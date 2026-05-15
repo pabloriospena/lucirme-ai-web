@@ -1,0 +1,53 @@
+---
+// src/components/Selector.astro
+---
+<div id="selector-overlay" class="fixed inset-0 bg-[#0F172A] z-[100] hidden flex items-center justify-center p-6 backdrop-blur-sm">
+  
+  <button 
+    onclick="document.getElementById('selector-overlay').classList.add('hidden')"
+    class="absolute top-8 right-8 text-white/40 hover:text-white text-3xl transition-all duration-300"
+  >✕</button>
+
+  <div class="max-w-xl w-full" x-data="{ paso: 1, respuestas: {}, cargando: false }">
+    
+    <!-- Paso 1 -->
+    <div x-show="paso === 1" class="space-y-8 text-center">
+      <h2 class="text-3xl font-bold text-white">¿Qué te trae al laboratorio?</h2>
+      <div class="grid gap-4">
+        <button @click="paso = 2; respuestas.perfil = 'empresa'" class="p-6 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">🏢 Empresa / Equipo Operativo</button>
+        <button @click="paso = 2; respuestas.perfil = 'startup'" class="p-6 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">🚀 Startup / Founder</button>
+        <button @click="paso = 2; respuestas.perfil = 'pro'" class="p-6 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">👤 Profesional Independiente</button>
+      </div>
+    </div>
+
+    <!-- Paso 2 -->
+    <div x-show="paso === 2" class="space-y-8 text-center">
+      <h2 class="text-3xl font-bold text-white">¿Dónde está el cuello de botella?</h2>
+      <div class="grid gap-4">
+        <button @click="paso = 3; respuestas.dolor = 'caos'" class="p-6 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">El caos operativo me quita el foco</button>
+        <button @click="paso = 3; respuestas.dolor = 'ejecucion'" class="p-6 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">Mi ejecución es lenta y dispersa</button>
+      </div>
+    </div>
+
+    <!-- Paso 3 -->
+    <div x-show="paso === 3" class="space-y-8 text-center">
+      <h2 class="text-4xl font-bold text-white italic">"Match" Detectado</h2>
+      <div class="bg-white/5 p-8 rounded-2xl border border-white/10 shadow-2xl">
+        <p class="text-white/80 text-lg mb-8">
+            Tu perfil <span class="text-teal font-bold capitalize" x-text="respuestas.perfil"></span> presenta fugas en <span class="text-teal font-bold" x-text="respuestas.dolor"></span>.
+        </p>
+        <div class="flex flex-col gap-4">
+          <button 
+            @click="cargando = true; fetch('/api/guardar-diagnostico', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(respuestas) }).then(res => { if (res.ok) window.location.href = 'https://calendar.app.google/k4iYmA42X9NNBb5t8'; else window.location.href = '/sign-in'; }).catch(() => { window.location.href = '/sign-in'; })"
+            class="bg-orange text-white py-5 rounded-xl font-black text-xl hover:bg-orange/90 transition-all"
+          >
+            <span x-show="!cargando">AGENDAR CAFÉ ESTRATÉGICO</span>
+            <span x-show="cargando">PROCESANDO...</span>
+          </button>
+          <a href="/recursos" class="text-white/40 hover:text-white underline text-sm transition">Ver recursos gratuitos</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -3,9 +3,5 @@ import clerk from '@clerk/astro';
 
 export default defineConfig({
   integrations: [clerk()],
-  vite: {
-    css: {
-      postcss: './postcss.config.mjs',
-    }
-  }
+  output: 'server' // <--- AÑADE ESTA LÍNEA SI NO ESTÁ
 });

@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+// Renombramos 'SignIn' a 'ClerkSignIn' para evitar el conflicto
+import { SignIn as ClerkSignIn } from "@clerk/astro/components";
+---
+<Layout title="Iniciar Sesión | LuciRMe AI">
+  <main class="flex justify-center py-20">
+    <ClerkSignIn />
+  </main>
+</Layout>

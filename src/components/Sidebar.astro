@@ -1,0 +1,90 @@
+---
+// src/components/Sidebar.astro
+import { UserButton } from "@clerk/astro/components";
+
+const navLinks = [
+  { href: "/", label: "Inicio" },
+  { href: "/servicios", label: "Servicios" },
+  { href: "/recursos", label: "Recursos" },
+  { href: "/blog", label: "Blog" },
+];
+
+const locals = Astro.locals as any;
+const auth = locals.auth;
+const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
+---
+
+<aside class="fixed left-0 top-0 h-screen w-64 border-r border-gray-200 bg-white hidden md:flex flex-col z-50">
+  <!-- Cabecera -->
+  <div class="p-6 border-b border-gray-100">
+    <h1 class="font-bold text-xl text-deep tracking-tight">LucirMe AI</h1>
+    <p class="text-xs text-gray-mid mt-1">Pablo Ríos Peña</p>
+  </div>
+  
+  <!-- CTA Maestro: Selector -->
+  <div class="p-4">
+    <button 
+      onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
+      class="w-full bg-deep text-white py-3 rounded-md text-sm font-bold hover:bg-teal transition-all duration-300 flex items-center justify-center gap-2 border border-teal"
+    >
+      ⚡ INICIAR SELECTOR
+    </button>
+  </div>
+
+  <!-- Navegación -->
+  <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
+    <!-- Botón Mi Dashboard: Solo visible si está logueado -->
+    {userId && (
+      <a href="/dashboard" class="flex items-center gap-2 px-3 py-2 text-sm text-teal bg-teal/5 border border-teal/20 rounded-md transition font-bold mb-4 hover:bg-teal/10">
+        <span>🏠</span> Mi Dashboard
+      </a>
+    )}
+
+    {navLinks.map(link => (
+      <a href={link.href} class="block px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-teal rounded-md transition font-medium">
+        {link.label}
+      </a>
+    ))}
+  </nav>
+
+  <!-- Pie de Sidebar: Identidad y Logout -->
+  <div class="p-4 border-t border-gray-100">
+    {userId ? (
+      <div class="flex flex-col gap-3">
+        <!-- Avatar y nombre -->
+        <div class="flex items-center gap-3 px-2">
+          <UserButton />
+          <span class="text-xs font-bold text-deep uppercase tracking-wider truncate">Mi Cuenta</span>
+        </div>
+        
+        <!-- Botón de Logout Directo -->
+        <button 
+          id="logout-btn"
+          class="w-full text-left px-3 py-2 text-xs font-medium text-gray-400 hover:text-red-600 transition flex items-center gap-2"
+        >
+          <span>👋</span> Cerrar Sesión
+        </button>
+      </div>
+    ) : (
+      <!-- Botón de Login si no hay usuario -->
+      <a href="/sign-in" class="flex items-center justify-center w-full py-2 text-sm font-bold text-teal border border-teal/30 rounded-md hover:bg-teal hover:text-white transition">
+        Iniciar Sesión →
+      </a>
+    )}
+  </div>
+</aside>
+
+<script>
+  // Lógica para que el botón de cerrar sesión funcione de inmediato
+  const logoutBtn = document.getElementById('logout-btn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', async () => {
+      // @ts-ignore
+      if (window.Clerk) {
+        // @ts-ignore
+        await window.Clerk.signOut();
+        window.location.href = '/';
+      }
+    });
+  }
+</script>
