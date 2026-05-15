@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Obtenemos los parámetros de la URL (ej: /resultado?perfil=startup&dolor=caos)
+const perfil = Astro.url.searchParams.get('perfil') || 'Profesional';
+const dolor = Astro.url.searchParams.get('dolor') || 'Operativa';
+
+const resultados = {
+  pro: {
+    friccion: "Operativa repetitiva que consume tu tiempo de valor.",
+    accion: "Automatiza 1 tarea recurrente esta semana con IA. Elimina el resto."
+  },
+  startup: {
+    friccion: "Decisiones de producto sin protocolo claro.",
+    accion: "Define 1 criterio de priorización para tu próximo sprint. Aplica solo ese."
+  },
+  empresa: {
+    friccion: "Procesos manuales que generan errores y lentitud.",
+    accion: "Mapea 1 cuello de botella esta semana. Documenta solo el paso crítico."
+  }
+};
+
+const res = resultados[perfil as keyof typeof resultados] || resultados.pro;
+---
+
+<Layout title="Tu Foco revelado">
+  <main class="max-w-2xl mx-auto py-20 px-6 text-center">
+    <h1 class="text-4xl font-bold text-deep mb-12">Tu Foco reveló esto:</h1>
+
+    <!-- Card de Resultado -->
+    <div class="bg-white p-10 rounded-2xl border border-gray-200 shadow-sm mb-12">
+      <h3 class="text-teal font-bold uppercase text-xs tracking-widest mb-4">Fricción identificada</h3>
+      <p class="text-xl text-deep mb-8">{res.friccion}</p>
+      
+      <h3 class="text-orange font-bold uppercase text-xs tracking-widest mb-4">Acción concreta</h3>
+      <p class="text-xl font-semibold text-deep">{res.accion}</p>
+    </div>
+
+    <p class="text-sm text-gray-400 mb-10">Este es tu punto de partida. Guarda tu resultado para acceder a recursos personalizados.</p>
+
+    <!-- CTAs en Jerarquía Estricta -->
+    <div class="space-y-4">
+      <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" class="block w-full bg-teal text-white py-4 rounded-lg font-bold hover:bg-tealHover transition shadow-lg">
+        Agendar Café Estratégico
+      </a>
+      
+      <a href="/sign-in" class="block w-full border-2 border-teal text-teal py-4 rounded-lg font-bold hover:bg-teal/5 transition">
+        Guardar mi resultado + recursos
+      </a>
+      
+      <a href="LINK_HOTMART" class="block text-gray-400 hover:text-teal underline text-sm mt-8 transition">
+        Obtener ebook "IA Práctica" →
+      </a>
+    </div>
+
+    <p class="text-xs text-gray-300 mt-8">Sin compromiso. Sin spam. Solo claridad.</p>
+  </main>
+</Layout>

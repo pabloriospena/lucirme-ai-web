@@ -1,10 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
-// Renombramos 'SignIn' a 'ClerkSignIn' para evitar el conflicto
 import { SignIn as ClerkSignIn } from "@clerk/astro/components";
+
+// Usamos solo los estilos base que Clerk Astro soporta sin errores de tipos
 ---
-<Layout title="Iniciar Sesión | LuciRMe AI">
+
+<Layout title="Accede al Laboratorio | LuciRMe AI">
   <main class="flex justify-center py-20">
-    <ClerkSignIn />
+    <ClerkSignIn 
+      appearance={{
+        variables: {
+          colorPrimary: '#0D9488',
+          borderRadius: '8px',
+        }
+      }}
+    />
   </main>
 </Layout>

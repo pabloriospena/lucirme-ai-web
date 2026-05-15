@@ -3,8 +3,16 @@ import Layout from '../layouts/Layout.astro';
 // Renombramos 'SignUp' a 'ClerkSignUp'
 import { SignUp as ClerkSignUp } from "@clerk/astro/components";
 ---
+
 <Layout title="Crear Cuenta | LuciRMe AI">
   <main class="flex justify-center py-20">
-    <ClerkSignUp />
+    <ClerkSignUp 
+      appearance={{
+        variables: {
+          colorPrimary: '#0D9488',
+          borderRadius: '8px',
+        }
+      }}
+    />
   </main>
 </Layout>

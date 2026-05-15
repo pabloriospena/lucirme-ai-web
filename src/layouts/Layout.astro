@@ -29,38 +29,55 @@ const userId = auth?.userId;
 
   <body class="bg-white text-gray-900 font-sans antialiased">
     
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
-      <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-        
-        <!-- Logo y Menú a la Izquierda -->
-        <div class="flex items-center gap-8">
-          <a href="/" class="text-xl font-bold text-deep">LucirMe AI</a>
-          
-          <nav class="hidden md:flex items-center gap-6">
-            <a href="/servicios" class="text-sm text-gray-600 hover:text-teal transition">Soluciones</a>
-            <a href="/recursos" class="text-sm text-gray-600 hover:text-teal transition">Recursos</a>
-            <button 
-              onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
-              class="text-sm font-bold text-orange hover:text-orange/80 transition"
-            >⚡ Enciende tu Foco</button>
-          </nav>
-        </div>
+    <!-- Header / Navegación Superior -->
+<!-- Header / Navegación Superior -->
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
+  <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+    
+    <!-- Logo y Menú Izquierda -->
+    <div class="flex items-center gap-8">
+      <a href="/" class="text-xl font-bold text-deep">LucirMe AI</a>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="/servicios" class="text-sm text-gray-600 hover:text-teal transition">Soluciones</a>
+        <a href="/recursos" class="text-sm text-gray-600 hover:text-teal transition">Recursos</a>
+        <button 
+          onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
+          class="text-sm font-bold text-orange hover:text-orange/80 transition"
+        >⚡ Enciende tu Foco</button>
+      </nav>
+    </div>
 
-        <!-- Acciones a la Derecha -->
-        <div class="flex items-center gap-4">
-          {userId ? (
-            <div class="flex items-center gap-4">
-               <a href="/dashboard" class="text-sm font-semibold text-teal hover:underline">Dashboard</a>
-               <UserButton />
-            </div>
-          ) : (
-            <a href="/sign-in" class="text-sm font-semibold text-teal hover:underline">
-              Iniciar Sesión
-            </a>
-          )}
-        </div>
-      </div>
-    </header>
+    <!-- Acciones Derecha (Contenedor que cambiará dinámicamente) -->
+    <div id="auth-header-container" class="flex items-center gap-4">
+      <a href="/sign-in" class="text-sm font-semibold text-teal hover:underline">
+        Cargando...
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Script "A prueba de balas" -->
+<script is:inline>
+  window.addEventListener('load', async () => {
+    const container = document.getElementById('auth-header-container');
+    // Esperamos a que Clerk cargue
+    await window.Clerk?.load();
+    const user = window.Clerk?.user;
+
+    if (user) {
+      container.innerHTML = `
+        <a href="/dashboard" class="text-sm font-semibold text-teal hover:underline">Dashboard</a>
+        <div id="user-button-div"></div>
+      `;
+      // @ts-ignore
+      window.Clerk.mountUserButton(document.getElementById('user-button-div'));
+    } else {
+      container.innerHTML = `
+        <a href="/sign-in" class="text-sm font-semibold text-teal hover:underline">Iniciar Sesión</a>
+      `;
+    }
+  });
+</script>
 
     <main class="w-full">
       <slot />
