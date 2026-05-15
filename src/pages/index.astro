@@ -1,37 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ProblemaSolucion from '../components/ProblemaSolucion.astro'; 
+import ComoFunciona from '../components/ComoFunciona.astro';
+import SobreMi from '../components/SobreMi.astro';
+import RecursosSoluciones from '../components/RecursosSoluciones.astro';
 
-// Obtenemos la autenticación del contexto de Astro
-const auth = (Astro.locals as any).auth;
+// Asegúrate que el archivo se llama así
 ---
 
-<Layout title="LucirMe AI | Product Management Sin Bullshit">
-  <section class="max-w-3xl">
-    <span class="text-teal font-semibold tracking-wide uppercase text-sm">IA Aplicada para Profesionales</span>
-    
-    <h1 class="text-5xl md:text-6xl font-bold text-deep mt-4 leading-tight">
-      Recupera 10 horas de tu semana con IA aplicada.
-    </h1>
-    
-    <p class="text-xl text-gray-600 mt-6 leading-relaxed">
-      No te enseño a usar herramientas. Te enseño a construir sistemas que trabajan en silencio para que tú te enfoques en lo que realmente importa.
-    </p>
-    
-    <div class="mt-10 flex flex-wrap gap-4">
-      {auth?.userId ? (
-        <!-- Si está logueado -->
-        <a href="/dashboard" class="bg-orange text-white px-8 py-3 rounded-lg font-bold hover:bg-orange/90 transition shadow-lg">
-          Ir a mi Centro de Mando
-        </a>
-      ) : (
-        <!-- Si NO está logueado -->
-        <a href="/sign-in" class="bg-teal text-white px-8 py-3 rounded-lg font-bold hover:bg-tealHover transition">
-          Iniciar Sesión
-        </a>
-        <a href="/cafe-estrategico" class="border border-gray-300 text-deep px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition">
-          Reservar Café Estratégico
-        </a>
-      )}
-    </div>
-  </section>
+<Layout title="LuciRMe Ai | IA Aplicada con Criterio">
+  <Hero />
+  <ProblemaSolucion />
+  <ComoFunciona />
+  <SobreMi />
+  <RecursosSoluciones />
 </Layout>

@@ -1,0 +1,51 @@
+---
+// src/components/ComoFunciona.astro
+---
+
+<section id="foco-section" class="py-1 bg-white">
+  <div class="container mx-auto max-w-4xl px-4 text-center">
+    
+    <!-- Header de sección -->
+    <h2 class="text-3xl md:text-4xl font-bold text-deep mb-6">
+      Enciende tu Foco. No es un test. <br class="hidden md:block" /> Es tu punto de partida.
+    </h2>
+    <h3 class="text-xl text-gray-600 mb-4 font-medium">4 preguntas. 60 segundos. Claridad inmediata.</h3>
+    <p class="text-sm text-gray-500 mb-16">Sin formularios largos. Sin teoría. Solo tu contexto + tu dolor = tu acción.</p>
+
+    <!-- Pasos -->
+    <div class="grid md:grid-cols-3 gap-8 text-left">
+      <!-- Paso 1 -->
+      <div class="p-6 border border-gray-100 rounded-xl hover:shadow-lg transition-shadow">
+        <span class="text-teal font-bold text-sm block mb-3">PASO 01</span>
+        <h4 class="font-bold text-deep text-lg mb-2">Responde</h4>
+        <p class="text-sm text-gray-600 leading-relaxed">4 preguntas sobre tu contexto y lo que te frena hoy. Sin campos abiertos. Sin adivinanzas.</p>
+      </div>
+
+      <!-- Paso 2 -->
+      <div class="p-6 border border-gray-100 rounded-xl hover:shadow-lg transition-shadow">
+        <span class="text-teal font-bold text-sm block mb-3">PASO 02</span>
+        <h4 class="font-bold text-deep text-lg mb-2">Revela</h4>
+        <p class="text-sm text-gray-600 leading-relaxed">Tu Foco se enciende y muestra tu fricción real + siguiente paso. Sin esperas. Sin "te contactaremos".</p>
+      </div>
+
+      <!-- Paso 3 -->
+      <div class="p-6 border border-gray-100 rounded-xl hover:shadow-lg transition-shadow">
+        <span class="text-teal font-bold text-sm block mb-3">PASO 03</span>
+        <h4 class="font-bold text-deep text-lg mb-2">Actúa</h4>
+        <p class="text-sm text-gray-600 leading-relaxed">Accede a recursos personalizados o agenda tu Café Estratégico. Sin compromiso. Sin presión.</p>
+      </div>
+    </div>
+
+    <!-- CTA Principal -->
+    <div class="mt-16">
+      <button 
+        onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
+        class="bg-orange text-white px-10 py-4 rounded-lg font-bold hover:bg-orange/90 transition shadow-lg text-lg"
+      >
+        Enciende tu Foco Ahora
+      </button>
+      <p class="text-xs text-gray-400 mt-4 uppercase tracking-widest">Perfil → Dolor → Acción.</p>
+    </div>
+
+  </div>
+</section>

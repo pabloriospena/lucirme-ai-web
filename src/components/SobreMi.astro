@@ -1,0 +1,43 @@
+---
+// src/components/SobreMi.astro
+---
+
+<section id="sobre-mi" class="py-10 px-4">
+  <div class="container mx-auto max-w-3xl bg-white border border-gray-100 p-8 md:p-12 rounded-2xl shadow-sm">
+    <div class="flex flex-col md:flex-row items-center gap-8">
+      
+      <!-- Foto (Asegúrate de que la ruta sea correcta en tu carpeta public) -->
+      <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-teal/20 flex-shrink-0">
+        <img 
+          src="/pablo-rios.jpeg" 
+          alt="Pablo Ríos" 
+          class="w-full h-full object-cover" 
+        />
+      </div>
+
+      <!-- Texto -->
+      <div class="text-center md:text-left">
+        <h2 class="text-3xl font-bold text-deep mb-6">Hola, soy Pablo Ríos</h2>
+        
+        <div class="space-y-4 text-gray-600 leading-relaxed text-base">
+          <p>
+            <strong class="text-deep font-semibold">Sé exactamente cómo te sientes.</strong> Pasé años viendo cómo profesionales brillantes perdían su energía en tareas operativas que los dejaban agotados.
+          </p>
+          <p>
+            Intenté todo: cursos interminables y herramientas "mágicas". El resultado era siempre el mismo: <em>más información, menos acción.</em> Por eso creé <strong class="text-deep">LuciRMe Ai</strong>.
+          </p>
+          <p class="font-medium text-deep">
+            Mi promesa: No te voy a vender humo ni software. Vamos a trabajar juntos hasta que recuperes tu tiempo.
+          </p>
+        </div>
+
+        <!-- Social Links -->
+        <div class="mt-8 flex gap-6 text-sm justify-center md:justify-start">
+          <a href="https://linkedin.com/in/pabloriospena" target="_blank" class="text-teal font-bold hover:underline">LinkedIn</a>
+          <a href="mailto:pabloriospena@gmail.com" class="text-teal font-bold hover:underline">Email</a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>

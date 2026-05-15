@@ -1,28 +1,73 @@
 ---
-// src/layouts/Layout.astro
 import '../styles/global.css';
-import Sidebar from '../components/Sidebar.astro';
 import Selector from '../components/Selector.astro';
-
-// CAMBIA ESTA LÍNEA (Quita las llaves { }):
-import Analytics from '@vercel/analytics/astro'; 
+import Analytics from '@vercel/analytics/astro';
+import { UserButton } from "@clerk/astro/components";
+import Footer from '../components/Footer.astro';
 
 interface Props { title: string; }
 const { title } = Astro.props;
+const auth = (Astro.locals as any).auth;
+const userId = auth?.userId;
 ---
+
 <!doctype html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    
+    <script is:inline>
+      (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+      .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+      n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+      (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+      ml('account', '2041884');
+    </script>
   </head>
-  <body class="bg-[#F8FAFC] text-deep flex">
-    <Sidebar />
-    <main class="flex-1 md:ml-64 p-8 md:p-12 min-h-screen">
+
+  <body class="bg-white text-gray-900 font-sans antialiased">
+    
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
+      <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+        
+        <!-- Logo y Menú a la Izquierda -->
+        <div class="flex items-center gap-8">
+          <a href="/" class="text-xl font-bold text-deep">LucirMe AI</a>
+          
+          <nav class="hidden md:flex items-center gap-6">
+            <a href="/servicios" class="text-sm text-gray-600 hover:text-teal transition">Soluciones</a>
+            <a href="/recursos" class="text-sm text-gray-600 hover:text-teal transition">Recursos</a>
+            <button 
+              onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
+              class="text-sm font-bold text-orange hover:text-orange/80 transition"
+            >⚡ Enciende tu Foco</button>
+          </nav>
+        </div>
+
+        <!-- Acciones a la Derecha -->
+        <div class="flex items-center gap-4">
+          {userId ? (
+            <div class="flex items-center gap-4">
+               <a href="/dashboard" class="text-sm font-semibold text-teal hover:underline">Dashboard</a>
+               <UserButton />
+            </div>
+          ) : (
+            <a href="/sign-in" class="text-sm font-semibold text-teal hover:underline">
+              Iniciar Sesión
+            </a>
+          )}
+        </div>
+      </div>
+    </header>
+
+    <main class="w-full">
       <slot />
     </main>
+    <Footer />
+
     <Selector />
-    <!-- Usa el componente importado por defecto -->
-    <Analytics /> 
+    <Analytics />
   </body>
 </html>

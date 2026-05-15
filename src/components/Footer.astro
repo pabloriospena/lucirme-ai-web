@@ -1,0 +1,56 @@
+---
+// src/components/Footer.astro
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-deep text-white py-20 px-6 mt-20">
+  <div class="container mx-auto max-w-6xl">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+      
+      <!-- Marca -->
+      <div class="col-span-1 md:col-span-1 space-y-4">
+        <h3 class="text-xl font-bold tracking-tight">LuciRMe AI</h3>
+        <p class="text-sm text-gray-400 leading-relaxed">Devuelve tiempo. Aplica IA con criterio.</p>
+      </div>
+
+      <!-- Enlaces -->
+      <div>
+        <h4 class="text-teal font-bold text-xs uppercase tracking-widest mb-4">Navegación</h4>
+        <ul class="space-y-3 text-sm text-gray-400">
+          <li><a href="#foco-section" class="hover:text-white transition">Cómo funciona</a></li>
+          <li><a href="/servicios" class="hover:text-white transition">Recursos y Soluciones</a></li>
+          <li><a href="/metodo" class="hover:text-white transition">Método PRP</a></li>
+          <li><a href="/terminos" class="hover:text-white transition">Términos</a></li>
+          <li><a href="/privacidad" class="hover:text-white transition">Privacidad</a></li>
+        </ul>
+      </div>
+
+      <!-- Conexión y Newsletter -->
+      <div class="col-span-1 md:col-span-2 space-y-6">
+        <div>
+          <h4 class="text-teal font-bold text-xs uppercase tracking-widest mb-4">Newsletter</h4>
+          <p class="text-sm text-gray-400 mb-4">Recibe contenido Sin Bullshit. 1 email/semana. Cero ruido.</p>
+          <form class="flex gap-2">
+            <input type="email" placeholder="tu@email.com" class="bg-white/5 border border-white/10 rounded-lg px-4 py-2 w-full max-w-xs text-sm focus:outline-none focus:border-teal" />
+            <button class="bg-teal text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-tealHover transition">Suscribirse</button>
+          </form>
+        </div>
+        
+        <div class="pt-6 border-t border-white/10">
+          <h4 class="text-teal font-bold text-xs uppercase tracking-widest mb-4">Acceso</h4>
+          <a href="/dashboard" class="text-sm font-bold text-white hover:text-orange transition">→ Acceder al Dashboard</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cierre Legal -->
+    <div class="mt-16 pt-8 border-t border-white/10 text-center">
+      <p class="text-sm text-gray-500 mb-2 italic">¿Ya encendiste tu Foco? Inicia sesión para guardar tu resultado y recursos personalizados.</p>
+      <p class="text-xs text-gray-600">© {year} LuciRMe AI. Hecho con criterio, no con humo.</p>
+      <div class="mt-6 flex justify-center gap-6 text-sm text-gray-400">
+        <a href="https://linkedin.com/in/pabloriospena" class="hover:text-white transition">LinkedIn</a>
+        <a href="#" class="hover:text-white transition">X (Twitter)</a>
+      </div>
+    </div>
+  </div>
+</footer>
