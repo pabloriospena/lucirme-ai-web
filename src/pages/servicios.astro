@@ -1,0 +1,123 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Soluciones y Mentorías | LuciRMe AI">
+
+  <!-- ============================================ -->
+  <!-- HEADER                                       -->
+  <!-- ============================================ -->
+  <header class="py-20 px-4 border-b border-gray-100 bg-[#F8FAFC]">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-deep leading-tight mb-6">
+        Elige tu punto de partida.
+      </h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        No hay soluciones genéricas. Diseñamos sistemas operativos, hábitos y herramientas de IA adaptadas a la realidad de tu negocio o carrera.
+      </p>
+    </div>
+  </header>
+
+  <!-- ============================================ -->
+  <!-- GRID DE SOLUCIONES                           -->
+  <!-- ============================================ -->
+  <main class="py-24 px-4 min-h-screen">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        
+        <!-- 1. PROFESIONALES -->
+        <a href="/soluciones/profesionales" class="group flex flex-col bg-white border border-gray-200 rounded-2xl p-8 hover:border-orange transition-all shadow-sm hover:shadow-xl relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-1 bg-orange opacity-50 group-hover:opacity-100 transition-opacity"></div>
+          
+          <div class="w-14 h-14 bg-orange/10 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">👤</div>
+          
+          <h2 class="text-2xl font-bold text-deep mb-3">Profesionales</h2>
+          <p class="text-sm text-gray-600 mb-8 flex-grow leading-relaxed">
+            Recupera 10 horas de tu semana. Rediseñamos tu día a día para que escales tu facturación sin agotar tu energía.
+          </p>
+          
+          <ul class="space-y-3 text-sm text-gray-500 mb-8">
+            <li class="flex items-start gap-2"><span class="text-orange font-bold">✓</span> Elimina reportes manuales</li>
+            <li class="flex items-start gap-2"><span class="text-orange font-bold">✓</span> Organiza tu operativa personal</li>
+            <li class="flex items-start gap-2"><span class="text-orange font-bold">✓</span> Flujos de trabajo propios</li>
+          </ul>
+
+          <div class="mt-auto pt-6 border-t border-gray-100">
+            <span class="text-orange font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+              Ver programa <span>→</span>
+            </span>
+          </div>
+        </a>
+
+        <!-- 2. STARTUPS (DESTACADA) -->
+        <a href="/soluciones/startups" class="group flex flex-col bg-white border-2 border-teal rounded-2xl p-8 shadow-md hover:shadow-xl transition-all relative overflow-hidden transform md:-translate-y-4">
+          <div class="absolute top-0 right-0 bg-teal text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1 rounded-bl-lg">Escala Rápido</div>
+          
+          <div class="w-14 h-14 bg-teal/10 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">🚀</div>
+          
+          <h2 class="text-2xl font-bold text-deep mb-3">Startups</h2>
+          <p class="text-sm text-gray-600 mb-8 flex-grow leading-relaxed">
+            Integra IA en tu producto sin reescribir código. Procesos, herramientas y hábitos (ShapeUp) para equipos early-stage.
+          </p>
+          
+          <ul class="space-y-3 text-sm text-gray-500 mb-8">
+            <li class="flex items-start gap-2"><span class="text-teal font-bold">✓</span> Adopción de ShapeUp</li>
+            <li class="flex items-start gap-2"><span class="text-teal font-bold">✓</span> Priorización de Backlog</li>
+            <li class="flex items-start gap-2"><span class="text-teal font-bold">✓</span> IA integrada en el Roadmap</li>
+          </ul>
+
+          <div class="mt-auto pt-6 border-t border-gray-100">
+            <span class="text-teal font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+              Ver soluciones <span>→</span>
+            </span>
+          </div>
+        </a>
+
+        <!-- 3. EMPRESAS -->
+        <a href="/soluciones/empresas" class="group flex flex-col bg-white border border-gray-200 rounded-2xl p-8 hover:border-deep transition-all shadow-sm hover:shadow-xl relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-full h-1 bg-deep opacity-50 group-hover:opacity-100 transition-opacity"></div>
+          
+          <div class="w-14 h-14 bg-gray-100 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">🏢</div>
+          
+          <h2 class="text-2xl font-bold text-deep mb-3">Empresas</h2>
+          <p class="text-sm text-gray-600 mb-8 flex-grow leading-relaxed">
+            Del caos manual a la excelencia operativa. Estandarizamos tus procesos para que la empresa funcione con precisión y sin errores.
+          </p>
+          
+          <ul class="space-y-3 text-sm text-gray-500 mb-8">
+            <li class="flex items-start gap-2"><span class="text-deep font-bold">✓</span> Reducción de horas manuales</li>
+            <li class="flex items-start gap-2"><span class="text-deep font-bold">✓</span> Entrenamiento de equipos</li>
+            <li class="flex items-start gap-2"><span class="text-deep font-bold">✓</span> Capacidad instalada (IA)</li>
+          </ul>
+
+          <div class="mt-auto pt-6 border-t border-gray-100">
+            <span class="text-deep font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+              Ver entrenamiento <span>→</span>
+            </span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ============================================ -->
+  <!-- CTA INFERIOR (EL SELECTOR)                   -->
+  <!-- ============================================ -->
+  <section class="py-24 px-4 bg-deep text-white text-center">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">¿No estás seguro de por dónde empezar?</h2>
+      <p class="text-gray-400 mb-10 text-lg">
+        El caos operativo se manifiesta distinto en cada etapa. Usa nuestro <strong>Sincronizador</strong> y recibe un diagnóstico y un plan de acción en 60 segundos.
+      </p>
+      <button 
+        onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
+        class="inline-flex items-center gap-2 bg-orange text-white px-10 py-4 rounded-lg font-bold hover:bg-orange/90 transition shadow-lg text-lg"
+      >
+        ⚡ Iniciar Sincronizador
+      </button>
+    </div>
+  </section>
+
+</Layout>

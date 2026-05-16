@@ -2,18 +2,26 @@
 import Layout from '../layouts/Layout.astro';
 import { SignIn as ClerkSignIn } from "@clerk/astro/components";
 
-// Usamos solo los estilos base que Clerk Astro soporta sin errores de tipos
+// 1. Capturamos la URL a la que el usuario quería ir originalmente
+const redirectUrl = Astro.url.searchParams.get('redirect_url') || '/dashboard';
 ---
 
 <Layout title="Accede al Laboratorio | LuciRMe AI">
   <main class="flex justify-center py-20">
-    <ClerkSignIn 
-      appearance={{
-        variables: {
-          colorPrimary: '#0D9488',
-          borderRadius: '8px',
-        }
-      }}
-    />
+    <div class="w-full max-w-md">
+      <!-- 
+        2. Pasamos el redirectUrl al componente.
+        Clerk usará fallbackRedirectUrl para devolverlo a donde quería ir.
+      -->
+      <ClerkSignIn 
+        fallbackRedirectUrl={redirectUrl}
+        appearance={{
+          variables: {
+            colorPrimary: '#0D9488', 
+            borderRadius: '8px',
+          }
+        }}
+      />
+    </div>
   </main>
 </Layout>

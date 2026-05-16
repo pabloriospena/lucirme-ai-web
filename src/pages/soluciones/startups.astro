@@ -1,0 +1,210 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="IA para Startups | LuciRMe Ai">
+
+  <!-- ============================================ -->
+  <!-- 1. HERO (ATENCIÓN)                           -->
+  <!-- ============================================ -->
+  <header class="py-20 px-4 border-b border-gray-100">
+    <div class="max-w-4xl mx-auto text-center">
+      
+      <span class="inline-block bg-orange/10 text-orange text-xs px-3 py-1 rounded-full mb-6 font-semibold border border-orange/20">
+        Para startups early-stage y pre-scale
+      </span>
+      
+      <h1 class="text-4xl md:text-5xl font-bold text-deep leading-tight mb-6">
+        Integra IA en tu producto<br>
+        <span class="text-teal">sin reescribir todo desde cero.</span>
+      </h1>
+      
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed">
+        Acelera tu time-to-market con procesos y herramientas que se adaptan a tu roadmap, no al revés.
+        Entregamos valor en semanas, no meses.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+        <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" target="_blank" class="inline-flex items-center justify-center gap-2 bg-orange hover:bg-orange/90 text-white px-8 py-4 rounded-lg font-bold transition shadow-lg">
+          Agendemos un café estratégico →
+        </a>
+        <a href="#casos" class="inline-flex items-center justify-center gap-2 bg-white border-2 border-gray-200 hover:border-teal text-deep px-8 py-4 rounded-lg font-bold transition">
+          Ver casos de uso
+        </a>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-6 text-xs text-gray-500 font-medium">
+        <span class="flex items-center gap-2"><span class="w-2 h-2 bg-teal rounded-full"></span> Sin dependencia</span>
+        <span class="flex items-center gap-2"><span class="w-2 h-2 bg-teal rounded-full"></span> Tu código, tu propiedad</span>
+        <span class="flex items-center gap-2"><span class="w-2 h-2 bg-teal rounded-full"></span> Entregamos valor en semanas</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================ -->
+  <!-- 2. PROBLEMA (INTERÉS)                        -->
+  <!-- ============================================ -->
+  <section id="problema" class="py-24 px-4 bg-[#F8FAFC]">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-deep mb-12 text-center">¿Te suena familiar?</h2>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        {[
+          "Quieren diferenciar con IA, pero no saben por dónde empezar sin quemar recursos.",
+          "El equipo pierde tiempo en tareas repetitivas en vez de iterar en el producto.",
+          "Prueban herramientas de IA, pero nada se integra al flujo real de desarrollo.",
+          "Infoxicados con tendencias, pero sin un plan de acción claro.",
+          "Parálisis por análisis: demasiadas opciones, poca ejecución.",
+          "Necesitan validar rápido, pero la operatividad los frena."
+        ].map(dolor => (
+          <div class="flex gap-4 items-start p-6 bg-white rounded-xl border border-gray-100 shadow-sm hover:border-teal transition-all">
+            <span class="text-orange text-xl font-bold mt-1">✕</span>
+            <p class="text-sm text-gray-700 leading-relaxed">{dolor}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 bg-teal/5 border-l-4 border-teal p-8 rounded-r-2xl text-center md:text-left">
+        <p class="text-base text-gray-700 leading-relaxed">
+          <strong class="text-deep font-bold block mb-2 text-lg">La realidad:</strong>
+          La IA no es un feature más. Es tu ventaja competitiva si se integra con intención, no con hype.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 3. LA DIFERENCIA (DESEO)                     -->
+  <!-- ============================================ -->
+  <section class="py-24 px-4 bg-white">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-16 pl-6 border-l-4 border-deep">
+        <h2 class="text-3xl font-bold text-deep leading-tight mb-2">No es consultoría genérica.</h2>
+        <p class="text-xl text-gray-600">Son procesos, herramientas y hábitos que escalan contigo.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-x-12 gap-y-10">
+        {[
+          { t: "Procesos claros", d: "Eliminamos el caos operativo para que tu equipo se enfoque en construir producto." },
+          { t: "Herramientas que se quedan", d: "Integramos IA en tu stack actual, sin dependencias externas ni licencias costosas." },
+          { t: "Hábitos que escalan", d: "Tu equipo gana autonomía y se convierte en squad de ninjas potenciados con IA." },
+          { t: "Resultados medibles", d: "Claridad end-to-end en el ciclo de producto, foco en métricas de negocio reales." },
+          { t: "Valor rápido", d: "Entregamos resultados tangibles en semanas, no meses. Sin relleno, sin teoría." }
+        ].map(item => (
+          <div class="flex gap-4 items-start">
+            <span class="mt-1 text-teal font-bold text-xl">✓</span>
+            <div>
+              <h3 class="font-bold text-deep mb-2 text-lg">{item.t}</h3>
+              <p class="text-sm text-gray-600 leading-relaxed">{item.d}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 4. CASOS DE USO                              -->
+  <!-- ============================================ -->
+  <section id="casos" class="py-24 px-4 bg-[#F8FAFC]">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-deep mb-4">Lo que puedes lograr en 4 semanas</h2>
+        <p class="text-lg text-gray-600">Sin configuración compleja. Sin curva de aprendizaje empinada. Solo resultados.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[
+          { i: "🚀", t: "MVP con IA", d: "Definición, claridad y planes apoyados con IA 5x más rápido." },
+          { i: "🔍", t: "Investigación", d: "Descubre qué dicen tus clientes de forma automatizada." },
+          { i: "⚡", t: "Metodología ShapeUp", d: "Implementación ágil adaptada a tu contexto real." },
+          { i: "📊", t: "Métricas claras", d: "Visibilidad total de conversión, retención y satisfacción." },
+          { i: "🗺️", t: "Roadmap automático", d: "Un organismo vivo que se adapta, no una tabla estática." }
+        ].map(caso => (
+          <div class="bg-white p-8 rounded-2xl border border-gray-100 hover:border-teal transition-all shadow-sm">
+            <div class="w-12 h-12 bg-teal/10 rounded-xl flex items-center justify-center text-teal text-2xl mb-6">{caso.i}</div>
+            <h3 class="font-bold text-deep mb-3 text-lg">{caso.t}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">{caso.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 5. INVERSIÓN                                 -->
+  <!-- ============================================ -->
+  <section id="inversion" class="py-24 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-deep mb-6 text-center">Inversión y Alcance</h2>
+      
+      <div class="flex justify-center mb-12">
+        <div class="inline-flex items-center gap-2 bg-teal/10 text-teal px-5 py-2 rounded-full text-sm font-bold border border-teal/20">
+          <span>✨ Early Adopters:</span>
+          <span>Precio de lanzamiento para las primeras 3 startups.</span>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-8 mb-16">
+        <!-- Paso 1 -->
+        <div class="bg-[#F8FAFC] p-8 rounded-2xl border border-gray-200">
+          <h3 class="text-xl font-bold text-deep mb-2">1: Inmersión</h3>
+          <p class="text-3xl font-bold text-teal mb-6">$620.000 <span class="text-sm text-gray-500 font-normal">COP</span></p>
+          <ul class="space-y-3 text-sm text-gray-600 mb-8">
+            <li class="flex items-start gap-2"><span class="text-teal font-bold">✓</span> Mapeo de fugas en flujo actual</li>
+            <li class="flex items-start gap-2"><span class="text-teal font-bold">✓</span> 1 solución con IA aplicada</li>
+            <li class="flex items-start gap-2"><span class="text-teal font-bold">✓</span> Hoja de ruta clara</li>
+          </ul>
+          <p class="text-xs text-gray-500 font-medium">Pago al finalizar · Crédito para el Paso 2.</p>
+        </div>
+
+        <!-- Paso 2 -->
+        <div class="bg-white p-8 rounded-2xl border-2 border-teal shadow-lg relative">
+          <div class="absolute top-0 right-0 bg-teal text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1 rounded-bl-lg">El más vital</div>
+          <h3 class="text-xl font-bold text-deep mb-2">2: Sprint Adopción</h3>
+          <p class="text-3xl font-bold text-teal mb-6">$2.600.000 <span class="text-sm text-gray-500 font-normal">COP</span></p>
+          <ul class="space-y-3 text-sm text-gray-600 mb-8">
+            <li class="flex items-start gap-2"><span class="text-teal font-bold">✓</span> Hábitos con IA en tu día a día</li>
+            <li class="flex items-start gap-2"><span class="text-teal font-bold">✓</span> Documentación: prompts, flujos</li>
+            <li class="flex items-start gap-2"><span class="text-teal font-bold">✓</span> Métricas base de discovery</li>
+          </ul>
+          <p class="text-xs text-gray-500 font-medium">Crédito automático para el Paso 3.</p>
+        </div>
+
+        <!-- Paso 3 -->
+        <div class="bg-[#F8FAFC] p-8 rounded-2xl border border-gray-200">
+          <h3 class="text-xl font-bold text-deep mb-2">3: Autonomía</h3>
+          <p class="text-3xl font-bold text-teal mb-6">$4.940.000 <span class="text-sm text-gray-500 font-normal">COP</span>/mes</p>
+          <ul class="space-y-3 text-sm text-gray-600 mb-8">
+            <li class="flex items-start gap-2"><span class="text-teal font-bold">✓</span> IA en ShapeUp/Scrum/Kanban</li>
+            <li class="flex items-start gap-2"><span class="text-teal font-bold">✓</span> Entrenamiento de squad ninja</li>
+            <li class="flex items-start gap-2"><span class="text-teal font-bold">✓</span> Roadmap 100% automatizado</li>
+          </ul>
+          <p class="text-xs text-gray-500 font-medium">Pago flexible · IP 100% tuya.</p>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" target="_blank" class="inline-block bg-orange text-white px-10 py-4 rounded-lg font-bold hover:bg-orange/90 transition shadow-lg text-lg">
+          Agendemos un café (30 min) →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- INVITACIÓN A RECURSOS                        -->
+  <!-- ============================================ -->
+  <section class="py-16 px-4 bg-teal/5 border-y border-teal/10">
+    <div class="max-w-3xl mx-auto text-center">
+      <h3 class="text-2xl font-bold text-deep mb-3">¿Aún no estás listo para escalar?</h3>
+      <p class="text-gray-600 mb-8">
+        Explora la librería privada. Accede al <strong>ShapeUp Builder</strong> y otros Micro-SaaS de producto que te ahorrarán horas de trabajo hoy mismo.
+      </p>
+      <a href="/recursos" class="inline-flex items-center gap-2 bg-white text-teal border-2 border-teal px-8 py-4 rounded-lg font-bold hover:bg-teal hover:text-white transition shadow-sm">
+        📚 Acceder a Recursos
+      </a>
+    </div>
+  </section>
+
+</Layout>

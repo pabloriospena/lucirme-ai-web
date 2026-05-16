@@ -1,0 +1,237 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// 1. Muro de Seguridad: Solo usuarios logueados
+const auth = (Astro.locals as any).auth;
+const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
+
+// Si NO está logueado, lo mandamos a registrarse y lo traemos de vuelta
+if (!userId) {
+  return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/shapeup-builder')}`);
+}
+---
+
+<Layout title="Constructor de Pitches ShapeUp | LuciRMe Ai">
+
+  <!-- SUB-NAV (Breadcrumb) -->
+  <nav class="bg-white border-b border-gray-100 px-4 py-3">
+    <div class="max-w-4xl mx-auto flex justify-between items-center">
+      <a href="/recursos" class="text-sm font-bold text-gray-400 hover:text-teal transition">← Volver a Recursos</a>
+      <span class="text-xs font-bold text-teal uppercase tracking-widest flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Herramienta Pro
+      </span>
+    </div>
+  </nav>
+
+  <!-- WIZARD APP -->
+  <main class="py-12 px-4 min-h-screen">
+    <div class="max-w-3xl mx-auto">
+      
+      <!-- Cabecera de la Herramienta -->
+      <div class="mb-10 text-center">
+        <h1 class="text-3xl font-bold text-deep mb-3">Constructor de Pitches (ShapeUp)</h1>
+        <p class="text-gray-600">Completa los 6 bloques. El sistema generará un prompt estratégico listo para copiar en tu IA favorita.</p>
+      </div>
+
+      <!-- Barra de Progreso -->
+      <div class="w-full bg-gray-100 rounded-full h-2 mb-8 overflow-hidden">
+        <div id="progress-bar" class="bg-teal h-2 rounded-full transition-all duration-300" style="width: 16.6%"></div>
+      </div>
+
+      <!-- Contenedor del Asistente -->
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-10 shadow-sm">
+        <form id="pitch-form" class="space-y-8">
+          
+          <!-- Los Inputs se inyectan con JS -->
+          <div id="step-container" class="min-h-[160px]"></div>
+          
+          <!-- Controles de Navegación -->
+          <div class="flex justify-between pt-6 border-t border-gray-100">
+            <button type="button" id="btn-back" class="hidden px-4 py-2 text-sm font-bold text-gray-400 hover:text-deep transition">
+              ← Atrás
+            </button>
+            <div class="flex gap-3 ml-auto">
+              <button type="button" id="btn-reset" class="px-4 py-2 text-sm font-bold text-red-400 hover:text-red-600 transition">
+                Limpiar
+              </button>
+              <button type="button" id="btn-next" class="px-8 py-3 bg-deep text-white rounded-lg text-sm font-bold hover:bg-teal transition shadow-md">
+                Siguiente →
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Estado Final: Resultado del Prompt (Oculto al inicio) -->
+        <div id="final-state" class="hidden space-y-6 animate-fade-in">
+          <div class="bg-teal/10 border border-teal/20 rounded-lg p-4 text-sm font-medium text-teal">
+            ✅ Prompt generado con éxito. Cópialo y pégalo en ChatGPT, Claude o tu IA preferida.
+          </div>
+          
+          <textarea id="prompt-output" class="w-full h-64 p-5 bg-[#F8FAFC] border border-gray-200 rounded-xl text-sm font-mono text-deep focus:ring-2 focus:ring-teal outline-none resize-none shadow-inner" readonly></textarea>
+          
+          <div class="flex flex-col sm:flex-row gap-3">
+            <button onclick="copyPrompt()" id="btn-copy" class="flex-1 px-6 py-4 bg-orange text-white rounded-xl text-sm font-bold hover:bg-orange/90 transition shadow-lg flex justify-center items-center gap-2">
+              📋 Copiar Prompt
+            </button>
+            <button onclick="restartWizard()" class="px-6 py-4 border-2 border-gray-200 text-deep rounded-xl text-sm font-bold hover:bg-gray-50 transition">
+              🔄 Nuevo Pitch
+            </button>
+          </div>
+
+          <div class="text-center pt-6 mt-6 border-t border-gray-100">
+            <p class="text-sm text-gray-500 mb-4">¿Necesitas ayuda para implementar este Pitch en tu equipo?</p>
+            <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" target="_blank" class="text-teal font-bold hover:underline">Agendar un Café Estratégico</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- LÓGICA DE LA APLICACIÓN (Vanilla JS) -->
+  <script is:inline>
+    const STEPS = [
+      { id: 'name', label: '1. Nombre de la Apuesta (Shape)', placeholder: 'Ej: Automatización de Reportes Financieros', guide: 'Usa 1-4 palabras. Debe entenderlo alguien fuera del equipo.' },
+      { id: 'appetite', label: '2. Appetite (Límite de Tiempo)', placeholder: 'Ej: 4 semanas / 2 personas', guide: '¿Cuánto tiempo y recursos estamos dispuestos a invertir como máximo?' },
+      { id: 'problem', label: '3. El Problema Real', placeholder: 'Describe el dolor operativo o estratégico...', guide: '¿Qué falla hoy? ¿A quién le duele? (Usa datos si es posible).' },
+      { id: 'solution', label: '4. La Solución (Idea Central)', placeholder: 'Visión general del abordaje...', guide: '¿Cómo lo resolvemos en esencia? Ojo: No entres en detalles técnicos aún.' },
+      { id: 'rabbit_holes', label: '5. Rabbit Holes (Riesgos)', placeholder: 'Ej: La API antigua puede fallar, adopción del equipo...', guide: '¿Dónde podríamos atascarnos y perder tiempo?' },
+      { id: 'no_gos', label: '6. No-Gos (Límites Estrictos)', placeholder: 'Ej: No migraremos el historial antiguo...', guide: '¿Qué está estrictamente FUERA del alcance en este ciclo?' }
+    ];
+
+    let currentStep = 0;
+    const formData = {};
+
+    // Recuperar progreso
+    const saved = localStorage.getItem('lucirme_pitch_draft');
+    if (saved) {
+      try { Object.assign(formData, JSON.parse(saved)); } catch(e) {}
+    }
+
+    const stepContainer = document.getElementById('step-container');
+    const progressBar = document.getElementById('progress-bar');
+    const btnBack = document.getElementById('btn-back');
+    const btnNext = document.getElementById('btn-next');
+    const btnReset = document.getElementById('btn-reset');
+    const finalState = document.getElementById('final-state');
+    const pitchForm = document.getElementById('pitch-form');
+    const promptOutput = document.getElementById('prompt-output');
+    const btnCopy = document.getElementById('btn-copy');
+
+    function renderStep() {
+      const step = STEPS[currentStep];
+      progressBar.style.width = `${((currentStep + 1) / STEPS.length) * 100}%`;
+      
+      stepContainer.innerHTML = `
+        <div class="space-y-4 animate-fade-in">
+          <label class="block text-xl font-bold text-deep">${step.label}</label>
+          <p class="text-sm font-medium text-teal bg-teal/5 p-3 rounded-lg border-l-2 border-teal">${step.guide}</p>
+          <textarea 
+            id="input-${step.id}"
+            class="w-full p-4 bg-[#F8FAFC] border border-gray-200 rounded-xl text-base focus:ring-2 focus:ring-teal outline-none transition resize-none h-32 text-deep"
+            placeholder="${step.placeholder}"
+          >${formData[step.id] || ''}</textarea>
+        </div>
+      `;
+
+      btnBack.classList.toggle('hidden', currentStep === 0);
+      
+      if (currentStep === STEPS.length - 1) {
+        btnNext.textContent = '⚡ Generar Prompt';
+        btnNext.className = 'px-8 py-3 bg-orange text-white rounded-lg text-sm font-bold hover:bg-orange/90 transition shadow-md';
+      } else {
+        btnNext.textContent = 'Siguiente →';
+        btnNext.className = 'px-8 py-3 bg-deep text-white rounded-lg text-sm font-bold hover:bg-teal transition shadow-md';
+      }
+    }
+
+    function saveStep() {
+      const step = STEPS[currentStep];
+      const input = document.getElementById(`input-${step.id}`);
+      if (input) formData[step.id] = input.value.trim();
+      localStorage.setItem('lucirme_pitch_draft', JSON.stringify(formData));
+    }
+
+    function nextStep() {
+      saveStep();
+      if (currentStep < STEPS.length - 1) {
+        currentStep++;
+        renderStep();
+      } else {
+        generatePrompt();
+      }
+    }
+
+    function prevStep() {
+      saveStep();
+      if (currentStep > 0) {
+        currentStep--;
+        renderStep();
+      }
+    }
+
+    function generatePrompt() {
+      pitchForm.classList.add('hidden');
+      finalState.classList.remove('hidden');
+      
+      const prompt = `Actúa como un experto en Product Management y metodologías ShapeUp. Tu objetivo es generar un "Pitch" ejecutivo interno para C-Level y líderes, basado en la siguiente información.
+
+CONTEXTO DE LA APUESTA:
+- Nombre del Shape: ${formData.name || '[PENDIENTE]'}
+- Appetite (Tiempo/Recursos): ${formData.appetite || '[PENDIENTE]'}
+- El Problema: ${formData.problem || '[PENDIENTE]'}
+- La Solución (Idea): ${formData.solution || '[PENDIENTE]'}
+- Rabbit Holes (Riesgos técnicos/operativos): ${formData.rabbit_holes || '[PENDIENTE]'}
+- No-Gos (Fuera de alcance): ${formData.no_gos || '[PENDIENTE]'}
+
+INSTRUCCIONES DE FORMATO:
+1. Usa Markdown limpio y profesional. Sin saludos, directo al grano.
+2. Estructura requerida:
+   - Resumen Ejecutivo (Máximo 3 líneas).
+   - El Problema Real (Destaca el dolor).
+   - La Solución Propuesta.
+   - Matriz de Riesgos (Rabbit Holes y cómo mitigarlos).
+   - Límites Estrictos (No-Gos).
+3. Tono: Estratégico, asertivo, orientado a ROI operativo y mitigación de riesgos (Sin "bullshit" ni palabras de moda innecesarias).
+4. Si falta información importante, señala amablemente dónde el equipo debe profundizar antes de la "Betting Table".
+
+Genera el Pitch ahora.`;
+
+      promptOutput.value = prompt;
+    }
+
+    function copyPrompt() {
+      promptOutput.select();
+      document.execCommand('copy');
+      const original = btnCopy.innerHTML;
+      btnCopy.innerHTML = '✅ ¡Copiado con éxito!';
+      btnCopy.classList.replace('bg-orange', 'bg-teal');
+      setTimeout(() => {
+        btnCopy.innerHTML = original;
+        btnCopy.classList.replace('bg-teal', 'bg-orange');
+      }, 3000);
+    }
+
+    function restartWizard() {
+      if(confirm('¿Estás seguro de querer borrar este borrador y empezar de cero?')) {
+        localStorage.removeItem('lucirme_pitch_draft');
+        currentStep = 0;
+        Object.keys(formData).forEach(k => delete formData[k]);
+        finalState.classList.add('hidden');
+        pitchForm.classList.remove('hidden');
+        renderStep();
+      }
+    }
+
+    btnNext.addEventListener('click', nextStep);
+    btnBack.addEventListener('click', prevStep);
+    btnReset.addEventListener('click', restartWizard);
+    
+    renderStep();
+  </script>
+</Layout>
+
+<style>
+  .animate-fade-in { animation: fadeIn 0.4s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+</style>

@@ -1,0 +1,84 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Guía Rápida: De Notas a Reportes con NotebookLM | LuciRMe Ai">
+
+  <!-- CABECERA DE RECURSO -->
+  <header class="py-12 border-b border-gray-100">
+    <div class="max-w-3xl mx-auto px-4">
+      <span class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-4">Guía Gratuita</span>
+      <h1 class="text-4xl font-bold text-deep leading-tight mb-4">
+        De Notas Sueltas a Reportes Listos
+      </h1>
+      <p class="text-lg text-gray-600 leading-relaxed">
+        Convierte horas de grabaciones y datos manuales en decisiones claras. <br>
+        Sin herramientas complejas. Sin configuración.
+      </p>
+    </div>
+  </header>
+
+  <!-- CONTENIDO -->
+  <main class="py-16 px-4">
+    <div class="max-w-3xl mx-auto space-y-16">
+
+      <!-- 1. EL PROBLEMA -->
+      <section>
+        <h2 class="text-xl font-bold text-deep mb-6 flex items-center gap-2">
+          <span class="text-orange">✕</span> El problema que te frena
+        </h2>
+        <div class="bg-white p-8 rounded-xl border border-gray-100 shadow-sm">
+          <ul class="space-y-4 text-sm text-gray-600">
+            <li class="flex gap-3 items-start"><span class="text-teal font-bold">✓</span> Juntas transcripciones, emails y hojas de cálculo a mano.</li>
+            <li class="flex gap-3 items-start"><span class="text-teal font-bold">✓</span> Redactas reportes que llegan tarde o sin foco claro.</li>
+            <li class="flex gap-3 items-start"><span class="text-teal font-bold">✓</span> Archivas notas de reuniones que nunca vuelves a abrir.</li>
+          </ul>
+          <p class="mt-6 text-sm font-bold text-deep pt-4 border-t border-gray-100">Resultado: Mucho esfuerzo, poca claridad. Decisiones basadas en intuición, no en datos.</p>
+        </div>
+      </section>
+
+      <!-- 2. LA SOLUCIÓN -->
+      <section>
+        <h2 class="text-xl font-bold text-deep mb-6">⚡ La solución: NotebookLM en 3 pasos</h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          {['Reúne', 'Sube', 'Pregunta'].map((paso, i) => (
+            <div class="bg-white p-6 rounded-xl border border-gray-100 text-center shadow-sm">
+              <div class="text-2xl mb-3">{['📁', '☁️', '💬'][i]}</div>
+              <h3 class="font-bold text-deep text-sm mb-1">{i + 1}. {paso}</h3>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 3. PROMPTS -->
+      <section>
+        <h2 class="text-xl font-bold text-deep mb-6">3 Prompts exactos</h2>
+        <div class="space-y-4">
+          {[
+            { cat: "Para notas de reuniones", prompt: "Extrae solo acuerdos, responsables y fechas límite. Omite conversaciones laterales. Formato: tabla." },
+            { cat: "Para reportes manuales", prompt: "Compara los datos de [Hoja1] con los comentarios de [Transcripción]. Identifica 3 discrepancias y sugiere una acción correctiva." },
+            { cat: "Para presentaciones", prompt: "Convierte este análisis en: Problema → Dato clave → Riesgo → Propuesta → Siguiente paso." }
+          ].map(p => (
+            <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+              <div class="bg-gray-50 px-6 py-2 text-xs font-bold text-gray-400 uppercase tracking-widest">{p.cat}</div>
+              <div class="p-6 font-mono text-sm text-deep bg-white">{p.prompt}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- 5. CIERRE + CTA (El motor de ventas) -->
+      <section class="bg-deep p-10 rounded-2xl text-center text-white">
+        <h3 class="text-2xl font-bold mb-4">Esto es solo el abrebocas.</h3>
+        <p class="text-sm text-gray-300 mb-8 max-w-lg mx-auto">
+          Este flujo te ahorra horas. Pero sigue siendo manual. <strong>En tu Café Estratégico (15 min)</strong> conectamos tus fuentes para que se actualicen solas.
+        </p>
+        <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" target="_blank" 
+           class="inline-block bg-orange text-white px-8 py-4 rounded-lg font-bold hover:bg-orange/90 transition shadow-lg">
+          Reservar mi Café Estratégico →
+        </a>
+      </section>
+
+    </div>
+  </main>
+</Layout>
