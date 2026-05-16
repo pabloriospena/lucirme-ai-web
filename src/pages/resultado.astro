@@ -7,16 +7,16 @@ const dolor = Astro.url.searchParams.get('dolor') || 'Operativa';
 
 const resultados = {
   pro: {
-    friccion: "Operativa repetitiva que consume tu tiempo de valor.",
-    accion: "Automatiza 1 tarea recurrente esta semana con IA. Elimina el resto."
+    friccion: "Operatividad repetitiva que consume tu tiempo de valor.",
+    accion: "Aprende a resolver una tarea repetitiva esta semana usando IA. Agendemos o pregúntame por Linkedin y charlamos."
   },
   startup: {
     friccion: "Decisiones de producto sin protocolo claro.",
-    accion: "Define 1 criterio de priorización para tu próximo sprint. Aplica solo ese."
+    accion: "Revisa si en realidad se está trabajando en lo que realmente importa, revisa si lo que se está ejecutando y lo que viene es prioridad de verdad."
   },
   empresa: {
     friccion: "Procesos manuales que generan errores y lentitud.",
-    accion: "Mapea 1 cuello de botella esta semana. Documenta solo el paso crítico."
+    accion: "Identifica en que tareas operativas se consume el tiempo y el esfuerzo y en cuales hay más errores manuales y documéntalo."
   }
 };
 
@@ -48,7 +48,7 @@ const res = resultados[perfil as keyof typeof resultados] || resultados.pro;
         Guardar mi resultado + recursos
       </a>
       
-      <a href="LINK_HOTMART" class="block text-gray-400 hover:text-teal underline text-sm mt-8 transition">
+      <a href="https://lucirme-ai-web.vercel.app/recursos/ebook-pm" class="block w-full border-2 py-4 rounded-lg bg-orange border-orange text-white hover:bg-white hover:text-teal">
         Obtener ebook "IA Práctica" →
       </a>
     </div>

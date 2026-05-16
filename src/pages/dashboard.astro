@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { createClerkClient } from '@clerk/astro/server';
 
-// 1. Obtenemos la sesión actual
+// 1. Verificación de Seguridad
 const auth = (Astro.locals as any).auth;
 const authData = typeof auth === 'function' ? await auth() : auth;
 
@@ -10,7 +10,7 @@ if (!authData?.userId) {
   return Astro.redirect('/sign-in');
 }
 
-// 2. Inicializamos el cliente de Clerk manualmente para obtener datos del usuario
+// 2. Obtención de datos del usuario
 const clerkClient = createClerkClient({ 
   secretKey: import.meta.env.CLERK_SECRET_KEY,
   publishableKey: import.meta.env.PUBLIC_CLERK_PUBLISHABLE_KEY
@@ -18,55 +18,155 @@ const clerkClient = createClerkClient({
 
 const user = await clerkClient.users.getUser(authData.userId);
 const diag = user.privateMetadata?.ultimoDiagnostico as any;
+
+// 3. Matriz de Resultados (Insight Completo)
+const resultadosData = {
+  pro: {
+    friccion: "Operativa repetitiva que consume tu tiempo de valor.",
+    accion: "Automatiza 1 tarea recurrente esta semana con IA. Elimina el resto.",
+    recTitulo: "Backlog Detox",
+    recUrl: "/recursos/backlog-detox",
+    recIcono: "🧹",
+    recDesc: "Limpia tus tareas y prioriza lo que da resultados."
+  },
+  startup: {
+    friccion: "Decisiones de producto sin protocolo claro.",
+    accion: "Define 1 criterio de priorización para tu próximo sprint. Aplica solo ese.",
+    recTitulo: "ShapeUp Builder",
+    recUrl: "/recursos/shapeup-builder",
+    recIcono: "🎯",
+    recDesc: "Estructura tu próximo ciclo sin perder el foco."
+  },
+  empresa: {
+    friccion: "Procesos manuales que generan errores y lentitud.",
+    accion: "Mapea 1 cuello de botella esta semana. Documenta solo el paso crítico.",
+    recTitulo: "Guía NotebookLM",
+    recUrl: "/recursos/guia-notebooklm",
+    recIcono: "📘",
+    recDesc: "Automatiza reportes y documentación de procesos."
+  }
+};
+
+// Asignamos el resultado basado en el perfil, por defecto usamos 'pro' si hay error
+const insight = diag?.perfil ? resultadosData[diag.perfil as keyof typeof resultadosData] : null;
 ---
 
-<Layout title="Mi Centro de Mando | LuciRMe AI">
-  <div class="max-w-4xl">
-    <header class="mb-12">
-      <h1 class="text-4xl font-bold text-deep">Hola, {user.firstName || 'Product Lead'}</h1>
-      <p class="text-xl text-gray-mid mt-2">Este es tu espacio de ejecución sin bullshit.</p>
+<Layout title="Centro de Mando | LuciRMe AI">
+  <main class="py-12 px-4 max-w-5xl mx-auto min-h-screen">
+    
+    <!-- HEADER DEL DASHBOARD -->
+    <header class="mb-12 border-b border-gray-100 pb-8 flex justify-between items-end">
+      <div>
+        <h1 class="text-4xl font-bold text-deep mb-2 tracking-tight">Hola, {user.firstName || 'Product Lead'}</h1>
+        <p class="text-gray-500">Este es tu espacio de ejecución. Cero bullshit.</p>
+      </div>
+      <div class="hidden sm:block">
+        <span class="inline-block bg-teal/10 text-teal text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-teal/20">
+          Status: Online
+        </span>
+      </div>
     </header>
 
-    <div class="grid md:grid-cols-2 gap-8">
-      <!-- Card de Diagnóstico -->
-      <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
-        <h2 class="text-sm font-bold text-teal uppercase tracking-widest mb-4">Estado de Sincronización</h2>
-        {diag ? (
-          <div>
-            <p class="text-lg text-deep">Tu perfil es: <span class="font-bold capitalize">{diag.perfil}</span></p>
-            <p class="text-gray-600 mt-2">Tu dolor identificado: {diag.dolor}</p>
-            <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" class="mt-6 inline-block bg-orange text-white px-6 py-3 rounded-lg font-bold hover:bg-orange/90 transition">
-              Agendar Café de Estrategia
-            </a>
+    <div class="grid md:grid-cols-12 gap-8">
+      
+      <!-- COLUMNA IZQUIERDA: DIAGNÓSTICO DETALLADO -->
+      <div class="md:col-span-7 space-y-8">
+        
+        {diag && insight ? (
+          <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-2 h-full bg-teal"></div>
+            
+            <div class="flex items-center justify-between mb-8">
+              <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Diagnóstico de Foco</h2>
+              <span class="text-xs font-bold text-deep bg-gray-100 px-3 py-1 rounded-md capitalize">Perfil: {diag.perfil}</span>
+            </div>
+            
+            <div class="space-y-6">
+              <!-- Fricción -->
+              <div>
+                <p class="text-xs font-bold text-orange uppercase tracking-widest mb-2 flex items-center gap-2">
+                  <span class="text-base">✕</span> Fricción Identificada
+                </p>
+                <p class="text-lg text-deep leading-relaxed">{insight.friccion}</p>
+              </div>
+
+              <!-- Acción -->
+              <div class="bg-[#F8FAFC] p-5 rounded-xl border border-gray-100">
+                <p class="text-xs font-bold text-teal uppercase tracking-widest mb-2 flex items-center gap-2">
+                  <span class="text-base">⚡</span> Acción Concreta
+                </p>
+                <p class="text-base font-semibold text-deep">{insight.accion}</p>
+              </div>
+            </div>
+
+            <div class="pt-8 mt-8 border-t border-gray-100">
+              <p class="text-sm text-gray-600 mb-4 text-center">Para ejecutar esta acción sin romper tu operativa actual:</p>
+              <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" target="_blank" class="block w-full text-center bg-orange text-white px-6 py-4 rounded-xl font-bold hover:bg-orange/90 transition shadow-[0_0_15px_rgba(234,88,12,0.2)] text-lg">
+                Agendar Café Estratégico →
+              </a>
+            </div>
           </div>
         ) : (
-          <div>
-            <p class="text-gray-600">Aún no has completado tu diagnóstico.</p>
-            <button onclick="document.getElementById('selector-overlay').classList.remove('hidden')" class="mt-4 text-teal font-bold hover:underline">
-              → Iniciar El Selector ahora
+          <div class="bg-[#F8FAFC] p-10 rounded-2xl border border-dashed border-gray-300 text-center flex flex-col items-center justify-center h-full">
+            <span class="text-4xl mb-4">🔍</span>
+            <h2 class="text-xl font-bold text-deep mb-2">Sistema sin calibrar</h2>
+            <p class="text-gray-500 mb-8 max-w-sm">No tenemos datos sobre tus operaciones. Inicia el Selector para recibir tu diagnóstico y plan de acción.</p>
+            <button onclick="document.getElementById('selector-overlay').classList.remove('hidden')" class="bg-teal text-white px-8 py-3 rounded-lg font-bold hover:bg-tealHover transition shadow-sm">
+              ⚡ Iniciar Selector
             </button>
           </div>
         )}
+
       </div>
 
-      <!-- Card de Recursos -->
-      <div class="bg-deep p-8 rounded-xl text-white">
-        <h2 class="text-sm font-bold text-teal uppercase tracking-widest mb-4">Recursos Disponibles</h2>
-        <ul class="space-y-4">
-          <li>
-            <a href="/recursos" class="flex items-center gap-3 group">
-              <span class="bg-white/10 p-2 rounded group-hover:bg-teal transition">📚</span>
-              <span>Librería de Playbooks</span>
+      <!-- COLUMNA DERECHA: RECURSOS -->
+      <div class="md:col-span-5 space-y-6">
+        
+        <!-- RECOMENDACIÓN DINÁMICA -->
+        {insight && (
+          <div class="bg-deep p-8 rounded-2xl text-white shadow-lg relative overflow-hidden group">
+            <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal/20 rounded-full blur-2xl group-hover:bg-teal/40 transition-all"></div>
+            
+            <h2 class="text-xs font-bold text-teal uppercase tracking-widest mb-6 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Herramienta Sugerida
+            </h2>
+            
+            <a href={insight.recUrl} class="block mb-2">
+              <div class="flex items-center gap-4 mb-3">
+                <span class="text-3xl bg-white/10 p-3 rounded-xl">{insight.recIcono}</span>
+                <h3 class="text-xl font-bold hover:text-teal transition">{insight.recTitulo}</h3>
+              </div>
+              <p class="text-sm text-gray-400 leading-relaxed">
+                {insight.recDesc}
+              </p>
             </a>
-          </li>
-          <li>
-            <a href="/recursos" class="flex items-center gap-3 group">
-              <span class="bg-white/10 p-2 rounded group-hover:bg-teal transition">🛠️</span>
-              <span>Micro-SaaS Builders</span>
-            </a>
-          </li>
-        </ul>
+          </div>
+        )}
+
+        <!-- ENLACES RÁPIDOS -->
+        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+          <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Mi Biblioteca</h2>
+          <ul class="space-y-3">
+            <li>
+              <a href="/recursos" class="flex items-center gap-3 p-3 hover:bg-[#F8FAFC] rounded-lg transition group">
+                <span class="text-gray-400 group-hover:text-teal">📚</span>
+                <span class="text-sm font-medium text-gray-700 group-hover:text-deep">Todos los Recursos</span>
+              </a>
+            </li>
+            <li>
+              <a href="/recursos/ebook-pm" class="flex items-center justify-between p-3 hover:bg-[#F8FAFC] rounded-lg transition group">
+                <div class="flex items-center gap-3">
+                  <span class="text-gray-400 group-hover:text-orange">📖</span>
+                  <span class="text-sm font-medium text-gray-700 group-hover:text-deep">Ebook Oficial</span>
+                </div>
+                <span class="text-[10px] font-bold text-orange bg-orange/10 px-2 py-1 rounded">50% OFF</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
       </div>
+
     </div>
-  </div>
+  </main>
 </Layout>

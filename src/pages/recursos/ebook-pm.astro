@@ -1,0 +1,113 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// 1. Muro de Seguridad: Solo usuarios del Laboratorio
+const auth = (Astro.locals as any).auth;
+const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
+
+if (!userId) {
+  return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/ebook-pm')}`);
+}
+
+// Enlace de Hotmart con el cupón inyectado en la URL (por si acaso)
+const hotmartLink = "https://pay.hotmart.com/D96093022S?off=OFF50";
+---
+
+<Layout title="Ebook: Product Management Sin Bullshit | LuciRMe AI">
+
+  <!-- SUB-NAV -->
+  <nav class="bg-white border-b border-gray-100 px-4 py-3">
+    <div class="max-w-4xl mx-auto flex justify-between items-center">
+      <a href="/recursos" class="text-sm font-bold text-gray-400 hover:text-teal transition">← Volver a Recursos</a>
+      <span class="text-xs font-bold text-orange uppercase tracking-widest flex items-center gap-2">
+        Beneficio Exclusivo
+      </span>
+    </div>
+  </nav>
+
+  <main class="py-16 px-4 bg-[#F8FAFC] min-h-screen">
+    <div class="max-w-4xl mx-auto">
+      
+      <!-- HERO DEL LIBRO -->
+      <div class="bg-deep rounded-3xl p-8 md:p-12 text-white shadow-2xl relative overflow-hidden mb-12">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-teal/20 rounded-full blur-3xl -mr-10 -mt-10"></div>
+        
+        <div class="relative z-10 grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <span class="inline-block bg-teal/20 text-teal text-xs font-bold px-3 py-1 rounded-full mb-6 uppercase tracking-widest">
+              Ebook Oficial
+            </span>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+              Product Management <br><span class="text-teal">Sin Bullshit.</span>
+            </h1>
+            <p class="text-lg text-gray-300 mb-8 leading-relaxed">
+              Cómo construir productos que importan en startups. Sin frameworks mágicos, solo lo que funciona en el campo de batalla.
+            </p>
+            
+            <!-- CAJA DE DESCUENTO (Solo visible por estar logueado) -->
+            <div class="bg-white/10 border border-white/20 p-5 rounded-xl mb-6">
+              <p class="text-sm text-gray-300 mb-2">Tu código por ser miembro del Laboratorio:</p>
+              <div class="flex items-center gap-4">
+                <span class="text-2xl font-mono font-bold text-orange tracking-widest bg-black/30 px-4 py-2 rounded-lg border border-orange/30">
+                  OFF50
+                </span>
+                <span class="text-sm font-bold text-teal">(50% de descuento)</span>
+              </div>
+            </div>
+
+            <a href={hotmartLink} target="_blank" class="inline-block w-full text-center bg-orange text-white px-8 py-4 rounded-xl font-bold hover:bg-orange/90 transition shadow-[0_0_20px_rgba(234,88,12,0.3)] text-lg">
+              Comprar Ebook en Hotmart →
+            </a>
+          </div>
+          
+          <!-- Mockup Visual del Libro -->
+          <div class="hidden md:flex justify-center">
+            <div class="w-64 h-80 bg-white rounded-r-2xl rounded-l-md shadow-2xl p-6 flex flex-col justify-between border-l-8 border-gray-300 transform rotate-3 hover:rotate-0 transition-transform duration-500 relative">
+              <div class="absolute inset-0 bg-gradient-to-tr from-gray-100 to-transparent opacity-50"></div>
+              <div class="relative z-10">
+                <h2 class="text-3xl font-black text-deep leading-none mb-2">Product<br>Management<br>Sin Bullshit</h2>
+                <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-4 border-t border-gray-200 pt-2">Cómo Construir Productos en Startups</p>
+              </div>
+              <p class="text-sm font-bold text-deep relative z-10">Pablo Ríos P.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LO QUE VAS A ENCONTRAR (Basado en el índice) -->
+      <div class="grid md:grid-cols-2 gap-6 mb-16">
+        <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm">
+          <h3 class="text-xl font-bold text-deep mb-6">La realidad te va a dar en la cara</h3>
+          <p class="text-gray-600 mb-6 text-sm leading-relaxed">
+            "Si alguna vez pensaste que ser Product Manager en una startup iba a ser todo sobre metodologías ágiles y la promesa de cambiar el mundo, déjame decirte que la realidad es otra."
+          </p>
+          <ul class="space-y-4 text-sm text-deep font-medium">
+            <li class="flex items-start gap-3"><span class="text-teal text-lg leading-none">✓</span> Evita métricas vanidosas que no sirven para nada.</li>
+            <li class="flex items-start gap-3"><span class="text-teal text-lg leading-none">✓</span> Deja de obsesionarte con metodologías al pie de la letra.</li>
+            <li class="flex items-start gap-3"><span class="text-teal text-lg leading-none">✓</span> Evita la trampa del "Feature Creep".</li>
+          </ul>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm">
+          <h3 class="text-xl font-bold text-deep mb-6">Contenido táctico (Nada de relleno)</h3>
+          <ul class="space-y-4 text-sm text-gray-600">
+            <li class="border-b border-gray-100 pb-3"><strong>1. El Backlog y el Roadmap:</strong> Hacerlo simple, hacerlo ágil. No dejes que te controle a ti.</li>
+            <li class="border-b border-gray-100 pb-3"><strong>2. Producción sin miedo:</strong> El momento perfecto no existe. Lanza rápido, aprende rápido.</li>
+            <li class="border-b border-gray-100 pb-3"><strong>3. El equipo de desarrollo:</strong> Son tus aliados, no tus enemigos ni tus ejecutores ciegos.</li>
+            <li class="pt-1"><strong>4. El cliente es un aliado:</strong> Pero no es tu jefe. Cómo saber leer entre líneas.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CTA INFERIOR -->
+      <div class="text-center py-8">
+        <h3 class="text-2xl font-bold text-deep mb-4">¿Listo para ensuciarte las botas?</h3>
+        <p class="text-gray-600 mb-8 max-w-xl mx-auto">Con tu código <strong>OFF50</strong> obtienes el conocimiento de más de 10 años de golpes y aprendizajes en startups a mitad de precio.</p>
+        <a href={hotmartLink} target="_blank" class="inline-block bg-deep text-white px-10 py-4 rounded-xl font-bold hover:bg-teal transition shadow-lg">
+          Aplicar mi código OFF50 y Comprar →
+        </a>
+      </div>
+
+    </div>
+  </main>
+</Layout>
