@@ -36,7 +36,13 @@ const userId = auth?.userId;
     
     <!-- Logo y Menú Izquierda -->
     <div class="flex items-center gap-8">
-      <a href="/" class="text-xl font-bold text-deep">LucirMe AI</a>
+      <!-- Reemplaza esto en Layout.astro -->
+      <a href="/" class="flex items-center gap-2">
+        <!-- Aquí el logo. h-7 es perfecto para un header limpio (28px de alto) -->
+        <img src="/logo-lucirme.png" alt="LuciRMe Ai" class="h-7 w-auto object-contain" />
+        <span class="text-xl font-bold text-deep hidden sm:block"></span>
+      </a>
+  <!-- ... resto del nav ... -->
       <nav class="hidden md:flex items-center gap-6">
         <a href="/servicios" class="text-sm text-gray-600 hover:text-teal transition">Soluciones</a>
         <a href="/recursos" class="text-sm text-gray-600 hover:text-teal transition">Recursos</a>
