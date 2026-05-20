@@ -1,58 +1,77 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// Obtenemos los parámetros de la URL (ej: /resultado?perfil=startup&dolor=caos)
-const perfil = Astro.url.searchParams.get('perfil') || 'Profesional';
-const dolor = Astro.url.searchParams.get('dolor') || 'Operativa';
+// Obtenemos los parámetros de la URL
+// Nota: en el Selector.astro estamos pasando los params, aquí los leemos
+const perfilRaw = Astro.url.searchParams.get('perfil') || 'pro';
+const perfil = perfilRaw === 'empresa' ? 'C' : perfilRaw === 'startup' ? 'B' : 'A';
 
 const resultados = {
-  pro: {
-    friccion: "Operatividad repetitiva que consume tu tiempo de valor.",
-    accion: "Aprende a resolver una tarea repetitiva esta semana usando IA. Agendemos o pregúntame por Linkedin y charlamos."
+  A: {
+    titulo: "⚡ Diagnóstico: Foco Atascado en Operatividad",
+    descripcion: "Estás consumiendo más del 40% de tu semana en tareas repetitivas, micro-gestión de datos o reportes manuales. Esto frena tu visibilidad estratégica e impide que des el salto al siguiente nivel profesional, rompiendo tu paz mental.",
+    recurso: "🎯 Pitch Builder & Guía NotebookLM",
+    recursoUrl: "/recursos",
+    ctaLibro: "📖 Framework Sin Bullshit: Adquiere el Ebook para estructurar tu criterio de PM y acelerar tu carrera.",
+    ctaCafe: "☕ Agenda un Café Estratégico de 15 min para mapear cómo automatizar tus flujos personales y destacar."
   },
-  startup: {
-    friccion: "Decisiones de producto sin protocolo claro.",
-    accion: "Revisa si en realidad se está trabajando en lo que realmente importa, revisa si lo que se está ejecutando y lo que viene es prioridad de verdad."
+  B: {
+    titulo: "🚀 Diagnóstico: Parálisis por Infoxicación en tu Startup",
+    descripcion: "Tu equipo tiene herramientas e ideas de IA, pero sufre de fricción de procesos. Te la pasas apagando incendios en el backlog o aclarando requerimientos de forma manual en lugar de acelerar el roadmap del producto.",
+    recurso: "🧹 Backlog Detox",
+    recursoUrl: "/recursos/backlog-detox",
+    ctaLibro: "📖 Ebook PM Sin Bullshit: El manual práctico para que tú y tu equipo dejen de procesar humo.",
+    ctaCafe: "☕ Reserva un Café Estratégico para desatascar los procesos y flujos repetitivos de tu equipo esta misma semana."
   },
-  empresa: {
-    friccion: "Procesos manuales que generan errores y lentitud.",
-    accion: "Identifica en que tareas operativas se consume el tiempo y el esfuerzo y en cuales hay más errores manuales y documéntalo."
+  C: {
+    titulo: "🏢 Diagnóstico: Fuga de Dinero en Operación Invisible",
+    descripcion: "Tu empresa está perdiendo horas críticas de rendimiento debido a procesos manuales obsoletos y recolección de datos aislada. Estás forzado a supervisar micro-detalles en lugar de enfocarte puramente en la estrategia de expansión.",
+    recurso: "🧹 Backlog Detox & Automatización",
+    recursoUrl: "/recursos",
+    ctaLibro: "📖 Ebook Corporativo: Frameworks de optimización operativa sin rodeos teóricos.",
+    ctaCafe: "☕ Agenda un Café Estratégico. Diseñemos un mapa de ingeniería de flujos de IA para blindar y delegar tu operación."
   }
 };
 
-const res = resultados[perfil as keyof typeof resultados] || resultados.pro;
+const res = resultados[perfil as keyof typeof resultados];
 ---
 
-<Layout title="Tu Foco revelado">
-  <main class="max-w-2xl mx-auto py-20 px-6 text-center">
-    <h1 class="text-4xl font-bold text-deep mb-12">Tu Foco reveló esto:</h1>
-
-    <!-- Card de Resultado -->
-    <div class="bg-white p-10 rounded-2xl border border-gray-200 shadow-sm mb-12">
-      <h3 class="text-teal font-bold uppercase text-xs tracking-widest mb-4">Fricción identificada</h3>
-      <p class="text-xl text-deep mb-8">{res.friccion}</p>
-      
-      <h3 class="text-orange font-bold uppercase text-xs tracking-widest mb-4">Acción concreta</h3>
-      <p class="text-xl font-semibold text-deep">{res.accion}</p>
+<Layout title="Tu Diagnóstico | LuciRMe Ai">
+  <main class="max-w-3xl mx-auto py-20 px-6">
+    
+    <!-- Badge -->
+    <div class="text-center mb-8">
+      <span class="inline-block bg-[#0D9488]/10 text-[#0D9488] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full border border-[#0D9488]/20">
+        {res.titulo}
+      </span>
     </div>
 
-    <p class="text-sm text-gray-400 mb-10">Este es tu punto de partida. Guarda tu resultado para acceder a recursos personalizados.</p>
+    <!-- Descripción -->
+    <p class="text-xl text-deep leading-relaxed text-center mb-12">
+      {res.descripcion}
+    </p>
+
+    <!-- Caja de Recurso Recomendado -->
+    <div class="bg-[#F8FAFC] border border-gray-200 p-6 rounded-xl mb-12 text-center">
+      <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Tu herramienta del laboratorio priorizada hoy:</p>
+      <a href={res.recursoUrl} class="text-teal font-bold text-lg hover:underline transition">
+        {res.recurso} →
+      </a>
+    </div>
 
     <!-- CTAs en Jerarquía Estricta -->
-    <div class="space-y-4">
-      <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" class="block w-full bg-teal text-white py-4 rounded-lg font-bold hover:bg-tealHover transition shadow-lg">
-        Agendar Café Estratégico
+    <div class="space-y-6">
+      <!-- Café Estratégico (Naranja) -->
+      <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" class="block w-full bg-[#EA580C] text-white py-4 rounded-lg font-bold hover:bg-[#EA580C]/90 transition shadow-lg text-center">
+        {res.ctaCafe}
       </a>
       
-      <a href="/sign-in" class="block w-full border-2 border-teal text-teal py-4 rounded-lg font-bold hover:bg-teal/5 transition">
-        Guardar mi resultado + recursos
-      </a>
-      
-      <a href="https://lucirme-ai-web.vercel.app/recursos/ebook-pm" class="block w-full border-2 py-4 rounded-lg bg-orange border-orange text-white hover:bg-white hover:text-teal">
-        Obtener ebook "IA Práctica" →
+      <!-- Libro (Teal Outline) -->
+      <a href="https://pay.hotmart.com/D96093022S?off=OFF50" class="block w-full border-2 border-[#0D9488] text-[#0D9488] py-4 rounded-lg font-bold hover:bg-[#0D9488]/5 transition text-center">
+        {res.ctaLibro}
       </a>
     </div>
 
-    <p class="text-xs text-gray-300 mt-8">Sin compromiso. Sin spam. Solo claridad.</p>
+    <p class="text-xs text-gray-400 mt-10 text-center uppercase tracking-widest">Sin compromiso. Sin spam. Solo claridad.</p>
   </main>
 </Layout>

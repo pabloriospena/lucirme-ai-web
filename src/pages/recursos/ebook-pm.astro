@@ -2,12 +2,12 @@
 import Layout from '../../layouts/Layout.astro';
 
 // 1. Muro de Seguridad: Solo usuarios del Laboratorio
-const auth = (Astro.locals as any).auth;
-const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
+//const auth = (Astro.locals as any).auth;
+//const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
 
-if (!userId) {
-  return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/ebook-pm')}`);
-}
+//if (!userId) {
+//  return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/ebook-pm')}`);
+//}
 
 // Enlace de Hotmart con el cupón inyectado en la URL (por si acaso)
 const hotmartLink = "https://pay.hotmart.com/D96093022S?off=OFF50";

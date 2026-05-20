@@ -2,12 +2,12 @@
 import Layout from '../../layouts/Layout.astro';
 
 // 1. Muro de Seguridad: Solo usuarios logueados
-const auth = (Astro.locals as any).auth;
-const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
+//const auth = (Astro.locals as any).auth;
+//const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
 
-if (!userId) {
-  return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/backlog-detox')}`);
-}
+//if (!userId) {
+ // return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/backlog-detox')}`);
+//}
 ---
 
 <Layout title="Backlog Detox | LuciRMe AI">

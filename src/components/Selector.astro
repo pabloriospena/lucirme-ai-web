@@ -7,11 +7,11 @@
   <div class="max-w-xl w-full">
     <!-- Contenedor dinámico -->
     <div id="selector-container" class="space-y-8 text-center animate-fade-in">
-       <h2 id="titulo" class="text-3xl font-bold text-white mb-8">¿Qué te trae al laboratorio?</h2>
+       <h2 id="titulo" class="text-3xl font-bold text-white mb-8">¿Cuál es tu situación profesional actual?</h2>
        <div id="opciones-container" class="grid gap-4">
-          <button onclick="seleccionarPerfil('empresa')" class="p-6 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">🏢 Empresa</button>
-          <button onclick="seleccionarPerfil('startup')" class="p-6 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">🚀 Startup</button>
-          <button onclick="seleccionarPerfil('pro')" class="p-6 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">👤 Profesional</button>
+          <button onclick="seleccionarPerfil('empresa')" class="p-6 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">Profesional, buscando potenciar mi carrera y eficiencia.</button>
+          <button onclick="seleccionarPerfil('startup')" class="p-6 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">Líder de equipo, Project Manager o Product Manager en una Startup.</button>
+          <button onclick="seleccionarPerfil('pro')" class="p-6 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">Fundador, Director o Dueño de Empresa tradicional.</button>
        </div>
     </div>
   </div>
@@ -22,20 +22,20 @@
 
   const estructura = {
     empresa: [
-      { q: "¿Dónde sientes que tu equipo pierde más tiempo/esfuerzo?", opts: ["Aprobaciones manuales y cuellos de botella", "Datos dispersos o versiones desactualizadas", "Procesos operativos con errores recurrentes", "Falta de protocolos entre áreas"] },
-      { q: "¿Qué te gustaría lograr en los próximos 15 días?", opts: ["Recuperar 5+ horas semanales de tiempo operativo", "Integrar IA en un flujo de trabajo actual", "Reducir errores manuales y repetitivos", "Que mi equipo llegue al siguiente nivel usando herramientas de IA"] },
-      { q: "¿Cómo prefieres avanzar?", opts: ["Quiero hacerlo yo mismo con una guía clara", "Prefiero acompañamiento estratégico para afinar el plan", "Necesito implementación directa para mi equipo o varios equipos"] }
+      { q: "¿Cuál es tu mayor cuello de botella operativo esta semana?", opts: ["'Copiar, pegar' datos y tareas repetitivas que me quitan tiempo para aportar valor real o buscar mejores oportunidades.", "La parálisis por análisis: demasiadas herramientas e ideas de IA, pero ningún flujo automatizado que use el equipo.", "Gestión e infoxicación: pierdo horas compilando reportes manuales o persiguiendo actualizaciones de mi operación."] },
+      { q: "¿Cómo manejas la IA en tu día a día actualmente?", opts: ["Uso prompts sueltos en ChatGPT, pero me frustra tener que repetir lo mismo de forma manual cada vez.", "Intentamos conectar herramientas (ej. Notion, Make), pero los flujos son frágiles o dependemos de desarrolladores.", "No la implementamos formalmente por falta de tiempo o por considerarla demasiado técnica para el negocio actual."] },
+      { q: "Si liberaras 10 horas operativas de tu semana, ¿dónde estaría tu foco?", opts: ["A) En liderar iniciativas estratégicas, capacitarme o dar el salto al siguiente nivel.", "En pulir el roadmap del producto, mejorar la UX o acelerar los lanzamientos del equipo.", "En optimizar el margen del negocio, delegar la operación o recuperar mi tiempo personal."] }
     ],
     startup: [
-      { q: "¿Dónde se frena tu producto o proceso?", opts: ["Backlog infinito sin criterios de priorización", "Reuniones de alineación sin acuerdos claros", "Integrar IA sin sobrecargar al equipo técnico", "Medir impacto real de features o campañas"] },
-      { q: "¿Qué te gustaría lograr en los próximos 15 días?", opts: ["Recuperar 5+ horas semanales de tiempo", "Integrar IA en mi día a día sin detener el trabajo actual", "Que mi equipo tenga un performance TOP usando herramientas de IA", "Claridad para priorizar y cortar lo que no impacta"] },
-      { q: "¿Cómo prefieres avanzar?", opts: ["Quiero hacerlo yo mismo con una guía clara", "Prefiero acompañamiento estratégico para afinar el plan", "Necesito implementación directa para mi equipo o varios equipos"] }
+      { q: "¿Cuál es tu mayor cuello de botella operativo esta semana?", opts: ["'Copiar, pegar' datos y tareas repetitivas que me quitan tiempo para aportar valor real o buscar mejores oportunidades.", "La parálisis por análisis: demasiadas herramientas e ideas de IA, pero ningún flujo automatizado que use el equipo.", "Gestión e infoxicación: pierdo horas compilando reportes manuales o persiguiendo actualizaciones de mi operación."] },
+      { q: "¿Cómo manejas la IA en tu día a día actualmente?", opts: ["Uso prompts sueltos en ChatGPT, pero me frustra tener que repetir lo mismo de forma manual cada vez.", "Intentamos conectar herramientas (ej. Notion, Make), pero los flujos son frágiles o dependemos de desarrolladores.", "No la implementamos formalmente por falta de tiempo o por considerarla demasiado técnica para el negocio actual."] },
+      { q: "Si liberaras 10 horas operativas de tu semana, ¿dónde estaría tu foco?", opts: ["A) En liderar iniciativas estratégicas, capacitarme o dar el salto al siguiente nivel.", "En pulir el roadmap del producto, mejorar la UX o acelerar los lanzamientos del equipo.", "En optimizar el margen del negocio, delegar la operación o recuperar mi tiempo personal."] }
 
     ],
     pro: [
-      { q: "¿Qué te quita más tiempo?", opts: ["Reportes, hojas de cálculo y coordinación manual", "Documentación y comunicación repetitiva", "Búsqueda o síntesis de información dispersa"] },
-      { q: "¿Qué te gustaría lograr en los próximos 15 días?", opts: ["Recuperar 5+ horas semanales de tiempo", "Integrar IA en mi día a día sin detener el trabajo actual", "Llegar al siguiente nivel profesional siendo PRO en IA", "Crear algo propio sin que me consuma demasiado tiempo apoyado en herramientas de IA"] },
-      { q: "¿Cómo prefieres avanzar?", opts: ["Quiero hacerlo yo mismo con una guía clara", "Prefiero acompañamiento estratégico para afinar el plan", "Necesito implementación directa para solucionar varios problemas específicos"] }
+      { q: "¿Cuál es tu mayor cuello de botella operativo esta semana?", opts: ["'Copiar, pegar' datos y tareas repetitivas que me quitan tiempo para aportar valor real o buscar mejores oportunidades.", "La parálisis por análisis: demasiadas herramientas e ideas de IA, pero ningún flujo automatizado que use el equipo.", "Gestión e infoxicación: pierdo horas compilando reportes manuales o persiguiendo actualizaciones de mi operación."] },
+      { q: "¿Cómo manejas la IA en tu día a día actualmente?", opts: ["Uso prompts sueltos en ChatGPT, pero me frustra tener que repetir lo mismo de forma manual cada vez.", "Intentamos conectar herramientas (ej. Notion, Make), pero los flujos son frágiles o dependemos de desarrolladores.", "No la implementamos formalmente por falta de tiempo o por considerarla demasiado técnica para el negocio actual."] },
+      { q: "Si liberaras 10 horas operativas de tu semana, ¿dónde estaría tu foco?", opts: ["A) En liderar iniciativas estratégicas, capacitarme o dar el salto al siguiente nivel.", "En pulir el roadmap del producto, mejorar la UX o acelerar los lanzamientos del equipo.", "En optimizar el margen del negocio, delegar la operación o recuperar mi tiempo personal."] }
 
     ]
   };
@@ -77,6 +77,6 @@ function finalizar() {
     perfil: estado.perfil,
     dolor: estado.dolor
   });
-  window.location.href = `/resultado?${params.toString()}`;
+    window.location.href = `/resultado?perfil=${estado.perfil}&dolor=${estado.dolor}`;
 }
 </script>
