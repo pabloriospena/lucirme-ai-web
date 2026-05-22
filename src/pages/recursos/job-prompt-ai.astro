@@ -1,0 +1,127 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ActionHub from '../../components/ActionHub.astro';
+
+---
+
+<Layout title="JobPrompt AI | LuciRMe AI">
+  <main class="py-12 px-4 max-w-4xl mx-auto" x-data="jobBuilder">
+    <header class="text-center mb-12">
+      <h1 class="text-3xl font-bold text-deep mb-4">✨ JobPrompt AI</h1>
+      <p class="text-gray-600">Configura tu perfil, genera un prompt de élite y pégalo en tu IA favorita.</p>
+    </header>
+
+    <section class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+      <form id="jobForm" class="space-y-6">
+        <!-- Perfil Profesional -->
+        <fieldset class="grid md:grid-cols-2 gap-4">
+          <div class="md:col-span-2">
+            <label class="block text-xs font-bold text-teal uppercase mb-2">1. Rol buscado (Obligatorio)</label>
+            <input type="text" id="role" required placeholder="Ej: Contador Público, Enfermero..." class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Nivel de experiencia</label>
+            <select id="seniority" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal">
+              <option value="Sin especificar">Sin especificar</option>
+              <option value="Junior (0-2 años)">Junior (0-2 años)</option>
+              <option value="Mid (2-4 años)">Mid (2-4 años)</option>
+              <option value="Senior (4-7 años)">Senior (4-7 años)</option>
+              <option value="Lead+ (7+ años)">Lead+ (7+ años)</option>
+            </select>
+          </div>
+          <input type="number" id="minSalary" placeholder="Salario mín. (USD/mes)" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none">
+          <select id="contract" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none">
+            <option value="Flexible">Tipo de contrato (Flexible)</option>
+            <option value="Contractor B2B">Contractor B2B</option>
+            <option value="Empleado directo">Empleado directo</option>
+            <option value="Freelance">Freelance</option>
+          </select>
+          <input type="text" id="timezone" placeholder="Zona horaria (Ej: UTC-5)" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none">
+        </fieldset>
+
+        <!-- Filtros -->
+        <fieldset class="space-y-4 pt-6 border-t border-gray-100">
+          <legend class="text-xs font-bold text-teal uppercase tracking-widest">Filtros de Búsqueda</legend>
+          <div class="grid md:grid-cols-2 gap-4">
+            <select id="englishLevel" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none">
+                <option value="No requerido">Inglés: No requerido</option>
+                <option value="B2">B2 (Intermedio)</option>
+                <option value="C1">C1 (Profesional)</option>
+                <option value="C2">C2 (Nativo)</option>
+            </select>
+            <select id="modality" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none">
+                <option value="Cualquiera">Modalidad: Cualquiera</option>
+                <option value="Remoto">Remoto</option>
+                <option value="Presencial">Presencial</option>
+                <option value="Híbrido">Híbrido</option>
+            </select>
+          </div>
+          <label class="flex items-center gap-2 text-sm text-gray-700">
+            <input type="checkbox" id="includeSecondary" class="accent-teal"> Incluir fuentes secundarias (⚠️)
+          </label>
+        </fieldset>
+
+        <button type="button" id="generateBtn" class="w-full bg-deep text-white font-bold py-4 rounded-xl hover:bg-teal transition shadow-lg">✨ Generar Prompt de Élite</button>
+      </form>
+    </section>
+
+    <!-- Output -->
+    <section id="output-section" class="hidden bg-white p-8 rounded-2xl border border-gray-200 space-y-6">
+      <h2 class="text-xl font-bold text-deep">📋 Tu Prompt Generado</h2>
+      <pre id="promptOutput" class="w-full bg-gray-50 p-6 rounded-xl text-xs font-mono text-gray-700 border border-gray-200 whitespace-pre-wrap"></pre>
+      <button id="copyBtn" class="w-full bg-orange text-white font-bold py-4 rounded-lg hover:bg-orange/90 transition">📋 Copiar Prompt</button>
+    </section>
+    <ActionHub />
+  </main>
+
+  <script is:inline>
+    document.getElementById('generateBtn').addEventListener('click', () => {
+      const v = (id, fallback) => document.getElementById(id)?.value.trim() || fallback;
+      const chk = id => document.getElementById(id).checked;
+
+      const data = {
+        role: v('role', 'Cualquier rol tech/producto'),
+        seniority: v('seniority', 'Sin especificar'),
+        salary: v('minSalary', 'Abierto a negociar'),
+        contract: v('contract', 'Flexible'),
+        timezone: v('timezone', 'Flexible'),
+        english: v('englishLevel', 'No requerido'),
+        modality: v('modality', 'Flexible'),
+        secondary: chk('includeSecondary')
+      };
+
+      const prompt = `Actúa como reclutador senior global. Tu misión es identificar vacantes activas (<7 días) y presentarlas en tabla Markdown.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 PERFIL CANDIDATO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Rol: ${data.role}
+- Nivel: ${data.seniority}
+- Salario mín: ${data.salary}
+- Contrato: ${data.contract}
+- Zona: ${data.timezone} | Modalidad: ${data.modality}
+- Inglés: ${data.english}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔍 INSTRUCCIONES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. BUSCA vacantes reales. ${data.secondary ? 'Incluye fuentes secundarias (marca con ⚠️).' : 'Usa solo fuentes primarias.'}
+2. FILTRA ESTRICTAMENTE: Coincidencia ≥ 70%, Salario transparente o abierto.
+3. OUTPUT: Tabla Markdown con estas columnas EXACTAS: 
+| Puesto | Empresa | Modalidad | Salario | MatchScore | Link | Fuente | Publicado | Nota estratégica |
+4. MatchScore: (🔥 ≥8, 🟡 6-7, 🔴 ≤5). 
+5. Nota estratégica: 1 frase accionable (ej: "Pide portafolio", "Proceso corto").
+
+RESPONDE SOLO CON LA TABLA Y 3 LÍNEAS DE RESUMEN FINAL.`;
+
+      document.getElementById('promptOutput').textContent = prompt;
+      document.getElementById('output-section').classList.remove('hidden');
+      document.getElementById('output-section').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.getElementById('copyBtn').addEventListener('click', () => {
+      navigator.clipboard.writeText(document.getElementById('promptOutput').textContent);
+      alert('Prompt copiado al portapapeles');
+    });
+  </script>
+</Layout>
