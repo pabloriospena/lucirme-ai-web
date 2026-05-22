@@ -1,77 +1,95 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// Obtenemos los parámetros de la URL
-// Nota: en el Selector.astro estamos pasando los params, aquí los leemos
-const perfilRaw = Astro.url.searchParams.get('perfil') || 'pro';
-const perfil = perfilRaw === 'empresa' ? 'C' : perfilRaw === 'startup' ? 'B' : 'A';
+// Obtenemos los parámetros desde la URL
+const perfil = Astro.url.searchParams.get('perfil') || 'pro';
+const dolor = Astro.url.searchParams.get('dolor') || 'Operativa';
 
-const resultados = {
-  A: {
-    titulo: "⚡ Diagnóstico: Foco Atascado en Operatividad",
-    descripcion: "Estás consumiendo más del 40% de tu semana en tareas repetitivas, micro-gestión de datos o reportes manuales. Esto frena tu visibilidad estratégica e impide que des el salto al siguiente nivel profesional, rompiendo tu paz mental.",
-    recurso: "🎯 Pitch Builder & Guía NotebookLM",
-    recursoUrl: "/recursos",
-    ctaLibro: "📖 Framework Sin Bullshit: Adquiere el Ebook para estructurar tu criterio de PM y acelerar tu carrera.",
-    ctaCafe: "☕ Agenda un Café Estratégico de 15 min para mapear cómo automatizar tus flujos personales y destacar."
-  },
-  B: {
-    titulo: "🚀 Diagnóstico: Parálisis por Infoxicación en tu Startup",
-    descripcion: "Tu equipo tiene herramientas e ideas de IA, pero sufre de fricción de procesos. Te la pasas apagando incendios en el backlog o aclarando requerimientos de forma manual en lugar de acelerar el roadmap del producto.",
-    recurso: "🧹 Backlog Detox",
-    recursoUrl: "/recursos/backlog-detox",
-    ctaLibro: "📖 Ebook PM Sin Bullshit: El manual práctico para que tú y tu equipo dejen de procesar humo.",
-    ctaCafe: "☕ Reserva un Café Estratégico para desatascar los procesos y flujos repetitivos de tu equipo esta misma semana."
-  },
-  C: {
-    titulo: "🏢 Diagnóstico: Fuga de Dinero en Operación Invisible",
-    descripcion: "Tu empresa está perdiendo horas críticas de rendimiento debido a procesos manuales obsoletos y recolección de datos aislada. Estás forzado a supervisar micro-detalles en lugar de enfocarte puramente en la estrategia de expansión.",
-    recurso: "🧹 Backlog Detox & Automatización",
-    recursoUrl: "/recursos",
-    ctaLibro: "📖 Ebook Corporativo: Frameworks de optimización operativa sin rodeos teóricos.",
-    ctaCafe: "☕ Agenda un Café Estratégico. Diseñemos un mapa de ingeniería de flujos de IA para blindar y delegar tu operación."
+// 1. Lógica de Negocio (El Cerebro)
+const obtenerRecomendacion = (perfil: string) => {
+  if (perfil === 'startup') {
+    return {
+      titulo: "🚀 Diagnóstico: Fuga de Foco en Startup",
+      accion: "Reserva tu Taller de Inmersión (2-3 horas) y alinea a tu equipo en un flujo prioritario.",
+      producto: "Taller de Inmersión",
+      link: "https://calendar.app.google/k4iYmA42X9NNBb5t8",
+      potencial: { horas: "8-12", pct: 85 }
+    };
   }
+  if (perfil === 'empresa') {
+    return {
+      titulo: "🏢 Diagnóstico: Fricción Operativa detectada",
+      accion: "Coordina un Taller de Inmersión y valida el impacto operativo antes de escalar.",
+      producto: "Taller de Inmersión",
+      link: "https://calendar.app.google/k4iYmA42X9NNBb5t8",
+      potencial: { horas: "12-15", pct: 90 }
+    };
+  }
+  // Default: Profesional
+  return {
+    titulo: "👤 Diagnóstico: Foco Atascado",
+    accion: "Agenda tu Sesión de Enfoque (1 hora) y configura tu primer flujo de IA hoy mismo.",
+    producto: "Sesión de Enfoque",
+    link: "https://calendar.app.google/k4iYmA42X9NNBb5t8",
+    potencial: { horas: "5-8", pct: 60 }
+  };
 };
 
-const res = resultados[perfil as keyof typeof resultados];
+const res = obtenerRecomendacion(perfil);
 ---
 
 <Layout title="Tu Diagnóstico | LuciRMe Ai">
   <main class="max-w-3xl mx-auto py-20 px-6">
     
-    <!-- Badge -->
+    <!-- Badge de Estado -->
     <div class="text-center mb-8">
-      <span class="inline-block bg-[#0D9488]/10 text-[#0D9488] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full border border-[#0D9488]/20">
+      <span class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full border border-teal/20">
         {res.titulo}
       </span>
     </div>
 
-    <!-- Descripción -->
-    <p class="text-xl text-deep leading-relaxed text-center mb-12">
-      {res.descripcion}
-    </p>
-
-    <!-- Caja de Recurso Recomendado -->
-    <div class="bg-[#F8FAFC] border border-gray-200 p-6 rounded-xl mb-12 text-center">
-      <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Tu herramienta del laboratorio priorizada hoy:</p>
-      <a href={res.recursoUrl} class="text-teal font-bold text-lg hover:underline transition">
-        {res.recurso} →
-      </a>
-    </div>
-
-    <!-- CTAs en Jerarquía Estricta -->
-    <div class="space-y-6">
-      <!-- Café Estratégico (Naranja) -->
-      <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" class="block w-full bg-[#EA580C] text-white py-4 rounded-lg font-bold hover:bg-[#EA580C]/90 transition shadow-lg text-center">
-        {res.ctaCafe}
-      </a>
+    <!-- Diagnóstico -->
+    <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm mb-10">
+      <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Fricción identificada</h3>
+      <p class="text-lg text-gray-700 mb-8">{dolor}</p>
       
-      <!-- Libro (Teal Outline) -->
-      <a href="https://pay.hotmart.com/D96093022S?off=OFF50" class="block w-full border-2 border-[#0D9488] text-[#0D9488] py-4 rounded-lg font-bold hover:bg-[#0D9488]/5 transition text-center">
-        {res.ctaLibro}
-      </a>
+      <!-- Indicador visual de evolución -->
+      <div class="bg-teal/5 border border-teal/10 rounded-xl p-4 mb-8">
+        <div class="flex items-center justify-between mb-2">
+            <span class="text-sm font-bold text-deep">Potencial de recuperación</span>
+            <span class="text-sm font-bold text-teal">{res.potencial.horas} h/semana</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2">
+            <div class="bg-teal h-2 rounded-full" style={`width: ${res.potencial.pct}%`}></div>
+        </div>
+      </div>
+
+      <h3 class="text-xs font-bold text-orange uppercase tracking-widest mb-4">Acción concreta</h3>
+      <p class="text-xl font-bold text-deep leading-relaxed">{res.accion}</p>
     </div>
 
-    <p class="text-xs text-gray-400 mt-10 text-center uppercase tracking-widest">Sin compromiso. Sin spam. Solo claridad.</p>
+    <!-- Recursos -->
+    <h2 class="text-lg font-bold text-deep mb-6">Recursos para avanzar solo</h2>
+    <div class="grid md:grid-cols-2 gap-4 mb-12">
+        <a href="/recursos/backlog-detox" class="p-4 border border-gray-200 rounded-lg hover:border-teal transition text-sm font-medium text-gray-700">
+            🧹 Backlog Detox (Plantilla)
+        </a>
+        <a href="/recursos/guia-notebooklm" class="p-4 border border-gray-200 rounded-lg hover:border-teal transition text-sm font-medium text-gray-700">
+            📘 Guía NotebookLM
+        </a>
+    </div>
+
+    <!-- CTA Principal -->
+    <a href={res.link} class="block w-full bg-teal text-white font-bold py-5 rounded-xl text-center hover:bg-tealHover transition shadow-lg text-lg mb-8">
+      Reservar {res.producto} →
+    </a>
+
+    <!-- Ebook Bonus -->
+    <div class="bg-deep text-white p-6 rounded-xl text-center mb-10">
+        <p class="text-sm mb-4">¿Quieres profundizar? Ebook "PM Sin Bullshit"</p>
+        <a href="https://pay.hotmart.com/D96093022S?off=OFF50" class="text-teal font-bold hover:underline">Obtener por 50% OFF →</a>
+    </div>
+
+    <p class="text-xs text-gray-400 text-center uppercase tracking-widest">30 minutos · 100% gratis · Sin venta · Sin presión.</p>
   </main>
 </Layout>

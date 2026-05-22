@@ -2,42 +2,52 @@
 // src/components/SobreMi.astro
 ---
 
-<section id="sobre-mi" class="py-10 px-4 ">
-  <div class="container max-w-6xl mx-auto  bg-white border border-gray-100 p-8 md:p-12 rounded-2xl shadow-sm">
-    <div class="flex flex-col md:flex-row items-center gap-8">
-      
-      <!-- Foto (Asegúrate de que la ruta sea correcta en tu carpeta public) -->
+<section id="sobre-mi" class="py-16 px-4">
+  <div class="container max-w-5xl mx-auto bg-white border border-gray-100 p-8 md:p-12 rounded-2xl shadow-sm">
+    
+    <!-- Bloque de Historia -->
+    <div class="flex flex-col md:flex-row items-center gap-12 mb-12">
       <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-teal/20 flex-shrink-0">
-        <img 
-          src="/pablo-rios.jpeg" 
-          alt="Pablo Ríos" 
-          class="w-full h-full object-cover" 
-        />
+        <img src="/pablo-rios.jpeg" alt="Pablo Ríos" class="w-full h-full object-cover" />
       </div>
 
-      <!-- Texto -->
       <div class="text-center md:text-left">
         <h2 class="text-3xl font-bold text-deep mb-6">Hola, soy Pablo Ríos</h2>
-        
         <div class="space-y-4 text-gray-600 leading-relaxed text-base">
           <p>
-            <strong class="text-deep font-semibold">Sé exactamente cómo te sientes.</strong> Pasé años viendo cómo profesionales brillantes perdían su energía en tareas operativas que los mantenían quemados y cansados sin oportunidad de mirar mejores formas de hacerlo. Yo también pasé por eso.
+            <strong class="text-deep font-semibold">Sé exactamente cómo te sientes.</strong> Pasé años viendo cómo profesionales perdían su energía en tareas operativas que los mantenían quemados. Yo también pasé por eso.
           </p>
           <p>
-            Intenté un montón de cosas como cursos interminables y herramientas interminables que nunca adoptaba ni ponía en mis hábitos. Pero resultado era siempre el mismo <em>mucha información, muy poquita acción.</em> Por eso creé <strong class="text-deep">LuciRMe Ai</strong>.
+            Intenté cursos interminables y herramientas "mágicas" que nunca adoptaba. El resultado era siempre el mismo: <em>mucha información, poca acción.</em> Por eso creé <strong class="text-deep">LuciRMe Ai</strong>.
           </p>
           <p class="font-medium text-deep">
-            Mi promesa es <br> No te voy a vender humo ni software. Vamos a trabajar juntos hasta que recuperes tu tiempo.
+            Mi promesa: No te voy a vender humo ni software. Vamos a trabajar juntos hasta que recuperes tu tiempo.
           </p>
         </div>
 
-        <!-- Social Links -->
         <div class="mt-8 flex gap-6 text-sm justify-center md:justify-start">
           <a href="https://linkedin.com/in/pabloriospena" target="_blank" class="text-teal font-bold hover:underline">LinkedIn</a>
           <a href="mailto:pabloriospena@gmail.com" class="text-teal font-bold hover:underline">Email</a>
         </div>
       </div>
-      
     </div>
+
+    <!-- BLOQUE AUTORIDAD: Venta del Ebook -->
+    <div class="bg-[#0F172A] rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 shadow-xl">
+      <div class="w-24 h-32 bg-white rounded-r-lg rounded-l-sm shadow-md flex-shrink-0 flex items-center justify-center border-l-4 border-gray-300">
+        <span class="text-[10px] font-bold text-deep text-center px-2">PM Sin Bullshit</span>
+      </div>
+      <div class="text-white flex-grow">
+        <h3 class="text-lg font-bold mb-2">📘 Ebook "PM Sin Bullshit"</h3>
+        <p class="text-sm text-gray-300 mb-4">Para aplicar con criterio real, eliminar la infoxicación operativa y trabajar como un Product Manager Senior sin Bullshit.</p>
+        <div class="flex flex-wrap gap-4 items-center">
+          <a href="https://pay.hotmart.com/D96093022S?off=OFF50" class="bg-teal text-white px-6 py-2 rounded-lg font-bold text-sm hover:bg-tealHover transition">
+            Comprar ahora ($53.000 COP)
+          </a>
+          <span class="text-xs text-orange font-bold uppercase tracking-widest">50% OFF para clientes</span>
+        </div>
+      </div>
+    </div>
+    
   </div>
 </section>

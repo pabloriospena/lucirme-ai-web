@@ -4,291 +4,89 @@ import Layout from '../../layouts/Layout.astro';
 
 <Layout title="IA para Profesionales | LuciRMe Ai">
 
-  <!-- ============================================ -->
-  <!-- 1. HERO (ATENCIÓN)                           -->
-  <!-- ============================================ -->
-  <header class="py-20 px-4 border-b border-gray-100">
+  <!-- HERO -->
+  <header class="py-24 px-4 bg-[#F8FAFC]">
     <div class="max-w-3xl mx-auto text-center">
-      <span class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-6">
-        Para profesionales
+      <span class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-6">
+        Para Profesionales
       </span>
-      
       <h1 class="text-4xl md:text-5xl font-bold text-deep leading-tight mb-6">
-        Deja de perder tiempo en tareas operativas.
+        Recupera 10 horas a la semana.<br>Sin volverte experto en IA.
       </h1>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-        Trabajamos de la mano para que te enfoques en lo que realmente importa: <br>tu crecimiento y tus resultados.
+      <p class="text-lg text-gray-600 leading-relaxed mb-10">
+        Automatiza lo repetitivo. Enfócate en lo que sí escala.
       </p>
-
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" target="_blank" class="inline-flex items-center justify-center gap-2 bg-orange hover:bg-orange/90 text-white px-8 py-4 rounded-lg font-bold transition shadow-lg">
-          Agendemos un café estratégico →
-        </a>
-        <a href="#metodo" class="inline-flex items-center justify-center gap-2 bg-white border-2 border-gray-200 hover:border-teal text-deep px-8 py-4 rounded-lg font-bold transition">
-          Ver Metodología
-        </a>
-      </div>
     </div>
   </header>
 
-  <!-- ============================================ -->
-  <!-- 2. AGITADOR DEL PROBLEMA (INTERÉS)           -->
-  <!-- ============================================ -->
-  <section id="problema" class="py-20 px-4 bg-[#F8FAFC]">
+  <main class="py-24 px-4 bg-white">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-deep mb-12 text-center">Sabes que podrías hacer más, pero algo te frena.</h2>
       
-      <div class="grid md:grid-cols-2 gap-8 items-start">
-        <!-- Lista de dolores -->
-        <div class="space-y-6">
-          <div class="flex gap-4 items-start bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
-            <span class="text-orange text-xl font-bold mt-1">✕</span>
-            <div>
-              <strong class="text-deep block mb-1">Repites lo mismo:</strong> 
-              <span class="text-sm text-gray-600">Tareas manuales que consumen tu agenda y tu energía.</span>
+      <!-- IDENTIFICACIÓN -->
+      <div class="bg-slate-50 rounded-2xl p-8 mb-16 border border-gray-100">
+        <h2 class="text-xl font-bold text-deep mb-6">¿Te suena familiar?</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          {[
+            "Pierdes horas en reportes, hojas de cálculo o coordinación manual.",
+            "Sientes que deberías usar IA, pero no sabes por dónde empezar sin perder tiempo.",
+            "Quieres cobrar más, pero la operativa te consume el tiempo de valor.",
+            "Has probado tutoriales, pero nada se integra a tu flujo real."
+          ].map(dolor => (
+            <div class="flex items-start gap-3">
+              <span class="text-orange mt-1">⚠️</span>
+              <p class="text-sm text-gray-700">{dolor}</p>
             </div>
-          </div>
-          <div class="flex gap-4 items-start bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
-            <span class="text-orange text-xl font-bold mt-1">✕</span>
-            <div>
-              <strong class="text-deep block mb-1">Pruebas herramientas, nada se queda:</strong> 
-              <span class="text-sm text-gray-600">Abres tutoriales, guardas prompts, pero sigues haciendo lo mismo a mano.</span>
-            </div>
-          </div>
-          <div class="flex gap-4 items-start bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
-            <span class="text-orange text-xl font-bold mt-1">✕</span>
-            <div>
-              <strong class="text-deep block mb-1">Ideas para crecer, sin horas:</strong> 
-              <span class="text-sm text-gray-600">Tu operativa te deja agotado y lo estratégico pasa a "después".</span>
-            </div>
-          </div>
+          ))}
         </div>
-
-        <!-- Callout destacado -->
-        <div class="bg-teal/5 border-l-4 border-teal p-8 rounded-r-2xl h-full flex flex-col justify-center">
-          <p class="text-base text-gray-700 leading-relaxed">
-            <strong class="text-deep font-bold block mb-3 text-lg">La verdad:</strong>
-            No es que la IA no funcione. Es que intentarla solo, con teoría genérica, rara vez funciona. Aquí trabajamos con lo que YA tienes.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- 3. LA DIFERENCIA (DESEO)                     -->
-  <!-- ============================================ -->
-  <section class="py-24 px-4 bg-white">
-    <div class="max-w-4xl mx-auto">
-      <div class="mb-16 pl-6 border-l-4 border-deep">
-        <h2 class="text-3xl font-bold text-deep leading-tight mb-2">No es un curso.</h2>
-        <p class="text-xl text-gray-600">Es tu sistema operativo personal para trabajar mejor.</p>
+        <p class="text-sm text-gray-500 mt-8 italic">Si te identificaste en 2 o más: esto es para ti.</p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-x-12 gap-y-10">
-        <div class="flex gap-4 items-start">
-          <span class="mt-1 text-teal font-bold text-xl">✓</span>
-          <div>
-            <h3 class="font-bold text-deep mb-2 text-lg">Recuperas tiempo</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">Olvida la teoría. Aplicamos IA a tus procesos reales para devolverte horas perdidas en lo manual.</p>
+      <!-- TRANSFORMACIÓN -->
+      <div class="mb-20">
+        <h2 class="text-2xl font-bold text-deep text-center mb-10">Tu jornada, antes y después</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="border border-gray-200 rounded-2xl p-8 bg-white">
+            <h3 class="font-bold text-deep mb-6">🔴 Antes</h3>
+            <ul class="space-y-4 text-sm text-gray-600">
+              <li class="flex gap-3"><span>✕</span> Compilar reportes manuales de la semana</li>
+              <li class="flex gap-3"><span>✕</span> Coordinar por WhatsApp tareas manuales</li>
+              <li class="flex gap-3"><span>✕</span> Documentar procesos obsoletos</li>
+            </ul>
           </div>
-        </div>
-        <div class="flex gap-4 items-start">
-          <span class="mt-1 text-teal font-bold text-xl">✓</span>
-          <div>
-            <h3 class="font-bold text-deep mb-2 text-lg">Sin quedarte atrás</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">Trabajamos tus desafíos actuales en vivo. Te mantienes relevante sin depender de tutoriales eternos.</p>
-          </div>
-        </div>
-        <div class="flex gap-4 items-start">
-          <span class="mt-1 text-teal font-bold text-xl">✓</span>
-          <div>
-            <h3 class="font-bold text-deep mb-2 text-lg">Resultados reales</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">Sales de cada sesión con tareas resueltas y pasos exactos para mañana. Claridad operativa total.</p>
-          </div>
-        </div>
-        <div class="flex gap-4 items-start">
-          <span class="mt-1 text-teal font-bold text-xl">✓</span>
-          <div>
-            <h3 class="font-bold text-deep mb-2 text-lg">Espacio para lo importante</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">Menos ruido, más tiempo libre. El objetivo es que te enfoques en tu vida y tu crecimiento.</p>
+          <div class="border border-teal/30 rounded-2xl p-8 bg-teal/5">
+            <h3 class="font-bold text-deep mb-6">🟢 Después</h3>
+            <ul class="space-y-4 text-sm text-gray-600">
+              <li class="flex gap-3"><span>✓</span> Revisar dashboard automático de IA</li>
+              <li class="flex gap-3"><span>✓</span> Estrategia pura, cero coordinación operativa</li>
+              <li class="flex gap-3"><span>✓</span> Documentación automática de procesos</li>
+            </ul>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ============================================ -->
-  <!-- 4. AUTORIDAD (CONFIANZA)                     -->
-  <!-- ============================================ -->
-  <section class="py-20 px-4 bg-[#F8FAFC]">
-    <div class="max-w-4xl mx-auto bg-white p-10 rounded-2xl border border-gray-100 shadow-sm">
-      <div class="flex flex-col md:flex-row items-center gap-10">
-        <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-teal/20 flex-shrink-0">
-          <img src="/pablo-rios.jpeg" alt="Pablo Ríos" class="w-full h-full object-cover" />
-        </div>
-        <div class="text-center md:text-left">
-          <h2 class="text-2xl font-bold text-deep mb-4">Hola, soy Pablo</h2>
-          <div class="space-y-3 text-sm text-gray-600 leading-relaxed">
-            <p><strong class="text-deep">Sé exactamente cómo te sientes.</strong> Pasé años viendo cómo profesionales brillantes perdían su energía en tareas operativas que los dejaban agotados.</p>
-            <p>Intenté todo: cursos interminables y herramientas "mágicas". El resultado era siempre el mismo: <em>más información, menos acción</em>. Por eso creé <strong>LuciRMe Ai</strong>.</p>
-            <p><strong class="text-deep">Mi promesa:</strong> No te voy a vender humo ni software. Vamos a trabajar juntos hasta que recuperes tu tiempo.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+      <!-- PRICING -->
+      <div class="grid md:grid-cols-2 gap-8 mb-20">
+        <div class="p-8 rounded-2xl border-2 border-gray-100 flex flex-col hover:border-teal transition-all">
+          <h3 class="font-bold text-deep text-xl mb-4">🎯 Sesión de Enfoque</h3>
+          <p class="text-xs text-teal font-bold uppercase tracking-widest mb-4">1 hora de trabajo directo</p>
+          <div class="text-3xl font-bold text-deep mb-6">$116.000 COP <span class="text-sm text-gray-400 font-normal">/ $35 USD</span></div>
+          <p class="text-sm text-gray-600 mb-8 flex-grow">Diagnóstico rápido + 1 flujo configurado. Tareas resueltas y pasos exactos para mañana.</p>        </div>
 
-  <!-- ============================================ -->
-  <!-- 5. OFERTA E INVERSIÓN (LÓGICA)               -->
-  <!-- ============================================ -->
-  <section id="precios" class="py-24 px-4 bg-white">
-    <div class="max-w-5xl mx-auto">
-      
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-deep mb-4">Elige cómo quieres trabajar</h2>
-        <p class="text-lg text-gray-600">Precios accesibles para empezar. Cupos limitados este mes.</p>
+        <div class="p-8 rounded-2xl border-2 border-teal shadow-lg flex flex-col">
+          <h3 class="font-bold text-deep text-xl mb-4">🔄 Ciclo Individual</h3>
+          <p class="text-xs text-teal font-bold uppercase tracking-widest mb-4">8 horas de trabajo (4 sesiones)</p>
+          <div class="text-3xl font-bold text-deep mb-6">$350.000 COP <span class="text-sm text-gray-400 font-normal">/ $98 USD</span></div>
+          <p class="text-sm text-gray-600 mb-8 flex-grow font-medium">Protocolos, Refinamiento e IA personalizada para tu carrera.</p>        </div>
       </div>
 
-      <div class="flex justify-center mb-12">
-        <div class="inline-flex items-center gap-2 bg-orange/10 text-orange px-5 py-2 rounded-full text-sm font-bold border border-orange/20">
-          <span>✨ Lanzamiento:</span>
-          <span>Los primeros 20 profesionales reciben precio especial y acompañamiento extendido.</span>
-        </div>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-8 mb-12">
-        <!-- Card 1: Sesión Express -->
-        <div class="bg-white p-8 rounded-2xl border-2 border-gray-100 flex flex-col hover:border-teal transition-colors shadow-sm">
-          <div class="mb-6">
-            <h3 class="font-bold text-deep text-2xl mb-1">Sesión Express</h3>
-            <p class="text-sm text-gray-500">Solución inmediata (1h)</p>
-          </div>
-          
-          <div class="flex justify-between items-end mb-8 pb-6 border-b border-gray-100">
-            <div>
-              <p class="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1">Individual 1:1</p>
-              <p class="text-4xl font-bold text-deep">$116.000</p>
-            </div>
-            <div class="text-right">
-              <p class="text-xs text-teal font-bold uppercase tracking-widest mb-1">Grupo</p>
-              <p class="text-2xl font-bold text-teal">$44.000 <span class="text-sm font-normal text-gray-400">/c.u.</span></p>
-            </div>
-          </div>
-
-          <ul class="space-y-4 text-sm text-gray-600 mb-8 flex-grow">
-            <li class="flex items-start gap-3"><span class="text-teal font-bold">✓</span> Identificamos tu mayor fuga de tiempo y la atacamos en 1 hora.</li>
-            <li class="flex items-start gap-3"><span class="text-teal font-bold">✓</span> Sales con un flujo funcional listo para usar hoy, no "para después".</li>
-            <li class="flex items-start gap-3"><span class="text-teal font-bold">✓</span> Sin compromiso: si ves valor, continuamos. Si no, cerramos sin preguntas.</li>
-          </ul>
-        </div>
-
-        <!-- Card 2: Ciclo PRP -->
-        <div class="bg-white p-8 rounded-2xl border-2 border-teal flex flex-col shadow-lg relative overflow-hidden">
-          <div class="absolute top-0 right-0 bg-teal text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1 rounded-bl-lg">Más elegido</div>
-          <div class="mb-6">
-            <h3 class="font-bold text-deep text-2xl mb-1">Ciclo PRP</h3>
-            <p class="text-sm text-gray-500">4 sesiones de inmersión profunda</p>
-          </div>
-          
-          <div class="flex justify-between items-end mb-8 pb-6 border-b border-gray-100">
-            <div>
-              <p class="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1">Individual 1:1</p>
-              <p class="text-4xl font-bold text-deep">$350.000</p>
-            </div>
-            <div class="text-right">
-              <p class="text-xs text-teal font-bold uppercase tracking-widest mb-1">Grupo</p>
-              <p class="text-2xl font-bold text-teal">$170.000 <span class="text-sm font-normal text-gray-400">/c.u.</span></p>
-            </div>
-          </div>
-
-          <ul class="space-y-4 text-sm text-gray-600 mb-8 flex-grow">
-            <li class="flex items-start gap-3"><span class="text-teal font-bold">✓</span> Transformas hábitos manuales en flujos con IA: una tarea por sesión.</li>
-            <li class="flex items-start gap-3"><span class="text-teal font-bold">✓</span> Conocimiento aplicado, no teoría: trabajamos con tus procesos reales.</li>
-            <li class="flex items-start gap-3"><span class="text-teal font-bold">✓</span> Acompañamiento humano entre sesiones para ajustar el sistema.</li>
-            <li class="flex items-start gap-3"><span class="text-teal font-bold">✓</span> Recuperas tiempo progresivamente con autonomía para escalar.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="text-center">
-        <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" target="_blank" class="inline-block bg-orange text-white px-10 py-4 rounded-lg font-bold hover:bg-orange/90 transition shadow-lg text-lg">
-          Agendemos un café estratégico (30 min)
+      <!-- CTA FINAL -->
+      <div class="text-center bg-deep p-10 rounded-2xl text-white">
+        <h3 class="text-2xl font-bold mb-4">Sin riesgo. Solo claridad.</h3>
+        <p class="text-gray-400 mb-8">Si en 15 min no ves valor, cerramos sin compromiso.</p>
+        <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" class="inline-block bg-orange text-white px-8 py-4 rounded-lg font-bold hover:bg-orange/90 transition shadow-lg">
+          Agendar Café Estratégico →
         </a>
-        <p class="text-sm text-gray-500 mt-4">✨ Sin compromiso. Si en 15 min ya hay claridad, cerramos antes.</p>
       </div>
     </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- INVITACIÓN A RECURSOS (Reemplaza Lead Magnet)-->
-  <!-- ============================================ -->
-  <section class="py-16 px-4 bg-teal/5 border-y border-teal/10">
-    <div class="max-w-3xl mx-auto text-center">
-      <div class="mb-8">
-        <span class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-4">Librería Gratuita</span>
-        <h3 class="text-2xl font-bold text-deep mb-3">¿Prefieres explorar por tu cuenta primero?</h3>
-        <p class="text-gray-600">
-          Accede a nuestras guías y Micro-SaaS como <strong>Backlog Detox</strong> y <strong>NotebookLM Guide</strong>. Inicia sesión una vez y ten acceso de por vida a los recursos.
-        </p>
-      </div>
-      <a href="/recursos" class="inline-flex items-center justify-center gap-2 bg-white text-teal border-2 border-teal px-8 py-4 rounded-lg font-bold hover:bg-teal hover:text-white transition shadow-sm">
-        📚 Explorar Librería de Recursos
-      </a>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!-- 6. METODOLOGÍA PRP (EL "CÓMO")               -->
-  <!-- ============================================ -->
-  <section id="metodo" class="py-24 px-4 bg-white">
-    <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold text-deep mb-4">Método PRP</h2>
-        <p class="text-lg text-gray-600">Prioriza · Robotiza · Potencia. Resultados medibles desde la semana uno.</p>
-      </div>
-
-      <div class="relative flex flex-col md:flex-row gap-8 md:gap-0">
-        <div class="hidden md:block absolute top-6 left-0 right-0 h-0.5 bg-gray-100"></div>
-
-        <div class="relative flex-1 flex flex-col items-center px-4">
-          <div class="w-12 h-12 bg-white border-2 border-gray-300 text-gray-400 rounded-full flex items-center justify-center text-lg font-bold mb-6 relative z-10 bg-white">1</div>
-          <div class="w-full bg-white p-8 rounded-xl border border-gray-100 shadow-sm text-center">
-            <h4 class="font-bold text-deep mb-2 text-lg">Protocolos <span class="text-gray-400 font-normal text-sm ml-1">(Orden)</span></h4>
-            <p class="text-sm text-gray-600">Identificamos tus fugas de tiempo y mapeamos tu gestión actual.</p>
-          </div>
-        </div>
-
-        <div class="relative flex-1 flex flex-col items-center px-4">
-          <div class="w-12 h-12 bg-white border-2 border-teal text-teal rounded-full flex items-center justify-center text-lg font-bold mb-6 relative z-10 bg-white">2</div>
-          <div class="w-full bg-white p-8 rounded-xl border border-teal/30 shadow-sm text-center">
-            <h4 class="font-bold text-deep mb-2 text-lg">Refinamiento <span class="text-teal font-normal text-sm ml-1">(IA)</span></h4>
-            <p class="text-sm text-gray-600">Aplicamos IA práctica para que la ejecución sea rápida y sin errores.</p>
-          </div>
-        </div>
-
-        <div class="relative flex-1 flex flex-col items-center px-4">
-          <div class="w-12 h-12 bg-teal text-white rounded-full flex items-center justify-center text-lg font-bold mb-6 relative z-10">3</div>
-          <div class="w-full bg-teal p-8 rounded-xl shadow-lg text-center text-white">
-            <h4 class="font-bold mb-2 text-lg">Potencial <span class="text-white/70 font-normal text-sm ml-1">(Autonomía)</span></h4>
-            <p class="text-sm text-white/90">Entregamos autonomía total. Escalas tus resultados sin depender de nosotros.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- STICKY BAR INVITACIÓN A RECURSOS -->
-  <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-40 p-4">
-    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="text-sm text-center sm:text-left">
-        <span class="font-bold text-deep block sm:inline">🎁 ¿Aún no estás listo para agendar?</span>
-        <span class="text-gray-600 ml-1">Visita nuestra librería y usa nuestras herramientas gratis.</span>
-      </div>
-      <a href="/recursos" class="bg-teal hover:bg-tealHover text-white px-6 py-2 rounded-lg text-sm font-bold transition whitespace-nowrap">
-        Ver Recursos Gratis
-      </a>
-    </div>
-  </div>
-
+  </main>
 </Layout>

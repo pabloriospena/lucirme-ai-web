@@ -1,0 +1,61 @@
+---
+// src/components/CardsSelector.astro
+const cards = [
+  {
+    perfil: 'pro',
+    titulo: "👤 Quiero resolverlo para mí",
+    pain: "Pierdes horas en reportes y coordinación manual.",
+    outcome: "Recupera hasta 10h/semana para enfocarte en lo que sí escala.",
+    note: "Para profesionales que deciden por su cuenta"
+  },
+  {
+    perfil: 'startup',
+    titulo: "🚀 Quiero resolverlo con mi equipo",
+    pain: "Features estancados, backlog que crece, decisiones sin datos.",
+    outcome: "Integra IA en tus hábitos detener tu roadmap.",
+    note: "Para founders y líderes de equipo pequeño"
+  },
+  {
+    perfil: 'empresa',
+    titulo: "🏢 Quiero proponerlo a mi organización",
+    pain: "Aprobaciones eternas, datos en silos, procesos manuales.",
+    outcome: "Reduce hasta un 40% de fricción operativa en corto plazo.",
+    note: "Para quienes necesitan aprobación interna"
+  }
+];
+---
+
+<section id="caminos" class="py-16 px-4">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold text-deep text-center mb-12">Elige tu camino</h2>
+    
+    <div class="grid md:grid-cols-3 gap-6">
+      {cards.map((c) => (
+        <button 
+          onclick={`selectIntention('${c.perfil}'); document.getElementById('selector-overlay').classList.remove('hidden');`}
+          class="group bg-white p-8 rounded-2xl border border-gray-200 hover:border-teal transition-all text-left flex flex-col shadow-sm hover:shadow-xl"
+        >
+          <h3 class="text-xl font-bold text-deep mb-4">{c.titulo}</h3>
+          
+          <div class="flex-grow space-y-4 mb-8">
+            <p class="text-sm text-gray-500 italic">" {c.pain} "</p>
+            <p class="text-sm font-bold text-teal">⚡ {c.outcome}</p>
+          </div>
+          
+          <div class="pt-6 border-t border-gray-100 w-full">
+            <span class="text-teal font-bold text-sm block mb-2 group-hover:underline">Enciende tu Foco →</span>
+            <span class="text-[10px] text-gray-400 uppercase tracking-widest">{c.note}</span>
+          </div>
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  // Esta función conecta el botón con el estado del Selector
+  function selectIntention(perfil) {
+    // Aquí puedes llamar a una función del Selector si necesitas precargar datos
+    console.log("Perfil seleccionado:", perfil);
+  }
+</script>

@@ -1,0 +1,26 @@
+---
+// src/components/FAQ.astro
+const faqs = [
+  { q: "¿Necesito saber de tecnología?", a: "No. Te ayudo a aplicar IA sin volverte experto. Usamos herramientas que ya conoces o que son intuitivas." },
+  { q: "¿Es 100% remoto?", a: "Sí. Todo se puede hacer remoto desde el computador. Si necesitas presencial, hablemos!." },
+  { q: "¿Qué herramientas usas?", a: "Make, n8n, Lovable, Notion AI, Qwen, Claude, y toda lo que ofrece Google además, las que ya usas o las que necesites." },
+  { q: "¿Hay garantía?", a: "Sí. Si en 15 min ves que no es para ti, cerramos sin compromiso. Si avanzamos y no obtienes claridad, no pagas." },
+  { q: "¿Cuánto cuesta?", a: "Sesión de Enfoque: $116.000 COP. Ciclo Individual: $350.000 COP. Taller de inmersión: $620.000 COP. Ciclo de Autonomía: Desde $4.400.000 COP." },
+  { q: "¿Puedo pagar en cuotas?", a: "sí. Hablemos en el Café para ajustar a tu realidad." }
+];
+---
+
+<section id="faq" class="py-24 px-4 bg-[#F8FAFC]">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-3xl font-bold text-deep text-center mb-16">Preguntas frecuentes</h2>
+
+    <div class="space-y-6">
+      {faqs.map((faq) => (
+        <div class="bg-white p-8 rounded-xl border border-gray-100 shadow-sm">
+          <h3 class="font-bold text-deep mb-3 text-lg">{faq.q}</h3>
+          <p class="text-sm text-gray-600 leading-relaxed">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

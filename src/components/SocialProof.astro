@@ -1,0 +1,57 @@
+---
+// src/components/Resultados.astro
+const testimonios = [
+  {
+    perfil: "👤 Profesional Independiente",
+    quote: "Recuperé 7h/semana automatizando reportes. Ahora enfoco ese tiempo en clientes que sí pagan.",
+    result: "→ Sesión de enfoque + Guía personalizada"
+  },
+  {
+    perfil: "🚀 Startup B2B (5 personas)",
+    quote: "Redujimos de 12 a 4 días el ciclo de decisión de features. Sin contratar más PMs.",
+    result: "→ Taller de inmersión + Ciclo de autonomía"
+  },
+  {
+    perfil: "🏢 Empresa de Servicios (50+ personas)",
+    quote: "Eliminamos 3 aprobaciones manuales en onboarding. Error humano: -80%.",
+    result: "→ Taller de inmersión + Ciclo de autonomía"
+  }
+];
+---
+
+<section class="py-24 px-4 bg-white border-t border-gray-100">
+  <div class="max-w-5xl mx-auto">
+    
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-bold text-deep mb-4">Algunos resultados.</h2>
+      <p class="text-lg text-gray-600">Primeros usuarios en proceso con impacto tangible.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      {testimonios.map((t) => (
+        <div class="bg-[#F8FAFC] p-8 rounded-2xl border border-gray-100 flex flex-col hover:border-teal transition-all">
+          <span class="inline-block bg-teal/10 text-teal text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-6">
+            {t.perfil}
+          </span>
+          <blockquote class="text-lg font-medium text-deep leading-relaxed mb-8 flex-grow">
+            "{t.quote}"
+          </blockquote>
+          <div class="pt-6 border-t border-gray-200">
+            <span class="text-teal font-bold text-sm">{t.result}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-16 text-center">
+      <p class="text-lg font-semibold text-deep mb-6">¿El siguiente caso? El tuyo.</p>
+      <button 
+        onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
+        class="inline-block bg-deep text-white px-10 py-4 rounded-lg font-bold hover:bg-teal transition shadow-lg text-lg"
+      >
+        Enciende tu Foco y empieza →
+      </button>
+    </div>
+
+  </div>
+</section>

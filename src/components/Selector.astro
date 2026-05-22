@@ -1,82 +1,72 @@
 ---
-// Selector.astro
+// Selector.astro - Flujo de diagnóstico profesional
 ---
 <div id="selector-overlay" class="fixed inset-0 bg-[#0F172A] z-[100] hidden flex items-center justify-center p-6 backdrop-blur-sm">
   <button onclick="document.getElementById('selector-overlay').classList.add('hidden')" class="absolute top-8 right-8 text-white/40 hover:text-white text-3xl">✕</button>
 
-  <div class="max-w-xl w-full">
-    <!-- Contenedor dinámico -->
-    <div id="selector-container" class="space-y-8 text-center animate-fade-in">
-       <h2 id="titulo" class="text-3xl font-bold text-white mb-8">¿Cuál es tu situación profesional actual?</h2>
-       <div id="opciones-container" class="grid gap-4">
-          <button onclick="seleccionarPerfil('empresa')" class="p-6 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">Profesional, buscando potenciar mi carrera y eficiencia.</button>
-          <button onclick="seleccionarPerfil('startup')" class="p-6 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">Líder de equipo, Project Manager o Product Manager en una Startup.</button>
-          <button onclick="seleccionarPerfil('pro')" class="p-6 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">Fundador, Director o Dueño de Empresa tradicional.</button>
-       </div>
+  <div class="max-w-xl w-full text-white" x-data="selectorLogica()">
+    <div id="selector-container" class="space-y-8 animate-fade-in">
+       <h2 id="selector-title" class="text-3xl font-bold text-white text-center">¿Quién toma la decisión?</h2>
+       <div id="opciones-container" class="grid gap-3"></div>
     </div>
   </div>
 </div>
 
 <script is:inline>
-  let estado = { perfil: null, paso: 1, respuestas: {} };
-
-  const estructura = {
-    empresa: [
-      { q: "¿Cuál es tu mayor cuello de botella operativo esta semana?", opts: ["'Copiar, pegar' datos y tareas repetitivas que me quitan tiempo para aportar valor real o buscar mejores oportunidades.", "La parálisis por análisis: demasiadas herramientas e ideas de IA, pero ningún flujo automatizado que use el equipo.", "Gestión e infoxicación: pierdo horas compilando reportes manuales o persiguiendo actualizaciones de mi operación."] },
-      { q: "¿Cómo manejas la IA en tu día a día actualmente?", opts: ["Uso prompts sueltos en ChatGPT, pero me frustra tener que repetir lo mismo de forma manual cada vez.", "Intentamos conectar herramientas (ej. Notion, Make), pero los flujos son frágiles o dependemos de desarrolladores.", "No la implementamos formalmente por falta de tiempo o por considerarla demasiado técnica para el negocio actual."] },
-      { q: "Si liberaras 10 horas operativas de tu semana, ¿dónde estaría tu foco?", opts: ["A) En liderar iniciativas estratégicas, capacitarme o dar el salto al siguiente nivel.", "En pulir el roadmap del producto, mejorar la UX o acelerar los lanzamientos del equipo.", "En optimizar el margen del negocio, delegar la operación o recuperar mi tiempo personal."] }
-    ],
-    startup: [
-      { q: "¿Cuál es tu mayor cuello de botella operativo esta semana?", opts: ["'Copiar, pegar' datos y tareas repetitivas que me quitan tiempo para aportar valor real o buscar mejores oportunidades.", "La parálisis por análisis: demasiadas herramientas e ideas de IA, pero ningún flujo automatizado que use el equipo.", "Gestión e infoxicación: pierdo horas compilando reportes manuales o persiguiendo actualizaciones de mi operación."] },
-      { q: "¿Cómo manejas la IA en tu día a día actualmente?", opts: ["Uso prompts sueltos en ChatGPT, pero me frustra tener que repetir lo mismo de forma manual cada vez.", "Intentamos conectar herramientas (ej. Notion, Make), pero los flujos son frágiles o dependemos de desarrolladores.", "No la implementamos formalmente por falta de tiempo o por considerarla demasiado técnica para el negocio actual."] },
-      { q: "Si liberaras 10 horas operativas de tu semana, ¿dónde estaría tu foco?", opts: ["A) En liderar iniciativas estratégicas, capacitarme o dar el salto al siguiente nivel.", "En pulir el roadmap del producto, mejorar la UX o acelerar los lanzamientos del equipo.", "En optimizar el margen del negocio, delegar la operación o recuperar mi tiempo personal."] }
-
-    ],
-    pro: [
-      { q: "¿Cuál es tu mayor cuello de botella operativo esta semana?", opts: ["'Copiar, pegar' datos y tareas repetitivas que me quitan tiempo para aportar valor real o buscar mejores oportunidades.", "La parálisis por análisis: demasiadas herramientas e ideas de IA, pero ningún flujo automatizado que use el equipo.", "Gestión e infoxicación: pierdo horas compilando reportes manuales o persiguiendo actualizaciones de mi operación."] },
-      { q: "¿Cómo manejas la IA en tu día a día actualmente?", opts: ["Uso prompts sueltos en ChatGPT, pero me frustra tener que repetir lo mismo de forma manual cada vez.", "Intentamos conectar herramientas (ej. Notion, Make), pero los flujos son frágiles o dependemos de desarrolladores.", "No la implementamos formalmente por falta de tiempo o por considerarla demasiado técnica para el negocio actual."] },
-      { q: "Si liberaras 10 horas operativas de tu semana, ¿dónde estaría tu foco?", opts: ["A) En liderar iniciativas estratégicas, capacitarme o dar el salto al siguiente nivel.", "En pulir el roadmap del producto, mejorar la UX o acelerar los lanzamientos del equipo.", "En optimizar el margen del negocio, delegar la operación o recuperar mi tiempo personal."] }
-
-    ]
+  const flujo = {
+    paso0: {
+      q: "¿Quién toma la decisión de implementar IA en tu caso?",
+      opts: ["Yo decido por mí", "Decido con mi equipo", "Necesito aprobación de otros", "Ninguna de las anteriores", "Es un contexto mixto"]
+    },
+    paso1: {
+      individual: { q: "¿Qué te quita más tiempo?", opts: ["Reportes/coordinación manual", "Documentación repetitiva", "Información dispersa", "Seguimiento de tareas", "Otro"] },
+      equipo: { q: "¿Qué frena más a tu equipo?", opts: ["Decisiones sin datos", "Coordinación WhatsApp/Email", "Backlog sin rumbo", "Herramientas desconectadas", "Otro"] },
+      empresa: { q: "¿Qué proceso genera más fricción?", opts: ["Aprobaciones manuales", "Datos en silos", "Reportes sin insights", "Onboarding lento", "Otro"] }
+    },
+    paso2: { q: "¿Cómo usas la IA hoy?", opts: ["Prompts sueltos manuales", "Conexión frágil (Make/Notion)", "No implementada", "Escalando con criterio"] },
+    paso3: { q: "¿Si recuperaras 10h, qué priorizarías?", opts: ["Enfocarme en trabajo de alto valor", "Pulir procesos internos", "Presentar propuesta a decisores", "Explorar opciones", "Otro"] }
   };
 
-  function seleccionarPerfil(p) {
-    estado.perfil = p;
-    estado.paso = 1; // Primer paso de las preguntas específicas
-    renderizarPaso();
-  }
+  let estado = { perfil: '', respuestas: {}, paso: 0 };
 
-  function renderizarPaso() {
-    const contenedor = document.getElementById('opciones-container');
-    const titulo = document.getElementById('titulo');
-    const preguntas = estructura[estado.perfil];
-    
-    if (estado.paso > preguntas.length) {
-      finalizar();
-      return;
+  function renderizar() {
+    const container = document.getElementById('opciones-container');
+    const titulo = document.getElementById('selector-title');
+    container.innerHTML = '';
+
+    if (estado.paso === 0) {
+      titulo.innerText = flujo.paso0.q;
+      flujo.paso0.opts.forEach(op => agregarBoton(op, () => {
+        estado.respuestas.decision = op;
+        estado.perfil = op.includes('Yo decido') ? 'individual' : op.includes('equipo') ? 'equipo' : 'empresa';
+        estado.paso = 1;
+        renderizar();
+      }));
+    } else if (estado.paso === 1) {
+      titulo.innerText = flujo.paso1[estado.perfil].q;
+      flujo.paso1[estado.perfil].opts.forEach(op => agregarBoton(op, () => { estado.respuestas.dolor = op; estado.paso++; renderizar(); }));
+    } else if (estado.paso === 2) {
+      titulo.innerText = flujo.paso2.q;
+      flujo.paso2.opts.forEach(op => agregarBoton(op, () => { estado.respuestas.usoIA = op; estado.paso++; renderizar(); }));
+    } else if (estado.paso === 3) {
+      titulo.innerText = flujo.paso3.q;
+      flujo.paso3.opts.forEach(op => agregarBoton(op, () => { estado.respuestas.objetivo = op; finalizar(); }));
     }
-
-    const pasoActual = preguntas[estado.paso - 1];
-    titulo.innerText = pasoActual.q;
-    contenedor.innerHTML = '';
-    
-    pasoActual.opts.forEach(op => {
-      const btn = document.createElement('button');
-      btn.innerText = op;
-      btn.className = "w-full p-6 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5";
-      btn.onclick = () => {
-        estado.paso++;
-        renderizarPaso();
-      };
-      contenedor.appendChild(btn);
-    });
   }
 
-function finalizar() {
-  const params = new URLSearchParams({
-    perfil: estado.perfil,
-    dolor: estado.dolor
-  });
-    window.location.href = `/resultado?perfil=${estado.perfil}&dolor=${estado.dolor}`;
-}
+  function agregarBoton(texto, callback) {
+    const btn = document.createElement('button');
+    btn.className = "w-full p-4 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5";
+    btn.innerText = texto;
+    btn.onclick = callback;
+    document.getElementById('opciones-container').appendChild(btn);
+  }
+
+  async function finalizar() {
+    await fetch('/api/guardar-diagnostico', { method: 'POST', body: JSON.stringify(estado.respuestas) });
+    window.location.href = `/resultado?perfil=${estado.perfil}&dolor=${estado.respuestas.dolor}`;
+  }
+
+  window.iniciarFlujo = () => renderizar();
+  renderizar();
 </script>

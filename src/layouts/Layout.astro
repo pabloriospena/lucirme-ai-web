@@ -1,14 +1,12 @@
 ---
 import '../styles/global.css';
 import Selector from '../components/Selector.astro';
+import Footer from '../components/Footer.astro'; // Asegúrate de tenerlo
 import Analytics from '@vercel/analytics/astro';
 import { UserButton } from "@clerk/astro/components";
-import Footer from '../components/Footer.astro';
 
-interface Props { title: string; }
-const { title } = Astro.props;
 const auth = (Astro.locals as any).auth;
-const userId = auth?.userId;
+const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
 ---
 
 <!doctype html>
@@ -16,81 +14,48 @@ const userId = auth?.userId;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    
-    <script is:inline>
-      (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
-      .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
-      n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
-      (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
-      ml('account', '2041884');
-    </script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <title>{Astro.props.title}</title>
   </head>
 
   <body class="bg-white text-gray-900 font-sans antialiased">
     
-    <!-- Header / Navegación Superior -->
-<!-- Header / Navegación Superior -->
-<header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
-  <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-    
-    <!-- Logo y Menú Izquierda -->
-    <div class="flex items-center gap-8">
-      <!-- Reemplaza esto en Layout.astro -->
-      <a href="/" class="flex items-center gap-2">
-        <!-- Aquí el logo. h-7 es perfecto para un header limpio (28px de alto) -->
-        <img src="/logo-lucirme.png" alt="LuciRMe Ai" class="h-7 w-auto object-contain" />
-        <span class="text-xl font-bold text-deep hidden sm:block"></span>
-      </a>
-  <!-- ... resto del nav ... -->
-      <nav class="hidden md:flex items-center gap-6">
-        <a href="/servicios" class="text-sm text-gray-600 hover:text-teal transition">Soluciones</a>
-        <a href="/recursos" class="text-sm text-gray-600 hover:text-teal transition">Recursos</a>
-        <button 
-          onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
-          class="text-sm font-bold text-orange hover:text-orange/80 transition"
-        >⚡ Enciende tu Foco</button>
-      </nav>
-    </div>
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
+      <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+        
+        <!-- GRUPO IZQUIERDA: Logo + Navegación -->
+        <div class="flex items-center gap-8">
+          <a href="/" class="flex items-center gap-2">
+            <img src="/logo-lucirme.png" alt="LuciRMe Ai" class="h-7 w-auto object-contain" />
+          </a>
+          
+          <nav class="hidden md:flex items-center gap-6">
+            <a href="#caminos" class="text-sm font-medium text-gray-600 hover:text-teal transition">Caminos</a>
+            <a href="#metodo" class="text-sm font-medium text-gray-600 hover:text-teal transition">Cómo funciona</a>
+            <a href="#precios" class="text-sm font-medium text-gray-600 hover:text-teal transition">Precios</a>
+          </nav>
+        </div>
 
-    <!-- Acciones Derecha (Contenedor que cambiará dinámicamente) -->
-    <div id="auth-header-container" class="flex items-center gap-4">
-      <a href="/sign-in" class="text-sm font-semibold text-teal hover:underline">
-        Cargando...
-      </a>
-    </div>
-  </div>
-</header>
+        <!-- GRUPO DERECHA: CTAs -->
+        <div class="flex items-center gap-3">
+          <button 
+            onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
+            class="text-sm font-bold text-orange hover:text-orange/80 transition px-3"
+          >
+            Enciende tu Foco
+          </button>
+          
+          <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" class="text-sm font-bold bg-teal text-white px-5 py-2.5 rounded-lg hover:bg-tealHover transition">
+            Agendar Café
+          </a>
+        </div>
+      </div>
+    </header>
 
-<!-- Script "A prueba de balas" -->
-<script is:inline>
-  window.addEventListener('load', async () => {
-    const container = document.getElementById('auth-header-container');
-    // Esperamos a que Clerk cargue
-    await window.Clerk?.load();
-    const user = window.Clerk?.user;
-
-    if (user) {
-      container.innerHTML = `
-        <a href="/dashboard" class="text-sm font-semibold text-teal hover:underline">Dashboard</a>
-        <div id="user-button-div"></div>
-      `;
-      // @ts-ignore
-      window.Clerk.mountUserButton(document.getElementById('user-button-div'));
-    } else {
-      container.innerHTML = `
-        <a href="/sign-in" class="text-sm font-semibold text-teal hover:underline">Iniciar Sesión</a>
-      `;
-    }
-  });
-</script>
-
-    <main class="w-full">
+    <main>
       <slot />
     </main>
-    <Footer />
 
+    <Footer />
     <Selector />
     <Analytics />
   </body>
