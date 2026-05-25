@@ -1,0 +1,507 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="IA-Solver | LuciRMe AI">
+
+  <!-- SUB-NAV (Breadcrumb) -->
+  <nav class="bg-white border-b border-gray-100 px-4 py-3">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <a href="/recursos" class="text-sm font-bold text-gray-400 hover:text-teal transition">← Volver a Recursos</a>
+      <span class="text-xs font-bold text-teal uppercase tracking-widest flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Evaluador de IA
+      </span>
+    </div>
+  </nav>
+
+  <!-- BANNER CAFÉ GRATIS -->
+  <div class="bg-gradient-to-r from-teal to-tealHover text-white px-4 py-3 text-center relative overflow-hidden">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3">
+      <span class="text-2xl">☕</span>
+      <div class="text-sm sm:text-base">
+        <strong>¿Tienes dudas sobre los resultados?</strong> Agenda un café virtual de 15 minutos y te ayudo a priorizar tus tareas.
+      </div>
+      <a href="https://calendar.app.google/tu-link-cafe" target="_blank" class="bg-white text-teal px-4 py-2 rounded-lg font-bold text-sm hover:bg-gray-100 transition whitespace-nowrap">
+        Agendar café gratis →
+      </a>
+    </div>
+    <button id="close-cafe-banner" class="absolute top-2 right-2 text-white/80 hover:text-white text-xl">×</button>
+  </div>
+
+  <main class="py-12 px-4 bg-[#F8FAFC] min-h-screen">
+    <div class="container mx-auto max-w-6xl">
+      
+      <!-- HERO -->
+      <div class="text-center mb-10">
+        <h1 class="text-3xl md:text-4xl font-bold text-deep mb-3">🤖 IA-Solver</h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-6">¿Tu tarea puede resolverla la IA? En 2 minutos evalúa viabilidad técnica y prioriza lo que sí genera retorno.</p>
+        <div class="bg-teal/5 border border-teal/20 inline-block px-4 py-2 rounded-lg text-sm text-teal font-medium">
+          💡 <strong>Tip:</strong> Tus tareas se guardan automáticamente. Puedes cerrar y volver cuando quieras.
+        </div>
+      </div>
+
+      <!-- CUADRÍCULA (APP) -->
+      <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden mb-6">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse min-w-[950px] table-auto">
+            <thead class="bg-gray-50 border-b border-gray-200">
+              <tr>
+                <th class="px-4 py-4 text-left font-bold text-deep min-w-[280px] max-w-[400px]">
+                  Tarea / Definición<br>
+                  <span class="text-xs font-normal text-gray-500">(describe claramente)</span>
+                </th>
+                <th class="px-3 py-4 text-left font-bold text-deep">Criterios IA<br><span class="text-xs font-normal text-gray-500">(marca los que aplican)</span></th>
+                <th class="px-3 py-4 text-left font-bold text-deep w-[120px]">Frecuencia</th>
+                <th class="px-3 py-4 text-left font-bold text-deep w-[120px]">Complejidad</th>
+                <th class="px-3 py-4 text-left font-bold text-deep">Datos disponibles<br><span class="text-xs font-normal text-gray-500">(selecciona múltiples)</span></th>
+                <th class="px-2 py-4 w-10"></th>
+              </tr>
+            </thead>
+            <tbody id="table-body" class="divide-y divide-gray-100">
+              <!-- Filas generadas por JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- CONTROLES -->
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4 px-6 py-4 bg-gray-50 border-t border-gray-200">
+          <div class="flex items-center gap-4">
+            <button id="add-row-btn" class="text-sm text-teal font-bold hover:text-tealHover flex items-center gap-1 transition">+ Agregar tarea</button>
+            <button id="clear-btn" class="text-sm text-gray-400 hover:text-red-500 font-bold transition">Limpiar todo</button>
+            <button id="export-btn" class="text-sm text-teal font-bold hover:text-tealHover flex items-center gap-1 transition">📥 Exportar</button>
+          </div>
+          <div class="flex items-center gap-4">
+            <span id="item-count" class="text-xs font-bold text-gray-400 uppercase tracking-widest">0 tareas</span>
+            <button id="evaluate-btn" class="bg-deep hover:bg-teal text-white px-8 py-3 rounded-lg font-bold transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+              Evaluar con IA
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BANNER LÍMITE -->
+      <div id="soft-limit-banner" class="hidden mb-6 p-4 bg-orange/10 border border-orange/20 rounded-lg text-sm font-medium text-orange text-center">
+        💡 Consejo: Evalúa en lotes de 10-15 tareas para mantener el foco.
+      </div>
+
+      <!-- RESULTADOS -->
+      <div id="results-section" class="hidden space-y-8 mt-16 animate-fade-in">
+        <h2 class="text-3xl font-bold text-deep text-center">Tareas Clasificadas por Viabilidad IA</h2>
+        
+        <div class="grid lg:grid-cols-3 gap-6">
+          <!-- ✅ IDEAL PARA IA -->
+          <div class="bg-white border-2 border-emerald-500 p-6 rounded-xl shadow-sm relative">
+            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+              <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1 rounded-full">Fase 1: Taller</span>
+            </div>
+            <h3 class="font-bold text-emerald-700 text-lg mb-2 flex items-center justify-center gap-2 pt-2">✅ Ideal para IA</h3>
+            <p class="text-xs text-gray-500 mb-4 text-center">Alta viabilidad: automatizable con herramientas actuales</p>
+            <div id="list-ideal" class="space-y-4"></div>
+          </div>
+          
+          <!-- 🔍 REQUIERE AJUSTE HUMANO -->
+          <div class="bg-white border-2 border-amber-500 p-6 rounded-xl shadow-sm relative">
+            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+              <span class="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full">Fase 2: PRP</span>
+            </div>
+            <h3 class="font-bold text-amber-700 text-lg mb-2 flex items-center justify-center gap-2 pt-2">🔍 Requiere ajuste humano</h3>
+            <p class="text-xs text-gray-500 mb-4 text-center">Viabilidad media: IA asiste, humano decide</p>
+            <div id="list-hybrid" class="space-y-4"></div>
+          </div>
+          
+          <!-- ❌ NO APTO PARA IA -->
+          <div class="bg-white border-2 border-gray-300 p-6 rounded-xl shadow-sm">
+            <h3 class="font-bold text-gray-600 text-lg mb-2 flex items-center justify-center gap-2">❌ No apto para IA</h3>
+            <p class="text-xs text-gray-500 mb-4 text-center">Baja viabilidad: requiere criterio experto o creatividad</p>
+            <div id="list-no-fit" class="space-y-4"></div>
+          </div>
+        </div>
+
+        <!-- ACCIONES FINALES -->
+        <div class="bg-white p-8 rounded-2xl border border-gray-200 text-center shadow-sm mt-8">
+          <h3 class="text-xl font-bold text-deep mb-4">¿Listo para transformar estas tareas en realidad?</h3>
+          <div class="flex flex-col sm:flex-row justify-center gap-4 mb-6">
+            <button id="copy-results-btn" class="bg-gray-100 hover:bg-gray-200 text-deep px-6 py-3 rounded-lg font-bold transition flex items-center justify-center gap-2">
+              📋 Copiar resultados
+            </button>
+            <button id="explain-btn" class="bg-white hover:bg-gray-50 text-deep border-2 border-gray-200 px-6 py-3 rounded-lg font-bold transition flex items-center justify-center gap-2">
+              💡 Ver Fórmula de Evaluación
+            </button>
+            <a href="https://calendar.app.google/tu-link-cafe" target="_blank" class="bg-teal hover:bg-tealHover text-white px-8 py-3 rounded-lg font-bold transition shadow-md flex items-center justify-center gap-2">
+              ☕ Agendar café gratis (15 min)
+            </a>
+          </div>
+          <p class="text-xs text-gray-500">Sin compromiso. Te ayudo a priorizar y te muestro cómo empezar.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MODAL EXPLICACIÓN FÓRMULA -->
+    <div id="explain-modal" class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-[#0F172A]/80 backdrop-blur-sm">
+      <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative animate-fade-in">
+        <button id="close-explain-btn" class="absolute top-6 right-6 text-gray-400 hover:text-deep text-2xl transition">✕</button>
+        
+        <h3 class="text-3xl font-bold text-deep mb-4">La Fórmula: ¿Es solucionable por IA?</h3>
+        <p class="text-base text-gray-600 mb-8">Evaluación basada en 5 criterios técnicos. Sin magia, solo lógica.</p>
+        
+        <div class="space-y-6">
+          <div class="bg-emerald-50 border border-emerald-200 p-5 rounded-xl">
+            <h4 class="font-bold text-emerald-800 text-lg mb-2">✅ IDEAL PARA IA</h4>
+            <ul class="text-sm text-emerald-900 space-y-2 ml-4 list-disc">
+              <li><strong>Repetitiva</strong> + <strong>Reglas claras</strong> + <strong>Datos estructurados</strong></li>
+              <li>Sin juicio humano complejo en cada paso</li>
+              <li>Resultado verificable y estructurado</li>
+              <li><em>Ej: Revisar checklist normativo, generar resumen de informe</em></li>
+            </ul>
+          </div>
+
+          <div class="bg-amber-50 border border-amber-200 p-5 rounded-xl">
+            <h4 class="font-bold text-amber-800 text-lg mb-2">🔍 REQUIERE AJUSTE HUMANO</h4>
+            <ul class="text-sm text-amber-900 space-y-2 ml-4 list-disc">
+              <li>Algunos criterios se cumplen, pero no todos</li>
+              <li>IA puede asistir en redacción, búsqueda u organización</li>
+              <li>Pero la decisión final requiere criterio experto</li>
+              <li><em>Ej: Interpretar hallazgos geotécnicos, priorizar riesgos</em></li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-50 border border-gray-200 p-5 rounded-xl">
+            <h4 class="font-bold text-gray-700 text-lg mb-2">❌ NO APTO PARA IA</h4>
+            <ul class="text-sm text-gray-600 space-y-2 ml-4 list-disc">
+              <li>Requiere creatividad, intuición o juicio estratégico</li>
+              <li>Contexto ambiguo o datos no estructurados</li>
+              <li>Responsabilidad legal/ética en la decisión</li>
+              <li><em>Ej: Diseñar estrategia de proyecto, negociar con cliente</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script is:inline>
+    // === ESTADO TIPADO ===
+    let tasks = [];
+    const MAX_SOFT = 15;
+    const MAX_HARD = 50;
+    const STORAGE_KEY = 'ia-solver-tasks';
+
+    // === DOM ELEMENTS ===
+    const tbody = document.getElementById('table-body');
+    const addRowBtn = document.getElementById('add-row-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const exportBtn = document.getElementById('export-btn');
+    const evaluateBtn = document.getElementById('evaluate-btn');
+    const itemCount = document.getElementById('item-count');
+    const softBanner = document.getElementById('soft-limit-banner');
+    const resultsSection = document.getElementById('results-section');
+    const listIdeal = document.getElementById('list-ideal');
+    const listHybrid = document.getElementById('list-hybrid');
+    const listNoFit = document.getElementById('list-no-fit');
+    const copyBtn = document.getElementById('copy-results-btn');
+    const cafeBanner = document.getElementById('close-cafe-banner');
+
+    // === LOCALSTORAGE ===
+    function saveTasks() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+      } catch (e) {
+        console.warn('No se pudo guardar en localStorage:', e);
+      }
+    }
+
+    function loadTasks() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          tasks = JSON.parse(saved);
+          renderTable();
+        }
+      } catch (e) {
+        console.warn('No se pudo cargar desde localStorage:', e);
+      }
+    }
+
+    // === OPCIONES ===
+    const CRITERIA = ['Repetitiva', 'Reglas claras', 'Datos estructurados', 'Sin juicio complejo', 'Resultado verificable'];
+    const FREQUENCIES = ['Diaria', 'Semanal', 'Mensual', 'Esporádica'];
+    const COMPLEXITIES = ['Baja', 'Media', 'Alta'];
+    const DATA_TYPES = ['PDF/Normas', 'Excel/Datos', 'Texto libre', 'Imágenes', 'API/Sistema'];
+
+    // === RENDER TABLE ===
+    function renderTable() {
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      
+      if (tasks.length === 0) {
+        tbody.innerHTML = `
+          <tr class="text-center text-gray-400">
+            <td colspan="6" class="py-12 border-b border-dashed border-gray-200">
+              Agrega una tarea o pega desde Excel/Sheets<br>
+              <span class="text-xs">💡 Tus tareas se guardan automáticamente</span>
+            </td>
+          </tr>`;
+      } else {
+        tasks.forEach(task => {
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-gray-50 transition border-b border-gray-100';
+          
+          const criteriaHtml = CRITERIA.map(c => `
+            <label class="inline-flex items-center mr-3 mb-1 cursor-pointer">
+              <input type="checkbox" data-field="criterion" data-value="${c}" data-id="${task.id}" ${task.criteria.includes(c) ? 'checked' : ''} class="task-checkbox w-4 h-4 text-teal rounded border-gray-300 focus:ring-teal">
+              <span class="ml-1.5 text-xs font-medium text-gray-700">${c}</span>
+            </label>
+          `).join('');
+          
+          const dataHtml = DATA_TYPES.map(d => `
+            <label class="inline-flex items-center mr-3 mb-1 cursor-pointer">
+              <input type="checkbox" data-field="dataType" data-value="${d}" data-id="${task.id}" ${task.dataTypes.includes(d) ? 'checked' : ''} class="task-checkbox w-4 h-4 text-teal rounded border-gray-300 focus:ring-teal">
+              <span class="ml-1.5 text-xs font-medium text-gray-700">${d}</span>
+            </label>
+          `).join('');
+          
+          tr.innerHTML = `
+            <td class="p-3 align-top min-w-[280px] max-w-[400px]">
+              <textarea 
+                data-field="name" 
+                data-id="${task.id}" 
+                rows="2"
+                class="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:ring-2 focus:ring-teal focus:border-transparent outline-none bg-white placeholder-gray-300 resize-none leading-tight"
+                placeholder="Ej: Revisar checklist de informe geotécnico antes de envío..."
+                oninput="this.style.height=''; this.style.height=this.scrollHeight+'px'; saveTasks()"
+                style="min-height: 64px; overflow: hidden; white-space: pre-wrap; word-break: break-word;"
+              >${task.name}</textarea>
+            </td>
+            <td class="p-3"><div class="flex flex-wrap">${criteriaHtml}</div></td>
+            <td class="p-3"><select data-field="frequency" data-id="${task.id}" onchange="saveTasks()" class="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:ring-2 focus:ring-teal outline-none bg-white"><option value="">-</option>${FREQUENCIES.map(f => `<option value="${f}" ${task.frequency === f ? 'selected' : ''}>${f}</option>`).join('')}</select></td>
+            <td class="p-3"><select data-field="complexity" data-id="${task.id}" onchange="saveTasks()" class="w-full px-3 py-2 rounded-lg border border-gray-200 text-sm focus:ring-2 focus:ring-teal outline-none bg-white"><option value="">-</option>${COMPLEXITIES.map(c => `<option value="${c}" ${task.complexity === c ? 'selected' : ''}>${c}</option>`).join('')}</select></td>
+            <td class="p-3"><div class="flex flex-wrap">${dataHtml}</div></td>
+            <td class="p-3 text-center align-top"><button data-remove-id="${task.id}" class="remove-btn text-gray-300 hover:text-red-500 transition text-xl font-bold mt-2">✕</button></td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+      updateUI();
+    }
+
+    function updateUI() {
+      if (!itemCount || !evaluateBtn) return;
+      itemCount.textContent = `${tasks.length} tareas`;
+      evaluateBtn.disabled = tasks.length === 0;
+      if (softBanner) softBanner.classList.toggle('hidden', tasks.length <= MAX_SOFT);
+    }
+
+    // === LOGIC ===
+    function addTask() {
+      if (tasks.length >= MAX_HARD) return alert(`Límite máximo: ${MAX_HARD} tareas. Evalúa en lotes.`);
+      tasks.push({ id: Date.now(), name: '', criteria: [], frequency: '', complexity: '', dataTypes: [] });
+      renderTable();
+      saveTasks();
+    }
+
+    function removeTask(id) {
+      tasks = tasks.filter(t => t.id !== id);
+      renderTable();
+      saveTasks();
+    }
+
+    function updateTask(id, field, value) {
+      const task = tasks.find(t => t.id === id);
+      if (!task) return;
+      if (['name', 'frequency', 'complexity'].includes(field)) task[field] = value;
+      else if (['criterion', 'dataType'].includes(field)) {
+        const arr = field === 'criterion' ? task.criteria : task.dataTypes;
+        arr.includes(value) ? arr.splice(arr.indexOf(value), 1) : arr.push(value);
+      }
+      saveTasks();
+    }
+
+    function clearAll() {
+      if (tasks.length === 0) return;
+      if (confirm('¿Limpiar todas las tareas? Esta acción no se puede deshacer.')) {
+        tasks = [];
+        localStorage.removeItem(STORAGE_KEY);
+        renderTable();
+        if (resultsSection) resultsSection.classList.add('hidden');
+      }
+    }
+
+    function exportTasks() {
+      if (tasks.length === 0) return alert('No hay tareas para exportar');
+      
+      const csvContent = [
+        ['Tarea', 'Criterios', 'Frecuencia', 'Complejidad', 'Datos'].join('\t'),
+        ...tasks.map(t => [
+          t.name,
+          t.criteria.join('; '),
+          t.frequency,
+          t.complexity,
+          t.dataTypes.join('; ')
+        ].join('\t'))
+      ].join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/tab-separated-values;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `ia-solver-tareas-${new Date().toISOString().split('T')[0]}.tsv`;
+      link.click();
+    }
+
+    function handlePaste(e) {
+      e.preventDefault();
+      const text = e.clipboardData.getData('text/plain');
+      if (!text.trim()) return;
+      const rows = text.split(/\r?\n/).filter(r => r.trim());
+      const newTasks = rows.map((row, i) => {
+        const delimiter = row.includes('\t') ? '\t' : (row.includes(',') ? ',' : '|');
+        const cols = row.split(delimiter).map(c => c.trim());
+        return {
+          id: Date.now() + i + Math.random(),
+          name: cols[0] || '',
+          criteria: cols[1] ? cols[1].split(';').map(c => c.trim()).filter(Boolean) : [],
+          frequency: cols[2] || '',
+          complexity: cols[3] || '',
+          dataTypes: cols[4] ? cols[4].split(';').map(d => d.trim()).filter(Boolean) : []
+        };
+      }).filter(task => task.name);
+
+      if (tasks.length + newTasks.length > MAX_HARD) return alert(`Límite máximo: ${MAX_HARD} tareas.`);
+      tasks = [...tasks, ...newTasks];
+      renderTable();
+      saveTasks();
+    }
+
+    // === CLASIFICACIÓN IA ===
+    function classifyTasks() {
+      if (!listIdeal || !listHybrid || !listNoFit) return;
+      listIdeal.innerHTML = ''; listHybrid.innerHTML = ''; listNoFit.innerHTML = '';
+
+      tasks.forEach(task => {
+        const criteriaMet = task.criteria.length;
+        const hasStructuredData = task.dataTypes.some(d => ['PDF/Normas', 'Excel/Datos', 'API/Sistema'].includes(d));
+        const isRepetitive = task.criteria.includes('Repetitiva');
+        const hasClearRules = task.criteria.includes('Reglas claras');
+        const noComplexJudgment = task.criteria.includes('Sin juicio complejo');
+        const verifiableOutput = task.criteria.includes('Resultado verificable');
+
+        const card = document.createElement('div');
+        card.className = 'bg-gray-50 p-4 rounded-lg border border-gray-200 mb-3';
+        
+        let category, badge, reason;
+        
+        if (criteriaMet >= 4 && hasStructuredData && isRepetitive && hasClearRules) {
+          category = 'ideal';
+          badge = '<span class="text-emerald-700 font-bold text-xs uppercase tracking-wider bg-emerald-100 px-2 py-1 rounded">Alta viabilidad</span>';
+          reason = 'Automatizable con herramientas actuales';
+        } else if (criteriaMet >= 2 && (noComplexJudgment || verifiableOutput)) {
+          category = 'hybrid';
+          badge = '<span class="text-amber-700 font-bold text-xs uppercase tracking-wider bg-amber-100 px-2 py-1 rounded">Viabilidad media</span>';
+          reason = 'IA asiste, humano decide';
+        } else {
+          category = 'no-fit';
+          badge = '<span class="text-gray-600 font-bold text-xs uppercase tracking-wider bg-gray-200 px-2 py-1 rounded">Baja viabilidad</span>';
+          reason = 'Requiere criterio experto o creatividad';
+        }
+
+        card.innerHTML = `
+          <div class="flex justify-between items-start mb-2">
+            <h4 class="font-bold text-deep leading-snug">${task.name || 'Tarea sin nombre'}</h4>
+            ${badge}
+          </div>
+          <p class="text-xs text-gray-500 mb-2">${reason}</p>
+          <div class="text-xs text-gray-500 flex flex-wrap gap-2 mt-2">
+            ${task.frequency ? `<span>📅 ${task.frequency}</span>` : ''}
+            ${task.complexity ? `<span>🎚️ ${task.complexity}</span>` : ''}
+            ${task.criteria.length ? `<span>✅ ${task.criteria.length}/5 criterios</span>` : ''}
+          </div>
+        `;
+        
+        if (category === 'ideal') listIdeal.appendChild(card);
+        else if (category === 'hybrid') listHybrid.appendChild(card);
+        else listNoFit.appendChild(card);
+      });
+
+      if (resultsSection) {
+        resultsSection.classList.remove('hidden');
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function copyResults() {
+      const getListText = (list) => Array.from(list?.querySelectorAll('h4') || []).map(el => `- ${el.textContent}`).join('\n');
+      const text = `✅ IDEAL PARA IA:\n${getListText(listIdeal) || '(vacío)'}\n\n🔍 REQUIERE AJUSTE HUMANO:\n${getListText(listHybrid) || '(vacío)'}\n\n❌ NO APTO PARA IA:\n${getListText(listNoFit) || '(vacío)'}`;
+      
+      navigator.clipboard.writeText(text).then(() => {
+        const original = copyBtn.innerHTML;
+        copyBtn.innerHTML = '✅ Copiado con éxito';
+        setTimeout(() => copyBtn.innerHTML = original, 2000);
+      });
+    }
+
+    // MODAL
+    const explainBtn = document.getElementById('explain-btn');
+    const explainModal = document.getElementById('explain-modal');
+    const closeExplainBtn = document.getElementById('close-explain-btn');
+
+    if (explainBtn) explainBtn.addEventListener('click', () => { explainModal.classList.remove('hidden'); explainModal.classList.add('flex'); });
+    if (closeExplainBtn) closeExplainBtn.addEventListener('click', () => { explainModal.classList.add('hidden'); explainModal.classList.remove('flex'); });
+    
+    // CAFÉ BANNER
+    if (cafeBanner) {
+      cafeBanner.addEventListener('click', () => {
+        cafeBanner.closest('div').style.display = 'none';
+        localStorage.setItem('cafe-banner-closed', 'true');
+      });
+      
+      // Verificar si ya cerró el banner
+      if (localStorage.getItem('cafe-banner-closed') === 'true') {
+        cafeBanner.closest('div').style.display = 'none';
+      }
+    }
+    
+    // EVENTS
+    if (addRowBtn) addRowBtn.addEventListener('click', addTask);
+    if (clearBtn) clearBtn.addEventListener('click', clearAll);
+    if (exportBtn) exportBtn.addEventListener('click', exportTasks);
+    if (evaluateBtn) evaluateBtn.addEventListener('click', classifyTasks);
+    if (copyBtn) copyBtn.addEventListener('click', copyResults);
+    
+    if (tbody) {
+      tbody.addEventListener('paste', handlePaste);
+      tbody.addEventListener('input', e => {
+        const target = e.target;
+        if (target.dataset.field) updateTask(Number(target.dataset.id), target.dataset.field, target.value);
+      });
+      tbody.addEventListener('change', e => {
+        const target = e.target;
+        if (target.classList.contains('task-checkbox')) updateTask(Number(target.dataset.id), target.dataset.field, target.dataset.value);
+      });
+      tbody.addEventListener('click', e => {
+        const btn = e.target.closest('.remove-btn');
+        if (btn) removeTask(Number(btn.dataset.removeId));
+      });
+    }
+
+    // Cargar tareas guardadas al iniciar
+    loadTasks();
+  </script>
+
+  <style>
+    .animate-fade-in { animation: fadeIn 0.5s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    
+    /* Optimización específica para la columna de tareas */
+    #table-body td:first-child textarea {
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      line-height: 1.4;
+    }
+    #table-body td:first-child {
+      vertical-align: top;
+    }
+  </style>
+
+</Layout>

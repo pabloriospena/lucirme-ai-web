@@ -1,0 +1,270 @@
+---
+// src/components/IrysPresentation.astro
+---
+<div id="presentation-container" class="relative overflow-hidden w-full h-screen bg-white">
+  <!-- Slides -->
+  <div id="slides-wrapper" class="w-full h-full">
+    <slot />
+  </div>
+
+  <!-- Navigation Arrows -->
+  <button 
+    id="prevBtn" 
+    class="fixed left-4 top-1/2 -translate-y-1/2 z-50 bg-white/90 border border-gray-200 p-3 rounded-full shadow-md hover:bg-teal hover:text-white hover:border-teal transition disabled:opacity-30 disabled:cursor-not-allowed"
+    aria-label="Slide anterior"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+
+  <button 
+    id="nextBtn" 
+    class="fixed right-4 top-1/2 -translate-y-1/2 z-50 bg-white/90 border border-gray-200 p-3 rounded-full shadow-md hover:bg-teal hover:text-white hover:border-teal transition disabled:opacity-30 disabled:cursor-not-allowed"
+    aria-label="Siguiente slide"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+
+  <!-- Slide Indicators (Dots) -->
+  <div id="slide-dots" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2">
+    <!-- Dots generados dinámicamente por JS -->
+  </div>
+
+  <!-- Slide Counter -->
+  <div class="fixed bottom-6 right-6 z-50 text-xs font-bold text-gray-400 bg-white/80 px-3 py-1.5 rounded-full border border-gray-200">
+    <span id="slide-counter">1</span> / <span id="total-slides">0</span>
+  </div>
+
+  <!-- UI Controls -->
+  <button id="fsToggle" class="fixed bottom-6 left-6 z-50 bg-white border border-gray-200 px-4 py-2 rounded-full text-xs font-bold shadow-sm hover:bg-gray-50 transition">
+    ⛶ Vista completa
+  </button>
+
+  <!-- Toast notification -->
+  <div id="toast" class="fixed bottom-20 right-6 bg-teal text-white px-6 py-3 rounded-lg opacity-0 transition-opacity pointer-events-none z-50">
+    ¡Prompt copiado!
+  </div>
+</div>
+
+<script>
+  let current = 0;
+  const slides = document.querySelectorAll('.slide') as NodeListOf<HTMLElement>;
+  const totalSlides = slides.length;
+  const dotsContainer = document.getElementById('slide-dots');
+  const slideCounter = document.getElementById('slide-counter');
+  const totalSlidesEl = document.getElementById('total-slides');
+  const prevBtn = document.getElementById('prevBtn') as HTMLButtonElement;
+  const nextBtn = document.getElementById('nextBtn') as HTMLButtonElement;
+
+  // Inicializar contadores y dots
+  if (totalSlidesEl) totalSlidesEl.textContent = totalSlides.toString();
+
+  function createDots() {
+    if (!dotsContainer) return;
+    dotsContainer.innerHTML = '';
+    
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('button');
+      dot.className = `w-2.5 h-2.5 rounded-full transition-all ${i === 0 ? 'bg-teal scale-110' : 'bg-gray-300 hover:bg-gray-400'}`;
+      dot.setAttribute('aria-label', `Ir al slide ${i + 1}`);
+      dot.addEventListener('click', () => showSlide(i));
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function updateDots() {
+    const dots = dotsContainer?.querySelectorAll('button') || [];
+    dots.forEach((dot, index) => {
+      if (index === current) {
+        dot.className = 'w-2.5 h-2.5 rounded-full bg-teal scale-110 transition-all';
+      } else {
+        dot.className = 'w-2.5 h-2.5 rounded-full bg-gray-300 hover:bg-gray-400 transition-all';
+      }
+    });
+    if (slideCounter) slideCounter.textContent = (current + 1).toString();
+  }
+
+  function showSlide(n: number) {
+    if (n < 0 || n >= totalSlides) return;
+    
+    slides.forEach(s => s.classList.remove('active'));
+    if (slides[n]) {
+      slides[n].classList.add('active');
+    }
+    
+    current = n;
+    updateDots();
+    updateButtons();
+  }
+
+  function updateButtons() {
+    if (prevBtn) prevBtn.disabled = current === 0;
+    if (nextBtn) nextBtn.disabled = current === totalSlides - 1;
+  }
+
+  // Navegación por teclado
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') {
+      e.preventDefault();
+      if (current < totalSlides - 1) showSlide(++current);
+    }
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      if (current > 0) showSlide(--current);
+    }
+    if (e.key === 'Home') {
+      e.preventDefault();
+      showSlide(0);
+    }
+    if (e.key === 'End') {
+      e.preventDefault();
+      showSlide(totalSlides - 1);
+    }
+  });
+
+  // Navegación por clic en bordes de la pantalla
+  document.getElementById('presentation-container')?.addEventListener('click', (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    // Ignorar clics en botones, enlaces o elementos interactivos
+    if (target.closest('button, a, input, textarea, select, .code-block, .copy-btn')) return;
+    
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    
+    if (clickX < rect.width * 0.3 && current > 0) {
+      showSlide(--current);
+    } else if (clickX > rect.width * 0.7 && current < totalSlides - 1) {
+      showSlide(++current);
+    }
+  });
+
+  // Copiar prompt
+  document.addEventListener('click', (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target && target.matches('.copy-btn')) {
+      const block = target.closest('.code-block');
+      const code = block?.querySelector('code')?.textContent || '';
+      
+      navigator.clipboard.writeText(code).then(() => {
+        const originalText = target.textContent;
+        target.textContent = '✅ Copiado';
+        showToast('Texto copiado al portapapeles');
+        setTimeout(() => { target.textContent = originalText; }, 2000);
+      });
+    }
+  });
+
+  // Toast notification
+  function showToast(message: string) {
+    let toast = document.getElementById('toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'toast';
+      toast.className = 'toast';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.classList.remove('opacity-0');
+    setTimeout(() => toast.classList.add('opacity-0'), 3000);
+  }
+
+  // Toggle Fullscreen
+  const fsToggle = document.getElementById('fsToggle') as HTMLButtonElement | null;
+  fsToggle?.addEventListener('click', async () => {
+    try {
+      if (!document.fullscreenElement) {
+        await document.documentElement.requestFullscreen();
+        fsToggle.textContent = '✕ Salir';
+      } else {
+        await document.exitFullscreen();
+        fsToggle.textContent = '⛶ Vista completa';
+      }
+    } catch (err) {
+      console.error('Error en fullscreen:', err);
+    }
+  });
+
+  // Actualizar texto del botón fullscreen al cambiar estado
+  document.addEventListener('fullscreenchange', () => {
+    if (fsToggle) {
+      fsToggle.textContent = document.fullscreenElement ? '✕ Salir' : '⛶ Vista completa';
+    }
+  });
+
+  // Inicialización
+  createDots();
+  showSlide(0);
+  updateButtons();
+</script>
+
+<style is:global>
+  /* Slides */
+  .slide { 
+    display: none; 
+    height: 100vh; 
+    padding: 4rem; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    width: 100%;
+  }
+  .slide.active { 
+    display: flex; 
+    animation: fadeIn 0.4s ease-out; 
+  }
+  
+  @keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(8px); } 
+    to { opacity: 1; transform: translateY(0); } 
+  }
+  
+  /* Code blocks */
+  .code-block { 
+    background: #f1f5f9; 
+    padding: 20px; 
+    border-radius: 12px; 
+    font-family: monospace; 
+    position: relative; 
+    border: 1px solid #e2e8f0; 
+    white-space: pre-wrap;
+  }
+  
+  .copy-btn { 
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+    background: #0D9488; 
+    color: white; 
+    padding: 4px 12px; 
+    border-radius: 6px; 
+    font-size: 12px; 
+    cursor: pointer; 
+    border: none;
+    transition: background 0.2s;
+  }
+  .copy-btn:hover { background: #0f766e; }
+  
+  /* Toast */
+  .toast {
+    transition: opacity 0.3s ease;
+  }
+  .toast.show {
+    opacity: 1 !important;
+  }
+  
+  /* Responsive: ocultar flechas en móvil, mantener dots */
+  @media (max-width: 768px) {
+    #prevBtn, #nextBtn { display: none; }
+    .slide { padding: 2rem 1.5rem; }
+    #slide-dots { bottom: 4rem; }
+  }
+  
+  /* Accesibilidad: focus visible */
+  button:focus-visible {
+    outline: 2px solid #0D9488;
+    outline-offset: 2px;
+  }
+</style>
