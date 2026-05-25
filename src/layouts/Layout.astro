@@ -1,10 +1,14 @@
 ---
 import '../styles/global.css';
 import Selector from '../components/Selector.astro';
-import Footer from '../components/Footer.astro'; // Asegúrate de tenerlo
+import Footer from '../components/Footer.astro';
 import Analytics from '@vercel/analytics/astro';
-import { UserButton } from "@clerk/astro/components";
 
+// Propiedades de la página
+interface Props { title: string; }
+const { title } = Astro.props;
+
+// Autenticación para el Header
 const auth = (Astro.locals as any).auth;
 const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
 ---
@@ -14,39 +18,49 @@ const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{Astro.props.title}</title>
+    <title>{title}</title>
+    
+    <!-- PostHog Analytics -->
+    <script is:inline>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(f!==a?u=e[a]=[]:u=e,u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_user_capturing opt_user_outside capture_size:capture_size:capture_size:capture_size:capture_size:capture_size:capture_size:capture_size".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      // Reemplaza TU_PROJECT_API_KEY por tu clave de PostHog
+      posthog.init('phc_kSyqfd9vkMePJjoH95yV9oPupWgV3de8zftzZLPtzzM7', { api_host: 'https://app.posthog.com' });
+    </script>
   </head>
 
   <body class="bg-white text-gray-900 font-sans antialiased">
     
+    <!-- HEADER -->
     <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
       <div class="container mx-auto px-4 py-4 flex items-center justify-between">
         
-        <!-- GRUPO IZQUIERDA: Logo + Navegación -->
+        <!-- Logo y Navegación -->
         <div class="flex items-center gap-8">
           <a href="/" class="flex items-center gap-2">
             <img src="/logo-lucirme.png" alt="LuciRMe Ai" class="h-7 w-auto object-contain" />
           </a>
           
           <nav class="hidden md:flex items-center gap-6">
-            <a href="#caminos" class="text-sm font-medium text-gray-600 hover:text-teal transition">Caminos</a>
-            <a href="#metodo" class="text-sm font-medium text-gray-600 hover:text-teal transition">Cómo funciona</a>
-            <a href="#precios" class="text-sm font-medium text-gray-600 hover:text-teal transition">Precios</a>
+            <a href="/#caminos" class="text-sm font-medium text-gray-600 hover:text-teal transition">Caminos</a>
+            <a href="/#metodo" class="text-sm font-medium text-gray-600 hover:text-teal transition">Cómo funciona</a>
+            <a href="/#precios" class="text-sm font-medium text-gray-600 hover:text-teal transition">Precios</a>
           </nav>
         </div>
 
-        <!-- GRUPO DERECHA: CTAs -->
-        <div class="flex items-center gap-3">
+        <!-- Acciones Derecha -->
+        <div class="flex items-center gap-4">
           <button 
             onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
-            class="text-sm font-bold text-orange hover:text-orange/80 transition px-3"
+            class="text-sm font-bold text-orange hover:text-orange/80 transition"
           >
             Enciende tu Foco
           </button>
           
-          <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" class="text-sm font-bold bg-teal text-white px-5 py-2.5 rounded-lg hover:bg-tealHover transition">
-            Agendar Café
-          </a>
+          {userId ? (
+            <a href="/dashboard" class="text-sm font-semibold text-teal hover:underline transition">Dashboard</a>
+          ) : (
+            <a href="/sign-in" class="text-sm font-semibold text-teal hover:underline transition">Iniciar Sesión</a>
+          )}
         </div>
       </div>
     </header>
