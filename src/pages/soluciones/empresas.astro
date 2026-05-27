@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Footer from '../../components/Footer.astro';
+import { LINKS } from '../../lib/constants.js';
 ---
 
 <Layout title="IA para Empresas | LuciRMe Ai">
@@ -20,7 +21,7 @@ import Footer from '../../components/Footer.astro';
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" target="_blank" class="inline-flex items-center justify-center gap-2 bg-orange hover:bg-orange/90 text-white px-8 py-4 rounded-lg font-bold transition shadow-lg">
+        <a href={LINKS.calendly} target="_blank" class="inline-flex items-center justify-center gap-2 bg-orange hover:bg-orange/90 text-white px-8 py-4 rounded-lg font-bold transition shadow-lg">
           Agendemos un café estratégico →
         </a>
       </div>
@@ -89,7 +90,7 @@ import Footer from '../../components/Footer.astro';
         <p class="text-xs text-gray-500 uppercase tracking-widest mb-4">2-3 horas de taller práctico</p>
         <div class="text-3xl font-bold text-deep mb-6">$620.000 COP <span class="text-sm font-normal text-gray-400">/ $170 USD</span></div>
         <p class="text-gray-600 mb-8">Trabajo directo con tu equipo. Identificamos cuellos de botella y configuramos el primer flujo prioritario.</p>
-        <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" target="_blank" class="block w-full bg-teal text-white font-bold py-4 rounded-lg text-center hover:bg-tealHover transition">Reservar Taller</a>
+        <a href={LINKS.calendly} target="_blank" class="block w-full bg-teal text-white font-bold py-4 rounded-lg text-center hover:bg-tealHover transition">Reservar Taller</a>
       </div>
 
       <!-- Ciclo -->
@@ -103,7 +104,7 @@ import Footer from '../../components/Footer.astro';
           <li>✓ 2-3 flujos complejos automatizados</li>
           <li>✓ Entrenamiento de equipo + soporte 30 días</li>
         </ul>
-        <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" target="_blank" class="block w-full border-2 border-teal text-teal font-bold py-4 rounded-lg text-center hover:bg-teal/5 transition">Agendar Café para Cotizar</a>
+        <a href={LINKS.calendly} target="_blank" class="block w-full border-2 border-teal text-teal font-bold py-4 rounded-lg text-center hover:bg-teal/5 transition">Agendar Café para Cotizar</a>
       </div>
     </div>
   </section>

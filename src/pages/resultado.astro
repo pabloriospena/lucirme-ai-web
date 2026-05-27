@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { LINKS } from '../lib/constants.js';
 
 // Obtenemos los parámetros desde la URL
 const perfil = Astro.url.searchParams.get('perfil') || 'pro';
@@ -12,7 +13,7 @@ const obtenerRecomendacion = (perfil: string) => {
       titulo: "🚀 Diagnóstico: Fuga de Foco en Startup",
       accion: "Reserva tu Taller de Inmersión (2-3 horas) y alinea a tu equipo en un flujo prioritario.",
       producto: "Taller de Inmersión",
-      link: "https://calendar.app.google/k4iYmA42X9NNBb5t8",
+      link: LINKS.calendly,
       potencial: { horas: "8-12", pct: 85 }
     };
   }
@@ -21,7 +22,7 @@ const obtenerRecomendacion = (perfil: string) => {
       titulo: "🏢 Diagnóstico: Fricción Operativa detectada",
       accion: "Coordina un Taller de Inmersión y valida el impacto operativo antes de escalar.",
       producto: "Taller de Inmersión",
-      link: "https://calendar.app.google/k4iYmA42X9NNBb5t8",
+      link: LINKS.calendly,
       potencial: { horas: "12-15", pct: 90 }
     };
   }
@@ -30,7 +31,7 @@ const obtenerRecomendacion = (perfil: string) => {
     titulo: "👤 Diagnóstico: Foco Atascado",
     accion: "Agenda tu Sesión de Enfoque (1 hora) y configura tu primer flujo de IA hoy mismo.",
     producto: "Sesión de Enfoque",
-    link: "https://calendar.app.google/k4iYmA42X9NNBb5t8",
+    link: LINKS.calendly,
     potencial: { horas: "5-8", pct: 60 }
   };
 };

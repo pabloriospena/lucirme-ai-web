@@ -1,5 +1,7 @@
 ---
 // src/components/Cierre.astro
+import { LINKS } from '../lib/constants.js';
+
 ---
 
 <section id="cta" class="py-24 px-4 bg-deep text-white">
@@ -28,7 +30,7 @@
 
     <!-- CTA Principal -->
     <a 
-      href="https://calendar.app.google/k4iYmA42X9NNBb5t8" 
+      href={LINKS.calendly} 
       target="_blank"
       class="inline-block w-full sm:w-auto bg-orange hover:bg-orange/90 text-white px-10 py-4 rounded-lg font-bold text-lg transition shadow-xl hover:shadow-orange/20 mb-8"
     >

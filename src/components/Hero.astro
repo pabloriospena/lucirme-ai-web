@@ -1,5 +1,6 @@
 ---
 // src/components/Hero.astro
+import { LINKS } from '../lib/constants.js';
 ---
 <section class="max-w-6xl mx-auto py-10 text-center flex flex-col items-center">
     <!-- Logo en el Hero (h-12 = 48px de alto, ideal para centrar atención) 
@@ -24,7 +25,7 @@
     </a>
     
     <!-- CTA Secundario: Outline -->
-    <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" class="border-2 border-deep text-deep px-8 py-4 rounded-lg font-bold hover:bg-gray-50 transition-all">
+    <a href={LINKS.calendly} class="border-2 border-deep text-deep px-8 py-4 rounded-lg font-bold hover:bg-gray-50 transition-all">
       Agendar Café
     </a>
   </div>
