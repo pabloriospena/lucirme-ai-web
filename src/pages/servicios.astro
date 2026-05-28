@@ -4,80 +4,48 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="Soluciones y Mentorías | LuciRMe AI">
 
-  <!-- ============================================ -->
-  <!-- HEADER                                       -->
-  <!-- ============================================ -->
+  <!-- HEADER -->
   <header class="py-20 px-4 border-b border-gray-100 bg-[#F8FAFC]">
-    <div class="max-w-4xl mx-auto text-center">
+    <div class="max-w-3xl mx-auto text-center">
       <h1 class="text-4xl md:text-5xl font-bold text-deep leading-tight mb-6">
         Elige tu punto de partida.
       </h1>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-        No hay herramientas mágicas, solo sistemas que se adaptan a tu realidad. 
-        Selecciona el perfil que mejor describa tu situación actual para ver cómo podemos ayudarte.
+        Sistemas, hábitos y herramientas de IA adaptadas a tu realidad, no al revés.
       </p>
     </div>
   </header>
 
-  <!-- ============================================ -->
-  <!-- GRID DE AUTO-IDENTIFICACIÓN                  -->
-  <!-- ============================================ -->
+  <!-- GRID DE SOLUCIONES (Ajustado a 2 perfiles) -->
   <main class="py-24 px-4 min-h-screen">
-    <div class="max-w-6xl mx-auto">
+    <div class="max-w-5xl mx-auto">
       
-      <!-- Las tres tarjetas tienen exactamente el mismo peso visual -->
-      <div class="grid md:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-2 gap-8">
         
         <!-- 1. PROFESIONALES -->
-        <a href="/soluciones/profesionales" class="group flex flex-col bg-white border border-gray-200 rounded-2xl p-8 hover:border-teal transition-all shadow-sm hover:shadow-lg relative overflow-hidden">
-          <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Si trabajas por tu cuenta</p>
-          
-          <div class="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center text-2xl mb-6 group-hover:bg-teal/10 transition-colors">👤</div>
-          
-          <h2 class="text-2xl font-bold text-deep mb-3 group-hover:text-teal transition-colors">Soy Profesional</h2>
+        <a href="/soluciones/profesionales" class="group flex flex-col bg-white border border-gray-200 rounded-2xl p-10 hover:border-teal transition-all shadow-sm hover:shadow-xl">
+          <div class="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center text-3xl mb-6 group-hover:bg-teal/10 transition-colors">👤</div>
+          <h2 class="text-2xl font-bold text-deep mb-4 group-hover:text-teal transition-colors">Para Profesionales</h2>
           <p class="text-sm text-gray-600 mb-8 flex-grow leading-relaxed">
-            Sientes que tu día se va en tareas repetitivas y no te queda tiempo para estrategia o captación. Quieres organizar tu operativa personal.
+            Recupera hasta 10 horas semanales. Automatizamos tu operativa personal para que dejes de apagar fuegos y te enfoques en lo que realmente factura.
           </p>
-          
-          <div class="mt-auto pt-6 border-t border-gray-100">
+          <div class="pt-6 border-t border-gray-100">
             <span class="text-teal font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-              Ver programa <span>→</span>
+              Ver programas y precios <span>→</span>
             </span>
           </div>
         </a>
 
-        <!-- 2. STARTUPS -->
-        <a href="/soluciones/startups" class="group flex flex-col bg-white border border-gray-200 rounded-2xl p-8 hover:border-teal transition-all shadow-sm hover:shadow-lg relative overflow-hidden">
-          <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Si estás en etapa temprana</p>
-          
-          <div class="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center text-2xl mb-6 group-hover:bg-teal/10 transition-colors">🚀</div>
-          
-          <h2 class="text-2xl font-bold text-deep mb-3 group-hover:text-teal transition-colors">Lidero una Startup</h2>
+        <!-- 2. EMPRESAS / STARTUPS -->
+        <a href="/soluciones/empresas" class="group flex flex-col bg-white border border-gray-200 rounded-2xl p-10 hover:border-teal transition-all shadow-sm hover:shadow-xl">
+          <div class="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-teal/10 transition-colors">🏢</div>
+          <h2 class="text-2xl font-bold text-deep mb-4 group-hover:text-teal transition-colors">Para Startups y Empresas</h2>
           <p class="text-sm text-gray-600 mb-8 flex-grow leading-relaxed">
-            Tu equipo está infoxicado con tendencias de IA o el backlog no tiene rumbo claro. Necesitas integrar IA sin detener tu roadmap.
+            Estandarizamos tus flujos operativos con IA. Integramos soluciones sin migraciones ni fricción para que tu equipo escale con precisión.
           </p>
-          
-          <div class="mt-auto pt-6 border-t border-gray-100">
+          <div class="pt-6 border-t border-gray-100">
             <span class="text-teal font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-              Ver soluciones <span>→</span>
-            </span>
-          </div>
-        </a>
-
-        <!-- 3. EMPRESAS -->
-        <a href="/soluciones/empresas" class="group flex flex-col bg-white border border-gray-200 rounded-2xl p-8 hover:border-teal transition-all shadow-sm hover:shadow-lg relative overflow-hidden">
-          <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Si escalas equipos</p>
-          
-          <div class="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center text-2xl mb-6 group-hover:bg-teal/10 transition-colors">🏢</div>
-          
-          <h2 class="text-2xl font-bold text-deep mb-3 group-hover:text-teal transition-colors">Gestiono una Empresa</h2>
-          <p class="text-sm text-gray-600 mb-8 flex-grow leading-relaxed">
-            Procesos manuales y áreas desconectadas están generando errores y lentitud. Buscas reducir fricción operativa de forma medible.
-          </p>
-          
-          <div class="mt-auto pt-6 border-t border-gray-100">
-            <span class="text-teal font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-              Ver entrenamiento <span>→</span>
+              Ver soluciones y equipos <span>→</span>
             </span>
           </div>
         </a>
@@ -86,14 +54,12 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </main>
 
-  <!-- ============================================ -->
-  <!-- CTA INFERIOR (EL SELECTOR)                   -->
-  <!-- ============================================ -->
+  <!-- CTA INFERIOR -->
   <section class="py-24 px-4 bg-deep text-white text-center">
     <div class="max-w-3xl mx-auto">
-      <h2 class="text-3xl font-bold mb-6">¿No estás seguro de cuál es tu perfil?</h2>
+      <h2 class="text-3xl font-bold mb-6">¿No sabes por dónde empezar?</h2>
       <p class="text-gray-400 mb-10 text-lg">
-        El caos operativo es distinto para cada persona. Usa nuestro <strong>Selector</strong> y recibe un diagnóstico y un plan de acción en 60 segundos.
+        Usa nuestro <strong>Selector</strong>. En 60 segundos mapeamos tu mayor fuga de tiempo y te damos un plan de acción concreto.
       </p>
       <button 
         onclick="document.getElementById('selector-overlay').classList.remove('hidden')"

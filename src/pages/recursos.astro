@@ -1,88 +1,68 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// La lista maestra de recursos (Escalable)
-const recursos = [
-    {
-    id: "ebook-pm",
-    titulo: "📖 Ebook: PM Sin Bullshit",
-    descripcion: "Cómo construir productos que importan. 50% OFF exclusivo para usuarios del laboratorio.",
-    etiqueta: "Libro Digital",
-    url: "/recursos/ebook-pm",
-    color: "orange"
-  },
-  {
-    id: "guia-notebooklm",
-    titulo: "📘 Guía NotebookLM",
-    descripcion: "De notas sueltas a reportes listos. Estructura y prompts exactos.",
-    etiqueta: "Guía Premium",
-    url: "/recursos/guia-notebooklm",
-    color: "teal"
-  },
-  {
-    id: "backlog-detox",
-    titulo: "🧹 Backlog Detox",
-    descripcion: "Limpia tu backlog en 2 minutos. Descubre qué archivar y qué validar.",
-    etiqueta: "Herramienta Pro",
-    url: "/recursos/backlog-detox",
-    color: "orange"
-  },
-  {
-    id: "shapeup-builder",
-    titulo: "🎯 ShapeUp Builder",
-    descripcion: "Generador de Pitches. Define límites y genera tu prompt estratégico.",
-    etiqueta: "Herramienta Pro",
-    url: "/recursos/shapeup-builder",
-    color: "deep"
-  }
-];
+// 1. Apuntamos a la subcarpeta 'recursos' de forma segura
+const archivos = import.meta.glob('./recursos/*.astro', { eager: true });
 
-// Opcional: Saber si está logueado para cambiar el CTA de las tarjetas
-const auth = (Astro.locals as any).auth;
-const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
+// 2. Mapeamos los archivos para crear el listado
+const recursos = Object.keys(archivos).map((key) => {
+  const file = archivos[key] as any;
+  // Extraemos el nombre del archivo (ej: "backlog-detox")
+  const slug = key.split('/').pop()?.replace('.astro', '') || '';
+  
+  return {
+    slug,
+    url: `/recursos/${slug}`,
+    titulo: file.frontmatter?.title || slug.replace('-', ' ').toUpperCase()
+  };
+});
+
+// 3. Tus metadatos de precios y etiquetas
+const metaData = {
+  "ebook-pm": { etiqueta: "Producto Destacado", precio: "$110.000 COP", esPago: true },
+  "backlog-detox": { etiqueta: "Herramienta Pro", precio: null, esPago: false },
+  "guia-notebooklm": { etiqueta: "Guía Premium", precio: null, esPago: false },
+  "shapeup-builder": { etiqueta: "Herramienta Pro", precio: null, esPago: false },
+  "job-prompt-ai": { etiqueta: "Herramienta Pro", precio: null, esPago: false },
+  "ai-solver": { etiqueta: "Herramienta Pro", precio: null, esPago: false },
+  "prompteador": { etiqueta: "Herramienta Pro", precio: null, esPago: false },
+  "roadmap-builder": { etiqueta: "Herramienta Pro", precio: null, esPago: false }
+};
 ---
 
 <Layout title="Librería de Recursos | LuciRMe AI">
-  
-  <header class="py-16 px-4 border-b border-gray-100 bg-[#F8FAFC]">
-    <div class="max-w-4xl mx-auto text-center">
-      <h1 class="text-4xl md:text-5xl font-bold text-deep mb-4">Librería de Recursos</h1>
-      <p class="text-lg text-gray-600">Herramientas, plantillas y guías listas para implementar. Acceso gratuito para usuarios del Laboratorio.</p>
-    </div>
-  </header>
-
-  <main class="py-16 px-4 min-h-[50vh]">
-    <div class="max-w-5xl mx-auto">
-      
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {recursos.map((rec) => (
-          <a href={rec.url} class="group bg-white p-6 rounded-2xl border border-gray-200 hover:border-teal transition-all shadow-sm hover:shadow-md flex flex-col h-full relative overflow-hidden">
-            
-            <!-- Etiqueta superior -->
+  <main class="max-w-6xl mx-auto py-16 px-6">
+    
+    <header class="text-center mb-16">
+      <h1 class="text-4xl font-bold text-deep mb-4">Librería de Recursos</h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">Herramientas, plantillas y guías de producto listas para implementar. Acceso abierto y directo.</p>
+    </header>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {recursos.map((rec) => {
+        const meta = metaData[rec.slug as keyof typeof metaData] || { etiqueta: "Herramienta", precio: null, esPago: false };
+        
+        return (
+          <a href={rec.url} class="group bg-white p-6 rounded-2xl border border-gray-200 hover:border-teal transition-all shadow-sm hover:shadow-lg flex flex-col h-full">
             <div class="mb-4">
-              <span class={`inline-block px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest ${
-                rec.color === 'teal' ? 'bg-teal/10 text-teal' : 
-                rec.color === 'orange' ? 'bg-orange/10 text-orange' : 
-                'bg-deep/10 text-deep'
-              }`}>
-                {rec.etiqueta}
+              <span class={`inline-block px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest ${meta.esPago ? 'bg-orange/10 text-orange' : 'bg-teal/10 text-teal'}`}>
+                {meta.etiqueta}
               </span>
             </div>
 
-            <!-- Contenido -->
             <h2 class="text-xl font-bold text-deep mb-3 group-hover:text-teal transition-colors">{rec.titulo}</h2>
-            <p class="text-sm text-gray-600 mb-8 flex-grow leading-relaxed">{rec.descripcion}</p>
             
-            <!-- CTA -->
-            <div class="pt-4 border-t border-gray-50 flex items-center justify-between mt-auto">
-              <span class="text-xs font-bold text-gray-400 group-hover:text-teal transition-colors uppercase tracking-widest">
-                {userId ? 'Abrir recurso →' : 'Iniciar sesión para acceder 🔒'}
-              </span>
+            <div class="mt-auto pt-6 border-t border-gray-100 flex justify-between items-center">
+              {meta.esPago ? (
+                <span class="text-sm font-bold text-orange">{meta.precio}</span>
+              ) : (
+                <span class="text-xs font-bold text-gray-400">Acceso abierto</span>
+              )}
+              <span class="text-teal font-bold text-sm group-hover:translate-x-1 transition-transform">Entrar →</span>
             </div>
           </a>
-        ))}
-      </div>
-
+        );
+      })}
     </div>
   </main>
 </Layout>

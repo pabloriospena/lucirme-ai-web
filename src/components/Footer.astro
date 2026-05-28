@@ -3,50 +3,31 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-deep text-white py-20 px-6 mt-24">
-  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+<footer class="bg-deep text-white py-12 px-6 mt-24 border-t border-white/5">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
     
-    <!-- Columna 1: Marca -->
-    <div class="space-y-4">
-      <h3 class="text-xl font-bold">LuciRMe AI</h3>
-      <p class="text-sm text-gray-400">Devuelve tiempo. Aplica IA con criterio.</p>
+    <!-- Marca + Tagline -->
+    <div class="flex items-center gap-3">
+      <span class="text-lg font-bold text-white">LuciRMe AI</span>
+      <span class="text-gray-500 text-sm hidden md:inline">·</span>
+      <p class="text-sm text-gray-500">Devuelve tiempo. Aplica IA con criterio.</p>
     </div>
 
-    <!-- Columna 2: Enlaces -->
-    <div>
-      <h4 class="text-teal font-bold text-xs uppercase tracking-widest mb-6">Enlaces</h4>
-      <ul class="space-y-3 text-sm text-gray-400">
-        <li><a href="#foco-section" class="hover:text-white transition">Cómo funciona</a></li>
-        <li><a href="#precios" class="hover:text-white transition">Inversión</a></li>
-        <li><a href="#casos" class="hover:text-white transition">Casos de éxito</a></li>
-        <li><a href="/terminos" class="hover:text-white transition">Términos</a></li>
-        <li><a href="/privacidad" class="hover:text-white transition">Privacidad</a></li>
-      </ul>
+    <!-- Legal + Dashboard (discreto) -->
+    <div class="flex items-center gap-4 text-xs text-gray-600">
+      <a href="/terminos" class="hover:text-gray-400 transition">Términos</a>
+      <span>/</span>
+      <a href="/privacidad" class="hover:text-gray-400 transition">Privacidad</a>
+      <span class="hidden md:inline">/</span>
+      <a href="/dashboard" class="hidden md:inline hover:text-teal transition">Dashboard</a>
     </div>
 
-    <!-- Columna 3: Conexión y Newsletter -->
-    <div class="space-y-6">
-      <div>
-        <h4 class="text-teal font-bold text-xs uppercase tracking-widest mb-4">Conexión</h4>
-        <div class="flex gap-4 text-sm text-gray-400">
-          <a href="https://linkedin.com/in/pabloriospena" class="hover:text-white transition">LinkedIn</a>
-          <a href="#" class="hover:text-white transition">X (Twitter)</a>
-        </div>
-      </div>
-      
-      <div>
-        <h4 class="text-teal font-bold text-xs uppercase tracking-widest mb-4">Newsletter</h4>
-        <form class="flex gap-2">
-          <input type="email" placeholder="Tu email" class="bg-white/5 border border-white/10 rounded-lg px-4 py-2 w-full text-sm focus:outline-none focus:border-teal">
-          <button class="bg-teal text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-tealHover transition">Suscribirse</button>
-        </form>
-      </div>
-    </div>
   </div>
 
-  <!-- Footer Bottom -->
-  <div class="max-w-6xl mx-auto mt-20 pt-8 border-t border-white/10 text-center">
-    <a href="/dashboard" class="text-teal font-bold hover:underline mb-4 block">→ Acceder al Dashboard</a>
-    <p class="text-[10px] text-gray-600 uppercase tracking-widest">© LuciRMe AI {year}. Hecho con criterio, no con humo.</p>
+  <!-- Copyright (sutil) -->
+  <div class="max-w-6xl mx-auto mt-8 pt-6 border-t border-white/5 text-center">
+    <p class="text-[10px] text-gray-700 uppercase tracking-widest">
+      © LuciRMe AI {year}
+    </p>
   </div>
 </footer>

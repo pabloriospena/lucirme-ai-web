@@ -1,5 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { LINKS } from '../../lib/constants.js';
+
 
 // 1. Muro de Seguridad: Solo usuarios logueados
 //const auth = (Astro.locals as any).auth;
@@ -15,14 +17,27 @@ import Layout from '../../layouts/Layout.astro';
 
   <!-- SUB-NAV (Breadcrumb) -->
   <nav class="bg-white border-b border-gray-100 px-4 py-3">
-    <div class="max-w-4xl mx-auto flex justify-between items-center">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
       <a href="/recursos" class="text-sm font-bold text-gray-400 hover:text-teal transition">← Volver a Recursos</a>
       <span class="text-xs font-bold text-teal uppercase tracking-widest flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Herramienta Pro
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Evaluador de IA
       </span>
     </div>
   </nav>
 
+  <!-- BANNER CAFÉ GRATIS -->
+  <div class="bg-gradient-to-r from-teal to-tealHover text-white px-4 py-3 text-center relative overflow-hidden">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3">
+      <span class="text-2xl">☕</span>
+      <div class="text-sm sm:text-base">
+        <strong>¿Tienes dudas sobre los resultados?</strong> Agenda un café virtual de 30 minutos y te ayudo a priorizar tus tareas.
+      </div>
+      <a href="https://calendar.app.google/tu-link-cafe" target="_blank" class="bg-white text-teal px-4 py-2 rounded-lg font-bold text-sm hover:bg-gray-100 transition whitespace-nowrap">
+        Agendar café gratis →
+      </a>
+    </div>
+    <button id="close-cafe-banner" class="absolute top-2 right-2 text-white/80 hover:text-white text-xl">×</button>
+  </div>
   <!-- WIZARD APP -->
   <main class="py-12 px-4 min-h-screen">
     <div class="max-w-3xl mx-auto">
