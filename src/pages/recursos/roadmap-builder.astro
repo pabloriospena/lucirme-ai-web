@@ -1,0 +1,71 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Roadmap Builder | LuciRMe AI">
+  <main class="py-10 px-6 max-w-7xl mx-auto">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-deep">🗺️ Roadmap Builder</h1>
+      <p class="text-sm text-gray-500">Vista de ejecución técnica. Columnas fijas, control total.</p>
+    </div>
+
+    <!-- CARGA -->
+    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm mb-6">
+      <input type="file" id="csv-file" accept=".csv" class="w-full text-sm file:bg-teal file:text-white file:px-4 file:py-2 file:rounded-lg file:border-0 cursor-pointer" />
+    </div>
+
+    <!-- CONTROLES DE TIEMPO -->
+    <div class="flex gap-2 mb-6" id="zoom-controls">
+      <button onclick="zoom('week')" class="px-4 py-2 bg-gray-100 rounded-lg text-xs font-bold hover:bg-teal hover:text-white transition">Semana</button>
+      <button onclick="zoom('month')" class="px-4 py-2 bg-gray-100 rounded-lg text-xs font-bold hover:bg-teal hover:text-white transition">Mes</button>
+      <button onclick="zoom('year')" class="px-4 py-2 bg-gray-100 rounded-lg text-xs font-bold hover:bg-teal hover:text-white transition">Año</button>
+    </div>
+
+    <!-- ROADMAP VISUAL -->
+    <div id="timeline-container" class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm"></div>
+  </main>
+
+  <link href="https://unpkg.com/vis-timeline@7.7.3/styles/vis-timeline-graph2d.min.css" rel="stylesheet" />
+  <script is:inline src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
+  <script is:inline src="https://unpkg.com/vis-timeline@7.7.3/standalone/umd/vis-timeline-graph2d.min.js"></script>
+
+  <script is:inline>
+    let timeline = null;
+
+    document.getElementById('csv-file').addEventListener('change', function(e) {
+      Papa.parse(e.target.files[0], {
+        header: true,
+        complete: function(results) {
+          const items = results.data.filter(r => r.Title).map((r, i) => ({
+            id: i,
+            content: `<div class="font-bold text-xs">${r.Title}</div><div class="text-[10px] opacity-70">${r.State}</div>`,
+            start: r['Start Date'] || '2026-05-28',
+            end: r['Due Date'] || '2026-06-28',
+            group: r.ID // Esto agrupa por ID para tener filas separadas
+          }));
+
+          const container = document.getElementById('timeline-container');
+          container.innerHTML = '';
+          
+          timeline = new window.vis.Timeline(container, new window.vis.DataSet(items), {
+            height: '500px',
+            orientation: 'top',
+            zoomable: false, // Desactivamos scroll-zoom
+            moveable: true
+          });
+        }
+      });
+    });
+
+    window.zoom = function(scale) {
+      if (!timeline) return;
+      const now = new Date();
+      const ranges = {
+        week: { start: new Date(now.getTime() - 7*864e5), end: new Date(now.getTime() + 7*864e5) },
+        month: { start: new Date(now.getTime() - 30*864e5), end: new Date(now.getTime() + 30*864e5) },
+        year: { start: new Date(now.getTime() - 180*864e5), end: new Date(now.getTime() + 180*864e5) }
+      };
+      timeline.setWindow(ranges[scale].start, ranges[scale].end);
+    };
+  </script>
+</Layout>
