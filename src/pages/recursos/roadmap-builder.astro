@@ -2,6 +2,14 @@
 import Layout from '../../layouts/Layout.astro';
 import { LINKS } from '../../lib/constants.js';
 
+
+const auth = (Astro.locals as any).auth;
+const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
+
+if (!userId) {
+ return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/backlog-detox')}`);
+}
+
 ---
 
 <Layout title="Roadmap Builder | LuciRMe AI">

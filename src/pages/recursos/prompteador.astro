@@ -3,8 +3,14 @@ import Layout from '../../layouts/Layout.astro';
 import ActionHub from '../../components/ActionHub.astro';
 import { LINKS } from '../../lib/constants.js';
 
----
+const auth = (Astro.locals as any).auth;
+const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
 
+if (!userId) {
+ return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/backlog-detox')}`);
+}
+
+---
 <Layout title="Prompteador de Tareas | LuciRMe AI">
     <!-- SUB-NAV (Breadcrumb) -->
   <nav class="bg-white border-b border-gray-100 px-4 py-3">

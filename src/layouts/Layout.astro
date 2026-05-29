@@ -32,39 +32,38 @@ const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
         defaults: '2026-01-30',
         person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
     })
-</script>
+    </script>
   </head>
 
   <body class="bg-white text-gray-900 font-sans antialiased">
     
     <!-- HEADER -->
-<header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
-  <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-    
-    <!-- Lógica de Navegación Contextual -->
-    <div class="flex items-center gap-8">
-      <a href="/" class="flex items-center gap-3">
-            <!-- Logo: h-8 es el tamaño ideal para que se vea nítido pero limpio -->
-            <img src="/logo-lucirme.png" alt="LuciRMe AI" class="h-8 w-auto object-contain" />
-            <span class="text-xl font-bold text-deep tracking-tight"><span>
-      </a>
-      
-      {isRecursos ? (
-        <nav class="hidden md:flex gap-6 text-sm font-bold text-gray-500">
-           <a href="/" class="hover:text-teal">Inicio</a>
-           <a href="/servicios" class="hover:text-teal">Servicios</a>
-        </nav>
-      ) : isSoluciones ? (
-        <nav class="hidden md:flex gap-6 text-sm font-bold text-gray-500">
-           <a href="/servicios" class="hover:text-teal">Ver todas</a>
-        </nav>
-      ) : (
-        <nav class="hidden md:flex gap-6 text-sm font-medium text-gray-600">
-           <a href="/servicios" class="hover:text-teal">Soluciones</a>
-           <a href="/recursos" class="hover:text-teal">Recursos</a>
-        </nav>
-      )}
-    </div>
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
+      <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+        
+        <!-- Lógica de Navegación Contextual -->
+        <div class="flex items-center gap-8">
+          <a href="/" class="flex items-center gap-2">
+            <img src="/logo-lucirme.png" alt="LuciRMe AI" class="h-7 w-auto object-contain" />
+          </a>
+          
+          {isRecursos ? (
+            <nav class="hidden md:flex gap-6 text-sm font-bold text-gray-500">
+               <a href="/" class="hover:text-teal">Inicio</a>
+               <a href="/servicios" class="hover:text-teal">Servicios</a>
+            </nav>
+          ) : isSoluciones ? (
+            <nav class="hidden md:flex gap-6 text-sm font-bold text-gray-500">
+               <a href="/servicios" class="hover:text-teal">Ver todas</a>
+            </nav>
+          ) : (
+            <nav class="hidden md:flex gap-6 text-sm font-medium text-gray-600">
+               <a href="/servicios" class="hover:text-teal">Soluciones</a>
+               <a href="/recursos" class="hover:text-teal">Recursos</a>
+            </nav>
+          )}
+        </div>
+
         <!-- Acciones Derecha -->
         <div class="flex items-center gap-4">
           <button 
@@ -90,5 +89,29 @@ const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
     <Footer />
     <Selector />
     <Analytics />
+
+    <!-- SCRIPT DE IDENTIFICACIÓN DE USUARIO (CLERK -> POSTHOG) -->
+    <script is:inline>
+      window.addEventListener('load', async () => {
+        // Esperamos a que el cliente de Clerk esté inicializado en el navegador
+        if (window.Clerk) {
+          await window.Clerk.load();
+          const user = window.Clerk.user;
+
+          // Si el usuario existe y PostHog está cargado, los vinculamos
+          if (user && window.posthog) {
+            console.log(">>> POSTHOG: Identificando usuario logueado:", user.primaryEmailAddress?.emailAddress);
+            window.posthog.identify(
+              user.id, // ID único de Clerk para este usuario
+              {
+                email: user.primaryEmailAddress?.emailAddress,
+                name: user.firstName + ' ' + user.lastName,
+                username: user.username
+              }
+            );
+          }
+        }
+      });
+    </script>
   </body>
 </html>

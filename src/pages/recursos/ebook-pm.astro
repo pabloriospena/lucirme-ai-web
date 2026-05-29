@@ -71,7 +71,14 @@ const hotmartLink = "https://pay.hotmart.com/D96093022S?off=OFF50";
               </div>
             </div>
 
-            <a href={hotmartLink} target="_blank" class="inline-block w-full text-center bg-orange text-white px-8 py-4 rounded-xl font-bold hover:bg-orange/90 transition shadow-[0_0_20px_rgba(234,88,12,0.3)] text-lg">
+            <a href={hotmartLink} target="_blank" onclick="
+    if (window.posthog) {
+      window.posthog.capture('ebook_comprar_click', { 
+        precio_estimado: '110.000 COP',
+        cupon: 'OFF50'
+      });
+    }
+  " class="inline-block w-full text-center bg-orange text-white px-8 py-4 rounded-xl font-bold hover:bg-orange/90 transition shadow-[0_0_20px_rgba(234,88,12,0.3)] text-lg">
               Comprar Ebook en Hotmart →
             </a>
           </div>

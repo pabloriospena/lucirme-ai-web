@@ -25,7 +25,14 @@ import { LINKS } from '../lib/constants.js';
     </a>
     
     <!-- CTA Secundario: Outline -->
-    <a href={LINKS.calendly} class="border-2 border-deep text-deep px-8 py-4 rounded-lg font-bold hover:bg-gray-50 transition-all">
+    <a  
+  href={LINKS.calendly} 
+  target="_blank"
+  onclick="
+    if (window.posthog) {
+      window.posthog.capture('click_agenda_cafe', { origen: 'dashboard' });
+    }
+  "class="border-2 border-deep text-deep px-8 py-4 rounded-lg font-bold hover:bg-gray-50 transition-all">
       Agendar Café
     </a>
   </div>

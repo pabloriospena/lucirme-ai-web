@@ -4,13 +4,13 @@ import { LINKS } from '../../lib/constants.js';
 
 
 
-// 1. Muro de Seguridad: Solo usuarios logueados
-//const auth = (Astro.locals as any).auth;
-//const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
+//1. Muro de Seguridad: Solo usuarios logueados
+const auth = (Astro.locals as any).auth;
+const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
 
-//if (!userId) {
- // return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/backlog-detox')}`);
-//}
+if (!userId) {
+ return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/backlog-detox')}`);
+}
 ---
 
 <Layout title="Backlog Detox | LuciRMe AI">
@@ -76,7 +76,13 @@ import { LINKS } from '../../lib/constants.js';
           </div>
           <div class="flex items-center gap-4">
             <span id="item-count" class="text-xs font-bold text-gray-400 uppercase tracking-widest">0 ítems</span>
-            <button id="prioritize-btn" class="bg-deep hover:bg-teal text-white px-8 py-3 rounded-lg font-bold transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+            <button id="prioritize-btn" onclick="
+    if (window.posthog) {
+      window.posthog.capture('backlog_detox_ejecutado', { 
+        cantidad_items: items.length 
+      });
+    }
+  " class="bg-deep hover:bg-teal text-white px-8 py-3 rounded-lg font-bold transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed" disabled>
               Priorizar Backlog
             </button>
           </div>

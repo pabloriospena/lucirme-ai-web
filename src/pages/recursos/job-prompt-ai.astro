@@ -3,46 +3,73 @@ import Layout from '../../layouts/Layout.astro';
 import ActionHub from '../../components/ActionHub.astro';
 import { LINKS } from '../../lib/constants.js';
 
+const auth = (Astro.locals as any).auth;
+const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
 
+// CORREGIDO: Redirige de vuelta a esta misma página tras el login
+if (!userId) {
+ return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/job-prompt-ai')}`);
+}
 ---
 
 <Layout title="JobPrompt AI | LuciRMe AI">
-    <!-- SUB-NAV (Breadcrumb) -->
+  <!-- BREADCRUMB -->
   <nav class="bg-white border-b border-gray-100 px-4 py-3">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
       <a href="/recursos" class="text-sm font-bold text-gray-400 hover:text-teal transition">← Volver a Recursos</a>
       <span class="text-xs font-bold text-teal uppercase tracking-widest flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Evaluador de IA
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Encuentra ofertas de empleo
       </span>
     </div>
   </nav>
 
   <!-- BANNER CAFÉ GRATIS -->
-  <div class="bg-gradient-to-r from-teal to-tealHover text-white px-4 py-3 text-center relative overflow-hidden">
+  <div id="cafe-banner" class="bg-gradient-to-r from-teal to-tealHover text-white px-4 py-3 text-center relative overflow-hidden transition-all duration-300">
     <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3">
       <span class="text-2xl">☕</span>
       <div class="text-sm sm:text-base">
-        <strong>¿Tienes dudas sobre los resultados?</strong> Agenda un café virtual de 30 minutos y te ayudo a priorizar tus tareas.
+        <strong>¿Tienes dudas sobre los resultados?</strong> Agenda un café virtual de 30 minutos y te ayudo a priorizar tus aplicaciones.
       </div>
       <a href={LINKS.calendly} target="_blank" class="bg-white text-teal px-4 py-2 rounded-lg font-bold text-sm hover:bg-gray-100 transition whitespace-nowrap">
         Agendar café gratis →
       </a>
     </div>
-    <button id="close-cafe-banner" class="absolute top-2 right-2 text-white/80 hover:text-white text-xl">×</button>
+    <button id="close-cafe-banner" class="absolute top-2 right-4 text-white/80 hover:text-white text-2xl font-bold">×</button>
   </div>
-  <main class="py-12 px-4 max-w-4xl mx-auto" x-data="jobBuilder">
-    <header class="text-center mb-12">
-      <h1 class="text-3xl font-bold text-deep mb-4">✨ JobPrompt AI</h1>
-      <p class="text-gray-600">Configura tu perfil, genera un prompt de élite y pégalo en tu IA favorita.</p>
+
+  <main class="py-12 px-4 max-w-4xl mx-auto space-y-8">
+    <header class="text-center mb-8">
+      <h1 class="text-4xl font-black text-deep mb-3">✨ JobPrompt AI</h1>
+      <p class="text-gray-500">Configura tu perfil de búsqueda, genera un prompt maestro y encuentra vacantes reales.</p>
     </header>
 
-    <section class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+    <!-- INSTRUCCIONES DE USO (Bento Style) -->
+    <div class="bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 md:p-8 space-y-4">
+      <h2 class="text-sm font-bold text-teal uppercase tracking-widest">📖 Guía de uso rápido</h2>
+      <div class="grid md:grid-cols-3 gap-6 text-sm text-gray-600">
+        <div>
+          <span class="font-bold text-deep block mb-1">1. Completa el perfil</span>
+          <p class="text-xs">Llena la información lo más completa posible. Los campos vacíos usarán valores "flexibles" por defecto para no limitarte.</p>
+        </div>
+        <div>
+          <span class="font-bold text-deep block mb-1">2. Copia el Prompt</span>
+          <p class="text-xs">Haz clic en "Generar Prompt de Élite" y cópialo con un solo clic de forma limpia.</p>
+        </div>
+        <div>
+          <span class="font-bold text-teal block mb-1">3. Usa Deep Research 🔥</span>
+          <p class="text-xs">Para resultados espectaculares, pega el prompt en **Gemini 1.5, ChatGPT Plus (con Search activo) o Qwen 2.5 Coder**.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMULARIO -->
+    <section class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm space-y-6">
       <form id="jobForm" class="space-y-6">
         <!-- Perfil Profesional -->
         <fieldset class="grid md:grid-cols-2 gap-4">
           <div class="md:col-span-2">
             <label class="block text-xs font-bold text-teal uppercase mb-2">1. Rol buscado (Obligatorio)</label>
-            <input type="text" id="role" required placeholder="Ej: Contador Público, Enfermero..." class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal">
+            <input type="text" id="role" required placeholder="Ej: Product Manager, Frontend Developer, UX Designer..." class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal">
           </div>
           <div>
             <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Nivel de experiencia</label>
@@ -61,12 +88,12 @@ import { LINKS } from '../../lib/constants.js';
             <option value="Empleado directo">Empleado directo</option>
             <option value="Freelance">Freelance</option>
           </select>
-          <input type="text" id="timezone" placeholder="Zona horaria (Ej: UTC-5)" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none">
+          <input type="text" id="timezone" placeholder="Zona horaria compatible (Ej: UTC-5 a UTC-3)" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none">
         </fieldset>
 
         <!-- Filtros -->
         <fieldset class="space-y-4 pt-6 border-t border-gray-100">
-          <legend class="text-xs font-bold text-teal uppercase tracking-widest">Filtros de Búsqueda</legend>
+          <legend class="text-xs font-bold text-teal uppercase tracking-widest mb-2">Filtros de Búsqueda</legend>
           <div class="grid md:grid-cols-2 gap-4">
             <select id="englishLevel" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none">
                 <option value="No requerido">Inglés: No requerido</option>
@@ -81,41 +108,61 @@ import { LINKS } from '../../lib/constants.js';
                 <option value="Híbrido">Híbrido</option>
             </select>
           </div>
-          <label class="flex items-center gap-2 text-sm text-gray-700">
-            <input type="checkbox" id="includeSecondary" class="accent-teal"> Incluir fuentes secundarias (⚠️)
+          <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+            <input type="checkbox" id="includeSecondary" class="accent-teal w-4 h-4"> Incluir fuentes secundarias con advertencia (⚠️)
           </label>
         </fieldset>
 
-        <button type="button" id="generateBtn" class="w-full bg-deep text-white font-bold py-4 rounded-xl hover:bg-teal transition shadow-lg">✨ Generar Prompt de Élite</button>
+        <button type="button" id="generateBtn" class="w-full bg-deep text-white font-bold py-4 rounded-xl hover:bg-teal transition shadow-lg text-lg">
+          ✨ Generar Prompt de Élite
+        </button>
       </form>
     </section>
 
-    <!-- Output -->
-    <section id="output-section" class="hidden bg-white p-8 rounded-2xl border border-gray-200 space-y-6">
-      <h2 class="text-xl font-bold text-deep">📋 Tu Prompt Generado</h2>
-      <pre id="promptOutput" class="w-full bg-gray-50 p-6 rounded-xl text-xs font-mono text-gray-700 border border-gray-200 whitespace-pre-wrap"></pre>
-      <button id="copyBtn" class="w-full bg-orange text-white font-bold py-4 rounded-lg hover:bg-orange/90 transition">📋 Copiar Prompt</button>
+    <!-- OUTPUT (Resultados) -->
+    <section id="output-section" class="hidden bg-deep text-white p-8 rounded-2xl border border-gray-800 space-y-6 animate-fade-in">
+      <div class="flex justify-between items-center">
+        <h2 class="text-xl font-bold">📋 Tu Prompt Generado</h2>
+      </div>
+      <pre id="promptOutput" class="w-full bg-black/30 p-6 rounded-lg text-xs font-mono text-gray-300 overflow-x-auto whitespace-pre-wrap min-h-[200px]"></pre>
+      
+      <div class="grid md:grid-cols-2 gap-4">
+        <button id="copyBtn" class="bg-orange text-white py-4 rounded-lg font-bold hover:bg-orange/90 transition shadow-lg flex items-center justify-center gap-2">
+          <span>📋</span> Copiar Prompt
+        </button>
+        <button onclick="window.open('https://perplexity.ai', '_blank')" class="border-2 border-white/20 text-white py-4 rounded-lg font-bold hover:bg-white/5 transition flex items-center justify-center gap-2">
+          <span>🔍</span> Abrir Perplexity (Recomendado)
+        </button>
+      </div>
     </section>
+
     <ActionHub />
   </main>
+</Layout>
 
-  <script is:inline>
-    document.getElementById('generateBtn').addEventListener('click', () => {
-      const v = (id, fallback) => document.getElementById(id)?.value.trim() || fallback;
-      const chk = id => document.getElementById(id).checked;
+<script is:inline>
+  // Banner close logic
+  document.getElementById('close-cafe-banner').addEventListener('click', () => {
+    document.getElementById('cafe-banner').classList.add('hidden');
+  });
 
-      const data = {
-        role: v('role', 'Cualquier rol tech/producto'),
-        seniority: v('seniority', 'Sin especificar'),
-        salary: v('minSalary', 'Abierto a negociar'),
-        contract: v('contract', 'Flexible'),
-        timezone: v('timezone', 'Flexible'),
-        english: v('englishLevel', 'No requerido'),
-        modality: v('modality', 'Flexible'),
-        secondary: chk('includeSecondary')
-      };
+  // Generator logic
+  document.getElementById('generateBtn').addEventListener('click', () => {
+    const v = (id, fallback) => document.getElementById(id)?.value.trim() || fallback;
+    const chk = id => document.getElementById(id).checked;
 
-      const prompt = `Actúa como reclutador senior global. Tu misión es identificar vacantes activas (<7 días) y presentarlas en tabla Markdown.
+    const data = {
+      role: v('role', 'Cualquier rol tech/producto'),
+      seniority: v('seniority', 'Sin especificar'),
+      salary: v('minSalary', 'Abierto a negociar'),
+      contract: v('contract', 'Flexible'),
+      timezone: v('timezone', 'Flexible'),
+      english: v('englishLevel', 'No requerido'),
+      modality: v('modality', 'Flexible'),
+      secondary: chk('includeSecondary')
+    };
+
+    const prompt = `Actúa como reclutador senior global. Tu misión es identificar vacantes activas (<7 días) y presentarlas en tabla Markdown.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📋 PERFIL CANDIDATO
@@ -139,14 +186,20 @@ import { LINKS } from '../../lib/constants.js';
 
 RESPONDE SOLO CON LA TABLA Y 3 LÍNEAS DE RESUMEN FINAL.`;
 
-      document.getElementById('promptOutput').textContent = prompt;
-      document.getElementById('output-section').classList.remove('hidden');
-      document.getElementById('output-section').scrollIntoView({ behavior: 'smooth' });
-    });
+    document.getElementById('promptOutput').textContent = prompt;
+    document.getElementById('output-section').classList.remove('hidden');
+    document.getElementById('output-section').scrollIntoView({ behavior: 'smooth' });
+  });
 
-    document.getElementById('copyBtn').addEventListener('click', () => {
-      navigator.clipboard.writeText(document.getElementById('promptOutput').textContent);
-      alert('Prompt copiado al portapapeles');
-    });
-  </script>
-</Layout>
+  // Copy to clipboard logic
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    const text = document.getElementById('promptOutput').textContent;
+    navigator.clipboard.writeText(text);
+    alert('Prompt copiado al portapapeles. ¡Pégalo en Gemini o Perplexity!');
+  });
+</script>
+
+<style>
+  .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+</style>

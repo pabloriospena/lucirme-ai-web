@@ -34,7 +34,7 @@ const metaData = {
   <main class="max-w-6xl mx-auto py-16 px-6">
     
     <header class="text-center mb-16">
-      <h1 class="text-4xl font-bold text-deep mb-4">Librería de Recursos</h1>
+      <h1 class="text-4xl font-bold text-deep mb-4">Recursos</h1>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">Herramientas, plantillas y guías de producto listas para implementar. Acceso abierto y directo.</p>
     </header>
     
@@ -43,7 +43,7 @@ const metaData = {
         const meta = metaData[rec.slug as keyof typeof metaData] || { etiqueta: "Herramienta", precio: null, esPago: false };
         
         return (
-          <a href={rec.url} class="group bg-white p-6 rounded-2xl border border-gray-200 hover:border-teal transition-all shadow-sm hover:shadow-lg flex flex-col h-full">
+          <a href={rec.url} class="group bg-white p-6 rounded-2xl border border-gray-200 hover:border-teal transition-all shadow-sm hover:shadow-lg flex flex-col h-full track-resource-click">
             <div class="mb-4">
               <span class={`inline-block px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest ${meta.esPago ? 'bg-orange/10 text-orange' : 'bg-teal/10 text-teal'}`}>
                 {meta.etiqueta}
@@ -65,4 +65,21 @@ const metaData = {
       })}
     </div>
   </main>
+  <script is:inline>
+  // Script para capturar clics en recursos dinámicos
+  document.querySelectorAll('.track-resource-click').forEach(el => {
+    el.addEventListener('click', () => {
+      const title = el.getAttribute('data-resource-title');
+      const isPaid = el.getAttribute('data-resource-paid');
+      
+      if (window.posthog) {
+        window.posthog.capture('recurso_click', {
+          titulo_recurso: title,
+          es_de_pago: isPaid === 'true',
+          origen: 'catalogo_recursos'
+        });
+      }
+    });
+  });
+</script>
 </Layout>

@@ -4,7 +4,9 @@
 <div id="selector-overlay" class="fixed inset-0 bg-[#0F172A] z-[100] hidden flex items-center justify-center p-6 backdrop-blur-sm">
   <!-- Botón Cerrar -->
   <button 
-    onclick="document.getElementById('selector-overlay').classList.add('hidden')" 
+    onclick="document.getElementById('selector-overlay').classList.add('hidden'); if (window.posthog) {
+      window.posthog.capture('selector_abierto', { pagina: window.location.pathname });
+    }" 
     class="absolute top-8 right-8 text-white/40 hover:text-white text-3xl transition animate-fade-in"
   >✕</button>
 
@@ -119,6 +121,16 @@
     const val = document.getElementById('input-p4').value.trim();
     if (!val) return alert('Por favor, cuéntanos tu foco.');
     respuestas.p4 = val;
+
+    // CAPTURA EN POSTHOG (Enviamos el dolor y el perfil)
+  if (window.posthog) {
+    window.posthog.capture('diagnostico_completado', {
+      perfil: perfil,
+      dolor_p2: respuestas.p2,
+      uso_ia_p3: respuestas.p3,
+      foco_p4: respuestas.p4
+    });
+  }
 
     // 1. Guardamos el borrador del diagnóstico de forma segura usando la variable 'perfil'
     localStorage.setItem('lucirme_pending_diagnostic', JSON.stringify({

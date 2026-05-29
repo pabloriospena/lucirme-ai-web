@@ -1,5 +1,6 @@
 ---
 // src/components/ActionHub.astro
+import { LINKS } from '../lib/constants.js';
 ---
 
 <section class="py-24 px-4 bg-white text-white">
@@ -12,7 +13,7 @@
     <h2 class="text-lg font-bold text-deep mb-6">Recursos para avanzar solo</h2>
     <div class="grid md:grid-cols-2 gap-4 mb-12">
         <a href="/recursos/backlog-detox" class="p-4 border border-gray-200 rounded-lg hover:border-teal transition text-sm font-medium text-gray-700">
-            🧹 Backlog Detox (Plantilla)
+            🧹 Backlog Detox
         </a>
         <a href="/recursos/guia-notebooklm" class="p-4 border border-gray-200 rounded-lg hover:border-teal transition text-sm font-medium text-gray-700">
             📘 Guía NotebookLM
@@ -20,12 +21,15 @@
         <a href="/recursos/shapeup-builder" class="p-4 border border-gray-200 rounded-lg hover:border-teal transition text-sm font-medium text-gray-700">
             📘 ShapeUp Builder
         </a>
+        <a href="/recursos/prompteador" class="p-4 border border-gray-200 rounded-lg hover:border-teal transition text-sm font-medium text-gray-700">
+            📘 Prompteador
+        </a>
     </div>
 
     <!-- CTA Principal -->
          <p class="text-xs text-gray-400 text-center uppercase tracking-widest">30 minutos · 100% gratis · Sin venta · Sin presión.</p>
 
-    <a href= "" class="block w-full bg-teal text-white font-bold py-5 rounded-xl text-center hover:bg-tealHover transition shadow-lg text-lg mb-8">Agenda tu café de estrategia 
+    <a href= {LINKS.calendly} target="_blank" class="block w-full bg-teal text-white font-bold py-5 rounded-xl text-center hover:bg-tealHover transition shadow-lg text-lg mb-8">Agenda tu café de estrategia 
     </a>
     
 
