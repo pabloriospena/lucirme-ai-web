@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { LINKS } from '../../lib/constants.js';
+import ActionHub from '../../components/ActionHub.astro';
 
 
 const auth = (Astro.locals as any).auth;
@@ -56,6 +57,9 @@ if (!userId) {
 
     <!-- ROADMAP VISUAL -->
     <div id="timeline-container" class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm"></div>
+
+
+    <ActionHub />
   </main>
 
   <link href="https://unpkg.com/vis-timeline@7.7.3/styles/vis-timeline-graph2d.min.css" rel="stylesheet" />

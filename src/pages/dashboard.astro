@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { createClerkClient } from '@clerk/astro/server';
 import { LINKS } from '../lib/constants.js';
+import ActionHub from '../components/ActionHub.astro';
 
 const auth = (Astro.locals as any).auth;
 const authData = typeof auth === 'function' ? await auth() : auth;
@@ -49,7 +50,7 @@ const recomendado = herramientas[perfilActivo as keyof typeof herramientas] || h
     <!-- HEADER -->
     <header class="mb-12 border-b border-gray-100 pb-8 flex justify-between items-center">
       <div>
-        <h1 class="text-3xl font-black text-deep">Consola: {user.firstName || 'Product Lead'}</h1>
+        <h1 class="text-3xl font-black text-deep">Dashboard: {user.firstName}</h1>
         <p class="text-sm text-gray-500 mt-1">Tu espacio de ejecución y foco. Sin bullshit.</p>
       </div>
       <button id="dashboard-logout" class="text-xs font-bold text-gray-400 hover:text-red-500 transition">Cerrar Sesión</button>
@@ -124,38 +125,8 @@ const recomendado = herramientas[perfilActivo as keyof typeof herramientas] || h
           </button>
         </div>
       )}
-
-      <!-- RECURSOS SUGERIDOS (Bento Grid Estilo Resultados) -->
-      <div class="space-y-6">
-        <h3 class="text-xl font-bold text-deep">Tus recursos para ejecutar ahora:</h3>
-        
-        <div class="grid md:grid-cols-2 gap-4">
-          <!-- Herramienta Dinámica -->
-          <a href={recomendado.url} class="group block p-6 bg-white border border-gray-200 rounded-xl hover:border-teal transition shadow-sm">
-            <div class="flex items-center gap-3 mb-2">
-              <span class="text-2xl">{recomendado.icono}</span>
-              <h4 class="font-bold text-deep text-sm group-hover:text-teal transition">{recomendado.titulo}</h4>
-            </div>
-            <p class="text-xs text-gray-500">{recomendado.desc}</p>
-            <span class="text-xs text-teal font-bold mt-4 inline-block group-hover:translate-x-1 transition-transform">
-              Abrir herramienta →
-            </span>
-          </a>
-
-          <!-- Ebook (Acceso directo con descuento) -->
-          <a href="/recursos/ebook-pm" class="group block p-6 bg-white border border-gray-200 rounded-xl hover:border-teal transition shadow-sm">
-            <div class="flex items-center gap-3 mb-2">
-              <span class="text-2xl">📖</span>
-              <h4 class="font-bold text-deep text-sm group-hover:text-teal transition">Ebook Oficial "PM Sin Bullshit"</h4>
-            </div>
-            <p class="text-xs text-gray-500">Acceso a tu cupón exclusivo de 50% de descuento por ser miembro.</p>
-            <span class="text-xs text-orange font-bold mt-4 inline-block group-hover:translate-x-1 transition-transform">
-              Obtener con descuento →
-            </span>
-          </a>
-        </div>
-      </div>
-
+<ActionHub />
+      
     </div>
   </main>
 </Layout>
