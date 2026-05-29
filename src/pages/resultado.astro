@@ -1,108 +1,161 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { LINKS } from '../lib/constants.js';
+import Footer from '../components/Footer.astro';
+import { LINKS } from '../lib/constants';
 
-// Obtenemos los parámetros desde la URL
-const perfil = Astro.url.searchParams.get('perfil') || 'pro';
-const dolor = Astro.url.searchParams.get('dolor') || 'Operativa';
+// 1. Obtenemos los parámetros dinámicos de la URL
+const perfil = Astro.url.searchParams.get('perfil') || 'individual';
+const dolor = Astro.url.searchParams.get('dolor') || 'Operativa repetitiva';
 
-// 1. Lógica de Negocio (El Cerebro)
-const obtenerRecomendacion = (perfil: string) => {
-  if (perfil === 'startup') {
-    return {
-      titulo: "🚀 Diagnóstico: Fuga de Foco en Startup",
-      accion: "Reserva tu Taller de Inmersión (2-3 horas) y alinea a tu equipo en un flujo prioritario.",
-      producto: "Taller de Inmersión",
-      link: LINKS.calendly,
-      potencial: { horas: "8-12", pct: 85 }
-    };
+// Leemos las 3 acciones del query param
+const act1 = Astro.url.searchParams.get('act1') || 'Mapea tus procesos manuales.';
+const act2 = Astro.url.searchParams.get('act2') || 'Identifica la mayor fuga de tiempo.';
+const act3 = Astro.url.searchParams.get('act3') || 'Aplica IA en el paso crítico.';
+
+const acciones = [act1, act2, act3];
+
+// 2. Lógica de "Nivel de Evolución Potencial" (Fórmula de Negocio)
+function calcularPotencial(dolorPrincipal: string) {
+  const dolorLower = dolorPrincipal.toLowerCase();
+  if (dolorLower.includes('reportes') || dolorLower.includes('manual') || dolorLower.includes('copiar')) {
+    return { horas: '10-12', porcentaje: 85 };
   }
-  if (perfil === 'empresa') {
-    return {
-      titulo: "🏢 Diagnóstico: Fricción Operativa detectada",
-      accion: "Coordina un Taller de Inmersión y valida el impacto operativo antes de escalar.",
-      producto: "Taller de Inmersión",
-      link: LINKS.calendly,
-      potencial: { horas: "12-15", pct: 90 }
-    };
+  if (dolorLower.includes('decisión') || dolorLower.includes('backlog') || dolorLower.includes('roadmap')) {
+    return { horas: '8-10', porcentaje: 75 };
   }
-  // Default: Profesional
-  return {
-    titulo: "👤 Diagnóstico: Foco Atascado",
-    accion: "Agenda tu Sesión de Enfoque (1 hora) y configura tu primer flujo de IA hoy mismo.",
-    producto: "Sesión de Enfoque",
-    link: LINKS.calendly,
-    potencial: { horas: "5-8", pct: 60 }
-  };
+  if (dolorLower.includes('aprobaciones') || dolorLower.includes('silos')) {
+    return { horas: '12-15', porcentaje: 90 };
+  }
+  return { horas: '5-8', porcentaje: 60 };
+}
+
+const potencial = calcularPotencial(dolor);
+
+// 3. Matriz de Contenido Dinámico por Perfil
+const configs = {
+  individual: {
+    badge: "👤 Profesional Independiente",
+    friccion: "Fricción identificada: Operativa repetitiva que consume tu tiempo de valor.",
+    siguientePaso: `Agenda tu Sesión de Enfoque (1 hora) y configura tu primer flujo de IA hoy mismo.`,
+    recursos: [
+      { titulo: "📘 Guía NotebookLM", desc: "De notas sueltas a reportes listos.", url: "/recursos/guia-notebooklm", icono: "📘" },
+      { titulo: "🧹 Backlog Detox", desc: "Limpia tus tareas y prioriza.", url: "/recursos/backlog-detox", icono: "🧹" }
+    ]
+  },
+  startup: {
+    badge: "🚀 Startup / Equipo",
+    friccion: "Fricción identificada: Decisiones de producto sin protocolo claro.",
+    siguientePaso: `Reserva tu Taller de Inmersión (2-3 horas) y alinea a tu equipo en un flujo prioritario.`,
+    recursos: [
+      { titulo: "🎯 Pitch Builder", desc: "Genera prompts estratégicos en 10 min.", url: "/recursos/shapeup-builder", icono: "🎯" },
+      { titulo: "🧹 Backlog Detox", desc: "Filtra el ruido de tus tableros.", url: "/recursos/backlog-detox", icono: "🧹" }
+    ]
+  },
+  empresa: {
+    badge: "🏢 Empresa / Organización",
+    friccion: "Fricción identificada: Procesos manuales que generan errores y lentitud.",
+    siguientePaso: `Coordina un Taller de Inmersión con tu área y valida el impacto antes de escalar.`,
+    recursos: [
+      { titulo: "📘 Guía NotebookLM", desc: "Estructura tus reportes ejecutivos.", url: "/recursos/guia-notebooklm", icono: "📘" },
+      { titulo: "✨ JobPrompt AI", desc: "Encuentra vacantes de élite con IA.", url: "/recursos/job-prompt-ai", icono: "✨" }
+    ]
+  }
 };
 
-const res = obtenerRecomendacion(perfil);
+const currentConfig = configs[perfil as keyof typeof configs] || configs.individual;
 ---
 
-<Layout title="Tu Diagnóstico | LuciRMe Ai">
-  <main class="max-w-3xl mx-auto py-20 px-6">
+<Layout title="Tu Diagnóstico de Foco | LuciRMe AI">
+  <main class="max-w-3xl mx-auto py-16 px-6">
     
-    <!-- Badge de Estado -->
-    <div class="text-center mb-8">
-      <span class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full border border-teal/20">
-        {res.titulo}
+    <!-- 1. Header con Badge -->
+    <div class="text-center mb-12 animate-fade-in">
+      <span class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full border border-teal/20 mb-4">
+        {currentConfig.badge}
       </span>
+      <h1 class="text-4xl font-bold text-deep leading-tight">Tu Foco reveló esto:</h1>
     </div>
 
-    <!-- Diagnóstico -->
-    <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm mb-10">
-      <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Fricción identificada</h3>
-      <p class="text-lg text-gray-700 mb-8">{dolor}</p>
+    <!-- 2. CARD PRINCIPAL (Fricción + Potencial + Acción) -->
+    <div class="bg-white border border-gray-200 rounded-3xl p-8 md:p-10 shadow-lg mb-12 space-y-8 animate-fade-in delay-100">
       
-      <!-- Indicador visual de evolución -->
-      <div class="bg-teal/5 border border-teal/10 rounded-xl p-4 mb-8">
-        <div class="flex items-center justify-between mb-2">
-            <span class="text-sm font-bold text-deep">Potencial de recuperación</span>
-            <span class="text-sm font-bold text-teal">{res.potencial.horas} h/semana</span>
-        </div>
-        <div class="w-full bg-gray-200 rounded-full h-2">
-            <div class="bg-teal h-2 rounded-full" style={`width: ${res.potencial.pct}%`}></div>
-        </div>
+      <!-- Fricción -->
+      <div>
+        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Fricción identificada</h3>
+        <p class="text-lg text-deep leading-relaxed">{dolor}</p>
       </div>
 
-      <h3 class="text-xs font-bold text-orange uppercase tracking-widest mb-4">Acción concreta</h3>
-      <p class="text-xl font-bold text-deep leading-relaxed">{res.accion}</p>
-    </div>
-
-    <!-- Recursos -->
-    <h2 class="text-lg font-bold text-deep mb-6">Recursos para avanzar solo</h2>
-    <div class="grid md:grid-cols-2 gap-4 mb-12">
-        <a href="/recursos/backlog-detox" class="p-4 border border-gray-200 rounded-lg hover:border-teal transition text-sm font-medium text-gray-700">
-            🧹 Backlog Detox (Plantilla)
-        </a>
-        <a href="/recursos/guia-notebooklm" class="p-4 border border-gray-200 rounded-lg hover:border-teal transition text-sm font-medium text-gray-700">
-            📘 Guía NotebookLM
-        </a>
-        <a href="/recursos/shapeup-builder" class="p-4 border border-gray-200 rounded-lg hover:border-teal transition text-sm font-medium text-gray-700">
-            📘 ShapeUp Builder
-        </a>
-    </div>
-
-    <!-- CTA Principal -->
-         <p class="text-xs text-gray-400 text-center uppercase tracking-widest">30 minutos · 100% gratis · Sin venta · Sin presión.</p>
-
-    <a href={res.link} class="block w-full bg-teal text-white font-bold py-5 rounded-xl text-center hover:bg-tealHover transition shadow-lg text-lg mb-8">
-      Reservar {res.producto} →
-    </a>
-    
-
-    <!-- Ebook Bonus -->
- <!-- BLOQUE AUTORIDAD: Venta del Ebook -->
-    <div class="bg-[#0F172A] rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 shadow-xl">
-      <div class="w-24 h-32 bg-white rounded-r-lg rounded-l-sm shadow-md flex-shrink-0 flex items-center justify-center border-l-4 border-gray-300">
-        <span class="text-[10px] font-bold text-deep text-center px-2">PM Sin Bullshit</span>
+      <!-- Barra de Potencial (ClickUp/Notion style) -->
+      <div class="bg-teal/5 border border-teal/10 rounded-xl p-5">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-sm font-bold text-deep">Potencial de recuperación</span>
+          <span class="text-sm font-bold text-teal">{potencial.horas} h/semana</span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+          <div class="bg-teal h-2 rounded-full transition-all duration-1000" style={`width: ${potencial.porcentaje}%`}></div>
+        </div>
+        <p class="text-xs text-gray-400 mt-2 font-medium">Estimado según tu contexto operativo actual</p>
       </div>
+
+<!-- Acción concreta (3 Bullets Tácticos) -->
+      <div>
+        <h3 class="text-xs font-bold text-orange uppercase tracking-widest mb-4">Acciones concretas para esta semana</h3>
+        <ul class="space-y-3 mb-6 text-left max-w-md mx-auto">
+          {acciones.map((act) => (
+            <li class="flex items-start gap-3 text-sm text-gray-700">
+              <span class="text-teal font-bold text-lg leading-none">•</span>
+              <span>{act}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="text-xs text-gray-500 italic">"Sin compromiso. Si en 15 min ves que no es para ti, cerramos igual."</p>
+      </div>
+
+      <!-- CTA Principal (Café) -->
+      <div class="pt-6 border-t border-gray-100 space-y-4">
+        <a 
+          href={LINKS.calendly} 
+          target="_blank"
+          class="block w-full bg-teal text-white font-bold py-4 rounded-xl text-center hover:bg-tealHover transition shadow-lg text-lg"
+        >
+          Agendar Café Estratégico (30 min) →
+        </a>
+        <p class="text-xs text-gray-400 text-center uppercase tracking-widest font-medium">30 minutos • 100% gratis • Sin venta • Sin presión</p>
+      </div>
+
+    </div>
+
+    <!-- 3. RECURSOS GRATUITOS -->
+    <div class="space-y-6 mb-12 animate-fade-in delay-200">
+      <h3 class="text-lg font-bold text-deep">Recursos gratuitos para empezar hoy</h3>
       
+      <div class="grid md:grid-cols-2 gap-4">
+        {currentConfig.recursos.map((r) => (
+          <a href={r.url} class="group block p-5 bg-white border border-gray-200 rounded-xl hover:border-teal transition shadow-sm">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-2xl">{r.icono}</span>
+              <h4 class="font-bold text-deep text-sm group-hover:text-teal transition">{r.titulo}</h4>
+            </div>
+            <p class="text-xs text-gray-500">{r.desc}</p>
+            <span class="text-xs text-teal font-bold mt-4 inline-block group-hover:translate-x-1 transition-transform">
+              Explorar recurso →
+            </span>
+          </a>
+        ))}
+      </div>
+      <p class="text-xs text-gray-400 text-center italic">Más recursos personalizados disponibles dentro de tu Dashboard.</p>
+    </div>
+
+    <!-- 4. BLOQUE AUTORIDAD: EBOOK -->
+    <div class="bg-deep rounded-3xl p-8 flex flex-col md:flex-row items-center gap-8 shadow-xl animate-fade-in delay-300">
+      <div class="w-20 h-28 bg-white rounded-r-lg rounded-l-sm shadow-md flex-shrink-0 flex items-center justify-center border-l-4 border-gray-300">
+        <span class="text-[8px] font-bold text-deep text-center px-1">PM Sin Bullshit</span>
+      </div>
       <div class="text-white flex-grow">
-        <h3 class="text-lg font-bold mb-2">📘 Ebook "PM Sin Bullshit"</h3>
-        <p class="text-sm text-gray-300 mb-4">Para PMs que quieren tomar mejores decisiones y tener más criterio. Sin bullsh*t.</p>
+        <h3 class="text-lg font-bold mb-1">📘 Ebook "PM Sin Bullshit"</h3>
+        <p class="text-xs text-gray-300 mb-4">Aprende a aplicar IA con criterio real y recupera 10 horas semanales.</p>
         <div class="flex flex-wrap gap-4 items-center">
-          <a href="https://pay.hotmart.com/D96093022S?off=OFF50" class="bg-teal text-white px-6 py-2 rounded-lg font-bold text-sm hover:bg-tealHover transition">
+          <a href="https://pay.hotmart.com/D96093022S?off=OFF50" target="_blank" class="bg-teal text-white px-6 py-2.5 rounded-lg font-bold text-xs hover:bg-tealHover transition">
             Comprar ahora ($53.000 COP)
           </a>
           <span class="text-xs text-orange font-bold uppercase tracking-widest">50% OFF para clientes</span>
@@ -112,3 +165,11 @@ const res = obtenerRecomendacion(perfil);
 
   </main>
 </Layout>
+
+<style>
+  .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; opacity: 0; }
+  .delay-100 { animation-delay: 0.1s; }
+  .delay-200 { animation-delay: 0.2s; }
+  .delay-300 { animation-delay: 0.3s; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+</style>

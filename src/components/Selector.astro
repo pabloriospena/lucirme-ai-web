@@ -1,72 +1,137 @@
 ---
-// Selector.astro - Flujo de diagnóstico profesional
+// src/components/Selector.astro - Consola de Triage Inteligente (Nativa, Sin Errores)
 ---
 <div id="selector-overlay" class="fixed inset-0 bg-[#0F172A] z-[100] hidden flex items-center justify-center p-6 backdrop-blur-sm">
-  <button onclick="document.getElementById('selector-overlay').classList.add('hidden')" class="absolute top-8 right-8 text-white/40 hover:text-white text-3xl">✕</button>
+  <!-- Botón Cerrar -->
+  <button 
+    onclick="document.getElementById('selector-overlay').classList.add('hidden')" 
+    class="absolute top-8 right-8 text-white/40 hover:text-white text-3xl transition animate-fade-in"
+  >✕</button>
 
-  <div class="max-w-xl w-full text-white" x-data="selectorLogica()">
-    <div id="selector-container" class="space-y-8 animate-fade-in">
-       <h2 id="selector-title" class="text-3xl font-bold text-white text-center">¿Quién toma la decisión?</h2>
-       <div id="opciones-container" class="grid gap-3"></div>
+  <div class="max-w-xl w-full text-white">
+    <div class="space-y-8">
+      
+      <!-- HEADER CONSOLA -->
+      <div class="text-center">
+        <span id="step-badge" class="inline-block bg-teal/10 text-teal text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-4 border border-teal/20">
+          Consola de Triage IA • Paso 1 de 4
+        </span>
+        <h2 class="text-3xl font-bold tracking-tight">Sincronizador de Foco</h2>
+      </div>
+
+      <!-- PANTALLA DE CHAT -->
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-8 min-h-45 flex flex-col justify-between">
+        
+        <!-- Pregunta 1: Contexto -->
+        <div id="p-step-1" class="space-y-4 animate-fade-in">
+          <p class="text-teal font-bold text-xs uppercase tracking-widest">LuciRMe AI:</p>
+          <p class="text-lg text-gray-200">¿Quién toma la decisión de implementar IA en tu caso?</p>
+          <div class="grid gap-3 mt-4">
+            <button onclick="guardarPaso1('pro')" class="w-full p-4 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">👤 Yo decido por mí (Profesional)</button>
+            <button onclick="guardarPaso1('startup')" class="w-full p-4 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">🚀 Decido con mi equipo (Startup)</button>
+            <button onclick="guardarPaso1('empresa')" class="w-full p-4 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">🏢 Necesito aprobación (Empresa)</button>
+          </div>
+        </div>
+
+        <!-- Pregunta 2: Dolor (Oculto) -->
+        <div id="p-step-2" class="hidden space-y-3 animate-fade-in">
+          <p class="text-teal font-bold text-xs uppercase tracking-widest">LuciRMe AI:</p>
+          <p class="text-lg text-gray-200">¿Qué tarea o proceso operativo te consumió más tiempo y energía esta semana?</p>
+          <div class="flex gap-2 mt-4">
+            <input type="text" id="input-p2" placeholder="Ej: Reportes de métricas manuales..." class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-teal transition text-deep" />
+            <button onclick="guardarPaso2()" class="bg-teal text-white px-6 py-3 rounded-lg font-bold hover:bg-tealHover transition">Siguiente</button>
+          </div>
+        </div>
+
+        <!-- Pregunta 3: Uso Actual (Oculto) -->
+        <div id="p-step-3" class="hidden space-y-3 animate-fade-in">
+          <p class="text-teal font-bold text-xs uppercase tracking-widest">LuciRMe AI:</p>
+          <p class="text-lg text-gray-200">¿Cómo estás usando la IA hoy para intentar resolverlo?</p>
+          <div class="flex gap-2 mt-4">
+            <input type="text" id="input-p3" placeholder="Ej: Prompts sueltos en ChatGPT..." class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-teal transition text-deep" />
+            <button onclick="guardarPaso3()" class="bg-teal text-white px-6 py-3 rounded-lg font-bold hover:bg-tealHover transition">Siguiente</button>
+          </div>
+        </div>
+
+        <!-- Pregunta 4: Foco / Destino (Oculto) -->
+        <div id="p-step-4" class="hidden space-y-3 animate-fade-in">
+          <p class="text-teal font-bold text-xs uppercase tracking-widest">LuciRMe AI:</p>
+          <p class="text-lg text-gray-200">Si recuperaras 10 horas esta semana, ¿dónde pondrías tu foco?</p>
+          <div class="flex gap-2 mt-4">
+            <input type="text" id="input-p4" placeholder="Ej: En vender más y delegar la operación..." class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-teal transition text-deep" />
+            <button onclick="enviarFinal()" class="bg-teal text-white px-6 py-3 rounded-lg font-bold hover:bg-tealHover transition">Finalizar</button>
+          </div>
+        </div>
+
+        <!-- Estado de Carga (Oculto) -->
+        <div id="p-step-loading" class="hidden text-center py-6 animate-pulse">
+          <span class="text-teal font-bold text-sm uppercase tracking-widest">🔄 Analizando tu contexto con IA...</span>
+        </div>
+
+      </div>
+
     </div>
   </div>
 </div>
 
 <script is:inline>
-  const flujo = {
-    paso0: {
-      q: "¿Quién toma la decisión de implementar IA en tu caso?",
-      opts: ["Yo decido por mí", "Decido con mi equipo", "Necesito aprobación de otros", "Ninguna de las anteriores", "Es un contexto mixto"]
-    },
-    paso1: {
-      individual: { q: "¿Qué te quita más tiempo?", opts: ["Reportes/coordinación manual", "Documentación repetitiva", "Información dispersa", "Seguimiento de tareas", "Otro"] },
-      equipo: { q: "¿Qué frena más a tu equipo?", opts: ["Decisiones sin datos", "Coordinación WhatsApp/Email", "Backlog sin rumbo", "Herramientas desconectadas", "Otro"] },
-      empresa: { q: "¿Qué proceso genera más fricción?", opts: ["Aprobaciones manuales", "Datos en silos", "Reportes sin insights", "Onboarding lento", "Otro"] }
-    },
-    paso2: { q: "¿Cómo usas la IA hoy?", opts: ["Prompts sueltos manuales", "Conexión frágil (Make/Notion)", "No implementada", "Escalando con criterio"] },
-    paso3: { q: "¿Si recuperaras 10h, qué priorizarías?", opts: ["Enfocarme en trabajo de alto valor", "Pulir procesos internos", "Presentar propuesta a decisores", "Explorar opciones", "Otro"] }
-  };
+  let respuestas = {};
+  let perfil = ''; // Declaramos 'perfil' a nivel global del script
 
-  let estado = { perfil: '', respuestas: {}, paso: 0 };
-
-  function renderizar() {
-    const container = document.getElementById('opciones-container');
-    const titulo = document.getElementById('selector-title');
-    container.innerHTML = '';
-
-    if (estado.paso === 0) {
-      titulo.innerText = flujo.paso0.q;
-      flujo.paso0.opts.forEach(op => agregarBoton(op, () => {
-        estado.respuestas.decision = op;
-        estado.perfil = op.includes('Yo decido') ? 'individual' : op.includes('equipo') ? 'equipo' : 'empresa';
-        estado.paso = 1;
-        renderizar();
-      }));
-    } else if (estado.paso === 1) {
-      titulo.innerText = flujo.paso1[estado.perfil].q;
-      flujo.paso1[estado.perfil].opts.forEach(op => agregarBoton(op, () => { estado.respuestas.dolor = op; estado.paso++; renderizar(); }));
-    } else if (estado.paso === 2) {
-      titulo.innerText = flujo.paso2.q;
-      flujo.paso2.opts.forEach(op => agregarBoton(op, () => { estado.respuestas.usoIA = op; estado.paso++; renderizar(); }));
-    } else if (estado.paso === 3) {
-      titulo.innerText = flujo.paso3.q;
-      flujo.paso3.opts.forEach(op => agregarBoton(op, () => { estado.respuestas.objetivo = op; finalizar(); }));
-    }
+  function ocultarTodos() {
+    document.getElementById('p-step-1').classList.add('hidden');
+    document.getElementById('p-step-2').classList.add('hidden');
+    document.getElementById('p-step-3').classList.add('hidden');
+    document.getElementById('p-step-4').classList.add('hidden');
+    document.getElementById('p-step-loading').classList.add('hidden');
   }
 
-  function agregarBoton(texto, callback) {
-    const btn = document.createElement('button');
-    btn.className = "w-full p-4 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5";
-    btn.innerText = texto;
-    btn.onclick = callback;
-    document.getElementById('opciones-container').appendChild(btn);
+  function guardarPaso1(p) {
+    perfil = p; // Guardamos el perfil seleccionado
+    respuestas.p1 = p;
+    ocultarTodos();
+    document.getElementById('p-step-2').classList.remove('hidden');
+    document.getElementById('step-badge').innerText = "Consola de Triage IA • Paso 2 de 4";
+    setTimeout(() => document.getElementById('input-p2').focus(), 100);
   }
 
-  async function finalizar() {
-    await fetch('/api/guardar-diagnostico', { method: 'POST', body: JSON.stringify(estado.respuestas) });
-    window.location.href = `/resultado?perfil=${estado.perfil}&dolor=${estado.respuestas.dolor}`;
+  function guardarPaso2() {
+    const val = document.getElementById('input-p2').value.trim();
+    if (!val) return alert('Por favor, cuéntanos tu dolor.');
+    respuestas.p2 = val;
+    ocultarTodos();
+    document.getElementById('p-step-3').classList.remove('hidden');
+    document.getElementById('step-badge').innerText = "Consola de Triage IA • Paso 3 de 4";
+    setTimeout(() => document.getElementById('input-p3').focus(), 100);
   }
 
-  window.iniciarFlujo = () => renderizar();
-  renderizar();
+  function guardarPaso3() {
+    const val = document.getElementById('input-p3').value.trim();
+    if (!val) return alert('Por favor, cuéntanos tu uso actual.');
+    respuestas.p3 = val;
+    ocultarTodos();
+    document.getElementById('p-step-4').classList.remove('hidden');
+    document.getElementById('step-badge').innerText = "Consola de Triage IA • Paso 4 de 4";
+    setTimeout(() => document.getElementById('input-p4').focus(), 100);
+  }
+
+  function enviarFinal() {
+    const val = document.getElementById('input-p4').value.trim();
+    if (!val) return alert('Por favor, cuéntanos tu foco.');
+    respuestas.p4 = val;
+
+    // 1. Guardamos el borrador del diagnóstico de forma segura usando la variable 'perfil'
+    localStorage.setItem('lucirme_pending_diagnostic', JSON.stringify({
+      perfil: perfil, // Corregido: ya no dará error de 'undefined'
+      respuestas: respuestas
+    }));
+
+    // 2. Redirigimos al Login. Tras loguearse, Clerk lo mandará automáticamente al Dashboard
+    window.location.href = `/sign-in?redirect_url=${encodeURIComponent('/dashboard')}`;
+  }
 </script>
+
+<style>
+  .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+</style>
