@@ -1,6 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ActionHub from '../../components/ActionHub.astro';
+import { LINKS } from '../../lib/constants.js';
+
 ---
 
 <Layout title="Prompteador de Tareas | LuciRMe AI">
@@ -21,7 +23,7 @@ import ActionHub from '../../components/ActionHub.astro';
       <div class="text-sm sm:text-base">
         <strong>¿Tienes dudas sobre los resultados?</strong> Agenda un café virtual de 30 minutos y te ayudo a priorizar tus tareas.
       </div>
-      <a href="https://calendar.app.google/tu-link-cafe" target="_blank" class="bg-white text-teal px-4 py-2 rounded-lg font-bold text-sm hover:bg-gray-100 transition whitespace-nowrap">
+      <a href={LINKS.calendly} target="_blank" class="bg-white text-teal px-4 py-2 rounded-lg font-bold text-sm hover:bg-gray-100 transition whitespace-nowrap">
         Agendar café gratis →
       </a>
     </div>
