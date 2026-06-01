@@ -1,0 +1,205 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Módulo 1: Análisis de Producto con IA | LuciRMe AI">
+  <main class="relative w-full h-screen bg-[#0F172A] text-[#F8FAFC] overflow-hidden flex flex-col justify-between">
+    
+    <!-- BOTÓN DE PANTALLA COMPLETA (Arriba a la derecha) -->
+    <button id="fsToggle" class="fixed top-20 right-6 z-50 bg-white/10 hover:bg-white/20 border border-white/10 text-white px-4 py-2 rounded-full text-xs font-bold shadow-sm transition">
+      ⛶ Pantalla completa
+    </button>
+
+    <!-- CONTENEDOR DE SLIDES -->
+    <div class="flex-grow relative w-full max-w-5xl mx-auto px-6 py-12 flex items-center justify-center">
+      
+      <!-- FLECHAS DE NAVEGACIÓN LATERALES (Para hacer clic rápido) -->
+      <button id="arrow-prev" class="hidden md:block absolute left-4 z-40 p-4 rounded-full bg-white/5 hover:bg-teal hover:text-white transition disabled:opacity-20" disabled>
+        <span class="text-xl">◀</span>
+      </button>
+      <button id="arrow-next" class="hidden md:block absolute right-4 z-40 p-4 rounded-full bg-white/5 hover:bg-teal hover:text-white transition disabled:opacity-20">
+        <span class="text-xl">▶</span>
+      </button>
+
+      <!-- Slide 1 -->
+      <section class="slide active">
+        <h1 class="text-4xl md:text-5xl font-bold text-teal mb-6 leading-tight">Análisis de Producto Digital con Inteligencia Artificial</h1>
+        <p class="text-lg md:text-xl text-gray-300">Módulo 1: Aprendiendo a pensar como <span class="text-teal font-bold">Product Managers</span> usando herramientas de última generación.</p>
+        <div class="mt-8 flex gap-3">
+          <span class="bg-teal/20 px-4 py-2 rounded-full text-xs font-bold text-teal">#ProductManagement</span>
+          <span class="bg-orange/20 px-4 py-2 rounded-full text-xs font-bold text-orange">#AI_CoPilot</span>
+        </div>
+      </section>
+
+      <!-- Slide 2 -->
+      <section class="slide">
+        <h2 class="text-3xl font-bold text-teal mb-6">🧠 El "Filtro Humano" primero</h2>
+        <p class="text-base text-gray-300 mb-6">La Inteligencia Artificial es una herramienta de apoyo espectacular, pero <strong class="text-white">el criterio final es tuyo</strong>.</p>
+        <div class="bg-teal/5 border-l-4 border-teal p-6 rounded-r-xl italic text-gray-200 my-6">
+          "La IA es tu asistente de investigación junior; ustedes son los Product Managers. Organiza, resume y busca información rápido, pero carece de empatía por el usuario y de visión de negocio."
+        </div>
+      </section>
+
+      <!-- Slide 3 -->
+      <section class="slide">
+        <h2 class="text-3xl font-bold text-teal mb-6">📐 Fórmula R + C + T + E</h2>
+        <p class="text-base text-gray-300 mb-8">Para no obtener respuestas genéricas de Wikipedia, estructuramos nuestros prompts así:</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+          {[
+            { l: "R", t: "Rol", d: "¿Quién habla?" },
+            { l: "C", t: "Contexto", d: "¿Qué app?" },
+            { l: "T", t: "Tarea", d: "¿Qué resuelves?" },
+            { l: "E", t: "Entrega", d: "¿Qué formato?" }
+          ].map(f => (
+            <div class="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
+              <span class="text-4xl font-black text-teal block mb-2">{f.l}</span>
+              <strong class="text-white">{f.t}</strong>
+              <p class="text-xs text-gray-400 mt-2">{f.d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Slide 4 -->
+      <section class="slide">
+        <h2 class="text-3xl font-bold text-teal mb-6">🔍 Paso 1: Deep Research</h2>
+        <p class="text-base text-gray-300 mb-6">Antes de analizar, necesitamos datos reales para evitar que la IA alucine.</p>
+
+      </section>
+
+      <!-- Slide 5 -->
+      <section class="slide">
+        <h2 class="text-3xl font-bold text-teal mb-6">📚 Paso 2: NotebookLM</h2>
+        <p class="text-base text-gray-300 mb-6">Abriremos NotebookLM de Google para asegurar respuestas 100% verídicas.</p>
+        <div class="grid md:grid-cols-3 gap-4 w-full max-w-2xl">
+          {["Reporte de Deep Research", "Enlace oficial o capturas", "Artículo de opinión o review"].map((f, i) => (
+            <div class="p-4 bg-white/5 border border-white/10 rounded-xl text-center">
+              <span class="text-2xl block mb-2">{['📄', '🔗', '🎨'][i]}</span>
+              <p class="text-xs font-bold text-white">Fuente 0{i+1}: {f}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Slide 6 -->
+      <section class="slide">
+        <h2 class="text-3xl font-bold text-teal mb-6">🛠️ El Remate: Preguntas Core</h2>
+        <p class="text-base text-gray-300 mb-6">Dentro del chat de NotebookLM, usaremos la fórmula aprendida:</p>
+        <div class="space-y-4 w-full max-w-2xl">
+          <div class="code-block text-xs"><strong>Pregunta 1:</strong> "Actúa como un [Rol: PM Senior]. Ayúdame a [Tarea: identificar el problema]..."</div>
+          <div class="code-block text-xs"><strong>Pregunta 2:</strong> "Actúa como un [Rol: UX Researcher]. Ayúdame a [Tarea: descubrir quién es su usuario]..."</div>
+        </div>
+      </section>
+
+      <!-- Slide 7 -->
+      <section class="slide">
+        <h2 class="text-3xl font-bold text-teal mb-6">🏁 Tu Entregable Final (1 Slide)</h2>
+        <ul class="space-y-3 text-sm text-gray-300 max-w-xl text-left">
+          <li>✓ <strong>Producto & Problema:</strong> Qué app elegiste y qué dolor soluciona.</li>
+          <li>✓ <strong>Usuario Principal:</strong> El perfil objetivo que descubriste con tus fuentes.</li>
+          <li>✓ <strong>1 Decisión de PM Inferida:</strong> Un cambio o función de interfaz.</li>
+          <li class="pt-4 text-xs text-teal italic">"Se utilizó Deep Research para recolectar el contexto y NotebookLM para procesar."</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <!-- BARRA DE CONTROLES INFERIOR -->
+    <div class="bg-slate-950/80 border-t border-white/10 px-8 py-5 flex justify-between items-center z-50">
+      <button class="bg-white/5 border border-white/10 px-6 py-2.5 rounded-lg text-sm font-bold text-white hover:bg-teal hover:border-teal disabled:opacity-30 disabled:cursor-not-allowed transition" id="prevBtn" disabled>Anterior</button>
+      <div class="flex gap-2" id="dotsContainer"></div>
+      <button class="bg-white/5 border border-white/10 px-6 py-2.5 rounded-lg text-sm font-bold text-white hover:bg-teal hover:border-teal disabled:opacity-30 disabled:cursor-not-allowed transition" id="nextBtn">Siguiente</button>
+    </div>
+
+  </main>
+</Layout>
+
+<script>
+  // LÓGICA DE NAVEGACIÓN INTELIGENTE (100% libre de errores)
+  let current = 0;
+  const slides = document.querySelectorAll('.slide') as NodeListOf<HTMLElement>;
+  const totalSlides = slides.length;
+  const dotsContainer = document.getElementById('dotsContainer');
+  const prevBtn = document.getElementById('prevBtn') as HTMLButtonElement | null;
+  const nextBtn = document.getElementById('nextBtn') as HTMLButtonElement | null;
+  const arrowPrev = document.getElementById('arrow-prev') as HTMLButtonElement | null;
+  const arrowNext = document.getElementById('arrow-next') as HTMLButtonElement | null;
+
+  // Crear dots dinámicos
+  if (dotsContainer) {
+    slides.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = `w-2 h-2 rounded-full bg-white/20 transition-all ${i === 0 ? 'bg-teal w-6' : ''}`;
+      dot.id = `dot-${i}`;
+      dotsContainer.appendChild(dot);
+    });
+  }
+
+  function showSlide(n: number) {
+    slides.forEach((s, i) => {
+      s.classList.remove('active');
+      const dot = document.getElementById(`dot-${i}`);
+      if (dot) {
+        dot.className = `w-2 h-2 rounded-full bg-white/20 transition-all ${i === n ? 'bg-teal w-6' : ''}`;
+      }
+    });
+
+    if (slides[n]) {
+      slides[n].classList.add('active');
+    }
+
+    current = n;
+
+    // Actualizar botones inferiores
+    if (prevBtn) prevBtn.disabled = current === 0;
+    if (nextBtn) nextBtn.disabled = current === totalSlides - 1;
+
+    // Actualizar flechas flotantes
+    if (arrowPrev) arrowPrev.disabled = current === 0;
+    if (arrowNext) arrowNext.disabled = current === totalSlides - 1;
+  }
+
+  // Clic en botones inferiores
+  prevBtn?.addEventListener('click', () => showSlide(current - 1));
+  nextBtn?.addEventListener('click', () => showSlide(current + 1));
+
+  // Clic en flechas flotantes
+  arrowPrev?.addEventListener('click', () => showSlide(current - 1));
+  arrowNext?.addEventListener('click', () => showSlide(current + 1));
+
+  // Teclado (← y →)
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if(e.key === 'ArrowRight' && current < totalSlides - 1) showSlide(current + 1);
+    if(e.key === 'ArrowLeft' && current > 0) showSlide(current - 1);
+  });
+
+  // Copiado
+  document.addEventListener('click', async (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target && target.matches('.copy-btn')) {
+      const code = target.closest('.code-block')?.querySelector('code')?.textContent || '';
+      await navigator.clipboard.writeText(code.trim());
+      const originalText = target.textContent;
+      target.textContent = '✅ Copiado';
+      setTimeout(() => { target.textContent = originalText; }, 2000);
+    }
+  });
+
+  // Fullscreen
+  const fsToggle = document.getElementById('fsToggle') as HTMLButtonElement | null;
+  fsToggle?.addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch((err) => console.error(err));
+    } else {
+      document.exitFullscreen();
+    }
+  });
+</script>
+
+<style is:global>
+  .slide { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; }
+  .slide.active { display: flex; animation: fadeIn 0.4s ease-out forwards; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .code-block { background: #1e293b; color: #f8fafc; padding: 1.5rem; border-radius: 12px; font-family: monospace; position: relative; width: 100%; max-width: 600px; }
+  .copy-btn { position: absolute; top: 10px; right: 10px; background: #0D9488; color: white; padding: 4px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; }
+</style>
