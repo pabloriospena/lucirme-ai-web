@@ -7,12 +7,12 @@ const auth = (Astro.locals as any).auth;
 const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
 
 if (!userId) {
- return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/backlog-detox')}`);
+ return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/prompteador')}`);
 }
-
 ---
+
 <Layout title="Prompteador de Tareas | LuciRMe AI">
-    <!-- SUB-NAV (Breadcrumb) -->
+  <!-- BREADCRUMB -->
   <nav class="bg-white border-b border-gray-100 px-4 py-3">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
       <a href="/recursos" class="text-sm font-bold text-gray-400 hover:text-teal transition">← Volver a Recursos</a>
@@ -35,9 +35,10 @@ if (!userId) {
     </div>
     <button id="close-cafe-banner" class="absolute top-2 right-2 text-white/80 hover:text-white text-xl">×</button>
   </div>
+
   <main class="py-12 px-4 max-w-4xl mx-auto">
     <header class="text-center mb-12">
-      <h1 class="text-3xl font-bold text-gray-900 mb-4">🛠️ Prompteador de Tareas</h1>
+      <h1 class="text-3xl font-bold text-deep mb-4">🛠️ Prompteador de Tareas</h1>
       <p class="text-gray-600">Configura tu tarea, genera un prompt estructurado y pégalo en tu IA favorita.</p>
     </header>
 
@@ -46,8 +47,8 @@ if (!userId) {
         <!-- ROL -->
         <fieldset class="grid gap-4">
           <div>
-            <label class="block text-xs font-bold text-blue-600 uppercase mb-2">[ROL] Actúa como...</label>
-            <input type="text" id="rol" required placeholder="Ej: ingeniero geotécnico senior especializado en estabilidad de taludes y normativa NSR-10" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500 transition">
+            <label class="block text-xs font-bold text-teal uppercase mb-2">[ROL] Actúa como...</label>
+            <input type="text" id="rol" required placeholder="Ej: ingeniero geotécnico senior especializado en estabilidad de taludes y normativa NSR-10" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal transition">
           </div>
         </fieldset>
 
@@ -55,7 +56,7 @@ if (!userId) {
         <fieldset class="pt-6 border-t border-gray-100">
           <div>
             <label class="block text-xs font-bold text-gray-500 uppercase mb-2">[CONTEXTO] Tu tarea:</label>
-            <textarea id="contexto" rows="2" required placeholder="Ej: Revisar un informe de estabilidad de talud para proyecto hidroeléctrico ubicado en zona de alta sismicidad. El informe contiene datos de campo y laboratorio que requieren validación normativa y de supuestos de modelación." class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500 resize-none transition"></textarea>
+            <textarea id="contexto" rows="2" required placeholder="Ej: Revisar un informe de estabilidad de talud para proyecto..." class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal resize-none transition"></textarea>
           </div>
         </fieldset>
 
@@ -63,7 +64,7 @@ if (!userId) {
         <fieldset class="pt-6 border-t border-gray-100">
           <div>
             <label class="block text-xs font-bold text-gray-500 uppercase mb-2">[OBJETIVO] Específicamente, debes:</label>
-            <textarea id="objetivo" rows="3" required placeholder="Ej: Identificar omisiones normativas (NSR-10)...&#10;Validar supuestos de modelación y parámetros geotécnicos...&#10;Mejorar redacción técnica para stakeholders no especializados..." class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500 resize-none transition"></textarea>
+            <textarea id="objetivo" rows="3" required placeholder="Ej: Identificar omisiones normativas..." class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal resize-none transition"></textarea>
           </div>
         </fieldset>
 
@@ -71,53 +72,62 @@ if (!userId) {
         <fieldset class="pt-6 border-t border-gray-100">
           <div>
             <label class="block text-xs font-bold text-gray-500 uppercase mb-2">[FORMATO] Formato de entrega:</label>
-            <textarea id="formato" rows="3" required placeholder="Ej: Presenta la respuesta como tabla con columnas: Categoría | Observación | Referencia NSR-10 o sugerencia.&#10;Al final, añade un resumen ejecutivo de máximo 3 líneas destacando hallazgos críticos." class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500 resize-none transition"></textarea>
+            <textarea id="formato" rows="3" required placeholder="Ej: Presenta la respuesta como tabla..." class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal resize-none transition"></textarea>
           </div>
         </fieldset>
 
-        <button type="button" id="generateBtn" class="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-lg active:scale-[0.98]">✨ Generar Prompt Estructurado</button>
+        <button type="button" id="generateBtn" class="w-full bg-teal text-white font-bold py-4 rounded-xl hover:bg-tealHover transition shadow-lg">✨ Generar Prompt Estructurado</button>
       </form>
     </section>
 
     <!-- Output -->
-    <section id="output-section" class="hidden mt-8 bg-white p-8 rounded-2xl border border-gray-200 space-y-6">
-      <h2 class="text-xl font-bold text-gray-900">📋 Tu Prompt Generado</h2>
+    <section id="output-section" class="hidden mt-8 bg-white p-8 rounded-2xl border border-gray-200 space-y-6 animate-fade-in">
+      <h2 class="text-xl font-bold text-deep">📋 Tu Prompt Generado</h2>
       <pre id="promptOutput" class="w-full bg-gray-50 p-6 rounded-xl text-sm font-mono text-gray-800 border border-gray-200 whitespace-pre-wrap leading-relaxed"></pre>
-      <button id="copyBtn" class="w-full bg-gray-800 text-white font-bold py-4 rounded-lg hover:bg-gray-900 transition">📋 Copiar Prompt</button>
+      <button id="copyBtn" class="w-full bg-orange text-white font-bold py-4 rounded-lg hover:bg-orange/90 transition">📋 Copiar Prompt</button>
     </section>
     
     <ActionHub />
   </main>
 
   <script is:inline>
-    document.getElementById('generateBtn').addEventListener('click', () => {
-      const v = (id) => document.getElementById(id)?.value.trim();
-      
-      const rol = v('rol');
-      const contexto = v('contexto');
-      const objetivo = v('objetivo');
-      const formato = v('formato');
+    document.getElementById('generateBtn').addEventListener('click', async () => {
+      const btn = document.getElementById('generateBtn');
+      const originalText = btn.textContent;
+      btn.textContent = '⏳ Optimizando con IA...';
+      btn.disabled = true;
 
-      if (!rol || !contexto || !objetivo || !formato) {
-        alert('Por favor completa todos los campos para generar el prompt.');
-        return;
+      // CORRECCIÓN CLAVE: Mapeamos los IDs reales en español que tienes en tu HTML
+      const payload = {
+        role: document.getElementById('rol')?.value.trim() || 'Cualquier especialista',
+        context: document.getElementById('contexto')?.value.trim() || 'Flexible',
+        goal: document.getElementById('objetivo')?.value.trim() || 'Automatización',
+        format: document.getElementById('formato')?.value.trim() || 'Markdown'
+      };
+
+      try {
+        const response = await fetch('/api/optimizar-prompt', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) throw new Error();
+        const data = await response.json();
+
+        const output = document.getElementById('promptOutput');
+        if (output) {
+          output.textContent = data.prompt;
+          document.getElementById('output-section')?.classList.remove('hidden');
+          document.getElementById('output-section')?.scrollIntoView({ behavior: 'smooth' });
+        }
+
+      } catch (err) {
+        alert('Error al generar el prompt. Inténtalo de nuevo.');
+      } finally {
+        btn.textContent = originalText;
+        btn.disabled = false;
       }
-
-      // Estructura exacta solicitada
-      const prompt = `Actúa como ${rol}.
-
-Tu tarea:
-${contexto}
-
-Específicamente, debes:
-${objetivo}
-
-Formato de entrega:
-${formato}`;
-
-      document.getElementById('promptOutput').textContent = prompt;
-      document.getElementById('output-section').classList.remove('hidden');
-      document.getElementById('output-section').scrollIntoView({ behavior: 'smooth' });
     });
 
     document.getElementById('copyBtn').addEventListener('click', async () => {
@@ -127,16 +137,12 @@ ${formato}`;
         const btn = document.getElementById('copyBtn');
         const original = btn.textContent;
         btn.textContent = '✅ ¡Copiado al portapapeles!';
-        btn.classList.remove('bg-gray-800', 'hover:bg-gray-900');
-        btn.classList.add('bg-green-600', 'hover:bg-green-700');
         
         setTimeout(() => {
           btn.textContent = original;
-          btn.classList.remove('bg-green-600', 'hover:bg-green-700');
-          btn.classList.add('bg-gray-800', 'hover:bg-gray-900');
         }, 2000);
       } catch (err) {
-        alert('No se pudo copiar automáticamente. Selecciona el texto manualmente.');
+        alert('No se pudo copiar automáticamente.');
       }
     });
   </script>
