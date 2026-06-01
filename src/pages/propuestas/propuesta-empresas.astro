@@ -1,0 +1,139 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Propuesta Comercial | LuciRMe AI">
+  
+  <!-- BOTÓN DE IMPRESIÓN (no-print para que no salga en el PDF) -->
+  <div class="max-w-4xl mx-auto my-8 p-4 no-print animate-fade-in">
+    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-200">
+      <p class="text-sm text-gray-500">
+        Fundador: <strong class="text-deep">Pablo Ríos</strong> | Documento de referencia.
+      </p>
+      <button
+        onclick="window.print()"
+        class="bg-teal hover:bg-tealHover text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition flex items-center gap-2 text-sm"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+        Descargar Propuesta en PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- CUERPO DE LA PROPUESTA (Área imprimible) -->
+  <article class="print-area max-w-3xl mx-auto my-4 p-8 md:p-12 bg-[#F8FAFC] text-deep border border-gray-200 rounded-2xl shadow-sm animate-fade-in">
+    
+    <header class="flex justify-between items-start border-b border-gray-200 pb-6 mb-8">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-widest text-teal bg-teal/10 px-3 py-1 rounded-full">Propuesta Comercial</span>
+        <h1 class="text-3xl font-bold tracking-tight text-deep mt-4">Plan de Despliegue IA: IRYS</h1>
+        <p class="text-sm text-gray-500 mt-1">De la operatividad manual a la excelencia operativa.</p>
+      </div>
+      <div class="text-right">
+        <span class="font-bold text-lg text-deep tracking-tight">🚀 LucirMe AI</span>
+        <p class="text-xs text-gray-400 mt-1">lucirme.com</p>
+      </div>
+    </header>
+
+    <!-- 1. El Diagnóstico -->
+    <section class="mb-8">
+      <h2 class="text-lg font-bold text-deep mb-3 flex items-center gap-2">
+        <span class="text-teal">🔍</span> 1. El Diagnóstico (Fugas de Tiempo)
+      </h2>
+      <p class="text-gray-600 text-sm leading-relaxed mb-6">
+        Durante nuestro Taller de Inmersión identificamos que la carga operativa y la falta de tiempo frenan la capacidad del equipo para ejecutar de manera autónoma. Las mayores fugas se concentran en tres frentes críticos:
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {[
+          { f: "Frente 01", t: "Procesamiento", d: "Recolectar, limpiar y cruzar información en tablas de manera manual." },
+          { f: "Frente 02", t: "Arqueología", d: "Buscar datos específicos dispersos en el histórico de chats." },
+          { f: "Frente 03", t: "Redacción", d: "Transcribir minutas de reuniones y redactar correos desde cero." }
+        ].map(item => (
+          <div class="bg-white p-5 rounded-xl border border-gray-100">
+            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1">{item.f}</span>
+            <h3 class="font-bold text-sm text-deep mb-1">{item.t}</h3>
+            <p class="text-xs text-gray-500 leading-normal">{item.d}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 2. Esquema de Soluciones -->
+    <section class="mb-8">
+      <h2 class="text-lg font-bold text-deep mb-4 flex items-center gap-2">
+        <span class="text-teal">🛠️</span> 2. Esquema de Soluciones Coherentes
+      </h2>
+      
+      <div class="overflow-hidden border border-gray-200 rounded-xl bg-white mb-4">
+        <table class="w-full text-left border-collapse text-sm">
+          <thead>
+            <tr class="bg-gray-50 border-b border-gray-200 text-deep font-bold">
+              <th class="p-4 w-1/2">Solución Mapeada</th>
+              <th class="p-4">Alcance / Entrega</th>
+              <th class="p-4 text-right">Inversión (COP)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 text-gray-700">
+            <tr>
+              <td class="p-4">
+                <strong class="text-deep block">Opción A: Ciclo de Autonomía Corporativa</strong>
+                <span class="text-xs text-gray-400 mt-1 block">Despliegue integral de arquitectura de IA para los 3 dolores del equipo.</span>
+              </td>
+              <td class="p-4 text-xs text-gray-500 leading-relaxed">
+                4 semanas de ejecución conjunta (16h+), configuración completa de flujos, entrenamiento en vivo, documentación en Notion.
+              </td>
+              <td class="p-4 text-right font-bold text-deep">
+                $4.400.000<br/>
+                <span class="text-[10px] font-bold text-teal block mt-1">(Saldo Taller a favor: -$620.000)</span>
+              </td>
+            </tr>
+          </tbody>
+          <tbody class="divide-y divide-gray-100 text-gray-700">
+            <tr>
+              <td class="p-4">
+                <strong class="text-deep block">Opción B: Bloques de Enfoque Práctico</strong>
+                <span class="text-xs text-gray-400 mt-1 block">Intervenciones atómicas por célula de trabajo o flujo específico.</span>
+              </td>
+              <td class="p-4 text-xs text-gray-500 leading-relaxed">
+                Sesión cerrada de 2 horas con el equipo enfocado. Incluye diagnóstico express, configuración en vivo de 1 flujo prioritario y documentación básica de uso.
+              </td>
+              <td class="p-4 text-right font-bold text-deep">
+                $580.000<br/>
+                <span class="text-[10px] font-bold text-teal block mt-1">(Saldo Taller a favor: -$310.000)</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    
+
+    <!-- Términos -->
+    <footer class="border-t border-gray-200 pt-8 mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 text-xs text-gray-500">
+      <div>
+        <h4 class="font-bold text-deep mb-3 uppercase tracking-widest text-[10px]">Términos de Trabajo</h4>
+        <ul class="space-y-1.5 list-disc list-inside">
+          <li><strong>Esquema corporativo:</strong> 50% de anticipo para iniciar, 50% contra entrega.</li>
+          <li><strong>Garantía de Fit:</strong> Si en los primeros 15 minutos no vemos viabilidad, cerramos el acuerdo sin compromisos.</li>
+        </ul>
+      </div>
+      <div class="flex flex-col justify-between items-end text-right">
+        <p class="mt-4 text-[11px] text-gray-400">
+          <strong>Pablo Ríos Peña</strong><br/>
+          Fundador, LucirMe AI | <span class="text-deep">pablo@lucirme.com</span>
+        </p>
+      </div>
+    </footer>
+  </article>
+</Layout>
+
+<style is:global>
+  @media print {
+    .no-print { display: none !important; }
+    body { background-color: #ffffff !important; color: #0F172A !important; }
+    .print-area { border: none !important; box-shadow: none !important; padding: 0 !important; margin: 0 !important; max-w: 100% !important; background: transparent !important; }
+    section, table, footer { page-break-inside: avoid; }
+  }
+</style>
