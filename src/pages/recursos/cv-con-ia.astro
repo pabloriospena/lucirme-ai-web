@@ -1,0 +1,366 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Tu CV con IA en 5 minutos | LuciRMe AI">
+  <main class="py-16 px-4 max-w-4xl mx-auto">
+    
+    <!-- HERO -->
+    <section class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-bold text-deep mb-4 leading-tight">
+        Tu CV, listo en 5 minutos.<br>
+        <span class="text-teal">Sin formato, sin estrés.</span>
+      </h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+        Completa 5 pasos. Obtén un prompt perfecto para Lovable o ChatGPT. 
+        Genera un CV profesional, ATS-friendly, listo para postular.
+      </p>
+      <a href="#formulario" class="bg-teal text-white px-8 py-3 rounded-lg font-bold hover:bg-tealHover transition shadow-md">
+        Crear mi CV con IA →
+      </a>
+      <p class="text-xs text-gray-400 mt-4 uppercase tracking-widest font-medium">Sin registros. Sin teoría. Solo tu información.</p>
+    </section>
+
+    <!-- CÓMO FUNCIONA -->
+    <section class="py-12 border-y border-gray-100 mb-16">
+      <h2 class="text-2xl font-bold text-deep text-center mb-10">En 3 pasos, sin complicaciones</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+          <div class="text-teal font-bold text-2xl mb-2">1</div>
+          <h3 class="font-bold text-deep mb-2">Completa tu info</h3>
+          <p class="text-sm text-gray-600">Datos básicos, experiencia, logros. Sin formato, solo contenido.</p>
+        </div>
+        <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+          <div class="text-teal font-bold text-2xl mb-2">2</div>
+          <h3 class="font-bold text-deep mb-2">Obtén tu prompt</h3>
+          <p class="text-sm text-gray-600">Un prompt optimizado para Lovable o ChatGPT, listo para copiar.</p>
+        </div>
+        <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+          <div class="text-teal font-bold text-2xl mb-2">3</div>
+          <h3 class="font-bold text-deep mb-2">Genera y descarga</h3>
+          <p class="text-sm text-gray-600">Pega el prompt, genera tu CV y guárdalo como PDF. ATS-friendly.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMULARIO DE 5 PASOS -->
+    <section id="formulario" class="bg-gray-50 rounded-2xl p-6 md:p-10 border border-gray-200">
+      
+      <!-- Bloque de Autocompletado (Bento Style) -->
+      <div class="bg-teal/5 border border-teal/20 rounded-2xl p-6 mb-8">
+        <h3 class="text-sm font-bold text-teal uppercase tracking-widest mb-2">⚡ Autocompletado Veloz (Opcional)</h3>
+        <p class="text-xs text-gray-600 mb-4">¿Tienes un CV antiguo? Pega el texto aquí abajo y nuestra IA rellenará todo el formulario por ti en segundos.</p>
+        <textarea id="fast-paste" rows="2" placeholder="Pega aquí tu CV viejo o tu perfil de LinkedIn copiado..." class="w-full p-3 border border-gray-200 rounded-lg bg-white text-xs outline-none focus:border-teal resize-none"></textarea>
+        <button type="button" id="auto-fill-btn" class="mt-2 text-xs font-bold bg-teal text-white px-4 py-2 rounded-lg hover:bg-tealHover transition">
+          Llenar Formulario con IA
+        </button>
+      </div>
+
+      <form id="cv-form" class="space-y-8">
+        <!-- Paso 1: Datos Básicos -->
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold text-deep border-b border-gray-200 pb-2">1. Tus datos</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <input type="text" id="nombre" placeholder="Nombre completo *" required class="w-full p-3 border border-gray-300 rounded-lg bg-white outline-none focus:border-teal">
+            <input type="email" id="email" placeholder="Email *" required class="w-full p-3 border border-gray-300 rounded-lg bg-white outline-none focus:border-teal">
+            <input type="tel" id="telefono" placeholder="Teléfono" class="w-full p-3 border border-gray-300 rounded-lg bg-white outline-none">
+            <input type="text" id="ubicacion" placeholder="Ciudad, País" class="w-full p-3 border border-gray-300 rounded-lg bg-white outline-none">
+            <input type="text" id="linkedin" placeholder="LinkedIn (opcional)" class="w-full p-3 border border-gray-300 rounded-lg bg-white">
+            <input type="text" id="portafolio" placeholder="Portafolio / Sitio Web (Ej: github.com/tu-usuario)" class="w-full p-3 border border-gray-300 rounded-lg bg-white md:col-span-2">
+          </div>
+        </div>
+
+        <!-- Paso 2: Perfil Profesional -->
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold text-deep border-b border-gray-200 pb-2">2. Tu perfil (3-4 líneas)</h3>
+          <textarea id="perfil" rows="3" placeholder="Ej: Product Manager con 5 años de experiencia en SaaS B2B, especializado en automatización de procesos con IA..." required class="w-full p-4 border border-gray-300 rounded-lg outline-none focus:border-teal bg-white resize-none"></textarea>
+        </div>
+
+        <!-- Paso 3: Experiencia Laboral Dinámica -->
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold text-deep border-b border-gray-200 pb-2">3. Experiencia laboral</h3>
+          <div id="experiencia-container" class="space-y-4">
+            <!-- Primera experiencia (Por defecto) -->
+            <div class="p-5 bg-white border border-gray-200 rounded-xl space-y-3 experience-card">
+              <input type="text" placeholder="Empresa *" required class="w-full p-3 border border-gray-200 rounded-lg exp-empresa bg-white outline-none">
+              <input type="text" placeholder="Cargo *" required class="w-full p-3 border border-gray-200 rounded-lg exp-cargo bg-white outline-none">
+              <input type="text" placeholder="Fecha (Ej: Ene 2022 - Presente) *" required class="w-full p-3 border border-gray-200 rounded-lg exp-fecha bg-white outline-none">
+              <textarea rows="3" placeholder="Logros con verbos de acción (Ej: Lideré la automatización de reportes, ahorrando 10h/semana)" required class="w-full p-3 border border-gray-200 rounded-lg exp-logros bg-white resize-none outline-none"></textarea>
+            </div>
+          </div>
+          <button type="button" id="add-exp-btn" class="text-teal text-sm font-bold hover:underline">+ Añadir otra experiencia</button>
+        </div>
+
+        <!-- Paso 4: Educación & Skills -->
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold text-deep border-b border-gray-200 pb-2">4. Educación, habilidades e info adicional</h3>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-bold text-deep text-xs uppercase tracking-wider mb-2">Educación</h4>
+                <input type="text" id="titulo" placeholder="Título obtenido" class="w-full p-3 border border-gray-200 rounded-lg bg-white outline-none mb-2">
+                <input type="text" id="institucion" placeholder="Institución" class="w-full p-3 border border-gray-200 rounded-lg bg-white outline-none mb-2">
+                <input type="text" id="fecha_edu" placeholder="Año de graduación" class="w-full p-3 border border-gray-200 rounded-lg bg-white outline-none">
+              </div>
+              
+              <!-- IDIOMAS Y CERTIFICACIONES -->
+              <div class="pt-4 border-t border-gray-200 space-y-3">
+                <h4 class="font-bold text-deep text-xs uppercase tracking-wider">Idiomas</h4>
+                <input type="text" id="idiomas" placeholder="Ej: Español: Nativo, Inglés: C1 Profesional" class="w-full p-3 border border-gray-200 rounded-lg bg-white outline-none">
+              </div>
+              <div class="pt-4 border-t border-gray-200 space-y-3">
+                <h4 class="font-bold text-deep text-xs uppercase tracking-wider">Certificaciones</h4>
+                <input type="text" id="certificaciones" placeholder="Ej: Scrum Master, Product Owner, AWS..." class="w-full p-3 border border-gray-200 rounded-lg bg-white outline-none">
+              </div>
+            </div>
+            
+            <div class="space-y-3">
+              <h4 class="font-bold text-deep text-xs uppercase tracking-wider">Habilidades</h4>
+              <textarea id="skills" rows="12" placeholder="Separa con comas: Product Management, Make, Notion, SQL, Liderazgo..." class="w-full p-3 border border-gray-200 rounded-lg bg-white resize-none outline-none focus:border-teal h-[380px]"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 5: Objetivo -->
+        <div class="space-y-4">
+          <h3 class="text-lg font-bold text-deep border-b border-gray-200 pb-2">5. Tu objetivo profesional</h3>
+          <textarea id="objetivo" rows="2" placeholder="Ej: Buscar un rol como Senior PM en startup B2B..." required class="w-full p-3 border border-gray-300 rounded-lg bg-white resize-none outline-none focus:border-teal"></textarea>
+          
+          <button type="submit" class="w-full bg-teal text-white font-bold py-4 rounded-xl hover:bg-tealHover transition shadow-lg text-lg">
+            Generar mi prompt para CV →
+          </button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- RESULTADO (Oculto hasta submit) -->
+    <section id="resultado" class="hidden space-y-8 animate-fade-in">
+      <h2 class="text-2xl font-bold text-deep text-center">Tu prompt está listo</h2>
+      
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-sm">
+        <h3 class="font-bold text-deep mb-3 text-sm uppercase tracking-widest">Copia este prompt y pégalo en Lovable o ChatGPT:</h3>
+        <pre id="prompt-output" class="bg-gray-50 p-6 rounded-xl border border-gray-200 text-xs font-mono text-deep overflow-x-auto whitespace-pre-wrap min-h-[200px]"></pre>
+        <button id="copy-prompt-btn" class="mt-4 w-full bg-orange text-white py-3 rounded-lg font-bold hover:bg-orange/90 transition shadow-md">
+          Copiar prompt
+        </button>
+      </div>
+
+      <div class="bg-teal/5 border border-teal/20 rounded-2xl p-8">
+        <h3 class="font-bold text-deep mb-4">Instrucciones para usar tu prompt:</h3>
+        <ul class="text-sm text-gray-700 space-y-3">
+          <li class="flex items-start gap-3"><span class="text-teal font-bold">1.</span> Abre <a href="https://lovable.dev" target="_blank" class="text-teal font-bold hover:underline">Lovable</a> o ChatGPT.</li>
+          <li class="flex items-start gap-3"><span class="text-teal font-bold">2.</span> Pega el prompt copiado en el chat y presiona enter.</li>
+          <li class="flex items-start gap-3"><span class="text-teal font-bold">3.</span> La IA generará tu CV estructurado para pasar filtros ATS (sin tablas, sin iconos que confundan al software).</li>
+          <li class="flex items-start gap-3"><span class="text-teal font-bold">4.</span> Para guardarlo: En tu navegador, presiona **Ctrl+P** (o Cmd+P), selecciona "Guardar como PDF" y nómbralo `TuNombre_CV_Rol.pdf`.</li>
+        </ul>
+      </div>
+
+      <!-- CTA de conversión -->
+      <div class="bg-deep text-white p-10 rounded-2xl text-center shadow-xl">
+        <p class="text-lg font-medium mb-4">¿Prefieres que un experto lo haga por ti?</p>
+        <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" target="_blank" class="inline-block bg-orange text-white px-8 py-3.5 rounded-lg font-bold hover:bg-orange/90 transition shadow-lg">
+          Agendar Café Estratégico →
+        </a>
+        <p class="text-xs text-gray-400 mt-3">30 min · Gratis · Sin compromiso</p>
+      </div>
+    </section>
+
+  </main>
+</Layout>
+
+<script is:inline>
+  // 1. EXPOSICIÓN DE LA FUNCIÓN GLOBAL (Debe ir arriba para que todo el script pueda leerla)
+// 1. EXPOSICIÓN DE LA FUNCIÓN GLOBAL CORREGIDA
+  window.addExperiencia = function() {
+    const container = document.getElementById('experiencia-container');
+    const index = container.querySelectorAll('.experience-card').length + 1;
+    
+    const card = document.createElement('div');
+    card.className = 'p-5 bg-white border border-gray-200 rounded-xl space-y-3 experience-card animate-fade-in relative';
+    card.innerHTML = `
+      <div class="flex justify-between items-center border-b border-gray-100 pb-2 mb-2">
+        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Experiencia 0${index}</span>
+        <button type="button" class="text-red-400 hover:text-red-500 text-xs font-bold transition" onclick="this.closest('.experience-card').remove()">Eliminar</button>
+      </div>
+      <input type="text" placeholder="Empresa *" required class="w-full p-3 border border-gray-200 rounded-lg exp-empresa bg-white outline-none">
+      <input type="text" placeholder="Cargo *" required class="w-full p-3 border border-gray-200 rounded-lg exp-cargo bg-white outline-none">
+      <input type="text" placeholder="Fecha (Ej: Ene 2022 - Presente) *" required class="w-full p-3 border border-gray-200 rounded-lg exp-fecha bg-white outline-none">
+      <textarea rows="3" placeholder="Logros con verbos de acción" required class="w-full p-3 border border-gray-200 rounded-lg exp-logros bg-white resize-none outline-none"></textarea>
+    `;
+    
+    // CORRECCIÓN CLAVE: Usamos appendChild en lugar de insertBefore. 
+    // Esto es 100% seguro y nunca lanzará el error de "not a child of this node"
+    container.appendChild(card);
+  };
+
+  // 2. LÓGICA DE AUTOCOMPLETADO INTELIGENTE (Usa window.addExperiencia declarada arriba)
+ document.getElementById('auto-fill-btn').addEventListener('click', async () => {
+    const text = document.getElementById('fast-paste').value.trim();
+    if (!text) return alert('Por favor, pega el texto de tu CV antiguo primero.');
+
+    const btn = document.getElementById('auto-fill-btn');
+    const originalText = btn.textContent;
+    btn.textContent = '⏳ Analizando con IA...';
+    btn.disabled = true;
+
+    try {
+      const response = await fetch('/api/extraer-cv', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ texto: text })
+      });
+
+      if (!response.ok) {
+        const errData = await response.json();
+        console.error(">>> ERROR SERVIDOR:", errData);
+        throw new Error(errData.error || 'Error en la llamada');
+      }
+      
+      const data = await response.json();
+      console.log(">>> DATOS RECIBIDOS DE LA IA:", data); // MIRA ESTO EN CONSOLA (F12)
+
+      // Rellenamos datos básicos
+      document.getElementById('nombre').value = data.nombre || '';
+      document.getElementById('email').value = data.email || '';
+      document.getElementById('telefono').value = data.telefono || '';
+      document.getElementById('ubicacion').value = data.ubicacion || '';
+      document.getElementById('linkedin').value = data.linkedin || '';
+      document.getElementById('perfil').value = data.perfil || '';
+      document.getElementById('skills').value = data.skills || '';
+      document.getElementById('titulo').value = data.titulo || '';
+      document.getElementById('institucion').value = data.institucion || '';
+      document.getElementById('fecha_edu').value = data.fecha_edu || '';
+      document.getElementById('portafolio').value = data.portafolio || '';
+      document.getElementById('idiomas').value = data.idiomas || '';
+      document.getElementById('certificaciones').value = data.certificaciones || '';
+
+      // Limpiamos las experiencias anteriores
+      const container = document.getElementById('experiencia-container');
+      const cardsExistentes = container.querySelectorAll('.experience-card');
+      cardsExistentes.forEach(c => c.remove());
+
+      // Creamos y rellenamos las nuevas tarjetas de experiencia
+      if (data.experiencia && data.experiencia.length > 0) {
+        data.experiencia.forEach((exp) => {
+          window.addExperiencia();
+          
+          const cards = container.querySelectorAll('.experience-card');
+          const lastCard = cards[cards.length - 1];
+          
+          if (lastCard) {
+            lastCard.querySelector('.exp-empresa').value = exp.empresa || '';
+            lastCard.querySelector('.exp-cargo').value = exp.cargo || '';
+            lastCard.querySelector('.exp-fecha').value = exp.fecha || '';
+            lastCard.querySelector('.exp-logros').value = exp.logros || '';
+          }
+        });
+      }
+
+      alert('✅ ¡Formulario y experiencias autocompletados! Revisa los campos antes de generar tu prompt.');
+
+    } catch (err) {
+      console.error("Error en autocompletado:", err);
+      alert('No pudimos procesar el texto. Revisa la consola (F12) para ver la razón.');
+    } finally {
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
+  });
+
+  // 3. SUBMIT DEL FORMULARIO (Generación del Prompt de salida)
+  document.getElementById('cv-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const experiencias = [];
+    document.querySelectorAll('.experience-card').forEach(card => {
+      experiencias.push({
+        empresa: card.querySelector('.exp-empresa').value,
+        cargo: card.querySelector('.exp-cargo').value,
+        fecha: card.querySelector('.exp-fecha').value,
+        logros: card.querySelector('.exp-logros').value
+      });
+    });
+
+    const data = {
+      nombre: document.getElementById('nombre').value,
+      email: document.getElementById('email').value,
+      telefono: document.getElementById('telefono').value,
+      ubicacion: document.getElementById('ubicacion').value,
+      linkedin: document.getElementById('linkedin').value,
+      portafolio: document.getElementById('portafolio').value,
+      perfil: document.getElementById('perfil').value,
+      objetivo: document.getElementById('objetivo').value,
+      titulo: document.getElementById('titulo').value,
+      institucion: document.getElementById('institucion').value,
+      fecha_edu: document.getElementById('fecha_edu').value,
+      idiomas: document.getElementById('idiomas').value,
+      certificaciones: document.getElementById('certificaciones').value,
+      skills: document.getElementById('skills').value,
+      experiencia: experiencias
+    };
+
+    const prompt = `Eres un experto en redacción de CVs profesionales ATS-friendly. Tu misión es generar un CV optimizado para pasar filtros automáticos de contratación.
+
+## DATOS DE CONTACTO
+- Nombre: ${data.nombre}
+- Email: ${data.email}
+- Teléfono: ${data.telefono || 'No especificado'}
+- Ubicación: ${data.ubicacion || 'No especificado'}
+- LinkedIn: ${data.linkedin || 'No especificado'}
+- Portafolio / Web: ${data.portafolio || '[PENDIENTE]'}
+
+## PERFIL PROFESIONAL
+${data.perfil}
+
+## OBJETIVO PROFESIONAL
+${data.objetivo}
+
+## EXPERIENCIA LABORAL
+${data.experiencia.map(exp => `
+- **${exp.cargo}** en **${exp.empresa}** (${exp.fecha})
+  ${exp.logros}
+`).join('')}
+
+## EDUCACIÓN
+- ${data.titulo || '[Título]'}, ${data.institucion || '[Institución]'} (${data.fecha_edu || '[Año]'})
+
+## CERTIFICACIONES
+${data.certificaciones ? data.certificaciones : '[PENDIENTE]'}
+
+## IDIOMAS
+${data.idiomas ? data.idiomas : 'Español: Nativo, Inglés: [PENDIENTE]'}
+
+## HABILIDADES CLAVE (ATS-FRIENDLY)
+${data.skills || 'Habilidades generales de producto/desarrollo'}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚠️ CRITERIOS DE MAQUETACIÓN ABSOLUTOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Diseña el documento en formato Markdown limpio, sin tablas ni columnas (esto confunde a los parsers de ATS).
+- Usa verbos de acción para abrir cada logro: "Lideré", "Autopracticé", "Optimicé", "Reduje".
+- No inventes información; si falta un dato, usa marcadores tipo [PENDIENTE] para que el candidato lo rellene.
+- Genera el CV en texto plano listo para copiar. No saludes al inicio ni des explicaciones al final.`;
+
+    document.getElementById('prompt-output').textContent = prompt;
+    document.getElementById('resultado').classList.remove('hidden');
+    document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // Copiar al portapapeles
+  document.getElementById('copy-prompt-btn').addEventListener('click', () => {
+    const text = document.getElementById('prompt-output').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copy-prompt-btn');
+      const original = btn.textContent;
+      btn.textContent = '✅ ¡Copiado con éxito!';
+      setTimeout(() => btn.textContent = original, 2000);
+    });
+  });
+</script>
+
+<style>
+  .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+</style>
