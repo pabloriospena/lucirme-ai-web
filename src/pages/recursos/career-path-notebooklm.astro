@@ -1,0 +1,157 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+
+// 1. Muro de Seguridad de Clerk
+const auth = (Astro.locals as any).auth;
+const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
+
+if (!userId) {
+ return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/career-path-notebooklm')}`);
+}
+---
+
+<Layout title="Career Path con NotebookLM | LuciRMe AI">
+  
+  <!-- BREADCRUMB -->
+  <nav class="bg-white border-b border-gray-100 px-4 py-3">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <a href="/recursos" class="text-sm font-bold text-gray-400 hover:text-teal transition">← Volver a Recursos</a>
+      <span class="text-xs font-bold text-teal uppercase tracking-widest flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Guía Exclusiva
+      </span>
+    </div>
+  </nav>
+
+  <main class="max-w-4xl mx-auto py-16 px-6 space-y-12">
+    
+    <!-- Hero del Recurso -->
+    <div class="text-center mb-12">
+      <span class="inline-block bg-teal/10 text-teal text-xs font-bold px-3 py-1 rounded-full mb-4">
+        Recurso Gratuito
+      </span>
+      <h1 class="text-4xl font-bold text-deep mb-4">
+        Career Path con NotebookLM
+      </h1>
+      <p class="text-lg text-gray-600 mb-6">
+        Explora caminos profesionales con IA. Sin teoría. Sin registros. Solo acción.
+      </p>
+      <div class="flex items-center justify-center gap-6 text-sm text-gray-500 border-y border-gray-100 py-3">
+        <span>🎯 Meta: Explorar roles</span>
+        <span>🛠️ Tool: NotebookLM (gratis)</span>
+        <span>⏱️ Tiempo: 20-30 min</span>
+      </div>
+    </div>
+
+    <!-- GANCHO AL CREADOR DE CV CON IA (Bento Style) -->
+    <div class="bg-orange/5 border border-orange/20 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row justify-between items-center gap-6 shadow-sm">
+      <div class="space-y-2 max-w-xl text-center md:text-left">
+        <h4 class="text-base font-bold text-deep">📄 ¿No tienes tu CV actualizado para empezar?</h4>
+        <p class="text-sm text-gray-600">Para que NotebookLM te dé resultados precisos, necesita tu perfil real. Créalo en 5 minutos con nuestro generador de CV con IA antes de iniciar.</p>
+      </div>
+      <a href="/recursos/cv-con-ia" class="bg-orange text-white px-6 py-3 rounded-lg font-bold text-sm hover:bg-orange/90 transition whitespace-nowrap shadow-md">
+        Crear CV con IA →
+      </a>
+    </div>
+
+    <!-- Pasos de la Guía -->
+    <div class="space-y-8 mb-12">
+      
+      <!-- Paso 1 -->
+      <div class="bg-slate-50 border border-gray-200 rounded-xl p-6">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 bg-teal text-white rounded-lg flex items-center justify-center font-bold flex-shrink-0">1</div>
+          <div class="flex-1">
+            <h3 class="font-bold text-deep mb-2">Crea tu base de conocimiento</h3>
+            <p class="text-sm text-gray-600 mb-4">
+              Ve a <a href="https://notebooklm.google.com" target="_blank" class="text-teal hover:underline font-bold">notebooklm.google.com</a> y agrega:
+            </p>
+            <ul class="text-sm text-gray-600 space-y-2 pl-4 list-disc">
+              <li>Una nota con tus intereses profesionales actuales</li>
+              <li>Tu CV actualizado (PDF o texto que acabas de generar arriba)</li>
+              <li>Artículos o enlaces de roles que te llamen la atención</li>
+              <li>Tu malla curricular o historial formativo</li>
+            </ul>
+            <p class="text-xs text-gray-500 mt-4 italic">
+              Tip: NotebookLM analiza todo en segundos. No necesitas orden perfecto, solo contexto real.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paso 2 -->
+      <div class="bg-slate-50 border border-gray-200 rounded-xl p-6">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 bg-teal text-white rounded-lg flex items-center justify-center font-bold flex-shrink-0">2</div>
+          <div class="flex-1">
+            <h3 class="font-bold text-deep mb-2">Explora con preguntas estratégicas</h3>
+            <p class="text-sm text-gray-600 mb-4">
+              Usa estos prompts en NotebookLM para descubrir oportunidades:
+            </p>
+            <div class="bg-white border border-gray-200 rounded-lg p-4 font-mono text-xs text-deep mb-4 leading-relaxed">
+              ¿Qué 3 roles emergentes combinan mis intereses en [tu área]?<br>
+              ¿Qué habilidades necesito para cada uno?<br>
+              ¿Cómo puedo empezar sin experiencia previa?<br>
+              ¿Qué empresas contratan perfiles en este campo?
+            </div>
+            <p class="text-xs text-gray-500 italic">
+              Reemplaza [tu área] con tu contexto real: "product management", "automatización", "IA aplicada", etc.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paso 3 -->
+      <div class="bg-slate-50 border border-gray-200 rounded-xl p-6">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 bg-teal text-white rounded-lg flex items-center justify-center font-bold flex-shrink-0">3</div>
+          <div class="flex-1">
+            <h3 class="font-bold text-deep mb-2">Crea tu plan de 8 semanas</h3>
+            <p class="text-sm text-gray-600 mb-4">
+              Pídele a NotebookLM que estructure un plan accionable:
+            </p>
+            <div class="bg-white border border-gray-200 rounded-lg p-4 font-mono text-xs text-deep mb-4 leading-relaxed">
+              Crea un plan de 8 semanas para desarrollar estas 3 habilidades clave:<br>
+              - Incluye recursos gratuitos (cursos, artículos, herramientas)<br>
+              - Propón ejercicios prácticos semanales<br>
+              - Define métricas simples para medir progreso
+            </div>
+            <p class="text-xs text-gray-500 italic">
+              Exporta el plan a Google Docs o Notion. Compártelo con un mentor si quieres feedback.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA Natural -->
+    <div class="bg-deep text-white rounded-3xl p-10 text-center mb-12 shadow-xl">
+      <h3 class="text-2xl font-bold mb-3">¿Quieres afinar tu plan con criterio?</h3>
+      <p class="text-sm text-gray-300 mb-8 max-w-lg mx-auto">
+        NotebookLM te da opciones. Un Café Estratégico de 15 minutos te ayuda a priorizar y enfocar la ejecución.
+      </p>
+      <a href="https://calendar.app.google/k4iYmA42X9NNBb5t8" target="_blank" class="inline-block bg-orange text-white px-8 py-4 rounded-lg font-bold hover:bg-orange/90 transition shadow-lg">
+        Agendar Café Estratégico (30 min) →
+      </a>
+      <p class="text-xs text-gray-500 mt-4 uppercase tracking-widest">30 min · Gratis · Sin compromiso</p>
+    </div>
+
+    <!-- Recursos Relacionados -->
+    <div class="border-t border-gray-100 pt-12">
+      <h4 class="font-bold text-deep text-lg mb-6">Más recursos gratuitos</h4>
+      <div class="grid md:grid-cols-2 gap-4">
+        <a href="/recursos/backlog-detox" class="block p-6 bg-white border border-gray-200 rounded-xl hover:border-teal transition shadow-sm group">
+          <h5 class="font-bold text-deep mb-2 group-hover:text-teal transition">🧹 Backlog Detox</h5>
+          <p class="text-sm text-gray-600">Prioriza con impacto y recupera tiempo de tu equipo operativo.</p>
+        </a>
+        <a href="/recursos/job-prompt-ai" class="block p-6 bg-white border border-gray-200 rounded-xl hover:border-teal transition shadow-sm group">
+          <h5 class="font-bold text-deep mb-2 group-hover:text-teal transition">✨ JobPrompt AI</h5>
+          <p class="text-sm text-gray-600">Genera prompts de búsqueda avanzada para vacantes de élite.</p>
+        </a>
+      </div>
+    </div>
+
+  </main>
+  <Footer />
+</Layout>
