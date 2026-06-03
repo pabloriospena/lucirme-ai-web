@@ -1,9 +1,14 @@
 import { defineConfig } from 'astro/config';
 import clerk from '@clerk/astro';
-import vercel from '@astrojs/vercel'; // <--- Esto es vital
+import vercel from '@astrojs/vercel';
+import { esES } from '@clerk/localizations'; // <--- 1. Importa esto
 
 export default defineConfig({
   output: 'server',
-  adapter: vercel(), // <--- Esto le dice a Astro: "cuando hagas el build, prepárate para Vercel"
-  integrations: [clerk()]
+  adapter: vercel(),
+  integrations: [
+    clerk({
+      localization: esES // <--- 2. Inyecta la traducción global aquí
+    })
+  ]
 });

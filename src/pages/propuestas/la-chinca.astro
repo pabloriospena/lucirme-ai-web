@@ -1,0 +1,110 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Propuesta La Chinca | LuciRMe AI">
+  
+  <!-- BOTÓN DE IMPRESIÓN (no-print) -->
+  <div class="max-w-4xl mx-auto my-8 p-4 no-print animate-fade-in">
+    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-200">
+      <p class="text-sm text-gray-500">
+        Fundador: <strong class="text-deep">Pablo Ríos</strong> | Espacio de Cooperación.
+      </p>
+      <button
+        onclick="window.print()"
+        class="bg-teal hover:bg-tealHover text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition flex items-center gap-2 text-sm cursor-pointer"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+        Descargar Propuesta en PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- CUERPO DE LA PROPUESTA (Ancho total controlado) -->
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <article class="print-area bg-[#F8FAFC] text-deep border border-gray-200 rounded-2xl shadow-sm p-8 md:p-12 space-y-12 animate-fade-in">
+      
+      <!-- CABECERA -->
+      <header class="flex justify-between items-start border-b border-gray-200 pb-6 mb-8">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-teal bg-teal/10 px-3 py-1 rounded-full">Espacio de Cooperación</span>
+          <h1 class="text-3xl font-bold tracking-tight text-deep mt-4">Acompañamiento Práctico: La Chinca</h1>
+          <p class="text-sm text-gray-500 mt-1">Llevando el uso de la IA de la teoría a la autonomía en equipo.</p>
+        </div>
+        <div class="text-right">
+          <span class="font-bold text-lg text-deep tracking-tight">🚀 LucirMe AI</span>
+          <p class="text-xs text-gray-400 mt-1">lucirme.com</p>
+        </div>
+      </header>
+
+      <!-- EL OBJETIVO -->
+      <section class="space-y-4">
+        <h2 class="text-lg font-bold text-deep flex items-center gap-2">
+          <span class="text-teal">🎯</span> El Objetivo
+        </h2>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          Luego de abrir el acceso a nuestra <strong>Librería de Recursos</strong> para la empleabilidad y productividad de las jóvenes y el equipo, el siguiente paso natural es la ejecución. Diseñamos un formato interactivo para sentarnos a construir flujos reales sobre las herramientas que ya usan, optimizando el tiempo administrativo de la fundación.
+        </p>
+      </section>
+
+      <!-- TARJETA DE VALOR (CORREGIDA) -->
+      <section class="bg-white border border-gray-200 p-8 rounded-2xl shadow-sm">
+        <h2 class="text-lg font-bold text-deep mb-3 flex items-center gap-2">
+          <span class="text-teal">🛠️</span> Bloques de Enfoque Práctico Grupal (Remoto)
+        </h2>
+        <p class="text-gray-600 text-sm leading-relaxed mb-6">
+          Sesiones cerradas de trabajo en vivo para resolver un cuello de botella o automatizar una tarea específica de la fundación. Sin rodeos teóricos.
+        </p>
+
+        <!-- Contenedor con columnas seguras y ancho completo -->
+        <div class="p-6 bg-gray-50 rounded-xl border border-gray-100 grid md:grid-cols-12 gap-6 items-center">
+          <div class="md:col-span-8 space-y-2 text-left">
+            <h3 class="font-bold text-base text-deep">Célula de Trabajo IA</h3>
+            <ul class="text-xs text-gray-500 space-y-1.5 list-disc list-inside">
+              <li><strong>Duración:</strong> 2 horas dedicadas a un solo problema operativo.</li>
+              <li><strong>Capacidad:</strong> Grupos de <strong>hasta 4 personas</strong>.</li>
+              <li><strong>Incluye:</strong> Configuración en vivo + guía de uso rápido + grabación de la sesión.</li>
+            </ul>
+          </div>
+          
+          <div class="md:col-span-4 text-right border-t md:border-t-0 md:border-l border-gray-200 pt-4 md:pt-0 md:pl-6 flex flex-col items-end justify-center">
+            <span class="line-through text-xs text-gray-400 block">$580.000</span>
+            <span class="text-2xl font-bold text-deep block">$290.000 COP</span>
+            <span class="text-[10px] font-bold text-teal bg-teal/10 px-3 py-1 rounded-full mt-2">Tarifa Social Neta</span>
+            <span class="text-[9px] text-gray-400 mt-1 block">Por bloque de 2 horas</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- TÉRMINOS -->
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs text-gray-500 border-t border-gray-200 pt-8 mt-8">
+        <div>
+          <h4 class="font-bold text-deep mb-3 uppercase tracking-widest text-[10px]">Términos de Cooperación</h4>
+          <ul class="space-y-1.5 list-disc list-inside">
+            <li><strong>Flexibilidad:</strong> Sin contratos mínimos. Se agenda de forma independiente.</li>
+            <li><strong>Garantía LuciRMe:</strong> Si en los primeros 15 minutos no vemos viabilidad, cancelamos sin costo.</li>
+          </ul>
+        </div>
+        <div class="flex flex-col justify-end items-end text-right">
+          <p class="text-[11px] text-gray-400">
+            <strong>Pablo Ríos Peña</strong><br/>
+            Fundador, LuciRMe AI | <span class="text-deep">pablo@lucirme.com</span>
+          </p>
+        </div>
+      </section>
+
+    </article>
+  </main>
+</Layout>
+
+<style is:global>
+  @media print {
+    .no-print { display: none !important; }
+    body { background-color: #ffffff !important; color: #0F172A !important; }
+    .print-area { border: none !important; box-shadow: none !important; padding: 0 !important; margin: 0 !important; max-w: 100% !important; background: transparent !important; }
+    section, table, footer { page-break-inside: avoid; }
+  }
+</style>

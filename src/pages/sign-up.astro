@@ -1,18 +1,35 @@
 ---
 import Layout from '../layouts/Layout.astro';
-// Renombramos 'SignUp' a 'ClerkSignUp'
 import { SignUp as ClerkSignUp } from "@clerk/astro/components";
+
+const SignUpComponent = ClerkSignUp as any;
+
+const traduccionES = {
+  signUp: {
+    start: {
+      title: "Crea tu cuenta gratis",
+      subtitle: "Únete a profesionales que ejecutan más y deciden mejor.",
+      actionText: "¿Ya tienes cuenta?",
+      actionLink: "Inicia Sesión"
+    }
+  },
+  dividerText: "o regístrate con",
+  formButtonPrimary: "Crear Cuenta de Foco"
+};
 ---
 
 <Layout title="Crear Cuenta | LuciRMe AI">
-  <main class="flex justify-center py-20">
-    <ClerkSignUp 
-      appearance={{
-        variables: {
-          colorPrimary: '#0D9488',
-          borderRadius: '8px',
-        }
-      }}
-    />
+  <main class="flex justify-center py-20 px-4">
+    <div class="w-full max-w-md">
+      <SignUpComponent 
+        localization={traduccionES}
+        appearance={{
+          variables: {
+            colorPrimary: '#0D9488',
+            borderRadius: '8px',
+          }
+        }}
+      />
+    </div>
   </main>
 </Layout>
