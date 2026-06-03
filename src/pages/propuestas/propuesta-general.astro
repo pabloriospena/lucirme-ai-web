@@ -1,0 +1,135 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout title="Propuesta Comercial Corporativa | LuciRMe AI">
+  
+  <!-- BOTÓN DE IMPRESIÓN (no-print para el PDF final) -->
+  <div class="max-w-5xl mx-auto my-8 p-4 no-print animate-fade-in">
+    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-200">
+      <p class="text-sm text-gray-500">
+        Fundador: <strong class="text-deep">Pablo Ríos</strong> | Propuesta General de Servicios.
+      </p>
+      <button
+        onclick="window.print()"
+        class="bg-teal hover:bg-tealHover text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition flex items-center gap-2 text-sm cursor-pointer"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+        </svg>
+        Descargar Propuesta en PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- CUERPO DE LA PROPUESTA (Área imprimible) -->
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <article class="print-area bg-white text-deep border border-gray-200 rounded-3xl shadow-sm p-8 md:p-12 space-y-12 animate-fade-in">
+      
+      <!-- HEADER -->
+      <header class="flex justify-between items-start border-b border-gray-200 pb-8 mb-8">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-teal bg-teal/10 px-3 py-1 rounded-full">Propuesta Exclusiva para Empresas</span>
+          <h1 class="text-3xl font-black tracking-tight text-deep mt-4">Recuperemos tiempo ejecutando con IA</h1>
+          <p class="text-sm text-gray-500 mt-1 max-w-xl">Tu equipo tiene el potencial de recuperar tiempo y mejorar los procesos integrando IA directamente en sus herramientas actuales. Sin desarrollos complejos ni fricción tecnológica.</p>
+        </div>
+        <div class="text-right flex-shrink-0">
+          <span class="font-bold text-lg text-deep tracking-tight">🚀 LucirMe AI</span>
+          <p class="text-xs text-gray-400 mt-1">lucirme.com</p>
+        </div>
+      </header>
+
+      <!-- EL MODELO DE 2 FASES -->
+      <div class="grid md:grid-cols-2 gap-8 items-stretch mb-10">
+        
+        <!-- FASE 1: Taller de Inmersión -->
+        <div class="bg-white p-8 rounded-2xl border border-gray-200 flex flex-col justify-between shadow-sm hover:border-teal transition-all">
+          <div class="space-y-4">
+            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest block">Fase 1: Diagnóstico Operativo</span>
+            <h3 class="text-2xl font-bold text-deep">Taller de Inmersión</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">Identificamos los cuellos de botella críticos en las tareas del día a día y dejamos configurado el primer flujo automatizado en tiempo real.</p>
+            
+            <div class="py-4 border-b border-gray-100">
+              <p class="text-3xl font-black text-deep">$620.000 <span class="text-sm font-normal text-gray-400">COP</span></p>
+              <span class="text-xs text-gray-500 font-medium">/ ~170 USD</span>
+            </div>
+
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li>• <strong>Duración:</strong> 2 a 3 horas (Sesión ejecutiva en vivo).</li>
+              <li>• Mapeo de fricción en flujos de información actuales.</li>
+              <li>• <strong>1 Flujo prioritario con IA</strong> implementado y operativo.</li>
+              <li>• Roadmap de optimización personalizado para el equipo.</li>
+            </ul>
+          </div>
+          
+          <div class="mt-6 p-4 bg-gray-50 border-l-4 border-gray-400 rounded-r-lg text-xs text-gray-600">
+            <strong>Forma de pago:</strong> 100% anticipado al agendar la sesión para asegurar el espacio en agenda. <br> <strong>Precios no incluyen transporte</strong>
+          </div>
+        </div>
+
+        <!-- FASE 2: Ciclo de Autonomía -->
+        <div class="bg-white p-8 rounded-2xl border-2 border-teal flex flex-col justify-between shadow-lg relative overflow-hidden">
+          <div class="space-y-4">
+            <span class="text-xs font-bold text-teal uppercase tracking-widest block">Fase 2: Escalamiento No-Tech</span>
+            <h3 class="text-2xl font-bold text-deep">Ciclo de Autonomía</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">Transformación integral de flujos manuales. Diseñado específicamente para que equipos administrativos, contables y de negocio escalen su capacidad operativa sin depender de código.</p>
+            
+            <div class="py-4 border-b border-gray-100">
+              <p class="text-3xl font-black text-deep">$8.800.000 <span class="text-sm font-normal text-gray-400">COP</span></p>
+              <span class="text-xs text-gray-500 font-medium">/ ~2.600 USD</span>
+            </div>
+
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li>• <strong>Duración:</strong> 8 semanas de acompañamiento estratégico.</li>
+              <li>• Reingeniería y automatización de procesos repetitivos y reportes.</li>
+              <li>• <strong>Entrenamiento interno práctico</strong> adaptado al ritmo del equipo.</li>
+              <li>• Estructura pedagógica y documentación de autonomía</li>
+            </ul>
+          </div>
+          
+          <div class="mt-6 p-4 bg-[#ecfdf5] border-l-4 border-teal rounded-r-lg text-xs text-[#065f46]">
+            <strong>Esquema de inversión (Una vez terminado el taller):</strong>
+            <ul class="list-disc pl-4 mt-1">
+              <li>50% al iniciar el ciclo / 50% al finalizar.</li>
+              <li><strong>💡 Beneficio:</strong> 10% de descuento por pago total anticipado al inicio de la Fase 2.</li>
+              <li><strong>Nota:</strong> Precios no incluyen transporte</li>
+
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <hr class="border-gray-200 my-8">
+
+      <!-- CONTACTO DIRECTO -->
+      <div class="text-center py-6">
+        <h3 class="text-2xl font-bold text-deep mb-2">¿Listo para liberar la capacidad operativa de tu equipo?</h3>
+        <p class="text-gray-500 mb-8 text-sm">Hablemos directamente para coordinar el Taller de Inmersión o evaluar tus procesos:</p>
+        
+        <div class="flex flex-wrap justify-center gap-4 text-xs font-bold text-gray-500">
+          <a href="mailto:pablo@lucirme.com" class="p-4 bg-gray-50 border border-gray-200 rounded-xl hover:border-teal hover:bg-white transition flex items-center gap-2">
+            <span>✉️</span> pablo@lucirme.com
+          </a>
+          <a href="https://wa.me/573128199661" target="_blank" class="p-4 bg-gray-50 border border-gray-200 rounded-xl hover:border-teal hover:bg-white transition flex items-center gap-2">
+            <span>📱</span> +57 312 819 9661
+          </a>
+          <a href="https://www.linkedin.com/in/pabloriospena/" target="_blank" class="p-4 bg-gray-50 border border-gray-200 rounded-xl hover:border-teal hover:bg-white transition flex items-center gap-2">
+            <span>🔗</span> LinkedIn de Pablo
+          </a>
+        </div>
+      </div>
+
+    </article>
+  </main>
+</Layout>
+
+<style is:global>
+  @media print {
+    .no-print { display: none !important; }
+    body { background-color: #ffffff !important; color: #0F172A !important; }
+    .print-area { border: none !important; box-shadow: none !important; padding: 0 !important; margin: 0 !important; max-w: 100% !important; background: transparent !important; }
+    section, table, footer { page-break-inside: avoid; }
+  }
+</style>
