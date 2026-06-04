@@ -1,0 +1,206 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+
+// 1. Muro de Seguridad de Clerk (Obligatorio para recursos privados)
+const auth = (Astro.locals as any).auth;
+const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
+
+if (!userId) {
+ return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/prompteador')}`);
+}
+---
+
+<Layout title="Guía de Prompting para PMs | LuciRMe AI">
+  
+  <!-- BREADCRUMB -->
+  <nav class="bg-white border-b border-gray-100 px-4 py-3 no-print">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+      <a href="/recursos" class="text-sm font-bold text-gray-400 hover:text-teal transition">← Volver a Recursos</a>
+      <span class="text-xs font-bold text-teal uppercase tracking-widest flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Guía Premium
+      </span>
+    </div>
+  </nav>
+
+  <main class="max-w-3xl mx-auto py-12 px-6 space-y-12">
+    
+    <!-- HEADER -->
+    <header class="text-center md:text-left border-b border-gray-100 pb-8">
+      <span class="inline-block bg-teal/10 text-teal text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-4 border border-teal/20">
+        Product Management Sin Bullshit
+      </span>
+      <h1 class="text-3xl md:text-4xl font-black text-deep leading-tight">Guía de Prompting para PMs</h1>
+      <p class="text-sm text-gray-500 mt-2">Fórmulas y plantillas listas para usar en tu día a día operativo.</p>
+    </header>
+
+    <!-- REGLA DE ORO -->
+    <div class="bg-teal/5 border-l-4 border-teal p-6 rounded-r-xl">
+      <p class="text-deep font-semibold italic text-base leading-relaxed">
+        💡 Regla de Oro: "Si tu prompt no devuelve tiempo, claridad o control, no sirve. Sé específico, da contexto y exige un formato de salida."
+      </p>
+    </div>
+
+    <!-- LA FÓRMULA -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-bold text-deep flex items-center gap-3">
+        <span class="text-orange text-lg">⚡</span> La Fórmula del Prompt Efectivo
+      </h2>
+      <p class="text-gray-600 text-sm">No le hables a la IA como si fuera una bola de cristal. Dale la estructura que necesita para trabajar por ti.</p>
+      
+      <div class="grid sm:grid-cols-2 gap-4">
+        {[
+          { t: "1. Rol y Contexto", d: "¿Quién es la IA y cuál es la situación? (Ej: 'Actúa como un PM Senior...')" },
+          { t: "2. Tarea Específica", d: "¿Qué quieres exactamente? Usa verbos de acción. (Ej: 'Redacta los criterios...')" },
+          { t: "3. Restricciones", d: "¿Qué NO debe hacer? (Ej: 'Sin jerga técnica, máximo 150 palabras...')" },
+          { t: "4. Formato de Salida", d: "¿Cómo quieres recibir el resultado? (Ej: 'En una tabla de 3 columnas...')" }
+        ].map(item => (
+          <div class="p-6 bg-gray-50 border border-gray-100 rounded-xl">
+            <h3 class="font-bold text-teal text-xs uppercase tracking-wider mb-2">{item.t}</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">{item.d}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- PROMPTS LISTOS -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-bold text-deep flex items-center gap-3">
+        <span class="text-orange text-lg">📋</span> Prompts Listos (Copia y Pega)
+      </h2>
+      <p class="text-gray-600 text-sm">Haz clic en cada sección para expandir el prompt. Solo reemplaza el texto entre corchetes <span class="text-orange font-bold">[ASÍ]</span>.</p>
+
+      <div class="space-y-4">
+        <!-- Prompt 1 -->
+        <details class="bg-white border border-gray-200 rounded-xl overflow-hidden group">
+          <summary class="p-5 font-bold text-deep cursor-pointer hover:bg-gray-50 flex justify-between items-center transition select-none">
+            <span>🛠️ Refinar una User Story (Evitar ambigüedad)</span>
+            <span class="text-teal text-xl font-light group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <div class="p-6 border-t border-gray-100 bg-gray-50/50 space-y-4">
+            <p class="text-xs text-gray-400">Úsalo cuando el equipo de desarrollo te diga "esto no está claro" o para evitar el feature creep.</p>
+            <div class="code-block bg-deep text-gray-300 p-6 rounded-xl font-mono text-xs relative">
+              <button class="copy-btn absolute top-3 right-3 bg-teal text-white px-3 py-1.5 rounded-md text-[10px] font-bold hover:bg-tealHover">📋 Copiar</button>
+              <code>Actúa como un Product Manager Senior con enfoque práctico. Necesito escribir una User Story para la siguiente funcionalidad: "[DESCRIBE LA FUNCIONALIDAD EN 1 ORACIÓN]".
+
+El usuario final es: "[DESCRIBE AL USUARIO]".
+El problema real que resuelve es: "[DESCRIBE EL PROBLEMA, NO LA SOLUCIÓN]".
+
+Genera la User Story siguiendo este formato exacto:
+1. Título claro y accionable.
+2. Historia de usuario (Como [rol], quiero [acción], para [beneficio]).
+3. Criterios de Aceptación (máximo 4 puntos, usando formato Given/When/Then, enfocados en el resultado, no en la implementación técnica).
+4. Una nota de "Fuera del Alcance" (Out of scope) para evitar que el equipo agregue features innecesarios.
+
+Tono: Directo, sin buzzwords, listo para Jira.</code>
+            </div>
+          </div>
+        </details>
+
+        <!-- Prompt 2 -->
+        <details class="bg-white border border-gray-200 rounded-xl overflow-hidden group">
+          <summary class="p-5 font-bold text-deep cursor-pointer hover:bg-gray-50 flex justify-between items-center transition select-none">
+            <span>🕵️‍♂️ Detective de Problemas Reales (Anti-Feature Creep)</span>
+            <span class="text-teal text-xl font-light group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <div class="p-6 border-t border-gray-100 bg-gray-50/50 space-y-4">
+            <p class="text-xs text-gray-400">Úsalo cuando un cliente o stakeholder te pida una solución específica en lugar de exponer su problema.</p>
+            <div class="code-block bg-deep text-gray-300 p-6 rounded-xl font-mono text-xs relative">
+              <button class="copy-btn absolute top-3 right-3 bg-teal text-white px-3 py-1.5 rounded-md text-[10px] font-bold hover:bg-tealHover">📋 Copiar</button>
+              <code>Actúa como un Product Manager con filosofía "Sin Bullshit". Un stakeholder me pidió lo siguiente: "[PEGA LA SOLICITUD DEL CLIENTE/STAKEHOLDER AQUÍ]".
+
+1. Analiza y dime cuál crees que es el problema real detrás de esta solicitud (lee entre líneas).
+2. Propón 2 alternativas más simples y escalables que resuelvan ese problema real sin agregar complejidad técnica innecesaria (evita el feature creep).
+3. Redacta una respuesta breve y empática para el stakeholder explicando por qué iremos por la alternativa simple, sin usar jerga técnica y manteniendo un tono de colega senior, calmado y confiado.</code>
+            </div>
+          </div>
+        </details>
+
+        <!-- Prompt 3 -->
+        <details class="bg-white border border-gray-200 rounded-xl overflow-hidden group">
+          <summary class="p-5 font-bold text-deep cursor-pointer hover:bg-gray-50 flex justify-between items-center transition select-none">
+            <span>📉 Analizador de Métricas (Adiós a las métricas vanidosas)</span>
+            <span class="text-teal text-xl font-light group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <div class="p-6 border-t border-gray-100 bg-gray-50/50 space-y-4">
+            <p class="text-xs text-gray-400">Úsalo para encontrar la causa raíz de un problema en los datos, enfocándote en MRR, Churn, LTV o Retención.</p>
+            <div class="code-block bg-deep text-gray-300 p-6 rounded-xl font-mono text-xs relative">
+              <button class="copy-btn absolute top-3 right-3 bg-teal text-white px-3 py-1.5 rounded-md text-[10px] font-bold hover:bg-tealHover">📋 Copiar</button>
+              <code>Tengo los siguientes datos de mi producto: "[PEGA AQUÍ TUS DATOS O DESCRIPCIÓN DEL COMPORTAMIENTO, ej: 'El registro subió un 20%, pero la activación bajó un 15%']".
+
+Actúa como un analista de producto pragmático. 
+1. Identifica las 3 hipótesis más probables de por qué está pasando esto (enfócate en fricción de usuario, no en suposiciones mágicas).
+2. Para cada hipótesis, dime qué dato o métrica específica necesito buscar para validarla o descartarla.
+3. Propón un experimento o cambio pequeño (MVP del 70%) que podamos lanzar rápido para probar la hipótesis más fuerte.</code>
+            </div>
+          </div>
+        </details>
+
+        <!-- Prompt 4 -->
+        <details class="bg-white border border-gray-200 rounded-xl overflow-hidden group">
+          <summary class="p-5 font-bold text-deep cursor-pointer hover:bg-gray-50 flex justify-between items-center transition select-none">
+            <span>🛡️ El Arte de Decir "No" (Diplomático pero firme)</span>
+            <span class="text-teal text-xl font-light group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <div class="p-6 border-t border-gray-100 bg-gray-50/50 space-y-4">
+            <p class="text-xs text-gray-400">Úsalo para proteger el roadmap sin quemar puentes con Ventas, CEO o Clientes.</p>
+            <div class="code-block bg-deep text-gray-300 p-6 rounded-xl font-mono text-xs relative">
+              <button class="copy-btn absolute top-3 right-3 bg-teal text-white px-3 py-1.5 rounded-md text-[10px] font-bold hover:bg-tealHover">📋 Copiar</button>
+              <code>Necesito decirle que "NO" a una solicitud de [VENTAS / UN CLIENTE GRANDE / EL CEO] sobre: "[INSERTA LA SOLICITUD]".
+
+Redacta un mensaje corto (máximo 3 párrafos), profesional y firme.
+- Párrafo 1: Reconoce su necesidad y valida su intención.
+- Párrafo 2: Explica claramente por qué no se alineará con la visión actual del producto o las métricas clave (menciona [METRICA CLAVE]), sin sonar condescendiente.
+- Párrafo 3: Ofrece una alternativa concreta o un momento futuro para revisarlo, sin prometer falsas esperanzas.
+
+Tono: Colega senior, calmado, sin urgencia falsa y cero buzzwords.</code>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- CHECKLIST -->
+    <section class="py-12 border-t border-gray-100">
+      <h2 class="text-2xl font-bold text-deep mb-8">Checklist de Validación (Antes de dar "Enter")</h2>
+      <ul class="space-y-4">
+        {[
+          "¿Le di a la IA un rol claro y el contexto necesario del negocio?",
+          "¿La tarea es una acción concreta y no una petición vaga como 'mejora esto'?",
+          "¿Incluí restricciones (longitud, tono, qué evitar) para filtrar el bullshit?",
+          "¿Especifiqué exactamente cómo quiero el formato de la respuesta (tabla, lista, email)?"
+        ].map((item, i) => (
+          <li class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100">
+            <input type="checkbox" id={`check-${i}`} class="accent-teal w-5 h-5 cursor-pointer mt-0.5" />
+            <label for={`check-${i}`} class="text-sm font-medium text-gray-700 cursor-pointer">{item}</label>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  // Lógica de copia con feedback visual en el botón
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const target = e.target;
+      const codeBlock = target.closest('.code-block');
+      const code = codeBlock.querySelector('code').textContent;
+      
+      await navigator.clipboard.writeText(code.trim());
+      const original = target.textContent;
+      target.textContent = '✅ Copiado';
+      setTimeout(() => target.textContent = original, 2000);
+    });
+  });
+</script>
+
+<style>
+  /* Deshabilitar el marcador de detalles por defecto en navegadores */
+  details summary::-webkit-details-marker { display: none; }
+  summary { list-style: none; }
+</style>

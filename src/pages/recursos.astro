@@ -2,14 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import Footer from '../components/Footer.astro';
 
-// 1. Cargamos todos los archivos .astro de la subcarpeta 'recursos' automáticamente
+// 1. Cargamos todos los archivos .astro automáticamente
 const archivos = import.meta.glob('./recursos/*.astro', { eager: true });
 
-// 2. Mapeamos los archivos y agregamos sus metadatos específicos
+// 2. Mapeamos los archivos
 const recursos = Object.keys(archivos).map((key) => {
   const file = archivos[key] as any;
   const slug = key.split('/').pop()?.replace('.astro', '') || '';
-  
   return {
     slug,
     url: `/recursos/${slug}`,
@@ -17,14 +16,28 @@ const recursos = Object.keys(archivos).map((key) => {
   };
 });
 
-// 3. Diccionario maestro de contenidos, descripciones y categorías de negocio
+// 3. Diccionario maestro de contenidos
 const metaData = {
   "ebook-pm": { 
-    etiqueta: "Ebook Oficial", 
-    desc: "El manual de Product Management sin rodeos teóricos para aprender a aplicar con criterio real y recuperar el control.",
+    etiqueta: "Ebook Oficial Vol. 1", 
+    desc: "El manual de Product Management sin rodeos teóricos para aprender a aplicar IA con criterio real.",
     precio: "$53.000 COP", 
     esPago: true, 
     categoria: "destacado" 
+  },
+  "preventa-vol2": { 
+    etiqueta: "Preventa Activa Vol. 2", 
+    desc: "Asegura tu acceso exclusivo al volumen 2 de 'PM Sin Bullshit' a mitad de precio y llévate un checklist de regalo.",
+    precio: "Acceso Preventa", 
+    esPago: false, 
+    categoria: "destacado" 
+  },
+  "checklistpm-vol1": { 
+    etiqueta: "Guía Premium", 
+    desc: "Aprende la fórmula R+C+T+E y accede a 4 prompts maestros para escribir User Stories, refinar roadmaps y priorizar sin bullshit.",
+    precio: null, 
+    esPago: false, 
+    categoria: "pm"
   },
   "prompteador": { 
     etiqueta: "Herramienta Pro", 
@@ -91,15 +104,17 @@ const metaData = {
   }
 };
 
-// Separamos los recursos por categoría para presentarlos ordenados
-const ebookDestacado = recursos.find(r => r.slug === 'ebook-pm');
+// Separamos por categorías
+const ebookDestacado = recursos.find((r) => r.slug === 'ebook-pm');
+const preventaDestacada = recursos.find((r) => r.slug === 'preventa-vol2');
+
 const recursosIA = recursos.filter(r => {
   const meta = metaData[r.slug as keyof typeof metaData];
   return meta?.categoria === 'ia';
 });
 const recursosPM = recursos.filter(r => {
   const meta = metaData[r.slug as keyof typeof metaData];
-  return meta?.categoria === 'pm';
+  return meta?.categoria === 'pm' && r.slug !== 'preventa-vol2'; // Evitamos duplicar la preventa
 });
 ---
 
@@ -111,37 +126,55 @@ const recursosPM = recursos.filter(r => {
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">Herramientas, plantillas y guías de producto listas para implementar. Acceso abierto y directo.</p>
     </header>
 
-    <!-- 1. PRODUCTO DESTACADO (EBOOK) -->
-    {ebookDestacado && (() => {
-      const meta = metaData["ebook-pm"];
-      return (
-        <div class="bg-gradient-to-r from-[#0F172A] to-[#1E293B] rounded-3xl p-8 md:p-12 text-white shadow-2xl flex flex-col md:flex-row items-center gap-8 border border-white/10">
-          <div class="w-24 h-32 bg-white rounded-r-lg rounded-l-sm shadow-md flex-shrink-0 flex items-center justify-center border-l-4 border-gray-300">
-            <span class="text-[9px] font-bold text-deep text-center px-1">PM Sin Bullshit</span>
-          </div>
-          <div class="flex-grow">
-            <span class="inline-block bg-orange/20 text-orange text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-4">{meta.etiqueta}</span>
-            <h2 class="text-2xl md:text-3xl font-bold mb-3 text-white">{ebookDestacado.titulo}</h2>
-            <p class="text-gray-300 text-sm mb-6 max-w-xl leading-relaxed">{meta.desc}</p>
-            <div class="flex flex-wrap gap-4 items-center">
-              <a href={ebookDestacado.url} class="bg-teal text-white px-6 py-3 rounded-lg font-bold text-sm hover:bg-tealHover transition shadow-lg">
-                Comprar por {meta.precio}
-              </a>
-              <span class="text-xs text-orange font-bold uppercase tracking-widest">50% OFF para clientes</span>
+    <!-- 1. SECCIÓN DESTACADA (BENTO DOUBLE GRID: VOL 1 & VOL 2) -->
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Ebook Vol 1 -->
+      {ebookDestacado && (() => {
+        const meta = metaData["ebook-pm"];
+        return (
+          <div class="bg-gradient-to-br from-[#0F172A] to-[#1E293B] rounded-3xl p-8 text-white shadow-2xl flex flex-col justify-between border border-white/10 min-h-[380px] relative overflow-hidden group">
+            <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal/10 rounded-full blur-2xl group-hover:bg-teal/20 transition-all"></div>
+            <div>
+              <span class="inline-block bg-teal/10 text-teal text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-4 border border-teal/20">{meta.etiqueta}</span>
+              <h2 class="text-2xl font-bold mb-3">{ebookDestacado.titulo}</h2>
+              <p class="text-gray-400 text-sm leading-relaxed mb-6">{meta.desc}</p>
+            </div>
+            <div class="flex items-center justify-between pt-6 border-t border-white/5">
+              <span class="text-sm font-bold text-teal">{meta.precio}</span>
+              <a href={ebookDestacado.url} class="bg-teal text-white px-5 py-2.5 rounded-lg font-bold text-xs hover:bg-tealHover transition">Comprar →</a>
             </div>
           </div>
-        </div>
-      )
-    })()}
+        )
+      })()}
+
+      <!-- Preventa Vol 2 -->
+      {preventaDestacada && (() => {
+        const meta = metaData["preventa-vol2"];
+        return (
+          <div class="bg-gradient-to-br from-[#0F172A] to-[#1E293B] rounded-3xl p-8 text-white shadow-2xl flex flex-col justify-between border border-white/10 min-h-[380px] relative overflow-hidden group">
+            <div class="absolute -right-10 -top-10 w-32 h-32 bg-orange/10 rounded-full blur-2xl group-hover:bg-orange/20 transition-all"></div>
+            <div>
+              <span class="inline-block bg-orange/10 text-orange text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-4 border border-orange/20">{meta.etiqueta}</span>
+              <h2 class="text-2xl font-bold mb-3">{preventaDestacada.titulo}</h2>
+              <p class="text-gray-400 text-sm leading-relaxed mb-6">{meta.desc}</p>
+            </div>
+            <div class="flex items-center justify-between pt-6 border-t border-white/5">
+              <span class="text-sm font-bold text-orange">{meta.precio}</span>
+              <a href={preventaDestacada.url} class="bg-orange text-white px-5 py-2.5 rounded-lg font-bold text-xs hover:bg-orange/90 transition">Asegurar →</a>
+            </div>
+          </div>
+        )
+      })()}
+    </div>
 
     <!-- 2. SOLUCIONES CON IA -->
-    <div>
+    <div class="pt-8">
       <h2 class="text-2xl font-bold text-deep mb-6 flex items-center gap-3">⚡ Soluciones con IA</h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {recursosIA.map((rec) => {
           const meta = metaData[rec.slug as keyof typeof metaData] || { etiqueta: "Herramienta", desc: "", precio: null, esPago: false };
           return (
-            <a href={rec.url} data-resource-title={rec.titulo} data-resource-paid="false" class="group bg-white p-6 rounded-2xl border border-gray-200 hover:border-teal transition-all shadow-sm flex flex-col h-full track-resource-click">
+            <a href={rec.url} class="group bg-white p-6 rounded-2xl border border-gray-200 hover:border-teal transition-all shadow-sm flex flex-col h-full">
               <span class="text-[10px] font-bold text-teal bg-teal/10 px-3 py-1 rounded-md uppercase tracking-widest w-fit mb-4">{meta.etiqueta}</span>
               <h3 class="text-lg font-bold text-deep mb-2 group-hover:text-teal transition-colors">{rec.titulo}</h3>
               <p class="text-xs text-gray-500 mb-6 leading-relaxed flex-grow">{meta.desc}</p>
@@ -156,13 +189,13 @@ const recursosPM = recursos.filter(r => {
     </div>
 
     <!-- 3. IA PARA PRODUCT MANAGERS -->
-    <div class="pt-8 border-t border-gray-100">
+    <div class="pt-12 border-t border-gray-100">
       <h2 class="text-2xl font-bold text-deep mb-6 flex items-center gap-3">🛠️ IA para Product Managers</h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {recursosPM.map((rec) => {
           const meta = metaData[rec.slug as keyof typeof metaData] || { etiqueta: "Herramienta", desc: "", precio: null, esPago: false };
           return (
-            <a href={rec.url} data-resource-title={rec.titulo} data-resource-paid="false" class="group bg-white p-6 rounded-2xl border border-gray-200 hover:border-teal transition-all shadow-sm flex flex-col h-full track-resource-click">
+            <a href={rec.url} class="group bg-white p-6 rounded-2xl border border-gray-200 hover:border-teal transition-all shadow-sm flex flex-col h-full">
               <span class="text-[10px] font-bold text-teal bg-teal/10 px-3 py-1 rounded-md uppercase tracking-widest w-fit mb-4">{meta.etiqueta}</span>
               <h3 class="text-lg font-bold text-deep mb-2 group-hover:text-teal transition-colors">{rec.titulo}</h3>
               <p class="text-xs text-gray-500 mb-6 leading-relaxed flex-grow">{meta.desc}</p>
@@ -177,21 +210,4 @@ const recursosPM = recursos.filter(r => {
     </div>
 
   </main>
-
-  <script is:inline>
-    // Captura clics para PostHog
-    document.querySelectorAll('.track-resource-click').forEach(el => {
-      el.addEventListener('click', () => {
-        const title = el.getAttribute('data-resource-title');
-        const isPaid = el.getAttribute('data-resource-paid');
-        if (window.posthog) {
-          window.posthog.capture('recurso_click', {
-            titulo_recurso: title,
-            es_de_pago: isPaid === 'true',
-            origen: 'catalogo_recursos'
-          });
-        }
-      });
-    });
-  </script>
 </Layout>

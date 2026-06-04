@@ -2,6 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import { SignUp as ClerkSignUp } from "@clerk/astro/components";
 
+// 1. Capturamos el destino original
+const redirectUrl = Astro.url.searchParams.get('redirect_url') || '/dashboard';
+
 const SignUpComponent = ClerkSignUp as any;
 
 const traduccionES = {
@@ -19,10 +22,13 @@ const traduccionES = {
 ---
 
 <Layout title="Crear Cuenta | LuciRMe AI">
-  <main class="flex justify-center py-20 px-4">
+  <main class="flex justify-center py-20 px-4 bg-[#F8FAFC]">
     <div class="w-full max-w-md">
+      <!-- 2. Forzamos la redirección tras el registro con 'forceRedirectUrl' -->
       <SignUpComponent 
         localization={traduccionES}
+        forceRedirectUrl={redirectUrl}
+        signInUrl={`/sign-in?redirect_url=${encodeURIComponent(redirectUrl)}`}
         appearance={{
           variables: {
             colorPrimary: '#0D9488',

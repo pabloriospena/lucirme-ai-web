@@ -2,7 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import { SignIn as ClerkSignIn } from "@clerk/astro/components";
 
-// 1. Forzamos a TypeScript a ver el componente como 'any' para poder pasarle la traducción
+// 1. Capturamos la URL a la que el usuario quería ir originalmente
+const redirectUrl = Astro.url.searchParams.get('redirect_url') || '/dashboard';
+
+// 2. Forzamos a TypeScript a tratar el componente como 'any' para evitar que se queje
 const SignInComponent = ClerkSignIn as any;
 
 const traduccionES = {
@@ -20,11 +23,16 @@ const traduccionES = {
 ---
 
 <Layout title="Iniciar Sesión | LuciRMe AI">
-  <main class="flex justify-center py-20 px-4">
+  <main class="flex justify-center py-20 px-4 bg-[#F8FAFC]">
     <div class="w-full max-w-md">
-      <!-- 2. Usamos el componente alias que no tiene restricciones de tipo -->
+      <!-- 
+        3. Forzamos la redirección usando 'signUpUrl' y 'forceRedirectUrl'.
+        Esto obliga a Clerk a respetar el destino original ignorando el .env
+      -->
       <SignInComponent 
         localization={traduccionES}
+        forceRedirectUrl={redirectUrl}
+        signUpUrl={`/sign-up?redirect_url=${encodeURIComponent(redirectUrl)}`}
         appearance={{
           variables: {
             colorPrimary: '#0D9488', 
