@@ -1,0 +1,149 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ActionHub from '../../components/ActionHub.astro';
+import Footer from '../../components/Footer.astro';
+
+// REGISTRAR EN EL FRONTMATTER PARA EL CATÁLOGO DINÁMICO
+export const frontmatter = {
+  title: "Ideador de Productos",
+  tipo: "guia"
+};
+---
+
+<Layout title="Ideador de Productos | LuciRMe AI">
+  
+  <!-- BREADCRUMB -->
+  <nav class="bg-white border-b border-gray-100 px-4 py-3">
+    <div class="max-w-4xl mx-auto flex justify-between items-center">
+      <a href="/recursos" class="text-sm font-bold text-gray-400 hover:text-teal transition">← Volver a Recursos</a>
+      <span class="text-xs font-bold text-teal uppercase tracking-widest flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Guía Abierta
+      </span>
+    </div>
+  </nav>
+
+  <main class="max-w-4xl mx-auto py-12 px-6 space-y-16">
+    
+    <!-- CABECERA -->
+    <header class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-deep mb-4">💡 Ideador de Productos</h1>
+      <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+        Guía paso a paso con prompts de IA para estructurar, validar y prototipar tu proyecto integrador de Product Management.
+      </p>
+    </header>
+
+    <!-- FASE 0 -->
+    <section class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+      <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+        <h2 class="text-2xl font-bold text-teal">Fase 0: Estructuración Inicial</h2>
+        <span class="bg-teal/10 text-teal text-xs font-bold px-3 py-1 rounded-full">🤖 ChatGPT o Gemini</span>
+      </div>
+      <p class="text-sm text-gray-500 border-l-2 border-teal pl-4">
+        <strong>Objetivo:</strong> Tomar tus ideas iniciales sueltas y convertirlas en una definición de producto sólida usando frameworks como <em>Jobs to be Done</em>.
+      </p>
+      
+      <div class="relative bg-deep rounded-xl overflow-hidden p-6 mt-4">
+        <button class="copy-btn absolute top-3 right-3 bg-white/10 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-white/20 transition">📋 Copiar Prompt</button>
+        <pre class="font-mono text-xs text-gray-300 whitespace-pre-wrap leading-relaxed"><code>Actúa como un Product Manager Senior. Estoy desarrollando un producto digital para mi proyecto integrador y tengo algunas definiciones iniciales. Ayúdame a estructurar, refinar y profesionalizar mi idea usando frameworks de producto (como Jobs to be Done). 
+
+Mis datos iniciales son:
+- Producto que quiero hacer: [Nombre o descripción breve]
+- Problema que creo que resuelve: [Tu idea inicial]
+- Usuario principal: [Tu idea inicial]
+- 1 Decisión de producto que planeo tomar: [Tu idea, ej: No pedir datos bancarios, solo registro manual rápido]
+- Cómo planeo usar IA: [Tu idea]
+
+Tu tarea: Reescribe y pule estos 5 puntos. Haz que el problema suene como un 'Job to be Done', define al usuario con psicografía, y justifica por qué mi 'Decisión de producto' es estratégica. Entrégame solo la lista estructurada y mejorada de estos 5 puntos.</code></pre>
+      </div>
+    </section>
+
+    <!-- FASE 1 -->
+    <section class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+      <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+        <h2 class="text-2xl font-bold text-teal">Fase 1: Descubrimiento y Mercado</h2>
+        <span class="bg-teal/10 text-teal text-xs font-bold px-3 py-1 rounded-full">🔍 Perplexity (Recomendado)</span>
+      </div>
+      <p class="text-sm text-gray-500 border-l-2 border-teal pl-4">
+        <strong>Objetivo:</strong> Validar tu idea buscando quiénes ya resuelven este problema en el mundo real, para aprender de ellos y mejorar tu propuesta.
+      </p>
+      
+      <div class="relative bg-deep rounded-xl overflow-hidden p-6 mt-4">
+        <button class="copy-btn absolute top-3 right-3 bg-white/10 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-white/20 transition">📋 Copiar Prompt</button>
+        <pre class="font-mono text-xs text-gray-300 whitespace-pre-wrap leading-relaxed"><code>Basado en el producto que estoy construyendo: [PEGA AQUÍ EL RESUMEN MEJORADO DE LA FASE 0].
+
+Actúa como un experto en Market Research. Busca productos reales (apps, plataformas, startups) que estén resolviendo este mismo problema o uno muy similar. 
+Entrégame la información en una tabla con las siguientes columnas:
+1. Nombre | 2. Link | 3. Solución (1 frase) | 4. Categoría | 5. Usuario | 6. Top 3 Funcionalidades.</code></pre>
+      </div>
+    </section>
+
+    <!-- FASE 2 -->
+    <section class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+      <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+        <h2 class="text-2xl font-bold text-teal">Fase 2: Refinamiento Final</h2>
+        <span class="bg-teal/10 text-teal text-xs font-bold px-3 py-1 rounded-full">🤖 ChatGPT o Gemini</span>
+      </div>
+      <p class="text-sm text-gray-500 border-l-2 border-teal pl-4">
+        <strong>Objetivo:</strong> Actualizar la definición de tu producto incorporando las lecciones del análisis de mercado, dejándolo listo para el entregable.
+      </p>
+      
+      <div class="relative bg-deep rounded-xl overflow-hidden p-6 mt-4">
+        <button class="copy-btn absolute top-3 right-3 bg-white/10 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-white/20 transition">📋 Copiar Prompt</button>
+        <pre class="font-mono text-xs text-gray-300 whitespace-pre-wrap leading-relaxed"><code>Toma la estructura que creamos en la Fase 0 y actualízala incorporando las lecciones de la Fase 1. 
+
+Entrégame la versión final de estos 5 puntos, lista para ser presentada:
+1. Producto elegido.
+2. Problema detectado (formato Jobs to be Done).
+3. Usuario principal (con motivaciones claras).
+4. 1 Decisión de PM inferida + Evidencia observable.
+5. Cómo utilizaron IA para el análisis.</code></pre>
+      </div>
+    </section>
+
+    <!-- FASE 3 -->
+    <section class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm space-y-4">
+      <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+        <h2 class="text-2xl font-bold text-teal">Fase 3: Entregable + Prototipo</h2>
+        <span class="bg-teal/10 text-teal text-xs font-bold px-3 py-1 rounded-full">🎨 Lovable.dev o v0.dev</span>
+      </div>
+      <p class="text-sm text-gray-500 border-l-2 border-teal pl-4">
+        <strong>Objetivo:</strong> Generar el texto final para tu slide y crear un prompt en inglés para generar el prototipo visual de tu app en Lovable.
+      </p>
+      
+      <div class="relative bg-deep rounded-xl overflow-hidden p-6 mt-4">
+        <button class="copy-btn absolute top-3 right-3 bg-white/10 text-white px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-white/20 transition">📋 Copiar Prompt</button>
+        <pre class="font-mono text-xs text-gray-300 whitespace-pre-wrap leading-relaxed"><code>Actúa como un experto en Prompt Engineering para herramientas de generación de UI con IA (como Lovable). 
+Escribe un prompt exclusivamente en inglés, detallado y técnico, para que Lovable.dev genere mi prototipo funcional y visual. Include: App Goal, Core Feature, PM Decision Evidence, UI/UX Style (modern clean SaaS), Key Components.</code></pre>
+      </div>
+    </section>
+
+    <!-- CONSEJOS -->
+    <section class="p-8 bg-orange/5 border border-orange/20 rounded-2xl space-y-4">
+      <h3 class="font-bold text-orange text-lg flex items-center gap-2">💡 Consejos Pro para Estudiantes</h3>
+      <ul class="text-sm text-gray-700 space-y-3 pl-4 list-disc">
+        <li><strong>Sé específico en la Fase 0:</strong> Cuanta más información "cruda" le des a la IA al principio, mejor será el refinamiento.</li>
+        <li><strong>Usa Perplexity:</strong> Los enlaces de Perplexity suelen ser reales y verificados, a diferencia de los que "inventa" ChatGPT.</li>
+      </ul>
+    </section>
+
+    <!-- ACTION HUB -->
+    <ActionHub />
+  </main>
+  <Footer />
+</Layout>
+
+<script is:inline>
+  // LÓGICA DE COPIA EN NAVEGADOR
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      const target = e.target;
+      const codeBlock = target.closest('.relative');
+      const code = codeBlock.querySelector('code').textContent;
+      
+      await navigator.clipboard.writeText(code.trim());
+      const original = target.textContent;
+      target.textContent = '✅ Copiado';
+      setTimeout(() => target.textContent = original, 2000);
+    });
+  });
+</script>
