@@ -1,27 +1,34 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Footer from '../../components/Footer.astro';
-import { LINKS } from '../../lib/constants.js';
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/Footer.astro";
+import { LINKS } from "../../lib/constants.js";
 ---
 
 <Layout title="IA para Empresas | LuciRMe Ai">
-
   <!-- HERO -->
   <header class="py-24 px-4 bg-[#F8FAFC] border-b border-gray-100">
     <div class="max-w-3xl mx-auto text-center">
-      <span class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-6">
+      <span
+        class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-6"
+      >
         Para Startups y Empresas
       </span>
       <h1 class="text-4xl md:text-5xl font-bold text-deep leading-tight mb-6">
-        Integra IA en tus flujos operativos.<br>
+        Integra IA en tus flujos operativos.<br />
         <span class="text-teal">Sin migraciones. Sin fricción.</span>
       </h1>
       <p class="text-lg text-gray-600 leading-relaxed mb-10">
-        Acelera el rendimiento de tu equipo con herramientas que se adaptan a los objetivos. <br>Ayudamos a reducir errores manuales. <br>Entregamos valor en semanas, no meses.
+        Acelera el rendimiento de tu equipo con herramientas que se adaptan a
+        los objetivos. <br />Ayudamos a reducir errores manuales. <br
+        />Entregamos valor en semanas, no meses.
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href={LINKS.calendly} target="_blank" class="inline-flex items-center justify-center gap-2 bg-orange hover:bg-orange/90 text-white px-8 py-4 rounded-lg font-bold transition shadow-lg">
+        <a
+          href={LINKS.calendly}
+          target="_blank"
+          class="inline-flex items-center justify-center gap-2 bg-orange hover:bg-orange/90 text-white px-8 py-4 rounded-lg font-bold transition shadow-lg"
+        >
           Agendemos un café estratégico →
         </a>
       </div>
@@ -31,19 +38,23 @@ import { LINKS } from '../../lib/constants.js';
   <!-- SECCIÓN: ¿Te suena familiar? -->
   <section class="py-20 px-4 bg-white">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-deep mb-12 text-center">¿Tu equipo vive esto?</h2>
+      <h2 class="text-3xl font-bold text-deep mb-12 text-center">
+        ¿Tu equipo vive esto?
+      </h2>
       <div class="grid md:grid-cols-2 gap-6">
-        {[
-          "Los procesos manuales generan errores recurrentes que afectan la calidad.",
-          "Las aprobaciones eternas frenan la ejecución y desmotivan al equipo.",
-          "Los datos están en silos: cada herramienta tiene su propia verdad.",
-          "Quieren innovar con IA, pero no saben por dónde empezar sin detener la operación."
-        ].map(dolor => (
-          <div class="flex gap-4 p-6 bg-slate-50 rounded-xl border border-gray-100 hover:border-teal transition-all">
-            <span class="text-orange text-xl font-bold">⚠️</span>
-            <p class="text-sm text-gray-700 leading-relaxed">{dolor}</p>
-          </div>
-        ))}
+        {
+          [
+            "Los procesos manuales generan errores recurrentes que afectan la calidad.",
+            "Las aprobaciones eternas frenan la ejecución y desmotivan al equipo.",
+            "Los datos están en silos: cada herramienta tiene su propia verdad.",
+            "Quieren innovar con IA, pero no saben por dónde empezar sin detener la operación.",
+          ].map((dolor) => (
+            <div class="flex gap-4 p-6 bg-slate-50 rounded-xl border border-gray-100 hover:border-teal transition-all">
+              <span class="text-orange text-xl font-bold">⚠️</span>
+              <p class="text-sm text-gray-700 leading-relaxed">{dolor}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -51,24 +62,50 @@ import { LINKS } from '../../lib/constants.js';
   <!-- SECCIÓN: ANTES Y DESPUÉS -->
   <section class="py-20 px-4 bg-[#F8FAFC]">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl font-bold text-deep text-center mb-12">El impacto en tu operación</h2>
+      <h2 class="text-2xl font-bold text-deep text-center mb-12">
+        El impacto en tu operación
+      </h2>
       <div class="grid md:grid-cols-2 gap-6">
         <div class="border border-gray-200 rounded-2xl p-8 bg-white">
           <h3 class="font-bold text-deep mb-6">🔴 Antes</h3>
           <ul class="space-y-4 text-sm text-gray-600">
-            <li><span class="text-red-500 font-bold mr-2">✕</span> Reportes semanales que toman 10h manuales</li>
-            <li><span class="text-red-500 font-bold mr-2">✕</span> Coordinación por email/WhatsApp duplicada</li>
-            <li><span class="text-red-500 font-bold mr-2">✕</span> Decisiones a ciegas por datos desactualizados</li>
-            <li><span class="text-red-500 font-bold mr-2">✕</span> Sensación de equipo agotado</li>
+            <li>
+              <span class="text-red-500 font-bold mr-2">✕</span> Reportes semanales
+              que toman 10h manuales
+            </li>
+            <li>
+              <span class="text-red-500 font-bold mr-2">✕</span> Coordinación por
+              email/WhatsApp duplicada
+            </li>
+            <li>
+              <span class="text-red-500 font-bold mr-2">✕</span> Decisiones a ciegas
+              por datos desactualizados
+            </li>
+            <li>
+              <span class="text-red-500 font-bold mr-2">✕</span> Sensación de equipo
+              agotado
+            </li>
           </ul>
         </div>
         <div class="border border-teal/30 rounded-2xl p-8 bg-teal/5">
           <h3 class="font-bold text-deep mb-6">🟢 Después</h3>
           <ul class="space-y-4 text-sm text-gray-600">
-            <li><span class="text-teal font-bold mr-2">✓</span> Reportes automáticos generados en minutos</li>
-            <li><span class="text-teal font-bold mr-2">✓</span> Coordinación centralizada: menos ruido, más acción</li>
-            <li><span class="text-teal font-bold mr-2">✓</span> Decisiones con datos en tiempo real</li>
-            <li><span class="text-teal font-bold mr-2">✓</span> Tiempo liberado para crear valor</li>
+            <li>
+              <span class="text-teal font-bold mr-2">✓</span> Reportes automáticos
+              generados en minutos
+            </li>
+            <li>
+              <span class="text-teal font-bold mr-2">✓</span> Coordinación centralizada:
+              menos ruido, más acción
+            </li>
+            <li>
+              <span class="text-teal font-bold mr-2">✓</span> Decisiones con datos
+              en tiempo real
+            </li>
+            <li>
+              <span class="text-teal font-bold mr-2">✓</span> Tiempo liberado para
+              crear valor
+            </li>
           </ul>
         </div>
       </div>
@@ -79,35 +116,66 @@ import { LINKS } from '../../lib/constants.js';
   <section id="precios" class="py-24 px-4 bg-white">
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold text-deep mb-4">Inversión para Empresas</h2>
+        <h2 class="text-3xl font-bold text-deep mb-4">
+          Inversión para Empresas
+        </h2>
         <p class="text-gray-600">Integra IA sin migraciones y sin fricción.</p>
       </div>
 
       <!-- Taller -->
-      <div class="bg-white p-8 rounded-2xl border-2 border-teal shadow-lg mb-8 relative">
-        <div class="absolute top-0 right-0 bg-teal text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1 rounded-bl-lg">Workshop práctico</div>
+      <div
+        class="bg-white p-8 rounded-2xl border-2 border-teal shadow-lg mb-8 relative"
+      >
+        <div
+          class="absolute top-0 right-0 bg-teal text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1 rounded-bl-lg"
+        >
+          Workshop práctico
+        </div>
         <h3 class="font-bold text-deep text-xl mb-4">🔥 Taller de Inmersión</h3>
-        <p class="text-xs text-gray-500 uppercase tracking-widest mb-4">2-3 horas de taller práctico</p>
-        <div class="text-3xl font-bold text-deep mb-6">$620.000 COP <span class="text-sm font-normal text-gray-400">/ $170 USD</span></div>
-        <p class="text-gray-600 mb-8">Trabajo directo con tu equipo. Identificamos cuellos de botella y configuramos el primer flujo prioritario.</p>
-        <a href={LINKS.calendly} target="_blank" class="block w-full bg-teal text-white font-bold py-4 rounded-lg text-center hover:bg-tealHover transition">Reservar Taller</a>
+        <p class="text-xs text-gray-500 uppercase tracking-widest mb-4">
+          2-3 horas de taller práctico
+        </p>
+        <div class="text-3xl font-bold text-deep mb-6">
+          $620.000 COP <span class="text-sm font-normal text-gray-400"
+            >/ $170 USD</span>
+        </div>
+        <p class="text-gray-600 mb-8">
+          Trabajo directo con tu equipo. Identificamos cuellos de botella y
+          configuramos el primer flujo prioritario.
+        </p>
+        <a
+          href={LINKS.calendly}
+          target="_blank"
+          class="block w-full bg-teal text-white font-bold py-4 rounded-lg text-center hover:bg-tealHover transition"
+          >Reservar Taller</a
+        >
       </div>
 
       <!-- Ciclo -->
       <div class="bg-slate-50 p-8 rounded-2xl border border-gray-200">
         <h3 class="font-bold text-deep text-xl mb-4">🚀 Ciclo de Autonomía</h3>
-        <p class="text-xs text-gray-500 uppercase tracking-widest mb-4">Mín. 32 horas · 8 semanas + seguimiento</p>
-        <div class="text-3xl font-bold text-deep mb-6">Desde $8.800.000 COP <span class="text-sm font-normal text-gray-400">/ $2.600 USD</span></div>
-        <p class="text-gray-600 font-medium mb-6">Implementación completa para escalar procesos operativos.</p>
+        <p class="text-xs text-gray-500 uppercase tracking-widest mb-4">
+          Mín. 32 horas · 8 semanas + seguimiento
+        </p>
+        <div class="text-3xl font-bold text-deep mb-6">
+          Desde $8.800.000 COP <span class="text-sm font-normal text-gray-400"
+            >/ $2.600 USD</span>
+        </div>
+        <p class="text-gray-600 font-medium mb-6">
+          Implementación completa para escalar procesos operativos.
+        </p>
         <ul class="space-y-3 text-sm text-gray-600 mb-8">
           <li>✓ Auditoría de procesos + integración IA</li>
           <li>✓ 2-3 flujos complejos automatizados</li>
           <li>✓ Entrenamiento de equipo + soporte 30 días</li>
         </ul>
-        <a href={LINKS.calendly} target="_blank" class="block w-full border-2 border-teal text-teal font-bold py-4 rounded-lg text-center hover:bg-teal/5 transition">Agendar Café para Cotizar</a>
+        <a
+          href={LINKS.calendly}
+          target="_blank"
+          class="block w-full border-2 border-teal text-teal font-bold py-4 rounded-lg text-center hover:bg-teal/5 transition"
+          >Agendar Café para Cotizar</a
+        >
       </div>
     </div>
   </section>
-
-  <Footer />
 </Layout>

@@ -1,9 +1,9 @@
 ---
-import '../styles/global.css';
-import Selector from '../components/Selector.astro';
-import Footer from '../components/Footer.astro';
-import Analytics from '@vercel/analytics/astro';
-import { LINKS } from '../lib/constants.js';
+import "../styles/global.css";
+import Selector from "../components/Selector.astro";
+import Footer from "../components/Footer.astro";
+import Analytics from "@vercel/analytics/astro";
+import { LINKS } from "../lib/constants.js";
 
 const { title } = Astro.props;
 ---
@@ -14,22 +14,80 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-    
+
     <!-- PostHog Analytics -->
     <script is:inline>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="Mi Ri init Vi Gi Rr Wi Ji Bi capture calculateEventProperties tn register register_once register_for_session unregister unregister_for_session an getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync un identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty nn Xi createPersonProfile setInternalOrTestUser sn Hi cn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Ki debug Lr rn getPageViewId captureTraceFeedback captureTraceMetric Di".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('phc_kSyqfd9vkMePJjoH95yV9oPupWgV3de8zftzZLPtzzM7', {
-        api_host: 'https://us.i.posthog.com',
-        defaults: '2026-01-30',
-        person_profiles: 'identified_only',
-    })
+      !(function (t, e) {
+        var o, n, p, r;
+        e.__SV ||
+          (window.posthog && window.posthog.__loaded) ||
+          ((window.posthog = e),
+          (e._i = []),
+          (e.init = function (i, s, a) {
+            function g(t, e) {
+              var o = e.split(".");
+              (2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                (t[e] = function () {
+                  t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+                }));
+            }
+            (((p = t.createElement("script")).type = "text/javascript"),
+              (p.crossOrigin = "anonymous"),
+              (p.async = !0),
+              (p.src =
+                s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") +
+                "/static/array.js"),
+              (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(
+                p,
+                r,
+              ));
+            var u = e;
+            for (
+              void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
+                u.people = u.people || [],
+                u.toString = function (t) {
+                  var e = "posthog";
+                  return (
+                    "posthog" !== a && (e += "." + a),
+                    t || (e += " (stub)"),
+                    e
+                  );
+                },
+                u.people.toString = function () {
+                  return u.toString(1) + ".people (stub)";
+                },
+                o =
+                  "Mi Ri init Vi Gi Rr Wi Ji Bi capture calculateEventProperties tn register register_once register_for_session unregister unregister_for_session an getFeatureFlag getFeatureFlagPayload getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync un identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty nn Xi createPersonProfile setInternalOrTestUser sn Hi cn opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Ki debug Lr rn getPageViewId captureTraceFeedback captureTraceMetric Di".split(
+                    " ",
+                  ),
+                n = 0;
+              n < o.length;
+              n++
+            )
+              g(u, o[n]);
+            e._i.push([i, s, a]);
+          }),
+          (e.__SV = 1));
+      })(document, window.posthog || []);
+      posthog.init("phc_kSyqfd9vkMePJjoH95yV9oPupWgV3de8zftzZLPtzzM7", {
+        api_host: "https://us.i.posthog.com",
+        defaults: "2026-01-30",
+        person_profiles: "identified_only",
+      });
     </script>
   </head>
 
   <body class="bg-white text-gray-900 font-sans antialiased flex">
-    
+    <!-- Backdrop de barra lateral en móviles -->
+    <div
+      id="sidebar-backdrop"
+      onclick="toggleSidebar()"
+      class="fixed inset-0 bg-[#0F172A]/30 backdrop-blur-xs z-40 hidden transition-opacity duration-200"
+    >
+    </div>
+
     <!-- 1. SIDEBAR (Estilo Notion Blanco, w-12 por defecto/collapsed) -->
-    <aside 
+    <aside
       id="site-sidebar"
       class="fixed inset-y-0 left-0 z-50 w-12 bg-white border-r border-gray-100 flex flex-col justify-between transition-all duration-200 select-none overflow-hidden"
     >
@@ -37,63 +95,168 @@ const { title } = Astro.props;
         <!-- Cabecera: Logo de imagen + Botón Colapsar -->
         <div class="px-3 flex items-center justify-between h-10">
           <div class="flex items-center gap-2 hidden" id="sidebar-brand">
-            <span class="font-bold text-xs text-deep uppercase tracking-wider whitespace-nowrap">LuciRMe AI</span>
+            <a href="/" class="flex items-center">
+              <span
+                class="font-bold text-xs text-deep tracking-wider whitespace-nowrap"
+                >LuciRMe AI</span
+              >
+            </a>
           </div>
-          <button 
+          <button
             onclick="toggleSidebar()"
             class="p-1.5 hover:bg-gray-100 rounded-md text-gray-400 hover:text-deep transition ml-auto"
             title="Barra lateral"
           >
-            <span id="collapse-icon" class="text-xs font-bold text-gray-400">≫</span>
+            <span id="collapse-icon" class="text-xs font-bold text-gray-400"
+              >≫</span
+            >
           </button>
         </div>
 
         <!-- Enlaces con Iconos Planos en SVG -->
         <nav class="flex flex-col gap-0.5 px-2">
-          
           <!-- Soluciones (Con Subsección de una sola palabra) -->
           <div class="flex flex-col">
-            <a href="/servicios" class="flex items-center gap-3 px-2 py-2 hover:bg-gray-100 rounded-lg transition-all group">
-              <svg class="w-5 h-5 text-gray-400 group-hover:text-teal transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+            <a
+              href="/servicios"
+              class="flex items-center gap-3 px-2 py-2 hover:bg-gray-100 rounded-lg transition-all group"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400 group-hover:text-teal transition-colors flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                ></path>
               </svg>
-              <span class="text-xs font-semibold text-gray-500 group-hover:text-deep hidden sidebar-text truncate">Soluciones</span>
+              <span
+                class="text-xs font-semibold text-gray-500 group-hover:text-deep hidden sidebar-text truncate"
+                >Soluciones</span
+              >
             </a>
             <!-- Sub-enlaces de una sola palabra, ocultos en collapsed -->
-            <div class="pl-8 py-0.5 space-y-1 hidden sidebar-text text-[11px]" id="sub-soluciones">
-              <a href="/soluciones/profesionales" class="block text-gray-400 hover:text-teal">Pro</a>
-              <a href="/soluciones/empresas" class="block text-gray-400 hover:text-teal">Empresa</a>
+            <div
+              class="pl-8 py-0.5 space-y-1 hidden sidebar-text text-[11px]"
+              id="sub-soluciones"
+            >
+              <a
+                href="/soluciones/profesionales"
+                class="block text-gray-400 hover:text-teal">Personalizada</a
+              >
+              <a
+                href="/soluciones/empresas"
+                class="block text-gray-400 hover:text-teal">Empresas</a
+              >
             </div>
           </div>
 
           <!-- Recursos (Con Subsección de una sola palabra) -->
           <div class="flex flex-col">
-            <a href="/recursos" class="flex items-center gap-3 px-2 py-2 hover:bg-gray-100 rounded-lg transition-all group">
-              <svg class="w-5 h-5 text-gray-400 group-hover:text-teal transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            <a
+              href="/recursos"
+              class="flex items-center gap-3 px-2 py-2 hover:bg-gray-100 rounded-lg transition-all group"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400 group-hover:text-teal transition-colors flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                ></path>
               </svg>
-              <span class="text-xs font-semibold text-gray-500 group-hover:text-deep hidden sidebar-text truncate">Recursos</span>
+              <span
+                class="text-xs font-semibold text-gray-500 group-hover:text-deep hidden sidebar-text truncate"
+                >Recursos</span
+              >
             </a>
-            <div class="pl-8 py-0.5 space-y-1 hidden sidebar-text text-[11px]" id="sub-recursos">
-              <a href="/recursos/backlog-detox" class="block text-gray-400 hover:text-teal">Detox</a>
-              <a href="/recursos/shapeup-builder" class="block text-gray-400 hover:text-teal">Pitch</a>
+            <div
+              class="pl-8 py-0.5 space-y-1 hidden sidebar-text text-[11px]"
+              id="sub-recursos"
+            >
+              <a
+                href="/recursos/backlog-detox"
+                class="block text-gray-400 hover:text-teal">Backlog-detox</a
+              >
+              <a
+                href="/recursos/shapeup-builder"
+                class="block text-gray-400 hover:text-teal">Shapeup-builder</a
+              >
+              <a
+                href="/recursos/career-path-notebooklm"
+                class="block text-gray-400 hover:text-teal">Career path</a
+              >
+              <a
+                href="/recursos/cv-con-ia"
+                class="block text-gray-400 hover:text-teal">CV con IA</a
+              >
+              <a
+                href="/recursos/ideador-producto"
+                class="block text-gray-400 hover:text-teal">Ideador producto</a
+              >
+              <a
+                href="/recursos/job-prompt-ai"
+                class="block text-gray-400 hover:text-teal">Job prompt AI</a
+              >
+              <a
+                href="/recursos/prompteador"
+                class="block text-gray-400 hover:text-teal">Prompteador</a
+              >
             </div>
           </div>
 
-          <a href="/#sobre-mi" class="flex items-center gap-3 px-2 py-2 hover:bg-gray-100 rounded-lg transition-all group">
-            <svg class="w-5 h-5 text-gray-400 group-hover:text-teal transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+          <a
+            href="/content/sobremi"
+            class="flex items-center gap-3 px-2 py-2 hover:bg-gray-100 rounded-lg transition-all group"
+          >
+            <svg
+              class="w-5 h-5 text-gray-400 group-hover:text-teal transition-colors flex-shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+              ></path>
             </svg>
-            <span class="text-xs font-semibold text-gray-500 group-hover:text-deep transition-opacity duration-200 hidden sidebar-text truncate">
+            <span
+              class="text-xs font-semibold text-gray-500 group-hover:text-deep transition-opacity duration-200 hidden sidebar-text truncate"
+            >
               Sobre Mí
             </span>
           </a>
 
-          <a href="/#experiencias" class="flex items-center gap-3 px-2 py-2 hover:bg-gray-100 rounded-lg transition-all group">
-            <svg class="w-5 h-5 text-gray-400 group-hover:text-teal transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          <a
+            href="/content/casosreales"
+            class="flex items-center gap-3 px-2 py-2 hover:bg-gray-100 rounded-lg transition-all group"
+          >
+            <svg
+              class="w-5 h-5 text-gray-400 group-hover:text-teal transition-colors flex-shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            <span class="text-xs font-semibold text-gray-500 group-hover:text-deep transition-opacity duration-200 hidden sidebar-text truncate">
+            <span
+              class="text-xs font-semibold text-gray-500 group-hover:text-deep transition-opacity duration-200 hidden sidebar-text truncate"
+            >
               Casos
             </span>
           </a>
@@ -102,48 +265,105 @@ const { title } = Astro.props;
 
       <!-- PIE DE SIDEBAR -->
       <div class="p-2 border-t border-gray-100 space-y-2">
-        <button onclick="document.getElementById('selector-overlay').classList.remove('hidden')" class="w-full flex items-center justify-center gap-2 py-2 bg-orange text-white text-[11px] font-bold rounded-lg hover:bg-orange/90 transition shadow-sm">
-          <span>⚡</span> <span class="hidden sidebar-text">Enciende tu Foco</span>
+        <button
+          onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
+          class="w-full flex items-center justify-center gap-2 py-2 bg-orange text-white text-[11px] font-bold rounded-lg hover:bg-orange/90 transition shadow-sm"
+        >
+          <span>⚡</span>
+          <span class="hidden sidebar-text">Enciende tu Foco</span>
         </button>
-        
-        <a href={LINKS.calendly} target="_blank" class="w-full flex items-center justify-center gap-2 py-2 border border-teal text-teal text-[11px] font-bold rounded-lg hover:bg-teal/5 transition mb-2">
-          <span>📅</span> <span class="hidden sidebar-text">Agendar Café</span>
+
+        <a
+          href={LINKS.calendly}
+          target="_blank"
+          class="w-full flex items-center justify-center gap-2 py-2 border border-teal text-teal text-[11px] font-bold rounded-lg hover:bg-teal/5 transition mb-2"
+        >
+          <span>📅</span>
+          <span class="hidden sidebar-text">Agendar Café</span>
         </a>
 
         <!-- Contenedor dinámico de Clerk en el Sidebar -->
-        <div id="auth-sidebar-container" class="pt-2 border-t border-gray-50 flex items-center justify-center gap-2">
-          <span class="text-[10px] text-gray-300 hidden sidebar-text">Cargando...</span>
+        <div
+          id="auth-sidebar-container"
+          class="pt-2 border-t border-gray-50 flex items-center justify-center gap-2"
+        >
+          <span class="text-[10px] text-gray-300 hidden sidebar-text"
+            >Cargando...</span
+          >
         </div>
       </div>
     </aside>
 
     <!-- 2. CONTENEDOR PRINCIPAL (Se adapta al ancho del sidebar) -->
-    <div id="main-content" class="flex-grow flex flex-col min-h-screen w-full pl-12 transition-all duration-200">
-      
+    <div
+      id="main-content"
+      class="flex-grow flex flex-col min-h-screen w-full pl-12 transition-all duration-200"
+    >
       <!-- HEADER SUPERIOR -->
-      <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-gray-100 px-6 py-4">
+      <header
+        class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-gray-100 px-4 py-3 sm:px-6 sm:py-4"
+      >
         <div class="w-full flex items-center justify-between">
-          
           <div class="flex items-center gap-2">
-            <img src="/logo-lucirme.png" alt="Logo" class="h-6 w-auto object-contain flex-shrink-0" />
-          </div>
-
-          <!-- Derecha -->
-          <div class="flex items-center gap-4 ml-auto">
-                        <a href="/sign-in" class="text-sm font-semibold text-gray-400 hover:text-deep transition">|  Iniciar Sesión  |</a>
-
-            <button 
-              onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
-              class="text-sm font-bold text-orange hover:text-orange/80 transition"
-            >
-              Enciende tu Foco
-            </button>
-            
-            <a href={LINKS.calendly} target="_blank" class="bg-teal text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-tealHover transition shadow-sm">
-              Agendar Sesión Gratuita →
+            <a href="/" class="flex items-center">
+              <img
+                src="/logo-lucirme.png"
+                alt="Logo"
+                class="h-5 sm:h-6 w-auto object-contain flex-shrink-0"
+              />
             </a>
           </div>
 
+          <!-- Derecha -->
+          <div class="flex items-center gap-2 sm:gap-4 ml-auto">
+            <a
+              href="/sign-in"
+              class="hidden md:inline-block text-xs sm:text-sm font-semibold text-gray-400 hover:text-deep transition"
+            >
+              Iniciar Sesión
+            </a>
+            <span class="hidden md:inline text-gray-200">|</span>
+
+            <button
+              onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
+              class="text-xs sm:text-sm font-bold text-orange hover:text-orange/80 transition px-2 py-1"
+            >
+              Enciende tu Foco
+            </button>
+
+            <!-- Botón de Agendar para pantallas medianas y grandes -->
+            <a
+              href={LINKS.calendly}
+              target="_blank"
+              class="hidden sm:inline-flex bg-teal text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold hover:bg-tealHover transition shadow-sm"
+            >
+              Agendar Sesión <span class="hidden md:inline">&nbsp;Gratuita</span
+              > →
+            </a>
+
+            <!-- Botón de Agendar minimalista para móviles -->
+            <a
+              href={LINKS.calendly}
+              target="_blank"
+              class="inline-flex sm:hidden bg-teal text-white p-2 rounded-lg hover:bg-tealHover transition shadow-sm"
+              title="Agendar Sesión Gratuita"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                ></path>
+              </svg>
+            </a>
+          </div>
         </div>
       </header>
 
@@ -162,34 +382,47 @@ const { title } = Astro.props;
     <script is:inline>
       let isOpened = false;
 
-      window.toggleSidebar = function() {
-        const sidebar = document.getElementById('site-sidebar');
-        const content = document.getElementById('main-content');
-        const icon = document.getElementById('collapse-icon');
-        const brand = document.getElementById('sidebar-brand');
-        const texts = document.querySelectorAll('.sidebar-text');
+      window.toggleSidebar = function () {
+        const sidebar = document.getElementById("site-sidebar");
+        const content = document.getElementById("main-content");
+        const icon = document.getElementById("collapse-icon");
+        const brand = document.getElementById("sidebar-brand");
+        const texts = document.querySelectorAll(".sidebar-text");
+        const backdrop = document.getElementById("sidebar-backdrop");
 
         isOpened = !isOpened;
+        const isMobile = window.innerWidth < 768; // breakpoint 'md'
 
         if (isOpened) {
-          sidebar.style.width = '240px';
-          content.style.paddingLeft = '240px';
-          icon.innerText = '≪';
-          brand.classList.remove('hidden');
-          texts.forEach(t => t.classList.remove('hidden'));
+          sidebar.style.width = "240px";
+          if (isMobile) {
+            content.style.paddingLeft = "48px"; // en móviles no empuja el contenido, se superpone
+            sidebar.classList.add("shadow-xl"); // añade sombra para efecto overlay
+            if (backdrop) backdrop.classList.remove("hidden");
+          } else {
+            content.style.paddingLeft = "240px";
+            sidebar.classList.remove("shadow-xl");
+          }
+          icon.innerText = "≪";
+          brand.classList.remove("hidden");
+          texts.forEach((t) => t.classList.remove("hidden"));
         } else {
-          sidebar.style.width = '48px';
-          content.style.paddingLeft = '48px';
-          icon.innerText = '≫';
-          brand.classList.add('hidden');
-          texts.forEach(t => t.classList.add('hidden'));
+          sidebar.style.width = "48px";
+          content.style.paddingLeft = "48px";
+          icon.innerText = "≫";
+          brand.classList.add("hidden");
+          texts.forEach((t) => t.classList.add("hidden"));
+          sidebar.classList.remove("shadow-xl");
+          if (backdrop) backdrop.classList.add("hidden");
         }
       };
 
       // Sincronizar sesión con Clerk
-      window.addEventListener('load', async () => {
-        const leftContainer = document.getElementById('auth-left-container');
-        const sidebarContainer = document.getElementById('auth-sidebar-container');
+      window.addEventListener("load", async () => {
+        const leftContainer = document.getElementById("auth-left-container");
+        const sidebarContainer = document.getElementById(
+          "auth-sidebar-container",
+        );
 
         if (window.Clerk) {
           await window.Clerk.load();
@@ -199,15 +432,17 @@ const { title } = Astro.props;
             if (window.posthog) {
               window.posthog.identify(user.id, {
                 email: user.primaryEmailAddress?.emailAddress,
-                name: user.firstName + ' ' + user.lastName
+                name: user.firstName + " " + user.lastName,
               });
             }
 
-            if (leftContainer) leftContainer.classList.add('hidden');
+            if (leftContainer) leftContainer.classList.add("hidden");
 
             if (sidebarContainer) {
               sidebarContainer.innerHTML = `<div id="clerk-sidebar-avatar" class="flex items-center gap-3"></div>`;
-              window.Clerk.mountUserButton(document.getElementById('clerk-sidebar-avatar'));
+              window.Clerk.mountUserButton(
+                document.getElementById("clerk-sidebar-avatar"),
+              );
             }
           } else {
             if (sidebarContainer) {

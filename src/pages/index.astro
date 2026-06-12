@@ -1,32 +1,350 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import CardsSelector from '../components/CardsSelector.astro';
-import ProblemaSolucion from '../components/ProblemaSolucion.astro'; 
-import ComoFunciona from '../components/ComoFunciona.astro';
-import SobreMi from '../components/SobreMi.astro';
-import RecursosSoluciones from '../components/RecursosSoluciones.astro';
-import Metodo from '../components/Metodo.astro';
-import Pricing from '../components/Pricing.astro';
-import SocialProof from '../components/SocialProof.astro';
-import FAQ from '../components/FAQ.astro';
-import Cierre from '../components/Cierre.astro';
-import ScannerCTA from '../components/ScannerCTA.astro'; // <--- Importa esto
-
-
-
-
-// Asegúrate que el archivo se llama así
+// src/pages/index-text-chat.astro
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="LuciRMe Ai | IA Aplicada con Criterio">
-  <Hero />
-  <CardsSelector />
-  <Metodo />
-  <ScannerCTA />
-  <Pricing />
-  <SobreMi />
-  <SocialProof />
-  <FAQ />
-  <Cierre />
+<Layout title="Consola de Triage | LuciRMe AI">
+  <main
+    class="max-w-4xl mx-auto py-12 px-6 min-h-[90vh] flex flex-col justify-center space-y-12"
+  >
+    <!-- HEADER -->
+    <header class="text-center md:text-left">
+      <h1 class="text-4xl font-black text-deep mb-2 tracking-tight">
+        Tu talento merece brillar
+      </h1>
+      <p class="text-sm text-gray-500">
+        Menos operatividad manual. Aplica IA con criterio para recuperar tu
+        tiempo
+      </p>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- SECCIÓN 1 Y 2: EL CHAT SIMULADO CLARO        -->
+    <!-- ============================================ -->
+    <div
+      id="lucirme-chat"
+      class="bg-[#F8FAFC] rounded-3xl p-6 md:p-8 shadow-sm border border-gray-200 relative overflow-hidden min-h-[350px] flex flex-col justify-between text-deep"
+    >
+      <div class="absolute top-0 left-0 w-full h-1 bg-teal"></div>
+
+      <!-- Área de Conversación -->
+      <div
+        id="chat-messages"
+        class="flex-grow space-y-6 overflow-y-auto max-h-[250px] pr-2"
+      >
+        <!-- Burbuja Inicial de la IA (Fondo Blanco) -->
+        <div class="space-y-2 initial-bot-message">
+          <span
+            class="text-teal font-bold text-xs uppercase tracking-widest block"
+            >LuciRMe AI:</span
+          >
+          <div
+            class="inline-block bg-white border border-gray-200 p-4 rounded-2xl rounded-tl-sm text-sm text-gray-700 max-w-lg shadow-sm"
+          >
+            Hola. Soy el asistente de LuciRMe. No te voy a hacer perder el
+            tiempo con teoría. Elige tu camino:
+          </div>
+        </div>
+
+        <!-- Indicador "Escribiendo..." -->
+        <div id="chat-loading" class="hidden space-y-2">
+          <span
+            class="text-teal font-bold text-xs uppercase tracking-widest block"
+            >LuciRMe AI:</span
+          >
+          <div
+            class="inline-flex items-center gap-1 bg-white border border-gray-200 px-4 py-3 rounded-2xl rounded-tl-sm text-sm text-gray-400"
+          >
+            <span
+              class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"
+              style="animation-delay: 0s"></span>
+            <span
+              class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"
+              style="animation-delay: 0.15s"></span>
+            <span
+              class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"
+              style="animation-delay: 0.3s"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: LOS ATAJOS ROUNDED -->
+      <div
+        id="chat-options"
+        class="flex flex-wrap gap-1.5 pt-6 border-t border-gray-100 mt-6 justify-center md:justify-start"
+      >
+        <button
+          onclick="responderChat(1, '👤 Quiero asesoría personalizada, aprender y recuperar tiempo')"
+          class="px-4 py-2.5 bg-white border border-gray-200 hover:border-teal rounded-full text-xs font-semibold text-gray-700 transition shadow-sm"
+        >
+          👤 Quiero asesoría personalizada, aprender y recuperar tiempo
+        </button>
+        <button
+          onclick="responderChat(2, '🏢 Necesito proponer IA en mi empresa')"
+          class="px-4 py-2.5 bg-white border border-gray-200 hover:border-teal rounded-full text-xs font-semibold text-gray-700 transition shadow-sm"
+        >
+          🏢 Necesito proponer IA en mi empresa
+        </button>
+        <button
+          onclick="responderChat(3, '📚 Ver recursos gratis')"
+          class="px-4 py-2.5 bg-white border border-gray-200 hover:border-teal rounded-full text-xs font-semibold text-gray-700 transition shadow-sm"
+        >
+          📚 Ver recursos gratis
+        </button>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SECCIÓN 3: SEGUIMIENTOS / NAV               -->
+    <!-- ============================================ -->
+    <section
+      class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden"
+      id="seguimientos-box"
+    >
+      <div
+        class="px-6 py-4 bg-gray-50/50 border-b border-gray-100 flex items-center justify-between"
+      >
+        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest"
+          >¿QUÉ QUIERES SABER DE LUCIRME?</span
+        >
+        <span class="text-xs text-gray-400 flex items-center gap-1.5"
+          ><span class="w-1.5 h-1.5 bg-teal rounded-full animate-pulse"></span> Elige
+          tu punto de partida</span
+        >
+      </div>
+
+      <div class="divide-y divide-gray-100">
+        <!-- Enlace 1: Metodología -->
+        <a
+          href="/content/como_funciona"
+          class="w-full px-6 py-4 flex items-start gap-4 hover:bg-gray-50 transition text-left group"
+        >
+          <span
+            class="text-teal font-bold text-lg mt-0.5 group-hover:translate-x-1 transition-transform"
+            >↳</span
+          >
+          <div class="flex-grow">
+            <p
+              class="text-sm font-semibold text-deep group-hover:text-teal transition"
+            >
+              ¿Cómo funciona el enfoque de LucirMe?
+            </p>
+            <p class="text-xs text-gray-400 mt-1">
+              Sistemas personalizados diseñados para que la tecnología trabaje
+              en silencio y tú recuperes tu vida.
+            </p>
+          </div>
+          <span
+            class="hidden sm:inline-block text-[10px] font-bold text-gray-400 bg-gray-100 px-2.5 py-1 rounded-full uppercase tracking-wider whitespace-nowrap self-center"
+            >Ver Método</span
+          >
+        </a>
+
+        <!-- Enlace 2: Sobre Pablo -->
+        <a
+          href="/content/sobremi"
+          class="w-full px-6 py-4 flex items-start gap-4 hover:bg-gray-50 transition text-left group"
+        >
+          <span
+            class="text-teal font-bold text-lg mt-0.5 group-hover:translate-x-1 transition-transform"
+            >↳</span
+          >
+          <div class="flex-grow">
+            <p
+              class="text-sm font-semibold text-deep group-hover:text-teal transition"
+            >
+              Me gustaría conocer quién es Pablo Ríos
+            </p>
+            <p class="text-xs text-gray-400 mt-1">
+              Ingeniero de sistemas con +10 años liderando productos digitales
+              en Latam.
+            </p>
+          </div>
+          <span
+            class="hidden sm:inline-block text-[10px] font-bold text-gray-400 bg-gray-100 px-2.5 py-1 rounded-full uppercase tracking-wider whitespace-nowrap self-center"
+            >Sobre Mí</span
+          >
+        </a>
+
+        <!-- Enlace 3: Precios -->
+        <a
+          href="/content/precios"
+          class="w-full px-6 py-4 flex items-start gap-4 hover:bg-gray-50 transition text-left group"
+        >
+          <span
+            class="text-teal font-bold text-lg mt-0.5 group-hover:translate-x-1 transition-transform"
+            >↳</span
+          >
+          <div class="flex-grow">
+            <p
+              class="text-sm font-semibold text-deep group-hover:text-teal transition"
+            >
+              Servicios y tarifas transparentes
+            </p>
+            <p class="text-xs text-gray-400 mt-1">
+              Consultorías uno a uno y talleres grupales. Precios claros, sin
+              llamadas ocultas de venta.
+            </p>
+          </div>
+          <span
+            class="hidden sm:inline-block text-[10px] font-bold text-gray-400 bg-gray-100 px-2.5 py-1 rounded-full uppercase tracking-wider whitespace-nowrap self-center"
+            >Inversión</span
+          >
+        </a>
+
+        <!-- Enlace 4: Casos de éxito (Corregido) -->
+        <a
+          href="/content/casosreales"
+          class="w-full px-6 py-4 flex items-start gap-4 hover:bg-gray-50 transition text-left group"
+        >
+          <span
+            class="text-teal font-bold text-lg mt-0.5 group-hover:translate-x-1 transition-transform"
+            >↳</span
+          >
+          <div class="flex-grow">
+            <p
+              class="text-sm font-semibold text-deep group-hover:text-teal transition"
+            >
+              Ver casos de éxito e impacto real
+            </p>
+            <p class="text-xs text-gray-400 mt-1">
+              Profesionales y startups que ya han optimizado su tiempo y
+              estandarizado flujos.
+            </p>
+          </div>
+          <span
+            class="hidden sm:inline-block text-[10px] font-bold text-gray-400 bg-gray-100 px-2.5 py-1 rounded-full uppercase tracking-wider whitespace-nowrap self-center"
+            >Casos</span
+          >
+        </a>
+
+        <!-- Enlace 5: Enciende tu foco (Corregido para abrir modal del test) -->
+        <button
+          onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
+          class="w-full px-6 py-4 flex items-start gap-4 hover:bg-gray-50 transition text-left group"
+        >
+          <span
+            class="text-teal font-bold text-lg mt-0.5 group-hover:translate-x-1 transition-transform"
+            >↳</span
+          >
+          <div class="flex-grow">
+            <p
+              class="text-sm font-semibold text-deep group-hover:text-teal transition"
+            >
+              Mapea tu mayor fuga de tiempo
+            </p>
+            <p class="text-xs text-gray-400 mt-1">
+              Realiza nuestro test de 60 segundos y recibe un diagnóstico
+              personalizado de automatización.
+            </p>
+          </div>
+          <span
+            class="hidden sm:inline-block text-[10px] font-bold text-teal bg-teal/10 px-2.5 py-1 rounded-full uppercase tracking-wider whitespace-nowrap self-center"
+            >Hacer Test</span
+          >
+        </button>
+      </div>
+    </section>
+  </main>
 </Layout>
+
+<script is:inline>
+  // LÓGICA DE SIMULADOR DE CHAT EN VIVO (Client Side)
+  async function responderChat(opcion, textoBoton) {
+    const messagesContainer = document.getElementById("chat-messages");
+    const optionsDiv = document.getElementById("chat-options");
+    const loadingDiv = document.getElementById("chat-loading");
+
+    // 1. Ocultar opciones para enfocar la conversación
+    optionsDiv.style.display = "none";
+
+    // 2. Pintar la burbuja del usuario (Fondo Teal de Marca)
+    const userBubble = document.createElement("div");
+    userBubble.className =
+      "space-y-2 text-right animate-fade-in chat-bubble-temp";
+    userBubble.innerHTML = `
+      <span class="text-orange font-bold text-xs uppercase tracking-widest block">Tú:</span>
+      <div class="inline-block bg-teal text-white p-4 rounded-2xl rounded-tr-sm text-sm text-left max-w-lg shadow-md font-semibold">
+        ${textoBoton}
+      </div>
+    `;
+    messagesContainer.appendChild(userBubble);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    // 3. Mostrar indicador de carga ("Escribiendo...")
+    messagesContainer.appendChild(loadingDiv);
+    loadingDiv.classList.remove("hidden");
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    // 4. Retraso simulado de "La IA está pensando" (1.2 segundos)
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+
+    // Ocultamos el cargando
+    loadingDiv.classList.add("hidden");
+
+    // 5. Determinar la respuesta de la IA (Rutas Corregidas a las Páginas de Producción)
+    let text = "";
+    let link = "";
+
+    if (opcion === 1) {
+      text =
+        "El software debería trabajar para ti, no al revés. Puedes recuperar hasta 10 horas de tu semana automatizando flujos de forma limpia. Miremos tu caso en un Café Estratégico de 30 minutos sin costo, o revisa mis servicios individuales.";
+      link =
+        "<a href='/soluciones/profesionales' class='inline-block text-teal font-bold hover:underline mt-2'>Ver servicios de consultoría 1-1 →</a>";
+    } else if (opcion === 2) {
+      text =
+        "El caos manual frena el crecimiento y quema a los equipos. Estandarizo tus procesos con arquitecturas de IA para que tu roadmap avance sin fricción técnica. Hablemos en un espacio estratégico gratis para diagnosticar a tu equipo.";
+      link =
+        "<a href='soluciones/empresas' class='inline-block text-teal font-bold hover:underline mt-2'>Ver opciones para empresas y talleres →</a>";
+    } else if (opcion === 3) {
+      text =
+        "Valor inmediato y directo al grano. Tienes a tu disposición mis guías de optimización, funcionalidades listas y, si eres Product Manager, el acceso a mi Ebook 'PM Sin Bullshit'.";
+      link =
+        "<a href='/recursos' class='inline-block text-teal font-bold hover:underline mt-2'>Acceder a la librería de recursos →</a>";
+    }
+
+    // 6. Pintar la respuesta de la IA (Fondo Blanco) y botón para reiniciar chat
+    const botBubble = document.createElement("div");
+    botBubble.className = "space-y-2 animate-fade-in chat-bubble-temp";
+    botBubble.innerHTML = `
+      <span class="text-teal font-bold text-xs uppercase tracking-widest block">LuciRMe AI:</span>
+      <div class="inline-block bg-white border border-gray-200 p-4 rounded-2xl rounded-tl-sm text-sm text-gray-700 max-w-lg shadow-sm">
+        <p>${text}</p>
+        <div class="pt-4">${link}</div>
+        <button onclick="reiniciarChat()" class="text-xs text-gray-400 hover:text-teal underline mt-4 block">← Probar otra opción</button>
+      </div>
+    `;
+    messagesContainer.appendChild(botBubble);
+
+    // Auto-scroll al final del chat
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  }
+
+  function reiniciarChat() {
+    const messagesContainer = document.getElementById("chat-messages");
+    const optionsDiv = document.getElementById("chat-options");
+
+    // Eliminar las burbujas temporales creadas
+    const tempBubbles = messagesContainer.querySelectorAll(".chat-bubble-temp");
+    tempBubbles.forEach((bubble) => bubble.remove());
+
+    // Mostrar de nuevo las opciones del chat
+    optionsDiv.style.display = "flex";
+  }
+</script>
+
+<style>
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

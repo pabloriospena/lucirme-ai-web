@@ -1,77 +1,121 @@
 ---
 // src/components/ActionHub.astro
-import { LINKS } from '../lib/constants.js';
+import { LINKS } from "../lib/constants.js";
 ---
 
 <section class="py-24 px-4 bg-white text-deep border-t border-gray-100">
   <div class="max-w-4xl mx-auto space-y-12">
-    
     <!-- CABECERA -->
     <div class="text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-deep mb-4">¿Listo para recuperar tu foco?</h2>
-      <p class="text-gray-500 text-lg">Elige el camino que mejor se ajuste a tu etapa actual.</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-deep mb-4">
+        ¿Listo para recuperar tu foco?
+      </h2>
     </div>
-
-    <!-- RECURSOS -->
-    <div>
-      <h2 class="text-lg font-bold text-deep mb-6">Recursos para avanzar solo</h2>
-      <div class="grid md:grid-cols-2 gap-4">
-          <a href="/recursos/backlog-detox" class="p-4 border border-gray-200 rounded-lg hover:border-teal transition text-sm font-medium text-gray-700">
-              静态 🧹 Backlog Detox
-          </a>
-          <a href="/recursos/guia-notebooklm" class="p-4 border border-gray-200 rounded-lg hover:border-teal transition text-sm font-medium text-gray-700">
-              📘 Guía NotebookLM
-          </a>
-          <a href="/recursos/shapeup-builder" class="p-4 border border-gray-200 rounded-lg hover:border-teal transition text-sm font-medium text-gray-700">
-              🎯 ShapeUp Builder
-          </a>
-          <a href="/recursos/prompteador" class="p-4 border border-gray-200 rounded-lg hover:border-teal transition text-sm font-medium text-gray-700">
-              💡 Prompteador
-          </a>
-      </div>
-    </div>
-
     <!-- CTA PRINCIPAL -->
     <div class="text-center py-6">
-      <p class="text-xs text-gray-400 uppercase tracking-widest mb-3">30 minutos · 100% gratis · Sin venta · Sin presión.</p>
-      <a href={LINKS.calendly} target="_blank" class="block w-full bg-teal text-white font-bold py-5 rounded-xl text-center hover:bg-tealHover transition shadow-lg text-lg mb-4">
+      <p class="text-xs text-gray-400 uppercase tracking-widest mb-3">
+        30 minutos · 100% gratis · Sin venta · Sin presión.
+      </p>
+      <a
+        href={LINKS.calendly}
+        target="_blank"
+        class="block w-full bg-teal text-white font-bold py-5 rounded-xl text-center hover:bg-tealHover transition shadow-lg text-lg mb-4"
+      >
         Agenda tu café de estrategia →
       </a>
     </div>
 
-    <!-- EBOOK -->
-    <div class="bg-[#0F172A] rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 shadow-xl text-white">
-      <div class="w-20 h-28 bg-white rounded-r-lg rounded-l-sm shadow-md flex-shrink-0 flex items-center justify-center border-l-4 border-gray-300">
-        <span class="text-[8px] font-bold text-deep text-center px-1 leading-tight">PM Sin Bullshit</span>
+    <!-- RECURSOS -->
+    <div>
+      <h2 class="text-lg font-bold text-deep mb-6">
+        Recursos para avanzar solo
+      </h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <a
+          href="/recursos/backlog-detox"
+          class="p-4 border border-gray-200 rounded-lg hover:border-teal transition text-sm font-medium text-gray-700"
+        >
+          🧹 Backlog Detox
+        </a>
+        <a
+          href="/recursos/guia-notebooklm"
+          class="p-4 border border-gray-200 rounded-lg hover:border-teal transition text-sm font-medium text-gray-700"
+        >
+          📘 Guía NotebookLM
+        </a>
+        <a
+          href="/recursos/shapeup-builder"
+          class="p-4 border border-gray-200 rounded-lg hover:border-teal transition text-sm font-medium text-gray-700"
+        >
+          🎯 ShapeUp Builder
+        </a>
+        <a
+          href="/recursos/prompteador"
+          class="p-4 border border-gray-200 rounded-lg hover:border-teal transition text-sm font-medium text-gray-700"
+        >
+          💡 Prompteador
+        </a>
       </div>
-      
+    </div>
+
+    <!-- EBOOK -->
+    <div
+      class="bg-[#0F172A] rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 shadow-xl text-white"
+    >
+      <div
+        class="w-20 h-28 bg-white rounded-r-lg rounded-l-sm shadow-md flex-shrink-0 flex items-center justify-center border-l-4 border-gray-300"
+      >
+        <span
+          class="text-[8px] font-bold text-deep text-center px-1 leading-tight"
+          >PM Sin Bullshit</span
+        >
+      </div>
+
       <div class="flex-grow">
         <h3 class="text-lg font-bold mb-1">📘 Ebook "PM Sin Bullshit"</h3>
-        <p class="text-xs text-gray-300 mb-4">Para PMs que quieren tomar mejores decisiones y tener más criterio. Sin bullsh*t.</p>
+        <p class="text-xs text-gray-300 mb-4">
+          Para PMs que quieren tomar mejores decisiones y tener más criterio.
+          Sin bullsh*t.
+        </p>
         <div class="flex flex-wrap gap-4 items-center">
-          <a href="https://pay.hotmart.com/D96093022S?off=OFF50" target="_blank" class="bg-teal text-white px-6 py-2.5 rounded-lg font-bold text-xs hover:bg-tealHover transition">
+          <a
+            href="https://pay.hotmart.com/D96093022S?off=OFF50"
+            target="_blank"
+            class="bg-teal text-white px-6 py-2.5 rounded-lg font-bold text-xs hover:bg-tealHover transition"
+          >
             Comprar ahora ($53.000 COP)
           </a>
-          <span class="text-xs text-orange font-bold uppercase tracking-widest">50% OFF para clientes</span>
+          <span class="text-xs text-orange font-bold uppercase tracking-widest"
+            >50% OFF para clientes</span
+          >
         </div>
       </div>
     </div>
 
     <!-- LÍNEA DE LINKEDIN DE CIERRE (Minimalista y Directa) -->
-    <div class="pt-8 mt-12 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
-      <p class="text-sm text-gray-500 font-medium">✨ Contenido de PM y automatizaciones de IA en LinkedIn.</p>
-      <a 
-        href={LINKS.linkedin} 
+    <div
+      class="pt-8 mt-12 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4"
+    >
+      <p class="text-sm text-gray-500 font-medium">
+        ✨ Contenido de PM y automatizaciones de IA en LinkedIn.
+      </p>
+      <a
+        href={LINKS.linkedin}
         target="_blank"
         class="inline-flex items-center gap-2 bg-[#0077B5] text-white px-6 py-2.5 rounded-lg font-bold text-xs hover:bg-[#0077B5]/90 transition shadow-sm whitespace-nowrap"
       >
         <!-- Icono oficial simplificado de LinkedIn en SVG -->
-        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        <svg
+          class="w-4 h-4 fill-current"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+          ></path>
         </svg>
         Seguir a Pablo Ríos
       </a>
     </div>
-
   </div>
 </section>
