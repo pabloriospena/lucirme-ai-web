@@ -3,5 +3,7 @@ export const LINKS = {
   calendly: "https://cal.com/pablolucirme",
   ebook: "https://pay.hotmart.com/D96093022S?off=OFF50",
   email: "mailto:pablo@lucirme.com",
-  linkedin: "https://linkedin.com/in/pabloriospena"
+  linkedin: "https://linkedin.com/in/pabloriospena",
+  calendly_sesion_pago: "https://cal.com/pablolucirme/sesion-enfoque",
+  calendly_ciclo: "https://cal.com/pablolucirme/ciclo",
 };

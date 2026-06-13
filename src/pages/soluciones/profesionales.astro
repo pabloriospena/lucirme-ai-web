@@ -1,93 +1,340 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { LINKS } from '../../lib/constants.js';
+import Layout from "../../layouts/Layout.astro";
+import { LINKS } from "../../lib/constants.js";
 ---
 
 <Layout title="IA para Profesionales | LuciRMe Ai">
-
   <!-- HERO -->
-  <header class="py-24 px-4 bg-[#F8FAFC]">
-    <div class="max-w-3xl mx-auto text-center">
-      <span class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-6">
-        Para Profesionales
+  <header
+    class="py-24 px-4 bg-slate-50 border-b border-gray-100 relative overflow-hidden"
+  >
+    <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
+    <div class="max-w-3xl mx-auto text-center relative z-10">
+      <span
+        class="inline-flex items-center bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-6"
+      >
+        Sesiones personalizadas
       </span>
-      <h1 class="text-4xl md:text-5xl font-bold text-deep leading-tight mb-6">
-        Recupera 10 horas a la semana.<br>Sin volverte experto en IA.
+      <h1
+        class="text-4xl md:text-5xl font-black text-deep leading-tight mb-6 tracking-tight"
+      >
+        Recupera 10 horas a la semana.<br />
+        <span class="text-teal">Sin volverte experto en IA.</span>
       </h1>
-      <p class="text-lg text-gray-600 leading-relaxed mb-10">
-        Automatiza lo repetitivo. Enfócate en lo que sí escala.
+      <p class="text-lg text-gray-600 leading-relaxed mb-10 max-w-2xl mx-auto">
+        Automatiza lo repetitivo en las herramientas que ya usas (Jira, Notion,
+        Excel,PDF). Enfócate en la estrategia y lo que realmente te hace
+        destacar.
       </p>
+
+      <!-- PEQUEÑA PRUEBA SOCIAL -->
+      <div
+        class="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-100 shadow-sm text-xs font-medium text-gray-500"
+      >
+        <span class="text-teal text-base">★</span>
+        <span
+          >Quienes más han solicitado trabajan en <strong>Administración</strong
+          >, <strong>Producto</strong>, <strong
+            >Análisis de datos, Desarrollo</strong
+          ></span
+        >
+      </div>
     </div>
   </header>
 
   <main class="py-24 px-4 bg-white">
     <div class="max-w-4xl mx-auto">
-      
-      <!-- IDENTIFICACIÓN -->
-      <div class="bg-slate-50 rounded-2xl p-8 mb-16 border border-gray-100">
-        <h2 class="text-xl font-bold text-deep mb-6">¿Te suena familiar?</h2>
+      <!-- IDENTIFICACIÓN (DOLOR) -->
+      <section
+        class="bg-slate-50 rounded-2xl p-8 md:p-10 mb-16 border border-gray-100"
+      >
+        <h2 class="text-xl font-bold text-deep mb-8 flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="w-5 h-5 text-orange"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
+            ></path>
+          </svg>
+          ¿Te suena familiar tu día a día?
+        </h2>
         <div class="grid md:grid-cols-2 gap-6">
-          {[
-            "Pierdes horas en reportes, hojas de cálculo o coordinación manual.",
-            "Sientes que deberías usar IA, pero no sabes por dónde empezar sin perder tiempo.",
-            "Quieres cobrar más, pero la operativa te consume el tiempo de valor.",
-            "Has probado tutoriales, pero nada se integra a tu flujo real."
-          ].map(dolor => (
-            <div class="flex items-start gap-3">
-              <span class="text-orange mt-1">⚠️</span>
-              <p class="text-sm text-gray-700">{dolor}</p>
+          {
+            [
+              "Pierdes horas compilando reportes manuales o actualizando hojas de cálculo.",
+              "Sientes que deberías usar IA, pero los tutoriales genéricos no se adaptan a tu flujo.",
+              "Quieres cobrar más o ascender, pero la operativa manual te consume el día.",
+              "Pasas más tiempo coordinando por WhatsApp que ejecutando estrategia.",
+            ].map((dolor) => (
+              <div class="flex items-start gap-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2.5"
+                  stroke="currentColor"
+                  class="w-4 h-4 text-orange shrink-0 mt-1"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+                <p class="text-sm text-gray-700 leading-relaxed">{dolor}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- TRANSFORMACIÓN (ANTES Y DESPUÉS) -->
+      <section class="mb-24">
+        <h2
+          class="text-2xl font-bold text-deep text-center mb-12 tracking-tight"
+        >
+          Tu jornada, antes y después de LuciRMe
+        </h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          {/* ANTES */}
+          <div class="border border-gray-150 rounded-2xl p-8 bg-slate-50/50">
+            <h3
+              class="font-bold text-gray-400 text-sm uppercase tracking-wider mb-6 flex items-center gap-2"
+            >
+              <span class="w-2 h-2 rounded-full bg-gray-300"></span> Antes (Operativo)
+            </h3>
+            <ul class="space-y-4 text-sm text-gray-500">
+              <li class="flex items-start gap-3">
+                <span class="text-gray-400 font-bold shrink-0 mt-0.5">✕</span>
+                <span
+                  >Compilar datos dispersos de 3 fuentes distintas manualmente.</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-gray-400 font-bold shrink-0 mt-0.5">✕</span>
+                <span
+                  >Redactar correos y seguimientos repetitivos uno por uno.</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-gray-400 font-bold shrink-0 mt-0.5">✕</span>
+                <span
+                  >Documentar procesos manuales que nadie en el equipo lee.</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          {/* DESPUÉS */}
+          <div
+            class="border border-teal/20 rounded-2xl p-8 bg-teal/5 shadow-sm relative overflow-hidden"
+          >
+            <div
+              class="absolute top-0 right-0 w-24 h-24 bg-teal/10 rounded-full blur-2xl"
+            >
             </div>
-          ))}
-        </div>
-        <p class="text-sm text-gray-500 mt-8 italic">Si te identificaste en 2 o más: esto es para ti.</p>
-      </div>
-
-      <!-- TRANSFORMACIÓN -->
-      <div class="mb-20">
-        <h2 class="text-2xl font-bold text-deep text-center mb-10">Tu jornada, antes y después</h2>
-        <div class="grid md:grid-cols-2 gap-6">
-          <div class="border border-gray-200 rounded-2xl p-8 bg-white">
-            <h3 class="font-bold text-deep mb-6">🔴 Antes</h3>
-            <ul class="space-y-4 text-sm text-gray-600">
-              <li class="flex gap-3"><span>✕</span> Compilar reportes manuales de la semana</li>
-              <li class="flex gap-3"><span>✕</span> Coordinar por WhatsApp tareas manuales</li>
-              <li class="flex gap-3"><span>✕</span> Documentar procesos obsoletos</li>
+            <h3
+              class="font-bold text-teal text-sm uppercase tracking-wider mb-6 flex items-center gap-2 relative z-10"
+            >
+              <span class="w-2 h-2 rounded-full bg-teal"></span> Después (Estratégico)
+            </h3>
+            <ul
+              class="space-y-4 text-sm text-gray-700 font-medium relative z-10"
+            >
+              <li class="flex items-start gap-3">
+                <span class="text-teal font-bold shrink-0 mt-0.5">✓</span>
+                <span
+                  >Dashboard centralizado que se actualiza solo usando IA.</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-teal font-bold shrink-0 mt-0.5">✓</span>
+                <span
+                  >Borradores de comunicación y reportes listos en segundos.</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-teal font-bold shrink-0 mt-0.5">✓</span>
+                <span
+                  >Tiempo real liberado para enfocarte en el valor de negocio.</span
+                >
+              </li>
             </ul>
           </div>
-          <div class="border border-teal/30 rounded-2xl p-8 bg-teal/5">
-            <h3 class="font-bold text-deep mb-6">🟢 Después</h3>
-            <ul class="space-y-4 text-sm text-gray-600">
-              <li class="flex gap-3"><span>✓</span> Revisar dashboard automático de IA</li>
-              <li class="flex gap-3"><span>✓</span> Estrategia pura, cero coordinación operativa</li>
-              <li class="flex gap-3"><span>✓</span> Documentación automática de procesos</li>
-            </ul>
-          </div>
         </div>
-      </div>
+      </section>
 
-      <!-- PRICING -->
-      <div class="grid md:grid-cols-2 gap-8 mb-20">
-        <div class="p-8 rounded-2xl border-2 border-gray-100 flex flex-col hover:border-teal transition-all">
-          <h3 class="font-bold text-deep text-xl mb-4">🎯 Sesión de Enfoque</h3>
-          <p class="text-xs text-teal font-bold uppercase tracking-widest mb-4">1 hora de trabajo directo</p>
-          <div class="text-3xl font-bold text-deep mb-6">$116.000 COP <span class="text-sm text-gray-400 font-normal">/ $35 USD</span></div>
-          <p class="text-sm text-gray-600 mb-8 flex-grow">Diagnóstico rápido + 1 flujo configurado. Tareas resueltas y pasos exactos para mañana.</p>        </div>
+      <!-- PRICING (CLARIDAD TOTAL) -->
+      <section class="grid md:grid-cols-2 gap-8 mb-24">
+        <!-- Opción 1: Sesión de Enfoque -->
+        <div
+          class="group p-8 rounded-2xl border-2 border-slate-100 flex flex-col hover:border-teal/50 hover:shadow-lg hover:shadow-slate-100/50 transition-all duration-300 bg-white"
+        >
+          <div class="mb-4">
+            <span
+              class="text-xs text-teal font-bold uppercase tracking-widest bg-teal/5 px-2.5 py-1 rounded"
+              >Ideal para empezar</span
+            >
+          </div>
+          <h3 class="font-bold text-deep text-xl mb-1">🎯 Sesión de Enfoque</h3>
+          <p class="text-xs text-gray-400 mb-6">
+            Diagnóstico y automatización rápida
+          </p>
 
-        <div class="p-8 rounded-2xl border-2 border-teal shadow-lg flex flex-col">
-          <h3 class="font-bold text-deep text-xl mb-4">🔄 Ciclo Individual</h3>
-          <p class="text-xs text-teal font-bold uppercase tracking-widest mb-4">8 horas de trabajo (4 sesiones)</p>
-          <div class="text-3xl font-bold text-deep mb-6">$350.000 COP <span class="text-sm text-gray-400 font-normal">/ $98 USD</span></div>
-          <p class="text-sm text-gray-600 mb-8 flex-grow font-medium">Protocolos, Refinamiento e IA personalizada para tu carrera.</p>        </div>
-      </div>
+          <div class="text-3xl font-black text-deep mb-6">
+            $116.000 COP <span class="text-sm text-gray-400 font-normal"
+              >/ $35 USD</span
+            >
+          </div>
 
-      <!-- CTA FINAL -->
-      <div class="text-center bg-deep p-10 rounded-2xl text-white">
-        <h3 class="text-2xl font-bold mb-4">Sin riesgo. Solo claridad.</h3>
-        <p class="text-gray-400 mb-8">Si en 15 min no ves valor, cerramos sin compromiso.</p>
-        <a href={LINKS.calendly} class="inline-block bg-orange text-white px-8 py-4 rounded-lg font-bold hover:bg-orange/90 transition shadow-lg">
-          Agendar Café Estratégico →
-        </a>
-      </div>
+          <ul class="text-sm text-gray-600 mb-8 space-y-3.5 flex-grow">
+            <li class="flex items-start gap-2.5">
+              <span class="text-teal font-bold shrink-0">✓</span>
+              <span>1 hora de trabajo directo personalizado.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-teal font-bold shrink-0">✓</span>
+              <span>Mapeo y diagnóstico de tus cuellos de botella.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-teal font-bold shrink-0">✓</span>
+              <span
+                ><strong>1 flujo automatizado configurado en vivo.</strong
+                ></span
+              >
+            </li>
+          </ul>
+
+          <a
+            href={LINKS.calendly_sesion_pago}
+            onclick="trackPricingClick('sesion_enfoque', '$116,000 COP')"
+            class="block text-center w-full py-3 rounded-xl border border-gray-200 text-gray-700 font-bold hover:bg-gray-50 hover:border-gray-300 transition-colors"
+          >
+            Reservar Sesión
+          </a>
+        </div>
+
+        <!-- Opción 2: Ciclo Individual (Destacada) -->
+        <div
+          class="group p-8 rounded-2xl border-2 border-teal shadow-xl flex flex-col relative overflow-hidden bg-white"
+        >
+          <div
+            class="absolute top-0 right-0 bg-teal text-white text-[10px] font-bold px-3 py-1.5 rounded-bl-xl uppercase tracking-wider"
+          >
+            MÁS POPULAR
+          </div>
+          <div class="mb-4">
+            <span
+              class="text-xs text-teal font-bold uppercase tracking-widest bg-teal/5 px-2.5 py-1 rounded"
+              >Transformación real</span
+            >
+          </div>
+          <h3 class="font-bold text-deep text-xl mb-1">🔄 Ciclo Individual</h3>
+          <p class="text-xs text-gray-400 mb-6">
+            Sistematización y autonomía completa
+          </p>
+
+          <div class="text-3xl font-black text-deep mb-6">
+            $350.000 COP <span class="text-sm text-gray-400 font-normal"
+              >/ $98 USD</span
+            >
+          </div>
+
+          <ul class="text-sm text-gray-600 mb-8 space-y-3.5 flex-grow">
+            <li class="flex items-start gap-2.5">
+              <span class="text-teal font-bold shrink-0">✓</span>
+              <span>8 horas de acompañamiento (4 sesiones de 2h).</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-teal font-bold shrink-0">✓</span>
+              <span
+                >Desarrollo de protocolos de IA específicos para tu rol.</span
+              >
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-teal font-bold shrink-0">✓</span>
+              <span
+                >Soporte asíncrono y refinamiento continuo hasta lograr
+                autonomía.</span
+              >
+            </li>
+          </ul>
+
+          <a
+            href={LINKS.calendly_ciclo}
+            onclick="trackPricingClick('ciclo_individual', '$350,000 COP')"
+            class="block text-center w-full py-3.5 rounded-xl bg-teal text-white font-bold hover:bg-teal/95 transition-all shadow-md shadow-teal/10"
+          >
+            Empezar el Ciclo
+          </a>
+        </div>
+      </section>
+
+      <!-- CTA FINAL (SIN RIESGO) -->
+      <section
+        class="text-center bg-deep p-10 md:p-12 rounded-3xl text-white relative overflow-hidden"
+      >
+        <div
+          class="absolute -bottom-12 -right-12 w-48 h-48 bg-orange/15 rounded-full blur-3xl"
+        >
+        </div>
+        <div class="relative z-10">
+          <h3 class="text-2xl font-bold mb-4">
+            ¿No estás seguro de cuál elegir?
+          </h3>
+          <p
+            class="text-gray-300 mb-8 max-w-xl mx-auto text-sm leading-relaxed"
+          >
+            Agenda una llamada rápida de máximo 30 minutos sin costo alguno.
+            Analizamos tu caso y definimos honestamente cuál es la mejor ruta
+            para ti.
+          </p>
+          <a
+            href={LINKS.calendly}
+            onclick="trackFreeCallClick('cta_final')"
+            class="inline-block bg-orange text-white px-8 py-4 rounded-xl font-bold hover:bg-orange/90 transition-all shadow-lg shadow-orange/20"
+          >
+            Agendar Llamada de Claridad (Gratis) →
+          </a>
+          <p class="text-[11px] text-gray-400 mt-5">
+            <strong>Garantía:</strong> Si no identificamos valor práctico en los primeros
+            15 min de tus sesiones de pago, te devolvemos la inversión sin rodeos.
+          </p>
+        </div>
+      </section>
     </div>
   </main>
 </Layout>
+
+<script is:inline>
+  // Helper para interactuar con PostHog de forma segura
+  function safeTrack(eventName, properties = {}) {
+    if (typeof window !== "undefined" && window.posthog) {
+      window.posthog.capture(eventName, properties);
+    }
+  }
+
+  // Medición para clics en los tiers de precios
+  function trackPricingClick(tierName, priceString) {
+    safeTrack("pro_pricing_clicked", {
+      tier: tierName,
+      price: priceString,
+      page: "para_profesionales",
+    });
+  }
+
+  // Medición para la llamada de claridad gratuita
+  function trackFreeCallClick(placementLabel) {
+    safeTrack("pro_free_call_clicked", {
+      placement: placementLabel,
+      page: "para_profesionales",
+    });
+  }
+</script>

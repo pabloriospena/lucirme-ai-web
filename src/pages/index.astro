@@ -32,7 +32,7 @@ import Layout from "../layouts/Layout.astro";
         id="chat-messages"
         class="flex-grow space-y-6 overflow-y-auto max-h-[250px] pr-2"
       >
-        <!-- Burbuja Inicial de la IA (Fondo Blanco) -->
+        <!-- Burbuja Inicial de la IA -->
         <div class="space-y-2 initial-bot-message">
           <span
             class="text-teal font-bold text-xs uppercase tracking-widest block"
@@ -117,6 +117,7 @@ import Layout from "../layouts/Layout.astro";
         <!-- Enlace 1: Metodología -->
         <a
           href="/content/como_funciona"
+          onclick="trackNavClick('/content/como_funciona', 'Metodologia')"
           class="w-full px-6 py-4 flex items-start gap-4 hover:bg-gray-50 transition text-left group"
         >
           <span
@@ -143,6 +144,7 @@ import Layout from "../layouts/Layout.astro";
         <!-- Enlace 2: Sobre Pablo -->
         <a
           href="/content/sobremi"
+          onclick="trackNavClick('/content/sobremi', 'Sobre Pablo')"
           class="w-full px-6 py-4 flex items-start gap-4 hover:bg-gray-50 transition text-left group"
         >
           <span
@@ -169,6 +171,7 @@ import Layout from "../layouts/Layout.astro";
         <!-- Enlace 3: Precios -->
         <a
           href="/content/precios"
+          onclick="trackNavClick('/content/precios', 'Precios')"
           class="w-full px-6 py-4 flex items-start gap-4 hover:bg-gray-50 transition text-left group"
         >
           <span
@@ -192,9 +195,10 @@ import Layout from "../layouts/Layout.astro";
           >
         </a>
 
-        <!-- Enlace 4: Casos de éxito (Corregido) -->
+        <!-- Enlace 4: Casos de éxito -->
         <a
           href="/content/casosreales"
+          onclick="trackNavClick('/content/casosreales', 'Casos de Exito')"
           class="w-full px-6 py-4 flex items-start gap-4 hover:bg-gray-50 transition text-left group"
         >
           <span
@@ -218,9 +222,9 @@ import Layout from "../layouts/Layout.astro";
           >
         </a>
 
-        <!-- Enlace 5: Enciende tu foco (Corregido para abrir modal del test) -->
+        <!-- Enlace 5: Enciende tu foco -->
         <button
-          onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
+          onclick="document.getElementById('selector-overlay').classList.remove('hidden'); trackNavClick('#test-modal', 'Abrir Test');"
           class="w-full px-6 py-4 flex items-start gap-4 hover:bg-gray-50 transition text-left group"
         >
           <span
@@ -249,16 +253,37 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <script is:inline>
+  // Helper de rastreo seguro con PostHog
+  function safeTrack(eventName, properties = {}) {
+    if (typeof window !== "undefined" && window.posthog) {
+      window.posthog.capture(eventName, properties);
+    }
+  }
+
+  // Rastreo de enlaces de la sección de abajo
+  function trackNavClick(destination, sectionLabel) {
+    safeTrack("home_navigation_clicked", {
+      destination_url: destination,
+      section_label: sectionLabel,
+    });
+  }
+
   // LÓGICA DE SIMULADOR DE CHAT EN VIVO (Client Side)
   async function responderChat(opcion, textoBoton) {
     const messagesContainer = document.getElementById("chat-messages");
     const optionsDiv = document.getElementById("chat-options");
     const loadingDiv = document.getElementById("chat-loading");
 
+    // RASTREO POSTHOG: Opción de chat elegida
+    safeTrack("chat_option_clicked", {
+      option_id: opcion,
+      option_text: textoBoton,
+    });
+
     // 1. Ocultar opciones para enfocar la conversación
     optionsDiv.style.display = "none";
 
-    // 2. Pintar la burbuja del usuario (Fondo Teal de Marca)
+    // 2. Pintar la burbuja del usuario
     const userBubble = document.createElement("div");
     userBubble.className =
       "space-y-2 text-right animate-fade-in chat-bubble-temp";
@@ -271,39 +296,57 @@ import Layout from "../layouts/Layout.astro";
     messagesContainer.appendChild(userBubble);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-    // 3. Mostrar indicador de carga ("Escribiendo...")
+    // 3. Mostrar indicador de carga
     messagesContainer.appendChild(loadingDiv);
     loadingDiv.classList.remove("hidden");
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-    // 4. Retraso simulado de "La IA está pensando" (1.2 segundos)
+    // 4. Retraso simulado de la IA
     await new Promise((resolve) => setTimeout(resolve, 1200));
 
     // Ocultamos el cargando
     loadingDiv.classList.add("hidden");
 
-    // 5. Determinar la respuesta de la IA (Rutas Corregidas a las Páginas de Producción)
+    // 5. Determinar la respuesta de la IA y configurar el botón con rastreo
     let text = "";
     let link = "";
 
     if (opcion === 1) {
       text =
         "El software debería trabajar para ti, no al revés. Puedes recuperar hasta 10 horas de tu semana automatizando flujos de forma limpia. Miremos tu caso en un Café Estratégico de 30 minutos sin costo, o revisa mis servicios individuales.";
-      link =
-        "<a href='/soluciones/profesionales' class='inline-block text-teal font-bold hover:underline mt-2'>Ver servicios de consultoría 1-1 →</a>";
+      link = `
+        <a 
+          href='/soluciones/profesionales' 
+          onclick="safeTrack('chat_cta_clicked', { destination: '/soluciones/profesionales', option_id: 1 })" 
+          class='inline-block text-teal font-bold hover:underline mt-2'
+        >
+          Ver servicios de consultoría 1-1 →
+        </a>`;
     } else if (opcion === 2) {
       text =
         "El caos manual frena el crecimiento y quema a los equipos. Estandarizo tus procesos con arquitecturas de IA para que tu roadmap avance sin fricción técnica. Hablemos en un espacio estratégico gratis para diagnosticar a tu equipo.";
-      link =
-        "<a href='soluciones/empresas' class='inline-block text-teal font-bold hover:underline mt-2'>Ver opciones para empresas y talleres →</a>";
+      link = `
+        <a 
+          href='/soluciones/empresas' 
+          onclick="safeTrack('chat_cta_clicked', { destination: '/soluciones/empresas', option_id: 2 })" 
+          class='inline-block text-teal font-bold hover:underline mt-2'
+        >
+          Ver opciones para empresas y talleres →
+        </a>`;
     } else if (opcion === 3) {
       text =
         "Valor inmediato y directo al grano. Tienes a tu disposición mis guías de optimización, funcionalidades listas y, si eres Product Manager, el acceso a mi Ebook 'PM Sin Bullshit'.";
-      link =
-        "<a href='/recursos' class='inline-block text-teal font-bold hover:underline mt-2'>Acceder a la librería de recursos →</a>";
+      link = `
+        <a 
+          href='/recursos' 
+          onclick="safeTrack('chat_cta_clicked', { destination: '/recursos', option_id: 3 })" 
+          class='inline-block text-teal font-bold hover:underline mt-2'
+        >
+          Acceder a la librería de recursos →
+        </a>`;
     }
 
-    // 6. Pintar la respuesta de la IA (Fondo Blanco) y botón para reiniciar chat
+    // 6. Pintar la respuesta de la IA y botón para reiniciar chat
     const botBubble = document.createElement("div");
     botBubble.className = "space-y-2 animate-fade-in chat-bubble-temp";
     botBubble.innerHTML = `
@@ -321,6 +364,9 @@ import Layout from "../layouts/Layout.astro";
   }
 
   function reiniciarChat() {
+    // RASTREO POSTHOG: Volver a empezar en el chat
+    safeTrack("chat_reset_clicked");
+
     const messagesContainer = document.getElementById("chat-messages");
     const optionsDiv = document.getElementById("chat-options");
 
