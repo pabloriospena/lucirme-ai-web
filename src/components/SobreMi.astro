@@ -1,58 +1,194 @@
 ---
 // src/components/SobreMi.astro
+import { LINKS } from "../lib/constants.js";
 ---
 
-<section id="sobre-mi" class="py-16 px-4">
-  <div
-    class="container max-w-5xl mx-auto bg-white border border-gray-100 p-8 md:p-12 rounded-2xl shadow-sm"
-  >
-    <!-- Bloque de Historia -->
-    <div class="flex flex-col md:flex-row items-center gap-12 mb-12">
-      <div
-        class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-teal/20 flex-shrink-0"
+<section
+  id="sobre-mi"
+  class="py-24 px-4 bg-slate-50 border-t border-b border-gray-100 relative"
+>
+  <div class="container max-w-5xl mx-auto">
+    <!-- HEADER DE LA SECCIÓN -->
+    <div class="text-center mb-16">
+      <span class="text-teal font-bold uppercase tracking-widest text-xs"
+        >Sobre el Fundador</span
       >
-        <img
-          src="/pablo-rios.jpeg"
-          alt="Pablo Ríos"
-          class="w-full h-full object-cover"
-        />
+      <h2 class="text-3xl md:text-4xl font-black text-deep mt-2 tracking-tight">
+        Más que IA, criterio de negocio
+      </h2>
+    </div>
+
+    {/* TARJETA PRINCIPAL */}
+    <div
+      class="bg-white border border-gray-100 p-8 md:p-12 rounded-3xl shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col md:flex-row gap-12 items-center relative overflow-hidden"
+    >
+      <div
+        class="absolute top-0 right-0 w-32 h-32 bg-teal/5 rounded-full blur-3xl"
+      >
       </div>
 
-      <div class="text-center md:text-left">
-        <h2 class="text-3xl font-bold text-deep mb-6">Hola, soy Pablo Ríos</h2>
-        <div class="space-y-4 text-gray-600 leading-relaxed text-base">
+      <!-- FOTO CON DETALLE ESTILIZADO -->
+      <div class="w-full md:w-1/3 flex flex-col items-center shrink-0">
+        <div
+          class="w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-xl relative z-10"
+        >
+          <img
+            src="/pablo-rios.jpeg"
+            alt="Pablo Ríos Peña"
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <!-- Badge de Autoridad -->
+        <div
+          class="mt-6 text-center bg-slate-50 px-5 py-2.5 rounded-xl border border-gray-100"
+        >
+          <p class="text-xs font-bold text-teal uppercase tracking-wider">
+            Ingeniero de Sistemas
+          </p>
+          <p class="text-[11px] text-gray-500 mt-0.5">
+            U. Pontificia Bolivariana
+          </p>
+        </div>
+      </div>
+
+      <!-- HISTORIA Y AUTORIDAD -->
+      <div class="w-full md:w-2/3 text-left relative z-10">
+        <h3 class="text-2xl font-bold text-deep mb-4 tracking-tight">
+          Hola, soy Pablo Ríos.
+        </h3>
+
+        <div
+          class="space-y-4 text-gray-600 leading-relaxed text-sm md:text-base"
+        >
           <p>
-            <strong class="text-deep font-semibold"
-              >Sé exactamente cómo te sientes.</strong
-            > Pasé años viendo cómo profesionales perdían su energía en tareas operativas
-            que los mantenían quemados. Yo también pasé por eso.
+            No llegué a la IA por moda, llegué por <strong
+              >necesidad operativa</strong
+            >. Durante más de 10 años liderando productos en startups como <strong
+              >Alegra, Vozy y Datup</strong
+            >, vi el mismo patrón: equipos brillantes quemados copiando datos
+            entre Jira, Excel y Slack.
           </p>
           <p>
-            Intenté cursos interminables y herramientas "mágicas" que nunca
-            adoptaba. El resultado era siempre el mismo: <em
-              >mucha información, poca acción.</em
-            > Por eso creé <strong class="text-deep">LuciRMe Ai</strong>.
+            Como Ingeniero y Product Manager, me cansé de las herramientas
+            "mágicas" que prometían revolucionar el mundo pero que nadie sabía
+            usar en el día a día. Por eso fundé <strong>LuciRMe AI</strong>:
+            para tender un puente entre la tecnología compleja y el resultado de
+            negocio real.
           </p>
-          <p class="font-medium text-deep">
-            Mi promesa: No te voy a vender humo ni software. Vamos a trabajar
-            juntos hasta que recuperes tu tiempo.
+          <p
+            class="border-l-4 border-orange pl-4 italic text-deep font-medium bg-slate-50 py-3 pr-2 rounded-r-lg text-sm md:text-[15px]"
+          >
+            "Mi enfoque es simple: mucha acción, poca teoría y cero humo. Si no
+            te ahorra tiempo o dinero desde la primera semana, no sirve."
           </p>
         </div>
 
-        <div class="mt-8 flex gap-6 text-sm justify-center md:justify-start">
+        <!-- REDES Y CONTACTO -->
+        <div
+          class="mt-8 pt-6 border-t border-gray-100 flex flex-wrap gap-6 text-xs md:text-sm font-bold"
+        >
           <a
             href="https://linkedin.com/in/pabloriospena"
             target="_blank"
-            class="text-teal font-bold hover:underline">LinkedIn</a
+            onclick="trackAboutContact('linkedin')"
+            class="flex items-center gap-2 text-teal hover:text-deep transition-colors duration-200"
           >
+            <svg
+              class="w-5 h-5 shrink-0"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              ><path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+              ></path></svg
+            >
+            Conectar en LinkedIn
+          </a>
           <a
             href="mailto:pablo@lucirme.com"
-            class="text-teal font-bold hover:underline">Email</a
+            onclick="trackAboutContact('email')"
+            class="flex items-center gap-2 text-teal hover:text-deep transition-colors duration-200"
           >
+            <svg
+              class="w-5 h-5 shrink-0"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              ></path></svg
+            >
+            pablo@lucirme.com
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- BLOQUE AUTORIDAD: Venta del Ebook -->
+    <!-- BLOQUE DE RECURSO DESTACADO (EBOOK) -->
+    <div
+      class="mt-12 bg-deep p-8 md:p-10 rounded-3xl text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl shadow-slate-900/10 relative overflow-hidden"
+    >
+      <div
+        class="absolute top-0 right-0 w-64 h-64 bg-orange/10 rounded-full blur-3xl"
+      >
+      </div>
+
+      <div class="md:w-2/3 relative z-10">
+        <span
+          class="inline-block bg-orange/20 text-orange text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded mb-3"
+          >Recurso Recomendado</span
+        >
+        <h4 class="text-xl font-bold mb-2 flex items-center gap-2">
+          📚 Ebook "PM Sin Bullshit"
+        </h4>
+        <p class="text-gray-300 text-sm mb-5 leading-relaxed">
+          Diseñado para Product Managers y profesionales que quieren dejar de
+          apagar incendios diarios y empezar a tomar decisiones con criterio
+          tecnológico real. Sin teoría abstracta, solo frameworks prácticos
+          listos para aplicar.
+        </p>
+        <div class="flex items-center gap-4">
+          <span class="text-2xl font-black text-orange">$53.000 COP</span>
+          <span class="text-xs text-gray-400 line-through">$100.000 COP</span>
+        </div>
+      </div>
+
+      <a
+        href={LINKS.ebook}
+        onclick="trackEbookPurchase()"
+        class="relative z-10 w-full md:w-auto text-center bg-orange hover:bg-orange/95 text-white px-8 py-3.5 rounded-xl font-bold transition-all duration-200 shadow-lg shadow-orange/20"
+      >
+        Comprar Ebook →
+      </a>
+    </div>
   </div>
 </section>
+
+<script is:inline>
+  // Helper para enviar eventos a PostHog
+  function safeTrack(eventName, properties = {}) {
+    if (typeof window !== "undefined" && window.posthog) {
+      window.posthog.capture(eventName, properties);
+    }
+  }
+
+  // Medir interacción con los canales de contacto
+  function trackAboutContact(platformName) {
+    safeTrack("about_contact_clicked", {
+      platform: platformName,
+      section: "sobre_mi",
+    });
+  }
+
+  // Medir intención de compra del ebook
+  function trackEbookPurchase() {
+    safeTrack("about_ebook_purchase_clicked", {
+      price_cop: 53000,
+      destination_url: "hotmart",
+      section: "sobre_mi",
+    });
+  }
+</script>
