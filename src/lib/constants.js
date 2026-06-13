@@ -6,4 +6,6 @@ export const LINKS = {
   linkedin: "https://linkedin.com/in/pabloriospena",
   calendly_sesion_pago: "https://cal.com/pablolucirme/sesion-enfoque",
   calendly_ciclo: "https://cal.com/pablolucirme/ciclo",
+  calendly_empresa: "https://cal.com/pablolucirme/diagnostico-gratuito",
+  calendly_taller: "https://cal.com/pablolucirme/taller-de-inmersion",
 };
