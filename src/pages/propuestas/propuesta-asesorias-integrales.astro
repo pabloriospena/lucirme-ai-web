@@ -1,0 +1,157 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Propuesta Comercial | Asesorías Integrales | LuciRMe AI">
+    <!-- BOTÓN DE IMPRESIÓN -->
+    <div class="max-w-4xl mx-auto my-8 p-4 no-print animate-fade-in">
+        <div
+            class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-200"
+        >
+            <p class="text-sm text-gray-500">
+                Propuesta para: <strong class="text-deep"
+                    >Asesorías Integrales</strong
+                >
+            </p>
+            <button
+                onclick="window.print()"
+                class="bg-teal hover:bg-tealHover text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition text-sm"
+            >
+                Descargar en PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- CUERPO DE LA PROPUESTA -->
+    <article
+        class="print-area max-w-3xl mx-auto my-4 p-8 md:p-12 bg-[#F8FAFC] text-deep border border-gray-200 rounded-2xl shadow-sm"
+    >
+        <header
+            class="flex justify-between items-start border-b border-gray-200 pb-6 mb-8"
+        >
+            <div>
+                <span
+                    class="text-xs font-bold uppercase tracking-widest text-teal bg-teal/10 px-3 py-1 rounded-full"
+                    >Propuesta Comercial</span
+                >
+                <h1 class="text-3xl font-bold tracking-tight text-deep mt-4">
+                    Ciclo de Autonomía: IA
+                </h1>
+                <p class="text-sm text-gray-500 mt-1">
+                    Solución para Asesorías Integrales
+                </p>
+            </div>
+            <div class="text-right">
+                <span class="font-bold text-lg text-deep tracking-tight"
+                    >🚀 LucirMe AI</span
+                >
+                <p class="text-xs text-gray-400 mt-1">
+                    Pablo Ríos | lucirme.com
+                </p>
+            </div>
+        </header>
+
+        <!-- 1. El Diagnóstico -->
+        <section class="mb-8">
+            <h2
+                class="text-lg font-bold text-deep mb-3 flex items-center gap-2"
+            >
+                <span class="text-teal">🔍</span> 1. Hoja de Ruta: Ciclo de Autonomía
+            </h2>
+            <p class="text-gray-600 text-sm leading-relaxed">
+                Tras nuestra sesión inicial, nos enfocamos en la eliminación de
+                tareas repetitivas en Asesorías Integrales. Este ciclo
+                transforma los procesos identificados en flujos de trabajo,
+                liberando tiempo para actividades estratégicas.
+            </p>
+        </section>
+
+        <!-- 2. Inversión -->
+        <section class="mb-8">
+            <h2
+                class="text-lg font-bold text-deep mb-4 flex items-center gap-2"
+            >
+                <span class="text-teal">💰</span> 2. Inversión Especial (Propuesta
+                Integrada)
+            </h2>
+
+            <div class="bg-white p-6 rounded-xl border border-gray-200">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-gray-600"
+                        >Ciclo de Autonomía (Precio de lista)</span
+                    >
+                    <span class="font-bold text-gray-400 line-through"
+                        >$8.800.000</span
+                    >
+                </div>
+                <div class="flex justify-between items-center mb-4 text-teal">
+                    <span class="font-bold">Saldo a favor (Taller previo)</span>
+                    <span class="font-bold">-$600.000</span>
+                </div>
+                <div class="flex justify-between items-center mb-6 text-teal">
+                    <span class="font-bold">Descuento corporativo (10%)</span>
+                    <span class="font-bold">-$820.000</span>
+                </div>
+                <div
+                    class="border-t border-gray-100 pt-6 flex justify-between items-center"
+                >
+                    <span class="text-xl font-black text-deep"
+                        >Total Inversión</span
+                    >
+                    <span class="text-2xl font-black text-teal">$7.380.000</span
+                    >
+                </div>
+            </div>
+            <p class="text-[10px] text-gray-400 mt-4 text-center italic">
+                * Inversión única, sin cobros adicionales por concepto de
+                transporte o viáticos.
+            </p>
+        </section>
+
+        <!-- 3. Entregables -->
+        <section class="mb-8">
+            <h3 class="font-bold text-deep mb-4">¿Qué incluye el Ciclo?</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div class="p-4 bg-white border border-gray-100 rounded-lg">
+                    ✓ Configuración de flujos IA end-to-end.
+                </div>
+                <div class="p-4 bg-white border border-gray-100 rounded-lg">
+                    ✓ Entrenamiento al equipo en operación.
+                </div>
+                <div class="p-4 bg-white border border-gray-100 rounded-lg">
+                    ✓ Documentación detallada de los flujos.
+                </div>
+                <div class="p-4 bg-white border border-gray-100 rounded-lg">
+                    ✓ 30 días de acompañamiento post-entrega (virtual).
+                </div>
+            </div>
+        </section>
+
+        <footer
+            class="border-t border-gray-200 pt-8 mt-8 text-xs text-gray-500"
+        >
+            <p>
+                <strong>Condiciones:</strong> 50% anticipo al iniciar | 50% contra
+                entrega. Propuesta válida por 10 días calendario.
+            </p>
+        </footer>
+    </article>
+</Layout>
+
+<style is:global>
+    @media print {
+        .no-print {
+            display: none !important;
+        }
+        body {
+            background-color: #ffffff !important;
+        }
+        .print-area {
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            max-w: 100% !important;
+        }
+    }
+</style>

@@ -1,44 +1,67 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { LINKS } from '../../lib/constants.js';
-import ActionHub from '../../components/ActionHub.astro';
-
+import Layout from "../../layouts/Layout.astro";
+import { LINKS } from "../../lib/constants.js";
+import ActionHub from "../../components/ActionHub.astro";
 ---
 
 <Layout title="Guía Rápida: De Notas a Reportes con NotebookLM | LuciRMe Ai">
   <!-- SUB-NAV (Breadcrumb) -->
   <nav class="bg-white border-b border-gray-100 px-4 py-3">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
-      <a href="/recursos" class="text-sm font-bold text-gray-400 hover:text-teal transition">← Volver a Recursos</a>
-      <span class="text-xs font-bold text-teal uppercase tracking-widest flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Evaluador de IA
+      <a
+        href="/recursos"
+        class="text-sm font-bold text-gray-400 hover:text-teal transition"
+        >← Volver a Recursos</a
+      >
+      <span
+        class="text-xs font-bold text-teal uppercase tracking-widest flex items-center gap-2"
+      >
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Evaluador
+        de IA
       </span>
     </div>
   </nav>
 
   <!-- BANNER CAFÉ GRATIS -->
-  <div class="bg-gradient-to-r from-teal to-tealHover text-white px-4 py-3 text-center relative overflow-hidden">
-    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3">
+  <div
+    class="bg-gradient-to-r from-teal to-tealHover text-white px-4 py-3 text-center relative overflow-hidden"
+  >
+    <div
+      class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3"
+    >
       <span class="text-2xl">☕</span>
       <div class="text-sm sm:text-base">
-        <strong>¿Tienes dudas sobre los resultados?</strong> Agenda un café virtual de 30 minutos y te ayudo a priorizar tus tareas.
+        <strong>¿Tienes dudas sobre los resultados?</strong> Agenda un café virtual
+        de 30 minutos y te ayudo a priorizar tus tareas.
       </div>
-      <a href={LINKS.calendly} target="_blank" class="bg-white text-teal px-4 py-2 rounded-lg font-bold text-sm hover:bg-gray-100 transition whitespace-nowrap">
+      <a
+        href={LINKS.calendly}
+        target="_blank"
+        class="bg-white text-teal px-4 py-2 rounded-lg font-bold text-sm hover:bg-gray-100 transition whitespace-nowrap"
+      >
         Agendar café gratis →
       </a>
     </div>
-    <button id="close-cafe-banner" class="absolute top-2 right-2 text-white/80 hover:text-white text-xl">×</button>
+    <button
+      id="close-cafe-banner"
+      class="absolute top-2 right-2 text-white/80 hover:text-white text-xl"
+      >×</button
+    >
   </div>
 
   <!-- CABECERA DE RECURSO -->
   <header class="py-12 border-b border-gray-100">
     <div class="max-w-3xl mx-auto px-4">
-      <span class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-4">Guía Gratuita</span>
+      <span
+        class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-4"
+        >Guía Gratuita</span
+      >
       <h1 class="text-4xl font-bold text-deep leading-tight mb-4">
         De Notas Sueltas a Reportes Listos
       </h1>
       <p class="text-lg text-gray-600 leading-relaxed">
-        Convierte horas de grabaciones y datos manuales en decisiones claras. <br>
+        Convierte horas de grabaciones y datos manuales en decisiones claras. <br
+        />
         Sin herramientas complejas. Sin configuración.
       </p>
     </div>
@@ -47,7 +70,6 @@ import ActionHub from '../../components/ActionHub.astro';
   <!-- CONTENIDO -->
   <main class="py-16 px-4">
     <div class="max-w-3xl mx-auto space-y-16">
-
       <!-- 1. EL PROBLEMA -->
       <section>
         <h2 class="text-xl font-bold text-deep mb-6 flex items-center gap-2">
@@ -55,24 +77,44 @@ import ActionHub from '../../components/ActionHub.astro';
         </h2>
         <div class="bg-white p-8 rounded-xl border border-gray-100 shadow-sm">
           <ul class="space-y-4 text-sm text-gray-600">
-            <li class="flex gap-3 items-start"><span class="text-teal font-bold">✓</span> Juntas transcripciones, emails y hojas de cálculo a mano.</li>
-            <li class="flex gap-3 items-start"><span class="text-teal font-bold">✓</span> Redactas reportes que llegan tarde o sin foco claro.</li>
-            <li class="flex gap-3 items-start"><span class="text-teal font-bold">✓</span> Archivas notas de reuniones que nunca vuelves a abrir.</li>
+            <li class="flex gap-3 items-start">
+              <span class="text-teal font-bold">✓</span> Juntas transcripciones, emails
+              y hojas de cálculo a mano.
+            </li>
+            <li class="flex gap-3 items-start">
+              <span class="text-teal font-bold">✓</span> Redactas reportes que llegan
+              tarde o sin foco claro.
+            </li>
+            <li class="flex gap-3 items-start">
+              <span class="text-teal font-bold">✓</span> Archivas notas de reuniones
+              que nunca vuelves a abrir.
+            </li>
           </ul>
-          <p class="mt-6 text-sm font-bold text-deep pt-4 border-t border-gray-100">Resultado: Mucho esfuerzo, poca claridad. Decisiones basadas en intuición, no en datos.</p>
+          <p
+            class="mt-6 text-sm font-bold text-deep pt-4 border-t border-gray-100"
+          >
+            Resultado: Mucho esfuerzo, poca claridad. Decisiones basadas en
+            intuición, no en datos.
+          </p>
         </div>
       </section>
 
       <!-- 2. LA SOLUCIÓN -->
       <section>
-        <h2 class="text-xl font-bold text-deep mb-6">⚡ La solución: NotebookLM en 3 pasos</h2>
+        <h2 class="text-xl font-bold text-deep mb-6">
+          ⚡ La solución: NotebookLM en 3 pasos
+        </h2>
         <div class="grid md:grid-cols-3 gap-4">
-          {['Reúne', 'Sube', 'Pregunta'].map((paso, i) => (
-            <div class="bg-white p-6 rounded-xl border border-gray-100 text-center shadow-sm">
-              <div class="text-2xl mb-3">{['📁', '☁️', '💬'][i]}</div>
-              <h3 class="font-bold text-deep text-sm mb-1">{i + 1}. {paso}</h3>
-            </div>
-          ))}
+          {
+            ["Reúne", "Sube", "Pregunta"].map((paso, i) => (
+              <div class="bg-white p-6 rounded-xl border border-gray-100 text-center shadow-sm">
+                <div class="text-2xl mb-3">{["📁", "☁️", "💬"][i]}</div>
+                <h3 class="font-bold text-deep text-sm mb-1">
+                  {i + 1}. {paso}
+                </h3>
+              </div>
+            ))
+          }
         </div>
       </section>
 
@@ -80,16 +122,34 @@ import ActionHub from '../../components/ActionHub.astro';
       <section>
         <h2 class="text-xl font-bold text-deep mb-6">3 Prompts exactos</h2>
         <div class="space-y-4">
-          {[
-            { cat: "Para notas de reuniones", prompt: "Extrae solo acuerdos, responsables y fechas límite. Omite conversaciones laterales. Formato: tabla." },
-            { cat: "Para reportes manuales", prompt: "Compara los datos de [Hoja1] con los comentarios de [Transcripción]. Identifica 3 discrepancias y sugiere una acción correctiva." },
-            { cat: "Para presentaciones", prompt: "Convierte este análisis en: Problema → Dato clave → Riesgo → Propuesta → Siguiente paso." }
-          ].map(p => (
-            <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-              <div class="bg-gray-50 px-6 py-2 text-xs font-bold text-gray-400 uppercase tracking-widest">{p.cat}</div>
-              <div class="p-6 font-mono text-sm text-deep bg-white">{p.prompt}</div>
-            </div>
-          ))}
+          {
+            [
+              {
+                cat: "Para notas de reuniones",
+                prompt:
+                  "Extrae solo acuerdos, responsables y fechas límite. Omite conversaciones laterales. Formato: tabla.",
+              },
+              {
+                cat: "Para reportes manuales",
+                prompt:
+                  "Compara los datos de [Hoja1] con los comentarios de [Transcripción]. Identifica 3 discrepancias y sugiere una acción correctiva.",
+              },
+              {
+                cat: "Para presentaciones",
+                prompt:
+                  "Convierte este análisis en: Problema → Dato clave → Riesgo → Propuesta → Siguiente paso.",
+              },
+            ].map((p) => (
+              <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                <div class="bg-gray-50 px-6 py-2 text-xs font-bold text-gray-400 uppercase tracking-widest">
+                  {p.cat}
+                </div>
+                <div class="p-6 font-mono text-sm text-deep bg-white">
+                  {p.prompt}
+                </div>
+              </div>
+            ))
+          }
         </div>
       </section>
 
@@ -97,16 +157,20 @@ import ActionHub from '../../components/ActionHub.astro';
       <section class="bg-deep p-10 rounded-2xl text-center text-white">
         <h3 class="text-2xl font-bold mb-4">Esto es solo el abrebocas.</h3>
         <p class="text-sm text-gray-300 mb-8 max-w-lg mx-auto">
-          Este flujo te ahorra horas. Pero sigue siendo manual. <strong>En tu Café Estratégico (15 min)</strong> conectamos tus fuentes para que se actualicen solas.
+          Este flujo te ahorra horas. Pero sigue siendo manual. <strong
+            >En tu Café Estratégico (15 min)</strong
+          > conectamos tus fuentes para que se actualicen solas.
         </p>
-        <a href={LINKS.calendly} target="_blank" 
-           class="inline-block bg-orange text-white px-8 py-4 rounded-lg font-bold hover:bg-orange/90 transition shadow-lg">
+        <a
+          href={LINKS.calendly}
+          target="_blank"
+          class="inline-block bg-orange text-white px-8 py-4 rounded-lg font-bold hover:bg-orange/90 transition shadow-lg"
+        >
           Reservar mi Café Estratégico →
         </a>
       </section>
 
       <ActionHub />
-
     </div>
   </main>
 </Layout>

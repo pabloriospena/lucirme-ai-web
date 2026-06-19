@@ -1,0 +1,209 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { LINKS } from "../../lib/constants.js";
+---
+
+<Layout title="Preparación Sesión de Enfoque | LuciRMe AI">
+    <!-- NAV DE RETORNO -->
+    <nav class="bg-white border-b border-gray-100 px-4 py-3">
+        <div class="max-w-2xl mx-auto">
+            <a
+                href="/"
+                class="text-sm font-bold text-gray-400 hover:text-teal transition"
+                >← Volver al inicio</a
+            >
+        </div>
+    </nav>
+
+    <main class="bg-[#F8FAFC] min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto">
+            <!-- HEADER -->
+            <div class="text-center mb-10">
+                <h1 class="text-3xl font-black text-deep mb-2 tracking-tight">
+                    Preparando tu Sesión de Enfoque 🎯
+                </h1>
+                <p class="text-gray-500 text-lg">
+                    Devolvamos esas horas de operatividad manual. Completa esto
+                    para llegar al grano.
+                </p>
+            </div>
+
+            <!-- CONTEXTO (INFO BOX) -->
+            <div
+                class="bg-white p-6 rounded-2xl border border-gray-100 mb-8 shadow-sm"
+            >
+                <h2 class="text-lg font-bold text-deep mb-4">
+                    El plan para hoy:
+                </h2>
+                <ul class="space-y-3 text-sm text-gray-600">
+                    <li class="flex items-start gap-3">
+                        <span class="text-teal font-bold">✓</span>
+                        <span
+                            ><strong>Diagnóstico (20 min):</strong> Priorizamos tu
+                            mayor "dolor de cabeza".</span
+                        >
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-teal font-bold">✓</span>
+                        <span
+                            ><strong>Resolución en vivo:</strong> Dejamos ese flujo
+                            funcionando con IA.</span
+                        >
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-teal font-bold">✓</span>
+                        <span
+                            ><strong>Autonomía:</strong> Te llevas la solución y el
+                            conocimiento para mantenerla.</span
+                        >
+                    </li>
+                </ul>
+            </div>
+
+            <!-- FORMULARIO -->
+            <form
+                id="checklist-form"
+                class="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6"
+            >
+                <div>
+                    <label class="block text-sm font-bold text-deep mb-2"
+                        >Nombres de los asistentes</label
+                    >
+                    <input
+                        type="text"
+                        name="nombres"
+                        required
+                        placeholder="Ej: Alejandro y Ana"
+                        class="w-full px-4 py-3 text-base border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal focus:border-transparent outline-none transition"
+                    />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-deep mb-2"
+                        >Correo electrónico principal</label
+                    >
+                    <input
+                        type="email"
+                        name="email"
+                        required
+                        placeholder="tu@empresa.com"
+                        class="w-full px-4 py-3 text-base border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal focus:border-transparent outline-none transition"
+                    />
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-deep mb-2"
+                        >Tarea principal que más tiempo les consume</label
+                    >
+                    <textarea
+                        name="tarea"
+                        required
+                        rows="2"
+                        placeholder="Ej: Compilar reportes en Excel..."
+                        class="w-full px-4 py-3 text-base border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal focus:border-transparent outline-none transition"
+                    ></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold text-deep mb-2"
+                            >Horas semanales aprox.</label
+                        >
+                        <input
+                            type="number"
+                            name="horas"
+                            required
+                            placeholder="Ej: 10"
+                            class="w-full px-4 py-3 text-base border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal focus:border-transparent outline-none transition"
+                        />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-deep mb-2"
+                            >¿Ejemplo real listo?</label
+                        >
+                        <select
+                            name="ejemplo"
+                            required
+                            class="w-full px-4 py-3 text-base border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal focus:border-transparent outline-none transition bg-white"
+                        >
+                            <option value="Sí">Sí, lo tengo abierto</option>
+                            <option value="No">Aún no, lo preparo antes</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button
+                    type="submit"
+                    id="submit-btn"
+                    class="w-full bg-teal hover:bg-tealHover text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-teal/20 text-center"
+                >
+                    Guardar y prepararme para la sesión →
+                </button>
+
+                <p
+                    id="form-message"
+                    class="text-center text-sm font-bold hidden"
+                >
+                </p>
+            </form>
+
+            <!-- CHECKLIST TÉCNICO -->
+            <div class="mt-8 p-6 bg-deep text-white rounded-2xl">
+                <h3 class="font-bold mb-4">✅ Para la sesión, ten listo:</h3>
+                <ul class="space-y-2 text-gray-300 text-sm">
+                    <li>• Estar frente al computador con buena conexión.</li>
+                    <li>
+                        • Cuentas de IA abiertas (Claude, ChatGPT o Gemini).
+                    </li>
+                    <li>
+                        • El "dolor" a la mano: archivos o procesos reales para
+                        trabajar.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+</Layout>
+
+<script>
+    const form = document.getElementById("checklist-form") as HTMLFormElement;
+    const btn = document.getElementById("submit-btn") as HTMLButtonElement;
+    const msg = document.getElementById("form-message") as HTMLParagraphElement;
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // Verificación de seguridad
+        if (!msg) return;
+
+        btn.disabled = true;
+        btn.innerText = "Guardando...";
+        msg.classList.add("hidden");
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch("/api/submit-checklist", {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: { "Content-Type": "application/json" },
+            });
+
+            if (response.ok) {
+                // Redirección inmediata a la página de gracias
+                window.location.href = "/gracias";
+            } else {
+                throw new Error("Error en el servidor");
+            }
+        } catch (err) {
+            msg.innerText = "Hubo un error. Por favor, escríbeme por WhatsApp.";
+            msg.classList.remove("hidden");
+            btn.disabled = false;
+            btn.innerText = "Guardar y prepararme para la sesión →";
+
+            // Scroll suave al mensaje para avisar al usuario en móvil
+            msg.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+    });
+</script>
