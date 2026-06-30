@@ -1,237 +1,955 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import Layout from "../../layouts/Layout.astro";
 ---
 
-<Layout title="Módulo 1: Análisis de Producto con IA | LuciRMe AI">
-  <main class="relative w-full h-screen bg-[#0F172A] text-[#F8FAFC] overflow-hidden flex flex-col justify-between">
-    
-    <!-- BOTÓN DE PANTALLA COMPLETA (Arriba a la derecha) -->
-    <button id="fsToggle" class="fixed top-20 right-6 z-50 bg-white/10 hover:bg-white/20 border border-white/10 text-white px-4 py-2 rounded-full text-xs font-bold shadow-sm transition">
-      ⛶ Pantalla completa
-    </button>
+<Layout title="IA Aplicada: De la idea a tu primer agente | LuciRMe AI">
+  <!-- Contador de slides y Nav Dots (Fijos) -->
+  <div
+    class="fixed top-6 right-6 text-xs font-semibold text-slate-500 bg-white/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-slate-200 shadow-sm z-50"
+  >
+    <span id="current">01</span> / <span id="total">12</span>
+  </div>
+  <nav
+    class="fixed right-6 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-50 bg-white/80 backdrop-blur-sm p-2 rounded-full border border-slate-200 shadow-sm"
+    id="navDots"
+  >
+  </nav>
 
-    <!-- CONTENEDOR DE SLIDES -->
-    <div class="flex-grow relative w-full max-w-5xl mx-auto px-6 py-12 flex items-center justify-center">
-      
-      <!-- FLECHAS DE NAVEGACIÓN LATERALES (Para hacer clic rápido) -->
-      <button id="arrow-prev" class="hidden md:block absolute left-4 z-40 p-4 rounded-full bg-white/5 hover:bg-teal hover:text-white transition disabled:opacity-20" disabled>
-        <span class="text-xl">◀</span>
-      </button>
-      <button id="arrow-next" class="hidden md:block absolute right-4 z-40 p-4 rounded-full bg-white/5 hover:bg-teal hover:text-white transition disabled:opacity-20">
-        <span class="text-xl">▶</span>
-      </button>
-
-      <!-- Slide 1 -->
-      <section class="slide active">
-        <h1 class="text-4xl md:text-5xl font-bold text-teal mb-6 leading-tight">Análisis de Producto Digital con Inteligencia Artificial</h1>
-        <p class="text-lg md:text-xl text-gray-300">Módulo 1: Aprendiendo a pensar como <span class="text-teal font-bold">Product Managers</span> usando herramientas de última generación.</p>
-        <div class="mt-8 flex gap-3">
-          <span class="bg-teal/20 px-4 py-2 rounded-full text-xs font-bold text-teal">#ProductManagement</span>
-          <span class="bg-orange/20 px-4 py-2 rounded-full text-xs font-bold text-orange">#AI_CoPilot</span>
+  <!-- Slider Principal -->
+  <main
+    class="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth"
+    id="slider"
+  >
+    <!-- SLIDE 01: PORTADA -->
+    <section
+      class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50 relative"
+    >
+      <div class="max-w-4xl w-full text-center">
+        <div
+          class="inline-flex items-center gap-2 bg-white border border-slate-200 px-4 py-1.5 rounded-full text-xs text-slate-600 font-medium mb-6 shadow-sm"
+        >
+          <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"
+          ></span>
+          Taller Práctico · 1 de julio 2026 · 9:00 AM
         </div>
-      </section>
-
-      <!-- Slide 2 -->
-      <section class="slide">
-        <h2 class="text-3xl font-bold text-teal mb-6">🧠 El "Filtro Humano" primero</h2>
-        <p class="text-base text-gray-300 mb-6">La Inteligencia Artificial es una herramienta de apoyo espectacular, pero <strong class="text-white">el criterio final es tuyo</strong>.</p>
-        <div class="bg-teal/5 border-l-4 border-teal p-6 rounded-r-xl italic text-gray-200 my-6">
-          "La IA es tu asistente de investigación junior; ustedes son los Product Managers. Organiza, resume y busca información rápido, pero carece de empatía por el usuario y de visión de negocio."
+        <h1
+          class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4"
+        >
+          IA Aplicada:<br />
+          <span
+            class="bg-gradient-to-r from-teal-600 to-emerald-500 bg-clip-text text-transparent"
+            >De la idea a tu primer agente</span
+          >
+        </h1>
+        <p class="text-base text-slate-600 max-w-xl mx-auto mb-6">
+          Un recorrido práctico para que tú y tu equipo decidan qué aplicar. Sin
+          teoría vacía. Sin herramientas que no usan.
+        </p>
+        <div class="flex flex-wrap justify-center gap-2 mb-8">
+          <span
+            class="bg-white border border-slate-200 px-3 py-1 rounded-md text-xs font-medium text-slate-700 shadow-sm"
+            >Almamotor SAS</span
+          >
+          <span
+            class="bg-white border border-slate-200 px-3 py-1 rounded-md text-xs font-medium text-slate-700 shadow-sm"
+            >Mobila BLE SAS</span
+          >
+          <span
+            class="bg-white border border-slate-200 px-3 py-1 rounded-md text-xs font-medium text-slate-700 shadow-sm"
+            >Agropecuaria la Isla</span
+          >
         </div>
-      </section>
+        <div>
+          <p
+            class="text-xs text-slate-500 uppercase tracking-wider font-semibold"
+          >
+            Facilitador
+          </p>
+          <p class="text-lg font-bold text-slate-900 mt-1">Pablo Ríos Peña</p>
+          <p class="text-xs text-slate-500">
+            Head of Product · Consultor en IA & Product Strategy
+          </p>
+        </div>
+      </div>
+      <div
+        class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center text-slate-400 text-xs animate-bounce"
+      >
+        <span>Desplázate</span>
+        <span class="text-lg">↓</span>
+      </div>
+    </section>
 
-      <!-- Slide 3 -->
-      <section class="slide">
-        <h2 class="text-3xl font-bold text-teal mb-6">📐 Fórmula R + C + T + E</h2>
-        <p class="text-base text-gray-300 mb-8">Para no obtener respuestas genéricas de Wikipedia, estructuramos nuestros prompts así:</p>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
-          {[
-            { l: "R", t: "Rol", d: "¿Quién habla?" },
-            { l: "C", t: "Contexto", d: "¿Qué app?" },
-            { l: "T", t: "Tarea", d: "¿Qué resuelves?" },
-            { l: "E", t: "Entrega", d: "¿Qué formato?" }
-          ].map(f => (
-            <div class="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
-              <span class="text-4xl font-black text-teal block mb-2">{f.l}</span>
-              <strong class="text-white">{f.t}</strong>
-              <p class="text-xs text-gray-400 mt-2">{f.d}</p>
+    <!-- SLIDE 02: ROMPEHIELOS -->
+    <section
+      class="min-h-screen snap-start flex items-center justify-center p-8 bg-white"
+    >
+      <div class="max-w-4xl w-full">
+        <p
+          class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+        >
+          🧊 Apertura y Conexión
+        </p>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+        >
+          ¿Cuándo usaste IA<br />por última vez?
+        </h2>
+        <div class="w-10 h-1 bg-teal-600 rounded-full mb-4"></div>
+        <p class="text-base text-slate-600 mb-6">
+          Probablemente hoy. Sin saberlo.
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+          <div
+            class="bg-slate-50 border border-slate-200 rounded-lg p-4 text-center hover:border-teal-500 transition-colors"
+          >
+            <span class="text-2xl block mb-1">🎵</span>
+            <span class="text-xs font-semibold text-slate-800">Spotify</span>
+            <p class="text-[10px] text-slate-500 mt-0.5">Descubre música</p>
+          </div>
+          <div
+            class="bg-slate-50 border border-slate-200 rounded-lg p-4 text-center hover:border-teal-500 transition-colors"
+          >
+            <span class="text-2xl block mb-1">🗺️</span>
+            <span class="text-xs font-semibold text-slate-800">Maps</span>
+            <p class="text-[10px] text-slate-500 mt-0.5">
+              Rutas en tiempo real
+            </p>
+          </div>
+          <div
+            class="bg-slate-50 border border-slate-200 rounded-lg p-4 text-center hover:border-teal-500 transition-colors"
+          >
+            <span class="text-2xl block mb-1">🎬</span>
+            <span class="text-xs font-semibold text-slate-800">Netflix</span>
+            <p class="text-[10px] text-slate-500 mt-0.5">Recomendaciones</p>
+          </div>
+          <div
+            class="bg-slate-50 border border-slate-200 rounded-lg p-4 text-center hover:border-teal-500 transition-colors"
+          >
+            <span class="text-2xl block mb-1">📹</span>
+            <span class="text-xs font-semibold text-slate-800">Cámaras</span>
+            <p class="text-[10px] text-slate-500 mt-0.5">Enfoque automático</p>
+          </div>
+        </div>
+        <div class="bg-teal-50 border-l-4 border-teal-500 rounded-r-lg p-4">
+          <p class="text-sm text-slate-700">
+            Si confías en que estas herramientas aprendan de ti para ayudarte,
+            puedes confiar en la IA para optimizar <strong
+              >tu flujo de trabajo</strong
+            >.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 03: QUIÉN SOY -->
+    <section
+      class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50"
+    >
+      <div class="max-w-4xl w-full grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <p
+            class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+          >
+            👨‍💼 Tu facilitador
+          </p>
+          <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-2">
+            Pablo Ríos Peña
+          </h2>
+          <div class="w-10 h-1 bg-teal-600 rounded-full mb-4"></div>
+          <blockquote
+            class="text-base italic text-slate-600 border-l-2 border-teal-500 pl-4 mb-4"
+          >
+            "Mejorar la vida de las personas con tecnología. Ese es el
+            propósito."
+          </blockquote>
+          <p class="text-sm text-slate-600 leading-relaxed mb-4">
+            No vengo a vender herramientas. Vengo a compartir lo que me ha
+            funcionado para que tú y tu equipo decidan qué aplicar.
+          </p>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="bg-teal-100 text-teal-700 px-2.5 py-1 rounded-full text-[10px] font-semibold"
+              >12+ años PM</span
+            >
+            <span
+              class="bg-orange-100 text-orange-700 px-2.5 py-1 rounded-full text-[10px] font-semibold"
+              >IA desde 2021</span
+            >
+            <span
+              class="bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full text-[10px] font-semibold"
+              >Fundador LuciRMe</span
+            >
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div
+            class="bg-white border border-slate-200 rounded-lg p-4 shadow-sm"
+          >
+            <h3 class="text-sm font-semibold text-teal-600 mb-2">
+              Lo que traigo a esta sesión
+            </h3>
+            <ul class="space-y-1.5 text-sm text-slate-600 custom-check-list">
+              <li>Enfoque práctico: 70% aplicación, 30% teoría</li>
+              <li>Herramientas 100% gratuitas</li>
+              <li>Rigor ingenieril: validación humana siempre</li>
+              <li>Propiedad intelectual: tú eres dueño de tus agentes</li>
+            </ul>
+          </div>
+          <div
+            class="bg-white border border-slate-200 rounded-lg p-4 shadow-sm"
+          >
+            <h3 class="text-sm font-semibold text-slate-500 mb-2">Formación</h3>
+            <div class="flex flex-wrap gap-1.5">
+              <span
+                class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded text-[10px] font-medium"
+                >Design Thinking</span
+              >
+              <span
+                class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded text-[10px] font-medium"
+                >Scrum Master</span
+              >
+              <span
+                class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded text-[10px] font-medium"
+                >User Story Mapping</span
+              >
+              <span
+                class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded text-[10px] font-medium"
+                >Product-Led Growth</span
+              >
             </div>
-          ))}
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Slide 4 -->
-      <section class="slide">
-        <h2 class="text-3xl font-bold text-teal mb-6">🔍 Paso 1: Deep Research</h2>
-        <p class="text-base text-gray-300 mb-6">Antes de analizar, necesitamos datos reales para evitar que la IA alucine.</p>
+    <!-- SLIDE 04: IA SIN TECNICISMOS -->
+    <section
+      class="min-h-screen snap-start flex items-center justify-center p-8 bg-white"
+    >
+      <div class="max-w-4xl w-full">
+        <p
+          class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+        >
+          🧠 Fundamentos
+        </p>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+        >
+          IA sin tecnicismos
+        </h2>
+        <div class="w-10 h-1 bg-teal-600 rounded-full mb-4"></div>
+        <p class="text-base text-slate-600 mb-6">
+          Conceptos claros, en palabras cortas.
+        </p>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h3 class="text-sm font-bold text-emerald-600 mb-2">✅ Qué ES</h3>
+            <ul class="space-y-1.5 text-sm text-slate-600 custom-check-list">
+              <li>Herramienta que aprende patrones</li>
+              <li>Asistente que sugiere, no decide</li>
+              <li>Motor que acelera tu flujo</li>
+              <li>Espejo que organiza tu conocimiento</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-red-500 mb-2">❌ Qué NO es</h3>
+            <ul class="space-y-1.5 text-sm text-slate-600 custom-x-list">
+              <li>No piensa como humano</li>
+              <li>No tiene criterio propio</li>
+              <li>No reemplaza tu juicio</li>
+              <li>No es magia: es estadística</li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="mt-6 text-center p-4 bg-slate-50 rounded-lg border border-slate-200"
+        >
+          <p class="text-base font-semibold text-slate-800">
+            Potencia tu criterio, <span class="text-teal-600"
+              >no lo reemplaza</span
+            >.
+          </p>
+          <p class="text-xs text-slate-500 mt-1">
+            La IA te devuelve tiempo para hacer más de lo que solo tú puedes
+            hacer: interpretar, decidir, innovar.
+          </p>
+        </div>
+      </div>
+    </section>
 
-      </section>
+    <!-- SLIDE 05: REGLA DE ORO -->
+    <section
+      class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50"
+    >
+      <div class="max-w-4xl w-full text-center">
+        <p
+          class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-4"
+        >
+          ⚖️ La Regla de Oro
+        </p>
+        <h2
+          class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-6 bg-gradient-to-r from-teal-600 to-emerald-500 bg-clip-text text-transparent"
+        >
+          La IA sugiere.<br />Tú decides.
+        </h2>
+        <div class="w-10 h-1 bg-teal-600 rounded-full mx-auto mb-6"></div>
+        <p class="text-base text-slate-600 max-w-lg mx-auto mb-8">
+          Tú eres la última línea de defensa. Valida siempre.<br />
+          <strong class="text-slate-900">Confía, pero verifica.</strong> Tu experiencia
+          es irreemplazable.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
+          <div
+            class="bg-white border border-slate-200 rounded-lg p-4 text-left shadow-sm"
+          >
+            <span class="text-xl block mb-1">🔍</span>
+            <h3 class="text-sm font-semibold text-slate-800 mb-1">Revisa</h3>
+            <p class="text-xs text-slate-500">
+              La IA puede inventar datos. Siempre verifica cifras.
+            </p>
+          </div>
+          <div
+            class="bg-white border border-slate-200 rounded-lg p-4 text-left shadow-sm"
+          >
+            <span class="text-xl block mb-1">🧠</span>
+            <h3 class="text-sm font-semibold text-slate-800 mb-1">
+              Interpreta
+            </h3>
+            <p class="text-xs text-slate-500">
+              El contexto de tu empresa solo tú lo conoces.
+            </p>
+          </div>
+          <div
+            class="bg-white border border-slate-200 rounded-lg p-4 text-left shadow-sm"
+          >
+            <span class="text-xl block mb-1">✅</span>
+            <h3 class="text-sm font-semibold text-slate-800 mb-1">Decide</h3>
+            <p class="text-xs text-slate-500">
+              La recomendación final siempre es tuya.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <!-- Slide 5 -->
-      <section class="slide">
-        <h2 class="text-3xl font-bold text-teal mb-6">📚 Paso 2: NotebookLM</h2>
-        <p class="text-base text-gray-300 mb-6">Abriremos NotebookLM de Google para asegurar respuestas 100% verídicas.</p>
-        <div class="grid md:grid-cols-3 gap-4 w-full max-w-2xl">
-          {["Reporte de Deep Research", "Enlace oficial o capturas", "Artículo de opinión o review"].map((f, i) => (
-            <div class="p-4 bg-white/5 border border-white/10 rounded-xl text-center">
-              <span class="text-2xl block mb-2">{['📄', '🔗', '🎨'][i]}</span>
-              <p class="text-xs font-bold text-white">Fuente 0{i+1}: {f}</p>
+    <!-- SLIDE 06: KIT GRATUITO -->
+    <section
+      class="min-h-screen snap-start flex items-center justify-center p-8 bg-white"
+    >
+      <div class="max-w-4xl w-full">
+        <p
+          class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+        >
+          🧰 Herramientas
+        </p>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+        >
+          Tu kit gratuito
+        </h2>
+        <div class="w-10 h-1 bg-teal-600 rounded-full mb-4"></div>
+        <p class="text-base text-slate-600 mb-6">
+          100% gratuitas. Sin tarjeta de crédito. Sin excusas.
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+          <div
+            class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-center hover:border-teal-500 transition-colors"
+          >
+            <span class="text-xl block mb-1">📓</span>
+            <span class="text-xs font-bold text-slate-800 block"
+              >NotebookLM</span
+            >
+            <span class="text-[10px] text-slate-500"
+              >Tu agente con contexto</span
+            >
+          </div>
+          <div
+            class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-center hover:border-teal-500 transition-colors"
+          >
+            <span class="text-xl block mb-1">💬</span>
+            <span class="text-xs font-bold text-slate-800 block">ChatGPT</span>
+            <span class="text-[10px] text-slate-500">Redacción y análisis</span>
+          </div>
+          <div
+            class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-center hover:border-teal-500 transition-colors"
+          >
+            <span class="text-xl block mb-1">💎</span>
+            <span class="text-xs font-bold text-slate-800 block">Gemini</span>
+            <span class="text-[10px] text-slate-500">Deep Research</span>
+          </div>
+          <div
+            class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-center hover:border-teal-500 transition-colors"
+          >
+            <span class="text-xl block mb-1">🔮</span>
+            <span class="text-xs font-bold text-slate-800 block">Qwen</span>
+            <span class="text-[10px] text-slate-500">Razonamiento</span>
+          </div>
+          <div
+            class="bg-slate-50 border border-slate-200 rounded-lg p-3 text-center hover:border-teal-500 transition-colors"
+          >
+            <span class="text-xl block mb-1">🔎</span>
+            <span class="text-xs font-bold text-slate-800 block"
+              >Perplexity</span
+            >
+            <span class="text-[10px] text-slate-500">Búsqueda con fuentes</span>
+          </div>
+        </div>
+        <div class="mt-6 flex items-center gap-3 flex-wrap">
+          <a
+            href="#"
+            class="inline-flex items-center gap-1.5 bg-teal-600 text-white px-4 py-2 rounded-md text-xs font-semibold hover:bg-teal-700 transition-colors shadow-sm"
+          >
+            🔗 Link al Prompteador
+          </a>
+          <span class="text-xs text-slate-500"
+            >Tu fórmula mágica para pedirle cosas a la IA</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 07: CHAT VS AGENTE -->
+    <section
+      class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50"
+    >
+      <div class="max-w-4xl w-full">
+        <p
+          class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+        >
+          🤖 Agentes de IA
+        </p>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+        >
+          De la búsqueda manual<br />a la respuesta con <span
+            class="text-teal-600">contexto</span>
+        </h2>
+        <div class="w-10 h-1 bg-teal-600 rounded-full mb-6"></div>
+        <div class="grid md:grid-cols-2 gap-4 mb-6">
+          <div
+            class="bg-white border border-slate-200 rounded-lg p-4 shadow-sm"
+          >
+            <span class="text-xl block mb-2">💬</span>
+            <h3 class="text-sm font-semibold text-slate-800 mb-2">
+              Chat tradicional
+            </h3>
+            <ul class="space-y-1.5 text-xs text-slate-600 custom-x-list">
+              <li>Responde con lo que sabe de internet</li>
+              <li>Puede alucinar o inventar datos</li>
+              <li>No conoce tu empresa</li>
+              <li>Cada pregunta empieza de cero</li>
+            </ul>
+          </div>
+          <div
+            class="bg-white border-2 border-teal-500 rounded-lg p-4 shadow-sm"
+          >
+            <span class="text-xl block mb-2">🤖</span>
+            <h3 class="text-sm font-semibold text-teal-600 mb-2">
+              Agente (NotebookLM)
+            </h3>
+            <ul class="space-y-1.5 text-xs text-slate-600 custom-check-list">
+              <li>Responde solo con tus documentos</li>
+              <li>100% controlado y verificable</li>
+              <li>Conoce tus políticas y procesos</li>
+              <li>Mantiene contexto siempre</li>
+            </ul>
+          </div>
+        </div>
+        <div class="bg-orange-50 border-l-4 border-orange-500 rounded-r-lg p-4">
+          <p class="text-xs text-slate-700">
+            <strong>Caso real:</strong> Subir manuales de conciliación bancaria y
+            políticas contables → Preguntarle al agente paso a paso cómo proceder
+            ante cada diferencia.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 08: DEMO EN VIVO -->
+    <section
+      class="min-h-screen snap-start flex items-center justify-center p-8 bg-white"
+    >
+      <div class="max-w-4xl w-full text-center">
+        <p
+          class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+        >
+          💻 Demo en Vivo
+        </p>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+        >
+          Manos a la obra
+        </h2>
+        <div class="w-10 h-1 bg-teal-600 rounded-full mx-auto mb-4"></div>
+        <p class="text-base text-slate-600 mb-8">
+          Vamos a crear un agente juntos, ahora mismo.
+        </p>
+
+        <div
+          class="flex flex-col md:flex-row items-center justify-center gap-4 mb-8"
+        >
+          <div class="flex flex-col items-center">
+            <div
+              class="w-10 h-10 rounded-full bg-teal-50 border-2 border-teal-500 flex items-center justify-center text-sm font-bold text-teal-600 mb-2"
+            >
+              1
             </div>
-          ))}
+            <span class="text-xs font-semibold text-slate-800"
+              >Crear Cuaderno</span
+            >
+          </div>
+          <div class="hidden md:block w-12 h-0.5 bg-slate-200"></div>
+          <div class="flex flex-col items-center">
+            <div
+              class="w-10 h-10 rounded-full bg-teal-50 border-2 border-teal-500 flex items-center justify-center text-sm font-bold text-teal-600 mb-2"
+            >
+              2
+            </div>
+            <span class="text-xs font-semibold text-slate-800"
+              >Subir Fuentes</span
+            >
+          </div>
+          <div class="hidden md:block w-12 h-0.5 bg-slate-200"></div>
+          <div class="flex flex-col items-center">
+            <div
+              class="w-10 h-10 rounded-full bg-teal-50 border-2 border-teal-500 flex items-center justify-center text-sm font-bold text-teal-600 mb-2"
+            >
+              3
+            </div>
+            <span class="text-xs font-semibold text-slate-800"
+              >Hacer Preguntas</span
+            >
+          </div>
         </div>
-      </section>
 
-      <!-- Slide 6 -->
-      <section class="slide">
-        <h2 class="text-3xl font-bold text-teal mb-6">🛠️ El Remate: Preguntas Core</h2>
-        <p class="text-base text-gray-300 mb-6">Dentro del chat de NotebookLM, usaremos la fórmula aprendida:</p>
-        <div class="space-y-4 w-full max-w-2xl">
-          <div class="code-block text-xs"><strong>Pregunta 1:</strong> "Actúa como un [Rol: PM Senior]. Ayúdame a [Tarea: identificar el problema]..."</div>
-          <div class="code-block text-xs"><strong>Pregunta 2:</strong> "Actúa como un [Rol: UX Researcher]. Ayúdame a [Tarea: descubrir quién es su usuario]..."</div>
+        <div
+          class="bg-slate-50 border border-slate-200 rounded-lg p-4 text-left max-w-lg mx-auto"
+        >
+          <p
+            class="text-[10px] font-bold text-teal-600 uppercase tracking-wider mb-2"
+          >
+            Prompt de ejemplo
+          </p>
+          <p
+            class="text-xs text-slate-700 font-mono bg-white p-3 rounded border border-slate-200 leading-relaxed"
+          >
+            "Actúa como mi asistente contable. Revisa el documento de políticas
+            y dime paso a paso cómo debo proceder si encuentro una diferencia de
+            valor en el banco vs el diario."
+          </p>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Slide 7 -->
-      <section class="slide">
-        <h2 class="text-3xl font-bold text-teal mb-6">🏁 Tu Entregable Final (1 Slide)</h2>
-        <ul class="space-y-3 text-sm text-gray-300 max-w-xl text-left">
-          <li>✓ <strong>Producto & Problema:</strong> Qué app elegiste y qué dolor soluciona.</li>
-          <li>✓ <strong>Usuario Principal:</strong> El perfil objetivo que descubriste con tus fuentes.</li>
-          <li>✓ <strong>1 Decisión de PM Inferida:</strong> Un cambio o función de interfaz.</li>
-          <li class="pt-4 text-xs text-teal italic">"Se utilizó Deep Research para recolectar el contexto y NotebookLM para procesar."</li>
-        </ul>
-      </section>
+    <!-- SLIDE 09: CRITERIOS DE VIABILIDAD -->
+    <section
+      class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50"
+    >
+      <div class="max-w-4xl w-full">
+        <p
+          class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+        >
+          🎯 Identificación de Tareas
+        </p>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+        >
+          ¿Qué podemos <span class="text-orange-600">"agentizar"</span> hoy?
+        </h2>
+        <div class="w-10 h-1 bg-teal-600 rounded-full mb-6"></div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div
+            class="bg-white border border-slate-200 rounded-lg p-4 shadow-sm"
+          >
+            <span class="text-xl block mb-1">🔄</span>
+            <h3 class="text-sm font-semibold text-slate-800 mb-1">
+              Repetitiva o con patrón claro
+            </h3>
+            <p class="text-xs text-slate-500">
+              Si lo haces cada semana de la misma forma, es candidato.
+            </p>
+          </div>
+          <div
+            class="bg-white border border-slate-200 rounded-lg p-4 shadow-sm"
+          >
+            <span class="text-xl block mb-1">📐</span>
+            <h3 class="text-sm font-semibold text-slate-800 mb-1">
+              Reglas o criterios definidos
+            </h3>
+            <p class="text-xs text-slate-500">
+              Si existe un procedimiento escrito, la IA puede seguirlo.
+            </p>
+          </div>
+          <div
+            class="bg-white border border-slate-200 rounded-lg p-4 shadow-sm"
+          >
+            <span class="text-xl block mb-1">🚫</span>
+            <h3 class="text-sm font-semibold text-slate-800 mb-1">
+              Sin juicio humano complejo
+            </h3>
+            <p class="text-xs text-slate-500">
+              Si requiere empatía o negociación subjetiva, aún no.
+            </p>
+          </div>
+          <div
+            class="bg-white border border-slate-200 rounded-lg p-4 shadow-sm"
+          >
+            <span class="text-xl block mb-1">📊</span>
+            <h3 class="text-sm font-semibold text-slate-800 mb-1">
+              Resultado estructurado
+            </h3>
+            <p class="text-xs text-slate-500">
+              Si el output es una tabla, reporte o listado, es perfecto.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    </div>
+    <!-- SLIDE 10: PRIORIZACIÓN -->
+    <section
+      class="min-h-screen snap-start flex items-center justify-center p-8 bg-white"
+    >
+      <div class="max-w-4xl w-full">
+        <p
+          class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+        >
+          📊 Priorización Colectiva
+        </p>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+        >
+          Evaluación → Votación → Selección
+        </h2>
+        <div class="w-10 h-1 bg-teal-600 rounded-full mb-6"></div>
 
-    <!-- BARRA DE CONTROLES INFERIOR -->
-    <div class="bg-slate-950/80 border-t border-white/10 px-8 py-5 flex justify-between items-center z-50">
-      <button class="bg-white/5 border border-white/10 px-6 py-2.5 rounded-lg text-sm font-bold text-white hover:bg-teal hover:border-teal disabled:opacity-30 disabled:cursor-not-allowed transition" id="prevBtn" disabled>Anterior</button>
-      <div class="flex gap-2" id="dotsContainer"></div>
-      <button class="bg-white/5 border border-white/10 px-6 py-2.5 rounded-lg text-sm font-bold text-white hover:bg-teal hover:border-teal disabled:opacity-30 disabled:cursor-not-allowed transition" id="nextBtn">Siguiente</button>
-    </div>
+        <div
+          class="grid grid-cols-4 border border-slate-200 rounded-lg overflow-hidden text-xs mb-6"
+        >
+          <div
+            class="bg-slate-100 p-3 font-bold text-slate-800 uppercase tracking-wide text-[10px]"
+          >
+            Criterio
+          </div>
+          <div
+            class="bg-slate-100 p-3 font-bold text-slate-800 uppercase tracking-wide text-[10px]"
+          >
+            Alto
+          </div>
+          <div
+            class="bg-slate-100 p-3 font-bold text-slate-800 uppercase tracking-wide text-[10px]"
+          >
+            Medio
+          </div>
+          <div
+            class="bg-slate-100 p-3 font-bold text-slate-800 uppercase tracking-wide text-[10px]"
+          >
+            Bajo
+          </div>
 
+          <div
+            class="p-3 font-semibold text-slate-700 border-t border-slate-200"
+          >
+            ⏱️ Tiempo ahorrado
+          </div>
+          <div class="p-3 text-emerald-600 border-t border-slate-200">
+            +10 hrs/sem
+          </div>
+          <div class="p-3 text-orange-600 border-t border-slate-200">
+            3-10 hrs/sem
+          </div>
+          <div class="p-3 text-slate-500 border-t border-slate-200">
+            &lt;3 hrs/sem
+          </div>
+
+          <div
+            class="p-3 font-semibold text-slate-700 border-t border-slate-200"
+          >
+            ⚙️ Viabilidad
+          </div>
+          <div class="p-3 text-emerald-600 border-t border-slate-200">
+            Reglas claras
+          </div>
+          <div class="p-3 text-orange-600 border-t border-slate-200">
+            Requiere limpieza
+          </div>
+          <div class="p-3 text-slate-500 border-t border-slate-200">
+            Datos complejos
+          </div>
+
+          <div
+            class="p-3 font-semibold text-slate-700 border-t border-slate-200"
+          >
+            🔁 Frecuencia
+          </div>
+          <div class="p-3 text-emerald-600 border-t border-slate-200">
+            Diaria
+          </div>
+          <div class="p-3 text-orange-600 border-t border-slate-200">
+            Semanal
+          </div>
+          <div class="p-3 text-slate-500 border-t border-slate-200">
+            Mensual
+          </div>
+        </div>
+        <div class="text-center">
+          <span
+            class="inline-block bg-orange-100 text-orange-700 px-4 py-1.5 rounded-full text-xs font-semibold"
+          >
+            🏆 Seleccionamos las TOP 3 tareas con mayor retorno
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 11: OUTPUT -->
+    <section
+      class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50"
+    >
+      <div class="max-w-4xl w-full">
+        <p
+          class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+        >
+          📋 Output de la Sesión
+        </p>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+        >
+          Tu plan de acción
+        </h2>
+        <div class="w-10 h-1 bg-teal-600 rounded-full mb-6"></div>
+
+        <div
+          class="bg-gradient-to-br from-teal-50 to-emerald-50 border border-teal-200 rounded-lg p-5 mb-6"
+        >
+          <div
+            class="flex items-start gap-3 pb-3 mb-3 border-b border-teal-100"
+          >
+            <span class="text-lg">🎯</span>
+            <div>
+              <span
+                class="text-[10px] font-bold text-teal-700 uppercase tracking-wider block"
+                >Tarea priorizada</span
+              >
+              <span class="text-xs text-slate-700"
+                >Descripción clara + contexto de uso</span
+              >
+            </div>
+          </div>
+          <div
+            class="flex items-start gap-3 pb-3 mb-3 border-b border-teal-100"
+          >
+            <span class="text-lg">👤</span>
+            <div>
+              <span
+                class="text-[10px] font-bold text-teal-700 uppercase tracking-wider block"
+                >Responsable</span
+              >
+              <span class="text-xs text-slate-700"
+                >Persona que lidera la implementación</span
+              >
+            </div>
+          </div>
+          <div
+            class="flex items-start gap-3 pb-3 mb-3 border-b border-teal-100"
+          >
+            <span class="text-lg">✅</span>
+            <div>
+              <span
+                class="text-[10px] font-bold text-teal-700 uppercase tracking-wider block"
+                >Criterio de éxito</span
+              >
+              <span class="text-xs text-slate-700"
+                >Cómo mediremos que funcionó</span
+              >
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-lg">📅</span>
+            <div>
+              <span
+                class="text-[10px] font-bold text-teal-700 uppercase tracking-wider block"
+                >Primer hito</span
+              >
+              <span class="text-xs text-slate-700"
+                >Fecha límite para tener el agente funcionando</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-lg p-4">
+          <p
+            class="text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-2"
+          >
+            Ejemplo de criterio de éxito
+          </p>
+          <div
+            class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden mb-2"
+          >
+            <div class="h-full w-3/4 bg-emerald-500 rounded-full"></div>
+          </div>
+          <p class="text-xs text-slate-600">
+            Reducir revisión de conciliaciones de 4 hrs a 45 min con 0 errores
+            de omisión
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 12: CIERRE -->
+    <section
+      class="min-h-screen snap-start flex items-center justify-center p-8 bg-white"
+    >
+      <div class="max-w-4xl w-full text-center">
+        <p
+          class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-4"
+        >
+          🚀 Lo que sigue
+        </p>
+        <h2
+          class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+        >
+          Lo que sigue<br /><span class="text-teal-600">depende de ti</span>
+        </h2>
+        <div class="w-10 h-1 bg-teal-600 rounded-full mx-auto mb-6"></div>
+        <p class="text-base text-slate-600 max-w-lg mx-auto mb-8">
+          Hoy identificaste tareas con potencial. La IA trabaja en silencio, de
+          fondo. Tú decides.
+        </p>
+        <div class="grid grid-cols-3 gap-4 max-w-md mx-auto mb-8">
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+            <span class="text-xl block mb-1">🧪</span>
+            <span class="text-xs font-semibold text-slate-800 block"
+              >Experimenta</span
+            >
+            <p class="text-[10px] text-slate-500 mt-0.5">
+              Prueba con datos ficticios
+            </p>
+          </div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+            <span class="text-xl block mb-1">📏</span>
+            <span class="text-xs font-semibold text-slate-800 block">Mide</span>
+            <p class="text-[10px] text-slate-500 mt-0.5">
+              Compara antes vs después
+            </p>
+          </div>
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+            <span class="text-xl block mb-1">🔄</span>
+            <span class="text-xs font-semibold text-slate-800 block">Itera</span
+            >
+            <p class="text-[10px] text-slate-500 mt-0.5">
+              Ajusta el agente cada semana
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-3 justify-center flex-wrap mb-8">
+          <a
+            href="https://linkedin.com/in/pabloriospena"
+            class="inline-flex items-center gap-1.5 bg-teal-600 text-white px-4 py-2 rounded-md text-xs font-semibold hover:bg-teal-700 transition-colors shadow-sm"
+            target="_blank"
+          >
+            💼 Conectemos en LinkedIn
+          </a>
+          <a
+            href="mailto:pabloriospena@gmail.com"
+            class="inline-flex items-center gap-1.5 bg-white text-slate-700 border border-slate-200 px-4 py-2 rounded-md text-xs font-semibold hover:bg-slate-50 transition-colors shadow-sm"
+          >
+            📬 pabloriospena@gmail.com
+          </a>
+        </div>
+        <p class="text-[10px] text-slate-400">
+          © 2026 Pablo Ríos Peña · LuciRMe AI · "No enseño IA. Enseño a
+          recuperar tu vida usando IA."
+        </p>
+      </div>
+    </section>
   </main>
+
+  <!-- Estilos mínimos para Scroll Snap y Listas personalizadas (Tailwind no maneja custom markers nativamente sin config) -->
+  <style is:global>
+    .custom-check-list li::before {
+      content: "✓";
+      color: #10b981; /* emerald-500 */
+      font-weight: 700;
+      margin-right: 0.5rem;
+    }
+    .custom-x-list li::before {
+      content: "✕";
+      color: #ef4444; /* red-500 */
+      font-weight: 700;
+      margin-right: 0.5rem;
+    }
+    /* Ocultar scrollbar pero mantener funcionalidad */
+    main::-webkit-scrollbar {
+      display: none;
+    }
+    main {
+      scrollbar-width: none;
+    }
+  </style>
+
+  <script>
+    const slider = document.getElementById("slider") as HTMLElement | null;
+    const slides = document.querySelectorAll(".slide, section"); // Ajustado para seleccionar las sections
+    const navDots = document.getElementById("navDots") as HTMLElement | null;
+    const currentEl = document.getElementById("current") as HTMLElement | null;
+    const totalEl = document.getElementById("total") as HTMLElement | null;
+
+    if (slider && navDots && currentEl && totalEl && slides.length > 0) {
+      totalEl.textContent = String(slides.length).padStart(2, "0");
+
+      // Create nav dots
+      slides.forEach((_, i) => {
+        const dot = document.createElement("button");
+        dot.className =
+          "w-2 h-2 rounded-full bg-slate-300 border-none cursor-pointer transition-all p-0 hover:bg-slate-400";
+        if (i === 0) {
+          dot.classList.add("bg-teal-500", "h-6", "rounded");
+        }
+        dot.setAttribute("aria-label", `Ir a diapositiva ${i + 1}`);
+        dot.addEventListener("click", () => {
+          slides[i].scrollIntoView({ behavior: "smooth" });
+        });
+        navDots.appendChild(dot);
+      });
+
+      const dots = document.querySelectorAll("#navDots button");
+
+      // Update active dot & counter on scroll
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const index = [...slides].indexOf(entry.target);
+              dots.forEach((d, i) => {
+                if (i === index) {
+                  d.className =
+                    "w-2 h-6 rounded bg-teal-500 border-none cursor-pointer transition-all p-0";
+                } else {
+                  d.className =
+                    "w-2 h-2 rounded-full bg-slate-300 border-none cursor-pointer transition-all p-0 hover:bg-slate-400";
+                }
+              });
+              currentEl.textContent = String(index + 1).padStart(2, "0");
+            }
+          });
+        },
+        { root: slider, threshold: 0.6 },
+      );
+
+      slides.forEach((slide) => observer.observe(slide));
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        const slideHeight = window.innerHeight;
+        if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+          e.preventDefault();
+          slider.scrollBy({ top: slideHeight, behavior: "smooth" });
+        } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+          e.preventDefault();
+          slider.scrollBy({ top: -slideHeight, behavior: "smooth" });
+        }
+      });
+    }
+  </script>
 </Layout>
-
-<script>
-  // LÓGICA DE NAVEGACIÓN INTELIGENTE (100% libre de errores)
-  let current = 0;
-  const slides = document.querySelectorAll('.slide') as NodeListOf<HTMLElement>;
-  const totalSlides = slides.length;
-  const dotsContainer = document.getElementById('dotsContainer');
-  const prevBtn = document.getElementById('prevBtn') as HTMLButtonElement | null;
-  const nextBtn = document.getElementById('nextBtn') as HTMLButtonElement | null;
-  const arrowPrev = document.getElementById('arrow-prev') as HTMLButtonElement | null;
-  const arrowNext = document.getElementById('arrow-next') as HTMLButtonElement | null;
-
-  // Crear dots dinámicos
-  if (dotsContainer) {
-    slides.forEach((_, i) => {
-      const dot = document.createElement('div');
-      dot.className = `w-2 h-2 rounded-full bg-white/20 transition-all ${i === 0 ? 'bg-teal w-6' : ''}`;
-      dot.id = `dot-${i}`;
-      dotsContainer.appendChild(dot);
-    });
-  }
-
-  function showSlide(n: number) {
-    slides.forEach((s, i) => {
-      s.classList.remove('active');
-      const dot = document.getElementById(`dot-${i}`);
-      if (dot) {
-        dot.className = `w-2 h-2 rounded-full bg-white/20 transition-all ${i === n ? 'bg-teal w-6' : ''}`;
-      }
-    });
-
-    if (slides[n]) {
-      slides[n].classList.add('active');
-    }
-
-    current = n;
-
-    // Actualizar botones inferiores
-    if (prevBtn) prevBtn.disabled = current === 0;
-    if (nextBtn) nextBtn.disabled = current === totalSlides - 1;
-
-    // Actualizar flechas flotantes
-    if (arrowPrev) arrowPrev.disabled = current === 0;
-    if (arrowNext) arrowNext.disabled = current === totalSlides - 1;
-  }
-
-  // Clic en botones inferiores
-  prevBtn?.addEventListener('click', () => showSlide(current - 1));
-  nextBtn?.addEventListener('click', () => showSlide(current + 1));
-
-  // Clic en flechas flotantes
-  arrowPrev?.addEventListener('click', () => showSlide(current - 1));
-  arrowNext?.addEventListener('click', () => showSlide(current + 1));
-
-  // Teclado (← y →)
-  document.addEventListener('keydown', (e: KeyboardEvent) => {
-    if(e.key === 'ArrowRight' && current < totalSlides - 1) showSlide(current + 1);
-    if(e.key === 'ArrowLeft' && current > 0) showSlide(current - 1);
-  });
-
-  // Copiado
-  document.addEventListener('click', async (e: MouseEvent) => {
-    const target = e.target as HTMLElement;
-    if (target && target.matches('.copy-btn')) {
-      const code = target.closest('.code-block')?.querySelector('code')?.textContent || '';
-      await navigator.clipboard.writeText(code.trim());
-      const originalText = target.textContent;
-      target.textContent = '✅ Copiado';
-      setTimeout(() => { target.textContent = originalText; }, 2000);
-    }
-  });
-
-  // Fullscreen
-  const fsToggle = document.getElementById('fsToggle') as HTMLButtonElement | null;
-  fsToggle?.addEventListener('click', () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch((err) => console.error(err));
-    } else {
-      document.exitFullscreen();
-    }
-  });
-
-  // LÓGICA DE SWIPE PARA MÓVILES (Touch Events)
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  const mainElement = document.querySelector('main');
-
-  if (mainElement) {
-    mainElement.addEventListener('touchstart', (e: TouchEvent) => {
-      touchStartX = e.changedTouches[0].clientX;
-    }, { passive: true });
-
-    mainElement.addEventListener('touchend', (e: TouchEvent) => {
-      touchEndX = e.changedTouches[0].clientX;
-      handleSwipe();
-    }, { passive: true });
-  }
-
-  function handleSwipe() {
-    const swipeThreshold = 50; // Distancia mínima en píxeles para detectar el deslizamiento
-    const diff = touchStartX - touchEndX;
-
-    if (Math.abs(diff) > swipeThreshold) {
-      if (diff > 0 && current < totalSlides - 1) {
-        // Deslizar hacia la izquierda -> Siguiente diapositiva
-        showSlide(current + 1);
-      } else if (diff < 0 && current > 0) {
-        // Deslizar hacia la derecha -> Diapositiva anterior
-        showSlide(current - 1);
-      }
-    }
-  }
-</script>
-
-<style is:global>
-  .slide { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; }
-  .slide.active { display: flex; animation: fadeIn 0.4s ease-out forwards; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-  .code-block { background: #1e293b; color: #f8fafc; padding: 1.5rem; border-radius: 12px; font-family: monospace; position: relative; width: 100%; max-width: 600px; }
-  .copy-btn { position: absolute; top: 10px; right: 10px; background: #0D9488; color: white; padding: 4px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; }
-</style>
