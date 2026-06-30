@@ -1,0 +1,226 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+// Definición estricta de tipos
+interface Campo {
+    nombre: string;
+    tipo: string;
+    placeholder?: string;
+}
+interface Pregunta {
+    id: number;
+    tipo:
+        | "texto"
+        | "numero"
+        | "email"
+        | "textarea"
+        | "radio"
+        | "checkbox"
+        | "grupo";
+    pregunta: string;
+    placeholder?: string;
+    nota?: string;
+    opciones?: any[];
+    campos?: Campo[];
+}
+interface Seccion {
+    seccion: string;
+    nota?: string;
+    preguntas: Pregunta[];
+}
+
+const formulario: Seccion[] = [
+    {
+        seccion: "Información Básica",
+        preguntas: [
+            {
+                id: 1,
+                tipo: "texto",
+                pregunta: "Nombre de la empresa",
+                placeholder: "Ej: Grupo Uribe",
+            },
+            {
+                id: 2,
+                tipo: "grupo",
+                pregunta: "¿Quién será el participante principal?",
+                campos: [
+                    { nombre: "Nombre", tipo: "texto" },
+                    { nombre: "Correo electrónico", tipo: "email" },
+                ],
+            },
+            {
+                id: 3,
+                tipo: "numero",
+                pregunta: "¿Cuántas personas asistirán?",
+                placeholder: "Ej: 3",
+            },
+        ],
+    },
+    {
+        seccion: "Estado Actual de IA",
+        preguntas: [
+            {
+                id: 5,
+                tipo: "radio",
+                pregunta: "¿Nivel de uso de IA hoy?",
+                opciones: ["Nulo", "Básico", "Intermedio", "Avanzado"],
+            },
+        ],
+    },
+    {
+        seccion: "Dolores y Procesos Manuales",
+        preguntas: [
+            {
+                id: 9,
+                tipo: "textarea",
+                pregunta: "Si pudieras optimizar UNA tarea, ¿cuál sería?",
+                placeholder: "Describe el proceso...",
+            },
+        ],
+    },
+];
+---
+
+<Layout title="Formulario Pre-Taller | LuciRMe AI">
+    <div class="max-w-xl mx-auto py-12 px-6">
+        <form id="pretaller-form">
+            {
+                formulario.map((s, idx) => (
+                    <div class="form-section hidden" data-index={idx}>
+                        <h2 class="text-3xl font-black mb-8">{s.seccion}</h2>
+                        {s.preguntas.map((p) => (
+                            <div class="mb-6">
+                                <label class="block font-bold mb-2">
+                                    {p.id}. {p.pregunta}
+                                </label>
+                                {p.tipo === "texto" && (
+                                    <input
+                                        type="text"
+                                        name={`q${p.id}`}
+                                        class="w-full p-4 border rounded-xl"
+                                        required
+                                    />
+                                )}
+                                {p.tipo === "numero" && (
+                                    <input
+                                        type="number"
+                                        name={`q${p.id}`}
+                                        class="w-full p-4 border rounded-xl"
+                                        required
+                                    />
+                                )}
+                                {p.tipo === "textarea" && (
+                                    <textarea
+                                        name={`q${p.id}`}
+                                        class="w-full p-4 border rounded-xl"
+                                        required
+                                    />
+                                )}
+                                {p.tipo === "radio" &&
+                                    p.opciones?.map((o) => (
+                                        <label class="block p-3 border rounded-xl mb-2">
+                                            <input
+                                                type="radio"
+                                                name="nivel_ia_actual"
+                                                value={o}
+                                                class="mr-2"
+                                                required
+                                            />
+                                            {o}
+                                        </label>
+                                    ))}
+                                {p.tipo === "grupo" &&
+                                    p.campos?.map((c) => (
+                                        <input
+                                            type={c.tipo as any}
+                                            name={
+                                                c.nombre === "Nombre"
+                                                    ? "q2-Nombre"
+                                                    : "q2-Correo"
+                                            }
+                                            placeholder={c.nombre}
+                                            class="w-full p-4 mb-2 border rounded-xl"
+                                            required
+                                        />
+                                    ))}
+                            </div>
+                        ))}
+                        <div class="flex gap-4 mt-8">
+                            {idx > 0 && (
+                                <button
+                                    type="button"
+                                    class="prev-btn flex-1 py-4 bg-gray-100 rounded-xl font-bold"
+                                >
+                                    Atrás
+                                </button>
+                            )}
+                            {idx < formulario.length - 1 ? (
+                                <button
+                                    type="button"
+                                    class="next-btn flex-1 py-4 bg-teal text-white rounded-xl font-bold"
+                                >
+                                    Siguiente
+                                </button>
+                            ) : (
+                                <button
+                                    type="submit"
+                                    id="submit-btn"
+                                    class="flex-1 py-4 bg-orange text-white rounded-xl font-bold"
+                                >
+                                    Enviar
+                                </button>
+                            )}
+                        </div>
+                    </div>
+                ))
+            }
+        </form>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        const sections = document.querySelectorAll(".form-section");
+        const update = () =>
+            sections.forEach((s, i) =>
+                s.classList.toggle("hidden", i !== currentStep),
+            );
+        document.querySelectorAll(".next-btn").forEach((b) =>
+            b.addEventListener("click", () => {
+                currentStep++;
+                update();
+            }),
+        );
+        document.querySelectorAll(".prev-btn").forEach((b) =>
+            b.addEventListener("click", () => {
+                currentStep--;
+                update();
+            }),
+        );
+        update();
+
+        document
+            .getElementById("pretaller-form")
+            ?.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById(
+                    "submit-btn",
+                ) as HTMLButtonElement;
+                btn.disabled = true;
+                btn.innerText = "Enviando...";
+                const data = Object.fromEntries(
+                    new FormData(e.target as HTMLFormElement),
+                );
+                const res = await fetch("/api/submit-pretaller", {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                    headers: { "Content-Type": "application/json" },
+                });
+                if (res.ok) window.location.href = "/gracias";
+                else {
+                    alert("Error. Revisa la terminal.");
+                    btn.disabled = false;
+                    btn.innerText = "Enviar";
+                }
+            });
+    </script>
+</Layout>

@@ -1,79 +1,142 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Footer from '../../components/Footer.astro';
-import { createClerkClient } from '@clerk/astro/server';
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/Footer.astro";
+import { createClerkClient } from "@clerk/astro/server";
 
 // 1. Muro de Seguridad: Solo usuarios logueados
 const auth = (Astro.locals as any).auth;
-const authData = typeof auth === 'function' ? await auth() : auth;
+const authData = typeof auth === "function" ? await auth() : auth;
 
 if (!authData?.userId) {
- return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/preventa-vol2')}`);
+  return Astro.redirect(
+    `/sign-in?redirect_url=${encodeURIComponent("/recursos/preventa-vol2")}`,
+  );
 }
 
 // 2. Obtenemos el correo real del usuario de forma segura desde Clerk
-const clerkClient = createClerkClient({ 
+const clerkClient = createClerkClient({
   secretKey: import.meta.env.CLERK_SECRET_KEY,
-  publishableKey: import.meta.env.PUBLIC_CLERK_PUBLISHABLE_KEY
+  publishableKey: import.meta.env.PUBLIC_CLERK_PUBLISHABLE_KEY,
 });
 const user = await clerkClient.users.getUser(authData.userId);
-const userEmail = user.primaryEmailAddress?.emailAddress || '';
+const userEmail = user.primaryEmailAddress?.emailAddress || "";
 ---
 
 <Layout title="Preventa PM Sin Bullshit Vol. 2 | LuciRMe AI">
-  
   <nav class="bg-white border-b border-gray-100 px-4 py-3 no-print">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
-      <a href="/recursos" class="text-sm font-bold text-gray-400 hover:text-teal transition">← Volver a Recursos</a>
-      <span class="text-xs font-bold text-teal uppercase tracking-widest flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Lanzamiento 2026
+      <a
+        href="/recursos"
+        class="text-sm font-bold text-gray-400 hover:text-teal transition"
+        >← Volver a Recursos</a
+      >
+      <span
+        class="text-xs font-bold text-teal uppercase tracking-widest flex items-center gap-2"
+      >
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Lanzamiento
+        2026
       </span>
     </div>
   </nav>
 
-  <main class="py-16 px-4 min-h-[80vh] flex items-center justify-center bg-[#F8FAFC]">
-    
-    <div class="w-full max-w-xl bg-white border border-gray-200 rounded-3xl p-8 md:p-12 shadow-xl relative overflow-hidden">
+  <main
+    class="py-16 px-4 min-h-[80vh] flex items-center justify-center bg-[#F8FAFC]"
+  >
+    <div
+      class="w-full max-w-xl bg-white border border-gray-200 rounded-3xl p-8 md:p-12 shadow-xl relative overflow-hidden"
+    >
       <div class="absolute top-0 left-0 w-full h-2 bg-teal"></div>
-      
-      <div class="text-teal font-black text-sm uppercase tracking-widest mb-8">🚀 LuciRMe AI</div>
-      
+
+      <div class="text-teal font-black text-sm uppercase tracking-widest mb-8">
+        🚀 LuciRMe AI
+      </div>
+
       <!-- PASO 1 -->
       <div class="step-card active space-y-6" id="step-1">
-        <h1 class="text-3xl font-black text-deep leading-tight">¿Cuántas horas pierdes a la semana en <span class="text-teal">tareas manuales repetitivas</span>?</h1>
-        <p class="text-sm text-gray-500">Evaluación rápida de fricción operativa para el Vol. 2.</p>
+        <h1 class="text-3xl font-black text-deep leading-tight">
+          ¿Cuántas horas pierdes a la semana en <span class="text-teal"
+            >tareas manuales repetitivas</span
+          >?
+        </h1>
+        <p class="text-sm text-gray-500">
+          Evaluación rápida de fricción operativa para el Vol. 2.
+        </p>
         <div class="grid gap-3">
-          <button class="w-full p-5 border border-gray-200 rounded-xl text-left hover:border-teal hover:bg-teal/5 transition-all font-semibold text-deep" onclick="nextStep(1, 2)">Menos de 3 horas. Todo está bajo control.</button>
-          <button class="w-full p-5 border border-gray-200 rounded-xl text-left hover:border-teal hover:bg-teal/5 transition-all font-semibold text-deep" onclick="nextStep(1, 5)">Entre 3 y 7 horas. El backlog me persigue.</button>
-          <button class="w-full p-5 border border-gray-200 rounded-xl text-left hover:border-teal hover:bg-teal/5 transition-all font-semibold text-deep" onclick="nextStep(1, 10)">Más de 7 horas. Estoy atrapado en el barro técnico.</button>
+          <button
+            class="w-full p-5 border border-gray-200 rounded-xl text-left hover:border-teal hover:bg-teal/5 transition-all font-semibold text-deep"
+            onclick="nextStep(1, 2)"
+            >Menos de 3 horas. Todo está bajo control.</button
+          >
+          <button
+            class="w-full p-5 border border-gray-200 rounded-xl text-left hover:border-teal hover:bg-teal/5 transition-all font-semibold text-deep"
+            onclick="nextStep(1, 5)"
+            >Entre 3 y 7 horas. El backlog me persigue.</button
+          >
+          <button
+            class="w-full p-5 border border-gray-200 rounded-xl text-left hover:border-teal hover:bg-teal/5 transition-all font-semibold text-deep"
+            onclick="nextStep(1, 10)"
+            >Más de 7 horas. Estoy atrapado en el barro técnico.</button
+          >
         </div>
       </div>
 
       <!-- PASO 2 -->
       <div class="step-card hidden space-y-6 animate-fade-in" id="step-2">
-        <h1 class="text-3xl font-black text-deep leading-tight">¿Cómo documentas actualmente los <span class="text-teal">requerimientos y PRDs</span>?</h1>
-        <p class="text-sm text-gray-500">Sé honesto. Aquí no juzgamos, automatizamos.</p>
+        <h1 class="text-3xl font-black text-deep leading-tight">
+          ¿Cómo documentas actualmente los <span class="text-teal"
+            >requerimientos y PRDs</span
+          >?
+        </h1>
+        <p class="text-sm text-gray-500">
+          Sé honesto. Aquí no juzgamos, automatizamos.
+        </p>
         <div class="grid gap-3">
-          <button class="w-full p-5 border border-gray-200 rounded-xl text-left hover:border-teal hover:bg-teal/5 transition-all font-semibold text-deep" onclick="nextStep(2, 2)">A mano, picando texto desde cero cada vez.</button>
-          <button class="w-full p-5 border border-gray-200 rounded-xl text-left hover:border-teal hover:bg-teal/5 transition-all font-semibold text-deep" onclick="nextStep(2, 4)">Uso plantillas en Notion, pero me toma horas llenarlas.</button>
-          <button class="w-full p-5 border border-gray-200 rounded-xl text-left hover:border-teal hover:bg-teal/5 transition-all font-semibold text-deep" onclick="nextStep(2, 8)">Intento usar prompts genéricos de IA, pero arrojan humo.</button>
+          <button
+            class="w-full p-5 border border-gray-200 rounded-xl text-left hover:border-teal hover:bg-teal/5 transition-all font-semibold text-deep"
+            onclick="nextStep(2, 2)"
+            >A mano, picando texto desde cero cada vez.</button
+          >
+          <button
+            class="w-full p-5 border border-gray-200 rounded-xl text-left hover:border-teal hover:bg-teal/5 transition-all font-semibold text-deep"
+            onclick="nextStep(2, 4)"
+            >Uso plantillas en Notion, pero me toma horas llenarlas.</button
+          >
+          <button
+            class="w-full p-5 border border-gray-200 rounded-xl text-left hover:border-teal hover:bg-teal/5 transition-all font-semibold text-deep"
+            onclick="nextStep(2, 8)"
+            >Intento usar prompts genéricos de IA, pero arrojan humo.</button
+          >
         </div>
       </div>
 
       <!-- PASO 3: CONFIRMACIÓN DE UN SOLO CLIC (Formulario de correo eliminado) -->
       <div class="step-card hidden space-y-6 animate-fade-in" id="step-3">
-        <h1 class="text-3xl font-black text-deep leading-tight">¡Diagnóstico Completo!</h1>
-        <p class="text-sm text-gray-500">Estás perdiendo tiempo valioso que podrías automatizar con el perfil Centauro.</p>
-        
+        <h1 class="text-3xl font-black text-deep leading-tight">
+          ¡Diagnóstico Completo!
+        </h1>
+        <p class="text-sm text-gray-500">
+          Estás perdiendo tiempo valioso que podrías automatizar con el perfil
+          Centauro.
+        </p>
+
         <div class="bg-teal/5 border border-teal/20 p-5 rounded-xl text-sm">
-          <h4 class="font-bold text-teal mb-1">🎁 Desbloqueo Inmediato (Vol. 1):</h4>
-          <p class="text-gray-600">Has desbloqueado el <strong>Checklist de Priorización Estratégica del Vol. 1</strong>.</p>
+          <h4 class="font-bold text-teal mb-1">
+            🎁 Desbloqueo Inmediato (Vol. 1):
+          </h4>
+          <p class="text-gray-600">
+            Has desbloqueado el <strong
+              >Checklist de Priorización Estratégica del Vol. 1</strong
+            >.
+          </p>
         </div>
 
         <!-- Inyectamos el correo de Clerk de forma oculta en el script -->
         <input type="hidden" id="user-email-clerk" value={userEmail} />
 
-        <button onclick="submitLead()" class="w-full bg-orange text-white py-4 rounded-xl font-bold hover:bg-orange/90 transition shadow-lg text-lg">
+        <button
+          onclick="submitLead()"
+          class="w-full bg-orange text-white py-4 rounded-xl font-bold hover:bg-orange/90 transition shadow-lg text-lg"
+        >
           Asegurar Acceso Vol. 2 + Ver Regalo
         </button>
       </div>
@@ -81,22 +144,39 @@ const userEmail = user.primaryEmailAddress?.emailAddress || '';
       <!-- PASO 4: ÉXITO -->
       <div class="step-card hidden space-y-6 animate-fade-in" id="success-step">
         <h1 class="text-3xl font-black text-teal">¡Estás dentro, Centauro!</h1>
-        <p class="text-sm text-gray-500">Te avisaremos antes que a nadie cuando el Vol. 2 esté listo con el descuento especial de preventa.</p>
-        <hr class="border-gray-100 my-6">
-        <h3 class="font-bold text-orange text-lg">🔓 Tu Activo del Vol. 1: Checklist de Priorización</h3>
-        <div class="text-sm text-gray-600 space-y-4 leading-relaxed bg-gray-50 p-6 rounded-xl border border-gray-100">
-          <p>Antes de picar código o prompts, filtra tu backlog con estas 3 preguntas del Volumen 1:</p>
+        <p class="text-sm text-gray-500">
+          Te avisaremos antes que a nadie cuando el Vol. 2 esté listo con el
+          descuento especial de preventa.
+        </p>
+        <hr class="border-gray-100 my-6" />
+        <h3 class="font-bold text-orange text-lg">
+          🔓 Tu Activo del Vol. 1: Checklist de Priorización
+        </h3>
+        <div
+          class="text-sm text-gray-600 space-y-4 leading-relaxed bg-gray-50 p-6 rounded-xl border border-gray-100"
+        >
+          <p>
+            Antes de picar código o prompts, filtra tu backlog con estas 3
+            preguntas del Volumen 1:
+          </p>
           <ol class="space-y-3 list-decimal list-inside pl-2">
-            <li><strong>¿Esta tarea toma más de 5 minutos?</strong> Si sí, es candidata a automatización.</li>
-            <li><strong>¿La data de entrada está estructurada?</strong> Si no, usa el Extractor Semántico del Cap. 3.</li>
-            <li><strong>¿Tiene impacto directo en el cliente?</strong> Si no, deslógala del sprint operativo.</li>
+            <li>
+              <strong>¿Esta tarea toma más de 5 minutos?</strong> Si sí, es candidata
+              a automatización.
+            </li>
+            <li>
+              <strong>¿La data de entrada está estructurada?</strong> Si no, usa el
+              Extractor Semántico del Cap. 3.
+            </li>
+            <li>
+              <strong>¿Tiene impacto directo en el cliente?</strong> Si no, deslógala
+              del sprint operativo.
+            </li>
           </ol>
         </div>
       </div>
-
     </div>
   </main>
-  <Footer />
 </Layout>
 
 <script is:inline>
@@ -104,7 +184,7 @@ const userEmail = user.primaryEmailAddress?.emailAddress || '';
     horasPerdidas: 0,
     metodoDocumentacion: 0,
     scoreTotal: 0,
-    email: ""
+    email: "",
   };
 
   function nextStep(current, val) {
@@ -112,53 +192,65 @@ const userEmail = user.primaryEmailAddress?.emailAddress || '';
       leadData.horasPerdidas = val;
     } else if (current === 2) {
       leadData.metodoDocumentacion = val;
-      leadData.scoreTotal = leadData.horasPerdidas + leadData.metodoDocumentacion;
+      leadData.scoreTotal =
+        leadData.horasPerdidas + leadData.metodoDocumentacion;
     }
 
-    document.getElementById(`step-${current}`).classList.add('hidden');
-    document.getElementById(`step-${current}`).classList.remove('active');
-    
+    document.getElementById(`step-${current}`).classList.add("hidden");
+    document.getElementById(`step-${current}`).classList.remove("active");
+
     const next = document.getElementById(`step-${current + 1}`);
     if (next) {
-      next.classList.remove('hidden');
-      next.classList.add('active');
+      next.classList.remove("hidden");
+      next.classList.add("active");
     }
   }
 
   async function submitLead() {
     // Leemos el correo inyectado por Clerk en segundo plano
-    leadData.email = document.getElementById('user-email-clerk').value;
+    leadData.email = document.getElementById("user-email-clerk").value;
 
     if (window.posthog) {
-      window.posthog.capture('preventa_vol2_completada', {
+      window.posthog.capture("preventa_vol2_completada", {
         email: leadData.email,
         horas_perdidas: leadData.horasPerdidas,
         metodo_documentacion: leadData.metodoDocumentacion,
-        score_total: leadData.scoreTotal
+        score_total: leadData.scoreTotal,
       });
     }
 
     try {
-      await fetch('/api/guardar-preventa', {
+      await fetch("/api/guardar-preventa", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(leadData)
+        body: JSON.stringify(leadData),
       });
       console.log("Datos sincronizados.");
     } catch (e) {
       console.error("Error en sincronización, pero guardamos localmente.");
     }
 
-    document.getElementById('step-3').classList.add('hidden');
-    document.getElementById('step-3').classList.remove('active');
-    
-    const success = document.getElementById('success-step');
-    success.classList.remove('hidden');
-    success.classList.add('active');
+    document.getElementById("step-3").classList.add("hidden");
+    document.getElementById("step-3").classList.remove("active");
+
+    const success = document.getElementById("success-step");
+    success.classList.remove("hidden");
+    success.classList.add("active");
   }
 </script>
 
 <style>
-  .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 </style>
