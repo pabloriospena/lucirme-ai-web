@@ -1,0 +1,167 @@
+---
+import ActionHub from "../components/ActionHub.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="¡Listo! Nos vemos en el Taller de Inmersión | LuciRMe AI">
+    <main class="bg-[#F8FAFC] min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-10">
+                <div
+                    class="inline-flex items-center justify-center w-16 h-16 bg-teal text-white rounded-full mb-4 shadow-lg shadow-teal/20"
+                >
+                    <svg
+                        class="w-8 h-8"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="3"
+                            d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h1 class="text-3xl font-black text-deep mb-2">
+                    ¡Taller Agendado! 🎯
+                </h1>
+                <p class="text-gray-500 text-lg">
+                    Ya tengo tu información. En las próximas 24 horas te
+                    contactaré para confirmar los detalles.
+                </p>
+            </div>
+
+            <!-- Qué sigue -->
+            <div
+                class="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 mb-8 shadow-sm"
+            >
+                <h2 class="text-lg font-bold text-deep mb-6">
+                    ¿Qué sigue ahora?
+                </h2>
+                <div class="space-y-6">
+                    {
+                        [
+                            {
+                                n: "1",
+                                t: "Te contacto en 24 horas",
+                                d: "Te llamaré o escribiré por WhatsApp para confirmar fecha, hora y coordinar los detalles del Taller de Inmersión.",
+                            },
+                            {
+                                n: "2",
+                                t: "Prepara tu proceso crítico",
+                                d: "Identifica ese proceso manual que más tiempo les consume (reportes en Excel, organización de documentos, seguimiento de tareas).",
+                            },
+                            {
+                                n: "3",
+                                t: "Reúne a tu equipo clave",
+                                d: "Invita a las personas que conocen mejor ese proceso. Su participación es clave para diseñar la solución.",
+                            },
+                        ].map((item) => (
+                            <div class="flex items-start gap-4">
+                                <span class="flex-shrink-0 w-8 h-8 bg-teal/10 text-teal font-bold rounded-full flex items-center justify-center">
+                                    {item.n}
+                                </span>
+                                <div>
+                                    <p class="font-bold text-deep">{item.t}</p>
+                                    <p class="text-sm text-gray-500 mt-1">
+                                        {item.d}
+                                    </p>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <!-- Qué incluye el Taller -->
+            <div class="bg-deep text-white p-6 md:p-8 rounded-2xl mb-8">
+                <h3 class="font-bold mb-4">
+                    📋 Qué incluye el Taller de Inmersión
+                </h3>
+                <ul class="space-y-3 text-gray-300 text-sm">
+                    <li class="flex items-start gap-2">
+                        <span class="text-teal">✓</span>
+                        <span>Entendimiento de tus procesos actuales</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-teal">✓</span>
+                        <span
+                            >Identificamos las mayores fugas de tiempo en tu
+                            operación</span
+                        >
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-teal">✓</span>
+                        <span
+                            >Demo en vivo de cómo optimizar un proceso real de
+                            tu empresa</span
+                        >
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-teal">✓</span>
+                        <span
+                            >Plan de acción personalizado con prioridades claras</span
+                        >
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-teal">✓</span>
+                        <span
+                            >Protocolos de seguridad para uso de IA con datos de
+                            clientes</span
+                        >
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Para preparar -->
+            <div
+                class="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 mb-8 shadow-sm"
+            >
+                <h3 class="text-lg font-bold text-deep mb-4">
+                    📝 Para aprovechar al máximo el Taller
+                </h3>
+                <ul class="space-y-3 text-gray-600 text-sm">
+                    <li class="flex items-start gap-2">
+                        <span class="text-teal font-bold">•</span>
+                        <span
+                            >Ten a la mano un ejemplo real del proceso que
+                            quieres automatizar (un Excel, un correo tipo, un
+                            documento)</span
+                        >
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-teal font-bold">•</span>
+                        <span
+                            >Calcula aproximadamente cuántas horas semanales
+                            dedica tu equipo a ese proceso</span
+                        >
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-teal font-bold">•</span>
+                        <span
+                            >Asegúrate de que las personas clave puedan asistir
+                            a la sesión</span
+                        >
+                    </li>
+                </ul>
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center">
+                <p class="text-gray-400 text-sm mb-4">
+                    ¿Tienes alguna pregunta antes del Taller?
+                </p>
+                <a
+                    href="https://wa.me/573128199661"
+                    target="_blank"
+                    class="inline-block px-8 py-4 bg-teal hover:bg-tealHover text-white font-bold rounded-xl transition-all shadow-lg shadow-teal/20"
+                >
+                    Escríbeme por WhatsApp →
+                </a>
+            </div>
+        </div>
+    </main>
+    <ActionHub />
+</Layout>
