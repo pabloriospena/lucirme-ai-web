@@ -4,8 +4,13 @@ import Selector from "../components/Selector.astro";
 import Footer from "../components/Footer.astro";
 import Analytics from "@vercel/analytics/astro";
 import { LINKS } from "../lib/constants.js";
+import { UserButton } from "@clerk/astro/components";
 
 const { title } = Astro.props;
+
+const locals = Astro.locals as any;
+const auth = locals.auth;
+const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
 ---
 
 <!doctype html>
@@ -316,13 +321,22 @@ const { title } = Astro.props;
 
           <!-- Derecha -->
           <div class="flex items-center gap-2 sm:gap-4 ml-auto">
-            <a
-              href="/sign-in"
-              class="hidden md:inline-block text-xs sm:text-sm font-semibold text-gray-400 hover:text-deep transition"
-            >
-              Iniciar Sesión
-            </a>
-            <span class="hidden md:inline text-gray-200">|</span>
+            {userId ? (
+              <div class="flex items-center gap-2 sm:gap-4">
+                <UserButton />
+                <span class="hidden md:inline text-gray-200">|</span>
+              </div>
+            ) : (
+              <>
+                <a
+                  href="/sign-in"
+                  class="hidden md:inline-block text-xs sm:text-sm font-semibold text-gray-400 hover:text-deep transition"
+                >
+                  Iniciar Sesión
+                </a>
+                <span class="hidden md:inline text-gray-200">|</span>
+              </>
+            )}
 
             <button
               onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
