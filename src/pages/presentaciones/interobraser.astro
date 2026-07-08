@@ -1,0 +1,1327 @@
+---
+// src/pages/taller-interobras.astro
+import Layout from "../../layouts/Layout.astro";
+
+const title = "Taller de Inmersión: IntERobras ER SAS | LuciRMe AI";
+const date = "9 de julio de 2026";
+const decisor = "Juan Camilo Rodríguez";
+const need =
+    "Búsqueda de clientes (privado y público) + mejorar licitaciones para ganarlas";
+const aiLevel = "Nulo (empezar desde cero)";
+
+// Enlaces oficiales de LucirMe
+const linkedinLink = "https://linkedin.com/in/pabloriospena";
+const prompteadorLink = "https://lucirme.com/recursos/prompteador";
+---
+
+<Layout title={title}>
+    <!-- Botón de Pantalla Completa -->
+    <button
+        id="fullscreen-btn"
+        class="fixed top-6 left-6 z-50 bg-white/80 backdrop-blur-sm p-3 rounded-full border border-slate-200 shadow-md hover:bg-slate-100 transition-colors text-slate-600"
+        aria-label="Pantalla completa"
+    >
+        <!-- Icono Entrar -->
+        <svg
+            id="fs-icon-enter"
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><path
+                d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
+            ></path></svg
+        >
+        <!-- Icono Salir -->
+        <svg
+            id="fs-icon-exit"
+            class="hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><path
+                d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"
+            ></path></svg
+        >
+    </button>
+
+    <!-- Contador de slides (Fijo) -->
+    <div
+        class="fixed top-6 right-6 text-sm font-bold text-slate-500 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-slate-200 shadow-md z-50"
+    >
+        <span id="current">01</span> / <span id="total">12</span>
+    </div>
+
+    <!-- Nav Dots (Fijos) -->
+    <nav
+        class="fixed right-6 top-1/2 -translate-y-1/2 flex flex-col gap-2.5 z-50 bg-white/80 backdrop-blur-sm p-2.5 rounded-full border border-slate-200 shadow-md"
+        id="navDots"
+    >
+    </nav>
+
+    <!-- Slider Principal -->
+    <main
+        class="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth"
+        id="slider"
+    >
+        <!-- SLIDE 01: PORTADA & DATOS DE LA SESIÓN -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50 relative"
+        >
+            <div class="max-w-5xl w-full text-center">
+                <div
+                    class="inline-flex items-center gap-2 bg-white border border-slate-200 px-5 py-2 rounded-full text-sm text-slate-600 font-semibold mb-8 shadow-sm"
+                >
+                    <span class="w-2 h-2 bg-teal-600 rounded-full animate-pulse"
+                    ></span>
+                    Taller de Inmersión · {date} · 2-3 Horas
+                </div>
+                <h1
+                    class="text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-none mb-8"
+                >
+                    IntERobras ER SAS<br />
+                    <span
+                        class="bg-gradient-to-r from-teal-600 to-emerald-500 bg-clip-text text-transparent"
+                        >Inteligencia Artificial Aplicada
+                    </span>
+                </h1>
+
+                <div
+                    class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 text-left max-w-4xl mx-auto"
+                >
+                    <div
+                        class="bg-white border border-slate-200 p-4 rounded-xl shadow-sm"
+                    >
+                        <span
+                            class="block text-xs uppercase font-semibold text-slate-400"
+                            >Decisor</span
+                        >
+                        <span class="text-sm font-extrabold text-slate-800"
+                            >{decisor}</span
+                        >
+                    </div>
+                    <div
+                        class="bg-white border border-slate-200 p-4 rounded-xl shadow-sm col-span-2"
+                    >
+                        <span
+                            class="block text-xs uppercase font-semibold text-slate-400"
+                            >Necesidad</span
+                        >
+                        <span
+                            class="text-sm font-extrabold text-slate-800 line-clamp-2"
+                            >{need}</span
+                        >
+                    </div>
+                    <div
+                        class="bg-white border border-slate-200 p-4 rounded-xl shadow-sm"
+                    >
+                        <span
+                            class="block text-xs uppercase font-semibold text-slate-400"
+                            >Nivel IA</span
+                        >
+                        <span class="text-sm font-extrabold text-slate-800"
+                            >{aiLevel}</span
+                        >
+                    </div>
+                </div>
+
+                <div>
+                    <p
+                        class="text-sm text-teal-600 uppercase tracking-wider font-extrabold"
+                    >
+                        Facilitador
+                    </p>
+                    <p class="text-xl font-extrabold text-slate-900 mt-1">
+                        Pablo Ríos Peña
+                    </p>
+                    <p class="text-sm text-slate-500 font-medium">
+                        Lucir<span class="text-teal-600 font-semibold">Me</span> AI
+                        · Tu negocio es tu talento, no tu operatividad
+                    </p>
+                </div>
+            </div>
+            <div
+                class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center text-slate-400 text-sm animate-bounce font-medium"
+            >
+                <span>Desplázate</span>
+                <span class="text-xl">↓</span>
+            </div>
+        </section>
+
+        <!-- SLIDE 02: RECOMENDACIONES CLAVE -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-900 text-white"
+        >
+            <div class="max-w-5xl w-full">
+                <p
+                    class="text-sm font-bold tracking-widest uppercase text-emerald-400 mb-3"
+                >
+                    🛠️ Recomendaciones clave para la sesión
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-3"
+                >
+                    ¿Cómo sacar el máximo provecho?
+                </h2>
+                <div class="w-12 h-1.5 bg-emerald-500 rounded-full mb-8"></div>
+                <p
+                    class="text-base md:text-lg text-slate-300 max-w-3xl mb-8 leading-relaxed"
+                >
+                    Trabajaremos directamente sobre tu realidad y tus procesos.
+                    Prepárate con estos dos requisitos simples:
+                </p>
+
+                <div class="grid md:grid-cols-2 gap-6 text-left">
+                    <div
+                        class="bg-white/10 border border-white/10 p-6 rounded-xl"
+                    >
+                        <span class="text-3xl block mb-3">💻</span>
+                        <h4 class="text-base font-extrabold text-white mb-2">
+                            Computador a la mano
+                        </h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            No vengas solo a escuchar de manera pasiva.
+                            Necesitamos que tú o tu equipo puedan interactuar
+                            con las herramientas en tiempo real para asimilar la
+                            práctica.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white/10 border border-white/10 p-6 rounded-xl"
+                    >
+                        <span class="text-3xl block mb-3">📂</span>
+                        <h4 class="text-base font-extrabold text-white mb-2">
+                            Archivos reales listos
+                        </h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            Ten en tu escritorio los pliegos de contratación,
+                            RUT, portafolios u hojas de vida de obras. Veremos
+                            cómo trabaja la IA con tu información directa.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 03: APERTURA Y CONEXIÓN -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-white"
+        >
+            <div class="max-w-5xl w-full">
+                <p
+                    class="text-sm font-bold tracking-widest uppercase text-teal-600 mb-3"
+                >
+                    🧊 1. Apertura y Conexión (15 min)
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-3"
+                >
+                    Rompehielo: ¿Cuándo usaste IA por última vez?
+                </h2>
+                <div class="w-12 h-1.5 bg-teal-600 rounded-full mb-6"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div
+                        class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center hover:border-teal-500 transition-colors shadow-sm"
+                    >
+                        <span class="text-3xl block mb-2">🎵</span>
+                        <span class="text-sm font-bold text-slate-800"
+                            >Spotify</span
+                        >
+                        <p class="text-xs text-slate-500 mt-1">
+                            Descubre música
+                        </p>
+                    </div>
+                    <div
+                        class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center hover:border-teal-500 transition-colors shadow-sm"
+                    >
+                        <span class="text-3xl block mb-2">🗺️</span>
+                        <span class="text-sm font-bold text-slate-800"
+                            >Maps</span
+                        >
+                        <p class="text-xs text-slate-500 mt-1">
+                            Rutas en tiempo real
+                        </p>
+                    </div>
+                    <div
+                        class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center hover:border-teal-500 transition-colors shadow-sm"
+                    >
+                        <span class="text-3xl block mb-2">🎬</span>
+                        <span class="text-sm font-bold text-slate-800"
+                            >Netflix</span
+                        >
+                        <p class="text-xs text-slate-500 mt-1">
+                            Recomendaciones
+                        </p>
+                    </div>
+                </div>
+
+                <blockquote
+                    class="text-sm md:text-base italic text-slate-700 bg-slate-50 border-l-4 border-teal-600 p-4 rounded-r-xl mb-6"
+                >
+                    "Si confías en que estas herramientas aprendan de ti para
+                    ayudarte, puedes confiar en la IA para optimizar <strong
+                        >cómo IntERobras encuentra clientes y gana licitaciones</strong
+                    >."
+                </blockquote>
+
+                <div
+                    class="bg-slate-50 border border-slate-200 rounded-xl p-5 grid md:grid-cols-2 gap-6"
+                >
+                    <div>
+                        <h4
+                            class="text-sm font-extrabold text-teal-600 uppercase mb-2"
+                        >
+                            Presentación de Pablo
+                        </h4>
+                        <ul
+                            class="text-sm text-slate-600 space-y-1.5 custom-check-list"
+                        >
+                            <li>12+ años como PM en startups y SaaS</li>
+                            <li>IA aplicada desde 2021</li>
+                            <li>Fundador de LucirMe AI</li>
+                            <li>
+                                Enfoque práctico: 70% aplicación, 30% teoría
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flex items-center">
+                        <div
+                            class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex gap-3 shadow-sm"
+                        >
+                            <span class="text-2xl">💡</span>
+                            <p
+                                class="text-xs md:text-sm text-emerald-800 italic font-medium leading-relaxed"
+                            >
+                                "No vengo a vender herramientas. Vengo a
+                                compartir lo que me ha funcionado para que tú y
+                                tu equipo decidan qué aplicar."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 04: FUNDAMENTOS -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50"
+        >
+            <div class="max-w-5xl w-full">
+                <p
+                    class="text-sm font-bold tracking-widest uppercase text-teal-600 mb-3"
+                >
+                    🧠 2. Fundamentos: IA sin tecnicismos (15 min)
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-3"
+                >
+                    ¿Qué es y qué no es la Inteligencia Artificial?
+                </h2>
+                <div class="w-12 h-1.5 bg-teal-600 rounded-full mb-6"></div>
+
+                <div class="grid md:grid-cols-2 gap-5 mb-5">
+                    <div
+                        class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm"
+                    >
+                        <h3
+                            class="text-sm font-extrabold text-emerald-600 uppercase mb-3"
+                        >
+                            ✅ Qué ES la IA
+                        </h3>
+                        <ul
+                            class="space-y-1.5 text-sm text-slate-600 custom-check-list"
+                        >
+                            <li>Herramienta que aprende patrones</li>
+                            <li>Asistente que sugiere, no decide</li>
+                            <li>Motor que acelera tu flujo de trabajo</li>
+                            <li>Espejo que organiza tu conocimiento</li>
+                        </ul>
+                    </div>
+                    <div
+                        class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm"
+                    >
+                        <h3
+                            class="text-sm font-extrabold text-rose-500 uppercase mb-3"
+                        >
+                            ❌ Qué NO es
+                        </h3>
+                        <ul
+                            class="space-y-1.5 text-sm text-slate-600 custom-x-list"
+                        >
+                            <li>No piensa como humano</li>
+                            <li>No tiene criterio propio</li>
+                            <li>No reemplaza tu juicio experto en obras</li>
+                            <li>No es magia: es estadística</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm"
+                >
+                    <h3
+                        class="text-sm font-extrabold text-teal-600 uppercase mb-3 text-center"
+                    >
+                        ⚖️ La Regla de Oro: "La IA sugiere. Tú decides."
+                    </h3>
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs md:text-sm"
+                    >
+                        <div
+                            class="bg-slate-50 p-3 rounded-lg border border-slate-150"
+                        >
+                            <strong class="text-slate-800 block mb-1"
+                                >🔍 Revisa</strong
+                            >
+                            <p class="text-slate-500 text-xs">
+                                La IA puede inventar datos sobre SECOP o
+                                requisitos. Siempre verifica.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-slate-50 p-3 rounded-lg border border-slate-150"
+                        >
+                            <strong class="text-slate-800 block mb-1"
+                                >🧠 Interpreta</strong
+                            >
+                            <p class="text-slate-500 text-xs">
+                                El contexto de cada licitación y cliente solo tú
+                                lo conoces.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-slate-50 p-3 rounded-lg border border-slate-150"
+                        >
+                            <strong class="text-slate-800 block mb-1"
+                                >✅ Decide</strong
+                            >
+                            <p class="text-slate-500 text-xs">
+                                La decisión de cómo presentar una propuesta
+                                siempre es tuya.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 05: EL PROBLEMA REAL -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-white"
+        >
+            <div class="max-w-5xl w-full">
+                <p
+                    class="text-sm font-bold tracking-widest uppercase text-teal-600 mb-3"
+                >
+                    🎯 3. El Problema Real de IntERobras (20 min)
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-3"
+                >
+                    Mapeando dolores reales en obras civiles
+                </h2>
+                <div class="w-12 h-1.5 bg-teal-600 rounded-full mb-6"></div>
+
+                <div class="grid md:grid-cols-12 gap-5 items-center">
+                    <div class="md:col-span-5">
+                        <blockquote
+                            class="text-sm italic text-slate-700 bg-slate-50 border-l-4 border-teal-600 p-4 rounded-r-xl"
+                        >
+                            <strong>Pregunta directa a Juan Camilo:</strong><br
+                            />
+                            "¿Cuántas horas dedica tu equipo a buscar oportunidades,
+                            revisar pliegos, armar propuestas y hacer seguimiento?
+                            ¿Cuántas licitaciones pierden por no alcanzar a presentar
+                            o por propuestas genéricas?"
+                        </blockquote>
+                    </div>
+                    <div class="md:col-span-7">
+                        <div
+                            class="overflow-x-auto border border-slate-200 rounded-xl"
+                        >
+                            <table class="w-full text-xs md:text-sm text-left">
+                                <thead
+                                    class="bg-slate-50 text-slate-500 uppercase text-xs tracking-wider"
+                                >
+                                    <tr>
+                                        <th class="p-3 border-b"
+                                            >Dolor típico en Colombia</th
+                                        >
+                                        <th class="p-3 border-b">Impacto</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-slate-600">
+                                    <tr class="border-b">
+                                        <td class="p-2.5 font-bold"
+                                            >Búsqueda manual en portales</td
+                                        >
+                                        <td class="p-2.5 text-xs"
+                                            >Se pierden oportunidades por no
+                                            detectarlas a tiempo</td
+                                        >
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="p-2.5 font-bold"
+                                            >Pliegos de 100+ páginas</td
+                                        >
+                                        <td class="p-2.5 text-xs"
+                                            >Horas perdidas en análisis manual
+                                            pesado</td
+                                        >
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="p-2.5 font-bold"
+                                            >Propuestas sin adaptación</td
+                                        >
+                                        <td class="p-2.5 text-xs"
+                                            >Menor puntuación técnica de los
+                                            evaluadores</td
+                                        >
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="p-2.5 font-bold"
+                                            >Seguimiento manual</td
+                                        >
+                                        <td class="p-2.5 text-xs"
+                                            >Relaciones comerciales frías, baja
+                                            recurrencia</td
+                                        >
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2.5 font-bold"
+                                            >Sin base histórica</td
+                                        >
+                                        <td class="p-2.5 text-xs"
+                                            >Cada propuesta empieza desde cero,
+                                            perdiendo el histórico</td
+                                        >
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="mt-5 bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex gap-3 items-center shadow-sm"
+                >
+                    <span class="text-2xl">🚀</span>
+                    <p class="text-xs md:text-sm text-emerald-800 font-medium">
+                        <strong>La promesa del taller:</strong> Identificaremos exactamente
+                        qué procesos de búsqueda y licitaciones se pueden automatizar
+                        para que tu equipo deje de perder tiempo en lo operativo y
+                        se enfoque en lo estratégico.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 06: AGENTES DE IA -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50"
+        >
+            <div class="max-w-5xl w-full">
+                <p
+                    class="text-sm font-bold tracking-widest uppercase text-teal-600 mb-3"
+                >
+                    🤖 4. Agentes de IA Aplicados a Licitaciones (20 min)
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-3"
+                >
+                    De chats genéricos a agentes con contexto
+                </h2>
+                <div class="w-12 h-1.5 bg-teal-600 rounded-full mb-6"></div>
+
+                <div class="grid md:grid-cols-2 gap-5 mb-5">
+                    <div
+                        class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm text-sm"
+                    >
+                        <h4
+                            class="font-bold text-slate-800 border-b pb-2 mb-3 flex items-center gap-2 text-base"
+                        >
+                            <span>💬</span> Chat tradicional (ChatGPT solo)
+                        </h4>
+                        <ul class="space-y-1.5 text-slate-600 custom-x-list">
+                            <li>Te da consejos genéricos sobre licitaciones</li>
+                            <li>
+                                No conoce a IntERobras (experiencia, equipo)
+                            </li>
+                            <li>Cada pregunta empieza desde cero</li>
+                            <li>
+                                Puede inventar requisitos ficticios de pliegos
+                            </li>
+                        </ul>
+                    </div>
+                    <div
+                        class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm text-sm"
+                    >
+                        <h4
+                            class="font-bold text-teal-600 border-b pb-2 mb-3 flex items-center gap-2 text-base"
+                        >
+                            <span>🤖</span> Agente (NotebookLM con documentos)
+                        </h4>
+                        <ul
+                            class="space-y-1.5 text-slate-600 custom-check-list"
+                        >
+                            <li>
+                                Responde con base estricta en tus pliegos
+                                subidos
+                            </li>
+                            <li>
+                                Conoce tu experiencia, portafolio y capacidad
+                            </li>
+                            <li>
+                                Mantiene contexto del negocio permanentemente
+                            </li>
+                            <li>Es 100% controlado, trazable y verificable</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div
+                        class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm text-center"
+                    >
+                        <span class="text-2xl block">🔍</span>
+                        <h5
+                            class="text-xs md:text-sm font-bold text-slate-800 mt-1"
+                        >
+                            Analizador de Pliegos
+                        </h5>
+                        <p
+                            class="text-[11px] text-slate-500 mt-1 leading-relaxed"
+                        >
+                            Extrae requisitos y criterios de evaluación en 2
+                            minutos.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm text-center"
+                    >
+                        <span class="text-2xl block">📝</span>
+                        <h5
+                            class="text-xs md:text-sm font-bold text-slate-800 mt-1"
+                        >
+                            Generador Técnico
+                        </h5>
+                        <p
+                            class="text-[11px] text-slate-500 mt-1 leading-relaxed"
+                        >
+                            Redacta borradores de propuestas según tu
+                            portafolio.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm text-center"
+                    >
+                        <span class="text-2xl block">📡</span>
+                        <h5
+                            class="text-xs md:text-sm font-bold text-slate-800 mt-1"
+                        >
+                            Rastreador Comercial
+                        </h5>
+                        <p
+                            class="text-[11px] text-slate-500 mt-1 leading-relaxed"
+                        >
+                            Te sugiere dónde buscar según tu capacidad real.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm text-center"
+                    >
+                        <span class="text-2xl block">📧</span>
+                        <h5
+                            class="text-xs md:text-sm font-bold text-slate-800 mt-1"
+                        >
+                            Asistente de Envío
+                        </h5>
+                        <p
+                            class="text-[11px] text-slate-500 mt-1 leading-relaxed"
+                        >
+                            Redacta correos persuasivos para reactivar clientes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 07: DEMO EN VIVO -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-white"
+        >
+            <div class="max-w-5xl w-full">
+                <p
+                    class="text-sm font-bold tracking-widest uppercase text-teal-600 mb-3"
+                >
+                    💻 5. Demo en Vivo (30 min)
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-3"
+                >
+                    Pasos prácticos y prompts estructurados
+                </h2>
+                <div class="w-12 h-1.5 bg-teal-600 rounded-full mb-6"></div>
+
+                <div class="grid md:grid-cols-12 gap-5">
+                    <div class="md:col-span-5 text-sm">
+                        <div
+                            class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-3 shadow-sm"
+                        >
+                            <h4
+                                class="font-extrabold text-slate-800 uppercase text-xs"
+                            >
+                                Paso a Paso Demo
+                            </h4>
+                            <div class="flex gap-3 items-center">
+                                <span
+                                    class="bg-teal-600 text-white font-bold px-2 py-0.5 rounded text-xs"
+                                    >1</span
+                                >
+                                <span class="text-slate-600 font-medium"
+                                    >Crear cuaderno en NotebookLM</span
+                                >
+                            </div>
+                            <div class="flex gap-3 items-center">
+                                <span
+                                    class="bg-teal-600 text-white font-bold px-2 py-0.5 rounded text-xs"
+                                    >2</span
+                                >
+                                <span class="text-slate-600 font-medium"
+                                    >Subir pliego de ejemplo</span
+                                >
+                            </div>
+                            <div class="flex gap-3 items-center">
+                                <span
+                                    class="bg-teal-600 text-white font-bold px-2 py-0.5 rounded text-xs"
+                                    >3</span
+                                >
+                                <span class="text-slate-600 font-medium"
+                                    >Subir portafolio de obras</span
+                                >
+                            </div>
+                        </div>
+                        <div
+                            class="mt-4 bg-teal-50 border border-teal-200 p-4 rounded-xl shadow-sm"
+                        >
+                            <p
+                                class="text-xs md:text-sm text-teal-900 leading-relaxed"
+                            >
+                                💡 <strong>Aprende la fórmula:</strong> Consulta el
+                                <a
+                                    href={prompteadorLink}
+                                    target="_blank"
+                                    class="font-extrabold underline hover:text-teal-700"
+                                    >Prompteador de LucirMe</a
+                                > para construir solicitudes profesionales y ordenadas
+                                de forma rápida.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="md:col-span-7 space-y-3">
+                        <div
+                            class="bg-slate-900 text-slate-200 p-4 rounded-xl text-left shadow-md"
+                        >
+                            <span
+                                class="text-[10.5px] font-bold text-teal-400 uppercase tracking-wider block mb-1"
+                                >Demo 1: Análisis de Requisitos</span
+                            >
+                            <pre
+                                class="font-mono text-xs leading-relaxed whitespace-pre-wrap"><code>"Actúa como mi asistente de licitaciones. Revisa el pliego y dime:
+1. ¿Cuáles son los requisitos habilitantes?
+2. ¿Cuáles son los criterios de evaluación y su peso?
+3. ¿IntERobras cumple con todos los requisitos?"</code></pre>
+                        </div>
+                        <div
+                            class="bg-slate-900 text-slate-200 p-4 rounded-xl text-left shadow-md"
+                        >
+                            <span
+                                class="text-[10.5px] font-bold text-orange-400 uppercase tracking-wider block mb-1"
+                                >Demo 2: Copia comercial clientes privados</span
+                            >
+                            <pre
+                                class="font-mono text-xs leading-relaxed whitespace-pre-wrap"><code>"Actúa como mi asistente comercial. Con base en nuestros proyectos, redacta 3 versiones de correo para presentar IntERobras a constructoras que necesiten subcontratación."</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 08: TAREAS AGENTIZABLES -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50"
+        >
+            <div class="max-w-5xl w-full">
+                <p
+                    class="text-sm font-bold tracking-widest uppercase text-teal-600 mb-3"
+                >
+                    🎯 6. Identificación de Tareas "Agentizables" (20 min)
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-3"
+                >
+                    ¿Qué procesos automatizamos primero?
+                </h2>
+                <div class="w-12 h-1.5 bg-teal-600 rounded-full mb-6"></div>
+
+                <div class="grid md:grid-cols-2 gap-5 text-sm mb-5">
+                    <div
+                        class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm"
+                    >
+                        <h4 class="font-bold text-slate-800 mb-3 text-base">
+                            Criterios de viabilidad técnica
+                        </h4>
+                        <ul class="space-y-2 text-slate-600">
+                            <li>
+                                <strong class="text-slate-800"
+                                    >🔄 Repetitiva:</strong
+                                > Leer pliegos, armar propuestas tipo.
+                            </li>
+                            <li>
+                                <strong class="text-slate-800"
+                                    >📐 Reglas claras:</strong
+                                > Criterios SECOP, formatos oficiales de la entidad.
+                            </li>
+                            <li>
+                                <strong class="text-slate-800"
+                                    >🚫 Sin juicio complejo:</strong
+                                > Extracción de datos concretos (no negociaciones).
+                            </li>
+                            <li>
+                                <strong class="text-slate-800"
+                                    >📊 Output estructurado:</strong
+                                > Listas de verificación, borradores de texto.
+                            </li>
+                        </ul>
+                    </div>
+                    <div
+                        class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm"
+                    >
+                        <h4 class="font-bold text-teal-600 mb-3 text-base">
+                            Matriz de priorización de la empresa
+                        </h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs md:text-sm">
+                                <thead
+                                    class="bg-slate-50 text-slate-500 uppercase tracking-wider"
+                                >
+                                    <tr>
+                                        <th class="p-2 border-b">Tarea</th>
+                                        <th class="p-2 border-b">Tiempo</th>
+                                        <th class="p-2 border-b">Viabilidad</th>
+                                        <th class="p-2 border-b">Prioridad</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-slate-600">
+                                    <tr class="border-b">
+                                        <td class="p-2 font-semibold"
+                                            >Leer pliegos</td
+                                        >
+                                        <td class="p-2">8 hrs/pliego</td>
+                                        <td
+                                            class="p-2 text-emerald-600 font-bold"
+                                            >Alta</td
+                                        >
+                                        <td class="p-2 text-amber-500"
+                                            >⭐⭐⭐</td
+                                        >
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="p-2 font-semibold"
+                                            >Redactar propuestas</td
+                                        >
+                                        <td class="p-2">15 hrs/prop</td>
+                                        <td
+                                            class="p-2 text-emerald-600 font-bold"
+                                            >Alta</td
+                                        >
+                                        <td class="p-2 text-amber-500"
+                                            >⭐⭐⭐</td
+                                        >
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-semibold"
+                                            >Buscar licitaciones</td
+                                        >
+                                        <td class="p-2">5 hrs/sem</td>
+                                        <td class="p-2 text-slate-500">Media</td
+                                        >
+                                        <td class="p-2 text-amber-500">⭐⭐</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="text-center bg-teal-50 border border-teal-200 p-3.5 rounded-xl shadow-sm"
+                >
+                    <span class="text-sm font-extrabold text-teal-950">
+                        🎯 Nos enfocaremos en tareas con alta viabilidad y
+                        retorno inmediato de tiempo.
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 09: PLAN DE ACCIÓN -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-white"
+        >
+            <div class="max-w-5xl w-full">
+                <p
+                    class="text-sm font-bold tracking-widest uppercase text-teal-600 mb-3"
+                >
+                    📋 7. Plan de Acción (15 min)
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-3"
+                >
+                    Definiendo el output real de la sesión
+                </h2>
+                <div class="w-12 h-1.5 bg-teal-600 rounded-full mb-6"></div>
+
+                <div
+                    class="overflow-x-auto border border-slate-200 rounded-xl shadow-md"
+                >
+                    <table class="w-full text-xs md:text-sm text-left">
+                        <thead
+                            class="bg-teal-50 text-teal-950 uppercase text-xs tracking-wider"
+                        >
+                            <tr>
+                                <th class="p-4 border-b">Tarea priorizada</th>
+                                <th class="p-4 border-b">Responsable</th>
+                                <th class="p-4 border-b">Criterio de éxito</th>
+                                <th class="p-4 border-b">Primer hito</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-600">
+                            <tr class="border-b hover:bg-slate-50">
+                                <td class="p-4 font-bold"
+                                    >Agente analizador de pliegos</td
+                                >
+                                <td class="p-4 text-slate-400 font-bold italic"
+                                    >[Por definir]</td
+                                >
+                                <td class="p-4"
+                                    >Reducir análisis de 8 hrs a 1 hr</td
+                                >
+                                <td
+                                    class="p-4 text-slate-400 font-semibold italic"
+                                    >[Fecha]</td
+                                >
+                            </tr>
+                            <tr class="border-b hover:bg-slate-50">
+                                <td class="p-4 font-bold"
+                                    >Agente generador de propuestas</td
+                                >
+                                <td class="p-4 text-slate-400 font-bold italic"
+                                    >[Por definir]</td
+                                >
+                                <td class="p-4"
+                                    >Borrador técnico en 2 hrs vs 15 hrs</td
+                                >
+                                <td
+                                    class="p-4 text-slate-400 font-semibold italic"
+                                    >[Fecha]</td
+                                >
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-4 font-bold"
+                                    >Agente de búsqueda de clientes</td
+                                >
+                                <td class="p-4 text-slate-400 font-bold italic"
+                                    >[Por definir]</td
+                                >
+                                <td class="p-4"
+                                    >Mapear 10 prospectos por semana</td
+                                >
+                                <td
+                                    class="p-4 text-slate-400 font-semibold italic"
+                                    >[Fecha]</td
+                                >
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p
+                    class="text-xs md:text-sm text-slate-500 mt-5 text-center font-medium"
+                >
+                    * Estos roles e hitos se terminarán de consensuar y llenar
+                    en vivo durante la sesión de trabajo colectivo.
+                </p>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: MENSAJES CLAVE -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50"
+        >
+            <div class="max-w-5xl w-full text-center">
+                <p
+                    class="text-sm font-bold tracking-widest uppercase text-teal-600 mb-3"
+                >
+                    💡 Mensajes Clave (Tono "Sin Bullshit")
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-3"
+                >
+                    Líneas de comunicación y enfoque directo
+                </h2>
+                <div class="w-12 h-1.5 bg-teal-600 rounded-full mx-auto mb-6">
+                </div>
+
+                <div
+                    class="overflow-x-auto border border-slate-200 rounded-xl text-xs md:text-sm text-left max-w-3xl mx-auto mb-4 bg-white shadow-md"
+                >
+                    <table class="w-full">
+                        <thead
+                            class="bg-slate-50 text-slate-500 uppercase text-xs tracking-wider"
+                        >
+                            <tr>
+                                <th class="p-3 border-b text-emerald-600"
+                                    >✅ Decir</th
+                                >
+                                <th class="p-3 border-b text-rose-500"
+                                    >❌ Evitar</th
+                                >
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-600">
+                            <tr class="border-b">
+                                <td class="p-4 font-bold"
+                                    >"Reduciremos de 8 horas a 1 hora el
+                                    análisis de pliegos"</td
+                                >
+                                <td class="p-4 text-slate-400 font-medium"
+                                    >"Transformación digital disruptiva con IA
+                                    de última generación"</td
+                                >
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-4 font-bold"
+                                    >"Si no ves valor, no seguimos"</td
+                                >
+                                <td class="p-4 text-slate-400 font-medium"
+                                    >"¡Oferta exclusiva por tiempo limitado!"</td
+                                >
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-bold"
+                                    >"La IA lee el pliego, tú decides la
+                                    estrategia"</td
+                                >
+                                <td class="p-4 text-slate-400 font-medium"
+                                    >"Nuestra solución sinergiza paradigmas
+                                    empresariales"</td
+                                >
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: ACTION HUB - RECURSOS & EBOOK -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-white"
+        >
+            <div class="max-w-5xl w-full text-left">
+                <p
+                    class="text-sm font-bold tracking-widest uppercase text-teal-600 mb-2"
+                >
+                    🛠| Recursos para avanzar solo
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-6"
+                >
+                    ¿Listo para recuperar tu foco?
+                </h2>
+
+                <div
+                    class="grid md:grid-cols-2 gap-4 mb-6 text-sm md:text-base"
+                >
+                    <a
+                        href="/recursos/backlog-detox"
+                        class="p-4 border border-slate-200 rounded-xl hover:border-teal-600 transition font-bold text-slate-700 flex items-center justify-between shadow-sm hover:shadow"
+                    >
+                        <span>🧹 Backlog Detox</span>
+                        <span class="text-slate-300">→</span>
+                    </a>
+                    <a
+                        href="/recursos/guia-notebooklm"
+                        class="p-4 border border-slate-200 rounded-xl hover:border-teal-600 transition font-bold text-slate-700 flex items-center justify-between shadow-sm hover:shadow"
+                    >
+                        <span>📘 Guía NotebookLM</span>
+                        <span class="text-slate-300">→</span>
+                    </a>
+                    <a
+                        href="/recursos/shapeup-builder"
+                        class="p-4 border border-slate-200 rounded-xl hover:border-teal-600 transition font-bold text-slate-700 flex items-center justify-between shadow-sm hover:shadow"
+                    >
+                        <span>🎯 ShapeUp Builder</span>
+                        <span class="text-slate-300">→</span>
+                    </a>
+                    <a
+                        href="/recursos/prompteador"
+                        class="p-4 border border-slate-200 rounded-xl hover:border-teal-600 transition font-bold text-slate-700 flex items-center justify-between shadow-sm hover:shadow"
+                    >
+                        <span>💡 Prompteador</span>
+                        <span class="text-slate-300">→</span>
+                    </a>
+                </div>
+
+                <div
+                    class="bg-[#0F172A] rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6 shadow-lg text-white"
+                >
+                    <div
+                        class="w-20 h-28 bg-white rounded-r border-l-4 border-slate-300 flex items-center justify-center flex-shrink-0 text-slate-900"
+                    >
+                        <span
+                            class="text-xs font-black text-center px-2 leading-tight"
+                            >PM Sin Bullshit</span
+                        >
+                    </div>
+                    <div class="flex-grow text-center md:text-left">
+                        <h3 class="text-base md:text-lg font-extrabold mb-1.5">
+                            📘 Ebook "PM Sin Bullshit"
+                        </h3>
+                        <p class="text-xs md:text-sm text-slate-300 mb-4">
+                            Para PMs que quieren tomar mejores decisiones y
+                            tener más criterio. Sin bullsh*t.
+                        </p>
+                        <div
+                            class="flex flex-wrap gap-4 items-center justify-center md:justify-start text-xs font-bold"
+                        >
+                            <a
+                                href="https://pay.hotmart.com/D96093022S?off=OFF50"
+                                target="_blank"
+                                class="bg-teal-600 text-white px-5 py-2.5 rounded-lg hover:bg-teal-700 transition tracking-wide text-xs"
+                            >
+                                Comprar ahora ($53.000 COP)
+                            </a>
+                            <span
+                                class="text-[10.5px] text-orange-500 uppercase tracking-widest font-black"
+                            >
+                                50% OFF para clientes
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: CIERRE -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50 text-center"
+        >
+            <div class="max-w-2xl w-full">
+                <p
+                    class="text-sm font-bold tracking-widest uppercase text-teal-600 mb-4"
+                >
+                    🤝 Mantengamos el contacto
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-2"
+                >
+                    Contenido de PM y automatizaciones de IA
+                </h2>
+                <p class="text-sm md:text-base text-slate-500 mb-8 font-medium">
+                    Sigue de cerca las guías prácticas y publicaciones semanales
+                    en LinkedIn.
+                </p>
+
+                <div class="flex justify-center mb-12">
+                    <a
+                        href={linkedinLink}
+                        target="_blank"
+                        class="inline-flex items-center gap-2 bg-[#0077B5] text-white px-8 py-4 rounded-xl font-bold text-sm hover:bg-[#0077B5]/90 transition shadow-md"
+                    >
+                        <svg
+                            class="w-5 h-5 fill-current"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                            ></path>
+                        </svg>
+                        Seguir a Pablo Ríos
+                    </a>
+                </div>
+
+                <p
+                    class="text-[11px] text-slate-400 font-semibold leading-relaxed"
+                >
+                    Lucir<span class="text-teal-600 font-black">Me</span> AI · Brand
+                    Book Visual v1.0 · 2026<br />
+                    "Tu negocio es tu talento, no tu operatividad" · pablo@lucirme.com
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Estilos específicos globales -->
+    <style is:global>
+        .custom-check-list li::before {
+            content: "✓";
+            color: #0d9488; /* LucirMe Teal */
+            font-weight: 800;
+            margin-right: 0.5rem;
+        }
+        .custom-x-list li::before {
+            content: "✕";
+            color: #ef4444; /* Rojo error */
+            font-weight: 800;
+            margin-right: 0.5rem;
+        }
+        /* Ocultar barra de scroll conservando funcionalidad */
+        main::-webkit-scrollbar {
+            display: none;
+        }
+        main {
+            scrollbar-width: none;
+        }
+    </style>
+
+    <script>
+        const slider = document.getElementById("slider") as HTMLElement | null;
+        const slides = document.querySelectorAll("section");
+        const navDots = document.getElementById(
+            "navDots",
+        ) as HTMLElement | null;
+        const currentEl = document.getElementById(
+            "current",
+        ) as HTMLElement | null;
+        const totalEl = document.getElementById("total") as HTMLElement | null;
+
+        // --- LÓGICA DE PANTALLA COMPLETA ---
+        const fsBtn = document.getElementById(
+            "fullscreen-btn",
+        ) as HTMLElement | null;
+        const fsIconEnter = document.getElementById(
+            "fs-icon-enter",
+        ) as HTMLElement | null;
+        const fsIconExit = document.getElementById(
+            "fs-icon-exit",
+        ) as HTMLElement | null;
+
+        if (fsBtn && fsIconEnter && fsIconExit) {
+            fsBtn.addEventListener("click", () => {
+                if (!document.fullscreenElement) {
+                    document.documentElement
+                        .requestFullscreen()
+                        .catch((err) => {
+                            console.log(
+                                `Error al activar pantalla completa: ${err.message}`,
+                            );
+                        });
+                } else {
+                    document.exitFullscreen();
+                }
+            });
+
+            document.addEventListener("fullscreenchange", () => {
+                if (document.fullscreenElement) {
+                    fsIconEnter.classList.add("hidden");
+                    fsIconExit.classList.remove("hidden");
+                    fsBtn.setAttribute(
+                        "aria-label",
+                        "Salir de pantalla completa",
+                    );
+                } else {
+                    fsIconEnter.classList.remove("hidden");
+                    fsIconExit.classList.add("hidden");
+                    fsBtn.setAttribute("aria-label", "Pantalla completa");
+                }
+            });
+        }
+        // ---------------------------------------------
+
+        if (slider && navDots && currentEl && totalEl && slides.length > 0) {
+            totalEl.textContent = String(slides.length).padStart(2, "0");
+
+            // Crear círculos indicadores laterales
+            slides.forEach((_, i) => {
+                const dot = document.createElement("button");
+                dot.className =
+                    "w-2.5 h-2.5 rounded-full bg-slate-300 border-none cursor-pointer transition-all p-0 hover:bg-slate-400";
+                if (i === 0) {
+                    dot.classList.add("bg-teal-600", "h-7", "rounded");
+                }
+                dot.setAttribute("aria-label", `Ir a diapositiva ${i + 1}`);
+                dot.addEventListener("click", () => {
+                    slides[i].scrollIntoView({ behavior: "smooth" });
+                });
+                navDots.appendChild(dot);
+            });
+
+            const dots = document.querySelectorAll("#navDots button");
+
+            // Actualizar número activo y círculos al desplazar
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            const index = [...slides].indexOf(
+                                entry.target as HTMLElement,
+                            );
+
+                            dots.forEach((d, i) => {
+                                if (i === index) {
+                                    d.className =
+                                        "w-2.5 h-7 rounded bg-teal-600 border-none cursor-pointer transition-all p-0";
+                                } else {
+                                    d.className =
+                                        "w-2.5 h-2.5 rounded-full bg-slate-300 border-none cursor-pointer transition-all p-0 hover:bg-slate-400";
+                                }
+                            });
+                            currentEl.textContent = String(index + 1).padStart(
+                                2,
+                                "0",
+                            );
+                        }
+                    });
+                },
+                { root: slider, threshold: 0.6 },
+            );
+
+            slides.forEach((slide) => observer.observe(slide));
+
+            // Atajos de teclado
+            document.addEventListener("keydown", (e) => {
+                if (
+                    e.target instanceof HTMLInputElement ||
+                    e.target instanceof HTMLTextAreaElement
+                )
+                    return;
+
+                const slideHeight = window.innerHeight;
+                if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+                    e.preventDefault();
+                    slider.scrollBy({ top: slideHeight, behavior: "smooth" });
+                } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+                    e.preventDefault();
+                    slider.scrollBy({ top: -slideHeight, behavior: "smooth" });
+                } else if (e.key === "f" || e.key === "F") {
+                    fsBtn?.click();
+                } else if (e.key === "Escape" && document.fullscreenElement) {
+                    document.exitFullscreen();
+                }
+            });
+        }
+    </script>
+</Layout>
