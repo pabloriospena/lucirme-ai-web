@@ -3,15 +3,6 @@
 import Layout from "../../layouts/Layout.astro";
 import ActionHub from "../../components/ActionHub.astro";
 import { LINKS } from "../../lib/constants.js";
-
-const auth = (Astro.locals as any).auth;
-const userId = typeof auth === "function" ? auth().userId : auth?.userId;
-
-if (!userId) {
-    return Astro.redirect(
-        `/sign-in?redirect_url=${encodeURIComponent("/recursos/guia-notebooklm")}`,
-    );
-}
 ---
 
 <Layout title="Guía NotebookLM Sin Bullshit | LuciRMe AI">
