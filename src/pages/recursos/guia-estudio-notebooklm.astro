@@ -1,0 +1,574 @@
+---
+// src/pages/recursos/guia-notebooklm.astro
+import Layout from "../../layouts/Layout.astro";
+import ActionHub from "../../components/ActionHub.astro";
+import { LINKS } from "../../lib/constants.js";
+
+const auth = (Astro.locals as any).auth;
+const userId = typeof auth === "function" ? auth().userId : auth?.userId;
+
+if (!userId) {
+    return Astro.redirect(
+        `/sign-in?redirect_url=${encodeURIComponent("/recursos/guia-notebooklm")}`,
+    );
+}
+---
+
+<Layout title="Guía NotebookLM Sin Bullshit | LuciRMe AI">
+    <!-- BREADCRUMB -->
+    <nav class="bg-white border-b border-slate-100 px-4 py-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <a
+                href="/recursos"
+                class="text-sm font-bold text-slate-400 hover:text-teal-600 transition"
+                >← Volver a Recursos</a
+            >
+            <span
+                class="text-xs font-bold text-teal-600 uppercase tracking-widest flex items-center gap-2"
+            >
+                <span class="w-2 h-2 rounded-full bg-teal-600 animate-pulse"
+                ></span> Guía Interactiva
+            </span>
+        </div>
+    </nav>
+
+    <!-- BANNER CAFÉ GRATIS -->
+    <div
+        id="cafe-banner"
+        class="bg-gradient-to-r from-teal-600 to-teal-700 text-white px-4 py-4 text-center relative overflow-hidden transition-all duration-300"
+    >
+        <div
+            class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+            <span class="text-2xl">☕</span>
+            <div class="text-sm md:text-base font-medium">
+                <strong>¿Tienes dudas sobre los resultados?</strong> Agenda un café
+                virtual de 30 minutos y te ayudo a priorizar tus tareas.
+            </div>
+            <a
+                href={LINKS.calendly}
+                target="_blank"
+                class="bg-white text-teal-600 px-5 py-2 rounded-lg font-bold text-sm hover:bg-slate-50 transition whitespace-nowrap shadow-sm"
+            >
+                Agendar café gratis →
+            </a>
+        </div>
+        <button
+            id="close-cafe-banner"
+            class="absolute top-1/2 -translate-y-1/2 right-4 text-white/80 hover:text-white text-2xl font-bold p-1"
+            >×</button
+        >
+    </div>
+
+    <main class="py-12 px-4 max-w-4xl mx-auto">
+        <!-- HEADER -->
+        <header class="text-center mb-12">
+            <div
+                class="inline-block bg-teal-100 text-teal-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3"
+            >
+                Guía Práctica
+            </div>
+            <h1
+                class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4"
+            >
+                Estudiar con NotebookLM: Sin Bullshit
+            </h1>
+            <p
+                class="text-slate-600 text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
+            >
+                Una guía directa para usar IA como un estudiante de alto
+                rendimiento, no como uno perezoso. La IA no te va a salvar si tu
+                base es cero.
+            </p>
+        </header>
+
+        <!-- GOLDEN RULE -->
+        <div
+            class="bg-slate-900 text-slate-100 p-6 rounded-2xl mb-12 text-center border border-slate-800 shadow-sm"
+        >
+            <p
+                class="font-bold text-sm uppercase tracking-wider text-orange-500 mb-1.5"
+            >
+                Regla
+            </p>
+            <p class="text-base font-semibold leading-relaxed">
+                Si no devuelve tiempo, claridad o control, no te sirve. <br />
+                <span class="text-slate-400 font-normal text-sm"
+                    >NotebookLM está anclado a tus fuentes. Si le das basura, te
+                    devolverá basura.</span
+                >
+            </p>
+        </div>
+
+        <!-- SECCIONES / PASOS -->
+        <div class="space-y-8">
+            <!-- PASO 1 -->
+            <section
+                class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm"
+            >
+                <div class="flex items-center gap-4 mb-4">
+                    <div
+                        class="bg-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0"
+                    >
+                        1
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-900">
+                        Abrir NotebookLM
+                    </h2>
+                </div>
+                <p
+                    class="text-slate-700 text-sm md:text-base leading-relaxed mb-4"
+                >
+                    Ve a <strong class="text-slate-900 font-bold"
+                        >notebooklm.google.com</strong
+                    > e inicia sesión con tu cuenta de Google. No entres a jugar.
+                </p>
+                <div
+                    class="bg-orange-50/60 border-l-4 border-orange-500 p-4 rounded-r-lg"
+                >
+                    <h4
+                        class="text-xs font-bold text-orange-700 uppercase tracking-wider mb-1"
+                    >
+                    </h4>
+                    <p
+                        class="text-xs md:text-sm text-slate-800 leading-relaxed"
+                    >
+                        A diferencia de un chatbot genérico que alucina,
+                        NotebookLM solo responde basándose en lo que tú le das.
+                        No le pidas que invente; pídele que procese. Entiende
+                        esta regla antes de escribir una sola palabra.
+                    </p>
+                </div>
+            </section>
+
+            <!-- PASO 2 -->
+            <section
+                class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm"
+            >
+                <div class="flex items-center gap-4 mb-4">
+                    <div
+                        class="bg-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0"
+                    >
+                        2
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-900">
+                        Crear Cuaderno
+                    </h2>
+                </div>
+                <p
+                    class="text-slate-700 text-sm md:text-base leading-relaxed mb-4"
+                >
+                    Haz clic en <strong class="text-slate-900 font-bold"
+                        >"+"</strong
+                    > (Crear nuevo cuaderno) y ponle un nombre claro y acotado (ej.
+                    "Macroeconomía - Parcial 2").
+                </p>
+                <div
+                    class="bg-orange-50/60 border-l-4 border-orange-500 p-4 rounded-r-lg"
+                >
+                    <h4
+                        class="text-xs font-bold text-orange-700 uppercase tracking-wider mb-1"
+                    >
+                    </h4>
+                    <p
+                        class="text-xs md:text-sm text-slate-800 leading-relaxed"
+                    >
+                        <strong>No hagas un cuaderno gigante para todo</strong> El
+                        modelo tiene un límite de contexto. Si metes 15 libros y 35
+                        PDFs en un solo cuaderno, la IA se volverá vaga y superficial.
+                        Un cuaderno por unidad o tema específico. Mantén el contexto
+                        limpio. El límite en el momento de NotebookLM es de 50 fuentes
+                    </p>
+                </div>
+            </section>
+
+            <!-- PASO 3 -->
+            <section
+                class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm"
+            >
+                <div class="flex items-center gap-4 mb-4">
+                    <div
+                        class="bg-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0"
+                    >
+                        3
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-900">
+                        Añadir Fuentes
+                    </h2>
+                </div>
+                <p
+                    class="text-slate-700 text-sm md:text-base leading-relaxed mb-4"
+                >
+                    En el panel izquierdo, haz clic en <strong
+                        class="text-slate-900 font-bold">"Añadir fuente"</strong
+                    >. Sube PDFs, pega texto, URLs o enlaces de YouTube.
+                </p>
+                <div
+                    class="bg-orange-50/60 border-l-4 border-orange-500 p-4 rounded-r-lg"
+                >
+                    <h4
+                        class="text-xs font-bold text-orange-700 uppercase tracking-wider mb-1"
+                    >
+                    </h4>
+                    <p
+                        class="text-xs md:text-sm text-slate-800 leading-relaxed"
+                    >
+                        <em>Garbage in, garbage out.</em> Si subes diapositivas llenas
+                        de errores y sin contexto, el resumen será pésimo. Haz curaduría.
+                        Sube el PDF del libro, el paper original y tus notas bien
+                        redactadas. 5 fuentes de altísima calidad te darán mejores
+                        resultados que 40 mediocres.
+                    </p>
+                </div>
+            </section>
+
+            <!-- PASO 4 -->
+            <section
+                class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm"
+            >
+                <div class="flex items-center gap-4 mb-4">
+                    <div
+                        class="bg-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0"
+                    >
+                        4
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-900">
+                        Prompts para Resumir
+                    </h2>
+                </div>
+                <p
+                    class="text-slate-700 text-sm md:text-base leading-relaxed mb-4"
+                >
+                    Escribe en el chat. Pero si escribes <em
+                        class="italic text-slate-600">"Resúmeme el PDF"</em
+                    >, eres un estudiante mediocre y vas a olvidar el 80% del
+                    contenido en dos días.
+                </p>
+
+                <div
+                    class="bg-teal-50 border-l-4 border-teal-600 p-4 rounded-r-lg mb-6"
+                >
+                    <h4
+                        class="text-xs font-bold text-teal-800 uppercase tracking-wider mb-1"
+                    >
+                        Prompts de Alto Rendimiento
+                    </h4>
+                    <p
+                        class="text-xs md:text-sm text-slate-800 leading-relaxed"
+                    >
+                        Utiliza estos prompts para estructurar adecuadamente tu
+                        conocimiento:
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <h3
+                            class="text-sm font-bold text-slate-700 uppercase mb-2"
+                        >
+                            Para entender la estructura:
+                        </h3>
+                        <div class="relative group">
+                            <pre
+                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Actúa como un profesor universitario experto. Analiza las fuentes y crea un mapa mental jerárquico en formato de texto (usando viñetas anidadas) de los conceptos clave, mostrando cómo se relacionan las ideas principales con las secundarias.</pre>
+                            <button
+                                class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
+                                >Copiar</button
+                            >
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3
+                            class="text-sm font-bold text-slate-700 uppercase mb-2"
+                        >
+                            Para detectar lo importante:
+                        </h3>
+                        <div class="relative group">
+                            <pre
+                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Identifica los 3 argumentos o conceptos más contraintuitivos o complejos de estas fuentes. Explícalos usando analogías del mundo real y desglosa por qué son importantes para el tema general.</pre>
+                            <button
+                                class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
+                                >Copiar</button
+                            >
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3
+                            class="text-sm font-bold text-slate-700 uppercase mb-2"
+                        >
+                            Para sintetizar:
+                        </h3>
+                        <div class="relative group">
+                            <pre
+                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Crea una tabla comparativa con 3 columnas: Concepto Clave, Definición técnica (basada en el texto) y Un ejemplo práctico de la vida real que no esté en el texto.</pre>
+                            <button
+                                class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
+                                >Copiar</button
+                            >
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PASO 5 -->
+            <section
+                class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm"
+            >
+                <div class="flex items-center gap-4 mb-4">
+                    <div
+                        class="bg-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0"
+                    >
+                        5
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-900">
+                        Prompts para Evaluar
+                    </h2>
+                </div>
+                <p
+                    class="text-slate-700 text-sm md:text-base leading-relaxed mb-4"
+                >
+                    Pídele que te examine. Los exámenes de opción múltiple son
+                    útiles para memorizar, pero no para comprender a fondo. Usa
+                    el método socrático para identificar tus puntos ciegos.
+                </p>
+
+                <div class="space-y-4">
+                    <div>
+                        <h3
+                            class="text-sm font-bold text-slate-700 uppercase mb-2"
+                        >
+                            El Abogado del Diablo:
+                        </h3>
+                        <div class="relative group">
+                            <pre
+                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Voy a explicarte el concepto de [X]. Quiero que actúes como un profesor riguroso y escéptico. Critica mi explicación, encuentra fallos en mi lógica, hazme 3 preguntas difíciles que pongan a prueba los límites de mi comprensión y no me des la respuesta hasta que yo intente resolverla.</pre>
+                            <button
+                                class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
+                                >Copiar</button
+                            >
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3
+                            class="text-sm font-bold text-slate-700 uppercase mb-2"
+                        >
+                            Técnica Feynman:
+                        </h3>
+                        <div class="relative group">
+                            <pre
+                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Voy a explicarte [Tema] como si tuviera 12 años. Dime en qué partes mi explicación es simplista, incorrecta o donde estoy usando jerga para ocultar que no entiendo el concepto profundo.</pre>
+                            <button
+                                class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
+                                >Copiar</button
+                            >
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PASO 6 -->
+            <section
+                class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm"
+            >
+                <div class="flex items-center gap-4 mb-4">
+                    <div
+                        class="bg-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0"
+                    >
+                        6
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-900">
+                        Guardar Notas
+                    </h2>
+                </div>
+                <p
+                    class="text-slate-700 text-sm md:text-base leading-relaxed mb-4"
+                >
+                    Cuando la IA te entregue una respuesta estructurada o
+                    valiosa, utiliza el icono de la <strong
+                        class="text-slate-900 font-bold"
+                        >chincheta (guardar nota)</strong
+                    > situado en la esquina de la respuesta.
+                </p>
+                <div
+                    class="bg-orange-50/60 border-l-4 border-orange-500 p-4 rounded-r-lg"
+                >
+                    <h4
+                        class="text-xs font-bold text-orange-700 uppercase tracking-wider mb-1"
+                    >
+                    </h4>
+                    <p
+                        class="text-xs md:text-sm text-slate-800 leading-relaxed"
+                    >
+                        No guardes todo de forma indiscriminada. Si almacenas
+                        decenas de notas, no repasarás ninguna. NotebookLM no es
+                        tu base de conocimiento a largo plazo. <strong
+                            >Solo guarda lo que te genere un aprendizaje real</strong
+                        >. Exporta periódicamente tus anotaciones a tu sistema
+                        diario de organización (Notion, Obsidian, Anki).
+                    </p>
+                </div>
+            </section>
+
+            <!-- PASO 7 -->
+            <section
+                class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm"
+            >
+                <div class="flex items-center gap-4 mb-4">
+                    <div
+                        class="bg-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0"
+                    >
+                        7
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-900">
+                        Podcast y Opciones Nativas
+                    </h2>
+                </div>
+                <p
+                    class="text-slate-700 text-sm md:text-base leading-relaxed mb-4"
+                >
+                    Familiarízate con las herramientas del sistema: <strong
+                        class="text-slate-900 font-bold"
+                        >Audio Overview (Podcast), Guías de estudio, Preguntas
+                        frecuentes y Líneas de tiempo.</strong
+                    >
+                </p>
+                <div
+                    class="bg-orange-50/60 border-l-4 border-orange-500 p-4 rounded-r-lg mb-4"
+                >
+                    <h4
+                        class="text-xs font-bold text-orange-700 uppercase tracking-wider mb-1"
+                    >
+                    </h4>
+                    <p
+                        class="text-xs md:text-sm text-slate-800 leading-relaxed"
+                    >
+                        <strong
+                            >El Audio Overview NO sustituye la lectura.</strong
+                        > Funciona como un recurso de refuerzo pasivo para tu tiempo
+                        libre. Te ayuda a interiorizar conceptos, pero depender exclusivamente
+                        de él creará una falsa ilusión de competencia intelectual.
+                    </p>
+                </div>
+                <p
+                    class="text-slate-700 text-xs md:text-sm mt-3 leading-relaxed"
+                >
+                    Para crear <strong class="text-slate-900 font-semibold"
+                        >Flashcards</strong
+                    >, evita pedir definiciones mecánicas de diccionario y
+                    utiliza una petición más analítica: <em
+                        class="italic text-slate-600"
+                        >"Genera 20 flashcards enfocadas en relaciones
+                        causa-efecto y aplicaciones prácticas, no en
+                        definiciones literales"</em
+                    >.
+                </p>
+            </section>
+
+            <!-- PASO 8 -->
+            <section
+                class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm"
+            >
+                <div class="flex items-center gap-4 mb-4">
+                    <div
+                        class="bg-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0"
+                    >
+                        8
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-900">
+                        Tiempo Potencial Ahorrado
+                    </h2>
+                </div>
+                <p
+                    class="text-slate-700 text-sm md:text-base leading-relaxed mb-4"
+                >
+                    Evita las falsas promesas de productividad que afirman
+                    ahorrar el 90% del tiempo de estudio.
+                </p>
+                <div
+                    class="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-lg"
+                >
+                    <h4
+                        class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-1"
+                    >
+                        La Realidad
+                    </h4>
+                    <p
+                        class="text-xs md:text-sm text-slate-800 leading-relaxed mb-2"
+                    >
+                        Si empleas NotebookLM para <strong
+                            class="text-slate-900"
+                            >acelerar tu nivel de comprensión</strong
+                        >, organizar información dispersa y evaluar tus áreas de
+                        mejora, podrás optimizar entre un <strong
+                            class="text-slate-900">20% y un 30%</strong
+                        > del tiempo total dedicado al estudio.
+                    </p>
+                    <p
+                        class="text-xs md:text-sm text-slate-800 leading-relaxed"
+                    >
+                        <strong>¿Qué significa esto?</strong> Si tu carga habitual
+                        es de 20 horas semanales de revisión, la herramienta te permitirá
+                        completar la misma labor en aproximadamente 14 o 15 horas,
+                        minimizando la fricción y el cansancio mental de organizar
+                        materiales desestructurados.
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ACTION HUB -->
+        <div class="mt-16">
+            <ActionHub />
+        </div>
+    </main>
+
+    <!-- LÓGICA DEL CLIENTE (INTERACTIVIDAD) -->
+    <script is:inline>
+        // Control del Banner Café Gratis
+        const cafeBanner = document.getElementById("cafe-banner");
+        const closeCafeBtn = document.getElementById("close-cafe-banner");
+
+        if (cafeBanner && closeCafeBtn) {
+            closeCafeBtn.addEventListener("click", () => {
+                cafeBanner.style.opacity = "0";
+                setTimeout(() => {
+                    cafeBanner.style.display = "none";
+                }, 300);
+            });
+        }
+
+        // Copia de prompts individuales de las tarjetas
+        document.querySelectorAll(".copy-prompt-btn").forEach((btn) => {
+            btn.addEventListener("click", async () => {
+                const textPre = btn.previousElementSibling;
+                if (!textPre) return;
+
+                const textToCopy = textPre.textContent || "";
+                try {
+                    await navigator.clipboard.writeText(textToCopy);
+                    const originalText = btn.textContent;
+                    btn.textContent = "¡Copiado!";
+                    btn.classList.add(
+                        "bg-teal-50",
+                        "text-teal-700",
+                        "border-teal-300",
+                    );
+
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.classList.remove(
+                            "bg-teal-50",
+                            "text-teal-700",
+                            "border-teal-300",
+                        );
+                    }, 2000);
+                } catch (err) {
+                    alert("No se pudo copiar el prompt automáticamente.");
+                }
+            });
+        });
+    </script>
+</Layout>
