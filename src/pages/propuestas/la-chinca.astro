@@ -1,110 +1,425 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Footer from '../../components/Footer.astro';
+// src/pages/propuestas/ia-aplicada.astro
+import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout title="Propuesta La Chinca | LuciRMe AI">
-  
-  <!-- BOTÓN DE IMPRESIÓN (no-print) -->
-  <div class="max-w-4xl mx-auto my-8 p-4 no-print animate-fade-in">
-    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-200">
-      <p class="text-sm text-gray-500">
-        Fundador: <strong class="text-deep">Pablo Ríos</strong> | Espacio de Cooperación.
-      </p>
-      <button
-        onclick="window.print()"
-        class="bg-teal hover:bg-tealHover text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition flex items-center gap-2 text-sm cursor-pointer"
+  <main class="max-w-4xl mx-auto py-12 px-4 space-y-10 print:py-6 print:px-0">
+    <!-- HEADER DE LA PROPUESTA -->
+    <header
+      class="border-b border-slate-200 pb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 print:border-slate-300"
+    >
+      <div>
+        <div
+          class="inline-block bg-teal-50 border border-teal-200 text-teal-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3 print:border-slate-300 print:text-slate-800"
+        >
+          Propuesta
+        </div>
+        <h1
+          class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight"
+        >
+          Programa de Aprendizaje en IA Aplicada
+        </h1>
+      </div>
+      <div
+        class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs md:text-sm text-slate-500 space-y-1 min-w-[240px] print:bg-white print:border-slate-300"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-        </svg>
-        Descargar Propuesta en PDF
-      </button>
-    </div>
-  </div>
-
-  <!-- CUERPO DE LA PROPUESTA (Ancho total controlado) -->
-  <main class="max-w-4xl mx-auto px-4 py-8">
-    <article class="print-area bg-[#F8FAFC] text-deep border border-gray-200 rounded-2xl shadow-sm p-8 md:p-12 space-y-12 animate-fade-in">
-      
-      <!-- CABECERA -->
-      <header class="flex justify-between items-start border-b border-gray-200 pb-6 mb-8">
-        <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-teal bg-teal/10 px-3 py-1 rounded-full">Espacio de Cooperación</span>
-          <h1 class="text-3xl font-bold tracking-tight text-deep mt-4">Acompañamiento Práctico: La Chinca</h1>
-          <p class="text-sm text-gray-500 mt-1">Llevando el uso de la IA de la teoría a la autonomía en equipo.</p>
-        </div>
-        <div class="text-right">
-          <span class="font-bold text-lg text-deep tracking-tight">🚀 LucirMe AI</span>
-          <p class="text-xs text-gray-400 mt-1">lucirme.com</p>
-        </div>
-      </header>
-
-      <!-- EL OBJETIVO -->
-      <section class="space-y-4">
-        <h2 class="text-lg font-bold text-deep flex items-center gap-2">
-          <span class="text-teal">🎯</span> El Objetivo
-        </h2>
-        <p class="text-gray-600 text-sm leading-relaxed">
-          Luego de abrir el acceso a nuestra <strong>Librería de Recursos</strong> para la empleabilidad y productividad de las jóvenes y el equipo, el siguiente paso natural es la ejecución. Diseñamos un formato interactivo para sentarnos a construir flujos reales sobre las herramientas que ya usan, optimizando el tiempo administrativo de la fundación.
+        <p>
+          <strong class="text-slate-800 font-semibold">Para:</strong> Casa Universitaria
+          • La Chinca
         </p>
-      </section>
-
-      <!-- TARJETA DE VALOR (CORREGIDA) -->
-      <section class="bg-white border border-gray-200 p-8 rounded-2xl shadow-sm">
-        <h2 class="text-lg font-bold text-deep mb-3 flex items-center gap-2">
-          <span class="text-teal">🛠️</span> Bloques de Enfoque Práctico Grupal (Remoto)
-        </h2>
-        <p class="text-gray-600 text-sm leading-relaxed mb-6">
-          Sesiones cerradas de trabajo en vivo para resolver un cuello de botella o automatizar una tarea específica de la fundación. Sin rodeos teóricos.
+        <p>
+          <strong class="text-slate-800 font-semibold">De:</strong> Pablo Ríos Peña
+          • LuciRMe AI
         </p>
+      </div>
+    </header>
 
-        <!-- Contenedor con columnas seguras y ancho completo -->
-        <div class="p-6 bg-gray-50 rounded-xl border border-gray-100 grid md:grid-cols-12 gap-6 items-center">
-          <div class="md:col-span-8 space-y-2 text-left">
-            <h3 class="font-bold text-base text-deep">Célula de Trabajo IA</h3>
-            <ul class="text-xs text-gray-500 space-y-1.5 list-disc list-inside">
-              <li><strong>Duración:</strong> 2 horas dedicadas a un solo problema operativo.</li>
-              <li><strong>Capacidad:</strong> Grupos de <strong>hasta 4 personas</strong>.</li>
-              <li><strong>Incluye:</strong> Configuración en vivo + guía de uso rápido + grabación de la sesión.</li>
-            </ul>
-          </div>
-          
-          <div class="md:col-span-4 text-right border-t md:border-t-0 md:border-l border-gray-200 pt-4 md:pt-0 md:pl-6 flex flex-col items-end justify-center">
-            <span class="line-through text-xs text-gray-400 block">$580.000</span>
-            <span class="text-2xl font-bold text-deep block">$290.000 COP</span>
-            <span class="text-[10px] font-bold text-teal bg-teal/10 px-3 py-1 rounded-full mt-2">Tarifa Social Neta</span>
-            <span class="text-[9px] text-gray-400 mt-1 block">Por bloque de 2 horas</span>
-          </div>
-        </div>
-      </section>
+    <!-- 1. RESUMEN EJECUTIVO -->
+    <section
+      class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm print:shadow-none print:border-slate-300 card"
+    >
+      <h2
+        class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2.5"
+      >
+        <span class="text-xl">🎯</span> Resumen Ejecutivo
+      </h2>
+      <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-6">
+        Esta propuesta responde a los resultados de la <em
+          class="italic text-slate-800 font-medium"
+          >Encuesta de Intereses de Aprendizaje sobre Inteligencia Artificial</em
+        > aplicada a jóvenes de Casa Universitaria (junio 2026):
+      </p>
 
-      <!-- TÉRMINOS -->
-      <section class="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs text-gray-500 border-t border-gray-200 pt-8 mt-8">
-        <div>
-          <h4 class="font-bold text-deep mb-3 uppercase tracking-widest text-[10px]">Términos de Cooperación</h4>
-          <ul class="space-y-1.5 list-disc list-inside">
-            <li><strong>Flexibilidad:</strong> Sin contratos mínimos. Se agenda de forma independiente.</li>
-            <li><strong>Garantía LuciRMe:</strong> Si en los primeros 15 minutos no vemos viabilidad, cancelamos sin costo.</li>
+      <div
+        class="overflow-x-auto border border-slate-200 rounded-xl mb-6 print:border-slate-300"
+      >
+        <table class="w-full text-xs md:text-sm text-left border-collapse">
+          <thead
+            class="bg-slate-50 text-slate-500 uppercase text-[10px] tracking-wider font-semibold print:bg-slate-100"
+          >
+            <tr>
+              <th class="p-3 border-b border-slate-200 print:border-slate-300"
+                >Hallazgo</th
+              >
+              <th class="p-3 border-b border-slate-200 print:border-slate-300"
+                >Dato</th
+              >
+            </tr>
+          </thead>
+          <tbody
+            class="text-slate-700 divide-y divide-slate-150 print:divide-slate-300"
+          >
+            <tr>
+              <td class="p-3 font-medium"
+                >Interés en seguir aprendiendo sobre IA</td
+              >
+              <td class="p-3 font-semibold text-slate-900"
+                >78,6% manifestó "mucho interés"</td
+              >
+            </tr>
+            <tr>
+              <td class="p-3 font-medium">Tema #1 de interés</td>
+              <td class="p-3 font-semibold text-slate-900"
+                >IA para estudiar mejor y ahorrar tiempo (71,4%)</td
+              >
+            </tr>
+            <tr>
+              <td class="p-3 font-medium">Tema #2 de interés</td>
+              <td class="p-3 font-semibold text-slate-900"
+                >IA para emprender y desarrollar ideas de negocio (64,3%)</td
+              >
+            </tr>
+            <tr>
+              <td class="p-3 font-medium">Tema #3 de interés</td>
+              <td class="p-3 font-semibold text-slate-900"
+                >IA para fortalecer proyecto de vida (42,9%)</td
+              >
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        class="bg-teal-50/60 border-l-4 border-teal-600 p-4 rounded-r-lg text-slate-800 text-sm md:text-base leading-relaxed print:bg-slate-100 print:border-slate-400"
+      >
+        <strong class="text-teal-900 print:text-slate-900"
+          >Objetivo del programa:</strong
+        > Entregar herramientas prácticas, gratuitas y aplicables de IA para que las
+        jóvenes potencien su desempeño académico, exploren caminos profesionales y
+        construyan autonomía tecnológica.
+        <br /><br />
+        <span
+          class="italic text-slate-600 block border-t border-teal-100 pt-3 mt-1 text-xs md:text-sm print:border-slate-300"
+        >
+          "No enseño IA. Enseño a recuperar tu vida usando IA."<br />
+          <strong class="text-slate-800 font-bold not-italic block mt-1"
+            >— Pablo Ríos, Fundador LuciRMe AI</strong
+          >
+        </span>
+      </div>
+    </section>
+
+    <!-- 3. ESTRUCTURA DEL PROGRAMA -->
+    <section
+      class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm print:shadow-none print:border-slate-300 card"
+    >
+      <h2
+        class="text-2xl font-bold text-slate-900 mb-2 flex items-center gap-2.5"
+      >
+        <span class="text-xl">🗂️</span> Estructura del Programa
+      </h2>
+      <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-6">
+        <strong class="text-slate-800 font-semibold">Formato:</strong> 2 Sesiones
+        Presenciales + Materiales Digitales de Apoyo
+      </p>
+
+      <div
+        class="overflow-x-auto border border-slate-200 rounded-xl mb-6 print:border-slate-300"
+      >
+        <table class="w-full text-xs md:text-sm text-left border-collapse">
+          <thead
+            class="bg-slate-50 text-slate-500 uppercase text-[10px] tracking-wider font-semibold print:bg-slate-100"
+          >
+            <tr>
+              <th class="p-3 border-b border-slate-200 print:border-slate-300"
+                >Sesión</th
+              >
+              <th class="p-3 border-b border-slate-200 print:border-slate-300"
+                >Duración</th
+              >
+              <th class="p-3 border-b border-slate-200 print:border-slate-300"
+                >Contenido</th
+              >
+              <th class="p-3 border-b border-slate-200 print:border-slate-300"
+                >Entregable</th
+              >
+            </tr>
+          </thead>
+          <tbody
+            class="text-slate-700 divide-y divide-slate-150 print:divide-slate-300"
+          >
+            <tr>
+              <td class="p-3 font-bold text-slate-900">Sesión 1</td>
+              <td class="p-3 font-medium">90 min</td>
+              <td class="p-3 text-slate-600"
+                >📚 IA para estudiar mejor + 📄 CV con IA</td
+              >
+              <td class="p-3 text-slate-600"
+                >• Flujo de estudio<br />• 3 prompts para apuntes<br />• CV
+                listo para usar</td
+              >
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-slate-900">Sesión 2</td>
+              <td class="p-3 font-medium">90 min</td>
+              <td class="p-3 text-slate-600"
+                >💡 IA para emprender + 🎨 Contenido visual</td
+              >
+              <td class="p-3 text-slate-600"
+                >• Idea de negocio validada<br />• Portafolio web básico<br />•
+                Biblioteca personal</td
+              >
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3
+        class="text-base font-bold text-slate-900 uppercase tracking-wider mb-3"
+      >
+        Materiales incluidos (entrega digital):
+      </h3>
+      <ul
+        class="space-y-2 text-sm md:text-base text-slate-600 custom-check-list"
+      >
+        <li>
+          <strong class="text-slate-800 font-semibold"
+            >Biblioteca de Prompts Personales</strong
+          >
+        </li>
+        <li>
+          <strong class="text-slate-800 font-semibold"
+            >Guías Visuales Descargables (PDF):</strong
+          >
+          <ul class="list-disc pl-6 mt-1.5 space-y-1 text-slate-500">
+            <li>"Tu Ruta Profesional con NotebookLM" (1 página)</li>
+            <li>"CV con IA: Flujo en 5 pasos" (1 página)</li>
+            <li>"Fórmula Maestra de Prompts" (1 página)</li>
           </ul>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 4. INVERSIÓN Y CONDICIONES -->
+    <section
+      class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm print:shadow-none print:border-slate-300 card"
+    >
+      <h2
+        class="text-2xl font-bold text-slate-900 mb-2 flex items-center gap-2.5"
+      >
+        <span class="text-xl">💰</span> Inversión: Descuento La Chinca
+      </h2>
+
+      <div
+        class="bg-slate-900 text-slate-100 p-6 rounded-2xl my-6 text-center border border-slate-800 shadow-sm print:bg-slate-100 print:text-slate-900 print:border-slate-300"
+      >
+        <span
+          class="inline-block bg-orange-600 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3 print:bg-slate-800 print:text-white"
+        >
+          Exclusivo Fundación
+        </span>
+        <div class="text-4xl font-black text-white mb-1.5 print:text-slate-900">
+          $900.000 COP <span
+            class="text-base font-normal text-slate-400 print:text-slate-500"
+            >(modalidad presencial)</span
+          >
         </div>
-        <div class="flex flex-col justify-end items-end text-right">
-          <p class="text-[11px] text-gray-400">
-            <strong>Pablo Ríos Peña</strong><br/>
-            Fundador, LuciRMe AI | <span class="text-deep">pablo@lucirme.com</span>
+        <p class="text-sm text-slate-300 font-medium print:text-slate-700">
+          o <strong class="text-white font-bold print:text-slate-900"
+            >$700.000 COP</strong
+          > en modalidad remota
+        </p>
+      </div>
+
+      <div
+        class="overflow-x-auto border border-slate-200 rounded-xl mb-6 print:border-slate-300"
+      >
+        <table class="w-full text-xs md:text-sm text-left border-collapse">
+          <tbody
+            class="text-slate-700 divide-y divide-slate-150 print:divide-slate-300"
+          >
+            <tr>
+              <th
+                class="p-3 bg-slate-50 font-bold text-slate-800 w-1/3 print:bg-slate-100"
+                >Participantes</th
+              >
+              <td class="p-3 text-slate-600">A elección de La Chinca</td>
+            </tr>
+            <tr>
+              <th
+                class="p-3 bg-slate-50 font-bold text-slate-800 print:bg-slate-100"
+                >Incluye</th
+              >
+              <td class="p-3 text-slate-600"
+                >2 sesiones + materiales + biblioteca de prompts +
+                Acompañamiento particular en 2 sesiones a demanda de 1 hora</td
+              >
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3
+        class="text-base font-bold text-slate-900 uppercase tracking-wider mb-3"
+      >
+        Condiciones del descuento:
+      </h3>
+      <p class="text-slate-600 text-sm md:text-base mb-4 leading-relaxed">
+        Este precio especial aplica <strong class="text-slate-900"
+          >exclusivamente para La Chinca</strong
+        >, bajo los siguientes acuerdos de contraprestación:
+      </p>
+      <ul
+        class="space-y-3 text-sm md:text-base text-slate-600 custom-check-list"
+      >
+        <li>
+          <strong class="text-slate-800 font-semibold"
+            >Contraprestación no monetaria:</strong
+          >
+          <ul class="list-disc pl-6 mt-1.5 space-y-1 text-slate-500">
+            <li>
+              Publicaciones compartidas en redes sociales de las estudiantes
+              etiquetando a @LuciRMeAI
+            </li>
+            <li>
+              1 testimonio breve en video (30-60 seg) documentando la
+              experiencia y resultados
+            </li>
+            <li>
+              Recomendaciones formales a contactos de otras organizaciones que
+              se beneficien de estas herramientas
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong class="text-slate-800 font-semibold"
+            >Opcional - Acompañamiento 1:1:</strong
+          >
+          <span class="block text-slate-500 text-xs md:text-sm mt-0.5"
+            >Espacios de asesoría individual adicionales pueden acordarse
+            mediante intercambios no económicos de mutuo acuerdo.</span
+          >
+        </li>
+      </ul>
+    </section>
+
+    <!-- 5. SOBRE NOSOTROS -->
+    <section class="grid md:grid-cols-2 gap-6 print:gap-4 print:grid-cols-1">
+      <div
+        class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm print:shadow-none print:border-slate-300 card flex flex-col justify-between"
+      >
+        <div>
+          <h2
+            class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2.5"
+          >
+            <span class="text-xl">👋</span> Sobre LuciRMe AI
+          </h2>
+          <p class="text-slate-600 text-xs md:text-sm leading-relaxed mb-4">
+            Iniciativa de acompañamiento práctico en IA aplicada, creada para
+            profesionales y jóvenes que quieren recuperar tiempo y claridad sin
+            volverse expertos en tecnología compleja.
           </p>
         </div>
-      </section>
+        <p
+          class="text-xs font-semibold text-teal-600 bg-teal-50 border border-teal-100 rounded-lg p-2.5 inline-block print:bg-slate-100 print:text-slate-800 print:border-slate-300"
+        >
+          Regla de oro: "Si no devuelve tiempo, claridad o control, no es
+          LuciRMe."
+        </p>
+      </div>
 
-    </article>
+      <div
+        class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm print:shadow-none print:border-slate-300 card text-xs md:text-sm"
+      >
+        <h3 class="text-lg font-bold text-slate-900 mb-1">Pablo Ríos Peña</h3>
+        <p class="text-slate-400 font-medium mb-3">
+          Head of Product · Consultor en IA & Product Strategy
+        </p>
+        <p class="text-slate-600 leading-relaxed mb-4">
+          Ingeniero de Sistemas con más de 10 años liderando productos digitales
+          en startups y entornos SaaS. Especialista en estrategia de producto,
+          Growth y adopción práctica de IA.
+        </p>
+        <div
+          class="border-t border-slate-100 pt-3 space-y-1 text-[11px] text-slate-500 print:border-slate-300"
+        >
+          <p>
+            🔗 <a
+              href="https://linkedin.com/in/pabloriospena"
+              target="_blank"
+              class="hover:underline text-teal-600 font-semibold"
+              >linkedin.com/in/pabloriospena</a
+            >
+          </p>
+          <p>
+            📧 <a
+              href="mailto:pabloriospena@gmail.com"
+              class="hover:underline text-teal-600 font-semibold"
+              >pabloriospena@gmail.com</a
+            >
+          </p>
+          <p>
+            🌐 <a
+              href="https://lucirme.com"
+              target="_blank"
+              class="hover:underline text-teal-600 font-semibold">lucirme.com</a
+            >
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer
+      class="text-center pt-8 border-t border-slate-200 text-slate-400 text-xs space-y-1 print:border-slate-300"
+    >
+      <p>© 2026 Pablo Ríos Peña • LuciRMe AI</p>
+      <p class="font-medium">
+        Documento estratégico. Todos los derechos reservados.
+      </p>
+    </footer>
   </main>
-</Layout>
 
-<style is:global>
-  @media print {
-    .no-print { display: none !important; }
-    body { background-color: #ffffff !important; color: #0F172A !important; }
-    .print-area { border: none !important; box-shadow: none !important; padding: 0 !important; margin: 0 !important; max-w: 100% !important; background: transparent !important; }
-    section, table, footer { page-break-inside: avoid; }
-  }
-</style>
+  <style is:global>
+    /* Estilos personalizados para la lista */
+    .custom-check-list li::before {
+      content: "✓";
+      color: #10b981; /* Verde Success */
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+
+    /* Reglas específicas para la impresión limpia del PDF */
+    @media print {
+      body {
+        background-color: white !important;
+        color: #0f172a !important;
+      }
+      .card {
+        page-break-inside: avoid;
+        border: 1px solid #e2e8f0 !important;
+      }
+    }
+  </style>
+
+  <script is:inline>
+    // Handler para el botón de imprimir
+    const printBtn = document.getElementById("print-button");
+    if (printBtn) {
+      printBtn.addEventListener("click", () => {
+        window.print();
+      });
+    }
+  </script>
+</Layout>
