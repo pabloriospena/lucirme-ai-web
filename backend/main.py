@@ -2,6 +2,13 @@ import os
 import re
 import uuid
 import shutil
+# pyrefly: ignore [missing-import]
+from backend.conciliacion import router as conciliacion_router
+
+# Después de crear la app:
+app = FastAPI(title="Conciliador - LuciRMe AI")
+app.include_router(conciliacion_router)
+
 from datetime import datetime
 # pyrefly: ignore [missing-import]
 from fastapi import FastAPI, File, UploadFile, HTTPException
