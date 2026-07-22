@@ -1,0 +1,191 @@
+---
+// Puedes importar componentes o layouts de Astro aquí si los utilizas
+---
+
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conciliación DIAN vs Contabilidad</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f9;
+        margin: 0;
+        padding: 40px 20px;
+      }
+      .container {
+        max-width: 550px;
+        margin: 0 auto;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 20px;
+        color: #1a73e8;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      .form-group {
+        margin-bottom: 18px;
+      }
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 6px;
+        font-size: 14px;
+        color: #333;
+      }
+      input[type="file"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #1a73e8;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        font-size: 15px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #1557b0;
+      }
+      #status {
+        margin-top: 18px;
+        font-size: 14px;
+        text-align: center;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Conciliación de Movimientos</h1>
+
+      <form id="concilForm">
+        <div class="form-group">
+          <label for="file_dian">1. Archivo DIAN / Facturación (.xlsx):</label>
+          <input type="file" id="file_dian" accept=".xlsx, .xls" required />
+        </div>
+
+        <div class="form-group">
+          <label for="file_conta">2. Archivo Contabilidad (.xlsx):</label>
+          <input type="file" id="file_conta" accept=".xlsx, .xls" required />
+        </div>
+
+        <button type="submit" id="btnSubmit"
+          >Procesar y Descargar Conciliación</button
+        >
+      </form>
+
+      <div id="status"></div>
+    </div>
+
+    <script>
+      // URL de tu backend desplegado en Render
+      const API_URL = "https://mi-backend-excel.onrender.com/api/conciliacion/";
+
+      const form = document.getElementById(
+        "concilForm",
+      ) as HTMLFormElement | null;
+      const statusDiv = document.getElementById(
+        "status",
+      ) as HTMLDivElement | null;
+      const btnSubmit = document.getElementById(
+        "btnSubmit",
+      ) as HTMLButtonElement | null;
+
+      if (form) {
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          // Casting preciso a HTMLInputElement para acceder a .files
+          const inputDian = document.getElementById(
+            "file_dian",
+          ) as HTMLInputElement | null;
+          const inputConta = document.getElementById(
+            "file_conta",
+          ) as HTMLInputElement | null;
+
+          // Verificación de existencia de elementos y archivos
+          const fileDian = inputDian?.files?.[0];
+          const fileConta = inputConta?.files?.[0];
+
+          if (!fileDian || !fileConta) {
+            if (statusDiv) {
+              statusDiv.style.color = "red";
+              statusDiv.textContent =
+                "Por favor selecciona ambos archivos antes de continuar.";
+            }
+            return;
+          }
+
+          if (statusDiv) {
+            statusDiv.style.color = "#333";
+            statusDiv.textContent =
+              "⏳ Procesando conciliación en el servidor... por favor espera.";
+          }
+
+          if (btnSubmit) {
+            btnSubmit.disabled = true;
+          }
+
+          const formData = new FormData();
+          formData.append("file_dian", fileDian);
+          formData.append("file_conta", fileConta);
+
+          try {
+            const response = await fetch(API_URL, {
+              method: "POST",
+              body: formData,
+            });
+
+            if (!response.ok) {
+              const errorData = await response.json();
+              throw new Error(
+                errorData.detail || "Error al procesar la conciliación",
+              );
+            }
+
+            const blob = await response.blob();
+
+            const downloadUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = downloadUrl;
+            a.download = "Conciliacion_DIAN_vs_Contabilidad.xlsx";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(downloadUrl);
+
+            if (statusDiv) {
+              statusDiv.style.color = "green";
+              statusDiv.textContent =
+                "✅ ¡Conciliación completada! El archivo se ha descargado.";
+            }
+          } catch (err: unknown) {
+            if (statusDiv) {
+              statusDiv.style.color = "red";
+              const errorMessage =
+                err instanceof Error ? err.message : "Error desconocido";
+              statusDiv.textContent = "❌ Error: " + errorMessage;
+            }
+          } finally {
+            if (btnSubmit) {
+              btnSubmit.disabled = false;
+            }
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
