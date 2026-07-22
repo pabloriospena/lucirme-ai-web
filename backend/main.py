@@ -2,35 +2,44 @@ import os
 import re
 import uuid
 import shutil
-# pyrefly: ignore [missing-import]
-from conciliacion import router as conciliacion_router
-
-# Después de crear la app:
-app = FastAPI(title="Conciliador - LuciRMe AI")
-app.include_router(conciliacion_router)
-
 from datetime import datetime
-# pyrefly: ignore [missing-import]
+
 from fastapi import FastAPI, File, UploadFile, HTTPException
-# pyrefly: ignore [missing-import]
 from fastapi.responses import FileResponse
-# pyrefly: ignore [missing-import]
 from fastapi.middleware.cors import CORSMiddleware
 import openpyxl
 from openpyxl.styles import PatternFill, Font
-import pandas as pd  # <-- NUEVO: Para leer cualquier formato
+import pandas as pd
 
-app = FastAPI(title="API Analizador de Excel - LuciRMe AI")
+# ==========================================
+# 1. IMPORTACIÓN DEL ROUTER DE CONCILIACIÓN
+# ==========================================
+# Intenta importar desde la misma carpeta, si no, desde la carpeta 'routers'
+try:
+    from conciliacion import router as conciliacion_router
+except ImportError:
+    from routers.conciliacion import router as conciliacion_router
 
+# ==========================================
+# 2. INICIALIZACIÓN DE LA APLICACIÓN
+# ==========================================
+app = FastAPI(title="API Analizador y Conciliador - LuciRMe AI")
+
+# Configurar CORS para permitir peticiones desde tu frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # En producción, cambia a ["https://lucirme.com"]
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# --- FUNCIONES AUXILIARES (Sin cambios, siguen funcionando perfecto) ---
+# Incluir el router de conciliación (endpoints: /conciliar)
+app.include_router(conciliacion_router)
+
+# ==========================================
+# 3. FUNCIONES AUXILIARES (Analizador de Mora)
+# ==========================================
 
 def normalizar_texto(texto):
     if not texto: return ""
@@ -94,7 +103,9 @@ def encontrar_mejor_hoja_y_cabecera(wb_orig):
                 mejor_ws, mejor_fila_cabecera, mejor_mapeo = ws, r, mapeo_actual
     return mejor_ws, mejor_fila_cabecera, mejor_mapeo, max_coincidencias
 
-# --- LÓGICA PRINCIPAL (Sin cambios, sigue pintando y generando las 2 hojas) ---
+# ==========================================
+# 4. LÓGICA PRINCIPAL (Analizador de Mora)
+# ==========================================
 
 def procesar_excel(ruta_archivo, ruta_salida):
     wb_orig = openpyxl.load_workbook(ruta_archivo, data_only=True)
@@ -110,6 +121,7 @@ def procesar_excel(ruta_archivo, ruta_salida):
     max_col_orig = ws_orig.max_column
     col_inconsistencia = max_col_orig + 1
 
+    # Copiar datos originales
     for r in range(1, ws_orig.max_row + 1):
         for c in range(1, max_col_orig + 1):
             ws_resultado.cell(row=r, column=c, value=ws_orig.cell(row=r, column=c).value)
@@ -140,6 +152,7 @@ def procesar_excel(ruta_archivo, ruta_salida):
         errores_fila = []
         row_priority = 0
 
+        # Regla Roja: Edad de mora != Cuotas en mora
         if idx_edad and idx_cuotas:
             val_edad = ws_orig.cell(row=r, column=idx_edad).value
             val_cuotas = ws_orig.cell(row=r, column=idx_cuotas).value
@@ -157,6 +170,7 @@ def procesar_excel(ruta_archivo, ruta_salida):
                     errores_fila.append("Edad o Cuotas de mora no son numéricos")
                     if row_priority < 3: row_priority = 3
 
+        # Regla Amarilla: Fecha de corte < Fecha de inicio
         if idx_f_ini and idx_f_cor:
             val_f_ini = ws_orig.cell(row=r, column=idx_f_ini).value
             val_f_cor = ws_orig.cell(row=r, column=idx_f_cor).value
@@ -192,6 +206,7 @@ def procesar_excel(ruta_archivo, ruta_salida):
         else:
             ws_resultado.cell(row=r, column=col_inconsistencia, value="Sin novedades")
 
+    # Ajustar anchos de columna
     for ws in [ws_resultado, ws_resumen]:
         for col in ws.columns:
             max_length = 0
@@ -208,7 +223,9 @@ def procesar_excel(ruta_archivo, ruta_salida):
     wb_nuevo.save(ruta_salida)
     return ruta_salida
 
-# --- ENDPOINT DE LA API (ACTUALIZADO PARA SOPORTAR CSV, XLS, XLSX) ---
+# ==========================================
+# 5. ENDPOINTS DE LA API
+# ==========================================
 
 @app.post("/procesar-excel")
 async def procesar_archivo(file: UploadFile = File(...)):
@@ -250,5 +267,8 @@ async def procesar_archivo(file: UploadFile = File(...)):
         # 4. Limpieza de archivos temporales
         if os.path.exists(temp_converted_path):
             os.remove(temp_converted_path)
-        # Nota: El output_path se mantiene para que FastAPI lo sirva, 
-        # el sistema operativo o un cron job de limpieza lo borrará después.
+
+# Endpoint de prueba para verificar que el servidor está vivo
+@app.get("/")
+def read_root():
+    return {"status": "ok", "message": "API de LuciRMe AI funcionando correctamente"}
