@@ -2,16 +2,14 @@ import os
 import uuid
 import shutil
 import pandas as pd
-# pyrefly: ignore [missing-import]
 from fastapi import APIRouter, File, UploadFile, HTTPException
-# pyrefly: ignore [missing-import]
 from fastapi.responses import FileResponse
 from openpyxl import Workbook
-from openpyxl.styles import PatternFill, Font, Alignment, numbers
+from openpyxl.styles import PatternFill, Font, Alignment
 
 router = APIRouter()
 
-# Colores para la conciliación
+# Colores
 FILL_VERDE = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
 FILL_AMARILLO = PatternFill(start_color="FFEB9C", end_color="FFEB9C", fill_type="solid")
 FILL_NARANJA = PatternFill(start_color="FCD5B4", end_color="FCD5B4", fill_type="solid")
@@ -23,260 +21,180 @@ FONT_HEADER = Font(color="FFFFFF", bold=True, size=11)
 UMBRAL_COINCIDE = 1000
 UMBRAL_DIFERENCIA_MENOR = 100000
 
-
 def limpiar_numero(valor):
-    """Convierte valores a float, manejando strings con comas o símbolos."""
-    if pd.isna(valor) or valor is None:
-        return 0.0
-    if isinstance(valor, (int, float)):
-        return float(valor)
+    if pd.isna(valor) or valor is None: return 0.0
+    if isinstance(valor, (int, float)): return float(valor)
     try:
         return float(str(valor).replace(",", "").replace("$", "").strip())
     except (ValueError, TypeError):
         return 0.0
 
-
 def limpiar_nit(valor):
-    """Limpia el NIT quitando puntos, guiones y espacios."""
-    if pd.isna(valor) or valor is None:
-        return ""
+    if pd.isna(valor) or valor is None: return ""
     return str(valor).replace(".", "").replace("-", "").replace(" ", "").strip()
 
+def buscar_columna(df, palabras_clave):
+    """Busca una columna que contenga alguna de las palabras clave, ignorando tildes y mayúsculas."""
+    columnas_norm = {str(c).strip().lower().replace("á", "a").replace("é", "e").replace("í", "i").replace("ó", "o").replace("ú", "u"): c for c in df.columns}
+    for key, original_name in columnas_norm.items():
+        for palabra in palabras_clave:
+            if palabra in key:
+                return original_name
+    return None
 
 def leer_facturas_dian(ruta_archivo: str) -> pd.DataFrame:
-    """Lee y limpia el archivo de facturas DIAN."""
-    df = pd.read_excel(ruta_archivo, engine="openpyxl")
+    df = pd.read_excel(ruta_archivo, engine='openpyxl')
     
-    # Filtrar solo documentos relevantes (excluir "Application response")
-    tipos_validos = [
-        "Factura electrónica",
-        "Nota de crédito electrónica",
-        "Documento equivalente POS",
-        "Factura electrónica de contingencia"
-    ]
-    df = df[df["Tipo de documento"].isin(tipos_validos)].copy()
+    # Buscar columnas dinámicamente
+    col_tipo = buscar_columna(df, ["tipo de documento", "tipo documento"])
+    col_nit = buscar_columna(df, ["nit emisor", "nit", "emisor"])
+    col_nombre = buscar_columna(df, ["nombre emisor", "nombre", "emisor"])
+    col_total = buscar_columna(df, ["total"])
     
-    # Limpiar NIT Emisor
-    df["NIT Emisor Limpio"] = df["NIT Emisor"].apply(limpiar_nit)
-    df["Total Limpio"] = df["Total"].apply(limpiar_numero)
-    
-    return df
+    if not col_nit or not col_total:
+        raise ValueError("No se encontraron las columnas 'NIT Emisor' o 'Total' en el archivo de facturas.")
 
+    # Filtrar si existe la columna de tipo
+    if col_tipo:
+        tipos_validos = ["factura electronica", "nota de credito electronica", "documento equivalente pos", "factura electronica de contingencia"]
+        df_filtrado = df[df[col_tipo].astype(str).str.lower().str.contains("|".join(tipos_validos), na=False)].copy()
+    else:
+        df_filtrado = df.copy()
+
+    df_limpio = pd.DataFrame()
+    df_limpio["NIT"] = df_filtrado[col_nit].apply(limpiar_nit)
+    df_limpio["Nombre"] = df_filtrado[col_nombre] if col_nombre else "Desconocido"
+    df_limpio["Total"] = df_filtrado[col_total].apply(limpiar_numero)
+    
+    return df_limpio
 
 def leer_movimientos_contables(ruta_archivo: str) -> pd.DataFrame:
-    """Lee y limpia el archivo de movimientos contables."""
-    df = pd.read_excel(ruta_archivo, engine="openpyxl")
+    df = pd.read_excel(ruta_archivo, engine='openpyxl')
     
-    # Limpiar Identificación y valores
-    df["Identificacion Limpia"] = df["Identificación"].apply(limpiar_nit)
-    df["Debito Limpio"] = df["Débito"].apply(limpiar_numero)
-    df["Credito Limpio"] = df["Crédito"].apply(limpiar_numero)
+    # Buscar columnas dinámicamente
+    col_id = buscar_columna(df, ["identificacion", "nit", "cedula", "id"])
+    col_nombre = buscar_columna(df, ["nombre tercero", "nombre", "tercero"])
+    col_debito = buscar_columna(df, ["debito", "debe"])
+    col_credito = buscar_columna(df, ["credito", "haber"])
     
-    return df
+    if not col_id:
+        raise ValueError(f"No se encontró la columna de Identificación/NIT. Columnas encontradas: {list(df.columns)}")
+    if not col_debito:
+        raise ValueError("No se encontró la columna de Débito.")
+    if not col_credito:
+        raise ValueError("No se encontró la columna de Crédito.")
 
+    df_limpio = pd.DataFrame()
+    df_limpio["NIT"] = df[col_id].apply(limpiar_nit)
+    df_limpio["Nombre"] = df[col_nombre] if col_nombre else "Desconocido"
+    df_limpio["Debito"] = df[col_debito].apply(limpiar_numero)
+    df_limpio["Credito"] = df[col_credito].apply(limpiar_numero)
+    
+    return df_limpio
 
 def conciliar_por_tercero(df_facturas: pd.DataFrame, df_movimientos: pd.DataFrame) -> pd.DataFrame:
-    """Agrupa y concilia por tercero."""
-    # Agrupar facturas por NIT Emisor
-    facturas_agg = df_facturas.groupby("NIT Emisor Limpio").agg(
-        Nombre_Tercero=("Nombre Emisor", "first"),
-        Total_Facturas=("Total Limpio", "sum")
+    # Agrupar facturas
+    facturas_agg = df_facturas.groupby("NIT").agg(
+        Nombre_Tercero=("Nombre", "first"),
+        Total_Facturas=("Total", "sum")
     ).reset_index()
-    facturas_agg.rename(columns={"NIT Emisor Limpio": "NIT"}, inplace=True)
     
-    # Agrupar movimientos por Identificación
-    movimientos_agg = df_movimientos.groupby("Identificacion Limpia").agg(
-        Nombre_Tercero_Cont=("Nombre tercero", "first"),
-        Total_Debito=("Debito Limpio", "sum"),
-        Total_Credito=("Credito Limpio", "sum")
+    # Agrupar movimientos
+    movimientos_agg = df_movimientos.groupby("NIT").agg(
+        Nombre_Tercero_Cont=("Nombre", "first"),
+        Total_Debito=("Debito", "sum"),
+        Total_Credito=("Credito", "sum")
     ).reset_index()
-    movimientos_agg.rename(columns={"Identificacion Limpia": "NIT"}, inplace=True)
     movimientos_agg["Neto_Contable"] = movimientos_agg["Total_Debito"] - movimientos_agg["Total_Credito"]
     
     # Full outer join
     conciliacion = pd.merge(facturas_agg, movimientos_agg, on="NIT", how="outer", suffixes=("_Fac", "_Cont"))
-    
-    # Unificar nombre: preferir el de facturación, si no existe usar el contable
-    conciliacion["Nombre"] = conciliacion["Nombre_Tercero_Fac"].fillna(conciliacion["Nombre_Tercero_Cont"])
+    conciliacion["Nombre"] = conciliacion["Nombre_Tercero"].fillna(conciliacion["Nombre_Tercero_Cont"])
     
     # Llenar NaN con 0
-    conciliacion["Total_Facturas"] = conciliacion["Total_Facturas"].fillna(0)
-    conciliacion["Total_Debito"] = conciliacion["Total_Debito"].fillna(0)
-    conciliacion["Total_Credito"] = conciliacion["Total_Credito"].fillna(0)
-    conciliacion["Neto_Contable"] = conciliacion["Neto_Contable"].fillna(0)
+    for col in ["Total_Facturas", "Total_Debito", "Total_Credito", "Neto_Contable"]:
+        conciliacion[col] = conciliacion[col].fillna(0.0)
     
-    # Calcular diferencia absoluta
     conciliacion["Diferencia"] = (conciliacion["Total_Facturas"] - conciliacion["Neto_Contable"]).abs()
     
-    # Clasificar estado
     def clasificar(row):
-        if row["Total_Facturas"] == 0 and row["Neto_Contable"] != 0:
-            return "Solo en Contabilidad"
-        if row["Total_Facturas"] > 0 and row["Neto_Contable"] == 0:
-            return "Solo en Facturación"
-        if row["Diferencia"] < UMBRAL_COINCIDE:
-            return "Coincide"
-        if row["Diferencia"] < UMBRAL_DIFERENCIA_MENOR:
-            return "Diferencia Menor"
+        if row["Total_Facturas"] == 0 and row["Neto_Contable"] != 0: return "Solo en Contabilidad"
+        if row["Total_Facturas"] > 0 and row["Neto_Contable"] == 0: return "Solo en Facturación"
+        if row["Diferencia"] < UMBRAL_COINCIDE: return "Coincide"
+        if row["Diferencia"] < UMBRAL_DIFERENCIA_MENOR: return "Diferencia Menor"
         return "Diferencia"
     
     conciliacion["Estado"] = conciliacion.apply(clasificar, axis=1)
     
-    # Ordenar: primero los que tienen problemas, luego los que coinciden
-    orden_estado = {"Diferencia": 0, "Solo en Facturación": 1, "Solo en Contabilidad": 2, 
-                    "Diferencia Menor": 3, "Coincide": 4}
+    orden_estado = {"Diferencia": 0, "Solo en Facturación": 1, "Solo en Contabilidad": 2, "Diferencia Menor": 3, "Coincide": 4}
     conciliacion["orden"] = conciliacion["Estado"].map(orden_estado)
     conciliacion = conciliacion.sort_values(["orden", "Diferencia"], ascending=[True, False])
     
-    # Seleccionar columnas finales
-    resultado = conciliacion[[
-        "NIT", "Nombre", "Total_Facturas", "Total_Debito", "Total_Credito", 
-        "Neto_Contable", "Diferencia", "Estado"
-    ]].copy()
-    
-    return resultado
+    return conciliacion[["NIT", "Nombre", "Total_Facturas", "Total_Debito", "Total_Credito", "Neto_Contable", "Diferencia", "Estado"]].copy()
 
-
-def escribir_excel_conciliacion(ruta_salida: str, df_conciliacion: pd.DataFrame, 
-                                 df_facturas: pd.DataFrame, df_movimientos: pd.DataFrame):
-    """Escribe el Excel final con 3 hojas y colores."""
+def escribir_excel_conciliacion(ruta_salida: str, df_conciliacion: pd.DataFrame, df_facturas: pd.DataFrame, df_movimientos: pd.DataFrame):
     wb = Workbook()
     
-    # ===== HOJA 1: CONCILIACIÓN POR TERCERO =====
+    # HOJA 1: CONCILIACIÓN
     ws1 = wb.active
     ws1.title = "Conciliación por Tercero"
+    cols1 = ["Cédula / NIT", "Nombre de Tercero", "Total Facturas Electrónicas", "Total Débito Contable", "Total Crédito Contable", "Neto Contable (Deb - Cred)", "Estado de Conciliación", "Diferencia Mínima Estimada"]
+    ws1.append(cols1)
+    for c in range(1, len(cols1) + 1):
+        cell = ws1.cell(row=1, column=c)
+        cell.fill, cell.font, cell.alignment = FILL_HEADER, FONT_HEADER, Alignment(horizontal="center", vertical="center")
     
-    columnas_conciliacion = [
-        "NIT", "Nombre Tercero", "Total Facturas DIAN", 
-        "Total Débito Contable", "Total Crédito Contable", 
-        "Neto Contable (Déb - Créd)", "Diferencia", "Estado"
-    ]
-    ws1.append(columnas_conciliacion)
+    estado_color = {"Coincide": FILL_VERDE, "Diferencia Menor": FILL_AMARILLO, "Diferencia": FILL_NARANJA, "Solo en Facturación": FILL_ROJO, "Solo en Contabilidad": FILL_AZUL}
     
-    # Formato del header
-    for col_idx, _ in enumerate(columnas_conciliacion, start=1):
-        cell = ws1.cell(row=1, column=col_idx)
-        cell.fill = FILL_HEADER
-        cell.font = FONT_HEADER
-        cell.alignment = Alignment(horizontal="center", vertical="center")
-    
-    # Mapeo de estado a color
-    estado_color = {
-        "Coincide": FILL_VERDE,
-        "Diferencia Menor": FILL_AMARILLO,
-        "Diferencia": FILL_NARANJA,
-        "Solo en Facturación": FILL_ROJO,
-        "Solo en Contabilidad": FILL_AZUL
-    }
-    
-    # Escribir datos y pintar
-    for row_idx, row in df_conciliacion.iterrows():
-        fila = [
-            row["NIT"],
-            row["Nombre"],
-            row["Total_Facturas"],
-            row["Total_Debito"],
-            row["Total_Credito"],
-            row["Neto_Contable"],
-            row["Diferencia"],
-            row["Estado"]
-        ]
-        ws1.append(fila)
-        excel_row = ws1.max_row
-        
+    for _, row in df_conciliacion.iterrows():
+        ws1.append([row["NIT"], row["Nombre"], row["Total_Facturas"], row["Total_Debito"], row["Total_Credito"], row["Neto_Contable"], row["Estado"], row["Diferencia"]])
+        r = ws1.max_row
         color = estado_color.get(row["Estado"], FILL_VERDE)
-        for col_idx in range(1, len(columnas_conciliacion) + 1):
-            cell = ws1.cell(row=excel_row, column=col_idx)
+        for c in range(1, 9):
+            cell = ws1.cell(row=r, column=c)
             cell.fill = color
-            # Formato numérico para columnas de dinero (3 a 7)
-            if 3 <= col_idx <= 7:
-                cell.number_format = '#,##0.00'
-    
-    # Ajustar anchos
-    ws1.column_dimensions["A"].width = 15  # NIT
-    ws1.column_dimensions["B"].width = 40  # Nombre
-    for col in ["C", "D", "E", "F", "G"]:
-        ws1.column_dimensions[col].width = 20
-    ws1.column_dimensions["H"].width = 25  # Estado
-    
-    # ===== HOJA 2: DETALLE FACTURAS DIAN =====
-    ws2 = wb.create_sheet("Detalle facturas DIAN")
-    columnas_facturas = [
-        "Tipo de documento", "Prefijo", "Folio", "Fecha Emisión",
-        "NIT Emisor", "Nombre Emisor", "NIT Receptor", "Nombre Receptor", "Total", "Estado"
-    ]
-    ws2.append(columnas_facturas)
-    for col_idx, _ in enumerate(columnas_facturas, start=1):
-        cell = ws2.cell(row=1, column=col_idx)
-        cell.fill = FILL_HEADER
-        cell.font = FONT_HEADER
-    
+            if 3 <= c <= 8: cell.number_format = '#,##0.00'
+            
+    for col in ws1.columns:
+        ws1.column_dimensions[col[0].column_letter].width = 25
+
+    # HOJA 2: DETALLE FACTURAS
+    ws2 = wb.create_sheet("Detalle Facturas (DIAN)")
+    cols2 = ["Tipo de documento", "NIT Emisor", "Nombre Emisor", "Total", "Estado"]
+    ws2.append(cols2)
+    for c in range(1, len(cols2) + 1):
+        cell = ws2.cell(row=1, column=c)
+        cell.fill, cell.font = FILL_HEADER, FONT_HEADER
+        
+    col_tipo_orig = buscar_columna(df_facturas, ["tipo de documento"]) or "Tipo de documento"
+    col_nit_orig = buscar_columna(df_facturas, ["nit emisor", "nit"]) or "NIT"
+    col_nom_orig = buscar_columna(df_facturas, ["nombre emisor", "nombre"]) or "Nombre"
+    col_tot_orig = buscar_columna(df_facturas, ["total"]) or "Total"
+    col_est_orig = buscar_columna(df_facturas, ["estado"]) or "Estado"
+
     for _, row in df_facturas.iterrows():
-        fila = [
-            row.get("Tipo de documento", ""),
-            row.get("Prefijo", ""),
-            row.get("Folio", ""),
-            row.get("Fecha Emisión", ""),
-            row.get("NIT Emisor", ""),
-            row.get("Nombre Emisor", ""),
-            row.get("NIT Receptor", ""),
-            row.get("Nombre Receptor", ""),
-            row.get("Total", 0),
-            row.get("Estado", "")
-        ]
-        ws2.append(fila)
-        excel_row = ws2.max_row
-        # Formato numérico en Total
-        ws2.cell(row=excel_row, column=9).number_format = '#,##0.00'
-    
-    ws2.column_dimensions["A"].width = 25
-    ws2.column_dimensions["B"].width = 10
-    ws2.column_dimensions["C"].width = 12
-    ws2.column_dimensions["D"].width = 15
-    ws2.column_dimensions["E"].width = 15
-    ws2.column_dimensions["F"].width = 35
-    ws2.column_dimensions["G"].width = 15
-    ws2.column_dimensions["H"].width = 25
-    ws2.column_dimensions["I"].width = 18
-    ws2.column_dimensions["J"].width = 25
-    
-    # ===== HOJA 3: DETALLE MOVIMIENTOS =====
-    ws3 = wb.create_sheet("Detalle movimientos")
-    columnas_movimientos = [
-        "Cuenta contable", "Identificación", "Nombre tercero",
-        "Comprobante", "Fecha elaboración", "Descripción", "Débito", "Crédito"
-    ]
-    ws3.append(columnas_movimientos)
-    for col_idx, _ in enumerate(columnas_movimientos, start=1):
-        cell = ws3.cell(row=1, column=col_idx)
-        cell.fill = FILL_HEADER
-        cell.font = FONT_HEADER
-    
+        ws2.append([row.get(col_tipo_orig, ""), row.get(col_nit_orig, ""), row.get(col_nom_orig, ""), row.get(col_tot_orig, 0), row.get(col_est_orig, "")])
+        ws2.cell(row=ws2.max_row, column=4).number_format = '#,##0.00'
+
+    # HOJA 3: DETALLE MOVIMIENTOS
+    ws3 = wb.create_sheet("Detalle Movimientos (Conta)")
+    cols3 = ["Cuenta contable", "Identificación", "Nombre tercero", "Débito", "Crédito"]
+    ws3.append(cols3)
+    for c in range(1, len(cols3) + 1):
+        cell = ws3.cell(row=1, column=c)
+        cell.fill, cell.font = FILL_HEADER, FONT_HEADER
+        
+    col_cta_orig = buscar_columna(df_movimientos, ["cuenta contable", "cuenta"]) or "Cuenta contable"
+    col_id_orig = buscar_columna(df_movimientos, ["identificacion", "nit", "cedula"]) or "NIT"
+    col_nom_mov_orig = buscar_columna(df_movimientos, ["nombre tercero", "nombre"]) or "Nombre"
+    col_deb_orig = buscar_columna(df_movimientos, ["debito", "debe"]) or "Debito"
+    col_cre_orig = buscar_columna(df_movimientos, ["credito", "haber"]) or "Credito"
+
     for _, row in df_movimientos.iterrows():
-        fila = [
-            row.get("Cuenta contable", ""),
-            row.get("Identificación", ""),
-            row.get("Nombre tercero", ""),
-            row.get("Comprobante", ""),
-            row.get("Fecha elaboración", ""),
-            row.get("Descripción", ""),
-            row.get("Débito", 0),
-            row.get("Crédito", 0)
-        ]
-        ws3.append(fila)
-        excel_row = ws3.max_row
-        ws3.cell(row=excel_row, column=7).number_format = '#,##0.00'
-        ws3.cell(row=excel_row, column=8).number_format = '#,##0.00'
-    
-    ws3.column_dimensions["A"].width = 25
-    ws3.column_dimensions["B"].width = 15
-    ws3.column_dimensions["C"].width = 35
-    ws3.column_dimensions["D"].width = 15
-    ws3.column_dimensions["E"].width = 15
-    ws3.column_dimensions["F"].width = 30
-    ws3.column_dimensions["G"].width = 18
-    ws3.column_dimensions["H"].width = 18
-    
+        ws3.append([row.get(col_cta_orig, ""), row.get(col_id_orig, ""), row.get(col_nom_mov_orig, ""), row.get(col_deb_orig, 0), row.get(col_cre_orig, 0)])
+        ws3.cell(row=ws3.max_row, column=4).number_format = '#,##0.00'
+        ws3.cell(row=ws3.max_row, column=5).number_format = '#,##0.00'
+
     wb.save(ruta_salida)
 
 @router.post("/conciliar")
@@ -284,45 +202,29 @@ async def conciliar_archivos(
     file_dian: UploadFile = File(...),
     file_conta: UploadFile = File(...)
 ):
-    """Endpoint para conciliar facturas DIAN con movimientos contables."""
     os.makedirs("temp", exist_ok=True)
-    
-    # Guardar archivos temporalmente usando los nombres del frontend
     ruta_facturas = f"temp/{uuid.uuid4()}_dian_{file_dian.filename}"
     ruta_movimientos = f"temp/{uuid.uuid4()}_conta_{file_conta.filename}"
     ruta_salida = f"temp/Conciliacion_{uuid.uuid4()}.xlsx"
     
     try:
-        with open(ruta_facturas, "wb") as f:
-            shutil.copyfileobj(file_dian.file, f)
-        with open(ruta_movimientos, "wb") as f:
-            shutil.copyfileobj(file_conta.file, f)
+        with open(ruta_facturas, "wb") as f: shutil.copyfileobj(file_dian.file, f)
+        with open(ruta_movimientos, "wb") as f: shutil.copyfileobj(file_conta.file, f)
         
-        # Procesar
         df_facturas = leer_facturas_dian(ruta_facturas)
         df_movimientos = leer_movimientos_contables(ruta_movimientos)
         
-        if df_facturas.empty:
-            raise HTTPException(status_code=400, detail="El archivo DIAN no contiene datos de facturas válidos.")
-        if df_movimientos.empty:
-            raise HTTPException(status_code=400, detail="El archivo de contabilidad no contiene datos válidos.")
+        if df_facturas.empty: raise HTTPException(status_code=400, detail="El archivo DIAN no contiene facturas válidas.")
+        if df_movimientos.empty: raise HTTPException(status_code=400, detail="El archivo contable está vacío.")
         
         df_conciliacion = conciliar_por_tercero(df_facturas, df_movimientos)
         escribir_excel_conciliacion(ruta_salida, df_conciliacion, df_facturas, df_movimientos)
         
-        return FileResponse(
-            ruta_salida,
-            media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            filename="Conciliacion_DIAN_vs_Contabilidad.xlsx"
-        )
-    except HTTPException:
-        raise  # Re-lanzar excepciones HTTP tal cual
+        return FileResponse(ruta_salida, media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", filename="Reporte_Conciliacion.xlsx")
+    except ValueError as ve:
+        raise HTTPException(status_code=400, detail=str(ve))
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error inesperado procesando archivos: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error inesperado: {str(e)}")
     finally:
-        # Limpiar archivos de entrada
         for ruta in [ruta_facturas, ruta_movimientos]:
-            if os.path.exists(ruta):
-                os.remove(ruta)
-        # Opcional: limpiar el archivo de salida después de un tiempo, 
-        # pero FastAPI lo necesita para enviarlo, así que lo dejamos.
+            if os.path.exists(ruta): os.remove(ruta)
