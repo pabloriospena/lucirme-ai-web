@@ -1,0 +1,124 @@
+---
+// src/pages/procesar.astro
+---
+
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <title>Procesador de Excel</title>
+    </head>
+    <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+        <div
+            class="bg-white p-8 rounded-2xl shadow-lg max-w-md w-full text-center space-y-6"
+        >
+            <h1 class="text-2xl font-bold text-gray-800">
+                Cargar y Procesar Excel
+            </h1>
+            <p class="text-sm text-gray-500">
+                Selecciona el archivo Excel generado para analizar las
+                inconsistencias.
+            </p>
+
+            <div
+                class="border-2 border-dashed border-gray-300 p-6 rounded-xl bg-gray-50 hover:bg-gray-100 transition"
+            >
+                <input
+                    type="file"
+                    id="excelInput"
+                    accept=".xlsx, .xls"
+                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer"
+                />
+            </div>
+
+            <button
+                id="btnProcesar"
+                class="w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-xl hover:bg-blue-700 transition shadow-md disabled:opacity-50"
+            >
+                Procesar y Descargar
+            </button>
+
+            <p
+                id="status"
+                class="text-sm font-medium text-gray-600 min-h-[20px]"
+            >
+            </p>
+        </div>
+
+        <script>
+            const BACKEND_URL = "https://mi-backend-excel.onrender.com/";
+            const btn = document.getElementById(
+                "btnProcesar",
+            ) as HTMLButtonElement;
+            const fileInput = document.getElementById(
+                "excelInput",
+            ) as HTMLInputElement;
+            const status = document.getElementById(
+                "status",
+            ) as HTMLParagraphElement;
+
+            btn?.addEventListener("click", async () => {
+                if (!fileInput.files || fileInput.files.length === 0) {
+                    alert("Por favor selecciona un archivo Excel.");
+                    return;
+                }
+
+                const file = fileInput.files[0];
+                const formData = new FormData();
+                formData.append("file", file);
+
+                try {
+                    btn.disabled = true;
+                    if (status) {
+                        status.className = "text-sm font-medium text-blue-600";
+                        status.innerText =
+                            "Procesando archivo... (si el servidor está frío puede tardar unos segundos)";
+                    }
+
+                    const response = await fetch(BACKEND_URL, {
+                        method: "POST",
+                        body: formData,
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response
+                            .json()
+                            .catch(() => null);
+                        throw new Error(
+                            errorData?.detail ||
+                                "Error al procesar el archivo en el servidor.",
+                        );
+                    }
+
+                    // Recibir el archivo en binario (blob)
+                    const blob = await response.blob();
+                    const downloadUrl = window.URL.createObjectURL(blob);
+
+                    // Crear un enlace temporal para forzar la descarga en el navegador
+                    const a = document.createElement("a");
+                    a.href = downloadUrl;
+                    a.download = "Resultado_Revision_Simplificado.xlsx";
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    window.URL.revokeObjectURL(downloadUrl);
+
+                    if (status) {
+                        status.className = "text-sm font-medium text-green-600";
+                        status.innerText =
+                            "¡Archivo procesado y descargado con éxito!";
+                    }
+                } catch (err: any) {
+                    console.error(err);
+                    if (status) {
+                        status.className = "text-sm font-medium text-red-600";
+                        status.innerText =
+                            err.message ||
+                            "Ocurrió un error al procesar el archivo.";
+                    }
+                } finally {
+                    btn.disabled = false;
+                }
+            });
+        </script>
+    </body>
+</html>

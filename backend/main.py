@@ -6,8 +6,18 @@ import openpyxl
 from openpyxl.styles import PatternFill
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.responses import StreamingResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+# Permitir peticiones desde tu frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # O la URL de tu frontend en Vercel
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # ----------------------------------------------------
 # FUNCIONES DE MANTENIMIENTO DE LÓGICA (Tus funciones)
