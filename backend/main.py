@@ -4,8 +4,11 @@ import io
 from datetime import datetime
 import openpyxl
 from openpyxl.styles import PatternFill
+# pyrefly: ignore [missing-import]
 from fastapi import FastAPI, UploadFile, File, HTTPException
+# pyrefly: ignore [missing-import]
 from fastapi.responses import StreamingResponse
+# pyrefly: ignore [missing-import]
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
