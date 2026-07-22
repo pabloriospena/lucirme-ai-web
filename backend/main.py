@@ -17,7 +17,6 @@ app = FastAPI(
     version="2.0"
 )
 
-# Configuración de CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -32,7 +31,7 @@ def home():
 
 
 # -------------------------------------------------------------------
-# RUTA 1: Validador CIFIN (Ya funcionando)
+# RUTA 1: Validador CIFIN
 # -------------------------------------------------------------------
 @app.post("/procesar-excel")
 @app.post("/procesar-excel/")
@@ -58,7 +57,7 @@ async def procesar_archivo_unico(file: UploadFile = File(...)):
 
 
 # -------------------------------------------------------------------
-# RUTA 2: Conciliador
+# RUTA 2: Conciliador DIAN vs Contabilidad
 # -------------------------------------------------------------------
 @app.post("/api/conciliacion")
 @app.post("/api/conciliacion/")
@@ -72,29 +71,41 @@ async def conciliar_archivos(
         df_dian = pd.read_excel(file_dian.file)
         df_conta = pd.read_excel(file_conta.file)
 
-        # Limpiar espacios en los nombres de las columnas
+        # Limpiar espacios en blanco al inicio/final de las columnas
         df_dian.columns = df_dian.columns.str.strip()
         df_conta.columns = df_conta.columns.str.strip()
 
-        # Nombres posibles para la columna llave de cruce
-        posibles_llaves = ["ID_TRANSACCION", "id_transaccion", "Id_Transaccion", "ID", "FACTURA", "Documento", "NIT"]
+        # Prioridades de columnas identificadoras/llaves
+        posibles_llaves_dian = [
+            "NIT Emisor", "NIT Receptor", "Folio", "CUFE/CUDE", 
+            "ID_TRANSACCION", "id_transaccion", "FACTURA", "NIT"
+        ]
+        posibles_llaves_conta = [
+            "NIT Emisor", "NIT", "Nit", "ID_TRANSACCION", "id_transaccion", 
+            "DOCUMENTO", "Documento", "FACTURA", "Factura", "Folio"
+        ]
 
-        col_dian = next((c for c in posibles_llaves if c in df_dian.columns), None)
-        col_conta = next((c for c in posibles_llaves if c in df_conta.columns), None)
+        # Detectar la primera coincidencia
+        col_dian = next((c for c in posibles_llaves_dian if c in df_dian.columns), None)
+        col_conta = next((c for c in posibles_llaves_conta if c in df_conta.columns), None)
 
         if not col_dian:
             raise HTTPException(
                 status_code=400, 
-                detail=f"El archivo de Facturación/DIAN debe tener una columna llamada 'ID_TRANSACCION'. Columnas encontradas: {list(df_dian.columns)}"
+                detail=f"No se encontró una columna clave en la DIAN. Columnas disponibles: {list(df_dian.columns)}"
             )
 
         if not col_conta:
             raise HTTPException(
                 status_code=400, 
-                detail=f"El archivo de Contabilidad debe tener una columna llamada 'ID_TRANSACCION'. Columnas encontradas: {list(df_conta.columns)}"
+                detail=f"No se encontró una columna clave en Contabilidad. Columnas disponibles: {list(df_conta.columns)}"
             )
 
-        # Realizar la fusión / cruce
+        # Convertir ambas columnas llave a string/texto para evitar fallos de tipo (int vs str)
+        df_dian[col_dian] = df_dian[col_dian].astype(str).str.strip()
+        df_conta[col_conta] = df_conta[col_conta].astype(str).str.strip()
+
+        # Realizar el cruce (merge)
         merged = pd.merge(
             df_dian, 
             df_conta, 
@@ -111,11 +122,18 @@ async def conciliar_archivos(
             elif row['_merge'] == 'right_only':
                 return 'Solo en Contabilidad'
             else:
-                # Buscar columnas de valor para comparar
-                valor_dian = row.get('VALOR_DIAN', row.get('VALOR', 0))
-                valor_conta = row.get('VALOR_CONTA', row.get('VALOR', 0))
-                if pd.notna(valor_dian) and pd.notna(valor_conta) and valor_dian != valor_conta:
-                    return 'Diferencia'
+                # Detectar columnas de valor total
+                valor_dian = row.get('Total', row.get('Total_DIAN', row.get('VALOR_DIAN', 0)))
+                valor_conta = row.get('Total_CONTA', row.get('VALOR_CONTA', row.get('Total', 0)))
+                
+                try:
+                    v_dian = float(valor_dian) if pd.notna(valor_dian) else 0.0
+                    v_conta = float(valor_conta) if pd.notna(valor_conta) else 0.0
+                    if round(v_dian, 2) != round(v_conta, 2):
+                        return 'Diferencia'
+                except (ValueError, TypeError):
+                    pass
+                
                 return 'Conciliado'
 
         merged['Estado_Conciliacion'] = merged.apply(determinar_estado, axis=1)
