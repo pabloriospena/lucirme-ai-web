@@ -11,19 +11,19 @@ from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 import openpyxl
 from openpyxl.styles import PatternFill, Font
+import pandas as pd  # <-- NUEVO: Para leer cualquier formato
 
 app = FastAPI(title="API Analizador de Excel - LuciRMe AI")
 
-# Configuración de CORS para permitir que tu frontend (Astro) se comunique con Render
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # En producción, puedes cambiar "*" por ["https://tu-dominio-astro.com"]
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# --- FUNCIONES AUXILIARES ---
+# --- FUNCIONES AUXILIARES (Sin cambios, siguen funcionando perfecto) ---
 
 def normalizar_texto(texto):
     if not texto: return ""
@@ -87,7 +87,7 @@ def encontrar_mejor_hoja_y_cabecera(wb_orig):
                 mejor_ws, mejor_fila_cabecera, mejor_mapeo = ws, r, mapeo_actual
     return mejor_ws, mejor_fila_cabecera, mejor_mapeo, max_coincidencias
 
-# --- LÓGICA PRINCIPAL ---
+# --- LÓGICA PRINCIPAL (Sin cambios, sigue pintando y generando las 2 hojas) ---
 
 def procesar_excel(ruta_archivo, ruta_salida):
     wb_orig = openpyxl.load_workbook(ruta_archivo, data_only=True)
@@ -103,16 +103,13 @@ def procesar_excel(ruta_archivo, ruta_salida):
     max_col_orig = ws_orig.max_column
     col_inconsistencia = max_col_orig + 1
 
-    # Copiar datos originales
     for r in range(1, ws_orig.max_row + 1):
         for c in range(1, max_col_orig + 1):
             ws_resultado.cell(row=r, column=c, value=ws_orig.cell(row=r, column=c).value)
 
-    # Cabecera de inconsistencia
     ws_resultado.cell(row=fila_cabecera, column=col_inconsistencia, value="Inconsistencia Detectada")
     ws_resultado.cell(row=fila_cabecera, column=col_inconsistencia).font = Font(bold=True)
 
-    # Hoja Resumen
     ws_resumen = wb_nuevo.create_sheet(title="Resumen")
     for c in range(1, col_inconsistencia + 1):
         val = ws_resultado.cell(row=fila_cabecera, column=c).value
@@ -136,7 +133,6 @@ def procesar_excel(ruta_archivo, ruta_salida):
         errores_fila = []
         row_priority = 0
 
-        # Regla Roja
         if idx_edad and idx_cuotas:
             val_edad = ws_orig.cell(row=r, column=idx_edad).value
             val_cuotas = ws_orig.cell(row=r, column=idx_cuotas).value
@@ -154,7 +150,6 @@ def procesar_excel(ruta_archivo, ruta_salida):
                     errores_fila.append("Edad o Cuotas de mora no son numéricos")
                     if row_priority < 3: row_priority = 3
 
-        # Regla Amarilla
         if idx_f_ini and idx_f_cor:
             val_f_ini = ws_orig.cell(row=r, column=idx_f_ini).value
             val_f_cor = ws_orig.cell(row=r, column=idx_f_cor).value
@@ -168,7 +163,6 @@ def procesar_excel(ruta_archivo, ruta_salida):
                 errores_fila.append("Formato de fecha inválido")
                 if row_priority < 1: row_priority = 1
 
-        # Aplicar formato y copiar a Resumen
         if errores_fila:
             texto_error = " | ".join(errores_fila)
             ws_resultado.cell(row=r, column=col_inconsistencia, value=texto_error)
@@ -191,7 +185,6 @@ def procesar_excel(ruta_archivo, ruta_salida):
         else:
             ws_resultado.cell(row=r, column=col_inconsistencia, value="Sin novedades")
 
-    # Ajustar anchos de columna
     for ws in [ws_resultado, ws_resumen]:
         for col in ws.columns:
             max_length = 0
@@ -208,28 +201,47 @@ def procesar_excel(ruta_archivo, ruta_salida):
     wb_nuevo.save(ruta_salida)
     return ruta_salida
 
-# --- ENDPOINT DE LA API ---
+# --- ENDPOINT DE LA API (ACTUALIZADO PARA SOPORTAR CSV, XLS, XLSX) ---
 
 @app.post("/procesar-excel")
 async def procesar_archivo(file: UploadFile = File(...)):
     os.makedirs("temp", exist_ok=True)
     
-    input_path = f"temp/{uuid.uuid4()}_{file.filename}"
-    output_path = f"temp/Resultado_{file.filename}"
+    file_ext = file.filename.split('.')[-1].lower()
+    temp_converted_path = f"temp/convertido_{uuid.uuid4()}.xlsx"
+    output_path = f"temp/Resultado_{file.filename.rsplit('.', 1)[0]}.xlsx"
     
-    with open(input_path, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
-        
     try:
-        procesar_excel(input_path, output_path)
+        # 1. Leer el archivo según su extensión usando Pandas
+        if file_ext == 'csv':
+            try:
+                df = pd.read_csv(file.file, encoding='utf-8')
+            except UnicodeDecodeError:
+                file.file.seek(0) # Resetear puntero del archivo
+                df = pd.read_csv(file.file, encoding='latin-1') # Fallback común en Latam
+        elif file_ext == 'xls':
+            df = pd.read_excel(file.file, engine='xlrd')
+        elif file_ext == 'xlsx':
+            df = pd.read_excel(file.file, engine='openpyxl')
+        else:
+            raise HTTPException(status_code=400, detail="Formato no soportado. Use .csv, .xls o .xlsx")
+        
+        # 2. Guardar como .xlsx temporal para que openpyxl pueda procesarlo y estilizarlo
+        df.to_excel(temp_converted_path, index=False, engine='openpyxl')
+        
+        # 3. Ejecutar la lógica de negocio sobre el archivo convertido
+        procesar_excel(temp_converted_path, output_path)
         
         return FileResponse(
             output_path, 
             media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", 
-            filename=f"Resultado_{file.filename}"
+            filename=f"Resultado_{file.filename.rsplit('.', 1)[0]}.xlsx"
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error procesando el archivo: {str(e)}")
     finally:
-        if os.path.exists(input_path):
-            os.remove(input_path)
+        # 4. Limpieza de archivos temporales
+        if os.path.exists(temp_converted_path):
+            os.remove(temp_converted_path)
+        # Nota: El output_path se mantiene para que FastAPI lo sirva, 
+        # el sistema operativo o un cron job de limpieza lo borrará después.
