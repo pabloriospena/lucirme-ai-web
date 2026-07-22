@@ -32,7 +32,7 @@ def home():
 
 
 # -------------------------------------------------------------------
-# RUTA 1: Validador CIFIN (Acepta todas las variantes de URL posibles)
+# RUTA 1: Validador CIFIN (Ya funcionando)
 # -------------------------------------------------------------------
 @app.post("/procesar-excel")
 @app.post("/procesar-excel/")
@@ -58,7 +58,7 @@ async def procesar_archivo_unico(file: UploadFile = File(...)):
 
 
 # -------------------------------------------------------------------
-# RUTA 2: Conciliador (Acepta con y sin slash)
+# RUTA 2: Conciliador
 # -------------------------------------------------------------------
 @app.post("/api/conciliacion")
 @app.post("/api/conciliacion/")
@@ -72,13 +72,34 @@ async def conciliar_archivos(
         df_dian = pd.read_excel(file_dian.file)
         df_conta = pd.read_excel(file_conta.file)
 
+        # Limpiar espacios en los nombres de las columnas
         df_dian.columns = df_dian.columns.str.strip()
         df_conta.columns = df_conta.columns.str.strip()
 
+        # Nombres posibles para la columna llave de cruce
+        posibles_llaves = ["ID_TRANSACCION", "id_transaccion", "Id_Transaccion", "ID", "FACTURA", "Documento", "NIT"]
+
+        col_dian = next((c for c in posibles_llaves if c in df_dian.columns), None)
+        col_conta = next((c for c in posibles_llaves if c in df_conta.columns), None)
+
+        if not col_dian:
+            raise HTTPException(
+                status_code=400, 
+                detail=f"El archivo de Facturación/DIAN debe tener una columna llamada 'ID_TRANSACCION'. Columnas encontradas: {list(df_dian.columns)}"
+            )
+
+        if not col_conta:
+            raise HTTPException(
+                status_code=400, 
+                detail=f"El archivo de Contabilidad debe tener una columna llamada 'ID_TRANSACCION'. Columnas encontradas: {list(df_conta.columns)}"
+            )
+
+        # Realizar la fusión / cruce
         merged = pd.merge(
             df_dian, 
             df_conta, 
-            on="ID_TRANSACCION", 
+            left_on=col_dian,
+            right_on=col_conta,
             how="outer", 
             suffixes=('_DIAN', '_CONTA'), 
             indicator=True
@@ -90,8 +111,9 @@ async def conciliar_archivos(
             elif row['_merge'] == 'right_only':
                 return 'Solo en Contabilidad'
             else:
-                valor_dian = row.get('VALOR_DIAN', 0)
-                valor_conta = row.get('VALOR_CONTA', 0)
+                # Buscar columnas de valor para comparar
+                valor_dian = row.get('VALOR_DIAN', row.get('VALOR', 0))
+                valor_conta = row.get('VALOR_CONTA', row.get('VALOR', 0))
                 if pd.notna(valor_dian) and pd.notna(valor_conta) and valor_dian != valor_conta:
                     return 'Diferencia'
                 return 'Conciliado'
@@ -135,6 +157,8 @@ async def conciliar_archivos(
             media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
 
+    except HTTPException as http_ex:
+        raise http_ex
     except Exception as e:
         raise HTTPException(
             status_code=500, 
