@@ -1,125 +1,320 @@
 ---
-// src/pages/procesar.astro
+// src/pages/soluciones-personalizadas/validador-cifin.astro
+import Layout from "../../layouts/Layout.astro";
 ---
 
-<html lang="es">
-    <head>
-        <meta charset="utf-8" />
-        <title>Procesador de Excel</title>
-    </head>
-    <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
-        <div
-            class="bg-white p-8 rounded-2xl shadow-lg max-w-md w-full text-center space-y-6"
-        >
-            <h1 class="text-2xl font-bold text-gray-800">
-                Cargar y Procesar Excel
-            </h1>
-            <p class="text-sm text-gray-500">
-                Selecciona el archivo Excel generado para analizar las
-                inconsistencias.
-            </p>
-
+<Layout title="Validador CIFIN | LuciRMe AI">
+    <main class="max-w-4xl mx-auto py-12 px-4 space-y-10 print:py-6 print:px-0">
+        <!-- HEADER -->
+        <header class="text-center space-y-3">
             <div
-                class="border-2 border-dashed border-gray-300 p-6 rounded-xl bg-gray-50 hover:bg-gray-100 transition"
+                class="inline-block bg-teal-50 border border-teal-200 text-teal-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"
             >
+                Herramienta
+            </div>
+            <h1
+                class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight"
+            >
+                Validador CIFIN
+            </h1>
+            <p
+                class="text-slate-600 text-sm md:text-base leading-relaxed max-w-2xl mx-auto"
+            >
+                Selecciona el archivo para validar y procesar la información de
+                manera rápida, segura y sin fricción.
+            </p>
+        </header>
+
+        <!-- CARD PRINCIPAL -->
+        <section
+            class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm card max-w-2xl mx-auto"
+        >
+            <!-- Área de Carga -->
+            <div class="mb-6">
+                <label
+                    for="excelInput"
+                    class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-slate-300 rounded-xl bg-slate-50 hover:bg-teal-50 hover:border-teal-400 transition-all duration-200 cursor-pointer group"
+                >
+                    <svg
+                        class="w-8 h-8 text-slate-400 group-hover:text-teal-600 transition-colors mb-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                        ></path>
+                    </svg>
+                    <span
+                        class="text-sm text-slate-600 group-hover:text-teal-700 font-medium"
+                    >
+                        Haz clic o arrastra tu archivo aquí
+                    </span>
+                    <span class="text-xs text-slate-400 mt-1"
+                        >.xlsx, .xls, .csv</span
+                    >
+                </label>
                 <input
                     type="file"
                     id="excelInput"
-                    accept=".xlsx, .xls"
-                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer"
+                    accept=".xlsx, .xls, .csv"
+                    class="hidden"
                 />
             </div>
 
+            <!-- Visualización del Archivo Seleccionado -->
+            <div
+                id="fileInfo"
+                class="hidden flex items-center justify-between bg-teal-50 border border-teal-100 rounded-lg p-3 text-left transition-all mb-6"
+            >
+                <div class="flex items-center space-x-3 overflow-hidden">
+                    <svg
+                        class="w-5 h-5 text-teal-600 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                        ></path>
+                    </svg>
+                    <span
+                        id="fileName"
+                        class="text-sm font-medium text-teal-900 truncate"
+                        >archivo.xlsx</span
+                    >
+                </div>
+                <button
+                    id="clearFile"
+                    class="text-teal-500 hover:text-teal-700 transition-colors p-1"
+                    title="Eliminar archivo"
+                    type="button"
+                >
+                    <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Botón de Acción -->
             <button
                 id="btnProcesar"
-                class="w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-xl hover:bg-blue-700 transition shadow-md disabled:opacity-50"
+                class="w-full bg-slate-900 text-white font-semibold py-3 px-4 rounded-xl hover:bg-slate-800 active:bg-slate-950 transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                type="button"
             >
-                Procesar y Descargar
+                <svg
+                    id="loadingSpinner"
+                    class="hidden animate-spin h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                >
+                    <circle
+                        class="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        stroke-width="4"></circle>
+                    <path
+                        class="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                </svg>
+                <span id="btnText">Procesar y Descargar</span>
             </button>
 
+            <!-- Mensaje de Estado -->
             <p
                 id="status"
-                class="text-sm font-medium text-gray-600 min-h-[20px]"
+                class="text-sm font-medium min-h-[20px] text-center transition-colors duration-300 mt-4"
+                aria-live="polite"
             >
             </p>
-        </div>
+        </section>
 
-        <script>
-            const BACKEND_URL =
-                "https://mi-backend-excel.onrender.com/procesar-excel/";
-            const btn = document.getElementById(
-                "btnProcesar",
-            ) as HTMLButtonElement;
-            const fileInput = document.getElementById(
-                "excelInput",
-            ) as HTMLInputElement;
-            const status = document.getElementById(
-                "status",
-            ) as HTMLParagraphElement;
+        <!-- FOOTER -->
+        <footer class="text-center text-slate-400 text-xs space-y-1">
+            <p>© 2026 Pablo Ríos Peña • LuciRMe AI</p>
+            <p class="font-medium">
+                Herramienta de uso interno. Todos los derechos reservados.
+            </p>
+        </footer>
+    </main>
 
-            btn?.addEventListener("click", async () => {
-                if (!fileInput.files || fileInput.files.length === 0) {
-                    alert("Por favor selecciona un archivo Excel.");
-                    return;
-                }
+    <style is:global>
+        /* Reglas específicas para la impresión limpia */
+        @media print {
+            body {
+                background-color: white !important;
+                color: #0f172a !important;
+            }
+            .card {
+                page-break-inside: avoid;
+                border: 1px solid #e2e8f0 !important;
+                box-shadow: none !important;
+            }
+        }
+    </style>
 
+    <script>
+        // ==========================================
+        // 1. DEFINICIÓN DE TIPOS PARA EVITAR ERRORES DE TS
+        // ==========================================
+        const fileInput = document.getElementById(
+            "excelInput",
+        ) as HTMLInputElement | null;
+        const fileInfo = document.getElementById(
+            "fileInfo",
+        ) as HTMLDivElement | null;
+        const fileName = document.getElementById(
+            "fileName",
+        ) as HTMLSpanElement | null;
+        const clearFileBtn = document.getElementById(
+            "clearFile",
+        ) as HTMLButtonElement | null;
+        const btn = document.getElementById(
+            "btnProcesar",
+        ) as HTMLButtonElement | null;
+        const loadingSpinner = document.getElementById(
+            "loadingSpinner",
+        ) as SVGSVGElement | null;
+        const btnText = document.getElementById(
+            "btnText",
+        ) as HTMLSpanElement | null;
+        const status = document.getElementById(
+            "status",
+        ) as HTMLParagraphElement | null;
+
+        // URL del backend (ajusta si tu endpoint es diferente)
+        const BACKEND_URL =
+            "https://mi-backend-excel.onrender.com/procesar-excel/";
+
+        // ==========================================
+        // 2. LÓGICA DE UX (Mostrar/Ocultar archivo)
+        // ==========================================
+        fileInput?.addEventListener("change", () => {
+            if (fileInput.files && fileInput.files.length > 0) {
                 const file = fileInput.files[0];
-                const formData = new FormData();
-                formData.append("file", file);
+                if (fileName) fileName.innerText = file.name;
+                fileInfo?.classList.remove("hidden");
 
-                try {
-                    btn.disabled = true;
-                    if (status) {
-                        status.className = "text-sm font-medium text-blue-600";
-                        status.innerText =
-                            "Procesando archivo... (si el servidor está frío puede tardar unos segundos)";
-                    }
-
-                    const response = await fetch(BACKEND_URL, {
-                        method: "POST",
-                        body: formData,
-                    });
-
-                    if (!response.ok) {
-                        const errorData = await response
-                            .json()
-                            .catch(() => null);
-                        throw new Error(
-                            errorData?.detail ||
-                                "Error al procesar el archivo en el servidor.",
-                        );
-                    }
-
-                    // Recibir el archivo en binario (blob)
-                    const blob = await response.blob();
-                    const downloadUrl = window.URL.createObjectURL(blob);
-
-                    // Crear un enlace temporal para forzar la descarga en el navegador
-                    const a = document.createElement("a");
-                    a.href = downloadUrl;
-                    a.download = "Resultado_Revision_Simplificado.xlsx";
-                    document.body.appendChild(a);
-                    a.click();
-                    a.remove();
-                    window.URL.revokeObjectURL(downloadUrl);
-
-                    if (status) {
-                        status.className = "text-sm font-medium text-green-600";
-                        status.innerText =
-                            "¡Archivo procesado y descargado con éxito!";
-                    }
-                } catch (err: any) {
-                    console.error(err);
-                    if (status) {
-                        status.className = "text-sm font-medium text-red-600";
-                        status.innerText =
-                            err.message ||
-                            "Ocurrió un error al procesar el archivo.";
-                    }
-                } finally {
-                    btn.disabled = false;
+                // Limpiar estado anterior
+                if (status) {
+                    status.innerText = "";
+                    status.className =
+                        "text-sm font-medium min-h-[20px] text-center transition-colors duration-300 mt-4";
                 }
-            });
-        </script>
-    </body>
-</html>
+            } else {
+                fileInfo?.classList.add("hidden");
+            }
+        });
+
+        clearFileBtn?.addEventListener("click", () => {
+            if (fileInput) {
+                fileInput.value = "";
+                fileInfo?.classList.add("hidden");
+                if (status) {
+                    status.innerText = "";
+                    status.className =
+                        "text-sm font-medium min-h-[20px] text-center transition-colors duration-300 mt-4";
+                }
+            }
+        });
+
+        // ==========================================
+        // 3. LÓGICA DE PROCESAMIENTO (Fetch)
+        // ==========================================
+        btn?.addEventListener("click", async () => {
+            if (!fileInput?.files || fileInput.files.length === 0) {
+                alert("Por favor selecciona un archivo primero.");
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append("file", file);
+
+            try {
+                // Activar estado de carga
+                if (btn) btn.disabled = true;
+                loadingSpinner?.classList.remove("hidden");
+                if (btnText) btnText.innerText = "Procesando...";
+
+                if (status) {
+                    status.className =
+                        "text-sm font-medium text-teal-700 min-h-[20px] text-center transition-colors duration-300 mt-4";
+                    status.innerText =
+                        "Procesando archivo... (si el servidor está frío puede tardar unos segundos)";
+                }
+
+                const response = await fetch(BACKEND_URL, {
+                    method: "POST",
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => null);
+                    throw new Error(
+                        errorData?.detail ||
+                            "Error al procesar el archivo en el servidor.",
+                    );
+                }
+
+                // Recibir el archivo en binario (blob)
+                const blob = await response.blob();
+                const downloadUrl = window.URL.createObjectURL(blob);
+
+                // Crear un enlace temporal para forzar la descarga
+                const a = document.createElement("a");
+                a.href = downloadUrl;
+                a.download = "Resultado_Validacion_CIFIN.xlsx";
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(downloadUrl);
+
+                if (status) {
+                    status.className =
+                        "text-sm font-medium text-green-600 min-h-[20px] text-center transition-colors duration-300 mt-4";
+                    status.innerText =
+                        "¡Archivo procesado y descargado con éxito!";
+                }
+            } catch (err: unknown) {
+                console.error(err);
+                // Manejo seguro del tipo 'unknown' en TypeScript
+                const errorMessage =
+                    err instanceof Error
+                        ? err.message
+                        : "Ocurrió un error desconocido al procesar el archivo.";
+
+                if (status) {
+                    status.className =
+                        "text-sm font-medium text-red-600 min-h-[20px] text-center transition-colors duration-300 mt-4";
+                    status.innerText = errorMessage;
+                }
+            } finally {
+                // Restaurar estado del botón
+                if (btn) btn.disabled = false;
+                loadingSpinner?.classList.add("hidden");
+                if (btnText) btnText.innerText = "Procesar y Descargar";
+            }
+        });
+    </script>
+</Layout>
