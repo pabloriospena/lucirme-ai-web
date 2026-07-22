@@ -1,5 +1,5 @@
 ---
-// Puedes importar componentes o layouts de Astro aquí si los utilizas
+// Frontmatter de Astro (vacío, no necesitamos lógica del servidor aquí)
 ---
 
 <html lang="es">
@@ -9,77 +9,129 @@
     <title>Conciliación DIAN vs Contabilidad</title>
     <style>
       body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f6f9;
+        font-family: "Inter", Arial, sans-serif;
+        background-color: #f8fafc;
         margin: 0;
         padding: 40px 20px;
+        color: #0f172a;
       }
       .container {
-        max-width: 550px;
+        max-width: 600px;
         margin: 0 auto;
         background: #ffffff;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e2e8f0;
       }
       h1 {
-        font-size: 20px;
-        color: #1a73e8;
-        margin-bottom: 20px;
+        font-size: 24px;
+        color: #0d9488;
+        margin-bottom: 10px;
         text-align: center;
       }
+      .subtitle {
+        text-align: center;
+        color: #64748b;
+        margin-bottom: 30px;
+        font-size: 14px;
+      }
       .form-group {
-        margin-bottom: 18px;
+        margin-bottom: 20px;
       }
       label {
         display: block;
-        font-weight: bold;
-        margin-bottom: 6px;
+        font-weight: 600;
+        margin-bottom: 8px;
         font-size: 14px;
-        color: #333;
+        color: #334155;
+      }
+      .file-input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 10px;
       }
       input[type="file"] {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        background: #f8fafc;
+        font-size: 14px;
+      }
+      input[type="file"]:hover {
+        border-color: #0d9488;
       }
       button {
         width: 100%;
-        padding: 12px;
-        background-color: #1a73e8;
+        padding: 14px;
+        background-color: #ea580c;
         color: #ffffff;
         border: none;
-        border-radius: 4px;
-        font-size: 15px;
-        font-weight: bold;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 600;
         cursor: pointer;
+        transition: background 0.2s;
+        margin-top: 10px;
       }
       button:hover {
-        background-color: #1557b0;
+        background-color: #c2410c;
+      }
+      button:disabled {
+        background-color: #94a3b8;
+        cursor: not-allowed;
       }
       #status {
-        margin-top: 18px;
+        margin-top: 20px;
+        padding: 12px;
+        border-radius: 6px;
         font-size: 14px;
         text-align: center;
-        font-weight: bold;
+        font-weight: 500;
+        display: none;
+      }
+      #status.show {
+        display: block;
+      }
+      #status.loading {
+        background-color: #fef3c7;
+        color: #92400e;
+        border: 1px solid #fde68a;
+      }
+      #status.success {
+        background-color: #d1fae5;
+        color: #065f46;
+        border: 1px solid #a7f3d0;
+      }
+      #status.error {
+        background-color: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>Conciliación de Movimientos</h1>
+      <h1>📊 Conciliación DIAN vs Contabilidad</h1>
+      <p class="subtitle">
+        Sube los dos archivos Excel para generar el reporte de conciliación
+      </p>
 
       <form id="concilForm">
         <div class="form-group">
-          <label for="file_dian">1. Archivo DIAN / Facturación (.xlsx):</label>
-          <input type="file" id="file_dian" accept=".xlsx, .xls" required />
+          <label for="file_dian">1. Archivo DIAN / Facturación (.xlsx)</label>
+          <div class="file-input-wrapper">
+            <input type="file" id="file_dian" accept=".xlsx,.xls" required />
+          </div>
         </div>
 
         <div class="form-group">
-          <label for="file_conta">2. Archivo Contabilidad (.xlsx):</label>
-          <input type="file" id="file_conta" accept=".xlsx, .xls" required />
+          <label for="file_conta">2. Archivo Contabilidad (.xlsx)</label>
+          <div class="file-input-wrapper">
+            <input type="file" id="file_conta" accept=".xlsx,.xls" required />
+          </div>
         </div>
 
         <button type="submit" id="btnSubmit"
@@ -89,7 +141,6 @@
 
       <div id="status"></div>
     </div>
-
     <script>
       // URL de tu backend desplegado en Render
       const API_URL = "https://mi-backend-excel.onrender.com/conciliar";
@@ -104,8 +155,18 @@
         "btnSubmit",
       ) as HTMLButtonElement | null;
 
+      function showStatus(
+        message: string,
+        type: "loading" | "success" | "error",
+      ): void {
+        if (statusDiv) {
+          statusDiv.textContent = message;
+          statusDiv.className = `show ${type}`;
+        }
+      }
+
       if (form) {
-        form.addEventListener("submit", async (e) => {
+        form.addEventListener("submit", async (e: Event) => {
           e.preventDefault();
 
           // Casting preciso a HTMLInputElement para acceder a .files
@@ -121,19 +182,17 @@
           const fileConta = inputConta?.files?.[0];
 
           if (!fileDian || !fileConta) {
-            if (statusDiv) {
-              statusDiv.style.color = "red";
-              statusDiv.textContent =
-                "Por favor selecciona ambos archivos antes de continuar.";
-            }
+            showStatus(
+              "⚠️ Por favor selecciona ambos archivos antes de continuar.",
+              "error",
+            );
             return;
           }
 
-          if (statusDiv) {
-            statusDiv.style.color = "#333";
-            statusDiv.textContent =
-              "⏳ Procesando conciliación en el servidor... por favor espera.";
-          }
+          showStatus(
+            "⏳ Procesando conciliación en el servidor... por favor espera.",
+            "loading",
+          );
 
           if (btnSubmit) {
             btnSubmit.disabled = true;
@@ -150,35 +209,32 @@
             });
 
             if (!response.ok) {
-              const errorData = await response.json();
+              const errorData = await response
+                .json()
+                .catch(() => ({ detail: "Error desconocido" }));
               throw new Error(
-                errorData.detail || "Error al procesar la conciliación",
+                errorData.detail || `Error del servidor: ${response.status}`,
               );
             }
 
             const blob = await response.blob();
-
             const downloadUrl = window.URL.createObjectURL(blob);
             const a = document.createElement("a");
             a.href = downloadUrl;
-            a.download = "Conciliacion_DIAN_vs_Contabilidad.xlsx";
+            a.download = "Reporte_Conciliacion.xlsx";
             document.body.appendChild(a);
             a.click();
             a.remove();
             window.URL.revokeObjectURL(downloadUrl);
 
-            if (statusDiv) {
-              statusDiv.style.color = "green";
-              statusDiv.textContent =
-                "✅ ¡Conciliación completada! El archivo se ha descargado.";
-            }
+            showStatus(
+              "✅ ¡Conciliación completada! El archivo se ha descargado.",
+              "success",
+            );
           } catch (err: unknown) {
-            if (statusDiv) {
-              statusDiv.style.color = "red";
-              const errorMessage =
-                err instanceof Error ? err.message : "Error desconocido";
-              statusDiv.textContent = "❌ Error: " + errorMessage;
-            }
+            const errorMessage =
+              err instanceof Error ? err.message : "Error desconocido";
+            showStatus(`❌ Error: ${errorMessage}`, "error");
           } finally {
             if (btnSubmit) {
               btnSubmit.disabled = false;
