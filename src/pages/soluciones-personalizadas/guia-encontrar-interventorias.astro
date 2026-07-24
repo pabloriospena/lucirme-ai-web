@@ -1,0 +1,359 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Guía Operativa de IA | Interobras · LuciRMe AI">
+    <main class="max-w-3xl mx-auto py-12 px-6">
+        <!-- HEADER -->
+        <header class="border-b border-slate-200 pb-8 mb-8">
+            <div
+                class="inline-block bg-teal-50 text-teal-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4 border border-teal-100 shadow-sm"
+            >
+                Guía Interna
+            </div>
+            <h1
+                class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-3"
+            >
+                Guía Operativa de IA para Licitaciones
+            </h1>
+            <p class="text-sm md:text-base text-slate-500 mb-4 font-medium">
+                <span class="text-slate-800 font-bold">Para:</span> Paola &nbsp;|&nbsp;
+                <span class="text-slate-800 font-bold">Empresa:</span> Interobras
+            </p>
+            <p
+                class="text-slate-600 text-base md:text-lg leading-relaxed font-normal"
+            >
+                Optimización de búsqueda, análisis y estructuración de
+                oportunidades de interventoría. Sin teoría vacía, solo lo que
+                funciona.
+            </p>
+        </header>
+
+        <div class="space-y-8">
+            <!-- PASO 1 -->
+            <section
+                class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow transition-shadow"
+            >
+                <div class="flex items-center gap-4 mb-4">
+                    <span
+                        class="text-xs font-bold text-orange-600 bg-orange-50 w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+                        >01</span
+                    >
+                    <h2
+                        class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight"
+                    >
+                        Búsqueda de Oportunidades
+                    </h2>
+                </div>
+                <p
+                    class="text-slate-700 text-sm md:text-base leading-relaxed mb-4"
+                >
+                    Ingresa a tu herramienta de investigación preferida:
+                    <a
+                        href="https://perplexity.ai"
+                        target="_blank"
+                        class="text-teal-600 font-bold border-b border-dashed border-teal-600 hover:text-orange-600 hover:border-orange-600 transition-colors"
+                        >Perplexity</a
+                    >, Gemini (usando <em
+                        class="italic font-medium text-slate-800"
+                        >Deep Research</em
+                    >) o ChatGPT (usando <em
+                        class="italic font-medium text-slate-800"
+                        >Investigar a fondo</em
+                    >).
+                </p>
+                <p
+                    class="text-slate-700 text-sm md:text-base leading-relaxed mb-4"
+                >
+                    Copia y pega el siguiente prompt para filtrar los procesos
+                    estratégicos de forma inmediata:
+                </p>
+
+                <!-- Prompt Block (Estilo Notion / Notion-like code card) -->
+                <div
+                    class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden mt-4"
+                >
+                    <div
+                        class="flex justify-between items-center px-4 py-3 bg-slate-100 border-b border-slate-200"
+                    >
+                        <span
+                            class="text-[10px] font-bold text-slate-500 uppercase tracking-widest"
+                            >Prompt de Búsqueda</span
+                        >
+                        <button
+                            id="copy-btn"
+                            class="bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg shadow-sm transition-all tracking-wide"
+                        >
+                            Copiar
+                        </button>
+                    </div>
+                    <pre
+                        id="prompt-text"
+                        class="p-5 font-mono text-xs md:text-sm text-slate-800 leading-relaxed whitespace-pre-wrap select-all max-h-[400px] overflow-y-auto">[ROL] Actuando como encargado de licitaciones e interventorías de una empresa especializada en interventorías, con experiencia en edificaciones de uso institucional, construcción de escenarios deportivos, proyectos de saneamiento básico y edificaciones de vivienda.
+
+[CONTEXTO] Nuestra empresa se enfoca en interventorías de proyectos de construcción en Colombia, específicamente en entidades estatales, con un enfoque en Antioquia, debe de excluir los procesos que se encuentren limitados a mipyme ubicados en territorios diferentes de antioquia
+
+[OBJETIVO] Identificar procesos de interventoría en estado publicado, cuyo objeto principal se ajuste a nuestro contexto, en todas las entidades estatales de Colombia, con un valor superior a 200 millones de pesos, que sean publicados en las últimas 3 semanas.
+
+[FORMATO] La salida debe ser una tabla con las siguientes columnas: 
+# Proceso | Objeto | municipio |Entidad contratante |Valor | Plazo | Ranking | Fecha | Probabilidad de ser adjudicatarios | Link | Plataforma en la que está publicada.
+
+[INSTRUCCIONES]
+1. Buscar procesos de interventoría publicados en entidades estatales de Colombia, debe de excluir los procesos que se encuentren limitados a mipyme ubicados en territorios diferentes de antioquia
+2. Filtrar procesos con un valor superior a 200 millones de pesos.
+3. Asignar un ranking a cada proceso según su relevancia con nuestro objetivo y contexto.
+4. Ordenar la tabla por fecha de cierre en orden descendente.
+5. Incluir una columna para la probabilidad de ser adjudicatarios, considerando factores como la experiencia de la empresa y la competencia en cada proceso.
+
+[CRITERIOS DE EXCLUSIÓN]
+- Procesos con un valor inferior o igual a 200 millones de pesos.
+- Procesos que no se ajusten a nuestro contexto de interventorías en edificaciones de uso institucional, construcción de escenarios deportivos, proyectos de saneamiento básico y edificaciones de vivienda.
+
+[INSTRUCCIÓN DE EJECUCIÓN]
+Ejecutar una búsqueda exhaustiva en bases de datos de licitaciones públicas de Colombia, como Secop, Contratación Pública, y otros portales de entidades estatales, para identificar procesos de interventoría que cumplan con los criterios establecidos. Utilizar técnicas de búsqueda avanzadas para garantizar la inclusión de todos los procesos relevantes.
+
+[TABLA DE SALIDA]
+La tabla debe contener la información solicitada, con los procesos ordenados por fecha de cierre en orden descendente, y un ranking que refleje la relevancia de cada proceso con nuestro objetivo y contexto. La tabla debe ser entregada en un formato claro y fácil de leer.</pre>
+                </div>
+            </section>
+
+            <!-- PASO 2 -->
+            <section
+                class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow transition-shadow"
+            >
+                <div class="flex items-center gap-4 mb-4">
+                    <span
+                        class="text-xs font-bold text-orange-600 bg-orange-50 w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+                        >02</span
+                    >
+                    <h2
+                        class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight"
+                    >
+                        Estructuración en NotebookLM
+                    </h2>
+                </div>
+                <p
+                    class="text-slate-700 text-sm md:text-base leading-relaxed mb-4"
+                >
+                    Una vez analizadas las oportunidades encontradas y definida
+                    la licitación a la que se postularán, abre <strong
+                        class="text-slate-900 font-bold">NotebookLM</strong
+                    > para centralizar la base de conocimiento.
+                </p>
+
+                <h3
+                    class="text-sm font-bold text-slate-800 uppercase tracking-wider mb-3 mt-6"
+                >
+                    Configuración del Cuaderno
+                </h3>
+                <ul
+                    class="space-y-2 text-sm md:text-base text-slate-600 custom-check-list mb-6"
+                >
+                    <li>
+                        Crea un cuaderno independiente por cada entidad que está
+                        ofreciendo la interventoría (Ejemplo: <em
+                            class="italic text-slate-800 font-medium"
+                            >Inder 2026</em
+                        >).
+                    </li>
+                    <li>
+                        Carga las siguientes fuentes clave dentro del cuaderno:
+                    </li>
+                </ul>
+
+                <!-- Source Grid -->
+                <div class="grid md:grid-cols-2 gap-4 mt-6">
+                    <div
+                        class="flex gap-4 p-4 bg-slate-50 border border-slate-200 rounded-xl shadow-sm"
+                    >
+                        <span class="text-2xl shrink-0 select-none">📊</span>
+                        <div>
+                            <strong
+                                class="block font-bold text-sm text-slate-900 mb-1"
+                                >Histórico</strong
+                            >
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Convocatorias pasadas de la misma entidad con
+                                sus respectivos resultados.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex gap-4 p-4 bg-slate-50 border border-slate-200 rounded-xl shadow-sm"
+                    >
+                        <span class="text-2xl shrink-0 select-none">⚖️</span>
+                        <div>
+                            <strong
+                                class="block font-bold text-sm text-slate-900 mb-1"
+                                >Reglas de Negocio</strong
+                            >
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Instrucciones técnicas para analizar y calcular
+                                correctamente los salarios mínimos.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex gap-4 p-4 bg-slate-50 border border-slate-200 rounded-xl shadow-sm"
+                    >
+                        <span class="text-2xl shrink-0 select-none">📄</span>
+                        <div>
+                            <strong
+                                class="block font-bold text-sm text-slate-900 mb-1"
+                                >Convocatoria Actual</strong
+                            >
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                El pliego formal y la documentación completa de
+                                la convocatoria abierta.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex gap-4 p-4 bg-slate-50 border border-slate-200 rounded-xl shadow-sm"
+                    >
+                        <span class="text-2xl shrink-0 select-none">🏗️</span>
+                        <div>
+                            <strong
+                                class="block font-bold text-sm text-slate-900 mb-1"
+                                >Data Interna</strong
+                            >
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Matrices de rendimiento y bases de conocimiento
+                                internas de Interobras.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PASO 3 -->
+            <section
+                class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow transition-shadow"
+            >
+                <div class="flex items-center gap-4 mb-4">
+                    <span
+                        class="text-xs font-bold text-orange-600 bg-orange-50 w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+                        >03</span
+                    >
+                    <h2
+                        class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight"
+                    >
+                        Análisis y Consulta Estratégica
+                    </h2>
+                </div>
+                <p
+                    class="text-slate-700 text-sm md:text-base leading-relaxed mb-4"
+                >
+                    Con toda la información cargada y conectada, utiliza el chat
+                    de NotebookLM para cruzar datos y resolver dudas en tiempo
+                    real. La IA trabaja en silencio, de fondo. Tú decides.
+                </p>
+
+                <h3
+                    class="text-sm font-bold text-slate-800 uppercase tracking-wider mb-3 mt-6"
+                >
+                    Temas clave de consulta:
+                </h3>
+                <div class="flex flex-wrap gap-2 mt-2">
+                    <span
+                        class="text-xs font-semibold text-teal-700 bg-teal-50 border border-teal-100 px-3 py-1.5 rounded-lg shadow-sm"
+                        >Análisis de experiencias previas</span
+                    >
+                    <span
+                        class="text-xs font-semibold text-teal-700 bg-teal-50 border border-teal-100 px-3 py-1.5 rounded-lg shadow-sm"
+                        >Cálculo de salarios mínimos</span
+                    >
+                    <span
+                        class="text-xs font-semibold text-teal-700 bg-teal-50 border border-teal-100 px-3 py-1.5 rounded-lg shadow-sm"
+                        >Probabilidades de adjudicación</span
+                    >
+                    <span
+                        class="text-xs font-semibold text-teal-700 bg-teal-50 border border-teal-100 px-3 py-1.5 rounded-lg shadow-sm"
+                        >Ranking de competencia</span
+                    >
+                    <span
+                        class="text-xs font-semibold text-teal-700 bg-teal-50 border border-teal-100 px-3 py-1.5 rounded-lg shadow-sm"
+                        >Cruce de data interna</span
+                    >
+                </div>
+
+                <!-- Callout box -->
+                <div
+                    class="flex gap-3.5 mt-8 p-4 bg-orange-50/50 border-l-4 border-orange-600 rounded-r-xl"
+                >
+                    <span class="text-xl select-none">💡</span>
+                    <p
+                        class="text-xs md:text-sm text-slate-700 leading-relaxed"
+                    >
+                        <strong class="text-orange-950 font-bold"
+                            >Regla de oro:</strong
+                        > Si la herramienta no te devuelve tiempo, claridad o control
+                        sobre la licitación, ajusta tu prompt o actualiza la fuente.
+                        Busca siempre el dato accionable.
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <!-- FOOTER -->
+        <footer
+            class="mt-16 pt-6 border-t border-slate-200 text-center text-xs text-slate-400 space-y-1"
+        >
+            <p>Guía operativa interna para Interobras.</p>
+            <p class="opacity-75">
+                Diseñado con la filosofía <em class="italic">Sin Bullshit</em> de
+                LuciRMe AI.
+            </p>
+        </footer>
+    </main>
+
+    <style is:global>
+        /* Estilos globales para la lista de chequeo */
+        .custom-check-list li::before {
+            content: "✓";
+            color: #10b981; /* Verde Success */
+            font-weight: 800;
+            margin-right: 0.5rem;
+        }
+    </style>
+
+    <script is:inline>
+        // Lógica interactiva para la copia del prompt
+        const copyBtn = document.getElementById("copy-btn");
+        const promptTextEl = document.getElementById("prompt-text");
+
+        if (copyBtn && promptTextEl) {
+            copyBtn.addEventListener("click", async () => {
+                const textToCopy = promptTextEl.textContent || "";
+                try {
+                    await navigator.clipboard.writeText(textToCopy);
+
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = "¡Copiado!";
+                    copyBtn.classList.remove(
+                        "bg-teal-600",
+                        "hover:bg-teal-700",
+                    );
+                    copyBtn.classList.add(
+                        "bg-emerald-600",
+                        "hover:bg-emerald-700",
+                    );
+
+                    setTimeout(() => {
+                        copyBtn.textContent = originalText;
+                        copyBtn.classList.remove(
+                            "bg-emerald-600",
+                            "hover:bg-emerald-700",
+                        );
+                        copyBtn.classList.add(
+                            "bg-teal-600",
+                            "hover:bg-teal-700",
+                        );
+                    }, 2000);
+                } catch (err) {
+                    alert("No se pudo copiar el prompt automáticamente.");
+                }
+            });
+        }
+    </script>
+</Layout>
