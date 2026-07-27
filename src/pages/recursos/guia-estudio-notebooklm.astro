@@ -18,7 +18,8 @@ import { LINKS } from "../../lib/constants.js";
                 class="text-xs font-bold text-teal-600 uppercase tracking-widest flex items-center gap-2"
             >
                 <span class="w-2 h-2 rounded-full bg-teal-600 animate-pulse"
-                ></span> Guía Interactiva
+                ></span>
+                Guía Interactiva
             </span>
         </div>
     </nav>
@@ -33,8 +34,9 @@ import { LINKS } from "../../lib/constants.js";
         >
             <span class="text-2xl">☕</span>
             <div class="text-sm md:text-base font-medium">
-                <strong>¿Tienes dudas sobre los resultados?</strong> Agenda un café
-                virtual de 30 minutos y te ayudo a priorizar tus tareas.
+                <strong>¿Tienes dudas sobre cómo aplicarlo a tu trabajo?</strong
+                > Agenda un café virtual de 15 minutos y mapeamos tu mayor fuga de
+                tiempo.
             </div>
             <a
                 href={LINKS.calendly}
@@ -62,14 +64,14 @@ import { LINKS } from "../../lib/constants.js";
             <h1
                 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4"
             >
-                Estudiar con NotebookLM: Sin Bullshit
+                Aprender y Trabajar con NotebookLM: Sin Bullshit
             </h1>
             <p
                 class="text-slate-600 text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
             >
-                Una guía directa para usar IA como un estudiante de alto
-                rendimiento, no como uno perezoso. La IA no te va a salvar si tu
-                base es cero.
+                Una guía directa para usar IA y procesar información en la mitad
+                de tiempo, no para que la IA piense por ti. La tecnología no te
+                va a salvar si tu base es cero.
             </p>
         </header>
 
@@ -80,14 +82,14 @@ import { LINKS } from "../../lib/constants.js";
             <p
                 class="font-bold text-sm uppercase tracking-wider text-orange-500 mb-1.5"
             >
-                Regla
+                Regla de Oro
             </p>
             <p class="text-base font-semibold leading-relaxed">
                 Si no devuelve tiempo, claridad o control, no te sirve. <br />
-                <span class="text-slate-400 font-normal text-sm"
-                    >NotebookLM está anclado a tus fuentes. Si le das basura, te
-                    devolverá basura.</span
-                >
+                <span class="text-slate-400 font-normal text-sm">
+                    NotebookLM está anclado a tus fuentes. Garbage in, garbage
+                    out.
+                </span>
             </p>
         </div>
 
@@ -120,6 +122,7 @@ import { LINKS } from "../../lib/constants.js";
                     <h4
                         class="text-xs font-bold text-orange-700 uppercase tracking-wider mb-1"
                     >
+                        Diferencia Clave
                     </h4>
                     <p
                         class="text-xs md:text-sm text-slate-800 leading-relaxed"
@@ -152,7 +155,7 @@ import { LINKS } from "../../lib/constants.js";
                     Haz clic en <strong class="text-slate-900 font-bold"
                         >"+"</strong
                     > (Crear nuevo cuaderno) y ponle un nombre claro y acotado (ej.
-                    "Macroeconomía - Parcial 2").
+                    "Proyecto Cliente X" o "Macroeconomía - Parcial 2").
                 </p>
                 <div
                     class="bg-orange-50/60 border-l-4 border-orange-500 p-4 rounded-r-lg"
@@ -160,15 +163,16 @@ import { LINKS } from "../../lib/constants.js";
                     <h4
                         class="text-xs font-bold text-orange-700 uppercase tracking-wider mb-1"
                     >
+                        Mantén el Contexto Limpio
                     </h4>
                     <p
                         class="text-xs md:text-sm text-slate-800 leading-relaxed"
                     >
-                        <strong>No hagas un cuaderno gigante para todo</strong> El
+                        <strong>No hagas un cuaderno gigante para todo.</strong> El
                         modelo tiene un límite de contexto. Si metes 15 libros y 35
                         PDFs en un solo cuaderno, la IA se volverá vaga y superficial.
-                        Un cuaderno por unidad o tema específico. Mantén el contexto
-                        limpio. El límite en el momento de NotebookLM es de 50 fuentes
+                        Un cuaderno por unidad o tema específico. El límite actual
+                        es de 50 fuentes.
                     </p>
                 </div>
             </section>
@@ -184,31 +188,104 @@ import { LINKS } from "../../lib/constants.js";
                         3
                     </div>
                     <h2 class="text-xl font-bold text-slate-900">
-                        Añadir Fuentes
+                        Curaduría y Añadir Fuentes
                     </h2>
                 </div>
                 <p
                     class="text-slate-700 text-sm md:text-base leading-relaxed mb-4"
                 >
-                    En el panel izquierdo, haz clic en <strong
-                        class="text-slate-900 font-bold">"Añadir fuente"</strong
-                    >. Sube PDFs, pega texto, URLs o enlaces de YouTube.
+                    NotebookLM no busca por ti. <strong
+                        class="text-slate-900 font-bold"
+                        >Tú eres el curador.</strong
+                    >
+                    No se trata de encontrar "la fuente perfecta", sino de alimentar
+                    el cuaderno con contenido práctico. En el panel izquierdo, haz
+                    clic en <strong class="text-slate-900 font-bold"
+                        >"Añadir fuente"</strong
+                    >.
                 </p>
+
+                <div class="space-y-4 mb-4">
+                    <ul class="space-y-2 text-xs md:text-sm text-slate-700">
+                        <li class="flex items-start gap-2">
+                            <span class="text-teal-600 font-bold mt-0.5"
+                                >1.</span
+                            >
+                            <span
+                                ><strong>YouTube:</strong> Tutoriales prácticos, conferencias,
+                                explicaciones de expertos. NotebookLM transcribe y
+                                analiza el audio automáticamente.</span
+                            >
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-teal-600 font-bold mt-0.5"
+                                >2.</span
+                            >
+                            <span
+                                ><strong>PDFs y manuales:</strong> Documentación técnica,
+                                guías de estudio, whitepapers de tu industria.</span
+                            >
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-teal-600 font-bold mt-0.5"
+                                >3.</span
+                            >
+                            <span
+                                ><strong>Google Docs/Notion:</strong> Tus propias
+                                notas, resúmenes de reuniones, apuntes de clase.</span
+                            >
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-teal-600 font-bold mt-0.5"
+                                >4.</span
+                            >
+                            <span
+                                ><strong>URLs de artículos:</strong> Blogs especializados,
+                                noticias de industria, casos de estudio.</span
+                            >
+                        </li>
+                    </ul>
+                </div>
+
+                <div
+                    class="bg-teal-50 border-l-4 border-teal-600 p-4 rounded-r-lg mb-4"
+                >
+                    <h4
+                        class="text-xs font-bold text-teal-800 uppercase tracking-wider mb-1"
+                    >
+                        Búsqueda Inteligente
+                    </h4>
+                    <p
+                        class="text-xs md:text-sm text-slate-800 leading-relaxed"
+                    >
+                        <strong>Parte de lo que ya tienes:</strong> Si tienes un PDF
+                        sobre "gestión de proyectos", busca en YouTube "project management
+                        best practices" o "cómo usar IA en project management".
+                        <strong>Conecta fuentes complementarias:</strong> Un tutorial
+                        práctico + la teoría de un paper + tus notas personales =
+                        entendimiento completo.
+                    </p>
+                </div>
+
                 <div
                     class="bg-orange-50/60 border-l-4 border-orange-500 p-4 rounded-r-lg"
                 >
                     <h4
                         class="text-xs font-bold text-orange-700 uppercase tracking-wider mb-1"
                     >
+                        La Regla del Triángulo
                     </h4>
                     <p
                         class="text-xs md:text-sm text-slate-800 leading-relaxed"
                     >
-                        <em>Garbage in, garbage out.</em> Si subes diapositivas llenas
-                        de errores y sin contexto, el resumen será pésimo. Haz curaduría.
-                        Sube el PDF del libro, el paper original y tus notas bien
-                        redactadas. 5 fuentes de altísima calidad te darán mejores
-                        resultados que 40 mediocres.
+                        Para cualquier tema crítico, alimenta el cuaderno con al
+                        menos 3 tipos de fuentes:
+                        <strong>1) Teoría</strong> (paper, libro, manual),
+                        <strong>2) Práctica</strong> (tutorial en YouTube, caso de
+                        estudio) y
+                        <strong>3) Tu contexto</strong> (tus notas, objetivos específicos).
+                        Así evitas sesgos y obtienes una visión completa desde el
+                        primer momento.
                     </p>
                 </div>
             </section>
@@ -224,86 +301,103 @@ import { LINKS } from "../../lib/constants.js";
                         4
                     </div>
                     <h2 class="text-xl font-bold text-slate-900">
-                        Prompts para Resumir
+                        Buscar Fuentes en la Web (El Atajo)
                     </h2>
                 </div>
                 <p
                     class="text-slate-700 text-sm md:text-base leading-relaxed mb-4"
                 >
-                    Escribe en el chat. Pero si escribes <em
-                        class="italic text-slate-600">"Resúmeme el PDF"</em
-                    >, eres un estudiante mediocre y vas a olvidar el 80% del
-                    contenido en dos días.
+                    NotebookLM tiene un buscador integrado. En lugar de salir a
+                    Google, copiar el link y volver a pegarlo, haz clic en <strong
+                        class="text-slate-900 font-bold">"+"</strong
+                    > y selecciona <strong class="text-slate-900 font-bold"
+                        >"Buscar en la web"</strong
+                    >.
                 </p>
 
                 <div
-                    class="bg-teal-50 border-l-4 border-teal-600 p-4 rounded-r-lg mb-6"
+                    class="bg-teal-50 border-l-4 border-teal-600 p-4 rounded-r-lg mb-4"
                 >
                     <h4
                         class="text-xs font-bold text-teal-800 uppercase tracking-wider mb-1"
                     >
-                        Prompts de Alto Rendimiento
+                        La Fórmula de Búsqueda
+                    </h4>
+                    <p
+                        class="text-xs md:text-sm text-slate-800 leading-relaxed mb-3"
+                    >
+                        No escribas preguntas largas. Usa esta fórmula simple
+                        para que Google te traiga oro en lugar de basura:
+                    </p>
+                    <div class="relative group">
+                        <pre
+                            class="prompt-text w-full bg-white border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">[Tema específico] + [Tipo de fuente o año]</pre>
+                        <button
+                            class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
+                            >Copiar</button
+                        >
+                    </div>
+                </div>
+
+                <div class="space-y-3 mb-4">
+                    <p class="text-xs md:text-sm text-slate-700">
+                        <strong class="text-slate-900"
+                            >Ejemplos prácticos:</strong>
+                    </p>
+                    <ul class="space-y-2 text-xs md:text-sm text-slate-700">
+                        <li class="flex items-start gap-2">
+                            <span class="text-teal-600 font-bold mt-0.5">•</span
+                            >
+                            <span
+                                ><em
+                                    >"Automatización de procesos administrativos
+                                    con IA casos de uso 2024"</em
+                                ></span
+                            >
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-teal-600 font-bold mt-0.5">•</span
+                            >
+                            <span
+                                ><em
+                                    >"Guía práctica de gestión de proyectos
+                                    ágiles pdf"</em
+                                ></span
+                            >
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-teal-600 font-bold mt-0.5">•</span
+                            >
+                            <span
+                                ><em
+                                    >"Regulaciones contables para pymes en
+                                    Colombia"</em
+                                ></span
+                            >
+                        </li>
+                    </ul>
+                </div>
+
+                <div
+                    class="bg-orange-50/60 border-l-4 border-orange-500 p-4 rounded-r-lg"
+                >
+                    <h4
+                        class="text-xs font-bold text-orange-700 uppercase tracking-wider mb-1"
+                    >
+                        Advertencia
                     </h4>
                     <p
                         class="text-xs md:text-sm text-slate-800 leading-relaxed"
                     >
-                        Utiliza estos prompts para estructurar adecuadamente tu
-                        conocimiento:
+                        Revisa los resultados antes de añadirlos. El buscador es
+                        bueno, pero tú sigues siendo el curador. Si el título
+                        suena a "clickbait" o a blog genérico de marketing,
+                        ignóralo y busca de nuevo.
                     </p>
-                </div>
-
-                <div class="space-y-4">
-                    <div>
-                        <h3
-                            class="text-sm font-bold text-slate-700 uppercase mb-2"
-                        >
-                            Para entender la estructura:
-                        </h3>
-                        <div class="relative group">
-                            <pre
-                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Actúa como un profesor universitario experto. Analiza las fuentes y crea un mapa mental jerárquico en formato de texto (usando viñetas anidadas) de los conceptos clave, mostrando cómo se relacionan las ideas principales con las secundarias.</pre>
-                            <button
-                                class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
-                                >Copiar</button
-                            >
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3
-                            class="text-sm font-bold text-slate-700 uppercase mb-2"
-                        >
-                            Para detectar lo importante:
-                        </h3>
-                        <div class="relative group">
-                            <pre
-                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Identifica los 3 argumentos o conceptos más contraintuitivos o complejos de estas fuentes. Explícalos usando analogías del mundo real y desglosa por qué son importantes para el tema general.</pre>
-                            <button
-                                class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
-                                >Copiar</button
-                            >
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3
-                            class="text-sm font-bold text-slate-700 uppercase mb-2"
-                        >
-                            Para sintetizar:
-                        </h3>
-                        <div class="relative group">
-                            <pre
-                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Crea una tabla comparativa con 3 columnas: Concepto Clave, Definición técnica (basada en el texto) y Un ejemplo práctico de la vida real que no esté en el texto.</pre>
-                            <button
-                                class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
-                                >Copiar</button
-                            >
-                        </div>
-                    </div>
                 </div>
             </section>
 
-            <!-- PASO 5 -->
+            <!-- PASO 5: PROMPTS PARA RESUMIR (MEJORADO - MARKDOWN + BULLETS) -->
             <section
                 class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm"
             >
@@ -314,27 +408,64 @@ import { LINKS } from "../../lib/constants.js";
                         5
                     </div>
                     <h2 class="text-xl font-bold text-slate-900">
-                        Prompts para Evaluar
+                        Prompts para Resumir
                     </h2>
                 </div>
                 <p
                     class="text-slate-700 text-sm md:text-base leading-relaxed mb-4"
                 >
-                    Pídele que te examine. Los exámenes de opción múltiple son
-                    útiles para memorizar, pero no para comprender a fondo. Usa
-                    el método socrático para identificar tus puntos ciegos.
+                    Escribe en el chat. Pero si escribes <em
+                        class="italic text-slate-600">"Resúmeme el PDF"</em
+                    >, vas a obtener una respuesta genérica y olvidarás el 80%
+                    del contenido en dos días.
                 </p>
+
+                <div
+                    class="bg-teal-50 border-l-4 border-teal-600 p-4 rounded-r-lg mb-6"
+                >
+                    <h4
+                        class="text-xs font-bold text-teal-800 uppercase tracking-wider mb-1"
+                    >
+                        Regla de Formato
+                    </h4>
+                    <p
+                        class="text-xs md:text-sm text-slate-800 leading-relaxed"
+                    >
+                        Todos estos prompts están diseñados para que NotebookLM
+                        te devuelva la respuesta en <strong
+                            >formato Markdown</strong
+                        >: títulos con <code class="bg-slate-200 px-1 rounded"
+                            >#</code
+                        >, subtítulos con <code
+                            class="bg-slate-200 px-1 rounded">##</code
+                        >, bullets con <code class="bg-slate-200 px-1 rounded"
+                            >-</code
+                        > y negritas con <code class="bg-slate-200 px-1 rounded"
+                            >**texto**</code
+                        >. Así puedes copiar y pegar directo en Notion, Obsidian
+                        o tu herramienta favorita.
+                    </p>
+                </div>
 
                 <div class="space-y-4">
                     <div>
                         <h3
                             class="text-sm font-bold text-slate-700 uppercase mb-2"
                         >
-                            El Abogado del Diablo:
+                            Mapa de conceptos (estructura jerárquica)
                         </h3>
                         <div class="relative group">
                             <pre
-                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Voy a explicarte el concepto de [X]. Quiero que actúes como un profesor riguroso y escéptico. Critica mi explicación, encuentra fallos en mi lógica, hazme 3 preguntas difíciles que pongan a prueba los límites de mi comprensión y no me des la respuesta hasta que yo intente resolverla.</pre>
+                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Analiza todas las fuentes y devuelve un resumen en formato Markdown estricto:
+
+- Usa `#` para el título principal (el tema central)
+- Usa `##` para cada concepto clave (máximo 7)
+- Bajo cada `##`, usa bullets `-` con los puntos esenciales
+- Usa sub-bullets `  -` para detalles, ejemplos o datos de soporte
+- Usa **negritas** para términos técnicos o ideas fuerza
+- No uses párrafos largos. Solo bullets.
+
+Objetivo: que pueda entender la estructura completa del tema en 3 minutos de lectura.</pre>
                             <button
                                 class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
                                 >Copiar</button
@@ -346,11 +477,82 @@ import { LINKS } from "../../lib/constants.js";
                         <h3
                             class="text-sm font-bold text-slate-700 uppercase mb-2"
                         >
-                            Técnica Feynman:
+                            Top 5 ideas contraintuitivas
                         </h3>
                         <div class="relative group">
                             <pre
-                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Voy a explicarte [Tema] como si tuviera 12 años. Dime en qué partes mi explicación es simplista, incorrecta o donde estoy usando jerga para ocultar que no entiendo el concepto profundo.</pre>
+                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Identifica las 5 ideas más contraintuitivas, sorprendentes o menos obvias de estas fuentes.
+
+Devuélvelo en Markdown así:
+
+# Ideas contraintuitivas clave
+
+## 1. [Título corto de la idea]
+- **Qué dice la fuente:** [1-2 líneas]
+- **Por qué es contraintuitivo:** [explicación breve]
+- **Por qué importa:** [impacto práctico]
+- **Ejemplo real:** [analogía o caso concreto]
+
+Repite la misma estructura para las 5 ideas. No rellenes. Si solo hay 3 ideas fuertes, devuelve 3.</pre>
+                            <button
+                                class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
+                                >Copiar</button
+                            >
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3
+                            class="text-sm font-bold text-slate-700 uppercase mb-2"
+                        >
+                            Tabla comparativa de conceptos
+                        </h3>
+                        <div class="relative group">
+                            <pre
+                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Extrae los conceptos clave de las fuentes y organízalos en una tabla Markdown con estas columnas:
+
+| Concepto | Definición (basada en el texto) | Ejemplo práctico (fuera del texto) | Dónde se menciona |
+|----------|--------------------------------|-------------------------------------|-------------------|
+
+Reglas:
+- Máximo 10 filas (los conceptos más importantes)
+- La columna "Ejemplo práctico" debe ser un caso real que NO esté en las fuentes
+- La columna "Dónde se menciona" debe citar la fuente específica</pre>
+                            <button
+                                class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
+                                >Copiar</button
+                            >
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3
+                            class="text-sm font-bold text-slate-700 uppercase mb-2"
+                        >
+                            Resumen ejecutivo para tomar decisiones
+                        </h3>
+                        <div class="relative group">
+                            <pre
+                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Actúa como un consultor senior. Devuélveme un resumen ejecutivo en Markdown para tomar decisiones rápidas:
+
+# Resumen Ejecutivo
+
+## Contexto (3 bullets máximo)
+- [Qué problema resuelven estas fuentes]
+- [Para quién aplica]
+- [Qué NO cubren]
+
+## Hallazgos clave (5 bullets máximo)
+- [Dato o idea #1 con su fuente]
+- [Dato o idea #2 con su fuente]
+...
+
+## Riesgos o limitaciones (3 bullets)
+- [Qué falta o qué puede fallar]
+
+## Recomendación accionable (1 párrafo corto, máximo 3 líneas)
+
+Usa **negritas** para lo crítico. Cita la fuente entre paréntesis al final de cada bullet.</pre>
                             <button
                                 class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
                                 >Copiar</button
@@ -360,7 +562,7 @@ import { LINKS } from "../../lib/constants.js";
                 </div>
             </section>
 
-            <!-- PASO 6 -->
+            <!-- PASO 6: PLAN DE ESTUDIO 1 HORA DIARIA (NUEVO) -->
             <section
                 class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm"
             >
@@ -369,6 +571,384 @@ import { LINKS } from "../../lib/constants.js";
                         class="bg-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0"
                     >
                         6
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-900">
+                        Plan de Estudio: 1 Hora Diaria para Dominar el Tema
+                    </h2>
+                </div>
+                <p
+                    class="text-slate-700 text-sm md:text-base leading-relaxed mb-4"
+                >
+                    No necesitas 4 horas diarias. Necesitas <strong
+                        class="text-slate-900 font-bold"
+                        >1 hora bien usada</strong
+                    >, todos los días, durante 2-4 semanas. NotebookLM puede
+                    armarte el plan basado en tus fuentes.
+                </p>
+
+                <div
+                    class="bg-teal-50 border-l-4 border-teal-600 p-4 rounded-r-lg mb-6"
+                >
+                    <h4
+                        class="text-xs font-bold text-teal-800 uppercase tracking-wider mb-1"
+                    >
+                        Cómo funciona
+                    </h4>
+                    <p
+                        class="text-xs md:text-sm text-slate-800 leading-relaxed"
+                    >
+                        Copia el prompt de abajo. NotebookLM analizará tus
+                        fuentes y te devolverá un plan de estudio <strong
+                            >en formato Markdown</strong
+                        >, dividido en sesiones de 60 minutos, con objetivos
+                        claros, actividades prácticas y checkpoints de
+                        evaluación.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <h3
+                            class="text-sm font-bold text-slate-700 uppercase mb-2"
+                        >
+                            Plan de 14 días (2 semanas intensivas)
+                        </h3>
+                        <div class="relative group">
+                            <pre
+                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Con base en las fuentes de este cuaderno, créame un plan de estudio de 14 días para dominar el tema.
+
+Restricciones:
+- 1 hora máxima por día (60 minutos)
+- 5 días de estudio + 1 día de práctica + 1 día de descanso por semana
+- Debo salir con nivel experto-práctico, no teórico
+
+Devuélvelo en Markdown con esta estructura exacta:
+
+# Plan de Estudio: [Nombre del tema]
+
+## Semana 1: Fundamentos y estructura
+
+### Día 1 - [Título de la sesión] (60 min)
+- **Objetivo:** [qué debo saber al terminar]
+- **Fuentes a revisar:** [cuáles y qué secciones]
+- **Actividad (40 min):** [qué hacer con NotebookLM]
+- **Cierre (10 min):** [qué anotar o guardar]
+- **Check:** [pregunta de autoevaluación]
+
+[Repite para días 2-5]
+
+### Día 6 - Práctica integrada
+- **Reto:** [caso práctico que combine lo aprendido]
+- **Entregable:** [qué debo producir]
+
+### Día 7 - Descanso activo
+- **Actividad ligera:** [audio overview o repaso de notas]
+
+## Semana 2: Aplicación y dominio
+
+[Repite la estructura con temas más avanzados]
+
+## Checkpoint final
+- [3 criterios para saber si ya domino el tema]
+
+Reglas:
+- Sé específico con los tiempos (no digas "revisa el PDF", di "revisa páginas 12-18 enfocándote en X")
+- Cada día debe tener UN objetivo claro, no tres
+- Incluye al menos 2 días de práctica real (no solo lectura)</pre>
+                            <button
+                                class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
+                                >Copiar</button
+                            >
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3
+                            class="text-sm font-bold text-slate-700 uppercase mb-2"
+                        >
+                            Plan express de 7 días (1 semana)
+                        </h3>
+                        <div class="relative group">
+                            <pre
+                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Necesito un plan express de 7 días, 1 hora diaria, para tener una base sólida y operativa sobre el tema de estas fuentes.
+
+Devuélvelo en Markdown:
+
+# Plan Express: [Tema] en 7 días
+
+Para cada día (1-7):
+- **Minuto 0-15:** [lectura o audio específico]
+- **Minuto 15-45:** [actividad práctica con las fuentes]
+- **Minuto 45-60:** [síntesis y notas]
+- **Check del día:** [1 pregunta que debo poder responder]
+
+Día 7 debe ser un mini-proyecto que combine todo.
+
+Prioriza lo que me dé resultado práctico rápido. Deja la teoría profunda para después.</pre>
+                            <button
+                                class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
+                                >Copiar</button
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-orange-50/60 border-l-4 border-orange-500 p-4 rounded-r-lg mt-6"
+                >
+                    <h4
+                        class="text-xs font-bold text-orange-700 uppercase tracking-wider mb-1"
+                    >
+                        La verdad sobre "volverse experto"
+                    </h4>
+                    <p
+                        class="text-xs md:text-sm text-slate-800 leading-relaxed"
+                    >
+                        14 días de 1 hora te dan una <strong
+                            >base sólida y operativa</strong
+                        >, no maestría. La maestría viene con la práctica real
+                        sobre tu trabajo. Este plan te quita el "no sé por dónde
+                        empezar" y te pone en movimiento. Eso ya es el 80% del
+                        valor.
+                    </p>
+                </div>
+            </section>
+
+            <!-- PASO 7: PROMPTS PARA EVALUAR (TIPO EXAMEN) -->
+            <section
+                class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm"
+            >
+                <div class="flex items-center gap-4 mb-4">
+                    <div
+                        class="bg-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0"
+                    >
+                        7
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-900">
+                        Prompts para Evaluar (Tipo Examen)
+                    </h2>
+                </div>
+                <p
+                    class="text-slate-700 text-sm md:text-base leading-relaxed mb-4"
+                >
+                    Leer no es aprender. <strong
+                        class="text-slate-900 font-bold"
+                        >Recuperar información de tu cabeza sí lo es.</strong
+                    > Estos prompts generan exámenes reales basados en tus fuentes,
+                    con respuestas y explicaciones.
+                </p>
+
+                <div
+                    class="bg-teal-50 border-l-4 border-teal-600 p-4 rounded-r-lg mb-6"
+                >
+                    <h4
+                        class="text-xs font-bold text-teal-800 uppercase tracking-wider mb-1"
+                    >
+                        Cómo usarlos
+                    </h4>
+                    <p
+                        class="text-xs md:text-sm text-slate-800 leading-relaxed"
+                    >
+                        Pide el examen, <strong>respóndelo tú primero</strong> (en
+                        papel o en un doc aparte), y luego pídele a NotebookLM que
+                        te califique y te explique los errores. No hagas trampa mirando
+                        las respuestas antes.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <h3
+                            class="text-sm font-bold text-slate-700 uppercase mb-2"
+                        >
+                            Examen de opción múltiple (20 preguntas)
+                        </h3>
+                        <div class="relative group">
+                            <pre
+                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Genera un examen de 20 preguntas de opción múltiple basado ÚNICAMENTE en las fuentes de este cuaderno.
+
+Formato Markdown:
+
+# Examen: [Tema]
+
+## Instrucciones
+- 20 preguntas
+- 4 opciones por pregunta (A, B, C, D)
+- Solo 1 correcta
+- Dificultad mixta: 8 fáciles, 8 medias, 4 difíciles
+
+## Preguntas
+
+### 1. [Enunciado claro]
+- A) [Opción]
+- B) [Opción]
+- C) [Opción]
+- D) [Opción]
+
+[Repite para las 20]
+
+---
+
+## Hoja de respuestas y explicaciones
+
+### 1. Respuesta correcta: [letra]
+- **Explicación:** [por qué es correcta, citando la fuente]
+- **Por qué las otras fallan:** [1 línea por cada opción incorrecta]
+
+REGLA CRÍTICA: No me muestres las respuestas hasta que yo te diga "muéstrame las respuestas". Primero solo las preguntas.</pre>
+                            <button
+                                class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
+                                >Copiar</button
+                            >
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3
+                            class="text-sm font-bold text-slate-700 uppercase mb-2"
+                        >
+                            Examen de preguntas abiertas (casos prácticos)
+                        </h3>
+                        <div class="relative group">
+                            <pre
+                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Genera un examen de 5 preguntas abiertas tipo caso práctico, basado en las fuentes.
+
+Formato Markdown:
+
+# Examen de Casos Prácticos
+
+## Caso 1: [Escenario realista de 3-4 líneas]
+**Pregunta:** [qué debe resolver o analizar]
+**Criterios de evaluación:**
+- [Criterio 1]
+- [Criterio 2]
+- [Criterio 3]
+
+[Repite para 5 casos]
+
+---
+
+## Rúbrica y respuestas modelo
+
+### Caso 1 - Respuesta modelo
+- **Puntos clave que debe incluir:** [lista]
+- **Errores comunes:** [qué evitar]
+- **Nivel esperado:** [qué distingue una respuesta buena de una excelente]
+
+REGLA: No muestres las respuestas hasta que yo diga "muéstrame las respuestas".</pre>
+                            <button
+                                class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
+                                >Copiar</button
+                            >
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3
+                            class="text-sm font-bold text-slate-700 uppercase mb-2"
+                        >
+                            Examen de verdadero/falso con justificación
+                        </h3>
+                        <div class="relative group">
+                            <pre
+                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Genera 15 afirmaciones basadas en las fuentes. Algunas son verdaderas, otras son falsas (con errores sutiles, no obvios).
+
+Formato Markdown:
+
+# Examen V/F
+
+| # | Afirmación | V/F | Justificación de la respuesta |
+|---|-----------|-----|-------------------------------|
+| 1 | [Afirmación] | [dejar en blanco] | [dejar en blanco] |
+
+Las afirmaciones falsas deben tener errores realistas (datos cambiados, conceptos mezclados, generalizaciones incorrectas).
+
+---
+
+## Respuestas
+
+| # | Afirmación | V/F | Justificación | Fuente |
+|---|-----------|-----|---------------|--------|
+| 1 | [Afirmación] | [V o F] | [por qué, en 1-2 líneas] | [cita] |
+
+REGLA: Entrega primero solo la tabla de preguntas (sin respuestas). Cuando yo diga "corrige", entrega la tabla completa con respuestas y justificaciones.</pre>
+                            <button
+                                class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
+                                >Copiar</button
+                            >
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3
+                            class="text-sm font-bold text-slate-700 uppercase mb-2"
+                        >
+                            Califica mi respuesta (autoevaluación)
+                        </h3>
+                        <div class="relative group">
+                            <pre
+                                class="prompt-text w-full bg-slate-50 border border-slate-200 p-4 rounded-lg font-mono text-xs md:text-sm text-slate-800 whitespace-pre-wrap leading-relaxed pr-16">Voy a pegarte mi respuesta a una pregunta sobre las fuentes. Quiero que la califiques como un profesor riguroso.
+
+Formato de tu respuesta (Markdown):
+
+# Evaluación
+
+## Puntuación: [X/10]
+
+## Lo que hiciste bien
+- [Punto 1]
+- [Punto 2]
+
+## Lo que falta o está incorrecto
+- [Error 1]: [qué dice la fuente realmente]
+- [Error 2]: [qué dice la fuente realmente]
+
+## Conceptos que debes reforzar
+- [Concepto 1] → revisa [fuente específica]
+- [Concepto 2] → revisa [fuente específica]
+
+## Versión mejorada de tu respuesta
+[Reescribe mi respuesta incorporando lo que falta, en 1 párrafo]
+
+Sé honesto. No me subas la nota por simpatía. Si está mal, dímelo.</pre>
+                            <button
+                                class="copy-prompt-btn absolute top-3 right-3 bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded text-xs font-bold shadow-sm hover:bg-slate-50 transition"
+                                >Copiar</button
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-orange-50/60 border-l-4 border-orange-500 p-4 rounded-r-lg mt-6"
+                >
+                    <h4
+                        class="text-xs font-bold text-orange-700 uppercase tracking-wider mb-1"
+                    >
+                        Por qué esto funciona
+                    </h4>
+                    <p
+                        class="text-xs md:text-sm text-slate-800 leading-relaxed"
+                    >
+                        La ciencia del aprendizaje lo llama <strong
+                            >"práctica de recuperación"</strong
+                        >: cada vez que forces a tu cerebro a recordar algo sin
+                        mirarlo, fortaleces la conexión neuronal. Un examen de
+                        20 minutos vale más que 2 horas de relectura. NotebookLM
+                        te da el examen; tú pones el esfuerzo de recordar.
+                    </p>
+                </div>
+            </section>
+
+            <!-- PASO 8: GUARDAR NOTAS -->
+            <section
+                class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm"
+            >
+                <div class="flex items-center gap-4 mb-4">
+                    <div
+                        class="bg-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0"
+                    >
+                        8
                     </div>
                     <h2 class="text-xl font-bold text-slate-900">
                         Guardar Notas
@@ -389,6 +969,7 @@ import { LINKS } from "../../lib/constants.js";
                     <h4
                         class="text-xs font-bold text-orange-700 uppercase tracking-wider mb-1"
                     >
+                        Calidad sobre Cantidad
                     </h4>
                     <p
                         class="text-xs md:text-sm text-slate-800 leading-relaxed"
@@ -398,12 +979,12 @@ import { LINKS } from "../../lib/constants.js";
                         tu base de conocimiento a largo plazo. <strong
                             >Solo guarda lo que te genere un aprendizaje real</strong
                         >. Exporta periódicamente tus anotaciones a tu sistema
-                        diario de organización (Notion, Obsidian, Anki).
+                        diario (Notion, Obsidian, Anki).
                     </p>
                 </div>
             </section>
 
-            <!-- PASO 7 -->
+            <!-- PASO 9: PODCAST Y OPCIONES NATIVAS -->
             <section
                 class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm"
             >
@@ -411,7 +992,7 @@ import { LINKS } from "../../lib/constants.js";
                     <div
                         class="bg-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0"
                     >
-                        7
+                        9
                     </div>
                     <h2 class="text-xl font-bold text-slate-900">
                         Podcast y Opciones Nativas
@@ -432,6 +1013,7 @@ import { LINKS } from "../../lib/constants.js";
                     <h4
                         class="text-xs font-bold text-orange-700 uppercase tracking-wider mb-1"
                     >
+                        Advertencia sobre el Audio
                     </h4>
                     <p
                         class="text-xs md:text-sm text-slate-800 leading-relaxed"
@@ -439,8 +1021,9 @@ import { LINKS } from "../../lib/constants.js";
                         <strong
                             >El Audio Overview NO sustituye la lectura.</strong
                         > Funciona como un recurso de refuerzo pasivo para tu tiempo
-                        libre. Te ayuda a interiorizar conceptos, pero depender exclusivamente
-                        de él creará una falsa ilusión de competencia intelectual.
+                        libre (mientras caminas o vas al trabajo). Te ayuda a interiorizar
+                        conceptos, pero depender exclusivamente de él creará una falsa
+                        ilusión de competencia.
                     </p>
                 </div>
                 <p
@@ -458,7 +1041,7 @@ import { LINKS } from "../../lib/constants.js";
                 </p>
             </section>
 
-            <!-- PASO 8 -->
+            <!-- PASO 10: TIEMPO POTENCIAL AHORRADO -->
             <section
                 class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm"
             >
@@ -466,7 +1049,7 @@ import { LINKS } from "../../lib/constants.js";
                     <div
                         class="bg-teal-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shrink-0"
                     >
-                        8
+                        10
                     </div>
                     <h2 class="text-xl font-bold text-slate-900">
                         Tiempo Potencial Ahorrado
@@ -476,7 +1059,7 @@ import { LINKS } from "../../lib/constants.js";
                     class="text-slate-700 text-sm md:text-base leading-relaxed mb-4"
                 >
                     Evita las falsas promesas de productividad que afirman
-                    ahorrar el 90% del tiempo de estudio.
+                    ahorrar el 90% del tiempo. La realidad es más matizada.
                 </p>
                 <div
                     class="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-lg"
@@ -495,7 +1078,7 @@ import { LINKS } from "../../lib/constants.js";
                         >, organizar información dispersa y evaluar tus áreas de
                         mejora, podrás optimizar entre un <strong
                             class="text-slate-900">20% y un 30%</strong
-                        > del tiempo total dedicado al estudio.
+                        > del tiempo total dedicado al estudio o análisis.
                     </p>
                     <p
                         class="text-xs md:text-sm text-slate-800 leading-relaxed"
@@ -507,6 +1090,69 @@ import { LINKS } from "../../lib/constants.js";
                         materiales desestructurados.
                     </p>
                 </div>
+            </section>
+
+            <!-- CIERRE Y CTA -->
+            <section
+                class="bg-slate-900 text-slate-100 rounded-2xl p-6 md:p-8 shadow-sm text-center"
+            >
+                <h2 class="text-2xl font-bold mb-4">¿Y ahora qué?</h2>
+                <p
+                    class="text-slate-300 text-sm md:text-base leading-relaxed mb-6 max-w-2xl mx-auto"
+                >
+                    La teoría no sirve si no se ejecuta. Haz esto ahora mismo:
+                </p>
+                <div
+                    class="grid md:grid-cols-2 gap-4 text-left mb-8 max-w-2xl mx-auto"
+                >
+                    <div
+                        class="bg-slate-800 p-4 rounded-lg border border-slate-700"
+                    >
+                        <span class="text-teal-400 font-bold text-lg">1.</span>
+                        <span class="text-sm"
+                            >Abre NotebookLM (toma 30 segundos).</span
+                        >
+                    </div>
+                    <div
+                        class="bg-slate-800 p-4 rounded-lg border border-slate-700"
+                    >
+                        <span class="text-teal-400 font-bold text-lg">2.</span>
+                        <span class="text-sm"
+                            >Crea un cuaderno con UN tema pendiente.</span
+                        >
+                    </div>
+                    <div
+                        class="bg-slate-800 p-4 rounded-lg border border-slate-700"
+                    >
+                        <span class="text-teal-400 font-bold text-lg">3.</span>
+                        <span class="text-sm"
+                            >Usa el buscador web con la fórmula del Paso 4.</span
+                        >
+                    </div>
+                    <div
+                        class="bg-slate-800 p-4 rounded-lg border border-slate-700"
+                    >
+                        <span class="text-teal-400 font-bold text-lg">4.</span>
+                        <span class="text-sm"
+                            >Usa el primer prompt de resumen del Paso 5.</span
+                        >
+                    </div>
+                </div>
+                <p class="text-slate-300 text-sm mb-6">
+                    Si quieres ver cómo aplico esto a tu trabajo específico para
+                    recuperar 10 horas semanales, hablemos.
+                </p>
+                <a
+                    href={LINKS.calendly}
+                    target="_blank"
+                    class="inline-block bg-orange-600 text-white px-8 py-3 rounded-lg font-bold text-base hover:bg-orange-700 transition shadow-lg"
+                >
+                    Agenda tu Café de Estrategia (15 min) →
+                </a>
+                <p class="text-slate-500 text-xs mt-4">
+                    Sin compromiso. Sin letra pequeña. Si no encaja, cerramos en
+                    el minuto 5.
+                </p>
             </section>
         </div>
 
