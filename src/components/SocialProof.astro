@@ -1,6 +1,5 @@
 ---
 // src/components/Resultados.astro
-// He añadido un par de ejemplos más para ilustrar cómo se ve con más volumen.
 const testimonios = [
   {
     perfil: "👤 Administrador Anónimo",
@@ -9,22 +8,46 @@ const testimonios = [
     result: "Sesión de enfoque + Guía personalizada",
   },
   {
-    perfil: "👤 María Camila B - Product Manager",
+    perfil: "👤 María Camila B. - Product Manager",
     quote:
-      "Mi objetivo no es usar IA por moda, es que pueda dejar de apagar incendios y tener una visión más tranquila y estratégica de todo mi pipeline.",
+      "Mi objetivo no es usar IA por moda, es dejar de apagar incendios y tener una visión más tranquila y estratégica de mi pipeline.",
     result: "Sesión de enfoque + Estructura de Automatización",
   },
   {
-    perfil: "👤 José Madriz - Data Analitycs",
+    perfil: "👤 José Madriz - Data Analytics",
     quote:
-      "LuciRMe me dio el 'chip' para dejar de quebrarme el c*** por algo que no es mío y empezar a sistematizar soluciones.",
+      "LucirMe me dio el 'chip' para dejar de quebrarme la cabeza por algo que no es mío y empezar a sistematizar soluciones.",
     result: "Sesión de enfoque + Guía personalizada",
   },
   {
     perfil: "👤 David M. Muñoz - Líder de desarrollo",
     quote:
-      "La sesión me pareció muy bacana porque pude validar el camino que tengo para mi cliente y las iniciativas de IA que estamos implementando. Fue justamente lo que necesitaba hablar para aterrizar la estrategia.",
+      "Pude validar el camino para mi cliente y las iniciativas de IA que estamos implementando. Fue justo lo que necesitaba para aterrizar la estrategia.",
     result: "Sesión de enfoque + Plan de ejecución estratégico",
+  },
+  {
+    perfil: "🏢 Almamotor",
+    quote:
+      "Nos encantó la metodología y la manera de enseñar. Nos diste claridad práctica para aplicar lo aprendido de inmediato en el equipo.",
+    result: "Taller de inmersión",
+  },
+  {
+    perfil: "🏢 InterobrasER",
+    quote:
+      "Un taller productivo y muy necesario. El equipo entendió la situación y vio los beneficios reales de aplicar estos cambios.",
+    result: "Taller de inmersión + Ciclo de autonomía",
+  },
+  {
+    perfil: "👤 Cecilia Morete - Alumno",
+    quote:
+      "Qué felicidad ser parte de este proceso. Ahora tengo las herramientas organizadas y la claridad para hacer las preguntas correctas y avanzar.",
+    result: "Acompañamiento individual",
+  },
+  {
+    perfil: "👤 Melody Abele - Alumno (Melfa CX)",
+    quote:
+      "Gracias a tus herramientas y devoluciones, mi proyecto hoy tiene mucho más sentido, un norte claro y gran potencial. Aprendizaje real.",
+    result: "Sesión de enfoque + Estructura de Automatización",
   },
   {
     perfil: "🚀 Startup B2B (5 personas)",
@@ -33,7 +56,7 @@ const testimonios = [
     result: "Taller de inmersión + Ciclo de autonomía",
   },
   {
-    perfil: "🏢 Empresa de Servicios (50+) Recursos Humanos",
+    perfil: "🏢 Empresa de Servicios (50+) RRHH",
     quote:
       "Eliminamos 3 aprobaciones manuales en onboarding. Error humano: -80%.",
     result: "Taller de inmersión + Ciclo de autonomía",
@@ -41,7 +64,7 @@ const testimonios = [
   {
     perfil: "🏢 Administradora - Fundación Casa Universitaria La Chinca",
     quote:
-      "Las estudiates quedaronTe cuento que tu charla en la Chinca tuvo muy buenos comentarios, les gusto mucho!",
+      "Tu charla tuvo muy buenos comentarios. A las estudiantes les gustó mucho el enfoque práctico.",
     result: "Taller de inmersión",
   },
   {
@@ -66,7 +89,8 @@ const testimonios = [
         Algunos resultados
       </h2>
       <p class="text-base text-gray-600 max-w-xl mx-auto">
-        Impacto real medido en los flujos de trabajo de nuestros usuarios.
+        Impacto real medido en los flujos de trabajo de nuestros usuarios. Sin
+        teoría vacía.
       </p>
     </div>
 
@@ -74,27 +98,24 @@ const testimonios = [
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {
         testimonios.map((t) => (
-          <div class="group bg-[#F8FAFC] p-6 rounded-xl border border-gray-100 flex flex-col justify-between hover:bg-white hover:shadow-lg hover:border-teal/30 transition-all duration-200">
+          <div class="group bg-[#F8FAFC] p-6 rounded-xl border border-gray-100 flex flex-col justify-between hover:bg-white hover:shadow-lg hover:border-[#0D9488]/30 transition-all duration-200">
             <div>
-              {/* Badge más pequeño */}
               <div class="mb-4">
-                <span class="inline-block bg-gray-200/50 group-hover:bg-teal/10 text-gray-600 group-hover:text-teal text-[10px] font-semibold px-2.5 py-1 rounded-md transition-colors duration-200">
+                <span class="inline-block bg-gray-200/50 group-hover:bg-[#0D9488]/10 text-gray-600 group-hover:text-[#0D9488] text-[10px] font-semibold px-2.5 py-1 rounded-md transition-colors duration-200">
                   {t.perfil}
                 </span>
               </div>
 
-              {/* Texto de cita más pequeño (text-sm) */}
               <blockquote class="text-gray-600 leading-relaxed mb-6 text-sm">
                 "{t.quote}"
               </blockquote>
             </div>
 
-            {/* Footer más delgado y compacto */}
             <div class="pt-4 border-t border-gray-100 mt-auto">
               <span class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">
                 Solución
               </span>
-              <div class="flex items-center gap-1.5 text-teal font-medium text-xs">
+              <div class="flex items-center gap-1.5 text-[#0D9488] font-medium text-xs">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
