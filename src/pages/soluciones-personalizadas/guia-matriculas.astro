@@ -1,0 +1,235 @@
+---
+// src/pages/guia-ia.astro
+import Layout from "../../layouts/Layout.astro";
+
+const pageTitle = "Guía de Productividad con IA | Almamotor";
+---
+
+<Layout title={pageTitle}>
+    <!-- HEADER -->
+    <header
+        class="bg-slate-900 text-white py-12 px-6 border-b border-slate-800 text-center"
+    >
+        <div class="max-w-4xl mx-auto space-y-3">
+            <h1
+                class="text-3xl md:text-5xl font-black text-teal-400 tracking-tight leading-tight"
+            >
+                Guía de Productividad con IA
+            </h1>
+            <p class="text-base md:text-xl text-slate-300 font-medium">
+                Optimización de procesos para <span
+                    class="font-extrabold text-white">Almamotor</span
+                >
+            </p>
+            <p
+                class="text-xs md:text-sm text-slate-500 font-semibold tracking-wider uppercase"
+            >
+                Flujos de trabajo con NotebookLM, Qwen, Gemini y Gmail
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12 space-y-12">
+        <!-- Módulo 1: NotebookLM -->
+        <section
+            class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200"
+        >
+            <div class="flex items-center gap-3.5 mb-4">
+                <span
+                    class="bg-blue-50 text-blue-600 p-2 rounded-xl text-2xl font-bold select-none"
+                    >📚</span
+                >
+                <h2
+                    class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight"
+                >
+                    1. Aprendamos de cualquier cosa con NotebookLM
+                </h2>
+            </div>
+            <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-6">
+                Utiliza esta guía completa para dominar la extracción y síntesis
+                de información de tus documentos internos, manuales o procesos
+                de la empresa.
+            </p>
+            <a
+                href="https://lucirme.com/recursos/guia-estudio-notebooklm"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-xl transition shadow-md hover:shadow-lg text-sm md:text-base tracking-wide"
+            >
+                Acceder a la Guía de NotebookLM
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 shrink-0"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </a>
+        </section>
+
+        <!-- Módulo 2: Qwen para Levantamiento de Prendas -->
+        <section
+            class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200"
+        >
+            <div class="flex items-center gap-3.5 mb-6">
+                <span
+                    class="bg-purple-50 text-purple-600 p-2 rounded-xl text-2xl font-bold select-none"
+                    >🏍️</span
+                >
+                <h2
+                    class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight"
+                >
+                    2. Extracción de Datos: Levantamiento de Prendas (Qwen)
+                </h2>
+            </div>
+
+            <ol
+                class="space-y-6 list-decimal list-inside text-sm md:text-base text-slate-700 leading-relaxed"
+            >
+                <li class="pl-2">
+                    Ingresa a <a
+                        href="https://chat.qwen.ai"
+                        target="_blank"
+                        class="text-teal-600 font-bold hover:text-orange-600 border-b border-dashed border-teal-600 hover:border-orange-600 transition-colors"
+                        >chat.qwen.ai</a
+                    > y crea una cuenta o inicia sesión.
+                </li>
+                <li class="pl-2">
+                    Crea un <strong class="text-slate-900 font-bold"
+                        >nuevo proyecto</strong
+                    > y asígnale un nombre claro (ej: "Levantamiento de Prendas -
+                    Almamotor").
+                </li>
+                <li class="pl-2">
+                    En <strong class="text-slate-900 font-bold"
+                        >Advance Settings</strong
+                    > (Configuración avanzada), pega el siguiente prompt:
+
+                    <!-- Code Block with Copy -->
+                    <div
+                        class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden mt-3 text-left"
+                    >
+                        <div
+                            class="flex justify-between items-center px-4 py-2.5 bg-slate-850 text-slate-400 border-b border-slate-200"
+                        >
+                            <span
+                                class="text-[10px] font-bold text-slate-500 uppercase tracking-widest"
+                                >Prompt de Levantamiento</span
+                            >
+                            <button
+                                class="copy-code-btn bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow-sm transition-colors"
+                                >Copiar</button
+                            >
+                        </div>
+                        <pre
+                            class="code-text p-4 font-mono text-xs md:text-sm text-slate-800 leading-relaxed whitespace-pre-wrap select-all max-h-[350px] overflow-y-auto font-sans">Eres un asistente experto en extracción de datos de matrículas vehiculares. Sigue estrictamente estas reglas:
+
+1. Saluda cordialmente: "Entrégame la imagen de la matrícula por favor".
+2. Si la imagen no es legible, responde solo con el error.
+3. Al recibir la imagen, extrae la información correspondiente y responde estrictamente con el siguiente formato, reemplazando los datos con los de la imagen:
+
+NIT 901220121-5
+LEVANTAMIENTO DE PRENDA
+Medellín,
+A QUIEN PUEDA INTERESAR
+
+Certifico que el señor [NOMBRE], identificado con Cédula de Ciudadanía N° [CEDULA], canceló en su totalidad la deuda adquirida con nuestro almacén Almamotor AKT Santuario. Se encuentra a paz y salvo y se autoriza levantar prenda.
+
+MARCA
+[MARCA]
+REFERENCIA
+[REFERENCIA]
+COLOR
+[COLOR]
+NUMERO DE MOTOR
+[MOTOR]
+NUMERO DE CHASIS
+[CHASIS]
+PLACA
+[PLACA]
+CILINDRAJE
+[CILINDRAJE]
+
+MARIANA LONDOÑO VALLEJO
+Representante Legal
+C.C 1.017.241.078
+Cra 43 # 50-71 apto 501 Edificio BOTERO Tel: 3206912881
+MEDELLIN ANTIOQUIA
+almamotorgerencia@gmail.com</pre>
+                    </div>
+                </li>
+                <li class="pl-2">
+                    Inicia la conversación adjuntando la <strong
+                        class="text-slate-900 font-semibold"
+                        >imagen de la matrícula</strong
+                    >
+                </li>
+                <li class="pl-2">
+                    La respuesta debe generarse en el <strong
+                        class="text-slate-900 font-semibold"
+                        >formato exacto</strong
+                    > que utiliza Jeaneth, listo para copiar y pegar.
+                </li>
+            </ol>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer
+        class="bg-slate-900 text-slate-400 py-8 px-6 text-center text-xs space-y-1"
+    >
+        <p>© 2026 Almamotor · Guía interna de productividad con IA</p>
+        <p class="font-medium">
+            Desarrollado con metodología <span class="text-teal-400 font-bold"
+                >Sin Bullshit</span
+            > | LuciRMe AI
+        </p>
+    </footer>
+
+    <!-- Estilos globales específicos -->
+    <style is:global>
+        .custom-check-list li::before {
+            content: "✓";
+            color: #10b981; /* Verde éxito */
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+    </style>
+
+    <!-- LÓGICA DE COPIADO AL PORTAPAPELES -->
+    <script is:inline>
+        document.querySelectorAll(".copy-code-btn").forEach((btn) => {
+            btn.addEventListener("click", async () => {
+                const headerBlock = btn.closest("div");
+                const codePre = headerBlock
+                    ? headerBlock.nextElementSibling
+                    : null;
+                if (!codePre) return;
+
+                const textToCopy = codePre.textContent || "";
+                try {
+                    await navigator.clipboard.writeText(textToCopy);
+                    const originalText = btn.textContent;
+                    btn.textContent = "¡Copiado!";
+                    btn.classList.remove("bg-teal-600", "hover:bg-teal-700");
+                    btn.classList.add("bg-emerald-600", "hover:bg-emerald-700");
+
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.classList.remove(
+                            "bg-emerald-600",
+                            "hover:bg-emerald-700",
+                        );
+                        btn.classList.add("bg-teal-600", "hover:bg-teal-700");
+                    }, 2000);
+                } catch (err) {
+                    alert("No se pudo copiar el texto automáticamente.");
+                }
+            });
+        });
+    </script>
+</Layout>
