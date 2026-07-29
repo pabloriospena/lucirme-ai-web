@@ -1,0 +1,567 @@
+---
+// src/pages/guia-sesion-sebastian.astro
+import Layout from "../../layouts/Layout.astro";
+
+const pageTitle = "Guía de Productividad con IA | Almamotor";
+---
+
+<Layout title={pageTitle}>
+    <!-- HEADER -->
+    <header
+        class="bg-slate-900 text-white py-12 px-6 border-b border-slate-800 text-center"
+    >
+        <div class="max-w-4xl mx-auto space-y-3">
+            <h1
+                class="text-3xl md:text-5xl font-black text-teal-400 tracking-tight leading-tight"
+            >
+                Guía de Productividad con IA
+            </h1>
+            <p class="text-base md:text-xl text-slate-300 font-medium">
+                Optimización de procesos para <span
+                    class="font-extrabold text-white">Almamotor</span
+                >
+            </p>
+            <p
+                class="text-xs md:text-sm text-slate-500 font-semibold tracking-wider uppercase"
+            >
+                Flujos de trabajo con NotebookLM, Qwen, Gemini y Gmail
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12 space-y-12">
+        <!-- Módulo 1: NotebookLM -->
+        <section
+            class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow transition-shadow"
+        >
+            <div class="flex items-center gap-3.5 mb-4">
+                <span
+                    class="bg-blue-50 text-blue-600 p-2 rounded-xl text-2xl font-bold select-none"
+                    >📚</span
+                >
+                <h2
+                    class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight"
+                >
+                    1. Aprendamos de cualquier cosa con NotebookLM
+                </h2>
+            </div>
+            <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-6">
+                Utiliza esta guía completa para dominar la extracción y síntesis
+                de información de tus documentos internos, manuales o procesos
+                de la empresa.
+            </p>
+            <a
+                href="https://lucirme.com/recursos/guia-estudio-notebooklm"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-xl transition shadow-md hover:shadow-lg text-sm md:text-base tracking-wide"
+            >
+                Acceder a la Guía de NotebookLM
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 shrink-0"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </a>
+        </section>
+
+        <!-- Módulo 2: Qwen para RRHH -->
+        <section
+            class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow transition-shadow"
+        >
+            <div class="flex items-center gap-3.5 mb-6">
+                <span
+                    class="bg-purple-50 text-purple-600 p-2 rounded-xl text-2xl font-bold select-none"
+                    >👥</span
+                >
+                <h2
+                    class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight"
+                >
+                    2. Extracción de Datos: Vinculación y Desvinculación (Qwen)
+                </h2>
+            </div>
+
+            <ol
+                class="space-y-6 list-decimal list-inside text-sm md:text-base text-slate-700 leading-relaxed"
+            >
+                <li class="pl-2">
+                    Ingresa a <a
+                        href="https://chat.qwen.ai"
+                        target="_blank"
+                        class="text-teal-600 font-bold hover:text-orange-600 border-b border-dashed border-teal-600 hover:border-orange-600 transition-colors"
+                        >chat.qwen.ai</a
+                    > y crea una cuenta o inicia sesión.
+                </li>
+                <li class="pl-2">
+                    Crea un <strong class="text-slate-900 font-bold"
+                        >nuevo proyecto</strong
+                    > y asígnale un nombre claro (ej: "RRHH-Almamotor").
+                </li>
+                <li class="pl-2">
+                    En <strong class="text-slate-900 font-bold"
+                        >Advance Settings</strong
+                    > (Configuración avanzada), pega el siguiente prompt estructurado:
+
+                    <!-- Code Block with Copy -->
+                    <div
+                        class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden mt-3 text-left"
+                    >
+                        <div
+                            class="flex justify-between items-center px-4 py-2.5 bg-slate-850 text-slate-400 border-b border-slate-200"
+                        >
+                            <span
+                                class="text-[10px] font-bold text-slate-500 uppercase tracking-widest"
+                                >Prompt de Extracción</span
+                            >
+                            <button
+                                class="copy-code-btn bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow-sm transition-colors"
+                                >Copiar</button
+                            >
+                        </div>
+                        <pre
+                            class="code-text p-4 font-mono text-xs md:text-sm text-slate-800 leading-relaxed whitespace-pre-wrap select-all max-h-[350px] overflow-y-auto">Rol: Eres un asistente experto en extracción y orden de datos de Recursos Humanos.
+
+Tarea: Recibirás un mensaje informal (ej. WhatsApp) y opcionalmente la foto/PDF de una cédula. Debes extraer, corregir y organizar los datos del trabajador sin agregar saludos ni explicaciones.
+
+Reglas:
+1. Corrige ortografía, puntuación y correos (ej: coma por punto en emails).
+2. Formatea el salario en pesos colombianos con punto de mil y la palabra "Mensuales" (ej: $2.200.000 Mensuales).
+3. Extrae nombres y cédula desde la imagen adjunta si está disponible.
+4. Estandariza nombres de fincas, municipios y departamentos.
+
+Formato de salida (estricto):
+Fecha de ingreso: [Fecha]
+Salario: $[Monto] Mensuales
+Cargo: [Cargo]
+Dirección de la sede de trabajo: [Finca/Sede]
+Municipio y departamento: [Municipio - Departamento]
+Dirección de residencia: [Dirección]
+Municipio y departamento: [Municipio - Departamento]
+Teléfono: [Número]
+Correo electrónico: [Email corregido]</pre>
+                    </div>
+                </li>
+                <li class="pl-2">
+                    Inicia la conversación adjuntando la cédula y
+                    copiando/pegando el mensaje que envían vía WhatsApp.
+                </li>
+                <li class="pl-2">
+                    La respuesta debe generarse en el <strong
+                        class="text-slate-900 font-semibold"
+                        >formato exacto</strong
+                    > que utiliza Sebastián.
+                </li>
+            </ol>
+        </section>
+
+        <!-- Módulo 3: Gemini para Caja Menor -->
+        <section
+            class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow transition-shadow"
+        >
+            <div class="flex items-center gap-3.5 mb-6">
+                <span
+                    class="bg-emerald-50 text-emerald-600 p-2 rounded-xl text-2xl font-bold select-none"
+                    >🧾</span
+                >
+                <h2
+                    class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight"
+                >
+                    3. Extracción de Recibos de Caja Menor (Gemini)
+                </h2>
+            </div>
+
+            <ol
+                class="space-y-6 list-decimal list-inside text-sm md:text-base text-slate-700 leading-relaxed"
+            >
+                <li class="pl-2">
+                    Abre <a
+                        href="https://gemini.google.com"
+                        target="_blank"
+                        class="text-teal-600 font-bold hover:text-orange-600 border-b border-dashed border-teal-600 hover:border-orange-600 transition-colors"
+                        >Gemini.google.com</a
+                    >.
+                </li>
+                <li class="pl-2">
+                    Adjunta el PDF con la información de los recibos de caja
+                    menor.
+                </li>
+                <li class="pl-2">
+                    Pega el siguiente prompt de procesamiento analítico:
+
+                    <!-- Code Block with Copy -->
+                    <div
+                        class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden mt-3 text-left"
+                    >
+                        <div
+                            class="flex justify-between items-center px-4 py-2.5 bg-slate-850 text-slate-400 border-b border-slate-200"
+                        >
+                            <span
+                                class="text-[10px] font-bold text-slate-500 uppercase tracking-widest"
+                                >Prompt de Recibos</span
+                            >
+                            <button
+                                class="copy-code-btn bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow-sm transition-colors"
+                                >Copiar</button
+                            >
+                        </div>
+                        <pre
+                            class="code-text p-4 font-mono text-xs md:text-sm text-slate-800 leading-relaxed whitespace-pre-wrap select-all max-h-[350px] overflow-y-auto">Extrae de cada factura en PDF la siguiente información y preséntala en una tabla estructurada: 
+(1) número o identificador de la factura, 
+(2) nombre completo del tercero (cliente o proveedor según corresponda), 
+(3) valor total de la factura, 
+(4) fecha de emisión, y 
+(5) cualquier observación relevante.
+
+Para el tercero, extrae el nombre completo tal como aparece en el documento, especificando si es persona natural o jurídica cuando sea identificable. Para el valor total, indica claramente si corresponde al valor antes de impuestos, el valor del impuesto, o el valor total a pagar (neto), según cómo esté discriminado en la factura.
+
+Organiza la tabla con las siguientes columnas: N° de factura | Nombre del tercero | Tipo de tercero | Valor total | Fecha de emisión | Observaciones.
+
+Si en alguna factura no logras identificar con claridad alguno de estos datos debido a: mala calidad del escaneo, información cortada, falta de algún campo, ambigüedad en los montos, o cualquier otra limitación, indícame explícitamente:
+- Qué factura o documento presenta el problema
+- Qué campo específico no puedes extraer o interpretar con confianza
+- La razón del problema (imagen borrosa, texto ilegible, estructura inusual, etc.)
+- Si es posible, incluye el fragmento del texto que genera la duda para revisión manual.
+
+Procesa las facturas en el orden en que te las proporcione y numera los resultados para facilitar la referencia cruzada.</pre>
+                    </div>
+                </li>
+                <li class="pl-2">
+                    Revisa la información extraída y compárala con la realidad
+                    física.
+                </li>
+                <li class="pl-2">
+                    Añade la información a <strong
+                        class="text-slate-900 font-bold">Siigo</strong
+                    > copiando y pegando directamente desde la tabla generada.
+                </li>
+                <li class="pl-2">
+                    <strong class="text-slate-900 font-bold"
+                        >Conciliación:</strong
+                    > Identifica cuáles son los valores en Siigo que NO se encuentran
+                    en la caja menor.
+                    <ul
+                        class="space-y-1.5 text-sm text-slate-500 mt-2.5 ml-5 custom-check-list"
+                    >
+                        <li>
+                            Adjunta el export de Siigo a la misma conversación
+                            de IA.
+                        </li>
+                        <li>
+                            Pide que cruce la información e identifique valores
+                            que SÍ y que NO se encuentran en el resultado
+                            anterior.
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+
+        <!-- Módulo 4: Gmail -->
+        <section
+            class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow transition-shadow"
+        >
+            <div class="flex items-center gap-3.5 mb-6">
+                <span
+                    class="bg-red-50 text-red-600 p-2 rounded-xl text-2xl font-bold select-none"
+                    >📧</span
+                >
+                <h2
+                    class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight"
+                >
+                    4. Organización Automática de Correos (Gmail)
+                </h2>
+            </div>
+
+            <div class="mb-8 border-b border-slate-100 pb-8">
+                <h3
+                    class="text-base md:text-lg font-bold text-slate-900 mb-3 uppercase tracking-wider text-xs"
+                >
+                    Método Manual (Configuración Nativa)
+                </h3>
+                <ol
+                    class="space-y-2 list-decimal list-inside text-sm md:text-base text-slate-700 leading-relaxed"
+                >
+                    <li>
+                        Ingresa a <a
+                            href="https://gmail.com"
+                            target="_blank"
+                            class="text-teal-600 font-bold hover:text-orange-600 border-b border-dashed border-teal-600 hover:border-orange-600 transition-colors"
+                            >gmail.com</a
+                        >.
+                    </li>
+                    <li>
+                        Haz clic en el engranaje (<span class="font-sans"
+                            >⚙️</span
+                        >) &gt; <strong class="text-slate-900"
+                            >Ver todos los ajustes</strong
+                        >.
+                    </li>
+                    <li>
+                        Ve a la pestaña <strong class="text-slate-900"
+                            >Filtros y direcciones bloqueadas</strong
+                        >.
+                    </li>
+                    <li>
+                        Haz clic en <strong class="text-slate-900"
+                            >Crear un filtro nuevo</strong
+                        >.
+                    </li>
+                    <li>
+                        Añade las condiciones (ej: "Contiene las palabras",
+                        "De", "Asunto") de los correos que deseas etiquetar.
+                    </li>
+                </ol>
+            </div>
+
+            <div
+                class="bg-slate-50 p-5 rounded-2xl border border-slate-200 shadow-sm space-y-6"
+            >
+                <h3
+                    class="text-base md:text-lg font-bold text-slate-900 flex items-center gap-2"
+                >
+                    <span
+                        class="bg-orange-600 text-white text-[10px] font-bold px-2 py-0.5 rounded tracking-wide uppercase"
+                        >BONUS</span
+                    >
+                    Importación Rápida de Filtros con IA
+                </h3>
+
+                <div
+                    class="space-y-6 text-sm md:text-base text-slate-700 leading-relaxed"
+                >
+                    <div>
+                        <p class="font-bold text-slate-900 mb-2">
+                            Paso 1: El Prompt (Úsalo en Qwen, Gemini o ChatGPT)
+                        </p>
+
+                        <!-- Code Block with Copy -->
+                        <div
+                            class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden text-left"
+                        >
+                            <div
+                                class="flex justify-between items-center px-4 py-2.5 bg-slate-850 text-slate-400 border-b border-slate-200"
+                            >
+                                <span
+                                    class="text-[10px] font-bold text-slate-500 uppercase tracking-widest"
+                                    >Prompt de Filtros XML</span
+                                >
+                                <button
+                                    class="copy-code-btn bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow-sm transition-colors"
+                                    >Copiar</button
+                                >
+                            </div>
+                            <pre
+                                class="code-text p-4 font-mono text-xs md:text-sm text-slate-800 leading-relaxed whitespace-pre-wrap select-all">Crea un archivo XML para importar en Gmail con estos 3 filtros:
+1. Los correos de newsletter@tech.com que se archiven, se marquen como leídos y se les ponga la etiqueta 'Tecnología'.
+2. Los correos que tengan la palabra 'URGENTE' en el asunto, que se marquen con una estrella y se les ponga la etiqueta 'Prioridad'.
+3. Los correos que vengan de spam@ofertas.com, que se eliminen directamente.</pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-bold text-slate-900 mb-2">
+                            Paso 2: La respuesta (Código XML de ejemplo)
+                        </p>
+
+                        <!-- Code Block with Copy -->
+                        <div
+                            class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden text-left"
+                        >
+                            <div
+                                class="flex justify-between items-center px-4 py-2.5 bg-slate-850 text-slate-400 border-b border-slate-200"
+                            >
+                                <span
+                                    class="text-[10px] font-bold text-slate-500 uppercase tracking-widest"
+                                    >Código XML</span
+                                >
+                                <button
+                                    class="copy-code-btn bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs px-3 py-1.5 rounded-lg shadow-sm transition-colors"
+                                    >Copiar</button
+                                >
+                            </div>
+                            <pre
+                                class="code-text p-4 font-mono text-xs md:text-sm text-slate-850 leading-relaxed whitespace-pre-wrap select-all max-h-[300px] overflow-y-auto">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;feed xmlns="http://www.w3.org/2005/Atom" xmlns:apps="http://schemas.google.com/apps/2006"&gt;
+  &lt;entry&gt;
+    &lt;category term="filter"&gt;&lt;/category&gt;
+    &lt;title&gt;Filtro Tecnología&lt;/title&gt;
+    &lt;content&gt;&lt;/content&gt;
+    &lt;apps:property name="from" value="newsletter@tech.com"/&gt;
+    &lt;apps:property name="label" value="Tecnología"/&gt;
+    &lt;apps:property name="shouldArchive" value="true"/&gt;
+    &lt;apps:property name="shouldMarkAsRead" value="true"/&gt;
+  &lt;/entry&gt;
+  &lt;entry&gt;
+    &lt;category term="filter"&gt;&lt;/category&gt;
+    &lt;title&gt;Filtro Prioridad&lt;/title&gt;
+    &lt;content&gt;&lt;/content&gt;
+    &lt;apps:property name="subject" value="URGENTE"/&gt;
+    &lt;apps:property name="label" value="Prioridad"/&gt;
+    &lt;apps:property name="shouldStar" value="true"/&gt;
+  &lt;/entry&gt;
+  &lt;entry&gt;
+    &lt;category term="filter"&gt;&lt;/category&gt;
+    &lt;title&gt;Filtro Spam&lt;/title&gt;
+    &lt;content&gt;&lt;/content&gt;
+    &lt;apps:property name="from" value="spam@ofertas.com"/&gt;
+    &lt;apps:property name="shouldTrash" value="true"/&gt;
+  &lt;/entry&gt;
+&lt;/feed&gt;</pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="font-bold text-slate-900 mb-2">
+                            Paso 3: Guardar el archivo correctamente
+                            (¡Importante!)
+                        </p>
+                        <ul
+                            class="list-disc list-inside space-y-1.5 text-xs md:text-sm text-slate-600 pl-4"
+                        >
+                            <li>
+                                Abre el <strong class="text-slate-800"
+                                    >Bloc de notas</strong
+                                > (Windows) o TextEdit (Mac).
+                            </li>
+                            <li>Pega el código XML generado por la IA.</li>
+                            <li>
+                                Ve a <strong class="text-slate-800"
+                                    >Archivo &gt; Guardar como...</strong>
+                            </li>
+                            <li>
+                                En "Nombre de archivo", escribe: <code
+                                    class="bg-slate-200 text-slate-800 px-1 rounded font-mono font-bold"
+                                    >"mis_filtros.xml"</code
+                                > (incluye las comillas dobles para evitar extensiones
+                                .txt).
+                            </li>
+                            <li>
+                                En "Tipo", selecciona <strong
+                                    class="text-slate-800"
+                                    >Todos los archivos (*.*)</strong
+                                >.
+                            </li>
+                            <li>
+                                En "Codificación", selecciona <strong
+                                    class="text-slate-800">UTF-8</strong
+                                > y haz clic en Guardar.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p class="font-bold text-slate-900 mb-2">
+                            Paso 4: Importar en Gmail
+                        </p>
+                        <ul
+                            class="list-disc list-inside space-y-1.5 text-xs md:text-sm text-slate-600 pl-4"
+                        >
+                            <li>
+                                En Gmail, ve a ⚙️ &gt; <strong
+                                    class="text-slate-900"
+                                    >Ver toda la configuración</strong
+                                > &gt; <strong class="text-slate-900"
+                                    >Filtros y direcciones bloqueadas</strong
+                                >.
+                            </li>
+                            <li>
+                                En la parte inferior, haz clic en el enlace <strong
+                                    class="text-slate-900 font-bold"
+                                    >Importar filtros</strong
+                                >.
+                            </li>
+                            <li>
+                                Selecciona el archivo XML recién guardado y haz
+                                clic en <strong class="text-slate-900"
+                                    >Crear filtros</strong
+                                >.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Success block -->
+                    <div
+                        class="bg-emerald-50 border border-emerald-200 p-4 rounded-xl flex gap-3 shadow-sm"
+                    >
+                        <span class="text-xl select-none">✓</span>
+                        <div>
+                            <p class="font-bold text-emerald-800">
+                                Paso 5: Verificación
+                            </p>
+                            <p
+                                class="text-xs md:text-sm text-emerald-700 mt-1 leading-normal"
+                            >
+                                Envía un correo de prueba desde otra dirección
+                                que cumpla con alguna de las condiciones.
+                                Observarás que el mensaje se procesa, etiqueta o
+                                archiva de forma completamente automatizada en
+                                segundos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer
+        class="bg-slate-900 text-slate-400 py-8 px-6 text-center text-xs space-y-1"
+    >
+        <p>© 2026 Almamotor · Guía interna de productividad con IA</p>
+        <p class="font-medium">
+            Desarrollado con metodología <span class="text-teal-400 font-bold"
+                >Sin Bullshit</span
+            > | LuciRMe AI
+        </p>
+    </footer>
+
+    <!-- Estilos globales específicos -->
+    <style is:global>
+        .custom-check-list li::before {
+            content: "✓";
+            color: #10b981; /* Verde éxito */
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+    </style>
+
+    <!-- LÓGICA DE COPIADO AL PORTAPAPELES -->
+    <script is:inline>
+        document.querySelectorAll(".copy-code-btn").forEach((btn) => {
+            btn.addEventListener("click", async () => {
+                const headerBlock = btn.closest("div");
+                const codePre = headerBlock
+                    ? headerBlock.nextElementSibling
+                    : null;
+                if (!codePre) return;
+
+                const textToCopy = codePre.textContent || "";
+                try {
+                    await navigator.clipboard.writeText(textToCopy);
+                    const originalText = btn.textContent;
+                    btn.textContent = "¡Copiado!";
+                    btn.classList.remove("bg-teal-600", "hover:bg-teal-700");
+                    btn.classList.add("bg-emerald-600", "hover:bg-emerald-700");
+
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.classList.remove(
+                            "bg-emerald-600",
+                            "hover:bg-emerald-700",
+                        );
+                        btn.classList.add("bg-teal-600", "hover:bg-teal-700");
+                    }, 2000);
+                } catch (err) {
+                    alert("No se pudo copiar el texto automáticamente.");
+                }
+            });
+        });
+    </script>
+</Layout>
