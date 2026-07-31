@@ -8,18 +8,59 @@ import * as XLSX from 'xlsx';
 function parseNumber(val) {
   if (val === null || val === undefined) return 0;
   if (typeof val === 'number') return val;
-  let str = String(val).replace(/[^\d.,-]/g, ''); // Keep only digits, dots, commas, minus
+  let str = String(val).trim();
   if (str === '') return 0;
 
-  const lastDot = str.lastIndexOf('.');
-  const lastComma = str.lastIndexOf(',');
+  // Remove currency symbols, spaces, and percent signs
+  str = str.replace(/[$\s%]/g, '');
 
-  if (lastDot > lastComma) {
-    // Dot is the decimal separator, e.g. "1,234.56"
-    str = str.replace(/,/g, '');
-  } else if (lastComma > lastDot) {
-    // Comma is the decimal separator, e.g. "1.234,56"
-    str = str.replace(/\./g, '').replace(',', '.');
+  const hasComma = str.includes(',');
+  const hasDot = str.includes('.');
+
+  if (hasComma && hasDot) {
+    // Both comma and dot exist
+    const lastComma = str.lastIndexOf(',');
+    const lastDot = str.lastIndexOf('.');
+    if (lastDot > lastComma) {
+      // Dot is the decimal separator, e.g., "1,500,000.00"
+      str = str.replace(/,/g, '');
+    } else {
+      // Comma is the decimal separator, e.g., "1.500.000,00"
+      str = str.replace(/\./g, '').replace(',', '.');
+    }
+  } else if (hasComma) {
+    // Only comma exists
+    const commaCount = (str.match(/,/g) || []).length;
+    if (commaCount > 1) {
+      // Multiple commas -> thousands separator
+      str = str.replace(/,/g, '');
+    } else {
+      // Single comma
+      const lastComma = str.lastIndexOf(',');
+      const digitsAfter = str.length - 1 - lastComma;
+      if (digitsAfter === 3) {
+        // e.g. "1,500" -> thousands separator
+        str = str.replace(/,/g, '');
+      } else {
+        // e.g. "1500,50" -> decimal separator
+        str = str.replace(',', '.');
+      }
+    }
+  } else if (hasDot) {
+    // Only dot exists
+    const dotCount = (str.match(/\./g) || []).length;
+    if (dotCount > 1) {
+      // Multiple dots -> thousands separator
+      str = str.replace(/\./g, '');
+    } else {
+      // Single dot
+      const lastDot = str.lastIndexOf('.');
+      const digitsAfter = str.length - 1 - lastDot;
+      if (digitsAfter === 3) {
+        // e.g. "1.500" -> thousands separator
+        str = str.replace(/\./g, '');
+      }
+    }
   }
 
   const num = parseFloat(str);
