@@ -1,0 +1,314 @@
+---
+// src/pages/recursos/procesador-siigo.astro
+import Layout from "../../layouts/Layout.astro";
+import { LINKS } from "../../lib/constants.js";
+---
+
+<Layout title="Procesador de Informes Siigo | LuciRMe AI">
+
+  <!-- NAVBAR -->
+  <nav class="bg-white/90 backdrop-blur-md border-b border-gray-200 px-6 py-4 sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <a href="/" class="text-xs md:text-sm font-bold text-gray-500 hover:text-teal transition flex items-center gap-1">
+        ← Volver a LuciRMe AI
+      </a>
+      <a href={LINKS.calendly} target="_blank" class="bg-orange hover:bg-orange/90 text-white font-bold text-xs py-2 px-4 rounded-xl transition shadow-xs">
+        Agendar Café Estratégico
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="bg-deep text-white py-14 px-6 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <span class="inline-flex items-center gap-2 bg-teal/15 text-teal text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4 border border-teal/30">
+        ⚡ Herramienta de Automatización de Datos
+      </span>
+      <h1 class="text-3xl md:text-5xl font-black mb-4 tracking-tight text-white">
+        Generador de Informe Gerencial <span class="text-teal">Siigo</span>
+      </h1>
+      <p class="text-base md:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+        Carga tu exportación de ventas de Siigo (.xlsx) y genera automáticamente tu informe gerencial limpio con filtro de duplicados, clasificación de productos y resumen por centro de costos.
+      </p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-12 space-y-10">
+
+    <!-- UPLOAD ZONE CARD -->
+    <section id="drop-zone" class="bg-white border-2 border-dashed border-gray-300 rounded-3xl p-8 md:p-12 text-center transition-all duration-300 hover:border-teal relative group">
+      <div class="max-w-md mx-auto space-y-4">
+        <div class="w-16 h-16 mx-auto rounded-2xl bg-teal/10 text-teal flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
+          📊
+        </div>
+        <div>
+          <h2 class="text-xl font-bold text-deep">Carga tu archivo de Siigo (.xlsx)</h2>
+          <p class="text-xs text-gray-500 mt-1">Arrastra tu archivo aquí o haz clic para seleccionar</p>
+        </div>
+
+        <input type="file" id="excel-file-input" accept=".xlsx, .xls" class="hidden" />
+
+        <div class="pt-2">
+          <button id="select-file-btn" type="button" class="bg-teal hover:bg-tealHover text-white font-bold text-sm py-3 px-8 rounded-xl transition shadow-md cursor-pointer inline-flex items-center gap-2">
+            <span>📁 Seleccionar Archivo</span>
+          </button>
+        </div>
+
+        <p id="selected-filename" class="text-xs font-semibold text-teal hidden truncate max-w-xs mx-auto"></p>
+      </div>
+    </section>
+
+    <!-- LOADING STATE -->
+    <div id="loading-state" class="hidden text-center py-8 space-y-3">
+      <div class="inline-block w-8 h-8 border-4 border-teal border-t-transparent rounded-full animate-spin"></div>
+      <p class="text-sm font-bold text-deep">Procesando y clasificando datos de Siigo...</p>
+    </div>
+
+    <!-- ERROR MESSAGE -->
+    <div id="error-box" class="hidden bg-red-50 border border-red-200 text-red-700 text-sm p-4 rounded-2xl"></div>
+
+    <!-- RESULT SUMMARY CARD (Appears after upload) -->
+    <section id="results-card" class="hidden bg-slate-50 border border-gray-200 rounded-3xl p-6 md:p-8 space-y-8">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-gray-200">
+        <div>
+          <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+            ✅ Procesamiento Completado
+          </span>
+          <h3 class="text-2xl font-bold text-deep mt-2">Resumen Ejecutivo Generado</h3>
+        </div>
+        <button id="download-btn" type="button" class="bg-orange hover:bg-orange/90 text-white font-bold text-sm py-3.5 px-6 rounded-xl transition shadow-md flex items-center justify-center gap-2 cursor-pointer">
+          <span>📥 Descargar Excel Final (.xlsx)</span>
+        </button>
+      </div>
+
+      <!-- METRICS GRID -->
+      <div class="grid sm:grid-cols-3 gap-4">
+        <div class="bg-white border border-gray-200 p-5 rounded-2xl shadow-2xs">
+          <span class="text-xs font-bold text-gray-500 uppercase">Facturación Neta Total</span>
+          <p id="metric-facturacion" class="text-xl md:text-2xl font-black text-deep mt-1">$0</p>
+          <span class="text-[11px] text-gray-400">Sin duplicados de fábrica</span>
+        </div>
+        <div class="bg-white border border-gray-200 p-5 rounded-2xl shadow-2xs">
+          <span class="text-xs font-bold text-gray-500 uppercase">Total Unidades</span>
+          <p id="metric-unidades" class="text-xl md:text-2xl font-black text-teal mt-1">0</p>
+          <span class="text-[11px] text-gray-400">Unidades vendidas</span>
+        </div>
+        <div class="bg-white border border-gray-200 p-5 rounded-2xl shadow-2xs">
+          <span class="text-xs font-bold text-gray-500 uppercase">Transacciones Activas</span>
+          <p id="metric-transacciones" class="text-xl md:text-2xl font-black text-deep mt-1">0</p>
+          <span class="text-[11px] text-gray-400">Registros depurados</span>
+        </div>
+      </div>
+
+      <!-- TABS OR SUMMARY SECTIONS -->
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 space-y-4">
+        <h4 class="font-bold text-deep text-base">Estructura de Pestañas Incluidas en el Excel:</h4>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+            <span class="font-bold text-teal block">1. Resumen Ejecutivo</span>
+            Indicadores gerenciales consolidados
+          </div>
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+            <span class="font-bold text-teal block">2. Centro de Costos</span>
+            Desglose por unidades, descuentos e impuestos
+          </div>
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+            <span class="font-bold text-teal block">3. Productos Estrella</span>
+            Top 10 Motos y Top 10 Repuestos
+          </div>
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+            <span class="font-bold text-teal block">4. Detalle Depurado</span>
+            Tabla limpia sin duplicados con categoría
+          </div>
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+            <span class="font-bold text-teal block">5. Archivo Original</span>
+            Resguardo de datos crudos
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTRUCTIONS / PASO A PASO EXPLICATIVO PARA EL USUARIO -->
+    <section class="bg-white border border-gray-200 rounded-3xl p-8 space-y-6">
+      <h3 class="text-xl font-extrabold text-deep border-b border-gray-100 pb-3">
+        📖 ¿Cómo llevar este código de Python a tu Frontend o Aplicación Web?
+      </h3>
+
+      <div class="space-y-6 text-sm text-gray-700 leading-relaxed">
+
+        <!-- PASO 1 -->
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 rounded-xl bg-teal text-white font-bold flex items-center justify-center shrink-0">
+            1
+          </div>
+          <div>
+            <h4 class="font-bold text-deep text-base">Entender las dos arquitecturas posibles</h4>
+            <p class="text-xs text-gray-600 mt-1">
+              <strong>Opción A (API Endpoint en Backend):</strong> El frontend envía el archivo via <code>fetch()</code> a tu servidor (Node.js / Python FastAPI / Flask / Next.js) donde corre el script y devuelve el Excel generado.<br/>
+              <strong>Opción B (Full Frontend / Browser):</strong> Puedes usar librerías de JavaScript como <code>xlsx</code> (SheetJS) o <code>exceljs</code> para ejecutar exactamente la misma lógica de pandas/openpyxl directamente en el navegador del usuario sin necesidad de un servidor Python.
+            </p>
+          </div>
+        </div>
+
+        <!-- PASO 2 -->
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 rounded-xl bg-teal text-white font-bold flex items-center justify-center shrink-0">
+            2
+          </div>
+          <div>
+            <h4 class="font-bold text-deep text-base">Crear la ruta API (si usas servidor Node/Astro/Next)</h4>
+            <p class="text-xs text-gray-600 mt-1">
+              En esta aplicación ya dejamos lista la ruta <code>/api/procesar-siigo</code> que recibe el archivo por FormData y devuelve la descarga en formato <code>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</code>.
+            </p>
+          </div>
+        </div>
+
+        <!-- PASO 3 -->
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 rounded-xl bg-teal text-white font-bold flex items-center justify-center shrink-0">
+            3
+          </div>
+          <div>
+            <h4 class="font-bold text-deep text-base">Conectar el componente del Frontend</h4>
+            <p class="text-xs text-gray-600 mt-1">
+              Creas un input de tipo <code>file</code> con zona de Drag & Drop en tu interfaz en React/Astro/Vue. Al seleccionar el archivo, ejecutas una petición POST y descargas el resultado en blob.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    import * as XLSX from 'xlsx';
+    import { processSiigoExcel } from '../../lib/siigoProcessor.js';
+
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('excel-file-input') as HTMLInputElement;
+    const selectBtn = document.getElementById('select-file-btn');
+    const selectedFilename = document.getElementById('selected-filename');
+    const loadingState = document.getElementById('loading-state');
+    const errorBox = document.getElementById('error-box');
+    const resultsCard = document.getElementById('results-card');
+
+    const metricFacturacion = document.getElementById('metric-facturacion');
+    const metricUnidades = document.getElementById('metric-unidades');
+    const metricTransacciones = document.getElementById('metric-transacciones');
+    const downloadBtn = document.getElementById('download-btn');
+
+    let processedBufferData: Uint8Array | null = null;
+
+    selectBtn?.addEventListener('click', () => fileInput?.click());
+
+    fileInput?.addEventListener('change', (e) => {
+      const files = (e.target as HTMLInputElement).files;
+      if (files && files.length > 0) {
+        handleFile(files[0]);
+      }
+    });
+
+    // Exponer handleUpload globalmente en window para corregir errores de handler inline HTML (onchange="handleUpload(event)")
+    (window as any).handleUpload = function(e: Event | File) {
+      if (e instanceof File) {
+        handleFile(e);
+      } else if (e && (e as any).target && (e as any).target.files) {
+        const file = (e as any).target.files[0];
+        if (file) handleFile(file);
+      }
+    };
+
+    // Drag and Drop
+    dropZone?.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('border-teal', 'bg-teal/5');
+    });
+
+    dropZone?.addEventListener('dragleave', () => {
+      dropZone.classList.remove('border-teal', 'bg-teal/5');
+    });
+
+    dropZone?.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('border-teal', 'bg-teal/5');
+      if (e.dataTransfer?.files && e.dataTransfer.files.length > 0) {
+        handleFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    async function handleFile(file: File) {
+      if (!file.name.endsWith('.xlsx') && !file.name.endsWith('.xls')) {
+        showError('Por favor selecciona un archivo de Excel válido (.xlsx o .xls).');
+        return;
+      }
+
+      if (selectedFilename) {
+        selectedFilename.textContent = `📄 ${file.name}`;
+        selectedFilename.classList.remove('hidden');
+      }
+
+      errorBox?.classList.add('hidden');
+      resultsCard?.classList.add('hidden');
+      loadingState?.classList.remove('hidden');
+
+      try {
+        const arrayBuffer = await file.arrayBuffer();
+        const fileUint8 = new Uint8Array(arrayBuffer);
+
+        // Procesar localmente con la misma lógica que Python
+        const outArray = processSiigoExcel(fileUint8);
+        processedBufferData = outArray;
+
+        // Extraer métricas rápidas para mostrar en la interfaz
+        const wb = XLSX.read(outArray, { type: 'array' });
+        const summarySheet = wb.Sheets['Resumen Ejecutivo'];
+        const summaryJson: any[] = XLSX.utils.sheet_to_json(summarySheet);
+
+        let facturacion = 0;
+        let unidades = 0;
+        let transacciones = 0;
+
+        summaryJson.forEach((row) => {
+          const k = row['Indicador Gerencial'];
+          if (k && k.includes('Facturación')) facturacion = row['Valor'] || 0;
+          if (k && k.includes('Unidades')) unidades = row['Valor'] || 0;
+          if (k && k.includes('Transacciones')) transacciones = row['Valor'] || 0;
+        });
+
+        if (metricFacturacion) metricFacturacion.textContent = `$${Math.round(facturacion).toLocaleString()}`;
+        if (metricUnidades) metricUnidades.textContent = unidades.toLocaleString();
+        if (metricTransacciones) metricTransacciones.textContent = transacciones.toLocaleString();
+
+        loadingState?.classList.add('hidden');
+        resultsCard?.classList.remove('hidden');
+      } catch (err: any) {
+        console.error(err);
+        loadingState?.classList.add('hidden');
+        showError(`Error al procesar el archivo: ${err.message || 'Formato no soportado.'}`);
+      }
+    }
+
+    function showError(msg: string) {
+      if (errorBox) {
+        errorBox.textContent = msg;
+        errorBox.classList.remove('hidden');
+      }
+    }
+
+    downloadBtn?.addEventListener('click', () => {
+      if (!processedBufferData) return;
+      const blob = new Blob([processedBufferData.buffer as ArrayBuffer], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Informe_Gerencial_Ventas_Final.xlsx';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</Layout>
