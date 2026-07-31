@@ -10,5 +10,10 @@ export default defineConfig({
     clerk({
       localization: esES // <--- 2. Inyecta la traducción global aquí
     })
-  ]
+  ],
+  vite: {
+    ssr: {
+      noExternal: ['xlsx']
+    }
+  }
 });
