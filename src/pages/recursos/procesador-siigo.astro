@@ -1,0 +1,279 @@
+---
+// src/pages/recursos/procesador-siigo.astro
+import Layout from "../../layouts/Layout.astro";
+import { LINKS } from "../../lib/constants.js";
+
+// REEMPLAZA ESTA URL POR LA URL EXACTA DE TU SERVIDOR EN RENDER
+const RENDER_BACKEND_URL =
+  "https://mi-backend-excel.onrender.com/procesar-siigo";
+---
+
+<Layout title="Procesador de Informes Siigo | LuciRMe AI">
+  <!-- NAVBAR -->
+  <nav
+    class="bg-white/90 backdrop-blur-md border-b border-gray-200 px-6 py-4 sticky top-0 z-50"
+  >
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <a
+        href="/"
+        class="text-xs md:text-sm font-bold text-gray-500 hover:text-teal transition flex items-center gap-1"
+      >
+        ← Volver a LuciRMe AI
+      </a>
+      <a
+        href={LINKS.calendly}
+        target="_blank"
+        class="bg-orange hover:bg-orange/90 text-white font-bold text-xs py-2 px-4 rounded-xl transition shadow-xs"
+      >
+        Agendar Café Estratégico
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="bg-deep text-white py-14 px-6 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <span
+        class="inline-flex items-center gap-2 bg-teal/15 text-teal text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4 border border-teal/30"
+      >
+        ⚡ Servidor Python activo en Render
+      </span>
+      <h1
+        class="text-3xl md:text-5xl font-black mb-4 tracking-tight text-white"
+      >
+        Procesador de Informes Gerenciales <span class="text-teal">Siigo</span>
+      </h1>
+      <p
+        class="text-base md:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed"
+      >
+        Sube tu archivo exportado de Siigo (.xlsx). Tu motor en Render procesará
+        la deduplicación, clasificación de motos/repuestos y el resumen por
+        centros de costo.
+      </p>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-6 py-12 space-y-8">
+    <!-- DROP ZONE PARA EL ARCHIVO -->
+    <section
+      id="drop-zone"
+      class="bg-white border-2 border-dashed border-gray-300 rounded-3xl p-8 md:p-12 text-center transition-all duration-300 hover:border-teal relative group cursor-pointer"
+    >
+      <div class="max-w-md mx-auto space-y-4">
+        <div
+          class="w-16 h-16 mx-auto rounded-2xl bg-teal/10 text-teal flex items-center justify-center text-3xl group-hover:scale-110 transition-transform"
+        >
+          📊
+        </div>
+        <div>
+          <h2 class="text-xl font-bold text-deep">
+            Carga tu Excel de Siigo (.xlsx)
+          </h2>
+          <p class="text-xs text-gray-500 mt-1">
+            Arrastra tu archivo aquí o haz clic para seleccionar
+          </p>
+        </div>
+
+        <input
+          type="file"
+          id="excel-file-input"
+          accept=".xlsx, .xls"
+          class="hidden"
+        />
+
+        <div class="pt-2">
+          <button
+            id="select-file-btn"
+            type="button"
+            class="bg-teal hover:bg-tealHover text-white font-bold text-sm py-3 px-8 rounded-xl transition shadow-md inline-flex items-center gap-2"
+          >
+            <span>📁 Seleccionar Archivo</span>
+          </button>
+        </div>
+
+        <p
+          id="selected-filename"
+          class="text-xs font-bold text-teal hidden truncate max-w-xs mx-auto"
+        >
+        </p>
+      </div>
+    </section>
+
+    <!-- ESTADO DE CARGA / SPINNER -->
+    <div
+      id="loading-state"
+      class="hidden text-center py-8 space-y-3 bg-white border border-gray-200 rounded-3xl p-6 shadow-xs"
+    >
+      <div
+        class="inline-block w-8 h-8 border-4 border-teal border-t-transparent rounded-full animate-spin"
+      >
+      </div>
+      <p class="text-sm font-bold text-deep">
+        Enviando archivo a Render y procesando informe...
+      </p>
+      <p class="text-xs text-gray-400">
+        Si tu servidor Render estaba 'dormido' (plan gratuito), el primer envío
+        puede tardar unos 20-30 segundos.
+      </p>
+    </div>
+
+    <!-- ERRORES -->
+    <div
+      id="error-box"
+      class="hidden bg-red-50 border border-red-200 text-red-700 text-sm p-4 rounded-2xl"
+    >
+    </div>
+
+    <!-- RESULTADO Y DESCARGA -->
+    <div
+      id="success-box"
+      class="hidden bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm p-6 rounded-3xl text-center space-y-4"
+    >
+      <div class="text-3xl">🎉</div>
+      <h3 class="text-lg font-bold">
+        ¡Informe procesado exitosamente en Render!
+      </h3>
+      <p class="text-xs text-emerald-700">
+        El archivo depurado se ha descargado automáticamente en tu navegador. Si
+        no se descargó, haz clic abajo:
+      </p>
+      <button
+        id="re-download-btn"
+        type="button"
+        class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2.5 px-6 rounded-xl transition shadow-xs cursor-pointer"
+      >
+        Descargar de nuevo (.xlsx)
+      </button>
+    </div>
+  </main>
+
+  <!-- LÓGICA DE CONEXIÓN VÍA FETCH CON RENDER -->
+  <script is:inline define:vars={{ RENDER_BACKEND_URL }}>
+    const dropZone = document.getElementById("drop-zone");
+    const fileInput = document.getElementById("excel-file-input");
+    const selectBtn = document.getElementById("select-file-btn");
+    const selectedFilename = document.getElementById("selected-filename");
+    const loadingState = document.getElementById("loading-state");
+    const errorBox = document.getElementById("error-box");
+    const successBox = document.getElementById("success-box");
+    const reDownloadBtn = document.getElementById("re-download-btn");
+
+    let downloadedBlob = null;
+
+    selectBtn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      fileInput?.click();
+    });
+
+    dropZone?.addEventListener("click", () => {
+      fileInput?.click();
+    });
+
+    fileInput?.addEventListener("change", (e) => {
+      const files = e.target.files;
+      if (files && files.length > 0) {
+        handleUpload(files[0]);
+      }
+    });
+
+    // Drag & Drop
+    dropZone?.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      dropZone.classList.add("border-teal", "bg-teal/5");
+    });
+
+    dropZone?.addEventListener("dragleave", () => {
+      dropZone.classList.remove("border-teal", "bg-teal/5");
+    });
+
+    dropZone?.addEventListener("drop", (e) => {
+      e.preventDefault();
+      dropZone.classList.remove("border-teal", "bg-teal/5");
+      if (e.dataTransfer?.files && e.dataTransfer.files.length > 0) {
+        handleUpload(e.dataTransfer.files[0]);
+      }
+    });
+
+    async function handleUpload(file) {
+      if (!file.name.endsWith(".xlsx") && !file.name.endsWith(".xls")) {
+        showError(
+          "Por favor selecciona un archivo de Excel válido (.xlsx o .xls).",
+        );
+        return;
+      }
+
+      if (selectedFilename) {
+        selectedFilename.textContent = `📄 ${file.name}`;
+        selectedFilename.classList.remove("hidden");
+      }
+
+      hideError();
+      successBox?.classList.add("hidden");
+      loadingState?.classList.remove("hidden");
+
+      try {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        // Envío vía POST multipart a Render
+        const response = await fetch(RENDER_BACKEND_URL, {
+          method: "POST",
+          body: formData,
+        });
+
+        if (!response.ok) {
+          const errData = await response.json().catch(() => null);
+          throw new Error(
+            errData?.detail || `Error en el servidor (${response.status})`,
+          );
+        }
+
+        // Convertir la respuesta binaria a Blob
+        const blob = await response.blob();
+        downloadedBlob = blob;
+
+        // Disparar descarga automática en el navegador
+        triggerDownload(blob, "Informe_Gerencial_Ventas_Final.xlsx");
+
+        loadingState?.classList.add("hidden");
+        successBox?.classList.remove("hidden");
+      } catch (err) {
+        console.error("Error conectando con Render:", err);
+        loadingState?.classList.add("hidden");
+        showError(
+          `No se pudo procesar el archivo: ${err.message || "Verifica la URL de Render."}`,
+        );
+      }
+    }
+
+    function triggerDownload(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    reDownloadBtn?.addEventListener("click", () => {
+      if (downloadedBlob) {
+        triggerDownload(downloadedBlob, "Informe_Gerencial_Ventas_Final.xlsx");
+      }
+    });
+
+    function showError(msg) {
+      if (errorBox) {
+        errorBox.textContent = msg;
+        errorBox.classList.remove("hidden");
+      }
+    }
+
+    function hideError() {
+      if (errorBox) {
+        errorBox.classList.add("hidden");
+      }
+    }
+  </script>
+</Layout>

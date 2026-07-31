@@ -1,0 +1,238 @@
+// src/lib/siigoProcessor.js
+import * as XLSX from 'xlsx';
+
+/**
+ * Procesa un Buffer o Uint8Array de un archivo Excel de Siigo
+ * y retorna la estructura de hojas en formato binary/Buffer
+ * igual que el script de Python.
+ */
+export function processSiigoExcel(fileBuffer) {
+  // 1. Leer workbook original
+  const workbook = XLSX.read(fileBuffer, { type: 'array', cellDates: true });
+  const firstSheetName = workbook.SheetNames[0];
+  const originalSheet = workbook.Sheets[firstSheetName];
+
+  // Leer filas como objetos
+  const df_original = XLSX.utils.sheet_to_json(originalSheet, { defval: null });
+
+  if (!df_original || df_original.length === 0) {
+    throw new Error('El archivo Excel está vacío o no se pudo leer.');
+  }
+
+  // 2. Limpieza inicial de metadatos de Siigo
+  // dropna(subset=['Tipo transacción'])
+  // ~df_clean['Tipo transacción'].str.contains('Procesado en')
+  let df_clean = df_original.filter((row) => {
+    const tipoTx = row['Tipo transacción'];
+    if (tipoTx === null || tipoTx === undefined || String(tipoTx).trim() === '') {
+      return false;
+    }
+    if (String(tipoTx).includes('Procesado en')) {
+      return false;
+    }
+    return true;
+  });
+
+  // Conversión de columnas numéricas
+  const numericCols = [
+    'Total',
+    'Cantidad',
+    'Valor unitario',
+    'Valor desc.',
+    'Valor Impuesto Cargo',
+    'Valor Impuesto Cargo 2'
+  ];
+
+  df_clean = df_clean.map((row) => {
+    const newRow = { ...row };
+    numericCols.forEach((col) => {
+      if (col in newRow) {
+        const val = parseFloat(newRow[col]);
+        newRow[col] = isNaN(val) ? 0 : val;
+      } else {
+        newRow[col] = 0;
+      }
+    });
+    return newRow;
+  });
+
+  // Definir la columna de fecha para ordenamiento
+  const dateCol = 'Fecha elaboración' in (df_clean[0] || {}) ? 'Fecha elaboración' : 'Fecha creación';
+
+  df_clean.forEach((row) => {
+    if (row[dateCol]) {
+      const d = new Date(row[dateCol]);
+      row._parsedDate = isNaN(d.getTime()) ? new Date(0) : d;
+    } else {
+      row._parsedDate = new Date(0);
+    }
+  });
+
+  // 3. FILTRO DE DUPLICADOS (Referencia fábrica / Chasis más reciente)
+  const df_valid_ref = [];
+  const df_no_ref = [];
+
+  df_clean.forEach((row) => {
+    const ref = row['Referencia fábrica'];
+    if (ref !== null && ref !== undefined && String(ref).trim() !== '') {
+      df_valid_ref.push(row);
+    } else {
+      df_no_ref.push(row);
+    }
+  });
+
+  // Ordenar df_valid_ref por fecha descendente
+  df_valid_ref.sort((a, b) => b._parsedDate.getTime() - a._parsedDate.getTime());
+
+  // Deduplicar subset=['Referencia fábrica'], keep='first'
+  const seenRefs = new Set();
+  const df_dedup_ref = [];
+  df_valid_ref.forEach((row) => {
+    const refKey = String(row['Referencia fábrica']).trim();
+    if (!seenRefs.has(refKey)) {
+      seenRefs.add(refKey);
+      df_dedup_ref.push(row);
+    }
+  });
+
+  // Combinar df_dedup_ref + df_no_ref
+  const df_filtered = [...df_dedup_ref, ...df_no_ref];
+
+  // 4. CLASIFICACIÓN: Moto vs Repuesto & LIMPIEZA DE NOMBRE
+  df_filtered.forEach((row) => {
+    const nombre = String(row['Nombre'] || '').toUpperCase();
+    const ref = String(row['Referencia fábrica'] || '').toUpperCase();
+
+    if (
+      nombre.includes('CHASIS') ||
+      nombre.includes('MOTOR') ||
+      ref.includes('CHASIS') ||
+      ref.includes('MOTOR') ||
+      nombre.includes('CC ') ||
+      nombre.includes('MODELO 20') ||
+      nombre.includes('MOD 20')
+    ) {
+      row['Categoría'] = 'Moto';
+    } else {
+      row['Categoría'] = 'Repuesto';
+    }
+
+    // Limpieza de Nombre (hasta antes de la palabra "Chasis")
+    const nameStr = String(row['Nombre'] || '');
+    const match = nameStr.match(/\bchasis\b/i);
+    if (match) {
+      const truncated = nameStr.substring(0, match.index).trim();
+      row['Nombre_Limpio'] = truncated !== '' ? truncated : nameStr.trim();
+    } else {
+      row['Nombre_Limpio'] = nameStr.trim();
+    }
+  });
+
+  // Remove internal helper field
+  df_filtered.forEach((r) => delete r._parsedDate);
+
+  // 5. INDICADORES Y AGRUPACIONES
+  const total_facturacion = df_filtered.reduce((sum, r) => sum + (r['Total'] || 0), 0);
+  const total_unidades = df_filtered.reduce((sum, r) => sum + (r['Cantidad'] || 0), 0);
+  const total_transacciones = df_filtered.length;
+
+  // CENTRO DE COSTOS
+  const ccMap = new Map();
+  df_filtered.forEach((row) => {
+    const cc = row['Centro costo'] || 'Sin Centro de Costo';
+    if (!ccMap.has(cc)) {
+      ccMap.set(cc, {
+        'Centro costo': cc,
+        Unidades: 0,
+        'Suma Valor Unitario': 0,
+        'Valor Descuento': 0,
+        'Valor Impuesto a Cargo': 0,
+        'Valor Impuesto a Cargo 2': 0,
+        'Ventas Netas': 0,
+        Transacciones: 0
+      });
+    }
+    const item = ccMap.get(cc);
+    item.Unidades += row['Cantidad'] || 0;
+    item['Suma Valor Unitario'] += row['Valor unitario'] || 0;
+    item['Valor Descuento'] += row['Valor desc.'] || 0;
+    item['Valor Impuesto a Cargo'] += row['Valor Impuesto Cargo'] || 0;
+    item['Valor Impuesto a Cargo 2'] += row['Valor Impuesto Cargo 2'] || 0;
+    item['Ventas Netas'] += row['Total'] || 0;
+    item.Transacciones += 1;
+  });
+
+  const ccGroupedList = Array.from(ccMap.values()).map((item) => {
+    const part = total_facturacion > 0 ? (item['Ventas Netas'] / total_facturacion) * 100 : 0;
+    return {
+      'Centro costo': item['Centro costo'],
+      Unidades: item.Unidades,
+      'Suma Valor Unitario': item['Suma Valor Unitario'],
+      'Valor Descuento': item['Valor Descuento'],
+      'Valor Impuesto a Cargo': item['Valor Impuesto a Cargo'],
+      'Valor Impuesto a Cargo 2': item['Valor Impuesto a Cargo 2'],
+      'Ventas Netas': item['Ventas Netas'],
+      'Participación %': Math.round(part * 100) / 100,
+      Transacciones: item.Transacciones
+    };
+  });
+
+  // Sort Centro de Costos by Ventas Netas descending
+  ccGroupedList.sort((a, b) => b['Ventas Netas'] - a['Ventas Netas']);
+
+  // PRODUCTOS ESTRELLA
+  const motos_df = df_filtered.filter((r) => r['Categoría'] === 'Moto');
+  const repuestos_df = df_filtered.filter((r) => r['Categoría'] === 'Repuesto');
+
+  function getTop10(items) {
+    const map = new Map();
+    items.forEach((row) => {
+      const nombre = row['Nombre_Limpio'] || 'Sin Nombre';
+      if (!map.has(nombre)) {
+        map.set(nombre, { 'Nombre Producto': nombre, Unidades: 0, 'Ventas Totales': 0 });
+      }
+      const entry = map.get(nombre);
+      entry.Unidades += row['Cantidad'] || 0;
+      entry['Ventas Totales'] += row['Total'] || 0;
+    });
+    return Array.from(map.values())
+      .sort((a, b) => b.Unidades - a.Unidades)
+      .slice(0, 10);
+  }
+
+  const topMotos = getTop10(motos_df);
+  const topRepuestos = getTop10(repuestos_df);
+
+  // 6. CREACIÓN DE LIBRO EXCEL MULTI-HOJA
+  const newWb = XLSX.utils.book_new();
+
+  // 1. Resumen Ejecutivo
+  const summaryRows = [
+    { 'Indicador Gerencial': 'Facturación Neta Total (Sin Duplicados)', Valor: total_facturacion },
+    { 'Indicador Gerencial': 'Total Unidades Vendidas', Valor: total_unidades },
+    { 'Indicador Gerencial': 'Total Transacciones Activas', Valor: total_transacciones }
+  ];
+  const wsSummary = XLSX.utils.json_to_sheet(summaryRows, { origin: 'A3' });
+  XLSX.utils.book_append_sheet(newWb, wsSummary, 'Resumen Ejecutivo');
+
+  // 2. Centro de Costos
+  const wsCC = XLSX.utils.json_to_sheet(ccGroupedList, { origin: 'A3' });
+  XLSX.utils.book_append_sheet(newWb, wsCC, 'Centro de Costos');
+
+  // 3. Productos Estrella
+  const wsEstrella = XLSX.utils.json_to_sheet(topMotos, { origin: 'A3' });
+  XLSX.utils.sheet_add_json(wsEstrella, topRepuestos, { origin: 'A16' });
+  XLSX.utils.book_append_sheet(newWb, wsEstrella, 'Productos Estrella');
+
+  // 4. Detalle Depurado
+  const wsFiltered = XLSX.utils.json_to_sheet(df_filtered);
+  XLSX.utils.book_append_sheet(newWb, wsFiltered, 'Detalle Depurado');
+
+  // 5. Archivo Original
+  const wsOriginal = XLSX.utils.json_to_sheet(df_original);
+  XLSX.utils.book_append_sheet(newWb, wsOriginal, 'Archivo Original');
+
+  // Generar buffer en formato uint8array / binary
+  const outBuffer = XLSX.write(newWb, { bookType: 'xlsx', type: 'array' });
+  return outBuffer;
+}
