@@ -194,56 +194,28 @@ const RENDER_BACKEND_URL =
       }
     });
 
-    async function handleUpload(file) {
-      if (!file.name.endsWith(".xlsx") && !file.name.endsWith(".xls")) {
-        showError(
-          "Por favor selecciona un archivo de Excel válido (.xlsx o .xls).",
-        );
-        return;
-      }
+    async function enviarARender(file) {
+      const formData = new FormData();
+      formData.append("file", file);
 
-      if (selectedFilename) {
-        selectedFilename.textContent = `📄 ${file.name}`;
-        selectedFilename.classList.remove("hidden");
-      }
-
-      hideError();
-      successBox?.classList.add("hidden");
-      loadingState?.classList.remove("hidden");
-
-      try {
-        const formData = new FormData();
-        formData.append("file", file);
-
-        // Envío vía POST multipart a Render
-        const response = await fetch(RENDER_BACKEND_URL, {
+      const response = await fetch(
+        "https://mi-backend-excel.onrender.com/procesar",
+        {
           method: "POST",
           body: formData,
-        });
+        },
+      );
 
-        if (!response.ok) {
-          const errData = await response.json().catch(() => null);
-          throw new Error(
-            errData?.detail || `Error en el servidor (${response.status})`,
-          );
-        }
-
-        // Convertir la respuesta binaria a Blob
-        const blob = await response.blob();
-        downloadedBlob = blob;
-
-        // Disparar descarga automática en el navegador
-        triggerDownload(blob, "Informe_Gerencial_Ventas_Final.xlsx");
-
-        loadingState?.classList.add("hidden");
-        successBox?.classList.remove("hidden");
-      } catch (err) {
-        console.error("Error conectando con Render:", err);
-        loadingState?.classList.add("hidden");
-        showError(
-          `No se pudo procesar el archivo: ${err.message || "Verifica la URL de Render."}`,
-        );
+      if (!response.ok) {
+        throw new Error("Error al procesar el archivo en Render");
       }
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Informe_Gerencial_Ventas_Final.xlsx";
+      a.click();
     }
 
     function triggerDownload(blob, filename) {
