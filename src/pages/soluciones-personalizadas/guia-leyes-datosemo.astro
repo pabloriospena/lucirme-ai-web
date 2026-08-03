@@ -1,0 +1,302 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const pageTitle = "Guía Práctica EMO & Matriz Legal | Interobras · LuciRMe AI";
+---
+
+<Layout title={pageTitle}>
+    <main class="max-w-4xl mx-auto py-12 px-6">
+        <!-- HEADER -->
+        <header class="border-b border-slate-200 pb-8 mb-10">
+            <div class="flex items-center gap-2 mb-4">
+                <a href="/" class="text-xs font-bold text-slate-500 hover:text-teal-600 transition-colors">
+                    ← Volver a LuciRMe AI
+                </a>
+                <span class="text-slate-300">•</span>
+                <span class="inline-block bg-teal-50 text-teal-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-teal-100 shadow-2xs">
+                    Guía Práctica Interna
+                </span>
+            </div>
+            
+            <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+                Guía Práctica: Natalia y Katherine
+            </h1>
+            <p class="text-base md:text-lg text-teal-700 font-bold mb-2">
+                Gestión de Exámenes Médicos Ocupacionales (EMO) & Actualización de Matriz Legal
+            </p>
+            <p class="text-xs md:text-sm text-slate-500 font-medium">
+                <span class="text-slate-800 font-bold">Para:</span> Natalia & Katherine &nbsp;|&nbsp;
+                <span class="text-slate-800 font-bold">Empresa:</span> Interobras &nbsp;|&nbsp;
+                <span class="text-slate-800 font-bold">Herramientas:</span> ChatGPT, Gemini, Qwen, NotebookLM
+            </p>
+        </header>
+
+        <div class="space-y-12">
+
+            <!-- SECCIÓN 1: TABLA DE SEGUIMIENTO EMO CON IA -->
+            <section class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-xs">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="text-2xl p-2 bg-blue-50 text-blue-600 rounded-xl font-bold shrink-0">📋</span>
+                    <div>
+                        <span class="text-xs font-bold text-teal-600 uppercase tracking-wider">Módulo 1</span>
+                        <h2 class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">
+                            1. Tabla de Seguimiento de EMO con IA
+                        </h2>
+                    </div>
+                </div>
+
+                <!-- COMPARATIVA DE FLUJO -->
+                <div class="grid md:grid-cols-2 gap-4 mb-8">
+                    <div class="bg-red-50/60 border border-red-200/80 rounded-xl p-4">
+                        <div class="text-xs font-bold text-red-700 uppercase tracking-wide mb-1">🔴 Tu flujo anterior</div>
+                        <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                            Lees cada PDF de examen médico individualmente y copias campo por campo manualmente a un Excel.
+                        </p>
+                    </div>
+                    <div class="bg-emerald-50/60 border border-emerald-200/80 rounded-xl p-4">
+                        <div class="text-xs font-bold text-emerald-700 uppercase tracking-wide mb-1">🟢 Tu nuevo flujo con IA</div>
+                        <p class="text-xs md:text-sm text-slate-700 leading-relaxed">
+                            Subes los PDFs en lote a la IA, la cual extrae, clasifica y genera la tabla consolidada para copiar en Excel en segundos.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- PASO A PASO -->
+                <div class="space-y-6 text-sm text-slate-700">
+                    <div class="flex items-start gap-3">
+                        <span class="bg-teal-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">a</span>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-base">Cargar los PDFs con los EMO</h3>
+                            <p class="text-xs md:text-sm text-slate-600 mt-1">
+                                Sube el primer grupo de PDFs (recomendado en tandas de 5 a 10 documentos según la IA que uses: <strong>ChatGPT, Gemini o Qwen</strong>).
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3">
+                        <span class="bg-teal-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">b</span>
+                        <div class="w-full">
+                            <h3 class="font-bold text-slate-900 text-base mb-2">Prompt para el primer paquete de PDFs</h3>
+                            <p class="text-xs md:text-sm text-slate-600 mb-3">
+                                Adjunta los primeros PDFs y ejecuta esta instrucción exacta:
+                            </p>
+
+                            <!-- PROMPT BOX 1 -->
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden mb-4">
+                                <div class="flex justify-between items-center px-4 py-2.5 bg-slate-100 border-b border-slate-200">
+                                    <span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Prompt 1: Extracción Inicial EMO</span>
+                                    <button onclick="copyText('prompt-emo-1', this)" class="bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs px-3 py-1 rounded-lg transition-all cursor-pointer">
+                                        Copiar Prompt
+                                    </button>
+                                </div>
+                                <pre id="prompt-emo-1" class="p-4 text-xs font-mono text-slate-800 leading-relaxed whitespace-pre-wrap select-all max-h-80 overflow-y-auto">Extrae de este examen médico ocupacional la siguiente información y preséntala en formato tabla con las columnas especificadas a continuación. Para cada campo, utiliza la información exacta que aparece en el documento; si algún dato no está presente o no puede determinarse con claridad, escribe "No especificado" en esa celda.
+
+Campos requeridos para la tabla:
+- Nombre completo del trabajador: nombre y apellidos completos tal como aparecen registrados en el documento.
+- Identificación (cédula): número de documento de identidad, cédula de ciudadanía o equivalente.
+- Cargo: puesto o rol laboral del trabajador evaluado.
+- Fecha de realización del examen: fecha en que se ejecutó la evaluación médica (formato DD/MM/AAAA si está disponible; de lo contrario, indicar el formato presente).
+- Hallazgos principales: resumen conciso de los resultados médicos relevantes, anomalías detectadas o conclusiones del estado de salud, sintetizado en 1-2 líneas de texto.
+- Vigencia del examen (fecha de vencimiento): fecha de expiración de la validez del certificado o período de vigencia establecido.
+- Recomendaciones médicas: indicaciones, restricciones, sugerencias de seguimiento o medidas preventivas emitidas por el profesional de salud; si no existen recomendaciones explícitas, indicar "No especificado".
+
+Instrucciones adicionales:
+- Verifica que la fecha de vencimiento no se confunda con la fecha de emisión del documento ni con la fecha del próximo examen programado, a menos que el texto explícitamente defina la vigencia de esa manera.
+- Si las recomendaciones médicas aparecen dispersas en diferentes secciones del documento (conclusiones, observaciones, plan de manejo, restricciones laborales), consolídalas en un solo campo resumido.
+- Mantén la fidelidad al contenido del documento original sin interpretaciones o inferencias no sustentadas en el texto.
+
+Debes visualizar la tabla con los datos adjuntos</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3">
+                        <span class="bg-teal-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">c</span>
+                        <div class="w-full">
+                            <h3 class="font-bold text-slate-900 text-base mb-1">Para las siguientes tandas o paquetes de PDFs</h3>
+                            <p class="text-xs md:text-sm text-slate-600 mb-2">
+                                En la misma conversación, adjunta el siguiente lote de PDFs y envía únicamente esta indicación:
+                            </p>
+                            <div class="bg-slate-100 border border-slate-200 rounded-lg p-3 text-xs font-mono font-bold text-slate-800 flex justify-between items-center">
+                                <span>incluir estos examenes a la misma tabla</span>
+                                <button onclick="navigator.clipboard.writeText('incluir estos examenes a la misma tabla'); alert('Copiado');" class="text-[11px] bg-teal-600 text-white px-2.5 py-1 rounded hover:bg-teal-700 transition cursor-pointer">
+                                    Copiar
+                                </button>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-2">
+                                Una vez terminada toda la lista de exámenes, puedes copiar directamente la tabla de la IA y pegarla en tu libro de Excel.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BONUS: PROMPT GENERADOR DE HTML DASHBOARD -->
+                <div class="mt-8 pt-6 border-t border-slate-200">
+                    <div class="bg-gradient-to-br from-teal-50 to-slate-50 border border-teal-200 rounded-xl p-5 md:p-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-orange-500 text-white text-xs font-black px-2 py-0.5 rounded uppercase">★ BONUS EMO</span>
+                            <h3 class="font-extrabold text-slate-900 text-base">Generar Informe Visual & Dashboard Interactivo en HTML</h3>
+                        </div>
+                        <p class="text-xs md:text-sm text-slate-700 leading-relaxed mb-4">
+                            Adjunta el archivo Excel resultante en una conversación nueva con <strong>Qwen</strong> (o prueba con <strong>Gemini</strong> y <strong>ChatGPT</strong>) y envía el siguiente prompt para crear un dashboard ejecutivo completo en un solo archivo HTML:
+                        </p>
+
+                        <!-- PROMPT BOX BONUS -->
+                        <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-2xs">
+                            <div class="flex justify-between items-center px-4 py-2 bg-slate-100 border-b border-slate-200">
+                                <span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Prompt Bonus: Generador Dashboard Power BI Style (index.html)</span>
+                                <button onclick="copyText('prompt-dashboard-html', this)" class="bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs px-3 py-1 rounded-lg transition-all cursor-pointer">
+                                    Copiar Prompt Dashboard
+                                </button>
+                            </div>
+                            <pre id="prompt-dashboard-html" class="p-4 text-xs font-mono text-slate-800 leading-relaxed whitespace-pre-wrap select-all max-h-80 overflow-y-auto">Eres un Ingeniero Senior de Frontend, Experto en Visualización de Datos, Diseñador UI/UX y Arquitecto de Software de Salud Ocupacional.
+
+Tu tarea es generar UN ÚNICO archivo HTML autónomo llamado:
+index.html
+
+El HTML debe contener todo el CSS y JavaScript embebidos.
+NO crees archivos adicionales.
+NO requieras backend.
+Todo debe funcionar localmente con solo abrir index.html en el navegador.
+
+## FUENTE DE DATOS
+Usa ÚNICAMENTE el archivo Excel adjunto como fuente de datos.
+Lee cada fila del Excel y utiliza todos los registros.
+NO inventes datos.
+NO omitas registros.
+Si un empleado tiene múltiples exámenes, conserva el historial médico completo.
+
+Columnas esperadas en el Excel:
+Employee Name, ID, Position, Exam Date, Exam Type, Medical Provider, Findings, Restrictions, Medical Treatment, Recommendations, Exam Validity (Months), Expiration Date, Status
+
+Si existen columnas adicionales, inclúyelas siempre que sean útiles.
+
+## DISEÑO GENERAL
+Crea un panel moderno similar a Microsoft Power BI.
+Usa: Fondo blanco, Tarjetas gris claro, Color primario azul, Verde, Amarillo, Anaranjado, Rojo, Tarjetas redondeadas, Sombras suaves, Diseño responsivo, Apariencia corporativa profesional, Navegación por barra lateral, Barra de navegación superior. Adaptable para escritorio y tableta.
+
+## PANEL (DASHBOARD)
+En la parte superior, crea tarjetas de KPI:
+Total de Empleados, Total de Exámenes Médicos, Exámenes Válidos, Exámenes Vencidos, Exámenes Próximos a Vencer, Empleados con Hallazgos, Empleados con Restricciones, Empleados Bajo Tratamiento Médico, Seguimiento Médico Pendiente, Puntuación de Riesgo Promedio.
+
+## GRÁFICOS
+Usa el CDN de Chart.js.
+Crea: Dona (Estado de Exámenes), Barras (Hallazgos Médicos), Pastel (Restricciones), Líneas (Exámenes por Año), Barras Horizontales (Proveedores Médicos), Área (Próximos Vencimientos).
+
+## TABLA DE EMPLEADOS
+Crea una tabla con capacidad de búsqueda.
+Columnas: Employee, ID, Position, Exam Date, Exam Type, Medical Provider, Findings, Restrictions, Medical Treatment, Recommendations, Validity, Expiration Date, Status, Risk, Actions.
+Habilita: Ordenamiento (Sorting), Paginación, Búsqueda, Encabezado fijo (Sticky header), Resaltado de filas.
+
+## FILTROS
+Crea filtros sobre la tabla: Employee, Position, Provider, Exam Type, Status, Year, Findings, Restrictions, Treatment, Risk Level, Search.
+Los filtros deben funcionar instantáneamente.
+
+## VALIDEZ DE EXÁMENES
+Calcula automáticamente: Válido, Vence en menos de 90 días, Vence en menos de 60 días, Vence en menos de 30 días, Vence en menos de 15 días, Vencido.
+Usa insignias (badges) de colores: Verde, Amarillo, Anaranjado, Rojo.
+
+## HALLAZGOS MÉDICOS
+Crea una sección que liste cada hallazgo: Employee, Finding, Severity, Restrictions, Recommendations, Provider, Date.
+Colores de severidad: Low, Medium, High, Critical.
+
+## TRATAMIENTOS MÉDICOS
+Crea tarjetas que muestren: Employee, Treatment, Current Status, Medication, Specialist, Recommendations, Follow-up.
+
+## PRÓXIMOS EXÁMENES
+Calcula automáticamente a partir de Expiration Date: Today, 7 Days, 15 Days, 30 Days, 60 Days, 90 Days, Expired.
+
+## PERFIL DEL EMPLEADO
+Hacer clic en una fila abre un modal con historial médico completo (Timeline, Exam Date, Provider, Exam Type, Findings, Restrictions, Medical Treatment, Recommendations, Validity, Expiration, Status, Trend).
+
+## ALERTAS
+Verde (Válido), Amarillo (Hallazgo), Anaranjado (Próximo vencimiento), Rojo (Vencido), Azul (Tratamiento médico), Morado (Restricción).
+
+## PUNTUACIÓN DE RIESGO (RISK SCORE)
+Calcula automáticamente: +3 Examen Vencido, +2 Vence en menos de 30 días, +2 Hallazgos, +2 Restricciones, +1 Tratamiento Médico.
+Niveles: 0-1 Bajo (Low), 2-4 Medio (Medium), 5+ Alto (High). Muestra insignia de color.
+
+## BÚSQUEDA GLOBAL & EXPORTACIÓN
+Busca en Employee, ID, Position, Provider, Recommendations, Findings, Treatment.
+Botones de exportación: Imprimir (Print), Exportar CSV, Exportar Excel.
+
+## EXTRA
+Usa Font Awesome, Chart.js vía CDN, Bootstrap 5 vía CDN, JS vanilla nativo sin frameworks.
+Todo en un solo archivo index.html listo para usar.</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 2: GUÍA PARA ACTUALIZAR INFORMACIÓN DE LEYES -->
+            <section class="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-xs">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="text-2xl p-2 bg-purple-50 text-purple-600 rounded-xl font-bold shrink-0">⚖️</span>
+                    <div>
+                        <span class="text-xs font-bold text-teal-600 uppercase tracking-wider">Módulo 2</span>
+                        <h2 class="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">
+                            2. Guía para Actualizar Información de Leyes y Matriz Legal
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="space-y-6 text-sm text-slate-700">
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                            <span>📌</span> Paso previo en NotebookLM
+                        </h3>
+                        <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+                            Crea un cuaderno en <strong>NotebookLM</strong> y agrega en la opción <em>"Añadir fuente"</em> (archivos de la matriz actual en PDF/Word/Excel) más las <em>fuentes web</em> o enlaces de las normativas vigentes que requieras auditar.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-base mb-2">Prompt para solicitar normativas nuevas o faltantes</h3>
+                        <p class="text-xs md:text-sm text-slate-600 mb-3">
+                            Usa esta instrucción reemplazando <code>(nombre del archivo de la matriz actual)</code> por el nombre de tu documento:
+                        </p>
+
+                        <!-- PROMPT BOX LEYES -->
+                        <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
+                            <div class="flex justify-between items-center px-4 py-2.5 bg-slate-100 border-b border-slate-200">
+                                <span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Prompt 2: Análisis y Actualización Legal</span>
+                                <button onclick="copyText('prompt-leyes', this)" class="bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs px-3 py-1 rounded-lg transition-all cursor-pointer">
+                                    Copiar Prompt Leyes
+                                </button>
+                            </div>
+                            <pre id="prompt-leyes" class="p-4 text-xs font-mono text-slate-800 leading-relaxed whitespace-pre-wrap select-all max-h-80 overflow-y-auto">Analiza la fuente (nombre del archivo de la matriz actual) e identifica exhaustivamente todas las normativas, leyes, decretos, reglamentos y disposiciones jurídicas que contiene actualmente. Posteriormente, investiga y compila las leyes o normativas vigentes que resulten aplicables al ámbito temático del archivo pero que aún no figuren en él, priorizando la completitud y actualización del marco regulatorio.
+
+Entrega los resultados en los siguientes formatos y secciones:
+
+1. Tabla completa consolidada en formato markdown que integre: (a) todas las normativas preexistentes del archivo, (b) las nuevas normativas añadidas, diferenciadas claramente mediante indicadores visuales (por ejemplo, emojis, colores de fila o columna de estado). La tabla debe incluir como mínimo las columnas: identificador de la norma (número y nombre oficial), tipo de normativa (ley, real decreto, orden ministerial, etc.), fecha de publicación o última modificación, ámbito de aplicación, breve descripción del objeto regulatorio, y estado (existente / añadido).
+2. Sección aparte en formato .md titulada explícitamente "Normativas añadidas" que liste únicamente las leyes o normas incorporadas nuevas, especificando para cada una: el motivo de su inclusión (vacío detectado, cambio legislativo posterior, área no cubierta), la fuente de consulta utilizada para su identificación, y cualquier nota relevante sobre su vigencia o relación con normas ya existentes en el archivo.
+3. Breve resumen ejecutivo al inicio que indique: número total de normativas en el archivo original, número de normativas añadidas, principales áreas regulatorias completadas, y advertencias sobre posibles lagunas que requieran revisión jurisdiccional adicional o consulta sectorial especializada.
+
+Mantén el idioma del documento en español, utiliza terminología jurídica precisa, y estructura la información para facilitar su mantenimiento futuro y auditoría de cumplimiento normativo.</pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script is:inline>
+        function copyText(elementId, btnElement) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            const text = el.innerText || el.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = btnElement.innerText;
+                btnElement.innerText = "¡Copiado!";
+                btnElement.classList.add("bg-emerald-600");
+                setTimeout(() => {
+                    btnElement.innerText = originalText;
+                    btnElement.classList.remove("bg-emerald-600");
+                }, 2000);
+            }).catch(err => {
+                console.error("Error al copiar text: ", err);
+            });
+        }
+    </script>
+</Layout>
