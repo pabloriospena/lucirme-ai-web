@@ -2,6 +2,7 @@
 // src/pages/recursos/guia-notebooklm.astro
 import Layout from "../../layouts/Layout.astro";
 import ActionHub from "../../components/ActionHub.astro";
+import RedesSociales from "../../components/RedesSociales.astro";
 import { LINKS } from "../../lib/constants.js";
 ---
 
@@ -35,8 +36,7 @@ import { LINKS } from "../../lib/constants.js";
             <span class="text-2xl">☕</span>
             <div class="text-sm md:text-base font-medium">
                 <strong>¿Tienes dudas sobre cómo aplicarlo a tu trabajo?</strong
-                > Agenda un café virtual de 15 minutos y mapeamos tu mayor fuga de
-                tiempo.
+                > Agenda un café virtual y mapeamos tu mayor fuga de tiempo.
             </div>
             <a
                 href={LINKS.calendly}
@@ -342,7 +342,8 @@ import { LINKS } from "../../lib/constants.js";
                 <div class="space-y-3 mb-4">
                     <p class="text-xs md:text-sm text-slate-700">
                         <strong class="text-slate-900"
-                            >Ejemplos prácticos:</strong>
+                            >Ejemplos prácticos:</strong
+                        >
                     </p>
                     <ul class="space-y-2 text-xs md:text-sm text-slate-700">
                         <li class="flex items-start gap-2">
@@ -1138,25 +1139,11 @@ Sé honesto. No me subas la nota por simpatía. Si está mal, dímelo.</pre>
                         >
                     </div>
                 </div>
-                <p class="text-slate-300 text-sm mb-6">
-                    Si quieres ver cómo aplico esto a tu trabajo específico para
-                    recuperar 10 horas semanales, hablemos.
-                </p>
-                <a
-                    href={LINKS.calendly}
-                    target="_blank"
-                    class="inline-block bg-orange-600 text-white px-8 py-3 rounded-lg font-bold text-base hover:bg-orange-700 transition shadow-lg"
-                >
-                    Agenda tu Café de Estrategia (15 min) →
-                </a>
-                <p class="text-slate-500 text-xs mt-4">
-                    Sin compromiso. Sin letra pequeña. Si no encaja, cerramos en
-                    el minuto 5.
-                </p>
             </section>
         </div>
 
         <!-- ACTION HUB -->
+        <RedesSociales />
         <div class="mt-16">
             <ActionHub />
         </div>
