@@ -1,149 +1,684 @@
 ---
-// src/components/Selector.astro - Consola de Triage Inteligente (Nativa, Sin Errores)
+// src/components/Selector.astro - Termómetro LuciRMe AI
 ---
-<div id="selector-overlay" class="fixed inset-0 bg-[#0F172A] z-[100] hidden flex items-center justify-center p-6 backdrop-blur-sm">
+
+<div
+  id="selector-overlay"
+  class="fixed inset-0 bg-[#0F172A]/90 backdrop-blur-md z-[100] hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+>
   <!-- Botón Cerrar -->
-  <button 
-    onclick="document.getElementById('selector-overlay').classList.add('hidden'); if (window.posthog) {
-      window.posthog.capture('selector_abierto', { pagina: window.location.pathname });
-    }" 
-    class="absolute top-8 right-8 text-white/40 hover:text-white text-3xl transition animate-fade-in"
-  >✕</button>
+  <button
+    onclick="cerrarTermometro()"
+    class="absolute top-4 right-4 sm:top-6 sm:right-6 text-white/50 hover:text-white text-2xl font-bold transition z-10 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20"
+    title="Cerrar">✕</button
+  >
 
-  <div class="max-w-xl w-full text-white">
-    <div class="space-y-8">
-      
+  <div class="max-w-xl w-full my-auto">
+    <div
+      class="bg-[#0F172A] border border-white/10 rounded-2xl p-5 sm:p-8 shadow-2xl text-white relative overflow-hidden"
+    >
       <!-- HEADER CONSOLA -->
-      <div class="text-center">
-        <span id="step-badge" class="inline-block bg-teal/10 text-teal text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-4 border border-teal/20">
-          Consola de Triage IA • Paso 1 de 4
+      <div id="term-header" class="text-center mb-6">
+        <span
+          id="term-badge"
+          class="inline-block bg-teal/15 text-teal text-[11px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-2 border border-teal/30"
+        >
+          Diagnóstico de Tiempo • 2 minutos
         </span>
-        <h2 class="text-3xl font-bold tracking-tight">Sincronizador de Foco</h2>
+        <h2
+          id="term-title"
+          class="text-xl sm:text-2xl font-bold tracking-tight text-white"
+        >
+          Termómetro LuciRMe Ai: ¿Qué tan optimizado está tu día a día?
+        </h2>
+        <p
+          id="term-subtitle"
+          class="text-xs sm:text-sm text-gray-300 mt-2 leading-relaxed max-w-lg mx-auto"
+        >
+          Responde en 2 minutos. No es un examen técnico. Es una lectura simple
+          para saber dónde estás perdiendo tiempo y qué paso te conviene dar.
+        </p>
       </div>
 
-      <!-- PANTALLA DE CHAT -->
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-8 min-h-45 flex flex-col justify-between">
-        
-        <!-- Pregunta 1: Contexto -->
-        <div id="p-step-1" class="space-y-4 animate-fade-in">
-          <p class="text-teal font-bold text-xs uppercase tracking-widest">LuciRMe AI:</p>
-          <p class="text-lg text-gray-200">¿Quién toma la decisión de implementar IA en tu caso?</p>
-          <div class="grid gap-3 mt-4">
-            <button onclick="guardarPaso1('pro')" class="w-full p-4 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">👤 Yo decido por mí (Profesional)</button>
-            <button onclick="guardarPaso1('startup')" class="w-full p-4 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">🚀 Decido con mi equipo (Startup)</button>
-            <button onclick="guardarPaso1('empresa')" class="w-full p-4 border border-white/10 rounded-xl text-white hover:bg-teal transition-all text-left bg-white/5">🏢 Necesito aprobación (Empresa)</button>
+      <!-- PASO 0: DATOS DE CONTACTO -->
+      <div id="term-step-0" class="space-y-4">
+        <form
+          id="term-lead-form"
+          onsubmit="iniciarPreguntas(event)"
+          class="space-y-4"
+        >
+          <div>
+            <label
+              for="term-name"
+              class="block text-xs font-semibold text-gray-200 mb-1"
+              >Nombre *</label
+            >
+            <input
+              type="text"
+              id="term-name"
+              required
+              placeholder="Tu nombre completo"
+              class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-400 outline-none focus:border-teal focus:ring-1 focus:ring-teal transition"
+            />
           </div>
-        </div>
 
-        <!-- Pregunta 2: Dolor (Oculto) -->
-        <div id="p-step-2" class="hidden space-y-3 animate-fade-in">
-          <p class="text-teal font-bold text-xs uppercase tracking-widest">LuciRMe AI:</p>
-          <p class="text-lg text-gray-200">¿Qué tarea o proceso operativo te consumió más tiempo y energía esta semana?</p>
-          <div class="flex gap-2 mt-4">
-            <input type="text" id="input-p2" placeholder="Ej: Reportes de métricas manuales..." class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-teal transition text-deep" />
-            <button onclick="guardarPaso2()" class="bg-teal text-white px-6 py-3 rounded-lg font-bold hover:bg-tealHover transition">Siguiente</button>
+          <div>
+            <label
+              for="term-email"
+              class="block text-xs font-semibold text-gray-200 mb-1"
+              >Email *</label
+            >
+            <input
+              type="email"
+              id="term-email"
+              required
+              placeholder="tu@correo.com"
+              class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-400 outline-none focus:border-teal focus:ring-1 focus:ring-teal transition"
+            />
           </div>
-        </div>
 
-        <!-- Pregunta 3: Uso Actual (Oculto) -->
-        <div id="p-step-3" class="hidden space-y-3 animate-fade-in">
-          <p class="text-teal font-bold text-xs uppercase tracking-widest">LuciRMe AI:</p>
-          <p class="text-lg text-gray-200">¿Cómo estás usando la IA hoy para intentar resolverlo?</p>
-          <div class="flex gap-2 mt-4">
-            <input type="text" id="input-p3" placeholder="Ej: Prompts sueltos en ChatGPT..." class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-teal transition text-deep" />
-            <button onclick="guardarPaso3()" class="bg-teal text-white px-6 py-3 rounded-lg font-bold hover:bg-tealHover transition">Siguiente</button>
+          <div>
+            <label
+              for="term-whatsapp"
+              class="block text-xs font-semibold text-gray-200 mb-1"
+            >
+              WhatsApp <span class="text-gray-400 font-normal">(opcional)</span>
+            </label>
+            <input
+              type="tel"
+              id="term-whatsapp"
+              placeholder="+57 300 000 0000"
+              class="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-400 outline-none focus:border-teal focus:ring-1 focus:ring-teal transition"
+            />
           </div>
-        </div>
 
-        <!-- Pregunta 4: Foco / Destino (Oculto) -->
-        <div id="p-step-4" class="hidden space-y-3 animate-fade-in">
-          <p class="text-teal font-bold text-xs uppercase tracking-widest">LuciRMe AI:</p>
-          <p class="text-lg text-gray-200">Si recuperaras 10 horas esta semana, ¿dónde pondrías tu foco?</p>
-          <div class="flex gap-2 mt-4">
-            <input type="text" id="input-p4" placeholder="Ej: En vender más y delegar la operación..." class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-teal transition text-deep" />
-            <button onclick="enviarFinal()" class="bg-teal text-white px-6 py-3 rounded-lg font-bold hover:bg-tealHover transition">Finalizar</button>
+          <div class="pt-1">
+            <label
+              class="flex items-start gap-2.5 cursor-pointer text-xs text-gray-300"
+            >
+              <input
+                type="checkbox"
+                id="term-accept"
+                required
+                checked
+                class="mt-0.5 rounded border-white/20 bg-white/5 text-teal focus:ring-teal"
+              />
+              <span
+                >Acepto recibir el diagnóstico y recursos de LuciRMe AI.</span
+              >
+            </label>
           </div>
-        </div>
 
-        <!-- Estado de Carga (Oculto) -->
-        <div id="p-step-loading" class="hidden text-center py-6 animate-pulse">
-          <span class="text-teal font-bold text-sm uppercase tracking-widest">🔄 Analizando tu contexto con IA...</span>
-        </div>
-
+          <button
+            type="submit"
+            class="w-full mt-3 bg-orange hover:bg-orange/90 text-white font-bold py-3.5 px-6 rounded-xl transition duration-200 shadow-lg text-sm flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <span>Iniciar diagnóstico</span>
+            <span>→</span>
+          </button>
+        </form>
       </div>
 
+      <!-- ÁREA DE PREGUNTAS (PASOS 1 A 9) -->
+      <div id="term-questions-container" class="hidden space-y-5">
+        <!-- BARRA DE PROGRESO -->
+        <div class="w-full bg-white/10 rounded-full h-2 overflow-hidden mb-4">
+          <div
+            id="term-progress-bar"
+            class="bg-teal h-full transition-all duration-300 w-[11%]"
+          >
+          </div>
+        </div>
+
+        <!-- ENCABEZADO PREGUNTA -->
+        <div
+          class="flex items-center justify-between text-xs text-gray-400 mb-1"
+        >
+          <span id="term-step-indicator" class="font-bold text-teal"
+            >Pregunta 1 de 9</span
+          >
+          <span
+            id="term-cat-badge"
+            class="bg-white/10 px-2.5 py-0.5 rounded-full text-[10px]"
+            >Contexto</span
+          >
+        </div>
+
+        <h3
+          id="term-question-title"
+          class="text-lg font-bold text-white leading-snug"
+        >
+          <!-- Título de la pregunta -->
+        </h3>
+
+        <!-- OPCIONES -->
+        <div id="term-options-grid" class="grid gap-2.5 pt-2">
+          <!-- Botones de opciones insertados dinámicamente -->
+        </div>
+
+        <!-- NAVEGACIÓN ANTERIOR -->
+        <div class="pt-2 flex justify-between items-center text-xs">
+          <button
+            id="term-btn-prev"
+            onclick="preguntaAnterior()"
+            class="text-gray-400 hover:text-white transition flex items-center gap-1 opacity-0 pointer-events-none"
+          >
+            ← Pregunta anterior
+          </button>
+        </div>
+      </div>
+
+      <!-- ESTADO DE CARGA -->
+      <div id="term-loading" class="hidden text-center py-12 space-y-4">
+        <div
+          class="w-12 h-12 border-4 border-teal border-t-transparent rounded-full animate-spin mx-auto"
+        >
+        </div>
+        <p class="text-base font-bold text-teal">
+          Calculando tu Termómetro de Recuperación de Tiempo...
+        </p>
+        <p class="text-xs text-gray-400">
+          Analizando tus respuestas y enrutando tu plan de acción
+        </p>
+      </div>
+
+      <!-- RESULTADO FINAL -->
+      <div id="term-result" class="hidden space-y-6">
+        <div class="text-center pb-4 border-b border-white/10">
+          <span
+            class="inline-block bg-teal/20 text-teal text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full mb-3 border border-teal/30"
+          >
+            Termómetro de Recuperación de Tiempo con IA
+          </span>
+          <h3
+            id="result-score-title"
+            class="text-2xl sm:text-3xl font-black text-white"
+          >
+            Tu diagnóstico: <span id="res-score-num" class="text-teal">0%</span> —
+            <span id="res-level-name">Nivel</span>
+          </h3>
+
+          <!-- Medidor visual -->
+          <div
+            class="mt-4 w-full bg-white/10 rounded-full h-3 overflow-hidden p-0.5 border border-white/10"
+          >
+            <div
+              id="res-gauge-bar"
+              class="h-full rounded-full transition-all duration-1000 bg-teal w-0"
+            >
+            </div>
+          </div>
+        </div>
+
+        <!-- MENSAJE PRINCIPAL -->
+        <div class="bg-white/5 border border-white/10 rounded-xl p-4 sm:p-5">
+          <h4
+            class="text-xs font-bold text-teal uppercase tracking-wider mb-1.5"
+          >
+            Lo que vemos:
+          </h4>
+          <p
+            id="res-main-msg"
+            class="text-sm text-gray-200 leading-relaxed font-medium"
+          >
+            <!-- Mensaje principal -->
+          </p>
+        </div>
+
+        <!-- PLAN RECOMENDADO -->
+        <div class="space-y-3">
+          <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">
+            Tu plan recomendado:
+          </h4>
+
+          <div
+            class="bg-white/5 border border-white/10 rounded-xl p-4 space-y-3 text-xs sm:text-sm"
+          >
+            <div class="flex items-start gap-2.5">
+              <span
+                class="p-1 bg-teal/20 text-teal rounded-lg font-bold shrink-0"
+                >1</span
+              >
+              <div>
+                <span class="font-bold text-white block">Recurso gratuito:</span
+                >
+                <span id="res-rec-free" class="text-gray-300">---</span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5">
+              <span
+                class="p-1 bg-orange/20 text-orange rounded-lg font-bold shrink-0"
+                >2</span
+              >
+              <div>
+                <span class="font-bold text-white block">Siguiente paso:</span>
+                <span id="res-rec-next" class="text-gray-300">---</span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5">
+              <span
+                class="p-1 bg-blue-500/20 text-blue-400 rounded-lg font-bold shrink-0"
+                >3</span
+              >
+              <div>
+                <span class="font-bold text-white block"
+                  >Contenido para seguir:</span
+                >
+                <div class="flex flex-wrap gap-2 mt-1">
+                  <a
+                    href="https://linkedin.com/in/pabloriospena"
+                    target="_blank"
+                    rel="noopener"
+                    class="text-xs font-bold text-teal hover:underline flex items-center gap-1"
+                  >
+                    <span>LinkedIn de Pablo</span> ↗
+                  </a>
+                  <span class="text-gray-500">•</span>
+                  <a
+                    href="/recursos"
+                    class="text-xs font-bold text-teal hover:underline flex items-center gap-1"
+                  >
+                    <span>Librería de Recursos Gratis</span> ↗
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACCIÓN MÁS SIMPLE -->
+        <div
+          class="bg-gradient-to-r from-orange/20 to-teal/20 border border-teal/30 rounded-xl p-4 sm:p-5 text-center space-y-3"
+        >
+          <h4 class="text-xs font-bold text-orange uppercase tracking-wider">
+            Tu acción más simple ahora:
+          </h4>
+          <p
+            id="res-final-cta-text"
+            class="text-xs sm:text-sm text-white font-semibold leading-relaxed"
+          >
+            <!-- CTA Final text -->
+          </p>
+
+          <div
+            id="res-cta-buttons"
+            class="pt-1 flex flex-col sm:flex-row gap-2.5 justify-center"
+          >
+            <a
+              id="res-primary-btn"
+              href="/recursos"
+              class="bg-orange hover:bg-orange/90 text-white font-bold py-3 px-6 rounded-xl transition text-xs sm:text-sm text-center shadow-md"
+            >
+              Ver recurso gratis recomendado
+            </a>
+            <a
+              id="res-secondary-btn"
+              href="/content/precios"
+              class="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl transition text-xs sm:text-sm text-center border border-white/20"
+            >
+              Agendar Café de Estrategia (30 min)
+            </a>
+          </div>
+        </div>
+
+        <div class="text-center pt-2">
+          <button
+            onclick="cerrarTermometro()"
+            class="text-xs text-gray-400 hover:text-white underline cursor-pointer"
+          >
+            Cerrar ventana
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <script is:inline>
-  let respuestas = {};
-  let perfil = ''; // Declaramos 'perfil' a nivel global del script
+  // BANCO DE PREGUNTAS DEL TERMÓMETRO
+  const PREGUNTAS_TERMOMETRO = [
+    {
+      id: "p1",
+      categoria: "Enrutamiento",
+      pregunta: "1. ¿Dónde quieres aplicar esto?",
+      opciones: [
+        {
+          label: "En mi trabajo personal o profesional",
+          perfil: "personal",
+          puntos: 0,
+        },
+        { label: "En mi empresa o equipo", perfil: "empresa", puntos: 0 },
+        {
+          label: "En la empresa donde trabajo, pero no soy dueño",
+          perfil: "empresa",
+          puntos: 0,
+        },
+        { label: "Solo estoy explorando", perfil: "personal", puntos: 0 },
+      ],
+    },
+    {
+      id: "p2",
+      categoria: "Frustración principal",
+      pregunta: "2. ¿Qué te molesta más hoy?",
+      opciones: [
+        { label: "Pierdo horas en tareas repetitivas", puntos: 15 },
+        { label: "Mi trabajo depende de 2 o 3 personas clave", puntos: 15 },
+        { label: "No puedo crecer sin contratar más gente", puntos: 15 },
+        { label: "Siento que la tecnología me está dejando atrás", puntos: 10 },
+      ],
+    },
+    {
+      id: "p3",
+      categoria: "Fuga de tiempo",
+      pregunta:
+        "3. ¿Cuántas horas a la semana pierdes en tareas que no requieren tu talento?",
+      opciones: [
+        { label: "Menos de 3 horas", puntos: 3 },
+        { label: "Entre 3 y 10 horas", puntos: 8 },
+        { label: "Entre 10 y 20 horas", puntos: 14 },
+        { label: "Más de 20 horas", puntos: 20 },
+      ],
+    },
+    {
+      id: "p4",
+      categoria: "Carga semanal",
+      pregunta: "4. ¿Cómo terminas la semana?",
+      opciones: [
+        { label: "Tranquilo, salgo a tiempo", puntos: 2 },
+        { label: "Con molestia leve por pendientes", puntos: 7 },
+        { label: "Quedándome hasta tarde", puntos: 14 },
+        {
+          label: "Pensando en cambiar de trabajo o cerrar el negocio",
+          puntos: 20,
+        },
+      ],
+    },
+    {
+      id: "p5",
+      categoria: "Madurez con IA",
+      pregunta: "5. ¿Cómo usas IA hoy?",
+      opciones: [
+        { label: "No la uso", puntos: 15 },
+        { label: "La uso de vez en cuando", puntos: 10 },
+        {
+          label: "La uso seguido, pero las respuestas son genéricas",
+          puntos: 12,
+        },
+        { label: "Ya tengo flujos que me ahorran tiempo", puntos: 3 },
+      ],
+    },
+    {
+      id: "p6",
+      categoria: "Reacción ante bloqueos",
+      pregunta: "6. Cuando la IA no te da lo que esperabas, ¿qué haces?",
+      opciones: [
+        { label: "La cierro y lo hago manual", puntos: 10 },
+        { label: "Busco un tutorial", puntos: 7 },
+        { label: "Intento varias veces hasta ajustar", puntos: 5 },
+        { label: "Pido ayuda a alguien que sepa", puntos: 2 },
+      ],
+    },
+    {
+      id: "p7",
+      categoria: "Urgencia",
+      pregunta: "7. ¿Por qué estás haciendo este diagnóstico ahora?",
+      opciones: [
+        { label: "Curiosidad", puntos: 2 },
+        { label: "Tuve un problema reciente", puntos: 6 },
+        { label: "Mi negocio está creciendo y no aguanta", puntos: 10 },
+        { label: "Alguien me está presionando", puntos: 7 },
+      ],
+    },
+    {
+      id: "p8",
+      categoria: "Necesidad de apoyo",
+      pregunta: "8. ¿Qué necesitarías para avanzar?",
+      opciones: [
+        { label: "Una guía para hacerlo yo", puntos: 3 },
+        { label: "Una sesión 1 a 1", puntos: 7 },
+        { label: "Acompañamiento con mi equipo", puntos: 10 },
+        { label: "Convencer a mi socio o jefe", puntos: 8 },
+      ],
+    },
+    {
+      id: "p9",
+      categoria: "Toma de decisiones",
+      pregunta: "9. ¿Quién tomaría la decisión de contratar algo así?",
+      opciones: [
+        { label: "Yo", puntos: 0 },
+        { label: "Yo con mi socio o equipo", puntos: 0 },
+        { label: "Mi jefe o comité", puntos: 0 },
+        { label: "Solo estoy explorando", puntos: 0 },
+      ],
+    },
+  ];
 
-  function ocultarTodos() {
-    document.getElementById('p-step-1').classList.add('hidden');
-    document.getElementById('p-step-2').classList.add('hidden');
-    document.getElementById('p-step-3').classList.add('hidden');
-    document.getElementById('p-step-4').classList.add('hidden');
-    document.getElementById('p-step-loading').classList.add('hidden');
+  let termState = {
+    currentStep: 0, // 0 = lead form, 1..9 = preguntas, 10 = result
+    leadData: { name: "", email: "", whatsapp: "" },
+    answers: {},
+    profile: "personal",
+    totalScore: 0,
+  };
+
+  function cerrarTermometro() {
+    const overlay = document.getElementById("selector-overlay");
+    if (overlay) overlay.classList.add("hidden");
   }
 
-  function guardarPaso1(p) {
-    perfil = p; // Guardamos el perfil seleccionado
-    respuestas.p1 = p;
-    ocultarTodos();
-    document.getElementById('p-step-2').classList.remove('hidden');
-    document.getElementById('step-badge').innerText = "Consola de Triage IA • Paso 2 de 4";
-    setTimeout(() => document.getElementById('input-p2').focus(), 100);
+  function iniciarPreguntas(e) {
+    e.preventDefault();
+    const nameVal = document.getElementById("term-name").value.trim();
+    const emailVal = document.getElementById("term-email").value.trim();
+    const whatsappVal = document.getElementById("term-whatsapp").value.trim();
+
+    if (!nameVal || !emailVal) return;
+
+    termState.leadData = {
+      name: nameVal,
+      email: emailVal,
+      whatsapp: whatsappVal,
+    };
+
+    // Ocultar form de contacto, mostrar container de preguntas
+    document.getElementById("term-step-0").classList.add("hidden");
+    document
+      .getElementById("term-questions-container")
+      .classList.remove("hidden");
+
+    termState.currentStep = 1;
+    renderPreguntaActual();
   }
 
-  function guardarPaso2() {
-    const val = document.getElementById('input-p2').value.trim();
-    if (!val) return alert('Por favor, cuéntanos tu dolor.');
-    respuestas.p2 = val;
-    ocultarTodos();
-    document.getElementById('p-step-3').classList.remove('hidden');
-    document.getElementById('step-badge').innerText = "Consola de Triage IA • Paso 3 de 4";
-    setTimeout(() => document.getElementById('input-p3').focus(), 100);
-  }
+  function renderPreguntaActual() {
+    const stepIdx = termState.currentStep - 1; // 0..8
+    const preguntaObj = PREGUNTAS_TERMOMETRO[stepIdx];
 
-  function guardarPaso3() {
-    const val = document.getElementById('input-p3').value.trim();
-    if (!val) return alert('Por favor, cuéntanos tu uso actual.');
-    respuestas.p3 = val;
-    ocultarTodos();
-    document.getElementById('p-step-4').classList.remove('hidden');
-    document.getElementById('step-badge').innerText = "Consola de Triage IA • Paso 4 de 4";
-    setTimeout(() => document.getElementById('input-p4').focus(), 100);
-  }
+    if (!preguntaObj) return;
 
-  function enviarFinal() {
-    const val = document.getElementById('input-p4').value.trim();
-    if (!val) return alert('Por favor, cuéntanos tu foco.');
-    respuestas.p4 = val;
+    // Actualizar barra de progreso e indicadores
+    const pct = Math.round((termState.currentStep / 9) * 100);
+    document.getElementById("term-progress-bar").style.width = pct + "%";
+    document.getElementById("term-step-indicator").textContent =
+      `Pregunta ${termState.currentStep} de 9`;
+    document.getElementById("term-cat-badge").textContent =
+      preguntaObj.categoria;
+    document.getElementById("term-question-title").textContent =
+      preguntaObj.pregunta;
 
-    // CAPTURA EN POSTHOG (Enviamos el dolor y el perfil)
-  if (window.posthog) {
-    window.posthog.capture('diagnostico_completado', {
-      perfil: perfil,
-      dolor_p2: respuestas.p2,
-      uso_ia_p3: respuestas.p3,
-      foco_p4: respuestas.p4
+    // Botón volver
+    const btnPrev = document.getElementById("term-btn-prev");
+    if (termState.currentStep > 1) {
+      btnPrev.classList.remove("opacity-0", "pointer-events-none");
+    } else {
+      btnPrev.classList.add("opacity-0", "pointer-events-none");
+    }
+
+    // Grid de opciones
+    const grid = document.getElementById("term-options-grid");
+    grid.innerHTML = "";
+
+    preguntaObj.opciones.forEach((opc, idx) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className =
+        "w-full p-3.5 border border-white/10 rounded-xl text-white hover:bg-teal hover:border-teal transition-all text-left bg-white/5 font-medium text-xs sm:text-sm flex items-center justify-between group cursor-pointer";
+
+      btn.innerHTML = `
+        <span>${opc.label}</span>
+        <span class="text-teal group-hover:text-white transition-transform group-hover:translate-x-1 font-bold">→</span>
+      `;
+
+      btn.onclick = () => seleccionarOpcion(preguntaObj.id, opc);
+      grid.appendChild(btn);
     });
   }
 
-    // 1. Guardamos el borrador del diagnóstico de forma segura usando la variable 'perfil'
-    localStorage.setItem('lucirme_pending_diagnostic', JSON.stringify({
-      perfil: perfil, // Corregido: ya no dará error de 'undefined'
-      respuestas: respuestas
-    }));
+  function seleccionarOpcion(questionId, opc) {
+    termState.answers[questionId] = opc.label;
 
-    // 2. Redirigimos al Login. Tras loguearse, Clerk lo mandará automáticamente al Dashboard
-    window.location.href = `/sign-in?redirect_url=${encodeURIComponent('/dashboard')}`;
+    if (questionId === "p1" && opc.perfil) {
+      termState.profile = opc.perfil;
+    }
+
+    if (termState.currentStep < 9) {
+      termState.currentStep++;
+      renderPreguntaActual();
+    } else {
+      finalizarTermometro();
+    }
+  }
+
+  function preguntaAnterior() {
+    if (termState.currentStep > 1) {
+      termState.currentStep--;
+      renderPreguntaActual();
+    }
+  }
+
+  async function finalizarTermometro() {
+    // Ocultar preguntas, mostrar cargando
+    document.getElementById("term-questions-container").classList.add("hidden");
+    document.getElementById("term-header").classList.add("hidden");
+    document.getElementById("term-loading").classList.remove("hidden");
+
+    // Calcular IRT = P2 + P3 + P4 + P5 + P6 + P7 + P8
+    let rawScore = 0;
+    PREGUNTAS_TERMOMETRO.forEach((q) => {
+      const ansLabel = termState.answers[q.id];
+      if (ansLabel) {
+        const found = q.opciones.find((o) => o.label === ansLabel);
+        if (found && typeof found.puntos === "number") {
+          rawScore += found.puntos;
+        }
+      }
+    });
+
+    // Score max possible = 100
+    const finalScorePct = Math.min(100, Math.max(0, rawScore));
+    termState.totalScore = finalScorePct;
+
+    // Determinar nivel
+    let nivelName = "";
+    let mainMsg = "";
+    let recFree = "";
+    let recNext = "";
+    let finalCtaText = "";
+
+    const isEmpresa = termState.profile === "empresa";
+
+    if (finalScorePct <= 39) {
+      nivelName = "Explorador con control";
+      mainMsg =
+        "Tu nivel de urgencia hoy es bajo. No estás en una emergencia operativa, pero sí puedes recuperar tiempo con pequeños flujos bien aplicados.";
+      recFree =
+        "Guía práctica de NotebookLM, checklist o caso corto de optimización.";
+      recNext =
+        "Empieza con este recurso gratuito. Si después quieres aplicar un flujo a tu caso, agenda un Café de Estrategia de 30 minutos.";
+      finalCtaText =
+        "Empieza con este recurso gratuito. Si después quieres aplicar un flujo a tu caso, agenda un Café de Estrategia de 30 minutos.";
+    } else if (finalScorePct <= 69) {
+      nivelName = "Fuga visible";
+      mainMsg =
+        "Hay una fuga de tiempo clara. Hoy la IA te ayuda, pero todavía no te devuelve control. El siguiente paso es convertir ese uso suelto en un flujo que trabaje para ti.";
+      recFree = "Flujo rápido de automatización o caso práctico real.";
+      if (isEmpresa) {
+        recNext =
+          "El siguiente paso no es comprar software. Es mapear dónde se está perdiendo el tiempo. Agenda un Café de Estrategia de 30 minutos.";
+        finalCtaText =
+          "El siguiente paso no es comprar software. Es mapear dónde se está perdiendo el tiempo. Agenda un Café de Estrategia de 30 minutos.";
+      } else {
+        recNext =
+          "Descarga este flujo rápido. Si quieres aplicarlo a tu trabajo real esta semana, agenda un Café de Estrategia de 30 minutos.";
+        finalCtaText =
+          "Descarga este flujo rápido. Si quieres aplicarlo a tu trabajo real esta semana, agenda un Café de Estrategia de 30 minutos.";
+      }
+    } else {
+      nivelName = "Prioridad alta";
+      mainMsg =
+        "Esto ya no es curiosidad. Hay una fuga importante de tiempo, control o dependencia operativa. Conviene ordenarlo pronto antes de que siga costando horas, dinero o paz mental.";
+      recFree = "Caso real breve de estandarización con IA.";
+      if (isEmpresa) {
+        recNext =
+          "Agenda un Café de Estrategia de 30 minutos. Si hay fit, te envío una propuesta clara para que la revises con calma.";
+        finalCtaText =
+          "Agenda un Café de Estrategia de 30 minutos. Si hay fit, te envío una propuesta clara para que la revises con calma.";
+      } else {
+        recNext =
+          "Agenda un Café de Estrategia de 30 minutos. Si hay fit, el siguiente paso puede ser una Sesión de Enfoque para destrabar una tarea concreta.";
+        finalCtaText =
+          "Agenda un Café de Estrategia de 30 minutos. Si hay fit, el siguiente paso puede ser una Sesión de Enfoque para destrabar una tarea concreta.";
+      }
+    }
+
+    // Enviar a API MailerLite
+    try {
+      await fetch("/api/termometro", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: termState.leadData.name,
+          email: termState.leadData.email,
+          whatsapp: termState.leadData.whatsapp,
+          score: finalScorePct,
+          nivel: nivelName,
+          perfil: termState.profile,
+          respuestas: termState.answers,
+        }),
+      });
+    } catch (err) {
+      console.warn("Sync termometro error:", err);
+    }
+
+    // Simular delay visual de análisis
+    setTimeout(() => {
+      document.getElementById("term-loading").classList.add("hidden");
+      document.getElementById("term-result").classList.remove("hidden");
+
+      document.getElementById("res-score-num").textContent =
+        `${finalScorePct}%`;
+      document.getElementById("res-level-name").textContent = nivelName;
+
+      // Color barra gauge
+      const gauge = document.getElementById("res-gauge-bar");
+      gauge.style.width = `${finalScorePct}%`;
+      if (finalScorePct <= 39) {
+        gauge.className =
+          "h-full rounded-full transition-all duration-1000 bg-emerald-500";
+      } else if (finalScorePct <= 69) {
+        gauge.className =
+          "h-full rounded-full transition-all duration-1000 bg-orange";
+      } else {
+        gauge.className =
+          "h-full rounded-full transition-all duration-1000 bg-red-500";
+      }
+
+      document.getElementById("res-main-msg").textContent = mainMsg;
+      document.getElementById("res-rec-free").textContent = recFree;
+      document.getElementById("res-rec-next").textContent = recNext;
+      document.getElementById("res-final-cta-text").textContent = finalCtaText;
+    }, 1000);
   }
 </script>
-
-<style>
-  .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-</style>
