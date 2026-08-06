@@ -183,150 +183,233 @@
       </div>
 
       <!-- RESULTADO FINAL -->
-      <div id="term-result" class="hidden space-y-6">
-        <div class="text-center pb-4 border-b border-white/10">
+      <div id="term-result" class="hidden space-y-5">
+        <!-- 1. HERO RESULTADO (PRINCIPALIDAD MÁXIMA) -->
+        <div
+          class="bg-gradient-to-b from-white/10 to-white/5 border border-white/15 rounded-2xl p-5 sm:p-6 text-center relative overflow-hidden shadow-xl"
+        >
           <span
             class="inline-block bg-teal/20 text-teal text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full mb-3 border border-teal/30"
           >
             Termómetro de Recuperación de Tiempo con IA
           </span>
-          <h3
-            id="result-score-title"
-            class="text-2xl sm:text-3xl font-black text-white"
-          >
-            Tu diagnóstico: <span id="res-score-num" class="text-teal">0%</span> —
-            <span id="res-level-name">Nivel</span>
-          </h3>
+
+          <div class="my-2">
+            <span
+              class="text-xs uppercase tracking-wider text-gray-300 font-semibold block mb-1"
+              >Tu Diagnóstico Actual</span
+            >
+            <div class="flex items-center justify-center gap-3">
+              <span
+                id="res-score-num"
+                class="text-4xl sm:text-5xl font-black text-teal tracking-tight"
+                >0%</span
+              >
+              <span class="text-2xl text-gray-400 font-light">—</span>
+              <span
+                id="res-level-name"
+                class="text-xl sm:text-2xl font-bold text-white">Nivel</span
+              >
+            </div>
+          </div>
 
           <!-- Medidor visual -->
           <div
-            class="mt-4 w-full bg-white/10 rounded-full h-3 overflow-hidden p-0.5 border border-white/10"
+            class="mt-4 w-full bg-white/10 rounded-full h-3.5 overflow-hidden p-0.5 border border-white/15 max-w-md mx-auto shadow-inner"
           >
             <div
               id="res-gauge-bar"
-              class="h-full rounded-full transition-all duration-1000 bg-teal w-0"
+              class="h-full rounded-full transition-all duration-1000 bg-teal w-0 shadow-sm"
             >
             </div>
           </div>
-        </div>
 
-        <!-- MENSAJE PRINCIPAL -->
-        <div class="bg-white/5 border border-white/10 rounded-xl p-4 sm:p-5">
-          <h4
-            class="text-xs font-bold text-teal uppercase tracking-wider mb-1.5"
-          >
-            Lo que vemos:
-          </h4>
-          <p
-            id="res-main-msg"
-            class="text-sm text-gray-200 leading-relaxed font-medium"
-          >
-            <!-- Mensaje principal -->
-          </p>
-        </div>
-
-        <!-- PLAN RECOMENDADO -->
-        <div class="space-y-3">
-          <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">
-            Tu plan recomendado:
-          </h4>
-
+          <!-- LO QUE VEMOS (ANÁLISIS DESTACADO) -->
           <div
-            class="bg-white/5 border border-white/10 rounded-xl p-4 space-y-3 text-xs sm:text-sm"
+            class="mt-5 bg-black/30 border border-white/10 rounded-xl p-4 text-left"
           >
-            <div class="flex items-start gap-2.5">
-              <span
-                class="p-1 bg-teal/20 text-teal rounded-lg font-bold shrink-0"
-                >1</span
-              >
-              <div>
-                <span class="font-bold text-white block">Recurso gratuito:</span
-                >
-                <span id="res-rec-free" class="text-gray-300">---</span>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-2.5">
-              <span
-                class="p-1 bg-orange/20 text-orange rounded-lg font-bold shrink-0"
-                >2</span
-              >
-              <div>
-                <span class="font-bold text-white block">Siguiente paso:</span>
-                <span id="res-rec-next" class="text-gray-300">---</span>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-2.5">
-              <span
-                class="p-1 bg-blue-500/20 text-blue-400 rounded-lg font-bold shrink-0"
-                >3</span
-              >
-              <div>
-                <span class="font-bold text-white block"
-                  >Contenido para seguir:</span
-                >
-                <div class="flex flex-wrap gap-2 mt-1">
-                  <a
-                    href="https://linkedin.com/in/pabloriospena"
-                    target="_blank"
-                    rel="noopener"
-                    class="text-xs font-bold text-teal hover:underline flex items-center gap-1"
-                  >
-                    <span>LinkedIn de Pablo</span> ↗
-                  </a>
-                  <span class="text-gray-500">•</span>
-                  <a
-                    href="/recursos"
-                    class="text-xs font-bold text-teal hover:underline flex items-center gap-1"
-                  >
-                    <span>Librería de Recursos Gratis</span> ↗
-                  </a>
-                </div>
-              </div>
-            </div>
+            <h4
+              class="text-xs font-bold text-teal uppercase tracking-wider mb-2 flex items-center gap-1.5"
+            >
+              <span>🔍</span>
+              <span>Lo que vemos en tu operación:</span>
+            </h4>
+            <p
+              id="res-main-msg"
+              class="text-sm text-gray-100 leading-relaxed font-medium"
+            >
+              <!-- Mensaje principal -->
+            </p>
           </div>
         </div>
 
-        <!-- ACCIÓN MÁS SIMPLE -->
+        <!-- 2. PLAN RECOMENDADO Y ACCIÓN UNIFICADA -->
         <div
-          class="bg-gradient-to-r from-orange/20 to-teal/20 border border-teal/30 rounded-xl p-4 sm:p-5 text-center space-y-3"
+          class="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-4"
         >
-          <h4 class="text-xs font-bold text-orange uppercase tracking-wider">
-            Tu acción más simple ahora:
-          </h4>
-          <p
-            id="res-final-cta-text"
-            class="text-xs sm:text-sm text-white font-semibold leading-relaxed"
+          <div
+            class="flex items-center justify-between border-b border-white/10 pb-3"
           >
-            <!-- CTA Final text -->
-          </p>
+            <h4
+              class="text-xs font-extrabold text-orange uppercase tracking-wider flex items-center gap-2"
+            >
+              <span>🚀</span>
+              <span>Tu Plan Recomendado y Siguiente Paso</span>
+            </h4>
+            <button
+              type="button"
+              onclick="descargarPDFDiagnostico()"
+              class="bg-white/10 hover:bg-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-lg border border-white/20 transition flex items-center gap-1.5 cursor-pointer"
+              title="Descargar copia en PDF"
+            >
+              <span>📥</span>
+              <span>Descargar PDF</span>
+            </button>
+          </div>
 
+          <div class="space-y-3 text-xs sm:text-sm">
+            <div
+              class="flex items-start gap-3 bg-white/5 p-3.5 rounded-xl border border-white/5"
+            >
+              <span
+                class="p-1.5 bg-teal/20 text-teal rounded-lg font-bold shrink-0 text-xs"
+                >Paso 1</span
+              >
+              <div>
+                <span
+                  class="font-bold text-white block text-xs uppercase tracking-wide"
+                  >Recurso gratuito recomendado:</span
+                >
+                <span
+                  id="res-rec-free"
+                  class="text-gray-200 mt-0.5 block leading-relaxed">---</span
+                >
+              </div>
+            </div>
+
+            <div
+              class="flex items-start gap-3 bg-white/5 p-3.5 rounded-xl border border-white/5"
+            >
+              <span
+                class="p-1.5 bg-orange/20 text-orange rounded-lg font-bold shrink-0 text-xs"
+                >Paso 2</span
+              >
+              <div>
+                <span
+                  class="font-bold text-white block text-xs uppercase tracking-wide"
+                  >Acción recomendada:</span
+                >
+                <span
+                  id="res-rec-next"
+                  class="text-gray-200 mt-0.5 block leading-relaxed">---</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- BOTONES DE ACCIÓN DIRECTA -->
           <div
             id="res-cta-buttons"
-            class="pt-1 flex flex-col sm:flex-row gap-2.5 justify-center"
+            class="pt-2 flex flex-col sm:flex-row gap-2.5 justify-center"
           >
             <a
               id="res-primary-btn"
               href="/recursos"
-              class="bg-orange hover:bg-orange/90 text-white font-bold py-3 px-6 rounded-xl transition text-xs sm:text-sm text-center shadow-md"
+              class="bg-orange hover:bg-orange/90 text-white font-bold py-3 px-6 rounded-xl transition text-xs sm:text-sm text-center shadow-lg cursor-pointer"
             >
               Ver recurso gratis recomendado
             </a>
             <a
               id="res-secondary-btn"
               href="/content/precios"
-              class="bg-white/10 hover:bg-white/20 text-white font-bold py-3 px-6 rounded-xl transition text-xs sm:text-sm text-center border border-white/20"
+              class="bg-teal hover:bg-tealHover text-white font-bold py-3 px-6 rounded-xl transition text-xs sm:text-sm text-center shadow-lg cursor-pointer"
             >
               Agendar Café de Estrategia (30 min)
             </a>
           </div>
         </div>
 
-        <div class="text-center pt-2">
+        <!-- 3. CONTENIDO Y REDES SOCIALES PARA SEGUIR (TODAS LAS REDES) -->
+        <div
+          class="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 text-center space-y-3"
+        >
+          <h4
+            class="text-xs font-bold text-gray-300 uppercase tracking-wider flex items-center justify-center gap-1.5"
+          >
+            <span>🌐</span>
+            <span>Contenido y Redes para Seguir</span>
+          </h4>
+          <p class="text-xs text-gray-400">
+            Aprende casos reales, flujos prácticos e Inteligencia Artificial
+            aplicada:
+          </p>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 pt-1 text-xs">
+            <a
+              href="https://linkedin.com/in/pabloriospena"
+              target="_blank"
+              rel="noopener"
+              class="p-2.5 bg-white/5 hover:bg-white/15 border border-white/10 rounded-xl text-teal hover:text-white transition flex items-center justify-center gap-1.5 font-semibold"
+            >
+              <span>💼</span>
+              <span>LinkedIn Pablo</span> ↗
+            </a>
+
+            <a
+              href="https://www.linkedin.com/company/lucirme-ai"
+              target="_blank"
+              rel="noopener"
+              class="p-2.5 bg-white/5 hover:bg-white/15 border border-white/10 rounded-xl text-teal hover:text-white transition flex items-center justify-center gap-1.5 font-semibold"
+            >
+              <span>🏢</span>
+              <span>LuciRMe AI</span> ↗
+            </a>
+
+            <a
+              href="https://www.instagram.com/lucirmeai/"
+              target="_blank"
+              rel="noopener"
+              class="p-2.5 bg-white/5 hover:bg-white/15 border border-white/10 rounded-xl text-teal hover:text-white transition flex items-center justify-center gap-1.5 font-semibold"
+            >
+              <span>📸</span>
+              <span>Instagram</span> ↗
+            </a>
+
+            <a
+              href="https://www.tiktok.com/@pabloriosp"
+              target="_blank"
+              rel="noopener"
+              class="p-2.5 bg-white/5 hover:bg-white/15 border border-white/10 rounded-xl text-teal hover:text-white transition flex items-center justify-center gap-1.5 font-semibold"
+            >
+              <span>🎵</span>
+              <span>TikTok</span> ↗
+            </a>
+
+            <a
+              href="/recursos"
+              class="col-span-2 sm:col-span-2 p-2.5 bg-teal/20 hover:bg-teal/30 border border-teal/40 rounded-xl text-teal hover:text-white transition flex items-center justify-center gap-1.5 font-bold"
+            >
+              <span>📚</span>
+              <span>Librería de Recursos Gratis</span> ↗
+            </a>
+          </div>
+        </div>
+
+        <div
+          class="text-center pt-2 flex items-center justify-between text-xs text-gray-400"
+        >
           <button
+            type="button"
+            onclick="descargarPDFDiagnostico()"
+            class="text-teal hover:underline flex items-center gap-1 cursor-pointer font-bold"
+          >
+            <span>📥</span>
+            <span>Descargar versión PDF</span>
+          </button>
+          <button
+            type="button"
             onclick="cerrarTermometro()"
-            class="text-xs text-gray-400 hover:text-white underline cursor-pointer"
+            class="hover:text-white underline cursor-pointer"
           >
             Cerrar ventana
           </button>
@@ -678,7 +761,247 @@
       document.getElementById("res-main-msg").textContent = mainMsg;
       document.getElementById("res-rec-free").textContent = recFree;
       document.getElementById("res-rec-next").textContent = recNext;
-      document.getElementById("res-final-cta-text").textContent = finalCtaText;
     }, 1000);
+  }
+
+  function descargarPDFDiagnostico() {
+    const name = termState.leadData.name || "Usuario";
+    const email = termState.leadData.email || "";
+    const score = termState.totalScore || 0;
+    const level = document.getElementById("res-level-name")?.textContent || "";
+    const mainMsg = document.getElementById("res-main-msg")?.textContent || "";
+    const recFree = document.getElementById("res-rec-free")?.textContent || "";
+    const recNext = document.getElementById("res-rec-next")?.textContent || "";
+    const dateStr = new Date().toLocaleDateString("es-ES", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    let levelColor = "#0D9488"; // teal
+    if (score >= 70)
+      levelColor = "#E11D48"; // red
+    else if (score >= 40) levelColor = "#F97316"; // orange
+
+    const printHTML = `
+      <!DOCTYPE html>
+      <html lang="es">
+      <head>
+        <meta charset="UTF-8">
+        <title>Diagnóstico LuciRMe AI - ${name}</title>
+        <style>
+          @page { margin: 15mm; size: A4 portrait; }
+          body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #0F172A;
+            background: #FFFFFF;
+            margin: 0;
+            padding: 24px;
+            line-height: 1.5;
+          }
+          .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #0D9488;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+          }
+          .brand {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0F172A;
+            letter-spacing: -0.5px;
+          }
+          .brand span { color: #0D9488; }
+          .tag {
+            font-size: 11px;
+            background: #F1F5F9;
+            color: #334155;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+          }
+          .lead-info {
+            font-size: 13px;
+            color: #475569;
+            margin-bottom: 20px;
+            background: #F8FAFC;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #E2E8F0;
+          }
+          .hero-card {
+            background: #F8FAFC;
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 24px;
+          }
+          .score-num {
+            font-size: 48px;
+            font-weight: 900;
+            color: ${levelColor};
+            margin-right: 8px;
+            line-height: 1;
+          }
+          .level-name {
+            font-size: 24px;
+            font-weight: 800;
+            color: #0F172A;
+          }
+          .gauge-bg {
+            background: #E2E8F0;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 18px 0 8px 0;
+          }
+          .gauge-bar {
+            background: ${levelColor};
+            height: 100%;
+            width: ${score}%;
+          }
+          .section-title {
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #0D9488;
+            margin-bottom: 8px;
+            margin-top: 20px;
+          }
+          .box {
+            background: #FFFFFF;
+            border: 1px solid #CBD5E1;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: #1E293B;
+          }
+          .step-num {
+            display: inline-block;
+            background: #0D9488;
+            color: white;
+            font-weight: bold;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 6px;
+            margin-right: 6px;
+          }
+          .links-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+            font-size: 12px;
+          }
+          .link-item {
+            background: #F1F5F9;
+            padding: 10px 14px;
+            border-radius: 8px;
+            color: #0F172A;
+            font-weight: 600;
+            border: 1px solid #E2E8F0;
+          }
+          .link-item span {
+            color: #0D9488;
+            font-weight: 700;
+          }
+          .footer {
+            margin-top: 36px;
+            padding-top: 14px;
+            border-top: 1px solid #E2E8F0;
+            text-align: center;
+            font-size: 11px;
+            color: #64748B;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <div class="brand">LuciRMe <span>AI</span></div>
+          <div class="tag">Termómetro de Recuperación de Tiempo</div>
+        </div>
+
+        <div class="lead-info">
+          <strong>Diagnóstico preparado para:</strong> ${name} ${email ? `(${email})` : ""}<br>
+          <strong>Fecha de emisión:</strong> ${dateStr}
+        </div>
+
+        <div class="hero-card">
+          <div style="font-size: 11px; color: #64748B; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Resultado del Diagnóstico</div>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <span class="score-num">${score}%</span>
+            <span style="font-size: 24px; color: #94A3B8;">—</span>
+            <span class="level-name">${level}</span>
+          </div>
+          <div class="gauge-bg">
+            <div class="gauge-bar"></div>
+          </div>
+        </div>
+
+        <div class="section-title">🔍 Lo que vemos en tu operación</div>
+        <div class="box">
+          ${mainMsg}
+        </div>
+
+        <div class="section-title">🚀 Tu Plan Recomendado y Siguiente Paso</div>
+        <div class="box">
+          <div style="margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #F1F5F9;">
+            <span class="step-num">Paso 1</span>
+            <strong>Recurso Gratuito Recomendado:</strong>
+            <div style="margin-top: 4px; color: #334155;">${recFree}</div>
+          </div>
+          <div>
+            <span class="step-num" style="background:#F97316;">Paso 2</span>
+            <strong>Acción Recomendada:</strong>
+            <div style="margin-top: 4px; color: #334155;">${recNext}</div>
+          </div>
+        </div>
+
+        <div class="section-title">🌐 Canales y Redes para Seguir</div>
+        <div class="box">
+          <p style="margin-top: 0; font-size: 12px; color: #475569;">Sigue nuestros canales para aprender casos reales, flujos prácticos e Inteligencia Artificial aplicada:</p>
+          <div class="links-grid">
+            <div class="link-item">💼 LinkedIn: <span>linkedin.com/in/pabloriospena</span></div>
+            <div class="link-item">🏢 Empresa: <span>linkedin.com/company/lucirme-ai</span></div>
+            <div class="link-item">📸 Instagram: <span>instagram.com/lucirmeai</span></div>
+            <div class="link-item">🎵 TikTok: <span>tiktok.com/@pabloriosp</span></div>
+            <div class="link-item" style="grid-column: span 2; background: #E6FFFA; border-color: #B2F5EA; text-align: center;">
+              📚 Librería de Recursos Gratis: <span>lucirme.com/recursos</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <strong>LuciRMe AI</strong> • Optimización de Tiempo y Automatización con Inteligencia Artificial • Pablo Ríos Peña<br>
+          Para agendar tu Café de Estrategia visita: <strong>lucirme.com/content/precios</strong>
+        </div>
+
+        <script>
+          window.onload = function() {
+            setTimeout(function() {
+              window.print();
+            }, 300);
+          };
+        <\/script>
+      </body>
+      </html>
+    `;
+
+    const printWin = window.open("", "_blank", "width=800,height=900");
+    if (printWin) {
+      printWin.document.write(printHTML);
+      printWin.document.close();
+    } else {
+      alert(
+        "Por favor permite ventanas emergentes (popups) para descargar tu PDF.",
+      );
+    }
   }
 </script>
