@@ -1,0 +1,453 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ActionHub from "../../components/ActionHub.astro";
+import RedesSociales from "../../components/RedesSociales.astro";
+---
+
+<Layout title="20 Prompts para NotebookLM · Listos para copiar y pegar | LuciRMe AI">
+  <!-- SUB-NAV (Breadcrumb) -->
+  <nav class="bg-white border-b border-gray-100 px-4 py-3">
+    <div class="max-w-4xl mx-auto flex justify-between items-center">
+      <a
+        href="/recursos"
+        class="text-sm font-bold text-gray-500 hover:text-teal transition"
+      >
+        ← Volver a Recursos
+      </a>
+      <span
+        class="text-xs font-bold text-teal uppercase tracking-widest flex items-center gap-2"
+      >
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Guía Interactiva
+      </span>
+    </div>
+  </nav>
+
+  <main class="py-12 px-4 min-h-screen bg-slate-50">
+    <div class="max-w-3xl mx-auto">
+      <!-- ═══════════════ MURO (nombre + email → MailerLite / API) ═══════════════ -->
+      <section id="muro" class="bg-white rounded-2xl p-6 sm:p-10 border border-gray-200 shadow-sm">
+        <span class="inline-block text-xs font-bold uppercase tracking-wider text-teal bg-teal/10 px-3 py-1 rounded-full mb-4">
+          Guía Gratis · LuciRMe AI
+        </span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-deep tracking-tight leading-tight">
+          20 prompts para NotebookLM, listos para copiar y pegar.
+        </h1>
+        <p class="text-lg sm:text-xl font-medium text-gray-600 mt-3">
+          Déjanos tu nombre y tu correo, y te llegan de una.
+        </p>
+
+        <form id="wall-form" action="https://assets.mailerlite.com/jsonp/TU_ACCOUNT_ID/forms/TU_FORM_ID/subscribe" method="POST" class="mt-8 flex flex-col gap-4">
+          <input type="hidden" name="tags[]" value="lead-notebooklm" />
+          <input type="hidden" name="fields[origen]" value="tiktok-notebook" />
+          
+          <div>
+            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Tu nombre</label>
+            <input 
+              type="text" 
+              name="fields[name]" 
+              placeholder="Ej. María Pérez" 
+              required 
+              autocomplete="name" 
+              class="w-full text-base p-4 border border-gray-300 rounded-xl bg-white text-deep focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition"
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Tu correo corporativo o personal</label>
+            <input 
+              type="email" 
+              name="fields[email]" 
+              placeholder="Ej. maria@empresa.com" 
+              required 
+              autocomplete="email" 
+              class="w-full text-base p-4 border border-gray-300 rounded-xl bg-white text-deep focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition"
+            />
+          </div>
+
+          <button type="submit" class="w-full bg-orange hover:bg-orange/90 text-white font-bold text-lg py-4 px-6 rounded-xl transition shadow-lg cursor-pointer mt-2">
+            Enviarme los prompts
+          </button>
+        </form>
+
+        <p class="text-xs text-gray-500 mt-4 text-center">
+          🔒 Sin spam. Un correo con los prompts y a lo mucho un seguimiento útil.
+        </p>
+      </section>
+
+      <!-- ═══════════════ CONTENIDO DESBLOQUEADO ═══════════════ -->
+      <section id="contenido" class="hidden space-y-8">
+        <div class="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200 shadow-sm">
+          <span class="inline-block text-xs font-bold uppercase tracking-wider text-teal bg-teal/10 px-3 py-1 rounded-full mb-3">
+            LuciRMe AI · Guía Desbloqueada
+          </span>
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-deep tracking-tight">
+            Tus 20 prompts para NotebookLM.
+          </h1>
+          <p class="text-base sm:text-lg text-gray-600 mt-2">
+            Copia, pega en tu notebook y ajusta. Listo.
+          </p>
+
+          <div class="mt-6 flex flex-col sm:flex-row items-start sm:items-center gap-3 pt-4 border-t border-gray-100">
+            <a 
+              class="bg-teal hover:bg-tealHover text-white font-bold text-base px-6 py-3 rounded-xl transition shadow-md inline-flex items-center gap-2" 
+              href="https://notebooklm.google.com" 
+              target="_blank" 
+              rel="noopener"
+            >
+              <span>Abrir en NotebookLM</span> ↗
+            </a>
+            <span class="text-xs text-gray-500">
+              notebooklm.google.com — gratis con tu cuenta de Google
+            </span>
+          </div>
+        </div>
+
+        <!-- ── Comprensión y Análisis ── -->
+        <div class="space-y-4">
+          <h2 class="text-xs font-extrabold uppercase tracking-widest text-teal pt-4">
+            Comprensión y Análisis
+          </h2>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">01</span> Resumen Instantáneo
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p01">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p01">Crea un resumen conciso de los puntos clave de estas fuentes. Analiza los temas principales, los argumentos y las conclusiones presentadas.</p>
+          </article>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">02</span> Explicación para Principiantes
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p02">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p02">Explícame los conceptos de estas fuentes como si fuera nuevo en el tema. Usa analogías simples, evita la jerga técnica y define cualquier término que yo necesite.</p>
+          </article>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">03</span> Análisis Profundo
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p03">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p03">Haz un análisis profundo de los argumentos de estas fuentes. Identifica tesis, evidencia, suposiciones y conclusiones, y dime qué tan sólido es cada uno.</p>
+          </article>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">04</span> Comparar Fuentes
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p04">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p04">Compara y contrasta las diferentes perspectivas en estas fuentes. ¿En qué coinciden, en qué difieren y cuál está mejor sustentada?</p>
+          </article>
+        </div>
+
+        <!-- ── Active Study ── -->
+        <div class="space-y-4">
+          <h2 class="text-xs font-extrabold uppercase tracking-widest text-teal pt-4">
+            Active Study
+          </h2>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">05</span> Study Notes
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p05">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p05">Convierte este contenido en notas de estudio estructuradas con encabezados, bullet points, definiciones y ejemplos memorables.</p>
+          </article>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">06</span> Flashcards
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p06">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p06">Genera 25 flashcards de alta calidad sobre este material, con una pregunta al frente y una respuesta concisa atrás.</p>
+          </article>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">07</span> Interactive Quiz
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p07">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p07">Crea un quiz progresivo de fácil a difícil basado únicamente en esta fuente. Hazme una pregunta a la vez, espera mi respuesta y califícame.</p>
+          </article>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">08</span> Memory Hooks
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p08">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p08">Crea mnemotecnias, analogías y ganchos de memoria que me ayuden a retener las partes más importantes de este contenido.</p>
+          </article>
+        </div>
+
+        <!-- ── Investigación y Pensamiento Crítico ── -->
+        <div class="space-y-4">
+          <h2 class="text-xs font-extrabold uppercase tracking-widest text-teal pt-4">
+            Investigación y Pensamiento Crítico
+          </h2>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">09</span> Extracción de Cronología
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p09">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p09">Organiza cronológicamente los eventos de estas fuentes. Identifica fechas y momentos clave y preséntalos como línea de tiempo con una línea de explicación por hito.</p>
+          </article>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">10</span> Buscador de Citas Clave
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p10">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p10">Encuentra las citas más influyentes de estas fuentes. Incluye la cita exacta, quién la dice y su contexto.</p>
+          </article>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">11</span> Detectar Lagunas en la Investigación
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p11">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p11">Señala lo que falta en estas fuentes. Identifica áreas sin información, contradicciones y preguntas que quedaron abiertas.</p>
+          </article>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">12</span> Debatir Ambos Lados
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p12">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p12">Presenta los mejores argumentos a favor y en contra de la tesis principal de estas fuentes. Mantén una postura neutral y analítica.</p>
+          </article>
+        </div>
+
+        <!-- ── Aplicación Práctica ── -->
+        <div class="space-y-4">
+          <h2 class="text-xs font-extrabold uppercase tracking-widest text-teal pt-4">
+            Aplicación Práctica
+          </h2>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">13</span> Convert to a Framework
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p13">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p13">Convierte este contenido en un framework accionable: pasos, plantillas y checklists que pueda aplicar esta misma semana.</p>
+          </article>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">14</span> Repurpose Content
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p14">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p14">Transforma estas fuentes en otros formatos: 3 posts para redes, 1 correo corto y el esquema de una presentación de 5 slides.</p>
+          </article>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">15</span> Expert Interview Mode
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p15">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p15">Actúa como especialista en este tema. Te voy a entrevistar: responde mis preguntas basándote en las fuentes y cita de dónde sale cada respuesta.</p>
+          </article>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">16</span> Executive Summary
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p16">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p16">Escribe un resumen ejecutivo para un líder ocupado: contexto, hallazgos clave, riesgos y decisiones recomendadas. Máximo una página.</p>
+          </article>
+        </div>
+
+        <!-- ── Creación y Acción ── -->
+        <div class="space-y-4">
+          <h2 class="text-xs font-extrabold uppercase tracking-widest text-teal pt-4">
+            Creación y Acción
+          </h2>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">17</span> Creador de Planes de Lecciones
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p17">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p17">Convierte estas notas en un plan de lecciones: sesiones con objetivo, tiempo estimado y orden de temas.</p>
+          </article>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">18</span> Generador de Ideas
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p18">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p18">Usa estas fuentes para proponer 10 enfoques o ideas nuevas que no haya considerado. Una línea de descripción y su impacto potencial por cada una.</p>
+          </article>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">19</span> Simplificar para Enseñar
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p19">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p19">Prepárame para explicar este contenido a otras personas: las 3 ideas centrales, un ejemplo por idea y el error más común al contarlo.</p>
+          </article>
+
+          <article class="bg-white rounded-xl p-5 border-l-4 border-teal border-gray-200 shadow-sm">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <h3 class="font-bold text-lg text-deep flex items-center gap-2">
+                <span class="text-orange font-black">20</span> Plan de Acción
+              </h3>
+              <button class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-2 rounded-lg transition cursor-pointer shrink-0" data-target="p20">
+                Copiar
+              </button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed font-mono bg-slate-50 p-3 rounded-lg border border-slate-100" id="p20">Lleva este conocimiento a ejecución: un plan de acción con prioridades, próximos pasos y cómo sabré que funcionó.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ACTION HUB & REDES SOCIALES -->
+      <div class="mt-12 space-y-8">
+        <ActionHub />
+      </div>
+    </div>
+  </main>
+
+  <RedesSociales />
+</Layout>
+
+<script is:inline>
+  // ── Muro → MailerLite + desbloqueo ─────────────────────────
+  const form = document.getElementById('wall-form');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const action = form.getAttribute('action');
+      const nameInput = form.querySelector('input[name="fields[name]"]');
+      const emailInput = form.querySelector('input[name="fields[email]"]');
+      const nameVal = nameInput ? nameInput.value : '';
+      const emailVal = emailInput ? emailInput.value : '';
+
+      // Si ya configuraste tu form de MailerLite, enviamos el lead.
+      if (action && !action.includes('TU_ACCOUNT_ID')) {
+        try {
+          await fetch(action, { method: 'POST', body: new FormData(form), mode: 'no-cors' });
+        } catch (err) { /* si falla, igual desbloqueamos */ }
+      } else {
+        try {
+          await fetch('/api/unlock-guia', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: nameVal, email: emailVal })
+          });
+        } catch (err) { /* si falla, desbloqueamos */ }
+      }
+
+      const muroEl = document.getElementById('muro');
+      if (muroEl) muroEl.classList.add('hidden');
+      
+      const contenidoEl = document.getElementById('contenido');
+      if (contenidoEl) contenidoEl.classList.remove('hidden');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // ── Botones Copiar ─────────────────────────────────────────
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const targetId = btn.getAttribute('data-target');
+      const targetEl = document.getElementById(targetId);
+      if (!targetEl) return;
+      const texto = targetEl.innerText;
+      try {
+        await navigator.clipboard.writeText(texto);
+      } catch (err) {
+        const t = document.createElement('textarea');
+        t.value = texto; document.body.appendChild(t);
+        t.select(); document.execCommand('copy'); t.remove();
+      }
+      const prevText = btn.textContent;
+      btn.textContent = '✓ Copiado';
+      btn.classList.remove('bg-teal', 'hover:bg-tealHover');
+      btn.classList.add('bg-emerald-600');
+      setTimeout(() => { 
+        btn.textContent = 'Copiar'; 
+        btn.classList.remove('bg-emerald-600');
+        btn.classList.add('bg-teal', 'hover:bg-tealHover');
+      }, 2000);
+    });
+  });
+</script>

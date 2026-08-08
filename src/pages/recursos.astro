@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Footer from "../components/Footer.astro";
+import RedesSociales from "../components/RedesSociales.astro";
 
 // 1. Cargamos todos los archivos .astro automáticamente
 const archivos = import.meta.glob("./recursos/*.astro", { eager: true });
@@ -49,6 +50,13 @@ const metaData = {
   prompteador: {
     etiqueta: "Herramienta Pro",
     desc: "Optimiza tus prompts con la fórmula R+C+T+E para obtener respuestas de ingeniería de élite.",
+    precio: null,
+    esPago: false,
+    categoria: "ia",
+  },
+  "guia-20prompts-notebooklm": {
+    etiqueta: "Guía de Prompts",
+    desc: "20 prompts listos para copiar y pegar en NotebookLM. Organizados por análisis, estudio activo, investigación y acción.",
     precio: null,
     esPago: false,
     categoria: "ia",
@@ -115,13 +123,6 @@ const metaData = {
     precio: null,
     esPago: false,
     categoria: "pm",
-  },
-  "procesador-cartera": {
-    etiqueta: "Herramienta Pro",
-    desc: "Carga tu reporte de gestión de cartera (.xlsx) y genera automáticamente un consolidado por tercero, control de vencimientos y alertas de CC-4 sin RC-1 en el mes actual.",
-    precio: null,
-    esPago: false,
-    categoria: "ia",
   },
 };
 
@@ -302,4 +303,6 @@ const recursosPM = recursos.filter((r) => {
       </div>
     </div>
   </main>
+
+  <RedesSociales />
 </Layout>
