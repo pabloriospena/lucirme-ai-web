@@ -1,0 +1,375 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ActionHub from "../../components/ActionHub.astro";
+import RedesSociales from "../../components/RedesSociales.astro";
+import { LINKS } from "../../lib/constants.js";
+
+const calendlyUrl = LINKS.calendly_empresa || LINKS.calendly_taller || LINKS.calendly;
+---
+
+<Layout title="Sesión de Diagnóstico: Susan Sarmiento | LuciRMe AI">
+
+  <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
+  <nav class="bg-white/90 backdrop-blur-md border-b border-gray-200 px-6 py-4 sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <a href="/" class="text-xs md:text-sm font-bold text-gray-500 hover:text-teal transition flex items-center gap-1">
+        ← Volver a LuciRMe AI
+      </a>
+      <a href={calendlyUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-bold bg-orange text-white rounded-xl py-2 px-4 hover:bg-orange/90 transition shadow-xs text-xs text-center cursor-pointer">
+        Agendar Sesión
+      </a>
+    </div>
+  </nav>
+
+  <!-- HEADER / HERO SECTION -->
+  <header class="bg-deep text-white py-16 md:py-20 px-6 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <!-- EYEBROW -->
+      <div class="inline-flex items-center gap-2 bg-teal/15 text-teal text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6 border border-teal/30">
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span>
+        Diagnóstico Personalizado · Plan de Acompañamiento
+      </div>
+
+      <!-- H1 -->
+      <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight text-white">
+        Sesión de Diagnóstico: <span class="text-teal">Susan Sarmiento</span>
+      </h1>
+
+      <!-- SUBTÍTULO -->
+      <p class="text-lg md:text-xl text-gray-300 font-medium max-w-2xl mx-auto mb-8">
+        Product Manager · Startup Salud/Farma · Julio 2026
+      </p>
+
+      <!-- META BADGES -->
+      <div class="inline-flex flex-wrap justify-center items-center gap-4 bg-white/5 border border-white/10 rounded-xl px-5 py-2.5 text-xs md:text-sm text-gray-300">
+        <span class="flex items-center gap-1.5">
+          👤 <strong>Cliente:</strong> Susan Sarmiento
+        </span>
+        <span class="text-gray-500 hidden sm:inline">•</span>
+        <span class="flex items-center gap-1.5">
+          🏥 <strong>Sector:</strong> Salud/Farma (Microsoft Partner)
+        </span>
+        <span class="text-gray-500 hidden sm:inline">•</span>
+        <span class="flex items-center gap-1.5">
+          🚀 <strong>Acompañamiento:</strong> 1 Ciclo Individual (4 Sesiones)
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-12 space-y-16">
+
+    <!-- SECCIÓN 1: RESUMEN EJECUTIVO -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Resumen Ejecutivo
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          Contexto y Diagnóstico Inicial
+        </h2>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-4 leading-relaxed text-gray-700 text-base">
+        <p>
+          Susan lidera producto en una startup del sector salud/farma (partner de Microsoft). Su producto —un orquestador de funnel marketing-ventas— sale a mercado en 2 semanas. Entró hace 4-5 meses a organizar un producto que llevaba 2 años en desarrollo sin documentación ni estructura clara.
+        </p>
+
+        <div class="p-5 bg-slate-50 border-l-4 border-orange rounded-r-xl my-4 space-y-2">
+          <h3 class="font-bold text-deep text-sm uppercase tracking-wide flex items-center gap-2">
+            <span>⚠️</span> <span>El problema concreto:</span>
+          </h3>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Susan ya usa IA en su día a día (Claude Pro, GPT, Lovable), pero lo hace "chateando". Cada paso es manual: hace research en Claude → copia el texto a Azure DevOps → lo pasa a Lovable para diseño → vuelve a Azure como historia de usuario → transcribe reuniones → hace ajustes manuales. El resultado: días que terminan sin completar la lista de tareas, justo cuando el lanzamiento le va a exigir métricas, usabilidad e interacción con usuarios.
+          </p>
+        </div>
+
+        <p>
+          <strong class="text-deep">Lo que identificamos:</strong> Susan no necesita más cursos genéricos, ni tampoco una agencia que le haga la tarea y le entregue un "PDF mágico". Necesita <strong class="text-teal">autonomía</strong>. Necesita un colega senior que se siente a su lado, le enseñe la lógica detrás de las automatizaciones y construya los flujos <em>con ella</em> en vivo.
+        </p>
+
+        <div class="p-4 bg-teal/10 border border-teal/20 rounded-xl text-teal-900 font-medium text-sm">
+          💡 <strong>Acuerdo alcanzado:</strong> Un Ciclo Individual (4 sesiones) para resolver las 3 fases iniciales del flujo, trabajando juntos, pantalla compartida y manos a la obra. Si toma más tiempo del estimado, corre por cuenta de LucirMe.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: OBJETIVOS DE LA SESIÓN -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Objetivos de la Sesión
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          Hallazgos y Estado de los Objetivos
+        </h2>
+      </div>
+
+      <!-- TABLA DE OBJETIVOS -->
+      <div class="overflow-x-auto bg-white border border-gray-200 rounded-2xl shadow-xs">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-50 border-b border-gray-200 text-xs uppercase tracking-wider text-gray-500">
+              <th class="p-4 font-bold w-12 text-center">#</th>
+              <th class="p-4 font-bold">Objetivo</th>
+              <th class="p-4 font-bold text-right">Estado</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 text-sm">
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-bold text-gray-400 text-center">1</td>
+              <td class="p-4 font-semibold text-deep">Entender el flujo actual de trabajo de Susan y dónde se pierde tiempo real</td>
+              <td class="p-4 text-right"><span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 font-bold px-2.5 py-1 rounded-full text-xs border border-emerald-200">✅ Cumplido</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-bold text-gray-400 text-center">2</td>
+              <td class="p-4 font-semibold text-deep">Identificar qué herramientas ya domina y cuáles usa "a medias"</td>
+              <td class="p-4 text-right"><span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 font-bold px-2.5 py-1 rounded-full text-xs border border-emerald-200">✅ Cumplido</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-bold text-gray-400 text-center">3</td>
+              <td class="p-4 font-semibold text-deep">Definir si el problema es de prompting, de automatización o de arquitectura</td>
+              <td class="p-4 text-right"><span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 font-bold px-2.5 py-1 rounded-full text-xs border border-emerald-200">✅ Cumplido — es arquitectura y conexión</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-bold text-gray-400 text-center">4</td>
+              <td class="p-4 font-semibold text-deep">Diseñar una solución en fases para construir <em>juntos</em> en las sesiones</td>
+              <td class="p-4 text-right"><span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 font-bold px-2.5 py-1 rounded-full text-xs border border-emerald-200">✅ Cumplido</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-bold text-gray-400 text-center">5</td>
+              <td class="p-4 font-semibold text-deep">Acordar alcance, tiempo y compromiso mutuo</td>
+              <td class="p-4 text-right"><span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 font-bold px-2.5 py-1 rounded-full text-xs border border-emerald-200">✅ Cumplido</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- DIAGNÓSTICO CLAVE CALLOUT -->
+      <div class="bg-gradient-to-r from-teal/10 via-slate-50 to-orange/10 border border-teal/20 rounded-2xl p-6 md:p-8 space-y-3">
+        <h3 class="font-extrabold text-deep text-base uppercase tracking-wider flex items-center gap-2">
+          <span>🧠</span> <span>Diagnóstico Clave</span>
+        </h3>
+        <p class="text-gray-700 text-sm md:text-base leading-relaxed">
+          Susan está en el 10% de profesionales que ya usan IA bien. Su cuello de botella no es saber usar las herramientas, es que cada herramienta vive aislada y ella es el pegamento manual entre todas. Lo que necesita son <strong>flujos conectados</strong> (N8N local) que eliminen el copiar-pegar, y aprender la lógica para poder mantenerlos ella misma cuando el producto escale.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: COMPROMISOS Y PASOS SIGUIENTES -->
+    <section class="space-y-8">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Plan de Trabajo
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          Compromisos y Pasos Siguientes
+        </h2>
+      </div>
+
+      <!-- LO QUE SUSAN TRAE -->
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-4">
+        <h3 class="text-lg font-bold text-deep flex items-center gap-2">
+          <span>🧰</span> <span>Lo que Susan trae a la mesa:</span>
+        </h3>
+        <ul class="grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
+          <li class="flex items-start gap-2.5 p-3 bg-slate-50 rounded-xl border border-slate-100">
+            <span class="text-teal font-bold shrink-0">✓</span>
+            <span><strong>Acceso a Azure DevOps</strong> (entorno Microsoft de la empresa).</span>
+          </li>
+          <li class="flex items-start gap-2.5 p-3 bg-slate-50 rounded-xl border border-slate-100">
+            <span class="text-teal font-bold shrink-0">✓</span>
+            <span><strong>Claude Pro</strong> (pago personal) + licencia corporativa.</span>
+          </li>
+          <li class="flex items-start gap-2.5 p-3 bg-slate-50 rounded-xl border border-slate-100">
+            <span class="text-teal font-bold shrink-0">✓</span>
+            <span><strong>N8N gratuito</strong> (versión escritorio/local) instalado en su máquina.</span>
+          </li>
+          <li class="flex items-start gap-2.5 p-3 bg-slate-50 rounded-xl border border-slate-100">
+            <span class="text-teal font-bold shrink-0">✓</span>
+            <span><strong>Contexto completo del producto:</strong> historias de usuario, research, diseño.</span>
+          </li>
+          <li class="flex items-start gap-2.5 p-3 bg-slate-50 rounded-xl border border-slate-100 sm:col-span-2">
+            <span class="text-teal font-bold shrink-0">✓</span>
+            <span><strong>Disponibilidad y actitud</strong> para construir en vivo durante las 4 sesiones.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- LO QUE CONSTRUIMOS JUNTOS -->
+      <div class="space-y-4">
+        <h3 class="text-xl font-extrabold text-deep flex items-center gap-2">
+          <span>🛠️</span> <span>Lo que construimos JUNTOS en las sesiones:</span>
+        </h3>
+
+        <!-- FASE 1 -->
+        <div class="bg-white border-l-4 border-teal border border-gray-200 rounded-2xl p-6 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="font-extrabold text-teal text-base uppercase tracking-wider">Fase 1 — Captura desde 3 fuentes</h4>
+            <span class="text-xs bg-teal/10 text-teal font-bold px-2.5 py-1 rounded-full">Sesión 1</span>
+          </div>
+          <p class="text-sm text-gray-700">
+            <strong>Enseño a Susan a configurar:</strong> Notion Web Clipper (captura sin fricción), Perplexity AI (validación táctica) y Deep Research (análisis estratégico).
+          </p>
+          <p class="text-xs text-gray-500 font-semibold pt-1 border-t border-gray-100">
+            🎯 <strong>Meta:</strong> Que la información llegue a un solo lugar sin que Susan tenga que buscarla.
+          </p>
+        </div>
+
+        <!-- FASE 2 -->
+        <div class="bg-white border-l-4 border-orange border border-gray-200 rounded-2xl p-6 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="font-extrabold text-orange text-base uppercase tracking-wider">Fase 2 — El Cerebro Central (Notion + N8N Local)</h4>
+            <span class="text-xs bg-orange/10 text-orange font-bold px-2.5 py-1 rounded-full">Sesiones 2 y 3</span>
+          </div>
+          <p class="text-sm text-gray-700">
+            <strong>Construimos juntos:</strong> Base de datos "Discovery Hub" y el flujo en N8N local.
+          </p>
+          <p class="text-sm text-gray-700">
+            <strong>La lógica:</strong> Susan aprenderá a configurar el nodo de IA para que procese cada captura y devuelva un output estándar: <em>¿Qué es? / ¿Por qué importa? / ¿Qué hago con esto?</em>
+          </p>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span class="text-xs font-bold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Capturado</span>
+            <span class="text-xs font-bold bg-blue-50 text-blue-700 px-2.5 py-1 rounded-md">→ Procesado</span>
+            <span class="text-xs font-bold bg-amber-50 text-amber-700 px-2.5 py-1 rounded-md">→ Por Revisar</span>
+            <span class="text-xs font-bold bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-md">→ Accionado</span>
+          </div>
+        </div>
+
+        <!-- FASE 3 -->
+        <div class="bg-white border-l-4 border-blue-500 border border-gray-200 rounded-2xl p-6 shadow-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="font-extrabold text-blue-600 text-base uppercase tracking-wider">Fase 3 — De la Decisión a la Ejecución (Azure DevOps)</h4>
+            <span class="text-xs bg-blue-50 text-blue-600 font-bold px-2.5 py-1 rounded-full">Sesión 4</span>
+          </div>
+          <p class="text-sm text-gray-700">
+            <strong>Conectamos en vivo:</strong> El trigger automático para que, cuando el estado cambie a "Accionado" en Notion, N8N genere el work item en Azure.
+          </p>
+          <p class="text-xs text-gray-500 font-semibold pt-1 border-t border-gray-100">
+            🎯 <strong>Meta:</strong> Cero copiar-pegar. Cero abrir 4 pestañas. Cero "se me olvidó pasarlo al sprint".
+          </p>
+        </div>
+      </div>
+
+      <!-- QUOTE BLOCK: EL ACUERDO -->
+      <blockquote class="bg-deep text-white rounded-2xl p-6 md:p-8 space-y-3 relative overflow-hidden shadow-lg border border-teal/30">
+        <div class="text-xs font-bold text-teal uppercase tracking-widest">El Acuerdo de Acompañamiento</div>
+        <p class="text-lg md:text-xl font-bold leading-relaxed text-teal-300">
+          "1 Ciclo Individual (4 sesiones) para completar las 3 fases."
+        </p>
+        <p class="text-sm md:text-base text-gray-300 leading-relaxed">
+          Mi rol no es configurar tu N8N en secreto y entregarte un manual. Mi rol es compartir pantalla, enseñarte la lógica y ensamblar el motor <em>contigo</em> para que el día que yo no esté, tú sepas exactamente cómo repararlo o escalarlo.
+        </p>
+        <p class="text-sm text-gray-400">
+          Si toma más tiempo del estimado, la sesión adicional corre por mi cuenta. Al finalizar, definimos si hay un segundo ciclo para la parte de métricas, dashboards y reporting post-lanzamiento.
+        </p>
+      </blockquote>
+    </section>
+
+    <!-- SECCIÓN 4: LO QUE NO VAMOS A HACER -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-orange uppercase tracking-widest bg-orange/10 px-3 py-1 rounded-full">
+          Límites Claros
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          Lo que NO vamos a hacer
+        </h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-xs space-y-2">
+          <div class="flex items-center gap-2 text-red-500 font-bold text-base">
+            <span>🚫</span> <span>No voy a hacer la tarea por ti</span>
+          </div>
+          <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+            No soy una agencia de automatización. Si yo lo construyo solo, el día que haya un error en la API, no vas a saber cómo arreglarlo. Lo hacemos juntos.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-xs space-y-2">
+          <div class="flex items-center gap-2 text-red-500 font-bold text-base">
+            <span>🚫</span> <span>No vamos a ver teoría de IA</span>
+          </div>
+          <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+            Cero diapositivas. Todo sobre tus tareas reales de la semana.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-xs space-y-2">
+          <div class="flex items-center gap-2 text-red-500 font-bold text-base">
+            <span>🚫</span> <span>No vamos a hacer un proyecto de 6 meses</span>
+          </div>
+          <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+            El producto sale en 2 semanas. Empezamos por lo que se puede mover ya (N8N local, Claude, Notion) sin pedir permisos a TI que tarden semanas.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-xs space-y-2">
+          <div class="flex items-center gap-2 text-red-500 font-bold text-base">
+            <span>🚫</span> <span>No vamos a usar métricas vanidosas</span>
+          </div>
+          <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+            Nos enfocamos en horas recuperadas y en el tiempo que Susan podrá dedicarle a los usuarios reales post-lanzamiento.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: PRÓXIMOS PASOS INMEDIATOS -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Hoja de Ruta
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          Próximos Pasos Inmediatos
+        </h2>
+      </div>
+
+      <div class="overflow-x-auto bg-white border border-gray-200 rounded-2xl shadow-xs">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-50 border-b border-gray-200 text-xs uppercase tracking-wider text-gray-500">
+              <th class="p-4 font-bold">Acción</th>
+              <th class="p-4 font-bold">Responsable</th>
+              <th class="p-4 font-bold text-right">Fecha</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 text-sm">
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-semibold text-deep">Confirmar fechas de las 4 sesiones del Ciclo</td>
+              <td class="p-4 text-gray-600 font-medium">Susan + Pablo</td>
+              <td class="p-4 text-right font-bold text-teal">Esta semana</td>
+            </tr>
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-semibold text-deep">Tener N8N local instalado y accesos a Notion/Azure a la mano</td>
+              <td class="p-4 text-gray-600 font-medium">Susan</td>
+              <td class="p-4 text-right text-gray-500">Antes de Sesión 1</td>
+            </tr>
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-semibold text-deep">Pablo trae la arquitectura base y los prompts listos</td>
+              <td class="p-4 text-gray-600 font-medium">Pablo</td>
+              <td class="p-4 text-right text-gray-500">Antes de Sesión 1</td>
+            </tr>
+            <tr class="hover:bg-slate-50/50 transition bg-teal/5">
+              <td class="p-4 font-extrabold text-deep">Sesión 1: Mapeo en vivo y ensamble de la Fase 1 (manos a la obra)</td>
+              <td class="p-4 text-teal font-bold">Ambos</td>
+              <td class="p-4 text-right font-bold text-orange">Jueves 13 de agosto</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ACTION HUB -->
+    <div class="pt-8">
+      <ActionHub />
+    </div>
+
+  </main>
+
+  <!-- REDES SOCIALES -->
+  <RedesSociales />
+
+</Layout>
