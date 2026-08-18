@@ -79,6 +79,7 @@ const calendlyUrl =
   </header>
 
   <!-- NAVEGACIÓN DE PARTES -->
+  <!-- NAVEGACIÓN DE PARTES -->
   <div class="bg-slate-100 border-b border-gray-200 px-6 py-4">
     <div
       class="max-w-4xl mx-auto flex flex-wrap items-center justify-between gap-3"
@@ -88,18 +89,24 @@ const calendlyUrl =
           >Estructura de la Guía:</span
         >
       </div>
-      <div class="flex items-center gap-2 text-xs md:text-sm">
+      <div class="flex flex-wrap items-center gap-2 text-xs md:text-sm">
         <a
           href="#parte-1"
-          class="font-bold bg-teal text-white px-3.5 py-1.5 rounded-lg shadow-2xs flex items-center gap-1.5"
+          class="font-bold bg-teal text-white px-3 py-1.5 rounded-lg shadow-2xs flex items-center gap-1"
         >
-          <span>Part 1:</span> Conexión Básica
+          <span>Part 1:</span> Conexión MCP
         </a>
         <a
           href="#parte-2"
-          class="font-semibold bg-white text-gray-600 hover:text-teal border border-gray-300 px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5"
+          class="font-semibold bg-white text-gray-600 hover:text-teal border border-gray-300 px-3 py-1.5 rounded-lg transition flex items-center gap-1"
         >
-          <span>Part 2:</span> Prompts y pruebas
+          <span>Part 2:</span> Generar PRDs
+        </a>
+        <a
+          href="#parte-3"
+          class="font-bold bg-orange text-white px-3 py-1.5 rounded-lg shadow-2xs flex items-center gap-1"
+        >
+          <span>Part 3:</span> Trigger en Chat
         </a>
       </div>
     </div>
@@ -544,6 +551,227 @@ Por favor, confirma en el chat cuando hayas completado el proceso y muéstrame l
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════ PARTE 3 ════════════════════ -->
+    <section
+      id="parte-3"
+      class="space-y-10 scroll-mt-24 pt-8 border-t border-gray-200"
+    >
+      <!-- PARTE 3 HEADER -->
+      <div
+        class="border-b border-gray-200 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+      >
+        <div>
+          <span
+            class="text-xs font-bold text-orange uppercase tracking-widest bg-orange/10 px-3 py-1 rounded-full"
+          >
+            PARTE 3 DE 3
+          </span>
+          <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-2">
+            Cómo crear un "Trigger" Manual en Claude para automatizar Notion
+          </h2>
+        </div>
+        <span
+          class="text-xs font-bold text-orange bg-orange/10 px-3 py-1 rounded-lg self-start sm:self-center"
+        >
+          Automatización mediante Chat
+        </span>
+      </div>
+
+      <!-- INTRO PARTE 3 -->
+      <div
+        class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-4"
+      >
+        <p class="text-base md:text-lg text-gray-700 leading-relaxed">
+          Si usas el plan gratuito de Claude y no quieres usar herramientas
+          externas (como Make o Zapier), puedes entrenar a Claude para que actúe
+          como un robot de automatización. Al configurar una <strong
+            >palabra clave (Trigger)</strong
+          >, Claude ejecutará todo el proceso de lectura, análisis y escritura
+          en Notion con un solo comando.
+        </p>
+      </div>
+
+      <!-- PASO 1: CONFIGURAR TRIGGER -->
+      <div
+        class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-4"
+      >
+        <div
+          class="flex items-center justify-between border-b border-gray-100 pb-3"
+        >
+          <h3
+            class="text-lg md:text-xl font-bold text-deep flex items-center gap-2.5"
+          >
+            <span
+              class="bg-orange text-white font-black text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+              >1</span
+            >
+            <span>Configurar el "Trigger" en el chat de Claude</span>
+          </h3>
+          <span
+            class="text-xs font-bold text-orange bg-orange/10 px-2.5 py-1 rounded-full"
+            >Paso 1</span
+          >
+        </div>
+
+        <p class="text-sm text-gray-700 leading-relaxed">
+          Abre un <strong>chat nuevo</strong> en Claude, asegúrate de que el acceso
+          a herramientas (icono de engranaje/herramientas abajo junto a la barra de
+          texto) esté en <strong>Auto</strong>, copia el siguiente texto, <strong
+            >reemplaza las variables entre corchetes <code>[ ]</code></strong
+          > y envíalo:
+        </p>
+
+        <!-- PROMPT BOX TRIGGER -->
+        <div
+          class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden my-4"
+        >
+          <div
+            class="flex justify-between items-center px-4 py-2.5 bg-slate-100 border-b border-slate-200"
+          >
+            <span
+              class="text-[11px] font-bold text-slate-600 uppercase tracking-wider"
+              >Prompt de Entrenamiento de Trigger</span
+            >
+            <button
+              onclick="copyText('prompt-trigger', this)"
+              class="bg-orange hover:bg-orange/90 text-white font-bold text-xs px-3 py-1 rounded-lg transition-all cursor-pointer"
+            >
+              Copiar Prompt Trigger
+            </button>
+          </div>
+          <pre
+            id="prompt-trigger"
+            class="p-4 text-xs font-mono text-slate-800 leading-relaxed whitespace-pre-wrap select-all max-h-96 overflow-y-auto">Actúa como un bot automatizado conectado a mi Notion. A partir de ahora, cada vez que yo escriba la palabra clave "[AÑADIR_TU_PALABRA_CLAVE_EJ_TRIGGER_PRD]", debes ejecutar automáticamente la siguiente secuencia sin pedirme más detalles ni introducciones:
+
+1. ACCIÓN DE LECTURA: 
+Busca en mi base de datos llamada "[AÑADIR_NOMBRE_BASE_DATOS_ORIGEN]" todos los elementos que tengan la propiedad [AÑADIR_NOMBRE_PROPIEDAD_ESTADO] = "[AÑADIR_ESTADO_A_BUSCAR_EJ_SESION_GRABADA]". Extrae toda su información y notas.
+
+2. ACCIÓN DE PROCESAMIENTO: 
+Toma esa información, adopta el rol de un experto en [AÑADIR_ROL_EJ_PRODUCT_MANAGER] y redacta un documento de tipo [AÑADIR_TIPO_DOCUMENTO_EJ_PRD] con una estructura profesional.
+
+3. ACCIÓN DE ESCRITURA: 
+Ve a mi base de datos llamada "[AÑADIR_NOMBRE_BASE_DATOS_DESTINO]" y CREA una nueva página con las siguientes especificaciones:
+   - Título de la página: "[AÑADIR_PREFIJO_EJ_PRD - ] [Nombre del elemento original]"
+   - Contenido del cuerpo: Todo el texto generado en el paso 2.
+   - Propiedad "[AÑADIR_PROPIEDAD_FECHA]": Asigna la fecha actual.
+   - Propiedad "[AÑADIR_PROPIEDAD_TEXTO]": Escribe el texto "[AÑADIR_TEXTO_CONFIRMACION_EJ_PRD_CREADO]".
+
+Si entiendes la instrucción y estás listo para operar, responde únicamente: "Sistema configurado. Esperando el comando [AÑADIR_TU_PALABRA_CLAVE]."</pre>
+        </div>
+      </div>
+
+      <!-- PASO 2: USO EN EL DÍA A DÍA -->
+      <div
+        class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-4"
+      >
+        <div
+          class="flex items-center justify-between border-b border-gray-100 pb-3"
+        >
+          <h3
+            class="text-lg md:text-xl font-bold text-deep flex items-center gap-2.5"
+          >
+            <span
+              class="bg-teal text-white font-black text-sm w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+              >2</span
+            >
+            <span>Cómo usarlo en tu día a día</span>
+          </h3>
+          <span
+            class="text-xs font-bold text-teal bg-teal/10 px-2.5 py-1 rounded-full"
+            >Flujo Diario</span
+          >
+        </div>
+
+        <p class="text-sm text-gray-700 leading-relaxed">
+          Una vez que Claude te confirme que el sistema está listo (<em
+            >"Sistema configurado. Esperando el comando..."</em
+          >), tu flujo de trabajo diario será el siguiente:
+        </p>
+
+        <div class="grid sm:grid-cols-3 gap-4 pt-2">
+          <div
+            class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-1"
+          >
+            <div class="font-bold text-deep text-sm flex items-center gap-1.5">
+              <span class="text-teal font-black">1.</span> Trabaja en Notion
+            </div>
+            <p class="text-xs text-gray-600">
+              Modifica tus registros y cambia su estado al valor configurado
+              (ej. <em>Sesión grabada</em>).
+            </p>
+          </div>
+
+          <div
+            class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-1"
+          >
+            <div class="font-bold text-deep text-sm flex items-center gap-1.5">
+              <span class="text-orange font-black">2.</span> Activa el Trigger
+            </div>
+            <p class="text-xs text-gray-600">
+              Ve al chat de Claude donde hiciste la configuración y escribe
+              únicamente tu palabra clave (ej. <code>TRIGGER_PRD</code>).
+            </p>
+          </div>
+
+          <div
+            class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-1"
+          >
+            <div class="font-bold text-deep text-sm flex items-center gap-1.5">
+              <span class="text-teal font-black">3.</span> Autoriza (1ª vez)
+            </div>
+            <p class="text-xs text-gray-600">
+              Si aparece el aviso flotante (<em>Allow tool access</em>), haz
+              clic en <strong>Permitir siempre (Always Allow)</strong>.
+            </p>
+          </div>
+        </div>
+
+        <p
+          class="text-xs sm:text-sm text-gray-600 italic bg-teal/5 p-3 rounded-xl border border-teal/10 mt-2"
+        >
+          ⚡ Claude se conectará de inmediato, buscará las actualizaciones,
+          procesará el contenido y escribirá la nueva página en tu Notion sin
+          que tengas que volver a explicarle qué hacer.
+        </p>
+      </div>
+
+      <!-- CONSEJOS PARA QUE NO FALLE -->
+      <div
+        class="bg-gradient-to-br from-slate-900 via-deep to-slate-800 text-white rounded-2xl p-6 md:p-8 space-y-4 shadow-md border border-orange/30"
+      >
+        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+          <span>💡</span>
+          <span>Consejos para que no falle</span>
+        </h3>
+
+        <ul class="space-y-3 text-sm text-gray-300">
+          <li
+            class="flex items-start gap-2.5 bg-white/5 p-3 rounded-xl border border-white/10"
+          >
+            <span class="text-orange font-bold shrink-0">📌</span>
+            <div>
+              <strong>Mantén el chat vivo:</strong> Este "entrenamiento" solo funciona
+              dentro del chat donde enviaste el Paso 1. Si abres un chat completamente
+              nuevo, tendrás que volver a pegar la instrucción del Paso 1.
+            </div>
+          </li>
+          <li
+            class="flex items-start gap-2.5 bg-white/5 p-3 rounded-xl border border-white/10"
+          >
+            <span class="text-teal font-bold shrink-0">📅</span>
+            <div>
+              <strong>Cuidado con las fechas:</strong> Al ser un plan gratuito, si
+              Claude tiene problemas para detectar la fecha exacta de hoy, puedes
+              escribir en el chat: <code
+                class="bg-black/40 text-teal-300 px-2 py-0.5 rounded font-mono text-xs"
+                >TRIGGER_PRD (Hoy es 18/08/2026)</code
+              > para ayudarle a rellenar la propiedad correctamente.
+            </div>
+          </li>
+        </ul>
       </div>
     </section>
 
