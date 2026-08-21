@@ -1,14 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ActionHub from '../../components/ActionHub.astro';
+import RedesSociales from '../../components/RedesSociales.astro';
 import { LINKS } from '../../lib/constants.js';
-
-const auth = (Astro.locals as any).auth;
-const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
-
-if (!userId) {
- return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/prompteador')}`);
-}
 ---
 
 <Layout title="Prompteador de Tareas | LuciRMe AI">
@@ -23,7 +17,7 @@ if (!userId) {
   </nav>
 
   <!-- BANNER CAFÉ GRATIS -->
-  <div class="bg-gradient-to-r from-teal to-tealHover text-white px-4 py-3 text-center relative overflow-hidden">
+  <div id="cafe-banner" class="bg-gradient-to-r from-teal to-tealHover text-white px-4 py-3 text-center relative overflow-hidden transition-all duration-300">
     <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3">
       <span class="text-2xl">☕</span>
       <div class="text-sm sm:text-base">
@@ -33,71 +27,266 @@ if (!userId) {
         Agendar café gratis →
       </a>
     </div>
-    <button id="close-cafe-banner" class="absolute top-2 right-2 text-white/80 hover:text-white text-xl">×</button>
+    <button id="close-cafe-banner" class="absolute top-2 right-2 text-white/80 hover:text-white text-xl font-bold cursor-pointer">×</button>
   </div>
 
   <main class="py-12 px-4 max-w-4xl mx-auto">
-    <header class="text-center mb-12">
-      <h1 class="text-3xl font-bold text-deep mb-4">🛠️ Prompteador de Tareas</h1>
-      <p class="text-gray-600">Configura tu tarea, genera un prompt estructurado y pégalo en tu IA favorita.</p>
+    <header class="text-center mb-8">
+      <div class="inline-block bg-teal/10 text-teal text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3">
+        Herramienta Gratuita
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-deep mb-3 tracking-tight">🛠️ Prompteador de Tareas</h1>
+      <p class="text-gray-600 max-w-xl mx-auto text-base">Configura tu tarea, genera un prompt estructurado y pégalo en tu IA favorita.</p>
     </header>
 
-    <section class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
-      <form id="promptForm" class="space-y-6">
-        <!-- ROL -->
-        <fieldset class="grid gap-4">
-          <div>
-            <label class="block text-xs font-bold text-teal uppercase mb-2">[ROL] Actúa como...</label>
-            <input type="text" id="rol" required placeholder="Ej: ingeniero geotécnico senior especializado en estabilidad de taludes y normativa NSR-10" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal transition">
+    <!-- CONTAINER CON MURO DE CORREO -->
+    <div id="prompteador-container" class="relative min-h-[450px]">
+
+      <!-- MURO / GATE CARD OVERLAY -->
+      <div
+        id="prompteador-gate-overlay"
+        class="absolute inset-x-0 top-0 z-30 flex items-start justify-center pt-2 sm:pt-6 px-4 bg-gradient-to-b from-slate-50/80 via-white/95 to-slate-100/95 backdrop-blur-[3px] transition-all duration-500 min-h-[500px] rounded-2xl"
+      >
+        <div
+          id="prompteador-gate-card"
+          class="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-xl w-full max-w-md mx-auto transition-all"
+        >
+          <div id="gate-form-wrapper" class="space-y-4">
+            <span class="inline-block text-xs font-bold uppercase tracking-wider text-teal bg-teal/10 px-3 py-1 rounded-full">
+              Acceso Gratuito · LuciRMe AI
+            </span>
+            <h2 class="text-2xl font-extrabold text-deep tracking-tight">
+              Desbloquea el Prompteador
+            </h2>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Ingresa tu nombre y tu correo para acceder al generador y optimizador de prompts de tareas.
+            </p>
+
+            <form id="prompteador-unlock-form" class="space-y-4 pt-2">
+              <!-- Honeypot anti-bots -->
+              <input type="text" id="gate-website" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+              <div>
+                <label for="gate-name" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">
+                  Tu nombre *
+                </label>
+                <input
+                  type="text"
+                  id="gate-name"
+                  required
+                  placeholder="Ej. María Pérez"
+                  class="w-full text-sm p-3.5 border border-gray-300 rounded-xl bg-white text-deep focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition"
+                />
+              </div>
+
+              <div>
+                <label for="gate-email" class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">
+                  Tu correo electrónico *
+                </label>
+                <input
+                  type="email"
+                  id="gate-email"
+                  required
+                  placeholder="maria@empresa.com"
+                  class="w-full text-sm p-3.5 border border-gray-300 rounded-xl bg-white text-deep focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition"
+                />
+              </div>
+
+              <div id="gate-error-msg" class="hidden bg-red-50 border border-red-200 text-red-700 text-xs p-3 rounded-xl leading-snug">
+                Algo falló. Por favor ingresa un correo válido.
+              </div>
+
+              <button
+                type="submit"
+                id="gate-submit-btn"
+                class="w-full bg-orange hover:bg-orange/90 text-white font-bold text-base py-3.5 px-6 rounded-xl transition shadow-md cursor-pointer mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                Desbloquear Prompteador →
+              </button>
+
+              <p class="text-xs text-gray-500 text-center pt-1">
+                🔒 Sin spam. Guardaremos tus datos para darte acceso directo.
+              </p>
+            </form>
           </div>
-        </fieldset>
 
-        <!-- CONTEXTO -->
-        <fieldset class="pt-6 border-t border-gray-100">
-          <div>
-            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">[CONTEXTO] Tu tarea:</label>
-            <textarea id="contexto" rows="2" required placeholder="Ej: Revisar un informe de estabilidad de talud para proyecto..." class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal resize-none transition"></textarea>
+          <div id="gate-success-box" class="hidden text-center py-6 space-y-3">
+            <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center text-2xl mx-auto font-bold">✓</div>
+            <p id="gate-success-msg" class="text-base font-semibold text-deep leading-relaxed">
+              ¡Acceso concedido! Cargando la herramienta...
+            </p>
           </div>
-        </fieldset>
+        </div>
+      </div>
 
-        <!-- OBJETIVO -->
-        <fieldset class="pt-6 border-t border-gray-100">
-          <div>
-            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">[OBJETIVO] Específicamente, debes:</label>
-            <textarea id="objetivo" rows="3" required placeholder="Ej: Identificar omisiones normativas..." class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal resize-none transition"></textarea>
-          </div>
-        </fieldset>
+      <!-- LOCKED / UNLOCKED CONTENT BODY -->
+      <div
+        id="prompteador-content-body"
+        class="blur-md pointer-events-none select-none transition-all duration-500"
+      >
+        <section class="bg-white p-6 sm:p-8 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+          <form id="promptForm" class="space-y-6">
+            <!-- ROL -->
+            <fieldset class="grid gap-4">
+              <div>
+                <label class="block text-xs font-bold text-teal uppercase mb-2">[ROL] Actúa como...</label>
+                <input type="text" id="rol" required placeholder="Ej: ingeniero geotécnico senior especializado en estabilidad de taludes y normativa NSR-10" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal transition">
+              </div>
+            </fieldset>
 
-        <!-- FORMATO -->
-        <fieldset class="pt-6 border-t border-gray-100">
-          <div>
-            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">[FORMATO] Formato de entrega:</label>
-            <textarea id="formato" rows="3" required placeholder="Ej: Presenta la respuesta como tabla..." class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal resize-none transition"></textarea>
-          </div>
-        </fieldset>
+            <!-- CONTEXTO -->
+            <fieldset class="pt-6 border-t border-gray-100">
+              <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase mb-2">[CONTEXTO] Tu tarea:</label>
+                <textarea id="contexto" rows="2" required placeholder="Ej: Revisar un informe de estabilidad de talud para proyecto..." class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal resize-none transition"></textarea>
+              </div>
+            </fieldset>
 
-        <button type="button" id="generateBtn" class="w-full bg-teal text-white font-bold py-4 rounded-xl hover:bg-tealHover transition shadow-lg">✨ Generar Prompt Estructurado</button>
-      </form>
-    </section>
+            <!-- OBJETIVO -->
+            <fieldset class="pt-6 border-t border-gray-100">
+              <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase mb-2">[OBJETIVO] Específicamente, debes:</label>
+                <textarea id="objetivo" rows="3" required placeholder="Ej: Identificar omisiones normativas..." class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal resize-none transition"></textarea>
+              </div>
+            </fieldset>
 
-    <!-- Output -->
-    <section id="output-section" class="hidden mt-8 bg-white p-8 rounded-2xl border border-gray-200 space-y-6 animate-fade-in">
-      <h2 class="text-xl font-bold text-deep">📋 Tu Prompt Generado</h2>
-      <pre id="promptOutput" class="w-full bg-gray-50 p-6 rounded-xl text-sm font-mono text-gray-800 border border-gray-200 whitespace-pre-wrap leading-relaxed"></pre>
-      <button id="copyBtn" class="w-full bg-orange text-white font-bold py-4 rounded-lg hover:bg-orange/90 transition">📋 Copiar Prompt</button>
-    </section>
-    
-    <ActionHub />
+            <!-- FORMATO -->
+            <fieldset class="pt-6 border-t border-gray-100">
+              <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase mb-2">[FORMATO] Formato de entrega:</label>
+                <textarea id="formato" rows="3" required placeholder="Ej: Presenta la respuesta como tabla..." class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal resize-none transition"></textarea>
+              </div>
+            </fieldset>
+
+            <button type="button" id="generateBtn" class="w-full bg-teal text-white font-bold py-4 rounded-xl hover:bg-tealHover transition shadow-lg cursor-pointer">✨ Generar Prompt Estructurado</button>
+          </form>
+        </section>
+
+        <!-- Output -->
+        <section id="output-section" class="hidden mt-8 bg-white p-6 sm:p-8 rounded-2xl border border-gray-200 space-y-6 animate-fade-in">
+          <h2 class="text-xl font-bold text-deep">📋 Tu Prompt Generado</h2>
+          <pre id="promptOutput" class="w-full bg-gray-50 p-6 rounded-xl text-sm font-mono text-gray-800 border border-gray-200 whitespace-pre-wrap leading-relaxed"></pre>
+          <button id="copyBtn" class="w-full bg-orange text-white font-bold py-4 rounded-lg hover:bg-orange/90 transition cursor-pointer">📋 Copiar Prompt</button>
+        </section>
+      </div>
+
+    </div>
+
+    <div class="mt-12 space-y-8">
+      <ActionHub />
+    </div>
   </main>
 
-  <script is:inline>
-    document.getElementById('generateBtn').addEventListener('click', async () => {
-      const btn = document.getElementById('generateBtn');
-      const originalText = btn.textContent;
-      btn.textContent = '⏳ Optimizando con IA...';
-      btn.disabled = true;
+  <RedesSociales />
+</Layout>
 
-      // CORRECCIÓN CLAVE: Mapeamos los IDs reales en español que tienes en tu HTML
+<script is:inline>
+  // ── Muro / Gate logic ──
+  const overlay = document.getElementById('prompteador-gate-overlay');
+  const contentBody = document.getElementById('prompteador-content-body');
+  const unlockForm = document.getElementById('prompteador-unlock-form');
+  const submitBtn = document.getElementById('gate-submit-btn');
+  const errorMsg = document.getElementById('gate-error-msg');
+  const formWrapper = document.getElementById('gate-form-wrapper');
+  const successBox = document.getElementById('gate-success-box');
+  const successMsg = document.getElementById('gate-success-msg');
+
+  function executeUnlock() {
+    if (overlay) overlay.classList.add('hidden');
+    if (contentBody) {
+      contentBody.classList.remove('blur-md', 'pointer-events-none', 'select-none');
+    }
+  }
+
+  // Auto-unlock if previously unlocked on this browser
+  if (localStorage.getItem('prompteador_unlocked') === 'true') {
+    executeUnlock();
+  }
+
+  if (unlockForm) {
+    unlockForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (errorMsg) errorMsg.classList.add('hidden');
+
+      const nameInput = document.getElementById('gate-name');
+      const emailInput = document.getElementById('gate-email');
+      const websiteInput = document.getElementById('gate-website');
+
+      const nameVal = nameInput ? nameInput.value.trim() : '';
+      const emailVal = emailInput ? emailInput.value.trim() : '';
+      const websiteVal = websiteInput ? websiteInput.value : '';
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviando...';
+      }
+
+      try {
+        const response = await fetch('/api/unlock-guia', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: nameVal,
+            email: emailVal,
+            website: websiteVal
+          })
+        });
+
+        const resData = await response.json().catch(() => ({}));
+
+        if (!response.ok && resData.error) {
+          if (errorMsg) {
+            errorMsg.textContent = resData.error;
+            errorMsg.classList.remove('hidden');
+          }
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Desbloquear Prompteador →';
+          }
+          return;
+        }
+
+        // Save unlock state
+        localStorage.setItem('prompteador_unlocked', 'true');
+
+        if (formWrapper) formWrapper.classList.add('hidden');
+        if (successMsg) {
+          successMsg.textContent = `¡Listo, ${nameVal}! Acceso concedido al Prompteador.`;
+        }
+        if (successBox) successBox.classList.remove('hidden');
+
+        setTimeout(() => {
+          executeUnlock();
+        }, 1000);
+
+      } catch (err) {
+        console.error('Unlock error:', err);
+        localStorage.setItem('prompteador_unlocked', 'true');
+        executeUnlock();
+      }
+    });
+  }
+
+  // ── Cafe Banner dismissal ──
+  const cafeBanner = document.getElementById('cafe-banner');
+  const closeCafeBtn = document.getElementById('close-cafe-banner');
+  if (cafeBanner && closeCafeBtn) {
+    closeCafeBtn.addEventListener('click', () => {
+      cafeBanner.style.opacity = '0';
+      setTimeout(() => {
+        cafeBanner.style.display = 'none';
+      }, 300);
+    });
+  }
+
+  // ── Prompteador Generation Logic ──
+  const generateBtn = document.getElementById('generateBtn');
+  if (generateBtn) {
+    generateBtn.addEventListener('click', async () => {
+      const originalText = generateBtn.textContent;
+      generateBtn.textContent = '⏳ Optimizando con IA...';
+      generateBtn.disabled = true;
+
       const payload = {
         role: document.getElementById('rol')?.value.trim() || 'Cualquier especialista',
         context: document.getElementById('contexto')?.value.trim() || 'Flexible',
@@ -125,25 +314,28 @@ if (!userId) {
       } catch (err) {
         alert('Error al generar el prompt. Inténtalo de nuevo.');
       } finally {
-        btn.textContent = originalText;
-        btn.disabled = false;
+        generateBtn.textContent = originalText;
+        generateBtn.disabled = false;
       }
     });
+  }
 
-    document.getElementById('copyBtn').addEventListener('click', async () => {
-      const text = document.getElementById('promptOutput').textContent;
+  // ── Copy Prompt Output ──
+  const copyBtn = document.getElementById('copyBtn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      const text = document.getElementById('promptOutput')?.textContent || '';
       try {
         await navigator.clipboard.writeText(text);
-        const btn = document.getElementById('copyBtn');
-        const original = btn.textContent;
-        btn.textContent = '✅ ¡Copiado al portapapeles!';
+        const original = copyBtn.textContent;
+        copyBtn.textContent = '✅ ¡Copiado al portapapeles!';
         
         setTimeout(() => {
-          btn.textContent = original;
+          copyBtn.textContent = original;
         }, 2000);
       } catch (err) {
         alert('No se pudo copiar automáticamente.');
       }
     });
-  </script>
-</Layout>
+  }
+</script>
