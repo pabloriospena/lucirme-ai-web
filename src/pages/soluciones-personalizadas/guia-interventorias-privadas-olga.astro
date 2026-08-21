@@ -1,0 +1,361 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ActionHub from "../../components/ActionHub.astro";
+import RedesSociales from "../../components/RedesSociales.astro";
+import { LINKS } from "../../lib/constants.js";
+
+const calendlyUrl = LINKS.calendly_empresa || LINKS.calendly_taller || LINKS.calendly;
+---
+
+<Layout title="Guía Operativa: Interventorías Sector Privado o Mixto | Olga - Interobras · LuciRMe AI">
+
+  <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
+  <nav class="bg-white/90 backdrop-blur-md border-b border-gray-200 px-6 py-4 sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <a href="/recursos" class="text-xs md:text-sm font-bold text-gray-500 hover:text-teal transition flex items-center gap-1">
+        ← Volver a Recursos
+      </a>
+      <a href={calendlyUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-bold bg-orange text-white rounded-xl py-2.5 px-5 hover:bg-orange/90 transition shadow-xs text-xs text-center cursor-pointer">
+        Agendar Sesión →
+      </a>
+    </div>
+  </nav>
+
+  <!-- HEADER / HERO SECTION -->
+  <header class="bg-deep text-white py-14 md:py-18 px-6 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <!-- EYEBROW -->
+      <div class="inline-flex items-center gap-2 bg-teal/15 text-teal text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5 border border-teal/30">
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span>
+        Solución Personalizada · Guía Operativa Interna
+      </div>
+
+      <!-- H1 -->
+      <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight text-white">
+        Guía operativa para encontrar interventorías del <span class="text-teal">sector privado o mixto</span>
+      </h1>
+
+      <!-- SUBTÍTULO -->
+      <p class="text-lg md:text-xl text-gray-300 font-medium max-w-2xl mx-auto mb-6">
+        Diseñada especialmente para <strong class="text-white">Olga (Empresa Interobras)</strong>. Búsqueda inteligente, estructuración en NotebookLM y estrategia en LinkedIn.
+      </p>
+
+      <!-- META BADGES -->
+      <div class="inline-flex flex-wrap justify-center items-center gap-4 bg-white/5 border border-white/10 rounded-xl px-5 py-2.5 text-xs md:text-sm text-gray-300">
+        <span class="flex items-center gap-1.5">
+          👤 <strong>Para:</strong> Olga
+        </span>
+        <span class="text-gray-500 hidden sm:inline">•</span>
+        <span class="flex items-center gap-1.5">
+          🏗️ <strong>Empresa:</strong> Interobras
+        </span>
+        <span class="text-gray-500 hidden sm:inline">•</span>
+        <span class="flex items-center gap-1.5">
+          🔓 <strong>Acceso:</strong> Directo
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-12 space-y-12">
+
+    <!-- RESUMEN / INDICE RAPIDO -->
+    <div class="bg-teal/5 border border-teal/20 rounded-2xl p-6 md:p-8 space-y-4">
+      <h2 class="text-lg font-bold text-deep flex items-center gap-2">
+        <span>⚡</span> <span>Estructura de esta Guía Operativa</span>
+      </h2>
+      <div class="grid sm:grid-cols-3 gap-3 text-xs md:text-sm">
+        <a href="#paso-01" class="bg-white border border-teal/15 hover:border-teal rounded-xl p-3 font-semibold text-deep hover:text-teal transition shadow-2xs flex items-center gap-2">
+          <span class="bg-teal text-white w-6 h-6 rounded-lg text-xs flex items-center justify-center font-bold">01</span>
+          <span>Búsqueda de Oportunidades</span>
+        </a>
+        <a href="#paso-02" class="bg-white border border-teal/15 hover:border-teal rounded-xl p-3 font-semibold text-deep hover:text-teal transition shadow-2xs flex items-center gap-2">
+          <span class="bg-orange text-white w-6 h-6 rounded-lg text-xs flex items-center justify-center font-bold">02</span>
+          <span>Estructuración en NotebookLM</span>
+        </a>
+        <a href="#paso-03" class="bg-white border border-teal/15 hover:border-teal rounded-xl p-3 font-semibold text-deep hover:text-teal transition shadow-2xs flex items-center gap-2">
+          <span class="bg-deep text-white w-6 h-6 rounded-lg text-xs flex items-center justify-center font-bold">03</span>
+          <span>Notebook para LinkedIn</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- ════════════════════ PASO 01 ════════════════════ -->
+    <section id="paso-01" class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-6 scroll-mt-24">
+      <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+        <div class="flex items-center gap-3">
+          <span class="bg-teal text-white font-black text-sm w-9 h-9 rounded-xl flex items-center justify-center shrink-0">01</span>
+          <h2 class="text-xl md:text-2xl font-bold text-deep tracking-tight">
+            Búsqueda de Oportunidades
+          </h2>
+        </div>
+        <span class="text-xs font-bold text-teal bg-teal/10 px-3 py-1 rounded-full hidden sm:inline-block">
+          Paso 1 · Filtrado con IA
+        </span>
+      </div>
+
+      <p class="text-sm md:text-base text-gray-700 leading-relaxed">
+        Ingresa a tu herramienta de investigación preferida: <strong class="text-deep">Perplexity</strong>, <strong class="text-deep">Gemini</strong> (usando <em>Deep Research</em>) o <strong class="text-deep">ChatGPT</strong> (usando <em>Investigar a fondo</em>).
+      </p>
+
+      <p class="text-sm md:text-base text-gray-700 leading-relaxed">
+        Copia y pega el siguiente prompt para filtrar los procesos estratégicos de forma inmediata:
+      </p>
+
+      <!-- PROMPT BOX 1 -->
+      <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden my-4">
+        <div class="flex justify-between items-center px-4 py-3 bg-slate-100 border-b border-slate-200">
+          <span class="text-xs font-bold text-slate-600 uppercase tracking-wider flex items-center gap-2">
+            <span>📋</span> Prompt 01: Búsqueda de Licitaciones Privadas o Mixtas
+          </span>
+          <button onclick="copyText('prompt-01', this)" class="bg-teal hover:bg-tealHover text-white font-bold text-xs px-3.5 py-1.5 rounded-lg transition-all cursor-pointer">
+            Copiar Prompt
+          </button>
+        </div>
+        <pre id="prompt-01" class="p-5 text-xs md:text-sm font-mono text-slate-800 leading-relaxed whitespace-pre-wrap select-all max-h-96 overflow-y-auto">[ROL] Actuando como encargado de encontrar licitaciones e interventorías de una empresa especializada en interventorías y obras civiles, con experiencia en edificaciones de uso institucional, construcción de escenarios deportivos, proyectos de saneamiento básico y edificaciones de vivienda.
+
+[CONTEXTO] Nuestra empresa se enfoca en interventorías de proyectos de construcción en Colombia, específicamente en entidades estatales, con un enfoque en Antioquia, debe de excluir los procesos que se encuentren limitados a mipyme ubicados en territorios diferentes de antioquia
+
+[OBJETIVO] Identificar procesos de interventoría del sector público, cuyo objeto principal se ajuste a nuestro contexto, en todas las entidades estatales de Colombia, que sean publicados en las últimas 3 semanas.
+
+[FORMATO] La salida debe ser una tabla con las siguientes columnas:
+
+Proceso | Objeto | municipio |Entidad contratante |Valor | Plazo | Ranking | Fecha | Probabilidad de ser adjudicatarios | Link | Plataforma en la que está publicada.
+
+[INSTRUCCIONES]
+
+1. Buscar procesos de interventoría publicados del sector privado o mixto en Colombia
+2. Asignar un ranking a cada proceso según su relevancia con nuestro objetivo y contexto.
+3. Ordenar la tabla por fecha de cierre en orden descendente.
+4. Incluir una columna para la probabilidad de ser adjudicatarios, considerando factores como la experiencia de la empresa y la competencia en cada proceso.
+
+[CRITERIOS DE EXCLUSIÓN]
+
+- Procesos que no se ajusten a nuestro contexto de interventorías en edificaciones de uso institucional, construcción de escenarios deportivos, proyectos de saneamiento básico y edificaciones de vivienda.
+
+[TABLA DE SALIDA]
+La tabla debe contener la información solicitada, con los procesos ordenados por fecha de cierre en orden descendente, y un ranking que refleje la relevancia de cada proceso con nuestro objetivo y contexto. La tabla debe ser entregada en un formato claro y fácil de leer.</pre>
+      </div>
+    </section>
+
+    <!-- ════════════════════ PASO 02 ════════════════════ -->
+    <section id="paso-02" class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-6 scroll-mt-24">
+      <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+        <div class="flex items-center gap-3">
+          <span class="bg-orange text-white font-black text-sm w-9 h-9 rounded-xl flex items-center justify-center shrink-0">02</span>
+          <h2 class="text-xl md:text-2xl font-bold text-deep tracking-tight">
+            Estructuración en NotebookLM
+          </h2>
+        </div>
+        <span class="text-xs font-bold text-orange bg-orange/10 px-3 py-1 rounded-full hidden sm:inline-block">
+          Paso 2 · Base de Conocimiento
+        </span>
+      </div>
+
+      <p class="text-sm md:text-base text-gray-700 leading-relaxed">
+        Una vez analizadas las oportunidades encontradas en Perplexity y/o DeepResearch en Gemini, descárgalas y abre <strong class="text-deep">NotebookLM</strong> para centralizar la base de conocimiento.
+      </p>
+
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-4">
+        <h3 class="text-base font-bold text-deep flex items-center gap-2">
+          <span>⚙️</span> <span>Configuración del Cuaderno</span>
+        </h3>
+        <ul class="space-y-2.5 text-xs md:text-sm text-gray-700">
+          <li class="flex items-start gap-2">
+            <span class="text-orange font-bold shrink-0">•</span>
+            <span>Crea un cuaderno independiente por cada investigación. El nombre puede ser: <em class="font-semibold text-deep">Posibles oportunidades y fecha</em> (Ej: <em>Posibles Oportunidades - Agosto 2026</em>).</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-orange font-bold shrink-0">•</span>
+            <span><strong>Carga las fuentes clave dentro del cuaderno:</strong></span>
+          </li>
+        </ul>
+
+        <div class="grid sm:grid-cols-3 gap-3 pt-2">
+          <div class="bg-white p-3.5 rounded-lg border border-slate-200 text-xs text-gray-700 space-y-1">
+            <div class="font-bold text-deep flex items-center gap-1.5">
+              <span>📄</span> Archivos Adjuntos
+            </div>
+            <p class="text-gray-500">Si es un archivo tipo <strong>DOCX</strong> o <strong>PDF</strong>, adjúntalo directamente.</p>
+          </div>
+          <div class="bg-white p-3.5 rounded-lg border border-slate-200 text-xs text-gray-700 space-y-1">
+            <div class="font-bold text-deep flex items-center gap-1.5">
+              <span>📝</span> Texto Copiado
+            </div>
+            <p class="text-gray-500">Puedes copiar la información del chat o informe y pegarla en la opción <strong>"Texto Copiado"</strong>.</p>
+          </div>
+          <div class="bg-white p-3.5 rounded-lg border border-slate-200 text-xs text-gray-700 space-y-1">
+            <div class="font-bold text-deep flex items-center gap-1.5">
+              <span>🔗</span> Enlaces / Webs
+            </div>
+            <p class="text-gray-500">Agrega URLs de portales o convocatorias si están disponibles online.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUBPROMPT 2.1: TABLA -->
+      <div class="space-y-3 pt-2">
+        <h3 class="text-base font-bold text-deep flex items-center gap-2">
+          <span>📊</span> <span>1. Prompt para Consolidar la Tabla de Oportunidades</span>
+        </h3>
+        <p class="text-xs md:text-sm text-gray-600">
+          Una vez añadidas las fuentes, puedes solicitarle la creación de una tabla. Mi sugerencia de prompt es esta (puedes modificar y perfeccionar este prompt según tus necesidades):
+        </p>
+
+        <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden my-3">
+          <div class="flex justify-between items-center px-4 py-2.5 bg-slate-100 border-b border-slate-200">
+            <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Prompt de Consolidación en Tabla</span>
+            <button onclick="copyText('prompt-tabla', this)" class="bg-orange hover:bg-orange/90 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg transition-all cursor-pointer">
+              Copiar Prompt Tabla
+            </button>
+          </div>
+          <pre id="prompt-tabla" class="p-4 text-xs md:text-sm font-mono text-slate-800 leading-relaxed whitespace-pre-wrap select-all max-h-80 overflow-y-auto">Basado en la información de las fuentes proporcionadas, estructura la información de todas las oportunidades de licitación disponibles en una tabla consolidada con las siguientes columnas específicas:
+
+- Nombre: denominación completa de la licitación o convocatoria
+- Link: URL directa de acceso a la página de la licitación en el portal correspondiente
+- Ciudad: ciudad o municipio donde se ejecutará el contrato o donde tiene sede la entidad contratante
+- Valor de la oportunidad: monto estimado del contrato, indicando la moneda (COP, USD, EUR, etc.)
+- Estado: fase actual del proceso (ej: Publicada, En evaluación, Adjudicada, Cancelada, En pausa)
+- Fecha de publicación: fecha exacta de lanzamiento de la convocatoria en formato DD/MM/AAAA
+- Fecha máxima de presentación: fecha y hora límite para la recepción de propuestas en formato DD/MM/AAAA HH:MM
+- Ranking según los criterios de postulación de 1 a 5: evaluación numérica donde 1 representa la oportunidad más desfavorable y 5 la más favorable, basada en: viabilidad técnica de cumplimiento, capacidad financiera requerida, experiencia previa necesaria, plazos de ejecución, y nivel de competencia esperado
+- ID: código único de identificación asignado por la plataforma de contratación (Número de proceso, SECOP, etc.)
+- Entidad: nombre completo de la entidad pública o privada que convoca la licitación
+
+Adicionalmente, incluye una fila de totales o resumen al final que muestre: cantidad total de oportunidades identificadas, valor acumulado de todas las licitaciones, distribución por estado, y cantidad de oportunidades por rango de ranking (1-2, 3, 4-5). Si algún dato no está disponible en las fuentes, indícalo explícitamente como "No disponible" o "No aplica" según corresponda.</pre>
+        </div>
+      </div>
+
+      <!-- SUBPROMPT 2.2: DASHBOARD HTML -->
+      <div class="space-y-3 pt-4 border-t border-gray-100">
+        <h3 class="text-base font-bold text-deep flex items-center gap-2">
+          <span>💻</span> <span>2. Prompt para Generar el Dashboard Interactivo en HTML</span>
+        </h3>
+        <p class="text-xs md:text-sm text-gray-600">
+          Para la creación del reporte visual interactivo en HTML, solicita este prompt en NotebookLM:
+        </p>
+
+        <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden my-3">
+          <div class="flex justify-between items-center px-4 py-2.5 bg-slate-100 border-b border-slate-200">
+            <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Prompt Dashboard HTML</span>
+            <button onclick="copyText('prompt-html', this)" class="bg-orange hover:bg-orange/90 text-white font-bold text-xs px-3.5 py-1.5 rounded-lg transition-all cursor-pointer">
+              Copiar Prompt HTML
+            </button>
+          </div>
+          <pre id="prompt-html" class="p-4 text-xs md:text-sm font-mono text-slate-800 leading-relaxed whitespace-pre-wrap select-all max-h-80 overflow-y-auto">Con la información de la tabla anterior, créame un código HTML que implemente un dashboard profesional para presentar las oportunidades priorizadas, cumpliendo con los siguientes requisitos:
+
+Contenido y datos:
+
+- Utilizar únicamente los datos proporcionados en la tabla anterior, completos y sin inventar ningún dato adicional
+- Mostrar la tabla completa con todas sus columnas y registros originales
+- Incluir la fecha actual visible en el dashboard
+
+Diseño visual:
+
+- Estética minimalista y limpia, con paleta de colores sobria (preferiblemente tonos neutros con acentos sutiles para destacar elementos clave)
+- Tipografía legible y jerarquía visual clara entre títulos, datos y resúmenes
+- Diseño responsive que se adapte a diferentes tamaños de pantalla
+
+Estructura del dashboard:
+
+- Encabezado con título descriptivo del dashboard y fecha visible
+- Sección de resumen ejecutivo con métricas clave calculadas a partir de los datos reales (como total de oportunidades, distribución por nivel de prioridad, estado general)
+- Visualización principal con la tabla completa de oportunidades priorizadas, manteniendo el orden de priorización original
+- Elementos visuales complementarios que faciliten la interpretación: indicadores de prioridad (colores o iconos), barras de progreso según estado, o gráficos simples que representen la distribución de las oportunidades
+
+Funcionalidad:
+
+- Tabla con capacidad de ordenamiento por columnas si es técnicamente viable con HTML/CSS/JS simple
+- Destacado visual de las oportunidades de alta prioridad
+- Tooltips o información al pasar el cursor para detalles adicionales sin saturar la vista principal
+
+Entregar el código HTML completo, autocontenido con CSS embebido y JavaScript ligero si es necesario, listo para ejecutar en un navegador.</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════ PASO 03 ════════════════════ -->
+    <section id="paso-03" class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-6 scroll-mt-24">
+      <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+        <div class="flex items-center gap-3">
+          <span class="bg-deep text-white font-black text-sm w-9 h-9 rounded-xl flex items-center justify-center shrink-0">03</span>
+          <h2 class="text-xl md:text-2xl font-bold text-deep tracking-tight">
+            Notebook para LinkedIn
+          </h2>
+        </div>
+        <span class="text-xs font-bold text-teal bg-teal/10 px-3 py-1 rounded-full hidden sm:inline-block">
+          Asesor Estratégico
+        </span>
+      </div>
+
+      <p class="text-sm md:text-base text-gray-700 leading-relaxed">
+        Crea un cuaderno nuevo en NotebookLM y llámalo: <strong class="text-deep font-bold">Asesor de LinkedIn para empresas</strong>.
+      </p>
+
+      <div class="space-y-4 pt-2">
+        <div class="flex items-start gap-3.5 bg-slate-50 p-4 rounded-xl border border-slate-200">
+          <span class="bg-teal text-white font-bold text-xs w-6 h-6 rounded-lg flex items-center justify-center shrink-0 mt-0.5">1</span>
+          <div class="space-y-1 text-xs md:text-sm text-gray-700">
+            <strong class="text-deep block font-bold">Buscar fuentes en la Web:</strong>
+            <p>En la opción de buscar nuevas fuentes en la web, copia una consulta como la siguiente:</p>
+            <div class="bg-white p-2.5 rounded-lg border border-slate-200 font-mono text-teal font-semibold text-xs mt-1">
+              "estrategias de crecimiento y conseguir clientes nuevos en LinkedIn como empresa"
+            </div>
+            <p class="text-gray-500 pt-1">Y añade las fuentes más relevantes que devuelva la búsqueda.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3.5 bg-slate-50 p-4 rounded-xl border border-slate-200">
+          <span class="bg-teal text-white font-bold text-xs w-6 h-6 rounded-lg flex items-center justify-center shrink-0 mt-0.5">2</span>
+          <div class="space-y-1 text-xs md:text-sm text-gray-700">
+            <strong class="text-deep block font-bold">Añadir fuentes sobre tu empresa (Interobras):</strong>
+            <p>Añade fuentes sobre la empresa que quieres potenciar: documentos PDFs, misión, visión, ubicación, contacto, equipo de trabajo, obras realizadas... Todo lo que más puedas del perfil empresarial de Interobras.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3.5 bg-slate-50 p-4 rounded-xl border border-slate-200">
+          <span class="bg-orange text-white font-bold text-xs w-6 h-6 rounded-lg flex items-center justify-center shrink-0 mt-0.5">3</span>
+          <div class="space-y-1 text-xs md:text-sm text-gray-700">
+            <strong class="text-deep block font-bold">Consultas e interacción estratégica:</strong>
+            <p>Con todas estas fuentes cargadas, ya le puedes hacer preguntas clave a este cuaderno como:</p>
+            <ul class="list-disc list-inside space-y-1 text-gray-600 pt-1">
+              <li>¿Cómo configurar la cuenta de la empresa para proyectar mayor autoridad en interventorías?</li>
+              <li>Sugiéreme descripciones de perfil y llamadas a la acción efectivas.</li>
+              <li>¿Qué tipos de fotos, portadas o recursos visuales debemos publicar?</li>
+              <li>Estructura una parrilla de contenido y publicaciones semanales dirigidas a tomadores de decisión del sector privado y mixto.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACTION HUB & CONTACTO -->
+    <div class="pt-8">
+      <ActionHub />
+    </div>
+
+  </main>
+
+  <RedesSociales />
+
+</Layout>
+
+<script is:inline>
+  function copyText(elementId, btnElement) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    const text = el.innerText || el.textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const originalText = btnElement.innerText;
+      btnElement.innerText = "¡Copiado!";
+      btnElement.classList.add("bg-emerald-600");
+      setTimeout(() => {
+        btnElement.innerText = originalText;
+        btnElement.classList.remove("bg-emerald-600");
+      }, 2000);
+    }).catch(err => {
+      console.error("Error al copiar texto: ", err);
+      alert("No se pudo copiar automáticamente.");
+    });
+  }
+</script>
