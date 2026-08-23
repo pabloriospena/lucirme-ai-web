@@ -1,205 +1,584 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import ActionHub from '../../components/ActionHub.astro';
-import { LINKS } from '../../lib/constants.js';
-
-const auth = (Astro.locals as any).auth;
-const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
-
-// CORREGIDO: Redirige de vuelta a esta misma página tras el login
-if (!userId) {
- return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/job-prompt-ai')}`);
-}
+import Layout from "../../layouts/Layout.astro";
+import ActionHub from "../../components/ActionHub.astro";
+import RedesSociales from "../../components/RedesSociales.astro";
+import { LINKS } from "../../lib/constants.js";
 ---
 
 <Layout title="JobPrompt AI | LuciRMe AI">
   <!-- BREADCRUMB -->
   <nav class="bg-white border-b border-gray-100 px-4 py-3">
     <div class="max-w-6xl mx-auto flex justify-between items-center">
-      <a href="/recursos" class="text-sm font-bold text-gray-400 hover:text-teal transition">← Volver a Recursos</a>
-      <span class="text-xs font-bold text-teal uppercase tracking-widest flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Encuentra ofertas de empleo
+      <a
+        href="/recursos"
+        class="text-sm font-bold text-gray-400 hover:text-teal transition"
+        >← Volver a Recursos</a
+      >
+      <span
+        class="text-xs font-bold text-teal uppercase tracking-widest flex items-center gap-2"
+      >
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Encuentra
+        ofertas de empleo
       </span>
     </div>
   </nav>
 
   <!-- BANNER CAFÉ GRATIS -->
-  <div id="cafe-banner" class="bg-gradient-to-r from-teal to-tealHover text-white px-4 py-3 text-center relative overflow-hidden transition-all duration-300">
-    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3">
+  <div
+    id="cafe-banner"
+    class="bg-gradient-to-r from-teal to-tealHover text-white px-4 py-3 text-center relative overflow-hidden transition-all duration-300"
+  >
+    <div
+      class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3"
+    >
       <span class="text-2xl">☕</span>
       <div class="text-sm sm:text-base">
-        <strong>¿Tienes dudas sobre los resultados?</strong> Agenda un café virtual de 30 minutos y te ayudo a priorizar tus aplicaciones.
+        <strong>¿Tienes dudas sobre los resultados?</strong> Agenda un café virtual
+        de 30 minutos y te ayudo a priorizar tus aplicaciones.
       </div>
-      <a href={LINKS.calendly} target="_blank" class="bg-white text-teal px-4 py-2 rounded-lg font-bold text-sm hover:bg-gray-100 transition whitespace-nowrap">
+      <a
+        href={LINKS.calendly}
+        target="_blank"
+        class="bg-white text-teal px-4 py-2 rounded-lg font-bold text-sm hover:bg-gray-100 transition whitespace-nowrap"
+      >
         Agendar café gratis →
       </a>
     </div>
-    <button id="close-cafe-banner" class="absolute top-2 right-4 text-white/80 hover:text-white text-2xl font-bold">×</button>
+    <button
+      id="close-cafe-banner"
+      class="absolute top-2 right-4 text-white/80 hover:text-white text-2xl font-bold cursor-pointer"
+      >×</button
+    >
   </div>
 
   <main class="py-12 px-4 max-w-4xl mx-auto space-y-8">
     <header class="text-center mb-8">
-      <h1 class="text-4xl font-black text-deep mb-3">✨ JobPrompt AI</h1>
-      <p class="text-gray-500">Configura tu perfil de búsqueda, genera un prompt maestro y encuentra vacantes reales.</p>
+      <div
+        class="inline-block bg-teal/10 text-teal text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-3"
+      >
+        Herramienta Gratuita
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-black text-deep mb-3 tracking-tight">
+        ✨ JobPrompt AI
+      </h1>
+      <p class="text-gray-600 max-w-xl mx-auto text-base">
+        Configura tu perfil de búsqueda, genera un prompt maestro con IA y
+        encuentra vacantes reales.
+      </p>
     </header>
 
-    <!-- INSTRUCCIONES DE USO (Bento Style) -->
-    <div class="bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 md:p-8 space-y-4">
-      <h2 class="text-sm font-bold text-teal uppercase tracking-widest">📖 Guía de uso rápido</h2>
-      <div class="grid md:grid-cols-3 gap-6 text-sm text-gray-600">
-        <div>
-          <span class="font-bold text-deep block mb-1">1. Completa el perfil</span>
-          <p class="text-xs">Llena la información lo más completa posible. Los campos vacíos usarán valores "flexibles" por defecto para no limitarte.</p>
+    <!-- CONTAINER CON MURO DE CORREO (MAILERLITE) -->
+    <div id="jobprompt-container" class="relative min-h-[450px]">
+      <!-- MURO / GATE CARD OVERLAY -->
+      <div
+        id="jobprompt-gate-overlay"
+        class="absolute inset-x-0 top-0 z-30 flex items-start justify-center pt-2 sm:pt-6 px-4 bg-gradient-to-b from-slate-50/80 via-white/95 to-slate-100/95 backdrop-blur-[3px] transition-all duration-500 min-h-[500px] rounded-2xl"
+      >
+        <div
+          id="jobprompt-gate-card"
+          class="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-xl w-full max-w-md mx-auto transition-all"
+        >
+          <div id="gate-form-wrapper" class="space-y-4">
+            <span
+              class="inline-block text-xs font-bold uppercase tracking-wider text-teal bg-teal/10 px-3 py-1 rounded-full"
+            >
+              Acceso Gratuito · LuciRMe AI
+            </span>
+            <h2 class="text-2xl font-extrabold text-deep tracking-tight">
+              Desbloquea JobPrompt AI
+            </h2>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Ingresa tu nombre y tu correo para acceder al generador de prompts
+              de empleo con IA.
+            </p>
+
+            <form id="jobprompt-unlock-form" class="space-y-4 pt-2">
+              <!-- Honeypot anti-bots -->
+              <input
+                type="text"
+                id="gate-website"
+                name="website"
+                tabindex="-1"
+                autocomplete="off"
+                class="hidden"
+                aria-hidden="true"
+              />
+
+              <div>
+                <label
+                  for="gate-name"
+                  class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1"
+                >
+                  Tu nombre *
+                </label>
+                <input
+                  type="text"
+                  id="gate-name"
+                  required
+                  placeholder="Ej. Carlos Mendoza"
+                  class="w-full text-sm p-3.5 border border-gray-300 rounded-xl bg-white text-deep focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition"
+                />
+              </div>
+
+              <div>
+                <label
+                  for="gate-email"
+                  class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1"
+                >
+                  Tu correo electrónico *
+                </label>
+                <input
+                  type="email"
+                  id="gate-email"
+                  required
+                  placeholder="carlos@ejemplo.com"
+                  class="w-full text-sm p-3.5 border border-gray-300 rounded-xl bg-white text-deep focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition"
+                />
+              </div>
+
+              <div
+                id="gate-error-msg"
+                class="hidden bg-red-50 border border-red-200 text-red-700 text-xs p-3 rounded-xl leading-snug"
+              >
+                Algo falló. Por favor ingresa un correo válido.
+              </div>
+
+              <button
+                type="submit"
+                id="gate-submit-btn"
+                class="w-full bg-orange hover:bg-orange/90 text-white font-bold text-base py-3.5 px-6 rounded-xl transition shadow-md cursor-pointer mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                Desbloquear JobPrompt AI →
+              </button>
+
+              <p class="text-xs text-gray-500 text-center pt-1">
+                🔒 Sin spam. Guardaremos tus datos para darte acceso directo.
+              </p>
+            </form>
+          </div>
+
+          <div id="gate-success-box" class="hidden text-center py-6 space-y-3">
+            <div
+              class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center text-2xl mx-auto font-bold"
+            >
+              ✓
+            </div>
+            <p
+              id="gate-success-msg"
+              class="text-base font-semibold text-deep leading-relaxed"
+            >
+              ¡Acceso concedido! Cargando la herramienta...
+            </p>
+          </div>
         </div>
-        <div>
-          <span class="font-bold text-deep block mb-1">2. Copia el Prompt</span>
-          <p class="text-xs">Haz clic en "Generar Prompt de Élite" y cópialo con un solo clic de forma limpia.</p>
+      </div>
+
+      <!-- LOCKED / UNLOCKED CONTENT BODY -->
+      <div
+        id="jobprompt-content-body"
+        class="blur-md pointer-events-none select-none transition-all duration-500 space-y-8"
+      >
+        <!-- INSTRUCCIONES DE USO (Bento Style) -->
+        <div
+          class="bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 md:p-8 space-y-4"
+        >
+          <h2 class="text-sm font-bold text-teal uppercase tracking-widest">
+            📖 Guía de uso rápido
+          </h2>
+          <div class="grid md:grid-cols-3 gap-6 text-sm text-gray-600">
+            <div>
+              <span class="font-bold text-deep block mb-1"
+                >1. Completa el perfil</span
+              >
+              <p class="text-xs">
+                Llena la información lo más completa posible. Los campos vacíos
+                usarán valores "flexibles" por defecto.
+              </p>
+            </div>
+            <div>
+              <span class="font-bold text-deep block mb-1"
+                >2. Genera con Groq IA</span
+              >
+              <p class="text-xs">
+                Haz clic en "Generar Prompt de Élite". Nuestra IA estructurará
+                un prompt maestro perfeccionado.
+              </p>
+            </div>
+            <div>
+              <span class="font-bold text-teal block mb-1"
+                >3. Usa Deep Research 🔥</span
+              >
+              <p class="text-xs">
+                Pega el prompt en **Gemini 1.5/2.0, Perplexity, ChatGPT Plus o
+                Claude** para encontrar ofertas reales.
+              </p>
+            </div>
+          </div>
         </div>
-        <div>
-          <span class="font-bold text-teal block mb-1">3. Usa Deep Research 🔥</span>
-          <p class="text-xs">Para resultados espectaculares, pega el prompt en **Gemini 1.5, ChatGPT Plus (con Search activo) o Qwen 2.5 Coder**.</p>
-        </div>
+
+        <!-- FORMULARIO -->
+        <section
+          class="bg-white p-6 sm:p-8 rounded-2xl border border-gray-200 shadow-sm space-y-6"
+        >
+          <form id="jobForm" class="space-y-6">
+            <!-- Perfil Profesional -->
+            <fieldset class="grid md:grid-cols-2 gap-4">
+              <div class="md:col-span-2">
+                <label class="block text-xs font-bold text-teal uppercase mb-2"
+                  >1. Rol buscado (Obligatorio)</label
+                >
+                <input
+                  type="text"
+                  id="role"
+                  required
+                  placeholder="Ej: Product Manager, Frontend Developer, UX Designer..."
+                  class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-xs font-bold text-gray-500 uppercase mb-2"
+                  >Nivel de experiencia</label
+                >
+                <select
+                  id="seniority"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal"
+                >
+                  <option value="Sin especificar">Sin especificar</option>
+                  <option value="Junior (0-2 años)">Junior (0-2 años)</option>
+                  <option value="Mid (2-4 años)">Mid (2-4 años)</option>
+                  <option value="Senior (4-7 años)">Senior (4-7 años)</option>
+                  <option value="Lead+ (7+ años)">Lead+ (7+ años)</option>
+                </select>
+              </div>
+              <div>
+                <label
+                  class="block text-xs font-bold text-gray-500 uppercase mb-2"
+                  >Salario mínimo esperable</label
+                >
+                <input
+                  type="number"
+                  id="minSalary"
+                  placeholder="Salario mín. (USD/mes)"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-xs font-bold text-gray-500 uppercase mb-2"
+                  >Tipo de contrato</label
+                >
+                <select
+                  id="contract"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal"
+                >
+                  <option value="Flexible">Tipo de contrato (Flexible)</option>
+                  <option value="Contractor B2B">Contractor B2B</option>
+                  <option value="Empleado directo">Empleado directo</option>
+                  <option value="Freelance">Freelance</option>
+                </select>
+              </div>
+              <div>
+                <label
+                  class="block text-xs font-bold text-gray-500 uppercase mb-2"
+                  >Zona horaria</label
+                >
+                <input
+                  type="text"
+                  id="timezone"
+                  placeholder="Ej: UTC-5 a UTC-3"
+                  class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal"
+                />
+              </div>
+            </fieldset>
+
+            <!-- Filtros -->
+            <fieldset class="space-y-4 pt-6 border-t border-gray-100">
+              <legend
+                class="text-xs font-bold text-teal uppercase tracking-widest mb-2"
+                >Filtros de Búsqueda</legend
+              >
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    class="block text-xs font-bold text-gray-500 uppercase mb-2"
+                    >Nivel de Inglés</label
+                  >
+                  <select
+                    id="englishLevel"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal"
+                  >
+                    <option value="No requerido">Inglés: No requerido</option>
+                    <option value="B2">B2 (Intermedio)</option>
+                    <option value="C1">C1 (Profesional)</option>
+                    <option value="C2">C2 (Nativo)</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-bold text-gray-500 uppercase mb-2"
+                    >Modalidad</label
+                  >
+                  <select
+                    id="modality"
+                    class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal"
+                  >
+                    <option value="Cualquiera">Modalidad: Cualquiera</option>
+                    <option value="Remoto">Remoto</option>
+                    <option value="Presencial">Presencial</option>
+                    <option value="Híbrido">Híbrido</option>
+                  </select>
+                </div>
+              </div>
+              <label
+                class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer pt-2"
+              >
+                <input
+                  type="checkbox"
+                  id="includeSecondary"
+                  class="accent-teal w-4 h-4"
+                /> Incluir fuentes secundarias con advertencia (⚠️)
+              </label>
+            </fieldset>
+
+            <button
+              type="button"
+              id="generateBtn"
+              class="w-full bg-deep text-white font-bold py-4 rounded-xl hover:bg-teal transition shadow-lg text-lg cursor-pointer"
+            >
+              ✨ Generar Prompt de Élite con IA
+            </button>
+          </form>
+        </section>
+
+        <!-- OUTPUT (Resultados) -->
+        <section
+          id="output-section"
+          class="hidden bg-deep text-white p-6 sm:p-8 rounded-2xl border border-gray-800 space-y-6 animate-fade-in"
+        >
+          <div class="flex justify-between items-center">
+            <h2 class="text-xl font-bold">📋 Tu Prompt Generado con IA</h2>
+          </div>
+          <pre
+            id="promptOutput"
+            class="w-full bg-black/40 p-6 rounded-xl text-xs sm:text-sm font-mono text-gray-200 overflow-x-auto whitespace-pre-wrap leading-relaxed min-h-[200px] border border-white/10">
+          </pre>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <button
+              id="copyBtn"
+              class="bg-orange text-white py-4 rounded-xl font-bold hover:bg-orange/90 transition shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <span>📋</span> Copiar Prompt
+            </button>
+            <button
+              onclick="window.open('https://perplexity.ai', '_blank')"
+              class="border-2 border-white/20 text-white py-4 rounded-xl font-bold hover:bg-white/10 transition flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <span>🔍</span> Abrir Perplexity (Recomendado)
+            </button>
+          </div>
+        </section>
       </div>
     </div>
 
-    <!-- FORMULARIO -->
-    <section class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm space-y-6">
-      <form id="jobForm" class="space-y-6">
-        <!-- Perfil Profesional -->
-        <fieldset class="grid md:grid-cols-2 gap-4">
-          <div class="md:col-span-2">
-            <label class="block text-xs font-bold text-teal uppercase mb-2">1. Rol buscado (Obligatorio)</label>
-            <input type="text" id="role" required placeholder="Ej: Product Manager, Frontend Developer, UX Designer..." class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal">
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-500 uppercase mb-2">Nivel de experiencia</label>
-            <select id="seniority" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-teal">
-              <option value="Sin especificar">Sin especificar</option>
-              <option value="Junior (0-2 años)">Junior (0-2 años)</option>
-              <option value="Mid (2-4 años)">Mid (2-4 años)</option>
-              <option value="Senior (4-7 años)">Senior (4-7 años)</option>
-              <option value="Lead+ (7+ años)">Lead+ (7+ años)</option>
-            </select>
-          </div>
-          <input type="number" id="minSalary" placeholder="Salario mín. (USD/mes)" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none">
-          <select id="contract" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none">
-            <option value="Flexible">Tipo de contrato (Flexible)</option>
-            <option value="Contractor B2B">Contractor B2B</option>
-            <option value="Empleado directo">Empleado directo</option>
-            <option value="Freelance">Freelance</option>
-          </select>
-          <input type="text" id="timezone" placeholder="Zona horaria compatible (Ej: UTC-5 a UTC-3)" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none">
-        </fieldset>
-
-        <!-- Filtros -->
-        <fieldset class="space-y-4 pt-6 border-t border-gray-100">
-          <legend class="text-xs font-bold text-teal uppercase tracking-widest mb-2">Filtros de Búsqueda</legend>
-          <div class="grid md:grid-cols-2 gap-4">
-            <select id="englishLevel" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none">
-                <option value="No requerido">Inglés: No requerido</option>
-                <option value="B2">B2 (Intermedio)</option>
-                <option value="C1">C1 (Profesional)</option>
-                <option value="C2">C2 (Nativo)</option>
-            </select>
-            <select id="modality" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 outline-none">
-                <option value="Cualquiera">Modalidad: Cualquiera</option>
-                <option value="Remoto">Remoto</option>
-                <option value="Presencial">Presencial</option>
-                <option value="Híbrido">Híbrido</option>
-            </select>
-          </div>
-          <label class="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-            <input type="checkbox" id="includeSecondary" class="accent-teal w-4 h-4"> Incluir fuentes secundarias con advertencia (⚠️)
-          </label>
-        </fieldset>
-
-        <button type="button" id="generateBtn" class="w-full bg-deep text-white font-bold py-4 rounded-xl hover:bg-teal transition shadow-lg text-lg">
-          ✨ Generar Prompt de Élite
-        </button>
-      </form>
-    </section>
-
-    <!-- OUTPUT (Resultados) -->
-    <section id="output-section" class="hidden bg-deep text-white p-8 rounded-2xl border border-gray-800 space-y-6 animate-fade-in">
-      <div class="flex justify-between items-center">
-        <h2 class="text-xl font-bold">📋 Tu Prompt Generado</h2>
-      </div>
-      <pre id="promptOutput" class="w-full bg-black/30 p-6 rounded-lg text-xs font-mono text-gray-300 overflow-x-auto whitespace-pre-wrap min-h-[200px]"></pre>
-      
-      <div class="grid md:grid-cols-2 gap-4">
-        <button id="copyBtn" class="bg-orange text-white py-4 rounded-lg font-bold hover:bg-orange/90 transition shadow-lg flex items-center justify-center gap-2">
-          <span>📋</span> Copiar Prompt
-        </button>
-        <button onclick="window.open('https://perplexity.ai', '_blank')" class="border-2 border-white/20 text-white py-4 rounded-lg font-bold hover:bg-white/5 transition flex items-center justify-center gap-2">
-          <span>🔍</span> Abrir Perplexity (Recomendado)
-        </button>
-      </div>
-    </section>
-
-    <ActionHub />
+    <div class="mt-12 space-y-8">
+      <ActionHub />
+    </div>
   </main>
+
+  <RedesSociales />
 </Layout>
 
 <script is:inline>
+  // ── Muro / Gate logic ──
+  const overlay = document.getElementById("jobprompt-gate-overlay");
+  const contentBody = document.getElementById("jobprompt-content-body");
+  const unlockForm = document.getElementById("jobprompt-unlock-form");
+  const submitBtn = document.getElementById("gate-submit-btn");
+  const errorMsg = document.getElementById("gate-error-msg");
+  const formWrapper = document.getElementById("gate-form-wrapper");
+  const successBox = document.getElementById("gate-success-box");
+  const successMsg = document.getElementById("gate-success-msg");
+
+  function executeUnlock() {
+    if (overlay) overlay.classList.add("hidden");
+    if (contentBody) {
+      contentBody.classList.remove(
+        "blur-md",
+        "pointer-events-none",
+        "select-none",
+      );
+    }
+  }
+
+  // Auto-unlock if previously unlocked on this browser
+  if (localStorage.getItem("jobprompt_unlocked") === "true") {
+    executeUnlock();
+  }
+
+  if (unlockForm) {
+    unlockForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (errorMsg) errorMsg.classList.add("hidden");
+
+      const nameInput = document.getElementById("gate-name");
+      const emailInput = document.getElementById("gate-email");
+      const websiteInput = document.getElementById("gate-website");
+
+      const nameVal = nameInput ? nameInput.value.trim() : "";
+      const emailVal = emailInput ? emailInput.value.trim() : "";
+      const websiteVal = websiteInput ? websiteInput.value : "";
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Enviando...";
+      }
+
+      try {
+        const response = await fetch("/api/unlock-guia", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: nameVal,
+            email: emailVal,
+            website: websiteVal,
+          }),
+        });
+
+        const resData = await response.json().catch(() => ({}));
+
+        if (!response.ok && resData.error) {
+          if (errorMsg) {
+            errorMsg.textContent = resData.error;
+            errorMsg.classList.remove("hidden");
+          }
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Desbloquear JobPrompt AI →";
+          }
+          return;
+        }
+
+        // Save unlock state
+        localStorage.setItem("jobprompt_unlocked", "true");
+
+        if (formWrapper) formWrapper.classList.add("hidden");
+        if (successMsg) {
+          successMsg.textContent = `¡Listo, ${nameVal}! Acceso concedido a JobPrompt AI.`;
+        }
+        if (successBox) successBox.classList.remove("hidden");
+
+        setTimeout(() => {
+          executeUnlock();
+        }, 1000);
+      } catch (err) {
+        console.error("Unlock error:", err);
+        localStorage.setItem("jobprompt_unlocked", "true");
+        executeUnlock();
+      }
+    });
+  }
+
   // Banner close logic
-  document.getElementById('close-cafe-banner').addEventListener('click', () => {
-    document.getElementById('cafe-banner').classList.add('hidden');
-  });
+  const cafeBanner = document.getElementById("cafe-banner");
+  const closeCafeBtn = document.getElementById("close-cafe-banner");
+  if (cafeBanner && closeCafeBtn) {
+    closeCafeBtn.addEventListener("click", () => {
+      cafeBanner.style.opacity = "0";
+      setTimeout(() => {
+        cafeBanner.style.display = "none";
+      }, 300);
+    });
+  }
 
-  // Generator logic
-  document.getElementById('generateBtn').addEventListener('click', () => {
-    const v = (id, fallback) => document.getElementById(id)?.value.trim() || fallback;
-    const chk = id => document.getElementById(id).checked;
+  // Generator logic with Groq API
+  const generateBtn = document.getElementById("generateBtn");
+  if (generateBtn) {
+    generateBtn.addEventListener("click", async () => {
+      const v = (id, fallback) =>
+        document.getElementById(id)?.value.trim() || fallback;
+      const chk = (id) => document.getElementById(id)?.checked || false;
 
-    const data = {
-      role: v('role', 'Cualquier rol tech/producto'),
-      seniority: v('seniority', 'Sin especificar'),
-      salary: v('minSalary', 'Abierto a negociar'),
-      contract: v('contract', 'Flexible'),
-      timezone: v('timezone', 'Flexible'),
-      english: v('englishLevel', 'No requerido'),
-      modality: v('modality', 'Flexible'),
-      secondary: chk('includeSecondary')
-    };
+      const payload = {
+        role: v("role", "Cualquier rol tech/producto"),
+        seniority: v("seniority", "Sin especificar"),
+        salary: v("minSalary", "Abierto a negociar"),
+        contract: v("contract", "Flexible"),
+        timezone: v("timezone", "Flexible"),
+        english: v("englishLevel", "No requerido"),
+        modality: v("modality", "Flexible"),
+        secondary: chk("includeSecondary"),
+      };
 
-    const prompt = `Actúa como reclutador senior global. Tu misión es identificar vacantes activas (<7 días) y presentarlas en tabla Markdown.
+      const originalText = generateBtn.textContent;
+      generateBtn.textContent = "⏳ Generando Prompt con IA (Groq)...";
+      generateBtn.disabled = true;
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📋 PERFIL CANDIDATO
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-- Rol: ${data.role}
-- Nivel: ${data.seniority}
-- Salario mín: ${data.salary}
-- Contrato: ${data.contract}
-- Zona: ${data.timezone} | Modalidad: ${data.modality}
-- Inglés: ${data.english}
+      try {
+        const response = await fetch("/api/generar-job-prompt", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🔍 INSTRUCCIONES
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-1. BUSCA vacantes reales. ${data.secondary ? 'Incluye fuentes secundarias (marca con ⚠️).' : 'Usa solo fuentes primarias.'}
-2. FILTRA ESTRICTAMENTE: Coincidencia ≥ 70%, Salario transparente o abierto.
-3. OUTPUT: Tabla Markdown con estas columnas EXACTAS: 
-| Puesto | Empresa | Modalidad | Salario | MatchScore | Link | Fuente | Publicado | Nota estratégica |
-4. MatchScore: (🔥 ≥8, 🟡 6-7, 🔴 ≤5). 
-5. Nota estratégica: 1 frase accionable (ej: "Pide portafolio", "Proceso corto").
+        if (!response.ok) {
+          throw new Error("Error al conectar con la API de generación");
+        }
 
-RESPONDE SOLO CON LA TABLA Y 3 LÍNEAS DE RESUMEN FINAL.`;
+        const data = await response.json();
+        const output = document.getElementById("promptOutput");
 
-    document.getElementById('promptOutput').textContent = prompt;
-    document.getElementById('output-section').classList.remove('hidden');
-    document.getElementById('output-section').scrollIntoView({ behavior: 'smooth' });
-  });
+        if (output && data.prompt) {
+          output.textContent = data.prompt;
+          document.getElementById("output-section")?.classList.remove("hidden");
+          document
+            .getElementById("output-section")
+            ?.scrollIntoView({ behavior: "smooth" });
+        } else {
+          alert("No se pudo generar el prompt. Por favor intenta de nuevo.");
+        }
+      } catch (err) {
+        console.error("Error generando prompt:", err);
+        alert("Ocurrió un problema al generar el prompt. Inténtalo de nuevo.");
+      } finally {
+        generateBtn.textContent = originalText;
+        generateBtn.disabled = false;
+      }
+    });
+  }
 
   // Copy to clipboard logic
-  document.getElementById('copyBtn').addEventListener('click', () => {
-    const text = document.getElementById('promptOutput').textContent;
-    navigator.clipboard.writeText(text);
-    alert('Prompt copiado al portapapeles. ¡Pégalo en Gemini o Perplexity!');
-  });
+  const copyBtn = document.getElementById("copyBtn");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async () => {
+      const text = document.getElementById("promptOutput")?.textContent || "";
+      try {
+        await navigator.clipboard.writeText(text);
+        const originalText = copyBtn.innerHTML;
+        copyBtn.innerHTML = "<span>✅</span> ¡Prompt copiado!";
+        setTimeout(() => {
+          copyBtn.innerHTML = originalText;
+        }, 2000);
+      } catch (err) {
+        alert("No se pudo copiar automáticamente.");
+      }
+    });
+  }
 </script>
 
 <style>
-  .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 </style>
