@@ -1,0 +1,1024 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ActionHub from "../../components/ActionHub.astro";
+import RedesSociales from "../../components/RedesSociales.astro";
+import { LINKS } from "../../lib/constants.js";
+
+const calendlyUrl = LINKS.calendly_empresa || LINKS.calendly_taller || LINKS.calendly;
+---
+
+<Layout title="IA Aplicada al Proyecto de Ceci Morete | MasterCraft | LuciRMe AI">
+
+  <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
+  <nav class="bg-white/90 backdrop-blur-md border-b border-gray-200 px-6 py-4 sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <a href="/" class="text-xs md:text-sm font-bold text-gray-500 hover:text-teal transition flex items-center gap-1">
+        ← Volver a LuciRMe AI
+      </a>
+      <a href={calendlyUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-bold bg-orange text-white rounded-xl py-2 px-4 hover:bg-orange/90 transition shadow-xs text-xs text-center cursor-pointer">
+        Agendar Sesión
+      </a>
+    </div>
+  </nav>
+
+  <!-- HEADER / HERO SECTION -->
+  <header class="bg-deep text-white py-16 md:py-20 px-6 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <!-- EYEBROW -->
+      <div class="inline-flex items-center gap-2 bg-teal/15 text-teal text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6 border border-teal/30">
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span>
+        Estrategia Personalizada · IA Aplicada
+      </div>
+
+      <!-- H1 -->
+      <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight text-white">
+        IA aplicada al proyecto de <span class="text-teal">Ceci Morete</span>
+      </h1>
+
+      <!-- SUBTÍTULO -->
+      <p class="text-lg md:text-xl text-gray-300 font-medium max-w-2xl mx-auto mb-8">
+        Resumen de la sesión · Agosto 2026
+      </p>
+
+      <!-- META BADGES -->
+      <div class="inline-flex flex-wrap justify-center items-center gap-3 md:gap-4 bg-white/5 border border-white/10 rounded-2xl px-5 py-3 text-xs md:text-sm text-gray-300 max-w-3xl">
+        <span class="flex items-center gap-1.5">
+          👤 <strong>Cliente:</strong> Ceci Morete
+        </span>
+        <span class="text-gray-500 hidden sm:inline">•</span>
+        <span class="flex items-center gap-1.5">
+          🎙️ <strong>Proyecto profesional:</strong> Radio + Emprendimiento de diseño
+        </span>
+        <span class="text-gray-500 hidden sm:inline">•</span>
+        <span class="flex items-center gap-1.5">
+          🧶 <strong>Marca:</strong> MasterCraft
+        </span>
+        <span class="text-gray-500 hidden sm:inline">•</span>
+        <span class="flex items-center gap-1.5">
+          🤖 <strong>Enfoque:</strong> Contenido, marca, ventas y organización
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-12 space-y-16">
+
+    <!-- SECCIÓN 1: RESUMEN DE NUESTRA CONVERSACIÓN -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Visión General
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          Resumen de nuestra conversación
+        </h2>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-4 leading-relaxed text-gray-700 text-base">
+        <p class="text-lg font-semibold text-deep">
+          Durante nuestra sesión partimos de una realidad muy particular: <strong class="text-teal">Ceci no tiene un solo proyecto.</strong>
+        </p>
+
+        <p>
+          Tiene experiencia y contactos en el mundo de la <strong>radio y la producción</strong>, mientras desarrolla en paralelo <strong>MasterCraft</strong>, su emprendimiento de tejido y diseño de autor.
+        </p>
+
+        <p>
+          Y lejos de ser dos mundos separados, la oportunidad está precisamente en encontrar cómo hacer que ambos se potencien:
+        </p>
+
+        <div class="grid sm:grid-cols-2 gap-4 my-6">
+          <div class="bg-slate-50 border border-gray-200 p-5 rounded-xl space-y-2">
+            <div class="flex items-center gap-2 font-bold text-deep text-base">
+              <span>🎙️</span>
+              <span>Por un lado: La Radio</span>
+            </div>
+            <p class="text-xs md:text-sm text-gray-600">
+              Le permite acceder a información, contactos, productores, profesionales y posibles contenidos.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 border border-gray-200 p-5 rounded-xl space-y-2">
+            <div class="flex items-center gap-2 font-bold text-teal text-base">
+              <span>🧶</span>
+              <span>Por otro: MasterCraft</span>
+            </div>
+            <p class="text-xs md:text-sm text-gray-600">
+              Le permite desarrollar una marca propia alrededor del diseño, el tejido, la sustentabilidad y el concepto de piezas de autor.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-4 bg-teal/5 border-l-4 border-teal rounded-r-xl text-deep font-semibold text-center text-sm md:text-base">
+          ✨ "La IA puede convertirse en un puente entre ambos mundos."
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: EL DIAGNÓSTICO -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Estado Actual
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          🧠 El diagnóstico
+        </h2>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-6 text-gray-700">
+        <p class="text-base leading-relaxed">
+          Ceci ya está utilizando Inteligencia Artificial. Ha experimentado con herramientas, ha aprendido a mejorar prompts y ya ha creado diferentes proyectos y espacios de trabajo.
+        </p>
+
+        <div>
+          <p class="font-bold text-deep text-sm uppercase tracking-wide mb-3">
+            Incluso ha utilizado IA para:
+          </p>
+          <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs md:text-sm">
+            <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg flex items-center gap-2 font-medium text-gray-700">
+              <span>🌐</span> Crear páginas web
+            </div>
+            <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg flex items-center gap-2 font-medium text-gray-700">
+              <span>🛍️</span> Analizar su tienda
+            </div>
+            <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg flex items-center gap-2 font-medium text-gray-700">
+              <span>✍️</span> Mejorar publicaciones
+            </div>
+            <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg flex items-center gap-2 font-medium text-gray-700">
+              <span>📈</span> Investigar tendencias
+            </div>
+            <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg flex items-center gap-2 font-medium text-gray-700">
+              <span>🔍</span> Analizar contenido
+            </div>
+            <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg flex items-center gap-2 font-medium text-gray-700">
+              <span>🎨</span> Trabajar sobre su marca
+            </div>
+            <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg flex items-center gap-2 font-medium text-gray-700">
+              <span>📅</span> Crear planes de contenido
+            </div>
+            <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg flex items-center gap-2 font-medium text-gray-700">
+              <span>📂</span> Organizar información
+            </div>
+          </div>
+        </div>
+
+        <p class="text-base leading-relaxed">
+          El problema, entonces, <strong>no es aprender qué es la IA.</strong> El siguiente nivel es aprender a convertir todo ese conocimiento en un sistema de trabajo.
+        </p>
+
+        <!-- EVOLUCIÓN DE ENFOQUE -->
+        <div class="bg-gradient-to-r from-slate-50 via-slate-100 to-slate-50 border border-gray-200 rounded-xl p-6 text-center space-y-4">
+          <p class="text-xs font-bold uppercase tracking-widest text-gray-500">
+            La oportunidad está en pasar de:
+          </p>
+          <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-sm md:text-base font-bold">
+            <span class="bg-white px-4 py-2 rounded-lg border border-gray-200 text-gray-500 line-through">
+              “Tengo muchas herramientas que puedo usar”
+            </span>
+            <span class="text-orange text-xl font-black">➔</span>
+            <span class="bg-teal text-white px-5 py-2.5 rounded-xl shadow-xs">
+              “Tengo un sistema que sabe de mi marca y me ayuda a tomar decisiones.”
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: EL GRAN CONCEPTO -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-orange uppercase tracking-widest bg-orange/10 px-3 py-1 rounded-full">
+          Criterio Estratégico
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          El gran concepto de la sesión: No enamorarse de la punta del iceberg
+        </h2>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-6 text-gray-700">
+        <p class="text-base leading-relaxed">
+          Durante la conversación apareció una idea especialmente importante: <strong>Crear algo con IA puede ser extremadamente fácil.</strong>
+        </p>
+
+        <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-gray-400 text-xs md:text-sm font-mono text-gray-600">
+          Por ejemplo: “Créame una página web.” En pocos minutos puedes tener un prototipo.
+        </div>
+
+        <p class="text-base leading-relaxed">
+          Pero ese prototipo es apenas la punta del iceberg. Después aparecen preguntas como:
+        </p>
+
+        <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs md:text-sm">
+          <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg text-center font-semibold text-deep">
+            ¿Dónde se publica?
+          </div>
+          <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg text-center font-semibold text-deep">
+            ¿Cómo se conecta con el dominio?
+          </div>
+          <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg text-center font-semibold text-deep">
+            ¿Cómo interactúan las personas?
+          </div>
+          <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg text-center font-semibold text-deep">
+            ¿Cómo se reciben los datos?
+          </div>
+          <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg text-center font-semibold text-deep">
+            ¿Cómo se conecta con email?
+          </div>
+          <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg text-center font-semibold text-deep">
+            ¿Cómo se automatiza?
+          </div>
+          <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg text-center font-semibold text-deep">
+            ¿Cómo se mantiene?
+          </div>
+          <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg text-center font-semibold text-deep">
+            ¿Cómo escala?
+          </div>
+        </div>
+
+        <p class="text-base leading-relaxed">
+          La IA hace que experimentar sea mucho más fácil. Pero eso no significa que todo deba convertirse inmediatamente en un proyecto complejo.
+        </p>
+
+        <!-- REGLA DESTACADA -->
+        <div class="bg-deep text-white p-6 rounded-2xl text-center space-y-3">
+          <span class="text-orange text-xs font-bold uppercase tracking-widest">La Regla</span>
+          <div class="flex flex-wrap justify-center items-center gap-3 text-base md:text-lg font-black">
+            <span class="text-teal">1. Primero experimentar</span>
+            <span class="text-gray-500">➔</span>
+            <span class="text-orange">2. Después validar</span>
+            <span class="text-gray-500">➔</span>
+            <span class="text-white">3. Después profundizar</span>
+          </div>
+          <p class="text-xs text-gray-400 font-medium">
+            No todo necesita convertirse en una gran automatización.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: OPORTUNIDAD PRINCIPAL (EL CEREBRO DE MASTERCRAFT) -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Estrategia Central
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          🧩 Tu oportunidad principal: Construir un “cerebro” para MasterCraft
+        </h2>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-6 text-gray-700">
+        <p class="text-base leading-relaxed">
+          Uno de los caminos más interesantes que identificamos fue crear un espacio donde la IA pueda conocer realmente tu marca.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-slate-50 border border-gray-200 p-4 rounded-xl text-center space-y-1">
+            <span class="text-xs font-bold text-gray-400 uppercase">No solamente preguntarle</span>
+            <p class="font-mono text-xs md:text-sm text-gray-600 italic">“¿Qué debería publicar?”</p>
+          </div>
+          <div class="bg-teal/10 border border-teal/30 p-4 rounded-xl text-center space-y-1">
+            <span class="text-xs font-bold text-teal uppercase">Sino darle contexto para responder</span>
+            <p class="font-bold text-xs md:text-sm text-deep">“¿Qué debería hacer MasterCraft?”</p>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-bold text-deep text-sm uppercase tracking-wide mb-3">
+            Para eso podemos construir un espacio de trabajo con información como:
+          </p>
+          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-xs md:text-sm">
+            <div class="bg-slate-50 border border-gray-200 px-3 py-2 rounded-lg flex items-center gap-2">
+              <span>📖</span> Historia de la marca
+            </div>
+            <div class="bg-slate-50 border border-gray-200 px-3 py-2 rounded-lg flex items-center gap-2">
+              <span>💎</span> Propuesta de valor
+            </div>
+            <div class="bg-slate-50 border border-gray-200 px-3 py-2 rounded-lg flex items-center gap-2">
+              <span>🧶</span> Productos
+            </div>
+            <div class="bg-slate-50 border border-gray-200 px-3 py-2 rounded-lg flex items-center gap-2">
+              <span>🎯</span> Público
+            </div>
+            <div class="bg-slate-50 border border-gray-200 px-3 py-2 rounded-lg flex items-center gap-2">
+              <span>✨</span> Estilo
+            </div>
+            <div class="bg-slate-50 border border-gray-200 px-3 py-2 rounded-lg flex items-center gap-2">
+              <span>🎨</span> Colores
+            </div>
+            <div class="bg-slate-50 border border-gray-200 px-3 py-2 rounded-lg flex items-center gap-2">
+              <span>📌</span> Referencias
+            </div>
+            <div class="bg-slate-50 border border-gray-200 px-3 py-2 rounded-lg flex items-center gap-2">
+              <span>📘</span> Manual de marca
+            </div>
+            <div class="bg-slate-50 border border-gray-200 px-3 py-2 rounded-lg flex items-center gap-2">
+              <span>🛒</span> Información de la tienda
+            </div>
+            <div class="bg-slate-50 border border-gray-200 px-3 py-2 rounded-lg flex items-center gap-2">
+              <span>📲</span> Contenido anterior
+            </div>
+            <div class="bg-slate-50 border border-gray-200 px-3 py-2 rounded-lg flex items-center gap-2">
+              <span>📈</span> Objetivos comerciales
+            </div>
+            <div class="bg-slate-50 border border-gray-200 px-3 py-2 rounded-lg flex items-center gap-2">
+              <span>🧵</span> Referencias de diseño
+            </div>
+            <div class="bg-slate-50 border border-gray-200 px-3 py-2 rounded-lg flex items-center gap-2">
+              <span>🪡</span> Información sobre tejido
+            </div>
+            <div class="bg-slate-50 border border-gray-200 px-3 py-2 rounded-lg flex items-center gap-2">
+              <span>🌱</span> Sustentabilidad
+            </div>
+            <div class="bg-slate-50 border border-gray-200 px-3 py-2 rounded-lg flex items-center gap-2">
+              <span>📊</span> Tendencias
+            </div>
+          </div>
+        </div>
+
+        <p class="text-sm md:text-base text-gray-600 font-medium italic text-center pt-2">
+          Así, cada nueva consulta parte de un contexto mucho más completo.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: NOTEBOOKLM -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Herramienta Clave
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          📚 NotebookLM como centro de conocimiento
+        </h2>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-6 text-gray-700">
+        <p class="text-base leading-relaxed">
+          Una de las herramientas que más sentido tiene para este proyecto es <strong>NotebookLM</strong>. No solamente para hacer preguntas, sino para crear diferentes espacios de conocimiento.
+        </p>
+
+        <div class="bg-slate-50 border border-gray-200 p-6 rounded-xl space-y-4">
+          <div class="flex items-center gap-2 text-deep font-bold text-lg">
+            <span>📓</span>
+            <span>Notebook — MasterCraft</span>
+          </div>
+
+          <p class="text-xs md:text-sm text-gray-600">Puede contener:</p>
+
+          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-xs md:text-sm">
+            <span class="bg-white px-3 py-1.5 rounded-lg border border-gray-200 text-gray-700 font-medium">🎨 Brandbook</span>
+            <span class="bg-white px-3 py-1.5 rounded-lg border border-gray-200 text-gray-700 font-medium">📦 Información de productos</span>
+            <span class="bg-white px-3 py-1.5 rounded-lg border border-gray-200 text-gray-700 font-medium">🛒 Tienda Nube</span>
+            <span class="bg-white px-3 py-1.5 rounded-lg border border-gray-200 text-gray-700 font-medium">📌 Referencias</span>
+            <span class="bg-white px-3 py-1.5 rounded-lg border border-gray-200 text-gray-700 font-medium">🎓 Cursos</span>
+            <span class="bg-white px-3 py-1.5 rounded-lg border border-gray-200 text-gray-700 font-medium">🎥 Videos</span>
+            <span class="bg-white px-3 py-1.5 rounded-lg border border-gray-200 text-gray-700 font-medium">📚 Libros</span>
+            <span class="bg-white px-3 py-1.5 rounded-lg border border-gray-200 text-gray-700 font-medium">📰 Artículos</span>
+            <span class="bg-white px-3 py-1.5 rounded-lg border border-gray-200 text-gray-700 font-medium">🌱 Moda sostenible</span>
+            <span class="bg-white px-3 py-1.5 rounded-lg border border-gray-200 text-gray-700 font-medium">📈 Tendencias</span>
+            <span class="bg-white px-3 py-1.5 rounded-lg border border-gray-200 text-gray-700 font-medium">💡 Material de formación</span>
+          </div>
+        </div>
+
+        <p class="text-sm md:text-base text-gray-700 font-semibold text-center">
+          A partir de ahí puedes pedirle a la IA que trabaje <strong>sobre esas fuentes concretas.</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 6: EJEMPLO APLICADO -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-orange uppercase tracking-widest bg-orange/10 px-3 py-1 rounded-full">
+          Caso Práctico
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          🎯 Ejemplo aplicado a MasterCraft
+        </h2>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-6">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-red-50/60 border border-red-200 p-5 rounded-xl space-y-2">
+            <span class="text-xs font-bold text-red-600 uppercase tracking-wider">En lugar de preguntar:</span>
+            <p class="font-mono text-xs md:text-sm text-red-900 bg-white p-3 rounded-lg border border-red-100">
+              “¿Cómo vendo más en Instagram?”
+            </p>
+          </div>
+
+          <div class="bg-emerald-50/60 border border-emerald-200 p-5 rounded-xl space-y-2">
+            <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider">Podemos darle primero el contexto y preguntar:</span>
+            <p class="font-mono text-xs md:text-sm text-emerald-950 bg-white p-3 rounded-lg border border-emerald-100">
+              “Analiza estas fuentes y construye una estrategia de 90 días para aumentar las ventas de MasterCraft en Instagram, teniendo en cuenta mi público, productos, posicionamiento, capacidad de producción y propuesta de valor.”
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 p-4 rounded-xl text-center border border-gray-200">
+          <p class="text-sm md:text-base font-bold text-deep">
+            La diferencia no está solamente en el prompt. Está en el <span class="text-teal">contexto que tiene la IA para responder.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 7: INSTAGRAM -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Estrategia de Contenido
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          📱 Instagram: de publicar a construir una estrategia
+        </h2>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-6 text-gray-700">
+        <p class="text-base leading-relaxed">
+          Actualmente MasterCraft tiene una comunidad todavía pequeña, pero con personas que ya conocen y compran los productos. Eso es importante: <strong>no necesariamente necesitas miles de seguidores.</strong>
+        </p>
+
+        <div class="bg-slate-50 border border-gray-200 p-6 rounded-xl space-y-3">
+          <p class="font-bold text-deep text-sm uppercase tracking-wide">
+            Necesitas entender:
+          </p>
+          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3 text-xs md:text-sm font-semibold text-teal">
+            <div class="bg-white p-3 rounded-lg border border-gray-200 flex items-center gap-2">
+              <span>❓</span> ¿Quiénes son las personas que ya compran?
+            </div>
+            <div class="bg-white p-3 rounded-lg border border-gray-200 flex items-center gap-2">
+              <span>💡</span> ¿Por qué compran?
+            </div>
+            <div class="bg-white p-3 rounded-lg border border-gray-200 flex items-center gap-2">
+              <span>📅</span> ¿Cuándo compran?
+            </div>
+            <div class="bg-white p-3 rounded-lg border border-gray-200 flex items-center gap-2">
+              <span>✨</span> ¿Qué esperan de la marca?
+            </div>
+            <div class="bg-white p-3 rounded-lg border border-gray-200 flex items-center gap-2">
+              <span>🔄</span> ¿Qué las hace volver?
+            </div>
+          </div>
+        </div>
+
+        <p class="text-sm md:text-base text-gray-600 italic text-center">
+          La IA puede ayudarte a analizar esas preguntas y convertirlas en una estrategia de contenido.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 8: CATEGORÍAS DE CONTENIDO -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Matriz de Contenidos
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          Contenido para MasterCraft
+        </h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="bg-white border border-gray-200 p-5 rounded-xl shadow-xs space-y-2 hover:border-teal/50 transition">
+          <div class="flex items-center gap-2 text-teal font-bold text-base">
+            <span>🧶</span>
+            <span>Producto</span>
+          </div>
+          <p class="text-xs text-gray-600 leading-relaxed">
+            Mostrar qué haces, cómo se hace y qué hace diferente a cada pieza.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 p-5 rounded-xl shadow-xs space-y-2 hover:border-teal/50 transition">
+          <div class="flex items-center gap-2 text-teal font-bold text-base">
+            <span>🎨</span>
+            <span>Diseño</span>
+          </div>
+          <p class="text-xs text-gray-600 leading-relaxed">
+            Hablar de inspiración, colores, materiales y procesos creativos.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 p-5 rounded-xl shadow-xs space-y-2 hover:border-teal/50 transition">
+          <div class="flex items-center gap-2 text-teal font-bold text-base">
+            <span>🌱</span>
+            <span>Sustentabilidad</span>
+          </div>
+          <p class="text-xs text-gray-600 leading-relaxed">
+            Explicar el concepto de diseño de autor y consumo alejado del fast fashion.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 p-5 rounded-xl shadow-xs space-y-2 hover:border-teal/50 transition">
+          <div class="flex items-center gap-2 text-teal font-bold text-base">
+            <span>👤</span>
+            <span>Marca</span>
+          </div>
+          <p class="text-xs text-gray-600 leading-relaxed">
+            Mostrar quién está detrás de MasterCraft y por qué existe.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 p-5 rounded-xl shadow-xs space-y-2 hover:border-teal/50 transition">
+          <div class="flex items-center gap-2 text-teal font-bold text-base">
+            <span>📚</span>
+            <span>Educación</span>
+          </div>
+          <p class="text-xs text-gray-600 leading-relaxed">
+            Compartir conocimiento sobre tejido, diseño, materiales y tendencias.
+          </p>
+        </div>
+
+        <div class="bg-orange/5 border border-orange/30 p-5 rounded-xl shadow-xs space-y-2 hover:border-orange/60 transition">
+          <div class="flex items-center gap-2 text-orange font-bold text-base">
+            <span>🛍️</span>
+            <span>Conversión</span>
+          </div>
+          <p class="text-xs text-gray-700 leading-relaxed font-medium">
+            Contenido diseñado específicamente para llevar a una persona desde: <strong class="text-deep font-bold">“Me gusta” → “Quiero conocerlo” → “Quiero comprarlo”.</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 9: TIENDA NUBE + INSTAGRAM -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Ecosistema Digital
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          🛒 Tienda Nube + Instagram
+        </h2>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-6 text-gray-700">
+        <p class="text-base leading-relaxed">
+          También identificamos una oportunidad importante en conectar mejor el contenido con la venta. La tienda ya contiene información valiosa sobre quiénes somos, productos, entregas, marca y propuesta.
+        </p>
+
+        <p class="text-sm font-bold text-deep uppercase tracking-wide">
+          Esa información puede convertirse en contexto para la IA para analizar:
+        </p>
+
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3 text-xs md:text-sm">
+          <div class="bg-slate-50 border border-gray-200 p-3.5 rounded-xl space-y-1">
+            <span class="font-bold text-teal">🎨 Presentación</span>
+            <p class="text-gray-600">Cómo está presentada la marca y qué información falta.</p>
+          </div>
+          <div class="bg-slate-50 border border-gray-200 p-3.5 rounded-xl space-y-1">
+            <span class="font-bold text-teal">⭐ Destacados</span>
+            <p class="text-gray-600">Qué productos deberían destacarse y tener mayor protagonismo.</p>
+          </div>
+          <div class="bg-slate-50 border border-gray-200 p-3.5 rounded-xl space-y-1">
+            <span class="font-bold text-teal">📸 Fotografía & Texto</span>
+            <p class="text-gray-600">Cómo mejorar las fotografías y descripciones.</p>
+          </div>
+          <div class="bg-slate-50 border border-gray-200 p-3.5 rounded-xl space-y-1">
+            <span class="font-bold text-teal">🚦 Tráfico</span>
+            <p class="text-gray-600">Qué contenido debería llevar tráfico directo a la tienda.</p>
+          </div>
+          <div class="bg-slate-50 border border-gray-200 p-3.5 rounded-xl space-y-1">
+            <span class="font-bold text-teal">🍂 Temporada</span>
+            <p class="text-gray-600">Qué productos deben priorizarse según la temporada.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 10: BASE DE CLIENTES CON MAILERLITE -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-orange uppercase tracking-widest bg-orange/10 px-3 py-1 rounded-full">
+          Activo Propio
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          📩 El siguiente nivel: construir una base de clientes
+        </h2>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-6 text-gray-700">
+        <p class="text-base leading-relaxed">
+          Actualmente ya existe una pequeña base de contactos y se está utilizando <strong>MailerLite</strong> para gestionar información y contactos. Esto abre una oportunidad importante: <strong>no depender exclusivamente de Instagram.</strong>
+        </p>
+
+        <!-- FLUJO DE CONTACTO -->
+        <div class="bg-slate-50 border border-gray-200 p-5 rounded-xl text-center space-y-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-gray-500">La idea es construir una relación directa:</span>
+          <div class="flex flex-wrap items-center justify-center gap-2 text-xs md:text-sm font-bold text-deep">
+            <span class="bg-white px-2.5 py-1 rounded border border-gray-200">Instagram</span> ➔
+            <span class="bg-white px-2.5 py-1 rounded border border-gray-200">Formulario</span> ➔
+            <span class="bg-white px-2.5 py-1 rounded border border-gray-200">Contacto</span> ➔
+            <span class="bg-white px-2.5 py-1 rounded border border-gray-200">Email</span> ➔
+            <span class="bg-white px-2.5 py-1 rounded border border-gray-200">Contenido</span> ➔
+            <span class="bg-white px-2.5 py-1 rounded border border-gray-200">Lanzamiento</span> ➔
+            <span class="bg-teal text-white px-3 py-1 rounded shadow-xs">Compra</span>
+          </div>
+        </div>
+
+        <div class="border-l-4 border-orange bg-orange/5 p-5 rounded-r-xl space-y-3">
+          <h3 class="font-bold text-deep text-base flex items-center gap-2">
+            <span>💡</span> <span>Regla importante: No pedir datos sin ofrecer algo a cambio.</span>
+          </h3>
+          <p class="text-xs md:text-sm text-gray-600">Puede ser:</p>
+          <div class="flex flex-wrap gap-2 text-xs font-semibold">
+            <span class="bg-white text-orange border border-orange/20 px-3 py-1 rounded-full">Descuento primera compra</span>
+            <span class="bg-white text-orange border border-orange/20 px-3 py-1 rounded-full">Acceso anticipado</span>
+            <span class="bg-white text-orange border border-orange/20 px-3 py-1 rounded-full">Guía</span>
+            <span class="bg-white text-orange border border-orange/20 px-3 py-1 rounded-full">Contenido exclusivo</span>
+            <span class="bg-white text-orange border border-orange/20 px-3 py-1 rounded-full">Preventa</span>
+            <span class="bg-white text-orange border border-orange/20 px-3 py-1 rounded-full">Nuevas colecciones</span>
+          </div>
+        </div>
+
+        <p class="text-center font-bold text-deep text-base">
+          La base de datos se convierte así en un activo de la marca.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 11: DE SEGUIDORES A COMUNIDAD -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Fidelización
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          🔄 De seguidores a comunidad
+        </h2>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-6">
+        <p class="text-base text-gray-700 leading-relaxed">
+          El objetivo no debería ser solamente “conseguir más seguidores”, sino construir una comunidad que pueda avanzar por diferentes etapas:
+        </p>
+
+        <!-- EMBUDO DE COMUNIDAD -->
+        <div class="max-w-md mx-auto space-y-2 text-center text-xs md:text-sm font-semibold">
+          <div class="bg-slate-100 p-2.5 rounded-lg border border-gray-200 text-deep">1. Descubre MasterCraft</div>
+          <div class="text-teal font-black text-xs">↓</div>
+          <div class="bg-slate-100 p-2.5 rounded-lg border border-gray-200 text-deep">2. Empieza a seguir la marca</div>
+          <div class="text-teal font-black text-xs">↓</div>
+          <div class="bg-slate-100 p-2.5 rounded-lg border border-gray-200 text-deep">3. Se interesa por el contenido</div>
+          <div class="text-teal font-black text-xs">↓</div>
+          <div class="bg-teal/10 p-2.5 rounded-lg border border-teal/20 text-teal font-bold">4. Deja sus datos</div>
+          <div class="text-teal font-black text-xs">↓</div>
+          <div class="bg-slate-100 p-2.5 rounded-lg border border-gray-200 text-deep">5. Recibe información</div>
+          <div class="text-teal font-black text-xs">↓</div>
+          <div class="bg-slate-100 p-2.5 rounded-lg border border-gray-200 text-deep">6. Conoce una colección</div>
+          <div class="text-orange font-black text-xs">↓</div>
+          <div class="bg-orange text-white p-2.5 rounded-lg font-bold shadow-xs">7. Compra</div>
+          <div class="text-teal font-black text-xs">↓</div>
+          <div class="bg-slate-100 p-2.5 rounded-lg border border-gray-200 text-deep">8. Vuelve</div>
+          <div class="text-teal font-black text-xs">↓</div>
+          <div class="bg-teal text-white p-2.5 rounded-lg font-bold">9. Recomienda</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 12: AUTOMATIZACIÓN DESPUÉS -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-orange uppercase tracking-widest bg-orange/10 px-3 py-1 rounded-full">
+          Secuencia Lógica
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          🤖 Automatización: después, no antes
+        </h2>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-6 text-gray-700">
+        <p class="text-base leading-relaxed">
+          También hablamos de herramientas que pueden ayudar a conectar contactos provenientes de diferentes canales y automatizar determinadas acciones. Pero aquí vuelve a aparecer el concepto de la punta del iceberg.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-4 text-center">
+          <div class="bg-slate-50 border border-gray-200 p-4 rounded-xl space-y-1">
+            <span class="text-xs font-bold text-teal uppercase">Paso 1</span>
+            <p class="font-bold text-sm text-deep">¿Qué queremos automatizar?</p>
+          </div>
+          <div class="bg-slate-50 border border-gray-200 p-4 rounded-xl space-y-1">
+            <span class="text-xs font-bold text-teal uppercase">Paso 2</span>
+            <p class="font-bold text-sm text-deep">¿Qué información necesitamos?</p>
+          </div>
+          <div class="bg-orange/10 border border-orange/30 p-4 rounded-xl space-y-1">
+            <span class="text-xs font-bold text-orange uppercase">Solamente entonces</span>
+            <p class="font-bold text-sm text-deep">¿Qué herramienta lo puede hacer?</p>
+          </div>
+        </div>
+
+        <p class="text-xs md:text-sm text-gray-500 italic text-center">
+          No tiene sentido pagar por cinco herramientas si todavía no sabemos qué proceso necesitamos resolver.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 13: EL PROYECTO RADIO -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Sinergia Profesional
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          🎙️ Y la radio también puede beneficiarse
+        </h2>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-6 text-gray-700">
+        <p class="text-base leading-relaxed">
+          Una de las oportunidades más interesantes de tu perfil es que la IA no tiene que quedarse solamente en MasterCraft. También puede ayudarte en tu trabajo en radio.
+        </p>
+
+        <p class="text-sm font-bold text-deep uppercase tracking-wide">
+          Ya tienes una estructura mucho más desarrollada allí:
+        </p>
+
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-xs md:text-sm">
+          <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg flex items-center gap-2">
+            <span>📚</span> Fuentes y Libros
+          </div>
+          <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg flex items-center gap-2">
+            <span>📄</span> PDFs y Discografías
+          </div>
+          <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg flex items-center gap-2">
+            <span>🏷️</span> Sellos y Productores
+          </div>
+          <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg flex items-center gap-2">
+            <span>✅</span> Información verificada
+          </div>
+          <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg flex items-center gap-2">
+            <span>📻</span> Contenido diario
+          </div>
+          <div class="bg-slate-50 border border-gray-200 p-3 rounded-lg flex items-center gap-2">
+            <span>🎙️</span> Redacción y Locutores
+          </div>
+        </div>
+
+        <!-- REGLA DE VERIFICACIÓN -->
+        <div class="border-l-4 border-teal bg-teal/5 p-5 rounded-r-xl space-y-3">
+          <h3 class="font-bold text-deep text-base">
+            🔎 Un principio importante para tu trabajo en radio (cuando la información necesita ser precisa):
+          </h3>
+
+          <div class="grid md:grid-cols-2 gap-4 text-xs md:text-sm">
+            <div class="bg-white p-3.5 rounded-lg border border-teal/20 text-center space-y-1">
+              <span class="text-xs font-bold text-teal uppercase">Flujo correcto:</span>
+              <p class="font-bold text-deep">Fuente ➔ Verificación ➔ Procesamiento ➔ Contenido</p>
+            </div>
+            <div class="bg-white p-3.5 rounded-lg border border-red-200 text-center space-y-1">
+              <span class="text-xs font-bold text-red-600 uppercase">No recomendado:</span>
+              <p class="font-bold text-gray-400 line-through">IA ➔ Respuesta ➔ Publicar</p>
+            </div>
+          </div>
+
+          <p class="text-xs text-gray-600">
+            La IA puede ayudarte muchísimo a procesar información. Pero la fuente debe seguir siendo la fuente.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 14: MASTERCRAFT DISEÑO SOSTENIBLE -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Posicionamiento
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          🌱 MasterCraft como proyecto de diseño sostenible
+        </h2>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-6 text-gray-700">
+        <p class="text-base leading-relaxed">
+          También apareció una línea interesante que puede convertirse en parte importante del posicionamiento de MasterCraft. No solamente “vendo prendas tejidas”, sino explorar conceptos como:
+        </p>
+
+        <div class="flex flex-wrap gap-2 text-xs md:text-sm font-semibold">
+          <span class="bg-slate-100 border border-gray-200 text-deep px-3 py-1.5 rounded-lg">🎨 Diseño de autor</span>
+          <span class="bg-slate-100 border border-gray-200 text-deep px-3 py-1.5 rounded-lg">💎 Piezas únicas</span>
+          <span class="bg-slate-100 border border-gray-200 text-deep px-3 py-1.5 rounded-lg">🧶 Tejido & Arte</span>
+          <span class="bg-slate-100 border border-gray-200 text-deep px-3 py-1.5 rounded-lg">🌱 Sustentabilidad</span>
+          <span class="bg-slate-100 border border-gray-200 text-deep px-3 py-1.5 rounded-lg">🌿 Slow fashion</span>
+          <span class="bg-slate-100 border border-gray-200 text-deep px-3 py-1.5 rounded-lg">💚 Consumo consciente</span>
+          <span class="bg-slate-100 border border-gray-200 text-deep px-3 py-1.5 rounded-lg">🖐️ Proceso artesanal</span>
+          <span class="bg-slate-100 border border-gray-200 text-deep px-3 py-1.5 rounded-lg">⏳ Valor de una pieza hecha para durar</span>
+        </div>
+
+        <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+          No necesitamos convertir MasterCraft en una marca que habla de sostenibilidad todo el tiempo. Pero sí podemos utilizar estos conceptos para construir una identidad más profunda.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 15: HERRAMIENTAS Y ESPACIOS -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Toolstack Sugerido
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          🛠️ Herramientas y espacios que pueden formar parte del sistema
+        </h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="bg-white border border-gray-200 p-5 rounded-xl space-y-2">
+          <span class="font-bold text-teal text-base">📚 NotebookLM</span>
+          <p class="text-xs text-gray-600">Para investigación y conocimiento basado en fuentes.</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-5 rounded-xl space-y-2">
+          <span class="font-bold text-teal text-base">🤖 Gemini</span>
+          <p class="text-xs text-gray-600">Para trabajar sobre el contexto de la marca y desarrollar diferentes tareas.</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-5 rounded-xl space-y-2">
+          <span class="font-bold text-teal text-base">💬 ChatGPT</span>
+          <p class="text-xs text-gray-600">Para estrategia, ideación, contenido y estructuración.</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-5 rounded-xl space-y-2">
+          <span class="font-bold text-teal text-base">📩 MailerLite</span>
+          <p class="text-xs text-gray-600">Para construir y gestionar la base de contactos.</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-5 rounded-xl space-y-2">
+          <span class="font-bold text-teal text-base">🛒 Tienda Nube</span>
+          <p class="text-xs text-gray-600">Como centro de conversión de la marca.</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-5 rounded-xl space-y-2">
+          <span class="font-bold text-teal text-base">📱 Instagram</span>
+          <p class="text-xs text-gray-600">Como principal canal de descubrimiento y relación.</p>
+        </div>
+      </div>
+      <div class="bg-slate-50 border border-gray-200 p-4 rounded-xl text-center">
+        <span class="font-bold text-deep text-xs md:text-sm">⚡ Automatizadores</span>
+        <p class="text-xs text-gray-500">Para conectar diferentes puntos del recorrido cuando el proceso esté suficientemente claro.</p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 16: HOJA DE RUTA / RECOMENDACIONES -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-orange uppercase tracking-widest bg-orange/10 px-3 py-1 rounded-full">
+          Próximos Pasos
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          🚀 Lo que te recomiendo hacer ahora
+        </h2>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-4">
+        <p class="text-sm font-semibold text-gray-500">No intentar hacer todo. Priorizaría este orden:</p>
+
+        <div class="space-y-3">
+          <div class="bg-slate-50 border border-gray-200 p-4 rounded-xl flex items-start gap-4">
+            <span class="bg-teal text-white text-xs font-black px-3 py-1.5 rounded-lg shrink-0">01</span>
+            <div class="space-y-0.5">
+              <h3 class="font-bold text-deep text-sm md:text-base">Construir el contexto de MasterCraft</h3>
+              <p class="text-xs md:text-sm text-gray-600">Crear un espacio central con brandbook + productos + público + propuesta + referencias + tienda + contenido.</p>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 border border-gray-200 p-4 rounded-xl flex items-start gap-4">
+            <span class="bg-teal text-white text-xs font-black px-3 py-1.5 rounded-lg shrink-0">02</span>
+            <div class="space-y-0.5">
+              <h3 class="font-bold text-deep text-sm md:text-base">Definir el cliente</h3>
+              <p class="text-xs md:text-sm text-gray-600">Utilizar IA para entender mejor quién compra, por qué compra y qué necesita ver antes de comprar.</p>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 border border-gray-200 p-4 rounded-xl flex items-start gap-4">
+            <span class="bg-teal text-white text-xs font-black px-3 py-1.5 rounded-lg shrink-0">03</span>
+            <div class="space-y-0.5">
+              <h3 class="font-bold text-deep text-sm md:text-base">Crear una estrategia de contenido</h3>
+              <p class="text-xs md:text-sm text-gray-600">Definir qué publicar y con qué objetivo. No publicar simplemente porque “toca publicar”.</p>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 border border-gray-200 p-4 rounded-xl flex items-start gap-4">
+            <span class="bg-teal text-white text-xs font-black px-3 py-1.5 rounded-lg shrink-0">04</span>
+            <div class="space-y-0.5">
+              <h3 class="font-bold text-deep text-sm md:text-base">Construir la base de contactos</h3>
+              <p class="text-xs md:text-sm text-gray-600">Empezar a convertir parte de la audiencia de Instagram en contactos propios.</p>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 border border-gray-200 p-4 rounded-xl flex items-start gap-4">
+            <span class="bg-teal text-white text-xs font-black px-3 py-1.5 rounded-lg shrink-0">05</span>
+            <div class="space-y-0.5">
+              <h3 class="font-bold text-deep text-sm md:text-base">Crear el primer flujo de email</h3>
+              <p class="text-xs md:text-sm text-gray-600">No necesitamos una gran automatización. Podemos empezar con algo sencillo: suscripción ➔ bienvenida ➔ propuesta ➔ producto ➔ seguimiento.</p>
+            </div>
+          </div>
+
+          <div class="bg-orange/10 border border-orange/30 p-4 rounded-xl flex items-start gap-4">
+            <span class="bg-orange text-white text-xs font-black px-3 py-1.5 rounded-lg shrink-0">06</span>
+            <div class="space-y-0.5">
+              <h3 class="font-bold text-deep text-sm md:text-base">Automatizar después</h3>
+              <p class="text-xs md:text-sm text-gray-700">Cuando el proceso funcione manualmente, identificamos qué vale la pena automatizar.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 17: LA IDEA FINAL -->
+    <section class="bg-deep text-white p-8 md:p-10 rounded-3xl text-center space-y-4 shadow-xl border border-slate-800">
+      <span class="text-teal text-xs font-bold uppercase tracking-widest bg-teal/15 px-3 py-1 rounded-full border border-teal/30">
+        Idea Clave
+      </span>
+      <h3 class="text-xl md:text-2xl font-black text-white max-w-2xl mx-auto">
+        La IA no debería reemplazar tu criterio. Debería permitirte pensar mejor, investigar más rápido y ejecutar ideas que antes te llevaban demasiado tiempo.
+      </h3>
+      <p class="text-gray-300 text-xs md:text-sm max-w-xl mx-auto leading-relaxed">
+        Tú ya tienes algo que muchas personas no tienen: <strong>experiencia, criterio, contactos y una historia detrás de tus proyectos.</strong> La IA puede ayudarte a convertir todo eso en sistemas.
+      </p>
+    </section>
+
+    <!-- SECCIÓN 18: SIGUIENTES PASOS & PROPUESTA RED DE CONTACTOS -->
+    <section class="space-y-6">
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-6 text-gray-700">
+        <div class="space-y-3">
+          <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+            Siguientes pasos
+          </span>
+          <h3 class="text-xl font-bold text-deep">Esta sesión no tiene que terminar aquí</h3>
+          <p class="text-xs md:text-sm leading-relaxed">
+            De hecho, <strong>me interesa mucho seguir en contacto contigo.</strong> Tu perfil me parece especialmente interesante porque estás en la intersección de varios mundos: <strong class="text-teal">radio + comunicación + emprendimiento + diseño + sostenibilidad + IA.</strong>
+          </p>
+          <p class="text-xs md:text-sm leading-relaxed">
+            Y creo que todavía podemos explorar muchas aplicaciones interesantes. No necesariamente tiene que ser una nueva sesión formal. Podemos mantenernos en contacto, compartir descubrimientos, oportunidades, herramientas o ideas que puedan servirte para MasterCraft o para la radio.
+          </p>
+        </div>
+
+        <hr class="border-gray-200" />
+
+        <div class="space-y-4">
+          <h3 class="text-xl font-bold text-deep flex items-center gap-2">
+            <span>🤝</span> <span>Y algo que también me gustaría proponerte</span>
+          </h3>
+          <p class="text-xs md:text-sm leading-relaxed">
+            Si durante este proceso encuentras personas de tu entorno —emprendedores, profesionales, equipos o empresas— que estén intentando <strong>entender cómo aplicar IA de forma práctica a su trabajo</strong>, me encantaría que les hablaras de <strong>LuciRMe AI</strong>.
+          </p>
+
+          <p class="text-xs font-bold text-deep uppercase tracking-wide">
+            Especialmente si conoces personas que:
+          </p>
+
+          <div class="grid sm:grid-cols-2 gap-2 text-xs md:text-sm">
+            <div class="bg-slate-50 p-3 rounded-lg border border-gray-200">
+              • Ya usan IA pero sienten que no la están aprovechando.
+            </div>
+            <div class="bg-slate-50 p-3 rounded-lg border border-gray-200">
+              • Tienen demasiadas tareas manuales.
+            </div>
+            <div class="bg-slate-50 p-3 rounded-lg border border-gray-200">
+              • Quieren incorporar IA a sus procesos.
+            </div>
+            <div class="bg-slate-50 p-3 rounded-lg border border-gray-200">
+              • Necesitan organizar mejor su información.
+            </div>
+            <div class="bg-slate-50 p-3 rounded-lg border border-gray-200">
+              • Quieren pasar de usar IA como chat a construir sistemas de trabajo.
+            </div>
+            <div class="bg-slate-50 p-3 rounded-lg border border-gray-200">
+              • Tienen un proyecto y quieren explorar cómo la IA puede ayudarles a crecer.
+            </div>
+          </div>
+
+          <p class="text-xs md:text-sm leading-relaxed text-gray-600">
+            No busco que simplemente compartas un contacto. <strong>Me interesa construir una red de personas que entiendan que la IA no se trata solamente de conocer herramientas, sino de aprender a trabajar mejor con ellas.</strong> Y si alguien llega recomendado por ti, para mí también será una forma de seguir construyendo esta relación.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 19: AGRADECIMIENTO & MARCA -->
+    <section class="bg-gradient-to-br from-white to-slate-50 border border-gray-200 rounded-3xl p-8 md:p-10 shadow-xs text-center space-y-6">
+      <div class="max-w-xl mx-auto space-y-3">
+        <h3 class="text-2xl font-black text-deep">Gracias, Ceci</h3>
+        <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+          Gracias por compartir conmigo tus proyectos, tus dudas y todo lo que estás construyendo. Me gustó especialmente descubrir que detrás de MasterCraft hay mucho más que prendas tejidas.
+        </p>
+        <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+          Hay una visión de diseño, una búsqueda por crear algo diferente y una historia profesional que también puede alimentar el proyecto. Creo que la IA puede ayudarte a ordenar todo eso, potenciarlo y, sobre todo, <strong>devolverte tiempo para seguir creando.</strong>
+        </p>
+        <p class="font-bold text-teal text-sm">Seguimos en contacto.</p>
+      </div>
+
+      <hr class="border-gray-200 max-w-md mx-auto" />
+
+      <div class="space-y-1">
+        <h4 class="text-xl font-extrabold text-deep">LuciRMe AI</h4>
+        <p class="text-xs md:text-sm font-bold text-teal uppercase tracking-widest">
+          Devuelve tiempo. Aplica IA con criterio.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <ActionHub />
+  <RedesSociales />
+
+</Layout>
