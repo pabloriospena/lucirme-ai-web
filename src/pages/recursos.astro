@@ -47,6 +47,14 @@ const metaData = {
     esPago: false,
     categoria: "pm",
   },
+  "guia-deepresearch": {
+    titulo: "Guía Completa de Deep Research",
+    etiqueta: "Guía Premium",
+    desc: "El superpoder de la investigación avanzada con IA: de 3 semanas de trabajo a 4 horas estratégicas con Gemini y ChatGPT.",
+    precio: null,
+    esPago: false,
+    categoria: "ia",
+  },
   prompteador: {
     etiqueta: "Herramienta Pro",
     desc: "Optimiza tus prompts con la fórmula R+C+T+E para obtener respuestas de ingeniería de élite.",
@@ -244,7 +252,7 @@ const recursosPM = recursos.filter((r) => {
                   {meta.etiqueta}
                 </span>
                 <h3 class="text-lg font-bold text-deep mb-2 group-hover:text-teal transition-colors">
-                  {rec.titulo}
+                  {(meta as any).titulo || rec.titulo}
                 </h3>
                 <p class="text-xs text-gray-500 mb-6 leading-relaxed flex-grow">
                   {meta.desc}
@@ -285,7 +293,7 @@ const recursosPM = recursos.filter((r) => {
                   {meta.etiqueta}
                 </span>
                 <h3 class="text-lg font-bold text-deep mb-2 group-hover:text-teal transition-colors">
-                  {rec.titulo}
+                  {(meta as any).titulo || rec.titulo}
                 </h3>
                 <p class="text-xs text-gray-500 mb-6 leading-relaxed flex-grow">
                   {meta.desc}
