@@ -1,0 +1,564 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ActionHub from "../../components/ActionHub.astro";
+import RedesSociales from "../../components/RedesSociales.astro";
+import { LINKS } from "../../lib/constants.js";
+
+const cafeEstrategiaUrl = LINKS.calendly_sesion_pago || LINKS.calendly;
+---
+
+<Layout title="Guía de Mentoría: Product Management con IA — Blanca Rodríguez | LuciRMe AI">
+
+  <!-- BARRA DE NAVEGACIÓN SUPERIOR (Breadcrumb & Café de Estrategia) -->
+  <nav class="bg-white/90 backdrop-blur-md border-b border-gray-200 px-6 py-4 sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto flex justify-between items-center gap-4">
+      <a href="/soluciones-personalizadas/sesion-blancar" class="text-xs md:text-sm font-bold text-gray-500 hover:text-teal transition flex items-center gap-1">
+        ← Volver a Diagnóstico Blanca R.
+      </a>
+      <a href={cafeEstrategiaUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-bold bg-orange text-white rounded-xl py-2 px-4 hover:bg-orange/90 transition shadow-xs text-xs text-center cursor-pointer shrink-0">
+        <span>☕</span>
+        <span>Reunión Café de Estrategia</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- HEADER / HERO SECTION -->
+  <header class="bg-deep text-white py-16 md:py-20 px-6 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <!-- EYEBROW -->
+      <div class="inline-flex items-center gap-2 bg-teal/15 text-teal text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6 border border-teal/30">
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span>
+        Guía de Mentoría Personalizada · Product Management & IA
+      </div>
+
+      <!-- H1 -->
+      <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight text-white">
+        Resumen de la Sesión: <span class="text-teal">Product Management con IA</span>
+      </h1>
+
+      <!-- SUBTÍTULO -->
+      <p class="text-base md:text-xl text-gray-300 font-medium max-w-2xl mx-auto mb-8 leading-relaxed">
+        Puntos clave y acuerdos alcanzados en la primera sesión de mentoría de <strong class="text-white">Blanca Rodríguez</strong>, enfocada en la optimización de flujos de trabajo como PM integrando IA estratégicamente con Notion y Jira.
+      </p>
+
+      <!-- META BADGES & BOTÓN REUNIÓN -->
+      <div class="flex flex-col items-center gap-4">
+        <div class="inline-flex flex-wrap justify-center items-center gap-3 md:gap-4 bg-white/5 border border-white/10 rounded-2xl px-5 py-3 text-xs md:text-sm text-gray-300 max-w-3xl">
+          <span class="flex items-center gap-1.5">
+            👤 <strong>Para:</strong> Blanca Rodríguez
+          </span>
+          <span class="text-gray-500 hidden sm:inline">•</span>
+          <span class="flex items-center gap-1.5">
+            🛠️ <strong>Stack:</strong> Notion + Claude + Jira
+          </span>
+          <span class="text-gray-500 hidden sm:inline">•</span>
+          <span class="flex items-center gap-1.5">
+            📅 <strong>Siguiente Sesión:</strong> Este miércoles
+          </span>
+        </div>
+
+        <!-- LINK DIRECTO A REUNIÓN CAFÉ DE ESTRATEGIA -->
+        <a 
+          href={cafeEstrategiaUrl} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-teal/20 hover:bg-teal/30 text-teal border border-teal/40 font-extrabold text-xs md:text-sm px-6 py-3 rounded-xl transition duration-200"
+        >
+          <span>☕</span>
+          <span>Acceder a la Reunión de Café de Estrategia con Blanca →</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-12 space-y-16">
+
+    <!-- RESUMEN EJECUTIVO / BANNER DE BIENVENIDA -->
+    <section class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-4">
+      <div class="flex items-center gap-3 border-b border-gray-100 pb-4">
+        <div class="w-10 h-10 rounded-full bg-teal/15 text-teal flex items-center justify-center font-bold text-lg">
+          📝
+        </div>
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold text-deep">Objetivo de la Mentoría</h2>
+          <p class="text-xs text-gray-500">Integración estratégica de IA en Notion y Jira</p>
+        </div>
+      </div>
+      <p class="text-base text-gray-700 leading-relaxed">
+        Esta guía resume los puntos clave y acuerdos alcanzados en la primera sesión de mentoría de <strong>Blanca Rodríguez</strong>, enfocada en la optimización de flujos de trabajo como Product Manager mediante Inteligencia Artificial integrándola de forma estratégica con <strong>Notion</strong> y <strong>Jira</strong>.
+      </p>
+    </section>
+
+    <!-- SECCIÓN 1: ANÁLISIS DEL FLUJO ACTUAL -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Sección 01
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          1. Análisis del Flujo Actual
+        </h2>
+      </div>
+
+      <p class="text-base text-gray-700 leading-relaxed">
+        Durante la sesión, analizamos tu proceso de trabajo cotidiano paso a paso:
+      </p>
+
+      <div class="space-y-4">
+        
+        <div class="bg-white border border-gray-200 rounded-2xl p-5 md:p-6 shadow-xs space-y-3 hover:border-teal/40 transition">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-lg bg-teal text-white flex items-center justify-center font-black text-xs shrink-0">
+              1
+            </span>
+            <h3 class="font-bold text-deep text-base">Documentación inicial</h3>
+          </div>
+          <p class="text-xs md:text-sm text-gray-600 leading-relaxed pl-11">
+            Creas y actualizas los Documentos de Requerimientos de Producto (PRD) en Notion.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-2xl p-5 md:p-6 shadow-xs space-y-3 hover:border-teal/40 transition">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-lg bg-teal text-white flex items-center justify-center font-black text-xs shrink-0">
+              2
+            </span>
+            <h3 class="font-bold text-deep text-base">Seguimiento en Jira</h3>
+          </div>
+          <p class="text-xs md:text-sm text-gray-600 leading-relaxed pl-11">
+            Abres un proyecto en <strong>Jira Product Discovery</strong> y un ítem tipo <em>Discovery</em> para registrar tu avance.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-2xl p-5 md:p-6 shadow-xs space-y-3 hover:border-teal/40 transition">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-lg bg-teal text-white flex items-center justify-center font-black text-xs shrink-0">
+              3
+            </span>
+            <h3 class="font-bold text-deep text-base">Recopilación de hallazgos</h3>
+          </div>
+          <p class="text-xs md:text-sm text-gray-600 leading-relaxed pl-11">
+            Acumulas entrevistas, notas y flujogramas en la sección <em>"Research and key insights"</em> de tu plantilla de Notion.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-2xl p-5 md:p-6 shadow-xs space-y-3 hover:border-teal/40 transition">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-lg bg-teal text-white flex items-center justify-center font-black text-xs shrink-0">
+              4
+            </span>
+            <h3 class="font-bold text-deep text-base">Redacción asistida</h3>
+          </div>
+          <p class="text-xs md:text-sm text-gray-600 leading-relaxed pl-11">
+            Copias y pegas todo este material en Claude para generar un borrador del PRD.
+          </p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-2xl p-5 md:p-6 shadow-xs space-y-3 hover:border-teal/40 transition">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-lg bg-teal text-white flex items-center justify-center font-black text-xs shrink-0">
+              5
+            </span>
+            <h3 class="font-bold text-deep text-base">Paso a ejecución</h3>
+          </div>
+          <p class="text-xs md:text-sm text-gray-600 leading-relaxed pl-11">
+            Creas las Features (soluciones) y las Épicas correspondientes en los tableros de diseño y desarrollo en Jira.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- CASO DE ESTUDIO PRÁCTICO -->
+      <div class="bg-gradient-to-r from-teal/10 via-slate-50 to-orange/10 border border-teal/30 rounded-2xl p-6 md:p-8 space-y-3 shadow-xs">
+        <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-teal bg-white/80 px-3 py-1 rounded-full border border-teal/20">
+          📍 Caso de Estudio Práctico
+        </div>
+        <h3 class="text-lg md:text-xl font-black text-deep">
+          Formulario de Direcciones de Empleados
+        </h3>
+        <p class="text-xs md:text-sm text-gray-700 leading-relaxed">
+          Revisamos un proyecto real que estás por arrancar: <strong>mejorar y estandarizar el formulario de direcciones de empleados</strong>, un problema crítico dado que el <strong>22% de tus registros actuales tienen direcciones erróneas o vacías</strong>.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- SECCIÓN 2: ¿CON QUÉ EMPEZAR? -->
+    <section class="space-y-8">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-orange uppercase tracking-widest bg-orange/10 px-3 py-1 rounded-full">
+          Sección 02
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          2. ¿Con qué empezar? (Recomendaciones de la Mentoría)
+        </h2>
+        <p class="text-sm text-gray-600 mt-1">
+          Para llevar a cabo una transición exitosa y sin fricciones, establecimos la siguiente ruta de inicio enfocada en la seguridad y la eficiencia.
+        </p>
+      </div>
+
+      <!-- A. EMPEZAR POR LO INDEFENSO -->
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-4">
+        <div class="flex items-center gap-3 border-b border-gray-100 pb-3">
+          <span class="text-2xl">🛡️</span>
+          <div>
+            <span class="text-xs font-bold text-teal uppercase tracking-wider block">Recomendación A</span>
+            <h3 class="text-xl font-bold text-deep">Empezar por lo "indefenso" (Mecanismos de Defensa)</h3>
+          </div>
+        </div>
+
+        <p class="text-sm text-gray-700 leading-relaxed">
+          Compartiste tu temor a cometer un error en producción tras una experiencia previa donde automatizaste una validación de campos en WhatsApp y terminaste generando retrabajo para el equipo de desarrollo por no haber auditado con suficiente detalle el borrador de la IA.
+        </p>
+
+        <div class="bg-slate-900 text-white p-5 rounded-2xl border border-slate-800 space-y-2">
+          <span class="text-xs font-extrabold uppercase tracking-widest text-orange block">👑 La Regla de Oro</span>
+          <p class="text-sm md:text-base font-medium text-gray-200 leading-relaxed">
+            Comenzar únicamente con flujos donde <strong class="text-teal">tú seas la única auditora</strong>. Es decir, automatizar la creación de borradores de PRD en Notion (que tú revisas y pules personalmente) antes de permitir que la IA ejecute tareas visibles para el equipo técnico o escriba directamente en Jira.
+          </p>
+        </div>
+      </div>
+
+      <!-- B. PRIMER PASO TÉCNICO -->
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-4">
+        <div class="flex items-center gap-3 border-b border-gray-100 pb-3">
+          <span class="text-2xl">🔗</span>
+          <div>
+            <span class="text-xs font-bold text-teal uppercase tracking-wider block">Recomendación B</span>
+            <h3 class="text-xl font-bold text-deep">Primer paso técnico: Conexión nativa de Notion con Claude</h3>
+          </div>
+        </div>
+
+        <p class="text-sm text-gray-700 leading-relaxed">
+          Es un proceso sencillo de pocos clics:
+        </p>
+
+        <ol class="space-y-3 text-xs md:text-sm text-gray-700 pl-5 list-decimal font-medium">
+          <li>Desde tu página de Notion, dirígete a los <strong>tres puntos (...)</strong> en la esquina superior derecha.</li>
+          <li>Ve a <strong>Connections (Conexiones)</strong>.</li>
+          <li>Busca <strong>Claude</strong> y actívalo.</li>
+        </ol>
+
+        <div class="bg-teal/10 border border-teal/30 p-4 rounded-xl text-xs md:text-sm text-teal-950 font-medium flex items-center gap-2">
+          <span>✨</span>
+          <span>Esto permite que Claude lea e interactúe directamente con tus páginas de investigación en Notion.</span>
+        </div>
+      </div>
+
+      <!-- C. PROYECTO CREADOR DE PRDS -->
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-4">
+        <div class="flex items-center gap-3 border-b border-gray-100 pb-3">
+          <span class="text-2xl">⚙️</span>
+          <div>
+            <span class="text-xs font-bold text-teal uppercase tracking-wider block">Recomendación C</span>
+            <h3 class="text-xl font-bold text-deep">Proyecto "Creador de PRDs" en Claude con System Prompt optimizado</h3>
+          </div>
+        </div>
+
+        <p class="text-sm text-gray-700 leading-relaxed">
+          En lugar de copiar y pegar transcripciones gigantescas manualmente:
+        </p>
+
+        <ul class="space-y-2 text-xs md:text-sm text-gray-700 pl-5 list-disc">
+          <li>Crearás un <strong>Project dedicado dentro de Claude</strong> configurado con un System Prompt estructurado (Rol, Objetivo, Contexto y Formato).</li>
+          <li>El prompt le ordena a Claude:
+            <ul class="pl-5 mt-1 space-y-1 list-circle text-gray-600">
+              <li>Confirmar si está conectado a tu Notion y solicitar el nombre de la página de investigación.</li>
+              <li>Leer exhaustivamente todo el material recopilado antes de redactar.</li>
+              <li>Redactar el PRD en formato Markdown en una nueva página, respetando estrictamente tu plantilla corporativa.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- BLOQUE DE CÓDIGO DE SYSTEM PROMPT RECOMENDADO -->
+        <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden my-3">
+          <div class="flex justify-between items-center px-4 py-2.5 bg-slate-100 border-b border-slate-200">
+            <span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider">System Prompt Recomendado para Proyecto Claude</span>
+            <button onclick="copySystemPrompt(this)" class="bg-teal hover:bg-tealHover text-white font-bold text-xs px-3 py-1 rounded-lg transition-all cursor-pointer">
+              Copiar System Prompt
+            </button>
+          </div>
+          <pre id="system-prompt-box" class="p-4 text-xs font-mono text-slate-800 leading-relaxed whitespace-pre-wrap select-all max-h-80 overflow-y-auto">Rol: Eres un Product Manager Senior especialista en redacción de PRDs y optimización de flujos de trabajo en Notion.
+
+Objetivo: Conectarte a las páginas de investigación en Notion de Blanca Rodríguez para extraer hallazgos (entrevistas, flujogramas, requerimientos) y redactar borradores de PRDs exhaustivos sin alucinaciones.
+
+Instrucciones:
+1. Confirma si estás conectado al Notion de la sesión y solicita el nombre exacto de la página de investigación.
+2. Lee exhaustivamente la sección "Research and key insights" y todas las notas asociadas.
+3. Genera el borrador del PRD en formato Markdown estructurado respetando la plantilla corporativa.
+4. Mantén un tono técnico, preciso y profesional listo para auditoría humana antes de ser enviado al equipo de desarrollo.</pre>
+        </div>
+      </div>
+
+      <!-- D. AUTOMATIZAR BENCHMARK -->
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-4">
+        <div class="flex items-center gap-3 border-b border-gray-100 pb-3">
+          <span class="text-2xl">🔍</span>
+          <div>
+            <span class="text-xs font-bold text-teal uppercase tracking-wider block">Recomendación D</span>
+            <h3 class="text-xl font-bold text-deep">Automatizar el Benchmark de Competidores</h3>
+          </div>
+        </div>
+
+        <p class="text-sm text-gray-700 leading-relaxed">
+          En lugar de poblar las tablas comparativas a mano con tu diseñadora, utilizarás herramientas de <strong>Deep Research</strong> y el <strong>Notion Web Clipper</strong> (o <em>Save to Notion</em>) para guardar automáticamente las capturas y análisis directamente en tu base de datos de Notion.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- SECCIÓN 3: CATÁLOGO DE HERRAMIENTAS -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Sección 03
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          3. Catálogo de Herramientas de IA Mencionadas
+        </h2>
+      </div>
+
+      <!-- TABLA RESPONSIVA DE HERRAMIENTAS -->
+      <div class="overflow-x-auto bg-white border border-gray-200 rounded-2xl shadow-xs">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-50 border-b border-gray-200 text-xs uppercase tracking-wider text-gray-500">
+              <th class="p-4 font-bold">Herramienta</th>
+              <th class="p-4 font-bold">Enlace Oficial</th>
+              <th class="p-4 font-bold">Uso y Aplicación en tu Flujo</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 text-xs md:text-sm">
+            
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-bold text-deep shrink-0">
+                Claude (Anthropic)
+              </td>
+              <td class="p-4">
+                <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">
+                  claude.ai ↗
+                </a>
+              </td>
+              <td class="p-4 text-gray-600 leading-relaxed">
+                Herramienta principal de redacción y análisis (cuenta corporativa). Conectada a Notion para redactar borradores de PRDs y sintetizar transcripciones de entrevistas. Recomendado usar el modelo <strong>Claude 3.5 Sonnet</strong> (en lugar de Opus) para optimizar consumo y velocidad.
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-bold text-deep shrink-0">
+                ChatGPT (OpenAI)
+              </td>
+              <td class="p-4">
+                <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">
+                  chatgpt.com ↗
+                </a>
+              </td>
+              <td class="p-4 text-gray-600 leading-relaxed">
+                Diseño de prompts y estructuración (cuenta personal). Úsalo mediante sus funciones de Projects o Custom Instructions para darle un contexto sostenido (guías de estilo, brandbooks) y preconfigurar las respuestas.
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-bold text-deep shrink-0">
+                Perplexity AI
+              </td>
+              <td class="p-4">
+                <a href="https://perplexity.ai" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">
+                  perplexity.ai ↗
+                </a>
+              </td>
+              <td class="p-4 text-gray-600 leading-relaxed">
+                Investigación competitiva rápida. Ideal para buscar en internet con fuentes verificadas en tiempo real y mapear mejores prácticas de la industria de forma profunda.
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-bold text-deep shrink-0">
+                Gemini / NotebookLM
+              </td>
+              <td class="p-4 space-y-1">
+                <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline block">
+                  gemini.google.com ↗
+                </a>
+                <a href="https://notebooklm.google.com" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline block">
+                  notebooklm.google.com ↗
+                </a>
+              </td>
+              <td class="p-4 text-gray-600 leading-relaxed">
+                Análisis profundo y preparación de carrera. Se destaca su función de <strong>Deep Research</strong>. Se recomienda usar NotebookLM (Gemini Notebook) para preparar tu próxima entrevista de trabajo, subiendo tu CV y la oferta laboral para simular una entrevista real.
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-bold text-deep shrink-0">
+                Qwen (Alibaba)
+              </td>
+              <td class="p-4">
+                <a href="https://qwenlm.ai" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">
+                  qwenlm.ai ↗
+                </a>
+              </td>
+              <td class="p-4 text-gray-600 leading-relaxed">
+                Modelos de lenguaje y estructuración. Mencionado durante la sesión como una alternativa de modelo LLM para estructurar proyectos organizando brandbooks, user personas y planes sostenidos.
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-bold text-deep shrink-0">
+                Notion Web Clipper
+              </td>
+              <td class="p-4">
+                <a href="https://www.notion.so/web-clipper" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">
+                  notion.so/web-clipper ↗
+                </a>
+              </td>
+              <td class="p-4 text-gray-600 leading-relaxed">
+                Captura automatizada. Extensión para navegadores (o alternativas como Save to Notion) que guarda cualquier página de competidores o hallazgos web directamente en tu base de datos de Benchmark en Notion con un clic.
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: PRÓXIMOS PASOS PARA BLANCA -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-orange uppercase tracking-widest bg-orange/10 px-3 py-1 rounded-full">
+          Sección 04
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          4. Próximos Pasos para Blanca
+        </h2>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-4">
+        <p class="text-sm font-semibold text-gray-700">
+          Haz clic en cada elemento para marcar tu progreso:
+        </p>
+
+        <div class="space-y-3">
+          
+          <!-- PASO 1 -->
+          <label class="flex items-start gap-3.5 p-4 rounded-xl border border-gray-200 bg-slate-50 hover:bg-white transition cursor-pointer group">
+            <input type="checkbox" class="mt-1 w-4 h-4 rounded text-teal focus:ring-teal cursor-pointer" />
+            <div class="space-y-0.5">
+              <div class="flex items-center gap-2">
+                <span class="bg-red-100 text-red-800 text-[10px] font-black uppercase px-2 py-0.5 rounded">Prioridad Máxima</span>
+                <strong class="text-deep text-sm font-bold group-hover:text-teal transition">Estudiar para tu entrevista de trabajo</strong>
+              </div>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Cargar tu CV y la descripción de la vacante a un cuaderno en NotebookLM para entrenar con una simulación de preguntas y respuestas antes del jueves/viernes.
+              </p>
+            </div>
+          </label>
+
+          <!-- PASO 2 -->
+          <label class="flex items-start gap-3.5 p-4 rounded-xl border border-gray-200 bg-slate-50 hover:bg-white transition cursor-pointer group">
+            <input type="checkbox" class="mt-1 w-4 h-4 rounded text-teal focus:ring-teal cursor-pointer" />
+            <div class="space-y-0.5">
+              <strong class="text-deep text-sm font-bold group-hover:text-teal transition">Configurar tu Claude Project</strong>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Copiar el System Prompt estructurado en la sección de Instructions de un nuevo Proyecto en Claude para automatizar la creación de tus PRD.
+              </p>
+            </div>
+          </label>
+
+          <!-- PASO 3 -->
+          <label class="flex items-start gap-3.5 p-4 rounded-xl border border-gray-200 bg-slate-50 hover:bg-white transition cursor-pointer group">
+            <input type="checkbox" class="mt-1 w-4 h-4 rounded text-teal focus:ring-teal cursor-pointer" />
+            <div class="space-y-0.5">
+              <strong class="text-deep text-sm font-bold group-hover:text-teal transition">Instalar Notion Web Clipper / Save to Notion</strong>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Configurar la extensión en tu navegador (Brave) para poblar tus tablas de Benchmark directamente desde Perplexity o la web.
+              </p>
+            </div>
+          </label>
+
+          <!-- PASO 4 -->
+          <label class="flex items-start gap-3.5 p-4 rounded-xl border border-gray-200 bg-slate-50 hover:bg-white transition cursor-pointer group">
+            <input type="checkbox" class="mt-1 w-4 h-4 rounded text-teal focus:ring-teal cursor-pointer" />
+            <div class="space-y-0.5">
+              <strong class="text-deep text-sm font-bold group-hover:text-teal transition">Mantener Notion como Fuente de la Verdad</strong>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Subir de forma consistente las notas, entrevistas y minutas al Notion del proyecto para que Claude siempre consulte la información más reciente desde allí.
+              </p>
+            </div>
+          </label>
+
+          <!-- PASO 5 -->
+          <label class="flex items-start gap-3.5 p-4 rounded-xl border border-emerald-200 bg-emerald-50 hover:bg-emerald-100/50 transition cursor-pointer group">
+            <input type="checkbox" class="mt-1 w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
+            <div class="space-y-0.5">
+              <div class="flex items-center gap-2">
+                <span class="bg-emerald-200 text-emerald-900 text-[10px] font-black uppercase px-2 py-0.5 rounded">Agendada</span>
+                <strong class="text-deep text-sm font-bold group-hover:text-emerald-700 transition">Siguiente Sesión de Mentoría</strong>
+              </div>
+              <p class="text-xs text-emerald-800 leading-relaxed">
+                Agendada para <strong>este miércoles</strong>.
+              </p>
+            </div>
+          </label>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- BANNER DE REUNIÓN CAFÉ DE ESTRATEGIA -->
+    <section class="bg-deep text-white rounded-3xl p-8 md:p-10 shadow-xl space-y-6 relative overflow-hidden">
+      <div class="space-y-3 relative z-10">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/20 px-3 py-1 rounded-full border border-teal/30">
+          Enlace Directo de Mentoría
+        </span>
+        <h3 class="text-2xl md:text-3xl font-black text-white">
+          ¿Tienes dudas o necesitas ajustar tu flujo antes del miércoles?
+        </h3>
+        <p class="text-sm md:text-base text-gray-300 leading-relaxed max-w-2xl">
+          Recuerda que tienes disponible el espacio de Café de Estrategia para resolver bloqueos puntuales en tus herramientas.
+        </p>
+      </div>
+
+      <div class="pt-2 relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <a 
+          href={cafeEstrategiaUrl} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="inline-flex items-center gap-2 bg-orange hover:bg-orange/90 text-white font-bold py-3.5 px-6 rounded-xl transition shadow-md text-xs md:text-sm cursor-pointer"
+        >
+          <span>☕</span>
+          <span>Acceder / Agendar Café de Estrategia con Blanca →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ACTION HUB -->
+    <div class="pt-8">
+      <ActionHub />
+    </div>
+
+  </main>
+
+  <!-- REDES SOCIALES -->
+  <RedesSociales />
+
+</Layout>
+
+<script is:inline>
+  function copySystemPrompt(btnElement) {
+    const el = document.getElementById("system-prompt-box");
+    if (!el) return;
+    const text = el.innerText || el.textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const originalText = btnElement.innerText;
+      btnElement.innerText = "¡Copiado!";
+      btnElement.classList.add("bg-emerald-600");
+      setTimeout(() => {
+        btnElement.innerText = originalText;
+        btnElement.classList.remove("bg-emerald-600");
+      }, 2000);
+    }).catch(err => {
+      console.error("Error al copiar texto: ", err);
+    });
+  }
+</script>
