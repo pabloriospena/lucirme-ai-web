@@ -11,13 +11,18 @@ const calendlyUrl = LINKS.calendly_empresa || LINKS.calendly_taller || LINKS.cal
 
   <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
   <nav class="bg-white/90 backdrop-blur-md border-b border-gray-200 px-6 py-4 sticky top-0 z-50">
-    <div class="max-w-5xl mx-auto flex justify-between items-center">
+    <div class="max-w-5xl mx-auto flex justify-between items-center gap-4">
       <a href="/" class="text-xs md:text-sm font-bold text-gray-500 hover:text-teal transition flex items-center gap-1">
         ← Volver a LuciRMe AI
       </a>
-      <a href={calendlyUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-bold bg-orange text-white rounded-xl py-2 px-4 hover:bg-orange/90 transition shadow-xs text-xs text-center cursor-pointer">
-        Agendar Sesión
-      </a>
+      <div class="flex items-center gap-2">
+        <a href="/soluciones-personalizadas/sesion2-elbertor" class="inline-flex items-center justify-center font-bold bg-teal text-white rounded-xl py-2 px-3 hover:bg-tealHover transition text-xs text-center cursor-pointer">
+          📖 Ver Sesión 2
+        </a>
+        <a href={calendlyUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-bold bg-orange text-white rounded-xl py-2 px-3 hover:bg-orange/90 transition shadow-xs text-xs text-center cursor-pointer">
+          Agendar Sesión
+        </a>
+      </div>
     </div>
   </nav>
 
@@ -32,13 +37,21 @@ const calendlyUrl = LINKS.calendly_empresa || LINKS.calendly_taller || LINKS.cal
 
       <!-- H1 -->
       <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight text-white">
-        Resumen de la Sesión: <span class="text-teal">Elberto R.</span>
+        Resumen de la Sesión 1: <span class="text-teal">Elberto R.</span>
       </h1>
 
       <!-- SUBTÍTULO -->
-      <p class="text-lg md:text-xl text-gray-300 font-medium max-w-2xl mx-auto mb-8">
+      <p class="text-lg md:text-xl text-gray-300 font-medium max-w-2xl mx-auto mb-6">
         Fundamentos de la IA, Prompting Estructurado, Ecosistema de Herramientas e Investigación Profunda
       </p>
+
+      <!-- BANNER ACCESO A SESIÓN 2 -->
+      <div class="mb-8">
+        <a href="/soluciones-personalizadas/sesion2-elbertor" class="inline-flex items-center gap-2 bg-gradient-to-r from-teal/20 via-white/10 to-orange/20 border border-teal/40 hover:border-teal/70 text-white font-extrabold text-xs md:text-sm px-5 py-2.5 rounded-2xl transition shadow-lg backdrop-blur-xs">
+          <span>✨</span>
+          <span>¡Nueva! Ver Resumen de la Sesión 2 de Elberto R. →</span>
+        </a>
+      </div>
 
       <!-- META BADGES -->
       <div class="inline-flex flex-wrap justify-center items-center gap-3 md:gap-4 bg-white/5 border border-white/10 rounded-2xl px-5 py-3 text-xs md:text-sm text-gray-300 max-w-3xl">
