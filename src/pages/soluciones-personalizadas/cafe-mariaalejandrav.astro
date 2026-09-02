@@ -4,79 +4,65 @@ import ActionHub from "../../components/ActionHub.astro";
 import RedesSociales from "../../components/RedesSociales.astro";
 import { LINKS } from "../../lib/constants.js";
 
-const calendlyUrl =
-  LINKS.calendly_empresa || LINKS.calendly_taller || LINKS.calendly;
+const calendlyUrl = LINKS.calendly_empresa || LINKS.calendly_taller || LINKS.calendly;
 ---
 
 <Layout title="Plan de Mentoría: María Alejandra V. | tusdatos.co | LuciRMe AI">
+
   <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
-  <nav
-    class="bg-white/90 backdrop-blur-md border-b border-gray-200 px-6 py-4 sticky top-0 z-50"
-  >
-    <div class="max-w-5xl mx-auto flex justify-between items-center">
-      <a
-        href="/"
-        class="text-xs md:text-sm font-bold text-gray-500 hover:text-teal transition flex items-center gap-1"
-      >
+  <nav class="bg-white/90 backdrop-blur-md border-b border-gray-200 px-6 py-4 sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto flex justify-between items-center gap-4">
+      <a href="/" class="text-xs md:text-sm font-bold text-gray-500 hover:text-teal transition flex items-center gap-1">
         ← Volver a LuciRMe AI
       </a>
-      <a
-        href={calendlyUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center justify-center font-bold bg-orange text-white rounded-xl py-2 px-4 hover:bg-orange/90 transition shadow-xs text-xs text-center cursor-pointer"
-      >
-        Agendar Sesión
-      </a>
+      <div class="flex items-center gap-2">
+        <a href="/soluciones-personalizadas/sesion-enfoque-mariaalev" class="inline-flex items-center justify-center font-bold bg-teal text-white rounded-xl py-2 px-3 hover:bg-tealHover transition text-xs text-center cursor-pointer">
+          📖 Ver Resumen de Sesión
+        </a>
+        <a href={calendlyUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-bold bg-orange text-white rounded-xl py-2 px-3 hover:bg-orange/90 transition text-xs text-center cursor-pointer">
+          Agendar Sesión
+        </a>
+      </div>
     </div>
   </nav>
 
   <!-- HEADER / HERO SECTION -->
-  <header
-    class="bg-deep text-white py-16 md:py-20 px-6 relative overflow-hidden"
-  >
+  <header class="bg-deep text-white py-16 md:py-20 px-6 relative overflow-hidden">
     <div class="max-w-4xl mx-auto text-center relative z-10">
       <!-- EYEBROW -->
-      <div
-        class="inline-flex items-center gap-2 bg-teal/15 text-teal text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6 border border-teal/30"
-      >
+      <div class="inline-flex items-center gap-2 bg-teal/15 text-teal text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6 border border-teal/30">
         <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span>
         Plan de Mentoría & Alineación Estratégica · tusdatos.co
       </div>
 
       <!-- H1 -->
-      <h1
-        class="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight text-white"
-      >
+      <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight text-white">
         Recuperando tu tiempo en <span class="text-teal">tusdatos.co</span>
       </h1>
 
       <!-- SUBTÍTULO -->
-      <p
-        class="text-lg md:text-xl text-gray-300 font-medium max-w-2xl mx-auto mb-8"
-      >
-        Guía de inicio y alineación estratégica para <strong class="text-white"
-          >María Alejandra</strong
-        >
+      <p class="text-lg md:text-xl text-gray-300 font-medium max-w-2xl mx-auto mb-6">
+        Guía de inicio y alineación estratégica para <strong class="text-white">María Alejandra Vera</strong>
       </p>
 
+      <!-- BANNER ACCESO A RESUMEN DE SESIÓN 1 -->
+      <div class="mb-8">
+        <a href="/soluciones-personalizadas/sesion-enfoque-mariaalev" class="inline-flex items-center gap-2 bg-gradient-to-r from-teal/20 via-white/10 to-orange/20 border border-teal/40 hover:border-teal/70 text-white font-extrabold text-xs md:text-sm px-5 py-2.5 rounded-2xl transition shadow-lg backdrop-blur-xs">
+          <span>✨</span>
+          <span>Ver Resumen de la Sesión de Mentoría de Producto e IA →</span>
+        </a>
+      </div>
+
       <!-- MANTRA CARD -->
-      <div
-        class="bg-gradient-to-r from-teal/20 via-white/10 to-orange/20 border border-teal/40 rounded-2xl p-4 md:p-6 mb-8 max-w-2xl mx-auto shadow-lg backdrop-blur-xs"
-      >
-        <span
-          class="text-xs uppercase tracking-widest text-teal font-extrabold block mb-1"
-          >Mantra del Ciclo</span
-        >
+      <div class="bg-gradient-to-r from-teal/20 via-white/10 to-orange/20 border border-teal/40 rounded-2xl p-4 md:p-6 mb-8 max-w-2xl mx-auto shadow-lg backdrop-blur-xs">
+        <span class="text-xs uppercase tracking-widest text-teal font-extrabold block mb-1">Mantra del Ciclo</span>
         <blockquote class="text-lg md:text-2xl font-black text-white italic">
           "Deja que la IA trabaje. Tú dedícate a crecer."
         </blockquote>
       </div>
 
       <!-- META BADGES -->
-      <div
-        class="inline-flex flex-wrap justify-center items-center gap-3 md:gap-4 bg-white/5 border border-white/10 rounded-2xl px-5 py-3 text-xs md:text-sm text-gray-300 max-w-3xl"
-      >
+      <div class="inline-flex flex-wrap justify-center items-center gap-3 md:gap-4 bg-white/5 border border-white/10 rounded-2xl px-5 py-3 text-xs md:text-sm text-gray-300 max-w-3xl">
         <span class="flex items-center gap-1.5">
           👤 <strong>Cliente:</strong> María Alejandra (tusdatos.co)
         </span>
@@ -93,48 +79,32 @@ const calendlyUrl =
   </header>
 
   <main class="max-w-4xl mx-auto px-6 py-12 space-y-16">
+
     <!-- BIENVENIDA & INTRODUCCIÓN -->
-    <section
-      class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-4"
-    >
+    <section class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-4">
       <div class="flex items-center gap-3 border-b border-gray-100 pb-4">
-        <div
-          class="w-10 h-10 rounded-full bg-teal/15 text-teal flex items-center justify-center font-bold text-lg"
-        >
+        <div class="w-10 h-10 rounded-full bg-teal/15 text-teal flex items-center justify-center font-bold text-lg">
           👋
         </div>
         <div>
-          <h2 class="text-xl md:text-2xl font-bold text-deep">
-            Hola, María Alejandra
-          </h2>
-          <p class="text-xs text-gray-500">
-            Carta de inicio y propuesta estratégica de mentoría
-          </p>
+          <h2 class="text-xl md:text-2xl font-bold text-deep">Hola, María Alejandra</h2>
+          <p class="text-xs text-gray-500">Carta de inicio y propuesta estratégica de mentoría</p>
         </div>
       </div>
 
       <p class="text-base text-gray-700 leading-relaxed">
-        Este documento resume lo que hablamos, el diagnóstico de tu realidad
-        actual y el plan exacto para que dejes de sentirte desactualizada y te
-        conviertas en el referente de IA y producto en tu equipo.
+        Este documento resume lo que hablamos, el diagnóstico de tu realidad actual y el plan exacto para que dejes de sentirte desactualizada y te conviertas en el referente de IA y producto en tu equipo.
       </p>
 
-      <p
-        class="text-base text-gray-700 leading-relaxed bg-slate-50 border-l-4 border-teal p-4 rounded-r-xl"
-      >
-        Aquí no vamos a hablar de "transformación digital" ni de buzzwords.
-        Vamos a atacar las <strong>fugas de tiempo reales</strong> y a estructurar
-        tus procesos para que la tecnología trabaje en silencio y tú te dediques a
-        liderar.
+      <p class="text-base text-gray-700 leading-relaxed bg-slate-50 border-l-4 border-teal p-4 rounded-r-xl">
+        Aquí no vamos a hablar de "transformación digital" ni de buzzwords. Vamos a atacar las <strong>fugas de tiempo reales</strong> y a estructurar tus procesos para que la tecnología trabaje en silencio y tú te dediques a liderar.
       </p>
     </section>
 
     <!-- SECCIÓN 1: EL DIAGNÓSTICO -->
     <section class="space-y-6">
       <div class="border-b border-gray-200 pb-4">
-        <span
-          class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full"
-        >
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
           Etapa 01
         </span>
         <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
@@ -143,56 +113,42 @@ const calendlyUrl =
       </div>
 
       <p class="text-base text-gray-700 leading-relaxed">
-        Tras nuestra conversación, identificamos que tu mayor cuello de botella
-        no es la falta de conocimiento técnico, sino la <strong
-          >operatividad manual</strong
-        > y la <strong>desconexión estratégica</strong>.
+        Tras nuestra conversación, identificamos que tu mayor cuello de botella no es la falta de conocimiento técnico, sino la <strong>operatividad manual</strong> y la <strong>desconexión estratégica</strong>.
       </p>
 
       <div class="grid md:grid-cols-2 gap-6">
+
         <!-- FUGA DE TIEMPO EN DOCUMENTACIÓN -->
-        <div
-          class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3 border-l-4 border-l-red-500 hover:border-red-400 transition"
-        >
+        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3 border-l-4 border-l-red-500 hover:border-red-400 transition">
           <div class="flex items-center gap-2 text-deep font-bold text-lg">
             <span class="text-red-500">⏳</span>
             <span>Fuga de tiempo en documentación</span>
           </div>
           <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
-            Pasas horas buscando fuentes, filtrando información y redactando
-            manualmente PRDs, TRDs e Historias de Usuario en GitHub.
+            Pasas horas buscando fuentes, filtrando información y redactando manualmente PRDs, TRDs e Historias de Usuario en GitHub.
           </p>
         </div>
 
         <!-- DESCONEXIÓN ESTRATÉGICA-EJECUCIÓN -->
-        <div
-          class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3 border-l-4 border-l-amber-500 hover:border-amber-400 transition"
-        >
+        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3 border-l-4 border-l-amber-500 hover:border-amber-400 transition">
           <div class="flex items-center gap-2 text-deep font-bold text-lg">
             <span class="text-amber-500">🔌</span>
             <span>Desconexión Estratégica - Ejecución</span>
           </div>
           <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
-            Los OKRs anuales no están amarrados a las épicas ni a los sprints.
-            La planeación resulta siendo reactiva y no estructurada.
+            Los OKRs anuales no están amarrados a las épicas ni a los sprints. La planeación resulta siendo reactiva y no estructurada.
           </p>
         </div>
+
       </div>
 
       <!-- EL OBJETIVO FINAL -->
-      <div
-        class="bg-gradient-to-br from-deep to-slate-900 text-white p-6 md:p-8 rounded-2xl shadow-md space-y-3"
-      >
-        <div
-          class="flex items-center gap-2 text-teal font-extrabold text-sm uppercase tracking-wider"
-        >
+      <div class="bg-gradient-to-br from-deep to-slate-900 text-white p-6 md:p-8 rounded-2xl shadow-md space-y-3">
+        <div class="flex items-center gap-2 text-teal font-extrabold text-sm uppercase tracking-wider">
           🎯 El Objetivo Principal
         </div>
         <p class="text-base md:text-lg text-gray-200 leading-relaxed">
-          Quieres dejar de sentirte rezagada frente a tus compañeras, dominar el
-          stack de IA corporativo (Gemini, Claude) y <strong
-            >liderar el ciclo de vida del producto con total autonomía</strong
-          >.
+          Quieres dejar de sentirte rezagada frente a tus compañeras, dominar el stack de IA corporativo (Gemini, Claude) y <strong>liderar el ciclo de vida del producto con total autonomía</strong>.
         </p>
       </div>
     </section>
@@ -200,9 +156,7 @@ const calendlyUrl =
     <!-- SECCIÓN 2: LA ESTRATEGIA -->
     <section class="space-y-6">
       <div class="border-b border-gray-200 pb-4">
-        <span
-          class="text-xs font-bold text-orange uppercase tracking-widest bg-orange/10 px-3 py-1 rounded-full"
-        >
+        <span class="text-xs font-bold text-orange uppercase tracking-widest bg-orange/10 px-3 py-1 rounded-full">
           Etapa 02
         </span>
         <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
@@ -211,81 +165,46 @@ const calendlyUrl =
       </div>
 
       <p class="text-base text-gray-700 leading-relaxed">
-        Para la <strong>Sesión 1</strong>, nos enfocaremos en tu dolor más
-        urgente: la redacción de documentación técnica.
+        Para la <strong>Sesión 1</strong>, nos enfocaremos en tu dolor más urgente: la redacción de documentación técnica.
       </p>
 
-      <div
-        class="bg-teal/5 border border-teal/30 p-4 rounded-xl text-xs md:text-sm text-teal-900 font-medium"
-      >
-        ✨ Vamos a implementar un flujo de dos pasos que elimina las
-        alucinaciones de la IA y reduce tu tiempo de redacción en un <strong
-          >80%</strong
-        >:
+      <div class="bg-teal/5 border border-teal/30 p-4 rounded-xl text-xs md:text-sm text-teal-900 font-medium">
+        ✨ Vamos a implementar un flujo de dos pasos que elimina las alucinaciones de la IA y reduce tu tiempo de redacción en un <strong>80%</strong>:
       </div>
 
       <div class="grid md:grid-cols-2 gap-6">
+
         <!-- PASO 1: LA BÓVEDA DE CONTEXTO -->
-        <div
-          class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-4 hover:border-teal/50 transition relative overflow-hidden"
-        >
-          <div
-            class="w-8 h-8 rounded-lg bg-teal text-white flex items-center justify-center font-black text-sm mb-2"
-          >
+        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-4 hover:border-teal/50 transition relative overflow-hidden">
+          <div class="w-8 h-8 rounded-lg bg-teal text-white flex items-center justify-center font-black text-sm mb-2">
             1
           </div>
-          <h3 class="text-xl font-extrabold text-deep">
-            La Bóveda de Contexto (NotebookLM)
-          </h3>
+          <h3 class="text-xl font-extrabold text-deep">La Bóveda de Contexto (NotebookLM)</h3>
           <div class="space-y-2 text-xs md:text-sm text-gray-600">
-            <p>
-              <strong>Qué es:</strong> Tu repositorio seguro de fuentes de conocimiento.
-            </p>
-            <p class="leading-relaxed">
-              <strong>Para qué sirve:</strong> Cargaremos las fuentes de <code
-                >tusdatos.co</code
-              >, manuales y datos tributarios. Al trabajar únicamente con tus
-              documentos, la IA no alucina y respeta al 100% la privacidad
-              corporativa.
-            </p>
+            <p><strong>Qué es:</strong> Tu repositorio seguro de fuentes de conocimiento.</p>
+            <p class="leading-relaxed"><strong>Para qué sirve:</strong> Cargaremos las fuentes de <code>tusdatos.co</code>, manuales y datos tributarios. Al trabajar únicamente con tus documentos, la IA no alucina y respeta al 100% la privacidad corporativa.</p>
           </div>
         </div>
 
         <!-- PASO 2: EL MOTOR DE REDACCIÓN -->
-        <div
-          class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-4 hover:border-teal/50 transition relative overflow-hidden"
-        >
-          <div
-            class="w-8 h-8 rounded-lg bg-orange text-white flex items-center justify-center font-black text-sm mb-2"
-          >
+        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-4 hover:border-teal/50 transition relative overflow-hidden">
+          <div class="w-8 h-8 rounded-lg bg-orange text-white flex items-center justify-center font-black text-sm mb-2">
             2
           </div>
-          <h3 class="text-xl font-extrabold text-deep">
-            El Motor de Redacción (Claude)
-          </h3>
+          <h3 class="text-xl font-extrabold text-deep">El Motor de Redacción (Claude)</h3>
           <div class="space-y-2 text-xs md:text-sm text-gray-600">
-            <p>
-              <strong>Qué es:</strong> El modelo de razonamiento y redacción de mayor
-              precisión.
-            </p>
-            <p class="leading-relaxed">
-              <strong>Para qué sirve:</strong> Tomará el contexto seguro de NotebookLM
-              y redactará PRDs, TRDs e Historias de Usuario con el formato exacto
-              que GitHub necesita. Tú pasas de redactora manual a <strong
-                >revisora estratégica</strong
-              >.
-            </p>
+            <p><strong>Qué es:</strong> El modelo de razonamiento y redacción de mayor precisión.</p>
+            <p class="leading-relaxed"><strong>Para qué sirve:</strong> Tomará el contexto seguro de NotebookLM y redactará PRDs, TRDs e Historias de Usuario con el formato exacto que GitHub necesita. Tú pasas de redactora manual a <strong>revisora estratégica</strong>.</p>
           </div>
         </div>
+
       </div>
     </section>
 
     <!-- SECCIÓN 3: EL STACK DE HERRAMIENTAS -->
     <section class="space-y-6">
       <div class="border-b border-gray-200 pb-4">
-        <span
-          class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full"
-        >
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
           Herramientas
         </span>
         <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
@@ -294,97 +213,63 @@ const calendlyUrl =
       </div>
 
       <p class="text-base text-gray-700 leading-relaxed">
-        No necesitamos 10 herramientas. Necesitas las correctas para tu contexto
-        corporativo:
+        No necesitamos 10 herramientas. Necesitas las correctas para tu contexto corporativo:
       </p>
 
       <div class="grid md:grid-cols-3 gap-6">
+
         <!-- NOTEBOOKLM -->
-        <div
-          class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3 hover:border-teal/50 transition flex flex-col justify-between"
-        >
+        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3 hover:border-teal/50 transition flex flex-col justify-between">
           <div class="space-y-2">
             <div class="flex items-center justify-between">
               <span class="font-extrabold text-deep text-lg">NotebookLM</span>
-              <span
-                class="text-xs bg-blue-100 text-blue-800 font-bold px-2.5 py-0.5 rounded-full"
-                >Google</span
-              >
+              <span class="text-xs bg-blue-100 text-blue-800 font-bold px-2.5 py-0.5 rounded-full">Google</span>
             </div>
             <p class="text-xs text-gray-600 leading-relaxed">
-              <strong>Tu base de datos segura.</strong> Ideal para interactuar con
-              fuentes internas y documentación confidencial sin filtrar información
-              a internet.
+              <strong>Tu base de datos segura.</strong> Ideal para interactuar con fuentes internas y documentación confidencial sin filtrar información a internet.
             </p>
           </div>
-          <a
-            href="https://notebooklm.google.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-xs font-bold text-teal hover:text-deep transition pt-2 block"
-          >
+          <a href="https://notebooklm.google.com" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-teal hover:text-deep transition pt-2 block">
             🔗 notebooklm.google.com →
           </a>
         </div>
 
         <!-- CLAUDE -->
-        <div
-          class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3 hover:border-teal/50 transition flex flex-col justify-between"
-        >
+        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3 hover:border-teal/50 transition flex flex-col justify-between">
           <div class="space-y-2">
             <div class="flex items-center justify-between">
               <span class="font-extrabold text-deep text-lg">Claude</span>
-              <span
-                class="text-xs bg-purple-100 text-purple-800 font-bold px-2.5 py-0.5 rounded-full"
-                >Anthropic</span
-              >
+              <span class="text-xs bg-purple-100 text-purple-800 font-bold px-2.5 py-0.5 rounded-full">Anthropic</span>
             </div>
             <p class="text-xs text-gray-600 leading-relaxed">
-              <strong>Tu analista senior.</strong> El mejor modelo del mercado para
-              estructurar lógica de producto, razonamiento complejo y redacción de
-              entregables técnicos.
+              <strong>Tu analista senior.</strong> El mejor modelo del mercado para estructurar lógica de producto, razonamiento complejo y redacción de entregables técnicos.
             </p>
           </div>
-          <a
-            href="https://claude.ai"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-xs font-bold text-teal hover:text-deep transition pt-2 block"
-          >
+          <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-teal hover:text-deep transition pt-2 block">
             🔗 claude.ai →
           </a>
         </div>
 
         <!-- GEMINI / CHATGPT -->
-        <div
-          class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3 hover:border-teal/50 transition flex flex-col justify-between"
-        >
+        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3 hover:border-teal/50 transition flex flex-col justify-between">
           <div class="space-y-2">
             <div class="flex items-center justify-between">
-              <span class="font-extrabold text-deep text-lg"
-                >Gemini / ChatGPT</span
-              >
-              <span
-                class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2.5 py-0.5 rounded-full"
-                >Apoyo Táctico</span
-              >
+              <span class="font-extrabold text-deep text-lg">Gemini / ChatGPT</span>
+              <span class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2.5 py-0.5 rounded-full">Apoyo Táctico</span>
             </div>
             <p class="text-xs text-gray-600 leading-relaxed">
-              Los usaremos como apoyo táctico o para flujos específicos donde tu
-              empresa ya tenga licencias corporativas activas. El núcleo de
-              nuestra mentoría será el dúo NotebookLM + Claude.
+              Los usaremos como apoyo táctico o para flujos específicos donde tu empresa ya tenga licencias corporativas activas. El núcleo de nuestra mentoría será el dúo NotebookLM + Claude.
             </p>
           </div>
         </div>
+
       </div>
     </section>
 
     <!-- SECCIÓN 4: ROADMAP DEL CICLO (4 SESIONES) -->
     <section class="space-y-6">
       <div class="border-b border-gray-200 pb-4">
-        <span
-          class="text-xs font-bold text-orange uppercase tracking-widest bg-orange/10 px-3 py-1 rounded-full"
-        >
+        <span class="text-xs font-bold text-orange uppercase tracking-widest bg-orange/10 px-3 py-1 rounded-full">
           Plan de Vuelo
         </span>
         <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
@@ -393,102 +278,70 @@ const calendlyUrl =
       </div>
 
       <p class="text-base text-gray-700 leading-relaxed">
-        Este es el plan de vuelo para nuestras 4 sesiones de trabajo. Iremos
-        progresivamente de lo táctico a lo estratégico:
+        Este es el plan de vuelo para nuestras 4 sesiones de trabajo. Iremos progresivamente de lo táctico a lo estratégico:
       </p>
 
       <div class="space-y-4">
+
         <!-- SESIÓN 1 -->
-        <div
-          class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-2 hover:border-teal/50 transition flex flex-col md:flex-row md:items-center gap-4"
-        >
-          <div
-            class="shrink-0 bg-teal text-white font-black text-sm px-4 py-2 rounded-xl text-center md:w-32"
-          >
+        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-2 hover:border-teal/50 transition flex flex-col md:flex-row md:items-center gap-4">
+          <div class="shrink-0 bg-teal text-white font-black text-sm px-4 py-2 rounded-xl text-center md:w-32">
             Sesión 1
           </div>
           <div class="space-y-1">
-            <h3 class="font-extrabold text-deep text-base md:text-lg">
-              Automatización de Documentación
-            </h3>
+            <h3 class="font-extrabold text-deep text-base md:text-lg">Automatización de Documentación</h3>
             <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
-              Configuración del flujo <strong>NotebookLM + Claude</strong> para generar
-              PRDs/TRDs e Historias de Usuario de manera automatizada y sin alucinaciones.
+              Configuración del flujo <strong>NotebookLM + Claude</strong> para generar PRDs/TRDs e Historias de Usuario de manera automatizada y sin alucinaciones.
             </p>
           </div>
         </div>
 
         <!-- SESIÓN 2 -->
-        <div
-          class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-2 hover:border-teal/50 transition flex flex-col md:flex-row md:items-center gap-4"
-        >
-          <div
-            class="shrink-0 bg-teal text-white font-black text-sm px-4 py-2 rounded-xl text-center md:w-32"
-          >
+        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-2 hover:border-teal/50 transition flex flex-col md:flex-row md:items-center gap-4">
+          <div class="shrink-0 bg-teal text-white font-black text-sm px-4 py-2 rounded-xl text-center md:w-32">
             Sesión 2
           </div>
           <div class="space-y-1">
-            <h3 class="font-extrabold text-deep text-base md:text-lg">
-              Aterrizando la Estrategia
-            </h3>
+            <h3 class="font-extrabold text-deep text-base md:text-lg">Aterrizando la Estrategia</h3>
             <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
-              Cómo conectar los OKRs anuales de <code>tusdatos.co</code> con las épicas
-              y sprints. Pasaremos de la planeación desestructurada a un roadmap ágil
-              y realista.
+              Cómo conectar los OKRs anuales de <code>tusdatos.co</code> con las épicas y sprints. Pasaremos de la planeación desestructurada a un roadmap ágil y realista.
             </p>
           </div>
         </div>
 
         <!-- SESIÓN 3 -->
-        <div
-          class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-2 hover:border-teal/50 transition flex flex-col md:flex-row md:items-center gap-4"
-        >
-          <div
-            class="shrink-0 bg-teal text-white font-black text-sm px-4 py-2 rounded-xl text-center md:w-32"
-          >
+        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-2 hover:border-teal/50 transition flex flex-col md:flex-row md:items-center gap-4">
+          <div class="shrink-0 bg-teal text-white font-black text-sm px-4 py-2 rounded-xl text-center md:w-32">
             Sesión 3
           </div>
           <div class="space-y-1">
-            <h3 class="font-extrabold text-deep text-base md:text-lg">
-              Flujos en GitHub
-            </h3>
+            <h3 class="font-extrabold text-deep text-base md:text-lg">Flujos en GitHub</h3>
             <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
-              Cómo usar IA para refinar tareas, generar reportes de avance y
-              mantener la documentación técnica actualizada sin esfuerzo manual
-              continuo.
+              Cómo usar IA para refinar tareas, generar reportes de avance y mantener la documentación técnica actualizada sin esfuerzo manual continuo.
             </p>
           </div>
         </div>
 
         <!-- SESIÓN 4 -->
-        <div
-          class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-2 hover:border-teal/50 transition flex flex-col md:flex-row md:items-center gap-4"
-        >
-          <div
-            class="shrink-0 bg-orange text-white font-black text-sm px-4 py-2 rounded-xl text-center md:w-32"
-          >
+        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-2 hover:border-teal/50 transition flex flex-col md:flex-row md:items-center gap-4">
+          <div class="shrink-0 bg-orange text-white font-black text-sm px-4 py-2 rounded-xl text-center md:w-32">
             Sesión 4
           </div>
           <div class="space-y-1">
-            <h3 class="font-extrabold text-deep text-base md:text-lg">
-              Liderazgo y Estándares
-            </h3>
+            <h3 class="font-extrabold text-deep text-base md:text-lg">Liderazgo y Estándares</h3>
             <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
-              Cómo estructurar estos flujos para que todo el equipo técnico los
-              adopte. Tu plan de acción definitivo para posicionarte como la
-              referente de IA en la empresa.
+              Cómo estructurar estos flujos para que todo el equipo técnico los adopte. Tu plan de acción definitivo para posicionarte como la referente de IA en la empresa.
             </p>
           </div>
         </div>
+
       </div>
     </section>
 
     <!-- SECCIÓN 5: ACUERDOS COMERCIALES Y LOGÍSTICA -->
     <section class="space-y-6">
       <div class="border-b border-gray-200 pb-4">
-        <span
-          class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full"
-        >
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
           Inversión & Logística
         </span>
         <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
@@ -496,62 +349,41 @@ const calendlyUrl =
         </h2>
       </div>
 
-      <div
-        class="bg-slate-50 border border-gray-200 rounded-2xl p-6 md:p-8 space-y-6"
-      >
-        <div
-          class="inline-flex items-center gap-2 bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full"
-        >
+      <div class="bg-slate-50 border border-gray-200 rounded-2xl p-6 md:p-8 space-y-6">
+        <div class="inline-flex items-center gap-2 bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">
           🏷️ Tarifa Especial de Referidos: "Susan"
         </div>
 
         <div class="grid sm:grid-cols-2 gap-6">
-          <div
-            class="bg-white border border-gray-200 p-5 rounded-xl space-y-1 shadow-xs"
-          >
-            <span class="text-xs font-bold text-gray-400 uppercase"
-              >Ciclo Completo</span
-            >
+
+          <div class="bg-white border border-gray-200 p-5 rounded-xl space-y-1 shadow-xs">
+            <span class="text-xs font-bold text-gray-400 uppercase">Ciclo Completo</span>
             <p class="text-lg font-black text-deep">4 sesiones de 1.5 horas</p>
-            <p class="text-xs text-gray-500">
-              Formato 1 a 1 en vivo con seguimiento
-            </p>
+            <p class="text-xs text-gray-500">Formato 1 a 1 en vivo con seguimiento</p>
           </div>
 
-          <div
-            class="bg-white border border-gray-200 p-5 rounded-xl space-y-1 shadow-xs"
-          >
-            <span class="text-xs font-bold text-gray-400 uppercase"
-              >Inversión Total</span
-            >
+          <div class="bg-white border border-gray-200 p-5 rounded-xl space-y-1 shadow-xs">
+            <span class="text-xs font-bold text-gray-400 uppercase">Inversión Total</span>
             <p class="text-2xl font-black text-teal">$350.000 COP</p>
             <p class="text-xs text-gray-500">Tarifa especial preferencial</p>
           </div>
+
         </div>
 
         <div class="space-y-3 pt-2 border-t border-gray-200">
           <h4 class="font-bold text-deep text-sm">Horarios Evaluados:</h4>
           <div class="flex flex-wrap gap-3">
-            <span
-              class="bg-white border border-gray-300 px-4 py-2 rounded-xl text-xs font-bold text-gray-700 shadow-xs"
-            >
+            <span class="bg-white border border-gray-300 px-4 py-2 rounded-xl text-xs font-bold text-gray-700 shadow-xs">
               ☀️ 6:30 AM - 8:00 AM
             </span>
-            <span
-              class="bg-white border border-gray-300 px-4 py-2 rounded-xl text-xs font-bold text-gray-700 shadow-xs"
-            >
+            <span class="bg-white border border-gray-300 px-4 py-2 rounded-xl text-xs font-bold text-gray-700 shadow-xs">
               🌙 6:00 PM - 7:30 PM
             </span>
           </div>
         </div>
 
-        <div
-          class="text-xs text-gray-500 italic bg-white p-3.5 rounded-xl border border-gray-200"
-        >
-          💡 <strong>Nota:</strong> Si en el futuro requieres sesiones sueltas de
-          seguimiento posterior al ciclo, la tarifa es de <strong
-            >$116.000 COP por 1 hora</strong
-          >.
+        <div class="text-xs text-gray-500 italic bg-white p-3.5 rounded-xl border border-gray-200">
+          💡 <strong>Nota:</strong> Si en el futuro requieres sesiones sueltas de seguimiento posterior al ciclo, la tarifa es de <strong>$116.000 COP por 1 hora</strong>.
         </div>
       </div>
     </section>
@@ -559,9 +391,7 @@ const calendlyUrl =
     <!-- SECCIÓN 6: PRÓXIMOS PASOS -->
     <section class="space-y-6">
       <div class="border-b border-gray-200 pb-4">
-        <span
-          class="text-xs font-bold text-orange uppercase tracking-widest bg-orange/10 px-3 py-1 rounded-full"
-        >
+        <span class="text-xs font-bold text-orange uppercase tracking-widest bg-orange/10 px-3 py-1 rounded-full">
           Acción Inmediata
         </span>
         <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
@@ -570,119 +400,80 @@ const calendlyUrl =
       </div>
 
       <p class="text-sm font-semibold text-gray-600">
-        Para que nuestra primera sesión sea 100% táctica y no perdamos tiempo
-        configurando cosas básicas, estos son nuestros compromisos:
+        Para que nuestra primera sesión sea 100% táctica y no perdamos tiempo configurando cosas básicas, estos son nuestros compromisos:
       </p>
 
       <div class="grid md:grid-cols-2 gap-6">
+
         <!-- TAREA DE MARÍA ALEJANDRA -->
-        <div
-          class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3 border-t-4 border-t-teal"
-        >
+        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3 border-t-4 border-t-teal">
           <div class="flex items-center gap-2">
-            <span
-              class="bg-teal text-white text-xs font-black px-2.5 py-1 rounded-md"
-              >1</span
-            >
-            <h3 class="font-extrabold text-deep text-base">
-              Tu tarea (María Alejandra)
-            </h3>
+            <span class="bg-teal text-white text-xs font-black px-2.5 py-1 rounded-md">1</span>
+            <h3 class="font-extrabold text-deep text-base">Tu tarea (María Alejandra)</h3>
           </div>
           <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
-            Toma un par de horas esta semana para organizar y subir las fuentes
-            de información de la empresa a tus Notebooks en <strong
-              >NotebookLM</strong
-            >. Tenlo listo para el día 1.
+            Toma un par de horas esta semana para organizar y subir las fuentes de información de la empresa a tus Notebooks en <strong>NotebookLM</strong>. Tenlo listo para el día 1.
           </p>
         </div>
 
         <!-- TAREA DE PABLO -->
-        <div
-          class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3 border-t-4 border-t-orange"
-        >
+        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3 border-t-4 border-t-orange">
           <div class="flex items-center gap-2">
-            <span
-              class="bg-orange text-white text-xs font-black px-2.5 py-1 rounded-md"
-              >2</span
-            >
+            <span class="bg-orange text-white text-xs font-black px-2.5 py-1 rounded-md">2</span>
             <h3 class="font-extrabold text-deep text-base">Mi tarea (Pablo)</h3>
           </div>
           <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
-            Te enviaré los accesos y la plantilla base de trabajo para que
-            estemos completamente listos desde el primer minuto.
+            Te enviaré los accesos y la plantilla base de trabajo para que estemos completamente listos desde el primer minuto.
           </p>
         </div>
+
       </div>
 
-      <div
-        class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3"
-      >
+      <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3">
         <div class="flex items-center gap-2 font-extrabold text-deep text-base">
           <span>📅</span>
           <span>Agendar horarios:</span>
         </div>
         <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
-          Confírmame por WhatsApp/Email qué horario (mañana o tarde) se ajusta
-          mejor a tu rutina para bloquear de una vez las 4 sesiones.
+          Confírmame por WhatsApp/Email qué horario (mañana o tarde) se ajusta mejor a tu rutina para bloquear de una vez las 4 sesiones.
         </p>
       </div>
 
-      <div
-        class="bg-gradient-to-r from-slate-50 to-teal/5 border border-gray-200 p-6 rounded-2xl space-y-2"
-      >
+      <div class="bg-gradient-to-r from-slate-50 to-teal/5 border border-gray-200 p-6 rounded-2xl space-y-2">
         <h4 class="font-extrabold text-deep text-sm flex items-center gap-2">
           <span>🚀</span> Opcional (Visión B2B para la empresa)
         </h4>
         <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
-          Una vez veas los resultados en tu flujo personal, conversaremos con tu
-          jefe para evaluar una propuesta de mentoría grupal para alinear a todo
-          el equipo de producto y técnico de <code>tusdatos.co</code>.
+          Una vez veas los resultados en tu flujo personal, conversaremos con tu jefe para evaluar una propuesta de mentoría grupal para alinear a todo el equipo de producto y técnico de <code>tusdatos.co</code>.
         </p>
       </div>
     </section>
 
     <!-- FIRMA Y CIERRE -->
-    <section
-      class="bg-deep text-white rounded-3xl p-8 md:p-10 shadow-xl space-y-6"
-    >
+    <section class="bg-deep text-white rounded-3xl p-8 md:p-10 shadow-xl space-y-6">
       <div class="space-y-3">
         <h3 class="text-xl md:text-2xl font-black text-teal">¿Dudas?</h3>
         <p class="text-base md:text-lg text-gray-300 leading-relaxed max-w-2xl">
-          Recuerda: no vas a aprender "teoría de IA". Vas a aprender a <strong
-            >recuperar 10 horas de tu semana</strong
-          > para enfocarte en lo que realmente importa: el producto y tu crecimiento
-          profesional.
+          Recuerda: no vas a aprender "teoría de IA". Vas a aprender a <strong>recuperar 10 horas de tu semana</strong> para enfocarte en lo que realmente importa: el producto y tu crecimiento profesional.
         </p>
         <p class="text-lg font-bold text-white pt-2">
           Nos vemos en la primera sesión.
         </p>
       </div>
 
-      <div
-        class="pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
-      >
+      <div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div class="space-y-1">
           <p class="text-lg font-black text-white">— Pablo Ríos</p>
-          <p class="text-xs text-teal font-semibold">
-            Head of Product · Consultor en IA & Product Strategy
-          </p>
+          <p class="text-xs text-teal font-semibold">Head of Product · Consultor en IA & Product Strategy</p>
           <p class="text-xs text-gray-400">Fundador, LuciRMe AI</p>
         </div>
 
         <div class="flex flex-col gap-1.5 text-xs text-gray-300">
-          <a
-            href="https://linkedin.com/in/pabloriospena"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-teal transition flex items-center gap-1.5"
-          >
+          <a href="https://linkedin.com/in/pabloriospena" target="_blank" rel="noopener noreferrer" class="hover:text-teal transition flex items-center gap-1.5">
             <span>🔗</span> linkedin.com/in/pabloriospena
           </a>
-          <a
-            href="mailto:pablo@lucirme.com"
-            class="hover:text-teal transition flex items-center gap-1.5"
-          >
-            <span>✉️</span> pablo@lucirme.com
+          <a href="mailto:pabloriospena@gmail.com" class="hover:text-teal transition flex items-center gap-1.5">
+            <span>✉️</span> pabloriospena@gmail.com
           </a>
         </div>
       </div>
@@ -691,5 +482,6 @@ const calendlyUrl =
     <!-- ACTION HUB & REDES SOCIALES -->
     <ActionHub />
     <RedesSociales />
+
   </main>
 </Layout>
