@@ -189,6 +189,11 @@ const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
               id="sub-recursos"
             >
               <a
+                href="/bot-presentaciones"
+                class="block text-orange font-bold hover:underline"
+                >⚡ Bot Presentaciones</a
+              >
+              <a
                 href="/recursos/backlog-detox"
                 class="block text-gray-400 hover:text-teal">Backlog-detox</a
               >
@@ -304,6 +309,30 @@ const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
       id="main-content"
       class="flex-grow flex flex-col min-h-screen w-full pl-12 transition-all duration-200"
     >
+      <!-- MINIHEADER DE PROMOCIÓN (Bot Arquitecto de Presentaciones) -->
+      <div id="miniheader-bot-presentaciones" class="bg-gradient-to-r from-[#0F172A] via-[#1E293B] to-[#0F172A] text-white text-xs px-4 py-2 border-b border-white/10 flex items-center justify-between gap-3 z-50">
+        <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-center sm:justify-between gap-2 w-full text-center sm:text-left">
+          <div class="flex items-center justify-center gap-2">
+            <span class="bg-orange text-white text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full animate-pulse shrink-0">
+              Nuevo Recurso
+            </span>
+            <span class="font-medium text-gray-200">
+              <strong class="text-white">Bot Arquitecto de Presentaciones:</strong> Transforma tu caos de ideas en un discurso claro.
+            </span>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <span class="font-bold text-amber-300 hidden md:inline">$8 USD · Pago único</span>
+            <a 
+              href="/bot-presentaciones" 
+              class="inline-flex items-center gap-1 bg-orange hover:bg-orange/90 text-white font-bold text-[11px] px-3 py-1 rounded-lg transition shadow-xs cursor-pointer"
+            >
+              <span>Ver Bot</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
       <!-- HEADER SUPERIOR -->
       <header
         class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-gray-100 px-4 py-3 sm:px-6 sm:py-4"

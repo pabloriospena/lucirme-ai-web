@@ -19,6 +19,14 @@ const recursos = Object.keys(archivos).map((key) => {
 
 // 3. Diccionario maestro de contenidos
 const metaData = {
+  "bot-presentaciones": {
+    etiqueta: "Agente Guiado · $8 USD",
+    titulo: "Bot Arquitecto de Presentaciones",
+    desc: "Ordena tu pensamiento disperso con un método de 5 pasos y lo convierte en un discurso claro, estructurado y con carga emocional. Sin perder tu voz.",
+    precio: "$8 USD",
+    esPago: true,
+    categoria: "destacado",
+  },
   "ideador-producto": {
     etiqueta: "Guía Abierta",
     desc: "Mapea, valida, pule y genera el prompt de Lovable para el prototipo visual de tu app en 4 fases de producto.",
@@ -135,12 +143,13 @@ const metaData = {
 };
 
 // Separamos por categorías
+const botDestacado = recursos.find((r) => r.slug === "bot-presentaciones");
 const ebookDestacado = recursos.find((r) => r.slug === "ebook-pm");
 const preventaDestacada = recursos.find((r) => r.slug === "preventa-vol2");
 
 const recursosIA = recursos.filter((r) => {
   const meta = metaData[r.slug as keyof typeof metaData];
-  return meta?.categoria === "ia";
+  return meta?.categoria === "ia" && r.slug !== "bot-presentaciones";
 });
 const recursosPM = recursos.filter((r) => {
   const meta = metaData[r.slug as keyof typeof metaData];
@@ -149,16 +158,56 @@ const recursosPM = recursos.filter((r) => {
 ---
 
 <Layout title="Librería de Recursos | LuciRMe AI">
-  <main class="max-w-6xl mx-auto py-16 px-6 space-y-16">
-    <header class="text-center mb-16">
+  <main class="max-w-6xl mx-auto py-16 px-6 space-y-12">
+    <header class="text-center mb-12">
       <h1 class="text-4xl font-bold text-deep mb-4">Librería de Recursos</h1>
       <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        Herramientas, plantillas y guías de producto listas para implementar.
-        Acceso abierto y directo.
+        Herramientas, plantillas y agentes guiados listos para potenciar tu trabajo.
       </p>
     </header>
 
-    <!-- 1. SECCIÓN DESTACADA (BENTO DOUBLE GRID: VOL 1 & VOL 2) -->
+    <!-- 0. RECURSO PRINCIPAL DESTACADO: BOT ARQUITECTO DE PRESENTACIONES -->
+    <div class="bg-gradient-to-r from-[#0F172A] via-[#1E293B] to-[#0F172A] rounded-3xl p-8 md:p-10 text-white shadow-2xl border-2 border-orange/40 relative overflow-hidden group">
+      <div class="absolute -right-16 -top-16 w-64 h-64 bg-orange/20 rounded-full blur-3xl group-hover:bg-orange/30 transition-all pointer-events-none"></div>
+      <div class="relative z-10 grid md:grid-cols-3 gap-8 items-center">
+        <div class="md:col-span-2 space-y-4">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="bg-orange text-white text-xs font-black uppercase tracking-widest px-3 py-1 rounded-md shadow-xs">
+              🔥 Recurso Principal Pago
+            </span>
+            <span class="bg-teal/20 text-teal text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-md border border-teal/30">
+              Método de 5 Pasos
+            </span>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight">
+            Bot Arquitecto de Presentaciones
+          </h2>
+          <p class="text-gray-300 text-sm md:text-base leading-relaxed">
+            Tienes las ideas. Lo que te falta es la estructura. El Arquitecto de Presentaciones ordena tu pensamiento disperso con un método de 5 pasos y lo convierte en un discurso claro, estructurado y con carga emocional. Sin perder tu voz.
+          </p>
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <span class="text-xl font-extrabold text-amber-300">$8 USD · Pago único</span>
+            <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1">
+              ✓ Garantía de 7 días
+            </span>
+            <span class="text-xs text-gray-400">• Acceso inmediato</span>
+          </div>
+        </div>
+        <div class="flex flex-col justify-center items-stretch sm:items-end gap-3">
+          <a
+            href="/bot-presentaciones"
+            class="bg-orange hover:bg-orange/90 text-white text-center px-6 py-4 rounded-xl font-extrabold text-sm md:text-base transition shadow-[0_0_20px_rgba(234,88,12,0.4)] cursor-pointer"
+          >
+            Ver Página de Ventas →
+          </a>
+          <span class="text-[11px] text-gray-400 text-center sm:text-right">
+            Trabaja solo con tus fuentes. No inventa nada.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. SECCIÓN DESTACADA SECUNDARIA (EBOOK VOL 1 & VOL 2) -->
     <div class="grid md:grid-cols-2 gap-8">
       <!-- Ebook Vol 1 -->
       {
@@ -166,7 +215,7 @@ const recursosPM = recursos.filter((r) => {
           (() => {
             const meta = metaData["ebook-pm"];
             return (
-              <div class="bg-gradient-to-br from-[#0F172A] to-[#1E293B] rounded-3xl p-8 text-white shadow-2xl flex flex-col justify-between border border-white/10 min-h-[380px] relative overflow-hidden group">
+              <div class="bg-gradient-to-br from-[#0F172A] to-[#1E293B] rounded-3xl p-8 text-white shadow-xl flex flex-col justify-between border border-white/10 min-h-[340px] relative overflow-hidden group">
                 <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal/10 rounded-full blur-2xl group-hover:bg-teal/20 transition-all" />
                 <div>
                   <span class="inline-block bg-teal/10 text-teal text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-4 border border-teal/20">
@@ -199,7 +248,7 @@ const recursosPM = recursos.filter((r) => {
           (() => {
             const meta = metaData["preventa-vol2"];
             return (
-              <div class="bg-gradient-to-br from-[#0F172A] to-[#1E293B] rounded-3xl p-8 text-white shadow-2xl flex flex-col justify-between border border-white/10 min-h-[380px] relative overflow-hidden group">
+              <div class="bg-gradient-to-br from-[#0F172A] to-[#1E293B] rounded-3xl p-8 text-white shadow-xl flex flex-col justify-between border border-white/10 min-h-[340px] relative overflow-hidden group">
                 <div class="absolute -right-10 -top-10 w-32 h-32 bg-orange/10 rounded-full blur-2xl group-hover:bg-orange/20 transition-all" />
                 <div>
                   <span class="inline-block bg-orange/10 text-orange text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-4 border border-orange/20">

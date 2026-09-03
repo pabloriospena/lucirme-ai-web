@@ -12,4 +12,5 @@ export const LINKS = {
   calendly_ciclo: "https://cal.com/pablolucirme/ciclo",
   calendly_empresa: "https://cal.com/pablolucirme/diagnostico-gratuito",
   calendly_taller: "https://cal.com/pablolucirme/taller-de-inmersion",
+  bot: "https://pay.hotmart.com/D96093022S?off=OFF50",
 };
