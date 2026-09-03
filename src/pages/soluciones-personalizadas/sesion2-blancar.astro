@@ -1,0 +1,581 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ActionHub from "../../components/ActionHub.astro";
+import RedesSociales from "../../components/RedesSociales.astro";
+import { LINKS } from "../../lib/constants.js";
+
+const diagnosticoUrl = "/soluciones-personalizadas/sesion-blancar";
+const guiaSesion1Url = "/soluciones-personalizadas/guia-sesion-blanca";
+const cafeEstrategiaUrl = LINKS.calendly_sesion_pago || LINKS.calendly;
+const calendlyUrl = LINKS.calendly_empresa || LINKS.calendly_taller || LINKS.calendly;
+---
+
+<Layout title="Resumen de Mentoría Sesión 2: Entrevista Senior PM & Estrategia AI-First — Blanca Rodríguez | LuciRMe AI">
+
+  <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
+  <nav class="bg-white/90 backdrop-blur-md border-b border-gray-200 px-6 py-4 sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto flex justify-between items-center gap-4">
+      <a href={diagnosticoUrl} class="text-xs md:text-sm font-bold text-gray-500 hover:text-teal transition flex items-center gap-1">
+        ← Volver a Diagnóstico Blanca R.
+      </a>
+      <div class="flex items-center gap-2">
+        <a href={guiaSesion1Url} class="inline-flex items-center justify-center font-bold bg-teal text-white rounded-xl py-2 px-3.5 hover:bg-tealHover transition shadow-xs text-xs text-center cursor-pointer">
+          📖 Guía Sesión 1
+        </a>
+        <a href={cafeEstrategiaUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-bold bg-orange text-white rounded-xl py-2 px-3.5 hover:bg-orange/90 transition shadow-xs text-xs text-center cursor-pointer">
+          ☕ Café de Estrategia
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER / HERO SECTION -->
+  <header class="bg-deep text-white py-16 md:py-20 px-6 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <!-- EYEBROW -->
+      <div class="inline-flex items-center gap-2 bg-teal/15 text-teal text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6 border border-teal/30">
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span>
+        Guía de Mentoría Personalizada · Sesión 2 de 4
+      </div>
+
+      <!-- H1 -->
+      <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight text-white">
+        Preparación Entrevista Senior PM & <span class="text-teal">Estrategia AI-First</span>
+      </h1>
+
+      <!-- SUBTÍTULO -->
+      <p class="text-base md:text-xl text-gray-300 font-medium max-w-2xl mx-auto mb-6 leading-relaxed">
+        Resumen estratégico de la segunda sesión de mentoría para <strong class="text-white">Blanca Rodríguez</strong>, enfocada en la oportunidad Senior PM en Modernize y el diseño de productos AI-First.
+      </p>
+
+      <!-- BOTONES NAVEGACIÓN -->
+      <div class="flex flex-wrap justify-center items-center gap-3 mb-8">
+        <a href={diagnosticoUrl} class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-extrabold text-xs md:text-sm px-5 py-2.5 rounded-2xl transition shadow-lg backdrop-blur-xs">
+          <span>📋</span>
+          <span>Ver Diagnóstico Inicial →</span>
+        </a>
+        <a href={guiaSesion1Url} class="inline-flex items-center gap-2 bg-gradient-to-r from-teal/20 via-white/10 to-orange/20 border border-teal/40 hover:border-teal/70 text-white font-extrabold text-xs md:text-sm px-5 py-2.5 rounded-2xl transition shadow-lg backdrop-blur-xs">
+          <span>📖</span>
+          <span>Ver Guía Sesión 1: Notion + Claude + Jira →</span>
+        </a>
+      </div>
+
+      <!-- META BADGES -->
+      <div class="inline-flex flex-wrap justify-center items-center gap-3 md:gap-4 bg-white/5 border border-white/10 rounded-2xl px-5 py-3 text-xs md:text-sm text-gray-300 max-w-3xl">
+        <span class="flex items-center gap-1.5">
+          👤 <strong>Menteada:</strong> Blanca Rodríguez
+        </span>
+        <span class="text-gray-500 hidden sm:inline">•</span>
+        <span class="flex items-center gap-1.5">
+          🚀 <strong>Progreso:</strong> Sesión 2 de 4
+        </span>
+        <span class="text-gray-500 hidden sm:inline">•</span>
+        <span class="flex items-center gap-1.5">
+          👨‍🏫 <strong>Mentor:</strong> Pablo Ríos (LuciRMe AI)
+        </span>
+        <span class="text-gray-500 hidden sm:inline">•</span>
+        <span class="flex items-center gap-1.5">
+          📅 <strong>Fecha:</strong> 2 de septiembre de 2026
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-12 space-y-16">
+
+    <!-- RESUMEN EJECUTIVO -->
+    <section class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-4">
+      <div class="flex items-center gap-3 border-b border-gray-100 pb-4">
+        <div class="w-10 h-10 rounded-full bg-teal/15 text-teal flex items-center justify-center font-bold text-lg">
+          🎯
+        </div>
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold text-deep">Objetivo de la Sesión</h2>
+          <p class="text-xs text-gray-500">Preparación para Entrevista Senior PM & Estrategia AI-First</p>
+        </div>
+      </div>
+      <p class="text-base text-gray-700 leading-relaxed">
+        En nuestra segunda sesión, nos enfocamos de manera prioritaria en tu preparación para la entrevista de <strong>Senior Product Manager en Modernize</strong> (marketplace de contratación de servicios para el hogar dentro del grupo Queen Street). Diseñamos una estrategia integral para destacar tu perfil, estructurar tus respuestas y transmitir una mentalidad de producto moderna y orientada a impacto.
+      </p>
+    </section>
+
+    <!-- SECCIÓN 1: AVANCES CLAVE Y ENFOQUE ESTRATÉGICO -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Sección 01
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          1. Avances Clave y Enfoque Estratégico
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <!-- ESTRUCTURACIÓN DE KPIS -->
+        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3 hover:border-teal/40 transition md:col-span-2">
+          <div class="flex items-center gap-3">
+            <span class="w-10 h-10 rounded-xl bg-teal/15 text-teal flex items-center justify-center text-xl font-bold shrink-0">
+              📊
+            </span>
+            <h3 class="font-bold text-deep text-lg">Estructuración Jerárquica de KPIs</h3>
+          </div>
+          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+            Definimos un marco sólido para responder preguntas sobre métricas en la entrevista. La clave es dividir los indicadores de arriba hacia abajo:
+          </p>
+          <div class="grid sm:grid-cols-2 gap-4 pt-2">
+            <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-1">
+              <span class="text-xs font-extrabold text-teal uppercase tracking-wider block">Métricas de Consecuencia (Output)</span>
+              <p class="text-xs text-gray-700 font-medium">Revenue, Churn, LTV, Margen Bruto</p>
+              <p class="text-[11px] text-gray-500">Miden el resultado final del negocio, pero no se pueden modificar directamente.</p>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-1">
+              <span class="text-xs font-extrabold text-orange uppercase tracking-wider block">Métricas Causales (Input / Drivers)</span>
+              <p class="text-xs text-gray-700 font-medium">Adopción, Retención, NPS, Engagement, Tickets</p>
+              <p class="text-[11px] text-gray-500">Palancas operativas sobre las que el equipo de producto actúa día a día.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- MENTALIDAD "LANZAR Y APRENDER" -->
+        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3 hover:border-teal/40 transition">
+          <div class="flex items-center gap-3">
+            <span class="w-10 h-10 rounded-xl bg-orange/15 text-orange flex items-center justify-center text-xl font-bold shrink-0">
+              🚀
+            </span>
+            <h3 class="font-bold text-deep text-base">Mentalidad "Lanzar y Aprender" (Shipping Culture)</h3>
+          </div>
+          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+            Enfatizamos la importancia de defender entregas rápidas y de valor real (MVPs o apuestas pequeñas) en lugar de mantener backlogs infinitos de funcionalidades que nunca llegan a producción. Conversamos sobre cómo la metodología <strong>Shape Up</strong> supera las limitaciones del Scrum tradicional en este aspecto.
+          </p>
+        </div>
+
+        <!-- ESTRATEGIA AI-FIRST -->
+        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-3 hover:border-teal/40 transition">
+          <div class="flex items-center gap-3">
+            <span class="w-10 h-10 rounded-xl bg-teal/15 text-teal flex items-center justify-center text-xl font-bold shrink-0">
+              🤖
+            </span>
+            <h3 class="font-bold text-deep text-base">Estructura "AI-First" en Producto</h3>
+          </div>
+          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+            Desglosamos cómo proyectar esta visión en la entrevista bajo dos ángulos complementarios:
+          </p>
+          <ul class="text-xs text-gray-600 space-y-1.5 list-disc pl-4 pt-1">
+            <li><strong>Optimización interna:</strong> Adopción de herramientas de IA para acelerar el descubrimiento, prototipado y flujo de trabajo del equipo.</li>
+            <li><strong>IA nativa en el producto:</strong> Integración de soluciones y agentes de IA dentro de la experiencia del usuario final para resolver dolores reales.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ACUERDOS OPERATIVOS BANNER -->
+      <div class="bg-slate-900 text-white p-6 rounded-2xl border border-slate-800 space-y-3">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-teal animate-pulse"></span>
+          <span class="text-xs font-bold uppercase tracking-widest text-teal">Acuerdos Operativos y Administrativos</span>
+        </div>
+        <p class="text-xs md:text-sm text-gray-300 leading-relaxed">
+          Revisamos los métodos de pago internacionales para habilitar la transferencia pendiente (<strong>Global66, Wise o PayPal</strong>) y recordamos la dinámica del <strong>programa de referidos</strong> (1 hora de mentoría 100% gratuita por cada colega que concrete su espacio de acompañamiento).
+        </p>
+      </div>
+
+    </section>
+
+    <!-- SECCIÓN 2: PLAN DE ACCIÓN INMEDIATO -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-orange uppercase tracking-widest bg-orange/10 px-3 py-1 rounded-full">
+          Sección 02
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          2. Plan de Acción Inmediato: ¿Por dónde empezar?
+        </h2>
+        <p class="text-sm text-gray-600 mt-1">
+          Para asegurar una preparación impecable de cara a la entrevista del lunes y potenciar tu trabajo actual, enfócate en estos cuatro frentes:
+        </p>
+      </div>
+
+      <div class="space-y-4">
+
+        <div class="bg-white border border-gray-200 rounded-2xl p-5 md:p-6 shadow-xs flex items-start gap-4">
+          <span class="w-8 h-8 rounded-lg bg-teal text-white flex items-center justify-center font-black text-xs shrink-0 mt-0.5">
+            01
+          </span>
+          <div class="space-y-1">
+            <h3 class="font-bold text-deep text-base">Inmersión en el Ecosistema de IA</h3>
+            <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+              Explora al menos 30 herramientas de IA en los próximos días para desarrollar agilidad, entender casos de uso reales y ganar un criterio amplio del mercado.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-2xl p-5 md:p-6 shadow-xs flex items-start gap-4">
+          <span class="w-8 h-8 rounded-lg bg-teal text-white flex items-center justify-center font-black text-xs shrink-0 mt-0.5">
+            02
+          </span>
+          <div class="space-y-1">
+            <h3 class="font-bold text-deep text-base">Investigación de Integraciones de Mercado</h3>
+            <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+              Analiza cómo otros marketplaces y plataformas SaaS han integrado funciones de IA en sus flujos para tomar inspiración y proponer soluciones con lógica de negocio durante las entrevistas.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-2xl p-5 md:p-6 shadow-xs flex items-start gap-4">
+          <span class="w-8 h-8 rounded-lg bg-teal text-white flex items-center justify-center font-black text-xs shrink-0 mt-0.5">
+            03
+          </span>
+          <div class="space-y-1">
+            <h3 class="font-bold text-deep text-base">Exploración de Herramientas Analíticas Requeridas</h3>
+            <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+              Revisa el funcionamiento básico y los conceptos de captura de eventos (event tracking) en <strong>Heap</strong> y <strong>Growthbook</strong>, herramientas explícitamente solicitadas en la vacante de Modernize.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-2xl p-5 md:p-6 shadow-xs flex items-start gap-4">
+          <span class="w-8 h-8 rounded-lg bg-teal text-white flex items-center justify-center font-black text-xs shrink-0 mt-0.5">
+            04
+          </span>
+          <div class="space-y-1">
+            <h3 class="font-bold text-deep text-base">Práctica de la Matriz de Métricas</h3>
+            <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+              Ensaya la estructuración de KPIs (causa vs. consecuencia) usando ejemplos concretos de tu producto actual para responder con fluidez y naturalidad ante el reclutador o líder de producto.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: METODOLOGÍAS PASO A PASO DESARROLLADAS -->
+    <section class="space-y-8">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Sección 03
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          3. Metodologías Paso a Paso Desarrolladas
+        </h2>
+      </div>
+
+      <div class="space-y-6">
+
+        <!-- A. CONSTRUCCIÓN DE UNA MENTALIDAD "AI-FIRST" EN PRODUCTO -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-5">
+          <div class="flex items-center gap-3 border-b border-gray-100 pb-3">
+            <span class="text-2xl">⚡</span>
+            <div>
+              <span class="text-xs font-bold text-teal uppercase tracking-wider block">Metodología A</span>
+              <h3 class="text-xl font-bold text-deep">Construcción de una Mentalidad "AI-First" en Producto</h3>
+            </div>
+          </div>
+
+          <div class="space-y-4 text-xs md:text-sm text-gray-700">
+
+            <div class="bg-slate-50 border border-gray-200 p-4 rounded-xl space-y-1">
+              <strong class="text-teal font-bold block">1. Sondeo y prueba semanal:</strong>
+              <p class="text-gray-600 leading-relaxed">
+                Explora herramientas emergentes interactuando directamente con sus interfaces para comprender sus alcances técnicos y limitaciones reales.
+              </p>
+            </div>
+
+            <div class="bg-slate-50 border border-gray-200 p-4 rounded-xl space-y-2">
+              <strong class="text-teal font-bold block">2. Clasificación del uso de IA (Las 2 Ramas):</strong>
+              <div class="grid sm:grid-cols-2 gap-3 pt-1">
+                <div class="bg-white border border-gray-200 p-3 rounded-lg">
+                  <span class="font-bold text-deep text-xs block">Rama 1: Eficiencia operativa del equipo</span>
+                  <p class="text-[11px] text-gray-600 mt-1">Apóyate en Claude para generar maquetas interactivas en HTML o en herramientas como Granola para minutas y estructuración de acuerdos.</p>
+                </div>
+                <div class="bg-white border border-gray-200 p-3 rounded-lg">
+                  <span class="font-bold text-deep text-xs block">Rama 2: Funcionalidades del producto</span>
+                  <p class="text-[11px] text-gray-600 mt-1">Diseña soluciones nativas (ej. automatizaciones tipo MCP o asistentes por WhatsApp) que resuelvan fricciones en la experiencia del usuario.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-slate-50 border border-gray-200 p-4 rounded-xl space-y-1">
+              <strong class="text-teal font-bold block">3. Filtro de valor sobre tendencia:</strong>
+              <p class="text-gray-600 leading-relaxed">
+                Valida siempre si la inclusión de IA responde a un problema genuino del cliente o si es solo un requerimiento cosmético.
+              </p>
+            </div>
+
+            <div class="bg-slate-50 border border-gray-200 p-4 rounded-xl space-y-1">
+              <strong class="text-teal font-bold block">4. Ciclos de prototipado rápido:</strong>
+              <p class="text-gray-600 leading-relaxed">
+                Diseña prototipos en semanas (ej. maquetas en HTML), despliega a cohortes reducidas de usuarios, mide adopción y retención, e itera basándote en datos reales.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- B. GESTIÓN Y REFINAMIENTO DE PRDS CON IA -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-4">
+          <div class="flex items-center gap-3 border-b border-gray-100 pb-3">
+            <span class="text-2xl">📝</span>
+            <div>
+              <span class="text-xs font-bold text-teal uppercase tracking-wider block">Metodología B</span>
+              <h3 class="text-xl font-bold text-deep">Gestión y Refinamiento de PRDs con IA</h3>
+            </div>
+          </div>
+
+          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+            Para evitar que las herramientas de transcripción incluyan ideas descartadas o desordenadas en tus documentos formales:
+          </p>
+
+          <ol class="space-y-3 text-xs md:text-sm text-gray-700 pl-5 list-decimal font-medium">
+            <li><strong>Marcación verbal explícita:</strong> Durante las llamadas con stakeholders, explicita en voz alta frases clave como: <em>"En conclusión, los acuerdos y siguientes pasos definitivos son..."</em> para guiar al transcriptor.</li>
+            <li><strong>Extracción en puntos clave:</strong> En lugar de copiar la transcripción cruda, solicita a la herramienta un resumen estructurado en lista de viñetas (bullets).</li>
+            <li><strong>Filtro de revisión en Claude:</strong> Carga las viñetas en Claude y dale instrucciones de limpieza: <em>"Remueve las propuestas descartadas por X persona y ajusta el lenguaje a formato de PRD corporativo"</em>.</li>
+            <li><strong>Sincronización en Notion:</strong> Exporta el requerimiento limpio y estructurado a tu espacio de trabajo oficial.</li>
+          </ol>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: ECOSISTEMA DE HERRAMIENTAS EVALUADAS -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+          Sección 04
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          4. Ecosistema de Herramientas Evaluadas
+        </h2>
+      </div>
+
+      <div class="overflow-x-auto bg-white border border-gray-200 rounded-2xl shadow-xs">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-50 border-b border-gray-200 text-xs uppercase tracking-wider text-gray-500">
+              <th class="p-4 font-bold">Herramienta</th>
+              <th class="p-4 font-bold">Enlace Oficial</th>
+              <th class="p-4 font-bold">Caso de Uso en la Mentoría</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 text-xs md:text-sm">
+
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-bold text-deep shrink-0">
+                Gemini Notebook (NotebookLM)
+              </td>
+              <td class="p-4">
+                <a href="https://notebooklm.google.com" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">
+                  notebooklm.google.com ↗
+                </a>
+              </td>
+              <td class="p-4 text-gray-600 leading-relaxed">
+                Consolidación de transcripciones y fuentes de las mentorías para generar resúmenes, guías y flashcards con cero alucinaciones.
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-bold text-deep shrink-0">
+                Perplexity AI
+              </td>
+              <td class="p-4">
+                <a href="https://perplexity.ai" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">
+                  perplexity.ai ↗
+                </a>
+              </td>
+              <td class="p-4 text-gray-600 leading-relaxed">
+                Búsqueda y mapeo rápido de casos de estudio e integraciones reales de IA en marketplaces y productos digitales.
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-bold text-deep shrink-0">
+                Claude (Anthropic)
+              </td>
+              <td class="p-4">
+                <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">
+                  claude.ai ↗
+                </a>
+              </td>
+              <td class="p-4 text-gray-600 leading-relaxed">
+                Prototipado rápido de interfaces en HTML interactivo, síntesis de minutas y refinamiento iterativo de PRDs.
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-bold text-deep shrink-0">
+                Granola AI
+              </td>
+              <td class="p-4">
+                <a href="https://granola.ai" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">
+                  granola.ai ↗
+                </a>
+              </td>
+              <td class="p-4 text-gray-600 leading-relaxed">
+                Grabación y transcripción automática de reuniones (requiere filtrado previo para eliminar puntos no acordados).
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-bold text-deep shrink-0">
+                ClickUp AI
+              </td>
+              <td class="p-4">
+                <a href="https://clickup.com" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">
+                  clickup.com ↗
+                </a>
+              </td>
+              <td class="p-4 text-gray-600 leading-relaxed">
+                Referencia de integración nativa de IA fluida y visual dentro de un flujo de gestión de proyectos.
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-bold text-deep shrink-0">
+                Heap
+              </td>
+              <td class="p-4">
+                <a href="https://heap.io" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">
+                  heap.io ↗
+                </a>
+              </td>
+              <td class="p-4 text-gray-600 leading-relaxed">
+                Plataforma de analítica digital y captura automática de eventos solicitada en la vacante de Modernize.
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-50/50 transition">
+              <td class="p-4 font-bold text-deep shrink-0">
+                Growthbook
+              </td>
+              <td class="p-4">
+                <a href="https://www.growthbook.io" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">
+                  growthbook.io ↗
+                </a>
+              </td>
+              <td class="p-4 text-gray-600 leading-relaxed">
+                Plataforma open-source de Feature Flags y experimentación A/B requerida para el rol de Senior PM.
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 5: PRÓXIMOS PASOS -->
+    <section class="space-y-6">
+      <div class="border-b border-gray-200 pb-4">
+        <span class="text-xs font-bold text-orange uppercase tracking-widest bg-orange/10 px-3 py-1 rounded-full">
+          Sección 05
+        </span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+          5. Próximos Pasos
+        </h2>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-4">
+        <p class="text-sm font-semibold text-gray-700">
+          Haz clic en cada elemento para marcar tu progreso de cara a la entrevista:
+        </p>
+
+        <div class="space-y-3">
+
+          <!-- PASO 1 -->
+          <label class="flex items-start gap-3.5 p-4 rounded-xl border border-gray-200 bg-slate-50 hover:bg-white transition cursor-pointer group">
+            <input type="checkbox" class="mt-1 w-4 h-4 rounded text-teal focus:ring-teal cursor-pointer" />
+            <div class="space-y-0.5">
+              <div class="flex items-center gap-2">
+                <span class="bg-red-100 text-red-800 text-[10px] font-black uppercase px-2 py-0.5 rounded">Prioridad Máxima</span>
+                <strong class="text-deep text-sm font-bold group-hover:text-teal transition">Estudio del modelo de Modernize</strong>
+              </div>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Analiza su dinámica de marketplace (modelo donde los propietarios no pagan y los ingresos provienen de la venta de leads a contratistas mediante <em>lead generation</em>, <em>custom programs</em> o <em>replacement models</em>).
+              </p>
+            </div>
+          </label>
+
+          <!-- PASO 2 -->
+          <label class="flex items-start gap-3.5 p-4 rounded-xl border border-gray-200 bg-slate-50 hover:bg-white transition cursor-pointer group">
+            <input type="checkbox" class="mt-1 w-4 h-4 rounded text-teal focus:ring-teal cursor-pointer" />
+            <div class="space-y-0.5">
+              <strong class="text-deep text-sm font-bold group-hover:text-teal transition">Revisión de Heap y Growthbook</strong>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Familiarízate con la terminología de embudos, experimentos A/B y métricas de comportamiento que utilizan estas plataformas.
+              </p>
+            </div>
+          </label>
+
+          <!-- PASO 3 -->
+          <label class="flex items-start gap-3.5 p-4 rounded-xl border border-gray-200 bg-slate-50 hover:bg-white transition cursor-pointer group">
+            <input type="checkbox" class="mt-1 w-4 h-4 rounded text-teal focus:ring-teal cursor-pointer" />
+            <div class="space-y-0.5">
+              <strong class="text-deep text-sm font-bold group-hover:text-teal transition">Alineación administrativa</strong>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Carga tus documentos en Global66 para habilitar el saldo y concretar el pago de la sesión.
+              </p>
+            </div>
+          </label>
+
+          <!-- PASO 4 -->
+          <label class="flex items-start gap-3.5 p-4 rounded-xl border border-emerald-200 bg-emerald-50 hover:bg-emerald-100/50 transition cursor-pointer group">
+            <input type="checkbox" class="mt-1 w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
+            <div class="space-y-0.5">
+              <div class="flex items-center gap-2">
+                <span class="bg-emerald-200 text-emerald-900 text-[10px] font-black uppercase px-2 py-0.5 rounded">Agendada</span>
+                <strong class="text-deep text-sm font-bold group-hover:text-emerald-700 transition">Sesión del Lunes</strong>
+              </div>
+              <p class="text-xs text-emerald-800 leading-relaxed">
+                Preparación final para simular las preguntas de la entrevista y ajustar detalles de tu presentación.
+              </p>
+            </div>
+          </label>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- BANNER DE REUNIÓN CAFÉ DE ESTRATEGIA -->
+    <section class="bg-deep text-white rounded-3xl p-8 md:p-10 shadow-xl space-y-6 relative overflow-hidden">
+      <div class="space-y-3 relative z-10">
+        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/20 px-3 py-1 rounded-full border border-teal/30">
+          Enlace Directo de Mentoría
+        </span>
+        <h3 class="text-2xl md:text-3xl font-black text-white">
+          ¿Lista para la simulación de entrevista del lunes, Blanca?
+        </h3>
+        <p class="text-sm md:text-base text-gray-300 leading-relaxed max-w-2xl">
+          Recuerda repasar tus métricas de causa y consecuencia antes del encuentro para responder con total soltura.
+        </p>
+      </div>
+
+      <div class="pt-2 relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <a 
+          href={guiaSesion1Url} 
+          class="inline-flex items-center gap-2 bg-teal hover:bg-tealHover text-white font-bold py-3.5 px-6 rounded-xl transition shadow-md text-xs md:text-sm cursor-pointer"
+        >
+          <span>📖</span>
+          <span>Ver Guía Sesión 1 →</span>
+        </a>
+        <a 
+          href={cafeEstrategiaUrl} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="inline-flex items-center gap-2 bg-orange hover:bg-orange/90 text-white font-bold py-3.5 px-6 rounded-xl transition shadow-md text-xs md:text-sm cursor-pointer"
+        >
+          <span>☕</span>
+          <span>Acceder a la Reunión con Blanca →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ACTION HUB -->
+    <div class="pt-8">
+      <ActionHub />
+    </div>
+
+  </main>
+
+  <!-- REDES SOCIALES -->
+  <RedesSociales />
+
+</Layout>
