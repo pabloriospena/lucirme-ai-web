@@ -1,0 +1,564 @@
+---
+import Layout from "../layouts/Layout.astro";
+import RedesSociales from "../components/RedesSociales.astro";
+import { LINKS } from "../lib/constants.js";
+
+const botLink = "/bot-presentaciones";
+const calendlyUrl = LINKS.calendly_empresa || LINKS.calendly;
+---
+
+<Layout 
+  title="Presentaciones con IA en 30 Minutos | Método LucirMe AI"
+  description="Deja de trasnochar armando slides. Método de 4 pasos + 4 prompts gratis para crear presentaciones que la gente realmente lee. Sistema completo disponible."
+>
+
+  <!-- NAVEGACIÓN SUPERIOR / BREADCRUMB -->
+  <nav class="bg-white/90 backdrop-blur-md border-b border-gray-200 px-6 py-3.5 sticky top-0 z-40">
+    <div class="max-w-5xl mx-auto flex justify-between items-center text-xs sm:text-sm">
+      <a href="/recursos" class="font-bold text-gray-500 hover:text-teal transition flex items-center gap-1">
+        ← Volver a Recursos
+      </a>
+      <a
+        href={botLink}
+        class="inline-flex items-center gap-2 bg-orange hover:bg-orange/90 text-white font-extrabold px-4 py-1.5 rounded-xl transition text-xs shadow-xs"
+      >
+        <span>⚡ Conoce el Bot ($8 USD)</span>
+        <span>→</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="bg-[#F8FAFC] text-slate-800 font-sans selection:bg-teal selection:text-white">
+
+    <!-- SECCIÓN 1 — HERO (El Gancho) -->
+    <header class="relative bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0F172A] text-white pt-16 pb-20 px-6 overflow-hidden">
+      <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#0D9488_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+
+      <div class="max-w-4xl mx-auto text-center relative z-10 space-y-6">
+        <!-- EYEBROW -->
+        <div class="inline-flex items-center gap-2 bg-teal/15 text-teal text-xs md:text-sm font-bold uppercase tracking-widest px-4 py-1.5 rounded-full border border-teal/30">
+          <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span>
+          Guía Gratuita de Acceso Libre
+        </div>
+
+        <!-- H1 -->
+        <h1 class="text-3xl sm:text-5xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-3xl mx-auto">
+          Presentaciones con IA <br class="hidden sm:block" />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal via-teal-300 to-orange">en 30 minutos</span>
+        </h1>
+
+        <!-- SUBTÍTULO -->
+        <p class="text-lg sm:text-xl md:text-2xl text-amber-200/90 font-bold max-w-2xl mx-auto">
+          De "me toca trasnochar el domingo" a "listo en media hora".
+        </p>
+
+        <!-- DESCRIPCIÓN -->
+        <p class="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto font-normal leading-relaxed">
+          El método exacto que uso para armar presentaciones que la gente realmente lee, sin abrir PowerPoint en blanco ni copiar bullets genéricos de internet.
+        </p>
+
+        <!-- CTAS -->
+        <div class="pt-4 flex flex-col items-center gap-4">
+          <a
+            href={botLink}
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-orange hover:bg-orange/90 text-white font-extrabold text-base sm:text-lg px-8 py-4 rounded-2xl transition shadow-[0_10px_30px_rgba(234,88,12,0.4)] transform hover:-translate-y-0.5 cursor-pointer"
+          >
+            <span>Quiero el sistema completo ($8 USD) →</span>
+          </a>
+
+          <a
+            href="#el-problema"
+            class="text-xs sm:text-sm text-teal hover:text-teal/80 font-bold underline decoration-2 underline-offset-4 transition"
+          >
+            O sigue leyendo para ver el método gratis ↓
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12 md:py-16 space-y-20">
+
+      <!-- SECCIÓN 2 — EL PROBLEMA REAL (Dolor reconocible) -->
+      <section id="el-problema" class="space-y-8 scroll-mt-24">
+        <div class="text-center space-y-3">
+          <span class="inline-block bg-amber-100 text-amber-900 font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-lg">
+            😖 ¿Te suena familiar?
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-[#0F172A] leading-tight max-w-2xl mx-auto">
+            Pierdes 4-6 horas armando una presentación que nadie va a leer completa.
+          </h2>
+        </div>
+
+        <div class="bg-white border border-gray-200/80 rounded-3xl p-8 md:p-10 shadow-xs space-y-6 text-gray-700 leading-relaxed text-base md:text-lg">
+          <p>
+            Abres PowerPoint en blanco. Copias bullets de internet. Mueves cuadros de texto durante horas. Terminas con slides que parecen del 2005 y un domingo arruinado.
+          </p>
+          <p class="font-bold text-[#0F172A]">
+            No es tu culpa. Es que te enseñaron a hacerlo mal.
+          </p>
+          <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider pt-2">
+            El método tradicional tiene 3 fallos brutales:
+          </p>
+
+          <div class="space-y-4 pt-1">
+            <!-- Ppunto 1 -->
+            <div class="bg-[#F8FAFC] border-l-[3px] border-teal p-5 rounded-r-2xl border-y border-r border-gray-200/60 flex items-start gap-4">
+              <span class="text-orange text-xl font-bold shrink-0">❌</span>
+              <div>
+                <strong class="text-[#0F172A] font-bold block mb-0.5">Empiezas desde cero cada vez</strong>
+                <span class="text-sm text-gray-600">Trabajas sin una estructura reutilizable que te ahorre el trabajo pesado de planificación.</span>
+              </div>
+            </div>
+
+            <!-- Punto 2 -->
+            <div class="bg-[#F8FAFC] border-l-[3px] border-teal p-5 rounded-r-2xl border-y border-r border-gray-200/60 flex items-start gap-4">
+              <span class="text-orange text-xl font-bold shrink-0">❌</span>
+              <div>
+                <strong class="text-[#0F172A] font-bold block mb-0.5">Usas contenido genérico</strong>
+                <span class="text-sm text-gray-600">Terminas usando los mismos bullets aburridos y predecibles que usa toda tu competencia.</span>
+              </div>
+            </div>
+
+            <!-- Punto 3 -->
+            <div class="bg-[#F8FAFC] border-l-[3px] border-teal p-5 rounded-r-2xl border-y border-r border-gray-200/60 flex items-start gap-4">
+              <span class="text-orange text-xl font-bold shrink-0">❌</span>
+              <div>
+                <strong class="text-[#0F172A] font-bold block mb-0.5">Optimizas por diseño, no por claridad</strong>
+                <span class="text-sm text-gray-600">Inviertes horas maquillando diapositivas que quedan visualmente cargadas pero conceptualmente vacías.</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="font-bold text-teal text-lg pt-2 text-center md:text-left">
+            La buena noticia: tiene solución. Y no requiere ser diseñador ni copywriter.
+          </p>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 3 — EL MÉTODO (Framework de 4 pasos) -->
+      <section class="space-y-10 border-t border-gray-200 pt-16">
+        <div class="text-center space-y-3">
+          <span class="inline-block bg-teal/10 text-teal font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full border border-teal/20">
+            ⚡ El Framework
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-[#0F172A]">
+            El método de 4 pasos (30 minutos)
+          </h2>
+          <p class="text-gray-600 text-sm sm:text-base max-w-xl mx-auto">
+            Un sistema que divide el trabajo en bloques acotados. Cada uno con un prompt específico y un tiempo máximo. Sin magia. Sin trasnochar.
+          </p>
+        </div>
+
+        <!-- GRID 2x2 CARDS -->
+        <div class="grid sm:grid-cols-2 gap-6">
+
+          <!-- Paso 1 -->
+          <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-xs relative space-y-3 hover:border-teal/50 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-4xl font-black text-teal">01</span>
+              <span class="bg-teal/10 text-teal font-bold text-xs px-3 py-1 rounded-full border border-teal/20">
+                5 minutos
+              </span>
+            </div>
+            <h3 class="text-lg font-bold text-[#0F172A]">Paso 1 — Estructura</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Decides el esqueleto de la presentación antes de escribir una sola palabra. El gancho, los 3 puntos clave, el cierre con CTA.
+            </p>
+          </div>
+
+          <!-- Paso 2 -->
+          <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-xs relative space-y-3 hover:border-teal/50 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-4xl font-black text-teal">02</span>
+              <span class="bg-teal/10 text-teal font-bold text-xs px-3 py-1 rounded-full border border-teal/20">
+                10 minutos
+              </span>
+            </div>
+            <h3 class="text-lg font-bold text-[#0F172A]">Paso 2 — Contenido</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Desarrollas cada punto con bullets concretos, datos reales y preguntas que mantienen la atención. Cero párrafos largos.
+            </p>
+          </div>
+
+          <!-- Paso 3 -->
+          <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-xs relative space-y-3 hover:border-teal/50 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-4xl font-black text-teal">03</span>
+              <span class="bg-teal/10 text-teal font-bold text-xs px-3 py-1 rounded-full border border-teal/20">
+                10 minutos
+              </span>
+            </div>
+            <h3 class="text-lg font-bold text-[#0F172A]">Paso 3 — Diseño</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              La IA te sugiere el layout de cada slide: una imagen máximo, paleta de 3 colores, mucho espacio en blanco.
+            </p>
+          </div>
+
+          <!-- Paso 4 -->
+          <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-xs relative space-y-3 hover:border-teal/50 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-4xl font-black text-teal">04</span>
+              <span class="bg-teal/10 text-teal font-bold text-xs px-3 py-1 rounded-full border border-teal/20">
+                5 minutos
+              </span>
+            </div>
+            <h3 class="text-lg font-bold text-[#0F172A]">Paso 4 — Refinamiento</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">
+              Pides a la IA que revise todo y te diga qué frases mejorar, qué slide eliminar y cuál es el gancho más fuerte para los primeros 30 segundos.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECCIÓN 4 — LOS 4 PROMPTS GRATIS (Valor real) -->
+      <section class="space-y-10 border-t border-gray-200 pt-16">
+        <div class="text-center space-y-3">
+          <span class="inline-block bg-orange/10 text-orange font-bold text-xs uppercase tracking-widest px-3.5 py-1 rounded-full border border-orange/20">
+            📋 Herramientas Prácticas
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-[#0F172A]">
+            Los 4 prompts (copia y pega hoy)
+          </h2>
+          <p class="text-gray-600 text-sm sm:text-base max-w-xl mx-auto">
+            Estos son los prompts que uso en mi día a día. Funcionan en ChatGPT, Claude o Gemini. Solo reemplaza los corchetes con tu información.
+          </p>
+        </div>
+
+        <div class="space-y-8">
+
+          <!-- PROMPT 1 -->
+          <div class="bg-[#0F172A] text-[#F8FAFC] rounded-2xl p-6 space-y-4 shadow-lg border border-slate-800">
+            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-teal"></span>
+                <span class="font-bold text-sm text-white uppercase tracking-wider">PROMPT 1 — ESTRUCTURA</span>
+              </div>
+              <button
+                onclick="copyPrompt('prompt-1', this)"
+                class="bg-teal hover:bg-tealHover text-white text-xs font-bold px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 cursor-pointer"
+              >
+                <span>📋 Copiar Prompt</span>
+              </button>
+            </div>
+            <pre id="prompt-1" class="font-mono text-xs sm:text-sm text-gray-300 leading-relaxed whitespace-pre-wrap overflow-x-auto bg-slate-900/60 p-4 rounded-xl border border-slate-800">Actúa como consultor senior. Tengo que presentar [TEMA] a [AUDIENCIA] en [DURACIÓN]. Crea una estructura de presentación con:
+
+1. Gancho inicial (que atrape en 10 segundos)
+2. 3 puntos clave máximo (nada de 7 u 8)
+3. Cierre con CTA claro y memorable
+
+Formato: bullet points con tiempo estimado por sección.</pre>
+          </div>
+
+          <!-- PROMPT 2 -->
+          <div class="bg-[#0F172A] text-[#F8FAFC] rounded-2xl p-6 space-y-4 shadow-lg border border-slate-800">
+            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-teal"></span>
+                <span class="font-bold text-sm text-white uppercase tracking-wider">PROMPT 2 — CONTENIDO</span>
+              </div>
+              <button
+                onclick="copyPrompt('prompt-2', this)"
+                class="bg-teal hover:bg-tealHover text-white text-xs font-bold px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 cursor-pointer"
+              >
+                <span>📋 Copiar Prompt</span>
+              </button>
+            </div>
+            <pre id="prompt-2" class="font-mono text-xs sm:text-sm text-gray-300 leading-relaxed whitespace-pre-wrap overflow-x-auto bg-slate-900/60 p-4 rounded-xl border border-slate-800">Desarrolla el punto [NÚMERO] de la estructura que me diste.
+
+Reglas:
+- Máximo 3 bullets por slide
+- Lenguaje directo, sin jerga
+- Un dato o ejemplo concreto por bullet
+- Una pregunta retórica al final para mantener atención
+
+Evita párrafos largos. Si cabe en 2 líneas, mejor.</pre>
+          </div>
+
+          <!-- PROMPT 3 -->
+          <div class="bg-[#0F172A] text-[#F8FAFC] rounded-2xl p-6 space-y-4 shadow-lg border border-slate-800">
+            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-teal"></span>
+                <span class="font-bold text-sm text-white uppercase tracking-wider">PROMPT 3 — DISEÑO</span>
+              </div>
+              <button
+                onclick="copyPrompt('prompt-3', this)"
+                class="bg-teal hover:bg-tealHover text-white text-xs font-bold px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 cursor-pointer"
+              >
+                <span>📋 Copiar Prompt</span>
+              </button>
+            </div>
+            <pre id="prompt-3" class="font-mono text-xs sm:text-sm text-gray-300 leading-relaxed whitespace-pre-wrap overflow-x-auto bg-slate-900/60 p-4 rounded-xl border border-slate-800">Sugiere el diseño visual para cada slide de esta presentación.
+
+Reglas:
+- Una imagen o gráfico por slide máximo
+- Paleta de 3 colores (principal, secundario, acento)
+- Tipografía sans-serif (Inter, Manrope o similar)
+- Mucho espacio en blanco (60% del slide vacío)
+
+Describe el layout de cada slide en 1 línea.</pre>
+          </div>
+
+          <!-- PROMPT 4 -->
+          <div class="bg-[#0F172A] text-[#F8FAFC] rounded-2xl p-6 space-y-4 shadow-lg border border-slate-800">
+            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-teal"></span>
+                <span class="font-bold text-sm text-white uppercase tracking-wider">PROMPT 4 — REFINAMIENTO</span>
+              </div>
+              <button
+                onclick="copyPrompt('prompt-4', this)"
+                class="bg-teal hover:bg-tealHover text-white text-xs font-bold px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 cursor-pointer"
+              >
+                <span>📋 Copiar Prompt</span>
+              </button>
+            </div>
+            <pre id="prompt-4" class="font-mono text-xs sm:text-sm text-gray-300 leading-relaxed whitespace-pre-wrap overflow-x-auto bg-slate-900/60 p-4 rounded-xl border border-slate-800">Revisa toda la presentación que hemos armado y dame:
+
+1. 3 frases que puedo mejorar para sonar más natural (menos corporativo)
+2. 1 slide que podría eliminar sin perder el mensaje
+3. El gancho más fuerte para los primeros 30 segundos
+
+Sé crítico. Prefiero una verdad incómoda que un halago inútil.</pre>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECCIÓN 5 — EL PUENTE AL PRODUCTO (Generar deseo) -->
+      <section class="bg-[#0F172A] text-white rounded-3xl p-8 sm:p-12 space-y-8 shadow-2xl relative overflow-hidden border border-slate-800">
+        <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-orange/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="space-y-4 relative z-10 max-w-2xl">
+          <span class="inline-block bg-orange/20 text-orange text-xs font-black uppercase tracking-widest px-3.5 py-1 rounded-full border border-orange/30">
+            🚀 Da el Siguiente Paso
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
+            Esto es solo el 20% del sistema
+          </h2>
+          <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
+            Los 4 prompts que te acabo de dar son la base. Funcionan para presentaciones generales. Pero si haces presentaciones específicas (pitch de ventas, propuestas comerciales, capacitaciones, reportes ejecutivos, webinars), necesitas prompts especializados.
+          </p>
+        </div>
+
+        <div class="space-y-4 relative z-10 bg-slate-800/80 p-6 rounded-2xl border border-slate-700/80">
+          <h3 class="font-bold text-base text-teal uppercase tracking-wider">
+            El sistema completo incluye:
+          </h3>
+          <ul class="space-y-3 text-sm sm:text-base text-gray-200">
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-400 font-bold shrink-0">✅</span>
+              <span><strong>20 prompts</strong> divididos por tipo de presentación</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-400 font-bold shrink-0">✅</span>
+              <span><strong>5 plantillas de Canva</strong> listas para usar (arrastrar y soltar)</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-400 font-bold shrink-0">✅</span>
+              <span><strong>Videos paso a paso</strong> (100% asíncrono, a tu ritmo)</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-400 font-bold shrink-0">✅</span>
+              <span><strong>Biblioteca de ganchos</strong> probados para los primeros 10 segundos</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-emerald-400 font-bold shrink-0">✅</span>
+              <span><strong>Checklist de revisión final</strong> (10 puntos antes de enviar)</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="relative z-10 space-y-4">
+          <p class="text-xs sm:text-sm text-gray-400 italic">
+            Cero sesiones en vivo. Cero teoría vacía. Cero "agendar una llamada para ver si encaja". Compras, accedes, aplicas hoy mismo.
+          </p>
+
+          <a
+            href={botLink}
+            class="inline-flex items-center justify-center gap-2 bg-orange hover:bg-orange/90 text-white font-black text-base sm:text-lg px-8 py-4 rounded-2xl transition shadow-lg transform hover:-translate-y-0.5 cursor-pointer w-full sm:w-auto"
+          >
+            <span>Quiero el Bot Arquitecto por $8 USD →</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 6 — PRUEBA SOCIAL (Testimonio) -->
+      <section class="space-y-10 border-t border-gray-200 pt-16">
+        <div class="text-center space-y-3">
+          <span class="inline-block bg-teal/10 text-teal font-bold text-xs uppercase tracking-widest px-3.5 py-1 rounded-full border border-teal/20">
+            💬 Casos Reales
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-[#0F172A]">
+            Lo que dicen quienes ya lo usan
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+
+          <!-- Testimonio 1 -->
+          <div class="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 space-y-4 shadow-xs flex flex-col justify-between">
+            <blockquote class="text-sm sm:text-base text-gray-700 italic leading-relaxed">
+              "Antes me tomaba todo el domingo armar la presentación del lunes. Con el sistema, la tengo lista en 40 minutos mientras tomo café. Lo que más me gustó: las plantillas de Canva ya vienen con la paleta resuelta. Solo cambio el texto."
+            </blockquote>
+            <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+              <div class="w-10 h-10 rounded-full bg-teal/20 text-teal font-bold flex items-center justify-center text-sm border border-teal/30">
+                LM
+              </div>
+              <div>
+                <strong class="text-sm text-[#0F172A] block font-bold">Laura M.</strong>
+                <span class="text-xs text-gray-500">Project Manager</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonio 2 -->
+          <div class="bg-white border border-gray-200/80 rounded-3xl p-6 sm:p-8 space-y-4 shadow-xs flex flex-col justify-between">
+            <blockquote class="text-sm sm:text-base text-gray-700 italic leading-relaxed">
+              "Mis propuestas comerciales pasaron de ser ignoradas a generar reuniones de seguimiento. El prompt de 'pitch ejecutivo' vale solo el precio del sistema."
+            </blockquote>
+            <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+              <div class="w-10 h-10 rounded-full bg-orange/20 text-orange font-bold flex items-center justify-center text-sm border border-orange/30">
+                CR
+              </div>
+              <div>
+                <strong class="text-sm text-[#0F172A] block font-bold">Carlos R.</strong>
+                <span class="text-xs text-gray-500">Dueño de consultora</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="text-center text-xs text-gray-500 italic">
+          *Estos son casos reales de clientes que aplicaron el método. Sin edición, sin filtros.*
+        </p>
+      </section>
+
+      <!-- SECCIÓN 7 — CTA FINAL AL PRODUCTO -->
+      <section class="bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-slate-900 text-white rounded-3xl p-8 sm:p-12 text-center space-y-8 shadow-2xl border border-slate-800">
+        <div class="space-y-4 max-w-2xl mx-auto">
+          <span class="inline-block bg-orange/20 text-orange font-bold text-xs uppercase tracking-widest px-3.5 py-1 rounded-full border border-orange/30">
+            🎯 Decisión Rápida
+          </span>
+          <h2 class="text-3xl sm:text-5xl font-black text-white">
+            ¿Listo para dejar de trasnochar?
+          </h2>
+        </div>
+
+        <div class="max-w-md mx-auto space-y-4">
+          <a
+            href={botLink}
+            class="w-full inline-flex items-center justify-center gap-2 bg-orange hover:bg-orange/90 text-white font-extrabold text-lg py-4 px-8 rounded-2xl transition shadow-[0_10px_25px_rgba(234,88,12,0.4)] cursor-pointer transform hover:-translate-y-0.5"
+          >
+            <span>Acceder al sistema completo por $8 USD →</span>
+          </a>
+
+          <p class="text-xs text-amber-200/80 font-medium">
+            Inversión: $8 USD · Acceso inmediato · Sin sesiones en vivo
+          </p>
+        </div>
+
+        <div class="bg-slate-800/80 p-6 rounded-2xl border border-slate-700 max-w-lg mx-auto text-left space-y-3">
+          <strong class="text-xs font-bold text-teal uppercase tracking-wider block">Lo que incluye:</strong>
+          <ul class="text-xs sm:text-sm text-gray-300 space-y-1.5">
+            <li>• 20 prompts especializados</li>
+            <li>• 5 plantillas de Canva</li>
+            <li>• Videos paso a paso</li>
+            <li>• Biblioteca de ganchos</li>
+            <li>• Checklist de revisión</li>
+          </ul>
+        </div>
+
+        <div class="text-xs text-emerald-400 font-semibold max-w-lg mx-auto bg-emerald-950/40 border border-emerald-800/60 p-4 rounded-xl">
+          🛡️ Guarantee de 7 días: si en 7 días no te ahorra al menos 2 horas, te devuelvo el dinero. Sin preguntas.
+        </div>
+      </section>
+
+      <!-- SECCIÓN 8 — CTA SECUNDARIO (Acompañamiento) -->
+      <section class="bg-white border border-gray-200 rounded-3xl p-8 sm:p-10 space-y-6 shadow-xs">
+        <div class="space-y-3">
+          <span class="inline-block bg-teal/10 text-teal font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full border border-teal/20">
+            🤝 Acompañamiento Personalizado
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
+            ¿Prefieres que lo armemos juntos?
+          </h2>
+          <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+            Si necesitas que adaptemos el sistema a tu contexto específico (tu industria, tu audiencia, tu tipo de presentación), hablemos.
+          </p>
+        </div>
+
+        <div class="pt-2">
+          <a
+            href={calendlyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 bg-teal hover:bg-tealHover text-white font-extrabold text-sm sm:text-base py-3.5 px-6 rounded-xl transition shadow-xs cursor-pointer"
+          >
+            <span>Agenda un Café de Estrategia (30 min) →</span>
+          </a>
+        </div>
+
+        <p class="text-xs text-gray-500 leading-relaxed pt-1">
+          En 30 minutos mapeamos tu mayor fuga de tiempo y te digo con honestidad si mi acompañamiento aplica a tu caso. Si no hay fit, te lo digo en los primeros 10 minutos y te recomiendo otra cosa. Sin compromiso. Sin letra pequeña.
+        </p>
+      </section>
+
+      <!-- SECCIÓN 9 — CIERRE (Firma personal) -->
+      <section class="border-t border-gray-200 pt-12">
+        <div class="bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left shadow-xs">
+          <img
+            src="/pablo-rios.jpeg"
+            alt="Pablo Ríos"
+            class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover shadow-md border-2 border-teal shrink-0"
+          />
+          <div class="space-y-1.5">
+            <h3 class="text-lg font-black text-[#0F172A]">Pablo Ríos</h3>
+            <p class="text-xs font-bold text-teal">Head of Product · Consultor en IA & Product Strategy</p>
+            <p class="text-xs text-gray-500 font-medium">Fundador, LucirMe AI</p>
+            <blockquote class="text-xs italic text-gray-600 pt-2 border-t border-gray-100 font-serif">
+              "No enseño IA. Enseño a recuperar tu vida usando IA."
+            </blockquote>
+            <div class="pt-2 flex flex-wrap justify-center sm:justify-start gap-4 text-xs font-semibold text-teal">
+              <a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer" class="hover:underline flex items-center gap-1">
+                🔗 LinkedIn
+              </a>
+              <a href={LINKS.email} class="hover:underline flex items-center gap-1">
+                ✉️ Email
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <RedesSociales />
+
+  <!-- SCRIPT PARA BOTÓN COPIAR PROMPTS -->
+  <script is:inline>
+    function copyPrompt(elementId, btnElement) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const text = el.innerText || el.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btnElement.innerHTML;
+        btnElement.innerHTML = '<span>¡Copiado! ✓</span>';
+        btnElement.classList.remove('bg-teal', 'hover:bg-tealHover');
+        btnElement.classList.add('bg-emerald-600');
+        setTimeout(() => {
+          btnElement.innerHTML = originalText;
+          btnElement.classList.remove('bg-emerald-600');
+          btnElement.classList.add('bg-teal', 'hover:bg-tealHover');
+        }, 2500);
+      }).catch(err => {
+        console.error('Error al copiar:', err);
+      });
+    }
+  </script>
+
+</Layout>
