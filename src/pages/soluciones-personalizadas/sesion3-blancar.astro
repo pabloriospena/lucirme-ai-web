@@ -1,0 +1,573 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ActionHub from "../../components/ActionHub.astro";
+import RedesSociales from "../../components/RedesSociales.astro";
+import { LINKS } from "../../lib/constants.js";
+
+const diagnosticoUrl = "/soluciones-personalizadas/sesion-blancar";
+const guiaSesion1Url = "/soluciones-personalizadas/guia-sesion-blanca";
+const sesion2Url = "/soluciones-personalizadas/sesion2-blancar";
+const cafeEstrategiaUrl = LINKS.calendly_sesion_pago || LINKS.calendly;
+const calendlyUrl = LINKS.calendly_empresa || LINKS.calendly_taller || LINKS.calendly;
+---
+
+<Layout title="Resumen de Mentoría Sesión 3: IA Aplicada al Ciclo de Vida de Producto — Blanca Rodríguez | LuciRMe AI">
+
+  <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
+  <nav class="bg-white/90 backdrop-blur-md border-b border-gray-200 px-6 py-4 sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto flex justify-between items-center gap-4">
+      <a href={diagnosticoUrl} class="text-xs md:text-sm font-bold text-gray-500 hover:text-teal transition flex items-center gap-1">
+        ← Volver a Diagnóstico Blanca R.
+      </a>
+      <div class="flex items-center gap-2 overflow-x-auto py-1">
+        <a href={guiaSesion1Url} class="inline-flex items-center justify-center font-bold bg-teal/15 text-teal border border-teal/30 hover:bg-teal hover:text-white rounded-xl py-2 px-3 transition text-xs text-center cursor-pointer shrink-0">
+          📖 Sesión 1
+        </a>
+        <a href={sesion2Url} class="inline-flex items-center justify-center font-bold bg-teal/15 text-teal border border-teal/30 hover:bg-teal hover:text-white rounded-xl py-2 px-3 transition text-xs text-center cursor-pointer shrink-0">
+          🚀 Sesión 2
+        </a>
+        <a href={cafeEstrategiaUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-bold bg-orange text-white rounded-xl py-2 px-3 hover:bg-orange/90 transition shadow-xs text-xs text-center cursor-pointer shrink-0">
+          ☕ Café de Estrategia
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER / HERO SECTION -->
+  <header class="bg-deep text-white py-16 md:py-20 px-6 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <!-- EYEBROW -->
+      <div class="inline-flex items-center gap-2 bg-teal/15 text-teal text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6 border border-teal/30">
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span>
+        Guía de Mentoría Personalizada · Sesión 3 de 4
+      </div>
+
+      <!-- H1 -->
+      <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight text-white">
+        IA Aplicada al <span class="text-teal">Ciclo de Vida de Producto</span>
+      </h1>
+
+      <!-- SUBTÍTULO -->
+      <p class="text-base md:text-xl text-gray-300 font-medium max-w-2xl mx-auto mb-6 leading-relaxed">
+        Resumen estratégico de la tercera sesión de mentoría de <strong class="text-white">Blanca Rodríguez</strong> (Product Manager · Bord): De la IA como herramienta interna a la IA como parte integral del producto.
+      </p>
+
+      <!-- BOTONES NAVEGACIÓN ENTRE SESIONES -->
+      <div class="flex flex-wrap justify-center items-center gap-3 mb-8">
+        <a href={diagnosticoUrl} class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-extrabold text-xs md:text-sm px-4 py-2.5 rounded-2xl transition shadow-lg backdrop-blur-xs">
+          <span>📋</span>
+          <span>Diagnóstico Inicial</span>
+        </a>
+        <a href={guiaSesion1Url} class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-extrabold text-xs md:text-sm px-4 py-2.5 rounded-2xl transition shadow-lg backdrop-blur-xs">
+          <span>📖</span>
+          <span>Sesión 1: Product Management con IA</span>
+        </a>
+        <a href={sesion2Url} class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-extrabold text-xs md:text-sm px-4 py-2.5 rounded-2xl transition shadow-lg backdrop-blur-xs">
+          <span>🔥</span>
+          <span>Sesión 2: Entrevista & AI-First</span>
+        </a>
+      </div>
+
+      <!-- META BADGES -->
+      <div class="inline-flex flex-wrap justify-center items-center gap-3 md:gap-4 bg-white/5 border border-white/10 rounded-2xl px-5 py-3 text-xs md:text-sm text-gray-300 max-w-3xl">
+        <span class="flex items-center gap-1.5">
+          👤 <strong>Mentora:</strong> Blanca Rodríguez (PM @ Bord)
+        </span>
+        <span class="text-gray-500 hidden sm:inline">•</span>
+        <span class="flex items-center gap-1.5">
+          🎯 <strong>Enfoque:</strong> IA en Producto vs. IA Operativa
+        </span>
+        <span class="text-gray-500 hidden sm:inline">•</span>
+        <span class="flex items-center gap-1.5">
+          ⚡ <strong>Ecosistema:</strong> Claude, Notion, Jira, Metabase, Amplitude
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-12 space-y-16">
+
+    <!-- INTRODUCCIÓN & RESUMEN DE LA SESIÓN -->
+    <section class="space-y-6">
+      <div class="border-l-4 border-teal pl-4 py-1">
+        <span class="text-xs font-bold uppercase tracking-widest text-teal">Concepto Central</span>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-deep">De la IA como herramienta a la IA como parte del producto</h2>
+      </div>
+
+      <div class="bg-gradient-to-br from-slate-900 to-deep text-white p-6 md:p-8 rounded-3xl shadow-xl space-y-4">
+        <p class="text-base md:text-lg text-gray-200 leading-relaxed font-medium">
+          En esta sesión profundizamos en una idea clave: <strong class="text-amber-300">La IA no necesariamente tiene que aparecer como un chatbot o una funcionalidad visible para el usuario.</strong>
+        </p>
+        <p class="text-sm md:text-base text-gray-300 leading-relaxed">
+          Puede utilizarse de dos maneras completamente diferentes dentro de una compañía como <strong>Bord</strong>:
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-6 pt-4">
+          <!-- CASO A -->
+          <div class="bg-white/5 border border-white/10 p-5 rounded-2xl space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="bg-teal text-white font-bold text-xs px-2.5 py-1 rounded-md">CASO A</span>
+              <h3 class="font-bold text-white text-sm md:text-base">IA para mejorar el trabajo del equipo</h3>
+            </div>
+            <p class="text-xs md:text-sm text-gray-300 leading-relaxed">
+              Utilizar herramientas como <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="text-teal underline font-bold">Claude</a> o <a href="https://claude.ai/code" target="_blank" rel="noopener noreferrer" class="text-teal underline font-bold">Claude Code</a> para analizar información, priorizar, generar documentación, organizar tareas o automatizar procesos internos de desarrollo y operaciones.
+            </p>
+          </div>
+
+          <!-- CASO B -->
+          <div class="bg-white/5 border border-white/10 p-5 rounded-2xl space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="bg-orange text-white font-bold text-xs px-2.5 py-1 rounded-md">CASO B</span>
+              <h3 class="font-bold text-white text-sm md:text-base">IA dentro del producto (Nativa)</h3>
+            </div>
+            <p class="text-xs md:text-sm text-gray-300 leading-relaxed">
+              Utilizar IA como parte de una funcionalidad que resuelve un problema real del usuario final dentro de la plataforma B2B.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-amber-500/10 border border-amber-500/30 p-4 rounded-xl text-xs md:text-sm text-amber-200 mt-4 leading-relaxed">
+          💡 <strong>Contexto estratégico para Bord:</strong> Actualmente el equipo de desarrollo utiliza <em>Claude Code</em> para agilizar código, pero todavía no ha incorporado funcionalidades de IA generativa directamente en la plataforma. Por eso, el reto no es simplemente <em>“encontrar algo para meterle IA al producto”</em>. El reto es encontrar problemas reales donde la IA aporte valor tangible.
+        </div>
+      </div>
+    </section>
+
+    <!-- 🧠 EL PUNTO DE PARTIDA -->
+    <section class="bg-white border border-gray-200/80 rounded-3xl p-6 md:p-8 shadow-xs space-y-6">
+      <div class="flex items-center gap-3">
+        <span class="text-3xl">🧠</span>
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold text-deep">El Punto de Partida Estratégico</h2>
+          <p class="text-xs text-gray-500">Inversión del enfoque tradicional de Product Management</p>
+        </div>
+      </div>
+
+      <p class="text-sm md:text-base text-gray-700 leading-relaxed">
+        Uno de los objetivos actuales de Blanca es identificar oportunidades de IA para el producto de Bord. Pero antes de pensar en funcionalidades tecnológicas, necesitamos invertir el orden de razonamiento:
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="bg-emerald-50 border border-emerald-200 p-5 rounded-2xl space-y-2">
+          <div class="text-emerald-800 font-extrabold text-xs uppercase tracking-wider">
+            ✅ Enfoque Correcto (Product-Led)
+          </div>
+          <div class="font-mono text-xs md:text-sm font-bold text-emerald-950">
+            Problema → Usuario → Contexto → Solución → Tecnología
+          </div>
+          <p class="text-xs text-emerald-800 pt-1">
+            Garantiza que cualquier implementación resuelva una fricción real antes de seleccionar la herramienta.
+          </p>
+        </div>
+
+        <div class="bg-rose-50 border border-rose-200 p-5 rounded-2xl space-y-2">
+          <div class="text-rose-800 font-extrabold text-xs uppercase tracking-wider">
+            ❌ Enfoque Erróneo (Tech-Driven)
+          </div>
+          <div class="font-mono text-xs md:text-sm font-bold text-rose-950">
+            IA → ¿Qué podemos hacer con ella?
+          </div>
+          <p class="text-xs text-rose-800 pt-1">
+            Genera 'features fantasma', chatbots innecesarios y desperdicio de recursos de ingeniería.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASO 1 — PRIORIZAR ÓRDENES PARA OPERACIONES -->
+    <section class="space-y-6">
+      <div class="flex items-center gap-3">
+        <span class="w-8 h-8 rounded-xl bg-teal text-white flex items-center justify-center font-extrabold text-sm shadow-xs">1</span>
+        <h2 class="text-xl md:text-2xl font-bold text-deep">Caso 1 — Priorizar Órdenes para Operaciones</h2>
+      </div>
+
+      <div class="bg-white border border-gray-200 rounded-3xl p-6 md:p-8 space-y-6 shadow-xs">
+        <p class="text-sm md:text-base text-gray-700 leading-relaxed">
+          Uno de los problemas más concretos identificados está en el equipo de operaciones de Bord. Actualmente utilizan un tablero con órdenes en diferentes estados y el equipo debe realizar un <strong>barrido manual</strong> para identificar:
+        </p>
+
+        <ul class="grid sm:grid-cols-2 gap-3 text-xs md:text-sm text-gray-700">
+          <li class="bg-slate-50 p-3 rounded-xl border border-gray-200 flex items-center gap-2">
+            <span class="text-orange font-bold">•</span> Cuáles están atrasadas
+          </li>
+          <li class="bg-slate-50 p-3 rounded-xl border border-gray-200 flex items-center gap-2">
+            <span class="text-orange font-bold">•</span> Cuáles llevan demasiado tiempo en un estado
+          </li>
+          <li class="bg-slate-50 p-3 rounded-xl border border-gray-200 flex items-center gap-2">
+            <span class="text-orange font-bold">•</span> Cuáles requieren atención inmediata
+          </li>
+          <li class="bg-slate-50 p-3 rounded-xl border border-gray-200 flex items-center gap-2">
+            <span class="text-orange font-bold">•</span> Qué debería revisar primero cada operador
+          </li>
+        </ul>
+
+        <!-- LA OPORTUNIDAD & DIAGRAMA DE FLUJO -->
+        <div class="bg-slate-900 text-white p-6 rounded-2xl space-y-4">
+          <h3 class="text-teal font-bold text-sm uppercase tracking-wider">La Oportunidad de Solución</h3>
+          <p class="text-xs md:text-sm text-gray-300 leading-relaxed">
+            En lugar de pedirle al operador que revise todo el tablero, podemos utilizar IA para analizar la información disponible y generar una priorización asistida. La IA no necesariamente tiene que conversar con el operador: puede simplemente entregarle la información lista para actuar al comenzar su día.
+          </p>
+
+          <div class="font-mono text-xs md:text-sm bg-slate-950 p-4 rounded-xl border border-slate-800 text-center space-y-2">
+            <div class="text-gray-400">Órdenes + Incidencias + Fechas + Estado + Criterios de prioridad</div>
+            <div class="text-teal font-bold">↓ (Procesamiento IA) ↓</div>
+            <div class="text-amber-300 font-bold">Lista priorizada por operador</div>
+            <div class="text-teal font-bold">↓</div>
+            <div class="text-emerald-400 font-bold">Acción Operativa Inmediata</div>
+          </div>
+        </div>
+
+        <!-- PRIMER MVP TABLA -->
+        <div class="space-y-3">
+          <h3 class="font-bold text-deep text-base">Primer MVP: "Tus Prioridades de Hoy" (8:00 AM)</h3>
+          <p class="text-xs md:text-sm text-gray-600">Una primera versión no necesita modificar todo el Back Office. Podría enviar un resumen matutino estructurado:</p>
+
+          <div class="overflow-x-auto border border-gray-200 rounded-2xl">
+            <table class="w-full text-left text-xs md:text-sm border-collapse">
+              <thead>
+                <tr class="bg-slate-100 text-deep font-bold border-b border-gray-200">
+                  <th class="p-3">Prioridad</th>
+                  <th class="p-3">Orden</th>
+                  <th class="p-3">Motivo</th>
+                  <th class="p-3">Acción Recomendada</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100 text-gray-700">
+                <tr class="bg-rose-50/50">
+                  <td class="p-3 font-bold text-rose-700">Alta</td>
+                  <td class="p-3 font-mono">#1234</td>
+                  <td class="p-3">Fecha vencida (&gt;48h)</td>
+                  <td class="p-3 font-semibold text-deep">Revisar proveedor</td>
+                </tr>
+                <tr class="bg-rose-50/50">
+                  <td class="p-3 font-bold text-rose-700">Alta</td>
+                  <td class="p-3 font-mono">#1298</td>
+                  <td class="p-3">Incidencia abierta en entrega</td>
+                  <td class="p-3 font-semibold text-deep">Contactar transporte</td>
+                </tr>
+                <tr class="bg-amber-50/50">
+                  <td class="p-3 font-bold text-amber-700">Media</td>
+                  <td class="p-3 font-mono">#1320</td>
+                  <td class="p-3">Próximo vencimiento (hoy 5:00 PM)</td>
+                  <td class="p-3 font-semibold text-deep">Dar seguimiento con cliente</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- PASOS DE VALIDACIÓN -->
+        <div class="bg-teal/5 border border-teal/20 p-5 rounded-2xl space-y-3">
+          <h4 class="font-bold text-teal text-sm">Cómo validaríamos esta idea en 5 pasos:</h4>
+          <ol class="list-decimal list-inside space-y-1.5 text-xs md:text-sm text-gray-700 font-medium">
+            <li><strong>Seleccionar algunos operadores:</strong> Trabajar inicialmente con un grupo piloto reducido.</li>
+            <li><strong>Definir criterios clave:</strong> Fecha vencida, tiempo en estado, cliente, volumen o incidencias.</li>
+            <li><strong>Generar las prioridades:</strong> Crear el resultado con la información disponible.</li>
+            <li><strong>Probar durante una semana:</strong> Comparar la agilidad frente al flujo manual anterior.</li>
+            <li><strong>Recoger feedback directo:</strong> Confirmar si el ranking entregado coincidió con la urgencia real del día.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- DELIVERY: UNA CAPA QUE PUEDE CAMBIAR LA EXPERIENCIA -->
+    <section class="bg-gradient-to-r from-deep via-slate-900 to-deep text-white p-6 md:p-8 rounded-3xl shadow-xl space-y-6">
+      <div class="flex items-center gap-3">
+        <span class="text-3xl">🚀</span>
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold text-white">Delivery: Llevando la IA donde el usuario trabaja</h2>
+          <p class="text-xs text-teal">La IA no siempre necesita vivir dentro de una pantalla tradicional</p>
+        </div>
+      </div>
+
+      <p class="text-sm md:text-base text-gray-300 leading-relaxed">
+        Identificamos algo fundamental: en lugar de obligar al usuario a entrar al Back Office, buscar, filtrar, revisar y decidir, podemos empujar el insight a su canal habitual de comunicación como <a href="https://slack.com" target="_blank" rel="noopener noreferrer" class="text-teal font-bold underline">Slack</a>.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-4 text-xs md:text-sm">
+        <div class="bg-white/5 border border-white/10 p-4 rounded-xl space-y-2">
+          <div class="text-rose-400 font-bold uppercase tracking-wider">Flujo Antiguo (Fricción)</div>
+          <div class="font-mono text-gray-300">Operador → Back Office → Buscar → Filtrar → Decidir</div>
+        </div>
+        <div class="bg-teal/20 border border-teal/40 p-4 rounded-xl space-y-2">
+          <div class="text-teal font-bold uppercase tracking-wider">Nuevo Flujo Delivery</div>
+          <div class="font-mono text-white font-bold">Back Office → IA → Slack → Operador (Acción)</div>
+        </div>
+      </div>
+
+      <p class="text-xs md:text-sm text-gray-300 italic">
+        La pregunta estratégica deja de ser <em>“¿Qué funcionalidad podemos construir dentro del menú?”</em> y pasa a ser <strong>“¿Dónde necesita recibir esta información el usuario para poder actuar de inmediato?”</strong>.
+      </p>
+    </section>
+
+    <!-- CASO 2 & CASO 3: IA TRAS ESCENA (DIRECCIONES & OCR) -->
+    <section class="grid md:grid-cols-2 gap-6">
+
+      <!-- CASO 2: DIRECCIONES -->
+      <div class="bg-white border border-gray-200 rounded-3xl p-6 space-y-4 shadow-xs">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-lg bg-teal text-white flex items-center justify-center font-bold text-xs">2</span>
+          <h3 class="font-bold text-deep text-lg">Caso 2 — Normalización de Direcciones</h3>
+        </div>
+        <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+          Existen formularios dispares y problemas de información incompleta en determinados países (ciudades faltantes, tipografía variada, datos no estandarizados).
+        </p>
+
+        <div class="bg-slate-50 p-4 rounded-xl space-y-2 text-xs border border-gray-200">
+          <span class="font-bold text-teal uppercase tracking-wider block">Flujo de IA Detrás de Escena:</span>
+          <p class="text-gray-700"><strong>Detectar:</strong> Inconsistencias en la base de datos.</p>
+          <p class="text-gray-700"><strong>Normalizar:</strong> Convertir variaciones a un formato único.</p>
+          <p class="text-gray-700"><strong>Escalar:</strong></p>
+          <ul class="pl-3 list-disc space-y-1 text-gray-600">
+            <li><em>Caso A:</em> Dirección correcta → No hacer nada.</li>
+            <li><em>Caso B:</em> Error conocido → Normalizar automáticamente.</li>
+            <li><em>Caso C:</em> Baja certeza → Pedir confirmación al usuario.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CASO 3: OCR PO -->
+      <div class="bg-white border border-gray-200 rounded-3xl p-6 space-y-4 shadow-xs">
+        <div class="flex items-center gap-2">
+          <span class="w-7 h-7 rounded-lg bg-teal text-white flex items-center justify-center font-bold text-xs">3</span>
+          <h3 class="font-bold text-deep text-lg">Caso 3 — OCR para Órdenes de Compra</h3>
+        </div>
+        <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+          El cliente carga su orden de compra en PDF. Se necesita el número de Purchase Order (PO) para la factura electrónica.
+        </p>
+
+        <div class="bg-slate-900 text-white p-4 rounded-xl space-y-2 font-mono text-xs border border-slate-800">
+          <div class="text-gray-400">PDF de Orden de Compra</div>
+          <div class="text-teal font-bold">↓ (Lectura OCR) ↓</div>
+          <div class="text-amber-300">Identificación automática del número PO</div>
+          <div class="text-teal font-bold">↓</div>
+          <div class="text-emerald-400">Asociación directa con Factura Electrónica</div>
+        </div>
+
+        <p class="text-xs text-gray-500 italic">
+          El usuario no necesita saber que existe OCR o IA. Simplemente carga el documento y la plataforma resuelve el trabajo manual.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- CASO 4 — REPORTES INTELIGENTES & INTERFACES GUIADAS -->
+    <section class="bg-white border border-gray-200 rounded-3xl p-6 md:p-8 space-y-6 shadow-xs">
+      <div class="flex items-center gap-3">
+        <span class="w-8 h-8 rounded-xl bg-teal text-white flex items-center justify-center font-extrabold text-sm shadow-xs">4</span>
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold text-deep">Caso 4 — Reportes Inteligentes & Interfaces Guiadas</h2>
+          <p class="text-xs text-gray-500">Superando el problema del "chat vacío"</p>
+        </div>
+      </div>
+
+      <div class="bg-rose-50 border border-rose-200 p-4 rounded-2xl space-y-2 text-xs md:text-sm">
+        <span class="font-bold text-rose-800 uppercase tracking-wider block">⚠️ El Problema del Chat Vacío</span>
+        <p class="text-rose-950 leading-relaxed">
+          Un cuadro de texto libre con la pregunta <em>"¿En qué puedo ayudarte?"</em> genera demasiada fricción cognitiva. El usuario B2B no sabe qué solicitar o cómo estructurar su prompt.
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        <h3 class="font-bold text-deep text-base">Solución: Interfaz Guiada por Acciones Concretas</h3>
+        <p class="text-xs md:text-sm text-gray-600">Al ingresar, la plataforma muestra botones de acción preconcebidos:</p>
+
+        <div class="grid sm:grid-cols-3 gap-3 text-xs font-bold text-center">
+          <div class="bg-slate-100 border border-gray-200 p-3 rounded-xl text-deep">📊 Reporte Inmediato</div>
+          <div class="bg-slate-100 border border-gray-200 p-3 rounded-xl text-deep">📦 Órdenes Abiertas</div>
+          <div class="bg-slate-100 border border-gray-200 p-3 rounded-xl text-deep">🚨 Incidencias Activas</div>
+        </div>
+
+        <div class="bg-slate-900 text-white p-5 rounded-2xl space-y-3 text-xs md:text-sm">
+          <strong class="text-teal uppercase tracking-wider block">Patrón de Interacción:</strong>
+          <p class="text-gray-300">
+            Usuario entra → Ve acciones disponibles → Selecciona opción → IA consulta datos → Devuelve un resultado accionable: <strong class="text-amber-300">Dato + Comparación + Contexto + Siguiente Acción</strong>.
+          </p>
+          <p class="text-gray-400 italic">
+            Principio: La IA no reemplaza la interfaz, la <strong>mejora</strong>. La interfaz enseña qué hacer; la IA ejecuta la acción.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASO 5 — CICLO DE VIDA DE PRODUCTO CONECTADO (ECOSISTEMA) -->
+    <section class="space-y-6">
+      <div class="flex items-center gap-3">
+        <span class="w-8 h-8 rounded-xl bg-orange text-white flex items-center justify-center font-extrabold text-sm shadow-xs">5</span>
+        <h2 class="text-xl md:text-2xl font-bold text-deep">Caso 5 — Ciclo de Vida de Producto Conectado</h2>
+      </div>
+
+      <div class="bg-gradient-to-br from-slate-900 via-deep to-slate-950 text-white p-6 md:p-8 rounded-3xl shadow-xl space-y-6">
+        <p class="text-sm md:text-base text-gray-200 leading-relaxed font-medium">
+          La oportunidad más grande no es pensar en funcionalidades aisladas, sino conectar la IA a lo largo del <strong>ciclo de vida completo de producto</strong> para reducir el trabajo operativo manual entre herramientas:
+        </p>
+
+        <!-- FLUJO DE TRABAJO -->
+        <div class="flex flex-wrap items-center justify-center gap-2 font-mono text-xs text-center py-2">
+          <span class="bg-white/10 px-3 py-1.5 rounded-lg border border-white/20">Discovery</span>
+          <span class="text-teal font-bold">→</span>
+          <span class="bg-white/10 px-3 py-1.5 rounded-lg border border-white/20">PRD</span>
+          <span class="text-teal font-bold">→</span>
+          <span class="bg-white/10 px-3 py-1.5 rounded-lg border border-white/20">Roadmap</span>
+          <span class="text-teal font-bold">→</span>
+          <span class="bg-white/10 px-3 py-1.5 rounded-lg border border-white/20">Jira</span>
+          <span class="text-teal font-bold">→</span>
+          <span class="bg-white/10 px-3 py-1.5 rounded-lg border border-white/20">Desarrollo</span>
+          <span class="text-teal font-bold">→</span>
+          <span class="bg-white/10 px-3 py-1.5 rounded-lg border border-white/20">Métricas</span>
+          <span class="text-teal font-bold">→</span>
+          <span class="bg-white/10 px-3 py-1.5 rounded-lg border border-white/20">Feedback</span>
+        </div>
+
+        <!-- ECOSISTEMA DE HERRAMIENTAS CON LINKS -->
+        <div class="space-y-3 pt-2">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-teal">El Ecosistema Integrado de Herramientas:</h3>
+          <div class="grid sm:grid-cols-3 gap-3 text-xs">
+            <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="bg-white/5 hover:bg-white/10 border border-white/15 p-3 rounded-xl flex items-center justify-between transition">
+              <div>
+                <strong class="text-white block">Claude / Claude Code</strong>
+                <span class="text-gray-400 text-[11px]">Procesamiento e IA</span>
+              </div>
+              <span class="text-teal font-bold">↗</span>
+            </a>
+            <a href="https://notion.so" target="_blank" rel="noopener noreferrer" class="bg-white/5 hover:bg-white/10 border border-white/15 p-3 rounded-xl flex items-center justify-between transition">
+              <div>
+                <strong class="text-white block">Notion</strong>
+                <span class="text-gray-400 text-[11px]">Documentación &amp; PRDs</span>
+              </div>
+              <span class="text-teal font-bold">↗</span>
+            </a>
+            <a href="https://atlassian.com/software/jira" target="_blank" rel="noopener noreferrer" class="bg-white/5 hover:bg-white/10 border border-white/15 p-3 rounded-xl flex items-center justify-between transition">
+              <div>
+                <strong class="text-white block">Jira</strong>
+                <span class="text-gray-400 text-[11px]">Conectar decisiones con dev</span>
+              </div>
+              <span class="text-teal font-bold">↗</span>
+            </a>
+            <a href="https://metabase.com" target="_blank" rel="noopener noreferrer" class="bg-white/5 hover:bg-white/10 border border-white/15 p-3 rounded-xl flex items-center justify-between transition">
+              <div>
+                <strong class="text-white block">Metabase</strong>
+                <span class="text-gray-400 text-[11px]">Datos operacionales</span>
+              </div>
+              <span class="text-teal font-bold">↗</span>
+            </a>
+            <a href="https://amplitude.com" target="_blank" rel="noopener noreferrer" class="bg-white/5 hover:bg-white/10 border border-white/15 p-3 rounded-xl flex items-center justify-between transition">
+              <div>
+                <strong class="text-white block">Amplitude</strong>
+                <span class="text-gray-400 text-[11px]">Comportamiento de usuarios</span>
+              </div>
+              <span class="text-teal font-bold">↗</span>
+            </a>
+            <a href="https://slack.com" target="_blank" rel="noopener noreferrer" class="bg-white/5 hover:bg-white/10 border border-white/15 p-3 rounded-xl flex items-center justify-between transition">
+              <div>
+                <strong class="text-white block">Slack</strong>
+                <span class="text-gray-400 text-[11px]">Delivery &amp; Notificaciones</span>
+              </div>
+              <span class="text-teal font-bold">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <p class="text-xs md:text-sm text-amber-200 font-medium pt-2">
+          La pregunta pasa de <em>“¿Cómo puedo usar Claude?”</em> a <strong>“¿Qué información debería fluir automáticamente entre las diferentes etapas de mi trabajo?”</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- CRITERIOS EVALUACIÓN & DE USAR IA A DISEÑAR CON IA -->
+    <section class="grid md:grid-cols-2 gap-6">
+
+      <!-- CRITERIOS MATRIZ -->
+      <div class="bg-white border border-gray-200 rounded-3xl p-6 space-y-4 shadow-xs">
+        <h3 class="font-extrabold text-deep text-lg flex items-center gap-2">
+          <span>🎯</span>
+          <span>Matriz para Decidir Qué Construir</span>
+        </h3>
+
+        <div class="space-y-2 text-xs md:text-sm">
+          <div class="p-2.5 bg-slate-50 rounded-xl border border-gray-100">
+            <strong class="text-deep">01. Valor para el usuario:</strong> ¿Resuelve un problema real?
+          </div>
+          <div class="p-2.5 bg-slate-50 rounded-xl border border-gray-100">
+            <strong class="text-deep">02. Frecuencia:</strong> ¿Ocurre suficientemente seguido?
+          </div>
+          <div class="p-2.5 bg-slate-50 rounded-xl border border-gray-100">
+            <strong class="text-deep">03. Impacto:</strong> ¿Cuánto mejora la experiencia o el trabajo?
+          </div>
+          <div class="p-2.5 bg-slate-50 rounded-xl border border-gray-100">
+            <strong class="text-deep">04. Viabilidad:</strong> ¿Tenemos los datos y la tecnología?
+          </div>
+          <div class="p-2.5 bg-slate-50 rounded-xl border border-gray-100">
+            <strong class="text-deep">05. Incertidumbre:</strong> ¿Cuánto necesitamos aprender antes?
+          </div>
+          <div class="p-2.5 bg-slate-50 rounded-xl border border-gray-100">
+            <strong class="text-deep">06. Esfuerzo:</strong> ¿Cuánto desarrollo requiere?
+          </div>
+        </div>
+
+        <p class="text-xs font-bold text-teal text-center pt-1">
+          "La IA no debe justificar una funcionalidad. El problema debe justificar la solución."
+        </p>
+      </div>
+
+      <!-- DE USAR IA A DISEÑAR CON IA -->
+      <div class="bg-slate-900 text-white rounded-3xl p-6 space-y-4 shadow-xs border border-slate-800 flex flex-col justify-between">
+        <div class="space-y-3">
+          <h3 class="font-extrabold text-white text-lg flex items-center gap-2">
+            <span>✨</span>
+            <span>De Usar IA a Diseñar con IA</span>
+          </h3>
+
+          <div class="space-y-3 text-xs md:text-sm">
+            <div class="p-3 bg-white/5 border border-white/10 rounded-xl space-y-1">
+              <span class="text-gray-400 font-bold uppercase text-[10px] tracking-wider block">Nivel 1: Usuario de IA</span>
+              <p class="text-gray-200 italic">"Ayúdame a escribir esto."</p>
+            </div>
+
+            <div class="p-3 bg-teal/20 border border-teal/40 rounded-xl space-y-1">
+              <span class="text-teal font-bold uppercase text-[10px] tracking-wider block">Nivel 2: PM que Piensa con IA</span>
+              <p class="text-white font-bold">"¿Qué parte de este proceso puede desaparecer, automatizarse o convertirse en una decisión asistida?"</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-xs text-gray-300 leading-relaxed border-t border-slate-800 pt-3">
+          Blanca está transitando exitosamente hacia el Nivel 2, construyendo sistemas de trabajo conectados para Bord y para sus experimentos personales.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- PRÓXIMA SESIÓN & PLAN DE TRABAJO -->
+    <section class="bg-gradient-to-r from-teal/10 via-white to-orange/10 border border-teal/30 rounded-3xl p-6 md:p-8 space-y-4 shadow-xs">
+      <div class="flex items-center gap-2 text-teal font-bold text-sm uppercase tracking-wider">
+        <span>📅</span>
+        <span>Próxima Sesión &amp; Objetivo Principal</span>
+      </div>
+
+      <h3 class="text-xl font-extrabold text-deep">Profundización en el PRD y Sistema de Trabajo Conectado</h3>
+
+      <p class="text-xs md:text-sm text-gray-700 leading-relaxed">
+        El siguiente paso acordado es profundizar en el <strong>PRD (Product Requirement Document)</strong> y utilizarlo como punto de entrada para trabajar el ciclo completo de producto. Exploraremos un flujo guiado:
+      </p>
+
+      <div class="font-mono text-xs bg-white p-3.5 rounded-xl border border-gray-200 text-deep text-center font-bold">
+        Discovery → PRD → Notion → Jira → Desarrollo → Metabase → Amplitude
+      </div>
+
+      <p class="text-xs text-gray-600 italic">
+        El objetivo no será automatizar por automatizar. Serás construir un flujo de producto más conectado, más rápido y con menos trabajo operativo para Blanca y el equipo de Bord.
+      </p>
+    </section>
+
+    <!-- ACTION HUB & RECURSOS -->
+    <ActionHub
+      title="Acompañamiento Continuo de Mentoría"
+      description="Espacio reservado para el seguimiento de tareas, coordinación de sesiones estratégicas y consultas continuas con Pablo Ríos."
+      calendlyUrl={calendlyUrl}
+    />
+
+  </main>
+
+  <RedesSociales />
+
+</Layout>
