@@ -2,6 +2,7 @@
 export const LINKS = {
   calendly: "https://cal.com/pablolucirme",
   ebook: "https://pay.hotmart.com/D96093022S?off=OFF50",
+  curso_presentaciones: "https://pay.hotmart.com/R107150726I?checkoutMode=10",
   email: "mailto:pablo@lucirme.com",
   linkedin: "https://linkedin.com/in/pabloriospena",
   linkedin_empresa: "https://www.linkedin.com/company/lucirme-ai",

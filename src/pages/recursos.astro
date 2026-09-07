@@ -19,6 +19,14 @@ const recursos = Object.keys(archivos).map((key) => {
 
 // 3. Diccionario maestro de contenidos
 const metaData = {
+  "curso-presentaciones": {
+    etiqueta: "Curso Asíncrono · $35 USD",
+    titulo: 'De "No tengo idea" a Presentación Completa',
+    desc: "Convierte documentos, correos, audios, datos y notas desordenadas en una presentación clara, verificable y lista para presentar con IA. Método práctico de 5 pasos.",
+    precio: "$35 USD",
+    esPago: true,
+    categoria: "destacado",
+  },
   "bot-presentaciones": {
     etiqueta: "Agente Guiado · $8 USD",
     titulo: "Bot Arquitecto de Presentaciones",
@@ -174,43 +182,46 @@ const recursosPM = recursos.filter((r) => {
       </p>
     </header>
 
-    <!-- 0. RECURSO PRINCIPAL DESTACADO: BOT ARQUITECTO DE PRESENTACIONES -->
-    <div class="bg-gradient-to-r from-[#0F172A] via-[#1E293B] to-[#0F172A] rounded-3xl p-8 md:p-10 text-white shadow-2xl border-2 border-orange/40 relative overflow-hidden group">
-      <div class="absolute -right-16 -top-16 w-64 h-64 bg-orange/20 rounded-full blur-3xl group-hover:bg-orange/30 transition-all pointer-events-none"></div>
+    <!-- 0. RECURSO PRINCIPAL DESTACADO: CURSO COMPLETO -->
+    <div class="bg-gradient-to-r from-[#0F172A] via-[#1E293B] to-[#0F172A] rounded-3xl p-8 md:p-10 text-white shadow-2xl border-2 border-amber-500/50 relative overflow-hidden group">
+      <div class="absolute -right-16 -top-16 w-64 h-64 bg-amber-500/20 rounded-full blur-3xl group-hover:bg-amber-500/30 transition-all pointer-events-none"></div>
       <div class="relative z-10 grid md:grid-cols-3 gap-8 items-center">
         <div class="md:col-span-2 space-y-4">
           <div class="flex flex-wrap items-center gap-2">
-            <span class="bg-orange text-white text-xs font-black uppercase tracking-widest px-3 py-1 rounded-md shadow-xs">
-              🔥 Recurso Principal Pago
+            <span class="bg-amber-500 text-slate-950 text-xs font-black uppercase tracking-widest px-3 py-1 rounded-md shadow-xs">
+              🎓 Producto Estrella · Curso Completo
             </span>
             <span class="bg-teal/20 text-teal text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-md border border-teal/30">
-              Método de 5 Pasos
+              100% Asíncrono · Método de 5 Pasos
             </span>
           </div>
           <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight">
-            Bot Arquitecto de Presentaciones
+            De "No tengo idea" a Presentación Completa
           </h2>
           <p class="text-gray-300 text-sm md:text-base leading-relaxed">
-            Tienes las ideas. Lo que te falta es la estructura. El Arquitecto de Presentaciones ordena tu pensamiento disperso con un método de 5 pasos y lo convierte en un discurso claro, estructurado y con carga emocional. Sin perder tu voz.
+            Convierte documentos, correos, audios, datos y notas desordenadas en una presentación clara, verificable y lista para presentar con IA. Un método práctico de 5 pasos para dejar de improvisar cada vez que tienes que preparar una presentación.
           </p>
           <div class="flex flex-wrap items-center gap-4 pt-2">
-            <span class="text-xl font-extrabold text-amber-300">$8 USD · Pago único</span>
+            <span class="text-xl font-extrabold text-amber-300">US$35 · Pago único</span>
             <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1">
-              ✓ Garantía de 7 días
+              ✓ Incluye Materiales + Asistente IA + Bonus Lovable
             </span>
             <span class="text-xs text-gray-400">• Acceso inmediato</span>
           </div>
         </div>
         <div class="flex flex-col justify-center items-stretch sm:items-end gap-3">
           <a
-            href="/bot-presentaciones"
-            class="bg-orange hover:bg-orange/90 text-white text-center px-6 py-4 rounded-xl font-extrabold text-sm md:text-base transition shadow-[0_0_20px_rgba(234,88,12,0.4)] cursor-pointer"
+            href="/curso-presentaciones"
+            class="bg-amber-500 hover:bg-amber-400 text-slate-950 text-center px-6 py-4 rounded-xl font-black text-sm md:text-base transition shadow-[0_0_25px_rgba(245,158,11,0.4)] cursor-pointer"
           >
-            Ver Página de Ventas →
+            Ver Curso Completo ($35) →
           </a>
-          <span class="text-[11px] text-gray-400 text-center sm:text-right">
-            Trabaja solo con tus fuentes. No inventa nada.
-          </span>
+          <a
+            href="/bot-presentaciones"
+            class="text-xs text-orange hover:underline text-center sm:text-right font-bold"
+          >
+            ⚡ ¿Buscas solo el Bot Guiado? Ver por $8 USD →
+          </a>
         </div>
       </div>
     </div>
