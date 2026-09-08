@@ -80,6 +80,11 @@ const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
         person_profiles: "identified_only",
       });
     </script>
+
+    <!-- Metricool Tracking -->
+    <script is:inline>
+      function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"b40d37da63c5f2b8924b135ee89e46e6"})});
+    </script>
   </head>
 
   <body class="bg-white text-gray-900 font-sans antialiased flex">
