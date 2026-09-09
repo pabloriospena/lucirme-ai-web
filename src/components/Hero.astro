@@ -24,16 +24,17 @@ import { LINKS } from '../lib/constants.js';
       Enciende tu Foco
     </a>
     
-    <!-- CTA Secundario: Outline -->
+    <!-- CTA Secundario: Outline WhatsApp -->
     <a  
-  href={LINKS.calendly} 
-  target="_blank"
-  onclick="
-    if (window.posthog) {
-      window.posthog.capture('click_agenda_cafe', { origen: 'dashboard' });
-    }
-  "class="border-2 border-deep text-deep px-8 py-4 rounded-lg font-bold hover:bg-gray-50 transition-all">
-      Agendar Café
+      href={LINKS.whatsapp} 
+      target="_blank"
+      rel="noopener noreferrer"
+      onclick="
+        if (window.posthog) {
+          window.posthog.capture('click_whatsapp_hero', { origen: 'dashboard' });
+        }
+      "class="border-2 border-emerald-600 text-emerald-700 hover:bg-emerald-600 hover:text-white px-8 py-4 rounded-lg font-bold transition-all flex items-center justify-center gap-2">
+      💬 Hablar por WhatsApp
     </a>
   </div>
 

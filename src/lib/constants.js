@@ -14,4 +14,5 @@ export const LINKS = {
   calendly_empresa: "https://cal.com/pablolucirme/diagnostico-gratuito",
   calendly_taller: "https://cal.com/pablolucirme/taller-de-inmersion",
   bot: "https://pay.hotmart.com/F107452795B",
+  whatsapp: "https://wa.me/573053046180",
 };

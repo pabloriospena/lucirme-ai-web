@@ -299,12 +299,13 @@ const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
         </button>
 
         <a
-          href={LINKS.calendly}
+          href={LINKS.whatsapp}
           target="_blank"
-          class="w-full flex items-center justify-center gap-2 py-2 border border-teal text-teal text-[11px] font-bold rounded-lg hover:bg-teal/5 transition mb-2"
+          rel="noopener noreferrer"
+          class="w-full flex items-center justify-center gap-2 py-2 border border-emerald-600 text-emerald-700 text-[11px] font-bold rounded-lg hover:bg-emerald-50 transition mb-2"
         >
-          <span>📅</span>
-          <span class="hidden sidebar-text">Agendar Café</span>
+          <span>💬</span>
+          <span class="hidden sidebar-text">Escribir a WhatsApp</span>
         </a>
 
         <!-- Contenedor dinámico de Clerk en el Sidebar -->
@@ -389,37 +390,25 @@ const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
               Enciende tu Foco
             </button>
 
-            <!-- Botón de Agendar para pantallas medianas y grandes -->
+            <!-- Botón de WhatsApp para pantallas medianas y grandes -->
             <a
-              href={LINKS.calendly}
+              href={LINKS.whatsapp}
               target="_blank"
-              class="hidden sm:inline-flex bg-teal text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold hover:bg-tealHover transition shadow-sm"
+              rel="noopener noreferrer"
+              class="hidden sm:inline-flex items-center gap-1.5 bg-emerald-600 text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg text-xs sm:text-sm font-bold hover:bg-emerald-500 transition shadow-sm"
             >
-              Agendar Sesión <span class="hidden md:inline">&nbsp;Gratuita</span
-              > →
+              <span>💬 Hablar por WhatsApp</span>
             </a>
 
-            <!-- Botón de Agendar minimalista para móviles -->
+            <!-- Botón de WhatsApp minimalista para móviles -->
             <a
-              href={LINKS.calendly}
+              href={LINKS.whatsapp}
               target="_blank"
-              class="inline-flex sm:hidden bg-teal text-white p-2 rounded-lg hover:bg-tealHover transition shadow-sm"
-              title="Agendar Sesión Gratuita"
+              rel="noopener noreferrer"
+              class="inline-flex sm:hidden bg-emerald-600 text-white p-2 rounded-lg hover:bg-emerald-500 transition shadow-sm"
+              title="Hablar por WhatsApp (+57 305 3046180)"
             >
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                ></path>
-              </svg>
+              <span class="text-sm">💬</span>
             </a>
           </div>
         </div>
