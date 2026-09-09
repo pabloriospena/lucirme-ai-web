@@ -3,595 +3,1330 @@ import Layout from "../layouts/Layout.astro";
 import RedesSociales from "../components/RedesSociales.astro";
 import { LINKS } from "../lib/constants.js";
 
-const checkoutUrl = LINKS.curso_presentaciones || "https://pay.hotmart.com/D96093022S?off=CURSO35";
-const botLink = "/bot-presentaciones";
+const checkoutUrl =
+  LINKS.curso_presentaciones ||
+  "https://pay.hotmart.com/R107150726I?checkoutMode=10";
+const whatsappUrl = LINKS.whatsapp;
 ---
 
-<Layout 
-  title="Curso: De 'No tengo idea' a Presentación Completa | LuciRMe AI"
-  description="Convierte documentos, correos, audios, datos y notas desordenadas en una presentación clara, verificable y lista para presentar con IA. Método práctico de 5 pasos por US$35."
+<Layout
+  title="Curso Presentaciones con IA: De 'No tengo idea' a Presentación Completa | LuciRMe AI"
+  description="Aprende a transformar información dispersa en una presentación ejecutiva clara, estructurada y lista para presentar con IA. Método de 5 pasos por $35 USD. 7 días de garantía."
 >
+  <!-- BARRA DE NAVEGACIÓN Y ALERTA URGENCIA STICKY -->
+  <div
+    class="bg-amber-500 text-slate-950 font-black text-xs py-2 px-4 text-center border-b border-amber-600/20 shadow-xs"
+  >
+    🔥 <span class="uppercase tracking-wider">OFERTA ESPECIAL:</span> Acceso Inmediato
+    por <span class="underline decoration-2 font-black">US$35</span> (Pago único ·
+    Garantía de 7 días según Hotmart)
+  </div>
 
-  <!-- BREADCRUMB / SUB-NAV -->
-  <nav class="bg-slate-900/95 backdrop-blur-md border-b border-white/10 px-6 py-3.5 sticky top-0 z-40 text-white">
-    <div class="max-w-5xl mx-auto flex justify-between items-center text-xs sm:text-sm">
-      <a href="/recursos" class="font-bold text-gray-400 hover:text-amber-300 transition flex items-center gap-1">
+  <nav
+    class="bg-white/95 backdrop-blur-md border-b border-slate-200 px-6 py-3 sticky top-0 z-40 text-slate-900 shadow-xs"
+  >
+    <div
+      class="max-w-5xl mx-auto flex justify-between items-center text-xs sm:text-sm"
+    >
+      <a
+        href="/recursos"
+        class="font-bold text-slate-600 hover:text-amber-700 transition flex items-center gap-1"
+      >
         ← Volver a Recursos
       </a>
       <div class="flex items-center gap-3">
-        <span class="font-bold text-amber-300 hidden sm:inline">US$35 · Pago único</span>
+        <span class="font-bold text-slate-700 hidden md:inline text-xs"
+          >Garantía 7 Días • Hotmart</span
+        >
         <a
           href={checkoutUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black px-4 py-1.5 rounded-xl transition text-xs shadow-md cursor-pointer"
+          class="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black px-3.5 py-1.5 rounded-lg transition text-xs shadow-sm cursor-pointer transform hover:scale-105"
         >
-          <span>Comprar Curso ($35 USD)</span>
+          <span>Acceder al Curso (US$35)</span>
           <span>→</span>
         </a>
       </div>
     </div>
   </nav>
 
-  <div class="bg-[#0F172A] text-slate-100 font-sans selection:bg-amber-500 selection:text-slate-950">
-
-    <!-- 1. HERO -->
-    <header class="relative pt-16 pb-20 px-6 overflow-hidden border-b border-slate-800">
-      <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#F59E0B_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
-      <div class="absolute -right-20 -top-20 w-96 h-96 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+  <div
+    class="bg-slate-50 text-slate-800 font-sans selection:bg-amber-200 selection:text-slate-900 min-h-screen"
+  >
+    <!-- 1. HERO SECTION -->
+    <header
+      class="bg-white relative pt-8 pb-12 md:pt-12 md:pb-16 px-6 overflow-hidden border-b border-slate-200"
+    >
+      <div
+        class="absolute inset-0 opacity-15 bg-[radial-gradient(#94A3B8_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"
+      >
+      </div>
+      <div
+        class="absolute -right-20 -top-20 w-80 h-80 bg-amber-400/15 rounded-full blur-3xl pointer-events-none"
+      >
+      </div>
 
       <div class="max-w-4xl mx-auto text-center relative z-10 space-y-6">
-        <!-- BADGE -->
-        <div class="inline-flex items-center gap-2 bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full">
-          <span>🎓 Curso 100% Asíncrono · Acceso Inmediato</span>
+        <div
+          class="inline-flex items-center gap-1.5 bg-amber-100 text-amber-900 border border-amber-300 text-[11px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full shadow-2xs"
+        >
+          <span class="w-2 h-2 rounded-full bg-amber-600 animate-pulse"></span>
+          Método de 5 Pasos con IA
         </div>
 
-        <!-- H1 -->
-        <h1 class="text-3xl sm:text-5xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-3xl mx-auto">
-          DE “NO TENGO IDEA” A <br />
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-300 to-orange font-black">
-            PRESENTACIÓN COMPLETA
+        <h1
+          class="text-2xl sm:text-4xl md:text-5xl font-black text-slate-900 leading-tight tracking-tight max-w-3xl mx-auto uppercase"
+        >
+          DE “NO TENGO IDEA” A UNA <br class="hidden sm:block" />
+          <span
+            class="text-amber-700 font-black underline decoration-amber-400/60 decoration-wavy decoration-2"
+          >
+            PRESENTACIÓN EJECUTIVA COMPLETA
           </span>
+          <br class="hidden sm:block" />
+          EN SOLO 30 MINUTOS
         </h1>
 
-        <!-- SUBTÍTULO -->
-        <p class="text-lg sm:text-xl md:text-2xl text-gray-200 font-bold max-w-2xl mx-auto leading-relaxed">
-          Convierte documentos, correos, audios, datos y notas desordenadas en una presentación clara, verificable y lista para presentar con IA.
+        <p
+          class="text-base sm:text-lg text-slate-700 font-medium max-w-2xl mx-auto leading-relaxed"
+        >
+          Aprende a transformar información dispersa en una presentación
+          ejecutiva clara, estructurada y lista para presentar con IA.
         </p>
 
-        <p class="text-sm sm:text-base text-gray-300 max-w-2xl mx-auto leading-relaxed">
-          Un método práctico de 5 pasos para dejar de improvisar cada vez que tienes que preparar una presentación. Sin empezar desde una página en blanco. Sin aprender 20 herramientas. Sin dejar que la IA invente información.
+        <!-- CHIPS DE TIPOS DE INFORMACIÓN -->
+        <div
+          class="flex flex-wrap justify-center items-center gap-2 max-w-xl mx-auto pt-1"
+        >
+          <span
+            class="bg-slate-100 text-slate-800 border border-slate-300 font-bold text-xs px-3 py-1 rounded-lg"
+            >📧 Emails</span
+          >
+          <span
+            class="bg-slate-100 text-slate-800 border border-slate-300 font-bold text-xs px-3 py-1 rounded-lg"
+            >💬 WhatsApp</span
+          >
+          <span
+            class="bg-slate-100 text-slate-800 border border-slate-300 font-bold text-xs px-3 py-1 rounded-lg"
+            >🎧 Audios</span
+          >
+          <span
+            class="bg-slate-100 text-slate-800 border border-slate-300 font-bold text-xs px-3 py-1 rounded-lg"
+            >📊 Excel</span
+          >
+          <span
+            class="bg-slate-100 text-slate-800 border border-slate-300 font-bold text-xs px-3 py-1 rounded-lg"
+            >📄 PDFs</span
+          >
+          <span
+            class="bg-slate-100 text-slate-800 border border-slate-300 font-bold text-xs px-3 py-1 rounded-lg"
+            >📝 Notas</span
+          >
+        </div>
+
+        <p
+          class="text-xs sm:text-sm text-slate-700 max-w-xl mx-auto leading-relaxed font-semibold"
+        >
+          Todo eso puede convertirse en una narrativa ejecutiva que puedas
+          entender, revisar y presentar.<br />
+          <span class="text-slate-500 font-normal"
+            >Sin pasar horas organizando información desde cero.</span
+          >
         </p>
 
-        <!-- CTA & GARANTÍAS -->
-        <div class="pt-4 space-y-4">
+        <!-- CTA Y GARANTÍA -->
+        <div class="pt-2 space-y-3">
           <a
             href={checkoutUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center justify-center gap-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-lg px-8 py-4 rounded-2xl transition shadow-[0_0_30px_rgba(245,158,11,0.4)] cursor-pointer transform hover:-translate-y-0.5 w-full sm:w-auto"
+            class="inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-sm sm:text-base px-8 py-3.5 rounded-xl transition shadow-lg shadow-amber-500/20 cursor-pointer transform hover:-translate-y-0.5 w-full sm:w-auto"
           >
-            <span>QUIERO APRENDER EL MÉTODO (US$35) →</span>
+            <span>QUIERO APRENDER EL MÉTODO POR US$35 →</span>
           </a>
 
-          <div class="flex flex-wrap items-center justify-center gap-4 text-xs text-gray-400 font-medium">
-            <span class="flex items-center gap-1 text-emerald-400 font-bold">✓ Trabaja sobre tu caso real</span>
-            <span>•</span>
-            <span>✓ Pago único</span>
-            <span>•</span>
-            <span>✓ Asistente IA incluido</span>
-          </div>
+          <p class="text-xs text-slate-600 font-medium pt-1">
+            Pago único · Curso online · Garantía de 7 días según las condiciones
+            de Hotmart
+          </p>
         </div>
       </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 py-16 space-y-20">
-
-      <!-- 2. EL PROBLEMA -->
-      <section class="bg-slate-900/80 border border-slate-800 rounded-3xl p-8 sm:p-12 space-y-8 shadow-xl">
-        <div class="space-y-3">
-          <span class="text-xs font-black uppercase tracking-widest text-orange bg-orange/10 px-3 py-1 rounded-md border border-orange/20 inline-block">
-            📍 El Caos Inicial
+    <main class="max-w-4xl mx-auto px-6 py-12 space-y-16">
+      <!-- 2. ¿TE HA PASADO ESTO? -->
+      <section
+        class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xs"
+      >
+        <div class="space-y-2">
+          <span
+            class="text-[11px] font-black uppercase tracking-wider text-rose-900 bg-rose-100 px-3 py-1 rounded-md border border-rose-200 inline-block"
+          >
+            📍 El Escenario Real
           </span>
-          <h2 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
-            Tu presentación no empieza cuando abres PowerPoint. Empieza mucho antes.
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+            ¿TE HA PASADO ESTO?
           </h2>
         </div>
 
-        <div class="space-y-4 text-gray-300 text-base sm:text-lg leading-relaxed">
-          <p>
-            Empieza cuando alguien te dice: <strong class="text-amber-300 font-bold">“Necesito una presentación para el viernes.”</strong>
-          </p>
-          <p>Y entonces comienza esto:</p>
-
-          <div class="grid sm:grid-cols-2 gap-3 text-sm text-gray-300 py-2">
-            <div class="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800 flex items-center gap-2">
-              <span class="text-amber-400 font-bold">🔍</span> Buscas correos dispersos
-            </div>
-            <div class="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800 flex items-center gap-2">
-              <span class="text-amber-400 font-bold">💬</span> Revisas chats y mensajes
-            </div>
-            <div class="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800 flex items-center gap-2">
-              <span class="text-amber-400 font-bold">📄</span> Abres PDFs e informes antiguos
-            </div>
-            <div class="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800 flex items-center gap-2">
-              <span class="text-amber-400 font-bold">📊</span> Buscas datos en varios Excel
-            </div>
-            <div class="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800 flex items-center gap-2">
-              <span class="text-amber-400 font-bold">🎧</span> Escuchas o lees audios de reuniones
-            </div>
-            <div class="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800 flex items-center gap-2">
-              <span class="text-amber-400 font-bold">❓</span> Intentas recordar qué dato era el correcto
-            </div>
-          </div>
-
-          <p class="pt-2">
-            Y después de todo eso todavía tienes que decidir: <em class="text-white font-bold">¿Qué pongo en la presentación?</em>
+        <div
+          class="space-y-4 text-slate-700 text-xs sm:text-sm leading-relaxed"
+        >
+          <p class="text-sm sm:text-base font-medium">
+            Tienes que preparar una presentación importante.<br />
+            Y la información está repartida por todas partes:
           </p>
 
-          <div class="bg-amber-500/10 border border-amber-500/30 p-5 rounded-2xl text-amber-200 text-sm sm:text-base font-bold">
-            El problema no es que no sepas hacer slides. El problema es que estás intentando construir una presentación con información que todavía está desordenada.
-          </div>
-        </div>
-      </section>
-
-      <!-- 3. EL CAMBIO DE ENFOQUE -->
-      <section class="space-y-8">
-        <div class="text-center space-y-3">
-          <span class="text-xs font-black uppercase tracking-widest text-teal bg-teal/10 px-3 py-1 rounded-full border border-teal/20 inline-block">
-            💡 La Solución
-          </span>
-          <h2 class="text-2xl sm:text-4xl font-extrabold text-white">
-            Deja de empezar por las slides. Empieza por organizar el problema.
-          </h2>
-        </div>
-
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-10 space-y-6">
-          <p class="text-sm sm:text-base text-gray-300 text-center font-medium">
-            Este método te guía paso a paso a través de este recorrido:
-          </p>
-
-          <div class="space-y-4 font-sans text-xs sm:text-sm">
-
-            <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-1">
-              <div class="font-bold text-orange uppercase tracking-wider text-[11px]">01. CAOS</div>
-              <p class="text-gray-300">Correos · chats · audios · PDFs · Excel · notas de reuniones</p>
-            </div>
-
-            <div class="text-center text-amber-400 font-bold">↓</div>
-
-            <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-1">
-              <div class="font-bold text-teal uppercase tracking-wider text-[11px]">02. CONTEXTO</div>
-              <p class="text-gray-300">Toda la información reunida y organizada en un solo espacio verificado</p>
-            </div>
-
-            <div class="text-center text-amber-400 font-bold">↓</div>
-
-            <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-1">
-              <div class="font-bold text-amber-300 uppercase tracking-wider text-[11px]">03. ESTRUCTURA</div>
-              <p class="text-gray-300">Temas · datos · contradicciones · fechas · mensaje central claro</p>
-            </div>
-
-            <div class="text-center text-amber-400 font-bold">↓</div>
-
-            <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-1">
-              <div class="font-bold text-emerald-400 uppercase tracking-wider text-[11px]">04. DOCUMENTO EXECUTIVE ONE-PAGER</div>
-              <p class="text-gray-300">One-pager HTML / PDF listo para lectura ejecutiva</p>
-            </div>
-
-            <div class="text-center text-amber-400 font-bold">↓</div>
-
-            <div class="bg-gradient-to-r from-amber-500/20 via-orange/20 to-teal/20 p-5 rounded-2xl border border-amber-500/40 text-center">
-              <div class="font-black text-amber-300 uppercase tracking-wider text-xs">05. PRESENTACIÓN / PROTOTIPO</div>
-              <p class="text-white font-bold text-sm sm:text-base mt-1">Un resultado listo para presentar, compartir y utilizar.</p>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      <!-- 4. QUÉ VAS A APRENDER (MÉTODO DE 5 PASOS) -->
-      <section class="space-y-8">
-        <div class="text-center space-y-3">
-          <span class="text-xs font-black uppercase tracking-widest text-amber-400 bg-amber-400/10 px-3.5 py-1 rounded-full border border-amber-400/20 inline-block">
-            📚 Contenido del Curso
-          </span>
-          <h2 class="text-2xl sm:text-4xl font-extrabold text-white">
-            Un método de 5 pasos para dejar de improvisar
-          </h2>
-        </div>
-
-        <div class="space-y-6">
-
-          <!-- PASO 1 -->
-          <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-3 relative overflow-hidden">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-black uppercase tracking-widest text-amber-400 bg-amber-400/10 px-3 py-1 rounded-md">
-                PASO 1
-              </span>
-              <span class="text-xs text-gray-400 font-mono">Modulo 1</span>
-            </div>
-            <h3 class="text-xl font-bold text-white">ORGANIZA EL DESORDEN</h3>
-            <p class="text-sm text-gray-300 leading-relaxed">
-              Aprende a reunir tu información en un solo espacio sin perder contexto: correos, chats, audios, indicadores, PDFs y transcripciones.
-            </p>
-            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 text-xs text-emerald-400 font-semibold">
-              🎯 Resultado: Todo tu caos queda en un proyecto organizado sin citas inventadas.
-            </div>
-          </div>
-
-          <!-- PASO 2 -->
-          <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-3 relative overflow-hidden">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-black uppercase tracking-widest text-amber-400 bg-amber-400/10 px-3 py-1 rounded-md">
-                PASO 2
-              </span>
-              <span class="text-xs text-gray-400 font-mono">Modulo 2</span>
-            </div>
-            <h3 class="text-xl font-bold text-white">ORDENA CON PROMPTS</h3>
-            <p class="text-sm text-gray-300 leading-relaxed">
-              No le pidas a la IA: <em>“Hazme una presentación”</em>. Primero haz que encuentre lo importante. Aprenderás a extraer: temas repetidos, números y métricas, contradicciones, vacíos de información, línea de tiempo y estructura ejecutiva.
-            </p>
-            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 text-xs text-emerald-400 font-semibold">
-              🎯 Resultado: Sabes qué información importa exactamente y de dónde salió cada cifra.
-            </div>
-          </div>
-
-          <!-- PASO 3 -->
-          <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-3 relative overflow-hidden">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-black uppercase tracking-widest text-amber-400 bg-amber-400/10 px-3 py-1 rounded-md">
-                PASO 3
-              </span>
-              <span class="text-xs text-gray-400 font-mono">Modulo 3</span>
-            </div>
-            <h3 class="text-xl font-bold text-white">CREA TU ONE-PAGER</h3>
-            <p class="text-sm text-gray-300 leading-relaxed">
-              Convierte las notas organizadas en un documento ejecutivo de una página con: conclusión, contexto, 3 datos clave, riesgos o vacíos y próximo paso recomendado.
-            </p>
-            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 text-xs text-emerald-400 font-semibold">
-              🎯 Resultado: Pasas de información dispersa a una historia ejecutiva clara y persuasiva.
-            </div>
-          </div>
-
-          <!-- PASO 4 -->
-          <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-3 relative overflow-hidden">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-black uppercase tracking-widest text-amber-400 bg-amber-400/10 px-3 py-1 rounded-md">
-                PASO 4
-              </span>
-              <span class="text-xs text-gray-400 font-mono">Modulo 4</span>
-            </div>
-            <h3 class="text-xl font-bold text-white">REVISA SIN REHACER TODO</h3>
-            <p class="text-sm text-gray-300 leading-relaxed">
-              Aprende a revisar tu resultado con un checklist de: números, nombres y fechas, tono, y algo todavía más importante: <strong>cuándo dejar de editar</strong>. Si el ajuste toma más de 5 minutos, ya no estás ajustando... estás rehaciendo.
-            </p>
-            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 text-xs text-emerald-400 font-semibold">
-              🎯 Resultado: Un protocolo de control de calidad impecable en tiempo récord.
-            </div>
-          </div>
-
-          <!-- PASO 5 -->
-          <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-3 relative overflow-hidden">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-black uppercase tracking-widest text-amber-400 bg-amber-400/10 px-3 py-1 rounded-md">
-                PASO 5
-              </span>
-              <span class="text-xs text-gray-400 font-mono">Modulo 5</span>
-            </div>
-            <h3 class="text-xl font-bold text-white">CREA UN PROTOTIPO LISTO</h3>
-            <p class="text-sm text-gray-300 leading-relaxed">
-              Tu documento aprobado se convierte en HTML, Notion o en un Dashboard interactivo con Lovable sin necesidad de escribir código.
-            </p>
-            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800/80 text-xs text-emerald-400 font-semibold">
-              🎯 Resultado: No terminas con un documento archivado. Terminas con un prototipo que puedes presentar, compartir y utilizar hoy mismo.
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- 5 & 6. ANTES Y DESPUÉS DEL MÉTODO -->
-      <section class="grid md:grid-cols-2 gap-6">
-
-        <!-- ANTES -->
-        <div class="bg-rose-950/30 border border-rose-900/50 rounded-3xl p-6 sm:p-8 space-y-4">
-          <div class="text-xs font-black uppercase tracking-widest text-rose-400 bg-rose-900/30 px-3 py-1 rounded-md inline-block">
-            ❌ Antes del Método
-          </div>
-          <div class="text-2xl font-black text-white">6–10 horas perdidas</div>
-          <ul class="space-y-2 text-xs sm:text-sm text-gray-300">
-            <li>• Buscar información dispersa</li>
-            <li>• Leerla y ordenarla mentalmente</li>
-            <li>• Copiar y pegar interminablemente</li>
-            <li>• Maquillar slides vacías</li>
-            <li>• Revisar, volver a revisar y cambiar palabras</li>
-            <li>• Volver a empezar el domingo por la noche</li>
+          <ul
+            class="grid sm:grid-cols-2 gap-2 text-xs text-slate-800 bg-slate-50 p-4 rounded-xl border border-slate-200"
+          >
+            <li class="flex items-center gap-2">
+              <span class="text-amber-600 font-bold">•</span> Un Excel con los datos.
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-amber-600 font-bold">•</span> Varios PDFs.
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-amber-600 font-bold">•</span> Correos con decisiones
+              importantes.
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-amber-600 font-bold">•</span> Audios de WhatsApp.
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-amber-600 font-bold">•</span> Notas de reuniones.
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-amber-600 font-bold">•</span> Comentarios de diferentes
+              personas.
+            </li>
           </ul>
-        </div>
 
-        <!-- DESPUÉS -->
-        <div class="bg-emerald-950/30 border border-emerald-900/50 rounded-3xl p-6 sm:p-8 space-y-4">
-          <div class="text-xs font-black uppercase tracking-widest text-emerald-400 bg-emerald-900/30 px-3 py-1 rounded-md inline-block">
-            ✅ Después del Método
-          </div>
-          <div class="text-2xl font-black text-white">30–40 minutos por presentación</div>
-          <ul class="space-y-2 text-xs sm:text-sm text-gray-300">
-            <li>• Proyecto base reutilizable listo</li>
-            <li>• Prompts y protocolos estructurados</li>
-            <li>• Plantillas HTML y Notion ejecutables</li>
-            <li>• Sistema de revisión rápida (&lt;5 min)</li>
-            <li>• La 3ª vez el método se convierte en tu forma natural de trabajar</li>
-          </ul>
-        </div>
-
-      </section>
-
-      <!-- 7. ESTO NO ES OTRO CURSO DE IA -->
-      <section class="bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-3xl p-8 sm:p-12 space-y-8">
-        <div class="text-center space-y-3">
-          <h2 class="text-2xl sm:text-4xl font-black text-white">
-            Esto NO es otro curso teórico de IA
-          </h2>
-          <p class="text-gray-300 text-sm sm:text-base max-w-xl mx-auto">
-            Aquí no vienes a aprender la teoría de la inteligencia artificial. Vienes a hacer algo concreto con ella.
-          </p>
-        </div>
-
-        <div class="grid sm:grid-cols-2 gap-6 text-sm">
-          <div class="bg-slate-900 p-6 rounded-2xl border border-rose-900/40 space-y-3">
-            <h3 class="font-bold text-rose-400 uppercase tracking-wider text-xs">NO ES:</h3>
-            <ul class="space-y-2 text-gray-300">
-              <li>❌ 400 horas de teoría pesada</li>
-              <li>❌ Una colección de prompts sin contexto</li>
-              <li>❌ Una app mágica que promete hacer todo sola</li>
-              <li>❌ Un curso lleno de clases eternas que jamás terminas</li>
-            </ul>
-          </div>
-
-          <div class="bg-slate-900 p-6 rounded-2xl border border-emerald-900/40 space-y-3">
-            <h3 class="font-bold text-emerald-400 uppercase tracking-wider text-xs">SÍ ES:</h3>
-            <ul class="space-y-2 text-gray-200 font-medium">
-              <li>✓ Un método práctico de 5 pasos</li>
-              <li>✓ Protocolos y prompts ejecutables</li>
-              <li>✓ Trabajo 100% sobre tu propio caso real</li>
-              <li>✓ Herramientas gratuitas o que ya utilizas</li>
-              <li>✓ Un sistema replicable para toda tu vida profesional</li>
-            </ul>
+          <div class="space-y-2 pt-2">
+            <p class="font-bold text-slate-900">Abres PowerPoint.</p>
+            <p
+              class="italic text-slate-600 bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r-lg"
+            >
+              “¿Por dónde empiezo?”
+            </p>
+            <p>
+              Pasas una hora leyendo. Otra organizando. Otra intentando
+              encontrar el mensaje principal.
+            </p>
+            <p class="font-semibold text-slate-900">
+              Y cuando finalmente abres la primera diapositiva… sigues sin saber
+              qué debería decir.
+            </p>
           </div>
         </div>
       </section>
 
-      <!-- 8 & 9. REQUISITOS Y HERRAMIENTAS -->
-      <section class="grid md:grid-cols-2 gap-6">
-
-        <!-- QUÉ NECESITAS -->
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4">
-          <h3 class="text-xl font-bold text-white flex items-center gap-2">
-            <span>⚙️</span>
-            <span>¿Qué necesitas?</span>
-          </h3>
-          <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
-            Mucho menos de lo que imaginas:
-          </p>
-          <ul class="space-y-2 text-xs sm:text-sm text-gray-200">
-            <li>• Una cuenta gratuita de Google (para Gemini y NotebookLM).</li>
-            <li>• Una presentación real que tengas que preparar.</li>
-          </ul>
-          <p class="text-xs text-amber-300 font-medium pt-2">
-            La primera vez puedes reservar unos 45 minutos para configurar el sistema; después, el proceso se vuelve automático.
-          </p>
-        </div>
-
-        <!-- HERRAMIENTAS -->
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-4">
-          <h3 class="text-xl font-bold text-white flex items-center gap-2">
-            <span>🛠️</span>
-            <span>Las Herramientas</span>
-          </h3>
-          <p class="text-xs text-gray-300">
-            Usa la que ya conoces. El método es agnóstico:
-          </p>
-          <div class="grid grid-cols-2 gap-2 text-xs font-medium">
-            <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-amber-300">NotebookLM</div>
-            <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-teal">Gemini</div>
-            <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-emerald-400">ChatGPT</div>
-            <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 text-orange">Claude</div>
-          </div>
-          <p class="text-[11px] text-gray-400 italic">
-            Regla de oro: No abras una herramienta nueva solo porque está de moda.
-          </p>
-        </div>
-
-      </section>
-
-      <!-- 10 & 11. PARA QUIÉN ES & OBJECIONES -->
-      <section class="space-y-8">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-10 space-y-6">
-          <h2 class="text-2xl font-extrabold text-white">Para quién es este curso</h2>
-          <div class="grid sm:grid-cols-2 gap-3 text-xs sm:text-sm text-gray-200">
-            <div class="flex items-start gap-2">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span>Preparas presentaciones para clientes, jefes o equipos.</span>
-            </div>
-            <div class="flex items-start gap-2">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span>Recibes información dispersa desde muchos lugares.</span>
-            </div>
-            <div class="flex items-start gap-2">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span>Trabajas con documentos, reuniones, datos o investigaciones.</span>
-            </div>
-            <div class="flex items-start gap-2">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span>Sabes usar IA pero sientes que no la estás aprovechando bien.</span>
-            </div>
-            <div class="flex items-start gap-2">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span>Pierdes demasiado tiempo organizando información.</span>
-            </div>
-            <div class="flex items-start gap-2">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span>Quieres un sistema que puedas volver a utilizar siempre.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-8 space-y-6">
-          <h2 class="text-xl font-bold text-amber-300">Y si piensas...</h2>
-          <div class="space-y-4 text-xs sm:text-sm">
-            <div class="space-y-1">
-              <strong class="text-white block">"Yo no soy técnica"</strong>
-              <p class="text-gray-300">Perfecto. No necesitas serlo. El objetivo no es enseñarte a programar. La IA hace el trabajo pesado; tú tomas las decisiones.</p>
-            </div>
-            <div class="space-y-1">
-              <strong class="text-white block">"Ya sé usar ChatGPT"</strong>
-              <p class="text-gray-300">Mejor. No necesitas cambiar de herramienta. El método funciona con la IA que ya utilizas habitualmente.</p>
-            </div>
-            <div class="space-y-1">
-              <strong class="text-white block">"Ya he comprado cursos de IA que nunca terminé"</strong>
-              <p class="text-gray-300">Precisamente por eso este curso no está diseñado para que pases semanas consumiendo contenido. Tienes que ejecutarlo sobre una presentación real.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 12. QUÉ RECIBES -->
-      <section class="bg-gradient-to-br from-amber-500/10 via-slate-900 to-slate-950 border border-amber-500/30 rounded-3xl p-8 sm:p-12 space-y-8">
+      <!-- 3. AHORA IMAGINA OTRO FLUJO -->
+      <section
+        class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xs"
+      >
         <div class="space-y-2 text-center sm:text-left">
-          <span class="text-xs font-black uppercase tracking-widest text-amber-400 bg-amber-400/20 px-3 py-1 rounded-full border border-amber-400/30 inline-block">
-            🎁 El Paquete Completo
+          <span
+            class="text-[11px] font-black uppercase tracking-wider text-emerald-900 bg-emerald-100 px-3 py-1 rounded-md border border-emerald-200 inline-block"
+          >
+            💡 El Método
           </span>
-          <h2 class="text-2xl sm:text-4xl font-extrabold text-white">
-            ¿Qué recibes al comprar el curso?
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+            AHORA IMAGINA OTRO FLUJO
           </h2>
+          <p class="text-slate-600 text-xs sm:text-sm">
+            Tienes toda esa información. La entregas a un proceso estructurado
+            con IA.<br />
+            Primero organizas. Después analizas. Luego sintetizas. Validas. Y finalmente
+            construyes la presentación.
+          </p>
         </div>
 
-        <div class="grid sm:grid-cols-2 gap-6 text-sm">
-          <div class="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 space-y-2">
-            <div class="font-black text-amber-300 uppercase tracking-wider text-xs">01. CURSO</div>
-            <h3 class="font-bold text-white text-base">De “No tengo idea” a presentación completa</h3>
-            <p class="text-xs text-gray-300">El método completo de 5 pasos explicado sin rodeos teóricos.</p>
+        <!-- DIAGRAMA DE FLUJO -->
+        <div
+          class="bg-slate-900 text-white p-6 rounded-xl space-y-3 max-w-xl mx-auto text-center font-mono text-xs sm:text-sm shadow-md"
+        >
+          <div class="text-amber-400 font-bold text-sm tracking-widest">
+            INFORMACIÓN
           </div>
-
-          <div class="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 space-y-2">
-            <div class="font-black text-teal uppercase tracking-wider text-xs">02. MATERIAL DE IMPLEMENTACIÓN</div>
-            <h3 class="font-bold text-white text-base">Protocolos y Prompts Ejecutables</h3>
-            <p class="text-xs text-gray-300">Instrucciones y guías escritas paso a paso para ejecutar cada fase.</p>
+          <div class="text-slate-500">↓</div>
+          <div class="text-sky-300 font-bold text-sm tracking-widest">
+            ANÁLISIS
           </div>
-
-          <div class="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 space-y-2">
-            <div class="font-black text-emerald-400 uppercase tracking-wider text-xs">03. ASISTENTE IA DEDICADO</div>
-            <h3 class="font-bold text-white text-base">Asistente de Consulta Integrado</h3>
-            <p class="text-xs text-gray-300">Para resolver dudas rápidas durante el proceso y ayudarte a no perderte.</p>
+          <div class="text-slate-500">↓</div>
+          <div class="text-emerald-400 font-bold text-sm tracking-widest">
+            NARRATIVA
           </div>
-
-          <div class="bg-slate-900/90 p-6 rounded-2xl border border-slate-800 space-y-2">
-            <div class="font-black text-orange uppercase tracking-wider text-xs">04. BONUS EXCLUSIVO</div>
-            <h3 class="font-bold text-white text-base">Prototipo Interactivo con Lovable</h3>
-            <p class="text-xs text-gray-300">Para quienes quieran llevar el resultado un paso más allá y convertirlo en un dashboard.</p>
+          <div class="text-slate-500">↓</div>
+          <div class="text-amber-300 font-bold text-sm tracking-widest">
+            VALIDACIÓN
+          </div>
+          <div class="text-slate-500">↓</div>
+          <div class="text-emerald-300 font-bold text-sm tracking-widest">
+            PRESENTACIÓN
           </div>
         </div>
+
+        <p class="text-center font-bold text-slate-900 text-xs sm:text-sm pt-1">
+          Ese es el método que vas a aprender en este curso.
+        </p>
       </section>
 
-      <!-- 13 & 14. PRINCIPALES Y PRECIO -->
-      <section class="bg-gradient-to-br from-slate-900 via-[#1E293B] to-slate-900 text-white rounded-3xl p-8 sm:p-12 text-center space-y-8 shadow-2xl border border-amber-500/40">
-        <div class="space-y-4 max-w-2xl mx-auto">
-          <blockquote class="text-lg sm:text-2xl font-black text-amber-300 italic">
-            "Tú eres el estratega. La IA es el motor."
-          </blockquote>
-          <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
-            No quiero que termines dependiendo de una IA para pensar. Quiero exactamente lo contrario: que la IA procese, cruce y formatee la información mientras tú utilizas tu tiempo para decidir, analizar y comunicar.
-          </p>
-        </div>
-
-        <div class="max-w-md mx-auto space-y-4 pt-4 border-t border-slate-800">
-          <span class="text-xs font-bold text-gray-400 uppercase tracking-widest block">Inversión Única</span>
-          <div class="text-4xl sm:text-5xl font-black text-white">
-            US$35
-          </div>
-          <p class="text-xs text-amber-200/90 font-medium">
-            Acceso al curso + materiales + asistente IA + bonus · 100% asíncrono
-          </p>
-
-          <a
-            href={checkoutUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="w-full inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-lg py-4 px-8 rounded-2xl transition shadow-[0_0_25px_rgba(245,158,11,0.4)] cursor-pointer transform hover:-translate-y-0.5"
+      <!-- 4. MIRA LO QUE PUEDES LLEGAR A CONSTRUIR -->
+      <section
+        class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xs"
+      >
+        <div class="space-y-2">
+          <span
+            class="text-[11px] font-black uppercase tracking-wider text-sky-900 bg-sky-100 px-3 py-1 rounded-md border border-sky-200 inline-block"
           >
-            <span>QUIERO EL CURSO POR US$35 →</span>
-          </a>
+            📊 Ejemplo Real
+          </span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+            MIRA LO QUE PUEDES LLEGAR A CONSTRUIR
+          </h2>
+          <p class="text-slate-700 text-xs sm:text-sm leading-relaxed">
+            Una de las aplicaciones prácticas de esta metodología es transformar
+            información operativa en un dashboard ejecutivo interactivo.<br />
+            Aquí puedes ver un ejemplo real de un reporte construido por un estudiante:
+          </p>
         </div>
+
+        <!-- REPORTE PREVIEW CARD -->
+        <div
+          class="bg-slate-50 border-2 border-slate-300 rounded-xl p-5 space-y-4"
+        >
+          <div
+            class="flex items-center justify-between border-b border-slate-200 pb-3"
+          >
+            <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">
+              Dashboard Ejecutivo · Cierre Agosto 2026
+            </h3>
+            <span
+              class="text-[10px] font-mono bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold"
+              >Reporte Interactivo</span
+            >
+          </div>
+
+          <p class="text-xs text-slate-600 font-medium">Incluye:</p>
+          <div
+            class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs text-slate-700"
+          >
+            <span class="bg-white p-2 rounded border border-slate-200"
+              >✓ Análisis financiero</span
+            >
+            <span class="bg-white p-2 rounded border border-slate-200"
+              >✓ Resultados comerciales</span
+            >
+            <span class="bg-white p-2 rounded border border-slate-200"
+              >✓ Comparación vs metas</span
+            >
+            <span class="bg-white p-2 rounded border border-slate-200"
+              >✓ Identificación de riesgos</span
+            >
+            <span class="bg-white p-2 rounded border border-slate-200"
+              >✓ Análisis de clientes</span
+            >
+            <span class="bg-white p-2 rounded border border-slate-200"
+              >✓ Fuentes de información</span
+            >
+            <span class="bg-white p-2 rounded border border-slate-200"
+              >✓ Datos faltantes</span
+            >
+            <span class="bg-white p-2 rounded border border-slate-200"
+              >✓ Recomendaciones</span
+            >
+            <span class="bg-white p-2 rounded border border-slate-200"
+              >✓ Próximos pasos</span
+            >
+          </div>
+
+          <div class="pt-2 text-center">
+            <a
+              href="https://reportedeagosto.lovable.app"
+              target="_blank"
+              class="inline-flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-5 py-2.5 rounded-lg transition"
+            >
+              <span>VER EL REPORTE INTERACTIVO →</span>
+            </a>
+          </div>
+        </div>
+
+        <p class="text-xs sm:text-sm text-slate-600 italic">
+          Este ejemplo muestra el tipo de entregable que puedes construir cuando
+          la IA deja de ser solamente un chat y empieza a formar parte de un
+          proceso de trabajo.
+        </p>
       </section>
 
-      <!-- 15. FAQ -->
+      <!-- 5. ¿QUÉ VAS A APRENDER? -->
       <section class="space-y-6">
-        <h2 class="text-2xl font-bold text-white text-center">Preguntas Frecuentes</h2>
+        <div class="text-center space-y-2">
+          <span
+            class="text-[11px] font-black uppercase tracking-wider text-amber-900 bg-amber-100 px-3 py-1 rounded-full border border-amber-200 inline-block"
+          >
+            📚 Metodología
+          </span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+            ¿QUÉ VAS A APRENDER?
+          </h2>
+          <p class="text-slate-600 text-xs sm:text-sm max-w-lg mx-auto">
+            No vas a aprender una colección de prompts aislados. Vas a aprender
+            un proceso completo.
+          </p>
+        </div>
 
-        <div class="space-y-4 text-xs sm:text-sm">
-          <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-1">
-            <strong class="text-white block">¿Es un curso en vivo?</strong>
-            <p class="text-gray-300">No. Es 100% asíncrono. Puedes avanzar a tu ritmo, pausar y volver cuando quieras.</p>
+        <div class="space-y-4">
+          <!-- 01 ORGANIZA -->
+          <div
+            class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 space-y-3 shadow-xs"
+          >
+            <div class="flex items-center gap-3">
+              <span
+                class="bg-amber-500 text-slate-950 font-black text-xs px-2.5 py-1 rounded-md"
+                >01</span
+              >
+              <h3 class="font-extrabold text-slate-900 text-base">
+                ORGANIZA — Construye tu fuente de verdad
+              </h3>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-600">
+              Aprende a reunir información que viene de diferentes lugares y
+              convertirla en una base organizada para trabajar con IA.
+            </p>
+            <div
+              class="text-xs text-slate-700 bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1"
+            >
+              <span class="font-bold text-slate-900 block"
+                >Vas a trabajar con ejemplos como:</span
+              >
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span
+                  class="bg-white px-2 py-0.5 rounded border border-slate-200"
+                  >PDFs</span
+                >
+                <span
+                  class="bg-white px-2 py-0.5 rounded border border-slate-200"
+                  >Excel</span
+                >
+                <span
+                  class="bg-white px-2 py-0.5 rounded border border-slate-200"
+                  >Documentos</span
+                >
+                <span
+                  class="bg-white px-2 py-0.5 rounded border border-slate-200"
+                  >Correos</span
+                >
+                <span
+                  class="bg-white px-2 py-0.5 rounded border border-slate-200"
+                  >Notas</span
+                >
+                <span
+                  class="bg-white px-2 py-0.5 rounded border border-slate-200"
+                  >Información desestructurada</span
+                >
+              </div>
+            </div>
+            <p class="text-xs text-emerald-700 font-bold">
+              🎯 Resultado: una fuente de información lista para analizar.
+            </p>
           </div>
 
-          <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-1">
-            <strong class="text-white block">¿Necesito pagar varias herramientas?</strong>
-            <p class="text-gray-300">No. El método está diseñado para funcionar con herramientas gratuitas o que ya tengas.</p>
+          <!-- 02 ANALIZA -->
+          <div
+            class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 space-y-3 shadow-xs"
+          >
+            <div class="flex items-center gap-3">
+              <span
+                class="bg-amber-500 text-slate-950 font-black text-xs px-2.5 py-1 rounded-md"
+                >02</span
+              >
+              <h3 class="font-extrabold text-slate-900 text-base">
+                ANALIZA — Haz que la IA encuentre lo importante
+              </h3>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-600">
+              Aprende a utilizar instrucciones estructuradas para extraer:
+            </p>
+            <div
+              class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-xs text-slate-700 bg-slate-50 p-3 rounded-xl border border-slate-200"
+            >
+              <span>• Datos relevantes</span>
+              <span>• Patrones</span>
+              <span>• Problemas</span>
+              <span>• Oportunidades</span>
+              <span>• Inconsistencias</span>
+              <span>• Información faltante</span>
+              <span class="col-span-2">• Puntos que requieren revisión</span>
+            </div>
+            <p class="text-xs text-emerald-700 font-bold">
+              🎯 Resultado: información organizada y analizada.
+            </p>
           </div>
 
-          <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-1">
-            <strong class="text-white block">¿Necesito saber de IA previamente?</strong>
-            <p class="text-gray-300">No. Necesitas saber qué quieres presentar. El curso te muestra cómo utilizar la IA para organizar esa información.</p>
+          <!-- 03 SINTETIZA -->
+          <div
+            class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 space-y-3 shadow-xs"
+          >
+            <div class="flex items-center gap-3">
+              <span
+                class="bg-amber-500 text-slate-950 font-black text-xs px-2.5 py-1 rounded-md"
+                >03</span
+              >
+              <h3 class="font-extrabold text-slate-900 text-base">
+                SINTETIZA — Convierte datos en una historia ejecutiva
+              </h3>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-600">
+              Aquí ocurre una de las partes más importantes. Aprendes a pasar de <em
+                class="text-slate-800 font-bold">“Tengo mucha información”</em
+              > a <em class="text-emerald-800 font-bold"
+                >“Sé exactamente qué necesito comunicar.”</em
+              >
+            </p>
+            <div
+              class="text-xs text-slate-700 bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1"
+            >
+              <span class="font-bold text-slate-900 block"
+                >Construirás un One-Pager ejecutivo con:</span
+              >
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span
+                  class="bg-white px-2 py-0.5 rounded border border-slate-200"
+                  >Contexto</span
+                >
+                <span
+                  class="bg-white px-2 py-0.5 rounded border border-slate-200"
+                  >Datos principales</span
+                >
+                <span
+                  class="bg-white px-2 py-0.5 rounded border border-slate-200"
+                  >Hallazgos</span
+                >
+                <span
+                  class="bg-white px-2 py-0.5 rounded border border-slate-200"
+                  >Riesgos</span
+                >
+                <span
+                  class="bg-white px-2 py-0.5 rounded border border-slate-200"
+                  >Oportunidades</span
+                >
+                <span
+                  class="bg-white px-2 py-0.5 rounded border border-slate-200"
+                  >Conclusión</span
+                >
+                <span
+                  class="bg-white px-2 py-0.5 rounded border border-slate-200"
+                  >Próximos pasos</span
+                >
+              </div>
+            </div>
+            <p class="text-xs text-emerald-700 font-bold">
+              🎯 Resultado: una narrativa ejecutiva clara antes de diseñar las
+              diapositivas.
+            </p>
           </div>
 
-          <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-1">
-            <strong class="text-white block">¿La IA hace toda la presentación por mí?</strong>
-            <p class="text-gray-300">No. Y eso es intencional. Tú decides. La IA procesa, organiza y acelera.</p>
+          <!-- 04 VALIDA -->
+          <div
+            class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 space-y-3 shadow-xs"
+          >
+            <div class="flex items-center gap-3">
+              <span
+                class="bg-amber-500 text-slate-950 font-black text-xs px-2.5 py-1 rounded-md"
+                >04</span
+              >
+              <h3 class="font-extrabold text-slate-900 text-base">
+                VALIDA — Revisa antes de presentar
+              </h3>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-600">
+              La IA puede ayudarte a construir rápido. También necesitas revisar
+              lo que construyó.<br />
+              Aprenderás un proceso rápido para comprobar:
+            </p>
+            <div
+              class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-xs text-slate-700 bg-slate-50 p-3 rounded-xl border border-slate-200"
+            >
+              <span>• Cifras</span>
+              <span>• Fuentes</span>
+              <span>• Conclusiones</span>
+              <span>• Inconsistencias</span>
+              <span>• Información faltante</span>
+              <span>• Afirmaciones con evidencia</span>
+            </div>
+            <p class="text-xs text-emerald-700 font-bold">
+              🎯 Resultado: mayor control sobre el contenido antes de
+              presentarlo.
+            </p>
           </div>
 
-          <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-1">
-            <strong class="text-white block">¿Incluye acompañamiento personalizado?</strong>
-            <p class="text-gray-300">No. El curso es un producto autónomo. Si después quieres construir el sistema sobre tu caso específico, el propio curso te indica cómo acceder a una Sesión de Enfoque.</p>
+          <!-- 05 PRESENTA -->
+          <div
+            class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 space-y-3 shadow-xs"
+          >
+            <div class="flex items-center gap-3">
+              <span
+                class="bg-amber-500 text-slate-950 font-black text-xs px-2.5 py-1 rounded-md"
+                >05</span
+              >
+              <h3 class="font-extrabold text-slate-900 text-base">
+                PRESENTA — Convierte la narrativa en un entregable
+              </h3>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-600">
+              Con la estructura lista, pasas a construir la presentación o
+              prototipo.<br />
+              Aprenderás a utilizar herramientas de IA para crear entregables interactivos
+              y visuales.
+            </p>
+            <div
+              class="bg-amber-50 border border-amber-300 p-3 rounded-xl text-xs font-bold text-amber-950 text-center"
+            >
+              El objetivo es que la presentación sea: clara + estructurada +
+              verificable + útil para tomar decisiones.
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- 16. CIERRE -->
-      <section class="text-center space-y-8 border-t border-slate-800 pt-16">
-        <div class="space-y-4 max-w-2xl mx-auto">
-          <h2 class="text-2xl sm:text-4xl font-extrabold text-white">
-            La próxima vez que te digan: <br />
-            <span class="text-amber-300">“Necesito una presentación para el viernes”</span>
+      <!-- 6. LO QUE CAMBIA EN TU FORMA DE TRABAJAR -->
+      <section
+        class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xs"
+      >
+        <div class="text-center space-y-2">
+          <span
+            class="text-[11px] font-black uppercase tracking-wider text-teal-900 bg-teal-100 px-3 py-1 rounded-full border border-teal-200 inline-block"
+          >
+            🔄 Transformación
+          </span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+            LO QUE CAMBIA EN TU FORMA DE TRABAJAR
           </h2>
-          <p class="text-sm sm:text-base text-gray-300">
-            No vuelvas a abrir una página en blanco. Abre tu método. Organiza. Ordena. Resume. Revisa. Presenta.
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- ANTES -->
+          <div
+            class="bg-rose-50/50 border border-rose-200 rounded-xl p-5 space-y-2 text-center"
+          >
+            <span
+              class="text-xs font-black uppercase tracking-wider text-rose-900 bg-rose-200/80 px-2.5 py-0.5 rounded"
+              >ANTES</span
+            >
+            <div class="text-xs text-slate-700 space-y-1 font-mono pt-2">
+              <p>Información dispersa.</p>
+              <p class="text-slate-400">↓</p>
+              <p>Lectura manual.</p>
+              <p class="text-slate-400">↓</p>
+              <p>Copiar y pegar.</p>
+              <p class="text-slate-400">↓</p>
+              <p>Intentar entender qué es importante.</p>
+              <p class="text-slate-400">↓</p>
+              <p>Abrir PowerPoint.</p>
+              <p class="text-slate-400">↓</p>
+              <p>Empezar a mover cajas.</p>
+              <p class="text-slate-400">↓</p>
+              <p>Cambiar diapositivas.</p>
+              <p class="text-slate-400">↓</p>
+              <p>Volver a revisar todo.</p>
+            </div>
+          </div>
+
+          <!-- DESPUÉS -->
+          <div
+            class="bg-emerald-50/50 border border-emerald-200 rounded-xl p-5 space-y-2 text-center"
+          >
+            <span
+              class="text-xs font-black uppercase tracking-wider text-emerald-900 bg-emerald-200/80 px-2.5 py-0.5 rounded"
+              >DESPUÉS</span
+            >
+            <div
+              class="text-xs text-slate-800 font-bold space-y-1 font-mono pt-2"
+            >
+              <p>Información dispersa.</p>
+              <p class="text-emerald-500">↓</p>
+              <p>Fuente de verdad.</p>
+              <p class="text-emerald-500">↓</p>
+              <p>Análisis con IA.</p>
+              <p class="text-emerald-500">↓</p>
+              <p>One-Pager ejecutivo.</p>
+              <p class="text-emerald-500">↓</p>
+              <p>Control de calidad.</p>
+              <p class="text-emerald-500">↓</p>
+              <p class="text-emerald-700 font-black">
+                Prototipo / presentación.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p
+          class="text-center text-xs sm:text-sm text-slate-700 font-semibold pt-2"
+        >
+          El trabajo empieza por la información y la narrativa. El diseño llega
+          después.
+        </p>
+      </section>
+
+      <!-- 7. ESTE CURSO ES / NO ES PARA TI SI... -->
+      <section class="space-y-6">
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- ES PARA TI SI -->
+          <div
+            class="bg-white border-2 border-emerald-400/80 rounded-2xl p-6 space-y-4 shadow-xs"
+          >
+            <div
+              class="inline-flex items-center gap-2 bg-emerald-100 text-emerald-900 font-black text-xs uppercase tracking-wider px-3 py-1 rounded-md border border-emerald-200"
+            >
+              ✅ ESTE CURSO ES PARA TI SI...
+            </div>
+            <ul class="space-y-2 text-xs sm:text-sm text-slate-700">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold">✓</span> Preparas informes
+                o presentaciones ejecutivas.
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold">✓</span> Trabajas con grandes
+                cantidades de información.
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold">✓</span> Recibes información
+                por diferentes canales.
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold">✓</span> Usas ChatGPT u otras
+                herramientas de IA, pero todavía no las integras en procesos completos.
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold">✓</span> Quieres reducir
+                el tiempo que dedicas a organizar y sintetizar información.
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold">✓</span> Necesitas presentar
+                información compleja de manera clara.
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600 font-bold">✓</span> Quieres aprender
+                un método que puedas repetir en diferentes proyectos.
+              </li>
+            </ul>
+          </div>
+
+          <!-- NO ES PARA TI SI -->
+          <div
+            class="bg-white border-2 border-rose-300 rounded-2xl p-6 space-y-4 shadow-xs"
+          >
+            <div
+              class="inline-flex items-center gap-2 bg-rose-100 text-rose-900 font-black text-xs uppercase tracking-wider px-3 py-1 rounded-md border border-rose-200"
+            >
+              ✕ ESTE CURSO NO ES PARA TI SI...
+            </div>
+            <ul class="space-y-2 text-xs sm:text-sm text-slate-600">
+              <li class="flex items-start gap-2">
+                <span class="text-rose-500 font-bold">✕</span> Buscas aprender diseño
+                avanzado de PowerPoint.
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-rose-500 font-bold">✕</span> Quieres una colección
+                de prompts para copiar sin entender el proceso.
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-rose-500 font-bold">✕</span> Buscas que alguien
+                haga una presentación por ti.
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-rose-500 font-bold">✕</span> No quieres trabajar
+                con información real de tu contexto.
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-rose-500 font-bold">✕</span> Esperas que una herramienta
+                de IA tome decisiones importantes sin revisión humana.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="text-center text-xs text-slate-600 italic">
+          La metodología busca precisamente mantener control, criterio y
+          autonomía en el proceso.
+        </p>
+      </section>
+
+      <!-- 8. EL CONTENIDO DEL CURSO (MÓDULOS) -->
+      <section class="space-y-6">
+        <div class="text-center space-y-2">
+          <span
+            class="text-[11px] font-black uppercase tracking-wider text-amber-900 bg-amber-100 px-3 py-1 rounded-full border border-amber-200 inline-block"
+          >
+            📋 Temario
+          </span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+            EL CONTENIDO DEL CURSO
+          </h2>
+        </div>
+
+        <div class="grid gap-3">
+          <div
+            class="bg-white border border-slate-200 p-4 rounded-xl space-y-1"
+          >
+            <span
+              class="text-[11px] font-black text-amber-800 uppercase tracking-wider"
+              >MÓDULO 1</span
+            >
+            <h3 class="font-bold text-slate-900 text-sm sm:text-base">
+              De información dispersa a una fuente de verdad
+            </h3>
+            <p class="text-xs text-slate-600">
+              Aprende a preparar tus fuentes para trabajar con IA.
+            </p>
+          </div>
+
+          <div
+            class="bg-white border border-slate-200 p-4 rounded-xl space-y-1"
+          >
+            <span
+              class="text-[11px] font-black text-amber-800 uppercase tracking-wider"
+              >MÓDULO 2</span
+            >
+            <h3 class="font-bold text-slate-900 text-sm sm:text-base">
+              Extracción y análisis ejecutivo
+            </h3>
+            <p class="text-xs text-slate-600">
+              Descubre cómo hacer que la IA encuentre la información que
+              realmente importa.
+            </p>
+          </div>
+
+          <div
+            class="bg-white border border-slate-200 p-4 rounded-xl space-y-1"
+          >
+            <span
+              class="text-[11px] font-black text-amber-800 uppercase tracking-wider"
+              >MÓDULO 3</span
+            >
+            <h3 class="font-bold text-slate-900 text-sm sm:text-base">
+              El One-Pager ejecutivo
+            </h3>
+            <p class="text-xs text-slate-600">
+              Construye la estructura que dará dirección a toda tu presentación.
+            </p>
+          </div>
+
+          <div
+            class="bg-white border border-slate-200 p-4 rounded-xl space-y-1"
+          >
+            <span
+              class="text-[11px] font-black text-amber-800 uppercase tracking-wider"
+              >MÓDULO 4</span
+            >
+            <h3 class="font-bold text-slate-900 text-sm sm:text-base">
+              Control de calidad
+            </h3>
+            <p class="text-xs text-slate-600">
+              Aprende a detectar inconsistencias, datos faltantes y conclusiones
+              que necesitan revisión.
+            </p>
+          </div>
+
+          <div
+            class="bg-white border border-slate-200 p-4 rounded-xl space-y-1"
+          >
+            <span
+              class="text-[11px] font-black text-amber-800 uppercase tracking-wider"
+              >MÓDULO 5</span
+            >
+            <h3 class="font-bold text-slate-900 text-sm sm:text-base">
+              Del One-Pager a la presentación
+            </h3>
+            <p class="text-xs text-slate-600">
+              Transforma tu narrativa en un entregable visual e interactivo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. ¿QUIÉN TE ENSEÑA? (Pablo Ríos) -->
+      <section
+        class="bg-slate-900 text-white rounded-2xl p-6 sm:p-10 shadow-lg border border-slate-800"
+      >
+        <div
+          class="flex flex-col md:flex-row items-center md:items-start gap-6 sm:gap-8"
+        >
+          <div
+            class="shrink-0 text-center flex flex-col items-center md:w-48 w-full"
+          >
+            <div class="relative inline-block">
+              <img
+                src="/pablo-rios.jpeg"
+                alt="Pablo Ríos"
+                class="w-32 h-32 sm:w-36 sm:h-36 rounded-full object-cover border-2 border-amber-400 mx-auto shadow-xl"
+              />
+              <div
+                class="absolute bottom-1 right-1 bg-amber-500 text-slate-950 text-[10px] font-black px-2.5 py-0.5 rounded-full shadow-md whitespace-nowrap"
+              >
+                Fundador
+              </div>
+            </div>
+            <h3 class="text-base sm:text-lg font-black text-white mt-3">
+              PABLO RÍOS
+            </h3>
+            <p class="text-xs text-amber-300 font-medium">
+              Product Manager y fundador de LuciRMe AI
+            </p>
+          </div>
+
+          <div
+            class="flex-1 w-full space-y-3.5 text-center md:text-left text-slate-200 text-xs sm:text-sm leading-relaxed"
+          >
+            <div>
+              <span
+                class="text-[11px] font-extrabold uppercase tracking-wider text-amber-300 bg-amber-500/20 px-3 py-1 rounded-full border border-amber-500/30 inline-block"
+              >
+                ¿QUIÉN TE ENSEÑA?
+              </span>
+            </div>
+
+            <p class="text-slate-300">
+              Trabajo en la intersección entre producto, procesos e inteligencia
+              artificial.<br />
+              Mi enfoque parte de una idea sencilla: <strong
+                class="text-amber-300 font-bold"
+                >la IA tiene valor cuando se integra al trabajo real.</strong
+              >
+            </p>
+
+            <p class="text-slate-300">
+              Por eso LuciRMe AI trabaja en arquitecturas de trabajo con IA
+              orientadas a recuperar tiempo y mejorar la forma en que
+              profesionales y equipos operan.
+            </p>
+
+            <p class="text-slate-300">
+              Este curso nace de esa misma filosofía. No necesitas convertirte
+              en especialista en IA. Necesitas aprender dónde ponerla dentro de
+              tu proceso de trabajo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. PRECIO Y ANCLAJE (TODO EL MÉTODO POR US$35) -->
+      <section
+        class="bg-gradient-to-br from-amber-50 via-white to-amber-100/50 border-2 border-amber-300 rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm text-center"
+      >
+        <div class="space-y-2">
+          <span
+            class="text-[11px] font-black uppercase tracking-wider text-amber-900 bg-amber-200/80 px-3.5 py-1 rounded-full border border-amber-300 inline-block"
+          >
+            💰 Inversión
+          </span>
+          <h2 class="text-xl sm:text-3xl font-extrabold text-slate-900">
+            TODO EL MÉTODO POR US$35
+          </h2>
+          <p class="text-slate-700 text-xs sm:text-sm max-w-lg mx-auto">
+            ¿Cuánto pagarías por tener este proceso resuelto? Una asesoría
+            personalizada para construir contigo un sistema de trabajo puede
+            representar una inversión mucho mayor. Este producto tiene otro
+            objetivo: enseñarte el método para que puedas aplicarlo por tu
+            cuenta.
           </p>
         </div>
 
-        <div class="pt-4">
+        <div
+          class="max-w-sm mx-auto bg-white p-6 rounded-2xl border-2 border-amber-400 shadow-md space-y-4"
+        >
+          <div class="space-y-1">
+            <span
+              class="text-xs text-slate-500 font-bold uppercase tracking-wider"
+              >VALOR DE REFERENCIA</span
+            >
+            <div class="text-xl text-slate-400 line-through font-bold">
+              US$120
+            </div>
+          </div>
+
+          <div
+            class="bg-amber-500 text-slate-950 p-4 rounded-xl shadow-sm space-y-1"
+          >
+            <span class="text-[11px] font-black uppercase tracking-wider block"
+              >HOY</span
+            >
+            <div class="text-4xl font-black">US$35</div>
+            <span class="text-xs font-bold block">Pago único</span>
+          </div>
+
+          <p class="text-xs text-slate-600">
+            Incluye el curso completo y los materiales que estén definidos
+            dentro del producto en Hotmart.
+          </p>
+
           <a
             href={checkoutUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-lg py-4 px-10 rounded-2xl transition shadow-[0_0_30px_rgba(245,158,11,0.4)] cursor-pointer"
+            class="w-full inline-flex items-center justify-center gap-2 bg-slate-950 hover:bg-slate-800 text-amber-300 font-black text-sm sm:text-base py-3.5 px-6 rounded-xl transition shadow-md cursor-pointer transform hover:-translate-y-0.5"
           >
-            <span>QUIERO APRENDER EL MÉTODO (US$35) →</span>
+            <span>QUIERO APRENDER EL MÉTODO →</span>
           </a>
+
+          <p class="text-xs text-emerald-700 font-bold">
+            Ahorras US$85 frente al valor de referencia.
+          </p>
+        </div>
+      </section>
+
+      <!-- 11. ¿POR QUÉ US$35? -->
+      <section
+        class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-4 shadow-xs text-center max-w-2xl mx-auto"
+      >
+        <h2 class="text-lg sm:text-xl font-extrabold text-slate-900">
+          ¿POR QUÉ US$35?
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+          Porque el objetivo es que puedas aprender el proceso sin convertir la
+          compra en una gran decisión financiera.<br />
+          Por menos de lo que cuesta una herramienta de software que puedes terminar
+          usando poco, puedes aprender un sistema que puedes aplicar cada vez que
+          necesites convertir información compleja en un entregable ejecutivo.
+        </p>
+        <div
+          class="inline-flex items-center gap-2 text-xs font-bold text-amber-900 bg-amber-100 px-4 py-2 rounded-lg border border-amber-200"
+        >
+          Una compra · Un método · Múltiples aplicaciones
+        </div>
+      </section>
+
+      <!-- 12. GARANTÍA DE RIESGO -->
+      <section
+        class="bg-emerald-50/80 border-2 border-emerald-300 rounded-2xl p-6 sm:p-8 shadow-xs relative"
+      >
+        <div
+          class="max-w-2xl mx-auto flex flex-col md:flex-row items-center gap-6"
+        >
+          <div class="shrink-0 text-center">
+            <div
+              class="w-20 h-20 bg-emerald-600 text-white rounded-full flex flex-col items-center justify-center shadow-md"
+            >
+              <span class="text-2xl font-black">7</span>
+              <span class="text-[9px] font-bold uppercase tracking-wider"
+                >Días Garantía</span
+              >
+            </div>
+          </div>
+
+          <div class="space-y-2 text-center md:text-left">
+            <h2 class="text-lg sm:text-xl font-black text-slate-900">
+              Y PUEDES EMPEZAR SIN ASUMIR TODO EL RIESGO
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              Tienes 7 días de garantía, de acuerdo con las condiciones
+              aplicables de Hotmart.<br />
+              Puedes entrar, revisar el contenido y comprobar si el método encaja
+              con lo que necesitas.
+            </p>
+            <div class="pt-2">
+              <a
+                href={checkoutUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs sm:text-sm px-6 py-2.5 rounded-lg shadow-sm"
+              >
+                <span>QUIERO EMPEZAR POR US$35 →</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 13. ¿QUIERES LLEVARLO MÁS LEJOS? -->
+      <section class="space-y-6">
+        <div class="text-center space-y-2">
+          <span
+            class="text-[11px] font-black uppercase tracking-wider text-slate-800 bg-slate-200 px-3 py-1 rounded-full inline-block"
+          >
+            🚀 Opciones Adicionales
+          </span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+            ¿QUIERES LLEVARLO MÁS LEJOS?
+          </h2>
+          <p class="text-slate-600 text-xs sm:text-sm max-w-lg mx-auto">
+            Después de aprender el método puedes complementar tu proceso con
+            otros recursos de LuciRMe AI.
+          </p>
         </div>
 
-        <div class="pt-8 border-t border-slate-800/80 max-w-md mx-auto space-y-2">
-          <strong class="text-white text-base block font-black">LuciRMe AI</strong>
-          <p class="text-xs text-amber-200/90 italic font-serif">
+        <div class="grid md:grid-cols-3 gap-4">
+          <div
+            class="bg-white border border-slate-200 p-5 rounded-2xl space-y-2 relative flex flex-col justify-between"
+          >
+            <div class="space-y-1">
+              <span
+                class="text-[10px] font-bold uppercase tracking-wider text-amber-800 bg-amber-100 px-2 py-0.5 rounded border border-amber-200 inline-block"
+                >Order bump opcional</span
+              >
+              <h3 class="font-bold text-slate-900 text-sm">
+                PLANTILLA DE NOTION DE SEGUIMIENTO E HISTORIAL DE PRESENTACIONES
+              </h3>
+              <p class="text-xs text-slate-600">
+                Una colección adicional para controlar las partes de tu flujo de
+                trabajo
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="bg-white border border-slate-200 p-5 rounded-2xl space-y-2 relative flex flex-col justify-between"
+          >
+            <div class="space-y-1">
+              <span
+                class="text-[10px] font-bold uppercase tracking-wider text-sky-800 bg-sky-100 px-2 py-0.5 rounded border border-sky-200 inline-block"
+                >Producto adicional</span
+              >
+              <h3 class="font-bold text-slate-900 text-sm">
+                ASISTENTE IA LUCIRME
+              </h3>
+              <p class="text-xs text-slate-600">
+                Un producto independiente para quienes quieren tener
+                acompañamiento de IA disponible durante su trabajo.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="bg-white border border-slate-200 p-5 rounded-2xl space-y-2 relative flex flex-col justify-between"
+          >
+            <div class="space-y-1">
+              <span
+                class="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-200 inline-block"
+                >Servicio adicional</span
+              >
+              <h3 class="font-bold text-slate-900 text-sm">
+                CICLO DE SESIONES 1:1
+              </h3>
+              <p class="text-xs text-slate-600">
+                Si quieres aplicar el método directamente a tu contexto
+                profesional, puedes pasar a un acompañamiento personalizado.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center text-xs text-slate-500 italic">
+          No necesitas comprar ninguno de estos productos para completar el
+          curso.
+        </p>
+      </section>
+
+      <!-- 14. PREGUNTAS FRECUENTES -->
+      <section class="space-y-6">
+        <div class="text-center space-y-2">
+          <span
+            class="text-[11px] font-black uppercase tracking-wider text-amber-900 bg-amber-100 px-3 py-1 rounded-full border border-amber-200 inline-block"
+          >
+            ❓ FAQ
+          </span>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+            PREGUNTAS FRECUENTES
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-3.5 text-xs sm:text-sm">
+          <div
+            class="bg-white p-5 rounded-xl border border-slate-200 space-y-1.5 shadow-2xs"
+          >
+            <strong class="text-slate-900 text-xs sm:text-sm block font-bold"
+              >¿Necesito saber de inteligencia artificial?</strong
+            >
+            <p class="text-slate-600 text-xs leading-relaxed">
+              No. Necesitas tener un problema real que quieras resolver y estar
+              dispuesto a trabajar con herramientas de IA. El curso está
+              diseñado para profesionales que ya han probado herramientas como
+              ChatGPT, pero todavía no saben cómo integrarlas de manera práctica
+              en su trabajo.
+            </p>
+          </div>
+
+          <div
+            class="bg-white p-5 rounded-xl border border-slate-200 space-y-1.5 shadow-2xs"
+          >
+            <strong class="text-slate-900 text-xs sm:text-sm block font-bold"
+              >¿Necesito saber diseñar en PowerPoint?</strong
+            >
+            <p class="text-slate-600 text-xs leading-relaxed">
+              No. El foco está en organizar información, analizarla, construir
+              una narrativa y validarla antes de convertirla en una
+              presentación.
+            </p>
+          </div>
+
+          <div
+            class="bg-white p-5 rounded-xl border border-slate-200 space-y-1.5 shadow-2xs"
+          >
+            <strong class="text-slate-900 text-xs sm:text-sm block font-bold"
+              >¿Voy a recibir una presentación hecha para mí?</strong
+            >
+            <p class="text-slate-600 text-xs leading-relaxed">
+              No. Vas a aprender el proceso para construir tus propias
+              presentaciones y entregables. El objetivo es que desarrolles
+              autonomía.
+            </p>
+          </div>
+
+          <div
+            class="bg-white p-5 rounded-xl border border-slate-200 space-y-1.5 shadow-2xs"
+          >
+            <strong class="text-slate-900 text-xs sm:text-sm block font-bold"
+              >¿Puedo utilizar información de mi trabajo?</strong
+            >
+            <p class="text-slate-600 text-xs leading-relaxed">
+              Sí, siempre que tengas autorización para utilizarla y respetes las
+              políticas de privacidad y seguridad de tu empresa. Para
+              información sensible, utiliza únicamente herramientas y
+              configuraciones aprobadas por tu organización.
+            </p>
+          </div>
+
+          <div
+            class="bg-white p-5 rounded-xl border border-slate-200 space-y-1.5 shadow-2xs"
+          >
+            <strong class="text-slate-900 text-xs sm:text-sm block font-bold"
+              >¿Cuánto tiempo necesito?</strong
+            >
+            <p class="text-slate-600 text-xs leading-relaxed">
+              El método está diseñado para trabajar sobre situaciones reales y
+              avanzar de manera práctica. La promesa del curso es que puedas
+              entender y aplicar el flujo completo en aproximadamente 30 minutos
+              para construir una primera versión, dependiendo de la cantidad y
+              complejidad de la información con la que trabajes.
+            </p>
+          </div>
+
+          <div
+            class="bg-white p-5 rounded-xl border border-slate-200 space-y-1.5 shadow-2xs"
+          >
+            <strong class="text-slate-900 text-xs sm:text-sm block font-bold"
+              >¿Qué herramientas necesito?</strong
+            >
+            <p class="text-slate-600 text-xs leading-relaxed">
+              El curso se centra en el proceso y no en depender de una única
+              herramienta. Las herramientas pueden cambiar. El método permanece:
+              Organizar → Analizar → Sintetizar → Validar → Presentar.
+            </p>
+          </div>
+
+          <div
+            class="bg-white p-5 rounded-xl border border-slate-200 space-y-1.5 shadow-2xs"
+          >
+            <strong class="text-slate-900 text-xs sm:text-sm block font-bold"
+              >¿Tengo que comprar las herramientas de IA?</strong
+            >
+            <p class="text-slate-600 text-xs leading-relaxed">
+              El curso enseña un proceso de trabajo con IA. Los costos de
+              herramientas externas, cuando apliquen, dependen de cada
+              plataforma y de los planes disponibles.
+            </p>
+          </div>
+
+          <div
+            class="bg-white p-5 rounded-xl border border-slate-200 space-y-1.5 shadow-2xs"
+          >
+            <strong class="text-slate-900 text-xs sm:text-sm block font-bold"
+              >¿Cuándo tengo acceso?</strong
+            >
+            <p class="text-slate-600 text-xs leading-relaxed">
+              El acceso se gestiona a través de Hotmart y está sujeto a las
+              condiciones configuradas para el producto.
+            </p>
+          </div>
+
+          <div
+            class="bg-white p-5 rounded-xl border border-slate-200 space-y-1.5 shadow-2xs col-span-full"
+          >
+            <strong class="text-slate-900 text-xs sm:text-sm block font-bold"
+              >¿Qué pasa si compro y no me sirve?</strong
+            >
+            <p class="text-slate-600 text-xs leading-relaxed">
+              Tienes una garantía de 7 días, según las condiciones aplicables de
+              Hotmart.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 15. DEJA DE EMPEZAR CADA PRESENTACIÓN DESDE CERO (CIERRE FINAL) -->
+      <section class="text-center space-y-6 border-t border-slate-200 pt-12">
+        <div class="space-y-3 max-w-xl mx-auto">
+          <span
+            class="text-[11px] font-black uppercase tracking-wider text-amber-900 bg-amber-100 px-3.5 py-1 rounded-full border border-amber-200 inline-block"
+          >
+            🚀 Cierre
+          </span>
+          <h2 class="text-xl sm:text-3xl font-extrabold text-slate-900">
+            DEJA DE EMPEZAR CADA PRESENTACIÓN DESDE CERO
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+            La próxima vez que recibas:<br />
+            <strong class="text-slate-900 font-bold"
+              >un Excel + tres PDFs + cinco correos + un audio + unas notas de
+              reunión...</strong
+            ><br />
+            ya tendrás un proceso para convertir todo eso en algo que puedas entender,
+            revisar y presentar.
+          </p>
+
+          <div
+            class="font-mono text-xs font-bold text-amber-900 bg-amber-100 p-3 rounded-xl border border-amber-200"
+          >
+            INFORMACIÓN → ANÁLISIS → NARRATIVA → VALIDACIÓN → PRESENTACIÓN
+          </div>
+
+          <p class="text-slate-900 font-extrabold text-sm pt-2">
+            Aprende el método por US$35
+          </p>
+        </div>
+
+        <div class="pt-1 space-y-3">
+          <a
+            href={checkoutUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-sm sm:text-base py-4 px-8 rounded-xl transition shadow-lg cursor-pointer transform hover:-translate-y-0.5 w-full sm:w-auto"
+          >
+            <span>QUIERO APRENDER EL MÉTODO →</span>
+          </a>
+
+          <p class="text-xs text-slate-600">
+            Pago único · 7 días de garantía según condiciones de Hotmart
+          </p>
+
+          <div
+            class="text-xs text-slate-600 flex items-center justify-center gap-1.5 pt-2"
+          >
+            <span>¿Tienes dudas antes de comprar?</span>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-emerald-700 font-bold hover:underline"
+            >
+              Escríbenos por WhatsApp (+57 305 3046180)
+            </a>
+          </div>
+        </div>
+
+        <div class="pt-8 border-t border-slate-200 max-w-sm mx-auto space-y-1">
+          <strong class="text-slate-900 text-sm block font-black"
+            >LuciRMe AI</strong
+          >
+          <p class="text-xs text-amber-800 italic font-serif">
             "No enseño IA. Enseño a recuperar tu vida usando IA."
           </p>
         </div>
       </section>
-
     </main>
-
   </div>
 
   <RedesSociales />
-
 </Layout>
