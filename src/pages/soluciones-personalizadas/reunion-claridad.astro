@@ -1,0 +1,463 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import RedesSociales from "../../components/RedesSociales.astro";
+import ActionHub from "../../components/ActionHub.astro";
+import { LINKS } from "../../lib/constants.js";
+---
+
+<Layout title="Convierte una reunión en decisiones claras con NotebookLM | LuciRMe AI">
+  <!-- BREADCRUMB NAV -->
+  <nav class="bg-white border-b border-gray-100 px-4 py-3">
+    <div class="max-w-4xl mx-auto flex justify-between items-center">
+      <a
+        href="/recursos"
+        class="text-sm font-bold text-slate-500 hover:text-teal transition flex items-center gap-1"
+      >
+        ← Volver a Recursos
+      </a>
+      <span
+        class="text-xs font-bold text-teal uppercase tracking-widest flex items-center gap-2"
+      >
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Guía Práctica NotebookLM
+      </span>
+    </div>
+  </nav>
+
+  <main class="py-12 px-4 min-h-screen bg-slate-50">
+    <div class="max-w-3xl mx-auto space-y-8">
+      
+      <!-- ═══════════════ MURO MAILERLITE (LEAD GATE) ═══════════════ -->
+      <section id="muro" class="bg-white rounded-2xl p-6 sm:p-10 border border-slate-200 shadow-md">
+        <div class="inline-flex items-center gap-2 bg-teal/10 text-teal text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full mb-4 border border-teal/20">
+          <span>📓</span> NotebookLM · Recurso Gratuito
+        </div>
+        
+        <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+          Convierte una reunión en decisiones claras con NotebookLM
+        </h1>
+        
+        <p class="text-base sm:text-lg text-slate-600 mt-3 leading-relaxed">
+          Ingresa tu nombre y correo para desbloquear inmediatamente la guía con los 3 prompts maestros y el método para pasar de conversaciones largas a acuerdos y acciones asignadas.
+        </p>
+
+        <form id="wall-form" class="mt-8 space-y-4">
+          <!-- Honeypot oculto anti-bots -->
+          <input type="text" id="wall-website" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+          <div>
+            <label for="wall-name" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+              Tu Nombre *
+            </label>
+            <input 
+              type="text" 
+              id="wall-name"
+              name="name" 
+              placeholder="Ej. María Pérez" 
+              required 
+              autocomplete="name" 
+              class="w-full text-base p-4 border border-slate-300 rounded-xl bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition"
+            />
+          </div>
+
+          <div>
+            <label for="wall-email" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+              Tu Correo Electrónico *
+            </label>
+            <input 
+              type="email" 
+              id="wall-email"
+              name="email" 
+              placeholder="Ej. maria@empresa.com" 
+              required 
+              autocomplete="email" 
+              class="w-full text-base p-4 border border-slate-300 rounded-xl bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition"
+            />
+          </div>
+
+          <div id="wall-error-msg" class="hidden p-3 bg-red-50 border border-red-200 text-red-600 text-xs rounded-lg font-medium"></div>
+
+          <button 
+            type="submit" 
+            id="wall-submit-btn"
+            class="w-full bg-teal hover:bg-tealHover text-white font-bold text-lg py-4 px-6 rounded-xl transition shadow-lg cursor-pointer mt-2 flex items-center justify-center gap-2"
+          >
+            <span>Desbloquear Guía Gratis</span> →
+          </button>
+        </form>
+
+        <p class="text-xs text-slate-400 mt-4 text-center flex items-center justify-center gap-1.5">
+          <span>🔒</span> Cero spam. Acceso inmediato a la guía y contenido de valor para Product Managers.
+        </p>
+      </section>
+
+      <!-- ═══════════════ CONTENIDO DESBLOQUEADO ═══════════════ -->
+      <section id="contenido" class="hidden space-y-10">
+        
+        <!-- HEADER DEL ARTÍCULO -->
+        <header class="bg-white rounded-2xl p-6 sm:p-10 border border-slate-200 shadow-xs space-y-4">
+          <div class="inline-flex items-center gap-2 bg-teal/10 text-teal text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full border border-teal/20">
+            <span>✨</span> Guía Desbloqueada · LuciRMe AI
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 leading-tight tracking-tight">
+            Convierte una reunión en decisiones claras con NotebookLM
+          </h1>
+
+          <div class="text-base sm:text-lg text-slate-700 leading-relaxed space-y-4 pt-2">
+            <p>
+              Tienes una reunión importante. Se habla de prioridades, entregas, clientes, ideas y cambios.
+            </p>
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl text-slate-900 font-semibold italic">
+              Dos días después, alguien pregunta: “¿Qué fue lo que acordamos?”
+            </div>
+            <p>
+              Esta guía te ayuda a convertir una conversación larga en decisiones, responsables y próximos pasos claros. Sin reconstruir la reunión desde la memoria ni revisar una hora de grabación.
+            </p>
+            <p class="font-medium text-slate-900">
+              Carga tu transcripción, notas, correos o documentos de contexto en <a href="https://notebooklm.google.com" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">NotebookLM</a>. Después usa estos tres prompts.
+            </p>
+          </div>
+        </header>
+
+        <!-- PROMPTS SECTION -->
+        <div class="space-y-6">
+
+          <!-- PROMPT 1 -->
+          <article class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-4 shadow-xs">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+              <div>
+                <span class="text-xs font-black uppercase tracking-wider text-teal bg-teal/10 px-2.5 py-1 rounded-md">
+                  Prompt 1
+                </span>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-2">
+                  Encuentra las decisiones reales
+                </h2>
+              </div>
+              <button 
+                class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-xs flex items-center gap-1.5 shrink-0"
+                data-target="prompt-1-text"
+              >
+                <span>📋</span> Copiar Prompt
+              </button>
+            </div>
+
+            <div class="bg-slate-900 text-slate-100 p-5 sm:p-6 rounded-xl font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto relative" id="prompt-1-text">
+Analiza esta reunión y crea una lista de todas las decisiones tomadas.
+
+Para cada decisión incluye:
+- la decisión concreta
+- el contexto que la motivó
+- quién participó en la decisión
+- si quedó alguna condición o duda pendiente
+
+No incluyas ideas que solo se mencionaron. Diferencia con claridad entre una decisión tomada y una propuesta sin aprobar.</div>
+
+            <p class="text-xs sm:text-sm text-slate-600 italic">
+              💡 <strong>Por qué funciona:</strong> Con este prompt puedes separar lo que se decidió de lo que simplemente se conversó.
+            </p>
+          </article>
+
+          <!-- PROMPT 2 -->
+          <article class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-4 shadow-xs">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+              <div>
+                <span class="text-xs font-black uppercase tracking-wider text-teal bg-teal/10 px-2.5 py-1 rounded-md">
+                  Prompt 2
+                </span>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-2">
+                  Convierte las decisiones en trabajo accionable
+                </h2>
+              </div>
+              <button 
+                class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-xs flex items-center gap-1.5 shrink-0"
+                data-target="prompt-2-text"
+              >
+                <span>📋</span> Copiar Prompt
+              </button>
+            </div>
+
+            <div class="bg-slate-900 text-slate-100 p-5 sm:p-6 rounded-xl font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto relative" id="prompt-2-text">
+A partir de esta reunión, crea un plan de acción.
+
+Organiza la respuesta en una tabla con estas columnas:
+- acción concreta
+- responsable
+- fecha límite mencionada
+- dependencia o información necesaria
+- nivel de prioridad: alta, media o baja
+
+Si no hay responsable o fecha, escribe “por definir”.
+No inventes información que no esté en las fuentes.</div>
+
+            <p class="text-xs sm:text-sm text-slate-600 italic">
+              💡 <strong>Por qué funciona:</strong> Ahora tienes una lista que puedes enviar al equipo, llevar a tu gestor de tareas o usar como seguimiento de la próxima reunión.
+            </p>
+          </article>
+
+          <!-- PROMPT 3 -->
+          <article class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-4 shadow-xs">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+              <div>
+                <span class="text-xs font-black uppercase tracking-wider text-teal bg-teal/10 px-2.5 py-1 rounded-md">
+                  Prompt 3
+                </span>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-2">
+                  Anticipa lo que puede frenar el avance
+                </h2>
+              </div>
+              <button 
+                class="copy-btn bg-teal hover:bg-tealHover text-white font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-xs flex items-center gap-1.5 shrink-0"
+                data-target="prompt-3-text"
+              >
+                <span>📋</span> Copiar Prompt
+              </button>
+            </div>
+
+            <div class="bg-slate-900 text-slate-100 p-5 sm:p-6 rounded-xl font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto relative" id="prompt-3-text">
+Revisa esta reunión e identifica los riesgos, bloqueos y decisiones pendientes.
+
+Para cada punto indica:
+- qué puede salir mal o quedar detenido
+- qué información falta
+- quién debería resolverlo
+- cuál sería el siguiente paso recomendado
+
+Ordena primero los elementos que pueden bloquear una entrega, una decisión o el trabajo de otra persona.</div>
+
+            <p class="text-xs sm:text-sm text-slate-600 italic">
+              💡 <strong>Por qué funciona:</strong> Este último paso evita que los temas críticos se descubran cuando ya hay una fecha encima.
+            </p>
+          </article>
+
+        </div>
+
+        <!-- LO QUE ACABAS DE HACER -->
+        <section class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xs">
+          <div class="border-l-4 border-teal pl-4 py-1 space-y-1">
+            <span class="text-xs font-bold uppercase tracking-widest text-teal">Resultados Obtenidos</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+              Lo que acabas de hacer
+            </h2>
+          </div>
+
+          <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+            Pasaste de una reunión dispersa a un sistema de trabajo con:
+          </p>
+
+          <div class="grid sm:grid-cols-2 gap-3.5">
+            <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl flex items-start gap-3">
+              <span class="text-teal font-black text-base">✓</span>
+              <div>
+                <strong class="text-slate-900 text-sm block">Decisiones claras</strong>
+                <p class="text-xs text-slate-600 mt-0.5">Diferenciadas de propuestas no aprobadas.</p>
+              </div>
+            </div>
+
+            <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl flex items-start gap-3">
+              <span class="text-teal font-black text-base">✓</span>
+              <div>
+                <strong class="text-slate-900 text-sm block">Acciones asignadas</strong>
+                <p class="text-xs text-slate-600 mt-0.5">Listas para delegar y dar seguimiento.</p>
+              </div>
+            </div>
+
+            <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl flex items-start gap-3">
+              <span class="text-teal font-black text-base">✓</span>
+              <div>
+                <strong class="text-slate-900 text-sm block">Fechas y dependencias visibles</strong>
+                <p class="text-xs text-slate-600 mt-0.5">Sin ambigüedades ni entregas cruzadas.</p>
+              </div>
+            </div>
+
+            <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl flex items-start gap-3">
+              <span class="text-teal font-black text-base">✓</span>
+              <div>
+                <strong class="text-slate-900 text-sm block">Riesgos que requieren seguimiento</strong>
+                <p class="text-xs text-slate-600 mt-0.5">Identificados antes de convertirse en retrasos.</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-sm text-slate-700 leading-relaxed pt-2">
+            Y este es solo un ejemplo de lo que ocurre cuando organizas la información antes de pedirle resultados a la IA.
+          </p>
+          <p class="text-xs sm:text-sm text-slate-600 bg-slate-50 border border-slate-200 p-4 rounded-xl leading-relaxed">
+            La misma lógica sirve para preparar una propuesta, ordenar una investigación, analizar información de clientes o construir una presentación que realmente ayude a tomar una decisión.
+          </p>
+        </section>
+
+        <!-- EL SIGUIENTE PASO: PRESENTACIONES CON IA (CTA CURSO) -->
+        <section class="bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0F172A] rounded-2xl p-6 sm:p-10 text-white space-y-6 shadow-xl border-2 border-amber-500/50 relative overflow-hidden">
+          <div class="absolute -right-16 -top-16 w-64 h-64 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+          <div class="relative z-10 space-y-4">
+            <span class="bg-amber-500 text-slate-950 text-xs font-black uppercase tracking-widest px-3 py-1 rounded-md shadow-xs inline-block">
+              🎓 El Siguiente Paso
+            </span>
+
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+              Conviértelo en una presentación clara
+            </h2>
+
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+              Muchas presentaciones se empiezan con una hoja en blanco y terminan acumulando diapositivas, datos y mensajes sin una estructura que los sostenga.
+            </p>
+
+            <p class="text-sm sm:text-base text-slate-200 leading-relaxed">
+              En el curso <strong class="text-amber-300">De “No tengo idea” a Presentación Completa</strong> aprenderás el método de 5 pasos para transformar información desordenada en una presentación clara, verificable y lista para presentar con IA.
+            </p>
+
+            <div class="bg-slate-900/80 border border-slate-700/80 p-5 rounded-xl space-y-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-amber-400 block">Vas a aprender a:</span>
+              <ul class="space-y-2 text-xs sm:text-sm text-slate-300">
+                <li class="flex items-center gap-2">
+                  <span class="text-amber-400 font-bold">•</span> Organizar fuentes y contexto antes de empezar
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-amber-400 font-bold">•</span> Definir el mensaje central
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-amber-400 font-bold">•</span> Crear una estructura que guíe a quien la ve
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-amber-400 font-bold">•</span> Usar IA para desarrollar cada parte con criterio
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-amber-400 font-bold">•</span> Revisar la presentación antes de compartirla
+                </li>
+              </ul>
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-300 italic pt-2">
+              Si esta guía te ayudó a ordenar una reunión, el curso te enseña a llevar ese mismo método a una presentación completa.
+            </p>
+
+            <div class="pt-4 flex flex-col sm:flex-row items-center gap-4">
+              <a
+                href="/curso-presentaciones"
+                class="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-950 text-center font-black text-sm sm:text-base px-8 py-4 rounded-xl transition shadow-[0_0_25px_rgba(245,158,11,0.4)] cursor-pointer"
+              >
+                Quiero aprender el método para crear presentaciones con IA →
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <ActionHub />
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- REDES SOCIALES -->
+  <RedesSociales />
+</Layout>
+
+<script is:inline>
+  const LOCAL_STORAGE_KEY = 'reunion_claridad_unlocked';
+
+  function executeUnlock() {
+    const muroEl = document.getElementById('muro');
+    if (muroEl) muroEl.classList.add('hidden');
+    
+    const contenidoEl = document.getElementById('contenido');
+    if (contenidoEl) contenidoEl.classList.remove('hidden');
+  }
+
+  // Verificar si ya fue desbloqueada previamente
+  if (localStorage.getItem(LOCAL_STORAGE_KEY) === 'true') {
+    executeUnlock();
+  }
+
+  // Form submission handler
+  const form = document.getElementById('wall-form');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('wall-submit-btn');
+      const errorMsg = document.getElementById('wall-error-msg');
+      const websiteVal = document.getElementById('wall-website')?.value || '';
+      const nameVal = document.getElementById('wall-name')?.value?.trim() || '';
+      const emailVal = document.getElementById('wall-email')?.value?.trim() || '';
+
+      if (errorMsg) errorMsg.classList.add('hidden');
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Procesando...</span>';
+      }
+
+      try {
+        const response = await fetch('/api/unlock-guia', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: nameVal,
+            email: emailVal,
+            website: websiteVal
+          })
+        });
+
+        const resData = await response.json().catch(() => ({}));
+
+        if (!response.ok && resData.error) {
+          if (errorMsg) {
+            errorMsg.textContent = resData.error;
+            errorMsg.classList.remove('hidden');
+          }
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span>Desbloquear Guía Gratis</span> →';
+          }
+          return;
+        }
+
+        // Guardar desbloqueo en localStorage
+        localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
+        executeUnlock();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      } catch (err) {
+        console.error('Unlock error:', err);
+        // Desbloquear como fallback
+        localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
+        executeUnlock();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
+
+  // Copiar Prompts al portapapeles
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const targetId = btn.getAttribute('data-target');
+      const targetEl = document.getElementById(targetId);
+      if (!targetEl) return;
+      
+      const texto = targetEl.innerText;
+      try {
+        await navigator.clipboard.writeText(texto);
+      } catch (err) {
+        const t = document.createElement('textarea');
+        t.value = texto; 
+        document.body.appendChild(t);
+        t.select(); 
+        document.execCommand('copy'); 
+        t.remove();
+      }
+
+      const prevHTML = btn.innerHTML;
+      btn.innerHTML = '<span>✓ Copiado</span>';
+      btn.classList.remove('bg-teal', 'hover:bg-tealHover');
+      btn.classList.add('bg-emerald-600');
+      
+      setTimeout(() => { 
+        btn.innerHTML = prevHTML; 
+        btn.classList.remove('bg-emerald-600');
+        btn.classList.add('bg-teal', 'hover:bg-tealHover');
+      }, 2000);
+    });
+  });
+</script>
