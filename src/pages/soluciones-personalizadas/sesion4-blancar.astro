@@ -1,0 +1,587 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import RedesSociales from "../../components/RedesSociales.astro";
+import { LINKS } from "../../lib/constants.js";
+
+const diagnosticoUrl = "/soluciones-personalizadas/sesion-blancar";
+const guiaSesion1Url = "/soluciones-personalizadas/guia-sesion-blanca";
+const sesion2Url = "/soluciones-personalizadas/sesion2-blancar";
+const sesion3Url = "/soluciones-personalizadas/sesion3-blancar";
+const sesion4Url = "/soluciones-personalizadas/sesion4-blancar";
+const whatsappUrl = LINKS.whatsapp;
+---
+
+<Layout title="Guía de Mentoría Sesión 4: Estrategia de Producto, Roles B2B y Canales — Blanca Rodríguez | LuciRMe AI">
+
+  <!-- BARRA DE NAVEGACIÓN SUPERIOR CON LINKS A OTRAS SESIONES -->
+  <nav class="bg-white/90 backdrop-blur-md border-b border-slate-200 px-6 py-3.5 sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto flex flex-wrap justify-between items-center gap-3">
+      <a href={diagnosticoUrl} class="text-xs sm:text-sm font-bold text-slate-600 hover:text-teal transition flex items-center gap-1">
+        ← Volver a Diagnóstico Blanca R.
+      </a>
+      
+      <!-- LINKS A LAS OTRAS SESIONES DE BLANCA -->
+      <div class="flex items-center gap-1.5 overflow-x-auto py-1">
+        <a href={diagnosticoUrl} class="inline-flex items-center justify-center font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-lg py-1.5 px-2.5 transition text-xs shrink-0">
+          📋 Diagnóstico
+        </a>
+        <a href={guiaSesion1Url} class="inline-flex items-center justify-center font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-lg py-1.5 px-2.5 transition text-xs shrink-0">
+          📖 Sesión 1
+        </a>
+        <a href={sesion2Url} class="inline-flex items-center justify-center font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-lg py-1.5 px-2.5 transition text-xs shrink-0">
+          🔥 Sesión 2
+        </a>
+        <a href={sesion3Url} class="inline-flex items-center justify-center font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 rounded-lg py-1.5 px-2.5 transition text-xs shrink-0">
+          💡 Sesión 3
+        </a>
+        <a href={sesion4Url} class="inline-flex items-center justify-center font-bold bg-teal text-white rounded-lg py-1.5 px-2.5 transition text-xs shrink-0 shadow-xs">
+          ✨ Sesión 4 (Actual)
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="bg-deep text-white py-14 md:py-18 px-6 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#0D9488_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto text-center relative z-10 space-y-5">
+      
+      <!-- EYEBROW -->
+      <div class="inline-flex items-center gap-2 bg-teal/20 text-teal-300 text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full border border-teal/40">
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span>
+        Guía de Mentoría Personalizada · Sesión 4 de 4
+      </div>
+
+      <!-- H1 -->
+      <h1 class="text-3xl md:text-5xl font-black leading-tight tracking-tight text-white">
+        Estrategia de Producto, <span class="text-teal">Roles B2B</span> y Notificaciones
+      </h1>
+
+      <!-- SUBTÍTULO -->
+      <p class="text-base md:text-lg text-slate-300 font-medium max-w-2xl mx-auto leading-relaxed">
+        Resumen estratégico de la sesión final de mentoría de <strong class="text-white">Blanca Rodríguez</strong> (Product Manager · Bord): Integración de IA en el ciclo de producto, diseño de arquitectura de permisos y estrategia multi-canal de comunicación.
+      </p>
+
+      <!-- BOTONES DE NAVEGACIÓN RÁPIDA A OTRAS SESIONES -->
+      <div class="flex flex-wrap justify-center items-center gap-2 pt-2">
+        <a href={diagnosticoUrl} class="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition backdrop-blur-xs">
+          <span>📋</span> Diagnóstico
+        </a>
+        <a href={guiaSesion1Url} class="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition backdrop-blur-xs">
+          <span>📖</span> Sesión 1
+        </a>
+        <a href={sesion2Url} class="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition backdrop-blur-xs">
+          <span>🔥</span> Sesión 2
+        </a>
+        <a href={sesion3Url} class="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition backdrop-blur-xs">
+          <span>💡</span> Sesión 3
+        </a>
+      </div>
+
+      <!-- METADATA BADGES -->
+      <div class="pt-4 inline-flex flex-wrap justify-center items-center gap-3 text-xs text-slate-300 bg-white/5 border border-white/10 rounded-2xl px-5 py-3 max-w-3xl">
+        <span class="flex items-center gap-1.5">
+          👤 <strong>Mentora:</strong> Blanca Rodríguez (PM @ Bord)
+        </span>
+        <span class="text-slate-500 hidden sm:inline">•</span>
+        <span class="flex items-center gap-1.5">
+          🎯 <strong>Enfoque:</strong> Roles B2B & Delivery de Información
+        </span>
+        <span class="text-slate-500 hidden sm:inline">•</span>
+        <span class="flex items-center gap-1.5">
+          ⚡ <strong>Ecosistema:</strong> Claude, Perplexity, NotebookLM, Granola, Notion
+        </span>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-12 space-y-16">
+
+    <!-- 1. RECOMENDACIONES DE LAS PRIMERAS 4 SESIONES -->
+    <section class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xs">
+      <div class="border-l-4 border-teal pl-4 py-1 space-y-1">
+        <span class="text-xs font-bold uppercase tracking-widest text-teal">Síntesis Estratégica</span>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+          Recomendaciones de las Primeras 4 Sesiones
+        </h2>
+      </div>
+
+      <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+        De acuerdo con las conversaciones y el seguimiento del trabajo de mentoría, las principales recomendaciones estratégicas para potenciar tu rol de Product Manager son:
+      </p>
+
+      <div class="grid gap-4">
+
+        <!-- REC 1 -->
+        <div class="bg-slate-50 border border-slate-200 p-4 sm:p-5 rounded-xl space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="bg-teal text-white font-black text-xs px-2.5 py-0.5 rounded-md">1</span>
+            <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">
+              Integrar la IA en todo el ciclo de vida del producto
+            </h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+            Usar la Inteligencia Artificial de forma transversal para acelerar desde la investigación inicial (Discovery) y la redacción de requerimientos (PRDs), hasta el prototipado visual y la consolidación de métricas.
+          </p>
+        </div>
+
+        <!-- REC 2 -->
+        <div class="bg-slate-50 border border-slate-200 p-4 sm:p-5 rounded-xl space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="bg-teal text-white font-black text-xs px-2.5 py-0.5 rounded-md">2</span>
+            <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">
+              Construir el reporte del Q como un artefacto dinámico
+            </h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+            En lugar de hacer resúmenes manuales, estructurar un artefacto interactivo en <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">Claude</a> que consuma de forma integrada la información de <a href="https://notion.so" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">Notion</a> (KRs y notas de la sesión), las épicas de <a href="https://atlassian.com/software/jira/product-discovery" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">Jira Product Discovery</a> y las métricas de <a href="https://amplitude.com" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">Amplitude</a>.
+          </p>
+        </div>
+
+        <!-- REC 3 -->
+        <div class="bg-slate-50 border border-slate-200 p-4 sm:p-5 rounded-xl space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="bg-teal text-white font-black text-xs px-2.5 py-0.5 rounded-md">3</span>
+            <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">
+              Optimizar la estrategia de conversación con la IA (Branching)
+            </h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+            Cuando el modelo se obstine con una inconsistencia de datos minoritaria o desactualizada, no insistir en la misma sesión; la mejor práctica es corregir la fuente en Notion o bifurcar la interacción abriendo un chat limpio (branch) con un prompt refinado.
+          </p>
+        </div>
+
+        <!-- REC 4 -->
+        <div class="bg-slate-50 border border-slate-200 p-4 sm:p-5 rounded-xl space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="bg-teal text-white font-black text-xs px-2.5 py-0.5 rounded-md">4</span>
+            <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">
+              Priorizar entregas rápidas y prototipos acotados
+            </h3>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+            Sustituir especificaciones extensas por prototipos visuales ejecutados rápidamente en Claude para validar la usabilidad con usuarios antes de pasar a desarrollo.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 2. ARQUITECTURA DE ROLES Y PERMISOS B2B -->
+    <section class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xs">
+      <div class="border-l-4 border-amber-500 pl-4 py-1 space-y-1">
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-600">Diseño B2B</span>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+          Arquitectura de Roles y Permisos B2B
+        </h2>
+      </div>
+
+      <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl text-xs sm:text-sm text-amber-950 leading-relaxed">
+        <strong>Contexto del problema:</strong> Actualmente, la plataforma cuenta con la limitación de tener únicamente dos tipos de usuario (<em>Administrador</em> y <em>Usuario General</em>). Para solucionar la gestión de accesos sin generar sobrecarga en desarrollo ni afectar a la base instalada, se define la siguiente arquitectura y flujo de trabajo.
+      </div>
+
+      <!-- FLUJO DE DISEÑO E IMPLEMENTACIÓN -->
+      <div class="space-y-4 pt-2">
+        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+          <span>🛠️</span> Flujo de diseño e implementación del sistema de roles:
+        </h3>
+
+        <div class="grid gap-3.5">
+          
+          <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-1.5">
+            <span class="text-[11px] font-black text-teal uppercase tracking-wider">Fase 1 · Discovery asistida por IA</span>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              Utilizar <a href="https://perplexity.ai" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">Perplexity</a> y herramientas de Deep Research para investigar cómo otras plataformas B2B de gestión de activos (asset management) han resuelto esquemas complejos de permisos. Depurar y resumir los mejores hallazgos directamente en páginas estructuradas de <a href="https://notion.so" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">Notion</a>.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-1.5">
+            <span class="text-[11px] font-black text-teal uppercase tracking-wider">Fase 2 · Generación del PRD</span>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              Conectar <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">Claude</a> a la información resumida en Notion para redactar el PRD oficial del módulo de usuarios y permisos.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-1.5">
+            <span class="text-[11px] font-black text-teal uppercase tracking-wider">Fase 3 · Prototipado mediante Artefactos</span>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              Solicitar a Claude un prompt especializado para generar un artefacto interactivo (dashboard/app funcional) que sirva como prototipo preliminar. Acotar la propuesta a la interfaz real del producto utilizando la librería de componentes en <a href="https://storybook.js.org" target="_blank" rel="noopener noreferrer" class="text-teal font-bold hover:underline">Storybook</a> para asegurar coherencia visual con lo que existe en producción.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- DEFINICIÓN TÉCNICA DE LA ARQUITECTURA -->
+      <div class="space-y-4 pt-4 border-t border-slate-200">
+        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+          <span>⚙️</span> Definición técnica de la arquitectura:
+        </h3>
+
+        <div class="grid sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+          
+          <div class="bg-slate-900 text-white p-4 rounded-xl space-y-1.5">
+            <strong class="text-amber-400 font-bold block text-xs uppercase tracking-wider">👑 Administrador General</strong>
+            <p class="text-slate-300 text-xs leading-relaxed">
+              Se mantiene el rol de administrador con acceso total para la toma de decisiones y configuración global de la organización.
+            </p>
+          </div>
+
+          <div class="bg-slate-900 text-white p-4 rounded-xl space-y-1.5">
+            <strong class="text-amber-400 font-bold block text-xs uppercase tracking-wider">👥 Asignación por Grupos</strong>
+            <p class="text-slate-300 text-xs leading-relaxed">
+              En lugar de configurar permisos individuales uno a uno, se crean grupos por perfil empresarial (Finanzas, IT, HR, Operaciones) y se asignan las personas a dichos grupos.
+            </p>
+          </div>
+
+          <div class="bg-slate-900 text-white p-4 rounded-xl space-y-1.5">
+            <strong class="text-amber-400 font-bold block text-xs uppercase tracking-wider">🧩 Permisos Modulares</strong>
+            <p class="text-slate-300 text-xs leading-relaxed">
+              Asignación granular de capacidades (Ver, Editar, Descargar) según cada módulo específico (ej. inventario de equipos).
+            </p>
+          </div>
+
+          <div class="bg-slate-900 text-white p-4 rounded-xl space-y-1.5">
+            <strong class="text-amber-400 font-bold block text-xs uppercase tracking-wider">🛡️ Estrategia de Deuda Técnica</strong>
+            <p class="text-slate-300 text-xs leading-relaxed">
+              Mantener a los usuarios y empresas actuales en el esquema legado (Administrador/General) y aplicar la nueva arquitectura de roles únicamente a las nuevas organizaciones y usuarios que se registren.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. NOTIFICACIONES Y COMUNICACIONES (DELIVERY) -->
+    <section class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xs">
+      <div class="border-l-4 border-sky-500 pl-4 py-1 space-y-1">
+        <span class="text-xs font-bold uppercase tracking-widest text-sky-600">Delivery de Información</span>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+          Notificaciones y Comunicaciones
+        </h2>
+      </div>
+
+      <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+        Una vez estructurados los roles, la comunicación debe segmentarse en función de lo que cada perfil necesita saber con urgencia y el canal adecuado para consumirlo.
+      </p>
+
+      <!-- ¿QUÉ DESEA SABER URGENTE CADA ROL? -->
+      <div class="space-y-3 pt-1">
+        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">
+          🎯 ¿Qué desea saber urgente cada rol?
+        </h3>
+
+        <div class="grid md:grid-cols-3 gap-3">
+          
+          <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-1.5">
+            <span class="text-xs font-black text-slate-900 block">💼 Finanzas</span>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Necesita conocer de inmediato el ahorro económico acumulado y la resolución de temas de facturación o cobros pendientes.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-1.5">
+            <span class="text-xs font-black text-slate-900 block">👔 Admin / CEO / Tomador de Decisiones</span>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Requiere saber cómo desbloquear un problema crítico de inmediato (ej. autorizar un pago o aprobar una orden detenida) para mantener la operación sin fricciones.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-1.5">
+            <span class="text-xs font-black text-slate-900 block">🛠️ Operaciones (IT / HR)</span>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Necesita visibilidad operativa sobre el estado de las entregas y saber si hay algún usuario que no ha recibido su activo o si hay un retraso en la recolección.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- MATRIZ DE CANALES DE ENVÍO -->
+      <div class="space-y-3 pt-4 border-t border-slate-200">
+        <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">
+          📡 Matriz de Canales de Envío
+        </h3>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-700 border-collapse">
+            <thead>
+              <tr class="bg-slate-900 text-white font-bold text-xs">
+                <th class="p-3 rounded-tl-lg">Canal</th>
+                <th class="p-3">Tipo de Contenido</th>
+                <th class="p-3 rounded-tr-lg">Formato y Frecuencia</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 bg-slate-50">
+              <tr>
+                <td class="p-3 font-bold text-emerald-700 whitespace-nowrap">
+                  <a href="https://whatsapp.com" target="_blank" rel="noopener noreferrer" class="hover:underline flex items-center gap-1">
+                    📱 WhatsApp
+                  </a>
+                </td>
+                <td class="p-3 font-medium">Urgente con accionable directo (ej. órdenes paradas, pagos requeridos).</td>
+                <td class="p-3">Máximo 300 caracteres. Incluye botones interactivos directos ("Botón de pago", "Más info aquí" o "Resolver aquí"). Dirigido al usuario operativo o al empleado final.</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold text-sky-700 whitespace-nowrap">
+                  📊 Infografía / Reporte
+                </td>
+                <td class="p-3 font-medium">Resumen periódico de valor e impacto (ej. "Hemos ahorrado $4,100 USD en este período").</td>
+                <td class="p-3">Envío semanal o periódico mediante una imagen o reporte sintético que demuestre el retorno de inversión al tomador de decisiones.</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-bold text-indigo-700 whitespace-nowrap">
+                  ✉️ Correo Electrónico
+                </td>
+                <td class="p-3 font-medium">Informativo y no urgente (resúmenes de actividad corporativa, confirmaciones de órdenes de fondo).</td>
+                <td class="p-3">Envíos pasivos para mantener el registro corporativo sin interrumpir la jornada del cliente.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. INTELIGENCIAS ARTIFICIALES MENCIONADAS Y SUS USOS (CON LINKS) -->
+    <section class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xs">
+      <div class="border-l-4 border-indigo-500 pl-4 py-1 space-y-1">
+        <span class="text-xs font-bold uppercase tracking-widest text-indigo-600">Herramientas Recomendadas</span>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+          Inteligencias Artificiales Mencionadas y sus Usos
+        </h2>
+      </div>
+
+      <p class="text-xs sm:text-sm text-slate-600">
+        Ecosistema de IA seleccionado para maximizar la velocidad y precisión en el flujo de trabajo de Product Management:
+      </p>
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        
+        <!-- CLAUDE -->
+        <div class="bg-slate-50 border border-slate-200 p-5 rounded-xl space-y-2">
+          <div class="flex items-center justify-between">
+            <h3 class="font-extrabold text-slate-900 text-base">Claude (Anthropic)</h3>
+            <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-teal hover:underline bg-teal/10 px-2.5 py-1 rounded-md">
+              claude.ai ↗
+            </a>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed">
+            <strong>Uso principal:</strong> Creación de artefactos para prototipar dashboards interactivos, redacción automática de PRDs consumiendo notas de Notion y generación del reporte de Q.
+          </p>
+        </div>
+
+        <!-- PERPLEXITY -->
+        <div class="bg-slate-50 border border-slate-200 p-5 rounded-xl space-y-2">
+          <div class="flex items-center justify-between">
+            <h3 class="font-extrabold text-slate-900 text-base">Perplexity AI</h3>
+            <a href="https://perplexity.ai" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-teal hover:underline bg-teal/10 px-2.5 py-1 rounded-md">
+              perplexity.ai ↗
+            </a>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed">
+            <strong>Uso principal:</strong> Investigación en la fase de Discovery para mapear cómo la competencia y otras plataformas B2B estructuran arquitecturas de permisos y estrategias de comunicación.
+          </p>
+        </div>
+
+        <!-- NOTEBOOKLM -->
+        <div class="bg-slate-50 border border-slate-200 p-5 rounded-xl space-y-2">
+          <div class="flex items-center justify-between">
+            <h3 class="font-extrabold text-slate-900 text-base">NotebookLM (Gemini)</h3>
+            <a href="https://notebooklm.google.com" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-teal hover:underline bg-teal/10 px-2.5 py-1 rounded-md">
+              notebooklm.google ↗
+            </a>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed">
+            <strong>Uso principal:</strong> Consolidación del conocimiento de las mentorías, permitiendo hacer consultas <em>grounded</em> basadas estrictamente en la información de las sesiones previas.
+          </p>
+        </div>
+
+        <!-- GRANOLA -->
+        <div class="bg-slate-50 border border-slate-200 p-5 rounded-xl space-y-2">
+          <div class="flex items-center justify-between">
+            <h3 class="font-extrabold text-slate-900 text-base">Granola</h3>
+            <a href="https://granola.ai" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-teal hover:underline bg-teal/10 px-2.5 py-1 rounded-md">
+              granola.ai ↗
+            </a>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed">
+            <strong>Uso principal:</strong> Transcripción inteligente y captura estructurada de notas durante reuniones de trabajo y entrevistas.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- OTRAS HERRAMIENTAS DEL ECOSISTEMA -->
+      <div class="bg-slate-900 text-white p-5 rounded-xl space-y-3">
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-400 block">🛠️ Otras Herramientas Integradas en el Flujo:</span>
+        <div class="flex flex-wrap gap-2 text-xs">
+          <a href="https://notion.so" target="_blank" rel="noopener noreferrer" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg border border-slate-700 text-slate-200 font-medium transition">
+            📝 Notion (Base de Conocimiento)
+          </a>
+          <a href="https://atlassian.com/software/jira/product-discovery" target="_blank" rel="noopener noreferrer" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg border border-slate-700 text-slate-200 font-medium transition">
+            🎯 Jira Product Discovery (Roadmap)
+          </a>
+          <a href="https://amplitude.com" target="_blank" rel="noopener noreferrer" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg border border-slate-700 text-slate-200 font-medium transition">
+            📈 Amplitude (Métricas)
+          </a>
+          <a href="https://storybook.js.org" target="_blank" rel="noopener noreferrer" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg border border-slate-700 text-slate-200 font-medium transition">
+            🎨 Storybook (Diseño UI)
+          </a>
+          <a href="https://whatsapp.com" target="_blank" rel="noopener noreferrer" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg border border-slate-700 text-slate-200 font-medium transition">
+            💬 WhatsApp (Mensajería Urgente)
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. DETALLE PASO A PASO DEL FLUJO DE TRABAJO UNIFICADO -->
+    <section class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xs">
+      <div class="border-l-4 border-teal pl-4 py-1 space-y-1">
+        <span class="text-xs font-bold uppercase tracking-widest text-teal">Paso a Paso</span>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+          Detalle Paso a Paso del Flujo de Trabajo Unificado
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        
+        <div class="flex items-start gap-3">
+          <span class="bg-slate-900 text-amber-400 font-black text-xs px-2.5 py-1 rounded-md shrink-0">1</span>
+          <div>
+            <strong class="text-slate-900 text-sm block font-bold">Investigación (Discovery):</strong>
+            <p class="text-xs text-slate-600 leading-relaxed">Ejecutar búsquedas en Perplexity sobre esquemas de permisos B2B → Resumir y depurar los hallazgos en páginas de Notion.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <span class="bg-slate-900 text-amber-400 font-black text-xs px-2.5 py-1 rounded-md shrink-0">2</span>
+          <div>
+            <strong class="text-slate-900 text-sm block font-bold">Especificación del PRD:</strong>
+            <p class="text-xs text-slate-600 leading-relaxed">Conectar las páginas de Notion a Claude → Pedir la estructura formal del PRD de roles y notificaciones.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <span class="bg-slate-900 text-amber-400 font-black text-xs px-2.5 py-1 rounded-md shrink-0">3</span>
+          <div>
+            <strong class="text-slate-900 text-sm block font-bold">Prototipado de UI:</strong>
+            <p class="text-xs text-slate-600 leading-relaxed">Solicitar a Claude el prompt para generar un Artefacto interactivo → Ajustar los componentes usando Storybook para alinearlos al diseño del producto.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <span class="bg-slate-900 text-amber-400 font-black text-xs px-2.5 py-1 rounded-md shrink-0">4</span>
+          <div>
+            <strong class="text-slate-900 text-sm block font-bold">Matriz de Notificaciones:</strong>
+            <p class="text-xs text-slate-600 leading-relaxed">Clasificar las alertas: configurar botones accionables por WhatsApp (&lt;300 caracteres) para eventos urgentes y reservar el correo electrónico para resúmenes corporativos.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <span class="bg-slate-900 text-amber-400 font-black text-xs px-2.5 py-1 rounded-md shrink-0">5</span>
+          <div>
+            <strong class="text-slate-900 text-sm block font-bold">Reporte de Q:</strong>
+            <p class="text-xs text-slate-600 leading-relaxed">Recopilar en Notion las métricas de Amplitude y tareas de Jira → Pedir a Claude la consolidación en un artefacto visual.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. PRÓXIMOS PASOS -->
+    <section class="bg-gradient-to-br from-teal/10 via-white to-amber-50 border-2 border-teal/40 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xs">
+      <div class="space-y-1 text-center sm:text-left">
+        <span class="text-xs font-black uppercase tracking-wider text-teal bg-teal/15 px-3 py-1 rounded-md border border-teal/30 inline-block">
+          🚀 Plan de Acción
+        </span>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">
+          Próximos Pasos Recomendados
+        </h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-3.5 text-xs sm:text-sm">
+        
+        <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-1 shadow-2xs">
+          <strong class="text-slate-900 font-bold block flex items-center gap-1.5">
+            <span>📝</span> 1. Crear la página base en Notion
+          </strong>
+          <p class="text-slate-600 text-xs">Strucuturar las notas depuradas de los roles B2B y las notificaciones para que sirvan de fuente a Claude.</p>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-1 shadow-2xs">
+          <strong class="text-slate-900 font-bold block flex items-center gap-1.5">
+            <span>🤖</span> 2. Redactar el prompt para el Artefacto en Claude
+          </strong>
+          <p class="text-slate-600 text-xs">Generar el primer prototipo visual interactivo del nuevo esquema de asignación de grupos y permisos.</p>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-1 shadow-2xs">
+          <strong class="text-slate-900 font-bold block flex items-center gap-1.5">
+            <span>💬</span> 3. Diseñar la plantilla de WhatsApp
+          </strong>
+          <p class="text-slate-600 text-xs">Definir el texto del mensaje urgente de menos de 300 caracteres con el botón accionable para resolver bloqueos de pago o entregas.</p>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-1 shadow-2xs">
+          <strong class="text-slate-900 font-bold block flex items-center gap-1.5">
+            <span>🗓️</span> 4. Agendar la secuencia de mentorías
+          </strong>
+          <p class="text-slate-600 text-xs">Mantener el esquema acordado de 4 sesiones (1 vez por semana) para revisar el avance del roadmap y los prototipos.</p>
+        </div>
+
+      </div>
+
+      <div class="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="text-xs text-slate-600 text-center sm:text-left">
+          ¿Dudas sobre la implementación o la estructura en Claude / Notion?
+        </div>
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs px-5 py-2.5 rounded-xl transition shadow-md shrink-0"
+        >
+          <span>💬 Consultar vía WhatsApp</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- NAVEGACIÓN ENTRE TODAS LAS SESIONES DE BLANCA (FOOTER NAVIGATION) -->
+    <section class="bg-slate-900 text-white p-6 sm:p-8 rounded-2xl space-y-4">
+      <div class="text-center space-y-1">
+        <span class="text-[10px] font-bold uppercase tracking-widest text-amber-400">Ciclo Completo de Mentoría</span>
+        <h3 class="text-lg font-extrabold text-white">Todas las Sesiones de Blanca Rodríguez</h3>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-center text-xs">
+        <a href={diagnosticoUrl} class="bg-slate-800 hover:bg-slate-700 p-3 rounded-xl border border-slate-700 transition flex flex-col items-center justify-center gap-1">
+          <span class="text-base">📋</span>
+          <span class="font-bold text-slate-200">Diagnóstico</span>
+        </a>
+        <a href={guiaSesion1Url} class="bg-slate-800 hover:bg-slate-700 p-3 rounded-xl border border-slate-700 transition flex flex-col items-center justify-center gap-1">
+          <span class="text-base">📖</span>
+          <span class="font-bold text-slate-200">Sesión 1</span>
+        </a>
+        <a href={sesion2Url} class="bg-slate-800 hover:bg-slate-700 p-3 rounded-xl border border-slate-700 transition flex flex-col items-center justify-center gap-1">
+          <span class="text-base">🔥</span>
+          <span class="font-bold text-slate-200">Sesión 2</span>
+        </a>
+        <a href={sesion3Url} class="bg-slate-800 hover:bg-slate-700 p-3 rounded-xl border border-slate-700 transition flex flex-col items-center justify-center gap-1">
+          <span class="text-base">💡</span>
+          <span class="font-bold text-slate-200">Sesión 3</span>
+        </a>
+        <a href={sesion4Url} class="bg-teal text-white p-3 rounded-xl font-bold transition flex flex-col items-center justify-center gap-1 shadow-md col-span-2 sm:col-span-1">
+          <span class="text-base">✨</span>
+          <span>Sesión 4</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- REDES SOCIALES -->
+  <RedesSociales />
+
+</Layout>
