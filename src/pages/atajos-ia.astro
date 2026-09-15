@@ -1,0 +1,607 @@
+---
+import Layout from "../layouts/Layout.astro";
+import RedesSociales from "../components/RedesSociales.astro";
+import { LINKS } from "../lib/constants.js";
+
+const hotmartLink = LINKS.atajos_ia || "https://pay.hotmart.com/X107628052G";
+---
+
+<Layout 
+  title="Atajos de IA: 18 Prompts Prácticos para Trabajar y Crear Mejor | LuciRMe AI"
+  description="Deja de empezar cada conversación con ChatGPT desde cero. 18 prompts prácticos, listos para copiar, pegar y adaptar. Menos tiempo buscando qué escribir, más tiempo haciendo."
+>
+
+  <!-- BARRA DE NAVEGACIÓN Y ALERTA STICKY -->
+  <div class="bg-teal text-white font-black text-xs py-2 px-4 text-center border-b border-teal/20 shadow-xs">
+    ⚡ <span class="uppercase tracking-wider">RECURSO PRÁCTICO:</span> 18 Prompts para trabajar y crear mejor con IA · Acceso inmediato
+  </div>
+
+  <nav class="bg-white/95 backdrop-blur-md border-b border-slate-200 px-6 py-3 sticky top-0 z-40 text-slate-900 shadow-xs">
+    <div class="max-w-5xl mx-auto flex justify-between items-center text-xs sm:text-sm">
+      <a href="/recursos" class="font-bold text-slate-600 hover:text-teal transition flex items-center gap-1">
+        ← Volver a Recursos
+      </a>
+      <div class="flex items-center gap-3">
+        <span class="font-bold text-slate-700 hidden md:inline text-xs">Acceso Inmediato • Hotmart</span>
+        <a
+          href={hotmartLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 bg-teal hover:bg-tealHover text-white font-black px-4 py-2 rounded-xl transition text-xs shadow-sm cursor-pointer transform hover:scale-105"
+        >
+          <span>Quiero mis 18 Prompts</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="bg-[#F8FAFC] text-slate-800 font-sans selection:bg-teal selection:text-white min-h-screen">
+
+    <!-- 1. HERO SECTION -->
+    <header class="relative bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0F172A] text-white pt-16 pb-20 px-6 overflow-hidden border-b border-slate-800">
+      <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#0D9488_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+      <div class="absolute -right-20 -top-20 w-80 h-80 bg-teal/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-4xl mx-auto text-center relative z-10 space-y-6">
+        
+        <!-- BADGE -->
+        <div class="inline-flex items-center gap-2 bg-teal/15 text-teal text-xs sm:text-sm font-extrabold uppercase tracking-widest px-4 py-1.5 rounded-full border border-teal/30 shadow-xs">
+          <span>🚀</span>
+          <span>Atajos de IA · Colección Práctica</span>
+        </div>
+
+        <!-- H1 -->
+        <h1 class="text-3xl sm:text-5xl md:text-6xl font-black text-white leading-tight tracking-tight max-w-3xl mx-auto uppercase">
+          ATAJOS DE IA <br />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal via-teal-300 to-amber-300">
+            18 prompts para trabajar y crear mejor
+          </span> <br class="hidden sm:block" />
+          con inteligencia artificial
+        </h1>
+
+        <!-- GANCHO PRINCIPAL -->
+        <p class="text-xl sm:text-2xl font-black text-amber-300 max-w-2xl mx-auto leading-snug">
+          Deja de empezar cada conversación con ChatGPT desde cero.
+        </p>
+
+        <p class="text-base sm:text-lg text-slate-300 font-medium max-w-2xl mx-auto leading-relaxed">
+          <strong class="text-white font-bold">18 prompts prácticos, listos para copiar, pegar y adaptar</strong>, diseñados para ayudarte a trabajar, pensar y crear con IA sin complicarte la vida.
+        </p>
+
+        <!-- SUBHEADLINE CALLOUT -->
+        <div class="bg-slate-900/90 border border-teal/30 p-4 sm:p-5 rounded-2xl max-w-xl mx-auto shadow-xl">
+          <h2 class="text-lg sm:text-xl font-bold text-teal mb-1">
+            Menos tiempo buscando qué escribir. Más tiempo haciendo.
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Si utilizas ChatGPT pero muchas veces no sabes exactamente qué pedirle, este recurso es para ti. Con estos 18 prompts tendrás instrucciones prácticas para situaciones reales de trabajo y creación.
+          </p>
+          <div class="mt-3 inline-block bg-teal/20 text-teal text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider">
+            Sin teoría innecesaria · Sin prompts kilométricos · Sin bullshit
+          </div>
+        </div>
+
+        <!-- CTA PRIMARIO -->
+        <div class="pt-4 space-y-3">
+          <a
+            href={hotmartLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 bg-teal hover:bg-tealHover text-white font-black text-base sm:text-lg px-8 py-4 rounded-xl transition shadow-lg shadow-teal/30 cursor-pointer transform hover:-translate-y-0.5 w-full sm:w-auto"
+          >
+            <span>QUIERO MIS 18 PROMPTS →</span>
+          </a>
+
+          <p class="text-xs text-slate-400 font-medium flex items-center justify-center gap-2">
+            <span>🔒 Acceso inmediato tras la compra</span>
+            <span>•</span>
+            <span>Garantía de satisfacción Hotmart</span>
+          </p>
+        </div>
+
+        <!-- MOCKUP PROMPT WORKFLOW -->
+        <div class="pt-6 max-w-xl mx-auto">
+          <div class="bg-slate-900 border border-slate-700/80 rounded-2xl p-4 sm:p-6 text-left text-xs sm:text-sm font-mono space-y-3 shadow-2xl">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2 text-slate-400 text-xs">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
+                <span class="ml-2 font-bold text-slate-300">Método Atajos de IA</span>
+              </div>
+              <span class="text-teal font-bold">18 Prompts Listos</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs font-bold pt-1">
+              <div class="bg-slate-800 p-2 rounded-lg text-slate-200 border border-slate-700">1. COPIAR</div>
+              <div class="bg-slate-800 p-2 rounded-lg text-slate-200 border border-slate-700">2. PEGAR</div>
+              <div class="bg-slate-800 p-2 rounded-lg text-teal border border-teal/40">3. ADAPTAR</div>
+              <div class="bg-teal text-white p-2 rounded-lg">4. USAR</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12 space-y-16">
+
+      <!-- 2. ¿QUÉ VAS A ENCONTRAR? (CATEGORÍAS DE PROMPTS) -->
+      <section class="space-y-8">
+        <div class="text-center space-y-2">
+          <span class="text-teal font-extrabold text-xs uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full border border-teal/20">
+            Contenido Estructurado
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">
+            ¿QUÉ VAS A ENCONTRAR?
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base max-w-xl mx-auto">
+            18 prompts organizados estratégicamente para ayudarte a resolver diferentes tipos de tareas con inteligencia artificial:
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-6">
+          
+          <!-- CATEGORÍA 1 -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs hover:border-teal transition space-y-3">
+            <div class="w-12 h-12 bg-teal/10 rounded-xl flex items-center justify-center text-2xl">
+              🧠
+            </div>
+            <h3 class="text-lg font-black text-slate-900 tracking-tight">
+              PARA PENSAR MEJOR
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Prompts para analizar información, ordenar ideas y convertir problemas confusos en pasos concretos y accionables.
+            </p>
+          </div>
+
+          <!-- CATEGORÍA 2 -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs hover:border-teal transition space-y-3">
+            <div class="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center text-2xl">
+              ⚡
+            </div>
+            <h3 class="text-lg font-black text-slate-900 tracking-tight">
+              PARA TRABAJAR MÁS RÁPIDO
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Prompts para ayudarte con tareas repetitivas, redacción de documentos, planificación estratégica y organización de proyectos.
+            </p>
+          </div>
+
+          <!-- CATEGORÍA 3 -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs hover:border-teal transition space-y-3">
+            <div class="w-12 h-12 bg-indigo-500/10 rounded-xl flex items-center justify-center text-2xl">
+              ✍️
+            </div>
+            <h3 class="text-lg font-black text-slate-900 tracking-tight">
+              PARA CREAR
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Prompts para generar, mejorar y transformar contenido sin quedarte mirando una pantalla en blanco preguntándote qué escribir.
+            </p>
+          </div>
+
+          <!-- CATEGORÍA 4 -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs hover:border-teal transition space-y-3">
+            <div class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center text-2xl">
+              🎯
+            </div>
+            <h3 class="text-lg font-black text-slate-900 tracking-tight">
+              PARA OBTENER MEJORES RESPUESTAS
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Prompts diseñados para darle a la IA el contexto y las instrucciones exactas que necesita para producir resultados realmente útiles.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 3. NO NECESITAS SER EXPERTO EN IA -->
+      <section class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-3xl p-8 sm:p-10 space-y-8 shadow-xl border border-slate-700">
+        <div class="max-w-2xl mx-auto text-center space-y-3">
+          <span class="bg-amber-400 text-slate-950 font-black text-xs uppercase tracking-widest px-3.5 py-1 rounded-full">
+            Pragmático & Directo
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-black tracking-tight text-white">
+            NO NECESITAS SER EXPERTO EN IA
+          </h2>
+        </div>
+
+        <div class="grid sm:grid-cols-3 gap-4 text-center">
+          <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/80 space-y-2">
+            <span class="text-2xl">❌</span>
+            <p class="text-sm font-semibold text-slate-300">No necesitas saber programar.</p>
+          </div>
+          <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/80 space-y-2">
+            <span class="text-2xl">❌</span>
+            <p class="text-sm font-semibold text-slate-300">No necesitas conocer técnicas avanzadas de prompting.</p>
+          </div>
+          <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/80 space-y-2">
+            <span class="text-2xl">❌</span>
+            <p class="text-sm font-semibold text-slate-300">No necesitas pasar horas aprendiendo teoría.</p>
+          </div>
+        </div>
+
+        <div class="bg-teal/15 border border-teal/40 p-6 rounded-2xl text-center max-w-2xl mx-auto space-y-3">
+          <p class="text-base sm:text-lg font-black text-teal-300">
+            Solo necesitas saber qué quieres conseguir y tener una buena forma de pedírselo a la IA.
+          </p>
+          <p class="text-xs sm:text-sm text-slate-300">
+            Cada prompt está pensado para que puedas seguir el método directo:
+          </p>
+          <div class="inline-flex flex-wrap justify-center items-center gap-2 font-mono font-bold text-xs sm:text-sm bg-slate-900/90 text-amber-300 px-4 py-2 rounded-xl border border-teal/30">
+            <span>COPIAR</span>
+            <span>→</span>
+            <span>PEGAR</span>
+            <span>→</span>
+            <span>ADAPTAR</span>
+            <span>→</span>
+            <span class="text-teal">USAR</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. ¿PARA QUIÉN ES? -->
+      <section class="bg-white border border-slate-200 rounded-3xl p-8 sm:p-10 space-y-8 shadow-xs">
+        <div class="text-center space-y-2">
+          <span class="text-teal font-extrabold text-xs uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full border border-teal/20">
+            Perfil Ideal
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">
+            ¿PARA QUIÉN ES ESTE RECURSO?
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base max-w-xl mx-auto">
+            Este recurso está diseñado específicamente para ti si:
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          
+          <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl flex items-start gap-3">
+            <span class="text-teal font-black text-lg mt-0.5">✓</span>
+            <p class="text-sm text-slate-800 font-medium">
+              Trabajas y quieres <strong>ahorrar tiempo</strong> en tareas repetitivas diarias.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl flex items-start gap-3">
+            <span class="text-teal font-black text-lg mt-0.5">✓</span>
+            <p class="text-sm text-slate-800 font-medium">
+              Utilizas ChatGPT pero sientes que podrías <strong>sacarle mucho más provecho</strong>.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl flex items-start gap-3">
+            <span class="text-teal font-black text-lg mt-0.5">✓</span>
+            <p class="text-sm text-slate-800 font-medium">
+              Creas contenido y necesitas <strong>acelerar tu proceso creativo</strong>.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl flex items-start gap-3">
+            <span class="text-teal font-black text-lg mt-0.5">✓</span>
+            <p class="text-sm text-slate-800 font-medium">
+              Tienes muchas ideas pero te cuesta <strong>convertirlas en algo concreto</strong>.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl flex items-start gap-3">
+            <span class="text-teal font-black text-lg mt-0.5">✓</span>
+            <p class="text-sm text-slate-800 font-medium">
+              Quieres empezar a utilizar IA de manera <strong>práctica desde hoy</strong>.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl flex items-start gap-3">
+            <span class="text-teal font-black text-lg mt-0.5">✓</span>
+            <p class="text-sm text-slate-800 font-medium">
+              <strong>No quieres otro curso lleno de teoría</strong>: quieres herramientas listas para usar.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 5. ¿QUÉ RECIBES? -->
+      <section class="bg-white border-2 border-teal rounded-3xl p-8 sm:p-10 space-y-6 shadow-md relative overflow-hidden">
+        <div class="absolute -right-12 -bottom-12 w-48 h-48 bg-teal/10 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div class="border-b border-slate-100 pb-4 space-y-1">
+          <span class="text-xs font-black uppercase tracking-wider text-teal">
+            Resumen de Entrega
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900">
+            ¿QUÉ RECIBES?
+          </h2>
+          <p class="text-sm text-slate-600 font-medium">
+            Atajos de IA: 18 prompts para trabajar y crear
+          </p>
+        </div>
+
+        <div class="space-y-3.5">
+          <div class="flex items-center gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+            <span class="w-6 h-6 rounded-full bg-teal text-white flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+            <span class="text-sm sm:text-base font-bold text-slate-900">18 prompts prácticos, probados y refinados</span>
+          </div>
+
+          <div class="flex items-center gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+            <span class="w-6 h-6 rounded-full bg-teal text-white flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+            <span class="text-sm sm:text-base font-bold text-slate-900">Instrucciones claras para saber cuándo utilizar cada uno</span>
+          </div>
+
+          <div class="flex items-center gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+            <span class="w-6 h-6 rounded-full bg-teal text-white flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+            <span class="text-sm sm:text-base font-bold text-slate-900">Estructuras listas para adaptar a tu situación concreta</span>
+          </div>
+
+          <div class="flex items-center gap-3 bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+            <span class="w-6 h-6 rounded-full bg-teal text-white flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+            <span class="text-sm sm:text-base font-bold text-slate-900">Acceso inmediato y permanente después de la compra</span>
+          </div>
+        </div>
+
+        <p class="text-xs sm:text-sm text-slate-500 italic pt-2">
+          Un recurso indispensable para tener siempre a mano cada vez que necesites que la IA te ayude a pensar, trabajar o crear.
+        </p>
+
+        <div class="pt-2">
+          <a
+            href={hotmartLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-teal hover:bg-tealHover text-white font-black text-sm sm:text-base px-8 py-3.5 rounded-xl transition shadow-lg shadow-teal/20 cursor-pointer"
+          >
+            <span>QUIERO MIS 18 PROMPTS →</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 6. 🎁 BENEFICIO EXCLUSIVO PARA EL CURSO -->
+      <section class="bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0F172A] rounded-3xl p-8 sm:p-10 text-white space-y-6 shadow-xl border-2 border-amber-500/60 relative overflow-hidden">
+        <div class="absolute -right-16 -top-16 w-64 h-64 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 space-y-4">
+          <div class="inline-flex items-center gap-2 bg-amber-500 text-slate-950 text-xs font-black uppercase tracking-widest px-3.5 py-1 rounded-full shadow-xs">
+            <span>🎁</span> Beneficio Exclusivo
+          </div>
+
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+            Por comprar los 18 prompts, tienes un beneficio exclusivo para acceder al curso
+          </h2>
+
+          <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+            Si después de probar los prompts quieres ir un paso más allá y aprender a <strong class="text-amber-300">utilizar la inteligencia artificial de forma más sistemática en tu trabajo y en tus procesos</strong>, tendrás acceso a un <strong class="text-amber-300">cupón exclusivo para comprar el curso de LuciRMe AI</strong>.
+          </p>
+
+          <div class="bg-slate-900/80 border border-slate-700/80 p-5 rounded-2xl space-y-2">
+            <div class="flex items-center gap-2 text-amber-400 font-bold text-sm">
+              <span>💡</span>
+              <span>Cómo funciona tu beneficio:</span>
+            </div>
+            <ul class="space-y-2 text-xs sm:text-sm text-slate-300 pt-1">
+              <li class="flex items-start gap-2">
+                <span class="text-amber-400 font-bold">1.</span>
+                <span><strong>Compra los prompts hoy</strong> y empieza a aplicarlos.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-400 font-bold">2.</span>
+                <span><strong>Prueba lo que puedes hacer con IA</strong> en tus tareas diarias.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-amber-400 font-bold">3.</span>
+                <span><strong>Si quieres profundizar</strong>, utiliza tu cupón exclusivo para entrar al curso completo.</span>
+              </li>
+            </ul>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-300 italic pt-1">
+            El cupón estará disponible para todos los compradores de este recurso.
+          </p>
+
+          <div class="pt-2">
+            <a
+              href={hotmartLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-sm sm:text-base px-8 py-4 rounded-xl transition shadow-[0_0_25px_rgba(245,158,11,0.4)] cursor-pointer"
+            >
+              <span>QUIERO MIS 18 PROMPTS + BENEFICIO →</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. ¿POR QUÉ 18 PROMPTS? -->
+      <section class="bg-white border border-slate-200 rounded-3xl p-8 sm:p-10 space-y-6 shadow-xs text-center">
+        <div class="space-y-2 max-w-xl mx-auto">
+          <span class="text-teal font-extrabold text-xs uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full border border-teal/20">
+            Filosofía Práctica
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            ¿POR QUÉ 18 PROMPTS?
+          </h2>
+        </div>
+
+        <p class="text-base sm:text-lg text-slate-700 leading-relaxed max-w-2xl mx-auto">
+          Porque no necesitas una biblioteca abrumadora de 500 prompts que probablemente nunca vas a utilizar.
+        </p>
+
+        <p class="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
+          Necesitas una selección pequeña y afilada de herramientas que puedas <strong class="text-slate-900">entender, adaptar y utilizar cuando realmente las necesites.</strong>
+        </p>
+
+        <div class="bg-slate-50 border border-slate-200 p-6 rounded-2xl max-w-xl mx-auto">
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">La regla de oro</div>
+          <div class="text-base sm:text-lg font-black text-teal flex flex-col sm:flex-row items-center justify-center gap-2">
+            <span>menos prompts guardados</span>
+            <span class="text-amber-500">→</span>
+            <span>más prompts utilizados</span>
+            <span class="text-amber-500">→</span>
+            <span class="text-slate-900">más trabajo resuelto</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. EMPIEZA A UTILIZAR LA IA DE FORMA PRÁCTICA -->
+      <section class="bg-slate-900 text-white rounded-3xl p-8 sm:p-10 space-y-8 shadow-xl text-center relative overflow-hidden">
+        <div class="space-y-3 max-w-2xl mx-auto">
+          <span class="text-amber-300 font-extrabold text-xs uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
+            Paso a Paso
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight">
+            EMPIEZA A UTILIZAR LA IA DE FORMA PRÁCTICA
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base">
+            No necesitas esperar a sentirte preparado.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
+          <div class="bg-slate-800/80 border border-slate-700 p-4 rounded-2xl text-center space-y-1">
+            <span class="text-xs text-amber-400 font-bold block">Paso 1</span>
+            <span class="text-sm font-extrabold text-white">Abre ChatGPT</span>
+          </div>
+          <div class="bg-slate-800/80 border border-slate-700 p-4 rounded-2xl text-center space-y-1">
+            <span class="text-xs text-amber-400 font-bold block">Paso 2</span>
+            <span class="text-sm font-extrabold text-white">Elige un prompt</span>
+          </div>
+          <div class="bg-slate-800/80 border border-slate-700 p-4 rounded-2xl text-center space-y-1">
+            <span class="text-xs text-amber-400 font-bold block">Paso 3</span>
+            <span class="text-sm font-extrabold text-white">Adáptalo</span>
+          </div>
+          <div class="bg-teal p-4 rounded-2xl text-center space-y-1 text-white shadow-md">
+            <span class="text-xs text-teal-100 font-bold block">Paso 4</span>
+            <span class="text-sm font-black">Y empieza</span>
+          </div>
+        </div>
+
+        <div class="space-y-4 max-w-xl mx-auto pt-2">
+          <p class="text-base sm:text-lg font-bold text-slate-200">
+            18 prompts pueden cambiar la forma en que haces una tarea. Lo importante es empezar a utilizarlos.
+          </p>
+
+          <a
+            href={hotmartLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 bg-teal hover:bg-tealHover text-white font-black text-base sm:text-lg px-8 py-4 rounded-xl transition shadow-lg shadow-teal/30 cursor-pointer w-full sm:w-auto"
+          >
+            <span>QUIERO LOS 18 PROMPTS →</span>
+          </a>
+
+          <p class="text-xs text-slate-400 font-semibold uppercase tracking-wider pt-1">
+            Acceso inmediato · Recurso práctico · Sin teoría innecesaria
+          </p>
+        </div>
+      </section>
+
+      <!-- 9. PREGUNTAS FRECUENTES -->
+      <section class="space-y-6">
+        <div class="text-center space-y-2">
+          <span class="text-teal font-extrabold text-xs uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full border border-teal/20">
+            Resuelve tus dudas
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            Preguntas Frecuentes
+          </h2>
+        </div>
+
+        <div class="space-y-4 max-w-3xl mx-auto">
+          
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-2">
+            <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+              <span class="text-teal font-black">?</span>
+              ¿Necesito conocimientos técnicos?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed pl-5">
+              No. Los prompts están pensados para personas que quieren utilizar IA de manera práctica, independientemente de su nivel técnico.
+            </p>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-2">
+            <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+              <span class="text-teal font-black">?</span>
+              ¿Necesito pagar ChatGPT?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed pl-5">
+              Puedes utilizar los prompts con las herramientas de IA compatibles con el tipo de tarea que quieras realizar (ChatGPT versión gratuita, Claude, Gemini, etc.). Algunas funciones específicas pueden depender del plan que tengas contratado en cada plataforma.
+            </p>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-2">
+            <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+              <span class="text-teal font-black">?</span>
+              ¿Los prompts funcionan sin modificarlos?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed pl-5">
+              Están diseñados para que puedas empezar rápidamente, pero obtendrás mejores resultados cuando adaptes el contexto a tu situación concreta.
+            </p>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs space-y-2">
+            <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+              <span class="text-teal font-black">?</span>
+              ¿Qué pasa después de comprar?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed pl-5">
+              Recibirás las instrucciones para acceder al recurso y utilizar los 18 prompts. Además, como comprador, recibirás información sobre el beneficio exclusivo para acceder al curso de LuciRMe AI.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 10. CLOSING HIGH-IMPACT BANNER -->
+      <section class="bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-slate-900 text-white rounded-3xl p-8 sm:p-12 text-center space-y-6 shadow-2xl relative overflow-hidden border border-slate-800">
+        <div class="space-y-3 relative z-10 max-w-2xl mx-auto">
+          <span class="inline-block bg-teal/20 text-teal font-bold text-xs uppercase tracking-widest px-3.5 py-1 rounded-full border border-teal/30">
+            Comienza Hoy
+          </span>
+          <h2 class="text-2xl sm:text-4xl font-black text-white leading-tight uppercase">
+            DEJA DE PREGUNTARTE QUÉ ESCRIBIRLE A LA IA. <br/>
+            <span class="text-teal">EMPIEZA A UTILIZARLA.</span>
+          </h2>
+          <p class="text-sm sm:text-base text-slate-300 leading-relaxed font-medium">
+            <strong>18 prompts. 18 atajos.</strong> Una forma más práctica de trabajar y crear con IA.
+          </p>
+        </div>
+
+        <div class="pt-2 relative z-10 flex justify-center">
+          <a
+            href={hotmartLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-teal hover:bg-tealHover text-white font-black text-base sm:text-lg py-4 px-8 rounded-xl transition shadow-xl cursor-pointer transform hover:-translate-y-0.5"
+          >
+            <span>QUIERO MIS 18 PROMPTS →</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 11. FIRMA DE PABLO RÍOS -->
+      <section class="border-t border-slate-200 pt-10">
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left shadow-xs max-w-3xl mx-auto">
+          <img
+            src="/pablo-rios.jpeg"
+            alt="Pablo Ríos"
+            class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover shadow-md border-2 border-teal shrink-0"
+          />
+          <div class="space-y-1">
+            <h3 class="text-lg font-black text-slate-900">Pablo Ríos</h3>
+            <p class="text-xs font-bold text-teal">Head of Product · Consultor en IA & Product Strategy</p>
+            <p class="text-xs text-slate-500 font-medium">Fundador, LuciRMe AI</p>
+            <blockquote class="text-xs italic text-slate-600 pt-2 border-t border-slate-100 font-serif">
+              "No enseño IA. Enseño a recuperar tu tiempo usando la IA como un atajo práctico."
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <RedesSociales />
+
+</Layout>
