@@ -1,0 +1,340 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const whatsappNumber = "573053046180";
+
+const rawText1 = `¡Hola! Te paso el contacto de Pablo Ríos, de LucirMe AI. A mí me ayudó a automatizar parte de mis reportes y presentaciones y terminé ahorrando varias horas a la semana.
+
+Lo que más me gustó es que no se queda en teoría: trabaja sobre lo que realmente haces y busca convertir tareas repetitivas en procesos más simples con IA.
+
+Si quieres revisar tu caso con él, puedes agendar un Café de Estrategia de 30 min gratuito y personalizado para revisar tu caso y detectar dónde podrías ahorrar tiempo usando IA y como podrían trabajar juntos
+
+https://lucirme.com/whatsapp
+
+Dile que vas de mi parte y te aplica un descuento de bienvenida en la primera sesión.`;
+
+const rawText2 = `Grupo, les comparto esto porque sé que a varios nos interesa aplicar IA directamente en nuestros trabajos y en nuestra cotidianidad sin perdernos en tanto detalle técnico. Pablo Ríos, de LucirMe AI, ayuda a convertir ese tipo de trabajo en procesos más rápidos y prácticos, sin tanta teoría ni información innecesaria.
+
+Tiene un Café de Estrategia de 30 min gratuito y personalizado para revisar tu caso y detectar dónde podrías ahorrar tiempo usando IA y como podrían trabajar juntos
+
+Si quieren hablar con él, pueden agendar directamente aquí:
+https://lucirme.com/whatsapp
+
+Mencionen que van de mi parte y les aplican un descuento de bienvenida en la primera sesión.`;
+
+const rawText3 = `Hola. Te recomiendo a Pablo Ríos, de LucirMe AI. Trabajamos con él para estandarizar algunos procesos que antes nos consumían muchas horas. Su enfoque es muy práctico y está muy enfocado al negocio. 
+
+Si estás buscando identificar procesos que podrías simplificar o automatizar con IA, te recomiendo agendar un Café de Estrategia de 30 min gratuito y personalizado para revisar los casos de tu empresa y detectar dónde podrían ahorrar tiempo usando IA y como podrían trabajar juntos.
+
+Puedes escribirle directamente aquí:
+
+https://lucirme.com/whatsapp
+
+Menciona que vas recomendado por mí y te aplican un descuento de bienvenida en la primera sesión.`;
+
+const linkOption1 = `https://api.whatsapp.com/send?text=${encodeURIComponent(rawText1)}`;
+const linkOption2 = `https://api.whatsapp.com/send?text=${encodeURIComponent(rawText2)}`;
+const linkOption3 = `https://api.whatsapp.com/send?text=${encodeURIComponent(rawText3)}`;
+---
+
+<Layout title="Recomienda LucirMe AI | Pásale el atajo">
+  <div
+    class="bg-slate-50 text-slate-800 font-sans selection:bg-teal/20 selection:text-slate-900 min-h-screen"
+  >
+    <!-- HEADER HERO -->
+    <header
+      class="bg-white relative pt-10 pb-12 md:pt-14 md:pb-16 px-6 border-b border-slate-200 overflow-hidden"
+    >
+      <div
+        class="absolute inset-0 opacity-10 bg-[radial-gradient(#94A3B8_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"
+      >
+      </div>
+      <div
+        class="absolute -right-20 -top-20 w-80 h-80 bg-teal/10 rounded-full blur-3xl pointer-events-none"
+      >
+      </div>
+
+      <div class="max-w-3xl mx-auto text-center relative z-10 space-y-5">
+        <div
+          class="inline-flex items-center gap-1.5 bg-teal/10 text-teal-800 border border-teal/20 text-[11px] font-extrabold uppercase tracking-widest px-3.5 py-1 rounded-full"
+        >
+          <span>🤝</span>
+          <span>Programa de Recomendación</span>
+        </div>
+
+        <h1
+          class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 leading-tight tracking-tight uppercase"
+        >
+          ¿Conoces a alguien que siga <br class="hidden sm:block" />
+          <span class="text-teal">perdiendo horas en tareas manuales?</span>
+        </h1>
+
+        <p
+          class="text-sm sm:text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed"
+        >
+          Si LucirMe te devolvió tiempo y claridad, pásale el atajo. Elige el
+          mensaje que mejor se adapte a tu contacto, toca el botón y se te
+          abrirá WhatsApp listo para enviar.
+        </p>
+
+        <!-- DESTACADO DE BENEFICIO -->
+        <div
+          class="bg-gradient-to-r from-teal/10 via-amber-500/10 to-teal/10 border border-teal/30 p-4 sm:p-5 rounded-2xl max-w-xl mx-auto shadow-2xs text-left sm:text-center mt-4"
+        >
+          <p
+            class="text-xs sm:text-sm text-slate-800 font-medium leading-relaxed"
+          >
+            <span class="text-base mr-1">🎁</span>
+            <strong class="text-slate-900 font-extrabold">Ganamos todos:</strong
+            > Tu contacto recibe un <span class="font-bold text-teal"
+              >descuento de bienvenida</span
+            > en su primera sesión y a ti te acreditamos una <strong
+              class="text-slate-900 font-bold"
+              >Sesión de Enfoque adicional</strong
+            > sin costo.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- OPCIONES DE COMPARTIR -->
+    <main class="max-w-3xl mx-auto px-6 py-12 space-y-10">
+      <!-- OPCIÓN 1 -->
+      <section
+        class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-5 shadow-2xs transition-all hover:border-teal/40"
+      >
+        <div class="space-y-1.5">
+          <div class="flex items-center gap-2">
+            <span
+              class="bg-teal/10 text-teal font-extrabold text-[11px] px-2.5 py-0.5 rounded-md uppercase tracking-wide border border-teal/20"
+            >
+              Opción 1
+            </span>
+            <span class="text-xs text-slate-500 font-semibold">1 a 1</span>
+          </div>
+          <h2
+            class="text-lg sm:text-xl font-black text-slate-900 tracking-tight"
+          >
+            Para un colega o amigo
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600 italic">
+            Ideal para enviarlo a alguien que sabes que está ahogado en trabajo
+            o reportes semanales.
+          </p>
+        </div>
+
+        <!-- PREVIEW -->
+        <div
+          class="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 space-y-3"
+        >
+          <div
+            class="flex items-center justify-between text-xs text-slate-400 font-mono"
+          >
+            <span>Vista previa del mensaje:</span>
+            <span>WhatsApp</span>
+          </div>
+          <p
+            class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans whitespace-pre-line bg-white p-3.5 rounded-lg border border-slate-200 text-slate-800"
+          >
+            {rawText1}
+          </p>
+        </div>
+
+        <!-- CTAS -->
+        <div class="flex flex-col sm:flex-row gap-3 pt-1">
+          <a
+            href={linkOption1}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-extrabold text-xs sm:text-sm px-5 py-3.5 rounded-xl transition shadow-xs transform hover:-translate-y-0.5 cursor-pointer"
+          >
+            <span>📲</span>
+            <span>Compartir por WhatsApp a un colega</span>
+          </a>
+          <button
+            type="button"
+            data-copy={rawText1}
+            class="copy-btn inline-flex items-center justify-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs px-4 py-3.5 rounded-xl transition cursor-pointer border border-slate-200 shrink-0"
+          >
+            <span>📋</span>
+            <span class="btn-text">Copiar texto</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- OPCIÓN 2 -->
+      <section
+        class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-5 shadow-2xs transition-all hover:border-teal/40"
+      >
+        <div class="space-y-1.5">
+          <div class="flex items-center gap-2">
+            <span
+              class="bg-amber-500/10 text-amber-900 font-extrabold text-[11px] px-2.5 py-0.5 rounded-md uppercase tracking-wide border border-amber-500/20"
+            >
+              Opción 2
+            </span>
+            <span class="text-xs text-slate-500 font-semibold"
+              >Grupos & Comunidad</span
+            >
+          </div>
+          <h2
+            class="text-lg sm:text-xl font-black text-slate-900 tracking-tight"
+          >
+            Para un grupo de WhatsApp o red de trabajo
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600 italic">
+            Pensado para compartir valor en un grupo sin sonar a venta agresiva.
+          </p>
+        </div>
+
+        <!-- PREVIEW -->
+        <div
+          class="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 space-y-3"
+        >
+          <div
+            class="flex items-center justify-between text-xs text-slate-400 font-mono"
+          >
+            <span>Vista previa del mensaje:</span>
+            <span>WhatsApp</span>
+          </div>
+          <p
+            class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans whitespace-pre-line bg-white p-3.5 rounded-lg border border-slate-200 text-slate-800"
+          >
+            {rawText2}
+          </p>
+        </div>
+
+        <!-- CTAS -->
+        <div class="flex flex-col sm:flex-row gap-3 pt-1">
+          <a
+            href={linkOption2}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-extrabold text-xs sm:text-sm px-5 py-3.5 rounded-xl transition shadow-xs transform hover:-translate-y-0.5 cursor-pointer"
+          >
+            <span>👥</span>
+            <span>Compartir en un grupo de WhatsApp</span>
+          </a>
+          <button
+            type="button"
+            data-copy={rawText2}
+            class="copy-btn inline-flex items-center justify-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs px-4 py-3.5 rounded-xl transition cursor-pointer border border-slate-200 shrink-0"
+          >
+            <span>📋</span>
+            <span class="btn-text">Copiar texto</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- OPCIÓN 3 -->
+      <section
+        class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-5 shadow-2xs transition-all hover:border-teal/40"
+      >
+        <div class="space-y-1.5">
+          <div class="flex items-center gap-2">
+            <span
+              class="bg-sky-500/10 text-sky-900 font-extrabold text-[11px] px-2.5 py-0.5 rounded-md uppercase tracking-wide border border-sky-500/20"
+            >
+              Opción 3
+            </span>
+            <span class="text-xs text-slate-500 font-semibold"
+              >B2B & Ejecutivo</span
+            >
+          </div>
+          <h2
+            class="text-lg sm:text-xl font-black text-slate-900 tracking-tight"
+          >
+            Para un perfil senior, jefe o fundador (B2B)
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600 italic">
+            Tono más formal, enfocado en ROI, estandarización de procesos y
+            seguridad.
+          </p>
+        </div>
+
+        <!-- PREVIEW -->
+        <div
+          class="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 space-y-3"
+        >
+          <div
+            class="flex items-center justify-between text-xs text-slate-400 font-mono"
+          >
+            <span>Vista previa del mensaje:</span>
+            <span>WhatsApp</span>
+          </div>
+          <p
+            class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans whitespace-pre-line bg-white p-3.5 rounded-lg border border-slate-200 text-slate-800"
+          >
+            {rawText3}
+          </p>
+        </div>
+
+        <!-- CTAS -->
+        <div class="flex flex-col sm:flex-row gap-3 pt-1">
+          <a
+            href={linkOption3}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-extrabold text-xs sm:text-sm px-5 py-3.5 rounded-xl transition shadow-xs transform hover:-translate-y-0.5 cursor-pointer"
+          >
+            <span>👔</span>
+            <span>Compartir a un perfil Senior / B2B</span>
+          </a>
+          <button
+            type="button"
+            data-copy={rawText3}
+            class="copy-btn inline-flex items-center justify-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs px-4 py-3.5 rounded-xl transition cursor-pointer border border-slate-200 shrink-0"
+          >
+            <span>📋</span>
+            <span class="btn-text">Copiar texto</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- FOOTER NOTE -->
+      <div class="text-center pt-6 space-y-2">
+        <p class="text-xs text-slate-500">
+          ¿Tienes alguna duda sobre el programa de recomendación?
+        </p>
+        <a
+          href="https://lucirme.com/whatsapp"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block text-xs font-bold text-teal hover:underline"
+        >
+          Habla directamente con Pablo por WhatsApp →
+        </a>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<script>
+  document.querySelectorAll(".copy-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      const textToCopy = button.getAttribute("data-copy");
+      if (textToCopy) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          const textSpan = button.querySelector(".btn-text");
+          if (textSpan) {
+            const originalText = textSpan.textContent;
+            textSpan.textContent = "¡Copiado!";
+            button.classList.add(
+              "bg-emerald-100",
+              "text-emerald-800",
+              "border-emerald-300",
+            );
+            setTimeout(() => {
+              textSpan.textContent = originalText;
+              button.classList.remove(
+                "bg-emerald-100",
+                "text-emerald-800",
+                "border-emerald-300",
+              );
+            }, 2000);
+          }
+        });
+      }
+    });
+  });
+</script>

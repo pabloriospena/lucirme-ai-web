@@ -5,6 +5,9 @@ import { esES } from '@clerk/localizations'; // <--- 1. Importa esto
 
 export default defineConfig({
   output: 'server',
+  redirects: {
+    '/whatsapp': 'https://wa.me/573053046180'
+  },
   adapter: vercel(),
   integrations: [
     clerk({
