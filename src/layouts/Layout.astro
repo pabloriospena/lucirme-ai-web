@@ -507,6 +507,20 @@ const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
             }
           }
         }
+      // Listener global de respaldo para clics en enlaces de Hotmart (PostHog)
+      document.addEventListener("click", (e) => {
+        const link = e.target.closest('a[href*="pay.hotmart.com"]');
+        if (link && window.posthog) {
+          // Solo enviar si el elemento no tiene ya un rastreo explícito con posthog.capture
+          const hasExplicitTracking = link.getAttribute('onclick')?.includes('posthog.capture');
+          if (!hasExplicitTracking) {
+            window.posthog.capture("hotmart_buy_click", {
+              url: link.href,
+              button_text: (link.innerText || "").trim(),
+              page_path: window.location.pathname,
+            });
+          }
+        }
       });
     </script>
   </body>

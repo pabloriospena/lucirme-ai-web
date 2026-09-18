@@ -126,7 +126,7 @@ const hotmartLink = "https://pay.hotmart.com/D96093022S?off=OFF50";
       <div class="text-center py-8">
         <h3 class="text-2xl font-bold text-deep mb-4">¿Listo para ensuciarte las botas?</h3>
         <p class="text-gray-600 mb-8 max-w-xl mx-auto">Con tu código <strong>OFF50</strong> obtienes el conocimiento de más de 10 años de golpes y aprendizajes en startups a mitad de precio.</p>
-        <a href={hotmartLink} target="_blank" class="inline-block bg-deep text-white px-10 py-4 rounded-xl font-bold hover:bg-teal transition shadow-lg">
+        <a href={hotmartLink} target="_blank" onclick="if (window.posthog) { window.posthog.capture('ebook_comprar_final_click', { precio_estimado: '110.000 COP', cupon: 'OFF50' }); }" class="inline-block bg-deep text-white px-10 py-4 rounded-xl font-bold hover:bg-teal transition shadow-lg">
           Aplicar mi código OFF50 y Comprar →
         </a>
       </div>

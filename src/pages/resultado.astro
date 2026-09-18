@@ -155,7 +155,7 @@ const currentConfig = configs[perfil as keyof typeof configs] || configs.individ
         <h3 class="text-lg font-bold mb-1">📘 Ebook "PM Sin Bullshit"</h3>
         <p class="text-xs text-gray-300 mb-4">Aprende a aplicar IA con criterio real y recupera 10 horas semanales.</p>
         <div class="flex flex-wrap gap-4 items-center">
-          <a href="https://pay.hotmart.com/D96093022S?off=OFF50" target="_blank" class="bg-teal text-white px-6 py-2.5 rounded-lg font-bold text-xs hover:bg-tealHover transition">
+          <a href="https://pay.hotmart.com/D96093022S?off=OFF50" target="_blank" onclick="if (window.posthog) { window.posthog.capture('resultado_ebook_buy_click', { producto: 'ebook_pm', cupon: 'OFF50' }); }" class="bg-teal text-white px-6 py-2.5 rounded-lg font-bold text-xs hover:bg-tealHover transition">
             Comprar ahora ($53.000 COP)
           </a>
           <span class="text-xs text-orange font-bold uppercase tracking-widest">50% OFF para clientes</span>

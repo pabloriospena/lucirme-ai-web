@@ -799,7 +799,7 @@ import Layout from "../../layouts/Layout.astro";
 
 <script>
   // COPY PROMPT TOAST FUNCTION
-  window.copyPrompt = function(promptText: string) {
+  (window as any).copyPrompt = function(promptText: string) {
     if (navigator.clipboard) {
       navigator.clipboard.writeText(promptText).then(() => {
         showToast("Prompt copiado al portapapeles");

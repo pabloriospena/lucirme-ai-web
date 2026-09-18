@@ -64,6 +64,7 @@ const redes = [
           href={item.url}
           target="_blank"
           rel="noopener noreferrer"
+          onclick="if (window.posthog && this.href.includes('hotmart')) { window.posthog.capture('redes_sociales_hotmart_click', { producto: 'ebook_pm' }); }"
           class="group flex items-center gap-4 p-4 rounded-xl border border-gray-100 bg-white hover:border-teal hover:shadow-sm transition-all duration-200"
         >
           <!-- ICONO -->

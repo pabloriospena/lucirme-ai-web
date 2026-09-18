@@ -120,6 +120,7 @@ import { LINKS } from "../lib/constants.js";
           <a
             href="https://pay.hotmart.com/D96093022S?off=OFF50"
             target="_blank"
+            onclick="if (window.posthog) { window.posthog.capture('action_hub_ebook_buy_click', { producto: 'ebook_pm', cupon: 'OFF50' }); }"
             class="bg-teal text-white px-6 py-2.5 rounded-lg font-bold text-xs hover:bg-tealHover transition"
           >
             Comprar ahora ($53.000 COP)

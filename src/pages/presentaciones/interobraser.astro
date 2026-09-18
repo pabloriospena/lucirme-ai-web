@@ -1109,6 +1109,7 @@ const prompteadorLink = "https://lucirme.com/recursos/prompteador";
                             <a
                                 href="https://pay.hotmart.com/D96093022S?off=OFF50"
                                 target="_blank"
+                                onclick="if (window.posthog) { window.posthog.capture('interobraser_ebook_buy_click', { producto: 'ebook_pm', cupon: 'OFF50' }); }"
                                 class="bg-teal-600 text-white px-5 py-2.5 rounded-lg hover:bg-teal-700 transition tracking-wide text-xs"
                             >
                                 Comprar ahora ($53.000 COP)
