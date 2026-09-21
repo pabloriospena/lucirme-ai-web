@@ -4,576 +4,1315 @@ import { LINKS } from "../lib/constants.js";
 ---
 
 <Layout title="Rutas para LuciRMe | Rutas de Aprendizaje con IA">
-  <div class="max-w-5xl mx-auto px-4 py-8 md:py-12 space-y-10">
-    
-    <!-- TOP METADATA & BREADCRUMB -->
-    <section class="space-y-4 border-b border-gray-100 pb-8">
-      <div class="flex flex-wrap items-center gap-2 text-xs text-gray-400 font-mono">
-        <a href="/recursos" class="hover:text-teal transition-colors flex items-center gap-1">
-          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+  <style>
+    .route-highlight {
+      animation: pulse-ring 1.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    @keyframes pulse-ring {
+      0% {
+        box-shadow: 0 0 0 0 rgba(13, 148, 136, 0.65);
+        transform: translateY(-2px);
+      }
+      40% {
+        box-shadow: 0 0 0 6px rgba(13, 148, 136, 0.28);
+        transform: translateY(-2px);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(13, 148, 136, 0);
+        transform: translateY(0);
+      }
+    }
+  </style>
+
+  <div class="max-w-5xl mx-auto px-4 py-8 md:py-12 space-y-12">
+    <!-- 1. HERO & BREADCRUMB -->
+    <section class="space-y-4">
+      <div
+        class="flex flex-wrap items-center gap-2 text-xs text-gray-400 font-mono"
+      >
+        <a
+          href="/recursos"
+          class="hover:text-teal transition-colors flex items-center gap-1"
+        >
+          <svg
+            class="w-3.5 h-3.5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
+            ></path>
           </svg>
           <span>Recursos</span>
         </a>
         <span>/</span>
         <span class="text-deep font-semibold flex items-center gap-1">
-          <svg class="w-3.5 h-3.5 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+          <svg
+            class="w-3.5 h-3.5 text-teal"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
+            ></path>
           </svg>
-          <span>Rutas de Aprendizaje</span>
+          <span>Rutas</span>
         </span>
-        <span class="text-gray-300">•</span>
-        <span class="bg-teal/10 text-teal px-2 py-0.5 rounded-full font-bold text-[10px] uppercase tracking-wider">Método LuciRMe AI</span>
       </div>
 
-      <!-- TITLE BLOCK -->
-      <div class="flex items-start gap-4">
-        <div class="w-12 h-12 rounded-2xl bg-teal/10 border border-teal/20 flex items-center justify-center text-teal shrink-0 shadow-2xs">
-          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-          </svg>
-        </div>
-        <div class="space-y-1">
-          <h1 class="text-3xl sm:text-4xl font-extrabold text-deep tracking-tight">
-            Rutas de Aprendizaje con IA
-          </h1>
-          <p class="text-sm sm:text-base text-gray-500 max-w-3xl leading-relaxed">
-            Aprende a tu ritmo: Comienza con recursos prácticos 100% gratuitos y avanza a sistemas guiados para dominar la IA con criterio profesional.
-          </p>
-        </div>
-      </div>
-
-      <!-- QUICK METRIC CHIPS -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2">
-        <div class="bg-white border border-gray-200/80 rounded-xl p-3 flex items-center gap-3 shadow-2xs">
-          <div class="w-8 h-8 rounded-lg bg-teal/10 flex items-center justify-center text-teal shrink-0">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
-          </div>
-          <div>
-            <span class="block font-bold text-sm text-deep leading-none">4 Rutas</span>
-            <span class="block text-[11px] text-gray-400">Especializadas</span>
-          </div>
-        </div>
-
-        <div class="bg-white border border-gray-200/80 rounded-xl p-3 flex items-center gap-3 shadow-2xs">
-          <div class="w-8 h-8 rounded-lg bg-teal/10 flex items-center justify-center text-teal shrink-0">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
-            </svg>
-          </div>
-          <div>
-            <span class="block font-bold text-sm text-deep leading-none">19 Recursos</span>
-            <span class="block text-[11px] text-gray-400">Tácticos</span>
-          </div>
-        </div>
-
-        <div class="bg-white border border-gray-200/80 rounded-xl p-3 flex items-center gap-3 shadow-2xs">
-          <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-700 shrink-0">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <div>
-            <span class="block font-bold text-sm text-deep leading-none">80% Gratis</span>
-            <span class="block text-[11px] text-gray-400">Para comenzar</span>
-          </div>
-        </div>
-
-        <div class="bg-white border border-gray-200/80 rounded-xl p-3 flex items-center gap-3 shadow-2xs">
-          <div class="w-8 h-8 rounded-lg bg-orange/10 flex items-center justify-center text-orange shrink-0">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-          </div>
-          <div>
-            <span class="block font-bold text-sm text-deep leading-none">Sin Relleno</span>
-            <span class="block text-[11px] text-gray-400">Ni teoría vacía</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- INTERACTIVE FILTER DROPDOWN -->
-    <section class="sticky top-16 z-30 bg-[#F8FAFC]/95 backdrop-blur-md py-2.5 border-b border-gray-100">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div class="flex items-center gap-2">
-          <label for="route-select-filter" class="text-xs font-bold text-deep flex items-center gap-1.5 shrink-0">
-            <svg class="w-4 h-4 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-            </svg>
-            <span>Filtrar Ruta:</span>
-          </label>
-          <div class="relative w-full sm:w-80">
-            <select 
-              id="route-select-filter"
-              class="w-full appearance-none bg-white border border-gray-200 hover:border-teal rounded-xl px-3.5 py-2 pr-9 text-xs font-bold text-deep transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-teal/20 shadow-2xs"
-            >
-              <option value="all">Todas las rutas (4 especialidades)</option>
-              <option value="ruta-1">01. Comunicación & Presentaciones Ejecutivas</option>
-              <option value="ruta-2">02. Product Management & Estrategia</option>
-              <option value="ruta-3">03. Productividad, Investigación & NotebookLM</option>
-              <option value="ruta-4">04. Empleabilidad y Desarrollo Profesional</option>
-            </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-gray-400">
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        <div class="hidden lg:flex items-center gap-3 text-xs text-gray-400 font-medium shrink-0">
-          <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Nivel 01-03: Gratis</span>
-          <span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-500"></span> Nivel 04-05: Pro</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- LIST OF 4 DETAILED LEARNING PATHS -->
-    <div class="space-y-12" id="routes-container">
-      
-      <!-- ========================================== -->
-      <!-- RUTA 1: COMUNICACIÓN Y PRESENTACIONES      -->
-      <!-- ========================================== -->
-      <article class="route-card bg-white border border-gray-200 rounded-2xl p-6 shadow-2xs space-y-6" data-route="ruta-1" id="ruta-comunicacion">
-        <!-- Header -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-gray-100">
-          <div class="flex items-start gap-3">
-            <div class="w-10 h-10 rounded-xl bg-teal/10 text-teal flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
-              </svg>
-            </div>
-            <div>
-              <div class="flex items-center gap-2 flex-wrap mb-1">
-                <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-teal text-white">Ruta 01</span>
-                <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-teal/10 text-teal">5 Etapas Progresivas</span>
-                <span class="text-[11px] text-gray-400 font-mono">3.5 hrs estimadas</span>
-              </div>
-              <h2 class="text-xl font-bold text-deep">Comunicación y Presentaciones Ejecutivas</h2>
-              <p class="text-xs text-gray-500 mt-0.5">Convierte notas dispersas, reuniones y datos en historias ejecutivas sin trasnochar.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Stepper Levels -->
-        <div class="space-y-3">
-          
-          <!-- Level 01 -->
-          <div class="p-4 rounded-xl bg-[#F7F7F5] border border-gray-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-[#F1F1EF] transition-all">
-            <div class="flex items-start gap-3">
-              <span class="text-xs font-mono font-bold text-teal bg-white border border-gray-200 px-2 py-1 rounded shrink-0">01</span>
-              <div>
-                <div class="flex items-center gap-2 flex-wrap mb-1">
-                  <span class="text-xs font-bold text-deep">Presentaciones con IA en 30 Minutos</span>
-                  <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.2 rounded-full">Gratis</span>
-                </div>
-                <p class="text-xs text-gray-500">Diseña la estructura, contenido y layout de tus slides en 4 pasos y 4 prompts probados.</p>
-              </div>
-            </div>
-            <a href="/presentaciones-con-ia" class="self-end sm:self-center px-3.5 py-1.5 rounded-lg bg-teal text-white text-xs font-bold hover:bg-teal/90 transition shrink-0 shadow-2xs">
-              Acceder Gratis →
-            </a>
-          </div>
-
-          <!-- Level 02 -->
-          <div class="p-4 rounded-xl bg-[#F7F7F5] border border-gray-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-[#F1F1EF] transition-all">
-            <div class="flex items-start gap-3">
-              <span class="text-xs font-mono font-bold text-teal bg-white border border-gray-200 px-2 py-1 rounded shrink-0">02</span>
-              <div>
-                <div class="flex items-center gap-2 flex-wrap mb-1">
-                  <span class="text-xs font-bold text-deep">Convierte una reunión en decisiones claras</span>
-                  <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.2 rounded-full">Gratis</span>
-                </div>
-                <p class="text-xs text-gray-500">Extrae acuerdos, responsables y riesgos de transcripciones con 3 prompts maestros.</p>
-              </div>
-            </div>
-            <a href="/recursos/reunion-claridad" class="self-end sm:self-center px-3.5 py-1.5 rounded-lg bg-white border border-gray-300 text-deep text-xs font-bold hover:bg-gray-50 transition shrink-0">
-              Ver Guía →
-            </a>
-          </div>
-
-          <!-- Level 03 -->
-          <div class="p-4 rounded-xl bg-[#F7F7F5] border border-gray-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-[#F1F1EF] transition-all">
-            <div class="flex items-start gap-3">
-              <span class="text-xs font-mono font-bold text-teal bg-white border border-gray-200 px-2 py-1 rounded shrink-0">03</span>
-              <div>
-                <div class="flex items-center gap-2 flex-wrap mb-1">
-                  <span class="text-xs font-bold text-deep">De Notas a Reportes con NotebookLM</span>
-                  <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.2 rounded-full">Gratis</span>
-                </div>
-                <p class="text-xs text-gray-500">Flujo de 3 pasos para consolidar emails, audios y hojas de cálculo en síntesis directivas.</p>
-              </div>
-            </div>
-            <a href="/recursos/career-path-notebooklm" class="self-end sm:self-center px-3.5 py-1.5 rounded-lg bg-white border border-gray-300 text-deep text-xs font-bold hover:bg-gray-50 transition shrink-0">
-              Ver Flujo →
-            </a>
-          </div>
-
-          <!-- Level 04 -->
-          <div class="p-4 rounded-xl bg-[#F7F7F5] border border-gray-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-[#F1F1EF] transition-all">
-            <div class="flex items-start gap-3">
-              <span class="text-xs font-mono font-bold text-orange bg-white border border-gray-200 px-2 py-1 rounded shrink-0">04</span>
-              <div>
-                <div class="flex items-center gap-2 flex-wrap mb-1">
-                  <span class="text-xs font-bold text-deep">Bot Presentaciones ($8 USD)</span>
-                  <span class="text-[10px] font-bold text-slate-900 bg-amber-200 px-2 py-0.2 rounded-full">Tool IA • $8</span>
-                </div>
-                <p class="text-xs text-gray-500">Asistente IA interactivo con framework de narrativa que te guía paso a paso en el armado de tu presentación.</p>
-              </div>
-            </div>
-            <a href="/bot-presentaciones" class="self-end sm:self-center px-3.5 py-1.5 rounded-lg bg-orange text-white text-xs font-bold hover:bg-orange/90 transition shrink-0 shadow-2xs">
-              Obtener Bot ($8) →
-            </a>
-          </div>
-
-          <!-- Level 05 -->
-          <div class="p-4 rounded-xl bg-gradient-to-r from-amber-500/10 via-amber-100/30 to-teal/10 border border-amber-300/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs">
-            <div class="flex items-start gap-3">
-              <span class="text-xs font-mono font-black text-slate-950 bg-amber-400 px-2 py-1 rounded shrink-0">05</span>
-              <div>
-                <div class="flex items-center gap-2 flex-wrap mb-1">
-                  <span class="text-xs font-bold text-deep">Curso Presentaciones con IA ($35 USD)</span>
-                  <span class="text-[10px] font-black uppercase text-slate-950 bg-amber-400 px-2 py-0.5 rounded-full">Programa Completo</span>
-                </div>
-                <p class="text-xs text-gray-600">Método de 5 pasos (<strong class="text-deep">Organiza, Analiza, Sintetiza, Valida, Presenta</strong>) para crear reportes y dashboards ejecutivos con alto impacto de decisión.</p>
-              </div>
-            </div>
-            <a href="/curso-presentaciones" class="self-end sm:self-center px-4 py-2 rounded-lg bg-amber-500 text-slate-950 text-xs font-black hover:bg-amber-400 transition shrink-0 shadow-sm">
-              Inscribirme ($35 USD) →
-            </a>
-          </div>
-
-        </div>
-      </article>
-
-      <!-- ========================================== -->
-      <!-- RUTA 2: PRODUCT MANAGEMENT                 -->
-      <!-- ========================================== -->
-      <article class="route-card bg-white border border-gray-200 rounded-2xl p-6 shadow-2xs space-y-6" data-route="ruta-2" id="ruta-pm">
-        <!-- Header -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-gray-100">
-          <div class="flex items-start gap-3">
-            <div class="w-10 h-10 rounded-xl bg-orange/10 text-orange flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <div>
-              <div class="flex items-center gap-2 flex-wrap mb-1">
-                <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-orange text-white">Ruta 02</span>
-                <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-orange/10 text-orange">De Idea a Entrega Táctica</span>
-                <span class="text-[11px] text-gray-400 font-mono">4 hrs estimadas</span>
-              </div>
-              <h2 class="text-xl font-bold text-deep">Product Management & Estrategia Sin Bullshit</h2>
-              <p class="text-xs text-gray-500 mt-0.5">Diseña, prioriza y construye productos reales sin perderte en marcos teóricos vacíos.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="space-y-3">
-          
-          <!-- Level 01 -->
-          <div class="p-4 rounded-xl bg-[#F7F7F5] border border-gray-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-[#F1F1EF] transition-all">
-            <div class="flex items-start gap-3">
-              <span class="text-xs font-mono font-bold text-orange bg-white border border-gray-200 px-2 py-1 rounded shrink-0">01</span>
-              <div>
-                <div class="flex items-center gap-2 flex-wrap mb-1">
-                  <span class="text-xs font-bold text-deep">Ideador de Productos</span>
-                  <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.2 rounded-full">Gratis</span>
-                </div>
-                <p class="text-xs text-gray-500">Estructura y valida la idea de tu app o funcionalidad en 4 fases usando Jobs to be Done, Perplexity y Lovable.</p>
-              </div>
-            </div>
-            <a href="/recursos/ideador-producto" class="self-end sm:self-center px-3.5 py-1.5 rounded-lg bg-teal text-white text-xs font-bold hover:bg-teal/90 transition shrink-0">
-              Usar Ideador →
-            </a>
-          </div>
-
-          <!-- Level 02 -->
-          <div class="p-4 rounded-xl bg-[#F7F7F5] border border-gray-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-[#F1F1EF] transition-all">
-            <div class="flex items-start gap-3">
-              <span class="text-xs font-mono font-bold text-orange bg-white border border-gray-200 px-2 py-1 rounded shrink-0">02</span>
-              <div>
-                <div class="flex items-center gap-2 flex-wrap mb-1">
-                  <span class="text-xs font-bold text-deep">Backlog Detox</span>
-                  <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.2 rounded-full">Gratis</span>
-                </div>
-                <p class="text-xs text-gray-500">Limpia y prioriza tu backlog de tareas acumuladas al instante evaluando impacto, esfuerzo y valor real.</p>
-              </div>
-            </div>
-            <a href="/recursos/backlog-detox" class="self-end sm:self-center px-3.5 py-1.5 rounded-lg bg-teal text-white text-xs font-bold hover:bg-teal/90 transition shrink-0 shadow-2xs">
-              Usar Detox →
-            </a>
-          </div>
-
-          <!-- Level 03 -->
-          <div class="p-4 rounded-xl bg-[#F7F7F5] border border-gray-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-[#F1F1EF] transition-all">
-            <div class="flex items-start gap-3">
-              <span class="text-xs font-mono font-bold text-orange bg-white border border-gray-200 px-2 py-1 rounded shrink-0">03</span>
-              <div>
-                <div class="flex items-center gap-2 flex-wrap mb-1">
-                  <span class="text-xs font-bold text-deep">ShapeUp Builder</span>
-                  <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.2 rounded-full">Gratis</span>
-                </div>
-                <p class="text-xs text-gray-500">Pasa de un problema difuso a un Pitch listo para construir definiendo apetito, riesgos y límites con Shape Up.</p>
-              </div>
-            </div>
-            <a href="/recursos/shapeup-builder" class="self-end sm:self-center px-3.5 py-1.5 rounded-lg bg-teal text-white text-xs font-bold hover:bg-teal/90 transition shrink-0 shadow-2xs">
-              Usar ShapeUp →
-            </a>
-          </div>
-
-          <!-- Level 04 -->
-          <div class="p-4 rounded-xl bg-[#F7F7F5] border border-gray-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-[#F1F1EF] transition-all">
-            <div class="flex items-start gap-3">
-              <span class="text-xs font-mono font-bold text-orange bg-white border border-gray-200 px-2 py-1 rounded shrink-0">04</span>
-              <div>
-                <div class="flex items-center gap-2 flex-wrap mb-1">
-                  <span class="text-xs font-bold text-deep">Ebook: Product Management Sin Bullshit (Vol. 1)</span>
-                  <span class="text-[10px] font-bold text-orange bg-orange/10 px-2 py-0.2 rounded-full">$53.000 COP</span>
-                </div>
-                <p class="text-xs text-gray-500">Manual táctico para construir y lanzar productos en startups reales, evitando métricas vanidosas y feature creep.</p>
-              </div>
-            </div>
-            <a href={LINKS.ebook} target="_blank" rel="noopener noreferrer" class="self-end sm:self-center px-3.5 py-1.5 rounded-lg bg-orange text-white text-xs font-bold hover:bg-orange/90 transition shrink-0 shadow-2xs">
-              Comprar Ebook →
-            </a>
-          </div>
-
-        </div>
-      </article>
-
-      <!-- ========================================== -->
-      <!-- RUTA 3: NOTEBOOKLM Y RESEARCH              -->
-      <!-- ========================================== -->
-      <article class="route-card bg-white border border-gray-200 rounded-2xl p-6 shadow-2xs space-y-6" data-route="ruta-3" id="ruta-notebooklm">
-        <!-- Header -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-gray-100">
-          <div class="flex items-start gap-3">
-            <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
-            </div>
-            <div>
-              <div class="flex items-center gap-2 flex-wrap mb-1">
-                <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-indigo-600 text-white">Ruta 03</span>
-                <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-indigo-100 text-indigo-700">Investigación & Síntesis</span>
-                <span class="text-[11px] text-gray-400 font-mono">2.5 hrs estimadas</span>
-              </div>
-              <h2 class="text-xl font-bold text-deep">Productividad, Investigación & NotebookLM</h2>
-              <p class="text-xs text-gray-500 mt-0.5">Procesa información, papers y documentos en tiempo récord sin que la IA invente datos.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="space-y-3">
-          
-          <!-- Level 01 -->
-          <div class="p-4 rounded-xl bg-[#F7F7F5] border border-gray-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-[#F1F1EF] transition-all">
-            <div class="flex items-start gap-3">
-              <span class="text-xs font-mono font-bold text-indigo-600 bg-white border border-gray-200 px-2 py-1 rounded shrink-0">01</span>
-              <div>
-                <div class="flex items-center gap-2 flex-wrap mb-1">
-                  <span class="text-xs font-bold text-deep">Guía NotebookLM Sin Bullshit</span>
-                  <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.2 rounded-full">Gratis</span>
-                </div>
-                <p class="text-xs text-gray-500">Domina la curaduría de fuentes, la regla del triángulo contra alucinaciones y planes de estudio activo de 7 días.</p>
-              </div>
-            </div>
-            <a href="/recursos/career-path-notebooklm" class="self-end sm:self-center px-3.5 py-1.5 rounded-lg bg-teal text-white text-xs font-bold hover:bg-teal/90 transition shrink-0">
-              Leer Guía →
-            </a>
-          </div>
-
-          <!-- Level 02 -->
-          <div class="p-4 rounded-xl bg-[#F7F7F5] border border-gray-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-[#F1F1EF] transition-all">
-            <div class="flex items-start gap-3">
-              <span class="text-xs font-mono font-bold text-indigo-600 bg-white border border-gray-200 px-2 py-1 rounded shrink-0">02</span>
-              <div>
-                <div class="flex items-center gap-2 flex-wrap mb-1">
-                  <span class="text-xs font-bold text-deep">Prompteador de Tareas (Fórmula R+C+T+E)</span>
-                  <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.2 rounded-full">Gratis</span>
-                </div>
-                <p class="text-xs text-gray-500">Genera y optimiza prompts estructurados para obtener respuestas deterministas de cualquier LLM.</p>
-              </div>
-            </div>
-            <a href="/recursos/prompteador" class="self-end sm:self-center px-3.5 py-1.5 rounded-lg bg-white border border-gray-300 text-deep text-xs font-bold hover:bg-gray-50 transition shrink-0">
-              Usar Herramienta →
-            </a>
-          </div>
-
-          <!-- Level 03 -->
-          <div class="p-4 rounded-xl bg-[#F7F7F5] border border-gray-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-[#F1F1EF] transition-all">
-            <div class="flex items-start gap-3">
-              <span class="text-xs font-mono font-bold text-indigo-600 bg-white border border-gray-200 px-2 py-1 rounded shrink-0">03</span>
-              <div>
-                <div class="flex items-center gap-2 flex-wrap mb-1">
-                  <span class="text-xs font-bold text-deep">Atajos de IA: 18 Prompts Prácticos</span>
-                  <span class="text-[10px] font-bold text-teal bg-teal/10 px-2 py-0.2 rounded-full">Colección Exclusiva</span>
-                </div>
-                <p class="text-xs text-gray-500">18 prompts afilados para pensar, trabajar y crear rápido sin rodeos teóricos.</p>
-              </div>
-            </div>
-            <a href="/atajos-ia" class="self-end sm:self-center px-3.5 py-1.5 rounded-lg bg-teal text-white text-xs font-bold hover:bg-teal/90 transition shrink-0">
-              Obtener Atajos →
-            </a>
-          </div>
-
-        </div>
-      </article>
-
-      <!-- ========================================== -->
-      <!-- RUTA 4: EMPLEABILIDAD Y CARRERA            -->
-      <!-- ========================================== -->
-      <article class="route-card bg-white border border-gray-200 rounded-2xl p-6 shadow-2xs space-y-6" data-route="ruta-4" id="ruta-empleabilidad">
-        <!-- Header -->
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-gray-100">
-          <div class="flex items-start gap-3">
-            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 1321 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <div>
-              <div class="flex items-center gap-2 flex-wrap mb-1">
-                <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-600 text-white">Ruta 04</span>
-                <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-emerald-100 text-emerald-700">Crecimiento Profesional</span>
-                <span class="text-[11px] text-gray-400 font-mono">2 hrs estimadas</span>
-              </div>
-              <h2 class="text-xl font-bold text-deep">Empleabilidad y Desarrollo Profesional</h2>
-              <p class="text-xs text-gray-500 mt-0.5">Destaca en el mercado laboral y planifica tu carrera con herramientas impulsadas por IA.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="space-y-3">
-          
-          <!-- Level 01 -->
-          <div class="p-4 rounded-xl bg-[#F7F7F5] border border-gray-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-[#F1F1EF] transition-all">
-            <div class="flex items-start gap-3">
-              <span class="text-xs font-mono font-bold text-emerald-600 bg-white border border-gray-200 px-2 py-1 rounded shrink-0">01</span>
-              <div>
-                <div class="flex items-center gap-2 flex-wrap mb-1">
-                  <span class="text-xs font-bold text-deep">Tu CV con IA en 5 minutos</span>
-                  <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.2 rounded-full">Gratis</span>
-                </div>
-                <p class="text-xs text-gray-500">Redacta y optimiza tu hoja de vida con IA para superar filtros ATS sin clichés.</p>
-              </div>
-            </div>
-            <a href="/recursos/cv-con-ia" class="self-end sm:self-center px-3.5 py-1.5 rounded-lg bg-teal text-white text-xs font-bold hover:bg-teal/90 transition shrink-0">
-              Optimizar CV →
-            </a>
-          </div>
-
-          <!-- Level 02 -->
-          <div class="p-4 rounded-xl bg-[#F7F7F5] border border-gray-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-[#F1F1EF] transition-all">
-            <div class="flex items-start gap-3">
-              <span class="text-xs font-mono font-bold text-emerald-600 bg-white border border-gray-200 px-2 py-1 rounded shrink-0">02</span>
-              <div>
-                <div class="flex items-center gap-2 flex-wrap mb-1">
-                  <span class="text-xs font-bold text-deep">JobPrompt AI</span>
-                  <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.2 rounded-full">Gratis</span>
-                </div>
-                <p class="text-xs text-gray-500">Genera super-prompts para encontrar vacantes activas y reales en Perplexity o Gemini sin perder horas.</p>
-              </div>
-            </div>
-            <a href="/recursos/job-prompt-ai" class="self-end sm:self-center px-3.5 py-1.5 rounded-lg bg-white border border-gray-300 text-deep text-xs font-bold hover:bg-gray-50 transition shrink-0">
-              Probar JobPrompt →
-            </a>
-          </div>
-
-          <!-- Level 03 -->
-          <div class="p-4 rounded-xl bg-[#F7F7F5] border border-gray-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-[#F1F1EF] transition-all">
-            <div class="flex items-start gap-3">
-              <span class="text-xs font-mono font-bold text-emerald-600 bg-white border border-gray-200 px-2 py-1 rounded shrink-0">03</span>
-              <div>
-                <div class="flex items-center gap-2 flex-wrap mb-1">
-                  <span class="text-xs font-bold text-deep">Café Estratégico 1:1 o Asesoría Directa</span>
-                  <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.2 rounded-full">Personalizado</span>
-                </div>
-                <p class="text-xs text-gray-500">Sesión de diagnóstico directo de 30 minutos para tu caso profesional o de empresa.</p>
-              </div>
-            </div>
-            <a href={LINKS.whatsapp} target="_blank" rel="noopener noreferrer" class="self-end sm:self-center px-3.5 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-500 transition shrink-0 shadow-2xs">
-              Agendar Café 1:1 →
-            </a>
-          </div>
-
-        </div>
-      </article>
-
-    </div>
-
-    <!-- CALLOUT BANNER: TERMÓMETRO IA -->
-    <section class="bg-[#F1F1EF] border border-[#E9E9E7] rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xs">
-      <div class="space-y-2 max-w-xl">
-        <div class="flex items-center gap-2">
-          <span class="text-xs font-bold text-orange uppercase tracking-wider">Diagnóstico Rápido</span>
-          <span class="text-xs text-gray-400">• Toma solo 2 minutos</span>
-        </div>
-        <h3 class="text-xl font-bold text-deep">¿No sabes por dónde empezar? Haz el Termómetro LuciRMe AI</h3>
-        <p class="text-xs text-gray-600 leading-relaxed">
-          Responde 9 preguntas rápidas y descubre exactamente dónde estás perdiendo tiempo y cuál es el recurso recomendado para tu nivel.
+      <div class="max-w-4xl space-y-2">
+        <h1
+          class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-deep tracking-tight"
+        >
+          ¿Qué quieres resolver hoy?
+        </h1>
+        <p class="text-base sm:text-lg text-gray-600 max-w-3xl leading-relaxed">
+          Elige tu problema. Puedes empezar gratis por tu cuenta o trabajarlo
+          directamente conmigo.
         </p>
       </div>
 
-      <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto shrink-0">
-        <button 
-          onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
-          class="w-full sm:w-auto bg-teal hover:bg-teal/90 text-white font-bold text-xs px-5 py-3 rounded-xl transition shadow-sm cursor-pointer"
+      <!-- 2. CAMINO 1: RESOLVERLO POR MI CUENTA -->
+      <div class="pt-4 flex flex-col gap-6">
+        <div class="flex flex-col gap-3">
+          <div
+            class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2"
+          >
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-teal"></span>
+              <h2 class="text-lg md:text-xl text-deep font-bold tracking-tight">
+                Quiero resolverlo por mi cuenta
+              </h2>
+            </div>
+            <p class="text-xs text-gray-500">
+              Elige el problema y empieza con una solución concreta.
+            </p>
+          </div>
+
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 items-stretch"
+          >
+            <!-- Tarjeta 1 -->
+            <button
+              onclick="selectRoute('ruta-comunicacion')"
+              class="group relative p-4 rounded-xl bg-white border border-gray-200 hover:border-teal hover:shadow-md transition-all flex flex-col justify-between text-left cursor-pointer"
+            >
+              <div>
+                <div
+                  class="w-10 h-10 rounded-lg bg-teal/10 text-teal flex items-center justify-center text-xl mb-3 group-hover:scale-105 transition-transform"
+                >
+                  📊
+                </div>
+                <h3
+                  class="font-bold text-sm text-deep group-hover:text-teal transition-colors mb-1.5"
+                >
+                  Necesito hacer una presentación
+                </h3>
+                <p class="text-xs text-gray-500 leading-snug">
+                  Haz una presentación clara sin pasar horas organizando
+                  información y peleando con diapositivas.
+                </p>
+              </div>
+              <div
+                class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-teal font-bold"
+              >
+                <span>Empezar presentación</span>
+                <span class="group-hover:translate-x-1 transition-transform"
+                  >→</span
+                >
+              </div>
+            </button>
+
+            <!-- Tarjeta 2 -->
+            <button
+              onclick="selectRoute('ruta-notebooklm')"
+              class="group relative p-4 rounded-xl bg-white border border-gray-200 hover:border-slate-800 hover:shadow-md transition-all flex flex-col justify-between text-left cursor-pointer"
+            >
+              <div>
+                <div
+                  class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-700 flex items-center justify-center text-xl mb-3 group-hover:scale-105 transition-transform"
+                >
+                  🧠
+                </div>
+                <h3
+                  class="font-bold text-sm text-deep group-hover:text-slate-800 transition-colors mb-1.5"
+                >
+                  Necesito ordenar información
+                </h3>
+                <p class="text-xs text-gray-500 leading-snug">
+                  Convierte documentos, audios, reuniones y otras fuentes
+                  dispersas en trabajo útil y síntesis clara.
+                </p>
+              </div>
+              <div
+                class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-indigo-700 font-bold"
+              >
+                <span>Ordenar información</span>
+                <span class="group-hover:translate-x-1 transition-transform"
+                  >→</span
+                >
+              </div>
+            </button>
+
+            <!-- Tarjeta 3 -->
+            <button
+              onclick="selectRoute('ruta-pm')"
+              class="group relative p-4 rounded-xl bg-white border border-gray-200 hover:border-orange hover:shadow-md transition-all flex flex-col justify-between text-left cursor-pointer"
+            >
+              <div>
+                <div
+                  class="w-10 h-10 rounded-lg bg-orange/10 text-orange flex items-center justify-center text-xl mb-3 group-hover:scale-105 transition-transform"
+                >
+                  🚀
+                </div>
+                <h3
+                  class="font-bold text-sm text-deep group-hover:text-orange transition-colors mb-1.5"
+                >
+                  Necesito trabajar mejor como PM
+                </h3>
+                <p class="text-xs text-gray-500 leading-snug">
+                  Prioriza, estructura problemas y toma decisiones de producto
+                  sin rodeos ni plantillas vacías.
+                </p>
+              </div>
+              <div
+                class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-orange font-bold"
+              >
+                <span>Resolver problema PM</span>
+                <span class="group-hover:translate-x-1 transition-transform"
+                  >→</span
+                >
+              </div>
+            </button>
+
+            <!-- Tarjeta 4 -->
+            <button
+              onclick="selectRoute('ruta-empleabilidad')"
+              class="group relative p-4 rounded-xl bg-white border border-gray-200 hover:border-emerald-600 hover:shadow-md transition-all flex flex-col justify-between text-left cursor-pointer"
+            >
+              <div>
+                <div
+                  class="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl mb-3 group-hover:scale-105 transition-transform"
+                >
+                  💼
+                </div>
+                <h3
+                  class="font-bold text-sm text-deep group-hover:text-emerald-600 transition-colors mb-1.5"
+                >
+                  Necesito mejorar mi carrera
+                </h3>
+                <p class="text-xs text-gray-500 leading-snug">
+                  Usa IA para mejorar tu CV, posicionamiento profesional,
+                  búsqueda de empleo y plan de carrera.
+                </p>
+              </div>
+              <div
+                class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-emerald-600 font-bold"
+              >
+                <span>Mejorar mi CV</span>
+                <span class="group-hover:translate-x-1 transition-transform"
+                  >→</span
+                >
+              </div>
+            </button>
+
+            <!-- Tarjeta 5 -->
+            <button
+              onclick="selectRoute('ruta-visual')"
+              class="group relative p-4 rounded-xl bg-white border border-gray-200 hover:border-teal hover:shadow-md transition-all flex flex-col justify-between text-left cursor-pointer"
+            >
+              <div>
+                <div
+                  class="w-10 h-10 rounded-lg bg-teal/10 text-teal flex items-center justify-center text-xl mb-3 group-hover:scale-105 transition-transform"
+                >
+                  📷
+                </div>
+                <h3
+                  class="font-bold text-sm text-deep group-hover:text-teal transition-colors mb-1.5"
+                >
+                  Crear imágenes y videos
+                </h3>
+                <p class="text-xs text-gray-500 leading-snug">
+                  Crea, transforma y edita imágenes y videos con IA usando
+                  comandos sencillos.
+                </p>
+              </div>
+              <div
+                class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-teal font-bold"
+              >
+                <span>Crear algo</span>
+                <span class="group-hover:translate-x-1 transition-transform"
+                  >→</span
+                >
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. CAMINO 2: RESOLVERLO CONTIGO -->
+        <div
+          class="p-6 md:p-8 rounded-2xl bg-[#0F172A] border border-slate-800 text-white shadow-md flex flex-col md:flex-row md:items-center justify-between gap-6"
         >
-          Hacer Diagnóstico Gratis →
-        </button>
-        <a 
-          href={LINKS.whatsapp} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-5 py-3 rounded-xl transition shadow-sm text-center"
-        >
-          💬 WhatsApp Directo
-        </a>
+          <div class="flex items-start gap-4 max-w-2xl">
+            <div
+              class="w-11 h-11 rounded-xl bg-slate-800/90 text-teal-300 border border-slate-700/80 flex items-center justify-center text-xl shrink-0"
+            >
+              ☕
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-2 mb-1">
+                <span
+                  class="text-[11px] font-bold uppercase tracking-wider text-teal-300 font-mono"
+                  >QUIERO RESOLVERLO CONTIGO</span
+                >
+                <span class="text-slate-600">•</span>
+                <span
+                  class="text-[11px] px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700 font-mono"
+                  >Café de Estrategia • 30 min • 1:1</span
+                >
+              </div>
+              <h3 class="text-xl font-bold text-white tracking-tight mb-1">
+                Tengo un problema concreto
+              </h3>
+              <p class="text-sm text-slate-300 leading-relaxed">
+                No necesito otro recurso. Necesito aterrizar mi problema y
+                decidir qué hacer.
+              </p>
+            </div>
+          </div>
+          <div class="shrink-0 flex sm:self-center">
+            <a
+              href={LINKS.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition-all shadow-sm"
+            >
+              <span>☕ Agendar Café de Estrategia</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
+    <!-- 4. TERMÓMETRO IA (TERCERA VÍA PARA INDECISOS) -->
+    <section
+      class="bg-gradient-to-r from-teal/5 via-teal/10 to-emerald-50 rounded-2xl p-6 md:p-8 border border-teal/20 relative overflow-hidden shadow-2xs"
+      id="termometro-banner"
+    >
+      <div
+        class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6"
+      >
+        <div class="flex items-start gap-4 max-w-2xl">
+          <div
+            class="w-10 h-10 rounded-xl bg-white border border-teal/20 text-teal flex items-center justify-center shrink-0 shadow-2xs text-lg"
+          >
+            🌡️
+          </div>
+          <div>
+            <h3
+              class="text-lg md:text-xl text-deep tracking-tight mb-1 font-bold"
+            >
+              ¿No sabes cuál camino elegir?
+            </h3>
+            <p class="text-xs md:text-sm text-gray-600 leading-relaxed mb-2">
+              Responde 9 preguntas y descubre qué podrías resolver con IA hoy.
+            </p>
+            <div
+              class="flex flex-wrap items-center gap-y-1 gap-x-3 text-[11px] text-gray-500 font-mono"
+            >
+              <span class="flex items-center gap-1.5"
+                ><span class="w-1.5 h-1.5 rounded-full bg-teal"></span> 2 minutos</span
+              >
+              <span>•</span>
+              <span class="flex items-center gap-1.5"
+                ><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> 100%
+                gratis</span
+              >
+              <span>•</span>
+              <span class="flex items-center gap-1.5"
+                ><span class="w-1.5 h-1.5 rounded-full bg-orange"></span> Recomendación
+                personalizada</span
+              >
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto shrink-0"
+        >
+          <button
+            onclick="document.getElementById('selector-overlay')?.classList.remove('hidden')"
+            class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-teal text-white font-bold text-xs hover:bg-teal/90 transition-all shadow-2xs cursor-pointer text-center"
+          >
+            <span>Descubrir mi ruta</span>
+            <span>→</span>
+          </button>
+          <a
+            href={LINKS.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-50 transition-all text-center"
+          >
+            <span>💬 Hablar conmigo</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. SECCIÓN RUTAS MAESTRAS -->
+    <section class="space-y-6 pt-4" id="rutas-maestras">
+      <div
+        class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-3 border-b border-gray-200"
+      >
+        <div>
+          <h2 class="text-2xl font-bold text-deep tracking-tight mb-1">
+            Elige una ruta
+          </h2>
+          <p class="text-xs text-gray-500">
+            Empieza con el recurso gratuito. Si necesitas más velocidad, el
+            método completo o acompañamiento, avanza en los siguientes pasos.
+          </p>
+        </div>
+
+        <!-- Pestañas/Filtros simples -->
+        <div
+          class="inline-flex p-1 bg-gray-200/60 rounded-xl border border-gray-200/80 self-start sm:self-auto overflow-x-auto max-w-full shrink-0"
+        >
+          <button
+            id="tab-all"
+            onclick="filterRoutes('all')"
+            class="route-tab px-3 py-1.5 rounded-lg text-xs font-bold text-teal bg-white shadow-2xs transition-colors whitespace-nowrap cursor-pointer"
+          >
+            Todas las rutas
+          </button>
+          <button
+            id="tab-ruta-comunicacion"
+            onclick="filterRoutes('ruta-comunicacion')"
+            class="route-tab px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-500 hover:text-deep transition-colors whitespace-nowrap cursor-pointer"
+          >
+            Presentaciones
+          </button>
+          <button
+            id="tab-ruta-notebooklm"
+            onclick="filterRoutes('ruta-notebooklm')"
+            class="route-tab px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-500 hover:text-deep transition-colors whitespace-nowrap cursor-pointer"
+          >
+            Información
+          </button>
+          <button
+            id="tab-ruta-pm"
+            onclick="filterRoutes('ruta-pm')"
+            class="route-tab px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-500 hover:text-deep transition-colors whitespace-nowrap cursor-pointer"
+          >
+            Product Management
+          </button>
+          <button
+            id="tab-ruta-empleabilidad"
+            onclick="filterRoutes('ruta-empleabilidad')"
+            class="route-tab px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-500 hover:text-deep transition-colors whitespace-nowrap cursor-pointer"
+          >
+            Carrera
+          </button>
+          <button
+            id="tab-ruta-visual"
+            onclick="filterRoutes('ruta-visual')"
+            class="route-tab px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-500 hover:text-deep transition-colors whitespace-nowrap cursor-pointer"
+          >
+            Imágenes y videos
+          </button>
+        </div>
+      </div>
+
+      <!-- 6. ESTRUCTURA DE LAS 4 RUTAS -->
+      <div class="flex flex-col gap-10" id="routes-wrapper">
+        <!-- ========================================================= -->
+        <!-- RUTA 01: PRESENTACIONES                                  -->
+        <!-- ========================================================= -->
+        <article
+          class="route-master-card bg-white rounded-2xl border border-gray-200 shadow-2xs overflow-hidden p-6 md:p-8 space-y-6 transition-all"
+          data-route="ruta-comunicacion"
+          id="ruta-comunicacion"
+        >
+          <div>
+            <span
+              class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-teal/10 text-teal font-mono"
+              >Ruta 01 • Presentaciones</span
+            >
+            <h3
+              class="text-xl md:text-2xl font-extrabold text-deep tracking-tight mt-1"
+            >
+              De información desordenada a presentación ejecutiva lista
+            </h3>
+          </div>
+
+          <!-- PASO 1 DOMINANTE -->
+          <div
+            class="bg-teal/5 rounded-xl border-2 border-teal/40 p-5 md:p-6 shadow-2xs"
+          >
+            <div
+              class="flex flex-col md:flex-row md:items-center justify-between gap-4"
+            >
+              <div class="max-w-2xl">
+                <span
+                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] bg-emerald-100 text-emerald-800 font-bold mb-2 font-mono"
+                >
+                  Empieza aquí • Gratis
+                </span>
+                <h4 class="text-lg md:text-xl text-deep font-bold">
+                  Presentaciones con IA en 30 minutos
+                </h4>
+                <p class="text-xs text-gray-600 mt-1 leading-relaxed">
+                  Aprende a estructurar una presentación clara en 4 pasos y usa
+                  prompts prácticos para empezar.
+                </p>
+              </div>
+              <a
+                href="/presentaciones-con-ia"
+                class="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-teal text-white font-bold text-xs hover:bg-teal/90 transition-all shrink-0 shadow-2xs"
+              >
+                <span>Empezar gratis</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- DIVISOR SUTIL -->
+          <div class="flex items-center gap-3">
+            <span
+              class="text-[10px] text-gray-400 font-bold uppercase tracking-wider font-mono"
+              >SI NECESITAS OTRA FORMA DE RESOLVERLO:</span
+            >
+            <div class="h-px bg-gray-100 flex-1"></div>
+          </div>
+
+          <!-- 3 COLUMNAS COMPLEMENTARIAS -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
+            <div
+              class="p-4 rounded-xl bg-gray-50 border border-gray-200/80 flex flex-col justify-between space-y-4"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-1 mb-2">
+                  <span class="text-[10px] text-gray-500 font-medium"
+                    >Más rápido • Herramienta</span
+                  >
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded bg-amber-100 text-amber-900 font-bold font-mono"
+                    >$8 USD</span
+                  >
+                </div>
+                <h5 class="text-sm text-deep font-bold mb-1">
+                  Bot Asistente de Presentaciones
+                </h5>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Asistente IA que te guía para estructurar tu presentación y
+                  avanzar slide a slide.
+                </p>
+              </div>
+              <a
+                href="/bot-presentaciones"
+                class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-100 transition-colors"
+              >
+                <span>Probar Bot</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <div
+              class="p-4 rounded-xl bg-gray-50 border border-gray-200/80 flex flex-col justify-between space-y-4"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-1 mb-2">
+                  <span class="text-[10px] text-gray-500 font-medium"
+                    >Aprende el método • Curso</span
+                  >
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded bg-teal/10 text-teal font-bold font-mono"
+                    >$35 USD</span
+                  >
+                </div>
+                <h5 class="text-sm text-deep font-bold mb-1">
+                  Curso Presentaciones con IA
+                </h5>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Aprende el método completo para organizar, analizar,
+                  sintetizar, validar y presentar información.
+                </p>
+              </div>
+              <a
+                href="/curso-presentaciones"
+                class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-100 transition-colors"
+              >
+                <span>Ver curso</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <div
+              class="p-4 rounded-xl bg-gray-50 border border-gray-200/80 flex flex-col justify-between space-y-4"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-1 mb-2">
+                  <span class="text-[10px] text-gray-500 font-medium"
+                    >Trabajarlo conmigo • 1:1</span
+                  >
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 text-slate-800 font-bold font-mono"
+                    >30 min</span
+                  >
+                </div>
+                <h5 class="text-sm text-deep font-bold mb-1">
+                  Café de Estrategia
+                </h5>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Trabajamos directamente sobre tu presentación, estructura o
+                  problema de comunicación.
+                </p>
+              </div>
+              <a
+                href={LINKS.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-500 transition-colors"
+              >
+                <span>Trabajarlo conmigo</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ========================================================= -->
+        <!-- RUTA 02: INFORMACIÓN & SÍNTESIS                           -->
+        <!-- ========================================================= -->
+        <article
+          class="route-master-card bg-white rounded-2xl border border-gray-200 shadow-2xs overflow-hidden p-6 md:p-8 space-y-6 transition-all"
+          data-route="ruta-notebooklm"
+          id="ruta-notebooklm"
+        >
+          <div>
+            <span
+              class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-indigo-100 text-indigo-800 font-mono"
+              >Ruta 02 • Información & Síntesis</span
+            >
+            <h3
+              class="text-xl md:text-2xl font-extrabold text-deep tracking-tight mt-1"
+            >
+              De documentos y audios densos a trabajo y síntesis útil
+            </h3>
+          </div>
+
+          <!-- PASO 1 DOMINANTE -->
+          <div
+            class="bg-indigo-50/60 rounded-xl border-2 border-indigo-200 p-5 md:p-6 shadow-2xs"
+          >
+            <div
+              class="flex flex-col md:flex-row md:items-center justify-between gap-4"
+            >
+              <div class="max-w-2xl">
+                <span
+                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] bg-emerald-100 text-emerald-800 font-bold mb-2 font-mono"
+                >
+                  Empieza aquí • Gratis
+                </span>
+                <h4 class="text-lg md:text-xl text-deep font-bold">
+                  Guía NotebookLM Sin Bullshit
+                </h4>
+                <p class="text-xs text-gray-600 mt-1 leading-relaxed">
+                  Domina la curaduría de fuentes, la regla del triángulo y
+                  planes de estudio activo con citas verificables de tus propias
+                  fuentes.
+                </p>
+              </div>
+              <a
+                href="/recursos/career-path-notebooklm"
+                class="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-teal text-white font-bold text-xs hover:bg-teal/90 transition-all shrink-0 shadow-2xs"
+              >
+                <span>Empezar gratis</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- DIVISOR SUTIL -->
+          <div class="flex items-center gap-3">
+            <span
+              class="text-[10px] text-gray-400 font-bold uppercase tracking-wider font-mono"
+              >SI NECESITAS OTRA FORMA DE RESOLVERLO:</span
+            >
+            <div class="h-px bg-gray-100 flex-1"></div>
+          </div>
+
+          <!-- 3 COLUMNAS COMPLEMENTARIAS -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
+            <div
+              class="p-4 rounded-xl bg-gray-50 border border-gray-200/80 flex flex-col justify-between space-y-4"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-1 mb-2">
+                  <span class="text-[10px] text-gray-500 font-medium"
+                    >Más rápido • Herramienta</span
+                  >
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold font-mono"
+                    >Gratis</span
+                  >
+                </div>
+                <h5 class="text-sm text-deep font-bold mb-1">
+                  Prompteador de Tareas (Fórmula R+C+T+E)
+                </h5>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Generadores estructurados para análisis y síntesis sin
+                  ambigüedad.
+                </p>
+              </div>
+              <a
+                href="/recursos/prompteador"
+                class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-100 transition-colors"
+              >
+                <span>Usar herramienta</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <div
+              class="p-4 rounded-xl bg-gray-50 border border-gray-200/80 flex flex-col justify-between space-y-4"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-1 mb-2">
+                  <span class="text-[10px] text-gray-500 font-medium"
+                    >Aprende el método • Colección</span
+                  >
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded bg-teal/10 text-teal font-bold font-mono"
+                    >18 prompts</span
+                  >
+                </div>
+                <h5 class="text-sm text-deep font-bold mb-1">
+                  Atajos de IA: 18 Prompts Prácticos
+                </h5>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  18 atajos afilados para redactar, resumir y pensar en tu día a
+                  día.
+                </p>
+              </div>
+              <a
+                href="/atajos-ia"
+                class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-100 transition-colors"
+              >
+                <span>Ver atajos</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <div
+              class="p-4 rounded-xl bg-gray-50 border border-gray-200/80 flex flex-col justify-between space-y-4"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-1 mb-2">
+                  <span class="text-[10px] text-gray-500 font-medium"
+                    >Trabajarlo conmigo • 1:1</span
+                  >
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 text-slate-800 font-bold font-mono"
+                    >30 min</span
+                  >
+                </div>
+                <h5 class="text-sm text-deep font-bold mb-1">
+                  Café de Estrategia
+                </h5>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Trabajamos directamente sobre tus fuentes, flujo de
+                  investigación o proceso de síntesis.
+                </p>
+              </div>
+              <a
+                href={LINKS.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-500 transition-colors"
+              >
+                <span>Trabajarlo conmigo</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ========================================================= -->
+        <!-- RUTA 03: PRODUCT MANAGEMENT                               -->
+        <!-- ========================================================= -->
+        <article
+          class="route-master-card bg-white rounded-2xl border border-gray-200 shadow-2xs overflow-hidden p-6 md:p-8 space-y-6 transition-all"
+          data-route="ruta-pm"
+          id="ruta-pm"
+        >
+          <div>
+            <span
+              class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-orange/10 text-orange font-mono"
+              >Ruta 03 • Product Management</span
+            >
+            <h3
+              class="text-xl md:text-2xl font-extrabold text-deep tracking-tight mt-1"
+            >
+              De backlog infinito y dudas a producto validado y priorizado
+            </h3>
+          </div>
+
+          <!-- PASO 1 DOMINANTE -->
+          <div
+            class="bg-orange/5 rounded-xl border-2 border-orange/40 p-5 md:p-6 shadow-2xs"
+          >
+            <div
+              class="flex flex-col md:flex-row md:items-center justify-between gap-4"
+            >
+              <div class="max-w-2xl">
+                <span
+                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] bg-emerald-100 text-emerald-800 font-bold mb-2 font-mono"
+                >
+                  Empieza aquí • Gratis
+                </span>
+                <h4 class="text-lg md:text-xl text-deep font-bold">
+                  Ideador de Productos & Checklist PM
+                </h4>
+                <p class="text-xs text-gray-600 mt-1 leading-relaxed">
+                  Estructura y valida la idea de tu app o funcionalidad sin
+                  rodeos ni plantillas vacías, directo a la ejecución.
+                </p>
+              </div>
+              <a
+                href="/recursos/ideador-producto"
+                class="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-teal text-white font-bold text-xs hover:bg-teal/90 transition-all shrink-0 shadow-2xs"
+              >
+                <span>Empezar gratis</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- DIVISOR SUTIL -->
+          <div class="flex items-center gap-3">
+            <span
+              class="text-[10px] text-gray-400 font-bold uppercase tracking-wider font-mono"
+              >SI NECESITAS OTRA FORMA DE RESOLVERLO:</span
+            >
+            <div class="h-px bg-gray-100 flex-1"></div>
+          </div>
+
+          <!-- 3 COLUMNAS COMPLEMENTARIAS -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
+            <div
+              class="p-4 rounded-xl bg-gray-50 border border-gray-200/80 flex flex-col justify-between space-y-4"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-1 mb-2">
+                  <span class="text-[10px] text-gray-500 font-medium"
+                    >Más rápido • Toolkit</span
+                  >
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold font-mono"
+                    >Gratis</span
+                  >
+                </div>
+                <h5 class="text-sm text-deep font-bold mb-1">
+                  Toolkit Táctico PM (Backlog Detox & ShapeUp)
+                </h5>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Prioriza backlog, crea pitches bajo Shape Up y valida
+                  viabilidad técnica con IA.
+                </p>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <a
+                  href="/recursos/backlog-detox"
+                  class="inline-flex items-center justify-center py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-[11px] hover:bg-gray-100 transition-colors text-center"
+                >
+                  Detox →
+                </a>
+                <a
+                  href="/recursos/shapeup-builder"
+                  class="inline-flex items-center justify-center py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-[11px] hover:bg-gray-100 transition-colors text-center"
+                >
+                  ShapeUp →
+                </a>
+              </div>
+            </div>
+
+            <div
+              class="p-4 rounded-xl bg-gray-50 border border-gray-200/80 flex flex-col justify-between space-y-4"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-1 mb-2">
+                  <span class="text-[10px] text-gray-500 font-medium"
+                    >Aprende el método • Ebook</span
+                  >
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded bg-orange/10 text-orange font-bold font-mono"
+                    >$53.000 COP</span
+                  >
+                </div>
+                <h5 class="text-sm text-deep font-bold mb-1">
+                  Ebook: Product Management Sin Bullshit
+                </h5>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Manual táctico para construir productos evitando métricas
+                  vanidosas y feature creep destructivo.
+                </p>
+              </div>
+              <a
+                href={LINKS.ebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-orange text-white font-bold text-xs hover:bg-orange/90 transition-colors shadow-2xs"
+              >
+                <span>Ver Ebook</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <div
+              class="p-4 rounded-xl bg-gray-50 border border-gray-200/80 flex flex-col justify-between space-y-4"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-1 mb-2">
+                  <span class="text-[10px] text-gray-500 font-medium"
+                    >Trabajarlo conmigo • 1:1</span
+                  >
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 text-slate-800 font-bold font-mono"
+                    >30 min</span
+                  >
+                </div>
+                <h5 class="text-sm text-deep font-bold mb-1">
+                  Café de Estrategia
+                </h5>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Trabajamos directamente sobre tu roadmap, priorización o
+                  problema de producto.
+                </p>
+              </div>
+              <a
+                href={LINKS.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-500 transition-colors"
+              >
+                <span>Trabajarlo conmigo</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ========================================================= -->
+        <!-- RUTA 04: CARRERA PROFESIONAL                              -->
+        <!-- ========================================================= -->
+        <article
+          class="route-master-card bg-white rounded-2xl border border-gray-200 shadow-2xs overflow-hidden p-6 md:p-8 space-y-6 transition-all"
+          data-route="ruta-empleabilidad"
+          id="ruta-empleabilidad"
+        >
+          <div>
+            <span
+              class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-mono"
+              >Ruta 04 • Carrera Profesional</span
+            >
+            <h3
+              class="text-xl md:text-2xl font-extrabold text-deep tracking-tight mt-1"
+            >
+              De postulaciones genéricas a CV optimizado y plan de carrera
+            </h3>
+          </div>
+
+          <!-- PASO 1 DOMINANTE -->
+          <div
+            class="bg-emerald-50/60 rounded-xl border-2 border-emerald-300 p-5 md:p-6 shadow-2xs"
+          >
+            <div
+              class="flex flex-col md:flex-row md:items-center justify-between gap-4"
+            >
+              <div class="max-w-2xl">
+                <span
+                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] bg-emerald-100 text-emerald-800 font-bold mb-2 font-mono"
+                >
+                  Empieza aquí • Gratis
+                </span>
+                <h4 class="text-lg md:text-xl text-deep font-bold">
+                  Tu CV con IA en 5 minutos
+                </h4>
+                <p class="text-xs text-gray-600 mt-1 leading-relaxed">
+                  Redacta y optimiza tu hoja de vida con IA para superar filtros
+                  ATS sin clichés ni errores de formato.
+                </p>
+              </div>
+              <a
+                href="/recursos/cv-con-ia"
+                class="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-teal text-white font-bold text-xs hover:bg-teal/90 transition-all shrink-0 shadow-2xs"
+              >
+                <span>Empezar gratis</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- DIVISOR SUTIL -->
+          <div class="flex items-center gap-3">
+            <span
+              class="text-[10px] text-gray-400 font-bold uppercase tracking-wider font-mono"
+              >SI NECESITAS OTRA FORMA DE RESOLVERLO:</span
+            >
+            <div class="h-px bg-gray-100 flex-1"></div>
+          </div>
+
+          <!-- 3 COLUMNAS COMPLEMENTARIAS -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
+            <div
+              class="p-4 rounded-xl bg-gray-50 border border-gray-200/80 flex flex-col justify-between space-y-4"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-1 mb-2">
+                  <span class="text-[10px] text-gray-500 font-medium"
+                    >Más rápido • Herramienta</span
+                  >
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold font-mono"
+                    >Perplexity</span
+                  >
+                </div>
+                <h5 class="text-sm text-deep font-bold mb-1">JobPrompt AI</h5>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Prompts estructurados para rastrear vacantes reales en
+                  Perplexity sin perderte en portales viejos.
+                </p>
+              </div>
+              <a
+                href="/recursos/job-prompt-ai"
+                class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-100 transition-colors"
+              >
+                <span>Probar JobPrompt</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <div
+              class="p-4 rounded-xl bg-gray-50 border border-gray-200/80 flex flex-col justify-between space-y-4"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-1 mb-2">
+                  <span class="text-[10px] text-gray-500 font-medium"
+                    >Aprende el método • Framework</span
+                  >
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 text-slate-800 font-bold font-mono"
+                    >8 semanas</span
+                  >
+                </div>
+                <h5 class="text-sm text-deep font-bold mb-1">
+                  Framework Career Path (8 Semanas)
+                </h5>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Mapea tus brechas técnicas y diseña una hoja de ruta con
+                  NotebookLM para negociar un mejor rol o sueldo.
+                </p>
+              </div>
+              <a
+                href="/recursos/career-path-notebooklm"
+                class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-100 transition-colors"
+              >
+                <span>Ver plan</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <div
+              class="p-4 rounded-xl bg-gray-50 border border-gray-200/80 flex flex-col justify-between space-y-4"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-1 mb-2">
+                  <span class="text-[10px] text-gray-500 font-medium"
+                    >Trabajarlo conmigo • 1:1</span
+                  >
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 text-slate-800 font-bold font-mono"
+                    >30 min</span
+                  >
+                </div>
+                <h5 class="text-sm text-deep font-bold mb-1">
+                  Café de Estrategia
+                </h5>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Trabajamos directamente sobre tu perfil, búsqueda o estrategia
+                  profesional.
+                </p>
+              </div>
+              <a
+                href={LINKS.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-500 transition-colors"
+              >
+                <span>Trabajarlo conmigo</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ========================================================= -->
+        <!-- RUTA 05: IMÁGENES & VIDEOS                               -->
+        <!-- ========================================================= -->
+        <article
+          class="route-master-card bg-white rounded-2xl border border-gray-200 shadow-2xs overflow-hidden p-6 md:p-8 space-y-6 transition-all"
+          data-route="ruta-visual"
+          id="ruta-visual"
+        >
+          <div>
+            <span
+              class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-teal/10 text-teal font-mono"
+              >Ruta 05 • Imágenes & Videos</span
+            >
+            <h3
+              class="text-xl md:text-2xl font-extrabold text-deep tracking-tight mt-1"
+            >
+              Crear imágenes y videos con IA
+            </h3>
+            <p class="text-xs text-gray-500 mt-0.5">
+              De una foto o una idea a una imagen o video listo para usar.
+            </p>
+          </div>
+
+          <!-- PASO 1 DOMINANTE -->
+          <div
+            class="bg-teal/5 rounded-xl border-2 border-teal/40 p-5 md:p-6 shadow-2xs"
+          >
+            <div
+              class="flex flex-col md:flex-row md:items-center justify-between gap-4"
+            >
+              <div class="max-w-2xl">
+                <span
+                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] bg-emerald-100 text-emerald-800 font-bold mb-2 font-mono"
+                >
+                  Empieza aquí • Gratis
+                </span>
+                <h4 class="text-lg md:text-xl text-deep font-bold">
+                  Prueba tu primer comando visual
+                </h4>
+                <p class="text-xs text-gray-600 mt-1 leading-relaxed">
+                  Aprende un comando sencillo y úsalo para transformar una foto
+                  o crear tu primer resultado visual.
+                </p>
+                <div
+                  class="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-xs font-mono"
+                >
+                  <span class="font-bold text-teal">/haircut</span>
+                  <span class="text-gray-500 font-sans"
+                    >Prueba diferentes cortes de cabello sobre una foto tuya.</span
+                  >
+                </div>
+              </div>
+              <a
+                href="/recursos/crear-imagenes-ia"
+                class="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-teal text-white font-bold text-xs hover:bg-teal/90 transition-all shrink-0 shadow-2xs"
+              >
+                <span>Probar gratis</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- DIVISOR SUTIL -->
+          <div class="flex items-center gap-3">
+            <span
+              class="text-[10px] text-gray-400 font-bold uppercase tracking-wider font-mono"
+              >SI NECESITAS OTRA FORMA DE RESOLVERLO:</span
+            >
+            <div class="h-px bg-gray-100 flex-1"></div>
+          </div>
+
+          <!-- 3 COLUMNAS COMPLEMENTARIAS -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
+            <!-- PASO 2: PRODUCTO PRINCIPAL (ATAJOS VISUALES - $5 USD) -->
+            <div
+              class="p-4 rounded-xl bg-gray-50 border border-gray-200/80 flex flex-col justify-between space-y-4"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-1 mb-2">
+                  <span class="text-[10px] text-gray-500 font-medium"
+                    >Si quieres más comandos</span
+                  >
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold font-mono"
+                    >US$5</span
+                  >
+                </div>
+                <h5 class="text-sm text-deep font-bold mb-0.5">
+                  Atajos Visuales
+                </h5>
+                <p class="text-[11px] text-teal font-semibold mb-1.5">
+                  75 Comandos para imágenes y videos con IA
+                </p>
+                <p class="text-xs text-gray-500 leading-relaxed mb-3">
+                  Una colección práctica de 75 comandos probados (50 imágenes +
+                  25 video) para transformar fotos, crear imágenes, probar
+                  estilos y generar contenido visual.
+                </p>
+              </div>
+              <a
+                href="/atajos-visuales"
+                class="inline-flex items-center justify-center gap-1 w-full py-2.5 rounded-lg bg-orange hover:bg-orange/90 text-white font-bold text-xs transition-colors shadow-2xs"
+              >
+                <span>Ver Atajos Visuales ($5)</span>
+                <span>→</span>
+              </a>
+            </div>
+
+            <!-- PASO 3: PRÓXIMAMENTE -->
+            <div
+              class="p-4 rounded-xl bg-gray-50 border border-gray-200/80 flex flex-col justify-between space-y-4"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-1 mb-2">
+                  <span class="text-[10px] text-gray-500 font-medium"
+                    >Si quieres ir más lejos</span
+                  >
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 text-slate-700 font-medium font-mono"
+                    >Próximamente</span
+                  >
+                </div>
+                <h5 class="text-sm text-deep font-bold mb-1">
+                  Creación visual completa
+                </h5>
+                <p class="text-xs text-gray-500 leading-relaxed mb-3">
+                  Estamos preparando una forma más completa de dominar creación
+                  visual, animación y storytelling con IA.
+                </p>
+              </div>
+              <div
+                class="py-2 px-3 rounded-lg bg-white border border-gray-200 text-center font-mono text-xs text-gray-400"
+              >
+                <span>En desarrollo táctico</span>
+              </div>
+            </div>
+
+            <!-- PASO 4: 1:1 CONMIGO -->
+            <div
+              class="p-4 rounded-xl bg-gray-50 border border-gray-200/80 flex flex-col justify-between space-y-4"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-1 mb-2">
+                  <span class="text-[10px] text-gray-500 font-medium"
+                    >Si prefieres trabajarlo conmigo</span
+                  >
+                  <span
+                    class="text-[10px] px-2 py-0.5 rounded bg-slate-200 text-slate-800 font-bold font-mono"
+                    >30 min • 1:1</span
+                  >
+                </div>
+                <h5 class="text-sm text-deep font-bold mb-1">
+                  Necesito crear algo concreto
+                </h5>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                  Trabajamos directamente sobre lo que necesitas crear:
+                  imágenes, contenido visual, piezas para redes o tu flujo de
+                  producción.
+                </p>
+              </div>
+              <a
+                href={LINKS.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-500 transition-colors"
+              >
+                <span>Trabajarlo conmigo</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- BOTTOM MANIFESTO CALLOUT -->
+    <section
+      class="mt-8 p-4 rounded-xl bg-gray-50 border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4"
+    >
+      <div class="flex items-center gap-3">
+        <span class="text-teal text-xl">🛡️</span>
+        <p class="text-xs text-gray-600 leading-relaxed">
+          <strong class="font-bold text-deep">Compromiso LucirMe:</strong> Cada recurso
+          responde a un caso de uso real. Cero teoría innecesaria ni contenido desactualizado.
+        </p>
+      </div>
+      <a
+        href="/content/como_funciona"
+        class="inline-flex items-center gap-1 text-xs font-bold text-teal hover:underline shrink-0"
+      >
+        <span>Leer Manifiesto</span>
+        <span>→</span>
+      </a>
+    </section>
   </div>
 </Layout>
 
 <script is:inline>
-  // Dropdown filtering logic
-  document.addEventListener("DOMContentLoaded", () => {
-    const routeSelect = document.getElementById("route-select-filter");
-    const cards = document.querySelectorAll(".route-card");
+  function selectRoute(targetRouteId) {
+    filterRoutes(targetRouteId);
+    const targetElement = document.getElementById(targetRouteId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      targetElement.classList.remove("route-highlight");
+      void targetElement.offsetWidth; // trigger reflow
+      targetElement.classList.add("route-highlight");
+      setTimeout(() => {
+        targetElement.classList.remove("route-highlight");
+      }, 1800);
+    }
+  }
 
-    if (routeSelect) {
-      // Check for hash in URL on load (e.g. #ruta-pm or #ruta-comunicacion)
-      const hash = window.location.hash.replace("#", "");
-      if (hash) {
-        const targetElement = document.getElementById(hash);
-        if (targetElement) {
-          const routeAttr = targetElement.getAttribute("data-route");
-          if (routeAttr) {
-            routeSelect.value = routeAttr;
-            cards.forEach(card => {
-              card.style.display = card.getAttribute("data-route") === routeAttr ? "block" : "none";
-            });
-          }
-        }
+  function filterRoutes(routeFilter) {
+    const cards = document.querySelectorAll(".route-master-card");
+    const tabs = document.querySelectorAll(".route-tab");
+
+    tabs.forEach((tab) => {
+      tab.classList.remove("text-teal", "bg-white", "shadow-2xs", "font-bold");
+      tab.classList.add("text-gray-500", "font-semibold");
+    });
+
+    const activeTab = document.getElementById("tab-" + routeFilter);
+    if (activeTab) {
+      activeTab.classList.add(
+        "text-teal",
+        "bg-white",
+        "shadow-2xs",
+        "font-bold",
+      );
+      activeTab.classList.remove("text-gray-500", "font-semibold");
+    }
+
+    cards.forEach((card) => {
+      if (
+        routeFilter === "all" ||
+        card.getAttribute("data-route") === routeFilter
+      ) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
       }
+    });
+  }
 
-      routeSelect.addEventListener("change", function() {
-        const filter = this.value;
-        cards.forEach(card => {
-          if (filter === "all" || card.getAttribute("data-route") === filter) {
-            card.style.display = "block";
-          } else {
-            card.style.display = "none";
-          }
-        });
-      });
+  document.addEventListener("DOMContentLoaded", () => {
+    const hash = window.location.hash.replace("#", "");
+    if (hash && document.getElementById(hash)) {
+      selectRoute(hash);
     }
   });
 </script>

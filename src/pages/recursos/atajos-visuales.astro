@@ -1,0 +1,771 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { LINKS } from "../../lib/constants.js";
+
+export const frontmatter = {
+  title: "Atajos Visuales: 75 Comandos para Imágenes y Video con IA",
+  description: "Biblioteca de 75 comandos probados para crear imágenes y videos con IA. US$5 · Pago único."
+};
+---
+
+<Layout title="Atajos Visuales | 75 Comandos para Imágenes y Video con IA - LuciRMe AI">
+  
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div 
+    id="copy-toast" 
+    class="fixed bottom-6 right-6 z-50 transform translate-y-16 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 text-white shadow-xl text-xs font-mono border border-slate-700"
+  >
+    <span class="text-emerald-400 font-bold">✓</span>
+    <span id="toast-text">Comando copiado al portapapeles</span>
+  </div>
+
+  <div class="w-full bg-surface">
+    
+    <!-- SECTION 1: BREADCRUMB & HERO -->
+    <section class="w-full py-8 sm:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 min-w-0">
+        
+        <!-- Breadcrumb -->
+        <nav aria-label="Breadcrumb" class="flex flex-wrap items-center gap-2 text-xs text-gray-400 font-mono">
+          <a href="/recursos" class="hover:text-teal transition-colors">Recursos</a>
+          <span>/</span>
+          <a href="/rutas" class="hover:text-teal transition-colors">Rutas</a>
+          <span>/</span>
+          <a href="/recursos/crear-imagenes-ia" class="hover:text-teal transition-colors">Crear imágenes con IA</a>
+          <span>/</span>
+          <span class="text-deep font-semibold">Atajos Visuales</span>
+        </nav>
+
+        <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-8 sm:gap-12 w-full min-w-0">
+          
+          <!-- Hero Text -->
+          <div class="w-full lg:w-7/12 space-y-5 min-w-0">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-teal/10 border border-teal/20">
+              <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span>
+              <span class="text-[10px] sm:text-xs font-mono font-bold text-teal tracking-wider uppercase whitespace-nowrap">
+                BIBLIOTECA DE COMANDOS • PAGO ÚNICO • ACCESO INMEDIATO
+              </span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-deep tracking-tight leading-tight break-words">
+              Atajos Visuales
+            </h1>
+
+            <div class="inline-block px-3.5 py-2 rounded-xl bg-gray-100 text-deep">
+              <span class="font-bold text-sm sm:text-base md:text-lg">75 comandos para crear imágenes y videos con IA.</span>
+            </div>
+
+            <p class="text-sm sm:text-base md:text-lg text-gray-600 max-w-xl leading-relaxed">
+              50 comandos para imágenes + 25 para video. Elige lo que quieres crear, copia, adapta y empieza en segundos.
+            </p>
+
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
+              <div class="flex flex-wrap items-center gap-3">
+                <span class="px-3 py-2 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-bold whitespace-nowrap">
+                  US$5 · Pago único
+                </span>
+                <a 
+                  href={LINKS.atajos_visuales} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-orange hover:bg-orange/90 text-white font-bold text-xs transition-all shadow-2xs whitespace-nowrap"
+                >
+                  <span>Quiero Atajos Visuales ($5)</span>
+                  <span>→</span>
+                </a>
+              </div>
+              <span class="text-xs text-gray-500 font-mono flex items-center gap-1.5 whitespace-nowrap">
+                <span class="text-emerald-600 font-bold">⚡</span>
+                Entrega inmediata en PDF digital
+              </span>
+            </div>
+          </div>
+
+          <!-- Hero Visual: Terminal Card -->
+          <div class="w-full lg:w-5/12 shrink-0 min-w-0">
+            <div class="rounded-2xl bg-slate-900 text-slate-100 p-5 sm:p-6 shadow-xl border border-slate-800 space-y-4">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                  <span class="ml-2 text-xs font-mono text-slate-400">atajos-visuales.sh</span>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-teal font-bold">v1.0-release</span>
+              </div>
+
+              <div class="space-y-2 font-mono text-xs">
+                <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-800/60 hover:bg-slate-800 transition-colors gap-2 min-w-0">
+                  <span class="text-teal font-bold shrink-0">/haircut</span>
+                  <span class="text-slate-300 font-sans text-xs truncate">Prueba nuevos cortes y peinados</span>
+                </div>
+                <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-800/60 hover:bg-slate-800 transition-colors gap-2 min-w-0">
+                  <span class="text-teal font-bold shrink-0">/product</span>
+                  <span class="text-slate-300 font-sans text-xs truncate">Fotografía de producto comercial</span>
+                </div>
+                <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-800/60 hover:bg-slate-800 transition-colors gap-2 min-w-0">
+                  <span class="text-teal font-bold shrink-0">/profile</span>
+                  <span class="text-slate-300 font-sans text-xs truncate">Retrato profesional para LinkedIn</span>
+                </div>
+                <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-800/60 hover:bg-slate-800 transition-colors gap-2 min-w-0">
+                  <span class="text-teal font-bold shrink-0">/animate</span>
+                  <span class="text-slate-300 font-sans text-xs truncate">Da movimiento fluido a una imagen</span>
+                </div>
+                <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-800/60 hover:bg-slate-800 transition-colors gap-2 min-w-0">
+                  <span class="text-teal font-bold shrink-0">/cinematic</span>
+                  <span class="text-slate-300 font-sans text-xs truncate">Escenas con iluminación de cine</span>
+                </div>
+              </div>
+
+              <div class="pt-2 flex items-center justify-between text-slate-400 text-[11px] font-mono border-t border-slate-800">
+                <span class="uppercase tracking-wider">75 ATAJOS ORGANIZADOS POR CASO DE USO</span>
+                <span class="text-teal font-bold">💻</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: EL PROBLEMA -->
+    <section class="w-full bg-gray-50 py-12 sm:py-16 border-y border-gray-200/60">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-6">
+        <div>
+          <span class="text-[10px] font-mono font-bold text-orange tracking-wider uppercase">EL VERDADERO CUELLO DE BOTELLA</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-deep mt-1 tracking-tight">
+            El problema no es que no puedas crear algo.
+          </h2>
+          <p class="text-sm sm:text-base text-gray-600 mt-1">
+            Es que muchas veces no sabes qué pedirle a la herramienta.
+          </p>
+        </div>
+
+        <div class="bg-white p-5 sm:p-6 rounded-2xl border border-gray-200 shadow-2xs space-y-3">
+          <div class="flex items-start gap-3">
+            <span class="text-xl shrink-0">❓</span>
+            <div class="text-xs sm:text-sm text-gray-700 space-y-2 leading-relaxed">
+              <p>Abres ChatGPT, Gemini o cualquier otra herramienta de generación.</p>
+              <p>Tienes una idea completamente clara en la cabeza.</p>
+              <p>Y te quedas mirando la pantalla en blanco pensando:</p>
+              <p class="font-bold text-teal text-sm sm:text-base italic">"¿Qué le escribo?"</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-teal/5 p-4 sm:p-5 rounded-xl border border-teal/20 flex items-start gap-3">
+          <span class="text-lg shrink-0">⌛</span>
+          <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+            Pasar 40 minutos adivinando palabras clave o intentando prompts kilométricos frustra a cualquiera. Los atajos eliminan la parálisis de la página en blanco ofreciéndote estructuras que ya dan el resultado correcto en el primer intento.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: LA SOLUCIÓN -->
+    <section class="w-full py-12 sm:py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-10">
+        <div class="text-center max-w-2xl mx-auto space-y-2">
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-deep tracking-tight">
+            Atajos Visuales te da el punto de partida.
+          </h2>
+          <p class="text-xs sm:text-sm text-gray-600">
+            Un método directo de 3 pasos para pasar de la intención al resultado visual en segundos.
+          </p>
+        </div>
+
+        <!-- 3 Steps -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-6 rounded-2xl bg-white border border-gray-200 shadow-2xs space-y-3">
+            <div class="flex items-center justify-between font-mono text-xs">
+              <span class="text-teal font-bold">PASO 01</span>
+              <span class="w-7 h-7 rounded-full bg-teal/10 text-teal flex items-center justify-center font-bold">1</span>
+            </div>
+            <h3 class="font-bold text-base text-deep">Elige</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">
+              Busca el tipo de resultado que quieres entre las categorías organizadas (personas, productos, video, fondos).
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white border border-gray-200 shadow-2xs space-y-3">
+            <div class="flex items-center justify-between font-mono text-xs">
+              <span class="text-teal font-bold">PASO 02</span>
+              <span class="w-7 h-7 rounded-full bg-teal/10 text-teal flex items-center justify-center font-bold">2</span>
+            </div>
+            <h3 class="font-bold text-base text-deep">Copia</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">
+              Usa el comando correspondiente diseñado para preservar proporciones, identidad y estilo sin deformaciones.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white border border-gray-200 shadow-2xs space-y-3">
+            <div class="flex items-center justify-between font-mono text-xs">
+              <span class="text-teal font-bold">PASO 03</span>
+              <span class="w-7 h-7 rounded-full bg-teal/10 text-teal flex items-center justify-center font-bold">3</span>
+            </div>
+            <h3 class="font-bold text-base text-deep">Adapta</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">
+              Cambia lo estrictamente necesario para tu caso particular (objeto, persona, contexto ambiental o esquema de luz).
+            </p>
+          </div>
+        </div>
+
+        <!-- Linear visual diagram -->
+        <div class="p-5 rounded-2xl bg-gray-50 border border-gray-200 flex flex-col sm:flex-row items-center justify-around gap-4 text-center text-xs font-mono">
+          <div class="flex items-center gap-2">
+            <span class="text-lg">💡</span>
+            <span class="font-bold text-deep">Necesidad visual</span>
+          </div>
+          <span class="text-teal font-bold">→</span>
+          <div class="px-4 py-2 rounded-lg bg-white border border-gray-200 shadow-2xs">
+            <span class="font-bold text-teal">/comando probado</span>
+          </div>
+          <span class="text-teal font-bold">→</span>
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-600 font-bold">✓</span>
+            <span class="font-bold text-deep">Resultado con nitidez</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: DEMOSTRACIÓN (3 COMANDOS) -->
+    <section class="w-full bg-gray-50 py-12 sm:py-16 border-y border-gray-200/60">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-8">
+        <div class="max-w-2xl space-y-1">
+          <span class="text-[10px] font-mono font-bold text-teal tracking-wider uppercase">EJEMPLOS REALES</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-deep tracking-tight">
+            Mira lo que hay dentro.
+          </h2>
+          <p class="text-xs sm:text-sm text-gray-600">
+            Esto es solo una pequeña muestra. Tres comandos reales listos para usar en tus herramientas habituales.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Ejemplo 1 -->
+          <div class="rounded-2xl bg-white p-5 sm:p-6 border border-gray-200 shadow-2xs flex flex-col justify-between gap-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between font-mono text-xs">
+                <span class="text-teal font-bold">Ejemplo 01</span>
+                <button 
+                  onclick="copyCommand(this, 'sample-1')" 
+                  class="px-2.5 py-1 rounded bg-gray-100 hover:bg-gray-200 text-deep transition-colors font-mono text-[11px] font-bold cursor-pointer"
+                >
+                  <span class="btn-label">Copiar</span>
+                </button>
+              </div>
+              <div class="p-3 rounded-xl bg-gray-50 font-mono text-xs text-deep space-y-1 border border-gray-100">
+                <div class="text-teal font-bold">/haircut</div>
+                <p id="sample-1" class="text-gray-600 font-sans text-xs leading-relaxed">
+                  Analiza este retrato y genera 4 estilos de corte de cabello realistas. Mantén rostro, identidad, proporciones y tono de piel intactos. Cambia únicamente peinado y volumen.
+                </p>
+              </div>
+            </div>
+            <div class="text-[11px] font-mono text-gray-500 flex items-center gap-1.5 pt-2 border-t border-gray-100">
+              <span>👤</span>
+              <span>Foto personal → 4 opciones de corte</span>
+            </div>
+          </div>
+
+          <!-- Ejemplo 2 -->
+          <div class="rounded-2xl bg-white p-5 sm:p-6 border border-gray-200 shadow-2xs flex flex-col justify-between gap-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between font-mono text-xs">
+                <span class="text-teal font-bold">Ejemplo 02</span>
+                <button 
+                  onclick="copyCommand(this, 'sample-2')" 
+                  class="px-2.5 py-1 rounded bg-gray-100 hover:bg-gray-200 text-deep transition-colors font-mono text-[11px] font-bold cursor-pointer"
+                >
+                  <span class="btn-label">Copiar</span>
+                </button>
+              </div>
+              <div class="p-3 rounded-xl bg-gray-50 font-mono text-xs text-deep space-y-1 border border-gray-100">
+                <div class="text-teal font-bold">/product</div>
+                <p id="sample-2" class="text-gray-600 font-sans text-xs leading-relaxed">
+                  Sitúa este producto en un entorno publicitario minimalista con iluminación de estudio difusa. Conserva la etiqueta, forma, logo y proporciones del producto original con nitidez fotográfica.
+                </p>
+              </div>
+            </div>
+            <div class="text-[11px] font-mono text-gray-500 flex items-center gap-1.5 pt-2 border-t border-gray-100">
+              <span>🛍️</span>
+              <span>Producto → Fondo de estudio publicitario</span>
+            </div>
+          </div>
+
+          <!-- Ejemplo 3 -->
+          <div class="rounded-2xl bg-white p-5 sm:p-6 border border-gray-200 shadow-2xs flex flex-col justify-between gap-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between font-mono text-xs">
+                <span class="text-teal font-bold">Ejemplo 03</span>
+                <button 
+                  onclick="copyCommand(this, 'sample-3')" 
+                  class="px-2.5 py-1 rounded bg-gray-100 hover:bg-gray-200 text-deep transition-colors font-mono text-[11px] font-bold cursor-pointer"
+                >
+                  <span class="btn-label">Copiar</span>
+                </button>
+              </div>
+              <div class="p-3 rounded-xl bg-gray-50 font-mono text-xs text-deep space-y-1 border border-gray-100">
+                <div class="text-teal font-bold">/animate</div>
+                <p id="sample-3" class="text-gray-600 font-sans text-xs leading-relaxed">
+                  Genera un movimiento de cámara suave y continuo avanzando hacia el centro del encuadre. Mantén la coherencia visual, luz volumétrica y velocidad constante en 24 fps.
+                </p>
+              </div>
+            </div>
+            <div class="text-[11px] font-mono text-gray-500 flex items-center gap-1.5 pt-2 border-t border-gray-100">
+              <span>🎬</span>
+              <span>Imagen estática → Clip de video</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-teal/5 border border-teal/20 text-center">
+          <p class="text-xs text-gray-600">
+            La función de esta biblioteca no es enseñar prompting complejo. Es darte el comando probado que ya funciona sin fricción.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: ¿QUÉ HAY DENTRO? -->
+    <section class="w-full py-12 sm:py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-8">
+        <div class="space-y-1">
+          <span class="text-[10px] font-mono font-bold text-teal tracking-wider uppercase">INVENTARIO COMPLETO</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-deep tracking-tight">
+            ¿Qué hay dentro?
+          </h2>
+          <p class="text-xs sm:text-sm text-gray-600">
+            75 puntos de partida estructurados. Tú eliges qué quieres crear.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- Card A: 50 Comandos de Imágenes -->
+          <div class="rounded-2xl bg-white p-6 sm:p-8 border border-gray-200 shadow-2xs space-y-6">
+            <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+              <div>
+                <h3 class="font-bold text-lg text-deep">50 comandos para imágenes</h3>
+                <p class="text-xs text-gray-500">Creación, edición y dirección de arte fija</p>
+              </div>
+              <span class="px-3 py-1 rounded bg-teal/10 text-teal text-xs font-mono font-bold whitespace-nowrap">
+                50 ATAJOS
+              </span>
+            </div>
+
+            <div class="space-y-3 text-xs">
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <span class="font-bold text-deep block">Personas y estilo</span>
+                  <span class="text-gray-500">Cortes, ropa, retratos, estilos, accesorios</span>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white border border-gray-200 text-gray-600 shrink-0 self-start sm:self-center">10 comandos</span>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <span class="font-bold text-deep block">Fotos y retoque</span>
+                  <span class="text-gray-500">Fondos, iluminación, restauración, colorimetría</span>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white border border-gray-200 text-gray-600 shrink-0 self-start sm:self-center">10 comandos</span>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <span class="font-bold text-deep block">Productos y ventas</span>
+                  <span class="text-gray-500">Producto en estudio, ecommerce, publicidad, empaques</span>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white border border-gray-200 text-gray-600 shrink-0 self-start sm:self-center">10 comandos</span>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <span class="font-bold text-deep block">Espacios y escenarios</span>
+                  <span class="text-gray-500">Habitaciones, oficinas, exteriores, arquitectura, viajes</span>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white border border-gray-200 text-gray-600 shrink-0 self-start sm:self-center">10 comandos</span>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <span class="font-bold text-deep block">Contenido y creatividad</span>
+                  <span class="text-gray-500">Pósters, portadas, miniaturas de YouTube, infografías</span>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white border border-gray-200 text-gray-600 shrink-0 self-start sm:self-center">10 comandos</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card B: 25 Comandos de Video -->
+          <div class="rounded-2xl bg-white p-6 sm:p-8 border border-gray-200 shadow-2xs space-y-6">
+            <div class="flex items-center justify-between border-b border-gray-100 pb-4">
+              <div>
+                <h3 class="font-bold text-lg text-deep">25 comandos para video</h3>
+                <p class="text-xs text-gray-500">Cinematografía, animación y piezas para redes</p>
+              </div>
+              <span class="px-3 py-1 rounded bg-teal/10 text-teal text-xs font-mono font-bold whitespace-nowrap">
+                25 ATAJOS
+              </span>
+            </div>
+
+            <div class="space-y-3 text-xs">
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <span class="font-bold text-deep block">Animar imágenes</span>
+                  <span class="text-gray-500">Puntos focales, micro-movimientos sutiles, retratos vivos</span>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white border border-gray-200 text-gray-600 shrink-0 self-start sm:self-center">5 comandos</span>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <span class="font-bold text-deep block">Cámara y movimiento</span>
+                  <span class="text-gray-500">Paneos, travelling, dolly in/out, planos secuencia</span>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white border border-gray-200 text-gray-600 shrink-0 self-start sm:self-center">5 comandos</span>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <span class="font-bold text-deep block">Escenas y estética</span>
+                  <span class="text-gray-500">Luz dorada, atmósfera cinematográfica, cámara lenta</span>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white border border-gray-200 text-gray-600 shrink-0 self-start sm:self-center">5 comandos</span>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <span class="font-bold text-deep block">Contenido para redes</span>
+                  <span class="text-gray-500">Hooks visuales, transiciones dinámicas, formato vertical</span>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white border border-gray-200 text-gray-600 shrink-0 self-start sm:self-center">5 comandos</span>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <span class="font-bold text-deep block">Storytelling y dirección</span>
+                  <span class="text-gray-500">Tomas de establecimiento, continuidad y ritmo visual</span>
+                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white border border-gray-200 text-gray-600 shrink-0 self-start sm:self-center">5 comandos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: PARA QUIÉN ES -->
+    <section class="w-full bg-gray-50 py-12 sm:py-16 border-y border-gray-200/60">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-8">
+        <div class="space-y-1">
+          <span class="text-[10px] font-mono font-bold text-teal tracking-wider uppercase">CASOS DE APLICACIÓN</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-deep tracking-tight">
+            ¿Para quién es?
+          </h2>
+          <p class="text-xs sm:text-sm text-gray-600">
+            Diseñado para perfiles que valoran la rapidez operativa por encima de la teoría de prompting.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="p-5 rounded-2xl bg-white border border-gray-200 shadow-2xs space-y-2">
+            <div class="w-9 h-9 rounded-xl bg-teal/10 text-teal flex items-center justify-center text-lg font-bold">
+              👤
+            </div>
+            <h3 class="font-bold text-sm text-deep">Para ti</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">
+              Si quieres experimentar con tu propia imagen, peinados, ropa y fotos casuales sin complicaciones técnicas.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white border border-gray-200 shadow-2xs space-y-2">
+            <div class="w-9 h-9 rounded-xl bg-teal/10 text-teal flex items-center justify-center text-lg font-bold">
+              👔
+            </div>
+            <h3 class="font-bold text-sm text-deep">Para profesionales</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">
+              Fotos de perfil corporativo, fondos para videollamadas y material para presentaciones ejecutivas.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white border border-gray-200 shadow-2xs space-y-2">
+            <div class="w-9 h-9 rounded-xl bg-teal/10 text-teal flex items-center justify-center text-lg font-bold">
+              🏬
+            </div>
+            <h3 class="font-bold text-sm text-deep">Para emprendedores</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">
+              Fotografía de producto atractiva, piezas para catálogos comerciales y banners sin contratar sesiones caras.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white border border-gray-200 shadow-2xs space-y-2">
+            <div class="w-9 h-9 rounded-xl bg-teal/10 text-teal flex items-center justify-center text-lg font-bold">
+              🎨
+            </div>
+            <h3 class="font-bold text-sm text-deep">Para creadores</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">
+              Generación de fondos, miniaturas llamativas, escenas cinemáticas y clips de video cortos.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: COMPARATIVA TRANSPARENTE -->
+    <section class="w-full py-12 sm:py-16">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-8">
+        <div class="text-center max-w-2xl mx-auto space-y-1">
+          <span class="text-[10px] font-mono font-bold text-teal tracking-wider uppercase">COMPARATIVA TRANSPARENTE</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-deep tracking-tight">
+            ¿Cómo se diferencia del recurso gratuito?
+          </h2>
+          <p class="text-xs sm:text-sm text-gray-600">
+            Prueba gratis primero en el tutorial interactivo; desbloquea la biblioteca si necesitas alcance completo.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Columna Gratis -->
+          <div class="rounded-2xl bg-white p-6 sm:p-8 border border-gray-200 shadow-2xs flex flex-col justify-between gap-6">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+                <span class="font-bold text-base text-deep">Recurso Gratuito</span>
+                <span class="text-[11px] font-mono px-2.5 py-0.5 rounded bg-gray-100 text-gray-600 font-bold">Muestra Básica</span>
+              </div>
+              <ul class="space-y-2.5 text-xs text-gray-600">
+                <li class="flex items-center gap-2">
+                  <span class="text-gray-400">✓</span>
+                  <span>3 comandos esenciales (/haircut, /outfit, /profile)</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-gray-400">✓</span>
+                  <span>Para probar la dinámica interactiva en 5 min</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-gray-400">✓</span>
+                  <span>Formato tutorial web abierto</span>
+                </li>
+              </ul>
+            </div>
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-mono">
+              <span class="text-gray-400">Inversión:</span>
+              <span class="font-bold text-deep">Gratis ($0)</span>
+            </div>
+          </div>
+
+          <!-- Columna Atajos Visuales -->
+          <div class="rounded-2xl bg-emerald-50/40 p-6 sm:p-8 border-2 border-emerald-500 shadow-sm flex flex-col justify-between gap-6 relative">
+            <div class="absolute -top-3 right-6 px-3 py-0.5 rounded-full bg-emerald-600 text-white font-mono text-[10px] font-bold uppercase tracking-wider">
+              BIBLIOTECA COMPLETA
+            </div>
+            <div class="space-y-4">
+              <div class="flex items-center justify-between border-b border-emerald-200/60 pb-3">
+                <span class="font-bold text-base text-deep">Atajos Visuales</span>
+                <span class="text-[11px] font-mono px-2.5 py-0.5 rounded bg-emerald-600 text-white font-bold">Todo Incluido</span>
+              </div>
+              <ul class="space-y-2.5 text-xs text-gray-700">
+                <li class="flex items-center gap-2 font-bold">
+                  <span class="text-emerald-600">✓</span>
+                  <span>75 comandos completos y organizados</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-emerald-600">✓</span>
+                  <span>50 de imagen + 25 de video</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-emerald-600">✓</span>
+                  <span>Organización por casos reales de uso diario</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="text-emerald-600">✓</span>
+                  <span>Documento PDF digital descargable al instante</span>
+                </li>
+              </ul>
+            </div>
+            <div class="pt-4 border-t border-emerald-200/60 flex items-center justify-between text-xs font-mono">
+              <span class="text-gray-600">Inversión:</span>
+              <span class="font-extrabold text-emerald-800 text-sm">US$5 (Pago único)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: HERRAMIENTAS COMPATIBLES -->
+    <section class="w-full bg-gray-50 py-12 sm:py-16 border-y border-gray-200/60">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 space-y-6 text-center">
+        <div class="space-y-1">
+          <h2 class="text-xl sm:text-2xl font-bold text-deep tracking-tight">
+            Herramientas compatibles
+          </h2>
+          <p class="text-xs sm:text-sm text-gray-600">
+            Puedes adaptar los comandos a las herramientas de IA que ya utilizas en tu flujo de trabajo diario.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-2.5 text-xs font-mono">
+          <span class="px-3.5 py-2 rounded-xl bg-white border border-gray-200 text-deep font-bold shadow-2xs">ChatGPT (GPT-4o / DALL-E)</span>
+          <span class="px-3.5 py-2 rounded-xl bg-white border border-gray-200 text-deep font-bold shadow-2xs">Google Gemini</span>
+          <span class="px-3.5 py-2 rounded-xl bg-white border border-gray-200 text-deep font-bold shadow-2xs">Google ImageFX</span>
+          <span class="px-3.5 py-2 rounded-xl bg-white border border-gray-200 text-deep font-bold shadow-2xs">Midjourney</span>
+          <span class="px-3.5 py-2 rounded-xl bg-white border border-gray-200 text-deep font-bold shadow-2xs">Runway Gen-2 / Gen-3</span>
+          <span class="px-3.5 py-2 rounded-xl bg-white border border-gray-200 text-deep font-bold shadow-2xs">Luma Dream Machine</span>
+          <span class="px-3.5 py-2 rounded-xl bg-white border border-gray-200 text-deep font-bold shadow-2xs">Kling AI</span>
+          <span class="px-3.5 py-2 rounded-xl bg-white border border-gray-200 text-deep font-bold shadow-2xs">Pika Labs</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 9: CAJA DE PRECIO Y CHECKOUT ($5 USD) -->
+    <section class="w-full py-12 sm:py-16" id="checkout">
+      <div class="max-w-xl mx-auto px-4 sm:px-6">
+        <div class="rounded-3xl bg-white p-6 sm:p-10 border-2 border-teal/30 shadow-md text-center space-y-6">
+          <span class="px-3 py-1 rounded-full bg-teal/10 text-teal font-mono text-xs font-bold uppercase tracking-wider">
+            ACCESO COMPLETO
+          </span>
+
+          <div class="space-y-1">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-deep">Atajos Visuales</h2>
+            <p class="text-xs text-gray-500">75 comandos visuales para crear sin perder tiempo</p>
+          </div>
+
+          <div class="py-1">
+            <span class="text-4xl sm:text-5xl font-extrabold text-teal">US$5</span>
+          </div>
+
+          <p class="text-xs text-gray-500 leading-relaxed">
+            50 imágenes + 25 videos · Pago único · Acceso permanente · PDF digital descargable al instante
+          </p>
+
+          <a 
+            href={LINKS.atajos_visuales} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="w-full block py-3.5 px-6 rounded-xl bg-orange hover:bg-orange/90 text-white font-bold text-sm transition-all shadow-2xs"
+          >
+            Quiero Atajos Visuales ($5) →
+          </a>
+
+          <div class="flex flex-wrap items-center justify-center gap-3 text-[11px] font-mono text-gray-400 pt-2">
+            <span>🔒 Pago seguro SSL</span>
+            <span>•</span>
+            <span>Sin suscripciones recurrentes</span>
+            <span>•</span>
+            <span>Descarga inmediata</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 10: PREGUNTAS FRECUENTES -->
+    <section class="w-full bg-gray-50 py-12 sm:py-16 border-t border-gray-200/60">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 space-y-8">
+        <div class="text-center space-y-1">
+          <span class="text-[10px] font-mono font-bold text-teal tracking-wider uppercase">RESOLUCIÓN DE DUDAS</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-deep tracking-tight">
+            Preguntas Frecuentes
+          </h2>
+        </div>
+
+        <div class="space-y-4 text-xs sm:text-sm">
+          <div class="p-5 rounded-2xl bg-white border border-gray-200 shadow-2xs space-y-1.5">
+            <h3 class="font-bold text-deep text-sm">¿Necesito saber prompting?</h3>
+            <p class="text-gray-600 leading-relaxed">
+              No. Los comandos están pensados justamente para darte el punto de partida sin memorizar fórmulas complejas ni vocabulario técnico. Solo copias y adaptas la palabra que necesites.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white border border-gray-200 shadow-2xs space-y-1.5">
+            <h3 class="font-bold text-deep text-sm">¿Cuántos comandos incluye?</h3>
+            <p class="text-gray-600 leading-relaxed">
+              75 comandos en total: 50 para creación y retoque de imágenes, y 25 para animación y generación de video.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white border border-gray-200 shadow-2xs space-y-1.5">
+            <h3 class="font-bold text-deep text-sm">¿Puedo usarlos en ChatGPT y Gemini?</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Sí. Puedes adaptar las instrucciones a cualquier herramienta con soporte de imagen o video (ChatGPT, Gemini, ImageFX, Midjourney, Runway, Kling, etc.).
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white border border-gray-200 shadow-2xs space-y-1.5">
+            <h3 class="font-bold text-deep text-sm">¿Qué recibo al pagar los $5?</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Acceso inmediato para descargar el documento PDF digital estructurado con los 75 comandos organizados por categorías, listos para copiar y usar en cualquier dispositivo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 11: CTA FINAL -->
+    <section class="w-full py-16 sm:py-20 text-center">
+      <div class="max-w-2xl mx-auto px-4 space-y-6">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-deep tracking-tight leading-tight">
+          La próxima vez que pienses "quiero crear esto", no empieces desde cero.
+        </h2>
+        
+        <p class="text-lg sm:text-xl font-extrabold text-teal">
+          Busca el atajo.
+        </p>
+
+        <div>
+          <a 
+            href={LINKS.atajos_visuales} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-orange hover:bg-orange/90 text-white font-bold text-sm transition-all shadow-2xs"
+          >
+            <span>Quiero los 75 comandos ($5) →</span>
+          </a>
+        </div>
+
+        <div class="pt-4">
+          <a href="/recursos/crear-imagenes-ia" class="text-xs font-bold text-gray-500 hover:text-teal transition-colors">
+            ← Volver al recurso gratuito de 3 comandos
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</Layout>
+
+<script is:inline>
+  function copyCommand(button, elementId) {
+    const textElement = document.getElementById(elementId);
+    if (!textElement) return;
+
+    const textToCopy = textElement.innerText;
+    
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      const label = button.querySelector('.btn-label');
+      const originalText = label ? label.innerText : 'Copiar';
+      
+      if (label) label.innerText = '¡Copiado!';
+      button.classList.add('bg-emerald-600', 'text-white');
+      
+      // Toast notification
+      const toast = document.getElementById('copy-toast');
+      if (toast) {
+        toast.classList.remove('translate-y-16', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+      }
+      
+      setTimeout(() => {
+        if (label) label.innerText = originalText;
+        button.classList.remove('bg-emerald-600', 'text-white');
+      }, 2000);
+
+      setTimeout(() => {
+        if (toast) {
+          toast.classList.add('translate-y-16', 'opacity-0');
+          toast.classList.remove('translate-y-0', 'opacity-100');
+        }
+      }, 3000);
+    }).catch(err => {
+      console.error('Error al copiar:', err);
+    });
+  }
+</script>
