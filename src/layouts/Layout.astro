@@ -125,6 +125,54 @@ const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
 
         <!-- Enlaces con Iconos Planos en SVG -->
         <nav class="flex flex-col gap-0.5 px-2">
+          <!-- Rutas para LuciRMe (Destacado) -->
+          <div class="flex flex-col">
+            <a
+              href="/rutas"
+              class="flex items-center gap-3 px-2 py-2 bg-teal/10 text-teal rounded-lg transition-all group font-bold"
+              title="Rutas para LuciRMe"
+            >
+              <svg
+                class="w-5 h-5 text-teal transition-colors flex-shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.8"
+                  d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
+                ></path>
+              </svg>
+              <span
+                class="text-xs font-bold text-teal hidden sidebar-text truncate"
+                >Rutas LuciRMe</span
+              >
+            </a>
+            <div
+              class="pl-8 py-0.5 space-y-1 hidden sidebar-text text-[11px]"
+              id="sub-rutas"
+            >
+              <a
+                href="/rutas#ruta-comunicacion"
+                class="block text-gray-500 hover:text-teal font-medium">01. Comunicación</a
+              >
+              <a
+                href="/rutas#ruta-pm"
+                class="block text-gray-500 hover:text-teal font-medium">02. Product Mgmt</a
+              >
+              <a
+                href="/rutas#ruta-notebooklm"
+                class="block text-gray-500 hover:text-teal font-medium">03. NotebookLM</a
+              >
+              <a
+                href="/rutas#ruta-empleabilidad"
+                class="block text-gray-500 hover:text-teal font-medium">04. Empleabilidad</a
+              >
+            </div>
+          </div>
+
           <!-- Soluciones (Con Subsección de una sola palabra) -->
           <div class="flex flex-col">
             <a
@@ -364,13 +412,19 @@ const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
         class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-gray-100 px-4 py-3 sm:px-6 sm:py-4"
       >
         <div class="w-full flex items-center justify-between">
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-3 sm:gap-6">
             <a href="/" class="flex items-center">
               <img
                 src="/logo-lucirme.png"
                 alt="Logo"
                 class="h-5 sm:h-6 w-auto object-contain flex-shrink-0"
               />
+            </a>
+            <a
+              href="/rutas"
+              class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal/10 text-teal text-xs font-bold hover:bg-teal/20 transition border border-teal/20"
+            >
+              <span>🗺️ Rutas de Aprendizaje</span>
             </a>
           </div>
 
@@ -505,22 +559,6 @@ const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
             if (sidebarContainer) {
               sidebarContainer.innerHTML = `<a href="/sign-in" class="text-xs font-bold text-teal hover:underline px-2 hidden sidebar-text">Iniciar Sesión →</a>`;
             }
-          }
-        }
-      });
-
-      // Listener global de respaldo para clics en enlaces de Hotmart (PostHog)
-      document.addEventListener("click", (e) => {
-        const link = e.target.closest('a[href*="pay.hotmart.com"]');
-        if (link && window.posthog) {
-          // Solo enviar si el elemento no tiene ya un rastreo explícito con posthog.capture
-          const hasExplicitTracking = link.getAttribute('onclick')?.includes('posthog.capture');
-          if (!hasExplicitTracking) {
-            window.posthog.capture("hotmart_buy_click", {
-              url: link.href,
-              button_text: (link.innerText || "").trim(),
-              page_path: window.location.pathname,
-            });
           }
         }
       });
