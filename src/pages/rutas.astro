@@ -868,7 +868,7 @@ import { LINKS } from "../lib/constants.js";
                   >
                   <span
                     class="text-[10px] px-2 py-0.5 rounded bg-orange/10 text-orange font-bold font-mono"
-                    >$53.000 COP</span
+                    >De Pago</span
                   >
                 </div>
                 <h5 class="text-sm text-deep font-bold mb-1">
@@ -1288,7 +1288,7 @@ import { LINKS } from "../lib/constants.js";
 <script is:inline>
   function selectRoute(targetRouteId) {
     if (window.posthog) {
-      window.posthog.capture('rutas_select_route', { ruta: targetRouteId });
+      window.posthog.capture("rutas_select_route", { ruta: targetRouteId });
     }
     filterRoutes(targetRouteId);
     const targetElement = document.getElementById(targetRouteId);
@@ -1305,7 +1305,7 @@ import { LINKS } from "../lib/constants.js";
 
   function filterRoutes(routeFilter) {
     if (window.posthog) {
-      window.posthog.capture('rutas_filter_routes', { filtro: routeFilter });
+      window.posthog.capture("rutas_filter_routes", { filtro: routeFilter });
     }
     const cards = document.querySelectorAll(".route-master-card");
     const tabs = document.querySelectorAll(".route-tab");
