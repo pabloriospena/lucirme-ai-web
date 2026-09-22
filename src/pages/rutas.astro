@@ -102,7 +102,7 @@ import { LINKS } from "../lib/constants.js";
           >
             <!-- Tarjeta 1 -->
             <button
-              onclick="selectRoute('ruta-comunicacion')"
+              onclick="if (window.posthog) { window.posthog.capture('rutas_card_click', { ruta: 'ruta-comunicacion', titulo: 'Necesito hacer una presentación' }); } selectRoute('ruta-comunicacion')"
               class="group relative p-4 rounded-xl bg-white border border-gray-200 hover:border-teal hover:shadow-md transition-all flex flex-col justify-between text-left cursor-pointer"
             >
               <div>
@@ -133,7 +133,7 @@ import { LINKS } from "../lib/constants.js";
 
             <!-- Tarjeta 2 -->
             <button
-              onclick="selectRoute('ruta-notebooklm')"
+              onclick="if (window.posthog) { window.posthog.capture('rutas_card_click', { ruta: 'ruta-notebooklm', titulo: 'Necesito ordenar información' }); } selectRoute('ruta-notebooklm')"
               class="group relative p-4 rounded-xl bg-white border border-gray-200 hover:border-slate-800 hover:shadow-md transition-all flex flex-col justify-between text-left cursor-pointer"
             >
               <div>
@@ -164,7 +164,7 @@ import { LINKS } from "../lib/constants.js";
 
             <!-- Tarjeta 3 -->
             <button
-              onclick="selectRoute('ruta-pm')"
+              onclick="if (window.posthog) { window.posthog.capture('rutas_card_click', { ruta: 'ruta-pm', titulo: 'Necesito trabajar mejor como PM' }); } selectRoute('ruta-pm')"
               class="group relative p-4 rounded-xl bg-white border border-gray-200 hover:border-orange hover:shadow-md transition-all flex flex-col justify-between text-left cursor-pointer"
             >
               <div>
@@ -195,7 +195,7 @@ import { LINKS } from "../lib/constants.js";
 
             <!-- Tarjeta 4 -->
             <button
-              onclick="selectRoute('ruta-empleabilidad')"
+              onclick="if (window.posthog) { window.posthog.capture('rutas_card_click', { ruta: 'ruta-empleabilidad', titulo: 'Necesito mejorar mi carrera' }); } selectRoute('ruta-empleabilidad')"
               class="group relative p-4 rounded-xl bg-white border border-gray-200 hover:border-emerald-600 hover:shadow-md transition-all flex flex-col justify-between text-left cursor-pointer"
             >
               <div>
@@ -226,7 +226,7 @@ import { LINKS } from "../lib/constants.js";
 
             <!-- Tarjeta 5 -->
             <button
-              onclick="selectRoute('ruta-visual')"
+              onclick="if (window.posthog) { window.posthog.capture('rutas_card_click', { ruta: 'ruta-visual', titulo: 'Crear imágenes y videos' }); } selectRoute('ruta-visual')"
               class="group relative p-4 rounded-xl bg-white border border-gray-200 hover:border-teal hover:shadow-md transition-all flex flex-col justify-between text-left cursor-pointer"
             >
               <div>
@@ -293,6 +293,7 @@ import { LINKS } from "../lib/constants.js";
               href={LINKS.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
+              onclick="if (window.posthog) { window.posthog.capture('rutas_whatsapp_click', { origen: 'banner_resolverlo_contigo', tipo: 'cafe_estrategia' }); }"
               class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition-all shadow-sm"
             >
               <span>☕ Agendar Café de Estrategia</span>
@@ -349,7 +350,7 @@ import { LINKS } from "../lib/constants.js";
           class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto shrink-0"
         >
           <button
-            onclick="document.getElementById('selector-overlay')?.classList.remove('hidden')"
+            onclick="if (window.posthog) { window.posthog.capture('rutas_termometro_open_click', { origen: 'banner_termometro' }); } document.getElementById('selector-overlay')?.classList.remove('hidden')"
             class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-teal text-white font-bold text-xs hover:bg-teal/90 transition-all shadow-2xs cursor-pointer text-center"
           >
             <span>Descubrir mi ruta</span>
@@ -359,6 +360,7 @@ import { LINKS } from "../lib/constants.js";
             href={LINKS.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
+            onclick="if (window.posthog) { window.posthog.capture('rutas_whatsapp_click', { origen: 'banner_termometro', tipo: 'hablar_conmigo' }); }"
             class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-50 transition-all text-center"
           >
             <span>💬 Hablar conmigo</span>
@@ -476,6 +478,7 @@ import { LINKS } from "../lib/constants.js";
               </div>
               <a
                 href="/presentaciones-con-ia"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_free_resource_click', { ruta: 'ruta-comunicacion', recurso: 'presentaciones-con-ia' }); }"
                 class="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-teal text-white font-bold text-xs hover:bg-teal/90 transition-all shrink-0 shadow-2xs"
               >
                 <span>Empezar gratis</span>
@@ -518,6 +521,7 @@ import { LINKS } from "../lib/constants.js";
               </div>
               <a
                 href="/bot-presentaciones"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_bot_buy_click', { producto: 'bot_presentaciones', precio: '8 USD', canal: 'hotmart', ruta: 'ruta-comunicacion', posicion: 'card_bot' }); }"
                 class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-100 transition-colors"
               >
                 <span>Probar Bot</span>
@@ -548,6 +552,7 @@ import { LINKS } from "../lib/constants.js";
               </div>
               <a
                 href="/curso-presentaciones"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_curso_buy_click', { producto: 'curso_presentaciones', precio: '35 USD', canal: 'hotmart', ruta: 'ruta-comunicacion', posicion: 'card_curso' }); }"
                 class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-100 transition-colors"
               >
                 <span>Ver curso</span>
@@ -580,6 +585,7 @@ import { LINKS } from "../lib/constants.js";
                 href={LINKS.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_whatsapp_click', { origen: 'ruta-comunicacion', tipo: '1:1' }); }"
                 class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-500 transition-colors"
               >
                 <span>Trabajarlo conmigo</span>
@@ -632,7 +638,8 @@ import { LINKS } from "../lib/constants.js";
                 </p>
               </div>
               <a
-                href="recursos/reunion-claridad"
+                href="/recursos/reunion-claridad"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_free_resource_click', { ruta: 'ruta-notebooklm', recurso: 'reunion-claridad' }); }"
                 class="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-teal text-white font-bold text-xs hover:bg-teal/90 transition-all shrink-0 shadow-2xs"
               >
                 <span>Empezar gratis</span>
@@ -675,6 +682,7 @@ import { LINKS } from "../lib/constants.js";
               </div>
               <a
                 href="/recursos/prompteador"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_free_resource_click', { ruta: 'ruta-notebooklm', recurso: 'prompteador' }); }"
                 class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-100 transition-colors"
               >
                 <span>Usar herramienta</span>
@@ -705,6 +713,7 @@ import { LINKS } from "../lib/constants.js";
               </div>
               <a
                 href="/atajos-ia"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_atajos_ia_buy_click', { producto: 'atajos_ia', precio: '17 USD', canal: 'hotmart', ruta: 'ruta-notebooklm', posicion: 'card_atajos_ia' }); }"
                 class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-100 transition-colors"
               >
                 <span>Ver atajos</span>
@@ -737,6 +746,7 @@ import { LINKS } from "../lib/constants.js";
                 href={LINKS.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_whatsapp_click', { origen: 'ruta-notebooklm', tipo: '1:1' }); }"
                 class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-500 transition-colors"
               >
                 <span>Trabajarlo conmigo</span>
@@ -789,6 +799,7 @@ import { LINKS } from "../lib/constants.js";
               </div>
               <a
                 href="/recursos/ideador-producto"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_free_resource_click', { ruta: 'ruta-pm', recurso: 'ideador-producto' }); }"
                 class="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-teal text-white font-bold text-xs hover:bg-teal/90 transition-all shrink-0 shadow-2xs"
               >
                 <span>Empezar gratis</span>
@@ -832,12 +843,14 @@ import { LINKS } from "../lib/constants.js";
               <div class="grid grid-cols-2 gap-2">
                 <a
                   href="/recursos/backlog-detox"
+                  onclick="if (window.posthog) { window.posthog.capture('rutas_free_resource_click', { ruta: 'ruta-pm', recurso: 'backlog-detox' }); }"
                   class="inline-flex items-center justify-center py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-[11px] hover:bg-gray-100 transition-colors text-center"
                 >
                   Detox →
                 </a>
                 <a
                   href="/recursos/shapeup-builder"
+                  onclick="if (window.posthog) { window.posthog.capture('rutas_free_resource_click', { ruta: 'ruta-pm', recurso: 'shapeup-builder' }); }"
                   class="inline-flex items-center justify-center py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-[11px] hover:bg-gray-100 transition-colors text-center"
                 >
                   ShapeUp →
@@ -870,6 +883,7 @@ import { LINKS } from "../lib/constants.js";
                 href={LINKS.ebook}
                 target="_blank"
                 rel="noopener noreferrer"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_ebook_buy_click', { producto: 'ebook_pm', precio: '53.000 COP', cupon: 'OFF50', canal: 'hotmart', ruta: 'ruta-pm', posicion: 'card_ebook' }); }"
                 class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-orange text-white font-bold text-xs hover:bg-orange/90 transition-colors shadow-2xs"
               >
                 <span>Ver Ebook</span>
@@ -902,6 +916,7 @@ import { LINKS } from "../lib/constants.js";
                 href={LINKS.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_whatsapp_click', { origen: 'ruta-pm', tipo: '1:1' }); }"
                 class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-500 transition-colors"
               >
                 <span>Trabajarlo conmigo</span>
@@ -954,6 +969,7 @@ import { LINKS } from "../lib/constants.js";
               </div>
               <a
                 href="/recursos/cv-con-ia"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_free_resource_click', { ruta: 'ruta-empleabilidad', recurso: 'cv-con-ia' }); }"
                 class="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-teal text-white font-bold text-xs hover:bg-teal/90 transition-all shrink-0 shadow-2xs"
               >
                 <span>Empezar gratis</span>
@@ -994,6 +1010,7 @@ import { LINKS } from "../lib/constants.js";
               </div>
               <a
                 href="/recursos/job-prompt-ai"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_free_resource_click', { ruta: 'ruta-empleabilidad', recurso: 'job-prompt-ai' }); }"
                 class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-100 transition-colors"
               >
                 <span>Probar JobPrompt</span>
@@ -1024,6 +1041,7 @@ import { LINKS } from "../lib/constants.js";
               </div>
               <a
                 href="/recursos/career-path-notebooklm"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_free_resource_click', { ruta: 'ruta-empleabilidad', recurso: 'career-path-notebooklm' }); }"
                 class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-100 transition-colors"
               >
                 <span>Ver plan</span>
@@ -1056,6 +1074,7 @@ import { LINKS } from "../lib/constants.js";
                 href={LINKS.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_whatsapp_click', { origen: 'ruta-empleabilidad', tipo: '1:1' }); }"
                 class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-500 transition-colors"
               >
                 <span>Trabajarlo conmigo</span>
@@ -1119,6 +1138,7 @@ import { LINKS } from "../lib/constants.js";
               </div>
               <a
                 href="/recursos/crear-imagenes-ia"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_free_resource_click', { ruta: 'ruta-visual', recurso: 'crear-imagenes-ia' }); }"
                 class="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-teal text-white font-bold text-xs hover:bg-teal/90 transition-all shrink-0 shadow-2xs"
               >
                 <span>Probar gratis</span>
@@ -1166,6 +1186,7 @@ import { LINKS } from "../lib/constants.js";
               </div>
               <a
                 href="/atajos-visuales"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_atajos_visuales_buy_click', { producto: 'atajos_visuales', precio: '5 USD', canal: 'hotmart', ruta: 'ruta-visual', posicion: 'card_atajos_visuales' }); }"
                 class="inline-flex items-center justify-center gap-1 w-full py-2.5 rounded-lg bg-orange hover:bg-orange/90 text-white font-bold text-xs transition-colors shadow-2xs"
               >
                 <span>Ver Atajos Visuales ($5)</span>
@@ -1229,6 +1250,7 @@ import { LINKS } from "../lib/constants.js";
                 href={LINKS.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_whatsapp_click', { origen: 'ruta-visual', tipo: '1:1' }); }"
                 class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-500 transition-colors"
               >
                 <span>Trabajarlo conmigo</span>
@@ -1253,6 +1275,7 @@ import { LINKS } from "../lib/constants.js";
       </div>
       <a
         href="/content/como_funciona"
+        onclick="if (window.posthog) { window.posthog.capture('rutas_manifesto_click', { origen: 'bottom_callout' }); }"
         class="inline-flex items-center gap-1 text-xs font-bold text-teal hover:underline shrink-0"
       >
         <span>Leer Manifiesto</span>
@@ -1264,6 +1287,9 @@ import { LINKS } from "../lib/constants.js";
 
 <script is:inline>
   function selectRoute(targetRouteId) {
+    if (window.posthog) {
+      window.posthog.capture('rutas_select_route', { ruta: targetRouteId });
+    }
     filterRoutes(targetRouteId);
     const targetElement = document.getElementById(targetRouteId);
     if (targetElement) {
@@ -1278,6 +1304,9 @@ import { LINKS } from "../lib/constants.js";
   }
 
   function filterRoutes(routeFilter) {
+    if (window.posthog) {
+      window.posthog.capture('rutas_filter_routes', { filtro: routeFilter });
+    }
     const cards = document.querySelectorAll(".route-master-card");
     const tabs = document.querySelectorAll(".route-tab");
 
