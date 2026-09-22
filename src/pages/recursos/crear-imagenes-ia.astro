@@ -4,910 +4,764 @@ import { LINKS } from "../../lib/constants.js";
 
 export const frontmatter = {
   title: "Crea tu primera imagen con IA",
-  description:
-    "Abre una herramienta, adjunta una foto y prueba un comando. No necesitas saber prompting.",
+  description: "Abre una herramienta, adjunta una foto y prueba un comando. No necesitas saber prompting."
 };
 ---
 
 <Layout title="Crea tu primera imagen con IA | Atajo Visual - LuciRMe AI">
+  
   <!-- TOAST NOTIFICATION CONTAINER -->
-  <div
-    id="copy-toast"
+  <div 
+    id="copy-toast" 
     class="fixed bottom-6 right-6 z-50 transform translate-y-16 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 text-white shadow-xl text-xs font-mono border border-slate-700"
   >
     <span class="text-emerald-400 font-bold">✓</span>
     <span id="toast-text">Comando copiado al portapapeles</span>
   </div>
 
-  <div
-    class="max-w-5xl mx-auto px-4 py-6 sm:py-10 space-y-10 sm:space-y-12 min-w-0"
-  >
-    <!-- 1. BREADCRUMB & HEADER -->
-    <section
-      class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-5 min-w-0"
-    >
-      <nav
-        aria-label="Breadcrumb"
-        class="flex flex-wrap items-center gap-1.5 text-xs text-gray-400 font-mono"
-      >
-        <a href="/recursos" class="hover:text-teal transition-colors"
-          >Recursos</a
-        >
-        <span>/</span>
-        <a href="/rutas" class="hover:text-teal transition-colors">Rutas</a>
-        <span>/</span>
-        <span class="text-deep font-semibold">Crear imágenes con IA</span>
-      </nav>
-      <div
-        class="inline-flex items-center gap-1.5 self-start sm:self-auto px-3 py-1 rounded-full bg-teal/10 text-teal font-mono text-[11px] font-bold shrink-0"
-      >
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-        <span>Guía práctica interactiva</span>
+  <div class="max-w-5xl mx-auto px-4 py-6 sm:py-10 space-y-10 sm:space-y-12 min-w-0">
+    
+    <!-- ═══════════════ MURO MAILERLITE (LEAD GATE) ═══════════════ -->
+    <section id="muro" class="bg-white rounded-2xl p-6 sm:p-10 border border-slate-200 shadow-md max-w-2xl mx-auto space-y-6">
+      <div class="inline-flex items-center gap-2 bg-teal/10 text-teal text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full border border-teal/20 font-mono">
+        <span>📷</span> Atajo Visual · Recurso Gratuito
       </div>
-    </section>
-
-    <!-- 2. HERO PRÁCTICO Y VISUAL -->
-    <section
-      class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-8 w-full min-w-0"
-    >
-      <!-- Left Content -->
-      <div class="w-full lg:w-7/12 space-y-4 min-w-0">
-        <div class="flex flex-wrap items-center gap-2">
-          <span
-            class="inline-block whitespace-nowrap text-[10px] font-black tracking-wider uppercase text-teal bg-teal/10 px-2.5 py-1 rounded font-mono"
-          >
-            ATAJO VISUAL • GRATIS
-          </span>
-          <span
-            class="inline-block whitespace-nowrap text-[10px] font-bold px-2.5 py-1 rounded-full bg-gray-100 text-gray-600 font-mono"
-          >
-            5 MINUTOS
-          </span>
-        </div>
-
-        <h1
-          class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-deep tracking-tight leading-tight break-words"
-        >
+      
+      <div class="space-y-2">
+        <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-tight">
           Crea tu primera imagen con IA
         </h1>
-
-        <p
-          class="text-sm sm:text-base md:text-lg text-gray-600 max-w-xl leading-relaxed"
-        >
-          Abre una herramienta, adjunta una foto y prueba un comando. No
-          necesitas saber prompting.
+        <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+          Ingresa tu nombre y correo para desbloquear inmediatamente la guía interactiva, los comandos <code class="font-mono text-teal font-bold">/haircut</code>, <code class="font-mono text-teal font-bold">/outfit</code> y <code class="font-mono text-teal font-bold">/profile</code>, y aprender a transformar fotos sin saber de prompting.
         </p>
-
-        <div class="flex flex-wrap items-center gap-3 pt-2">
-          <a
-            href="#paso-1"
-            class="inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-teal text-white font-bold text-xs hover:bg-teal/90 transition-all shadow-2xs whitespace-nowrap"
-          >
-            Empezar gratis →
-          </a>
-          <a
-            href="#como-funciona"
-            class="inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-gray-100 text-deep font-bold text-xs hover:bg-gray-200 transition-all whitespace-nowrap"
-          >
-            <span>Ver cómo funciona</span>
-            <span>↓</span>
-          </a>
-        </div>
       </div>
 
-      <!-- Right Preview Box -->
-      <div class="w-full lg:w-5/12 shrink-0 min-w-0">
-        <div
-          class="w-full bg-white p-4 sm:p-6 rounded-2xl border border-gray-200 shadow-2xs space-y-4"
+      <form id="wall-form" class="space-y-4 pt-2">
+        <!-- Honeypot oculto anti-bots -->
+        <input type="text" id="wall-website" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+        <div>
+          <label for="wall-name" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 font-mono">
+            Tu Nombre *
+          </label>
+          <input 
+            type="text" 
+            id="wall-name"
+            name="name" 
+            placeholder="Ej. María Pérez" 
+            required 
+            autocomplete="name" 
+            class="w-full text-sm p-3.5 border border-slate-300 rounded-xl bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition"
+          />
+        </div>
+
+        <div>
+          <label for="wall-email" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 font-mono">
+            Tu Correo Electrónico *
+          </label>
+          <input 
+            type="email" 
+            id="wall-email"
+            name="email" 
+            placeholder="Ej. maria@empresa.com" 
+            required 
+            autocomplete="email" 
+            class="w-full text-sm p-3.5 border border-slate-300 rounded-xl bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition"
+          />
+        </div>
+
+        <div id="wall-error-msg" class="hidden p-3 bg-red-50 border border-red-200 text-red-600 text-xs rounded-lg font-medium"></div>
+
+        <button 
+          type="submit" 
+          id="wall-submit-btn"
+          class="w-full bg-teal hover:bg-teal/90 text-white font-bold text-base py-3.5 px-6 rounded-xl transition shadow-md cursor-pointer flex items-center justify-center gap-2"
         >
-          <div
-            class="flex flex-wrap items-center justify-between gap-2 text-xs font-mono"
-          >
-            <span
-              class="text-gray-400 uppercase tracking-wider font-bold whitespace-nowrap"
-              >Flujo directo</span
-            >
-            <span
-              class="text-emerald-600 flex items-center gap-1 font-bold whitespace-nowrap text-[11px]"
-            >
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"
-              ></span> Sin sintaxis compleja
+          <span>Desbloquear Guía Gratis</span> →
+        </button>
+      </form>
+
+      <p class="text-xs text-slate-400 text-center flex items-center justify-center gap-1.5 pt-1">
+        <span>🔒</span> Cero spam. Acceso inmediato a los atajos visuales y recursos prácticos de IA.
+      </p>
+    </section>
+
+    <!-- ═══════════════ CONTENIDO DESBLOQUEADO ═══════════════ -->
+    <div id="contenido" class="hidden space-y-10 sm:space-y-12 min-w-0">
+      
+      <!-- 1. BREADCRUMB & HEADER -->
+      <section class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-5 min-w-0">
+        <nav aria-label="Breadcrumb" class="flex flex-wrap items-center gap-1.5 text-xs text-gray-400 font-mono">
+          <a href="/recursos" class="hover:text-teal transition-colors">Recursos</a>
+          <span>/</span>
+          <a href="/rutas" class="hover:text-teal transition-colors">Rutas</a>
+          <span>/</span>
+          <span class="text-deep font-semibold">Crear imágenes con IA</span>
+        </nav>
+        <div class="inline-flex items-center gap-1.5 self-start sm:self-auto px-3 py-1 rounded-full bg-teal/10 text-teal font-mono text-[11px] font-bold shrink-0">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          <span>Guía práctica interactiva</span>
+        </div>
+      </section>
+
+      <!-- 2. HERO PRÁCTICO Y VISUAL -->
+      <section class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-8 w-full min-w-0">
+        <!-- Left Content -->
+        <div class="w-full lg:w-7/12 space-y-4 min-w-0">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="inline-block whitespace-nowrap text-[10px] font-black tracking-wider uppercase text-teal bg-teal/10 px-2.5 py-1 rounded font-mono">
+              ATAJO VISUAL • GRATIS
+            </span>
+            <span class="inline-block whitespace-nowrap text-[10px] font-bold px-2.5 py-1 rounded-full bg-gray-100 text-gray-600 font-mono">
+              5 MINUTOS
             </span>
           </div>
+          
+          <h1 class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-deep tracking-tight leading-tight break-words">
+            Crea tu primera imagen con IA
+          </h1>
+          
+          <p class="text-sm sm:text-base md:text-lg text-gray-600 max-w-xl leading-relaxed">
+            Abre una herramienta, adjunta una foto y prueba un comando. No necesitas saber prompting.
+          </p>
 
-          <div class="space-y-2.5">
-            <!-- Node 1 -->
-            <div
-              class="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 p-3 rounded-xl bg-gray-50 border border-gray-100 min-w-0"
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a 
+              href="#paso-1" 
+              class="inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-teal text-white font-bold text-xs hover:bg-teal/90 transition-all shadow-2xs whitespace-nowrap"
             >
-              <div class="flex items-center gap-3 min-w-0">
-                <div
-                  class="w-9 h-9 rounded-lg bg-teal/10 text-teal flex items-center justify-center text-base shrink-0"
-                >
-                  👤
-                </div>
-                <div class="min-w-0">
-                  <div class="font-bold text-xs text-deep truncate">
-                    Tu Foto
-                  </div>
-                  <div class="text-[11px] text-gray-400 truncate">
-                    Cualquier retrato casual
-                  </div>
-                </div>
-              </div>
-              <span
-                class="text-[10px] font-bold px-2 py-0.5 rounded bg-white text-gray-600 border border-gray-200 font-mono whitespace-nowrap shrink-0 ml-auto sm:ml-0"
-              >
-                Paso 1
-              </span>
-            </div>
-
-            <!-- Arrow -->
-            <div class="flex items-center justify-center text-gray-300 text-xs">
-              ↓
-            </div>
-
-            <!-- Node 2 -->
-            <div
-              class="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 p-3 rounded-xl bg-teal/5 border border-teal/20 min-w-0"
+              Empezar gratis →
+            </a>
+            <a 
+              href="#como-funciona" 
+              class="inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-gray-100 text-deep font-bold text-xs hover:bg-gray-200 transition-all whitespace-nowrap"
             >
-              <div class="flex items-center gap-3 min-w-0">
-                <div
-                  class="w-9 h-9 rounded-lg bg-teal text-white flex items-center justify-center font-mono font-bold text-xs shrink-0"
-                >
-                  &gt;_
-                </div>
-                <div class="min-w-0">
-                  <div class="font-mono text-xs text-teal font-bold truncate">
-                    /haircut
-                  </div>
-                  <div class="text-[11px] text-gray-500 truncate">
-                    Instrucción estructurada
-                  </div>
-                </div>
-              </div>
-              <span
-                class="text-[10px] font-bold px-2 py-0.5 rounded bg-teal text-white font-mono whitespace-nowrap shrink-0 ml-auto sm:ml-0"
-              >
-                Copiar y pegar
-              </span>
-            </div>
-
-            <!-- Arrow -->
-            <div class="flex items-center justify-center text-gray-300 text-xs">
-              ↓
-            </div>
-
-            <!-- Node 3 -->
-            <div
-              class="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 p-3 rounded-xl bg-emerald-50 border border-emerald-200 min-w-0"
-            >
-              <div class="flex items-center gap-3 min-w-0">
-                <div
-                  class="w-9 h-9 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shrink-0"
-                >
-                  ✨
-                </div>
-                <div class="min-w-0">
-                  <div class="font-bold text-xs text-deep truncate">
-                    4 Resultados
-                  </div>
-                  <div class="text-[11px] text-gray-500 truncate">
-                    Misma cara, nuevos cortes
-                  </div>
-                </div>
-              </div>
-              <span
-                class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-600 text-white font-mono whitespace-nowrap shrink-0 ml-auto sm:ml-0"
-              >
-                Listo
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3. PASO 1: ELIGE DÓNDE HACERLO -->
-    <section class="space-y-4 pt-2 min-w-0" id="paso-1">
-      <div class="space-y-1">
-        <h2 class="text-xl sm:text-2xl font-bold text-deep tracking-tight">
-          1. Elige dónde hacerlo
-        </h2>
-        <p class="text-xs text-gray-500">
-          No necesitas usar las tres. Elige una y sigue los pasos.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <!-- ChatGPT -->
-        <div
-          class="flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-white border border-gray-200 shadow-2xs hover:shadow-md transition-shadow min-w-0"
-        >
-          <div class="space-y-3">
-            <div
-              class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-xl shrink-0"
-            >
-              🤖
-            </div>
-            <h3 class="font-bold text-base text-deep">ChatGPT</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">
-              Sube una foto en el chat y pídele que la transforme con el
-              comando.
-            </p>
-          </div>
-          <div class="pt-5">
-            <a
-              href="https://chatgpt.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 text-xs font-bold text-teal hover:underline whitespace-nowrap"
-            >
-              <span>Abrir ChatGPT</span>
-              <span>↗</span>
+              <span>Ver cómo funciona</span>
+              <span>↓</span>
             </a>
           </div>
         </div>
 
-        <!-- Gemini -->
-        <div
-          class="flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-white border border-gray-200 shadow-2xs hover:shadow-md transition-shadow min-w-0"
-        >
-          <div class="space-y-3">
-            <div
-              class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-xl shrink-0"
-            >
-              ✦
+        <!-- Right Preview Box -->
+        <div class="w-full lg:w-5/12 shrink-0 min-w-0">
+          <div class="w-full bg-white p-4 sm:p-6 rounded-2xl border border-gray-200 shadow-2xs space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+              <span class="text-gray-400 uppercase tracking-wider font-bold whitespace-nowrap">Flujo directo</span>
+              <span class="text-emerald-600 flex items-center gap-1 font-bold whitespace-nowrap text-[11px]">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span> Sin sintaxis compleja
+              </span>
             </div>
-            <h3 class="font-bold text-base text-deep">Gemini</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">
-              Sube una foto y crea una nueva versión con una instrucción rápida.
-            </p>
-          </div>
-          <div class="pt-5">
-            <a
-              href="https://gemini.google.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 text-xs font-bold text-teal hover:underline whitespace-nowrap"
-            >
-              <span>Abrir Gemini</span>
-              <span>↗</span>
-            </a>
-          </div>
-        </div>
+            
+            <div class="space-y-2.5">
+              <!-- Node 1 -->
+              <div class="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 p-3 rounded-xl bg-gray-50 border border-gray-100 min-w-0">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-9 h-9 rounded-lg bg-teal/10 text-teal flex items-center justify-center text-base shrink-0">
+                    👤
+                  </div>
+                  <div class="min-w-0">
+                    <div class="font-bold text-xs text-deep truncate">Tu Foto</div>
+                    <div class="text-[11px] text-gray-400 truncate">Cualquier retrato casual</div>
+                  </div>
+                </div>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-white text-gray-600 border border-gray-200 font-mono whitespace-nowrap shrink-0 ml-auto sm:ml-0">
+                  Paso 1
+                </span>
+              </div>
 
-        <!-- Google Labs -->
-        <div
-          class="flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-white border border-gray-200 shadow-2xs hover:shadow-md transition-shadow min-w-0 sm:col-span-2 lg:col-span-1"
-        >
-          <div class="space-y-3">
-            <div
-              class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-xl shrink-0"
-            >
-              🧪
+              <!-- Arrow -->
+              <div class="flex items-center justify-center text-gray-300 text-xs">
+                ↓
+              </div>
+
+              <!-- Node 2 -->
+              <div class="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 p-3 rounded-xl bg-teal/5 border border-teal/20 min-w-0">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-9 h-9 rounded-lg bg-teal text-white flex items-center justify-center font-mono font-bold text-xs shrink-0">
+                    &gt;_
+                  </div>
+                  <div class="min-w-0">
+                    <div class="font-mono text-xs text-teal font-bold truncate">/haircut</div>
+                    <div class="text-[11px] text-gray-500 truncate">Instrucción estructurada</div>
+                  </div>
+                </div>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-teal text-white font-mono whitespace-nowrap shrink-0 ml-auto sm:ml-0">
+                  Copiar y pegar
+                </span>
+              </div>
+
+              <!-- Arrow -->
+              <div class="flex items-center justify-center text-gray-300 text-xs">
+                ↓
+              </div>
+
+              <!-- Node 3 -->
+              <div class="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 p-3 rounded-xl bg-emerald-50 border border-emerald-200 min-w-0">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-9 h-9 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shrink-0">
+                    ✨
+                  </div>
+                  <div class="min-w-0">
+                    <div class="font-bold text-xs text-deep truncate">4 Resultados</div>
+                    <div class="text-[11px] text-gray-500 truncate">Misma cara, nuevos cortes</div>
+                  </div>
+                </div>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-600 text-white font-mono whitespace-nowrap shrink-0 ml-auto sm:ml-0">
+                  Listo
+                </span>
+              </div>
             </div>
-            <h3 class="font-bold text-base text-deep">Google Labs</h3>
-            <p class="text-xs text-gray-500 leading-relaxed">
-              Explora las herramientas de creación e investigación visual
-              disponibles en Google Labs.
-            </p>
-          </div>
-          <div class="pt-5">
-            <a
-              href="https://labs.google/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 text-xs font-bold text-teal hover:underline whitespace-nowrap"
-            >
-              <span>Explorar Google Labs</span>
-              <span>↗</span>
-            </a>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 4. PASO 2: ADJUNTA UNA FOTO -->
-    <section class="space-y-4 pt-2 min-w-0" id="como-funciona">
-      <div class="space-y-1">
-        <h2 class="text-xl sm:text-2xl font-bold text-deep tracking-tight">
-          2. Adjunta una foto
-        </h2>
-        <p class="text-xs text-gray-500">
-          El flujo completo en 5 acciones directas.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-        <!-- Step 1 -->
-        <div
-          class="p-4 rounded-xl bg-white border border-gray-200 shadow-2xs space-y-1 min-w-0"
-        >
-          <div class="text-[10px] font-bold text-teal font-mono uppercase">
-            PASO 01
-          </div>
-          <div class="font-bold text-sm text-deep">Abre</div>
-          <p class="text-xs text-gray-500 leading-snug">
-            La herramienta que elegiste en el paso anterior.
-          </p>
-        </div>
-
-        <!-- Step 2 -->
-        <div
-          class="p-4 rounded-xl bg-white border border-gray-200 shadow-2xs space-y-1 min-w-0"
-        >
-          <div class="text-[10px] font-bold text-teal font-mono uppercase">
-            PASO 02
-          </div>
-          <div class="font-bold text-sm text-deep">Adjunta</div>
-          <p class="text-xs text-gray-500 leading-snug">
-            Una foto tuya con buena luz y rostro claro.
-          </p>
-        </div>
-
-        <!-- Step 3 -->
-        <div
-          class="p-4 rounded-xl bg-white border border-gray-200 shadow-2xs space-y-1 min-w-0"
-        >
-          <div class="text-[10px] font-bold text-teal font-mono uppercase">
-            PASO 03
-          </div>
-          <div class="font-bold text-sm text-deep">Copia</div>
-          <p class="text-xs text-gray-500 leading-snug">
-            Uno de los comandos de abajo con un solo clic.
-          </p>
-        </div>
-
-        <!-- Step 4 -->
-        <div
-          class="p-4 rounded-xl bg-white border border-gray-200 shadow-2xs space-y-1 min-w-0"
-        >
-          <div class="text-[10px] font-bold text-teal font-mono uppercase">
-            PASO 04
-          </div>
-          <div class="font-bold text-sm text-deep">Pégalo</div>
-          <p class="text-xs text-gray-500 leading-snug">
-            En el cuadro de texto junto a la foto adjuntada.
-          </p>
-        </div>
-
-        <!-- Step 5 -->
-        <div
-          class="p-4 rounded-xl bg-white border border-gray-200 shadow-2xs space-y-1 min-w-0 sm:col-span-2 lg:col-span-1"
-        >
-          <div class="text-[10px] font-bold text-teal font-mono uppercase">
-            PASO 05
-          </div>
-          <div class="font-bold text-sm text-deep">Genera</div>
-          <p class="text-xs text-gray-500 leading-snug">
-            Envía el mensaje y evalúa las alternativas visuales.
-          </p>
-        </div>
-      </div>
-
-      <!-- Tip Callout -->
-      <div
-        class="flex items-start gap-3 p-4 rounded-xl bg-teal/5 border border-teal/20 text-xs text-gray-700 min-w-0"
-      >
-        <span class="text-base shrink-0">💡</span>
-        <p class="leading-relaxed">
-          <strong class="font-bold text-deep">Consejo:</strong> usa una foto donde
-          se vea claramente la persona u objeto que quieres transformar. Evita fotos
-          borrosas o con fondos demasiado saturados.
-        </p>
-      </div>
-    </section>
-
-    <!-- 5. PASO 3: PRUEBA TU PRIMER COMANDO (/haircut) -->
-    <section class="space-y-4 pt-2 min-w-0">
-      <div class="space-y-1">
-        <h2 class="text-xl sm:text-2xl font-bold text-deep tracking-tight">
-          3. Prueba tu primer comando
-        </h2>
-        <p class="text-xs text-gray-500">
-          Diseñado para preservar tus rasgos y darte alternativas realistas.
-        </p>
-      </div>
-
-      <div
-        class="p-5 sm:p-8 rounded-2xl bg-white border border-gray-200 shadow-2xs space-y-5 min-w-0"
-      >
-        <div class="flex flex-wrap items-center justify-between gap-2">
-          <div class="flex items-center gap-2.5">
-            <span
-              class="px-2.5 py-1 rounded bg-teal/10 text-teal text-[11px] font-bold font-mono whitespace-nowrap"
-            >
-              PRIMER COMANDO
-            </span>
-            <span class="font-mono text-lg sm:text-xl font-bold text-teal"
-              >/haircut</span
-            >
-          </div>
-          <span class="text-xs text-gray-400 font-mono whitespace-nowrap"
-            >Tiempo estimado: 30 seg</span
-          >
-        </div>
-
+      <!-- 3. PASO 1: ELIGE DÓNDE HACERLO -->
+      <section class="space-y-4 pt-2 min-w-0" id="paso-1">
         <div class="space-y-1">
-          <h3 class="text-base sm:text-lg font-bold text-deep">
-            Prueba diferentes cortes de cabello
-          </h3>
-          <p class="text-xs text-gray-500 leading-relaxed">
-            Usa una foto tuya y prueba diferentes estilos sin cambiar tu rostro
-            ni tu identidad.
-          </p>
+          <h2 class="text-xl sm:text-2xl font-bold text-deep tracking-tight">1. Elige dónde hacerlo</h2>
+          <p class="text-xs text-gray-500">No necesitas usar las tres. Elige una y sigue los pasos.</p>
         </div>
 
-        <!-- Code Block with Copy CTA -->
-        <div
-          class="flex flex-col rounded-xl overflow-hidden bg-slate-900 text-slate-100 border border-slate-800 min-w-0"
-        >
-          <div
-            class="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 bg-slate-950 border-b border-slate-800"
-          >
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-slate-700 shrink-0"
-              ></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-slate-700 shrink-0"
-              ></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-slate-700 shrink-0"
-              ></span>
-              <span class="ml-1 text-[11px] font-mono text-slate-400 truncate"
-                >prompt-haircut.txt</span
-              >
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- ChatGPT -->
+          <div class="flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-white border border-gray-200 shadow-2xs hover:shadow-md transition-shadow min-w-0">
+            <div class="space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-xl shrink-0">
+                🤖
+              </div>
+              <h3 class="font-bold text-base text-deep">ChatGPT</h3>
+              <p class="text-xs text-gray-500 leading-relaxed">Sube una foto en el chat y pídele que la transforme con el comando.</p>
             </div>
-            <button
-              onclick="copyCommand(this, 'haircut-code')"
-              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal hover:bg-teal/90 text-white font-mono text-xs transition-colors cursor-pointer shrink-0 ml-auto"
-            >
-              <span>📋</span>
-              <span class="btn-label font-bold whitespace-nowrap"
-                >Copiar comando</span
+            <div class="pt-5">
+              <a 
+                href="https://chatgpt.com/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="inline-flex items-center gap-1.5 text-xs font-bold text-teal hover:underline whitespace-nowrap"
               >
-            </button>
+                <span>Abrir ChatGPT</span>
+                <span>↗</span>
+              </a>
+            </div>
           </div>
-          <pre
-            id="haircut-code"
-            class="p-4 font-mono text-xs leading-relaxed overflow-x-auto select-all text-slate-200 whitespace-pre-wrap break-words">/haircut
+
+          <!-- Gemini -->
+          <div class="flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-white border border-gray-200 shadow-2xs hover:shadow-md transition-shadow min-w-0">
+            <div class="space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-xl shrink-0">
+                ✦
+              </div>
+              <h3 class="font-bold text-base text-deep">Gemini</h3>
+              <p class="text-xs text-gray-500 leading-relaxed">Sube una foto y crea una nueva versión con una instrucción rápida.</p>
+            </div>
+            <div class="pt-5">
+              <a 
+                href="https://gemini.google.com/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="inline-flex items-center gap-1.5 text-xs font-bold text-teal hover:underline whitespace-nowrap"
+              >
+                <span>Abrir Gemini</span>
+                <span>↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Google Labs -->
+          <div class="flex flex-col justify-between p-5 sm:p-6 rounded-2xl bg-white border border-gray-200 shadow-2xs hover:shadow-md transition-shadow min-w-0 sm:col-span-2 lg:col-span-1">
+            <div class="space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-xl shrink-0">
+                🧪
+              </div>
+              <h3 class="font-bold text-base text-deep">Google Labs</h3>
+              <p class="text-xs text-gray-500 leading-relaxed">Explora las herramientas de creación e investigación visual disponibles en Google Labs.</p>
+            </div>
+            <div class="pt-5">
+              <a 
+                href="https://labs.google/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="inline-flex items-center gap-1.5 text-xs font-bold text-teal hover:underline whitespace-nowrap"
+              >
+                <span>Explorar Google Labs</span>
+                <span>↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. PASO 2: ADJUNTA UNA FOTO -->
+      <section class="space-y-4 pt-2 min-w-0" id="como-funciona">
+        <div class="space-y-1">
+          <h2 class="text-xl sm:text-2xl font-bold text-deep tracking-tight">2. Adjunta una foto</h2>
+          <p class="text-xs text-gray-500">El flujo completo en 5 acciones directas.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+          <!-- Step 1 -->
+          <div class="p-4 rounded-xl bg-white border border-gray-200 shadow-2xs space-y-1 min-w-0">
+            <div class="text-[10px] font-bold text-teal font-mono uppercase">PASO 01</div>
+            <div class="font-bold text-sm text-deep">Abre</div>
+            <p class="text-xs text-gray-500 leading-snug">La herramienta que elegiste en el paso anterior.</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="p-4 rounded-xl bg-white border border-gray-200 shadow-2xs space-y-1 min-w-0">
+            <div class="text-[10px] font-bold text-teal font-mono uppercase">PASO 02</div>
+            <div class="font-bold text-sm text-deep">Adjunta</div>
+            <p class="text-xs text-gray-500 leading-snug">Una foto tuya con buena luz y rostro claro.</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="p-4 rounded-xl bg-white border border-gray-200 shadow-2xs space-y-1 min-w-0">
+            <div class="text-[10px] font-bold text-teal font-mono uppercase">PASO 03</div>
+            <div class="font-bold text-sm text-deep">Copia</div>
+            <p class="text-xs text-gray-500 leading-snug">Uno de los comandos de abajo con un solo clic.</p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="p-4 rounded-xl bg-white border border-gray-200 shadow-2xs space-y-1 min-w-0">
+            <div class="text-[10px] font-bold text-teal font-mono uppercase">PASO 04</div>
+            <div class="font-bold text-sm text-deep">Pégalo</div>
+            <p class="text-xs text-gray-500 leading-snug">En el cuadro de texto junto a la foto adjuntada.</p>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="p-4 rounded-xl bg-white border border-gray-200 shadow-2xs space-y-1 min-w-0 sm:col-span-2 lg:col-span-1">
+            <div class="text-[10px] font-bold text-teal font-mono uppercase">PASO 05</div>
+            <div class="font-bold text-sm text-deep">Genera</div>
+            <p class="text-xs text-gray-500 leading-snug">Envía el mensaje y evalúa las alternativas visuales.</p>
+          </div>
+        </div>
+
+        <!-- Tip Callout -->
+        <div class="flex items-start gap-3 p-4 rounded-xl bg-teal/5 border border-teal/20 text-xs text-gray-700 min-w-0">
+          <span class="text-base shrink-0">💡</span>
+          <p class="leading-relaxed">
+            <strong class="font-bold text-deep">Consejo:</strong> usa una foto donde se vea claramente la persona u objeto que quieres transformar. Evita fotos borrosas o con fondos demasiado saturados.
+          </p>
+        </div>
+      </section>
+
+      <!-- 5. PASO 3: PRUEBA TU PRIMER COMANDO (/haircut) -->
+      <section class="space-y-4 pt-2 min-w-0">
+        <div class="space-y-1">
+          <h2 class="text-xl sm:text-2xl font-bold text-deep tracking-tight">3. Prueba tu primer comando</h2>
+          <p class="text-xs text-gray-500">Diseñado para preservar tus rasgos y darte alternativas realistas.</p>
+        </div>
+
+        <div class="p-5 sm:p-8 rounded-2xl bg-white border border-gray-200 shadow-2xs space-y-5 min-w-0">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2.5 py-1 rounded bg-teal/10 text-teal text-[11px] font-bold font-mono whitespace-nowrap">
+                PRIMER COMANDO
+              </span>
+              <span class="font-mono text-lg sm:text-xl font-bold text-teal">/haircut</span>
+            </div>
+            <span class="text-xs text-gray-400 font-mono whitespace-nowrap">Tiempo estimado: 30 seg</span>
+          </div>
+
+          <div class="space-y-1">
+            <h3 class="text-base sm:text-lg font-bold text-deep">Prueba diferentes cortes de cabello</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">
+              Usa una foto tuya y prueba diferentes estilos sin cambiar tu rostro ni tu identidad.
+            </p>
+          </div>
+
+          <!-- Code Block with Copy CTA -->
+          <div class="flex flex-col rounded-xl overflow-hidden bg-slate-900 text-slate-100 border border-slate-800 min-w-0">
+            <div class="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 bg-slate-950 border-b border-slate-800">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-700 shrink-0"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-700 shrink-0"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-700 shrink-0"></span>
+                <span class="ml-1 text-[11px] font-mono text-slate-400 truncate">prompt-haircut.txt</span>
+              </div>
+              <button 
+                onclick="copyCommand(this, 'haircut-code')"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal hover:bg-teal/90 text-white font-mono text-xs transition-colors cursor-pointer shrink-0 ml-auto"
+              >
+                <span>📋</span>
+                <span class="btn-label font-bold whitespace-nowrap">Copiar comando</span>
+              </button>
+            </div>
+            <pre id="haircut-code" class="p-4 font-mono text-xs leading-relaxed overflow-x-auto select-all text-slate-200 whitespace-pre-wrap break-words">/haircut
 Analiza mi rostro y prueba 4 estilos de corte de cabello que puedan favorecerme.
 Mantén mi rostro, identidad, proporciones y características físicas. Cambia únicamente el cabello.
 Muestra las 4 opciones de forma clara para poder compararlas.</pre>
-        </div>
-
-        <!-- Micro action flow -->
-        <div
-          class="p-4 rounded-xl bg-gray-50 border border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs min-w-0"
-        >
-          <div class="flex items-center gap-2 min-w-0">
-            <span class="text-emerald-600 font-bold shrink-0">▶</span>
-            <span class="font-bold text-deep shrink-0">Ahora haz esto:</span>
-            <span class="text-gray-500 truncate"
-              >Adjunta tu foto + pega el comando + genera.</span
-            >
           </div>
-          <div
-            class="inline-flex items-center gap-2 self-start sm:self-auto text-[11px] font-mono px-3 py-1 rounded-lg bg-white border border-gray-200 text-gray-700 whitespace-nowrap shrink-0"
-          >
-            <span>ORIGINAL</span>
-            <span class="text-teal font-bold">→</span>
-            <span>4 RESULTADOS</span>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- 6. SEGUNDO COMANDO (/outfit) -->
-    <section class="space-y-4 min-w-0">
-      <div class="space-y-1">
-        <h2 class="text-xl sm:text-2xl font-bold text-deep tracking-tight">
-          ¿Funcionó? Prueba otro.
-        </h2>
-        <p class="text-xs text-gray-500">
-          Explora vestuario y adaptaciones contextuales realistas.
-        </p>
-      </div>
-
-      <div
-        class="p-5 sm:p-8 rounded-2xl bg-white border border-gray-200 shadow-2xs space-y-5 min-w-0"
-      >
-        <div class="flex flex-wrap items-center justify-between gap-2">
-          <div class="flex items-center gap-2.5">
-            <span
-              class="px-2.5 py-1 rounded bg-teal/10 text-teal text-[11px] font-bold font-mono whitespace-nowrap"
-            >
-              ESTILO PERSONAL
-            </span>
-            <span class="font-mono text-lg sm:text-xl font-bold text-teal"
-              >/outfit</span
-            >
-          </div>
-        </div>
-
-        <div class="space-y-1">
-          <h3 class="text-base sm:text-lg font-bold text-deep">
-            Prueba diferentes estilos de ropa
-          </h3>
-          <p class="text-xs text-gray-500 leading-relaxed">
-            Prueba diferentes estilos de ropa sin cambiar quién eres.
-          </p>
-        </div>
-
-        <!-- Code Block -->
-        <div
-          class="flex flex-col rounded-xl overflow-hidden bg-slate-900 text-slate-100 border border-slate-800 min-w-0"
-        >
-          <div
-            class="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 bg-slate-950 border-b border-slate-800"
-          >
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-slate-700 shrink-0"
-              ></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-slate-700 shrink-0"
-              ></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-slate-700 shrink-0"
-              ></span>
-              <span class="ml-1 text-[11px] font-mono text-slate-400 truncate"
-                >prompt-outfit.txt</span
-              >
+          <!-- Micro action flow -->
+          <div class="p-4 rounded-xl bg-gray-50 border border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs min-w-0">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="text-emerald-600 font-bold shrink-0">▶</span>
+              <span class="font-bold text-deep shrink-0">Ahora haz esto:</span>
+              <span class="text-gray-500 truncate">Adjunta tu foto + pega el comando + genera.</span>
             </div>
-            <button
-              onclick="copyCommand(this, 'outfit-code')"
-              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal hover:bg-teal/90 text-white font-mono text-xs transition-colors cursor-pointer shrink-0 ml-auto"
-            >
-              <span>📋</span>
-              <span class="btn-label font-bold whitespace-nowrap"
-                >Copiar comando</span
-              >
-            </button>
+            <div class="inline-flex items-center gap-2 self-start sm:self-auto text-[11px] font-mono px-3 py-1 rounded-lg bg-white border border-gray-200 text-gray-700 whitespace-nowrap shrink-0">
+              <span>ORIGINAL</span>
+              <span class="text-teal font-bold">→</span>
+              <span>4 RESULTADOS</span>
+            </div>
           </div>
-          <pre
-            id="outfit-code"
-            class="p-4 font-mono text-xs leading-relaxed overflow-x-auto select-all text-slate-200 whitespace-pre-wrap break-words">/outfit
+        </div>
+      </section>
+
+      <!-- 6. SEGUNDO COMANDO (/outfit) -->
+      <section class="space-y-4 min-w-0">
+        <div class="space-y-1">
+          <h2 class="text-xl sm:text-2xl font-bold text-deep tracking-tight">¿Funcionó? Prueba otro.</h2>
+          <p class="text-xs text-gray-500">Explora vestuario y adaptaciones contextuales realistas.</p>
+        </div>
+
+        <div class="p-5 sm:p-8 rounded-2xl bg-white border border-gray-200 shadow-2xs space-y-5 min-w-0">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2.5 py-1 rounded bg-teal/10 text-teal text-[11px] font-bold font-mono whitespace-nowrap">
+                ESTILO PERSONAL
+              </span>
+              <span class="font-mono text-lg sm:text-xl font-bold text-teal">/outfit</span>
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <h3 class="text-base sm:text-lg font-bold text-deep">Prueba diferentes estilos de ropa</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">
+              Prueba diferentes estilos de ropa sin cambiar quién eres.
+            </p>
+          </div>
+
+          <!-- Code Block -->
+          <div class="flex flex-col rounded-xl overflow-hidden bg-slate-900 text-slate-100 border border-slate-800 min-w-0">
+            <div class="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 bg-slate-950 border-b border-slate-800">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-700 shrink-0"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-700 shrink-0"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-700 shrink-0"></span>
+                <span class="ml-1 text-[11px] font-mono text-slate-400 truncate">prompt-outfit.txt</span>
+              </div>
+              <button 
+                onclick="copyCommand(this, 'outfit-code')"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal hover:bg-teal/90 text-white font-mono text-xs transition-colors cursor-pointer shrink-0 ml-auto"
+              >
+                <span>📋</span>
+                <span class="btn-label font-bold whitespace-nowrap">Copiar comando</span>
+              </button>
+            </div>
+            <pre id="outfit-code" class="p-4 font-mono text-xs leading-relaxed overflow-x-auto select-all text-slate-200 whitespace-pre-wrap break-words">/outfit
 Crea 4 versiones de esta foto con estilos de vestuario diferentes que puedan favorecerme.
 Mantén mi rostro, cuerpo, proporciones e identidad.
 Cambia únicamente la ropa y adapta el entorno de forma coherente con cada estilo.
 Haz que los resultados se vean naturales y realistas.</pre>
-        </div>
-
-        <!-- Micro action flow -->
-        <div
-          class="p-4 rounded-xl bg-gray-50 border border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs min-w-0"
-        >
-          <div class="flex items-center gap-2 min-w-0">
-            <span class="text-emerald-600 font-bold shrink-0">▶</span>
-            <span class="font-bold text-deep shrink-0">Acción directa:</span>
-            <span class="text-gray-500 truncate"
-              >Adjunta la misma foto y prueba el comando.</span
-            >
           </div>
-          <div
-            class="inline-flex items-center gap-2 self-start sm:self-auto text-[11px] font-mono px-3 py-1 rounded-lg bg-white border border-gray-200 text-gray-700 whitespace-nowrap shrink-0"
-          >
-            <span>MISMA FOTO</span>
-            <span class="text-teal font-bold">→</span>
-            <span>4 ESTILOS</span>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- 7. TERCER COMANDO (/profile) -->
-    <section class="space-y-4 min-w-0">
-      <div class="space-y-1">
-        <h2 class="text-xl sm:text-2xl font-bold text-deep tracking-tight">
-          Ahora prueba uno para trabajo
-        </h2>
-        <p class="text-xs text-gray-500">
-          Optimización fotográfica para presencia profesional y LinkedIn.
-        </p>
-      </div>
-
-      <div
-        class="p-5 sm:p-8 rounded-2xl bg-white border border-gray-200 shadow-2xs space-y-5 min-w-0"
-      >
-        <div class="flex flex-wrap items-center justify-between gap-2">
-          <div class="flex items-center gap-2.5">
-            <span
-              class="px-2.5 py-1 rounded bg-teal/10 text-teal text-[11px] font-bold font-mono whitespace-nowrap"
-            >
-              PROFESIONAL
-            </span>
-            <span class="font-mono text-lg sm:text-xl font-bold text-teal"
-              >/profile</span
-            >
-          </div>
-        </div>
-
-        <div class="space-y-1">
-          <h3 class="text-base sm:text-lg font-bold text-deep">
-            Retrato profesional para perfil laboral
-          </h3>
-          <p class="text-xs text-gray-500 leading-relaxed">
-            Convierte una foto casual en un retrato profesional para tu perfil
-            laboral.
-          </p>
-        </div>
-
-        <!-- Code Block -->
-        <div
-          class="flex flex-col rounded-xl overflow-hidden bg-slate-900 text-slate-100 border border-slate-800 min-w-0"
-        >
-          <div
-            class="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 bg-slate-950 border-b border-slate-800"
-          >
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-slate-700 shrink-0"
-              ></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-slate-700 shrink-0"
-              ></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-slate-700 shrink-0"
-              ></span>
-              <span class="ml-1 text-[11px] font-mono text-slate-400 truncate"
-                >prompt-profile.txt</span
-              >
+          <!-- Micro action flow -->
+          <div class="p-4 rounded-xl bg-gray-50 border border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs min-w-0">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="text-emerald-600 font-bold shrink-0">▶</span>
+              <span class="font-bold text-deep shrink-0">Acción directa:</span>
+              <span class="text-gray-500 truncate">Adjunta la misma foto y prueba el comando.</span>
             </div>
-            <button
-              onclick="copyCommand(this, 'profile-code')"
-              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal hover:bg-teal/90 text-white font-mono text-xs transition-colors cursor-pointer shrink-0 ml-auto"
-            >
-              <span>📋</span>
-              <span class="btn-label font-bold whitespace-nowrap"
-                >Copiar comando</span
-              >
-            </button>
+            <div class="inline-flex items-center gap-2 self-start sm:self-auto text-[11px] font-mono px-3 py-1 rounded-lg bg-white border border-gray-200 text-gray-700 whitespace-nowrap shrink-0">
+              <span>MISMA FOTO</span>
+              <span class="text-teal font-bold">→</span>
+              <span>4 ESTILOS</span>
+            </div>
           </div>
-          <pre
-            id="profile-code"
-            class="p-4 font-mono text-xs leading-relaxed overflow-x-auto select-all text-slate-200 whitespace-pre-wrap break-words">/profile
+        </div>
+      </section>
+
+      <!-- 7. TERCER COMANDO (/profile) -->
+      <section class="space-y-4 min-w-0">
+        <div class="space-y-1">
+          <h2 class="text-xl sm:text-2xl font-bold text-deep tracking-tight">Ahora prueba uno para trabajo</h2>
+          <p class="text-xs text-gray-500">Optimización fotográfica para presencia profesional y LinkedIn.</p>
+        </div>
+
+        <div class="p-5 sm:p-8 rounded-2xl bg-white border border-gray-200 shadow-2xs space-y-5 min-w-0">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5">
+              <span class="px-2.5 py-1 rounded bg-teal/10 text-teal text-[11px] font-bold font-mono whitespace-nowrap">
+                PROFESIONAL
+              </span>
+              <span class="font-mono text-lg sm:text-xl font-bold text-teal">/profile</span>
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <h3 class="text-base sm:text-lg font-bold text-deep">Retrato profesional para perfil laboral</h3>
+            <p class="text-xs text-gray-500 leading-relaxed">
+              Convierte una foto casual en un retrato profesional para tu perfil laboral.
+            </p>
+          </div>
+
+          <!-- Code Block -->
+          <div class="flex flex-col rounded-xl overflow-hidden bg-slate-900 text-slate-100 border border-slate-800 min-w-0">
+            <div class="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 bg-slate-950 border-b border-slate-800">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-700 shrink-0"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-700 shrink-0"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-slate-700 shrink-0"></span>
+                <span class="ml-1 text-[11px] font-mono text-slate-400 truncate">prompt-profile.txt</span>
+              </div>
+              <button 
+                onclick="copyCommand(this, 'profile-code')"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-teal hover:bg-teal/90 text-white font-mono text-xs transition-colors cursor-pointer shrink-0 ml-auto"
+              >
+                <span>📋</span>
+                <span class="btn-label font-bold whitespace-nowrap">Copiar comando</span>
+              </button>
+            </div>
+            <pre id="profile-code" class="p-4 font-mono text-xs leading-relaxed overflow-x-auto select-all text-slate-200 whitespace-pre-wrap break-words">/profile
 Convierte esta foto en un retrato profesional para usar en mi perfil laboral.
 Mantén exactamente mis rasgos faciales e identidad.
 Mejora la iluminación, el encuadre y el fondo.
 Usa un fondo limpio y profesional, iluminación natural y una apariencia realista.
 No hagas que parezca una foto excesivamente retocada.</pre>
-        </div>
-
-        <!-- Micro action flow -->
-        <div
-          class="p-4 rounded-xl bg-gray-50 border border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs min-w-0"
-        >
-          <div class="flex items-center gap-2 min-w-0">
-            <span class="text-emerald-600 font-bold shrink-0">▶</span>
-            <span class="font-bold text-deep shrink-0">Acción directa:</span>
-            <span class="text-gray-500 truncate"
-              >Adjunta tu foto + pega el comando + genera.</span
-            >
           </div>
-          <div
-            class="inline-flex items-center gap-2 self-start sm:self-auto text-[11px] font-mono px-3 py-1 rounded-lg bg-white border border-gray-200 text-gray-700 whitespace-nowrap shrink-0"
-          >
-            <span>FOTO CASUAL</span>
-            <span class="text-teal font-bold">→</span>
-            <span>FOTO PROFESIONAL</span>
+
+          <!-- Micro action flow -->
+          <div class="p-4 rounded-xl bg-gray-50 border border-gray-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs min-w-0">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="text-emerald-600 font-bold shrink-0">▶</span>
+              <span class="font-bold text-deep shrink-0">Acción directa:</span>
+              <span class="text-gray-500 truncate">Adjunta tu foto + pega el comando + genera.</span>
+            </div>
+            <div class="inline-flex items-center gap-2 self-start sm:self-auto text-[11px] font-mono px-3 py-1 rounded-lg bg-white border border-gray-200 text-gray-700 whitespace-nowrap shrink-0">
+              <span>FOTO CASUAL</span>
+              <span class="text-teal font-bold">→</span>
+              <span>FOTO PROFESIONAL</span>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 8. BLOQUE DE APRENDIZAJE -->
-    <section
-      class="p-5 sm:p-8 rounded-2xl bg-teal/5 border border-teal/20 space-y-4 min-w-0"
-    >
-      <div class="flex items-center gap-2">
-        <span class="text-2xl shrink-0">🧠</span>
-        <h3 class="text-base sm:text-lg font-bold text-deep">
-          ¿Viste lo que acaba de pasar?
-        </h3>
-      </div>
-
-      <p class="text-xs sm:text-sm font-bold text-deep">
-        No necesitaste aprender una herramienta nueva ni memorizar conceptos
-        teóricos de prompting.
-      </p>
-
-      <!-- Flow sequence in pills -->
-      <div class="flex flex-wrap items-center gap-2 text-xs font-mono">
-        <span
-          class="px-2.5 py-1.5 rounded-lg bg-white border border-gray-200 text-deep font-bold whitespace-nowrap"
-          >1. Elegiste herramienta</span
-        >
-        <span class="text-teal font-bold">→</span>
-        <span
-          class="px-2.5 py-1.5 rounded-lg bg-white border border-gray-200 text-deep font-bold whitespace-nowrap"
-          >2. Subiste foto</span
-        >
-        <span class="text-teal font-bold">→</span>
-        <span
-          class="px-2.5 py-1.5 rounded-lg bg-white border border-gray-200 text-deep font-bold whitespace-nowrap"
-          >3. Copiaste comando</span
-        >
-        <span class="text-teal font-bold">→</span>
-        <span
-          class="px-2.5 py-1.5 rounded-lg bg-teal text-white font-bold whitespace-nowrap"
-          >4. Obtuviste resultado</span
-        >
-      </div>
-
-      <div class="space-y-1 text-xs text-gray-600">
-        <p>
-          El <code
-            class="font-mono text-deep bg-white border border-gray-200 px-1.5 py-0.5 rounded font-bold"
-            >/haircut</code
-          >, <code
-            class="font-mono text-deep bg-white border border-gray-200 px-1.5 py-0.5 rounded font-bold"
-            >/outfit</code
-          > o <code
-            class="font-mono text-deep bg-white border border-gray-200 px-1.5 py-0.5 rounded font-bold"
-            >/profile</code
-          > es simplemente una forma rápida de organizar una instrucción.
+      <!-- 8. BLOQUE DE APRENDIZAJE -->
+      <section class="p-5 sm:p-8 rounded-2xl bg-teal/5 border border-teal/20 space-y-4 min-w-0">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl shrink-0">🧠</span>
+          <h3 class="text-base sm:text-lg font-bold text-deep">¿Viste lo que acaba de pasar?</h3>
+        </div>
+        
+        <p class="text-xs sm:text-sm font-bold text-deep">
+          No necesitaste aprender una herramienta nueva ni memorizar conceptos teóricos de prompting.
         </p>
-        <p class="italic text-gray-500">
-          Lo importante no es el slash. Lo importante es decirle a la
-          herramienta qué quieres cambiar y qué quieres conservar.
-        </p>
-      </div>
-    </section>
 
-    <!-- 9. CTA HACIA EL PRODUCTO DE US$5 -->
-    <section class="space-y-4 pt-2 min-w-0">
-      <div class="space-y-1">
-        <span
-          class="text-[10px] font-black tracking-wider uppercase text-teal font-mono"
-          >¿QUIERES MÁS?</span
-        >
-        <h2 class="text-xl sm:text-2xl font-bold text-deep tracking-tight">
-          Esto fue solo el comienzo.
-        </h2>
-        <p class="text-xs text-gray-500 max-w-2xl leading-relaxed">
-          Puedes usar la misma lógica para crear imágenes de productos, cambiar
-          escenarios, probar estilos, crear contenido para redes, transformar
-          fotos y experimentar con video.
-        </p>
-      </div>
+        <!-- Flow sequence in pills -->
+        <div class="flex flex-wrap items-center gap-2 text-xs font-mono">
+          <span class="px-2.5 py-1.5 rounded-lg bg-white border border-gray-200 text-deep font-bold whitespace-nowrap">1. Elegiste herramienta</span>
+          <span class="text-teal font-bold">→</span>
+          <span class="px-2.5 py-1.5 rounded-lg bg-white border border-gray-200 text-deep font-bold whitespace-nowrap">2. Subiste foto</span>
+          <span class="text-teal font-bold">→</span>
+          <span class="px-2.5 py-1.5 rounded-lg bg-white border border-gray-200 text-deep font-bold whitespace-nowrap">3. Copiaste comando</span>
+          <span class="text-teal font-bold">→</span>
+          <span class="px-2.5 py-1.5 rounded-lg bg-teal text-white font-bold whitespace-nowrap">4. Obtuviste resultado</span>
+        </div>
 
-      <!-- Product Card -->
-      <div
-        class="p-5 sm:p-8 rounded-2xl bg-white border border-gray-200 shadow-2xs flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-8 min-w-0"
-        id="atajos-visuales"
-      >
-        <div class="w-full lg:w-7/12 space-y-4 min-w-0">
-          <div class="flex flex-wrap items-center gap-3">
-            <h3 class="text-xl sm:text-2xl font-extrabold text-deep">
-              Atajos Visuales
-            </h3>
-            <span
-              class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-mono font-bold whitespace-nowrap"
-              >US$5</span
-            >
-          </div>
-          <div class="text-xs sm:text-sm font-bold text-teal">
-            Comandos para crear imágenes y videos con IA
-          </div>
-          <p class="text-xs text-gray-600 leading-relaxed">
-            Una colección de comandos listos para copiar y usar. Sin
-            explicaciones innecesarias, organizados por objetivo práctico.
+        <div class="space-y-1 text-xs text-gray-600">
+          <p>
+            El <code class="font-mono text-deep bg-white border border-gray-200 px-1.5 py-0.5 rounded font-bold">/haircut</code>, <code class="font-mono text-deep bg-white border border-gray-200 px-1.5 py-0.5 rounded font-bold">/outfit</code> o <code class="font-mono text-deep bg-white border border-gray-200 px-1.5 py-0.5 rounded font-bold">/profile</code> es simplemente una forma rápida de organizar una instrucción.
           </p>
-          <div class="pt-2">
-            <a
-              href="/atajos-visuales"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 px-5 sm:px-6 py-3 rounded-xl bg-orange hover:bg-orange/90 text-white font-bold text-xs transition-all shadow-2xs whitespace-nowrap"
-            >
-              <span>Obtener Atajos Visuales (US$5)</span>
-              <span>→</span>
-            </a>
-          </div>
+          <p class="italic text-gray-500">
+            Lo importante no es el slash. Lo importante es decirle a la herramienta qué quieres cambiar y qué quieres conservar.
+          </p>
+        </div>
+      </section>
+
+      <!-- 9. CTA HACIA EL PRODUCTO DE US$5 -->
+      <section class="space-y-4 pt-2 min-w-0">
+        <div class="space-y-1">
+          <span class="text-[10px] font-black tracking-wider uppercase text-teal font-mono">¿QUIERES MÁS?</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-deep tracking-tight">Esto fue solo el comienzo.</h2>
+          <p class="text-xs text-gray-500 max-w-2xl leading-relaxed">
+            Puedes usar la misma lógica para crear imágenes de productos, cambiar escenarios, probar estilos, crear contenido para redes, transformar fotos y experimentar con video.
+          </p>
         </div>
 
-        <!-- Shortcuts Interactive Deck Preview -->
-        <div
-          class="w-full lg:w-5/12 space-y-2 text-xs font-mono shrink-0 min-w-0"
-        >
-          <div
-            class="p-3 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-between gap-2"
-          >
-            <span class="text-teal font-bold shrink-0">/haircut</span>
-            <span class="text-gray-600 font-sans text-xs truncate"
-              >Prueba nuevos cortes</span
-            >
+        <!-- Product Card -->
+        <div class="p-5 sm:p-8 rounded-2xl bg-white border border-gray-200 shadow-2xs flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-8 min-w-0" id="atajos-visuales">
+          <div class="w-full lg:w-7/12 space-y-4 min-w-0">
+            <div class="flex flex-wrap items-center gap-3">
+              <h3 class="text-xl sm:text-2xl font-extrabold text-deep">Atajos Visuales</h3>
+              <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-mono font-bold whitespace-nowrap">US$5</span>
+            </div>
+            <div class="text-xs sm:text-sm font-bold text-teal">
+              Comandos para crear imágenes y videos con IA
+            </div>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              Una colección de comandos listos para copiar y usar. Sin explicaciones innecesarias, organizados por objetivo práctico.
+            </p>
+            <div class="pt-2">
+              <a 
+                href={LINKS.atajos_visuales} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="inline-flex items-center gap-2 px-5 sm:px-6 py-3 rounded-xl bg-orange hover:bg-orange/90 text-white font-bold text-xs transition-all shadow-2xs whitespace-nowrap"
+              >
+                <span>Obtener Atajos Visuales (US$5)</span>
+                <span>→</span>
+              </a>
+            </div>
           </div>
-          <div
-            class="p-3 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-between gap-2"
-          >
-            <span class="text-teal font-bold shrink-0">/outfit</span>
-            <span class="text-gray-600 font-sans text-xs truncate"
-              >Prueba nuevos estilos</span
-            >
-          </div>
-          <div
-            class="p-3 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-between gap-2"
-          >
-            <span class="text-teal font-bold shrink-0">/profile</span>
-            <span class="text-gray-600 font-sans text-xs truncate"
-              >Mejora tu foto</span
-            >
-          </div>
-          <div
-            class="p-3 rounded-xl bg-teal/5 border border-teal/20 flex items-center justify-between gap-2"
-          >
-            <span class="text-teal font-bold shrink-0">/product</span>
-            <span class="text-gray-600 font-sans text-xs truncate"
-              >Crea imágenes para productos</span
-            >
-          </div>
-          <div
-            class="p-3 rounded-xl bg-teal/5 border border-teal/20 flex items-center justify-between gap-2"
-          >
-            <span class="text-teal font-bold shrink-0">/room</span>
-            <span class="text-gray-600 font-sans text-xs truncate"
-              >Transforma un espacio</span
-            >
-          </div>
-          <div
-            class="p-3 rounded-xl bg-teal/5 border border-teal/20 flex items-center justify-between gap-2"
-          >
-            <span class="text-teal font-bold shrink-0">/video</span>
-            <span class="text-gray-600 font-sans text-xs truncate"
-              >Convierte una idea en video</span
-            >
+
+          <!-- Shortcuts Interactive Deck Preview -->
+          <div class="w-full lg:w-5/12 space-y-2 text-xs font-mono shrink-0 min-w-0">
+            <div class="p-3 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-between gap-2">
+              <span class="text-teal font-bold shrink-0">/haircut</span>
+              <span class="text-gray-600 font-sans text-xs truncate">Prueba nuevos cortes</span>
+            </div>
+            <div class="p-3 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-between gap-2">
+              <span class="text-teal font-bold shrink-0">/outfit</span>
+              <span class="text-gray-600 font-sans text-xs truncate">Prueba nuevos estilos</span>
+            </div>
+            <div class="p-3 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-between gap-2">
+              <span class="text-teal font-bold shrink-0">/profile</span>
+              <span class="text-gray-600 font-sans text-xs truncate">Mejora tu foto</span>
+            </div>
+            <div class="p-3 rounded-xl bg-teal/5 border border-teal/20 flex items-center justify-between gap-2">
+              <span class="text-teal font-bold shrink-0">/product</span>
+              <span class="text-gray-600 font-sans text-xs truncate">Crea imágenes para productos</span>
+            </div>
+            <div class="p-3 rounded-xl bg-teal/5 border border-teal/20 flex items-center justify-between gap-2">
+              <span class="text-teal font-bold shrink-0">/room</span>
+              <span class="text-gray-600 font-sans text-xs truncate">Transforma un espacio</span>
+            </div>
+            <div class="p-3 rounded-xl bg-teal/5 border border-teal/20 flex items-center justify-between gap-2">
+              <span class="text-teal font-bold shrink-0">/video</span>
+              <span class="text-gray-600 font-sans text-xs truncate">Convierte una idea en video</span>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- 10. RETORNO -->
-    <section class="pt-2 pb-6">
-      <a
-        href="/rutas"
-        class="inline-flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-teal transition-colors whitespace-nowrap"
-      >
-        <span>←</span>
-        <span>Volver a todas las rutas</span>
-      </a>
-    </section>
+      <!-- 10. RETORNO -->
+      <section class="pt-2 pb-6">
+        <a href="/rutas" class="inline-flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-teal transition-colors whitespace-nowrap">
+          <span>←</span>
+          <span>Volver a todas las rutas</span>
+        </a>
+      </section>
+
+    </div>
+
   </div>
 </Layout>
 
 <script is:inline>
+  const LOCAL_STORAGE_KEY = 'lucirme_unlocked_crear_imagenes_ia';
+
+  function executeUnlock() {
+    const muro = document.getElementById('muro');
+    const contenido = document.getElementById('contenido');
+    if (muro) muro.classList.add('hidden');
+    if (contenido) contenido.classList.remove('hidden');
+  }
+
+  // Verificar si ya está desbloqueado previamente
+  if (localStorage.getItem(LOCAL_STORAGE_KEY) === 'true') {
+    executeUnlock();
+  }
+
+  // Manejador de envío del muro (MailerLite lead capture)
+  const wallForm = document.getElementById('wall-form');
+  if (wallForm) {
+    wallForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const submitBtn = document.getElementById('wall-submit-btn');
+      const errorMsg = document.getElementById('wall-error-msg');
+      const websiteVal = document.getElementById('wall-website')?.value || '';
+      const nameVal = document.getElementById('wall-name')?.value?.trim() || '';
+      const emailVal = document.getElementById('wall-email')?.value?.trim() || '';
+
+      if (errorMsg) errorMsg.classList.add('hidden');
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Procesando...</span>';
+      }
+
+      try {
+        const response = await fetch('/api/unlock-guia', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: nameVal,
+            email: emailVal,
+            website: websiteVal
+          })
+        });
+
+        const resData = await response.json().catch(() => ({}));
+
+        if (!response.ok && resData.error) {
+          if (errorMsg) {
+            errorMsg.textContent = resData.error;
+            errorMsg.classList.remove('hidden');
+          }
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span>Desbloquear Guía Gratis</span> →';
+          }
+          return;
+        }
+
+        if (window.posthog) {
+          window.posthog.capture('resource_unlocked', {
+            recurso: 'crear-imagenes-ia',
+            email: emailVal
+          });
+        }
+
+        localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
+        executeUnlock();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      } catch (err) {
+        console.error('Unlock error:', err);
+        localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
+        executeUnlock();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
+
   function copyCommand(button, elementId) {
     const textElement = document.getElementById(elementId);
     if (!textElement) return;
 
     const textToCopy = textElement.innerText;
+    
+    navigator.clipboard.writeText(textToCopy).then(() => {
+      const label = button.querySelector('.btn-label');
+      const originalText = label ? label.innerText : 'Copiar comando';
+      
+      if (label) label.innerText = '¡Copiado!';
+      button.classList.add('bg-emerald-600');
+      button.classList.remove('bg-teal');
+      
+      // Toast notification
+      const toast = document.getElementById('copy-toast');
+      if (toast) {
+        toast.classList.remove('translate-y-16', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+      }
+      
+      setTimeout(() => {
+        if (label) label.innerText = originalText;
+        button.classList.remove('bg-emerald-600');
+        button.classList.add('bg-teal');
+      }, 2000);
 
-    navigator.clipboard
-      .writeText(textToCopy)
-      .then(() => {
-        const label = button.querySelector(".btn-label");
-        const originalText = label ? label.innerText : "Copiar comando";
-
-        if (label) label.innerText = "¡Copiado!";
-        button.classList.add("bg-emerald-600");
-        button.classList.remove("bg-teal");
-
-        // Toast notification
-        const toast = document.getElementById("copy-toast");
+      setTimeout(() => {
         if (toast) {
-          toast.classList.remove("translate-y-16", "opacity-0");
-          toast.classList.add("translate-y-0", "opacity-100");
+          toast.classList.add('translate-y-16', 'opacity-0');
+          toast.classList.remove('translate-y-0', 'opacity-100');
         }
-
-        setTimeout(() => {
-          if (label) label.innerText = originalText;
-          button.classList.remove("bg-emerald-600");
-          button.classList.add("bg-teal");
-        }, 2000);
-
-        setTimeout(() => {
-          if (toast) {
-            toast.classList.add("translate-y-16", "opacity-0");
-            toast.classList.remove("translate-y-0", "opacity-100");
-          }
-        }, 3000);
-      })
-      .catch((err) => {
-        console.error("Error al copiar:", err);
-      });
+      }, 3000);
+    }).catch(err => {
+      console.error('Error al copiar:', err);
+    });
   }
 </script>
