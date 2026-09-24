@@ -28,7 +28,7 @@ const whatsappUrl = LINKS.whatsapp;
           href={checkoutUrl}
           target="_blank"
           rel="noopener noreferrer"
-          onclick="if (window.posthog) { window.posthog.capture('curso_presentaciones_nav_buy_click', { producto: 'curso_presentaciones', precio: '35 USD' }); }"
+          onclick="if (window.posthog) { window.posthog.capture('curso_presentaciones_nav_buy_click', Object.assign({ producto: 'Curso Presentaciones', product_slug: 'curso_presentaciones', precio: '35 USD', ruta: 'ruta-comunicacion', page: '/curso-presentaciones', cta_location: 'nav' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {})); }"
           class="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black px-3.5 py-1.5 rounded-lg transition text-xs shadow-sm cursor-pointer transform hover:scale-105"
         >
           <span>Acceder al Curso (US$35)</span>
@@ -85,7 +85,7 @@ const whatsappUrl = LINKS.whatsapp;
             href={checkoutUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onclick="if (window.posthog) { window.posthog.capture('curso_presentaciones_hero_buy_click', { producto: 'curso_presentaciones', precio: '35 USD' }); }"
+            onclick="if (window.posthog) { window.posthog.capture('curso_presentaciones_hero_buy_click', Object.assign({ producto: 'Curso Presentaciones', product_slug: 'curso_presentaciones', precio: '35 USD', ruta: 'ruta-comunicacion', page: '/curso-presentaciones', cta_location: 'hero' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {})); }"
             class="inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-sm sm:text-base px-7 py-3.5 rounded-xl transition shadow-md cursor-pointer transform hover:-translate-y-0.5 w-full sm:w-auto"
           >
             <span>QUIERO APRENDER EL MÉTODO POR US$35 →</span>
@@ -762,7 +762,7 @@ const whatsappUrl = LINKS.whatsapp;
             href={checkoutUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onclick="if (window.posthog) { window.posthog.capture('curso_presentaciones_final_buy_click', { producto: 'curso_presentaciones', precio: '35 USD' }); }"
+            onclick="if (window.posthog) { window.posthog.capture('curso_presentaciones_final_buy_click', Object.assign({ producto: 'Curso Presentaciones', product_slug: 'curso_presentaciones', precio: '35 USD', ruta: 'ruta-comunicacion', page: '/curso-presentaciones', cta_location: 'final' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {})); }"
             class="inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-sm sm:text-base py-3.5 px-7 rounded-xl transition shadow-md cursor-pointer transform hover:-translate-y-0.5 w-full sm:w-auto"
           >
             <span>QUIERO APRENDER EL MÉTODO →</span>

@@ -73,10 +73,15 @@ const hotmartLink = "https://pay.hotmart.com/D96093022S?off=OFF50";
 
             <a href={hotmartLink} target="_blank" onclick="
     if (window.posthog) {
-      window.posthog.capture('ebook_comprar_click', { 
+      window.posthog.capture('ebook_comprar_click', Object.assign({ 
+        producto: 'Ebook PM Sin Bullshit',
+        product_slug: 'ebook_pm',
         precio_estimado: '110.000 COP',
-        cupon: 'OFF50'
-      });
+        cupon: 'OFF50',
+        ruta: 'ruta-pm',
+        page: '/recursos/ebook-pm',
+        cta_location: 'hero'
+      }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {}));
     }
   " class="inline-block w-full text-center bg-orange text-white px-8 py-4 rounded-xl font-bold hover:bg-orange/90 transition shadow-[0_0_20px_rgba(234,88,12,0.3)] text-lg">
               Comprar Ebook en Hotmart →
@@ -126,7 +131,7 @@ const hotmartLink = "https://pay.hotmart.com/D96093022S?off=OFF50";
       <div class="text-center py-8">
         <h3 class="text-2xl font-bold text-deep mb-4">¿Listo para ensuciarte las botas?</h3>
         <p class="text-gray-600 mb-8 max-w-xl mx-auto">Con tu código <strong>OFF50</strong> obtienes el conocimiento de más de 10 años de golpes y aprendizajes en startups a mitad de precio.</p>
-        <a href={hotmartLink} target="_blank" onclick="if (window.posthog) { window.posthog.capture('ebook_comprar_final_click', { precio_estimado: '110.000 COP', cupon: 'OFF50' }); }" class="inline-block bg-deep text-white px-10 py-4 rounded-xl font-bold hover:bg-teal transition shadow-lg">
+        <a href={hotmartLink} target="_blank" onclick="if (window.posthog) { window.posthog.capture('ebook_comprar_final_click', Object.assign({ producto: 'Ebook PM Sin Bullshit', product_slug: 'ebook_pm', precio_estimado: '110.000 COP', cupon: 'OFF50', ruta: 'ruta-pm', page: '/recursos/ebook-pm', cta_location: 'final' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {})); }" class="inline-block bg-deep text-white px-10 py-4 rounded-xl font-bold hover:bg-teal transition shadow-lg">
           Aplicar mi código OFF50 y Comprar →
         </a>
       </div>

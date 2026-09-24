@@ -102,7 +102,7 @@ import { LINKS } from "../lib/constants.js";
           >
             <!-- Tarjeta 1 -->
             <button
-              onclick="if (window.posthog) { window.posthog.capture('rutas_card_click', { ruta: 'ruta-comunicacion', titulo: 'Necesito hacer una presentación' }); } selectRoute('ruta-comunicacion')"
+              onclick="if (window.posthog) { window.posthog.capture('rutas_card_click', Object.assign({ ruta: 'ruta-comunicacion', titulo: 'Necesito hacer una presentación', page: '/rutas', cta_location: 'problem_card' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {})); } selectRoute('ruta-comunicacion')"
               class="group relative p-4 rounded-xl bg-white border border-gray-200 hover:border-teal hover:shadow-md transition-all flex flex-col justify-between text-left cursor-pointer"
             >
               <div>
@@ -133,7 +133,7 @@ import { LINKS } from "../lib/constants.js";
 
             <!-- Tarjeta 2 -->
             <button
-              onclick="if (window.posthog) { window.posthog.capture('rutas_card_click', { ruta: 'ruta-notebooklm', titulo: 'Necesito ordenar información' }); } selectRoute('ruta-notebooklm')"
+              onclick="if (window.posthog) { window.posthog.capture('rutas_card_click', Object.assign({ ruta: 'ruta-notebooklm', titulo: 'Necesito ordenar información', page: '/rutas', cta_location: 'problem_card' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {})); } selectRoute('ruta-notebooklm')"
               class="group relative p-4 rounded-xl bg-white border border-gray-200 hover:border-slate-800 hover:shadow-md transition-all flex flex-col justify-between text-left cursor-pointer"
             >
               <div>
@@ -164,7 +164,7 @@ import { LINKS } from "../lib/constants.js";
 
             <!-- Tarjeta 3 -->
             <button
-              onclick="if (window.posthog) { window.posthog.capture('rutas_card_click', { ruta: 'ruta-pm', titulo: 'Necesito trabajar mejor como PM' }); } selectRoute('ruta-pm')"
+              onclick="if (window.posthog) { window.posthog.capture('rutas_card_click', Object.assign({ ruta: 'ruta-pm', titulo: 'Necesito trabajar mejor como PM', page: '/rutas', cta_location: 'problem_card' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {})); } selectRoute('ruta-pm')"
               class="group relative p-4 rounded-xl bg-white border border-gray-200 hover:border-orange hover:shadow-md transition-all flex flex-col justify-between text-left cursor-pointer"
             >
               <div>
@@ -195,7 +195,7 @@ import { LINKS } from "../lib/constants.js";
 
             <!-- Tarjeta 4 -->
             <button
-              onclick="if (window.posthog) { window.posthog.capture('rutas_card_click', { ruta: 'ruta-empleabilidad', titulo: 'Necesito mejorar mi carrera' }); } selectRoute('ruta-empleabilidad')"
+              onclick="if (window.posthog) { window.posthog.capture('rutas_card_click', Object.assign({ ruta: 'ruta-empleabilidad', titulo: 'Necesito mejorar mi carrera', page: '/rutas', cta_location: 'problem_card' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {})); } selectRoute('ruta-empleabilidad')"
               class="group relative p-4 rounded-xl bg-white border border-gray-200 hover:border-emerald-600 hover:shadow-md transition-all flex flex-col justify-between text-left cursor-pointer"
             >
               <div>
@@ -226,7 +226,7 @@ import { LINKS } from "../lib/constants.js";
 
             <!-- Tarjeta 5 -->
             <button
-              onclick="if (window.posthog) { window.posthog.capture('rutas_card_click', { ruta: 'ruta-visual', titulo: 'Crear imágenes y videos' }); } selectRoute('ruta-visual')"
+              onclick="if (window.posthog) { window.posthog.capture('rutas_card_click', Object.assign({ ruta: 'ruta-visual', titulo: 'Crear imágenes y videos', page: '/rutas', cta_location: 'problem_card' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {})); } selectRoute('ruta-visual')"
               class="group relative p-4 rounded-xl bg-white border border-gray-200 hover:border-teal hover:shadow-md transition-all flex flex-col justify-between text-left cursor-pointer"
             >
               <div>
@@ -521,7 +521,7 @@ import { LINKS } from "../lib/constants.js";
               </div>
               <a
                 href="/bot-presentaciones"
-                onclick="if (window.posthog) { window.posthog.capture('rutas_bot_buy_click', { producto: 'bot_presentaciones', precio: '8 USD', canal: 'hotmart', ruta: 'ruta-comunicacion', posicion: 'card_bot' }); }"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_bot_buy_click', Object.assign({ producto: 'Bot Presentaciones', product: 'bot_presentaciones', product_slug: 'bot_presentaciones', precio: '8 USD', canal: 'hotmart', ruta: 'ruta-comunicacion', page: '/rutas', cta_location: 'card_bot' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {})); }"
                 class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-100 transition-colors"
               >
                 <span>Probar Bot</span>
@@ -552,7 +552,7 @@ import { LINKS } from "../lib/constants.js";
               </div>
               <a
                 href="/curso-presentaciones"
-                onclick="if (window.posthog) { window.posthog.capture('rutas_curso_buy_click', { producto: 'curso_presentaciones', precio: '35 USD', canal: 'hotmart', ruta: 'ruta-comunicacion', posicion: 'card_curso' }); }"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_curso_buy_click', Object.assign({ producto: 'Curso Presentaciones', product: 'curso_presentaciones', product_slug: 'curso_presentaciones', precio: '35 USD', canal: 'hotmart', ruta: 'ruta-comunicacion', page: '/rutas', cta_location: 'card_curso' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {})); }"
                 class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-100 transition-colors"
               >
                 <span>Ver curso</span>
@@ -713,7 +713,7 @@ import { LINKS } from "../lib/constants.js";
               </div>
               <a
                 href="/atajos-ia"
-                onclick="if (window.posthog) { window.posthog.capture('rutas_atajos_ia_buy_click', { producto: 'atajos_ia', precio: '17 USD', canal: 'hotmart', ruta: 'ruta-notebooklm', posicion: 'card_atajos_ia' }); }"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_atajos_ia_buy_click', Object.assign({ producto: 'Atajos IA', product: 'atajos_ia', product_slug: 'atajos_ia', precio: '17 USD', canal: 'hotmart', ruta: 'ruta-notebooklm', page: '/rutas', cta_location: 'card_atajos_ia' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {})); }"
                 class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-100 transition-colors"
               >
                 <span>Ver atajos</span>
@@ -883,7 +883,7 @@ import { LINKS } from "../lib/constants.js";
                 href={LINKS.ebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                onclick="if (window.posthog) { window.posthog.capture('rutas_ebook_buy_click', { producto: 'ebook_pm', precio: '53.000 COP', cupon: 'OFF50', canal: 'hotmart', ruta: 'ruta-pm', posicion: 'card_ebook' }); }"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_ebook_buy_click', Object.assign({ producto: 'Ebook PM Sin Bullshit', product: 'ebook_pm', product_slug: 'ebook_pm', precio: '53.000 COP', cupon: 'OFF50', canal: 'hotmart', ruta: 'ruta-pm', page: '/rutas', cta_location: 'card_ebook' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {})); }"
                 class="inline-flex items-center justify-center gap-1 w-full py-2 rounded-lg bg-orange text-white font-bold text-xs hover:bg-orange/90 transition-colors shadow-2xs"
               >
                 <span>Ver Ebook</span>
@@ -1186,7 +1186,7 @@ import { LINKS } from "../lib/constants.js";
               </div>
               <a
                 href="/atajos-visuales"
-                onclick="if (window.posthog) { window.posthog.capture('rutas_atajos_visuales_buy_click', { producto: 'atajos_visuales', precio: '5 USD', canal: 'hotmart', ruta: 'ruta-visual', posicion: 'card_atajos_visuales' }); }"
+                onclick="if (window.posthog) { window.posthog.capture('rutas_atajos_visuales_buy_click', Object.assign({ producto: 'Atajos Visuales', product: 'atajos_visuales', product_slug: 'atajos_visuales', precio: '5 USD', canal: 'hotmart', ruta: 'ruta-visual', page: '/rutas', cta_location: 'card_atajos_visuales' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {})); }"
                 class="inline-flex items-center justify-center gap-1 w-full py-2.5 rounded-lg bg-orange hover:bg-orange/90 text-white font-bold text-xs transition-colors shadow-2xs"
               >
                 <span>Ver Atajos Visuales ($5)</span>
@@ -1288,7 +1288,7 @@ import { LINKS } from "../lib/constants.js";
 <script is:inline>
   function selectRoute(targetRouteId) {
     if (window.posthog) {
-      window.posthog.capture("rutas_select_route", { ruta: targetRouteId });
+      window.posthog.capture("rutas_select_route", Object.assign({ ruta: targetRouteId, page: '/rutas' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {}));
     }
     filterRoutes(targetRouteId);
     const targetElement = document.getElementById(targetRouteId);
@@ -1305,7 +1305,7 @@ import { LINKS } from "../lib/constants.js";
 
   function filterRoutes(routeFilter) {
     if (window.posthog) {
-      window.posthog.capture("rutas_filter_routes", { filtro: routeFilter });
+      window.posthog.capture("rutas_filter_routes", Object.assign({ filtro: routeFilter, page: '/rutas' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {}));
     }
     const cards = document.querySelectorAll(".route-master-card");
     const tabs = document.querySelectorAll(".route-tab");

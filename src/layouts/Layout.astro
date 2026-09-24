@@ -79,6 +79,81 @@ const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
         defaults: "2026-01-30",
         person_profiles: "identified_only",
       });
+
+      // Captura y preservación de UTMs durante la sesión para atribución
+      (function () {
+        function getUtmsFromUrl() {
+          try {
+            var params = new URLSearchParams(window.location.search);
+            var utms = {};
+            var keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+            var hasUtm = false;
+            keys.forEach(function (k) {
+              var val = params.get(k);
+              if (val) {
+                utms[k] = val;
+                hasUtm = true;
+              }
+            });
+            return hasUtm ? utms : null;
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function getStoredUtms() {
+          try {
+            var stored = sessionStorage.getItem("lucirme_utm_params");
+            return stored ? JSON.parse(stored) : {};
+          } catch (e) {
+            return {};
+          }
+        }
+
+        function saveUtms(utms) {
+          try {
+            sessionStorage.setItem("lucirme_utm_params", JSON.stringify(utms));
+          } catch (e) {}
+        }
+
+        var currentUtms = getUtmsFromUrl();
+        var storedUtms = getStoredUtms();
+
+        if (currentUtms) {
+          storedUtms = Object.assign({}, storedUtms, currentUtms);
+          saveUtms(storedUtms);
+        }
+
+        var attributionProps = {};
+        if (storedUtms.utm_source) {
+          attributionProps.source = storedUtms.utm_source;
+          attributionProps.utm_source = storedUtms.utm_source;
+        }
+        if (storedUtms.utm_medium) {
+          attributionProps.medium = storedUtms.utm_medium;
+          attributionProps.utm_medium = storedUtms.utm_medium;
+        }
+        if (storedUtms.utm_campaign) {
+          attributionProps.campaign = storedUtms.utm_campaign;
+          attributionProps.utm_campaign = storedUtms.utm_campaign;
+        }
+        if (storedUtms.utm_content) {
+          attributionProps.content = storedUtms.utm_content;
+          attributionProps.utm_content = storedUtms.utm_content;
+        }
+        if (storedUtms.utm_term) {
+          attributionProps.term = storedUtms.utm_term;
+          attributionProps.utm_term = storedUtms.utm_term;
+        }
+
+        if (window.posthog && Object.keys(attributionProps).length > 0) {
+          window.posthog.register(attributionProps);
+        }
+
+        window.getLucirmeAttribution = function () {
+          return attributionProps;
+        };
+      })();
     </script>
 
     <!-- Metricool Tracking -->

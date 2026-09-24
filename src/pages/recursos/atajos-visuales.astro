@@ -68,6 +68,7 @@ export const frontmatter = {
                   href={LINKS.atajos_visuales} 
                   target="_blank" 
                   rel="noopener noreferrer" 
+                  onclick="if (window.posthog) { window.posthog.capture('atajos_visuales_hero_buy_click', Object.assign({ producto: 'Atajos Visuales', product_slug: 'atajos_visuales', precio: '5 USD', ruta: 'ruta-visual', page: '/atajos-visuales', cta_location: 'hero' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {})); }"
                   class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-orange hover:bg-orange/90 text-white font-bold text-xs transition-all shadow-2xs whitespace-nowrap"
                 >
                   <span>Quiero Atajos Visuales ($5)</span>
@@ -641,6 +642,7 @@ export const frontmatter = {
             href={LINKS.atajos_visuales} 
             target="_blank" 
             rel="noopener noreferrer" 
+            onclick="if (window.posthog) { window.posthog.capture('atajos_visuales_price_buy_click', Object.assign({ producto: 'Atajos Visuales', product_slug: 'atajos_visuales', precio: '5 USD', ruta: 'ruta-visual', page: '/atajos-visuales', cta_location: 'price_card' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {})); }"
             class="w-full block py-3.5 px-6 rounded-xl bg-orange hover:bg-orange/90 text-white font-bold text-sm transition-all shadow-2xs"
           >
             Quiero Atajos Visuales ($5) →
@@ -715,6 +717,7 @@ export const frontmatter = {
             href={LINKS.atajos_visuales} 
             target="_blank" 
             rel="noopener noreferrer" 
+            onclick="if (window.posthog) { window.posthog.capture('atajos_visuales_final_buy_click', Object.assign({ producto: 'Atajos Visuales', product_slug: 'atajos_visuales', precio: '5 USD', ruta: 'ruta-visual', page: '/atajos-visuales', cta_location: 'final' }, window.getLucirmeAttribution ? window.getLucirmeAttribution() : {})); }"
             class="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-orange hover:bg-orange/90 text-white font-bold text-sm transition-all shadow-2xs"
           >
             <span>Quiero los 75 comandos ($5) →</span>
