@@ -1,0 +1,461 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ActionHub from "../../components/ActionHub.astro";
+import RedesSociales from "../../components/RedesSociales.astro";
+import { LINKS } from "../../lib/constants.js";
+
+const whatsappUrl = LINKS.whatsapp || "https://wa.me/573053046180";
+---
+
+<Layout 
+  title="Resumen Estratégico & Plan de Automatización Contable: Caro Ceballos | LuciRMe AI"
+  description="Resumen general de la sesión estratégica de IA y automatización contable para Caro Ceballos y su equipo. Diagnóstico de procesos, herramientas recomendadas (Claude, NotebookLM, ChatGPT, WhatsApp Bot) y guía paso a paso."
+>
+
+  <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
+  <nav class="bg-white/90 backdrop-blur-md border-b border-gray-200 px-6 py-4 sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto flex justify-between items-center gap-4">
+      <a href="/" class="text-xs md:text-sm font-bold text-gray-500 hover:text-teal transition flex items-center gap-1">
+        ← Volver a LuciRMe AI
+      </a>
+      <div class="flex items-center gap-2">
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center font-bold bg-teal text-white rounded-xl py-2 px-3.5 hover:bg-tealHover transition text-xs text-center cursor-pointer shadow-xs gap-1.5">
+          <span>💬</span>
+          <span>Contactar a Pablo</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER / HERO SECTION -->
+  <header class="bg-[#0F172A] text-white py-16 md:py-20 px-6 relative overflow-hidden border-b border-slate-800">
+    <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#0D9488_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
+    <div class="absolute -right-20 -top-20 w-96 h-96 bg-teal/15 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <!-- EYEBROW -->
+      <div class="inline-flex items-center gap-2 bg-teal/15 text-teal text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6 border border-teal/30">
+        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span>
+        Encuentro Estratégico & Diagnóstico Contable
+      </div>
+
+      <!-- H1 -->
+      <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight text-white">
+        Caro Ceballos · <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal via-teal-300 to-amber-300">Automatización Contable con IA</span>
+      </h1>
+
+      <!-- SUBTÍTULO -->
+      <p class="text-lg md:text-xl text-gray-300 font-medium max-w-3xl mx-auto mb-8 leading-relaxed">
+        Resumen de la sesión, diagnóstico de procesos, herramientas clave y guía paso a paso para transformar la operación contable.
+      </p>
+
+      <!-- MANTRA CARD -->
+      <div class="bg-gradient-to-r from-teal/20 via-white/10 to-amber-500/20 border border-teal/40 rounded-2xl p-5 md:p-6 mb-8 max-w-2xl mx-auto shadow-xl backdrop-blur-xs">
+        <span class="text-xs uppercase tracking-widest text-teal font-black block mb-1">Impacto de la Transformación</span>
+        <blockquote class="text-lg md:text-2xl font-black text-white italic">
+          "Pasar de la era prehistórica a descubrir el enorme impacto de la IA en tareas que antes tomaban horas."
+        </blockquote>
+      </div>
+
+      <!-- META BADGES -->
+      <div class="inline-flex flex-wrap justify-center items-center gap-3 md:gap-4 bg-white/5 border border-white/10 rounded-2xl px-5 py-3 text-xs md:text-sm text-gray-300 max-w-3xl">
+        <span class="flex items-center gap-1.5">
+          👤 <strong>Participantes:</strong> Caro Ceballos & Pablo Ríos
+        </span>
+        <span class="text-gray-500 hidden sm:inline">•</span>
+        <span class="flex items-center gap-1.5">
+          📊 <strong>Área:</strong> Gestión & Procesos Contables
+        </span>
+        <span class="text-gray-500 hidden sm:inline">•</span>
+        <span class="flex items-center gap-1.5">
+          🤖 <strong>Enfoque:</strong> IA & Automatización a Medida
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-12 space-y-16">
+
+    <!-- RESUMEN GENERAL DE LA SESIÓN -->
+    <section class="bg-white border border-gray-200 rounded-3xl p-6 md:p-8 shadow-xs space-y-6">
+      <div class="flex items-center gap-3 border-b border-gray-100 pb-4">
+        <div class="w-10 h-10 rounded-2xl bg-teal/15 text-teal flex items-center justify-center font-bold text-xl">
+          📌
+        </div>
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold text-[#0F172A]">Resumen General de la Sesión</h2>
+          <p class="text-xs text-gray-500">Encuentro estratégico de optimización contable</p>
+        </div>
+      </div>
+
+      <p class="text-base text-gray-700 leading-relaxed">
+        La sesión consiste en un encuentro estratégico entre <strong>Pablo</strong> (consultor y mentor en inteligencia artificial) y <strong>Caro Ceballos</strong> (profesional del área contable que lidera un equipo de trabajo junto a dos colegas). El propósito central de la conversación es explorar cómo la inteligencia artificial puede optimizar los procesos contables manuales, evaluar el estado actual del equipo de Caro en su proceso de aprendizaje y definir oportunidades de automatización.
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-6 pt-2">
+        <!-- Trayectoria y propuesta de Pablo -->
+        <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="text-lg">💡</span>
+            <h3 class="text-sm font-bold uppercase tracking-wider text-teal">Trayectoria y propuesta de Pablo</h3>
+          </div>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Pablo cuenta con más de 13 años de experiencia en tecnología y desde 2021 trabaja con IA. Su modelo de trabajo actual se enfoca en mentorías personalizadas para dar autonomía a las personas y empresas, guiándolas en tiempo real mientras el cliente opera su propia computadora. Además, desarrolla soluciones de automatización a medida.
+          </p>
+        </div>
+
+        <!-- Situación actual del equipo de Caro -->
+        <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="text-lg">👥</span>
+            <h3 class="text-sm font-bold uppercase tracking-wider text-teal">Situación actual del equipo de Caro</h3>
+          </div>
+          <p class="text-sm text-gray-600 leading-relaxed">
+            Caro trabaja con una socia y un colega muy hábil y autodidacta. Actualmente están tomando un curso de automatización contable con "Aldía Contador". Caro destaca que pasaron de estar en la "era prehistórica" a descubrir el enorme impacto de la IA en tareas que antes tomaban horas.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRINCIPALES CUELLOS DE BOTELLA CONTABLES IDENTIFICADOS -->
+    <section class="bg-white border border-gray-200 rounded-3xl p-6 md:p-8 shadow-xs space-y-6">
+      <div class="flex items-center gap-3 border-b border-gray-100 pb-4">
+        <div class="w-10 h-10 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center font-bold text-xl">
+          ⚠️
+        </div>
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold text-[#0F172A]">Principales Cuellos de Botella Contables Identificados</h2>
+          <p class="text-xs text-gray-500">Puntos críticos operativos a intervenir con IA</p>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        <!-- Cuello 1 -->
+        <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl space-y-2">
+          <div class="flex items-center gap-2 font-bold text-gray-900 text-base">
+            <span class="text-teal font-black">1.</span>
+            <span>Facturación electrónica y Resolución 85 de la DIAN</span>
+          </div>
+          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+            Proceso manual de descarga de facturas desde el correo, archivado, renombrado y generación de los 3 acuses de recibo requeridos por la DIAN.
+          </p>
+        </div>
+
+        <!-- Cuello 2 -->
+        <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl space-y-2">
+          <div class="flex items-center gap-2 font-bold text-gray-900 text-base">
+            <span class="text-teal font-black">2.</span>
+            <span>Conciliaciones bancarias y de la DIAN</span>
+          </div>
+          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+            Conversión de extractos bancarios en PDF a Excel, cruce de registros contables frente a lo reportado en la DIAN e identificación de faltantes o diferencias en montos.
+          </p>
+        </div>
+
+        <!-- Cuello 3 -->
+        <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl space-y-2">
+          <div class="flex items-center gap-2 font-bold text-gray-900 text-base">
+            <span class="text-teal font-black">3.</span>
+            <span>Liquidación de retención en la fuente</span>
+          </div>
+          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+            Verificación de autorretenedores, regímenes tributarios y conceptos de costo por cada factura.
+          </p>
+        </div>
+
+        <!-- Cuello 4 -->
+        <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl space-y-2">
+          <div class="flex items-center gap-2 font-bold text-gray-900 text-base">
+            <span class="text-teal font-black">4.</span>
+            <span>Errores de clasificación en auxiliares contables</span>
+          </div>
+          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+            Problemas con la calidad del registro contable, donde los auxiliares asignan gastos a cuentas erróneas (ej. asignar gasolina a servicios eléctricos) o abusan de cuentas genéricas como "pregúntale a tu contador" en Siigo o la cuenta de "otros".
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTELIGENCIAS ARTIFICIALES MENCIONADAS -->
+    <section class="bg-white border border-gray-200 rounded-3xl p-6 md:p-8 shadow-xs space-y-6">
+      <div class="flex items-center gap-3 border-b border-gray-100 pb-4">
+        <div class="w-10 h-10 rounded-2xl bg-teal/15 text-teal flex items-center justify-center font-bold text-xl">
+          🤖
+        </div>
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold text-[#0F172A]">Inteligencias Artificiales Mencionadas</h2>
+          <p class="text-xs text-gray-500">Herramientas analizadas durante la sesión y su aplicación</p>
+        </div>
+      </div>
+
+      <p class="text-sm text-gray-600">A continuación se detallan las herramientas de IA analizadas durante la sesión:</p>
+
+      <div class="space-y-6">
+        <!-- 1. ChatGPT -->
+        <div class="border border-gray-200 rounded-2xl p-5 hover:border-teal/50 transition bg-slate-50/50">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <h3 class="text-lg font-bold text-[#0F172A] flex items-center gap-2">
+              <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-2.5 py-1 rounded-lg">1</span>
+              ChatGPT
+            </h3>
+            <a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" class="text-xs text-teal font-bold hover:underline flex items-center gap-1">
+              https://chatgpt.com ↗
+            </a>
+          </div>
+          <div class="space-y-2 text-sm text-gray-700">
+            <p><strong>Uso en la sesión:</strong> Mencionado por Pablo como uno de los modelos estándar con los que ayuda a personas y empresas a resolver situaciones operativas y de negocio.</p>
+            <p class="bg-emerald-50 text-emerald-900 border border-emerald-200 p-3 rounded-xl">
+              <strong>Recomendación:</strong> Utilizarlo como un asistente generalista para la resolución de dudas, redacción y consultas rápidas de propósito general.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2. Claude -->
+        <div class="border border-gray-200 rounded-2xl p-5 hover:border-teal/50 transition bg-slate-50/50">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <h3 class="text-lg font-bold text-[#0F172A] flex items-center gap-2">
+              <span class="bg-amber-100 text-amber-800 text-xs font-black px-2.5 py-1 rounded-lg">2</span>
+              Claude <span class="text-xs text-gray-400 font-normal">(mencionado como "Cloud / Claud")</span>
+            </h3>
+            <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="text-xs text-teal font-bold hover:underline flex items-center gap-1">
+              https://claude.ai ↗
+            </a>
+          </div>
+          <div class="space-y-3 text-sm text-gray-700">
+            <div>
+              <strong class="block mb-1 text-gray-900">Uso en la sesión:</strong>
+              <ul class="list-disc list-inside space-y-1 text-gray-600 pl-1">
+                <li>Parametrización e integración de programas y procesos contables.</li>
+                <li>Creación de macros automáticas para procesar y liquidar la retención en la fuente durante la noche.</li>
+                <li>Conexión con Google Workspace (Gmail, Google Drive y Google Calendar) desde su panel de configuración.</li>
+                <li>Anclaje a la barra del navegador para interactuar directamente con páginas web como la de la DIAN y automatizar la descarga de facturas.</li>
+              </ul>
+            </div>
+            <p class="bg-amber-50 text-amber-900 border border-amber-200 p-3 rounded-xl">
+              <strong>Recomendación:</strong> Adquirir la cuenta de pago (Claude Pro) para habilitar la vinculación nativa con cuentas de Google, utilizar extensiones y evitar limitaciones de permisos en la ejecución de macros complejas.
+            </p>
+          </div>
+        </div>
+
+        <!-- 3. Gemini Notebook (NotebookLM) -->
+        <div class="border border-gray-200 rounded-2xl p-5 hover:border-teal/50 transition bg-slate-50/50">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <h3 class="text-lg font-bold text-[#0F172A] flex items-center gap-2">
+              <span class="bg-blue-100 text-blue-800 text-xs font-black px-2.5 py-1 rounded-lg">3</span>
+              Gemini Notebook (NotebookLM)
+            </h3>
+            <a href="https://notebooklm.google.com" target="_blank" rel="noopener noreferrer" class="text-xs text-teal font-bold hover:underline flex items-center gap-1">
+              https://notebooklm.google.com ↗
+            </a>
+          </div>
+          <div class="space-y-3 text-sm text-gray-700">
+            <div>
+              <strong class="block mb-1 text-gray-900">Uso en la sesión:</strong>
+              <ul class="list-disc list-inside space-y-1 text-gray-600 pl-1">
+                <li>Herramienta orientada exclusivamente al aprendizaje y estudio acelerado.</li>
+                <li>Permite crear cuadernos e ingresar fuentes diversas: transcripciones de sesiones de llamadas, documentos PDF, archivos de audio e incluso videos de YouTube de larga duración (como un video de 6 horas sobre marca personal).</li>
+                <li>Permite realizar preguntas en texto sobre el material cargado para obtener explicaciones y corregir errores de configuración.</li>
+              </ul>
+            </div>
+            <p class="bg-blue-50 text-blue-900 border border-blue-200 p-3 rounded-xl">
+              <strong>Recomendación:</strong> Crear un cuaderno exclusivo para el curso de "Aldía Contador" cargando todos los PDFs, grabaciones y transcripciones de las clases. Sirve como tutor interactivo para solucionar fallas al configurar prompts en Claude, pero no debe usarse para ejecutar la conciliación bancaria directamente.
+            </p>
+          </div>
+        </div>
+
+        <!-- 4. Sistema de Automatización por WhatsApp -->
+        <div class="border border-gray-200 rounded-2xl p-5 hover:border-teal/50 transition bg-slate-50/50">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <h3 class="text-lg font-bold text-[#0F172A] flex items-center gap-2">
+              <span class="bg-purple-100 text-purple-800 text-xs font-black px-2.5 py-1 rounded-lg">4</span>
+              Sistema de Automatización por WhatsApp <span class="text-xs text-teal font-semibold">(Desarrollo Propio)</span>
+            </h3>
+            <span class="text-xs text-gray-500 font-medium bg-gray-100 px-2.5 py-1 rounded-full">Desarrollo a medida por Pablo y su equipo</span>
+          </div>
+          <div class="space-y-3 text-sm text-gray-700">
+            <div>
+              <strong class="block mb-1 text-gray-900">Uso en la sesión:</strong>
+              <ul class="list-disc list-inside space-y-1 text-gray-600 pl-1">
+                <li>Lee fotos de facturas enviadas a través de WhatsApp.</li>
+                <li>Extrae los datos automáticamente, genera un porcentaje de confianza sobre la imputación contable y clasifica los registros en un tablero visual (dashboard) y en un archivo de Excel.</li>
+                <li>Marca alertas con colores (verde, amarillo, naranja) si detecta sospechas en la asignación de cuentas contables.</li>
+              </ul>
+            </div>
+            <p class="bg-purple-50 text-purple-900 border border-purple-200 p-3 rounded-xl">
+              <strong>Recomendación:</strong> Excelente solución para agilizar el trabajo de auxiliares administrativos e ingresar datos de ventas o gastos de forma inmediata desde dispositivos móviles sin procesos de digitalización manual.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUÍA PASO A PASO DEL PROCESO DE AUTOMATIZACIÓN CONTABLE -->
+    <section class="bg-white border border-gray-200 rounded-3xl p-6 md:p-8 shadow-xs space-y-8">
+      <div class="flex items-center gap-3 border-b border-gray-100 pb-4">
+        <div class="w-10 h-10 rounded-2xl bg-teal/15 text-teal flex items-center justify-center font-bold text-xl">
+          🚀
+        </div>
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold text-[#0F172A]">Guía Paso a Paso del Proceso de Automatización Contable</h2>
+          <p class="text-xs text-gray-500">Flujo de trabajo guiado para aplicar lo discutido en la sesión</p>
+        </div>
+      </div>
+
+      <p class="text-sm text-gray-600">Para aplicar lo discutido en la sesión de manera estructurada, sigue este flujo de trabajo guiado:</p>
+
+      <div class="space-y-8 relative before:absolute before:inset-0 before:left-4 md:before:left-5 before:w-0.5 before:bg-teal/30">
+
+        <!-- PASO 1 -->
+        <div class="relative pl-10 md:pl-12 space-y-3">
+          <div class="absolute left-0 top-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-teal text-white font-black flex items-center justify-center text-sm shadow-md">
+            1
+          </div>
+          <h3 class="text-lg font-bold text-[#0F172A]">
+            Paso 1: Configuración de la Central de Aprendizaje en NotebookLM
+          </h3>
+          <ul class="space-y-2 text-sm text-gray-700 bg-slate-50 border border-slate-200 p-4 rounded-2xl">
+            <li class="flex items-start gap-2">
+              <span class="text-teal font-bold">•</span>
+              <span>Ingresa a <a href="https://notebooklm.google.com" target="_blank" class="text-teal font-semibold hover:underline">notebooklm.google.com</a> e inicia sesión con tu cuenta de Google.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-teal font-bold">•</span>
+              <span>Crea un nuevo cuaderno titulado <strong>"Curso Aldía Contador"</strong> o la temática que estés estudiando.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-teal font-bold">•</span>
+              <span><strong>Carga las fuentes de estudio:</strong> sube los PDFs del curso, los enlaces de videos de YouTube y las transcripciones de las sesiones grabadas.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-teal font-bold">•</span>
+              <span>Utiliza el chat de NotebookLM como un tutor personalizado para formular preguntas sobre el material y solicitar correcciones de prompts cuando algo no funcione en Claude.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- PASO 2 -->
+        <div class="relative pl-10 md:pl-12 space-y-3">
+          <div class="absolute left-0 top-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-teal text-white font-black flex items-center justify-center text-sm shadow-md">
+            2
+          </div>
+          <h3 class="text-lg font-bold text-[#0F172A]">
+            Paso 2: Integración de Claude con las Herramientas de Trabajo
+          </h3>
+          <ul class="space-y-2 text-sm text-gray-700 bg-slate-50 border border-slate-200 p-4 rounded-2xl">
+            <li class="flex items-start gap-2">
+              <span class="text-teal font-bold">•</span>
+              <span>Accede a <a href="https://claude.ai" target="_blank" class="text-teal font-semibold hover:underline">claude.ai</a> y verifica contar con la suscripción de pago (Claude Pro).</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-teal font-bold">•</span>
+              <span>Dirígete a la sección de Configuración (Settings) e integra tu cuenta de Google para conectar Gmail, Google Drive y Google Calendar.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-teal font-bold">•</span>
+              <span>Ancla la pestaña de Claude en el lateral o barra de herramientas del navegador web para tener acceso directo mientras navegas.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- PASO 3 -->
+        <div class="relative pl-10 md:pl-12 space-y-3">
+          <div class="absolute left-0 top-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-teal text-white font-black flex items-center justify-center text-sm shadow-md">
+            3
+          </div>
+          <h3 class="text-lg font-bold text-[#0F172A]">
+            Paso 3: Automatización de la Facturación Electrónica y Resolución 85
+          </h3>
+          <ul class="space-y-2 text-sm text-gray-700 bg-slate-50 border border-slate-200 p-4 rounded-2xl">
+            <li class="flex items-start gap-2">
+              <span class="text-teal font-bold">•</span>
+              <span><strong>Captura desde el correo:</strong> Utiliza instrucciones conectadas a Gmail para que identifique los correos con facturas adjuntas, descargue los archivos, los renombre según la regla establecida y los organice automáticamente en una carpeta de Google Drive.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-teal font-bold">•</span>
+              <span><strong>Procesamiento de acuses en la DIAN:</strong> Utiliza la barra lateral de Claude conectada al portal de la DIAN para ejecutar la descarga masiva y los tres clics de la Resolución 85 (acuses de recibo).</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- PASO 4 -->
+        <div class="relative pl-10 md:pl-12 space-y-3">
+          <div class="absolute left-0 top-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-teal text-white font-black flex items-center justify-center text-sm shadow-md">
+            4
+          </div>
+          <h3 class="text-lg font-bold text-[#0F172A]">
+            Paso 4: Ejecución de Conciliaciones y Detección de Errores
+          </h3>
+          <ul class="space-y-2 text-sm text-gray-700 bg-slate-50 border border-slate-200 p-4 rounded-2xl">
+            <li class="flex items-start gap-2">
+              <span class="text-teal font-bold">•</span>
+              <span><strong>Conversión y cruce:</strong> Carga el extracto bancario en PDF a Claude y solicita convertirlo a estructura de Excel.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-teal font-bold">•</span>
+              <span><strong>Cruce Dian vs. Contabilidad:</strong> Sube el reporte descargado de la DIAN y el reporte del software contable (ej. Alegra o Siigo).</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-teal font-bold">•</span>
+              <span><strong>Generación de alertas:</strong> Configura la instrucción para que la IA devuelva un archivo de Excel consolidado que señale en rojo los registros faltantes o las diferencias en valores.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-teal font-bold">•</span>
+              <span><strong>Verificación de cuentas contables:</strong> Añade una regla para que la IA traiga la cuenta contable asignada y detecte incoherencias (como facturas de estaciones de servicio registradas en arriendos o en la cuenta "pregúntale a tu contador").</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- PASO 5 -->
+        <div class="relative pl-10 md:pl-12 space-y-3">
+          <div class="absolute left-0 top-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-teal text-white font-black flex items-center justify-center text-sm shadow-md">
+            5
+          </div>
+          <h3 class="text-lg font-bold text-[#0F172A]">
+            Paso 5: Liquidación Automatizada de Retención en la Fuente
+          </h3>
+          <ul class="space-y-2 text-sm text-gray-700 bg-slate-50 border border-slate-200 p-4 rounded-2xl">
+            <li class="flex items-start gap-2">
+              <span class="text-teal font-bold">•</span>
+              <span>Diseña una macro en Claude que contenga las reglas de retención (identificación de autorretenedores, régimen simple y conceptos de costo).</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-teal font-bold">•</span>
+              <span>Ingresa la información consolidada y deja corriendo la instrucción durante la noche para que procese los volúmenes de datos sin consumir tiempo de trabajo diario.</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION SECTION -->
+    <section class="bg-gradient-to-r from-[#0F172A] to-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12 text-center text-white space-y-6 shadow-2xl relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#0D9488_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+      
+      <span class="inline-block bg-teal/20 text-teal text-xs font-extrabold uppercase tracking-widest px-4 py-1.5 rounded-full border border-teal/30">
+        ¿Listo para dar el siguiente paso?
+      </span>
+
+      <h2 class="text-2xl md:text-4xl font-black text-white max-w-2xl mx-auto leading-tight">
+        Avanza en tu proceso de automatización contable
+      </h2>
+
+      <p class="text-gray-300 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+        Si tienes dudas al implementar esta guía o deseas profundizar en mentorías de acompañamiento directo o desarrollos a medida, coordinemos vía WhatsApp.
+      </p>
+
+      <div class="pt-2 flex justify-center">
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-bold bg-teal hover:bg-tealHover text-white px-8 py-4 rounded-2xl text-base shadow-lg transition transform hover:-translate-y-0.5 cursor-pointer">
+          <span>💬</span>
+          <span>Escribir a Pablo por WhatsApp</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ACTION HUB & REDES -->
+    <ActionHub />
+    <RedesSociales />
+
+  </main>
+
+</Layout>
