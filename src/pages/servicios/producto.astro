@@ -1,0 +1,939 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { LINKS } from "../../lib/constants.js";
+
+const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
+const ctaGeneral = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, estuve viendo la landing de IA para Producto y quiero agendar una conversación.")}`;
+const ctaRevisarProceso = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero revisar mi proceso de Producto con IA.")}`;
+const ctaProfesional = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, soy profesional de producto y quiero mejorar mi forma de trabajar con IA.")}`;
+const ctaLider = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, soy líder / head de producto y quiero incorporar IA en mi equipo.")}`;
+const ctaCardProcess = (nombre: string) => `${whatsappBase}?text=${encodeURIComponent(`Hola Pablo, quiero transformar el proceso de ${nombre} en mi equipo de Producto.`)}`;
+---
+
+<Layout 
+  title="IA para Producto | LuciRMe AI — Acompañamiento e Implementación"
+  description="Ayudamos a profesionales y equipos de Producto a incorporar IA en procesos reales: research, feedback, documentación, análisis, reporting, reuniones y presentaciones."
+>
+
+  <!-- NAVEGACIÓN STICKY HEADER -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <!-- LOGO -->
+      <a href="/" class="flex items-center gap-2 group">
+        <span class="font-extrabold text-xl tracking-tight text-deep group-hover:text-teal transition-colors">
+          lucirme<span class="text-teal">.com</span>
+        </span>
+        <span class="hidden sm:inline-block text-[10px] uppercase font-bold tracking-widest bg-teal/10 text-teal px-2 py-0.5 rounded-full border border-teal/20">
+          Producto
+        </span>
+      </a>
+
+      <!-- NAVEGACIÓN DESKTOP -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
+        <a href="#que-hacemos" class="hover:text-teal transition-colors">Qué hacemos</a>
+        <a href="#para-quien" class="hover:text-teal transition-colors">Para quién</a>
+        <a href="#como-trabajamos" class="hover:text-teal transition-colors">Cómo trabajamos</a>
+        <a href="#sobre-mi" class="hover:text-teal transition-colors">Sobre mí</a>
+      </nav>
+
+      <!-- CTA CABECERA -->
+      <div class="flex items-center gap-3">
+        <a 
+          href={ctaGeneral} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="hidden sm:inline-flex items-center justify-center gap-2 bg-teal text-white font-bold text-xs md:text-sm px-4 py-2.5 rounded-xl hover:bg-teal/90 transition shadow-xs hover:shadow-md"
+        >
+          <span>💬</span>
+          <span>Agendar conversación</span>
+        </a>
+
+        <!-- HAMBURGER BUTTON (MOBILE) -->
+        <button 
+          id="product-mobile-menu-btn"
+          aria-label="Toggle Navigation Menu"
+          class="md:hidden p-2 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-100 transition"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path id="menu-icon-bars" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            <path id="menu-icon-close" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- MENÚ DESPLEGABLE MOBILE -->
+    <div id="product-mobile-menu" class="hidden md:hidden border-t border-gray-100 bg-white px-4 py-4 space-y-3 shadow-lg">
+      <a href="#que-hacemos" class="block py-2 text-sm font-semibold text-gray-700 hover:text-teal">Qué hacemos</a>
+      <a href="#para-quien" class="block py-2 text-sm font-semibold text-gray-700 hover:text-teal">Para quién</a>
+      <a href="#como-trabajamos" class="block py-2 text-sm font-semibold text-gray-700 hover:text-teal">Cómo trabajamos</a>
+      <a href="#sobre-mi" class="block py-2 text-sm font-semibold text-gray-700 hover:text-teal">Sobre mí</a>
+      <a 
+        href={ctaGeneral} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="flex items-center justify-center gap-2 bg-teal text-white font-bold text-sm py-3 rounded-xl hover:bg-teal/90 transition w-full mt-2"
+      >
+        <span>💬</span>
+        <span>Agendar conversación</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="overflow-x-hidden">
+
+    <!-- HERO SECTION -->
+    <section class="relative bg-gradient-to-b from-[#0F172A] via-[#131F37] to-[#0F172A] text-white py-16 sm:py-24 px-4 sm:px-6 overflow-hidden">
+      <!-- Decoración de fondo -->
+      <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#0D9488_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+      <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-teal/15 blur-3xl pointer-events-none rounded-full"></div>
+
+      <div class="max-w-4xl mx-auto text-center relative z-10 space-y-8">
+        
+        <!-- ETIQUETA PEQUEÑA -->
+        <div class="inline-flex items-center gap-2 bg-teal/15 text-teal text-xs font-extrabold uppercase tracking-widest px-4 py-1.5 rounded-full border border-teal/30 backdrop-blur-xs">
+          <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span>
+          IA PARA PRODUCTO
+        </div>
+
+        <!-- H1 HEADLINE -->
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-black leading-tight sm:leading-tight text-white tracking-tight">
+          Tu equipo de Producto tiene suficiente trabajo.<br class="hidden sm:block"/>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal via-teal-300 to-amber-300">
+            No debería perder tiempo en trabajo que puede estar mejor diseñado.
+          </span>
+        </h1>
+
+        <!-- SUBTÍTULO -->
+        <p class="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium">
+          Ayudo a profesionales y equipos de Producto a incorporar IA en procesos reales: 
+          <strong class="text-white font-semibold">research, feedback, documentación, análisis, reporting, reuniones y presentaciones.</strong>
+        </p>
+
+        <!-- CTA PRINCIPAL -->
+        <div class="pt-2 flex flex-col items-center gap-3">
+          <a 
+            href={ctaRevisarProceso}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-3 bg-orange text-white text-base sm:text-lg font-black px-8 py-4 rounded-2xl hover:bg-orange/90 transition transform hover:-translate-y-0.5 shadow-xl hover:shadow-orange/20 w-full sm:w-auto"
+          >
+            <span>⚡</span>
+            <span>Quiero revisar mi proceso</span>
+            <span>→</span>
+          </a>
+
+          <!-- MICROSEÑAL DEBAJO DEL CTA -->
+          <p class="text-xs sm:text-sm text-gray-400 max-w-md mx-auto leading-normal">
+            No necesitas saber qué herramienta usar.<br/>
+            <strong class="text-gray-200 font-semibold">Llegas con el problema. Lo revisamos juntos.</strong>
+          </p>
+        </div>
+
+        <!-- TEXTO SECUNDARIO / PROCESO FLUIDO -->
+        <div class="pt-6 border-t border-slate-800/80 max-w-3xl mx-auto">
+          <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm font-semibold text-gray-400">
+            <span class="text-teal font-bold">Diagnóstico</span>
+            <span>→</span>
+            <span class="text-teal font-bold">Diseño</span>
+            <span>→</span>
+            <span class="text-teal font-bold">Implementación</span>
+            <span>→</span>
+            <span class="text-teal font-bold">Capacitación</span>
+            <span>→</span>
+            <span class="text-teal font-bold">Adopción</span>
+            <span>→</span>
+            <span class="text-amber-400 font-bold">Autonomía</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BLOQUE DE ELECCIÓN (PARA QUIÉN) -->
+    <section id="para-quien" class="py-16 sm:py-24 px-4 sm:px-6 bg-white border-b border-gray-100">
+      <div class="max-w-5xl mx-auto space-y-12">
+        
+        <div class="text-center space-y-3">
+          <span class="text-xs font-bold uppercase tracking-widest text-teal">PERFILES</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-deep">¿Qué estás buscando?</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
+          
+          <!-- CARD 1: PROFESIONALES -->
+          <a 
+            href={ctaProfesional}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group relative flex flex-col justify-between bg-[#F8FAFC] border-2 border-gray-200 hover:border-teal rounded-3xl p-6 sm:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+          >
+            <div class="space-y-4">
+              <div class="w-14 h-14 bg-teal/10 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
+                👤
+              </div>
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-teal">Para profesionales</span>
+                <h3 class="text-2xl font-bold text-deep group-hover:text-teal transition-colors mt-1">
+                  Quiero mejorar mi forma de trabajar
+                </h3>
+              </div>
+              <p class="text-xs font-semibold text-gray-500 bg-white px-3 py-1.5 rounded-lg border border-gray-200 inline-block">
+                PMs, Product Designers, Product Ops, consultores y profesionales de Producto.
+              </p>
+              <p class="text-sm text-gray-600 leading-relaxed pt-2">
+                Aprende a identificar oportunidades, construir tus propios flujos y trabajar con IA de forma autónoma.
+              </p>
+            </div>
+
+            <div class="pt-8 mt-6 border-t border-gray-200/80 flex items-center justify-between text-teal font-bold text-sm group-hover:gap-2 transition-all">
+              <span>Soy profesional</span>
+              <span class="text-lg group-hover:translate-x-1 transition-transform">→</span>
+            </div>
+          </a>
+
+          <!-- CARD 2: LÍDERES / EQUIPOS -->
+          <a 
+            href={ctaLider}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group relative flex flex-col justify-between bg-[#F8FAFC] border-2 border-gray-200 hover:border-orange/80 rounded-3xl p-6 sm:p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+          >
+            <div class="space-y-4">
+              <div class="w-14 h-14 bg-orange/10 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform">
+                👥
+              </div>
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-orange">Para equipos</span>
+                <h3 class="text-2xl font-bold text-deep group-hover:text-orange transition-colors mt-1">
+                  Quiero mejorar la forma de trabajar de mi equipo
+                </h3>
+              </div>
+              <p class="text-xs font-semibold text-gray-500 bg-white px-3 py-1.5 rounded-lg border border-gray-200 inline-block">
+                Heads of Product, líderes y equipos de Producto.
+              </p>
+              <p class="text-sm text-gray-600 leading-relaxed pt-2">
+                Diseñamos e implementamos flujos de IA sobre procesos reales del equipo y acompañamos su adopción.
+              </p>
+            </div>
+
+            <div class="pt-8 mt-6 border-t border-gray-200/80 flex items-center justify-between text-orange font-bold text-sm group-hover:gap-2 transition-all">
+              <span>Soy líder / equipo</span>
+              <span class="text-lg group-hover:translate-x-1 transition-transform">→</span>
+            </div>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BLOQUE PROBLEMA -->
+    <section class="py-16 sm:py-24 px-4 sm:px-6 bg-[#F8FAFC] border-b border-gray-200">
+      <div class="max-w-4xl mx-auto space-y-10 text-center">
+        
+        <div class="space-y-3">
+          <span class="text-xs font-bold uppercase tracking-widest text-red-600 bg-red-50 border border-red-200 px-3 py-1 rounded-full">
+            EL PROBLEMA
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-deep">
+            El trabajo de Producto no termina en el roadmap.
+          </h2>
+        </div>
+
+        <!-- GRID DE TAREAS PERDIDAS -->
+        <div class="flex flex-wrap justify-center gap-2.5 sm:gap-3 max-w-3xl mx-auto">
+          {['Entrevistas', 'Tickets', 'Feedback', 'Reuniones', 'Métricas', 'Documentación', 'Reportes', 'Presentaciones', 'Investigación'].map((task) => (
+            <span class="bg-white border border-gray-300 text-gray-700 font-semibold text-xs sm:text-sm px-4 py-2 rounded-xl shadow-2xs hover:border-teal transition-colors">
+              {task}
+            </span>
+          ))}
+        </div>
+
+        <!-- DEBAJO -->
+        <div class="bg-white border border-gray-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-6 max-w-3xl mx-auto text-left sm:text-center">
+          <h3 class="text-xl sm:text-2xl font-bold text-deep leading-snug">
+            El trabajo importante muchas veces está rodeado de trabajo manual.
+          </h3>
+
+          <!-- ACCIONES MANUALES -->
+          <div class="flex flex-wrap justify-center gap-2 text-xs sm:text-sm text-gray-600 font-mono">
+            <span class="bg-gray-100 px-2.5 py-1 rounded">Leer.</span>
+            <span class="bg-gray-100 px-2.5 py-1 rounded">Buscar.</span>
+            <span class="bg-gray-100 px-2.5 py-1 rounded">Copiar.</span>
+            <span class="bg-gray-100 px-2.5 py-1 rounded">Clasificar.</span>
+            <span class="bg-gray-100 px-2.5 py-1 rounded">Comparar.</span>
+            <span class="bg-gray-100 px-2.5 py-1 rounded">Resumir.</span>
+            <span class="bg-gray-100 px-2.5 py-1 rounded">Actualizar.</span>
+            <span class="bg-gray-100 px-2.5 py-1 rounded">Volver a explicar.</span>
+          </div>
+
+          <div class="pt-4 border-t border-gray-100">
+            <p class="text-lg sm:text-xl font-extrabold text-teal">
+              Ahí es donde buscamos oportunidades.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BLOQUE DE OPORTUNIDADES (QUÉ PODEMOS HACER) -->
+    <section id="que-hacemos" class="py-16 sm:py-24 px-4 sm:px-6 bg-white border-b border-gray-200">
+      <div class="max-w-5xl mx-auto space-y-12">
+        
+        <div class="text-center space-y-3">
+          <span class="text-xs font-bold uppercase tracking-widest text-teal">QUÉ PODEMOS HACER</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-deep">
+            Algunos procesos que podemos transformar
+          </h2>
+          <p class="text-sm text-gray-500 max-w-xl mx-auto">
+            Haz clic en cualquier proceso para desplegar el flujo exacto (Entrada → IA → Persona → Salida).
+          </p>
+        </div>
+
+        <!-- GRID DE 7 CARDS EXPANDIBLES -->
+        <div class="grid md:grid-cols-2 gap-4 sm:gap-6">
+          
+          <!-- CARD 1 -->
+          <div class="product-card border border-gray-200 rounded-2xl bg-[#F8FAFC] overflow-hidden transition-all duration-200 hover:border-teal">
+            <button class="product-card-header w-full text-left p-5 flex items-start justify-between gap-4 cursor-pointer focus:outline-none">
+              <div class="flex items-start gap-3.5">
+                <span class="text-2xl p-2 bg-white rounded-xl border border-gray-200 shadow-2xs">🔍</span>
+                <div>
+                  <h3 class="text-lg font-bold text-deep">Research → Insights</h3>
+                  <p class="text-xs text-gray-600 mt-1">
+                    Entrevistas, transcripciones y notas → <strong class="text-deep">temas + patrones + evidencias + insights</strong>
+                  </p>
+                </div>
+              </div>
+              <span class="card-chevron text-gray-400 font-bold text-lg transition-transform duration-200 mt-1">↓</span>
+            </button>
+            <div class="card-content hidden border-t border-gray-200 bg-white p-5 space-y-4 text-xs sm:text-sm">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
+                  <span class="text-[10px] font-bold text-gray-400 uppercase block mb-1">📥 Entrada</span>
+                  <p class="text-gray-700 font-medium">Entrevistas + transcripciones</p>
+                </div>
+                <div class="bg-teal/5 p-3 rounded-xl border border-teal/20">
+                  <span class="text-[10px] font-bold text-teal uppercase block mb-1">🤖 IA</span>
+                  <p class="text-teal-900 font-medium">Agrupa temas, encuentra patrones y extrae evidencias</p>
+                </div>
+                <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                  <span class="text-[10px] font-bold text-amber-600 uppercase block mb-1">👤 Persona</span>
+                  <p class="text-amber-900 font-medium">Valida e interpreta</p>
+                </div>
+                <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200">
+                  <span class="text-[10px] font-bold text-emerald-600 uppercase block mb-1">🎯 Salida</span>
+                  <p class="text-emerald-900 font-bold">Insights estructurados</p>
+                </div>
+              </div>
+              <a href={ctaCardProcess("Research a Insights")} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold text-teal hover:underline pt-1">
+                <span>Quiero implementar este flujo en mi equipo</span> →
+              </a>
+            </div>
+          </div>
+
+          <!-- CARD 2 -->
+          <div class="product-card border border-gray-200 rounded-2xl bg-[#F8FAFC] overflow-hidden transition-all duration-200 hover:border-teal">
+            <button class="product-card-header w-full text-left p-5 flex items-start justify-between gap-4 cursor-pointer focus:outline-none">
+              <div class="flex items-start gap-3.5">
+                <span class="text-2xl p-2 bg-white rounded-xl border border-gray-200 shadow-2xs">💬</span>
+                <div>
+                  <h3 class="text-lg font-bold text-deep">Feedback → Patrones</h3>
+                  <p class="text-xs text-gray-600 mt-1">
+                    Tickets, soporte, ventas y conversaciones → <strong class="text-deep">clasificación + tendencias + problemas</strong>
+                  </p>
+                </div>
+              </div>
+              <span class="card-chevron text-gray-400 font-bold text-lg transition-transform duration-200 mt-1">↓</span>
+            </button>
+            <div class="card-content hidden border-t border-gray-200 bg-white p-5 space-y-4 text-xs sm:text-sm">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
+                  <span class="text-[10px] font-bold text-gray-400 uppercase block mb-1">📥 Entrada</span>
+                  <p class="text-gray-700 font-medium">Tickets + feedback de soporte y ventas</p>
+                </div>
+                <div class="bg-teal/5 p-3 rounded-xl border border-teal/20">
+                  <span class="text-[10px] font-bold text-teal uppercase block mb-1">🤖 IA</span>
+                  <p class="text-teal-900 font-medium">Clasifica por temas, identifica severidad y tendencias</p>
+                </div>
+                <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                  <span class="text-[10px] font-bold text-amber-600 uppercase block mb-1">👤 Persona</span>
+                  <p class="text-amber-900 font-medium">Prioriza y decide accionables</p>
+                </div>
+                <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200">
+                  <span class="text-[10px] font-bold text-emerald-600 uppercase block mb-1">🎯 Salida</span>
+                  <p class="text-emerald-900 font-bold">Matriz de problemas recurrentes</p>
+                </div>
+              </div>
+              <a href={ctaCardProcess("Feedback a Patrones")} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold text-teal hover:underline pt-1">
+                <span>Quiero implementar este flujo en mi equipo</span> →
+              </a>
+            </div>
+          </div>
+
+          <!-- CARD 3 -->
+          <div class="product-card border border-gray-200 rounded-2xl bg-[#F8FAFC] overflow-hidden transition-all duration-200 hover:border-teal">
+            <button class="product-card-header w-full text-left p-5 flex items-start justify-between gap-4 cursor-pointer focus:outline-none">
+              <div class="flex items-start gap-3.5">
+                <span class="text-2xl p-2 bg-white rounded-xl border border-gray-200 shadow-2xs">🎙️</span>
+                <div>
+                  <h3 class="text-lg font-bold text-deep">Reuniones → Acciones</h3>
+                  <p class="text-xs text-gray-600 mt-1">
+                    Transcripción → <strong class="text-deep">decisiones + tareas + documentación</strong>
+                  </p>
+                </div>
+              </div>
+              <span class="card-chevron text-gray-400 font-bold text-lg transition-transform duration-200 mt-1">↓</span>
+            </button>
+            <div class="card-content hidden border-t border-gray-200 bg-white p-5 space-y-4 text-xs sm:text-sm">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
+                  <span class="text-[10px] font-bold text-gray-400 uppercase block mb-1">📥 Entrada</span>
+                  <p class="text-gray-700 font-medium">Transcripciones de Syncs / 1:1 / Discovery</p>
+                </div>
+                <div class="bg-teal/5 p-3 rounded-xl border border-teal/20">
+                  <span class="text-[10px] font-bold text-teal uppercase block mb-1">🤖 IA</span>
+                  <p class="text-teal-900 font-medium">Extrae acuerdos, compromisos y redacta minuta</p>
+                </div>
+                <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                  <span class="text-[10px] font-bold text-amber-600 uppercase block mb-1">👤 Persona</span>
+                  <p class="text-amber-900 font-medium">Confirma responsables y fechas</p>
+                </div>
+                <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200">
+                  <span class="text-[10px] font-bold text-emerald-600 uppercase block mb-1">🎯 Salida</span>
+                  <p class="text-emerald-900 font-bold">Minuta ejecutiva y tareas asignadas</p>
+                </div>
+              </div>
+              <a href={ctaCardProcess("Reuniones a Acciones")} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold text-teal hover:underline pt-1">
+                <span>Quiero implementar este flujo en mi equipo</span> →
+              </a>
+            </div>
+          </div>
+
+          <!-- CARD 4 -->
+          <div class="product-card border border-gray-200 rounded-2xl bg-[#F8FAFC] overflow-hidden transition-all duration-200 hover:border-teal">
+            <button class="product-card-header w-full text-left p-5 flex items-start justify-between gap-4 cursor-pointer focus:outline-none">
+              <div class="flex items-start gap-3.5">
+                <span class="text-2xl p-2 bg-white rounded-xl border border-gray-200 shadow-2xs">📊</span>
+                <div>
+                  <h3 class="text-lg font-bold text-deep">Datos → Reportes</h3>
+                  <p class="text-xs text-gray-600 mt-1">
+                    Métricas + contexto → <strong class="text-deep">análisis + narrativa + presentación</strong>
+                  </p>
+                </div>
+              </div>
+              <span class="card-chevron text-gray-400 font-bold text-lg transition-transform duration-200 mt-1">↓</span>
+            </button>
+            <div class="card-content hidden border-t border-gray-200 bg-white p-5 space-y-4 text-xs sm:text-sm">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
+                  <span class="text-[10px] font-bold text-gray-400 uppercase block mb-1">📥 Entrada</span>
+                  <p class="text-gray-700 font-medium">Métricas de producto + contexto del sprint</p>
+                </div>
+                <div class="bg-teal/5 p-3 rounded-xl border border-teal/20">
+                  <span class="text-[10px] font-bold text-teal uppercase block mb-1">🤖 IA</span>
+                  <p class="text-teal-900 font-medium">Redacta narrativa de progreso, highlights y bloqueos</p>
+                </div>
+                <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                  <span class="text-[10px] font-bold text-amber-600 uppercase block mb-1">👤 Persona</span>
+                  <p class="text-amber-900 font-medium">Ajusta tono ejecutivo</p>
+                </div>
+                <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200">
+                  <span class="text-[10px] font-bold text-emerald-600 uppercase block mb-1">🎯 Salida</span>
+                  <p class="text-emerald-900 font-bold">Reporte de impacto o presentación lista</p>
+                </div>
+              </div>
+              <a href={ctaCardProcess("Datos a Reportes")} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold text-teal hover:underline pt-1">
+                <span>Quiero implementar este flujo en mi equipo</span> →
+              </a>
+            </div>
+          </div>
+
+          <!-- CARD 5 -->
+          <div class="product-card border border-gray-200 rounded-2xl bg-[#F8FAFC] overflow-hidden transition-all duration-200 hover:border-teal">
+            <button class="product-card-header w-full text-left p-5 flex items-start justify-between gap-4 cursor-pointer focus:outline-none">
+              <div class="flex items-start gap-3.5">
+                <span class="text-2xl p-2 bg-white rounded-xl border border-gray-200 shadow-2xs">📚</span>
+                <div>
+                  <h3 class="text-lg font-bold text-deep">Información → Respuestas</h3>
+                  <p class="text-xs text-gray-600 mt-1">
+                    PDFs + Excel + documentos + tickets → <strong class="text-deep">respuestas estructuradas y trazables</strong>
+                  </p>
+                </div>
+              </div>
+              <span class="card-chevron text-gray-400 font-bold text-lg transition-transform duration-200 mt-1">↓</span>
+            </button>
+            <div class="card-content hidden border-t border-gray-200 bg-white p-5 space-y-4 text-xs sm:text-sm">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
+                  <span class="text-[10px] font-bold text-gray-400 uppercase block mb-1">📥 Entrada</span>
+                  <p class="text-gray-700 font-medium">Documentación interna dispersa y especificaciones</p>
+                </div>
+                <div class="bg-teal/5 p-3 rounded-xl border border-teal/20">
+                  <span class="text-[10px] font-bold text-teal uppercase block mb-1">🤖 IA</span>
+                  <p class="text-teal-900 font-medium">Sintetiza respuestas citando las fuentes exactas</p>
+                </div>
+                <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                  <span class="text-[10px] font-bold text-amber-600 uppercase block mb-1">👤 Persona</span>
+                  <p class="text-amber-900 font-medium">Verifica aplicabilidad al caso</p>
+                </div>
+                <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200">
+                  <span class="text-[10px] font-bold text-emerald-600 uppercase block mb-1">🎯 Salida</span>
+                  <p class="text-emerald-900 font-bold">Respuestas claras e inmediatas</p>
+                </div>
+              </div>
+              <a href={ctaCardProcess("Informacion a Respuestas")} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold text-teal hover:underline pt-1">
+                <span>Quiero implementar este flujo en mi equipo</span> →
+              </a>
+            </div>
+          </div>
+
+          <!-- CARD 6 -->
+          <div class="product-card border border-gray-200 rounded-2xl bg-[#F8FAFC] overflow-hidden transition-all duration-200 hover:border-teal">
+            <button class="product-card-header w-full text-left p-5 flex items-start justify-between gap-4 cursor-pointer focus:outline-none">
+              <div class="flex items-start gap-3.5">
+                <span class="text-2xl p-2 bg-white rounded-xl border border-gray-200 shadow-2xs">📄</span>
+                <div>
+                  <h3 class="text-lg font-bold text-deep">Documentación → Sistema</h3>
+                  <p class="text-xs text-gray-600 mt-1">
+                    PRDs + discovery + decisiones → <strong class="text-deep">documentación más rápida y consistente</strong>
+                  </p>
+                </div>
+              </div>
+              <span class="card-chevron text-gray-400 font-bold text-lg transition-transform duration-200 mt-1">↓</span>
+            </button>
+            <div class="card-content hidden border-t border-gray-200 bg-white p-5 space-y-4 text-xs sm:text-sm">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
+                  <span class="text-[10px] font-bold text-gray-400 uppercase block mb-1">📥 Entrada</span>
+                  <p class="text-gray-700 font-medium">Ideas, notas de discovery y requisitos</p>
+                </div>
+                <div class="bg-teal/5 p-3 rounded-xl border border-teal/20">
+                  <span class="text-[10px] font-bold text-teal uppercase block mb-1">🤖 IA</span>
+                  <p class="text-teal-900 font-medium">Estructura PRDs, criterios de aceptación y user stories</p>
+                </div>
+                <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                  <span class="text-[10px] font-bold text-amber-600 uppercase block mb-1">👤 Persona</span>
+                  <p class="text-amber-900 font-medium">Define alcance final y edge cases</p>
+                </div>
+                <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200">
+                  <span class="text-[10px] font-bold text-emerald-600 uppercase block mb-1">🎯 Salida</span>
+                  <p class="text-emerald-900 font-bold">PRD listo para desarrollo</p>
+                </div>
+              </div>
+              <a href={ctaCardProcess("Documentacion a Sistema")} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold text-teal hover:underline pt-1">
+                <span>Quiero implementar este flujo en mi equipo</span> →
+              </a>
+            </div>
+          </div>
+
+          <!-- CARD 7 (ANCHO COMPLETO EN DESKTOP) -->
+          <div class="product-card md:col-span-2 border border-gray-200 rounded-2xl bg-[#F8FAFC] overflow-hidden transition-all duration-200 hover:border-teal">
+            <button class="product-card-header w-full text-left p-5 flex items-start justify-between gap-4 cursor-pointer focus:outline-none">
+              <div class="flex items-start gap-3.5">
+                <span class="text-2xl p-2 bg-white rounded-xl border border-gray-200 shadow-2xs">⚡</span>
+                <div>
+                  <h3 class="text-lg font-bold text-deep">Procesos repetitivos → Flujos</h3>
+                  <p class="text-xs text-gray-600 mt-1">
+                    Tareas que ocurren cada semana → <strong class="text-deep">menos trabajo manual + mayor capacidad</strong>
+                  </p>
+                </div>
+              </div>
+              <span class="card-chevron text-gray-400 font-bold text-lg transition-transform duration-200 mt-1">↓</span>
+            </button>
+            <div class="card-content hidden border-t border-gray-200 bg-white p-5 space-y-4 text-xs sm:text-sm">
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="bg-gray-50 p-3 rounded-xl border border-gray-100">
+                  <span class="text-[10px] font-bold text-gray-400 uppercase block mb-1">📥 Entrada</span>
+                  <p class="text-gray-700 font-medium">Rutinas semanales (release notes, changelogs, status)</p>
+                </div>
+                <div class="bg-teal/5 p-3 rounded-xl border border-teal/20">
+                  <span class="text-[10px] font-bold text-teal uppercase block mb-1">🤖 IA</span>
+                  <p class="text-teal-900 font-medium">Automatiza generación de borradores</p>
+                </div>
+                <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                  <span class="text-[10px] font-bold text-amber-600 uppercase block mb-1">👤 Persona</span>
+                  <p class="text-amber-900 font-medium">Revisa y aprueba</p>
+                </div>
+                <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200">
+                  <span class="text-[10px] font-bold text-emerald-600 uppercase block mb-1">🎯 Salida</span>
+                  <p class="text-emerald-900 font-bold">Flujo automatizado continuo</p>
+                </div>
+              </div>
+              <a href={ctaCardProcess("Procesos repetitivos a Flujos")} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold text-teal hover:underline pt-1">
+                <span>Quiero implementar este flujo en mi equipo</span> →
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BLOQUE CENTRAL (FONDO DEEP) -->
+    <section class="py-16 sm:py-24 px-4 sm:px-6 bg-[#0F172A] text-white border-b border-slate-800 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#0D9488_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
+
+      <div class="max-w-5xl mx-auto space-y-12 relative z-10 text-center">
+        
+        <div class="space-y-3">
+          <span class="text-xs font-extrabold uppercase tracking-widest text-teal bg-teal/15 px-4 py-1.5 rounded-full border border-teal/30">
+            NO EMPEZAMOS POR LA HERRAMIENTA
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-black text-white">
+            Primero entendemos el proceso.
+          </h2>
+        </div>
+
+        <!-- SECUENCIA VISUAL -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-left">
+          
+          <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-5 space-y-2 relative">
+            <span class="text-2xl font-black text-teal font-mono">01</span>
+            <h3 class="text-base font-bold text-white uppercase tracking-wider">ENTRA</h3>
+            <p class="text-xs text-gray-300 leading-relaxed">
+              ¿Qué información recibe el equipo? (Entrevistas, datos, tickets, requerimientos).
+            </p>
+          </div>
+
+          <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-5 space-y-2 relative">
+            <span class="text-2xl font-black text-teal font-mono">02</span>
+            <h3 class="text-base font-bold text-white uppercase tracking-wider">SE PROCESA</h3>
+            <p class="text-xs text-gray-300 leading-relaxed">
+              ¿Qué parte requiere criterio humano y qué parte es trabajo puramente manual?
+            </p>
+          </div>
+
+          <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-5 space-y-2 relative">
+            <span class="text-2xl font-black text-amber-400 font-mono">03</span>
+            <h3 class="text-base font-bold text-white uppercase tracking-wider">DISEÑO</h3>
+            <p class="text-xs text-gray-300 leading-relaxed">
+              ¿Cómo entra la IA a potenciar el trabajo sin reemplazar la revisión estratégica?
+            </p>
+          </div>
+
+          <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-5 space-y-2 relative">
+            <span class="text-2xl font-black text-amber-400 font-mono">04</span>
+            <h3 class="text-base font-bold text-white uppercase tracking-wider">ADOPCIÓN</h3>
+            <p class="text-xs text-gray-300 leading-relaxed">
+              ¿Cómo aseguramos que el equipo realmente lo use y se vuelva 100% autónomo?
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- METODOLOGÍA (CÓMO TRABAJAMOS) -->
+    <section id="como-trabajamos" class="py-16 sm:py-24 px-4 sm:px-6 bg-white border-b border-gray-200">
+      <div class="max-w-5xl mx-auto space-y-12">
+        
+        <div class="text-center space-y-4 max-w-3xl mx-auto">
+          <span class="text-xs font-bold uppercase tracking-widest text-teal">METODOLOGÍA</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-deep">
+            Acompañamiento hasta la autonomía
+          </h2>
+          
+          <div class="bg-teal/5 border-2 border-teal/20 rounded-2xl p-6 text-base sm:text-lg font-semibold text-deep leading-relaxed text-left sm:text-center">
+            "No entrego una guía. No configuro una herramienta y me voy. Acompaño al profesional o equipo en vivo, sobre sus proyectos reales, hasta que no me necesite más."
+          </div>
+        </div>
+
+        <!-- 5 ETAPAS -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <div class="bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 space-y-3">
+            <span class="text-xs font-black text-teal font-mono bg-teal/10 px-2.5 py-1 rounded-md">01</span>
+            <h3 class="text-lg font-bold text-deep">Diagnóstico</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              Mapeamos el flujo actual, identificamos cuellos de botella y elegimos los procesos de mayor impacto para intervenir.
+            </p>
+          </div>
+
+          <div class="bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 space-y-3">
+            <span class="text-xs font-black text-teal font-mono bg-teal/10 px-2.5 py-1 rounded-md">02</span>
+            <h3 class="text-lg font-bold text-deep">Diseño del flujo</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              Definimos qué hace la IA, qué revisa la persona y cómo se conecta sin fricción con las herramientas actuales del equipo.
+            </p>
+          </div>
+
+          <div class="bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 space-y-3">
+            <span class="text-xs font-black text-teal font-mono bg-teal/10 px-2.5 py-1 rounded-md">03</span>
+            <h3 class="text-lg font-bold text-deep">Implementación en vivo</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              Construimos las soluciones trabajando juntos sobre casos, documentos y datos de proyectos reales.
+            </p>
+          </div>
+
+          <div class="bg-[#F8FAFC] border border-gray-200 rounded-2xl p-6 space-y-3">
+            <span class="text-xs font-black text-teal font-mono bg-teal/10 px-2.5 py-1 rounded-md">04</span>
+            <h3 class="text-lg font-bold text-deep">Capacitación y Adopción</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              El equipo aprende operando. Ajustamos prompts y flujos según el uso diario y el feedback continuo.
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-br from-amber-50 to-orange/10 border-2 border-amber-300 rounded-2xl p-6 space-y-3 sm:col-span-2 lg:col-span-1">
+            <span class="text-xs font-black text-orange font-mono bg-orange/10 px-2.5 py-1 rounded-md">05</span>
+            <h3 class="text-lg font-bold text-deep">Autonomía Total</h3>
+            <p class="text-xs text-gray-700 leading-relaxed">
+              El equipo domina la metodología, mantiene sus asistentes y puede iterar o crear nuevos flujos por su cuenta.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SOBRE MÍ (PABLO) -->
+    <section id="sobre-mi" class="py-16 sm:py-24 px-4 sm:px-6 bg-[#F8FAFC] border-b border-gray-200">
+      <div class="max-w-4xl mx-auto bg-white border border-gray-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-8">
+        
+        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+          <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-slate-900 flex items-center justify-center text-3xl text-white font-black shrink-0 border-4 border-teal/20 shadow-md">
+            PR
+          </div>
+          <div class="space-y-1">
+            <span class="text-xs font-bold uppercase tracking-widest text-teal">SOBRE MÍ</span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-deep">Pablo Ríos</h2>
+            <p class="text-sm font-semibold text-gray-600">
+              Consultor y Mentor en Inteligencia Artificial
+            </p>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+          
+          <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 flex items-start gap-3">
+            <span class="text-xl">🚀</span>
+            <div>
+              <strong class="text-deep font-bold block mb-0.5">+13 años de experiencia</strong>
+              <p class="text-gray-600">En tecnología, desarrollo de software y productos digitales.</p>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 flex items-start gap-3">
+            <span class="text-xl">🧠</span>
+            <div>
+              <strong class="text-deep font-bold block mb-0.5">Desde 2021 en IA</strong>
+              <p class="text-gray-600">Diseñando e implementando soluciones prácticas de IA en proyectos reales.</p>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 flex items-start gap-3">
+            <span class="text-xl">🎯</span>
+            <div>
+              <strong class="text-deep font-bold block mb-0.5">Enfoque 100% práctico</strong>
+              <p class="text-gray-600">Sin vende-humos ni teorias vacías. Construimos flujos que ahorran horas reales.</p>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 flex items-start gap-3">
+            <span class="text-xl">⚡</span>
+            <div>
+              <strong class="text-deep font-bold block mb-0.5">Acompañamiento en directo</strong>
+              <p class="text-gray-600">Guiando en tiempo real mientras el cliente opera su propia computadora.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- FILOSOFÍA -->
+        <blockquote class="bg-teal/5 border-l-4 border-teal p-4 rounded-r-xl text-xs sm:text-sm font-medium text-deep italic">
+          "La IA no reemplaza el criterio de Producto; elimina el trabajo tedioso para potenciar el pensamiento estratégico."
+        </blockquote>
+
+      </div>
+    </section>
+
+    <!-- PREGUNTAS FRECUENTES (FAQ) -->
+    <section class="py-16 sm:py-24 px-4 sm:px-6 bg-white border-b border-gray-200">
+      <div class="max-w-4xl mx-auto space-y-10">
+        
+        <div class="text-center space-y-3">
+          <span class="text-xs font-bold uppercase tracking-widest text-teal">DUDAS FRECUENTES</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-deep">Preguntas Frecuentes</h2>
+        </div>
+
+        <div class="space-y-4">
+          
+          <div class="faq-item border border-gray-200 rounded-2xl bg-[#F8FAFC] overflow-hidden">
+            <button class="faq-toggle w-full text-left p-5 flex justify-between items-center gap-4 font-bold text-deep text-sm sm:text-base cursor-pointer focus:outline-none">
+              <span>¿Necesitamos saber de programación o tener conocimientos previos de IA?</span>
+              <span class="faq-chevron text-gray-400 font-bold transition-transform duration-200">↓</span>
+            </button>
+            <div class="faq-answer hidden px-5 pb-5 pt-0 text-xs sm:text-sm text-gray-600 leading-relaxed border-t border-gray-200/60 mt-1">
+              No. Trabajamos con interfaces en lenguaje natural y herramientas no-code/low-code accesibles para cualquier perfil de Producto.
+            </div>
+          </div>
+
+          <div class="faq-item border border-gray-200 rounded-2xl bg-[#F8FAFC] overflow-hidden">
+            <button class="faq-toggle w-full text-left p-5 flex justify-between items-center gap-4 font-bold text-deep text-sm sm:text-base cursor-pointer focus:outline-none">
+              <span>¿Sustituye nuestras herramientas actuales (Jira, Notion, Figma, Slack)?</span>
+              <span class="faq-chevron text-gray-400 font-bold transition-transform duration-200">↓</span>
+            </button>
+            <div class="faq-answer hidden px-5 pb-5 pt-0 text-xs sm:text-sm text-gray-600 leading-relaxed border-t border-gray-200/60 mt-1">
+              No. La IA se integra en los flujos existentes donde ya trabaja tu equipo para evitar fricción y acelerar lo que ya hacen.
+            </div>
+          </div>
+
+          <div class="faq-item border border-gray-200 rounded-2xl bg-[#F8FAFC] overflow-hidden">
+            <button class="faq-toggle w-full text-left p-5 flex justify-between items-center gap-4 font-bold text-deep text-sm sm:text-base cursor-pointer focus:outline-none">
+              <span>¿Cuánto dura un proceso de acompañamiento?</span>
+              <span class="faq-chevron text-gray-400 font-bold transition-transform duration-200">↓</span>
+            </button>
+            <div class="faq-answer hidden px-5 pb-5 pt-0 text-xs sm:text-sm text-gray-600 leading-relaxed border-t border-gray-200/60 mt-1">
+              Varía según el alcance: desde sesiones intensivas de diagnóstico/diseño de 1 a 2 semanas, hasta programas de 4 a 8 semanas con acompañamiento continuo.
+            </div>
+          </div>
+
+          <div class="faq-item border border-gray-200 rounded-2xl bg-[#F8FAFC] overflow-hidden">
+            <button class="faq-toggle w-full text-left p-5 flex justify-between items-center gap-4 font-bold text-deep text-sm sm:text-base cursor-pointer focus:outline-none">
+              <span>¿Cómo garantizamos la seguridad de los datos de la empresa?</span>
+              <span class="faq-chevron text-gray-400 font-bold transition-transform duration-200">↓</span>
+            </button>
+            <div class="faq-answer hidden px-5 pb-5 pt-0 text-xs sm:text-sm text-gray-600 leading-relaxed border-t border-gray-200/60 mt-1">
+              Trabajamos bajo protocolos de privacidad estrictos, utilizando entornos corporativos con IA empresarial que garantizan que los modelos no se entrenan con tus datos.
+            </div>
+          </div>
+
+          <div class="faq-item border border-gray-200 rounded-2xl bg-[#F8FAFC] overflow-hidden">
+            <button class="faq-toggle w-full text-left p-5 flex justify-between items-center gap-4 font-bold text-deep text-sm sm:text-base cursor-pointer focus:outline-none">
+              <span>¿Qué diferencia hay entre este servicio y un curso grabado?</span>
+              <span class="faq-chevron text-gray-400 font-bold transition-transform duration-200">↓</span>
+            </button>
+            <div class="faq-answer hidden px-5 pb-5 pt-0 text-xs sm:text-sm text-gray-600 leading-relaxed border-t border-gray-200/60 mt-1">
+              Aquí no ves vídeos teóricos. Resolvemos tus problemas reales en tiempo real sobre tus propios archivos y herramientas, acompañándote hasta que seas 100% autónomo.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA FINAL (WHATSAPP PRINCIPAL) -->
+    <section class="py-20 sm:py-28 px-4 sm:px-6 bg-gradient-to-br from-[#0F172A] via-slate-900 to-[#0F172A] text-white text-center relative overflow-hidden">
+      <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#0D9488_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+
+      <div class="max-w-3xl mx-auto space-y-8 relative z-10">
+        
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight">
+          ¿Tienes un proceso de Producto que te quita demasiado tiempo?
+        </h2>
+
+        <p class="text-base sm:text-xl text-gray-300 font-medium max-w-2xl mx-auto leading-relaxed">
+          Hablemos 20 minutos. Lo revisamos juntos, sin compromiso, y vemos si tiene sentido trabajarlo.
+        </p>
+
+        <div class="pt-2 flex flex-col items-center gap-4">
+          <a 
+            href={ctaRevisarProceso}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-3 bg-emerald-500 text-slate-950 text-lg sm:text-xl font-black px-10 py-5 rounded-2xl hover:bg-emerald-400 transition transform hover:-translate-y-1 shadow-2xl hover:shadow-emerald-500/20 w-full sm:w-auto"
+          >
+            <span>💬</span>
+            <span>Hablar por WhatsApp con Pablo</span>
+          </a>
+
+          <p class="text-xs sm:text-sm text-gray-400">
+            Sin presentaciones de ventas agresivas. Directo a tu problema real.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- JAVASCRIPT DE INTERACTIVIDAD (MOBILE MENU, EXPANDABLE CARDS, FAQ) -->
+  <script is:inline>
+    // 1. Mobile Menu Toggle
+    const mobileBtn = document.getElementById('product-mobile-menu-btn');
+    const mobileMenu = document.getElementById('product-mobile-menu');
+    const iconBars = document.getElementById('menu-icon-bars');
+    const iconClose = document.getElementById('menu-icon-close');
+
+    if (mobileBtn && mobileMenu) {
+      mobileBtn.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        if (isHidden) {
+          mobileMenu.classList.remove('hidden');
+          iconBars.classList.add('hidden');
+          iconClose.classList.remove('hidden');
+        } else {
+          mobileMenu.classList.add('hidden');
+          iconBars.classList.remove('hidden');
+          iconClose.classList.add('hidden');
+        }
+      });
+    }
+
+    // 2. Expandable Opportunity Cards
+    document.querySelectorAll('.product-card').forEach((card) => {
+      const header = card.querySelector('.product-card-header');
+      const content = card.querySelector('.card-content');
+      const chevron = card.querySelector('.card-chevron');
+
+      if (header && content) {
+        header.addEventListener('click', () => {
+          const isHidden = content.classList.contains('hidden');
+          
+          // Opcional: cerrar otras
+          document.querySelectorAll('.product-card').forEach((otherCard) => {
+            if (otherCard !== card) {
+              otherCard.querySelector('.card-content')?.classList.add('hidden');
+              const otherChevron = otherCard.querySelector('.card-chevron');
+              if (otherChevron) otherChevron.style.transform = 'rotate(0deg)';
+            }
+          });
+
+          if (isHidden) {
+            content.classList.remove('hidden');
+            if (chevron) chevron.style.transform = 'rotate(180deg)';
+          } else {
+            content.classList.add('hidden');
+            if (chevron) chevron.style.transform = 'rotate(0deg)';
+          }
+        });
+      }
+    });
+
+    // 3. FAQ Toggle
+    document.querySelectorAll('.faq-item').forEach((item) => {
+      const toggle = item.querySelector('.faq-toggle');
+      const answer = item.querySelector('.faq-answer');
+      const chevron = item.querySelector('.faq-chevron');
+
+      if (toggle && answer) {
+        toggle.addEventListener('click', () => {
+          const isHidden = answer.classList.contains('hidden');
+          
+          document.querySelectorAll('.faq-item').forEach((otherItem) => {
+            if (otherItem !== item) {
+              otherItem.querySelector('.faq-answer')?.classList.add('hidden');
+              const otherChevron = otherItem.querySelector('.faq-chevron');
+              if (otherChevron) otherChevron.style.transform = 'rotate(0deg)';
+            }
+          });
+
+          if (isHidden) {
+            answer.classList.remove('hidden');
+            if (chevron) chevron.style.transform = 'rotate(180deg)';
+          } else {
+            answer.classList.add('hidden');
+            if (chevron) chevron.style.transform = 'rotate(0deg)';
+          }
+        });
+      }
+    });
+  </script>
+
+</Layout>
