@@ -10,7 +10,7 @@ const { title } = Astro.props;
 
 const locals = Astro.locals as any;
 const auth = locals.auth;
-const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
+const userId = typeof auth === "function" ? auth().userId : auth?.userId;
 ---
 
 <!doctype html>
@@ -83,7 +83,18 @@ const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
 
     <!-- Metricool Tracking -->
     <script is:inline>
-      function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"b40d37da63c5f2b8924b135ee89e46e6"})});
+      function loadScript(a) {
+        var b = document.getElementsByTagName("head")[0],
+          c = document.createElement("script");
+        ((c.type = "text/javascript"),
+          (c.src = "https://tracker.metricool.com/resources/be.js"),
+          (c.onreadystatechange = a),
+          (c.onload = a),
+          b.appendChild(c));
+      }
+      loadScript(function () {
+        beTracker.t({ hash: "b40d37da63c5f2b8924b135ee89e46e6" });
+      });
     </script>
   </head>
 
@@ -156,23 +167,28 @@ const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
             >
               <a
                 href="/rutas#ruta-comunicacion"
-                class="block text-gray-500 hover:text-teal font-medium">01. Comunicación</a
+                class="block text-gray-500 hover:text-teal font-medium"
+                >01. Comunicación</a
               >
               <a
                 href="/rutas#ruta-pm"
-                class="block text-gray-500 hover:text-teal font-medium">02. Product Mgmt</a
+                class="block text-gray-500 hover:text-teal font-medium"
+                >02. Product Mgmt</a
               >
               <a
                 href="/rutas#ruta-notebooklm"
-                class="block text-gray-500 hover:text-teal font-medium">03. NotebookLM</a
+                class="block text-gray-500 hover:text-teal font-medium"
+                >03. NotebookLM</a
               >
               <a
                 href="/rutas#ruta-empleabilidad"
-                class="block text-gray-500 hover:text-teal font-medium">04. Empleabilidad</a
+                class="block text-gray-500 hover:text-teal font-medium"
+                >04. Empleabilidad</a
               >
               <a
                 href="/rutas#ruta-visual"
-                class="block text-gray-500 hover:text-teal font-medium">05. Imágenes & Video</a
+                class="block text-gray-500 hover:text-teal font-medium"
+                >05. Imágenes & Video</a
               >
             </div>
           </div>
@@ -393,20 +409,31 @@ const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
       class="flex-grow flex flex-col min-h-screen w-full pl-12 transition-all duration-200"
     >
       <!-- MINIHEADER DE PROMOCIÓN (Curso: De "No Tengo Idea" a Presentación Completa) -->
-      <div id="miniheader-curso-presentaciones" class="bg-gradient-to-r from-[#0F172A] via-[#1E293B] to-[#0F172A] text-white text-xs px-4 py-2 border-b border-white/10 flex items-center justify-between gap-3 z-50">
-        <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-center sm:justify-between gap-2 w-full text-center sm:text-left">
+      <div
+        id="miniheader-curso-presentaciones"
+        class="bg-gradient-to-r from-[#0F172A] via-[#1E293B] to-[#0F172A] text-white text-xs px-4 py-2 border-b border-white/10 flex items-center justify-between gap-3 z-50"
+      >
+        <div
+          class="max-w-6xl mx-auto flex flex-wrap items-center justify-center sm:justify-between gap-2 w-full text-center sm:text-left"
+        >
           <div class="flex items-center justify-center gap-2">
-            <span class="bg-amber-500 text-slate-950 text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full animate-pulse shrink-0">
+            <span
+              class="bg-amber-500 text-slate-950 text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full animate-pulse shrink-0"
+            >
               Curso Destacado
             </span>
             <span class="font-medium text-gray-200">
-              <strong class="text-white">De "No tengo idea" a Presentación Completa:</strong> El método de 5 pasos con IA sin empezar de cero.
+              <strong class="text-white"
+                >De "No tengo idea" a Presentación Completa:</strong
+              > El método de 5 pasos con IA sin empezar de cero.
             </span>
           </div>
           <div class="flex items-center gap-3 shrink-0">
-            <span class="font-bold text-amber-300 hidden md:inline">$35 USD · Pago único</span>
-            <a 
-              href="/curso-presentaciones" 
+            <span class="font-bold text-amber-300 hidden md:inline"
+              >$35 USD · Pago único</span
+            >
+            <a
+              href="/curso-presentaciones"
               class="inline-flex items-center gap-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-[11px] px-3.5 py-1 rounded-lg transition shadow-xs cursor-pointer"
             >
               <span>Ver Curso</span>
@@ -439,22 +466,24 @@ const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
 
           <!-- Derecha -->
           <div class="flex items-center gap-2 sm:gap-4 ml-auto">
-            {userId ? (
-              <div class="flex items-center gap-2 sm:gap-4">
-                <UserButton />
-                <span class="hidden md:inline text-gray-200">|</span>
-              </div>
-            ) : (
-              <>
-                <a
-                  href="/sign-in"
-                  class="hidden md:inline-block text-xs sm:text-sm font-semibold text-gray-400 hover:text-deep transition"
-                >
-                  Iniciar Sesión
-                </a>
-                <span class="hidden md:inline text-gray-200">|</span>
-              </>
-            )}
+            {
+              userId ? (
+                <div class="flex items-center gap-2 sm:gap-4">
+                  <UserButton />
+                  <span class="hidden md:inline text-gray-200">|</span>
+                </div>
+              ) : (
+                <>
+                  <a
+                    href="/sign-in"
+                    class="hidden md:inline-block text-xs sm:text-sm font-semibold text-gray-400 hover:text-deep transition"
+                  >
+                    Iniciar Sesión
+                  </a>
+                  <span class="hidden md:inline text-gray-200">|</span>
+                </>
+              )
+            }
 
             <button
               onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
