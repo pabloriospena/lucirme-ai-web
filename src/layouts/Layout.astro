@@ -6,14 +6,14 @@ import Analytics from "@vercel/analytics/astro";
 import { LINKS } from "../lib/constants.js";
 import { UserButton } from "@clerk/astro/components";
 
-const { 
-  title = "LuciRMe AI | Consultoría, Mentoría e Inteligencia Artificial", 
+const {
+  title = "LuciRMe AI | Consultoría, Mentoría e Inteligencia Artificial",
   description = "Consultoría, mentoría e implementación de Inteligencia Artificial en vivo para profesionales y equipos. Automatización de flujos con Pablo Ríos.",
-  image = "https://lucirme.com/logo-lucirme-ai.png",
+  image = "https://lucirme.com/logo-lucirme.png",
   canonical,
   type = "website",
   keywords = "inteligencia artificial, consultoria ia, mentorias ia, ia para producto, pablo rios, automatizacion de flujos, lucirme ai, colombia",
-  jsonLd
+  jsonLd,
 } = Astro.props;
 
 const canonicalUrl = canonical || Astro.url.href;
@@ -26,26 +26,27 @@ const userId = typeof auth === "function" ? auth().userId : auth?.userId;
 const defaultOrganizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "LuciRMe AI",
-  "url": "https://lucirme.com",
-  "logo": "https://lucirme.com/logo-lucirme-ai.png",
-  "founder": {
+  name: "LuciRMe AI",
+  url: "https://lucirme.com",
+  logo: "https://lucirme.com/logo-lucirme-ai.png",
+  founder: {
     "@type": "Person",
-    "name": "Pablo Ríos",
-    "jobTitle": "Consultor & Mentor en Inteligencia Artificial",
-    "sameAs": [
+    name: "Pablo Ríos",
+    jobTitle: "Consultor & Mentor en Inteligencia Artificial",
+    sameAs: [
       "https://linkedin.com/in/pabloriospena",
       "https://www.instagram.com/lucirmeai/",
-      "https://www.tiktok.com/@pabloriosp"
-    ]
+      "https://www.tiktok.com/@pabloriosp",
+    ],
   },
-  "contactPoint": {
+  contactPoint: {
     "@type": "ContactPoint",
-    "contactType": "Customer Support",
-    "url": "https://wa.me/573053046180",
-    "email": "pablo@lucirme.com"
+    contactType: "Customer Support",
+    url: "https://wa.me/573053046180",
+    email: "pablo@lucirme.com",
   },
-  "description": "Sistemas de Inteligencia Artificial de alto impacto, consultoría técnica y mentoría en vivo para profesionales y equipos."
+  description:
+    "Sistemas de Inteligencia Artificial de alto impacto, consultoría técnica y mentoría en vivo para profesionales y equipos.",
 };
 ---
 
@@ -54,13 +55,16 @@ const defaultOrganizationSchema = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <!-- SEO Core Metadata -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     <meta name="author" content="Pablo Ríos - LuciRMe AI" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
     <link rel="canonical" href={canonicalUrl} />
 
     <!-- OpenGraph Social Sharing (Facebook, LinkedIn, WhatsApp) -->
@@ -81,13 +85,21 @@ const defaultOrganizationSchema = {
     <meta name="twitter:image" content={image} />
 
     <!-- Google Material Symbols -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
 
     <!-- Schema.org JSON-LD Structured Data for Search Engines & AI Models -->
-    <script type="application/ld+json" set:html={JSON.stringify(defaultOrganizationSchema)} />
-    {jsonLd && (
-      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-    )}
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(defaultOrganizationSchema)}
+    />
+    {
+      jsonLd && (
+        <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+      )
+    }
 
     <!-- PostHog Analytics -->
     <script is:inline>
@@ -167,79 +179,119 @@ const defaultOrganizationSchema = {
     </script>
   </head>
 
-  <body class="bg-white text-slate-900 font-sans antialiased min-h-screen flex flex-col selection:bg-teal-100 selection:text-teal-900">
-    
+  <body
+    class="bg-white text-slate-900 font-sans antialiased min-h-screen flex flex-col selection:bg-teal-100 selection:text-teal-900"
+  >
     <!-- Componente A: Miniheader Superior (Top Bar Utility - 36px) -->
-    <div id="miniheader-topbar" class="h-9 bg-[#0F172A] text-slate-300 text-xs px-4 border-b border-slate-800 flex items-center justify-between z-40 relative shrink-0">
+    <div
+      id="miniheader-topbar"
+      class="h-9 bg-[#0F172A] text-slate-300 text-xs px-4 border-b border-slate-800 flex items-center justify-between z-40 relative shrink-0"
+    >
       <div class="max-w-7xl mx-auto w-full flex items-center justify-between">
         <!-- Left / Center Promo Message -->
         <div class="flex items-center gap-2 text-xs truncate">
-          <span class="border border-amber-500/30 text-amber-400 bg-amber-500/10 text-[10px] font-mono px-2 py-0.5 rounded shrink-0">
+          <span
+            class="border border-amber-500/30 text-amber-400 bg-amber-500/10 text-[10px] font-mono px-2 py-0.5 rounded shrink-0"
+          >
             [CURSO DESTACADO]
           </span>
           <span class="text-slate-300 font-medium truncate">
             De "No tengo idea" a Presentación Completa (5 pasos con IA)
           </span>
-          <a href="/curso-presentaciones" class="text-amber-400 hover:text-amber-300 font-semibold underline underline-offset-2 ml-1 shrink-0">
-            Ver curso ($35) →
+          <a
+            href="/curso-presentaciones"
+            class="text-amber-400 hover:text-amber-300 font-semibold underline underline-offset-2 ml-1 shrink-0"
+          >
+            Ver curso →
           </a>
         </div>
 
         <!-- Right Live Support Indicator (Hidden on small mobile) -->
-        <div class="hidden md:flex items-center gap-2 text-[11px] text-slate-400 font-mono shrink-0">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <div
+          class="hidden md:flex items-center gap-2 text-[11px] text-slate-400 font-mono shrink-0"
+        >
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
+          ></span>
           <span>Soporte directo · WhatsApp (GMT-5)</span>
         </div>
       </div>
     </div>
 
     <!-- Componente B: Header Principal Institucional (64px) -->
-    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 h-16 px-4 sm:px-6 shrink-0">
-      <div class="max-w-7xl mx-auto h-full flex items-center justify-between gap-4">
-        
+    <header
+      class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 h-16 px-4 sm:px-6 shrink-0"
+    >
+      <div
+        class="max-w-7xl mx-auto h-full flex items-center justify-between gap-4"
+      >
         <!-- Izquierda: Brand & Subtitle -->
         <div class="flex items-center gap-3 shrink-0">
           <a href="/" class="flex items-center gap-2.5 group">
-            <img 
-              src="/logo-lucirme-ai.png" 
-              alt="LuciRMe AI Logo" 
-              class="w-8 h-8 rounded-lg object-contain bg-white border border-slate-200/80 p-0.5 shadow-2xs group-hover:scale-105 transition-transform" 
+            <img
+              src="/logo-lucirme-ai.png"
+              alt="LuciRMe AI Logo"
+              class="w-8 h-8 rounded-lg object-contain bg-white border border-slate-200/80 p-0.5 shadow-2xs group-hover:scale-105 transition-transform"
               onerror="this.onerror=null; this.src='/logo-lucirme.png';"
             />
             <div class="flex flex-col">
-              <span class="font-bold text-slate-900 tracking-tight text-lg leading-none">LuciRMe AI</span>
+              <span
+                class="font-bold text-slate-900 tracking-tight text-lg leading-none"
+                >LuciRMe AI</span
+              >
             </div>
           </a>
-          <span class="text-[10px] font-mono text-slate-500 tracking-wide uppercase pl-2.5 border-l border-slate-200 hidden sm:inline-block">
+          <span
+            class="text-[10px] font-mono text-slate-500 tracking-wide uppercase pl-2.5 border-l border-slate-200 hidden sm:inline-block"
+          >
             Guías & Mentoría
           </span>
         </div>
 
         <!-- Centro: Navegación Nuclear en Desktop -->
-        <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
-          <a href="/rutas" class="hover:text-teal-700 transition-colors flex items-center gap-1.5">
+        <nav
+          class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600"
+        >
+          <a
+            href="/rutas"
+            class="hover:text-teal-700 transition-colors flex items-center gap-1.5"
+          >
             <span>Rutas</span>
-            <span class="bg-teal-50 text-teal-700 text-[10px] font-mono px-1.5 py-0.2 rounded border border-teal-200/80">5</span>
+            <span
+              class="bg-teal-50 text-teal-700 text-[10px] font-mono px-1.5 py-0.2 rounded border border-teal-200/80"
+              >5</span
+            >
           </a>
-          <a href="/servicios" class="hover:text-teal-700 transition-colors">Soluciones</a>
-          <a href="/recursos" class="hover:text-teal-700 transition-colors">Recursos</a>
-          <a href="/content/sobremi" class="hover:text-teal-700 transition-colors">Sobre Pablo</a>
+          <a href="/servicios" class="hover:text-teal-700 transition-colors"
+            >Soluciones</a
+          >
+          <a href="/recursos" class="hover:text-teal-700 transition-colors"
+            >Recursos</a
+          >
+          <a
+            href="/content/sobremi"
+            class="hover:text-teal-700 transition-colors">Sobre Pablo</a
+          >
         </nav>
 
         <!-- Derecha: Acciones Consolidadas -->
         <div class="flex items-center gap-2 sm:gap-3 shrink-0">
           <!-- Auth User Button if logged in -->
-          {userId ? (
-            <div class="flex items-center gap-2">
-              <UserButton />
-            </div>
-          ) : (
-            <a href="/sign-in" class="hidden xl:inline-block text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors">
-              Iniciar Sesión
-            </a>
-          )}
+          {
+            userId ? (
+              <div class="flex items-center gap-2">
+                <UserButton />
+              </div>
+            ) : (
+              <a
+                href="/sign-in"
+                class="hidden xl:inline-block text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors"
+              >
+                Iniciar Sesión
+              </a>
+            )
+          }
 
-          <button 
+          <button
             onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
             class="hidden sm:inline-flex text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/70 px-3 py-1.5 rounded-lg transition-colors border border-slate-200 cursor-pointer"
           >
@@ -247,64 +299,79 @@ const defaultOrganizationSchema = {
           </button>
 
           <!-- Botón CTA Primario WhatsApp -->
-          <a 
+          <a
             href={LINKS.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
             class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3.5 sm:px-4 py-2 rounded-lg flex items-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
           >
             <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.187-2.59-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.199.534 1.286.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.178.182-.077.355.101.173.45 1.741 1.942 2.072.193.043.344.029.473-.043.159-.087.375-.434.505-.622.13-.188.26-.159.433-.087s1.097.519 1.285.607c.188.087.317.13.361.202.044.073.044.42-.1 1.225z"/>
+              <path
+                d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.187-2.59-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.199.534 1.286.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.178.182-.077.355.101.173.45 1.741 1.942 2.072.193.043.344.029.473-.043.159-.087.375-.434.505-.622.13-.188.26-.159.433-.087s1.097.519 1.285.607c.188.087.317.13.361.202.044.073.044.42-.1 1.225z"
+              ></path>
             </svg>
             <span class="hidden sm:inline">Escribir a WhatsApp</span>
             <span class="sm:hidden">WhatsApp</span>
           </a>
 
           <!-- Toggler Hamburguesa para Sidebar Drawer -->
-          <button 
+          <button
             id="sidebar-toggler"
             onclick="toggleSidebar()"
             aria-label="Abrir menú de navegación"
             aria-expanded="false"
             class="w-9 h-9 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors cursor-pointer"
           >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/>
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.8"
+                d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
           </button>
         </div>
-
       </div>
     </header>
 
     <!-- Componente C: Sidebar Drawer Desplegable Off-Canvas -->
-    
+
     <!-- Backdrop del Drawer -->
-    <div 
-      id="sidebar-backdrop" 
+    <div
+      id="sidebar-backdrop"
       onclick="closeSidebar()"
       class="fixed inset-0 bg-[#0F172A]/40 backdrop-blur-xs z-50 hidden transition-opacity duration-200"
-    ></div>
+    >
+    </div>
 
     <!-- Sidebar Drawer Off-Canvas -->
-    <aside 
+    <aside
       id="sidebar-drawer"
       tabindex="-1"
       class="fixed top-0 right-0 w-full sm:w-[380px] h-full bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between overflow-hidden"
     >
       <!-- Cabecera del Drawer -->
-      <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50/80">
+      <div
+        class="px-5 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50/80"
+      >
         <div class="flex items-center gap-2">
-          <img 
-            src="/logo-lucirme-ai.png" 
-            alt="LuciRMe AI Logo" 
-            class="w-6 h-6 rounded-md object-contain bg-white border border-slate-200 p-0.5 shadow-2xs" 
+          <img
+            src="/logo-lucirme-ai.png"
+            alt="LuciRMe AI Logo"
+            class="w-6 h-6 rounded-md object-contain bg-white border border-slate-200 p-0.5 shadow-2xs"
             onerror="this.onerror=null; this.src='/logo-lucirme.png';"
           />
-          <span class="font-bold text-sm text-slate-900 tracking-tight">Ecosistema LuciRMe</span>
+          <span class="font-bold text-sm text-slate-900 tracking-tight"
+            >Ecosistema LuciRMe</span
+          >
         </div>
-        
-        <button 
+
+        <button
           onclick="closeSidebar()"
           class="text-xs font-mono text-slate-500 hover:text-slate-900 bg-white hover:bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200 transition-colors flex items-center gap-1 cursor-pointer"
           aria-label="Cerrar menú"
@@ -316,37 +383,79 @@ const defaultOrganizationSchema = {
 
       <!-- Cuerpo del Drawer con Scroll Organizado en 3 Capas -->
       <div class="flex-1 overflow-y-auto p-5 space-y-6">
-        
         <!-- Capa 1: Rutas de Aprendizaje Guiadas (5) -->
         <div class="space-y-2.5">
-          <div class="text-[11px] font-mono text-slate-400 tracking-wider uppercase font-semibold flex items-center justify-between">
+          <div
+            class="text-[11px] font-mono text-slate-400 tracking-wider uppercase font-semibold flex items-center justify-between"
+          >
             <span>RUTAS DE APRENDIZAJE (5)</span>
-            <a href="/rutas" class="text-teal-700 hover:underline text-[10px] normal-case">Ver todas →</a>
+            <a
+              href="/rutas"
+              class="text-teal-700 hover:underline text-[10px] normal-case"
+              >Ver todas →</a
+            >
           </div>
 
           <div class="space-y-1">
-            <a href="/rutas#ruta-comunicacion" class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group">
-              <span class="group-hover:text-teal-700">01. Comunicación Directa con IA</span>
-              <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-amber-50 text-amber-700 border border-amber-200/80">PRO</span>
-            </a>
-            
-            <a href="/servicios/producto" class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group">
-              <span class="group-hover:text-teal-700">02. Product Management & ShapeUp</span>
-              <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-teal-50 text-teal-700 border border-teal-200/80">GUÍA</span>
-            </a>
-
-            <a href="/rutas#ruta-notebooklm" class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group">
-              <span class="group-hover:text-teal-700">03. Dominio de NotebookLM</span>
-              <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-rose-50 text-rose-700 border border-rose-200/80">HOT</span>
+            <a
+              href="/rutas#ruta-comunicacion"
+              class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group"
+            >
+              <span class="group-hover:text-teal-700"
+                >01. Comunicación Directa con IA</span
+              >
+              <span
+                class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-amber-50 text-amber-700 border border-amber-200/80"
+                >PRO</span
+              >
             </a>
 
-            <a href="/rutas#ruta-empleabilidad" class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group">
-              <span class="group-hover:text-teal-700">04. Empleabilidad y Portafolio con IA</span>
+            <a
+              href="/servicios/producto"
+              class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group"
+            >
+              <span class="group-hover:text-teal-700"
+                >02. Product Management & ShapeUp</span
+              >
+              <span
+                class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-teal-50 text-teal-700 border border-teal-200/80"
+                >GUÍA</span
+              >
             </a>
 
-            <a href="/atajos-visuales" class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group">
-              <span class="group-hover:text-teal-700">05. Creación de Imágenes y Videos ($5)</span>
-              <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-700 border border-emerald-200/80">POPULAR</span>
+            <a
+              href="/rutas#ruta-notebooklm"
+              class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group"
+            >
+              <span class="group-hover:text-teal-700"
+                >03. Dominio de NotebookLM</span
+              >
+              <span
+                class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-rose-50 text-rose-700 border border-rose-200/80"
+                >HOT</span
+              >
+            </a>
+
+            <a
+              href="/rutas#ruta-empleabilidad"
+              class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group"
+            >
+              <span class="group-hover:text-teal-700"
+                >04. Empleabilidad y Portafolio con IA</span
+              >
+            </a>
+
+            <a
+              href="/atajos-visuales"
+              class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group"
+            >
+              <span class="group-hover:text-teal-700"
+                >05. Creación de Imágenes y Videos</span
+              >
+              <span
+                class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-700 border border-emerald-200/80"
+                >POPULAR</span
+              >
             </a>
           </div>
         </div>
@@ -355,23 +464,45 @@ const defaultOrganizationSchema = {
 
         <!-- Capa 2: Servicios Y Mentoría Ejecutiva (3) -->
         <div class="space-y-2.5">
-          <div class="text-[11px] font-mono text-slate-400 tracking-wider uppercase font-semibold">
+          <div
+            class="text-[11px] font-mono text-slate-400 tracking-wider uppercase font-semibold"
+          >
             SERVICIOS Y MENTORÍA (3)
           </div>
 
           <div class="space-y-1">
-            <a href="/soluciones/profesionales" class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group">
-              <span class="group-hover:text-teal-700">Consultoría 1 a 1 Directa</span>
-              <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 border border-slate-200">$120/sesión</span>
+            <a
+              href="/soluciones/profesionales"
+              class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group"
+            >
+              <span class="group-hover:text-teal-700"
+                >Consultoría 1 a 1 Directa</span
+              >
+              <span
+                class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 border border-slate-200"
+              ></span>
             </a>
 
-            <a href="/soluciones/empresas" class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group">
-              <span class="group-hover:text-teal-700">Capacitación In-Company para Equipos</span>
-              <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 border border-slate-200">Equipos</span>
+            <a
+              href="/soluciones/empresas"
+              class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group"
+            >
+              <span class="group-hover:text-teal-700"
+                >Capacitación In-Company para Equipos</span
+              >
+              <span
+                class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 border border-slate-200"
+                >Equipos</span
+              >
             </a>
 
-            <a href="/servicios" class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group">
-              <span class="group-hover:text-teal-700">Auditoría y Despliegue de Procesos IA</span>
+            <a
+              href="/servicios"
+              class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group"
+            >
+              <span class="group-hover:text-teal-700"
+                >Auditoría y Despliegue de Procesos IA</span
+              >
             </a>
           </div>
         </div>
@@ -380,46 +511,66 @@ const defaultOrganizationSchema = {
 
         <!-- Capa 3: Herramientas Rápidas & Diagnóstico -->
         <div class="space-y-2.5">
-          <div class="text-[11px] font-mono text-slate-400 tracking-wider uppercase font-semibold">
+          <div
+            class="text-[11px] font-mono text-slate-400 tracking-wider uppercase font-semibold"
+          >
             HERRAMIENTAS RÁPIDAS
           </div>
 
           <div class="space-y-1">
-            <button 
+            <button
               onclick="closeSidebar(); document.getElementById('selector-overlay').classList.remove('hidden');"
               class="w-full flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium text-left cursor-pointer group"
             >
-              <span class="group-hover:text-teal-700">Termómetro IA (Diagnóstico 2 min)</span>
-              <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-amber-50 text-amber-700 border border-amber-200">GRATIS</span>
+              <span class="group-hover:text-teal-700"
+                >Termómetro IA (Diagnóstico 2 min)</span
+              >
+              <span
+                class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-amber-50 text-amber-700 border border-amber-200"
+                >GRATIS</span
+              >
             </button>
 
-            <a href="/atajos-ia" class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group">
-              <span class="group-hover:text-teal-700">Atajos de IA (Prompts testeados)</span>
+            <a
+              href="/atajos-ia"
+              class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group"
+            >
+              <span class="group-hover:text-teal-700"
+                >Atajos de IA (Prompts testeados)</span
+              >
             </a>
 
-            <a href="/recursos" class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group">
-              <span class="group-hover:text-teal-700">Biblioteca Abierta en Notion</span>
+            <a
+              href="/recursos"
+              class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group"
+            >
+              <span class="group-hover:text-teal-700"
+                >Biblioteca Abierta en Notion</span
+              >
             </a>
           </div>
         </div>
-
       </div>
 
       <!-- Pie Fijo del Drawer (Ancla de Autoridad & Cierre) -->
       <div class="p-4 border-t border-slate-200 bg-slate-50 space-y-3">
         <div class="flex items-center gap-3">
-          <img 
-            src="/pablo-rios.jpeg" 
-            alt="Pablo Ríos" 
-            class="w-10 h-10 rounded-xl object-cover border border-slate-200 shrink-0" 
+          <img
+            src="/pablo-rios.jpeg"
+            alt="Pablo Ríos"
+            class="w-10 h-10 rounded-xl object-cover border border-slate-200 shrink-0"
           />
           <div class="min-w-0 flex-1">
-            <h4 class="text-xs font-bold text-slate-900 truncate">Pablo Ríos</h4>
-            <p class="text-[10px] text-slate-500 font-medium truncate">Consultor Principal · +13 años en producto</p>
+            <h4 class="text-xs font-bold text-slate-900 truncate">
+              Pablo Ríos
+            </h4>
+            <p class="text-[10px] text-slate-500 font-medium truncate">
+              Consultor Principal · +13 años en producto
+            </p>
           </div>
         </div>
 
-        <a 
+        <a
           href={LINKS.whatsapp}
           target="_blank"
           rel="noopener noreferrer"
@@ -429,7 +580,6 @@ const defaultOrganizationSchema = {
           <span>→</span>
         </a>
       </div>
-
     </aside>
 
     <!-- Main Content Body -->
