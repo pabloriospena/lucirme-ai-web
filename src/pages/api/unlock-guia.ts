@@ -31,7 +31,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const apiKey = process.env.MAILERLITE_API_KEY;
-    const groupId = process.env.MAILERLITE_GROUP_GUIA_NBLM;
+    const groupId = process.env.MAILERLITE_GROUP_ID;
 
     if (!apiKey) {
       console.warn('MAILERLITE_API_KEY variable is missing on server');

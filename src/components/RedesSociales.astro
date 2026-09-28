@@ -7,114 +7,150 @@ const redes = [
     nombre: "LinkedIn (Empresa)",
     usuario: "@lucirme-ai",
     url: LINKS.linkedin_empresa || "https://www.linkedin.com/company/lucirme-ai",
+    color: "#0A66C2",
+    badge: "Oficial",
+    descripcion: "Novedades de la empresa, productos y soluciones de IA.",
     icono: "linkedin"
   },
   {
     nombre: "LinkedIn (Pablo Ríos)",
     usuario: "@pabloriospena",
     url: LINKS.linkedin || "https://linkedin.com/in/pabloriospena",
+    color: "#0077B5",
+    badge: "Personal",
+    descripcion: "Estrategia de PM, automatizaciones y contenido diario.",
     icono: "linkedin"
   },
   {
     nombre: "Instagram",
     usuario: "@lucirmeai",
     url: LINKS.instagram || "https://www.instagram.com/lucirmeai/",
+    color: "#E4405F",
+    badge: "Comunidad",
+    descripcion: "Tips rápidos, reels explicativos y detrás de escena.",
     icono: "instagram"
   },
   {
     nombre: "TikTok",
     usuario: "@pabloriosp",
     url: LINKS.tiktok || "https://www.tiktok.com/@pabloriosp",
+    color: "#000000",
+    badge: "Shorts & AI",
+    descripcion: "Tutoriales express de IA y herramientas prácticas.",
     icono: "tiktok"
   },
   {
     nombre: "Facebook",
     usuario: "@lucirmeai",
     url: LINKS.facebook || "https://www.facebook.com/lucirmeai/",
+    color: "#1877F2",
+    badge: "Página",
+    descripcion: "Anuncios, eventos y actualizaciones del ecosistema.",
     icono: "facebook"
   },
   {
     nombre: "Email Directo",
     usuario: "pablo@lucirme.com",
     url: LINKS.email || "mailto:pablo@lucirme.com",
+    color: "#0D9488",
+    badge: "Contacto Directo",
+    descripcion: "Para alianzas, asesorías o consultas personalizadas.",
     icono: "email"
   },
   {
-    nombre: "Ebook: PM Sin Bullshit",
-    usuario: "Disponible en Hotmart",
+    nombre: "Ebook / Hotmart",
+    usuario: "PM Sin Bullshit (50% OFF)",
     url: LINKS.ebook || "https://pay.hotmart.com/D96093022S?off=OFF50",
+    color: "#FF5722",
+    badge: "Recurso",
+    descripcion: "Manual práctico para PMs y profesionales de producto.",
     icono: "hotmart"
   }
 ];
 ---
 
-<section id="redes-sociales" class="py-16 px-6 bg-light">
-  <div class="max-w-4xl mx-auto">
-    
-    <!-- TÍTULO MINIMALISTA -->
-    <div class="text-center mb-10">
-      <h2 class="text-2xl font-bold text-deep tracking-tight">Conecta con nosotros</h2>
-      <p class="text-sm text-gray-500 mt-2">Sigue a LuciRMe AI y a Pablo Ríos en nuestras redes.</p>
+<section id="redes-sociales" class="py-16 px-6 bg-slate-50 border-t border-gray-200">
+  <div class="max-w-5xl mx-auto">
+    <!-- TITULO DE SECCIÓN -->
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="inline-block bg-teal/10 text-teal font-bold text-xs uppercase tracking-widest px-3 py-1 rounded-full mb-3 border border-teal/20">
+        Conéctate con nosotros
+      </span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-deep tracking-tight mb-4">
+        Redes Sociales y Canales Oficiales
+      </h2>
+      <p class="text-gray-600 text-base leading-relaxed">
+        Sigue a <strong class="text-deep">LuciRMe AI</strong> y a <strong class="text-deep">Pablo Ríos</strong> en todas las plataformas para contenido diario sobre Product Management, Inteligencia Artificial y automatización.
+      </p>
     </div>
 
-    <!-- GRID LIMPIO -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <!-- GRID DE TARJETAS -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {redes.map((item) => (
         <a
           href={item.url}
           target="_blank"
           rel="noopener noreferrer"
-          onclick="if (window.posthog && this.href.includes('hotmart')) { window.posthog.capture('redes_sociales_hotmart_click', { producto: 'ebook_pm' }); }"
-          class="group flex items-center gap-4 p-4 rounded-xl border border-gray-100 bg-white hover:border-teal hover:shadow-sm transition-all duration-200"
+          class="group bg-white border border-gray-200 rounded-2xl p-6 shadow-xs hover:shadow-lg hover:border-teal transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
         >
-          <!-- ICONO -->
-          <div class="w-10 h-10 rounded-lg bg-slate-50 flex items-center justify-center text-deep group-hover:bg-teal/10 group-hover:text-teal transition-colors duration-200">
-            {item.icono === 'linkedin' && (
-              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-            )}
-            {item.icono === 'instagram' && (
-              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            )}
-            {item.icono === 'tiktok' && (
-              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.33 6.33 0 0 0 9.33 22 6.33 6.33 0 0 0 15.66 15.7V9.08a8.21 8.21 0 0 0 4.88 1.58V7.21a4.85 4.85 0 0 1-.95-.52z"/>
-              </svg>
-            )}
-            {item.icono === 'facebook' && (
-              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-            )}
-            {item.icono === 'email' && (
-              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-              </svg>
-            )}
-            {item.icono === 'hotmart' && (
-              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-              </svg>
-            )}
-          </div>
+          <!-- TIRA DE COLOR DE ACENTO -->
+          <div class="absolute top-0 left-0 right-0 h-1 transition-all group-hover:h-1.5" style={`background-color: ${item.color};`}></div>
 
-          <!-- TEXTO -->
-          <div class="flex-1 min-w-0">
-            <h3 class="text-sm font-semibold text-deep group-hover:text-teal transition-colors truncate">
+          <div>
+            <div class="flex items-center justify-between gap-3 mb-4 mt-1">
+              <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-deep group-hover:scale-110 transition-transform shadow-xs">
+                {item.icono === 'linkedin' && (
+                  <svg class="w-5 h-5 fill-current" style={`color: ${item.color};`} viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                )}
+                {item.icono === 'instagram' && (
+                  <svg class="w-5 h-5 fill-current" style={`color: ${item.color};`} viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                  </svg>
+                )}
+                {item.icono === 'tiktok' && (
+                  <svg class="w-5 h-5 fill-current text-black" viewBox="0 0 24 24">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.33 6.33 0 0 0 9.33 22 6.33 6.33 0 0 0 15.66 15.7V9.08a8.21 8.21 0 0 0 4.88 1.58V7.21a4.85 4.85 0 0 1-.95-.52z"/>
+                  </svg>
+                )}
+                {item.icono === 'facebook' && (
+                  <svg class="w-5 h-5 fill-current" style={`color: ${item.color};`} viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                )}
+                {item.icono === 'email' && (
+                  <svg class="w-5 h-5 fill-current text-teal" viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                  </svg>
+                )}
+                {item.icono === 'hotmart' && (
+                  <svg class="w-5 h-5 fill-current text-orange" viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  </svg>
+                )}
+              </div>
+
+              <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                {item.badge}
+              </span>
+            </div>
+
+            <h3 class="text-lg font-bold text-deep mb-1 group-hover:text-teal transition-colors">
               {item.nombre}
             </h3>
-            <p class="text-xs text-gray-500 font-mono truncate">
+            <p class="text-xs font-mono font-semibold text-gray-500 mb-2">
               {item.usuario}
+            </p>
+            <p class="text-sm text-gray-600 leading-relaxed mb-6">
+              {item.descripcion}
             </p>
           </div>
 
-          <!-- FLECHA DE ACCIÓN -->
-          <svg class="w-4 h-4 text-gray-300 group-hover:text-teal group-hover:translate-x-1 transition-all duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-          </svg>
+          <div class="pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-bold text-teal group-hover:translate-x-1 transition-transform">
+            <span>Visitar canal</span>
+            <span>→</span>
+          </div>
         </a>
       ))}
     </div>

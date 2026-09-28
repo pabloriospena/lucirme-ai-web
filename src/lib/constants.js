@@ -1,6 +1,6 @@
 // src/lib/constants.js
 export const LINKS = {
-  calendly: "https://cal.com/pablolucirme",
+  calendly: "https://wa.me/573053046180",
   ebook: "https://pay.hotmart.com/D96093022S?off=OFF50",
   curso_presentaciones: "https://pay.hotmart.com/R107150726I?checkoutMode=10",
   email: "mailto:pablo@lucirme.com",
@@ -9,10 +9,10 @@ export const LINKS = {
   instagram: "https://www.instagram.com/lucirmeai/",
   facebook: "https://www.facebook.com/lucirmeai/",
   tiktok: "https://www.tiktok.com/@pabloriosp",
-  calendly_sesion_pago: "https://cal.com/pablolucirme/sesion-enfoque",
-  calendly_ciclo: "https://cal.com/pablolucirme/ciclo",
-  calendly_empresa: "https://cal.com/pablolucirme/diagnostico-gratuito",
-  calendly_taller: "https://cal.com/pablolucirme/taller-de-inmersion",
+  calendly_sesion_pago: "https://wa.me/573053046180",
+  calendly_ciclo: "https://wa.me/573053046180",
+  calendly_empresa: "https://wa.me/573053046180",
+  calendly_taller: "https://wa.me/573053046180",
   bot: "https://pay.hotmart.com/F107452795B",
   atajos_ia: "https://pay.hotmart.com/X107628052G",
   atajos_visuales: "https://pay.hotmart.com/A107711155Q",

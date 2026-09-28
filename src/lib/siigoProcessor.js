@@ -2,95 +2,6 @@
 import * as XLSX from 'xlsx';
 
 /**
- * Parses any value to a number. Handles formatted strings like currency,
- * different decimals/thousands formats (e.g. 1.234,56 or 1,234.56).
- */
-function parseNumber(val) {
-  if (val === null || val === undefined) return 0;
-  if (typeof val === 'number') return val;
-  let str = String(val).trim();
-  if (str === '') return 0;
-
-  // Remove currency symbols, spaces, and percent signs
-  str = str.replace(/[$\s%]/g, '');
-
-  const hasComma = str.includes(',');
-  const hasDot = str.includes('.');
-
-  if (hasComma && hasDot) {
-    // Both comma and dot exist
-    const lastComma = str.lastIndexOf(',');
-    const lastDot = str.lastIndexOf('.');
-    if (lastDot > lastComma) {
-      // Dot is the decimal separator, e.g., "1,500,000.00"
-      str = str.replace(/,/g, '');
-    } else {
-      // Comma is the decimal separator, e.g., "1.500.000,00"
-      str = str.replace(/\./g, '').replace(',', '.');
-    }
-  } else if (hasComma) {
-    // Only comma exists
-    const commaCount = (str.match(/,/g) || []).length;
-    if (commaCount > 1) {
-      // Multiple commas -> thousands separator
-      str = str.replace(/,/g, '');
-    } else {
-      // Single comma
-      const lastComma = str.lastIndexOf(',');
-      const digitsAfter = str.length - 1 - lastComma;
-      if (digitsAfter === 3) {
-        // e.g. "1,500" -> thousands separator
-        str = str.replace(/,/g, '');
-      } else {
-        // e.g. "1500,50" -> decimal separator
-        str = str.replace(',', '.');
-      }
-    }
-  } else if (hasDot) {
-    // Only dot exists
-    const dotCount = (str.match(/\./g) || []).length;
-    if (dotCount > 1) {
-      // Multiple dots -> thousands separator
-      str = str.replace(/\./g, '');
-    } else {
-      // Single dot
-      const lastDot = str.lastIndexOf('.');
-      const digitsAfter = str.length - 1 - lastDot;
-      if (digitsAfter === 3) {
-        // e.g. "1.500" -> thousands separator
-        str = str.replace(/\./g, '');
-      }
-    }
-  }
-
-  const num = parseFloat(str);
-  return isNaN(num) ? 0 : num;
-}
-
-/**
- * Parses various Excel date formats (Date objects, serial numbers, string dates).
- */
-function parseExcelDate(val) {
-  if (val === null || val === undefined) return new Date(0);
-  if (val instanceof Date) return val;
-  if (typeof val === 'number') {
-    // Excel serial dates: 25569 is 1970-01-01
-    return new Date((val - 25569) * 86400 * 1000);
-  }
-  const str = String(val).trim();
-  // Match DD/MM/YYYY or DD-MM-YYYY
-  const dmyMatch = str.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})/);
-  if (dmyMatch) {
-    const day = parseInt(dmyMatch[1], 10);
-    const month = parseInt(dmyMatch[2], 10) - 1; // 0-indexed
-    const year = parseInt(dmyMatch[3], 10);
-    return new Date(year, month, day);
-  }
-  const d = new Date(str);
-  return isNaN(d.getTime()) ? new Date(0) : d;
-}
-
-/**
  * Procesa un Buffer o Uint8Array de un archivo Excel de Siigo
  * y retorna la estructura de hojas en formato binary/Buffer
  * igual que el script de Python.
@@ -135,7 +46,12 @@ export function processSiigoExcel(fileBuffer) {
   df_clean = df_clean.map((row) => {
     const newRow = { ...row };
     numericCols.forEach((col) => {
-      newRow[col] = parseNumber(newRow[col]);
+      if (col in newRow) {
+        const val = parseFloat(newRow[col]);
+        newRow[col] = isNaN(val) ? 0 : val;
+      } else {
+        newRow[col] = 0;
+      }
     });
     return newRow;
   });
@@ -144,7 +60,12 @@ export function processSiigoExcel(fileBuffer) {
   const dateCol = 'Fecha elaboración' in (df_clean[0] || {}) ? 'Fecha elaboración' : 'Fecha creación';
 
   df_clean.forEach((row) => {
-    row._parsedDate = parseExcelDate(row[dateCol]);
+    if (row[dateCol]) {
+      const d = new Date(row[dateCol]);
+      row._parsedDate = isNaN(d.getTime()) ? new Date(0) : d;
+    } else {
+      row._parsedDate = new Date(0);
+    }
   });
 
   // 3. FILTRO DE DUPLICADOS (Referencia fábrica / Chasis más reciente)
@@ -251,7 +172,7 @@ export function processSiigoExcel(fileBuffer) {
       'Valor Impuesto a Cargo': item['Valor Impuesto a Cargo'],
       'Valor Impuesto a Cargo 2': item['Valor Impuesto a Cargo 2'],
       'Ventas Netas': item['Ventas Netas'],
-      'Participación %': part,
+      'Participación %': Math.round(part * 100) / 100,
       Transacciones: item.Transacciones
     };
   });
@@ -268,11 +189,11 @@ export function processSiigoExcel(fileBuffer) {
     items.forEach((row) => {
       const nombre = row['Nombre_Limpio'] || 'Sin Nombre';
       if (!map.has(nombre)) {
-        map.set(nombre, { 'Nombre Producto': nombre, Unidades: 0, 'Ventas_Totales': 0 });
+        map.set(nombre, { 'Nombre Producto': nombre, Unidades: 0, 'Ventas Totales': 0 });
       }
       const entry = map.get(nombre);
       entry.Unidades += row['Cantidad'] || 0;
-      entry['Ventas_Totales'] += row['Total'] || 0;
+      entry['Ventas Totales'] += row['Total'] || 0;
     });
     return Array.from(map.values())
       .sort((a, b) => b.Unidades - a.Unidades)
@@ -285,24 +206,21 @@ export function processSiigoExcel(fileBuffer) {
   // 6. CREACIÓN DE LIBRO EXCEL MULTI-HOJA
   const newWb = XLSX.utils.book_new();
 
-  // 1. Resumen Ejecutivo (startrow=2, i.e. origin A3)
+  // 1. Resumen Ejecutivo
   const summaryRows = [
     { 'Indicador Gerencial': 'Facturación Neta Total (Sin Duplicados)', Valor: total_facturacion },
     { 'Indicador Gerencial': 'Total Unidades Vendidas', Valor: total_unidades },
     { 'Indicador Gerencial': 'Total Transacciones Activas', Valor: total_transacciones }
   ];
-  const wsSummary = XLSX.utils.aoa_to_sheet([]);
-  XLSX.utils.sheet_add_json(wsSummary, summaryRows, { origin: 'A3' });
+  const wsSummary = XLSX.utils.json_to_sheet(summaryRows, { origin: 'A3' });
   XLSX.utils.book_append_sheet(newWb, wsSummary, 'Resumen Ejecutivo');
 
-  // 2. Centro de Costos (startrow=2, i.e. origin A3)
-  const wsCC = XLSX.utils.aoa_to_sheet([]);
-  XLSX.utils.sheet_add_json(wsCC, ccGroupedList, { origin: 'A3' });
+  // 2. Centro de Costos
+  const wsCC = XLSX.utils.json_to_sheet(ccGroupedList, { origin: 'A3' });
   XLSX.utils.book_append_sheet(newWb, wsCC, 'Centro de Costos');
 
   // 3. Productos Estrella
-  const wsEstrella = XLSX.utils.aoa_to_sheet([]);
-  XLSX.utils.sheet_add_json(wsEstrella, topMotos, { origin: 'A3' });
+  const wsEstrella = XLSX.utils.json_to_sheet(topMotos, { origin: 'A3' });
   XLSX.utils.sheet_add_json(wsEstrella, topRepuestos, { origin: 'A16' });
   XLSX.utils.book_append_sheet(newWb, wsEstrella, 'Productos Estrella');
 

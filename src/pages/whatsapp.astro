@@ -1,3 +1,29 @@
 ---
-return Astro.redirect("https://wa.me/573053046180?text=Hola%20Pablo,%20llegu%C3%A9%20desde%20la%20web");
+export const prerender = false;
+
+const url = new URL(Astro.request.url);
+const text = url.searchParams.get('text');
+const targetUrl = text 
+  ? `https://wa.me/573053046180?text=${encodeURIComponent(text)}`
+  : "https://wa.me/573053046180";
+
+return Astro.redirect(targetUrl, 302);
 ---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="refresh" content={`0;url=${targetUrl}`} />
+  <title>Redirigiendo a WhatsApp...</title>
+</head>
+<body style="background-color: #0F172A; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+  <div style="text-align: center;">
+    <p>Redirigiendo a WhatsApp...</p>
+    <a href={targetUrl} style="color: #2DD4BF;">Haz clic aquí si no te redirige automáticamente</a>
+  </div>
+  <script is:inline define:vars={{ targetUrl }}>
+    window.location.href = targetUrl;
+  </script>
+</body>
+</html>

@@ -1,9 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { LINKS } from "../../lib/constants.js";
-import SobreMi from '../../components/SobreMi.astro';
-import RedesSociales from '../../components/RedesSociales.astro';
-
 
 const tareas = [
     { id: 1, categoria: "Profesionales", titulo: "Compilar reportes semanales de Excel", meta: "ChatGPT / Claude • 5 min", prompt: "Resume estos datos en un reporte ejecutivo con 3 puntos clave, 2 tendencias y 2 recomendaciones. Tono: profesional y directo.", resultado: "De 2 horas manuales → 10 min de revisión." },
@@ -206,9 +203,23 @@ const calendlyUrl = LINKS.calendly_empresa || LINKS.calendly;
             </div>
         </div>
     </section>
-    <SobreMi />
-    <RedesSociales />
 
+    <!-- FOOTER -->
+    <footer class="bg-light border-t border-gray-200 py-12 px-6">
+        <div class="max-w-3xl mx-auto text-center">
+            <p class="text-gray-600 text-sm leading-relaxed mb-6">
+                Soy Pablo Ríos. Product Manager con +10 años de experiencia. 
+                Ayudo a profesionales a recuperar 10+ horas a la semana con IA aplicada. 
+                <br><strong>Sin teoría vacía. Sin volverte técnico.</strong>
+            </p>
+            <div class="flex justify-center items-center gap-6 text-sm mb-8">
+                <a href={LINKS.linkedin} target="_blank" class="text-teal hover:text-teal-700 font-bold transition">LinkedIn</a>
+                <span class="text-gray-300">•</span>
+                <a href={LINKS.email} class="text-teal hover:text-teal-700 font-bold transition">Email</a>
+            </div>
+            <p class="text-xs text-gray-400">© {new Date().getFullYear()} LuciRMe AI. Product Management Sin Bullshit.</p>
+        </div>
+    </footer>
 </Layout>
 
 <style>
