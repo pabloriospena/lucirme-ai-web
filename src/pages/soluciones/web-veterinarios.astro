@@ -1,6 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { LINKS } from "../../lib/constants.js";
+
+const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
+const ctaDescuentoWA = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero aprovechar el descuento del 50% para la web de mi veterinaria.")}`;
 ---
 
 <Layout
@@ -43,6 +46,12 @@ import { LINKS } from "../../lib/constants.js";
           >Qué incluye</a
         >
         <a
+          class="hover:text-[#0D9488] transition-colors font-bold text-amber-700"
+          href="#precios"
+          onclick="if (window.posthog) { window.posthog.capture('web_vet_nav_click', { seccion: 'precios' }); }"
+          >Precios (50% OFF)</a
+        >
+        <a
           class="hover:text-[#0D9488] transition-colors"
           href="#faq"
           onclick="if (window.posthog) { window.posthog.capture('web_vet_nav_click', { seccion: 'faq' }); }"
@@ -57,23 +66,21 @@ import { LINKS } from "../../lib/constants.js";
           >Páginas Web Veterinarias</span
         >
         <a
-          class="inline-flex items-center gap-1 bg-[#0D9488] hover:bg-[#0f766e] text-white px-3 py-1 rounded-md font-semibold text-xs transition-all shadow-2xs"
-          href={LINKS.whatsapp}
+          class="inline-flex items-center gap-1 bg-[#0D9488] hover:bg-[#0f766e] text-white px-3 py-1 rounded-md font-semibold text-xs transition-all shadow-2xs cursor-pointer"
+          href={ctaDescuentoWA}
           target="_blank"
           rel="noopener noreferrer"
           onclick="if (window.posthog) { window.posthog.capture('web_vet_whatsapp_click', { posicion: 'sub_header', intent: 'quiero_mi_web' }); }"
         >
           <span>Quiero mi web</span>
-          <span class="material-symbols-outlined text-[14px]"
-            >arrow_forward</span
-          >
+          <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
         </a>
       </div>
     </div>
   </div>
 
   <div
-    class="bg-[#F8FAFC] text-[#0F172A] font-sans antialiased selection:bg-teal-100 selection:text-teal-900 pb-20 md:pb-0"
+    class="bg-[#F8FAFC] text-[#0F172A] font-sans antialiased selection:bg-teal-100 selection:text-teal-900 pb-28 md:pb-24"
   >
     <main class="w-full">
       <!-- HERO SECTION -->
@@ -112,8 +119,8 @@ import { LINKS } from "../../lib/constants.js";
             class="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto justify-center mb-12"
           >
             <a
-              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0D9488] hover:bg-[#0f766e] text-white px-6 py-3.5 rounded-lg font-semibold text-base shadow-xs hover:shadow-sm transition-all"
-              href={LINKS.whatsapp}
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0D9488] hover:bg-[#0f766e] text-white px-6 py-3.5 rounded-lg font-semibold text-base shadow-xs hover:shadow-sm transition-all cursor-pointer"
+              href={ctaDescuentoWA}
               target="_blank"
               rel="noopener noreferrer"
               onclick="if (window.posthog) { window.posthog.capture('web_vet_whatsapp_click', { posicion: 'hero_primary', intent: 'quiero_mi_web' }); }"
@@ -122,14 +129,12 @@ import { LINKS } from "../../lib/constants.js";
               <span class="material-symbols-outlined text-[18px]">chat</span>
             </a>
             <a
-              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-6 py-3.5 rounded-lg font-medium text-base transition-all"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-6 py-3.5 rounded-lg font-medium text-base transition-all cursor-pointer"
               href="#caso-real"
               onclick="if (window.posthog) { window.posthog.capture('web_vet_case_study_click', { posicion: 'hero_secondary', accion: 'scroll_caso_real' }); }"
             >
               <span>Ver un caso real</span>
-              <span class="material-symbols-outlined text-[18px]"
-                >visibility</span
-              >
+              <span class="material-symbols-outlined text-[18px]">visibility</span>
             </a>
           </div>
         </div>
@@ -587,8 +592,8 @@ import { LINKS } from "../../lib/constants.js";
                 </p>
               </div>
               <a
-                class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0D9488] hover:text-[#0f766e]"
-                href={LINKS.whatsapp}
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0D9488] hover:text-[#0f766e] cursor-pointer"
+                href={ctaDescuentoWA}
                 target="_blank"
                 rel="noopener noreferrer"
                 onclick="if (window.posthog) { window.posthog.capture('web_vet_whatsapp_click', { posicion: 'modulos_seccion', intent: 'consultar_modulos' }); }"
@@ -742,8 +747,8 @@ import { LINKS } from "../../lib/constants.js";
                 <span class="text-base leading-none">↗</span>
               </a>
               <a
-                class="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0f766e] text-white px-5 py-2.5 rounded-lg font-semibold text-sm transition-all shadow-xs"
-                href={LINKS.whatsapp}
+                class="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0f766e] text-white px-5 py-2.5 rounded-lg font-semibold text-sm transition-all shadow-xs cursor-pointer"
+                href={ctaDescuentoWA}
                 target="_blank"
                 rel="noopener noreferrer"
                 onclick="if (window.posthog) { window.posthog.capture('web_vet_whatsapp_click', { posicion: 'caso_real_card', intent: 'quiero_mi_web' }); }"
@@ -1121,6 +1126,152 @@ import { LINKS } from "../../lib/constants.js";
         </div>
       </section>
 
+      <!-- SECCIÓN DE PRECIOS CON DESCUENTO Y URGENCIA -->
+      <section
+        class="w-full py-16 md:py-24 max-w-5xl mx-auto px-6 lg:px-12 scroll-mt-20"
+        id="precios"
+      >
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span
+            class="font-mono text-xs text-[#0D9488] uppercase tracking-wider font-semibold bg-teal-50 border border-teal-200/60 px-3.5 py-1.5 rounded-full inline-block mb-3"
+          >
+            INVERSIÓN CLARA Y TRANSPARENTE
+          </span>
+          <h2
+            class="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight mt-2"
+          >
+            Todo tu sitio profesional, llave en mano.
+          </h2>
+          <p class="text-base sm:text-lg text-slate-600 mt-3 leading-relaxed">
+            Sin sorpresas, sin cargos ocultos y sin suscripciones obligatorias. Una sola inversión para resolver la web de tu veterinaria de principio a fin.
+          </p>
+        </div>
+
+        <!-- Card de Precios Principal -->
+        <div
+          class="max-w-3xl mx-auto bg-[#F8FAFC] border-2 border-[#0D9488] rounded-2xl p-6 sm:p-10 shadow-lg relative overflow-hidden"
+        >
+          <!-- Top Badges / Nudges -->
+          <div
+            class="flex flex-wrap items-center justify-between gap-3 mb-6 pb-6 border-b border-slate-200"
+          >
+            <div
+              class="inline-flex items-center gap-2 bg-[#0D9488] text-white px-3.5 py-1 rounded-full text-xs font-bold tracking-wide uppercase shadow-2xs"
+            >
+              <span class="material-symbols-outlined text-[16px]">local_offer</span>
+              <span>50% de Descuento de Lanzamiento</span>
+            </div>
+            <div
+              class="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-amber-700 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full"
+            >
+              <span class="material-symbols-outlined text-[15px] text-amber-600">timer</span>
+              <span>Quedan solo 3 cupos</span>
+            </div>
+          </div>
+
+          <!-- Pricing Header -->
+          <div
+            class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 mb-6"
+          >
+            <div>
+              <span
+                class="font-mono text-xs uppercase tracking-wider text-slate-500 font-semibold block mb-1"
+                >Web Integral Veterinaria</span
+              >
+              <div class="flex items-baseline gap-3 flex-wrap">
+                <span class="text-3xl sm:text-5xl font-extrabold text-[#0F172A] tracking-tight"
+                  >$1.075.000 <span class="text-base sm:text-xl font-normal text-slate-500">COP</span></span
+                >
+                <span class="text-sm sm:text-base font-mono text-slate-400 line-through"
+                  >$2.150.000 COP</span
+                >
+              </div>
+              <div class="flex items-baseline gap-2 mt-1">
+                <span class="text-sm sm:text-base font-semibold text-slate-700"
+                  >o $275 USD</span
+                >
+                <span class="text-xs sm:text-sm font-mono text-slate-400 line-through"
+                  >$530 USD</span
+                >
+              </div>
+            </div>
+            <div class="text-left sm:text-right">
+              <span
+                class="inline-block font-mono text-xs font-semibold text-[#0D9488] bg-teal-50 border border-teal-200 px-2.5 py-1 rounded"
+              >
+                Pago único · Sin mensualidades
+              </span>
+            </div>
+          </div>
+
+          <!-- Urgency Nudge Callout -->
+          <div
+            class="bg-white border border-slate-200 rounded-xl p-4 mb-8 flex items-center gap-3"
+          >
+            <span class="material-symbols-outlined text-[#0D9488] text-[22px] shrink-0">event</span>
+            <p class="text-xs sm:text-sm text-slate-700 font-medium">
+              <strong class="text-[#0F172A]">Válido hasta el viernes 9 de octubre</strong> o hasta agotar los 3 cupos promocionales disponibles.
+            </p>
+          </div>
+
+          <!-- What's included checklist -->
+          <div class="mb-8">
+            <h4 class="text-sm font-bold uppercase tracking-wider font-mono text-slate-700 mb-4">
+              ¿Qué incluye exactamente tu proyecto?
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-700">
+              <div class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[#0D9488] text-[18px] mt-0.5 shrink-0">check_circle</span>
+                <span>Diseño visual y UX clínica 100% personalizado</span>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[#0D9488] text-[18px] mt-0.5 shrink-0">check_circle</span>
+                <span>Redacción y arquitectura de contenidos veterinarios</span>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[#0D9488] text-[18px] mt-0.5 shrink-0">check_circle</span>
+                <span>100% adaptada para móviles y computadores</span>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[#0D9488] text-[18px] mt-0.5 shrink-0">check_circle</span>
+                <span>Configuración de dominio y hosting de alta velocidad</span>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[#0D9488] text-[18px] mt-0.5 shrink-0">check_circle</span>
+                <span>Integración directa a WhatsApp y citas guiadas</span>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-[#0D9488] text-[18px] mt-0.5 shrink-0">check_circle</span>
+                <span>SEO técnico básico y analítica de visitas</span>
+              </div>
+              <div class="flex items-start gap-2.5 sm:col-span-2">
+                <span class="material-symbols-outlined text-[#0D9488] text-[18px] mt-0.5 shrink-0">check_circle</span>
+                <span>Sesión de entrega y capacitación completa (la web te pertenece 100%)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <div
+            class="flex flex-col sm:flex-row items-center gap-4 justify-between pt-6 border-t border-slate-200"
+          >
+            <a
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0D9488] hover:bg-[#0f766e] text-white px-7 py-3.5 rounded-lg font-bold text-base transition-all shadow-md hover:shadow-lg cursor-pointer"
+              href={ctaDescuentoWA}
+              target="_blank"
+              rel="noopener noreferrer"
+              onclick="if (window.posthog) { window.posthog.capture('web_vet_whatsapp_click', { posicion: 'card_precios', intent: 'aprovechar_descuento_50' }); }"
+            >
+              <span>Aprovechar descuento del 50%</span>
+              <span class="material-symbols-outlined text-[18px]">chat</span>
+            </a>
+            <span class="font-mono text-xs text-slate-500 text-center sm:text-right"
+              >Respuesta rápida · Sin intermediarios</span
+            >
+          </div>
+        </div>
+      </section>
+
       <!-- FAQ SECTION -->
       <section
         class="w-full py-16 md:py-24 max-w-5xl mx-auto px-6 lg:px-12"
@@ -1187,9 +1338,7 @@ import { LINKS } from "../../lib/constants.js";
               ¿Cuánto cuesta?
             </h3>
             <p class="text-sm text-slate-600 leading-relaxed">
-              Cada veterinaria tiene una escala y necesidades diferentes.
-              Hablemos de tu caso y revisamos qué alcance tiene sentido antes de
-              cualquier compromiso.
+              Actualmente tenemos una promoción de lanzamiento con el <strong>50% de descuento</strong>: la tarifa oficial de $2.150.000 COP ($530 USD) queda en <strong>$1.075.000 COP ($275 USD)</strong> para el paquete llave en mano completo. Solo hay <strong>3 cupos disponibles</strong> válidos hasta el viernes 9 de octubre.
             </p>
           </div>
         </div>
@@ -1219,13 +1368,13 @@ import { LINKS } from "../../lib/constants.js";
           </p>
           <div class="flex flex-col items-center justify-center gap-3">
             <a
-              class="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0f766e] text-white px-8 py-4 rounded-lg font-bold text-base transition-all shadow-md"
-              href={LINKS.whatsapp}
+              class="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0f766e] text-white px-8 py-4 rounded-lg font-bold text-base transition-all shadow-md cursor-pointer"
+              href={ctaDescuentoWA}
               target="_blank"
               rel="noopener noreferrer"
               onclick="if (window.posthog) { window.posthog.capture('web_vet_whatsapp_click', { posicion: 'cta_final', intent: 'quiero_mi_web' }); }"
             >
-              <span>Quiero mi web</span>
+              <span>Quiero mi web (50% OFF)</span>
               <span class="material-symbols-outlined text-[20px]">chat</span>
             </a>
             <span class="font-mono text-xs text-slate-500"
@@ -1235,33 +1384,55 @@ import { LINKS } from "../../lib/constants.js";
         </div>
       </section>
     </main>
-
-    <!-- MOBILE STICKY CTA -->
-    <div
-      class="fixed bottom-0 left-0 right-0 p-3 bg-white/95 backdrop-blur-md border-t border-slate-200 sm:hidden z-50 shadow-lg"
-    >
-      <a
-        class="w-full flex items-center justify-center gap-2 bg-[#0D9488] hover:bg-[#0f766e] text-white py-3 rounded-lg font-bold text-sm shadow-xs"
-        href={LINKS.whatsapp}
-        target="_blank"
-        rel="noopener noreferrer"
-        onclick="if (window.posthog) { window.posthog.capture('web_vet_whatsapp_click', { posicion: 'mobile_sticky', intent: 'quiero_mi_web' }); }"
-      >
-        <span>Quiero mi web</span>
-        <span class="material-symbols-outlined text-[18px]">chat</span>
-      </a>
-    </div>
   </div>
 
-  <!-- SCRIPT DE SEGUIMIENTO INTENCIONAL CON POSTHOG -->
-  <script is:inline>
-    document.addEventListener("DOMContentLoaded", function () {
-      if (window.posthog) {
-        window.posthog.capture("web_vet_page_view", {
-          pagina: "soluciones/web-veterinarios",
-          categoria: "soluciones_veterinarias",
-        });
-      }
-    });
-  </script>
+  <!-- BARRA STICKY INFERIOR EXCLUSIVA PARA ESTA PÁGINA (PÁGINAS WEB VETERINARIAS) -->
+  <aside 
+    class="fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] py-2.5 sm:py-3 px-4 sm:px-6 transition-all duration-300"
+    data-purpose="vet-sticky-promobar"
+  >
+    <div class="max-w-6xl mx-auto flex items-center justify-between gap-3 sm:gap-6">
+      <!-- Bloque de propuesta y nudges -->
+      <div class="flex items-center gap-2 sm:gap-4 min-w-0">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-2.5">
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <span class="inline-flex items-center font-mono font-bold text-[10px] sm:text-xs text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+              50% OFF LANZAMIENTO
+            </span>
+            <span class="inline-flex items-center font-mono text-[10px] sm:text-xs text-amber-700 bg-amber-50 border border-amber-200/70 px-2 py-0.5 rounded-full font-medium">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1 animate-pulse"></span>
+              Solo 3 cupos
+            </span>
+            <span class="hidden md:inline-flex font-mono text-[11px] text-slate-500">
+              · Hasta viernes 9 oct
+            </span>
+          </div>
+          <div class="flex items-baseline gap-1.5 mt-0.5 sm:mt-0">
+            <span class="text-xs sm:text-sm font-bold text-[#0F172A] tracking-tight whitespace-nowrap">
+              $1.075.000 COP <span class="text-slate-500 font-normal">($275 USD)</span>
+            </span>
+            <span class="text-[10px] sm:text-xs text-slate-400 line-through hidden sm:inline">
+              $2.150.000
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón CTA WhatsApp -->
+      <div class="shrink-0 flex items-center">
+        <a 
+          href={ctaDescuentoWA} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          onclick="if (window.posthog) { window.posthog.capture('web_vet_whatsapp_click', { posicion: 'sticky_bottom_bar', intent: 'aprovechar_50_off' }); }"
+          class="inline-flex items-center gap-1.5 sm:gap-2 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-lg font-semibold text-xs sm:text-sm shadow-2xs transition-all whitespace-nowrap cursor-pointer"
+        >
+          <span class="material-symbols-outlined text-[17px] sm:text-[19px]">chat</span>
+          <span class="sm:hidden">Aprovechar 50%</span>
+          <span class="hidden sm:inline">Aprovechar 50% en WhatsApp →</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
 </Layout>
