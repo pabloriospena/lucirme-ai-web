@@ -1,0 +1,698 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { LINKS } from "../../lib/constants.js";
+---
+
+<Layout
+  title="LuciRMe AI — Páginas Web para Veterinarios y Clínicas"
+  description="Páginas web claras, profesionales y listas para veterinarios y clínicas veterinarias. Estructura, contenido, diseño y publicación por Pablo Ríos."
+  keywords="paginas web veterinarias, diseño web veterinarios, paginas web para clinicas veterinarias, pablo rios, lucirme ai"
+>
+  <!-- SUB-HEADER DE NAVEGACIÓN LOCAL EN PÁGINA -->
+  <div class="sticky top-16 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 h-12 flex items-center justify-between">
+      <nav class="hidden md:flex items-center gap-6 text-xs font-medium text-slate-600">
+        <a
+          class="hover:text-[#0D9488] transition-colors"
+          href="#que-hago"
+          onclick="if (window.posthog) { window.posthog.capture('web_vet_nav_click', { seccion: 'que_hago' }); }"
+        >Qué hago</a>
+        <a
+          class="hover:text-[#0D9488] transition-colors"
+          href="#como-funciona"
+          onclick="if (window.posthog) { window.posthog.capture('web_vet_nav_click', { seccion: 'como_funciona' }); }"
+        >Cómo funciona</a>
+        <a
+          class="hover:text-[#0D9488] transition-colors"
+          href="#caso-real"
+          onclick="if (window.posthog) { window.posthog.capture('web_vet_nav_click', { seccion: 'caso_real' }); }"
+        >Caso real</a>
+        <a
+          class="hover:text-[#0D9488] transition-colors"
+          href="#que-incluye"
+          onclick="if (window.posthog) { window.posthog.capture('web_vet_nav_click', { seccion: 'que_incluye' }); }"
+        >Qué incluye</a>
+        <a
+          class="hover:text-[#0D9488] transition-colors"
+          href="#faq"
+          onclick="if (window.posthog) { window.posthog.capture('web_vet_nav_click', { seccion: 'faq' }); }"
+        >Preguntas</a>
+      </nav>
+      <div class="flex items-center gap-2 w-full md:w-auto justify-between md:justify-end">
+        <span class="font-mono text-xs text-slate-400 font-medium hidden sm:inline">Páginas Web Veterinarias</span>
+        <a
+          class="inline-flex items-center gap-1 bg-[#0D9488] hover:bg-[#0f766e] text-white px-3 py-1 rounded-md font-semibold text-xs transition-all shadow-2xs"
+          href={LINKS.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          onclick="if (window.posthog) { window.posthog.capture('web_vet_whatsapp_click', { posicion: 'sub_header', intent: 'quiero_mi_web' }); }"
+        >
+          <span>Quiero mi web</span>
+          <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-[#F8FAFC] text-[#0F172A] font-sans antialiased selection:bg-teal-100 selection:text-teal-900 pb-20 md:pb-0">
+    <main class="w-full">
+      <!-- HERO SECTION -->
+      <section class="w-full pt-14 pb-16 md:pt-20 md:pb-24 max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="flex flex-col items-center text-center max-w-3xl mx-auto">
+          <!-- Eyebrow -->
+          <span class="font-mono uppercase tracking-wider text-[#0D9488] bg-teal-50 border border-teal-200/60 px-3.5 py-1.5 rounded-full text-xs font-medium mb-6">
+            PÁGINAS WEB PARA VETERINARIOS
+          </span>
+          <!-- H1 -->
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F172A] tracking-tight leading-[1.15] mb-6">
+            La web de tu veterinaria, resuelta.
+          </h1>
+          <!-- Paragraph -->
+          <p class="text-lg sm:text-xl text-slate-600 font-normal leading-relaxed mb-3 max-w-2xl">
+            Tú sabes de veterinaria. Yo me encargo de convertir lo que haces en una web clara, profesional y lista para tus clientes.
+          </p>
+          <!-- Subtitle -->
+          <p class="text-sm sm:text-base text-slate-500 font-medium leading-relaxed mb-8">
+            Desde la estructura y el contenido hasta el diseño, desarrollo y publicación.
+          </p>
+          <!-- Buttons -->
+          <div class="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto justify-center mb-12">
+            <a
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0D9488] hover:bg-[#0f766e] text-white px-6 py-3.5 rounded-lg font-semibold text-base shadow-xs hover:shadow-sm transition-all"
+              href={LINKS.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              onclick="if (window.posthog) { window.posthog.capture('web_vet_whatsapp_click', { posicion: 'hero_primary', intent: 'quiero_mi_web' }); }"
+            >
+              <span>Quiero mi web</span>
+              <span class="material-symbols-outlined text-[18px]">chat</span>
+            </a>
+            <a
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-6 py-3.5 rounded-lg font-medium text-base transition-all"
+              href="#caso-real"
+              onclick="if (window.posthog) { window.posthog.capture('web_vet_case_study_click', { posicion: 'hero_secondary', accion: 'scroll_caso_real' }); }"
+            >
+              <span>Ver un caso real</span>
+              <span class="material-symbols-outlined text-[18px]">visibility</span>
+            </a>
+          </div>
+        </div>
+        <!-- Mockup Visual -->
+        <div class="w-full max-w-5xl mx-auto rounded-2xl overflow-hidden border border-slate-200/90 shadow-xl bg-white mb-10">
+          <img
+            alt="Mockup de página web veterinaria profesional en laptop y celular"
+            class="w-full h-auto block object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBO0ps_vhqlVC8SAofpYKKUKBGZ4n0xHOZThKzic0fiaNA7dubD3ztlpAG9YRJLAOlWn3P7CSLj_ClQNJI6QR3BnmnPH6jasgdkX2dzo2U14NDHMMJ9keNK3R8Yv_UNn9EDVHILRq06ct_05vydzgtceSfYSYgZL5h7X3Wv_1WB-FrVSy8I8ptEx9PvSvhPOsb5oACEYq87NRwLWwmMTRL9HSsxFBAjm0NlMF0wOf7QO9EZnWWYFoSnxw"
+          />
+        </div>
+        <!-- Repeated CTA directly beneath the hero -->
+        <div class="flex flex-col items-center justify-center gap-2 text-center pt-2">
+          <a
+            class="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0f766e] text-white px-7 py-3 rounded-lg font-semibold text-sm transition-all shadow-xs"
+            href={LINKS.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            onclick="if (window.posthog) { window.posthog.capture('web_vet_whatsapp_click', { posicion: 'hero_bottom', intent: 'quiero_mi_web' }); }"
+          >
+            <span>Quiero mi web</span>
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </a>
+          <span class="font-mono text-xs text-slate-500">Conversación directa por WhatsApp</span>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: EL PROBLEMA -->
+      <section class="w-full py-16 md:py-24 bg-white border-y border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+          <div class="max-w-3xl mb-12">
+            <span class="font-mono text-xs text-[#0D9488] uppercase tracking-wider font-semibold">DIAGNÓSTICO INICIAL</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-[#0F172A] tracking-tight mt-2 leading-tight">
+              Tu web debería responder las preguntas que un propietario tiene antes de contactarte.
+            </h2>
+          </div>
+          <!-- Question cards composition -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+            <div class="p-6 bg-[#F8FAFC] border border-slate-200/80 rounded-xl flex items-start gap-4">
+              <span class="material-symbols-outlined text-[#0D9488] text-[24px] mt-0.5">pets</span>
+              <div>
+                <h3 class="text-lg font-semibold text-[#0F172A]">¿Atienden mi mascota?</h3>
+                <p class="text-sm text-slate-600 mt-1">Especies atendidas con claridad inmediata para evitar consultas erradas.</p>
+              </div>
+            </div>
+            <div class="p-6 bg-[#F8FAFC] border border-slate-200/80 rounded-xl flex items-start gap-4">
+              <span class="material-symbols-outlined text-[#0D9488] text-[24px] mt-0.5">medical_services</span>
+              <div>
+                <h3 class="text-lg font-semibold text-[#0F172A]">¿Qué servicios ofrecen?</h3>
+                <p class="text-sm text-slate-600 mt-1">Listado organizado de procedimientos clínicos, profilaxis o cirugías.</p>
+              </div>
+            </div>
+            <div class="p-6 bg-[#F8FAFC] border border-slate-200/80 rounded-xl flex items-start gap-4">
+              <span class="material-symbols-outlined text-[#0D9488] text-[24px] mt-0.5">location_on</span>
+              <div>
+                <h3 class="text-lg font-semibold text-[#0F172A]">¿Dónde están?</h3>
+                <p class="text-sm text-slate-600 mt-1">Ubicación exacta, puntos de referencia, parqueo o sedes físicas.</p>
+              </div>
+            </div>
+            <div class="p-6 bg-[#F8FAFC] border border-slate-200/80 rounded-xl flex items-start gap-4">
+              <span class="material-symbols-outlined text-[#0D9488] text-[24px] mt-0.5">home_health</span>
+              <div>
+                <h3 class="text-lg font-semibold text-[#0F172A]">¿Atienden a domicilio?</h3>
+                <p class="text-sm text-slate-600 mt-1">Cobertura precisa de zonas y municipios sin generar falsas expectativas.</p>
+              </div>
+            </div>
+            <div class="p-6 bg-[#F8FAFC] border border-slate-200/80 rounded-xl flex items-start gap-4">
+              <span class="material-symbols-outlined text-[#0D9488] text-[24px] mt-0.5">badge</span>
+              <div>
+                <h3 class="text-lg font-semibold text-[#0F172A]">¿Quién me va a atender?</h3>
+                <p class="text-sm text-slate-600 mt-1">Credenciales del médico veterinario para transmitir tranquilidad real.</p>
+              </div>
+            </div>
+            <div class="p-6 bg-[#F8FAFC] border border-slate-200/80 rounded-xl flex items-start gap-4">
+              <span class="material-symbols-outlined text-[#0D9488] text-[24px] mt-0.5">calendar_month</span>
+              <div>
+                <h3 class="text-lg font-semibold text-[#0F172A]">¿Cómo puedo agendar?</h3>
+                <p class="text-sm text-slate-600 mt-1">El paso directo a una conversación guiada en WhatsApp o calendario.</p>
+              </div>
+            </div>
+          </div>
+          <!-- Supporting text callout -->
+          <div class="p-5 bg-teal-50/60 border border-teal-200/70 rounded-xl flex items-center gap-3">
+            <span class="material-symbols-outlined text-[#0D9488] shrink-0 text-[22px]">info</span>
+            <p class="text-sm sm:text-base font-medium text-slate-800">
+              Si una persona tiene que buscar demasiado para encontrar estas respuestas, la web no está haciendo bien su trabajo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: NO TIENES QUE SABER QUÉ WEB NECESITAS -->
+      <section class="w-full py-16 md:py-24 max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="max-w-3xl mb-12">
+          <span class="font-mono text-xs text-[#0D9488] uppercase tracking-wider font-semibold">PUNTO DE PARTIDA</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-[#0F172A] tracking-tight mt-2">
+            No necesitas llegar con la solución.
+          </h2>
+        </div>
+        <!-- Quote cards for common thoughts -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl shadow-2xs">
+            <p class="text-lg font-semibold text-[#0F172A] italic">«Necesito una web.»</p>
+            <span class="font-mono text-xs text-slate-400 mt-3 block">Partida simple</span>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl shadow-2xs">
+            <p class="text-lg font-semibold text-[#0F172A] italic">«Mi web está vieja.»</p>
+            <span class="font-mono text-xs text-slate-400 mt-3 block">Renovación integral</span>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl shadow-2xs">
+            <p class="text-lg font-semibold text-[#0F172A] italic">«Quiero empezar de cero.»</p>
+            <span class="font-mono text-xs text-slate-400 mt-3 block">Nueva clínica</span>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl shadow-2xs">
+            <p class="text-lg font-semibold text-[#0F172A] italic">«Mi web no explica bien lo que hacemos.»</p>
+            <span class="font-mono text-xs text-slate-400 mt-3 block">Claridad de mensaje</span>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl shadow-2xs">
+            <p class="text-lg font-semibold text-[#0F172A] italic">«Quiero mostrar mis especialidades.»</p>
+            <span class="font-mono text-xs text-slate-400 mt-3 block">Diferencial médico</span>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl shadow-2xs">
+            <p class="text-lg font-semibold text-[#0F172A] italic">«Quiero que sea más fácil agendar.»</p>
+            <span class="font-mono text-xs text-slate-400 mt-3 block">Menos fricción</span>
+          </div>
+        </div>
+        <!-- Bottom statement -->
+        <div class="p-6 bg-white border border-slate-200 rounded-xl text-center max-w-3xl mx-auto shadow-2xs">
+          <p class="text-base sm:text-lg text-slate-800 font-medium">
+            Con eso es suficiente para empezar. Yo entiendo tu negocio y te propongo qué debería tener la web.
+          </p>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: CÓMO TRABAJAMOS -->
+      <section class="w-full py-16 md:py-24 bg-white border-y border-slate-200/80" id="como-funciona">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+          <div class="max-w-3xl mb-14">
+            <span class="font-mono text-xs text-[#0D9488] uppercase tracking-wider font-semibold">METODOLOGÍA SIMPLE</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-[#0F172A] tracking-tight mt-2">
+              Tú me cuentas de tu veterinaria. Yo me encargo de la web.
+            </h2>
+          </div>
+          <!-- 4 numbered stages -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="p-6 bg-[#F8FAFC] border border-slate-200/80 rounded-xl flex flex-col justify-between">
+              <div>
+                <span class="font-mono text-xs font-bold text-[#0D9488] bg-teal-50 px-2 py-1 rounded inline-block mb-4 border border-teal-200/60">01</span>
+                <h3 class="text-base font-bold text-[#0F172A] mb-2">Entiendo tu negocio</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Qué haces, qué animales atiendes, qué servicios tienes, dónde trabajas y qué quieres comunicar.</p>
+              </div>
+            </div>
+            <div class="p-6 bg-[#F8FAFC] border border-slate-200/80 rounded-xl flex flex-col justify-between">
+              <div>
+                <span class="font-mono text-xs font-bold text-[#0D9488] bg-teal-50 px-2 py-1 rounded inline-block mb-4 border border-teal-200/60">02</span>
+                <h3 class="text-base font-bold text-[#0F172A] mb-2">Organizo la información</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Defino qué debe aparecer primero, qué páginas necesitas y cómo debería recorrerlas una persona.</p>
+              </div>
+            </div>
+            <div class="p-6 bg-[#F8FAFC] border border-slate-200/80 rounded-xl flex flex-col justify-between">
+              <div>
+                <span class="font-mono text-xs font-bold text-[#0D9488] bg-teal-50 px-2 py-1 rounded inline-block mb-4 border border-teal-200/60">03</span>
+                <h3 class="text-base font-bold text-[#0F172A] mb-2">Construyo la web</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Contenido, UX, diseño visual, desarrollo y adaptación para celular.</p>
+              </div>
+            </div>
+            <div class="p-6 bg-[#F8FAFC] border border-slate-200/80 rounded-xl flex flex-col justify-between">
+              <div>
+                <span class="font-mono text-xs font-bold text-[#0D9488] bg-teal-50 px-2 py-1 rounded inline-block mb-4 border border-teal-200/60">04</span>
+                <h3 class="text-base font-bold text-[#0F172A] mb-2">La pongo en funcionamiento</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Dominio, configuración técnica, formularios, contacto, analítica y publicación.</p>
+              </div>
+            </div>
+          </div>
+          <!-- Highlight note -->
+          <div class="p-4 bg-slate-100/70 border border-slate-200 rounded-lg flex items-center justify-center text-center">
+            <p class="text-sm font-medium text-slate-700">
+              No tienes que convertirte en experto en páginas web.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: QUÉ PUEDE TENER TU WEB -->
+      <section class="w-full py-16 md:py-24 max-w-7xl mx-auto px-6 lg:px-12" id="que-hago">
+        <div class="max-w-3xl mb-12">
+          <span class="font-mono text-xs text-[#0D9488] uppercase tracking-wider font-semibold">ESTRUCTURA MODULAR</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-[#0F172A] tracking-tight mt-2">
+            La construimos alrededor de tu veterinaria.
+          </h2>
+        </div>
+        <!-- Clean modular cards with refined clinical/medical line icons -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl shadow-2xs">
+            <span class="material-symbols-outlined text-[#0D9488] text-[26px] mb-3">medical_services</span>
+            <h3 class="text-base font-bold text-[#0F172A] mb-1">Servicios</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Explica claramente qué haces y qué puede solicitar un propietario.</p>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl shadow-2xs">
+            <span class="material-symbols-outlined text-[#0D9488] text-[26px] mb-3">clinical_notes</span>
+            <h3 class="text-base font-bold text-[#0F172A] mb-1">Especialidades</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Destaca las áreas en las que tienes experiencia.</p>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl shadow-2xs">
+            <span class="material-symbols-outlined text-[#0D9488] text-[26px] mb-3">pets</span>
+            <h3 class="text-base font-bold text-[#0F172A] mb-1">Especies</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Ideal para veterinarios especializados en determinados animales.</p>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl shadow-2xs">
+            <span class="material-symbols-outlined text-[#0D9488] text-[26px] mb-3">group</span>
+            <h3 class="text-base font-bold text-[#0F172A] mb-1">Equipo</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Presenta a las personas detrás de la atención.</p>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl shadow-2xs">
+            <span class="material-symbols-outlined text-[#0D9488] text-[26px] mb-3">distance</span>
+            <h3 class="text-base font-bold text-[#0F172A] mb-1">Sedes y cobertura</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Especialmente importante si tienes varias sedes o atención a domicilio.</p>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl shadow-2xs">
+            <span class="material-symbols-outlined text-[#0D9488] text-[26px] mb-3">verified</span>
+            <h3 class="text-base font-bold text-[#0F172A] mb-1">Casos y testimonios</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Ayuda a que nuevos clientes conozcan experiencias reales.</p>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl shadow-2xs sm:col-span-2 lg:col-span-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <span class="material-symbols-outlined text-[#0D9488] text-[26px] mb-1">event_available</span>
+                <h3 class="text-base font-bold text-[#0F172A] mb-1">Contacto y agenda</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">Haz que pasar de visitar la web a contactarte sea sencillo.</p>
+              </div>
+              <a
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0D9488] hover:text-[#0f766e]"
+                href={LINKS.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                onclick="if (window.posthog) { window.posthog.capture('web_vet_whatsapp_click', { posicion: 'modulos_seccion', intent: 'consultar_modulos' }); }"
+              >
+                <span>Consultar módulos para tu práctica</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Disclaimer tag -->
+        <p class="text-xs text-slate-500 font-mono text-center">
+          Módulos modulares a medida: se eligen según las necesidades operativas de cada veterinaria.
+        </p>
+      </section>
+
+      <!-- SECCIÓN PRINCIPAL: CASO REAL -->
+      <section class="w-full py-16 md:py-24 bg-white border-y border-slate-200/80" id="caso-real">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+          <div class="max-w-3xl mb-10">
+            <span class="font-mono text-xs text-[#0D9488] uppercase tracking-wider font-semibold">CASO REAL DE IMPLEMENTACIÓN</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-[#0F172A] tracking-tight mt-2">
+              Así se ve cuando la web parte del negocio.
+            </h2>
+          </div>
+          <!-- Case study card container -->
+          <div class="p-8 sm:p-10 bg-[#F8FAFC] border border-slate-200 rounded-2xl shadow-2xs mb-10">
+            <div class="border-b border-slate-200 pb-6 mb-8">
+              <span class="font-mono text-xs text-slate-500 uppercase tracking-wider">Proyecto Clínico</span>
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-[#0F172A] mt-1">Exótico Veterinaria</h3>
+              <p class="text-slate-600 text-base mt-1 font-medium">Veterinaria especializada en animales no convencionales con atención a domicilio.</p>
+              <p class="text-sm text-slate-600 mt-4 leading-relaxed max-w-3xl">
+                Exótico necesitaba una web capaz de explicar un servicio que no funciona como una veterinaria tradicional.
+              </p>
+            </div>
+            <!-- 5 Key elements solved -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              <div class="p-5 bg-white border border-slate-200/80 rounded-xl">
+                <span class="font-mono text-xs text-[#0D9488] font-bold block mb-1">01 · Especies</span>
+                <h4 class="text-sm font-bold text-[#0F172A] mb-1">Qué animales atiende</h4>
+                <p class="text-xs sm:text-sm text-slate-600">Aves, conejos, roedores, animales exóticos y otras especies.</p>
+              </div>
+              <div class="p-5 bg-white border border-slate-200/80 rounded-xl">
+                <span class="font-mono text-xs text-[#0D9488] font-bold block mb-1">02 · Claridad</span>
+                <h4 class="text-sm font-bold text-[#0F172A] mb-1">Qué servicios ofrece</h4>
+                <p class="text-xs sm:text-sm text-slate-600">Para que el propietario pueda identificar rápidamente qué tipo de atención necesita.</p>
+              </div>
+              <div class="p-5 bg-white border border-slate-200/80 rounded-xl">
+                <span class="font-mono text-xs text-[#0D9488] font-bold block mb-1">03 · Cobertura</span>
+                <h4 class="text-sm font-bold text-[#0F172A] mb-1">Dónde trabaja</h4>
+                <p class="text-xs sm:text-sm text-slate-600">Atención en diferentes zonas del Oriente Antioqueño.</p>
+              </div>
+              <div class="p-5 bg-white border border-slate-200/80 rounded-xl">
+                <span class="font-mono text-xs text-[#0D9488] font-bold block mb-1">04 · Confianza</span>
+                <h4 class="text-sm font-bold text-[#0F172A] mb-1">Quién está detrás</h4>
+                <p class="text-xs sm:text-sm text-slate-600">Presentar a la profesional y generar confianza antes del contacto.</p>
+              </div>
+              <div class="p-5 bg-white border border-slate-200/80 rounded-xl md:col-span-2 lg:col-span-2">
+                <span class="font-mono text-xs text-[#0D9488] font-bold block mb-1">05 · Acción</span>
+                <h4 class="text-sm font-bold text-[#0F172A] mb-1">Cómo solicitar atención</h4>
+                <p class="text-xs sm:text-sm text-slate-600">Facilitar el paso hacia el contacto y la agenda sin fricciones.</p>
+              </div>
+            </div>
+            <!-- Highlight callout -->
+            <div class="p-5 bg-white border-l-4 border-[#0D9488] rounded-r-xl mb-8">
+              <p class="text-sm sm:text-base font-semibold text-[#0F172A]">
+                La web no se construyó alrededor de una plantilla. Se construyó alrededor de cómo funciona el negocio.
+              </p>
+            </div>
+            <!-- Link CTA and Action CTA -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <a
+                class="inline-flex items-center gap-1.5 text-sm font-bold text-[#0D9488] hover:text-[#0f766e] bg-teal-50 px-4 py-2.5 rounded-lg border border-teal-200/60 transition-colors"
+                href="https://www.exoticoveterinaria.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onclick="if (window.posthog) { window.posthog.capture('web_vet_external_case_click', { posicion: 'caso_real', sitio: 'exoticoveterinaria.com' }); }"
+              >
+                <span>Ver Exótico Veterinaria</span>
+                <span class="text-base leading-none">↗</span>
+              </a>
+              <a
+                class="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0f766e] text-white px-5 py-2.5 rounded-lg font-semibold text-sm transition-all shadow-xs"
+                href={LINKS.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                onclick="if (window.posthog) { window.posthog.capture('web_vet_whatsapp_click', { posicion: 'caso_real_card', intent: 'quiero_mi_web' }); }"
+              >
+                <span>Quiero mi web</span>
+                <span class="material-symbols-outlined text-[17px]">chat</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: TIPOS DE VETERINARIOS -->
+      <section class="w-full py-16 md:py-24 max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="max-w-3xl mb-12">
+          <span class="font-mono text-xs text-[#0D9488] uppercase tracking-wider font-semibold">ENFOQUE</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-[#0F172A] tracking-tight mt-2">
+            ¿Para quién es?
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl shadow-2xs">
+            <span class="font-mono text-xs text-slate-400 block mb-2">Perfil 01</span>
+            <h3 class="text-base font-bold text-[#0F172A] mb-1">Veterinario independiente</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Quieres una presencia profesional que represente tu trabajo.</p>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl shadow-2xs">
+            <span class="font-mono text-xs text-slate-400 block mb-2">Perfil 02</span>
+            <h3 class="text-base font-bold text-[#0F172A] mb-1">Clínica veterinaria</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Necesitas organizar servicios, especialidades, equipo y contacto.</p>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl shadow-2xs">
+            <span class="font-mono text-xs text-slate-400 block mb-2">Perfil 03</span>
+            <h3 class="text-base font-bold text-[#0F172A] mb-1">Veterinario especializado</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Tu trabajo es diferente y necesitas explicarlo correctamente.</p>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl shadow-2xs">
+            <span class="font-mono text-xs text-slate-400 block mb-2">Perfil 04</span>
+            <h3 class="text-base font-bold text-[#0F172A] mb-1">Veterinaria a domicilio</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Necesitas comunicar claramente dónde atiendes y cómo funciona el servicio.</p>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl shadow-2xs sm:col-span-2 lg:col-span-1">
+            <span class="font-mono text-xs text-slate-400 block mb-2">Perfil 05</span>
+            <h3 class="text-base font-bold text-[#0F172A] mb-1">Nueva veterinaria</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Estás comenzando y necesitas construir tu presencia digital desde cero.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: QUÉ INCLUYE -->
+      <section class="w-full py-16 md:py-24 bg-white border-y border-slate-200/80" id="que-incluye">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+          <div class="max-w-3xl mb-12">
+            <span class="font-mono text-xs text-[#0D9488] uppercase tracking-wider font-semibold">ALCANCE CONCRETO</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-[#0F172A] tracking-tight mt-2">
+              Yo me encargo de todo lo necesario para poner tu web en marcha.
+            </h2>
+          </div>
+          <!-- 15 items in a neat 3-column grid with subtle tick marks -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
+            <div class="flex items-center gap-3 py-2 border-b border-slate-100">
+              <span class="material-symbols-outlined text-[#0D9488] text-[20px]">check</span>
+              <span class="text-sm font-medium text-slate-800">Entendimiento del negocio</span>
+            </div>
+            <div class="flex items-center gap-3 py-2 border-b border-slate-100">
+              <span class="material-symbols-outlined text-[#0D9488] text-[20px]">check</span>
+              <span class="text-sm font-medium text-slate-800">Investigación</span>
+            </div>
+            <div class="flex items-center gap-3 py-2 border-b border-slate-100">
+              <span class="material-symbols-outlined text-[#0D9488] text-[20px]">check</span>
+              <span class="text-sm font-medium text-slate-800">Arquitectura de información</span>
+            </div>
+            <div class="flex items-center gap-3 py-2 border-b border-slate-100">
+              <span class="material-symbols-outlined text-[#0D9488] text-[20px]">check</span>
+              <span class="text-sm font-medium text-slate-800">Estructura de páginas</span>
+            </div>
+            <div class="flex items-center gap-3 py-2 border-b border-slate-100">
+              <span class="material-symbols-outlined text-[#0D9488] text-[20px]">check</span>
+              <span class="text-sm font-medium text-slate-800">Organización de servicios</span>
+            </div>
+            <div class="flex items-center gap-3 py-2 border-b border-slate-100">
+              <span class="material-symbols-outlined text-[#0D9488] text-[20px]">check</span>
+              <span class="text-sm font-medium text-slate-800">Redacción y estructura del contenido</span>
+            </div>
+            <div class="flex items-center gap-3 py-2 border-b border-slate-100">
+              <span class="material-symbols-outlined text-[#0D9488] text-[20px]">check</span>
+              <span class="text-sm font-medium text-slate-800">UX/UI</span>
+            </div>
+            <div class="flex items-center gap-3 py-2 border-b border-slate-100">
+              <span class="material-symbols-outlined text-[#0D9488] text-[20px]">check</span>
+              <span class="text-sm font-medium text-slate-800">Diseño visual</span>
+            </div>
+            <div class="flex items-center gap-3 py-2 border-b border-slate-100">
+              <span class="material-symbols-outlined text-[#0D9488] text-[20px]">check</span>
+              <span class="text-sm font-medium text-slate-800">Desarrollo</span>
+            </div>
+            <div class="flex items-center gap-3 py-2 border-b border-slate-100">
+              <span class="material-symbols-outlined text-[#0D9488] text-[20px]">check</span>
+              <span class="text-sm font-medium text-slate-800">Diseño responsive</span>
+            </div>
+            <div class="flex items-center gap-3 py-2 border-b border-slate-100">
+              <span class="material-symbols-outlined text-[#0D9488] text-[20px]">check</span>
+              <span class="text-sm font-medium text-slate-800">Configuración técnica</span>
+            </div>
+            <div class="flex items-center gap-3 py-2 border-b border-slate-100">
+              <span class="material-symbols-outlined text-[#0D9488] text-[20px]">check</span>
+              <span class="text-sm font-medium text-slate-800">Dominio y publicación</span>
+            </div>
+            <div class="flex items-center gap-3 py-2 border-b border-slate-100">
+              <span class="material-symbols-outlined text-[#0D9488] text-[20px]">check</span>
+              <span class="text-sm font-medium text-slate-800">Formularios y contacto</span>
+            </div>
+            <div class="flex items-center gap-3 py-2 border-b border-slate-100">
+              <span class="material-symbols-outlined text-[#0D9488] text-[20px]">check</span>
+              <span class="text-sm font-medium text-slate-800">Analítica básica</span>
+            </div>
+            <div class="flex items-center gap-3 py-2 border-b border-slate-100">
+              <span class="material-symbols-outlined text-[#0D9488] text-[20px]">check</span>
+              <span class="text-sm font-medium text-slate-800">SEO técnico y básico</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: QUÉ NO HAGO -->
+      <section class="w-full py-16 md:py-24 max-w-7xl mx-auto px-6 lg:px-12">
+        <div class="max-w-3xl mb-12">
+          <span class="font-mono text-xs text-slate-500 uppercase tracking-wider font-semibold">TRANSPARENCIA</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-[#0F172A] tracking-tight mt-2">
+            También prefiero dejar esto claro.
+          </h2>
+        </div>
+        <!-- Discard checklist -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+          <div class="p-4 bg-white border border-slate-200/90 rounded-lg flex items-center gap-3">
+            <span class="material-symbols-outlined text-slate-400 text-[20px]">close</span>
+            <span class="text-sm font-medium text-slate-700">Tiendas online</span>
+          </div>
+          <div class="p-4 bg-white border border-slate-200/90 rounded-lg flex items-center gap-3">
+            <span class="material-symbols-outlined text-slate-400 text-[20px]">close</span>
+            <span class="text-sm font-medium text-slate-700">Manejo de redes sociales</span>
+          </div>
+          <div class="p-4 bg-white border border-slate-200/90 rounded-lg flex items-center gap-3">
+            <span class="material-symbols-outlined text-slate-400 text-[20px]">close</span>
+            <span class="text-sm font-medium text-slate-700">Diseño de logos como servicio independiente</span>
+          </div>
+          <div class="p-4 bg-white border border-slate-200/90 rounded-lg flex items-center gap-3">
+            <span class="material-symbols-outlined text-slate-400 text-[20px]">close</span>
+            <span class="text-sm font-medium text-slate-700">Paquetes de publicaciones</span>
+          </div>
+          <div class="p-4 bg-white border border-slate-200/90 rounded-lg flex items-center gap-3">
+            <span class="material-symbols-outlined text-slate-400 text-[20px]">close</span>
+            <span class="text-sm font-medium text-slate-700">Promesas de conseguir pacientes</span>
+          </div>
+          <div class="p-4 bg-white border border-slate-200/90 rounded-lg flex items-center gap-3">
+            <span class="material-symbols-outlined text-slate-400 text-[20px]">close</span>
+            <span class="text-sm font-medium text-slate-700">Soporte permanente por WhatsApp</span>
+          </div>
+          <div class="p-4 bg-white border border-slate-200/90 rounded-lg flex items-center gap-3 sm:col-span-2 lg:col-span-3">
+            <span class="material-symbols-outlined text-slate-400 text-[20px]">close</span>
+            <span class="text-sm font-medium text-slate-700">Proyectos con cambios de alcance constantes</span>
+          </div>
+        </div>
+        <!-- Slogan principle -->
+        <div class="p-5 bg-slate-100/70 border border-slate-200 rounded-xl text-center">
+          <p class="text-base font-semibold text-[#0F172A]">
+            Mi trabajo es resolver tu web. No venderte diez servicios que no necesitas.
+          </p>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: SOBRE PABLO -->
+      <section class="w-full py-16 md:py-24 bg-white border-y border-slate-200/80">
+        <div class="max-w-4xl mx-auto px-6 lg:px-12">
+          <div class="p-8 sm:p-10 bg-[#F8FAFC] border border-slate-200 rounded-2xl flex flex-col md:flex-row gap-8 items-start">
+            <!-- Clean portrait / avatar badge -->
+            <div class="shrink-0">
+              <div class="w-20 h-20 rounded-2xl bg-teal-50 border border-teal-200 flex items-center justify-center text-[#0D9488] font-bold text-2xl font-mono">
+                PR
+              </div>
+              <span class="font-mono text-xs text-slate-500 mt-2 block text-center">Pablo Ríos</span>
+            </div>
+            <div class="flex flex-col gap-3">
+              <span class="font-mono text-xs text-[#0D9488] uppercase tracking-wider font-semibold">CONSULTORÍA DIRECTA</span>
+              <h2 class="text-2xl sm:text-3xl font-bold text-[#0F172A] tracking-tight">Soy Pablo.</h2>
+              <p class="text-base text-slate-700 leading-relaxed">
+                Soy Product Manager y trabajo en la intersección entre negocio, tecnología, experiencia de usuario e inteligencia artificial. Cuando construyo una web, primero intento entender cómo funciona el negocio y qué necesita comunicar. Después decido qué vale la pena construir. Por eso no necesitas llegar con una especificación técnica.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ SECTION -->
+      <section class="w-full py-16 md:py-24 max-w-5xl mx-auto px-6 lg:px-12" id="faq">
+        <div class="max-w-3xl mb-12">
+          <span class="font-mono text-xs text-[#0D9488] uppercase tracking-wider font-semibold">RESOLUCIÓN DE DUDAS</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-[#0F172A] tracking-tight mt-2">
+            Preguntas frecuentes
+          </h2>
+        </div>
+        <div class="flex flex-col gap-4">
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl">
+            <h3 class="text-base font-bold text-[#0F172A] mb-2">¿Tengo que saber exactamente qué quiero?</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">No. Puedes llegar simplemente diciendo que necesitas una web. Primero hablamos y definimos qué tendría sentido.</p>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl">
+            <h3 class="text-base font-bold text-[#0F172A] mb-2">¿Pueden renovar una web que ya tengo?</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Sí. Podemos analizar qué debería mantenerse, qué debería cambiar y reconstruir la experiencia.</p>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl">
+            <h3 class="text-base font-bold text-[#0F172A] mb-2">¿Trabajan con veterinarios especializados?</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Sí. La estructura puede adaptarse a especies, especialidades y modelos de atención diferentes.</p>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl">
+            <h3 class="text-base font-bold text-[#0F172A] mb-2">¿Pueden hacer una web para atención a domicilio?</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Sí. Podemos estructurar claramente zonas de cobertura, funcionamiento del servicio y contacto.</p>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl">
+            <h3 class="text-base font-bold text-[#0F172A] mb-2">¿La web funciona en celular?</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Sí. La experiencia se diseña para escritorio y móvil.</p>
+          </div>
+          <div class="p-6 bg-white border border-slate-200/90 rounded-xl">
+            <h3 class="text-base font-bold text-[#0F172A] mb-2">¿Cuánto cuesta?</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">Cada veterinaria tiene una escala y necesidades diferentes. Hablemos de tu caso y revisamos qué alcance tiene sentido antes de cualquier compromiso.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA FINAL -->
+      <section class="w-full py-16 md:py-24 bg-white border-t border-slate-200/80">
+        <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center">
+          <span class="font-mono text-xs text-[#0D9488] uppercase tracking-wider font-semibold">
+            TU VETERINARIA MERECE UNA BUENA WEB
+          </span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] tracking-tight mt-3 mb-6">
+            Cuéntame qué necesitas. Yo me encargo de convertirlo en una web.
+          </h2>
+          <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto mb-8 leading-relaxed">
+            No necesitas tener el proyecto definido. Cuéntame qué haces, qué tienes actualmente y qué quieres mejorar. Hablamos y vemos qué tendría sentido construir.
+          </p>
+          <div class="flex flex-col items-center justify-center gap-3">
+            <a
+              class="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0f766e] text-white px-8 py-4 rounded-lg font-bold text-base transition-all shadow-md"
+              href={LINKS.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              onclick="if (window.posthog) { window.posthog.capture('web_vet_whatsapp_click', { posicion: 'cta_final', intent: 'quiero_mi_web' }); }"
+            >
+              <span>Quiero mi web</span>
+              <span class="material-symbols-outlined text-[20px]">chat</span>
+            </a>
+            <span class="font-mono text-xs text-slate-500">Primera conversación sin costo.</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- MOBILE STICKY CTA -->
+    <div class="fixed bottom-0 left-0 right-0 p-3 bg-white/95 backdrop-blur-md border-t border-slate-200 sm:hidden z-50 shadow-lg">
+      <a
+        class="w-full flex items-center justify-center gap-2 bg-[#0D9488] hover:bg-[#0f766e] text-white py-3 rounded-lg font-bold text-sm shadow-xs"
+        href={LINKS.whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+        onclick="if (window.posthog) { window.posthog.capture('web_vet_whatsapp_click', { posicion: 'mobile_sticky', intent: 'quiero_mi_web' }); }"
+      >
+        <span>Quiero mi web</span>
+        <span class="material-symbols-outlined text-[18px]">chat</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- SCRIPT DE SEGUIMIENTO INTENCIONAL CON POSTHOG -->
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.posthog) {
+        window.posthog.capture("web_vet_page_view", {
+          pagina: "soluciones/web-veterinarios",
+          categoria: "soluciones_veterinarias"
+        });
+      }
+    });
+  </script>
+</Layout>
