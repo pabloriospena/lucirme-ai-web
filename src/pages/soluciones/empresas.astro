@@ -26,12 +26,14 @@ import { LINKS } from "../../lib/constants.js";
         <a
           href={LINKS.calendly_empresa}
           class="inline-flex items-center justify-center gap-2 bg-orange hover:bg-orange/90 text-white px-8 py-4 rounded-lg font-bold transition shadow-lg"
+          onclick="if (window.posthog) { window.posthog.capture('empresas_calendly_click', { origen: 'hero' }); }"
         >
           Agendar Diagnóstico Operativo →
         </a>
         <a
           href="#precios"
           class="inline-flex items-center justify-center gap-2 bg-white border border-gray-300 text-deep px-8 py-4 rounded-lg font-bold hover:bg-gray-50 transition"
+          onclick="if (window.posthog) { window.posthog.capture('empresas_scroll_precios', { origen: 'hero' }); }"
         >
           Ver Sesiones y talleres
         </a>
@@ -183,6 +185,7 @@ import { LINKS } from "../../lib/constants.js";
             target="_blank"
             rel="noopener noreferrer"
             class="block w-full bg-emerald-600 text-white font-bold py-3 rounded-lg text-center hover:bg-emerald-500 transition shadow-md"
+            onclick="if (window.posthog) { window.posthog.capture('empresas_whatsapp_click', { producto: 'taller_inmersion', posicion: 'precios' }); }"
           >
             💬 Consultar por WhatsApp (+57 305 3046180)
           </a>
@@ -220,6 +223,7 @@ import { LINKS } from "../../lib/constants.js";
             target="_blank"
             rel="noopener noreferrer"
             class="block w-full bg-emerald-600 text-white font-bold py-3.5 rounded-lg text-center hover:bg-emerald-500 transition shadow-lg"
+            onclick="if (window.posthog) { window.posthog.capture('empresas_whatsapp_click', { producto: 'ciclo_autonomia', posicion: 'precios' }); }"
           >
             💬 Cotizar por WhatsApp (+57 305 3046180)
           </a>
@@ -230,4 +234,15 @@ import { LINKS } from "../../lib/constants.js";
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.posthog) {
+        window.posthog.capture("empresas_page_view", {
+          pagina: "soluciones/empresas",
+          categoria: "b2b_empresas"
+        });
+      }
+    });
+  </script>
 </Layout>

@@ -201,6 +201,7 @@ const defaultOrganizationSchema = {
           <a
             href="/curso-presentaciones"
             class="text-amber-400 hover:text-amber-300 font-semibold underline underline-offset-2 ml-1 shrink-0"
+            onclick="if (window.posthog) { window.posthog.capture('miniheader_promo_click', { curso: 'curso-presentaciones', posicion: 'top_bar' }); }"
           >
             Ver curso →
           </a>
@@ -226,7 +227,7 @@ const defaultOrganizationSchema = {
       >
         <!-- Izquierda: Brand & Subtitle -->
         <div class="flex items-center gap-3 shrink-0">
-          <a href="/" class="flex items-center gap-2.5 group">
+          <a href="/" class="flex items-center gap-2.5 group" onclick="if (window.posthog) { window.posthog.capture('header_brand_click', { origen: 'header_logo' }); }">
             <img
               src="/logo-lucirme.png"
               alt="LuciRMe AI Logo"
@@ -254,6 +255,7 @@ const defaultOrganizationSchema = {
           <a
             href="/rutas"
             class="hover:text-teal-700 transition-colors flex items-center gap-1.5"
+            onclick="if (window.posthog) { window.posthog.capture('header_nav_click', { destino: '/rutas', label: 'Rutas' }); }"
           >
             <span>Rutas</span>
             <span
@@ -261,15 +263,17 @@ const defaultOrganizationSchema = {
               >5</span
             >
           </a>
-          <a href="/servicios" class="hover:text-teal-700 transition-colors"
+          <a href="/servicios" class="hover:text-teal-700 transition-colors" onclick="if (window.posthog) { window.posthog.capture('header_nav_click', { destino: '/servicios', label: 'Soluciones' }); }"
             >Soluciones</a
           >
-          <a href="/recursos" class="hover:text-teal-700 transition-colors"
+          <a href="/recursos" class="hover:text-teal-700 transition-colors" onclick="if (window.posthog) { window.posthog.capture('header_nav_click', { destino: '/recursos', label: 'Recursos' }); }"
             >Recursos</a
           >
           <a
             href="/content/sobremi"
-            class="hover:text-teal-700 transition-colors">Sobre Pablo</a
+            class="hover:text-teal-700 transition-colors"
+            onclick="if (window.posthog) { window.posthog.capture('header_nav_click', { destino: '/content/sobremi', label: 'Sobre Pablo' }); }"
+            >Sobre Pablo</a
           >
         </nav>
 
@@ -285,6 +289,7 @@ const defaultOrganizationSchema = {
               <a
                 href="/sign-in"
                 class="hidden xl:inline-block text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors"
+                onclick="if (window.posthog) { window.posthog.capture('header_signin_click', { origen: 'header' }); }"
               >
                 Iniciar Sesión
               </a>
@@ -292,7 +297,7 @@ const defaultOrganizationSchema = {
           }
 
           <button
-            onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
+            onclick="if (window.posthog) { window.posthog.capture('header_termometro_click', { origen: 'header_main' }); } document.getElementById('selector-overlay').classList.remove('hidden')"
             class="hidden sm:inline-flex text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/70 px-3 py-1.5 rounded-lg transition-colors border border-slate-200 cursor-pointer"
           >
             Termómetro (2 min)
@@ -304,6 +309,7 @@ const defaultOrganizationSchema = {
             target="_blank"
             rel="noopener noreferrer"
             class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3.5 sm:px-4 py-2 rounded-lg flex items-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
+            onclick="if (window.posthog) { window.posthog.capture('header_whatsapp_click', { origen: 'header_main' }); }"
           >
             <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
               <path

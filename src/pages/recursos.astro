@@ -245,12 +245,14 @@ const recursosPM = recursos.filter((r) => {
           <a
             href="/curso-presentaciones"
             class="bg-amber-500 hover:bg-amber-400 text-slate-950 text-center px-6 py-4 rounded-xl font-black text-sm md:text-base transition shadow-[0_0_25px_rgba(245,158,11,0.4)] cursor-pointer"
+            onclick="if (window.posthog) { window.posthog.capture('recursos_card_click', { recurso: 'curso-presentaciones', tipo: 'hero_destacado' }); }"
           >
             Ver Curso Completo ($35) →
           </a>
           <a
             href="/bot-presentaciones"
             class="text-xs text-orange hover:underline text-center sm:text-right font-bold"
+            onclick="if (window.posthog) { window.posthog.capture('recursos_card_click', { recurso: 'bot-presentaciones', tipo: 'sub_hero' }); }"
           >
             ⚡ ¿Buscas solo el Bot Guiado? Ver por $8 USD →
           </a>
@@ -284,6 +286,7 @@ const recursosPM = recursos.filter((r) => {
                   <a
                     href={ebookDestacado.url}
                     class="bg-teal text-white px-5 py-2.5 rounded-lg font-bold text-xs hover:bg-tealHover transition"
+                    onclick="if (window.posthog) { window.posthog.capture('recursos_card_click', { recurso: 'ebook-pm', tipo: 'ebook' }); }"
                   >
                     Comprar →
                   </a>
@@ -319,6 +322,7 @@ const recursosPM = recursos.filter((r) => {
                   <a
                     href={preventaDestacada.url}
                     class="bg-orange text-white px-5 py-2.5 rounded-lg font-bold text-xs hover:bg-orange/90 transition"
+                    onclick="if (window.posthog) { window.posthog.capture('recursos_card_click', { recurso: 'preventa-vol2', tipo: 'preventa' }); }"
                   >
                     Asegurar →
                   </a>
@@ -347,6 +351,7 @@ const recursosPM = recursos.filter((r) => {
               <a
                 href={rec.url}
                 class="group bg-white p-6 rounded-2xl border border-gray-200 hover:border-teal transition-all shadow-sm flex flex-col h-full"
+                onclick={`if (window.posthog) { window.posthog.capture('recursos_card_click', { recurso: '${rec.slug}', categoria: 'ia' }); }`}
               >
                 <span class="text-[10px] font-bold text-teal bg-teal/10 px-3 py-1 rounded-md uppercase tracking-widest w-fit mb-4">
                   {meta.etiqueta}
@@ -388,6 +393,7 @@ const recursosPM = recursos.filter((r) => {
               <a
                 href={rec.url}
                 class="group bg-white p-6 rounded-2xl border border-gray-200 hover:border-teal transition-all shadow-sm flex flex-col h-full"
+                onclick={`if (window.posthog) { window.posthog.capture('recursos_card_click', { recurso: '${rec.slug}', categoria: 'pm' }); }`}
               >
                 <span class="text-[10px] font-bold text-teal bg-teal/10 px-3 py-1 rounded-md uppercase tracking-widest w-fit mb-4">
                   {meta.etiqueta}
@@ -411,6 +417,16 @@ const recursosPM = recursos.filter((r) => {
       </div>
     </div>
   </main>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.posthog) {
+        window.posthog.capture("recursos_page_view", {
+          pagina: "recursos"
+        });
+      }
+    });
+  </script>
 
   <RedesSociales />
 </Layout>

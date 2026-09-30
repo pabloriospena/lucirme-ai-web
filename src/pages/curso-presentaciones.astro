@@ -29,6 +29,7 @@ const whatsappUrl = LINKS.whatsapp;
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black px-3.5 py-1.5 rounded-lg transition text-xs shadow-sm cursor-pointer transform hover:scale-105"
+          onclick="if (window.posthog) { window.posthog.capture('curso_presentaciones_buy_click', { precio: '35 USD', posicion: 'sticky_top_nav' }); }"
         >
           <span>Acceder al Curso (US$35)</span>
           <span>→</span>
@@ -85,6 +86,7 @@ const whatsappUrl = LINKS.whatsapp;
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-sm sm:text-base px-7 py-3.5 rounded-xl transition shadow-md cursor-pointer transform hover:-translate-y-0.5 w-full sm:w-auto"
+            onclick="if (window.posthog) { window.posthog.capture('curso_presentaciones_buy_click', { precio: '35 USD', posicion: 'hero' }); }"
           >
             <span>QUIERO APRENDER EL MÉTODO POR US$35 →</span>
           </a>
@@ -565,6 +567,7 @@ const whatsappUrl = LINKS.whatsapp;
             target="_blank"
             rel="noopener noreferrer"
             class="w-full inline-flex items-center justify-center gap-2 bg-slate-950 hover:bg-slate-800 text-amber-300 font-black text-xs sm:text-sm py-3 px-5 rounded-xl transition shadow-xs cursor-pointer transform hover:-translate-y-0.5"
+            onclick="if (window.posthog) { window.posthog.capture('curso_presentaciones_buy_click', { precio: '35 USD', posicion: 'pricing_card' }); }"
           >
             <span>QUIERO APRENDER EL MÉTODO →</span>
           </a>
@@ -759,6 +762,7 @@ const whatsappUrl = LINKS.whatsapp;
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-sm sm:text-base py-3.5 px-7 rounded-xl transition shadow-md cursor-pointer transform hover:-translate-y-0.5 w-full sm:w-auto"
+            onclick="if (window.posthog) { window.posthog.capture('curso_presentaciones_buy_click', { precio: '35 USD', posicion: 'final_cta' }); }"
           >
             <span>QUIERO APRENDER EL MÉTODO →</span>
           </a>
@@ -769,7 +773,7 @@ const whatsappUrl = LINKS.whatsapp;
 
           <div class="text-xs text-slate-500 flex items-center justify-center gap-1.5 pt-1">
             <span>¿Tienes dudas antes de comprar?</span>
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="text-emerald-700 font-bold hover:underline">
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="text-emerald-700 font-bold hover:underline" onclick="if (window.posthog) { window.posthog.capture('curso_presentaciones_whatsapp_click', { posicion: 'final_cta' }); }">
               Escríbenos por WhatsApp (+57 305 3046180)
             </a>
           </div>
@@ -786,6 +790,16 @@ const whatsappUrl = LINKS.whatsapp;
     </main>
 
   </div>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.posthog) {
+        window.posthog.capture("curso_presentaciones_page_view", {
+          pagina: "curso-presentaciones"
+        });
+      }
+    });
+  </script>
 
   <RedesSociales />
 

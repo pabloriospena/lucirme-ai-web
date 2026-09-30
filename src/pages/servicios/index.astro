@@ -23,7 +23,7 @@ import Layout from '../../layouts/Layout.astro';
       <div class="grid md:grid-cols-3 gap-8">
         
         <!-- 1. PROFESIONALES -->
-        <a href="/soluciones/profesionales" class="group flex flex-col bg-white border border-gray-200 rounded-2xl p-8 hover:border-teal transition-all shadow-sm hover:shadow-xl">
+        <a href="/soluciones/profesionales" class="group flex flex-col bg-white border border-gray-200 rounded-2xl p-8 hover:border-teal transition-all shadow-sm hover:shadow-xl" onclick="if (window.posthog) { window.posthog.capture('servicios_card_click', { destino: '/soluciones/profesionales', tipo: 'profesionales' }); }">
           <div class="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-teal/10 transition-colors">👤</div>
           <h2 class="text-xl font-bold text-deep mb-3 group-hover:text-teal transition-colors">Para Profesionales</h2>
           <p class="text-xs text-gray-600 mb-6 flex-grow leading-relaxed">
@@ -37,7 +37,7 @@ import Layout from '../../layouts/Layout.astro';
         </a>
 
         <!-- 2. EQUIPOS DE PRODUCTO -->
-        <a href="/servicios/producto" class="group flex flex-col bg-white border-2 border-teal/40 rounded-2xl p-8 hover:border-teal transition-all shadow-sm hover:shadow-xl relative overflow-hidden">
+        <a href="/servicios/producto" class="group flex flex-col bg-white border-2 border-teal/40 rounded-2xl p-8 hover:border-teal transition-all shadow-sm hover:shadow-xl relative overflow-hidden" onclick="if (window.posthog) { window.posthog.capture('servicios_card_click', { destino: '/servicios/producto', tipo: 'producto' }); }">
           <div class="absolute top-0 right-0 bg-teal text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider">
             Especializado
           </div>
@@ -54,7 +54,7 @@ import Layout from '../../layouts/Layout.astro';
         </a>
 
         <!-- 3. EMPRESAS / STARTUPS -->
-        <a href="/soluciones/empresas" class="group flex flex-col bg-white border border-gray-200 rounded-2xl p-8 hover:border-teal transition-all shadow-sm hover:shadow-xl">
+        <a href="/soluciones/empresas" class="group flex flex-col bg-white border border-gray-200 rounded-2xl p-8 hover:border-teal transition-all shadow-sm hover:shadow-xl" onclick="if (window.posthog) { window.posthog.capture('servicios_card_click', { destino: '/soluciones/empresas', tipo: 'empresas' }); }">
           <div class="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-teal/10 transition-colors">🏢</div>
           <h2 class="text-xl font-bold text-deep mb-3 group-hover:text-teal transition-colors">Para Startups y Empresas</h2>
           <p class="text-xs text-gray-600 mb-6 flex-grow leading-relaxed">
@@ -79,12 +79,22 @@ import Layout from '../../layouts/Layout.astro';
         Usa nuestro <strong>Selector</strong>. En 60 segundos mapeamos tu mayor fuga de tiempo y te damos un plan de acción concreto.
       </p>
       <button 
-        onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
-        class="inline-flex items-center gap-2 bg-orange text-white px-10 py-4 rounded-lg font-bold hover:bg-orange/90 transition shadow-lg text-lg"
+        onclick="if (window.posthog) { window.posthog.capture('servicios_selector_click', { origen: 'bottom_callout' }); } document.getElementById('selector-overlay').classList.remove('hidden');"
+        class="inline-flex items-center gap-2 bg-orange text-white px-10 py-4 rounded-lg font-bold hover:bg-orange/90 transition shadow-lg text-lg cursor-pointer"
       >
         ⚡ Enciende tu Foco
       </button>
     </div>
   </section>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.posthog) {
+        window.posthog.capture("servicios_index_page_view", {
+          pagina: "servicios"
+        });
+      }
+    });
+  </script>
 
 </Layout>

@@ -26,10 +26,10 @@ import { LINKS } from '../../lib/constants.js';
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-        <a href={LINKS.calendly} target="_blank" class="inline-flex items-center justify-center gap-2 bg-orange hover:bg-orange/90 text-white px-8 py-4 rounded-lg font-bold transition shadow-lg">
+        <a href={LINKS.calendly} target="_blank" class="inline-flex items-center justify-center gap-2 bg-orange hover:bg-orange/90 text-white px-8 py-4 rounded-lg font-bold transition shadow-lg" onclick="if (window.posthog) { window.posthog.capture('startups_calendly_click', { origen: 'hero' }); }">
           Agendemos un café estratégico →
         </a>
-        <a href="#casos" class="inline-flex items-center justify-center gap-2 bg-white border-2 border-gray-200 hover:border-teal text-deep px-8 py-4 rounded-lg font-bold transition">
+        <a href="#casos" class="inline-flex items-center justify-center gap-2 bg-white border-2 border-gray-200 hover:border-teal text-deep px-8 py-4 rounded-lg font-bold transition" onclick="if (window.posthog) { window.posthog.capture('startups_scroll_casos', { origen: 'hero' }); }">
           Ver casos de uso
         </a>
       </div>
@@ -188,10 +188,10 @@ import { LINKS } from '../../lib/constants.js';
       </div>
 
       <div class="text-center flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href={LINKS.whatsapp} target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-xl font-bold text-base transition shadow-lg">
+        <a href={LINKS.whatsapp} target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-xl font-bold text-base transition shadow-lg" onclick="if (window.posthog) { window.posthog.capture('startups_whatsapp_click', { posicion: 'inversion' }); }">
           💬 Consultar por WhatsApp (+57 305 3046180) →
         </a>
-        <a href={LINKS.calendly} target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0F172A] hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-bold text-base transition shadow-md">
+        <a href={LINKS.calendly} target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0F172A] hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-bold text-base transition shadow-md" onclick="if (window.posthog) { window.posthog.capture('startups_calendly_click', { posicion: 'inversion' }); }">
           ☕ Agendar un Café (30 min) →
         </a>
       </div>
@@ -207,10 +207,21 @@ import { LINKS } from '../../lib/constants.js';
       <p class="text-gray-600 mb-8">
         Explora la librería privada. Accede al <strong>ShapeUp Builder</strong> y otros Micro-SaaS de producto que te ahorrarán horas de trabajo hoy mismo.
       </p>
-      <a href="/recursos" class="inline-flex items-center gap-2 bg-white text-teal border-2 border-teal px-8 py-4 rounded-lg font-bold hover:bg-teal hover:text-white transition shadow-sm">
+      <a href="/recursos" class="inline-flex items-center gap-2 bg-white text-teal border-2 border-teal px-8 py-4 rounded-lg font-bold hover:bg-teal hover:text-white transition shadow-sm" onclick="if (window.posthog) { window.posthog.capture('startups_recursos_click', { origen: 'bottom_callout' }); }">
         📚 Acceder a Recursos
       </a>
     </div>
   </section>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.posthog) {
+        window.posthog.capture("startups_page_view", {
+          pagina: "soluciones/startups",
+          categoria: "b2b_startups"
+        });
+      }
+    });
+  </script>
 
 </Layout>

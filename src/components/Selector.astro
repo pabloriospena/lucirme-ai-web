@@ -200,6 +200,7 @@
               id="res-primary-btn" 
               href="/recursos" 
               class="bg-orange hover:bg-orange/90 text-white font-bold py-3 px-6 rounded-xl transition text-xs sm:text-sm text-center shadow-lg cursor-pointer"
+              onclick="if (window.posthog) { window.posthog.capture('termometro_cta_click', { tipo: 'recurso_gratis', destino: '/recursos' }); }"
             >
               Ver recurso gratis recomendado
             </a>
@@ -207,6 +208,7 @@
               id="res-secondary-btn" 
               href="/content/precios" 
               class="bg-teal hover:bg-tealHover text-white font-bold py-3 px-6 rounded-xl transition text-xs sm:text-sm text-center shadow-lg cursor-pointer"
+              onclick="if (window.posthog) { window.posthog.capture('termometro_cta_click', { tipo: 'cafe_estrategia', destino: '/content/precios' }); }"
             >
               Agendar Café de Estrategia (30 min)
             </a>
@@ -228,6 +230,7 @@
               target="_blank" 
               rel="noopener" 
               class="p-2.5 bg-white/5 hover:bg-white/15 border border-white/10 rounded-xl text-teal hover:text-white transition flex items-center justify-center gap-1.5 font-semibold"
+              onclick="if (window.posthog) { window.posthog.capture('termometro_social_click', { red: 'LinkedIn Pablo' }); }"
             >
               <span>💼</span> <span>LinkedIn Pablo</span> ↗
             </a>
@@ -237,6 +240,7 @@
               target="_blank" 
               rel="noopener" 
               class="p-2.5 bg-white/5 hover:bg-white/15 border border-white/10 rounded-xl text-teal hover:text-white transition flex items-center justify-center gap-1.5 font-semibold"
+              onclick="if (window.posthog) { window.posthog.capture('termometro_social_click', { red: 'LinkedIn LuciRMe' }); }"
             >
               <span>🏢</span> <span>LuciRMe AI</span> ↗
             </a>
@@ -246,6 +250,7 @@
               target="_blank" 
               rel="noopener" 
               class="p-2.5 bg-white/5 hover:bg-white/15 border border-white/10 rounded-xl text-teal hover:text-white transition flex items-center justify-center gap-1.5 font-semibold"
+              onclick="if (window.posthog) { window.posthog.capture('termometro_social_click', { red: 'Instagram' }); }"
             >
               <span>📸</span> <span>Instagram</span> ↗
             </a>
@@ -255,6 +260,7 @@
               target="_blank" 
               rel="noopener" 
               class="p-2.5 bg-white/5 hover:bg-white/15 border border-white/10 rounded-xl text-teal hover:text-white transition flex items-center justify-center gap-1.5 font-semibold"
+              onclick="if (window.posthog) { window.posthog.capture('termometro_social_click', { red: 'TikTok' }); }"
             >
               <span>🎵</span> <span>TikTok</span> ↗
             </a>
@@ -262,6 +268,7 @@
             <a 
               href="/recursos" 
               class="col-span-2 sm:col-span-2 p-2.5 bg-teal/20 hover:bg-teal/30 border border-teal/40 rounded-xl text-teal hover:text-white transition flex items-center justify-center gap-1.5 font-bold"
+              onclick="if (window.posthog) { window.posthog.capture('termometro_social_click', { red: 'Libreria Recursos' }); }"
             >
               <span>📚</span> <span>Librería de Recursos Gratis</span> ↗
             </a>
@@ -417,6 +424,14 @@
 
     termState.leadData = { name: nameVal, email: emailVal, whatsapp: whatsappVal };
 
+    if (window.posthog) {
+      window.posthog.capture('termometro_lead_submitted', {
+        name: nameVal,
+        has_email: !!emailVal,
+        has_whatsapp: !!whatsappVal
+      });
+    }
+
     // Ocultar form de contacto, mostrar container de preguntas
     document.getElementById('term-step-0').classList.add('hidden');
     document.getElementById('term-questions-container').classList.remove('hidden');
@@ -470,6 +485,14 @@
 
     if (questionId === 'p1' && opc.perfil) {
       termState.profile = opc.perfil;
+    }
+
+    if (window.posthog) {
+      window.posthog.capture('termometro_question_answered', {
+        question_id: questionId,
+        step: termState.currentStep,
+        selected_option: opc.label
+      });
     }
 
     if (termState.currentStep < 9) {
@@ -548,6 +571,14 @@
       }
     }
 
+    if (window.posthog) {
+      window.posthog.capture('termometro_completed', {
+        score: finalScorePct,
+        nivel: nivelName,
+        perfil: termState.profile
+      });
+    }
+
     // Enviar a API MailerLite
     try {
       await fetch('/api/termometro', {
@@ -597,6 +628,13 @@
     const email = termState.leadData.email || "";
     const score = termState.totalScore || 0;
     const level = document.getElementById('res-level-name')?.textContent || "";
+
+    if (window.posthog) {
+      window.posthog.capture('termometro_pdf_downloaded', {
+        score: score,
+        level: level
+      });
+    }
     const mainMsg = document.getElementById('res-main-msg')?.textContent || "";
     const recFree = document.getElementById('res-rec-free')?.textContent || "";
     const recNext = document.getElementById('res-rec-next')?.textContent || "";
