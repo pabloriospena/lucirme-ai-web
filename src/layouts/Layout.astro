@@ -14,6 +14,8 @@ const {
   type = "website",
   keywords = "inteligencia artificial, consultoria ia, mentorias ia, ia para producto, pablo rios, automatizacion de flujos, lucirme ai, colombia",
   jsonLd,
+  hideHeader = false,
+  hideFooter = false,
 } = Astro.props;
 
 const canonicalUrl = canonical || Astro.url.href;
@@ -182,6 +184,8 @@ const defaultOrganizationSchema = {
   <body
     class="bg-white text-slate-900 font-sans antialiased min-h-screen flex flex-col selection:bg-teal-100 selection:text-teal-900"
   >
+    {!hideHeader && (
+    <>
     <!-- Componente A: Miniheader Superior (Top Bar Utility - 36px) -->
     <div
       id="miniheader-topbar"
@@ -345,6 +349,8 @@ const defaultOrganizationSchema = {
         </div>
       </div>
     </header>
+    </>
+    )}
 
     <!-- Componente C: Sidebar Drawer Desplegable Off-Canvas -->
 
@@ -594,7 +600,7 @@ const defaultOrganizationSchema = {
       <slot />
     </main>
 
-    <Footer />
+    {!hideFooter && <Footer />}
     <Selector />
     <Analytics />
 

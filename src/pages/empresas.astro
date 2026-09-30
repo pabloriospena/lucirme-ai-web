@@ -1,295 +1,1224 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { LINKS } from "../lib/constants.js";
-import SobreMi from "../components/SobreMi.astro";
+
+const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
+const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
 ---
 
-<Layout title="Soluciones con IA para Empresas y Equipos | LuciRMe AI">
-  <!-- HERO B2B -->
-  <header class="py-20 md:py-24 px-4 bg-[#F8FAFC] border-b border-gray-100 relative overflow-hidden">
-    <div class="max-w-4xl mx-auto text-center relative z-10">
-      <span class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-md mb-6 border border-teal/20">
-        Empresas & Equipos
-      </span>
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-deep leading-tight mb-6 tracking-tight">
-        Implemento IA en tu empresa hasta que tu equipo pueda trabajar de forma <span class="text-teal underline decoration-teal/30">autónoma</span>.
-      </h1>
-      <p class="text-base sm:text-lg text-gray-600 leading-relaxed mb-10 max-w-2xl mx-auto font-medium">
-        Reducimos la fricción operativa, automatizamos procesos clave y capacitamos a tu equipo sobre tus herramientas reales sin detener tu operación.
-      </p>
+<Layout
+  title="LuciRMe AI · Empresas | Primero el problema. Después la tecnología."
+  description="Encuentra un cuello de botella operativo en tu empresa, mide cuánto te está costando y decide si vale la pena intervenir. Soluciones con IA, automatización y adopción autónoma por Pablo Ríos."
+  hideHeader={true}
+  hideFooter={true}
+>
+  <!-- 1. NAVEGACIÓN DEDICADA B2B (HEADER) -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="h-16 max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
+      <a class="flex flex-col group" href="#">
+        <span class="text-base font-bold tracking-tight text-slate-900 group-hover:text-primary-dark transition-colors">LuciRMe AI · Empresas</span>
+        <span class="text-[11px] font-mono text-slate-500">Primero el problema. Después la tecnología.</span>
+      </a>
+      
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600">
+        <a class="hover:text-slate-900 transition-colors" href="#diagnostico">Diagnóstico</a>
+        <a class="hover:text-slate-900 transition-colors" href="#soluciones">Soluciones</a>
+        <a class="hover:text-slate-900 transition-colors" href="#casos">Casos</a>
+        <a class="hover:text-slate-900 transition-colors" href="#como-trabajamos">Cómo trabajamos</a>
+        <a class="hover:text-slate-900 transition-colors" href="#pablo">Pablo</a>
+      </nav>
 
-      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+      <div class="flex items-center gap-3">
         <a
-          href={LINKS.whatsapp}
-          target="_blank"
+          class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors shadow-2xs"
+          href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero revisar un cuello de botella operativo en mi empresa.")}`}
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-xl font-bold transition shadow-lg text-base cursor-pointer"
-          onclick="if (window.posthog) { window.posthog.capture('empresas_whatsapp_click', { origen: 'hero_b2b' }); }"
-        >
-          💬 Consultar por WhatsApp (+57 305 3046180) →
-        </a>
-        <a
-          href={LINKS.calendly_empresa}
           target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 bg-white border border-gray-300 text-deep px-8 py-4 rounded-xl font-bold hover:bg-gray-50 transition shadow-sm text-base cursor-pointer"
-          onclick="if (window.posthog) { window.posthog.capture('empresas_calendly_click', { origen: 'hero_b2b' }); }"
+          onclick="if (window.posthog) { window.posthog.capture('empresas_whatsapp_click', { origen: 'header_b2b' }); }"
         >
-          📅 Agendar Diagnóstico Operativo
+          <span class="material-symbols-outlined text-[17px]">chat</span>
+          <span>Hablemos por WhatsApp</span>
         </a>
-      </div>
-
-      <!-- LOGOS DE AUTORIDAD B2B -->
-      <div class="pt-8 border-t border-gray-200/80">
-        <p class="text-xs text-gray-400 uppercase tracking-widest mb-4 font-semibold">
-          Procesos e IA implementados en equipos de:
-        </p>
-        <div class="flex flex-wrap justify-center items-center gap-6 sm:gap-10 text-gray-500 font-bold text-sm sm:text-base">
-          <span class="hover:text-deep transition-colors">Irys</span>
-          <span>•</span>
-          <span class="hover:text-deep transition-colors">Fundación La Chinca</span>
-          <span>•</span>
-          <span class="hover:text-deep transition-colors">Asesorías Integrales</span>
-          <span>•</span>
-          <span class="hover:text-deep transition-colors">Almamotor</span>
-          <span>•</span>
-          <span class="hover:text-deep transition-colors">InterobrasER</span>
-        </div>
       </div>
     </div>
   </header>
 
-  <!-- SECCIÓN 1: SOLUCIONES EMPRESARIALES -->
-  <section class="py-20 px-4 bg-white">
-    <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-2xl sm:text-3xl font-bold text-deep mb-4">
-          Soluciones de IA y Automatización Operativa
+  <main class="w-full bg-[#F8FAFC]">
+    
+    <!-- 2. HERO -->
+    <section class="w-full max-w-7xl mx-auto px-6 pt-16 pb-14 md:py-20 flex flex-col items-start gap-6 border-b border-slate-200/60">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center w-full">
+        <div class="lg:col-span-7 flex flex-col items-start gap-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-white border border-slate-200 rounded-full font-mono text-xs text-slate-700 shadow-2xs">
+            <span class="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
+            Primero el problema. Después la tecnología.
+          </div>
+          <div class="max-w-2xl flex flex-col gap-4">
+            <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 leading-tight">
+              ¿Dónde se está perdiendo el tiempo en tu empresa?
+            </h1>
+            <p class="text-base md:text-lg text-slate-600 font-normal leading-relaxed">
+              Hay procesos que parecen pequeños hasta que calculas cuántas veces se repiten. Encuentra un cuello de botella, mide cuánto te está costando y decide si vale la pena intervenir.
+            </p>
+          </div>
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2 w-full sm:w-auto">
+            <a
+              class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors shadow-sm"
+              href="#diagnostico"
+            >
+              <span>Empezar diagnóstico · 5 min</span>
+              <span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+            </a>
+            <a
+              class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors shadow-2xs"
+              href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero conversar sobre un proceso operativo en mi empresa.")}`}
+              rel="noopener noreferrer"
+              target="_blank"
+              onclick="if (window.posthog) { window.posthog.capture('empresas_whatsapp_click', { origen: 'hero_direct' }); }"
+            >
+              <span class="material-symbols-outlined text-slate-500 text-[18px]">chat</span>
+              <span>Hablar directamente con Pablo</span>
+            </a>
+          </div>
+          <p class="text-xs font-mono text-slate-500 pt-1">
+            No necesitas saber de IA. Nosotros nos ocupamos de esa parte.
+          </p>
+        </div>
+
+        <div class="lg:col-span-5 w-full flex justify-center lg:justify-end">
+          <div class="w-full max-w-md bg-white rounded-2xl border border-slate-200 shadow-sm p-5 md:p-6 flex flex-col gap-4">
+            <div class="flex items-center justify-between pb-1">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                <span class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-900">Diagnóstico LuciRMe AI</span>
+              </div>
+              <span class="font-mono text-[11px] text-slate-400">Live Matrix</span>
+            </div>
+            
+            <div class="p-3.5 bg-slate-50 border border-slate-200/60 rounded-xl flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-[10px] uppercase font-semibold text-slate-500 tracking-wider">Fuga típica identificada</span>
+                <span class="font-mono text-xs font-bold text-amber-700">~18.5 hrs/semana</span>
+              </div>
+              <p class="text-xs font-semibold text-slate-900 leading-snug">
+                Consolidación manual de datos entre hojas de cálculo sueltas y CRM.
+              </p>
+              <div class="w-full bg-slate-200 rounded-full h-1.5 mt-1 overflow-hidden">
+                <div class="bg-amber-600 h-1.5 rounded-full w-[65%]"></div>
+              </div>
+            </div>
+
+            <div class="p-3.5 bg-slate-50 border border-slate-200/60 rounded-xl flex flex-col gap-1">
+              <span class="font-mono text-[10px] uppercase font-semibold text-slate-500 tracking-wider">Priorización:</span>
+              <h4 class="text-xs font-bold text-amber-700">
+                P1 Urgente · Alto ROI Inmediato
+              </h4>
+              <span class="text-[11px] font-medium text-teal-700 font-mono">
+                Automatización + LLM
+              </span>
+            </div>
+
+            <div class="p-3 bg-white border border-slate-200/80 rounded-xl flex items-start gap-2.5 text-xs text-slate-600 leading-relaxed shadow-2xs">
+              <span class="material-symbols-outlined text-teal-600 text-[18px] shrink-0 mt-0.5">verified</span>
+              <p class="text-[11px] leading-relaxed text-slate-600">
+                Identificamos la causa raíz antes de gastar recursos. El 40% de los cuellos de botella se resuelven simplificando el flujo sin añadir costos fijos.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 & 4. DIAGNÓSTICO OPERATIVO (CONSOLA INTERACTIVA PASO A PASO) -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 scroll-mt-20" id="diagnostico">
+      <div class="max-w-3xl mb-10 flex flex-col gap-3">
+        <div class="inline-flex items-center gap-2 font-mono text-xs text-teal-800 uppercase font-semibold">
+          Diagnóstico Operativo
+        </div>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+          No necesitas saber de IA. Necesitas identificar qué está frenando al equipo.
         </h2>
-        <p class="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
+        <p class="text-sm md:text-base text-slate-600 leading-relaxed">
+          El diagnóstico te ayuda a mirar un proceso concreto y responder: ¿Cuánto tiempo consume? ¿Con qué frecuencia ocurre? ¿Cuántas personas intervienen? ¿Dónde se atasca? ¿Qué impacto tiene? ¿Qué tan difícil sería cambiarlo?
+        </p>
+        <div class="mt-2 inline-flex items-center gap-2 px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-lg text-xs font-mono text-slate-700 self-start">
+          <span>Cómo funciona:</span>
+          <span class="text-slate-900 font-medium">Identifica</span>
+          <span class="text-slate-400">→</span>
+          <span class="text-slate-900 font-medium">Mide</span>
+          <span class="text-slate-400">→</span>
+          <span class="text-slate-900 font-medium">Evalúa</span>
+          <span class="text-slate-400">→</span>
+          <span class="text-teal-700 font-semibold">Prioriza</span>
+        </div>
+      </div>
+
+      <!-- Consola Interactiva con Wizard de 1 pregunta a la vez -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Columna Izquierda: Wizard Paso a Paso -->
+        <div class="lg:col-span-7 flex flex-col bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm relative min-h-[460px]">
+          <!-- Header del Wizard: Barra de Progreso y Paso actual -->
+          <div class="flex flex-col gap-2.5 pb-6 border-b border-slate-100">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-teal-600 animate-pulse"></span>
+                <span class="font-mono text-xs font-semibold text-teal-800 uppercase" id="step-counter">Paso 1 de 7</span>
+              </div>
+              <span class="text-[11px] font-mono text-slate-400" id="step-hint">Selección guiada</span>
+            </div>
+            <!-- Barra de progreso -->
+            <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="bg-teal-700 h-1.5 rounded-full transition-all duration-300 ease-out" id="progress-bar" style="width: 14.2857%;"></div>
+            </div>
+          </div>
+
+          <!-- Contenedor dinámico de pasos -->
+          <div class="py-6 flex-1 flex flex-col justify-between" id="wizard-container">
+            <!-- Paso 1 -->
+            <div class="wizard-step flex flex-col gap-4" id="step-1">
+              <div class="flex flex-col gap-1.5">
+                <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 1 · Proceso</span>
+                <h3 class="text-lg md:text-xl font-bold text-slate-900">¿Qué proceso te gustaría dejar de hacer de la forma en que lo haces hoy?</h3>
+                <p class="text-xs text-slate-500">Selecciona el área donde sientes que el equipo invierte más esfuerzo operativo:</p>
+              </div>
+              <div class="flex flex-col gap-2.5 pt-2" id="group-proceso">
+                <button class="diag-option active flex items-center justify-between px-4 py-3 rounded-xl border text-left text-sm font-medium transition-all border-teal-700 bg-teal-50/80 text-teal-900 cursor-pointer" onclick="selectStepOption('proceso', 'Reportes y consolidación de información', this)" type="button">
+                  <span>Reportes y consolidación de información</span>
+                  <span class="material-symbols-outlined text-[18px] text-teal-700">check_circle</span>
+                </button>
+                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Atención y seguimiento de clientes', this)" type="button">
+                  <span>Atención y seguimiento de clientes</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Documentación', this)" type="button">
+                  <span>Documentación</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Reuniones y seguimiento', this)" type="button">
+                  <span>Reuniones y seguimiento</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Procesos administrativos', this)" type="button">
+                  <span>Procesos administrativos</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Ventas y marketing', this)" type="button">
+                  <span>Ventas y marketing</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Otro', this)" type="button">
+                  <span>Otro</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Paso 2 -->
+            <div class="wizard-step hidden flex flex-col gap-4" id="step-2">
+              <div class="flex flex-col gap-1.5">
+                <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 2 · Frecuencia</span>
+                <h3 class="text-lg md:text-xl font-bold text-slate-900">¿Con qué frecuencia ocurre?</h3>
+                <p class="text-xs text-slate-500">La recurrencia determina el efecto acumulativo de la ineficiencia:</p>
+              </div>
+              <div class="flex flex-col gap-2.5 pt-2" id="group-frecuencia">
+                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('frecuencia', 'Varias veces al día', this)" type="button">
+                  <span>Varias veces al día</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+                <button class="diag-option active flex items-center justify-between px-4 py-3.5 rounded-xl border text-left text-sm font-medium transition-all border-teal-700 bg-teal-50/80 text-teal-900 cursor-pointer" onclick="selectStepOption('frecuencia', 'Todos los días', this)" type="button">
+                  <span>Todos los días</span>
+                  <span class="material-symbols-outlined text-[18px] text-teal-700">check_circle</span>
+                </button>
+                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('frecuencia', 'Varias veces por semana', this)" type="button">
+                  <span>Varias veces por semana</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('frecuencia', 'Una vez por semana', this)" type="button">
+                  <span>Una vez por semana</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('frecuencia', 'Algunas veces al mes', this)" type="button">
+                  <span>Algunas veces al mes</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Paso 3 -->
+            <div class="wizard-step hidden flex flex-col gap-4" id="step-3">
+              <div class="flex flex-col gap-1.5">
+                <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 3 · Tiempo por ejecución</span>
+                <h3 class="text-lg md:text-xl font-bold text-slate-900">¿Cuánto tiempo consume cada vez?</h3>
+                <p class="text-xs text-slate-500">Selecciona una estimación promedio por sesión o ciclo de trabajo:</p>
+              </div>
+              <div class="flex flex-col gap-2.5 pt-2" id="group-tiempo">
+                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('tiempo', 'Menos de 15 minutos', this)" type="button">
+                  <span>Menos de 15 minutos</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('tiempo', '15–30 minutos', this)" type="button">
+                  <span>15–30 minutos</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('tiempo', '30–60 minutos', this)" type="button">
+                  <span>30–60 minutos</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+                <button class="diag-option active flex items-center justify-between px-4 py-3.5 rounded-xl border text-left text-sm font-medium transition-all border-teal-700 bg-teal-50/80 text-teal-900 cursor-pointer" onclick="selectStepOption('tiempo', '1–2 horas', this)" type="button">
+                  <span>1–2 horas</span>
+                  <span class="material-symbols-outlined text-[18px] text-teal-700">check_circle</span>
+                </button>
+                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('tiempo', 'Más de 2 horas', this)" type="button">
+                  <span>Más de 2 horas</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Paso 4 -->
+            <div class="wizard-step hidden flex flex-col gap-4" id="step-4">
+              <div class="flex flex-col gap-1.5">
+                <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 4 · Equipo</span>
+                <h3 class="text-lg md:text-xl font-bold text-slate-900">¿Cuántas personas participan normalmente?</h3>
+                <p class="text-xs text-slate-500">Cuantas más personas involucradas, mayor fricción de coordinación:</p>
+              </div>
+              <div class="grid grid-cols-2 gap-3 pt-2" id="group-personas">
+                <button class="diag-option p-4 rounded-xl border border-slate-200 text-center font-medium text-slate-800 hover:border-slate-300 hover:bg-slate-50 transition-all flex flex-col items-center gap-1 cursor-pointer" onclick="selectStepOption('personas', '1 persona', this)" type="button">
+                  <span class="text-2xl font-bold font-mono">1</span>
+                  <span class="text-xs text-slate-500">Solo 1 persona</span>
+                </button>
+                <button class="diag-option active p-4 rounded-xl border border-teal-700 bg-teal-50/80 text-teal-900 text-center font-medium transition-all flex flex-col items-center gap-1 cursor-pointer" onclick="selectStepOption('personas', '2 a 4 personas', this)" type="button">
+                  <span class="text-2xl font-bold font-mono">2–3</span>
+                  <span class="text-xs text-teal-800 font-medium">Equipo pequeño</span>
+                </button>
+                <button class="diag-option p-4 rounded-xl border border-slate-200 text-center font-medium text-slate-800 hover:border-slate-300 hover:bg-slate-50 transition-all flex flex-col items-center gap-1 cursor-pointer" onclick="selectStepOption('personas', '4 a 5 personas', this)" type="button">
+                  <span class="text-2xl font-bold font-mono">4–5</span>
+                  <span class="text-xs text-slate-500">Varios roles</span>
+                </button>
+                <button class="diag-option p-4 rounded-xl border border-slate-200 text-center font-medium text-slate-800 hover:border-slate-300 hover:bg-slate-50 transition-all flex flex-col items-center gap-1 cursor-pointer" onclick="selectStepOption('personas', 'Más de 5 personas', this)" type="button">
+                  <span class="text-2xl font-bold font-mono">&gt;5</span>
+                  <span class="text-xs text-slate-500">Equipo extendido</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Paso 5 -->
+            <div class="wizard-step hidden flex flex-col gap-4" id="step-5">
+              <div class="flex flex-col gap-1.5">
+                <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 5 · Impacto</span>
+                <h3 class="text-lg md:text-xl font-bold text-slate-900">¿Qué pasa cuando este proceso se retrasa o se hace mal?</h3>
+                <p class="text-xs text-slate-500">El costo real suele estar en el daño colateral que produce:</p>
+              </div>
+              <div class="flex flex-col gap-2.5 pt-2" id="group-impacto">
+                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('impacto', 'Solo perdemos tiempo', this)" type="button">
+                  <span>Solo perdemos tiempo</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('impacto', 'Retrasa otras tareas', this)" type="button">
+                  <span>Retrasa otras tareas</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+                <button class="diag-option active flex items-center justify-between px-4 py-3 rounded-xl border text-left text-sm font-medium transition-all border-teal-700 bg-teal-50/80 text-teal-900 cursor-pointer" onclick="selectStepOption('impacto', 'Afecta al cliente', this)" type="button">
+                  <span>Afecta al cliente</span>
+                  <span class="material-symbols-outlined text-[18px] text-teal-700">check_circle</span>
+                </button>
+                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('impacto', 'Genera errores o retrabajo', this)" type="button">
+                  <span>Genera errores o retrabajo</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('impacto', 'Afecta ingresos', this)" type="button">
+                  <span>Afecta ingresos</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('impacto', 'Puede generar varios de los anteriores', this)" type="button">
+                  <span>Puede generar varios de los anteriores</span>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Paso 6 -->
+            <div class="wizard-step hidden flex flex-col gap-4" id="step-6">
+              <div class="flex flex-col gap-1.5">
+                <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 6 · Viabilidad</span>
+                <h3 class="text-lg md:text-xl font-bold text-slate-900">¿Qué tan difícil crees que sería cambiarlo?</h3>
+                <p class="text-xs text-slate-500">Tu percepción inicial sobre la complejidad organizativa o técnica:</p>
+              </div>
+              <div class="flex flex-col gap-2.5 pt-2" id="group-esfuerzo">
+                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('esfuerzo', 'Fácil', this)" type="button">
+                  <div>
+                    <div class="text-sm font-semibold text-slate-900">Fácil</div>
+                    <div class="text-xs text-slate-500">Solo ordenar o alinear hábitos</div>
+                  </div>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+                <button class="diag-option active flex items-center justify-between px-4 py-3.5 rounded-xl border text-left text-sm font-medium transition-all border-teal-700 bg-teal-50/80 text-teal-900 cursor-pointer" onclick="selectStepOption('esfuerzo', 'Moderado', this)" type="button">
+                  <div>
+                    <div class="text-sm font-semibold text-teal-800">Moderado</div>
+                    <div class="text-xs text-teal-800">Conectar herramientas y estandarizar</div>
+                  </div>
+                  <span class="material-symbols-outlined text-[18px] text-teal-700">check_circle</span>
+                </button>
+                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('esfuerzo', 'Difícil', this)" type="button">
+                  <div>
+                    <div class="text-sm font-semibold text-slate-900">Difícil</div>
+                    <div class="text-xs text-slate-500">Muchos sistemas legados o dependencias externas</div>
+                  </div>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('esfuerzo', 'No tengo idea', this)" type="button">
+                  <div>
+                    <div class="text-sm font-semibold text-slate-900">No tengo idea</div>
+                    <div class="text-xs text-slate-500">Necesitamos explorarlo en el diagnóstico</div>
+                  </div>
+                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Paso 7: Datos de la Empresa -->
+            <div class="wizard-step hidden flex flex-col gap-4" id="step-7">
+              <div class="flex flex-col gap-1.5">
+                <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 7 · Datos de la empresa</span>
+                <h3 class="text-lg md:text-xl font-bold text-slate-900">Contexto para calibrar la solución</h3>
+                <p class="text-xs text-slate-500">Esto nos permite darte una referencia precisa para el tamaño y sector de tu operación.</p>
+              </div>
+              <form class="flex flex-col gap-3.5 pt-2" id="company-form" onsubmit="event.preventDefault(); submitDiagnostic();">
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-semibold text-slate-700" for="empresa-input">Empresa</label>
+                  <input class="w-full text-xs md:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-teal-700 focus:ring-1 focus:ring-teal-700 outline-none bg-white transition-colors" id="empresa-input" placeholder="Nombre de tu empresa u organización" required type="text" value="Mi Empresa">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                  <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-700" for="tamano-select">Tamaño de la empresa</label>
+                    <select class="w-full text-xs md:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-teal-700 focus:ring-1 focus:ring-teal-700 outline-none bg-white transition-colors" id="tamano-select" required>
+                      <option value="1-10 personas">1–10 personas</option>
+                      <option selected value="11-50 personas">11–50 personas</option>
+                      <option value="51-200 personas">51–200 personas</option>
+                      <option value="+200 personas">+200 personas</option>
+                    </select>
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-700" for="industria-select">Industria / Sector</label>
+                    <select class="w-full text-xs md:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-teal-700 focus:ring-1 focus:ring-teal-700 outline-none bg-white transition-colors" id="industria-select" required>
+                      <option selected value="Tecnología/SaaS">Tecnología / SaaS</option>
+                      <option value="Servicios/Consultoría">Servicios / Consultoría</option>
+                      <option value="Salud/Veterinaria">Salud / Veterinaria</option>
+                      <option value="Comercio/Retail">Comercio / Retail</option>
+                      <option value="Manufactura/Logística">Manufactura / Logística</option>
+                      <option value="Finanzas">Finanzas</option>
+                      <option value="Otro">Otro</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                  <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-700" for="pais-input">País</label>
+                    <input class="w-full text-xs md:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-teal-700 focus:ring-1 focus:ring-teal-700 outline-none bg-white transition-colors" id="pais-input" placeholder="Ej. Colombia, México, Chile..." required type="text" value="Colombia">
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-700" for="ciudad-input">Ciudad</label>
+                    <input class="w-full text-xs md:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-teal-700 focus:ring-1 focus:ring-teal-700 outline-none bg-white transition-colors" id="ciudad-input" placeholder="Ej. Bogotá, Medellín, CDMX..." required type="text" value="Bogotá">
+                  </div>
+                </div>
+                <div class="pt-2">
+                  <button class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer" type="submit">
+                    <span>Ver diagnóstico de cuello de botella →</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Vista de Diagnóstico Completado (resumen en consola) -->
+            <div class="wizard-step hidden flex flex-col gap-4" id="step-completed">
+              <div class="p-4 bg-teal-50 border border-teal-200 rounded-xl flex items-start gap-3">
+                <span class="material-symbols-outlined text-teal-700 text-2xl shrink-0">check_circle</span>
+                <div class="flex flex-col gap-1">
+                  <h4 class="text-sm font-bold text-slate-900">Diagnóstico completado con éxito</h4>
+                  <p class="text-xs text-slate-600">Revisa la tarjeta en el lateral con el cálculo de fuga operativa y los próximos pasos recomendados.</p>
+                </div>
+              </div>
+              <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl flex flex-col gap-2">
+                <span class="font-mono text-[11px] uppercase font-semibold text-slate-500">Resumen procesado:</span>
+                <div class="text-xs text-slate-700 leading-relaxed" id="completion-summary-text">
+                  Diagnóstico listo para analizar en conversación con Pablo.
+                </div>
+              </div>
+              <div class="flex items-center gap-3 pt-2">
+                <button class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer" onclick="goToStep(1)" type="button">
+                  <span class="material-symbols-outlined text-[16px]">restart_alt</span>
+                  Reiniciar diagnóstico
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botones de Navegación del Wizard -->
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between" id="wizard-navigation">
+            <button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer" disabled id="btn-prev" onclick="prevStep()" type="button">
+              <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+              <span>Anterior</span>
+            </button>
+            <div class="flex items-center gap-1.5" id="step-dots">
+              <span class="w-4 h-2 rounded-full transition-all bg-teal-700"></span>
+              <span class="w-2 h-2 rounded-full transition-all bg-slate-200"></span>
+              <span class="w-2 h-2 rounded-full transition-all bg-slate-200"></span>
+              <span class="w-2 h-2 rounded-full transition-all bg-slate-200"></span>
+              <span class="w-2 h-2 rounded-full transition-all bg-slate-200"></span>
+              <span class="w-2 h-2 rounded-full transition-all bg-slate-200"></span>
+              <span class="w-2 h-2 rounded-full transition-all bg-slate-200"></span>
+            </div>
+            <button class="inline-flex items-center gap-1 px-4 py-1.5 rounded-lg bg-teal-700 text-white text-xs font-medium hover:bg-teal-800 transition-colors shadow-2xs cursor-pointer" id="btn-next" onclick="nextStep()" type="button">
+              <span>Siguiente</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Tarjeta Viva "Tu cuello de botella" -->
+        <div class="lg:col-span-5 lg:sticky lg:top-24">
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-7 flex flex-col gap-6" id="assessment-card">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                <span class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-900">Tu cuello de botella</span>
+              </div>
+              <span class="font-mono text-[11px] text-slate-500">Live Assessment</span>
+            </div>
+
+            <!-- Proceso Activo -->
+            <div class="flex flex-col gap-1 bg-slate-50 p-4 rounded-xl border border-slate-100">
+              <span class="font-mono text-[11px] uppercase text-slate-500">Proceso identificado:</span>
+              <h3 class="text-base font-bold text-slate-900 leading-snug" id="card-proceso">Reportes y consolidación de información</h3>
+              <span class="text-[11px] text-slate-500 font-mono" id="card-company-tag">Mi Empresa · Tecnología/SaaS (Bogotá, Colombia)</span>
+            </div>
+
+            <!-- Resumen en tiempo real -->
+            <div class="grid grid-cols-2 gap-3 text-xs">
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-1">
+                <span class="font-mono text-[11px] text-slate-500">Frecuencia:</span>
+                <span class="font-semibold text-slate-800" id="card-frecuencia">Todos los días</span>
+              </div>
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-1">
+                <span class="font-mono text-[11px] text-slate-500">Tiempo estimado:</span>
+                <span class="font-semibold text-teal-700" id="card-tiempo">~18.8 h/semana acumuladas</span>
+              </div>
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-1">
+                <span class="font-mono text-[11px] text-slate-500">Personas involucradas:</span>
+                <span class="font-semibold text-slate-800" id="card-personas">2 a 4 personas</span>
+              </div>
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-1">
+                <span class="font-mono text-[11px] text-slate-500">Esfuerzo de mejora:</span>
+                <span class="font-semibold text-slate-800" id="card-esfuerzo">Moderado</span>
+              </div>
+            </div>
+
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-1 text-xs">
+              <span class="font-mono text-[11px] text-slate-500">Impacto principal:</span>
+              <span class="font-semibold text-slate-800" id="card-impacto">Afecta al cliente</span>
+            </div>
+
+            <!-- Indicador Prioridad -->
+            <div class="p-4 bg-teal-50/70 border border-teal-100 rounded-xl flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold text-teal-800">¿Vale la pena intervenir?</span>
+                <span class="px-2 py-0.5 rounded font-mono text-[11px] font-bold bg-amber-100 text-amber-900 uppercase" id="card-priority-badge">Prioridad: Alta</span>
+              </div>
+              <p class="text-xs text-slate-600 leading-relaxed" id="card-justification">
+                Este proceso merece ser intervenido pronto porque genera una fuga de aproximadamente <strong class="text-slate-900">~18.8 horas/semana</strong> combinando: <strong class="text-slate-800">Alta recurrencia · Impacto directo en la operación · Retorno rápido de inversión</strong>.
+              </p>
+            </div>
+
+            <!-- Mensaje clave de LuciRMe -->
+            <div class="p-3.5 bg-slate-100 rounded-xl text-xs text-slate-600 leading-relaxed border border-slate-200/80">
+              <span class="font-semibold text-slate-800">Criterio LuciRMe:</span> Esto no significa que necesites IA. Primero hay que entender el proceso. La solución puede ser simplificarlo, eliminar pasos, conectar herramientas, automatizar una parte o incorporar IA.
+            </div>
+
+            <!-- Botón CTA WhatsApp -->
+            <a
+              class="inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-2xs text-center cursor-pointer"
+              href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, completé el diagnóstico de LuciRMe AI para Mi Empresa (Colombia):\n\n• Proceso a mejorar: Reportes y consolidación de información\n• Frecuencia: Todos los días\n• Tiempo por sesión: 1–2 horas\n• Fuga calculada: ~18.8 hrs/semana\n• Personas involucradas: 2 a 4 personas\n• Impacto principal: Afecta al cliente\n• Esfuerzo estimado: Moderado\n• Tamaño: 11-50 personas | Sector: Tecnología/SaaS\n\nQuiero revisar este proceso contigo.")}`}
+              id="card-whatsapp-btn"
+              rel="noopener noreferrer"
+              target="_blank"
+              onclick="if (window.posthog) { window.posthog.capture('empresas_whatsapp_click', { origen: 'diagnostico_card' }); }"
+            >
+              <span class="material-symbols-outlined text-[19px]">chat</span>
+              <span>Quiero revisar este proceso con Pablo</span>
+            </a>
+
+            <div class="grid grid-cols-2 gap-2.5 pt-1 w-full">
+              <button
+                type="button"
+                onclick="window.print()"
+                class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors shadow-2xs cursor-pointer"
+              >
+                <span class="material-symbols-outlined text-[16px] text-slate-500">download</span>
+                <span>Descargar PDF</span>
+              </button>
+              <button
+                type="button"
+                onclick="if(navigator.clipboard){navigator.clipboard.writeText(window.location.href);alert('Enlace del diagnóstico copiado al portapapeles');}else if(navigator.share){navigator.share({title:'Diagnóstico LuciRMe AI',url:window.location.href});}"
+                class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors shadow-2xs cursor-pointer"
+              >
+                <span class="material-symbols-outlined text-[16px] text-slate-500">share</span>
+                <span>Compartir resultado</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. SOLUCIONES -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-20 border-t border-slate-200" id="soluciones">
+      <div class="max-w-3xl mb-12 flex flex-col gap-2">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Líneas de Intervención</span>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+          Cuatro formas de intervenir tu operación
+        </h2>
+        <p class="text-base text-slate-600 leading-relaxed">
           Diseñamos e integramos tecnología sin obligarte a migrar de software ni cambiar la lógica de tu negocio.
         </p>
       </div>
 
       <div class="grid md:grid-cols-2 gap-8">
         <!-- 1. Implementación de IA -->
-        <div class="p-8 rounded-2xl bg-slate-50 border border-gray-200/80 hover:border-teal transition-all shadow-xs flex flex-col justify-between">
+        <div class="p-8 rounded-2xl bg-white border border-slate-200 shadow-2xs flex flex-col justify-between">
           <div>
-            <div class="w-12 h-12 bg-teal/10 rounded-xl flex items-center justify-center text-2xl mb-6">⚙️</div>
-            <h3 class="text-xl font-bold text-deep mb-3">Implementación de IA en Procesos</h3>
-            <p class="text-sm text-gray-600 leading-relaxed mb-6">
+            <div class="w-12 h-12 bg-teal-50 rounded-xl flex items-center justify-center text-2xl mb-6 text-teal-700">⚙️</div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">1. Implementación de IA en Procesos</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-6">
               Mapeamos tus cuellos de botella e integramos agentes y asistentes de IA para análisis de documentos, reportes ejecutivos, respuesta a clientes y validación de datos.
             </p>
           </div>
-          <ul class="space-y-2 text-xs text-gray-700 font-medium pt-4 border-t border-gray-200/60">
-            <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Asistentes de consulta sobre bases de conocimiento corporativas.</li>
-            <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Extracción automática de datos desde PDFs, facturas y correos.</li>
+          <ul class="space-y-2 text-xs text-slate-700 font-medium pt-4 border-t border-slate-100">
+            <li class="flex items-center gap-2"><span class="text-teal-700 font-bold">✓</span> Asistentes de consulta sobre bases de conocimiento corporativas.</li>
+            <li class="flex items-center gap-2"><span class="text-teal-700 font-bold">✓</span> Extracción automática de datos desde PDFs, facturas y correos.</li>
           </ul>
         </div>
 
         <!-- 2. Automatización de Procesos -->
-        <div class="p-8 rounded-2xl bg-slate-50 border border-gray-200/80 hover:border-teal transition-all shadow-xs flex flex-col justify-between">
+        <div class="p-8 rounded-2xl bg-white border border-slate-200 shadow-2xs flex flex-col justify-between">
           <div>
-            <div class="w-12 h-12 bg-orange/10 rounded-xl flex items-center justify-center text-2xl mb-6">⚡</div>
-            <h3 class="text-xl font-bold text-deep mb-3">Automatización de Flujos</h3>
-            <p class="text-sm text-gray-600 leading-relaxed mb-6">
+            <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center text-2xl mb-6 text-amber-700">⚡</div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">2. Automatización de Flujos</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-6">
               Conectamos tus sistemas actuales (Slack, WhatsApp, CRM, ERP, Notion, Excel, Siigo) para eliminar tareas repetitivas y reducir errores humanos.
             </p>
           </div>
-          <ul class="space-y-2 text-xs text-gray-700 font-medium pt-4 border-t border-gray-200/60">
-            <li class="flex items-center gap-2"><span class="text-orange font-bold">✓</span> Sincronización automática de bases de datos y notificaciones.</li>
-            <li class="flex items-center gap-2"><span class="text-orange font-bold">✓</span> Reducción de tiempos muertos en traspaso de información.</li>
+          <ul class="space-y-2 text-xs text-slate-700 font-medium pt-4 border-t border-slate-100">
+            <li class="flex items-center gap-2"><span class="text-amber-700 font-bold">✓</span> Sincronización automática de bases de datos y notificaciones.</li>
+            <li class="flex items-center gap-2"><span class="text-amber-700 font-bold">✓</span> Reducción de tiempos muertos en traspaso de información.</li>
           </ul>
         </div>
 
         <!-- 3. Capacitación y Adopción -->
-        <div class="p-8 rounded-2xl bg-slate-50 border border-gray-200/80 hover:border-teal transition-all shadow-xs flex flex-col justify-between">
+        <div class="p-8 rounded-2xl bg-white border border-slate-200 shadow-2xs flex flex-col justify-between">
           <div>
-            <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-2xl mb-6">🎓</div>
-            <h3 class="text-xl font-bold text-deep mb-3">Capacitación y Adopción del Equipo</h3>
-            <p class="text-sm text-gray-600 leading-relaxed mb-6">
+            <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center text-2xl mb-6 text-emerald-700">🎓</div>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">3. Capacitación y Adopción del Equipo</h3>
+            <p class="text-sm text-slate-600 leading-relaxed mb-6">
               Acompañamiento en vivo y documentación práctica para que tu equipo aprenda a usar IA con criterio real y mantenga la autonomía sin depender de externos.
             </p>
           </div>
-          <ul class="space-y-2 text-xs text-gray-700 font-medium pt-4 border-t border-gray-200/60">
+          <ul class="space-y-2 text-xs text-slate-700 font-medium pt-4 border-t border-slate-100">
             <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Talleres prácticos sobre casos de uso reales de la empresa.</li>
             <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Guías de prompts internos y políticas de uso de IA.</li>
           </ul>
         </div>
 
         <!-- 4. Página Comercial + WhatsApp -->
-        <div id="pagina-comercial" class="p-8 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white shadow-md flex flex-col justify-between border border-slate-700">
+        <div class="p-8 rounded-2xl bg-slate-900 text-white border border-slate-800 shadow-md flex flex-col justify-between">
           <div>
             <div class="flex justify-between items-start mb-6">
               <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center text-2xl">🌐</div>
               <span class="bg-emerald-500/20 text-emerald-300 text-[10px] font-extrabold uppercase px-3 py-1 rounded-full border border-emerald-500/30">Puerta de Entrada Digital</span>
             </div>
-            <h3 class="text-xl font-bold mb-3">Página Comercial + WhatsApp</h3>
+            <h3 class="text-xl font-bold mb-3">4. Página Comercial + WhatsApp</h3>
             <p class="text-sm text-slate-300 leading-relaxed mb-6">
               Una solución optimizada para negocios que necesitan una presencia digital profesional, clara y enfocada en generar conversaciones directas con clientes por WhatsApp y formularios.
             </p>
           </div>
-          <ul class="space-y-2 text-xs text-slate-300 font-medium pt-4 border-t border-slate-700">
-            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Arquitectura mobile-first, copy persuasivo y captura de leads.</li>
-            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Integración con WhatsApp, analítica de PostHog y automatizaciones.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECCIÓN 2: PROCESO DE TRABAJO -->
-  <section class="py-20 px-4 bg-[#F8FAFC] border-y border-gray-100">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl sm:text-3xl font-bold text-deep text-center mb-12">
-        Proceso de Trabajo: De Diagnóstico a Autonomía
-      </h2>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
-        {
-          [
-            { paso: "1. Diagnóstico", desc: "Auditamos tu operativa e identificamos fugas de tiempo." },
-            { paso: "2. Diseño", desc: "Estructuramos la arquitectura de solución y flujos." },
-            { paso: "3. Implementación", desc: "Configuramos las integraciones y asistentes de IA." },
-            { paso: "4. Capacitación", desc: "Entrenamos a tu equipo con casos prácticos reales." },
-            { paso: "5. Adopción", desc: "Acompañamos hasta garantizar autonomía total." },
-          ].map((item, index) => (
-            <div class="bg-white p-5 rounded-xl border border-gray-200/80 shadow-2xs flex flex-col justify-between">
-              <div>
-                <span class="text-xs font-black text-teal uppercase block mb-2">{item.paso}</span>
-                <p class="text-xs text-gray-600 leading-relaxed">{item.desc}</p>
-              </div>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- SECCIÓN 3: CASOS DE ÉXITO EMPRESARIALES -->
-  <section class="py-20 px-4 bg-white">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-2xl sm:text-3xl font-bold text-deep text-center mb-12">
-        Casos de Éxito Empresariales
-      </h2>
-      
-      <div class="space-y-8">
-        <!-- Caso 1: Irys -->
-        <div class="p-8 rounded-2xl bg-slate-50 border border-gray-200/80">
-          <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-            <h3 class="text-xl font-bold text-deep">Caso Irys — Optimización de Operaciones</h3>
-            <span class="bg-teal/10 text-teal text-xs font-bold px-3 py-1 rounded-md">B2B SaaS</span>
-          </div>
-          <div class="grid md:grid-cols-2 gap-6 text-xs text-gray-600 leading-relaxed">
-            <div>
-              <p class="font-bold text-gray-800 mb-1">Contexto & Problema:</p>
-              <p>Procesos de coordinación manual y análisis de requerimientos que consumían horas de personal clave.</p>
-            </div>
-            <div>
-              <p class="font-bold text-gray-800 mb-1">Solución & Resultado:</p>
-              <p>Estructuración de flujos asistidos por IA y automatización de reportes. Reducción del 40% en tiempo de procesamiento.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Caso 2: Fundación La Chinca -->
-        <div class="p-8 rounded-2xl bg-slate-50 border border-gray-200/80">
-          <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-            <h3 class="text-xl font-bold text-deep">Fundación La Chinca — Estandarización Digital</h3>
-            <span class="bg-orange/10 text-orange text-xs font-bold px-3 py-1 rounded-md">Sector Social</span>
-          </div>
-          <div class="grid md:grid-cols-2 gap-6 text-xs text-gray-600 leading-relaxed">
-            <div>
-              <p class="font-bold text-gray-800 mb-1">Contexto & Problema:</p>
-              <p>Información dispersa en carpetas físicas y múltiples formatos sin unificación.</p>
-            </div>
-            <div>
-              <p class="font-bold text-gray-800 mb-1">Solución & Resultado:</p>
-              <p>Sistema centralizado de captura y procesamiento documental con IA, habilitando consulta inmediata.</p>
-            </div>
+          <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+            <a href="/empresas/pagina-comercial" class="text-xs font-bold text-emerald-400 hover:underline flex items-center gap-1">
+              Ver detalles de Página Comercial →
+            </a>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- SECCIÓN 4: OPCIONES DE TRABAJO Y PRECIOS B2B -->
-  <section id="precios" class="py-20 px-4 bg-[#F8FAFC] border-t border-gray-100">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-12">
-        <h2 class="text-2xl sm:text-3xl font-bold text-deep mb-3">
-          Opciones de Acompañamiento B2B
+    <!-- 6. CÓMO TRABAJAMOS -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-20 border-t border-slate-200" id="como-trabajamos">
+      <div class="max-w-3xl mb-12 flex flex-col gap-2">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase">¿Qué sigue después del diagnóstico?</span>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+          ¿Qué hacemos después del diagnóstico?
         </h2>
-        <p class="text-gray-600 text-sm">
-          Modelos flexibles adaptados al tamaño y ritmo de tu empresa.
+        <p class="text-base text-slate-600 leading-relaxed">
+          No todos los problemas necesitan el mismo tipo de intervención. Por eso, el siguiente paso depende de lo que encontremos.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8">
-        <!-- Option 1: Taller de Inmersión -->
-        <div class="bg-white p-8 rounded-2xl border-2 border-gray-200/80 flex flex-col justify-between">
-          <div>
-            <span class="bg-gray-100 text-gray-700 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-md inline-block mb-4">Diagnóstico & Inicio</span>
-            <h3 class="text-xl font-bold text-deep mb-2">Taller de Inmersión</h3>
-            <p class="text-xs text-gray-500 mb-6">Workshop interactivo de 2-3 horas con tu equipo directivo o técnico.</p>
-            <ul class="space-y-3 text-xs text-gray-600 mb-8">
-              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Auditoría en vivo de procesos y fugas de tiempo.</li>
-              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Configuración inicial de 1 flujo prioritario con IA.</li>
-              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Hoja de ruta estratégica de automatización.</li>
-            </ul>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Paso 01 -->
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold text-teal-800">01</span>
+            <span class="material-symbols-outlined text-teal-600 text-[20px]">chat</span>
           </div>
-          <a
-            href={LINKS.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="block w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl text-center transition shadow-md text-xs cursor-pointer"
-            onclick="if (window.posthog) { window.posthog.capture('empresas_whatsapp_click', { producto: 'taller_inmersion' }); }"
-          >
-            💬 Consultar Taller por WhatsApp →
-          </a>
+          <h3 class="text-base font-bold text-slate-900 leading-snug">Conversación de 30 minutos con Pablo</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Revisamos el resultado del diagnóstico, entendemos mejor el contexto y definimos si realmente vale la pena intervenir.
+          </p>
         </div>
 
-        <!-- Option 2: Ciclo de Autonomía -->
-        <div class="bg-white p-8 rounded-2xl border-2 border-teal shadow-lg flex flex-col justify-between relative">
-          <div class="absolute -top-3 right-6 bg-teal text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-full shadow-sm">
-            Acompañamiento Integral
+        <!-- Paso 02 -->
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold text-teal-800">02</span>
+            <span class="material-symbols-outlined text-slate-400 text-[20px]">groups</span>
           </div>
-          <div>
-            <span class="bg-teal/10 text-teal text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-md inline-block mb-4">8 Semanas</span>
-            <h3 class="text-xl font-bold text-deep mb-2">Ciclo de Autonomía</h3>
-            <p class="text-xs text-gray-500 mb-6">Implementación completa, automatizaciones y capacitación continua.</p>
-            <ul class="space-y-3 text-xs text-gray-700 font-medium mb-8">
-              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Automatización de 3 a 5 flujos complejos de la empresa.</li>
-              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Capacitación y documentación de procedimientos.</li>
-              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Soporte post-implementación garantizado.</li>
-            </ul>
+          <h3 class="text-base font-bold text-slate-900 leading-snug">Taller de inmersión con el equipo</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Nos metemos en el proceso real: cómo trabajan hoy, dónde se atascan, qué herramientas utilizan y qué está generando el problema.
+          </p>
+        </div>
+
+        <!-- Paso 03 -->
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold text-emerald-600">03</span>
+            <span class="material-symbols-outlined text-emerald-600 text-[20px]">school</span>
           </div>
-          <a
-            href={LINKS.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="block w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl text-center transition shadow-lg text-xs cursor-pointer"
-            onclick="if (window.posthog) { window.posthog.capture('empresas_whatsapp_click', { producto: 'ciclo_autonomia' }); }"
-          >
-            💬 Cotizar Ciclo por WhatsApp →
-          </a>
+          <h3 class="text-base font-bold text-slate-900 leading-snug">Ciclo de autonomía</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Diseñamos e implementamos la solución junto al equipo. No se trata solo de entregar algo funcionando: acompaño, capacito y dejo al equipo preparado para utilizarlo y seguir mejorándolo por su cuenta.
+          </p>
+        </div>
+
+        <!-- Paso 04 -->
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold text-slate-400">04</span>
+            <span class="material-symbols-outlined text-slate-400 text-[20px]">precision_manufacturing</span>
+          </div>
+          <div class="flex flex-col gap-1">
+            <h3 class="text-base font-bold text-slate-900 leading-snug">Automatizaciones a la medida</h3>
+            <span class="font-mono text-[11px] text-slate-500 uppercase font-semibold">Opcional</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Si el proceso necesita desarrollo o automatización más avanzada, podemos construirla a medida e integrarla al flujo de trabajo existente.
+          </p>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- SOBRE PABLO B2B -->
-  <section class="py-16 px-4 bg-white border-t border-gray-100">
-    <div class="max-w-4xl mx-auto">
-      <SobreMi />
-    </div>
-  </section>
+      <div class="mt-8 p-6 md:p-8 bg-slate-100 rounded-2xl border border-slate-200 text-center">
+        <p class="text-base md:text-lg font-semibold text-slate-900 tracking-tight">
+          "El objetivo no es que dependas de nosotros. Es que tu equipo pueda hacer más por sí mismo."
+        </p>
+      </div>
 
+      <div class="mt-8 flex flex-col items-center justify-center gap-3 text-center">
+        <a
+          class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
+          href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, estuve revisando los pasos después del diagnóstico y quiero conversar sobre mi empresa.")}`}
+          rel="noopener noreferrer"
+          target="_blank"
+          onclick="if (window.posthog) { window.posthog.capture('empresas_whatsapp_click', { origen: 'como_trabajamos' }); }"
+        >
+          <span class="material-symbols-outlined text-[18px]">chat</span>
+          <span>Hablar por WhatsApp con Pablo</span>
+        </a>
+        <p class="text-xs font-mono text-slate-500">Respuesta directa por WhatsApp sin intermediarios ni compromiso.</p>
+      </div>
+    </section>
+
+    <!-- 7. CASOS (Problemas reales. Soluciones reales) -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-20 border-t border-slate-200" id="casos">
+      <div class="max-w-3xl mb-12 flex flex-col gap-2">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Evidencia</span>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+          Problemas reales. Soluciones reales.
+        </h2>
+        <p class="text-base text-slate-600">
+          No mostramos proyectos para presumir tecnología. Los mostramos para explicar qué problema había y cómo lo resolvimos.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Caso 1 · Irys -->
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-5">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <h3 class="text-base font-bold text-slate-900">Caso · Irys</h3>
+            <span class="font-mono text-[11px] text-slate-500">SaaS / Ops</span>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <span class="font-mono text-[11px] font-semibold text-amber-700 uppercase">El problema</span>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Gestión caótica de solicitudes e incidencias entre equipos y clientes a través de múltiples chats y canales desarticulados.
+            </p>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <span class="font-mono text-[11px] font-semibold text-teal-800 uppercase">Qué hicimos</span>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Diseñamos un flujo de clasificación inteligente y canal centralizado con plantillas estandarizadas y criterios claros de derivación.
+            </p>
+          </div>
+          <div class="flex flex-col gap-1.5 bg-slate-50 p-3.5 rounded-xl border border-slate-100 mt-auto">
+            <span class="font-mono text-[11px] font-semibold text-emerald-600 uppercase">Qué cambió</span>
+            <p class="text-xs text-slate-700 font-medium leading-relaxed">
+              Reducción drástica del tiempo de primera respuesta y visibilidad total para el liderazgo sin saturar los chats.
+            </p>
+          </div>
+        </div>
+
+        <!-- Caso 2 · Fundación La Chinca -->
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-5">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <h3 class="text-base font-bold text-slate-900">Caso · Fundación La Chinca</h3>
+            <span class="font-mono text-[11px] text-slate-500">ONG / Procesos</span>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <span class="font-mono text-[11px] font-semibold text-amber-700 uppercase">El problema</span>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Registro manual de beneficiarios y actividades en hojas de cálculo sueltas que requerían días enteros de consolidación cada mes.
+            </p>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <span class="font-mono text-[11px] font-semibold text-teal-800 uppercase">Qué hicimos</span>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Unificación de la captura de datos en una base centralizada con validaciones y automatización del informe periódico.
+            </p>
+          </div>
+          <div class="flex flex-col gap-1.5 bg-slate-50 p-3.5 rounded-xl border border-slate-100 mt-auto">
+            <span class="font-mono text-[11px] font-semibold text-emerald-600 uppercase">Qué cambió</span>
+            <p class="text-xs text-slate-700 font-medium leading-relaxed">
+              Eliminación del retrabajo administrativo de fin de mes, pasando de 3 días de consolidación a un reporte disponible en minutos.
+            </p>
+          </div>
+        </div>
+
+        <!-- Caso 3 · Almamotor -->
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-5">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <h3 class="text-base font-bold text-slate-900">Caso · Almamotor</h3>
+            <span class="font-mono text-[11px] text-slate-500">Servicios / Automotriz</span>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <span class="font-mono text-[11px] font-semibold text-amber-700 uppercase">El problema</span>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Cuellos de botella en la coordinación de citas de taller y seguimiento de presupuestos pendientes por WhatsApp y llamadas telefónicas.
+            </p>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <span class="font-mono text-[11px] font-semibold text-teal-800 uppercase">Qué hicimos</span>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Asistente operativo conectado a la base de clientes y agenda para automatizar confirmaciones y estados sin perder el toque humano.
+            </p>
+          </div>
+          <div class="flex flex-col gap-1.5 bg-slate-50 p-3.5 rounded-xl border border-slate-100 mt-auto">
+            <span class="font-mono text-[11px] font-semibold text-emerald-600 uppercase">Qué cambió</span>
+            <p class="text-xs text-slate-700 font-medium leading-relaxed">
+              Aumento notable en la tasa de confirmación de citas y recuperación de horas diarias del equipo de servicio al cliente.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. PABLO -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-20 border-t border-slate-200" id="pablo">
+      <div class="max-w-4xl bg-white rounded-2xl border border-slate-200 shadow-2xs p-8 md:p-12 flex flex-col md:flex-row gap-8 items-start">
+        <div class="w-16 h-16 rounded-full bg-teal-50 border border-teal-200 text-teal-800 flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-3xl">person</span>
+        </div>
+        <div class="flex flex-col gap-5">
+          <div class="flex flex-col gap-1">
+            <span class="font-mono text-xs text-teal-800 uppercase font-semibold">Detrás de LuciRMe estoy yo</span>
+            <h2 class="text-2xl font-bold text-slate-900">Pablo Ríos</h2>
+            <p class="text-sm font-medium text-slate-600">Consultor de Producto, Operaciones e IA.</p>
+          </div>
+          <div class="text-sm text-slate-600 flex flex-col gap-3 leading-relaxed">
+            <p>
+              Trabajo con empresas y profesionales para encontrar problemas concretos, diseñar soluciones y llevarlas hasta la adopción.
+            </p>
+            <p class="text-slate-800 font-medium">
+              No vengo a venderte una herramienta de moda. Primero quiero entender:
+            </p>
+            <ul class="flex flex-col gap-1.5 pl-1 font-mono text-xs text-slate-700">
+              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-teal-700"></span> Qué está pasando.</li>
+              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-teal-700"></span> Dónde se está perdiendo tiempo.</li>
+              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-teal-700"></span> Qué está generando fricción.</li>
+              <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-teal-700"></span> Qué vale la pena cambiar.</li>
+            </ul>
+            <p>
+              Y después decidimos juntos si la respuesta es IA, automatización, una integración, una herramienta nueva o simplemente cambiar el proceso.
+            </p>
+            <p class="text-slate-900 font-medium">
+              Mi objetivo no es que dependas de mí. Es que tu equipo termine pudiendo resolver más cosas por sí mismo.
+            </p>
+          </div>
+          <div class="pt-2">
+            <a
+              class="inline-flex items-center gap-1 text-sm font-semibold text-teal-700 hover:underline"
+              href="/sobre-pablo"
+            >
+              <span>Conocer más sobre Pablo</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. CTA FINAL -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-20 border-t border-slate-200">
+      <div class="p-8 md:p-14 bg-white rounded-2xl border border-slate-200 text-center flex flex-col items-center gap-5 shadow-2xs max-w-4xl mx-auto">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso Siguiente</span>
+        <h2 class="text-2xl md:text-4xl font-bold tracking-tight text-slate-900">
+          ¿Ya sabes qué proceso quieres mejorar?
+        </h2>
+        <p class="text-sm md:text-base text-slate-600 max-w-2xl leading-relaxed">
+          Cuéntame qué está pasando. Revisamos el problema, hablamos de posibles caminos y te digo qué haría yo. Sin presentación comercial genérica. Sin venderte una herramienta porque sí.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center gap-3 pt-3 w-full sm:w-auto">
+          <a
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
+            href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, tengo un proceso identificado para mejorar.")}`}
+            rel="noopener noreferrer"
+            target="_blank"
+            onclick="if (window.posthog) { window.posthog.capture('empresas_whatsapp_click', { origen: 'cta_final' }); }"
+          >
+            <span class="material-symbols-outlined text-[18px]">chat</span>
+            <span>Hablemos por WhatsApp</span>
+          </a>
+          <a
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white border border-slate-200 text-slate-700 text-sm font-semibold hover:bg-slate-50 transition-colors cursor-pointer"
+            href={calendlyUrl}
+            rel="noopener noreferrer"
+            target="_blank"
+            onclick="if (window.posthog) { window.posthog.capture('empresas_calendly_click', { origen: 'cta_final' }); }"
+          >
+            <span class="material-symbols-outlined text-[18px] text-slate-500">calendar_month</span>
+            <span>Agendar una conversación</span>
+          </a>
+        </div>
+        <p class="text-xs font-mono text-slate-500 pt-2">
+          Conversación estratégica directa. Sin compromiso de contratación.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 10. DEDICATED EMPRESAS FOOTER -->
+  <footer class="w-full bg-white border-t border-slate-200 py-12">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col gap-10">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="flex flex-col gap-2 md:col-span-1">
+          <span class="text-base font-bold text-slate-900 tracking-tight">LuciRMe AI · Empresas</span>
+          <p class="text-xs font-mono text-slate-500">Primero el problema. Después la tecnología.</p>
+        </div>
+        <!-- Columna 1: Empresas -->
+        <div class="flex flex-col gap-2.5">
+          <span class="font-mono text-xs font-semibold text-slate-900 uppercase">Empresas</span>
+          <div class="flex flex-col gap-2 text-xs text-slate-600">
+            <a class="hover:text-slate-900 transition-colors" href="#diagnostico">Diagnóstico</a>
+            <a class="hover:text-slate-900 transition-colors" href="#soluciones">Soluciones</a>
+            <a class="hover:text-slate-900 transition-colors" href="#casos">Casos</a>
+            <a class="hover:text-slate-900 transition-colors" href="#como-trabajamos">Cómo trabajamos</a>
+            <a class="hover:text-slate-900 transition-colors" href="#pablo">Pablo</a>
+          </div>
+        </div>
+        <!-- Columna 2: Contacto -->
+        <div class="flex flex-col gap-2.5">
+          <span class="font-mono text-xs font-semibold text-slate-900 uppercase">Contacto</span>
+          <div class="flex flex-col gap-2 text-xs text-slate-600">
+            <a class="hover:text-slate-900 transition-colors" href={whatsappBase} rel="noopener noreferrer" target="_blank">WhatsApp Directo</a>
+            <a class="hover:text-slate-900 transition-colors" href={calendlyUrl} rel="noopener noreferrer" target="_blank">Calendly (Agenda)</a>
+            <a class="hover:text-slate-900 transition-colors" href="https://linkedin.com/in/pabloriospena" rel="noopener noreferrer" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+        <!-- Columna 3: Navegación -->
+        <div class="flex flex-col gap-2.5">
+          <span class="font-mono text-xs font-semibold text-slate-900 uppercase">Navegación</span>
+          <div class="flex flex-col gap-2 text-xs text-slate-600">
+            <a class="hover:text-slate-900 transition-colors" href="/">Inicio</a>
+            <a class="hover:text-slate-900 transition-colors" href="/profesionales">Profesionales</a>
+            <a class="hover:text-slate-900 transition-colors" href="/educacion">Educación</a>
+            <a class="hover:text-slate-900 transition-colors" href="/sobre-pablo">Sobre Pablo</a>
+          </div>
+        </div>
+      </div>
+      <div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
+        <span>© 2026 LuciRMe AI · Todos los derechos reservados.</span>
+        <span>lucirme.com/empresas</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script interactivo del Wizard y la Tarjeta Viva de Diagnóstico (Client-side) -->
   <script is:inline>
-    document.addEventListener("DOMContentLoaded", function () {
+    let currentStep = 1;
+    const totalSteps = 7;
+
+    const currentSelections = {
+      proceso: 'Reportes y consolidación de información',
+      frecuencia: 'Todos los días',
+      tiempo: '1–2 horas',
+      personas: '2 a 4 personas',
+      impacto: 'Afecta al cliente',
+      esfuerzo: 'Moderado',
+      empresa: 'Mi Empresa',
+      tamano: '11-50 personas',
+      industria: 'Tecnología/SaaS',
+      pais: 'Colombia',
+      ciudad: 'Bogotá'
+    };
+
+    function updateProgressBar() {
+      const bar = document.getElementById('progress-bar');
+      const counter = document.getElementById('step-counter');
+      const prevBtn = document.getElementById('btn-prev');
+      const nextBtn = document.getElementById('btn-next');
+      const stepHint = document.getElementById('step-hint');
+      const dotsContainer = document.getElementById('step-dots');
+
+      if (!bar || !counter) return;
+
+      if (currentStep <= totalSteps) {
+        const percentage = (currentStep / totalSteps) * 100;
+        bar.style.width = percentage + '%';
+        counter.innerText = `Paso ${currentStep} de ${totalSteps}`;
+        if (prevBtn) prevBtn.disabled = currentStep === 1;
+
+        if (currentStep === totalSteps) {
+          if (nextBtn) nextBtn.classList.add('hidden');
+          if (stepHint) stepHint.innerText = 'Último paso · Contexto operativo';
+        } else {
+          if (nextBtn) nextBtn.classList.remove('hidden');
+          if (stepHint) stepHint.innerText = 'Selección guiada';
+        }
+
+        if (dotsContainer) {
+          dotsContainer.innerHTML = '';
+          for (let i = 1; i <= totalSteps; i++) {
+            const dot = document.createElement('span');
+            dot.className = `h-2 rounded-full transition-all ${i === currentStep ? 'bg-teal-700 w-4' : (i < currentStep ? 'bg-teal-300 w-2' : 'bg-slate-200 w-2')}`;
+            dotsContainer.appendChild(dot);
+          }
+        }
+      } else {
+        bar.style.width = '100%';
+        counter.innerText = 'Diagnóstico Finalizado';
+        if (stepHint) stepHint.innerText = 'Evaluación generada';
+        if (prevBtn) prevBtn.disabled = false;
+        if (nextBtn) nextBtn.classList.add('hidden');
+        if (dotsContainer) {
+          dotsContainer.innerHTML = '<span class="text-xs font-mono text-emerald-600 font-semibold">100% Completado</span>';
+        }
+      }
+    }
+
+    function goToStep(step) {
+      document.querySelectorAll('.wizard-step').forEach(el => el.classList.add('hidden'));
+
+      currentStep = step;
+      if (step <= totalSteps) {
+        const targetStep = document.getElementById(`step-${step}`);
+        if (targetStep) targetStep.classList.remove('hidden');
+      } else {
+        const compStep = document.getElementById('step-completed');
+        if (compStep) compStep.classList.remove('hidden');
+      }
+
+      updateProgressBar();
+    }
+
+    function nextStep() {
+      if (currentStep < totalSteps) {
+        goToStep(currentStep + 1);
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 1) {
+        goToStep(currentStep - 1);
+      }
+    }
+
+    function selectStepOption(category, value, btnElement) {
+      currentSelections[category] = value;
+
+      const parent = btnElement.parentElement;
+      if (parent) {
+        const buttons = parent.querySelectorAll('.diag-option');
+        buttons.forEach(btn => {
+          btn.classList.remove('border-teal-700', 'bg-teal-50/80', 'text-teal-900');
+          btn.classList.add('border-slate-200', 'text-slate-700');
+          const icon = btn.querySelector('.material-symbols-outlined');
+          if (icon) {
+            icon.innerText = 'circle';
+            icon.classList.remove('text-teal-700');
+            icon.classList.add('text-slate-300', 'opacity-0');
+          }
+        });
+      }
+
+      btnElement.classList.remove('border-slate-200', 'text-slate-700');
+      btnElement.classList.add('border-teal-700', 'bg-teal-50/80', 'text-teal-900');
+      const activeIcon = btnElement.querySelector('.material-symbols-outlined');
+      if (activeIcon) {
+        activeIcon.innerText = 'check_circle';
+        activeIcon.classList.remove('text-slate-300', 'opacity-0');
+        activeIcon.classList.add('text-teal-700');
+      }
+
+      recalculateAssessment();
+
+      setTimeout(() => {
+        if (currentStep < totalSteps) {
+          nextStep();
+        }
+      }, 280);
+    }
+
+    function calculateEstimatedWeeklyHours() {
+      let freqMultiplier = 5;
+      if (currentSelections.frecuencia.includes('Varias veces al día')) freqMultiplier = 15;
+      else if (currentSelections.frecuencia.includes('Todos los días')) freqMultiplier = 5;
+      else if (currentSelections.frecuencia.includes('Varias veces por semana')) freqMultiplier = 3;
+      else if (currentSelections.frecuencia.includes('Una vez por semana')) freqMultiplier = 1;
+      else if (currentSelections.frecuencia.includes('Algunas veces al mes')) freqMultiplier = 0.5;
+
+      let timeValue = 1.5;
+      if (currentSelections.tiempo.includes('Menos de 15 minutos')) timeValue = 0.2;
+      else if (currentSelections.tiempo.includes('15–30 minutos')) timeValue = 0.4;
+      else if (currentSelections.tiempo.includes('30–60 minutos')) timeValue = 0.75;
+      else if (currentSelections.tiempo.includes('1–2 horas')) timeValue = 1.5;
+      else if (currentSelections.tiempo.includes('Más de 2 horas')) timeValue = 2.5;
+
+      let personsCount = 2;
+      if (currentSelections.personas.includes('1 persona')) personsCount = 1;
+      else if (currentSelections.personas.includes('2 a 4 personas')) personsCount = 2.5;
+      else if (currentSelections.personas.includes('4 a 5 personas')) personsCount = 4.5;
+      else if (currentSelections.personas.includes('Más de 5 personas')) personsCount = 6;
+
+      return Math.round(freqMultiplier * timeValue * personsCount * 10) / 10;
+    }
+
+    function recalculateAssessment() {
+      const weeklyHours = calculateEstimatedWeeklyHours();
+      
+      const elProc = document.getElementById('card-proceso');
+      if (elProc) elProc.innerText = currentSelections.proceso;
+
+      const elFreq = document.getElementById('card-frecuencia');
+      if (elFreq) elFreq.innerText = currentSelections.frecuencia;
+
+      const elTime = document.getElementById('card-tiempo');
+      if (elTime) elTime.innerText = `~${weeklyHours} h/semana acumuladas`;
+
+      const elPers = document.getElementById('card-personas');
+      if (elPers) elPers.innerText = currentSelections.personas;
+
+      const elImp = document.getElementById('card-impacto');
+      if (elImp) elImp.innerText = currentSelections.impacto;
+
+      const elEsf = document.getElementById('card-esfuerzo');
+      if (elEsf) elEsf.innerText = currentSelections.esfuerzo;
+
+      const elTag = document.getElementById('card-company-tag');
+      if (elTag) {
+        elTag.innerText = `${currentSelections.empresa || 'Tu empresa'} · ${currentSelections.industria} (${currentSelections.ciudad}, ${currentSelections.pais})`;
+      }
+
+      const badge = document.getElementById('card-priority-badge');
+      const justification = document.getElementById('card-justification');
+
+      if (badge && justification) {
+        if (weeklyHours >= 12 || currentSelections.impacto.includes('ingresos') || currentSelections.impacto.includes('varios') || currentSelections.impacto.includes('cliente')) {
+          badge.className = 'px-2 py-0.5 rounded font-mono text-[11px] font-bold bg-amber-100 text-amber-900 uppercase';
+          badge.innerText = 'Prioridad: Alta';
+          justification.innerHTML = `Este proceso merece ser intervenido pronto porque genera una fuga de aproximadamente <strong class="text-slate-900">~${weeklyHours} horas/semana</strong> combinando: <strong class="text-slate-800">Alta recurrencia · Impacto directo en la operación · Retorno rápido de inversión</strong>.`;
+        } else {
+          badge.className = 'px-2 py-0.5 rounded font-mono text-[11px] font-bold bg-teal-100 text-teal-800 uppercase';
+          badge.innerText = 'Prioridad: Media';
+          justification.innerHTML = `Este proceso genera cerca de <strong class="text-slate-900">~${weeklyHours} horas/semana</strong>. Recomendamos simplificarlo o automatizar pasos clave antes de plantear software personalizado.`;
+        }
+      }
+
+      const waBtn = document.getElementById('card-whatsapp-btn');
+      if (waBtn) {
+        const encodedMsg = encodeURIComponent(
+          `Hola Pablo, completé el diagnóstico de LuciRMe AI para ${currentSelections.empresa} (${currentSelections.pais}):\n\n` +
+          `• Proceso a mejorar: ${currentSelections.proceso}\n` +
+          `• Frecuencia: ${currentSelections.frecuencia}\n` +
+          `• Tiempo por sesión: ${currentSelections.tiempo}\n` +
+          `• Fuga calculada: ~${weeklyHours} hrs/semana\n` +
+          `• Personas involucradas: ${currentSelections.personas}\n` +
+          `• Impacto principal: ${currentSelections.impacto}\n` +
+          `• Esfuerzo estimado: ${currentSelections.esfuerzo}\n` +
+          `• Tamaño: ${currentSelections.tamano} | Sector: ${currentSelections.industria}\n\n` +
+          `Quiero revisar este proceso contigo.`
+        );
+        waBtn.href = `https://wa.me/573053046180?text=${encodedMsg}`;
+      }
+    }
+
+    function submitDiagnostic() {
+      const empInput = document.getElementById('empresa-input');
+      const tamSelect = document.getElementById('tamano-select');
+      const indSelect = document.getElementById('industria-select');
+      const paisInput = document.getElementById('pais-input');
+      const cdInput = document.getElementById('ciudad-input');
+
+      currentSelections.empresa = (empInput && empInput.value.trim()) || 'Mi Empresa';
+      currentSelections.tamano = (tamSelect && tamSelect.value) || '11-50 personas';
+      currentSelections.industria = (indSelect && indSelect.value) || 'Tecnología/SaaS';
+      currentSelections.pais = (paisInput && paisInput.value.trim()) || 'Colombia';
+      currentSelections.ciudad = (cdInput && cdInput.value.trim()) || 'Bogotá';
+
+      recalculateAssessment();
+
+      const hours = calculateEstimatedWeeklyHours();
+      const sumText = document.getElementById('completion-summary-text');
+      if (sumText) {
+        sumText.innerHTML = `
+          Para <strong>${currentSelections.empresa}</strong> (${currentSelections.industria}, ${currentSelections.tamano}), el proceso <strong>"${currentSelections.proceso}"</strong> representa una carga de aproximadamente <strong>~${hours} horas por semana</strong> para ${currentSelections.personas}.
+        `;
+      }
+
       if (window.posthog) {
-        window.posthog.capture("empresas_page_view", {
-          pagina: "empresas",
-          categoria: "b2b_empresas"
+        window.posthog.capture('empresas_diagnostico_completado', {
+          proceso: currentSelections.proceso,
+          frecuencia: currentSelections.frecuencia,
+          fuga_horas: hours,
+          empresa: currentSelections.empresa,
+          industria: currentSelections.industria
+        });
+      }
+
+      const card = document.getElementById('assessment-card');
+      if (card) {
+        card.classList.add('ring-2', 'ring-emerald-500');
+        setTimeout(() => {
+          card.classList.remove('ring-2', 'ring-emerald-500');
+        }, 1500);
+      }
+
+      goToStep(totalSteps + 1);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateProgressBar();
+      recalculateAssessment();
+
+      if (window.posthog) {
+        window.posthog.capture('empresas_page_view', {
+          pagina: 'empresas_b2b_custom'
         });
       }
     });
