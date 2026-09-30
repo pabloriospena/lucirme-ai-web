@@ -1,0 +1,203 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { LINKS } from "../lib/constants.js";
+import SobreMi from "../components/SobreMi.astro";
+---
+
+<Layout title="IA Aplicada a tu Trabajo | LuciRMe AI">
+  <!-- HERO PROFESIONALES -->
+  <header class="py-20 md:py-24 px-4 bg-slate-50 border-b border-gray-100 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <span class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-6 border border-teal/20">
+        Para Profesionales & Líderes
+      </span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-deep leading-tight mb-6 tracking-tight">
+        IA aplicada a tu forma <span class="text-teal underline decoration-teal/30">real</span> de trabajar.
+      </h1>
+      <p class="text-base sm:text-lg text-gray-600 leading-relaxed mb-10 max-w-2xl mx-auto font-medium">
+        Te acompaño paso a paso a incorporar IA en tu flujo diario de trabajo hasta que puedas hacerlo de manera 100% autónoma. Sin teoría abstracta ni prompts genéricos.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+        <a
+          href={LINKS.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-xl font-bold transition shadow-lg text-base cursor-pointer"
+          onclick="if (window.posthog) { window.posthog.capture('profesionales_whatsapp_click', { origen: 'hero_profesionales' }); }"
+        >
+          💬 Hablar por WhatsApp (+57 305 3046180) →
+        </a>
+        <a
+          href={LINKS.calendly}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 bg-white border border-gray-300 text-deep px-8 py-4 rounded-xl font-bold hover:bg-gray-50 transition shadow-sm text-base cursor-pointer"
+          onclick="if (window.posthog) { window.posthog.capture('profesionales_calendly_click', { origen: 'hero_profesionales' }); }"
+        >
+          📅 Agendar Sesión de Diagnóstico
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="py-20 px-4 bg-white">
+    <div class="max-w-5xl mx-auto space-y-20">
+
+      <!-- SECCIÓN 1: AUDIENCIAS Y CASOS DE USO -->
+      <section>
+        <div class="text-center mb-14">
+          <h2 class="text-2xl sm:text-3xl font-bold text-deep mb-3">
+            ¿A quiénes acompañamos?
+          </h2>
+          <p class="text-gray-600 text-sm max-w-xl mx-auto">
+            Soluciones aplicadas para profesionales que gestionan información, decisiones, personas y proyectos.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- 1. Product Managers & Equipos de Producto -->
+          <div class="p-8 rounded-2xl bg-teal/5 border border-teal/30 relative overflow-hidden shadow-xs">
+            <div class="w-12 h-12 bg-teal/10 rounded-xl flex items-center justify-center text-2xl mb-6">🚀</div>
+            <span class="bg-teal text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-full inline-block mb-3">Audiencia Destacada</span>
+            <h3 class="text-xl font-bold text-deep mb-3">Product Managers & Digital Leaders</h3>
+            <p class="text-xs text-gray-600 leading-relaxed mb-6">
+              Aplica IA en todo el ciclo de vida de producto para entregar más valor sin horas extras:
+            </p>
+            <div class="grid grid-cols-2 gap-2 text-xs text-gray-700 font-medium">
+              <span class="bg-white/80 p-2 rounded-md border border-teal/20">🔍 Research & Feedback</span>
+              <span class="bg-white/80 p-2 rounded-md border border-teal/20">📄 Discovery & PRDs</span>
+              <span class="bg-white/80 p-2 rounded-md border border-teal/20">📋 Refinamiento de Backlog</span>
+              <span class="bg-white/80 p-2 rounded-md border border-teal/20">🎟️ User Stories & Tickets</span>
+              <span class="bg-white/80 p-2 rounded-md border border-teal/20">📊 Análisis de Métricas</span>
+              <span class="bg-white/80 p-2 rounded-md border border-teal/20">🎙️ Resumen de Reuniones</span>
+            </div>
+          </div>
+
+          <!-- 2. Otros Profesionales e Independientes -->
+          <div class="p-8 rounded-2xl bg-slate-50 border border-gray-200/80 shadow-xs flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 bg-slate-200 rounded-xl flex items-center justify-center text-2xl mb-6">💼</div>
+              <h3 class="text-xl font-bold text-deep mb-3">Consultores, Abogados, Contadores & Independientes</h3>
+              <p class="text-xs text-gray-600 leading-relaxed mb-6">
+                Para profesionales que manejan altos volúmenes de documentos, normas, auditorías, clientes y coordinación operativa repetitiva.
+              </p>
+            </div>
+            <div class="space-y-2 text-xs text-gray-700 font-medium pt-4 border-t border-gray-200/60">
+              <p class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Síntesis y comparación de contratos, leyes y reportes complejos.</p>
+              <p class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Automatización de respuestas a clientes y seguimiento por correo.</p>
+              <p class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Creación de presentaciones ejecutivas en minutos.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 2: PRODUCT MANAGEMENT SIN BULLSHIT -->
+      <section class="p-8 md:p-12 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-deep text-white shadow-xl relative overflow-hidden border border-slate-700">
+        <div class="max-w-3xl">
+          <span class="bg-orange/20 text-orange border border-orange/30 text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-md inline-block mb-4">
+            Especialidad & Libro Oficial
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black mb-4 tracking-tight">
+            Product Management Sin Bullshit
+          </h2>
+          <p class="text-sm sm:text-base text-slate-300 leading-relaxed mb-6">
+            El manual y sistema de trabajo diseñado por Pablo Ríos para Product Managers que quieren dejar de hacer "teatro de procesos" y enfocarse en entregar productos reales usando IA con criterio profesional.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a
+              href="/recursos/ebook-pm"
+              class="bg-orange hover:bg-orange/90 text-white font-bold px-6 py-3 rounded-xl transition text-xs sm:text-sm shadow-md"
+              onclick="if (window.posthog) { window.posthog.capture('profesionales_ebook_click', { origen: 'bloque_pm_sb' }); }"
+            >
+              📖 Ver Libro Vol. 1 ($53.000 COP) →
+            </a>
+            <a
+              href="/recursos/preventa-vol2"
+              class="bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-xl border border-white/20 transition text-xs sm:text-sm"
+              onclick="if (window.posthog) { window.posthog.capture('profesionales_preventa_click', { origen: 'bloque_pm_sb' }); }"
+            >
+              🚀 Preventa Exclusiva Vol. 2
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 3: CASOS DE ÉXITO DE PROFESIONALES -->
+      <section>
+        <div class="text-center mb-12">
+          <h2 class="text-2xl sm:text-3xl font-bold text-deep mb-3">
+            Casos de Éxito de Profesionales
+          </h2>
+          <p class="text-gray-600 text-sm">
+            Resultados reales en la forma cotidiana de trabajar.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Caso 1: Product Manager -->
+          <div class="p-6 rounded-2xl bg-slate-50 border border-gray-200/80">
+            <span class="text-xs font-bold text-teal bg-teal/10 px-3 py-1 rounded-md uppercase mb-3 inline-block">Product Manager B2B</span>
+            <h3 class="font-bold text-deep text-base mb-2">De 15h de documentación a 3h semanales</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              <strong>Acompañamiento:</strong> Creamos asistentes de IA personalizados cargados con sus metodologías de PRD y estándares de equipo para estructurar backlog e historias en tiempo récord.
+            </p>
+          </div>
+
+          <!-- Caso 2: Consultor Independiente -->
+          <div class="p-6 rounded-2xl bg-slate-50 border border-gray-200/80">
+            <span class="text-xs font-bold text-orange bg-orange/10 px-3 py-1 rounded-md uppercase mb-3 inline-block">Consultor Estratégico</span>
+            <h3 class="font-bold text-deep text-base mb-2">Reportes ejecutivos en minutos</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">
+              <strong>Acompañamiento:</strong> Automatización del procesamiento de entrevistas en audio y notas sueltas en presentaciones estructuradas listas para clientes.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 4: MODELOS DE TRABAJO INDIVIDUAL -->
+      <section class="bg-slate-50 p-8 md:p-12 rounded-3xl border border-gray-200/80">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-2xl sm:text-3xl font-bold text-deep mb-4">
+            ¿Cómo podemos trabajar juntos?
+          </h2>
+          <p class="text-gray-600 text-sm mb-8">
+            Elige el formato de acompañamiento que mejor se adapte a tus metas actuales.
+          </p>
+
+          <div class="grid sm:grid-cols-2 gap-6 text-left mb-8">
+            <div class="bg-white p-6 rounded-2xl border border-gray-200/80">
+              <h3 class="font-bold text-deep text-lg mb-2">Sesión 1:1 de Claridad</h3>
+              <p class="text-xs text-gray-600 mb-4 leading-relaxed">60 minutos intensivos para resolver un cuello de botella específico y construir tu primer flujo con IA.</p>
+              <a href={LINKS.whatsapp} target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-teal hover:underline flex items-center gap-1">Consultar por WhatsApp →</a>
+            </div>
+            <div class="bg-white p-6 rounded-2xl border border-teal/40">
+              <h3 class="font-bold text-deep text-lg mb-2">Acompañamiento Individual</h3>
+              <p class="text-xs text-gray-600 mb-4 leading-relaxed">Programa personalizado de 4 semanas para transformar completamente tu sistema de trabajo personal.</p>
+              <a href={LINKS.whatsapp} target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-teal hover:underline flex items-center gap-1">Cotizar programa →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <section class="py-16 px-4 bg-white border-t border-gray-100">
+    <div class="max-w-4xl mx-auto">
+      <SobreMi />
+    </div>
+  </section>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.posthog) {
+        window.posthog.capture("profesionales_page_view", {
+          pagina: "profesionales",
+          categoria: "profesionales"
+        });
+      }
+    });
+  </script>
+</Layout>

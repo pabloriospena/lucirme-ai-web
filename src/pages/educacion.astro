@@ -1,0 +1,263 @@
+---
+import Layout from "../layouts/Layout.astro";
+import RedesSociales from "../components/RedesSociales.astro";
+
+// Cargar dinámicamente recursos de /recursos/*.astro
+const archivos = import.meta.glob("./recursos/*.astro", { eager: true });
+const listaRecursos = Object.keys(archivos).map((key) => {
+  const file = archivos[key] as any;
+  const slug = key.split("/").pop()?.replace(".astro", "") || "";
+  return {
+    slug,
+    url: `/recursos/${slug}`,
+    titulo: file.frontmatter?.title || slug.replace("-", " ").toUpperCase(),
+  };
+});
+
+const productosDestacados = [
+  {
+    slug: "curso-presentaciones",
+    url: "/curso-presentaciones",
+    etiqueta: "Curso Asíncrono · $35 USD",
+    titulo: 'De "No tengo idea" a Presentación Completa',
+    desc: "Convierte documentos, correos, audios, datos y notas desordenadas en una presentación clara, verificable y lista para presentar con IA. Método práctico de 5 pasos.",
+    precio: "$35 USD",
+    destacado: true,
+  },
+  {
+    slug: "bot-presentaciones",
+    url: "/bot-presentaciones",
+    etiqueta: "Agente Guiado · $8 USD",
+    titulo: "Bot Arquitecto de Presentaciones",
+    desc: "Ordena tu pensamiento disperso con un método de 5 pasos y lo convierte en un discurso claro, estructurado y con carga emocional. Sin perder tu voz.",
+    precio: "$8 USD",
+    destacado: true,
+  },
+  {
+    slug: "atajos-ia",
+    url: "/atajos-ia",
+    etiqueta: "Librería Pro · $17 USD",
+    titulo: "Atajos IA — Prompts Maestros",
+    desc: "Colección de prompts testeados para automatizar tareas clave de análisis, síntesis y redacción ejecutiva.",
+    precio: "$17 USD",
+    destacado: false,
+  },
+  {
+    slug: "atajos-visuales",
+    url: "/atajos-visuales",
+    etiqueta: "Librería Visual · $5 USD",
+    titulo: "Atajos Visuales — Midjourney & Imagen",
+    desc: "Prompts listos para generar diagramas, ilustraciones y conceptos visuales de calidad profesional.",
+    precio: "$5 USD",
+    destacado: false,
+  },
+];
+
+const herramientasGratuitas = [
+  {
+    titulo: "Prompteador R+C+T+E",
+    url: "/recursos/prompteador",
+    etiqueta: "Herramienta Gratis",
+    desc: "Optimiza tus prompts con la fórmula R+C+T+E para obtener respuestas de ingeniería de élite.",
+  },
+  {
+    titulo: "Backlog Detox",
+    url: "/recursos/backlog-detox",
+    etiqueta: "Micro-SaaS Gratis",
+    desc: "Limpia y prioriza tu backlog de producto con inteligencia artificial en segundos.",
+  },
+  {
+    titulo: "Shape Up Builder",
+    url: "/recursos/shapeup-builder",
+    etiqueta: "Micro-SaaS Gratis",
+    desc: "Estructura pitches de producto bajo la metodología Shape Up listos para tu equipo.",
+  },
+  {
+    titulo: "CV con IA",
+    url: "/recursos/cv-con-ia",
+    etiqueta: "Herramienta Gratis",
+    desc: "Optimiza tu hoja de vida profesional para superar los filtros de contratación ATS.",
+  },
+  {
+    titulo: "Job Prompt AI",
+    url: "/recursos/job-prompt-ai",
+    etiqueta: "Herramienta Gratis",
+    desc: "Genera el prompt exacto para analizar ofertas de trabajo y preparar entrevistas.",
+  },
+  {
+    titulo: "Guía Deep Research",
+    url: "/recursos/guia-deepresearch",
+    etiqueta: "Guía Premium",
+    desc: "El superpoder de la investigación avanzada con IA: de 3 semanas a 4 horas estratégicas.",
+  },
+];
+---
+
+<Layout title="Mundo Educación | Rutas, Cursos y Herramientas IA | LuciRMe AI">
+  <!-- HERO EDUCACIÓN -->
+  <header class="py-20 md:py-24 px-4 bg-[#F8FAFC] border-b border-gray-100 text-center">
+    <div class="max-w-4xl mx-auto">
+      <span class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-6 border border-teal/20">
+        Educación & Productos Digitales
+      </span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-deep mb-6 tracking-tight">
+        Aprende IA con rutas, herramientas y productos prácticos.
+      </h1>
+      <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed font-medium">
+        Todo el conocimiento práctico estructurado para que pases de la teoría a la aplicación real en minutos.
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-3 pt-8 text-xs font-bold">
+        <a href="#rutas" class="bg-white border border-gray-300 text-deep px-5 py-2.5 rounded-xl hover:bg-gray-50 transition shadow-2xs">
+          🧭 Rutas de Aprendizaje
+        </a>
+        <a href="#productos" class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-5 py-2.5 rounded-xl transition shadow-2xs">
+          🎓 Cursos y Productos
+        </a>
+        <a href="#gratuitos" class="bg-teal text-white px-5 py-2.5 rounded-xl hover:bg-tealHover transition shadow-2xs">
+          ⚡ Herramientas Gratuitas
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="py-16 px-4 max-w-6xl mx-auto space-y-24">
+
+    <!-- 1. RUTAS DE APRENDIZAJE -->
+    <section id="rutas" class="scroll-mt-24">
+      <div class="mb-10 text-center md:text-left">
+        <span class="text-xs font-bold text-teal bg-teal/10 px-3 py-1 rounded-md uppercase tracking-widest inline-block mb-3">Pilar 1</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-deep">Rutas de Aprendizaje Guiadas</h2>
+        <p class="text-xs sm:text-sm text-gray-500 mt-1">Elige tu objetivo y sigue el camino recomendado.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Ruta 1 -->
+        <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-teal transition-all shadow-xs flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-md uppercase tracking-wider block w-fit mb-3">Ruta 1 · Comunicación</span>
+            <h3 class="text-lg font-bold text-deep mb-2">De "No tengo idea" a Presentación Completa</h3>
+            <p class="text-xs text-gray-600 leading-relaxed mb-6">Transforma caos de información en discursos y diapositivas ejecutivas.</p>
+          </div>
+          <a href="/curso-presentaciones" class="text-xs font-bold text-teal hover:underline flex items-center justify-between pt-4 border-t border-gray-100" onclick="if (window.posthog) { window.posthog.capture('educacion_ruta_click', { ruta: 'curso-presentaciones' }); }">
+            Explorar Ruta → <span class="font-normal text-gray-400">$35 USD</span>
+          </a>
+        </div>
+
+        <!-- Ruta 2 -->
+        <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-teal transition-all shadow-xs flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-bold text-teal bg-teal/5 px-2.5 py-1 rounded-md uppercase tracking-wider block w-fit mb-3">Ruta 2 · Segundo Cerebro</span>
+            <h3 class="text-lg font-bold text-deep mb-2">Segundo Cerebro con NotebookLM</h3>
+            <p class="text-xs text-gray-600 leading-relaxed mb-6">Organiza tus notas, fuentes y documentos en un asistente de estudio activo.</p>
+          </div>
+          <a href="/recursos/guia-notebooklm" class="text-xs font-bold text-teal hover:underline flex items-center justify-between pt-4 border-t border-gray-100" onclick="if (window.posthog) { window.posthog.capture('educacion_ruta_click', { ruta: 'notebooklm' }); }">
+            Ver Guía Completa → <span class="font-normal text-gray-400">Gratis</span>
+          </a>
+        </div>
+
+        <!-- Ruta 3 -->
+        <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-teal transition-all shadow-xs flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-bold text-orange bg-orange/5 px-2.5 py-1 rounded-md uppercase tracking-wider block w-fit mb-3">Ruta 3 · Product Management</span>
+            <h3 class="text-lg font-bold text-deep mb-2">PM Sin Bullshit con IA</h3>
+            <p class="text-xs text-gray-600 leading-relaxed mb-6">Research, PRDs, backlog y refinamiento con criterio profesional.</p>
+          </div>
+          <a href="/profesionales" class="text-xs font-bold text-teal hover:underline flex items-center justify-between pt-4 border-t border-gray-100" onclick="if (window.posthog) { window.posthog.capture('educacion_ruta_click', { ruta: 'pm' }); }">
+            Ver Especialidad → <span class="font-normal text-gray-400">Libro & Guías</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. PRODUCTOS DIGITALES Y CURSOS -->
+    <section id="productos" class="scroll-mt-24">
+      <div class="mb-10 text-center md:text-left">
+        <span class="text-xs font-bold text-amber-600 bg-amber-50 px-3 py-1 rounded-md uppercase tracking-widest inline-block mb-3">Pilar 2</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-deep">Cursos y Productos Digitales</h2>
+        <p class="text-xs sm:text-sm text-gray-500 mt-1">Acceso inmediato y de por vida para aprender a tu ritmo.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        {
+          productosDestacados.map((prod) => (
+            <div class="bg-white p-8 rounded-3xl border border-gray-200/80 hover:border-amber-400 transition-all shadow-sm flex flex-col justify-between relative group">
+              <div>
+                <span class="inline-block bg-amber-500/10 text-amber-900 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-md mb-4 border border-amber-500/20">
+                  {prod.etiqueta}
+                </span>
+                <h3 class="text-xl font-bold text-deep mb-3 group-hover:text-amber-600 transition-colors">
+                  {prod.titulo}
+                </h3>
+                <p class="text-xs text-gray-600 leading-relaxed mb-6">
+                  {prod.desc}
+                </p>
+              </div>
+              <div class="flex items-center justify-between pt-6 border-t border-gray-100">
+                <span class="text-base font-black text-amber-600">{prod.precio}</span>
+                <a
+                  href={prod.url}
+                  class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-5 py-2.5 rounded-xl font-black text-xs transition shadow-2xs"
+                  onclick={`if (window.posthog) { window.posthog.capture('educacion_producto_click', { producto: '${prod.slug}' }); }`}
+                >
+                  Ver Producto →
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- 3. HERRAMIENTAS Y RECURSOS GRATUITOS -->
+    <section id="gratuitos" class="scroll-mt-24">
+      <div class="mb-10 text-center md:text-left">
+        <span class="text-xs font-bold text-teal bg-teal/10 px-3 py-1 rounded-md uppercase tracking-widest inline-block mb-3">Pilar 3</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-deep">Herramientas & Micro-SaaS Gratuitos</h2>
+        <p class="text-xs sm:text-sm text-gray-500 mt-1">Utilidades de acceso abierto sin registro obligatorio.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          herramientasGratuitas.map((herramienta) => (
+            <a
+              href={herramienta.url}
+              class="group bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-teal transition-all shadow-2xs flex flex-col justify-between"
+              onclick={`if (window.posthog) { window.posthog.capture('educacion_recurso_click', { recurso: '${herramienta.titulo}' }); }`}
+            >
+              <div>
+                <span class="text-[10px] font-bold text-teal bg-teal/10 px-2.5 py-1 rounded-md uppercase tracking-wider inline-block mb-3">
+                  {herramienta.etiqueta}
+                </span>
+                <h3 class="text-base font-bold text-deep mb-2 group-hover:text-teal transition-colors">
+                  {herramienta.titulo}
+                </h3>
+                <p class="text-xs text-gray-500 leading-relaxed mb-6">
+                  {herramienta.desc}
+                </p>
+              </div>
+              <div class="pt-4 border-t border-gray-100 flex justify-between items-center text-xs text-teal font-bold">
+                <span>Acceder Gratis</span>
+                <span class="group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+  </main>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.posthog) {
+        window.posthog.capture("educacion_page_view", {
+          pagina: "educacion",
+          categoria: "educacion"
+        });
+      }
+    });
+  </script>
+
+  <RedesSociales />
+</Layout>

@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SobreMi from "../components/SobreMi.astro";
+import ActionHub from "../components/ActionHub.astro";
+import RedesSociales from "../components/RedesSociales.astro";
+---
+
+<Layout title="Sobre Pablo Ríos | LuciRMe AI">
+  <main class="py-12 bg-white">
+    <SobreMi />
+  </main>
+
+  <ActionHub />
+  <RedesSociales />
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.posthog) {
+        window.posthog.capture("sobre_pablo_page_view", {
+          pagina: "sobre-pablo"
+        });
+      }
+    });
+  </script>
+</Layout>

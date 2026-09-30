@@ -1,0 +1,297 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { LINKS } from "../lib/constants.js";
+import SobreMi from "../components/SobreMi.astro";
+---
+
+<Layout title="Soluciones con IA para Empresas y Equipos | LuciRMe AI">
+  <!-- HERO B2B -->
+  <header class="py-20 md:py-24 px-4 bg-[#F8FAFC] border-b border-gray-100 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <span class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-md mb-6 border border-teal/20">
+        Empresas & Equipos
+      </span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-deep leading-tight mb-6 tracking-tight">
+        Implemento IA en tu empresa hasta que tu equipo pueda trabajar de forma <span class="text-teal underline decoration-teal/30">autónoma</span>.
+      </h1>
+      <p class="text-base sm:text-lg text-gray-600 leading-relaxed mb-10 max-w-2xl mx-auto font-medium">
+        Reducimos la fricción operativa, automatizamos procesos clave y capacitamos a tu equipo sobre tus herramientas reales sin detener tu operación.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+        <a
+          href={LINKS.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-xl font-bold transition shadow-lg text-base cursor-pointer"
+          onclick="if (window.posthog) { window.posthog.capture('empresas_whatsapp_click', { origen: 'hero_b2b' }); }"
+        >
+          💬 Consultar por WhatsApp (+57 305 3046180) →
+        </a>
+        <a
+          href={LINKS.calendly_empresa}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 bg-white border border-gray-300 text-deep px-8 py-4 rounded-xl font-bold hover:bg-gray-50 transition shadow-sm text-base cursor-pointer"
+          onclick="if (window.posthog) { window.posthog.capture('empresas_calendly_click', { origen: 'hero_b2b' }); }"
+        >
+          📅 Agendar Diagnóstico Operativo
+        </a>
+      </div>
+
+      <!-- LOGOS DE AUTORIDAD B2B -->
+      <div class="pt-8 border-t border-gray-200/80">
+        <p class="text-xs text-gray-400 uppercase tracking-widest mb-4 font-semibold">
+          Procesos e IA implementados en equipos de:
+        </p>
+        <div class="flex flex-wrap justify-center items-center gap-6 sm:gap-10 text-gray-500 font-bold text-sm sm:text-base">
+          <span class="hover:text-deep transition-colors">Irys</span>
+          <span>•</span>
+          <span class="hover:text-deep transition-colors">Fundación La Chinca</span>
+          <span>•</span>
+          <span class="hover:text-deep transition-colors">Asesorías Integrales</span>
+          <span>•</span>
+          <span class="hover:text-deep transition-colors">Almamotor</span>
+          <span>•</span>
+          <span class="hover:text-deep transition-colors">InterobrasER</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECCIÓN 1: SOLUCIONES EMPRESARIALES -->
+  <section class="py-20 px-4 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-2xl sm:text-3xl font-bold text-deep mb-4">
+          Soluciones de IA y Automatización Operativa
+        </h2>
+        <p class="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
+          Diseñamos e integramos tecnología sin obligarte a migrar de software ni cambiar la lógica de tu negocio.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- 1. Implementación de IA -->
+        <div class="p-8 rounded-2xl bg-slate-50 border border-gray-200/80 hover:border-teal transition-all shadow-xs flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 bg-teal/10 rounded-xl flex items-center justify-center text-2xl mb-6">⚙️</div>
+            <h3 class="text-xl font-bold text-deep mb-3">Implementación de IA en Procesos</h3>
+            <p class="text-sm text-gray-600 leading-relaxed mb-6">
+              Mapeamos tus cuellos de botella e integramos agentes y asistentes de IA para análisis de documentos, reportes ejecutivos, respuesta a clientes y validación de datos.
+            </p>
+          </div>
+          <ul class="space-y-2 text-xs text-gray-700 font-medium pt-4 border-t border-gray-200/60">
+            <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Asistentes de consulta sobre bases de conocimiento corporativas.</li>
+            <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Extracción automática de datos desde PDFs, facturas y correos.</li>
+          </ul>
+        </div>
+
+        <!-- 2. Automatización de Procesos -->
+        <div class="p-8 rounded-2xl bg-slate-50 border border-gray-200/80 hover:border-teal transition-all shadow-xs flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 bg-orange/10 rounded-xl flex items-center justify-center text-2xl mb-6">⚡</div>
+            <h3 class="text-xl font-bold text-deep mb-3">Automatización de Flujos</h3>
+            <p class="text-sm text-gray-600 leading-relaxed mb-6">
+              Conectamos tus sistemas actuales (Slack, WhatsApp, CRM, ERP, Notion, Excel, Siigo) para eliminar tareas repetitivas y reducir errores humanos.
+            </p>
+          </div>
+          <ul class="space-y-2 text-xs text-gray-700 font-medium pt-4 border-t border-gray-200/60">
+            <li class="flex items-center gap-2"><span class="text-orange font-bold">✓</span> Sincronización automática de bases de datos y notificaciones.</li>
+            <li class="flex items-center gap-2"><span class="text-orange font-bold">✓</span> Reducción de tiempos muertos en traspaso de información.</li>
+          </ul>
+        </div>
+
+        <!-- 3. Capacitación y Adopción -->
+        <div class="p-8 rounded-2xl bg-slate-50 border border-gray-200/80 hover:border-teal transition-all shadow-xs flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-2xl mb-6">🎓</div>
+            <h3 class="text-xl font-bold text-deep mb-3">Capacitación y Adopción del Equipo</h3>
+            <p class="text-sm text-gray-600 leading-relaxed mb-6">
+              Acompañamiento en vivo y documentación práctica para que tu equipo aprenda a usar IA con criterio real y mantenga la autonomía sin depender de externos.
+            </p>
+          </div>
+          <ul class="space-y-2 text-xs text-gray-700 font-medium pt-4 border-t border-gray-200/60">
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Talleres prácticos sobre casos de uso reales de la empresa.</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Guías de prompts internos y políticas de uso de IA.</li>
+          </ul>
+        </div>
+
+        <!-- 4. Página Comercial + WhatsApp -->
+        <div id="pagina-comercial" class="p-8 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white shadow-md flex flex-col justify-between border border-slate-700">
+          <div>
+            <div class="flex justify-between items-start mb-6">
+              <div class="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center text-2xl">🌐</div>
+              <span class="bg-emerald-500/20 text-emerald-300 text-[10px] font-extrabold uppercase px-3 py-1 rounded-full border border-emerald-500/30">Puerta de Entrada Digital</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Página Comercial + WhatsApp</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-6">
+              Una solución optimizada para negocios que necesitan una presencia digital profesional, clara y enfocada en generar conversaciones directas con clientes por WhatsApp y formularios.
+            </p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-300 font-medium pt-4 border-t border-slate-700">
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Arquitectura mobile-first, copy persuasivo y captura de leads.</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Integración con WhatsApp, analítica de PostHog y automatizaciones.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 2: PROCESO DE TRABAJO -->
+  <section class="py-20 px-4 bg-[#F8FAFC] border-y border-gray-100">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl sm:text-3xl font-bold text-deep text-center mb-12">
+        Proceso de Trabajo: De Diagnóstico a Autonomía
+      </h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        {
+          [
+            { paso: "1. Diagnóstico", desc: "Auditamos tu operativa e identificamos fugas de tiempo." },
+            { paso: "2. Diseño", desc: "Estructuramos la arquitectura de solución y flujos." },
+            { paso: "3. Implementación", desc: "Configuramos las integraciones y asistentes de IA." },
+            { paso: "4. Capacitación", desc: "Entrenamos a tu equipo con casos prácticos reales." },
+            { paso: "5. Adopción", desc: "Acompañamos hasta garantizar autonomía total." },
+          ].map((item, index) => (
+            <div class="bg-white p-5 rounded-xl border border-gray-200/80 shadow-2xs flex flex-col justify-between">
+              <div>
+                <span class="text-xs font-black text-teal uppercase block mb-2">{item.paso}</span>
+                <p class="text-xs text-gray-600 leading-relaxed">{item.desc}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 3: CASOS DE ÉXITO EMPRESARIALES -->
+  <section class="py-20 px-4 bg-white">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl sm:text-3xl font-bold text-deep text-center mb-12">
+        Casos de Éxito Empresariales
+      </h2>
+      
+      <div class="space-y-8">
+        <!-- Caso 1: Irys -->
+        <div class="p-8 rounded-2xl bg-slate-50 border border-gray-200/80">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+            <h3 class="text-xl font-bold text-deep">Caso Irys — Optimización de Operaciones</h3>
+            <span class="bg-teal/10 text-teal text-xs font-bold px-3 py-1 rounded-md">B2B SaaS</span>
+          </div>
+          <div class="grid md:grid-cols-2 gap-6 text-xs text-gray-600 leading-relaxed">
+            <div>
+              <p class="font-bold text-gray-800 mb-1">Contexto & Problema:</p>
+              <p>Procesos de coordinación manual y análisis de requerimientos que consumían horas de personal clave.</p>
+            </div>
+            <div>
+              <p class="font-bold text-gray-800 mb-1">Solución & Resultado:</p>
+              <p>Estructuración de flujos asistidos por IA y automatización de reportes. Reducción del 40% en tiempo de procesamiento.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Caso 2: Fundación La Chinca -->
+        <div class="p-8 rounded-2xl bg-slate-50 border border-gray-200/80">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+            <h3 class="text-xl font-bold text-deep">Fundación La Chinca — Estandarización Digital</h3>
+            <span class="bg-orange/10 text-orange text-xs font-bold px-3 py-1 rounded-md">Sector Social</span>
+          </div>
+          <div class="grid md:grid-cols-2 gap-6 text-xs text-gray-600 leading-relaxed">
+            <div>
+              <p class="font-bold text-gray-800 mb-1">Contexto & Problema:</p>
+              <p>Información dispersa en carpetas físicas y múltiples formatos sin unificación.</p>
+            </div>
+            <div>
+              <p class="font-bold text-gray-800 mb-1">Solución & Resultado:</p>
+              <p>Sistema centralizado de captura y procesamiento documental con IA, habilitando consulta inmediata.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 4: OPCIONES DE TRABAJO Y PRECIOS B2B -->
+  <section id="precios" class="py-20 px-4 bg-[#F8FAFC] border-t border-gray-100">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-deep mb-3">
+          Opciones de Acompañamiento B2B
+        </h2>
+        <p class="text-gray-600 text-sm">
+          Modelos flexibles adaptados al tamaño y ritmo de tu empresa.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Option 1: Taller de Inmersión -->
+        <div class="bg-white p-8 rounded-2xl border-2 border-gray-200/80 flex flex-col justify-between">
+          <div>
+            <span class="bg-gray-100 text-gray-700 text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-md inline-block mb-4">Diagnóstico & Inicio</span>
+            <h3 class="text-xl font-bold text-deep mb-2">Taller de Inmersión</h3>
+            <p class="text-xs text-gray-500 mb-6">Workshop interactivo de 2-3 horas con tu equipo directivo o técnico.</p>
+            <ul class="space-y-3 text-xs text-gray-600 mb-8">
+              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Auditoría en vivo de procesos y fugas de tiempo.</li>
+              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Configuración inicial de 1 flujo prioritario con IA.</li>
+              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Hoja de ruta estratégica de automatización.</li>
+            </ul>
+          </div>
+          <a
+            href={LINKS.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl text-center transition shadow-md text-xs cursor-pointer"
+            onclick="if (window.posthog) { window.posthog.capture('empresas_whatsapp_click', { producto: 'taller_inmersion' }); }"
+          >
+            💬 Consultar Taller por WhatsApp →
+          </a>
+        </div>
+
+        <!-- Option 2: Ciclo de Autonomía -->
+        <div class="bg-white p-8 rounded-2xl border-2 border-teal shadow-lg flex flex-col justify-between relative">
+          <div class="absolute -top-3 right-6 bg-teal text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-full shadow-sm">
+            Acompañamiento Integral
+          </div>
+          <div>
+            <span class="bg-teal/10 text-teal text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-md inline-block mb-4">8 Semanas</span>
+            <h3 class="text-xl font-bold text-deep mb-2">Ciclo de Autonomía</h3>
+            <p class="text-xs text-gray-500 mb-6">Implementación completa, automatizaciones y capacitación continua.</p>
+            <ul class="space-y-3 text-xs text-gray-700 font-medium mb-8">
+              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Automatización de 3 a 5 flujos complejos de la empresa.</li>
+              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Capacitación y documentación de procedimientos.</li>
+              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Soporte post-implementación garantizado.</li>
+            </ul>
+          </div>
+          <a
+            href={LINKS.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl text-center transition shadow-lg text-xs cursor-pointer"
+            onclick="if (window.posthog) { window.posthog.capture('empresas_whatsapp_click', { producto: 'ciclo_autonomia' }); }"
+          >
+            💬 Cotizar Ciclo por WhatsApp →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE PABLO B2B -->
+  <section class="py-16 px-4 bg-white border-t border-gray-100">
+    <div class="max-w-4xl mx-auto">
+      <SobreMi />
+    </div>
+  </section>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.posthog) {
+        window.posthog.capture("empresas_page_view", {
+          pagina: "empresas",
+          categoria: "b2b_empresas"
+        });
+      }
+    });
+  </script>
+</Layout>

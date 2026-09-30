@@ -253,26 +253,27 @@ const defaultOrganizationSchema = {
           class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600"
         >
           <a
-            href="/rutas"
-            class="hover:text-teal-700 transition-colors flex items-center gap-1.5"
-            onclick="if (window.posthog) { window.posthog.capture('header_nav_click', { destino: '/rutas', label: 'Rutas' }); }"
-          >
-            <span>Rutas</span>
-            <span
-              class="bg-teal-50 text-teal-700 text-[10px] font-mono px-1.5 py-0.2 rounded border border-teal-200/80"
-              >5</span
-            >
-          </a>
-          <a href="/servicios" class="hover:text-teal-700 transition-colors" onclick="if (window.posthog) { window.posthog.capture('header_nav_click', { destino: '/servicios', label: 'Soluciones' }); }"
-            >Soluciones</a
-          >
-          <a href="/recursos" class="hover:text-teal-700 transition-colors" onclick="if (window.posthog) { window.posthog.capture('header_nav_click', { destino: '/recursos', label: 'Recursos' }); }"
-            >Recursos</a
+            href="/empresas"
+            class="hover:text-teal transition-colors font-semibold"
+            onclick="if (window.posthog) { window.posthog.capture('header_nav_click', { destino: '/empresas', label: 'Empresas' }); }"
+            >Empresas</a
           >
           <a
-            href="/content/sobremi"
-            class="hover:text-teal-700 transition-colors"
-            onclick="if (window.posthog) { window.posthog.capture('header_nav_click', { destino: '/content/sobremi', label: 'Sobre Pablo' }); }"
+            href="/profesionales"
+            class="hover:text-teal transition-colors font-semibold"
+            onclick="if (window.posthog) { window.posthog.capture('header_nav_click', { destino: '/profesionales', label: 'Profesionales' }); }"
+            >Profesionales</a
+          >
+          <a
+            href="/educacion"
+            class="hover:text-teal transition-colors font-semibold"
+            onclick="if (window.posthog) { window.posthog.capture('header_nav_click', { destino: '/educacion', label: 'Educación' }); }"
+            >Educación</a
+          >
+          <a
+            href="/sobre-pablo"
+            class="hover:text-teal transition-colors font-semibold"
+            onclick="if (window.posthog) { window.posthog.capture('header_nav_click', { destino: '/sobre-pablo', label: 'Sobre Pablo' }); }"
             >Sobre Pablo</a
           >
         </nav>

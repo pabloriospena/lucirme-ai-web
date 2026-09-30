@@ -1,477 +1,159 @@
 ---
-// src/pages/index-text-chat.astro
 import Layout from "../layouts/Layout.astro";
+import SobreMi from "../components/SobreMi.astro";
+import RedesSociales from "../components/RedesSociales.astro";
+import { LINKS } from "../lib/constants.js";
 ---
 
-<Layout title="LuciRMe AI">
-  <main
-    class="max-w-4xl mx-auto py-12 px-6 min-h-[90vh] flex flex-col justify-center space-y-12"
-  >
-    <!-- HEADER -->
-    <header class="text-center md:text-left">
-      <h1 class="text-4xl font-black text-deep mb-2 tracking-tight">
-        Tu talento merece brillar
+<Layout title="LuciRMe AI | Recupera tu Tiempo con IA">
+  <main class="max-w-5xl mx-auto py-12 md:py-16 px-4 space-y-16">
+
+    <!-- 1. HERO & MANIFIESTO -->
+    <header class="text-center space-y-4 max-w-3xl mx-auto">
+      <span class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full border border-teal/20">
+        Estrategia, Soluciones & Educación en IA
+      </span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-deep leading-tight tracking-tight">
+        Tu talento merece brillar.<br />
+        <span class="text-teal underline decoration-teal/30">Menos operatividad manual.</span>
       </h1>
-      <p class="text-sm text-gray-500">
-        Menos operatividad manual. Aplica IA con criterio para recuperar tu
-        tiempo
+      <p class="text-base sm:text-lg text-gray-600 font-medium leading-relaxed">
+        No enseñamos teoría abstracta. Diseñamos e implementamos sistemas de Inteligencia Artificial adaptados a la realidad de tu empresa o tu trabajo profesional.
       </p>
     </header>
 
-    <!-- MINI HEADER DIAGNÓSTICO -->
-    <div class="bg-gradient-to-r from-teal/10 via-slate-100 to-orange/10 border border-teal/20 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-deep shadow-2xs">
-      <div class="flex items-center gap-2.5 text-xs sm:text-sm font-bold">
-        <span class="p-1.5 bg-teal text-white rounded-xl text-base shrink-0">🌡️</span>
+    <!-- 2. MINI BANNER DIAGNÓSTICO TERMÓMETRO IA -->
+    <div class="bg-gradient-to-r from-teal/10 via-slate-50 to-orange/10 border border-teal/20 rounded-2xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
+      <div class="flex items-center gap-3 text-sm font-bold text-deep text-center sm:text-left">
+        <span class="p-2 bg-teal text-white rounded-xl text-lg shrink-0">🌡️</span>
         <div>
-          <span class="text-deep font-bold block sm:inline">¿Ya tienes tu diagnóstico?</span>
-          <span class="text-gray-500 font-normal text-xs block sm:inline">Mide tus fugas de tiempo en 2 minutos.</span>
+          <span class="text-deep font-black block sm:inline">¿Ya tienes tu diagnóstico?</span>
+          <span class="text-gray-600 font-normal text-xs block sm:inline"> Mide tus mayores fugas de tiempo en 2 minutos.</span>
         </div>
       </div>
       <button
-        onclick="document.getElementById('selector-overlay').classList.remove('hidden'); safeTrack('mini_header_termometro_clicked');"
-        class="bg-teal hover:bg-tealHover text-white text-xs font-bold px-4 py-2 rounded-xl transition shrink-0 shadow-sm cursor-pointer"
+        onclick="document.getElementById('selector-overlay').classList.remove('hidden'); if (window.posthog) { window.posthog.capture('home_termometro_click', { origen: 'mini_banner' }); }"
+        class="bg-teal hover:bg-tealHover text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shrink-0 shadow-md cursor-pointer w-full sm:w-auto"
       >
-        Realizar diagnóstico
+        Realizar diagnóstico →
       </button>
     </div>
 
-    <!-- ============================================ -->
-    <!-- SECCIÓN 1 Y 2: EL CHAT SIMULADO CLARO        -->
-    <!-- ============================================ -->
-    <div
-      id="lucirme-chat"
-      class="bg-[#F8FAFC] rounded-3xl p-6 md:p-8 shadow-sm border border-gray-200 relative overflow-hidden min-h-[350px] flex flex-col justify-between text-deep"
-    >
-      <div class="absolute top-0 left-0 w-full h-1 bg-teal"></div>
+    <!-- 3. SELECTOR DE INTENCIÓN PRINCIPAL (3 GRANDES MUNDOS) -->
+    <section class="space-y-6">
+      <div class="text-center max-w-xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-black text-deep">
+          Elige tu punto de partida
+        </h2>
+        <p class="text-xs sm:text-sm text-gray-500 mt-1">
+          Tres caminos claros adaptados a lo que necesitas hoy.
+        </p>
+      </div>
 
-      <!-- Área de Conversación -->
-      <div
-        id="chat-messages"
-        class="flex-grow space-y-6 overflow-y-auto max-h-[250px] pr-2"
-      >
-        <!-- Burbuja Inicial de la IA -->
-        <div class="space-y-2 initial-bot-message">
-          <span
-            class="text-teal font-bold text-xs uppercase tracking-widest block"
-            >LuciRMe AI:</span
-          >
-          <div
-            class="inline-block bg-white border border-gray-200 p-4 rounded-2xl rounded-tl-sm text-sm text-gray-700 max-w-lg shadow-sm"
-          >
-            Hola. Soy el asistente de LuciRMe. No te voy a hacer perder el
-            tiempo con teoría. Elige tu camino:
+      <div class="grid md:grid-cols-3 gap-8 pt-4">
+        
+        <!-- MUNDO 1: EMPRESAS -->
+        <div class="bg-white border-2 border-slate-200/80 rounded-3xl p-8 hover:border-teal transition-all shadow-sm hover:shadow-xl flex flex-col justify-between group relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-slate-100 text-slate-700 text-[10px] font-extrabold uppercase px-3 py-1 rounded-bl-xl tracking-wider">
+            Para Negocios
           </div>
+          <div>
+            <div class="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-teal/10 transition-colors">🏢</div>
+            <h3 class="text-xl font-bold text-deep mb-3 group-hover:text-teal transition-colors">Empresas</h3>
+            <p class="text-xs text-gray-600 leading-relaxed mb-6">
+              Implementación de IA y soluciones digitales para equipos y negocios. Automatizamos procesos y capacitamos a tu equipo hasta lograr autonomía total.
+            </p>
+            <ul class="space-y-2 text-xs text-gray-500 mb-8 font-medium">
+              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Automatización de procesos</li>
+              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Adopción e IA aplicada</li>
+              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Página Comercial + WhatsApp</li>
+            </ul>
+          </div>
+          <a
+            href="/empresas"
+            class="block w-full bg-deep hover:bg-slate-800 text-white text-center font-bold text-xs py-3.5 rounded-xl transition shadow-md cursor-pointer"
+            onclick="if (window.posthog) { window.posthog.capture('home_selector_click', { camino: 'empresas' }); }"
+          >
+            Ver soluciones para empresas →
+          </a>
         </div>
 
-        <!-- Indicador "Escribiendo..." -->
-        <div id="chat-loading" class="hidden space-y-2">
-          <span
-            class="text-teal font-bold text-xs uppercase tracking-widest block"
-            >LuciRMe AI:</span
-          >
-          <div
-            class="inline-flex items-center gap-1 bg-white border border-gray-200 px-4 py-3 rounded-2xl rounded-tl-sm text-sm text-gray-400"
-          >
-            <span
-              class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"
-              style="animation-delay: 0s"></span>
-            <span
-              class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"
-              style="animation-delay: 0.15s"></span>
-            <span
-              class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"
-              style="animation-delay: 0.3s"></span>
+        <!-- MUNDO 2: PROFESIONALES -->
+        <div class="bg-white border-2 border-teal/40 rounded-3xl p-8 hover:border-teal transition-all shadow-md hover:shadow-xl flex flex-col justify-between group relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-teal text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-bl-xl tracking-wider">
+            Recomendado
           </div>
+          <div>
+            <div class="w-12 h-12 bg-teal/10 rounded-2xl flex items-center justify-center text-2xl mb-6 transition-colors">👤</div>
+            <h3 class="text-xl font-bold text-deep mb-3 group-hover:text-teal transition-colors">Profesionales</h3>
+            <p class="text-xs text-gray-600 leading-relaxed mb-6">
+              IA aplicada a tu forma real de trabajar. Acompañamiento individual para Product Managers, consultores, abogados, contadores e independientes.
+            </p>
+            <ul class="space-y-2 text-xs text-gray-600 mb-8 font-medium">
+              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Product Managers (Research & PRDs)</li>
+              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Product Management Sin Bullshit</li>
+              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Sesiones de claridad & acompañamiento</li>
+            </ul>
+          </div>
+          <a
+            href="/profesionales"
+            class="block w-full bg-teal hover:bg-tealHover text-white text-center font-bold text-xs py-3.5 rounded-xl transition shadow-md cursor-pointer"
+            onclick="if (window.posthog) { window.posthog.capture('home_selector_click', { camino: 'profesionales' }); }"
+          >
+            Ver soluciones para profesionales →
+          </a>
         </div>
-      </div>
 
-      <!-- SECCIÓN 2: LOS ATAJOS ROUNDED -->
-      <div
-        id="chat-options"
-        class="flex flex-wrap gap-2 pt-6 border-t border-gray-100 mt-6 justify-center md:justify-start"
-      >
-        <button
-          onclick="responderChat(5, '🗺️ Rutas para LuciRMe: Aprende según tu nivel')"
-          class="px-4 py-2.5 bg-teal text-white hover:bg-teal/90 rounded-full text-xs font-bold transition shadow-sm flex items-center gap-1.5 cursor-pointer"
-        >
-          <span>🗺️</span>
-          <span>Rutas para LuciRMe: Aprende según tu nivel</span>
-        </button>
-        <button
-          onclick="responderChat(1, '👤 Quiero asesoría personalizada, aprender y recuperar tiempo')"
-          class="px-4 py-2.5 bg-white border border-gray-200 hover:border-teal rounded-full text-xs font-semibold text-gray-700 transition shadow-sm cursor-pointer"
-        >
-          👤 Quiero asesoría personalizada, aprender y recuperar tiempo
-        </button>
-        <button
-          onclick="responderChat(2, '🏢 Necesito proponer IA en mi empresa')"
-          class="px-4 py-2.5 bg-white border border-gray-200 hover:border-teal rounded-full text-xs font-semibold text-gray-700 transition shadow-sm cursor-pointer"
-        >
-          🏢 Necesito proponer IA en mi empresa
-        </button>
-        <button
-          onclick="responderChat(3, '📚 Ver recursos gratis')"
-          class="px-4 py-2.5 bg-white border border-gray-200 hover:border-teal rounded-full text-xs font-semibold text-gray-700 transition shadow-sm cursor-pointer"
-        >
-          📚 Ver recursos gratis
-        </button>
-        <button
-          onclick="responderChat(4, '🌡️ Termómetro LuciRMe Ai: ¿Qué tanto puedes optimizar tu día a día?')"
-          class="px-4 py-2.5 bg-teal/10 hover:bg-teal text-teal hover:text-white border-2 border-teal rounded-full text-xs font-bold transition shadow-sm flex items-center gap-1.5 cursor-pointer ring-2 ring-teal/20"
-        >
-          <span>🌡️</span>
-          <span>Termómetro LuciRMe Ai: ¿Qué tanto puedes optimizar tu día a día?</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- SECCIÓN 3: SEGUIMIENTOS / NAV               -->
-    <!-- ============================================ -->
-    <section
-      class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden"
-      id="seguimientos-box"
-    >
-      <div
-        class="px-6 py-4 bg-gray-50/50 border-b border-gray-100 flex items-center justify-between"
-      >
-        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest"
-          >¿QUÉ QUIERES SABER DE LUCIRME?</span
-        >
-        <span class="text-xs text-gray-400 flex items-center gap-1.5"
-          ><span class="w-1.5 h-1.5 bg-teal rounded-full animate-pulse"></span> Elige
-          tu punto de partida</span
-        >
-      </div>
-
-      <div class="divide-y divide-gray-100">
-        <!-- Enlace 0: Rutas para LuciRMe (Destacado) -->
-        <a
-          href="/rutas"
-          onclick="trackNavClick('/rutas', 'Rutas para LuciRMe')"
-          class="w-full px-6 py-4 flex items-start gap-4 hover:bg-teal/5 transition text-left group bg-teal/5"
-        >
-          <span
-            class="text-teal font-bold text-lg mt-0.5 group-hover:translate-x-1 transition-transform"
-            >↳</span
-          >
-          <div class="flex-grow">
-            <p
-              class="text-sm font-bold text-deep group-hover:text-teal transition flex items-center gap-2"
-            >
-              <span>🗺️ Rutas para LuciRMe — Rutas de Aprendizaje con IA</span>
-            </p>
-            <p class="text-xs text-gray-500 mt-1">
-              Paso a paso estructurado: desde recursos 100% gratuitos hasta programas guiados para Comunicación, PM, NotebookLM y Empleabilidad.
-            </p>
+        <!-- MUNDO 3: EDUCACIÓN -->
+        <div class="bg-white border-2 border-slate-200/80 rounded-3xl p-8 hover:border-amber-400 transition-all shadow-sm hover:shadow-xl flex flex-col justify-between group relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-amber-100 text-amber-900 text-[10px] font-extrabold uppercase px-3 py-1 rounded-bl-xl tracking-wider">
+            Aprende a tu Ritmo
           </div>
-          <span
-            class="hidden sm:inline-block text-[10px] font-bold text-white bg-teal px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap self-center shadow-2xs"
-            >Ver 4 Rutas</span
-          >
-        </a>
-
-        <!-- Enlace 1: Metodología -->
-        <a
-          href="/content/como_funciona"
-          onclick="trackNavClick('/content/como_funciona', 'Metodologia')"
-          class="w-full px-6 py-4 flex items-start gap-4 hover:bg-gray-50 transition text-left group"
-        >
-          <span
-            class="text-teal font-bold text-lg mt-0.5 group-hover:translate-x-1 transition-transform"
-            >↳</span
-          >
-          <div class="flex-grow">
-            <p
-              class="text-sm font-semibold text-deep group-hover:text-teal transition"
-            >
-              ¿Cómo funciona el enfoque de LucirMe?
+          <div>
+            <div class="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-amber-100 transition-colors">🎓</div>
+            <h3 class="text-xl font-bold text-deep mb-3 group-hover:text-amber-600 transition-colors">Educación</h3>
+            <p class="text-xs text-gray-600 leading-relaxed mb-6">
+              Aprende IA con rutas de aprendizaje guiadas, cursos asíncronos, bots asistentes, librerías de prompts y herramientas gratuitas.
             </p>
-            <p class="text-xs text-gray-400 mt-1">
-              Sistemas personalizados diseñados para que la tecnología trabaje
-              en silencio y tú recuperes tu vida.
-            </p>
+            <ul class="space-y-2 text-xs text-gray-500 mb-8 font-medium">
+              <li class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> Rutas guiadas por objetivo</li>
+              <li class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> Curso de Presentaciones ($35 USD)</li>
+              <li class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> Prompteador & Micro-SaaS Gratis</li>
+            </ul>
           </div>
-          <span
-            class="hidden sm:inline-block text-[10px] font-bold text-gray-400 bg-gray-100 px-2.5 py-1 rounded-full uppercase tracking-wider whitespace-nowrap self-center"
-            >Ver Método</span
+          <a
+            href="/educacion"
+            class="block w-full bg-amber-500 hover:bg-amber-400 text-slate-950 text-center font-bold text-xs py-3.5 rounded-xl transition shadow-md cursor-pointer"
+            onclick="if (window.posthog) { window.posthog.capture('home_selector_click', { camino: 'educacion' }); }"
           >
-        </a>
+            Explorar educación →
+          </a>
+        </div>
 
-        <!-- Enlace 2: Sobre Pablo -->
-        <a
-          href="/content/sobremi"
-          onclick="trackNavClick('/content/sobremi', 'Sobre Pablo')"
-          class="w-full px-6 py-4 flex items-start gap-4 hover:bg-gray-50 transition text-left group"
-        >
-          <span
-            class="text-teal font-bold text-lg mt-0.5 group-hover:translate-x-1 transition-transform"
-            >↳</span
-          >
-          <div class="flex-grow">
-            <p
-              class="text-sm font-semibold text-deep group-hover:text-teal transition"
-            >
-              Me gustaría conocer quién es Pablo Ríos
-            </p>
-            <p class="text-xs text-gray-400 mt-1">
-              Ingeniero de sistemas con +10 años liderando productos digitales
-              en Latam.
-            </p>
-          </div>
-          <span
-            class="hidden sm:inline-block text-[10px] font-bold text-gray-400 bg-gray-100 px-2.5 py-1 rounded-full uppercase tracking-wider whitespace-nowrap self-center"
-            >Sobre Mí</span
-          >
-        </a>
-
-        <!-- Enlace 3: Precios -->
-        <a
-          href="/content/precios"
-          onclick="trackNavClick('/content/precios', 'Precios')"
-          class="w-full px-6 py-4 flex items-start gap-4 hover:bg-gray-50 transition text-left group"
-        >
-          <span
-            class="text-teal font-bold text-lg mt-0.5 group-hover:translate-x-1 transition-transform"
-            >↳</span
-          >
-          <div class="flex-grow">
-            <p
-              class="text-sm font-semibold text-deep group-hover:text-teal transition"
-            >
-              Servicios
-            </p>
-            <p class="text-xs text-gray-400 mt-1">
-              Consultorías uno a uno y talleres grupales.
-            </p>
-          </div>
-          <span
-            class="hidden sm:inline-block text-[10px] font-bold text-gray-400 bg-gray-100 px-2.5 py-1 rounded-full uppercase tracking-wider whitespace-nowrap self-center"
-            >Inversión</span
-          >
-        </a>
-
-        <!-- Enlace 4: Casos de éxito -->
-        <a
-          href="/content/casosreales"
-          onclick="trackNavClick('/content/casosreales', 'Casos de Exito')"
-          class="w-full px-6 py-4 flex items-start gap-4 hover:bg-gray-50 transition text-left group"
-        >
-          <span
-            class="text-teal font-bold text-lg mt-0.5 group-hover:translate-x-1 transition-transform"
-            >↳</span
-          >
-          <div class="flex-grow">
-            <p
-              class="text-sm font-semibold text-deep group-hover:text-teal transition"
-            >
-              Ver casos de éxito e impacto real
-            </p>
-            <p class="text-xs text-gray-400 mt-1">
-              Profesionales y startups que ya han optimizado su tiempo y
-              estandarizado flujos.
-            </p>
-          </div>
-          <span
-            class="hidden sm:inline-block text-[10px] font-bold text-gray-400 bg-gray-100 px-2.5 py-1 rounded-full uppercase tracking-wider whitespace-nowrap self-center"
-            >Casos</span
-          >
-        </a>
-
-        <!-- Enlace 5: Termómetro LuciRMe Ai -->
-        <button
-          onclick="document.getElementById('selector-overlay').classList.remove('hidden'); trackNavClick('#test-modal', 'Abrir Termometro');"
-          class="w-full px-6 py-4 flex items-start gap-4 hover:bg-gray-50 transition text-left group bg-teal/5 border-t border-teal/10"
-        >
-          <span
-            class="text-teal font-bold text-lg mt-0.5 group-hover:translate-x-1 transition-transform"
-            >↳</span
-          >
-          <div class="flex-grow">
-            <p
-              class="text-sm font-bold text-deep group-hover:text-teal transition flex items-center gap-2"
-            >
-              <span>🌡️ Termómetro LuciRMe Ai: ¿Qué tanto puedes optimizar tu día a día?</span>
-            </p>
-            <p class="text-xs text-gray-500 mt-1">
-              Responde en 2 minutos. Descubre cuántas horas pierdes en tareas repetitivas y recibe tu plan personalizado.
-            </p>
-          </div>
-          <span
-            class="hidden sm:inline-block text-[10px] font-bold text-white bg-teal px-3 py-1 rounded-full uppercase tracking-wider whitespace-nowrap self-center shadow-2xs"
-            >Diagnóstico 2 min</span
-          >
-        </button>
       </div>
     </section>
+
+    <!-- 4. SOBRE PABLO RÍOS -->
+    <section class="pt-8 border-t border-gray-200/80">
+      <SobreMi />
+      <div class="text-center pt-6">
+        <a href="/sobre-pablo" class="text-xs font-bold text-teal hover:underline inline-flex items-center gap-1">
+          Conocer más sobre Pablo Ríos y su trayectoria →
+        </a>
+      </div>
+    </section>
+
   </main>
+
+  <RedesSociales />
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.posthog) {
+        window.posthog.capture("home_page_view", {
+          pagina: "home"
+        });
+      }
+    });
+  </script>
 </Layout>
-
-<script is:inline>
-  // Helper de rastreo seguro con PostHog
-  function safeTrack(eventName, properties = {}) {
-    if (typeof window !== "undefined" && window.posthog) {
-      window.posthog.capture(eventName, properties);
-    }
-  }
-
-  // Rastreo de enlaces de la sección de abajo
-  function trackNavClick(destination, sectionLabel) {
-    safeTrack("home_navigation_clicked", {
-      destination_url: destination,
-      section_label: sectionLabel,
-    });
-  }
-
-  // LÓGICA DE SIMULADOR DE CHAT EN VIVO (Client Side)
-  async function responderChat(opcion, textoBoton) {
-    const messagesContainer = document.getElementById("chat-messages");
-    const optionsDiv = document.getElementById("chat-options");
-    const loadingDiv = document.getElementById("chat-loading");
-
-    // RASTREO POSTHOG: Opción de chat elegida
-    safeTrack("chat_option_clicked", {
-      option_id: opcion,
-      option_text: textoBoton,
-    });
-
-    // 1. Ocultar opciones para enfocar la conversación
-    optionsDiv.style.display = "none";
-
-    // 2. Pintar la burbuja del usuario
-    const userBubble = document.createElement("div");
-    userBubble.className =
-      "space-y-2 text-right animate-fade-in chat-bubble-temp";
-    userBubble.innerHTML = `
-      <span class="text-orange font-bold text-xs uppercase tracking-widest block">Tú:</span>
-      <div class="inline-block bg-teal text-white p-4 rounded-2xl rounded-tr-sm text-sm text-left max-w-lg shadow-md font-semibold">
-        ${textoBoton}
-      </div>
-    `;
-    messagesContainer.appendChild(userBubble);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-    // 3. Mostrar indicador de carga
-    messagesContainer.appendChild(loadingDiv);
-    loadingDiv.classList.remove("hidden");
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-    // 4. Retraso simulado de la IA
-    await new Promise((resolve) => setTimeout(resolve, 1200));
-
-    // Ocultamos el cargando
-    loadingDiv.classList.add("hidden");
-
-    // 5. Determinar la respuesta de la IA y configurar el botón con rastreo
-    let text = "";
-    let link = "";
-
-    if (opcion === 5) {
-      text =
-        "He estructurado 4 rutas de aprendizaje progresivas (Comunicación & Slides, Product Management, NotebookLM & Research, y Empleabilidad) divididas en 5 niveles para que avances a tu ritmo sin perderte en teoría.";
-      link = `
-        <a 
-          href='/rutas' 
-          onclick="safeTrack('chat_cta_clicked', { destination: '/rutas', option_id: 5 })" 
-          class='bg-teal hover:bg-teal/90 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition inline-flex items-center gap-1.5 shadow-sm mt-2 cursor-pointer'
-        >
-          <span>🗺️ Explorar Rutas de Aprendizaje</span> <span>→</span>
-        </a>`;
-    } else if (opcion === 1) {
-      text =
-        "El software debería trabajar para ti, no al revés. Puedes recuperar hasta 10 horas de tu semana automatizando flujos de forma limpia. Miremos tu caso en un Café Estratégico de 30 minutos sin costo, o revisa mis servicios individuales.";
-      link = `
-        <a 
-          href='/soluciones/profesionales' 
-          onclick="safeTrack('chat_cta_clicked', { destination: '/soluciones/profesionales', option_id: 1 })" 
-          class='inline-block text-teal font-bold hover:underline mt-2'
-        >
-          Ver servicios de consultoría 1-1 →
-        </a>`;
-    } else if (opcion === 2) {
-      text =
-        "El caos manual frena el crecimiento y quema a los equipos. Estandarizo tus procesos con arquitecturas de IA para que tu roadmap avance sin fricción técnica. Hablemos en un espacio estratégico gratis para diagnosticar a tu equipo.";
-      link = `
-        <a 
-          href='/soluciones/empresas' 
-          onclick="safeTrack('chat_cta_clicked', { destination: '/soluciones/empresas', option_id: 2 })" 
-          class='inline-block text-teal font-bold hover:underline mt-2'
-        >
-          Ver opciones para empresas y talleres →
-        </a>`;
-    } else if (opcion === 3) {
-      text =
-        "Valor inmediato y directo al grano. Tienes a tu disposición mis guías de optimización, funcionalidades listas y, si eres Product Manager, el acceso a mi Ebook 'PM Sin Bullshit'.";
-      link = `
-        <a 
-          href='/recursos' 
-          onclick="safeTrack('chat_cta_clicked', { destination: '/recursos', option_id: 3 })" 
-          class='inline-block text-teal font-bold hover:underline mt-2'
-        >
-          Acceder a la librería de recursos →
-        </a>`;
-    } else if (opcion === 4) {
-      text =
-        "El primer paso para recuperar tu tiempo es medir exactamente dónde está la fuga. Responde nuestro Termómetro de 2 minutos para obtener un diagnóstico personalizado e inmediato.";
-      link = `
-        <button 
-          onclick="document.getElementById('selector-overlay').classList.remove('hidden'); safeTrack('chat_cta_clicked', { destination: '#termometro', option_id: 4 })" 
-          class='bg-orange hover:bg-orange/90 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition inline-flex items-center gap-1.5 shadow-sm mt-2 cursor-pointer'
-        >
-          <span>🌡️ Abrir Termómetro LuciRMe AI</span> <span>→</span>
-        </button>`;
-
-      setTimeout(() => {
-        const overlay = document.getElementById('selector-overlay');
-        if (overlay) overlay.classList.remove('hidden');
-      }, 500);
-    }
-
-    // 6. Pintar la respuesta de la IA y botón para reiniciar chat
-    const botBubble = document.createElement("div");
-    botBubble.className = "space-y-2 animate-fade-in chat-bubble-temp";
-    botBubble.innerHTML = `
-      <span class="text-teal font-bold text-xs uppercase tracking-widest block">LuciRMe AI:</span>
-      <div class="inline-block bg-white border border-gray-200 p-4 rounded-2xl rounded-tl-sm text-sm text-gray-700 max-w-lg shadow-sm">
-        <p>${text}</p>
-        <div class="pt-4">${link}</div>
-        <button onclick="reiniciarChat()" class="text-xs text-gray-400 hover:text-teal underline mt-4 block">← Probar otra opción</button>
-      </div>
-    `;
-    messagesContainer.appendChild(botBubble);
-
-    // Auto-scroll al final del chat
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-  }
-
-  function reiniciarChat() {
-    // RASTREO POSTHOG: Volver a empezar en el chat
-    safeTrack("chat_reset_clicked");
-
-    const messagesContainer = document.getElementById("chat-messages");
-    const optionsDiv = document.getElementById("chat-options");
-
-    // Eliminar las burbujas temporales creadas
-    const tempBubbles = messagesContainer.querySelectorAll(".chat-bubble-temp");
-    tempBubbles.forEach((bubble) => bubble.remove());
-
-    // Mostrar de nuevo las opciones del chat
-    optionsDiv.style.display = "flex";
-  }
-</script>
-
-<style>
-  .animate-fade-in {
-    animation: fadeIn 0.4s ease-out forwards;
-  }
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>
