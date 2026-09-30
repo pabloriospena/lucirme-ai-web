@@ -1,0 +1,129 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { LINKS } from "../../lib/constants.js";
+
+const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
+const ctaWA = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero información sobre la Página Comercial + WhatsApp para mi negocio.")}`;
+---
+
+<Layout
+  title="Página Comercial + WhatsApp | Solución Digital B2B | LuciRMe AI"
+  description="Una página que explica tu negocio, genera confianza y lleva al cliente a WhatsApp. Estrategia, copy, diseño mobile-first, medición y captura de leads por Pablo Ríos."
+>
+  <main class="py-16 md:py-24 px-4 bg-[#F8FAFC]">
+    <div class="max-w-4xl mx-auto space-y-16">
+
+      <!-- HERO -->
+      <section class="text-center space-y-6">
+        <span class="inline-block bg-emerald-500/10 text-emerald-700 text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full border border-emerald-500/20">
+          Solución Digital para Negocios
+        </span>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-deep leading-tight tracking-tight">
+          Página Comercial + WhatsApp
+        </h1>
+        <p class="text-base sm:text-lg text-gray-600 font-medium max-w-2xl mx-auto leading-relaxed">
+          Una página web que explica tu negocio de forma clara, genera confianza profesional y lleva a tus clientes potenciales directamente a conversar por WhatsApp.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+          <a
+            href={ctaWA}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-xl font-bold transition shadow-lg text-base cursor-pointer"
+            onclick="if (window.posthog) { window.posthog.capture('pagina_comercial_whatsapp_click', { origen: 'hero' }); }"
+          >
+            💬 Consultar por WhatsApp (+57 305 3046180) →
+          </a>
+        </div>
+      </section>
+
+      <!-- LO QUE INCLUYE LA SOLUCIÓN -->
+      <section class="bg-white p-8 md:p-12 rounded-3xl border border-gray-200/80 shadow-xs space-y-8">
+        <div class="text-center max-w-xl mx-auto">
+          <h2 class="text-2xl font-bold text-deep">
+            ¿Qué incluye la Página Comercial?
+          </h2>
+          <p class="text-xs text-gray-500 mt-1">
+            Una solución completa sin vueltas técnicas innecesarias.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div class="p-5 rounded-2xl bg-slate-50 border border-gray-100">
+            <span class="text-xl mb-2 block">🎯</span>
+            <h3 class="font-bold text-deep text-base mb-1">Estrategia & Estructura</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">Definición de propuesta de valor, jerarquía de información y camino del cliente.</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-50 border border-gray-100">
+            <span class="text-xl mb-2 block">✍️</span>
+            <h3 class="font-bold text-deep text-base mb-1">Redacción y Copy Persuasivo</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">Textos claros que responden las dudas del cliente antes de que las pregunte.</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-50 border border-gray-100">
+            <span class="text-xl mb-2 block">📱</span>
+            <h3 class="font-bold text-deep text-base mb-1">Diseño Mobile-First</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">Carga ultrarrápida optimizada para la pantalla donde ocurren el 90% de los clics: el celular.</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-50 border border-gray-100">
+            <span class="text-xl mb-2 block">📊</span>
+            <h3 class="font-bold text-deep text-base mb-1">Medición y Analytics</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">Instalación de rastreo de clics e intenciones para saber exactamente qué funciona.</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-50 border border-gray-100">
+            <span class="text-xl mb-2 block">💬</span>
+            <h3 class="font-bold text-deep text-base mb-1">Integración WhatsApp Directo</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">Botones de contacto con mensajes preconfigurados según el servicio consultado.</p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-slate-50 border border-gray-100">
+            <span class="text-xl mb-2 block">🔒</span>
+            <h3 class="font-bold text-deep text-base mb-1">Configuración Técnica</h3>
+            <p class="text-xs text-gray-600 leading-relaxed">Dominio, certificado de seguridad SSL y optimización SEO básica.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- PUERTA DE ENTRADA B2B -->
+      <section class="p-8 md:p-10 rounded-3xl bg-slate-900 text-white border border-slate-800">
+        <div class="max-w-2xl mx-auto text-center space-y-4">
+          <span class="bg-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-emerald-500/30">
+            Evolución Digital
+          </span>
+          <h2 class="text-xl sm:text-2xl font-bold">
+            Mucho más que una página web
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            La Página Comercial es el primer paso. Una vez construida tu presencia, identificamos juntos qué flujos de tu negocio pueden automatizarse o gestionarse con Inteligencia Artificial.
+          </p>
+          <div class="pt-4">
+            <a
+              href={ctaWA}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-6 py-3.5 rounded-xl transition shadow-md"
+              onclick="if (window.posthog) { window.posthog.capture('pagina_comercial_whatsapp_click', { origen: 'puerta_entrada' }); }"
+            >
+              💬 Iniciar proyecto por WhatsApp →
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.posthog) {
+        window.posthog.capture("pagina_comercial_view", {
+          pagina: "empresas/pagina-comercial"
+        });
+      }
+    });
+  </script>
+</Layout>

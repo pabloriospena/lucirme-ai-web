@@ -2,66 +2,47 @@
 import Layout from "../layouts/Layout.astro";
 import SobreMi from "../components/SobreMi.astro";
 import RedesSociales from "../components/RedesSociales.astro";
-import { LINKS } from "../lib/constants.js";
 ---
 
-<Layout title="LuciRMe AI | Recupera tu Tiempo con IA">
-  <main class="max-w-5xl mx-auto py-12 md:py-16 px-4 space-y-16">
+<Layout title="LuciRMe AI | Soluciones, Acompañamiento y Recursos en IA">
+  <main class="max-w-5xl mx-auto py-12 md:py-20 px-4 space-y-16">
 
-    <!-- 1. HERO & MANIFIESTO -->
+    <!-- HERO LIMPIO & MANIFIESTO -->
     <header class="text-center space-y-4 max-w-3xl mx-auto">
       <span class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full border border-teal/20">
-        Estrategia, Soluciones & Educación en IA
+        LuciRMe AI
       </span>
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-deep leading-tight tracking-tight">
-        Tu talento merece brillar.<br />
-        <span class="text-teal underline decoration-teal/30">Menos operatividad manual.</span>
+        IA aplicada a problemas reales.
       </h1>
       <p class="text-base sm:text-lg text-gray-600 font-medium leading-relaxed">
-        No enseñamos teoría abstracta. Diseñamos e implementamos sistemas de Inteligencia Artificial adaptados a la realidad de tu empresa o tu trabajo profesional.
+        Implemento soluciones, acompaño profesionales y creo recursos para que la IA haga parte de tu forma de trabajar.
       </p>
     </header>
 
-    <!-- 2. MINI BANNER DIAGNÓSTICO TERMÓMETRO IA -->
-    <div class="bg-gradient-to-r from-teal/10 via-slate-50 to-orange/10 border border-teal/20 rounded-2xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
-      <div class="flex items-center gap-3 text-sm font-bold text-deep text-center sm:text-left">
-        <span class="p-2 bg-teal text-white rounded-xl text-lg shrink-0">🌡️</span>
-        <div>
-          <span class="text-deep font-black block sm:inline">¿Ya tienes tu diagnóstico?</span>
-          <span class="text-gray-600 font-normal text-xs block sm:inline"> Mide tus mayores fugas de tiempo en 2 minutos.</span>
-        </div>
-      </div>
-      <button
-        onclick="document.getElementById('selector-overlay').classList.remove('hidden'); if (window.posthog) { window.posthog.capture('home_termometro_click', { origen: 'mini_banner' }); }"
-        class="bg-teal hover:bg-tealHover text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shrink-0 shadow-md cursor-pointer w-full sm:w-auto"
-      >
-        Realizar diagnóstico →
-      </button>
-    </div>
-
-    <!-- 3. SELECTOR DE INTENCIÓN PRINCIPAL (3 GRANDES MUNDOS) -->
+    <!-- SELECTOR DE INTENCIÓN PRINCIPAL (TRES CAMINOS PRINCIPALES) -->
     <section class="space-y-6">
       <div class="text-center max-w-xl mx-auto">
-        <h2 class="text-2xl sm:text-3xl font-black text-deep">
-          Elige tu punto de partida
+        <h2 class="text-xl sm:text-2xl font-black text-deep uppercase tracking-wider">
+          ¿Qué estás buscando?
         </h2>
         <p class="text-xs sm:text-sm text-gray-500 mt-1">
-          Tres caminos claros adaptados a lo que necesitas hoy.
+          Elige el camino que mejor responde a tu necesidad actual.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8 pt-4">
+      <div class="grid md:grid-cols-3 gap-8 pt-2">
         
-        <!-- MUNDO 1: EMPRESAS -->
+        <!-- CAMINO 1: EMPRESAS -->
         <div class="bg-white border-2 border-slate-200/80 rounded-3xl p-8 hover:border-teal transition-all shadow-sm hover:shadow-xl flex flex-col justify-between group relative overflow-hidden">
           <div class="absolute top-0 right-0 bg-slate-100 text-slate-700 text-[10px] font-extrabold uppercase px-3 py-1 rounded-bl-xl tracking-wider">
-            Para Negocios
+            B2B & Equipos
           </div>
           <div>
             <div class="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-teal/10 transition-colors">🏢</div>
             <h3 class="text-xl font-bold text-deep mb-3 group-hover:text-teal transition-colors">Empresas</h3>
             <p class="text-xs text-gray-600 leading-relaxed mb-6">
-              Implementación de IA y soluciones digitales para equipos y negocios. Automatizamos procesos y capacitamos a tu equipo hasta lograr autonomía total.
+              Implementación de IA, automatización y soluciones digitales para equipos y negocios.
             </p>
             <ul class="space-y-2 text-xs text-gray-500 mb-8 font-medium">
               <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Automatización de procesos</li>
@@ -74,25 +55,25 @@ import { LINKS } from "../lib/constants.js";
             class="block w-full bg-deep hover:bg-slate-800 text-white text-center font-bold text-xs py-3.5 rounded-xl transition shadow-md cursor-pointer"
             onclick="if (window.posthog) { window.posthog.capture('home_selector_click', { camino: 'empresas' }); }"
           >
-            Ver soluciones para empresas →
+            Ver soluciones →
           </a>
         </div>
 
-        <!-- MUNDO 2: PROFESIONALES -->
+        <!-- CAMINO 2: PROFESIONALES -->
         <div class="bg-white border-2 border-teal/40 rounded-3xl p-8 hover:border-teal transition-all shadow-md hover:shadow-xl flex flex-col justify-between group relative overflow-hidden">
           <div class="absolute top-0 right-0 bg-teal text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-bl-xl tracking-wider">
-            Recomendado
+            Acompañamiento 1:1
           </div>
           <div>
             <div class="w-12 h-12 bg-teal/10 rounded-2xl flex items-center justify-center text-2xl mb-6 transition-colors">👤</div>
             <h3 class="text-xl font-bold text-deep mb-3 group-hover:text-teal transition-colors">Profesionales</h3>
             <p class="text-xs text-gray-600 leading-relaxed mb-6">
-              IA aplicada a tu forma real de trabajar. Acompañamiento individual para Product Managers, consultores, abogados, contadores e independientes.
+              IA aplicada a tu trabajo con acompañamiento hasta que puedas hacerlo de forma autónoma.
             </p>
             <ul class="space-y-2 text-xs text-gray-600 mb-8 font-medium">
-              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Product Managers (Research & PRDs)</li>
+              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Product Managers (PRDs & Research)</li>
               <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Product Management Sin Bullshit</li>
-              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Sesiones de claridad & acompañamiento</li>
+              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Consultores, Abogados & Independientes</li>
             </ul>
           </div>
           <a
@@ -100,25 +81,25 @@ import { LINKS } from "../lib/constants.js";
             class="block w-full bg-teal hover:bg-tealHover text-white text-center font-bold text-xs py-3.5 rounded-xl transition shadow-md cursor-pointer"
             onclick="if (window.posthog) { window.posthog.capture('home_selector_click', { camino: 'profesionales' }); }"
           >
-            Ver soluciones para profesionales →
+            Ver soluciones →
           </a>
         </div>
 
-        <!-- MUNDO 3: EDUCACIÓN -->
+        <!-- CAMINO 3: EDUCACIÓN -->
         <div class="bg-white border-2 border-slate-200/80 rounded-3xl p-8 hover:border-amber-400 transition-all shadow-sm hover:shadow-xl flex flex-col justify-between group relative overflow-hidden">
           <div class="absolute top-0 right-0 bg-amber-100 text-amber-900 text-[10px] font-extrabold uppercase px-3 py-1 rounded-bl-xl tracking-wider">
-            Aprende a tu Ritmo
+            Aprender
           </div>
           <div>
             <div class="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-amber-100 transition-colors">🎓</div>
             <h3 class="text-xl font-bold text-deep mb-3 group-hover:text-amber-600 transition-colors">Educación</h3>
             <p class="text-xs text-gray-600 leading-relaxed mb-6">
-              Aprende IA con rutas de aprendizaje guiadas, cursos asíncronos, bots asistentes, librerías de prompts y herramientas gratuitas.
+              Rutas, herramientas y productos para aprender IA de forma práctica.
             </p>
             <ul class="space-y-2 text-xs text-gray-500 mb-8 font-medium">
-              <li class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> Rutas guiadas por objetivo</li>
-              <li class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> Curso de Presentaciones ($35 USD)</li>
-              <li class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> Prompteador & Micro-SaaS Gratis</li>
+              <li class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> Rutas de aprendizaje guiadas</li>
+              <li class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> Cursos y Bots asistentes ($35 / $8)</li>
+              <li class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> Prompteador & Herramientas Gratis</li>
             </ul>
           </div>
           <a
@@ -126,14 +107,31 @@ import { LINKS } from "../lib/constants.js";
             class="block w-full bg-amber-500 hover:bg-amber-400 text-slate-950 text-center font-bold text-xs py-3.5 rounded-xl transition shadow-md cursor-pointer"
             onclick="if (window.posthog) { window.posthog.capture('home_selector_click', { camino: 'educacion' }); }"
           >
-            Explorar educación →
+            Explorar →
           </a>
         </div>
 
       </div>
     </section>
 
-    <!-- 4. SOBRE PABLO RÍOS -->
+    <!-- BLOQUE SECUNDARIO: TERMÓMETRO IA -->
+    <div class="bg-gradient-to-r from-teal/10 via-slate-50 to-orange/10 border border-teal/20 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
+      <div class="flex items-center gap-3 text-sm font-bold text-deep text-center sm:text-left">
+        <span class="p-2.5 bg-teal text-white rounded-xl text-xl shrink-0">🌡️</span>
+        <div>
+          <span class="text-deep font-black block sm:inline text-base">¿No sabes por dónde empezar?</span>
+          <span class="text-gray-600 font-normal text-xs block sm:inline"> Mide tus mayores fugas de tiempo con el Termómetro de Recuperación de Tiempo.</span>
+        </div>
+      </div>
+      <button
+        onclick="document.getElementById('selector-overlay').classList.remove('hidden'); if (window.posthog) { window.posthog.capture('home_termometro_click', { origen: 'home_secundario' }); }"
+        class="bg-teal hover:bg-tealHover text-white text-xs font-bold px-6 py-3 rounded-xl transition shrink-0 shadow-md cursor-pointer w-full sm:w-auto"
+      >
+        Realizar diagnóstico (2 min) →
+      </button>
+    </div>
+
+    <!-- PRUEBA SOCIAL & SOBRE PABLO BREVE -->
     <section class="pt-8 border-t border-gray-200/80">
       <SobreMi />
       <div class="text-center pt-6">
