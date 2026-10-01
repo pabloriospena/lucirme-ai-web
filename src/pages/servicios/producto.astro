@@ -3,876 +3,1305 @@ import Layout from "../../layouts/Layout.astro";
 import { LINKS } from "../../lib/constants.js";
 
 const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
-const whatsappPM = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, estuve viendo la landing de Product Management y quiero revisar mi caso.")}`;
+const whatsappPM = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, llegué a la página de Product Management y quiero hablarte sobre un problema que tengo en mi trabajo como PM.")}`;
 ---
 
 <Layout
-  title="Product Management e IA Aplicada | LuciRMe AI"
-  description="Acompañamiento 1-1 para Product Managers y profesionales de producto que quieren mejorar sus procesos, aplicar IA y trabajar de forma más simple."
+  title="Product Management: Research, Discovery e IA aplicada | LuciRMe AI"
+  description="Acompañamiento 1-1 para Product Managers que quieren mejorar Research, Discovery, documentación, Jira y sus procesos de trabajo con IA y automatización."
   canonical="https://lucirme.com/servicios/producto"
   hideHeader={true}
   hideFooter={true}
 >
-  <!-- HEADER DEDICADO PRODUCT MANAGEMENT -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
-    <div class="h-16 max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
-      <a class="flex flex-col group" href="#">
-        <span class="text-base font-bold tracking-tight text-slate-900 group-hover:text-teal-700 transition-colors">LuciRMe AI · Product Management</span>
-        <span class="text-[11px] font-mono text-slate-500">Product Management aplicado a problemas reales.</span>
-      </a>
-
-      <nav class="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600">
-        <a class="hover:text-slate-900 transition-colors" href="#diagnostico-pm">Diagnóstico</a>
-        <a class="hover:text-slate-900 transition-colors" href="#en-que-trabajamos">¿En qué trabajamos?</a>
-        <a class="hover:text-slate-900 transition-colors" href="#como-trabajamos">Cómo trabajamos</a>
-        <a class="hover:text-slate-900 transition-colors" href="#pm-ia">PM + IA</a>
-        <a class="hover:text-slate-900 transition-colors" href="#pm-sin-bullshit">PM Sin Bullshit</a>
-        <a class="hover:text-slate-900 transition-colors" href="#pablo">Pablo</a>
-      </nav>
-
-      <div class="flex items-center gap-3">
-        <a
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-teal-700 text-white text-xs font-semibold hover:bg-teal-800 transition-colors shadow-2xs cursor-pointer"
-          href="#diagnostico-pm"
-        >
-          <span class="material-symbols-outlined text-[17px]">inventory_2</span>
-          <span>Quiero revisar mi caso</span>
+  <header class="fixed top-0 left-0 right-0 z-50 bg-[#F8FAFC]/85 backdrop-blur-xl border-b border-[#E2E8F0]">
+    <div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-6">
+      <div class="flex items-center gap-4">
+        <a class="flex items-center gap-3" href="#">
+          <img alt="LuciRMe AI" class="h-8 w-auto object-contain" src="/logo-lucirme.png" />
+          <span class="text-base font-semibold text-[#0b1c30] tracking-tight">LuciRMe AI</span>
         </a>
+        <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full bg-[#F1F1EF] text-[#3d4947] font-mono text-[11px] border border-[#E9E9E7]">PM & Teams</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-8 h-full">
+        <a class="text-sm text-[#3d4947] hover:text-[#0b1c30] transition-colors py-5" href="/empresas">Empresas</a>
+        <a class="text-sm text-[#3d4947] hover:text-[#0b1c30] transition-colors py-5" href="/profesionales">Profesionales</a>
+        <a class="text-sm text-[#3d4947] hover:text-[#0b1c30] transition-colors py-5" href="/educacion">Educación</a>
+        <a class="text-sm text-[#3d4947] hover:text-[#0b1c30] transition-colors py-5" href="/sobre-pablo">Sobre Pablo</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a class="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-[#059669] text-white text-xs font-medium hover:bg-[#059669]/90 transition-all shadow-2xs" href={whatsappPM} rel="noopener noreferrer" target="_blank" onclick="if(window.posthog) window.posthog.capture('product_whatsapp_click', { cta_location: 'header' });">Hablar con Pablo</a>
+        <div class="w-8 h-8 rounded-full bg-[#00685f] flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-white text-[18px]">person</span>
+        </div>
       </div>
     </div>
   </header>
 
-  <main class="w-full bg-[#F8FAFC]">
-
-    <!-- HERO SECTION -->
-    <section class="w-full max-w-7xl mx-auto px-6 pt-12 pb-12 md:py-20 border-b border-slate-200/60">
-      <div class="max-w-3xl mx-auto flex flex-col items-center text-center gap-6">
-        
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-slate-100 border border-slate-200/80 rounded-full font-mono text-xs text-teal-800 shadow-2xs">
-          <span class="w-2 h-2 rounded-full bg-teal-600 animate-pulse"></span>
-          PRODUCT MANAGEMENT
-        </div>
-
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
-          ¿Hay algo de tu trabajo como PM que sientes que podría hacerse mucho mejor?
-        </h1>
-
-        <p class="text-base md:text-lg text-slate-600 font-normal leading-relaxed">
-          Research, discovery, documentación, priorización, estrategia, análisis, reuniones, presentaciones… podemos revisar cómo lo estás haciendo hoy y encontrar dónde tiene sentido simplificar, mejorar o aplicar IA.
-        </p>
-
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 w-full sm:w-auto">
-          <a
-            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
-            href="#diagnostico-pm"
-            onclick="if(window.posthog) window.posthog.capture('product_diagnostic_started');"
-          >
-            <span>Quiero revisar mi caso →</span>
-          </a>
-
-          <a
-            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors shadow-2xs"
-            href={whatsappPM}
-            rel="noopener noreferrer"
-            target="_blank"
-            onclick="if(window.posthog) window.posthog.capture('product_whatsapp_click', { origen: 'hero' });"
-          >
-            <span class="material-symbols-outlined text-[18px]">chat</span>
-            <span>Hablar con Pablo</span>
-          </a>
-        </div>
-
-        <div class="p-3 bg-white border border-slate-200 rounded-xl text-xs text-slate-600 font-medium mt-2 max-w-xl">
-          💡 <strong>Filosofía de trabajo:</strong> Primero entendemos el problema. Después vemos qué herramienta, método o solución tiene sentido.
-        </div>
-
-      </div>
-    </section>
-
-    <!-- COMPONENTE DIAGNÓSTICO INTERACTIVO PARA PMs -->
-    <section class="w-full max-w-7xl mx-auto px-6 py-12 scroll-mt-20" id="diagnostico-pm">
-      <div class="max-w-2xl mx-auto flex flex-col gap-6">
-
-        <div class="bg-white rounded-2xl border border-slate-200 shadow-md p-6 md:p-8 relative min-h-[400px] flex flex-col justify-between" id="pm-wizard-card">
-          
-          <!-- Wizard Header -->
-          <div class="flex flex-col gap-2 pb-4 border-b border-slate-100" id="pm-wizard-header">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="font-mono text-xs font-semibold text-slate-900 uppercase" id="pm-step-counter">Paso 1 de 5</span>
-              </div>
-              <span class="text-xs font-mono text-slate-400" id="pm-step-time">~2 min</span>
+  <main class="w-full pt-16 bg-[#F8FAFC] min-h-screen">
+    <div class="flex flex-col w-full">
+      <!-- SECTION 1: HERO EDITORIAL -->
+      <section class="relative w-full overflow-hidden px-6 lg:px-12 py-16 lg:py-24">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div class="lg:col-span-7 flex flex-col items-start">
+            <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-[#F1F1EF] text-[#3d4947] font-mono text-[11px] tracking-widest uppercase">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#00685f]"></span>
+              PRODUCT MANAGEMENT
             </div>
-            <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
-              <div class="bg-emerald-600 h-1.5 rounded-full transition-all duration-300 ease-out" id="pm-progress-bar" style="width: 20%;"></div>
-            </div>
-          </div>
-
-          <!-- PASO 1: ÁREA DE TRABAJO -->
-          <div class="pm-step flex flex-col gap-4 py-4" id="pm-step-1">
-            <div class="flex flex-col gap-1.5">
-              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 1 · Área de Fricción</span>
-              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿Qué parte de tu trabajo como PM te está quitando más tiempo?</h3>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2" id="group-pm-area">
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Research', this)" type="button">🔍 Research</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Discovery', this)" type="button">🧭 Discovery</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Documentación', this)" type="button">📄 Documentación / PRDs</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Priorización', this)" type="button">📌 Priorización</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Análisis', this)" type="button">📊 Análisis cuali/cuanti</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Estrategia', this)" type="button">🎯 Estrategia</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Reuniones', this)" type="button">👥 Reuniones & Syncs</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Presentaciones', this)" type="button">🖼️ Presentaciones a Stakeholders</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Backlog', this)" type="button">📦 Backlog & Refinement</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Tareas repetitivas', this)" type="button">🔄 Tareas repetitivas</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Otra', this)" type="button">Otra</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('No estoy seguro todavía', this)" type="button">❓ No estoy seguro todavía</button>
-            </div>
-          </div>
-
-          <!-- PASO 2: FRECUENCIA -->
-          <div class="pm-step hidden flex flex-col gap-4 py-4" id="pm-step-2">
-            <div class="flex flex-col gap-1.5">
-              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 2 · Frecuencia</span>
-              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿Con qué frecuencia haces ese trabajo?</h3>
-            </div>
-            <div class="flex flex-col gap-2 pt-2" id="group-pm-frecuencia">
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectFrecuencia('Varias veces al día', this)" type="button">⚡ Varias veces al día</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectFrecuencia('Todos los días', this)" type="button">📅 Todos los días</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectFrecuencia('Varias veces por semana', this)" type="button">🗓️ Varias veces por semana</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectFrecuencia('Una vez por semana', this)" type="button">📌 Una vez por semana</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectFrecuencia('De vez en cuando', this)" type="button">⏳ De vez en cuando</button>
-            </div>
-          </div>
-
-          <!-- PASO 3: TIEMPO ESTIMADO -->
-          <div class="pm-step hidden flex flex-col gap-4 py-4" id="pm-step-3">
-            <div class="flex flex-col gap-1.5">
-              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 3 · Tiempo invertido</span>
-              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿Cuánto tiempo crees que te consume a la semana?</h3>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2" id="group-pm-tiempo">
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectTiempo('Menos de 1 hora a la semana', this)" type="button">⏱️ Menos de 1 hora a la semana</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectTiempo('1–3 horas', this)" type="button">⏳ 1–3 horas</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectTiempo('3–5 horas', this)" type="button">📊 3–5 horas</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectTiempo('5–10 horas', this)" type="button">🔥 5–10 horas</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectTiempo('Más de 10 horas', this)" type="button">🚨 Más de 10 horas</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectTiempo('No tengo idea', this)" type="button">❓ No tengo idea</button>
-            </div>
-          </div>
-
-          <!-- PASO 4: HERRAMIENTAS ACTUALES -->
-          <div class="pm-step hidden flex flex-col gap-4 py-4" id="pm-step-4">
-            <div class="flex flex-col gap-1.5">
-              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 4 · Stack actual</span>
-              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿Qué estás usando hoy para resolverlo?</h3>
-              <p class="text-xs text-slate-500">Puedes seleccionar varias opciones.</p>
-            </div>
-            <div class="grid grid-cols-2 gap-2 pt-2" id="group-pm-herramientas">
-              <button class="multi-option p-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('ChatGPT', this)" type="button">🤖 ChatGPT</button>
-              <button class="multi-option p-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Claude', this)" type="button">🧠 Claude</button>
-              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Gemini', this)" type="button">✨ Gemini</button>
-              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('NotebookLM', this)" type="button">📚 NotebookLM</button>
-              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Copilot', this)" type="button">💻 Copilot</button>
-              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Notion', this)" type="button">📓 Notion</button>
-              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Jira', this)" type="button">🔷 Jira</button>
-              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Linear', this)" type="button">📐 Linear</button>
-              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Confluence', this)" type="button">📖 Confluence</button>
-              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Excel / Sheets', this)" type="button">📊 Excel / Sheets</button>
-              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Automatizaciones', this)" type="button">⚡ Automatizaciones</button>
-              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Nada todavía', this)" type="button">⏳ Nada todavía</button>
-            </div>
-            <button
-              class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors cursor-pointer self-start mt-2"
-              onclick="window.pmNextStep(4)"
-              type="button"
-            >
-              <span>Continuar →</span>
-            </button>
-          </div>
-
-          <!-- PASO 5: OBJETIVO -->
-          <div class="pm-step hidden flex flex-col gap-4 py-4" id="pm-step-5">
-            <div class="flex flex-col gap-1.5">
-              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 5 · Objetivo deseado</span>
-              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿Qué te gustaría conseguir?</h3>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2" id="group-pm-objetivo">
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectObjetivo('Ahorrar tiempo', this)" type="button">⏱️ Ahorrar tiempo</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectObjetivo('Resolver mejor una tarea concreta', this)" type="button">🎯 Resolver mejor una tarea concreta</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectObjetivo('Mejorar mi workflow', this)" type="button">⚙️ Mejorar mi workflow de Producto</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectObjetivo('Automatizar algo repetitivo', this)" type="button">🔄 Automatizar algo repetitivo</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectObjetivo('Conectar mejor las herramientas que ya uso', this)" type="button">🔗 Conectar herramientas que ya uso</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectObjetivo('Aplicar IA a mi trabajo', this)" type="button">🧠 Aplicar IA a mi trabajo de PM</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectObjetivo('Tener más claridad sobre por dónde empezar', this)" type="button">💡 Tener claridad sobre por dónde empezar</button>
-              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectObjetivo('Mejorar mi proceso de Product Management', this)" type="button">🚀 Mejorar mi proceso de PM</button>
-            </div>
-          </div>
-
-          <!-- PASO 6: DATOS DE CONTACTO -->
-          <div class="pm-step hidden flex flex-col gap-4 py-4" id="pm-step-6">
-            <div class="flex flex-col gap-1.5">
-              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 6 · Enviar Diagnóstico</span>
-              <h3 class="text-xl md:text-2xl font-bold text-slate-900">Ya tenemos una idea mucho más clara.</h3>
-              <p class="text-sm text-slate-600">¿A dónde te envío el diagnóstico y la recomendación personalizada?</p>
-            </div>
-            <form class="flex flex-col gap-3 pt-2" onsubmit="event.preventDefault(); window.pmSubmitLead();">
-              <div class="flex flex-col gap-1">
-                <label class="text-xs font-semibold text-slate-700" for="pm-input-nombre">Tu Nombre *</label>
-                <input class="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white" id="pm-input-nombre" placeholder="Ej. Andrea Gómez (PM)" required type="text" />
-              </div>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div class="flex flex-col gap-1">
-                  <label class="text-xs font-semibold text-slate-700" for="pm-input-email">Correo Electrónico *</label>
-                  <input class="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white" id="pm-input-email" placeholder="andrea@empresa.com" required type="email" />
-                </div>
-                <div class="flex flex-col gap-1">
-                  <label class="text-xs font-semibold text-slate-700" for="pm-input-whatsapp">Número de WhatsApp *</label>
-                  <input class="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white" id="pm-input-whatsapp" placeholder="+57 300 000 0000" required type="tel" />
-                </div>
-              </div>
-
-              <div class="pt-2">
-                <button id="pm-btn-submit" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer" type="submit">
-                  <span>Ver diagnóstico y recomendación →</span>
-                </button>
-              </div>
-            </form>
-          </div>
-
-          <!-- RESULTADO PERSONALIZADO -->
-          <div class="pm-step hidden flex flex-col gap-5 py-4" id="pm-step-result">
-            <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl flex flex-col gap-2">
-              <div class="flex items-center gap-2 text-emerald-800 font-bold text-sm">
-                <span class="material-symbols-outlined text-emerald-600 text-xl">verified</span>
-                <span>Diagnóstico de Producto Completado</span>
-              </div>
-              <h3 class="text-xl font-bold text-slate-900">Esto es lo que veo en tu caso:</h3>
-              <p class="text-xs text-slate-700 leading-relaxed" id="pm-result-summary">
-                Por lo que me cuentas, una parte importante de tu tiempo se está yendo en el trabajo de Producto. En tu caso no empezaría buscando otra herramienta: empezaría por revisar cómo estás haciendo hoy ese trabajo y detectar qué partes realmente vale la pena simplificar o automatizar.
+            <h1 class="mt-6 font-bold text-3xl sm:text-4xl lg:text-[46px] lg:leading-[54px] text-[#0b1c30] tracking-tight">
+              ¿Qué parte de tu trabajo como PM te está quitando más tiempo del que debería?
+            </h1>
+            <p class="mt-6 text-base lg:text-lg text-[#3d4947] leading-relaxed max-w-2xl">
+              Research, entrevistas, discovery, documentación, Jira, análisis, presentaciones… Hay muchas cosas que hacemos porque “tocan”, pero que terminan llevándose horas todas las semanas.
+            </p>
+            <p class="mt-4 text-sm text-[#0b1c30] leading-relaxed max-w-2xl font-medium">
+              Yo trabajo con PMs para revisar cómo están haciendo esas cosas hoy y encontrar una forma más simple de hacerlas.
+            </p>
+            <div class="mt-8 w-full p-4 rounded-lg bg-[#F1F1EF] border-l-4 border-[#00685f]">
+              <p class="text-sm lg:text-base font-semibold text-[#0b1c30]">
+                No empezamos por una herramienta. Empezamos por el problema.
               </p>
             </div>
+            <div class="mt-8 flex flex-wrap items-center gap-4">
+              <a class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-[#00685f] text-white font-medium text-sm hover:bg-[#005049] transition-all shadow-xs" href="#diagnostico-interactivo" onclick="if(window.posthog) { window.posthog.capture('product_diagnostic_started'); window.posthog.capture('product_cta_click', { cta_location: 'hero', cta_type: 'diagnostico' }); }">
+                Quiero revisar mi caso
+              </a>
+              <a class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-white text-[#0b1c30] font-medium text-sm border border-[#E9E9E7] hover:bg-[#F7F7F5] transition-all shadow-xs" href={whatsappPM} rel="noopener noreferrer" target="_blank" onclick="if(window.posthog) window.posthog.capture('product_whatsapp_click', { cta_location: 'hero' });">
+                <span class="material-symbols-outlined text-[18px] text-[#059669]">chat</span>
+                Hablar con Pablo
+              </a>
+            </div>
+          </div>
 
-            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col gap-2.5 text-xs text-slate-800">
-              <span class="font-mono text-[10px] uppercase font-bold text-slate-500">Plan sugerido para tu caso:</span>
-              <ul class="flex flex-col gap-2 text-slate-700 font-medium" id="pm-result-bullets">
-                <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Mapear el proceso actual de Producto donde se pierde tiempo.</li>
-                <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Diseñar el flujo de trabajo o asistente con IA sobre tus insumos reales.</li>
-                <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Conectar tus herramientas actuales sin cambiar tu stack.</li>
-                <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Practicar en vivo durante la sesión hasta lograr total autonomía.</li>
-              </ul>
+          <div class="lg:col-span-5 relative w-full">
+            <div class="relative w-full rounded-xl bg-white p-6 border border-[#E9E9E7] shadow-xs space-y-4">
+              <div class="flex items-center justify-between pb-3 border-b border-[#E9E9E7]">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#E2E8F0]"></span>
+                </div>
+                <span class="font-mono text-[11px] text-[#3d4947]">pm-workflow.sys</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-left">
+                <div class="p-3 rounded-md bg-[#F1F1EF] border border-[#E9E9E7]">
+                  <div class="flex items-center justify-between text-[#3d4947] text-[11px] font-mono">
+                    <span>01. Discovery</span>
+                    <span class="material-symbols-outlined text-[14px]">psychology</span>
+                  </div>
+                  <p class="mt-1 text-xs font-medium text-[#0b1c30]">Entrevistas & Audio</p>
+                  <div class="mt-2 h-1 w-full bg-[#E2E8F0] rounded-full overflow-hidden">
+                    <div class="h-full bg-[#6d7a77] w-3/4"></div>
+                  </div>
+                </div>
+                <div class="p-3 rounded-md bg-[#F1F1EF] border border-[#E9E9E7]">
+                  <div class="flex items-center justify-between text-[#3d4947] text-[11px] font-mono">
+                    <span>02. Jira Admin</span>
+                    <span class="material-symbols-outlined text-[14px]">checklist</span>
+                  </div>
+                  <p class="mt-1 text-xs font-medium text-[#0b1c30]">Specs & Historias</p>
+                  <div class="mt-2 h-1 w-full bg-[#E2E8F0] rounded-full overflow-hidden">
+                    <div class="h-full bg-[#6d7a77] w-1/2"></div>
+                  </div>
+                </div>
+                <div class="p-3 rounded-md bg-[#F1F1EF] border border-[#E9E9E7]">
+                  <div class="flex items-center justify-between text-[#3d4947] text-[11px] font-mono">
+                    <span>03. Docs Repartidos</span>
+                    <span class="material-symbols-outlined text-[14px]">folder_copy</span>
+                  </div>
+                  <p class="mt-1 text-xs font-medium text-[#0b1c30]">Notion, Confluence, GDocs</p>
+                  <div class="mt-2 h-1 w-full bg-[#E2E8F0] rounded-full overflow-hidden">
+                    <div class="h-full bg-[#6d7a77] w-2/3"></div>
+                  </div>
+                </div>
+                <div class="p-3 rounded-md bg-[#F1F1EF] border border-[#E9E9E7]">
+                  <div class="flex items-center justify-between text-[#3d4947] text-[11px] font-mono">
+                    <span>04. IA & Prompts</span>
+                    <span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+                  </div>
+                  <p class="mt-1 text-xs font-medium text-[#0b1c30]">ChatGPT & NotebookLM</p>
+                  <div class="mt-2 h-1 w-full bg-[#E2E8F0] rounded-full overflow-hidden">
+                    <div class="h-full bg-[#00685f] w-4/5"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="p-5 rounded-lg bg-[#F7F7F5] border border-[#E2E8F0] relative overflow-hidden">
+                <div class="flex items-start justify-between">
+                  <div>
+                    <span class="font-mono text-[11px] text-[#00685f] uppercase tracking-wider font-semibold">Resultado Esperado</span>
+                    <h4 class="mt-1 font-semibold text-sm text-[#0b1c30]">Una forma de trabajar mejor</h4>
+                  </div>
+                  <span class="px-2 py-1 rounded bg-[#059669]/10 text-[#059669] font-mono text-[11px] font-medium">Activo</span>
+                </div>
+                <div class="mt-4 pt-3 border-t border-[#E9E9E7] grid grid-cols-2 gap-4">
+                  <div>
+                    <span class="font-mono text-[11px] text-[#3d4947] block">Alivio cognitivo</span>
+                    <span class="font-bold text-lg text-[#0b1c30] tracking-tight">Directo</span>
+                  </div>
+                  <div>
+                    <span class="font-mono text-[11px] text-[#3d4947] block">Horas recuperadas</span>
+                    <span class="font-bold text-lg text-[#00685f] tracking-tight">4 – 8 h / sem</span>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <span class="font-mono text-[11px] text-[#3d4947]">Conexión directa: Problema real → Automatización sobria</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: DIAGNÓSTICO INTERACTIVO -->
+      <div id="diagnostico" class="scroll-mt-20"></div>
+      <section class="w-full px-6 lg:px-12 py-16 bg-[#F8FAFC] scroll-mt-20" id="diagnostico-interactivo">
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-white rounded-xl border border-[#E9E9E7] p-8 lg:p-12 shadow-xs">
+            <div class="flex items-center justify-between pb-6 border-b border-[#E9E9E7]">
+              <div>
+                <h2 class="font-bold text-2xl text-[#0b1c30] tracking-tight">
+                  Cuéntame qué te está quitando tiempo
+                </h2>
+                <p class="mt-1 text-xs text-[#3d4947]">
+                  No es un test y no hay respuestas correctas. Quiero entender qué estás haciendo hoy, cuánto tiempo te está tomando y qué te gustaría mejorar.
+                </p>
+              </div>
+              <div class="text-right shrink-0 ml-4">
+                <span class="font-mono text-sm text-[#00685f] font-semibold" id="step-counter">01 / 05</span>
+              </div>
+            </div>
+            <div class="w-full bg-[#F1F1EF] h-1 mt-4 rounded-full overflow-hidden">
+              <div class="h-full bg-[#00685f] transition-all duration-300 ease-out" id="step-progress-bar" style="width: 20%;"></div>
             </div>
 
-            <a
-              class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors shadow-2xs text-center cursor-pointer"
-              href="#como-trabajamos"
-            >
-              <span>Ver cómo trabajamos en la sesión ↓</span>
+            <div class="mt-8 min-h-[290px] flex flex-col justify-between">
+              <!-- STEP 1 -->
+              <div class="step-view space-y-4" id="step-1">
+                <div class="flex items-center justify-between">
+                  <span class="font-semibold text-base text-[#0b1c30]">1. ¿Qué tareas te consumen más fricción o tiempo?</span>
+                  <span class="font-mono text-[11px] text-[#3d4947]">Puedes elegir varias</span>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-2" id="step1-options">
+                  <button class="diag-chip px-3.5 py-2.5 text-left rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Research" type="button">Research</button>
+                  <button class="diag-chip px-3.5 py-2.5 text-left rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Discovery" type="button">Discovery</button>
+                  <button class="diag-chip px-3.5 py-2.5 text-left rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Entrevistas" type="button">Entrevistas</button>
+                  <button class="diag-chip px-3.5 py-2.5 text-left rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Documentación" type="button">Documentación</button>
+                  <button class="diag-chip px-3.5 py-2.5 text-left rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Priorización" type="button">Priorización</button>
+                  <button class="diag-chip px-3.5 py-2.5 text-left rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Backlog" type="button">Backlog</button>
+                  <button class="diag-chip px-3.5 py-2.5 text-left rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Jira" type="button">Jira</button>
+                  <button class="diag-chip px-3.5 py-2.5 text-left rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Análisis" type="button">Análisis</button>
+                  <button class="diag-chip px-3.5 py-2.5 text-left rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Estrategia" type="button">Estrategia</button>
+                  <button class="diag-chip px-3.5 py-2.5 text-left rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Reuniones" type="button">Reuniones</button>
+                  <button class="diag-chip px-3.5 py-2.5 text-left rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Presentaciones" type="button">Presentaciones</button>
+                  <button class="diag-chip px-3.5 py-2.5 text-left rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Tareas repetitivas" type="button">Tareas repetitivas</button>
+                  <button class="diag-chip px-3.5 py-2.5 text-left rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer col-span-2 sm:col-span-2" data-val="Información repartida entre herramientas" type="button">Información repartida entre herramientas</button>
+                  <button class="diag-chip px-3.5 py-2.5 text-left rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="No estoy seguro todavía" type="button">No estoy seguro todavía</button>
+                </div>
+              </div>
+
+              <!-- STEP 2 -->
+              <div class="step-view hidden space-y-4" id="step-2">
+                <span class="font-semibold text-base text-[#0b1c30]">2. ¿Con qué frecuencia realizas o sufres este trabajo manual?</span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2" id="step2-options">
+                  <button class="diag-single-chip p-4 text-left rounded-md border border-[#E9E9E7] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Todos los días" type="button">
+                    <span class="font-semibold text-xs text-[#0b1c30] block">A diario</span>
+                    <span class="text-[11px] text-[#3d4947]">Es parte ineludible de mi rutina operativa diaria.</span>
+                  </button>
+                  <button class="diag-single-chip p-4 text-left rounded-md border border-[#E9E9E7] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Varias veces por semana" type="button">
+                    <span class="font-semibold text-xs text-[#0b1c30] block">Varias veces por semana</span>
+                    <span class="text-[11px] text-[#3d4947]">Sprints, preparación de planning, reuniones de refinamiento.</span>
+                  </button>
+                  <button class="diag-single-chip p-4 text-left rounded-md border border-[#E9E9E7] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Ciclos periódicos" type="button">
+                    <span class="font-semibold text-xs text-[#0b1c30] block">Por ciclos o releases</span>
+                    <span class="text-[11px] text-[#3d4947]">Cuando toca sintetizar research grande o armar decks ejecutivos.</span>
+                  </button>
+                  <button class="diag-single-chip p-4 text-left rounded-md border border-[#E9E9E7] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Constante desorganización" type="button">
+                    <span class="font-semibold text-xs text-[#0b1c30] block">Impredecible</span>
+                    <span class="text-[11px] text-[#3d4947]">Surge como fricción constante acumulada sin orden.</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- STEP 3 -->
+              <div class="step-view hidden space-y-4" id="step-3">
+                <span class="font-semibold text-base text-[#0b1c30]">3. ¿Cuánto tiempo estimas que se te va semanalmente en esto?</span>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2" id="step3-options">
+                  <button class="diag-single-chip p-4 text-left rounded-md border border-[#E9E9E7] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="2–4 h / semana" type="button">
+                    <span class="font-bold text-lg text-[#00685f] block">2 – 4 h</span>
+                    <span class="text-[11px] text-[#3d4947]">Molesto pero manejable.</span>
+                  </button>
+                  <button class="diag-single-chip p-4 text-left rounded-md border border-[#E9E9E7] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="5–10 h / semana" type="button">
+                    <span class="font-bold text-lg text-[#00685f] block">5 – 10 h</span>
+                    <span class="text-[11px] text-[#3d4947]">Una jornada laboral entera en tareas mecánicas.</span>
+                  </button>
+                  <button class="diag-single-chip p-4 text-left rounded-md border border-[#E9E9E7] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="+10 h / semana" type="button">
+                    <span class="font-bold text-lg text-[#00685f] block">+10 h</span>
+                    <span class="text-[11px] text-[#3d4947]">Carga cognitiva crítica que frena mi impacto.</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- STEP 4 -->
+              <div class="step-view hidden space-y-4" id="step-4">
+                <div class="flex items-center justify-between">
+                  <span class="font-semibold text-base text-[#0b1c30]">4. ¿Qué herramientas estás usando hoy?</span>
+                  <span class="font-mono text-[11px] text-[#3d4947]">Selecciona las que apliquen</span>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-2" id="step4-options">
+                  <button class="diag-chip-tools px-3 py-2 text-center rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="ChatGPT" type="button">ChatGPT</button>
+                  <button class="diag-chip-tools px-3 py-2 text-center rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Claude" type="button">Claude</button>
+                  <button class="diag-chip-tools px-3 py-2 text-center rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="NotebookLM" type="button">NotebookLM</button>
+                  <button class="diag-chip-tools px-3 py-2 text-center rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Jira" type="button">Jira</button>
+                  <button class="diag-chip-tools px-3 py-2 text-center rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Linear" type="button">Linear</button>
+                  <button class="diag-chip-tools px-3 py-2 text-center rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Notion" type="button">Notion</button>
+                  <button class="diag-chip-tools px-3 py-2 text-center rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Confluence" type="button">Confluence</button>
+                  <button class="diag-chip-tools px-3 py-2 text-center rounded-md border border-[#E9E9E7] text-xs text-[#0b1c30] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Ninguna IA aún" type="button">Ninguna IA</button>
+                </div>
+              </div>
+
+              <!-- STEP 5 -->
+              <div class="step-view hidden space-y-4" id="step-5">
+                <span class="font-semibold text-base text-[#0b1c30]">5. ¿Cuál es tu prioridad principal hoy?</span>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2" id="step5-options">
+                  <button class="diag-single-chip p-4 text-left rounded-md border border-[#E9E9E7] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Ahorrar tiempo" type="button">
+                    <span class="font-semibold text-xs text-[#0b1c30] block">Recuperar horas</span>
+                    <span class="text-[11px] text-[#3d4947]">Automatizar o delegar la talacha repetitiva.</span>
+                  </button>
+                  <button class="diag-single-chip p-4 text-left rounded-md border border-[#E9E9E7] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Mejorar el flujo" type="button">
+                    <span class="font-semibold text-xs text-[#0b1c30] block">Mejorar el flujo</span>
+                    <span class="text-[11px] text-[#3d4947]">Conectar research con Jira y decisiones sin fricción.</span>
+                  </button>
+                  <button class="diag-single-chip p-4 text-left rounded-md border border-[#E9E9E7] hover:bg-[#F1F1EF] transition-colors cursor-pointer" data-val="Usar mejor IA" type="button">
+                    <span class="font-semibold text-xs text-[#0b1c30] block">Usar mejor IA</span>
+                    <span class="text-[11px] text-[#3d4947]">Pasar de prompts aislados a un sistema consistente.</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- STEP PROCESSING -->
+              <div class="step-view hidden flex flex-col items-center justify-center gap-4 py-12 text-center" id="step-processing">
+                <div class="w-8 h-8 border-2 border-[#00685f] border-t-transparent rounded-full animate-spin"></div>
+                <h3 class="text-base font-bold text-[#0b1c30]">Revisando tu caso…</h3>
+                <p class="text-xs text-[#3d4947]">Mapeando la relación entre tus herramientas y flujos de trabajo.</p>
+              </div>
+
+              <!-- RESULTS VIEW -->
+              <div class="step-view hidden space-y-6" id="step-result">
+                <div class="p-6 rounded-lg bg-[#F1F1EF] border border-[#E2E8F0] space-y-6">
+                  <div class="flex flex-wrap items-center justify-between gap-2 border-b border-[#E9E9E7] pb-4">
+                    <div class="flex items-center gap-2">
+                      <span class="material-symbols-outlined text-[#00685f] text-[20px]">assignment_turned_in</span>
+                      <span class="font-semibold text-sm text-[#0b1c30]">Esto es lo que veo en tu caso</span>
+                    </div>
+                    <span class="px-2 py-0.5 rounded bg-[#00685f]/10 text-[#00685f] font-mono text-[11px]">Diagnóstico Preliminar</span>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white p-3.5 rounded border border-[#E9E9E7]">
+                      <span class="font-mono text-[11px] text-[#3d4947] uppercase block">Tu situación</span>
+                      <p class="mt-1 text-xs font-medium text-[#0b1c30]" id="res-situacion">Research · Discovery · Documentación</p>
+                    </div>
+                    <div class="bg-white p-3.5 rounded border border-[#E9E9E7]">
+                      <span class="font-mono text-[11px] text-[#3d4947] uppercase block">Tiempo aproximado</span>
+                      <p class="mt-1 text-xs font-medium text-[#0b1c30]" id="res-tiempo">5–10 h / semana</p>
+                    </div>
+                    <div class="bg-white p-3.5 rounded border border-[#E9E9E7]">
+                      <span class="font-mono text-[11px] text-[#3d4947] uppercase block">Lo que estás buscando</span>
+                      <p class="mt-1 text-xs font-medium text-[#0b1c30]" id="res-objetivo">Ahorrar tiempo · Mejorar el flujo · Usar mejor IA</p>
+                    </div>
+                  </div>
+                  <div class="space-y-2">
+                    <span class="font-mono text-[11px] text-[#00685f] font-semibold uppercase tracking-wider">Recomendación directa de Pablo</span>
+                    <p class="text-xs text-[#0b1c30] leading-relaxed font-normal" id="res-recomendacion">
+                      Yo empezaría por revisar cómo estás pasando de la información que recoges en Research y Discovery a la documentación que utilizas después. Antes de automatizar todo, revisaría el proceso completo y encontraría dónde realmente se está yendo el tiempo.
+                    </p>
+                  </div>
+                  <div class="pt-4 border-t border-[#E9E9E7] flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <button
+                      class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#059669] text-white font-medium text-xs hover:bg-[#059669]/90 transition-all shadow-xs cursor-pointer"
+                      onclick="window.pmGoToStep(8)"
+                      type="button"
+                    >
+                      Continuar y solicitar la recomendación →
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CONTACT FORM VIEW -->
+              <div class="step-view hidden space-y-4" id="step-contact">
+                <div class="flex flex-col gap-1.5 border-b border-[#E9E9E7] pb-3">
+                  <span class="font-mono text-[11px] font-semibold text-[#00685f] uppercase">Paso Final · Enviar Diagnóstico</span>
+                  <h3 class="text-lg font-bold text-[#0b1c30]">¿A dónde te envío el diagnóstico y la recomendación?</h3>
+                  <p class="text-xs text-[#3d4947]">Ingresa tus datos para registrar tu caso en nuestro acompañamiento 1-1.</p>
+                </div>
+                <form class="flex flex-col gap-3 pt-2" onsubmit="event.preventDefault(); window.pmSubmitLead();">
+                  <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-[#0b1c30]" for="pm-input-nombre">Tu Nombre *</label>
+                    <input class="w-full text-xs px-4 py-2.5 rounded-lg border border-[#E2E8F0] focus:border-[#00685f] outline-none bg-white" id="pm-input-nombre" placeholder="Ej. Andrea Gómez (PM)" required type="text" />
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="flex flex-col gap-1">
+                      <label class="text-xs font-semibold text-[#0b1c30]" for="pm-input-email">Correo Electrónico *</label>
+                      <input class="w-full text-xs px-4 py-2.5 rounded-lg border border-[#E2E8F0] focus:border-[#00685f] outline-none bg-white" id="pm-input-email" placeholder="andrea@empresa.com" required type="email" />
+                    </div>
+                    <div class="flex flex-col gap-1">
+                      <label class="text-xs font-semibold text-[#0b1c30]" for="pm-input-whatsapp">Número de WhatsApp *</label>
+                      <input class="w-full text-xs px-4 py-2.5 rounded-lg border border-[#E2E8F0] focus:border-[#00685f] outline-none bg-white" id="pm-input-whatsapp" placeholder="+57 300 000 0000" required type="tel" />
+                    </div>
+                  </div>
+
+                  <div class="pt-2">
+                    <button id="pm-btn-submit" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#059669] text-white font-semibold text-xs hover:bg-[#059669]/90 transition-all shadow-xs cursor-pointer" type="submit">
+                      <span>Guardar y ver confirmación →</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- SUBMITTING STATE -->
+              <div class="step-view hidden flex flex-col items-center justify-center gap-4 py-12 text-center" id="step-submitting">
+                <div class="w-8 h-8 border-2 border-[#059669] border-t-transparent rounded-full animate-spin"></div>
+                <h3 class="text-base font-bold text-[#0b1c30]">Guardando tu información…</h3>
+                <p class="text-xs text-[#3d4947]">Registrando tus respuestas para preparar la sesión.</p>
+              </div>
+
+              <!-- SUCCESS STATE -->
+              <div class="step-view hidden space-y-4" id="step-success">
+                <div class="p-6 bg-[#059669]/10 border border-[#059669]/20 rounded-xl flex flex-col gap-3 text-center items-center">
+                  <div class="w-10 h-10 rounded-full bg-[#059669]/20 text-[#059669] flex items-center justify-center">
+                    <span class="material-symbols-outlined text-xl">check_circle</span>
+                  </div>
+                  <h3 class="text-lg font-bold text-[#0b1c30]">Listo. Ya tengo tu caso.</h3>
+                  <p class="text-xs text-[#3d4947] leading-relaxed max-w-lg">
+                    Con lo que me contaste, ya podemos partir de algo concreto. Escríbeme por WhatsApp para coordinar el siguiente paso.
+                  </p>
+                </div>
+                <a
+                  id="pm-success-wa-btn"
+                  class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-[#059669] text-white font-semibold text-xs hover:bg-[#059669]/90 transition-all shadow-xs text-center cursor-pointer"
+                  href={whatsappPM}
+                  target="_blank"
+                  onclick="if(window.posthog) window.posthog.capture('product_whatsapp_click', { cta_location: 'diagnostic_success' });"
+                >
+                  <span class="material-symbols-outlined text-[18px]">chat</span>
+                  <span>Hablar con Pablo por WhatsApp →</span>
+                </a>
+              </div>
+
+              <!-- ERROR STATE -->
+              <div class="step-view hidden space-y-4" id="step-error">
+                <div class="p-5 bg-amber-50 border border-amber-200 rounded-xl flex flex-col gap-2">
+                  <h3 class="text-sm font-bold text-amber-900">No pude guardar tus datos en este momento.</h3>
+                  <p class="text-xs text-amber-800 leading-relaxed">
+                    Inténtalo nuevamente o escríbeme directamente por WhatsApp para revisar tu caso.
+                  </p>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center gap-3">
+                  <button
+                    class="w-full sm:w-auto px-5 py-2.5 rounded-lg bg-[#E2E8F0] text-[#0b1c30] text-xs font-semibold hover:bg-[#CBD5E1] transition-colors cursor-pointer"
+                    onclick="window.pmGoToStep(8)"
+                    type="button"
+                  >
+                    Reintentar
+                  </button>
+                  <a
+                    class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#059669] text-white text-xs font-semibold hover:bg-[#059669]/90 transition-all shadow-xs text-center cursor-pointer"
+                    href={whatsappPM}
+                    target="_blank"
+                    onclick="if(window.posthog) window.posthog.capture('product_whatsapp_click', { cta_location: 'diagnostic_error' });"
+                  >
+                    <span class="material-symbols-outlined text-[16px]">chat</span>
+                    <span>Hablar con Pablo</span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Bottom Navigation Controls -->
+            <div class="pt-6 mt-6 border-t border-[#E9E9E7] flex items-center justify-between" id="diagnostic-nav">
+              <button class="hidden text-[#3d4947] text-xs hover:text-[#0b1c30] flex items-center gap-1 cursor-pointer" id="btn-diag-back" type="button">
+                <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                Atrás
+              </button>
+              <div class="ml-auto">
+                <button class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#00685f] text-white text-xs font-medium hover:bg-[#005049] transition-all cursor-pointer" id="btn-diag-next" type="button">
+                  <span>Siguiente</span>
+                  <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: ESTO ES LO QUE PODEMOS TRABAJAR -->
+      <section class="w-full px-6 lg:px-12 py-16 bg-white border-y border-[#E2E8F0]">
+        <div class="max-w-7xl mx-auto">
+          <div class="max-w-3xl">
+            <span class="font-mono text-[11px] text-[#00685f] uppercase tracking-wider font-semibold">Enfoque Concreto</span>
+            <h2 class="mt-2 font-bold text-2xl lg:text-3xl text-[#0b1c30] tracking-tight">
+              No te vendo “consultoría de Product Management”.
+            </h2>
+            <p class="mt-4 text-base text-[#3d4947] leading-relaxed">
+              Prefiero que llegues con algo concreto. Algo que haces todas las semanas y piensas: <span class="text-[#0b1c30] font-medium">“Esto no debería tomarme tanto tiempo.”</span>
+            </p>
+          </div>
+          <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="p-5 rounded-lg bg-[#F8FAFC] border border-[#E9E9E7] flex flex-col justify-between hover:border-[#00685f]/40 transition-colors">
+              <div class="flex items-center justify-between">
+                <span class="material-symbols-outlined text-[#00685f] text-[24px]">troubleshoot</span>
+                <span class="font-mono text-[11px] text-[#3d4947]">01</span>
+              </div>
+              <div class="mt-6">
+                <h3 class="font-semibold text-sm text-[#0b1c30]">Research</h3>
+                <p class="mt-1 text-xs text-[#3d4947]">Transcripciones, notas crudas y síntesis temática rápida.</p>
+              </div>
+            </div>
+            <div class="p-5 rounded-lg bg-[#F8FAFC] border border-[#E9E9E7] flex flex-col justify-between hover:border-[#00685f]/40 transition-colors">
+              <div class="flex items-center justify-between">
+                <span class="material-symbols-outlined text-[#00685f] text-[24px]">explore</span>
+                <span class="font-mono text-[11px] text-[#3d4947]">02</span>
+              </div>
+              <div class="mt-6">
+                <h3 class="font-semibold text-sm text-[#0b1c30]">Discovery</h3>
+                <p class="mt-1 text-xs text-[#3d4947]">De testimonios de clientes a oportunidades evaluadas.</p>
+              </div>
+            </div>
+            <div class="p-5 rounded-lg bg-[#F8FAFC] border border-[#E9E9E7] flex flex-col justify-between hover:border-[#00685f]/40 transition-colors">
+              <div class="flex items-center justify-between">
+                <span class="material-symbols-outlined text-[#00685f] text-[24px]">splitscreen</span>
+                <span class="font-mono text-[11px] text-[#3d4947]">03</span>
+              </div>
+              <div class="mt-6">
+                <h3 class="font-semibold text-sm text-[#0b1c30]">Jira / Linear</h3>
+                <p class="mt-1 text-xs text-[#3d4947]">Generación de épicas y criterios de aceptación sin tedio.</p>
+              </div>
+            </div>
+            <div class="p-5 rounded-lg bg-[#F8FAFC] border border-[#E9E9E7] flex flex-col justify-between hover:border-[#00685f]/40 transition-colors">
+              <div class="flex items-center justify-between">
+                <span class="material-symbols-outlined text-[#00685f] text-[24px]">article</span>
+                <span class="font-mono text-[11px] text-[#3d4947]">04</span>
+              </div>
+              <div class="mt-6">
+                <h3 class="font-semibold text-sm text-[#0b1c30]">Documentación</h3>
+                <p class="mt-1 text-xs text-[#3d4947]">PRDs vivos que se actualizan sin empezar de cero.</p>
+              </div>
+            </div>
+            <div class="p-5 rounded-lg bg-[#F8FAFC] border border-[#E9E9E7] flex flex-col justify-between hover:border-[#00685f]/40 transition-colors">
+              <div class="flex items-center justify-between">
+                <span class="material-symbols-outlined text-[#00685f] text-[24px]">analytics</span>
+                <span class="font-mono text-[11px] text-[#3d4947]">05</span>
+              </div>
+              <div class="mt-6">
+                <h3 class="font-semibold text-sm text-[#0b1c30]">Análisis</h3>
+                <p class="mt-1 text-xs text-[#3d4947]">Extraer la señal del ruido en métricas de producto complejas.</p>
+              </div>
+            </div>
+            <div class="p-5 rounded-lg bg-[#F8FAFC] border border-[#E9E9E7] flex flex-col justify-between hover:border-[#00685f]/40 transition-colors">
+              <div class="flex items-center justify-between">
+                <span class="material-symbols-outlined text-[#00685f] text-[24px]">slideshow</span>
+                <span class="font-mono text-[11px] text-[#3d4947]">06</span>
+              </div>
+              <div class="mt-6">
+                <h3 class="font-semibold text-sm text-[#0b1c30]">Presentaciones</h3>
+                <p class="mt-1 text-xs text-[#3d4947]">Narrativas para stakeholders sin pasar días armando slides.</p>
+              </div>
+            </div>
+            <div class="p-5 rounded-lg bg-[#F8FAFC] border border-[#E9E9E7] flex flex-col justify-between hover:border-[#00685f]/40 transition-colors">
+              <div class="flex items-center justify-between">
+                <span class="material-symbols-outlined text-[#00685f] text-[24px]">repeat</span>
+                <span class="font-mono text-[11px] text-[#3d4947]">07</span>
+              </div>
+              <div class="mt-6">
+                <h3 class="font-semibold text-sm text-[#0b1c30]">Procesos Repetitivos</h3>
+                <p class="mt-1 text-xs text-[#3d4947]">Mapeo, simplificación y descarte de pasos burocráticos.</p>
+              </div>
+            </div>
+            <div class="p-5 rounded-lg bg-[#F8FAFC] border border-[#E9E9E7] flex flex-col justify-between hover:border-[#00685f]/40 transition-colors">
+              <div class="flex items-center justify-between">
+                <span class="material-symbols-outlined text-[#00685f] text-[24px]">smart_toy</span>
+                <span class="font-mono text-[11px] text-[#3d4947]">08</span>
+              </div>
+              <div class="mt-6">
+                <h3 class="font-semibold text-sm text-[#0b1c30]">IA Aplicada</h3>
+                <p class="mt-1 text-xs text-[#3d4947]">Asistentes contextualizados a tu producto y estándares.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: RUTAS DE PARTIDA -->
+      <section class="w-full px-6 lg:px-12 py-20 bg-[#F8FAFC]">
+        <div class="max-w-7xl mx-auto">
+          <div class="max-w-3xl">
+            <span class="font-mono text-[11px] text-[#00685f] uppercase tracking-wider font-semibold">Puntos de Partida</span>
+            <h2 class="mt-2 font-bold text-2xl lg:text-3xl text-[#0b1c30] tracking-tight">
+              Podemos empezar por aquí
+            </h2>
+            <p class="mt-3 text-base text-[#3d4947]">
+              Elige el problema que más se parece a lo que estás viviendo.
+            </p>
+          </div>
+          <div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="rounded-xl bg-white border border-[#E9E9E7] p-6 flex flex-col justify-between shadow-xs">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="font-mono text-[11px] text-[#00685f] font-medium">01 · RESEARCH</span>
+                  <span class="material-symbols-outlined text-[#6d7a77] text-[18px]">biotech</span>
+                </div>
+                <h3 class="mt-3 font-semibold text-lg text-[#0b1c30]">Research → Insights</h3>
+                <div class="mt-4 p-3 rounded bg-[#F1F1EF] text-[#3d4947] font-mono text-[11px]">
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <span>Investigar</span>
+                    <span class="text-[#00685f] font-bold">→</span>
+                    <span>Recopilar</span>
+                    <span class="text-[#00685f] font-bold">→</span>
+                    <span>Sintetizar</span>
+                    <span class="text-[#00685f] font-bold">→</span>
+                    <span>Patrones</span>
+                    <span class="text-[#00685f] font-bold">→</span>
+                    <span class="text-[#0b1c30] font-semibold">Insights</span>
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <span class="font-mono text-[11px] text-[#3d4947] block">Resultado:</span>
+                  <p class="mt-1 text-xs text-[#0b1c30] font-medium">
+                    Un proceso de research que puedas repetir sin empezar de cero.
+                  </p>
+                </div>
+              </div>
+              <div class="mt-6 pt-4 border-t border-[#E9E9E7]">
+                <a class="text-xs text-[#00685f] font-medium flex items-center gap-1 hover:underline" href={whatsappPM} target="_blank">
+                  <span>Ver cómo lo trabajamos</span>
+                  <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="rounded-xl bg-white border border-[#E9E9E7] p-6 flex flex-col justify-between shadow-xs">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="font-mono text-[11px] text-[#00685f] font-medium">02 · DISCOVERY</span>
+                  <span class="material-symbols-outlined text-[#6d7a77] text-[18px]">travel_explore</span>
+                </div>
+                <h3 class="mt-3 font-semibold text-lg text-[#0b1c30]">Discovery → Oportunidades</h3>
+                <div class="mt-4 p-3 rounded bg-[#F1F1EF] text-[#3d4947] font-mono text-[11px]">
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <span>Entrevistas</span>
+                    <span class="text-[#00685f] font-bold">→</span>
+                    <span>Patrones</span>
+                    <span class="text-[#00685f] font-bold">→</span>
+                    <span>Problemas</span>
+                    <span class="text-[#00685f] font-bold">→</span>
+                    <span class="text-[#0b1c30] font-semibold">Oportunidades</span>
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <span class="font-mono text-[11px] text-[#3d4947] block">Resultado:</span>
+                  <p class="mt-1 text-xs text-[#0b1c30] font-medium">
+                    De lo que escuchas a lo que decides investigar o probar.
+                  </p>
+                </div>
+              </div>
+              <div class="mt-6 pt-4 border-t border-[#E9E9E7]">
+                <a class="text-xs text-[#00685f] font-medium flex items-center gap-1 hover:underline" href={whatsappPM} target="_blank">
+                  <span>Ver cómo lo trabajamos</span>
+                  <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="rounded-xl bg-white border border-[#E9E9E7] p-6 flex flex-col justify-between shadow-xs">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="font-mono text-[11px] text-[#00685f] font-medium">03 · JIRA</span>
+                  <span class="material-symbols-outlined text-[#6d7a77] text-[18px]">account_tree</span>
+                </div>
+                <h3 class="mt-3 font-semibold text-lg text-[#0b1c30]">Jira → Menos manual</h3>
+                <div class="mt-4 p-3 rounded bg-[#F1F1EF] text-[#3d4947] font-mono text-[11px]">
+                  <span>Docs ↔ Notion ↔ Jira</span>
+                </div>
+                <div class="mt-4">
+                  <span class="font-mono text-[11px] text-[#3d4947] block">Resultado:</span>
+                  <p class="mt-1 text-xs text-[#0b1c30] font-medium">
+                    Menos trabajo administrativo reescribiendo historias y tareas.
+                  </p>
+                </div>
+              </div>
+              <div class="mt-6 pt-4 border-t border-[#E9E9E7]">
+                <a class="text-xs text-[#00685f] font-medium flex items-center gap-1 hover:underline" href={whatsappPM} target="_blank">
+                  <span>Ver cómo lo trabajamos</span>
+                  <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="rounded-xl bg-white border border-[#E9E9E7] p-6 flex flex-col justify-between shadow-xs">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="font-mono text-[11px] text-[#00685f] font-medium">04 · DOCUMENTACIÓN</span>
+                  <span class="material-symbols-outlined text-[#6d7a77] text-[18px]">edit_note</span>
+                </div>
+                <h3 class="mt-3 font-semibold text-lg text-[#0b1c30]">Documentación sin empezar de cero</h3>
+                <div class="mt-4 p-3 rounded bg-[#F1F1EF] text-[#3d4947] font-mono text-[11px]">
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <span>Reunión</span>
+                    <span class="text-[#00685f] font-bold">→</span>
+                    <span>Decisiones</span>
+                    <span class="text-[#00685f] font-bold">→</span>
+                    <span>Acciones</span>
+                    <span class="text-[#00685f] font-bold">→</span>
+                    <span class="text-[#0b1c30] font-semibold">Docs</span>
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <span class="font-mono text-[11px] text-[#3d4947] block">Resultado:</span>
+                  <p class="mt-1 text-xs text-[#0b1c30] font-medium">
+                    Que documentar sea parte natural del flujo y no otra tarea al final del día.
+                  </p>
+                </div>
+              </div>
+              <div class="mt-6 pt-4 border-t border-[#E9E9E7]">
+                <a class="text-xs text-[#00685f] font-medium flex items-center gap-1 hover:underline" href={whatsappPM} target="_blank">
+                  <span>Ver cómo lo trabajamos</span>
+                  <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="rounded-xl bg-white border border-[#E9E9E7] p-6 flex flex-col justify-between shadow-xs">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="font-mono text-[11px] text-[#00685f] font-medium">05 · ANÁLISIS Y NARRATIVA</span>
+                  <span class="material-symbols-outlined text-[#6d7a77] text-[18px]">query_stats</span>
+                </div>
+                <h3 class="mt-3 font-semibold text-lg text-[#0b1c30]">Información → Decisión</h3>
+                <div class="mt-4 p-3 rounded bg-[#F1F1EF] text-[#3d4947] font-mono text-[11px]">
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <span>Datos</span>
+                    <span class="text-[#00685f] font-bold">→</span>
+                    <span>Análisis</span>
+                    <span class="text-[#00685f] font-bold">→</span>
+                    <span>Narrativa</span>
+                    <span class="text-[#00685f] font-bold">→</span>
+                    <span class="text-[#0b1c30] font-semibold">Decisión</span>
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <span class="font-mono text-[11px] text-[#3d4947] block">Resultado:</span>
+                  <p class="mt-1 text-xs text-[#0b1c30] font-medium">
+                    Llegar más rápido a una historia clara que ayude a stakeholders a decidir.
+                  </p>
+                </div>
+              </div>
+              <div class="mt-6 pt-4 border-t border-[#E9E9E7]">
+                <a class="text-xs text-[#00685f] font-medium flex items-center gap-1 hover:underline" href={whatsappPM} target="_blank">
+                  <span>Ver cómo lo trabajamos</span>
+                  <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="rounded-xl bg-white border border-[#E9E9E7] p-6 flex flex-col justify-between shadow-xs">
+              <div>
+                <div class="flex items-center justify-between">
+                  <span class="font-mono text-[11px] text-[#00685f] font-medium">06 · IA APLICADA</span>
+                  <span class="material-symbols-outlined text-[#6d7a77] text-[18px]">neurology</span>
+                </div>
+                <h3 class="mt-3 font-semibold text-lg text-[#0b1c30]">IA dentro de tu trabajo</h3>
+                <div class="mt-4 flex flex-wrap gap-1.5">
+                  <span class="px-2 py-0.5 rounded bg-[#F1F1EF] font-mono text-[11px] text-[#0b1c30]">ChatGPT</span>
+                  <span class="px-2 py-0.5 rounded bg-[#F1F1EF] font-mono text-[11px] text-[#0b1c30]">Claude</span>
+                  <span class="px-2 py-0.5 rounded bg-[#F1F1EF] font-mono text-[11px] text-[#0b1c30]">NotebookLM</span>
+                </div>
+                <div class="mt-4">
+                  <span class="font-mono text-[11px] text-[#3d4947] block">Resultado:</span>
+                  <p class="mt-1 text-xs text-[#0b1c30] font-medium">
+                    Menos improvisación frente al prompt en blanco. Más flujo de trabajo.
+                  </p>
+                </div>
+              </div>
+              <div class="mt-6 pt-4 border-t border-[#E9E9E7]">
+                <a class="text-xs text-[#00685f] font-medium flex items-center gap-1 hover:underline" href={whatsappPM} target="_blank">
+                  <span>Ver cómo lo trabajamos</span>
+                  <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: MANIFIESTO -->
+      <section class="w-full px-6 lg:px-12 py-20 bg-[#F1F1EF] border-y border-[#E9E9E7]">
+        <div class="max-w-4xl mx-auto text-center flex flex-col items-center">
+          <span class="font-mono text-[11px] uppercase tracking-widest text-[#3d4947]">
+            CRITERIO & DISCIPLINA
+          </span>
+          <h2 class="mt-4 font-bold text-3xl text-[#0b1c30] tracking-tight">
+            Y no, no todo necesita IA.
+          </h2>
+          <p class="mt-6 text-base text-[#3d4947] max-w-2xl leading-relaxed">
+            A veces el problema está en el proceso. A veces falta una integración. A veces hay una tarea que simplemente sobra. Y sí, a veces la solución sí es IA.
+          </p>
+          <div class="mt-10 py-6 px-8 rounded-xl bg-white border border-[#E9E9E7] shadow-xs max-w-xl">
+            <p class="font-bold text-lg text-[#00685f] tracking-tight">
+              Primero el problema. Después la tecnología.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 6: CÓMO TRABAJAMOS -->
+      <section class="w-full px-6 lg:px-12 py-20 bg-white">
+        <div class="max-w-7xl mx-auto">
+          <div class="max-w-3xl">
+            <span class="font-mono text-[11px] text-[#00685f] uppercase tracking-wider font-semibold">Metodología 1-1</span>
+            <h2 class="mt-2 font-bold text-2xl lg:text-3xl text-[#0b1c30] tracking-tight">
+              No te entrego una lista de recomendaciones y desaparezco.
+            </h2>
+            <p class="mt-3 text-sm text-[#3d4947]">
+              Construimos el sistema contigo directamente sobre tus herramientas y entregables en vivo.
+            </p>
+          </div>
+          <div class="mt-12 grid grid-cols-1 md:grid-cols-5 gap-4">
+            <div class="p-5 rounded-lg bg-[#F8FAFC] border border-[#E9E9E7] flex flex-col justify-between">
+              <div>
+                <span class="font-mono text-xs text-[#00685f] font-bold">01</span>
+                <h3 class="mt-3 font-semibold text-sm text-[#0b1c30]">Entendemos</h3>
+                <p class="mt-2 text-xs text-[#3d4947]">Cómo haces las cosas hoy, paso a paso, sin juicio ni sesgo.</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-[#E9E9E7] text-[#3d4947] font-mono text-[11px]">
+                Auditoría de fricción
+              </div>
+            </div>
+            <div class="p-5 rounded-lg bg-[#F8FAFC] border border-[#E9E9E7] flex flex-col justify-between">
+              <div>
+                <span class="font-mono text-xs text-[#00685f] font-bold">02</span>
+                <h3 class="mt-3 font-semibold text-sm text-[#0b1c30]">Encontramos</h3>
+                <p class="mt-2 text-xs text-[#3d4947]">Dónde se está yendo el tiempo real y qué cuellos de botella existen.</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-[#E9E9E7] text-[#3d4947] font-mono text-[11px]">
+                Diagnóstico de horas
+              </div>
+            </div>
+            <div class="p-5 rounded-lg bg-[#F8FAFC] border border-[#E9E9E7] flex flex-col justify-between">
+              <div>
+                <span class="font-mono text-xs text-[#00685f] font-bold">03</span>
+                <h3 class="mt-3 font-semibold text-sm text-[#0b1c30]">Construimos</h3>
+                <p class="mt-2 text-xs text-[#3d4947]">Una forma mejor de hacerlo: plantillas, prompts contextuales, automatizaciones.</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-[#E9E9E7] text-[#3d4947] font-mono text-[11px]">
+                Diseño del flujo
+              </div>
+            </div>
+            <div class="p-5 rounded-lg bg-[#F8FAFC] border border-[#E9E9E7] flex flex-col justify-between">
+              <div>
+                <span class="font-mono text-xs text-[#00685f] font-bold">04</span>
+                <h3 class="mt-3 font-semibold text-sm text-[#0b1c30]">Practicas</h3>
+                <p class="mt-2 text-xs text-[#3d4947]">La pruebas sobre tu trabajo real y tus sprints en curso con feedback inmediato.</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-[#E9E9E7] text-[#3d4947] font-mono text-[11px]">
+                Validación práctica
+              </div>
+            </div>
+            <div class="p-5 rounded-lg bg-[#F8FAFC] border border-[#E9E9E7] flex flex-col justify-between">
+              <div>
+                <span class="font-mono text-xs text-[#00685f] font-bold">05</span>
+                <h3 class="mt-3 font-semibold text-sm text-[#0b1c30]">Te independizas</h3>
+                <p class="mt-2 text-xs text-[#3d4947]">Te quedas con algo que entiendes y puedes seguir utilizando por tu cuenta.</p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-[#E9E9E7] text-[#3d4947] font-mono text-[11px]">
+                Autonomía total
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 7: FORMATOS DE COLABORACIÓN -->
+      <section class="w-full px-6 lg:px-12 py-20 bg-[#F8FAFC]">
+        <div class="max-w-5xl mx-auto">
+          <div class="text-center max-w-2xl mx-auto">
+            <span class="font-mono text-[11px] text-[#00685f] uppercase tracking-wider font-semibold">Formatos de Colaboración</span>
+            <h2 class="mt-2 font-bold text-2xl lg:text-3xl text-[#0b1c30] tracking-tight">
+              Dos formas de trabajar
+            </h2>
+            <p class="mt-3 text-sm text-[#3d4947]">
+              Sin compromisos rígidos de largo plazo ni metodologías infladas.
+            </p>
+          </div>
+          <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="rounded-xl bg-white border border-[#E9E9E7] p-8 flex flex-col justify-between shadow-xs">
+              <div>
+                <div class="inline-flex items-center px-2.5 py-1 rounded bg-[#F1F1EF] text-[#3d4947] font-mono text-[11px]">
+                  MODALIDAD · SESIÓN 1-1
+                </div>
+                <h3 class="mt-4 font-semibold text-lg text-[#0b1c30]">Tengo un problema concreto</h3>
+                <p class="mt-4 text-xs text-[#3d4947] leading-relaxed">
+                  Nos enfocamos en un único entregable o cuello de botella. Revisamos tu setup actual y salimos con la solución armada y funcionando.
+                </p>
+              </div>
+              <div class="mt-8 pt-6 border-t border-[#E9E9E7]">
+                <a class="w-full inline-flex items-center justify-center px-5 py-3 rounded-lg bg-[#F1F1EF] text-[#0b1c30] hover:bg-[#F7F7F5] border border-[#E2E8F0] text-xs font-medium transition-all" href="#diagnostico-interactivo">
+                  Quiero revisar un problema
+                </a>
+              </div>
+            </div>
+
+            <div class="rounded-xl bg-white border border-[#E9E9E7] p-8 flex flex-col justify-between shadow-xs relative overflow-hidden">
+              <div>
+                <div class="inline-flex items-center px-2.5 py-1 rounded bg-[#00685f]/10 text-[#00685f] font-mono text-[11px] font-medium">
+                  MODALIDAD · ACOMPAÑAMIENTO
+                </div>
+                <h3 class="mt-4 font-semibold text-lg text-[#0b1c30]">Tengo varios problemas</h3>
+                <p class="mt-4 text-xs text-[#3d4947] leading-relaxed">
+                  Un acompañamiento estructurado en varias sesiones para rediseñar cómo gestionas producto, incorporando automatizaciones e IA donde sume.
+                </p>
+              </div>
+              <div class="mt-8 pt-6 border-t border-[#E9E9E7]">
+                <a class="w-full inline-flex items-center justify-center px-5 py-3 rounded-lg bg-[#00685f] text-white hover:bg-[#005049] text-xs font-medium transition-all shadow-xs" href={whatsappPM} target="_blank">
+                  Quiero hablar sobre mi caso
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 8: SISTEMAS CONECTADOS -->
+      <section class="w-full px-6 lg:px-12 py-20 bg-white border-t border-[#E2E8F0]">
+        <div class="max-w-7xl mx-auto">
+          <div class="max-w-3xl">
+            <span class="font-mono text-[11px] text-[#00685f] uppercase tracking-wider font-semibold">Sistemas Conectados</span>
+            <h2 class="mt-2 font-bold text-2xl lg:text-3xl text-[#0b1c30] tracking-tight">
+              Algunas cosas que podemos construir juntos
+            </h2>
+            <p class="mt-3 text-sm text-[#3d4947]">
+              Flujos continuos diseñados para eliminar la fricción entre la recolección de contexto y la ejecución técnica.
+            </p>
+          </div>
+          <div class="mt-12 space-y-4">
+            <div class="p-6 rounded-xl bg-[#F8FAFC] border border-[#E9E9E7]">
+              <div class="flex items-center justify-between mb-4">
+                <span class="font-mono text-[11px] text-[#3d4947]">PIPELINE 01</span>
+                <span class="font-mono text-[11px] text-[#00685f] font-medium">Del usuario a desarrollo</span>
+              </div>
+              <div class="flex flex-wrap items-center gap-3">
+                <div class="px-4 py-2 rounded bg-white border border-[#E9E9E7] text-xs text-[#0b1c30] font-medium">Research</div>
+                <span class="text-[#00685f] font-bold">→</span>
+                <div class="px-4 py-2 rounded bg-white border border-[#E9E9E7] text-xs text-[#0b1c30] font-medium">Insights</div>
+                <span class="text-[#00685f] font-bold">→</span>
+                <div class="px-4 py-2 rounded bg-white border border-[#E9E9E7] text-xs text-[#0b1c30] font-medium">Oportunidades</div>
+                <span class="text-[#00685f] font-bold">→</span>
+                <div class="px-4 py-2 rounded bg-[#00685f] text-white text-xs font-medium">Jira / Linear</div>
+              </div>
+            </div>
+            <div class="p-6 rounded-xl bg-[#F8FAFC] border border-[#E9E9E7]">
+              <div class="flex items-center justify-between mb-4">
+                <span class="font-mono text-[11px] text-[#3d4947]">PIPELINE 02</span>
+                <span class="font-mono text-[11px] text-[#00685f] font-medium">Alineación y síntesis de equipo</span>
+              </div>
+              <div class="flex flex-wrap items-center gap-3">
+                <div class="px-4 py-2 rounded bg-white border border-[#E9E9E7] text-xs text-[#0b1c30] font-medium">Reunión</div>
+                <span class="text-[#00685f] font-bold">→</span>
+                <div class="px-4 py-2 rounded bg-white border border-[#E9E9E7] text-xs text-[#0b1c30] font-medium">Decisiones</div>
+                <span class="text-[#00685f] font-bold">→</span>
+                <div class="px-4 py-2 rounded bg-white border border-[#E9E9E7] text-xs text-[#0b1c30] font-medium">Acciones</div>
+                <span class="text-[#00685f] font-bold">→</span>
+                <div class="px-4 py-2 rounded bg-[#00685f] text-white text-xs font-medium">Documentación viva</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 9: SOBRE PABLO -->
+      <section class="w-full px-6 lg:px-12 py-20 bg-[#F8FAFC] border-t border-[#E9E9E7]">
+        <div class="max-w-5xl mx-auto">
+          <div class="bg-white rounded-xl border border-[#E9E9E7] p-8 lg:p-12 shadow-xs grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <div class="md:col-span-4 flex flex-col items-center">
+              <div class="w-40 h-44 rounded-xl overflow-hidden bg-[#F1F1EF] border border-[#E9E9E7] relative">
+                <img class="w-full h-full object-cover grayscale contrast-125" alt="Pablo Ríos" src="/pablo-rios.jpeg" />
+              </div>
+              <div class="mt-4 text-center">
+                <h4 class="font-semibold text-sm text-[#0b1c30]">Pablo Ríos</h4>
+                <span class="text-[11px] text-[#3d4947] block mt-0.5">Consultor de Producto, Ops e IA</span>
+              </div>
+            </div>
+            <div class="md:col-span-8 flex flex-col justify-center">
+              <span class="font-mono text-[11px] text-[#00685f] uppercase font-medium">Autonomía sobre dependencia</span>
+              <h2 class="mt-2 font-bold text-2xl text-[#0b1c30] tracking-tight">
+                Detrás de esto estoy yo.
+              </h2>
+              <p class="mt-4 text-xs md:text-sm text-[#3d4947] leading-relaxed">
+                Llevo más de una década construyendo productos de software y optimizando cómo operan los equipos de desarrollo. No creo en el hype vacío de la IA ni en llenar tu día de herramientas desconectadas.
+              </p>
+              <div class="mt-6 grid grid-cols-3 gap-4 py-4 border-y border-[#E9E9E7]">
+                <div>
+                  <span class="font-bold text-lg text-[#0b1c30] block">+13</span>
+                  <span class="text-[11px] text-[#3d4947]">Años en producto y tech</span>
+                </div>
+                <div>
+                  <span class="font-bold text-lg text-[#0b1c30] block">+50</span>
+                  <span class="text-[11px] text-[#3d4947]">PMs acompañados 1-1</span>
+                </div>
+                <div>
+                  <span class="font-bold text-lg text-[#0b1c30] block">+30</span>
+                  <span class="text-[11px] text-[#3d4947]">Empresas asesoradas</span>
+                </div>
+              </div>
+              <blockquote class="mt-6 p-4 rounded-lg bg-[#F1F1EF] border-l-2 border-[#00685f]">
+                <p class="text-xs text-[#0b1c30] italic leading-relaxed">
+                  “No quiero que termines dependiendo de mí. Quiero que entiendas lo que construimos y puedas seguir utilizándolo por tu cuenta.”
+                </p>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 10: CTA FINAL -->
+      <section class="w-full px-6 lg:px-12 py-20 bg-[#F1F1EF] border-t border-[#E2E8F0]">
+        <div class="max-w-4xl mx-auto text-center flex flex-col items-center">
+          <span class="font-mono text-[11px] text-[#00685f] uppercase tracking-widest font-semibold">
+            PASO SIGUIENTE
+          </span>
+          <h2 class="mt-3 font-bold text-3xl text-[#0b1c30] tracking-tight max-w-2xl">
+            ¿Qué parte de tu trabajo como PM te está quitando tiempo?
+          </h2>
+          <p class="mt-6 text-sm text-[#3d4947] max-w-2xl leading-relaxed">
+            Puede ser Research. Discovery. Jira. Documentación. IA. Una integración. Una automatización. O algo que todavía no sabes muy bien cómo explicar. Cuéntamelo y vemos si tiene sentido trabajarlo juntos.
+          </p>
+          <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <a class="inline-flex items-center justify-center px-6 py-3.5 rounded-lg bg-[#00685f] text-white font-medium text-xs hover:bg-[#005049] transition-all shadow-xs" href="#diagnostico-interactivo" onclick="if(window.posthog) window.posthog.capture('product_cta_click', { cta_location: 'final_cta', cta_type: 'diagnostico' });">
+              Quiero revisar mi caso
+            </a>
+            <a class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-white text-[#0b1c30] font-medium text-xs border border-[#E9E9E7] hover:bg-[#F7F7F5] transition-all shadow-xs" href={whatsappPM} rel="noopener noreferrer" target="_blank" onclick="if(window.posthog) window.posthog.capture('product_whatsapp_click', { cta_location: 'final_cta' });">
+              <span class="material-symbols-outlined text-[18px] text-[#059669]">chat</span>
+              Hablar con Pablo
             </a>
           </div>
-
-          <!-- Wizard Footer Navigation -->
-          <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-2" id="pm-wizard-navigation">
-            <button
-              class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
-              disabled
-              id="pm-btn-prev"
-              onclick="window.pmPrevStep()"
-              type="button"
-            >
-              <span class="material-symbols-outlined text-[15px]">arrow_back</span>
-              <span>Anterior</span>
-            </button>
-            <span class="text-xs font-mono text-slate-400" id="pm-status-tag">Paso 1</span>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECCIÓN: ¿EN QUÉ PODEMOS TRABAJAR? -->
-    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="en-que-trabajamos">
-      <div class="max-w-3xl mb-12 flex flex-col gap-2">
-        <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Problemas Reales de Producto</span>
-        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
-          ¿En qué podemos trabajar?
-        </h2>
-        <p class="text-sm text-slate-600">
-          No partimos de una herramienta. Partimos de lo que necesitas resolver en tu día a día como PM.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
-          <span class="text-xl mb-1">🔍</span>
-          <h3 class="text-base font-bold text-slate-900">Research</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">Encontrar, organizar y sintetizar información sin pasar horas saltando entre documentos, entrevistas y herramientas.</p>
-        </div>
-
-        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
-          <span class="text-xl mb-1">🧭</span>
-          <h3 class="text-base font-bold text-slate-900">Discovery</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">Dar estructura al trabajo de discovery y convertir información dispersa en algo que realmente ayude a tomar decisiones.</p>
-        </div>
-
-        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
-          <span class="text-xl mb-1">📄</span>
-          <h3 class="text-base font-bold text-slate-900">Documentación</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">PRDs, decisiones, briefs, especificaciones y documentación que no se conviertan en trabajo administrativo infinito.</p>
-        </div>
-
-        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
-          <span class="text-xl mb-1">📌</span>
-          <h3 class="text-base font-bold text-slate-900">Priorización</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">Ordenar problemas, oportunidades y backlog para poder decidir con más claridad frente al equipo e ingeniería.</p>
-        </div>
-
-        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
-          <span class="text-xl mb-1">📊</span>
-          <h3 class="text-base font-bold text-slate-900">Análisis</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">Trabajar con datos, información cualitativa o grandes cantidades de contenido sin hacerlo todo manualmente.</p>
-        </div>
-
-        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
-          <span class="text-xl mb-1">🎯</span>
-          <h3 class="text-base font-bold text-slate-900">Estrategia</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">Pasar de información dispersa a hipótesis, decisiones, experimentos y planes accionables.</p>
-        </div>
-
-        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
-          <span class="text-xl mb-1">🖼️</span>
-          <h3 class="text-base font-bold text-slate-900">Presentaciones</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">Convertir trabajo de producto en presentaciones claras y convincentes para stakeholders y equipos.</p>
-        </div>
-
-        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
-          <span class="text-xl mb-1">🤖</span>
-          <h3 class="text-base font-bold text-slate-900">IA aplicada a producto</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">Diseñar flujos concretos donde la IA realmente ayude dentro de tu trabajo cotidiano de Producto.</p>
-        </div>
-
-      </div>
-
-      <div class="p-4 bg-teal-50/80 border border-teal-200 rounded-2xl mt-8 max-w-2xl text-center mx-auto text-xs text-teal-900 font-medium">
-        "No partimos de una herramienta. Partimos de lo que necesitas resolver."
-      </div>
-    </section>
-
-    <!-- DESPUÉS DEL DIAGNÓSTICO: CÓMO TRABAJAMOS -->
-    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="como-trabajamos">
-      <div class="max-w-3xl mb-12 flex flex-col gap-3">
-        <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Acompañamiento Práctico</span>
-        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
-          Podemos trabajar sobre eso.
-        </h2>
-        <p class="text-sm md:text-base text-slate-600 leading-relaxed">
-          En una sesión 1-1 no vamos a sentarnos a hablar de Product Management durante una hora. Vamos a trabajar sobre algo que realmente haces en tu día a día.
-        </p>
-        <p class="text-xs text-slate-500 leading-relaxed italic">
-          Revisamos cómo lo haces hoy, encontramos dónde está el problema y construimos contigo una forma mejor de resolverlo.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-        
-        <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-3">
-          <div class="w-9 h-9 rounded-xl bg-teal-50 border border-teal-200 text-teal-800 font-mono text-xs font-bold flex items-center justify-center">
-            01
-          </div>
-          <h3 class="text-sm font-bold text-slate-900">Entendemos</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">Cómo trabajas hoy y qué estás intentando conseguir en tu proyecto.</p>
-        </div>
-
-        <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-3">
-          <div class="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 font-mono text-xs font-bold flex items-center justify-center">
-            02
-          </div>
-          <h3 class="text-sm font-bold text-slate-900">Encontramos</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">Dónde está realmente el cuello de botella que frena tu flujo.</p>
-        </div>
-
-        <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-3">
-          <div class="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 font-mono text-xs font-bold flex items-center justify-center">
-            03
-          </div>
-          <h3 class="text-sm font-bold text-slate-900">Construimos</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">Una solución o flujo concreto diseñado alrededor de tu problema.</p>
-        </div>
-
-        <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-3">
-          <div class="w-9 h-9 rounded-xl bg-teal-50 border border-teal-200 text-teal-800 font-mono text-xs font-bold flex items-center justify-center">
-            04
-          </div>
-          <h3 class="text-sm font-bold text-slate-900">Practicas</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">La utilizas contigo en vivo sobre tus tareas reales, no solo en teoría.</p>
-        </div>
-
-        <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-3">
-          <div class="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 font-mono text-xs font-bold flex items-center justify-center">
-            05
-          </div>
-          <h3 class="text-sm font-bold text-slate-900">Te independizas</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">La idea es que puedas seguir utilizándola de forma autónoma sin depender de mí.</p>
-        </div>
-
-      </div>
-
-      <div class="p-4 bg-teal-50/80 border border-teal-200 rounded-2xl mt-8 max-w-3xl text-center mx-auto text-xs text-teal-900 font-medium">
-        "No quiero que aprendas algo que después no uses. Quiero que salgas con algo que puedas aplicar."
-      </div>
-    </section>
-
-    <!-- SESIÓN 1-1 VS ACOMPAÑAMIENTO -->
-    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="que-necesitas">
-      <div class="max-w-3xl mb-12 flex flex-col gap-2">
-        <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Modalidades</span>
-        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
-          ¿Qué necesitas?
-        </h2>
-        <p class="text-sm text-slate-600">
-          Elegimos el formato que mejor responda a tu situación actual en Producto.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
-        <div class="p-8 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between">
-          <div>
-            <span class="px-3 py-1 bg-teal-50 text-teal-800 rounded-full font-mono text-xs font-bold border border-teal-200 inline-block mb-4">Caso Puntual</span>
-            <h3 class="text-xl font-bold text-slate-900 mb-2">Tengo un problema concreto</h3>
-            <p class="text-xs text-slate-600 leading-relaxed mb-6">
-              Una sesión 1-1 para revisar una situación específica (un PRD trabado, síntesis de research, preparar un pitch de stakeholders), construir una solución y salir con algo aplicable.
-            </p>
-          </div>
-          <a
-            class="inline-flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-teal-800 text-white font-semibold text-xs hover:bg-teal-900 transition-colors shadow-2xs text-center cursor-pointer"
-            href="#diagnostico-pm"
-          >
-            <span>Quiero revisar mi caso →</span>
-          </a>
-        </div>
-
-        <div class="p-8 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between">
-          <div>
-            <span class="px-3 py-1 bg-amber-50 text-amber-800 rounded-full font-mono text-xs font-bold border border-amber-200 inline-block mb-4">Proceso Continuo</span>
-            <h3 class="text-xl font-bold text-slate-900 mb-2">Tengo varios problemas o quiero cambiar mi forma de trabajar</h3>
-            <p class="text-xs text-slate-600 leading-relaxed mb-6">
-              Podemos trabajar durante varias sesiones para revisar procesos completos, construir workflows y acompañarte paso a paso hasta que puedas utilizarlos por tu cuenta.
-            </p>
-          </div>
-          <a
-            class="inline-flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-slate-900 text-white font-semibold text-xs hover:bg-slate-800 transition-colors shadow-2xs text-center cursor-pointer"
-            href={whatsappPM}
-            target="_blank"
-          >
-            <span>Hablar con Pablo por WhatsApp →</span>
-          </a>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- PRODUCT MANAGEMENT + IA -->
-    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="pm-ia">
-      <div class="max-w-3xl mb-10 flex flex-col gap-2">
-        <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Enfoque Pragmático</span>
-        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
-          IA aplicada a Product Management
-        </h2>
-        <p class="text-sm text-slate-600 leading-relaxed">
-          No se trata de meter IA en cada parte de tu trabajo. Se trata de identificar dónde realmente aporta algo. Podemos trabajar desde un prompt concreto hasta un flujo completo que conecte información, herramientas y decisiones.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        
-        <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col gap-1.5 text-xs font-mono">
-          <span class="text-teal-700 font-bold">Research</span>
-          <span class="text-slate-400">↓</span>
-          <span class="text-slate-700">síntesis</span>
-          <span class="text-slate-400">↓</span>
-          <span class="text-emerald-700 font-bold">insights accionables</span>
-        </div>
-
-        <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col gap-1.5 text-xs font-mono">
-          <span class="text-teal-700 font-bold">Entrevistas</span>
-          <span class="text-slate-400">↓</span>
-          <span class="text-slate-700">patrones</span>
-          <span class="text-slate-400">↓</span>
-          <span class="text-emerald-700 font-bold">oportunidades</span>
-        </div>
-
-        <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col gap-1.5 text-xs font-mono">
-          <span class="text-teal-700 font-bold">Documentación</span>
-          <span class="text-slate-400">↓</span>
-          <span class="text-slate-700">estructura</span>
-          <span class="text-slate-400">↓</span>
-          <span class="text-emerald-700 font-bold">PRD listo</span>
-        </div>
-
-        <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col gap-1.5 text-xs font-mono">
-          <span class="text-teal-700 font-bold">Backlog</span>
-          <span class="text-slate-400">↓</span>
-          <span class="text-slate-700">análisis</span>
-          <span class="text-slate-400">↓</span>
-          <span class="text-emerald-700 font-bold">priorización</span>
-        </div>
-
-        <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col gap-1.5 text-xs font-mono">
-          <span class="text-teal-700 font-bold">Información</span>
-          <span class="text-slate-400">↓</span>
-          <span class="text-slate-700">análisis</span>
-          <span class="text-slate-400">↓</span>
-          <span class="text-emerald-700 font-bold">decisión</span>
-        </div>
-
-        <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col gap-1.5 text-xs font-mono">
-          <span class="text-teal-700 font-bold">Reuniones</span>
-          <span class="text-slate-400">↓</span>
-          <span class="text-slate-700">notas</span>
-          <span class="text-slate-400">↓</span>
-          <span class="text-emerald-700 font-bold">acciones en Jira/Linear</span>
-        </div>
-
-        <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col gap-1.5 text-xs font-mono">
-          <span class="text-teal-700 font-bold">Datos</span>
-          <span class="text-slate-400">↓</span>
-          <span class="text-slate-700">análisis</span>
-          <span class="text-slate-400">↓</span>
-          <span class="text-emerald-700 font-bold">presentación ejecutiva</span>
-        </div>
-
-        <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col gap-1.5 text-xs font-mono">
-          <span class="text-teal-700 font-bold">Información dispersa</span>
-          <span class="text-slate-400">↓</span>
-          <span class="text-emerald-700 font-bold">workflow reutilizable</span>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- PRODUCT MANAGEMENT SIN BULLSHIT -->
-    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="pm-sin-bullshit">
-      <div class="p-8 md:p-10 bg-gradient-to-r from-amber-50/80 via-white to-teal-50/80 border border-slate-200 rounded-3xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-2xs">
-        
-        <div class="flex flex-col gap-2 max-w-2xl">
-          <span class="font-mono text-xs font-bold text-amber-800 uppercase">Recurso &amp; Comunidad</span>
-          <h2 class="text-2xl font-bold text-slate-900">
-            También estoy construyendo Product Management Sin Bullshit
-          </h2>
-          <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
-            Recursos, ideas y herramientas para quienes trabajan en producto y quieren aprender sin tragarse teoría innecesaria ni lecciones infladas.
-          </p>
-        </div>
-
-        <a
-          class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900 text-white font-semibold text-xs hover:bg-slate-800 transition-colors shadow-2xs shrink-0 cursor-pointer"
-          href="/educacion"
-        >
-          <span>Ver Product Management Sin Bullshit →</span>
-        </a>
-
-      </div>
-    </section>
-
-    <!-- SECCIÓN HUMANA & PABLO RÍOS -->
-    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="pablo">
-      <div class="max-w-4xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-2xs p-8 md:p-12 flex flex-col md:flex-row gap-8 items-start">
-        
-        <div class="w-16 h-16 rounded-full bg-teal-50 border border-teal-200 text-teal-800 flex items-center justify-center shrink-0 font-bold text-xl">
-          PR
-        </div>
-
-        <div class="flex flex-col gap-4">
-          <div class="flex flex-col gap-1">
-            <span class="font-mono text-xs text-teal-800 uppercase font-semibold">Detrás de esto estoy yo</span>
-            <h2 class="text-2xl font-bold text-slate-900">Pablo Ríos</h2>
-            <p class="text-xs font-semibold text-slate-600">Consultor de Producto, Operaciones e IA</p>
-          </div>
-
-          <div class="text-xs text-slate-600 flex flex-col gap-3 leading-relaxed">
-            <p class="text-sm font-semibold text-slate-800">
-              "Trabajo con profesionales y equipos para convertir problemas concretos en soluciones que realmente puedan utilizar."
-            </p>
-            <p>
-              Mi enfoque combina Product Management, operaciones e IA aplicada. La idea no es enseñarte una herramienta porque sí: es ayudarte a encontrar una forma mejor de hacer algo que ya haces.
-            </p>
-          </div>
-
-          <div class="grid grid-cols-2 gap-4 pt-2 border-t border-slate-100">
-            <div>
-              <div class="font-bold text-base text-slate-900">+50 personas</div>
-              <div class="text-[11px] text-slate-500">Acompañadas y mentoreadas 1-1</div>
-            </div>
-            <div>
-              <div class="font-bold text-base text-slate-900">+30 empresas</div>
-              <div class="text-[11px] text-slate-500">Con las que he colaborado</div>
-            </div>
+          <div class="mt-6 flex items-center gap-2 text-[#3d4947] font-mono text-[11px]">
+            <span class="material-symbols-outlined text-[15px] text-[#6d7a77]">schedule</span>
+            <span>Respuesta habitual en menos de 24 horas laborables.</span>
           </div>
         </div>
+      </section>
 
-      </div>
-    </section>
-
-    <!-- CTA FINAL -->
-    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="cta-final">
-      <div class="p-8 md:p-12 bg-white rounded-2xl border border-slate-200 text-center flex flex-col items-center gap-5 shadow-2xs max-w-3xl mx-auto">
-        <span class="font-mono text-xs font-semibold text-teal-800 uppercase font-mono">Paso Siguiente</span>
-        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
-          ¿Hay algo de tu trabajo que quieras mejorar?
-        </h2>
-        <p class="text-xs md:text-sm text-slate-600 max-w-xl leading-relaxed">
-          Cuéntame qué estás intentando resolver y vemos si tiene sentido trabajarlo juntos.
-        </p>
-
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
-          <a
-            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
-            href="#diagnostico-pm"
-          >
-            <span>Quiero revisar mi caso →</span>
-          </a>
-
-          <a
-            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors shadow-2xs"
-            href={whatsappPM}
-            rel="noopener noreferrer"
-            target="_blank"
-            onclick="if(window.posthog) window.posthog.capture('product_whatsapp_click', { origen: 'cta_final' });"
-          >
-            <span class="material-symbols-outlined text-[18px]">chat</span>
-            <span>Hablar con Pablo</span>
-          </a>
-        </div>
-
-        <p class="text-xs font-mono text-slate-500">Sin compromisos ni ventas agresivas.</p>
-      </div>
-    </section>
-
+    </div>
   </main>
 
-  <!-- FOOTER DEDICADO PRODUCT MANAGEMENT -->
-  <footer class="w-full bg-white border-t border-slate-200 py-12">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col gap-8">
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div class="flex flex-col gap-1">
-          <span class="text-base font-bold text-slate-900">LuciRMe AI · Product Management</span>
-          <p class="text-xs font-mono text-slate-500">Product Management aplicado a problemas reales.</p>
-        </div>
-        <div class="flex items-center gap-4 text-xs text-slate-600 font-medium">
-          <a class="hover:text-slate-900 transition-colors" href={whatsappPM} target="_blank">WhatsApp Directo</a>
-          <a class="hover:text-slate-900 transition-colors" href="/profesionales">Profesionales</a>
-          <a class="hover:text-slate-900 transition-colors" href="/empresas">Empresas</a>
-          <a class="hover:text-slate-900 transition-colors" href="/educacion">Educación</a>
-          <a class="hover:text-slate-900 transition-colors" href="/sobre-pablo">Sobre Pablo</a>
-        </div>
-      </div>
-      <div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
-        <span>© 2026 LuciRMe AI · Todos los derechos reservados.</span>
-        <span>lucirme.com/servicios/producto</span>
-      </div>
+  <footer class="w-full bg-white border-t border-[#E2E8F0] py-12">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
+      <span class="font-mono text-xs text-[#3d4947]">© 2026 LuciRMe AI. Todos los derechos reservados.</span>
+      <nav class="flex flex-wrap items-center justify-center gap-6 text-xs text-[#3d4947]">
+        <a class="hover:text-[#0b1c30] transition-colors" href="/empresas">Empresas</a>
+        <a class="hover:text-[#0b1c30] transition-colors" href="/profesionales">Profesionales</a>
+        <a class="hover:text-[#0b1c30] transition-colors" href="/educacion">Educación</a>
+        <a class="hover:text-[#0b1c30] transition-colors" href="/sobre-pablo">Sobre Pablo</a>
+      </nav>
     </div>
   </footer>
 
-  <!-- SCRIPT DIAGNÓSTICO PM Y EVENTOS POSTHOG -->
+  <!-- SCRIPT DIAGNÓSTICO PM, RECOMENDACIÓN DETERMINÍSTICA Y TRACKING -->
   <script>
-    let pmStep = 1;
-    const totalPmSteps = 5;
+    interface ProductDiagData {
+      currentStep: number;
+      problems: string[];
+      frequency: string | null;
+      estimatedTime: string | null;
+      tools: string[];
+      goals: string[];
+      name: string;
+      email: string;
+      whatsapp: string;
+      recommendationText?: string;
+    }
 
-    const pmState: Record<string, any> = {
-      area: '',
-      frecuencia: '',
-      tiempo: '',
-      herramientas: [],
-      objetivo: '',
-      nombre: '',
+    const STORAGE_KEY = 'lucirme_product_diagnostic';
+    const totalPmSteps = 5;
+    let pmStep = 1;
+
+    const pmData: ProductDiagData = {
+      currentStep: 1,
+      problems: [],
+      frequency: null,
+      estimatedTime: null,
+      tools: [],
+      goals: [],
+      name: '',
       email: '',
       whatsapp: '',
     };
 
-    // Restore from sessionStorage
     try {
-      const saved = sessionStorage.getItem('pm_diag_state');
+      const saved = sessionStorage.getItem(STORAGE_KEY);
       if (saved) {
-        Object.assign(pmState, JSON.parse(saved));
+        const parsed = JSON.parse(saved);
+        if (parsed && typeof parsed === 'object') {
+          Object.assign(pmData, parsed);
+        }
       }
     } catch (e) {}
 
-    function savePmState() {
+    function saveState() {
       try {
-        sessionStorage.setItem('pm_diag_state', JSON.stringify(pmState));
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(pmData));
       } catch (e) {}
     }
 
-    function updatePmWizardProgress() {
-      const counter = document.getElementById('pm-step-counter');
-      const bar = document.getElementById('pm-progress-bar');
-      const tag = document.getElementById('pm-status-tag');
-      const prevBtn = document.getElementById('pm-btn-prev') as HTMLButtonElement | null;
+    function clearState() {
+      try {
+        sessionStorage.removeItem(STORAGE_KEY);
+      } catch (e) {}
+    }
 
-      if (!counter || !bar) return;
+    function generateProductRecommendation(data: ProductDiagData): string {
+      const probs = data.problems || [];
+      const hasResearch = probs.includes('Research');
+      const hasDiscovery = probs.includes('Discovery');
+      const hasJira = probs.includes('Jira') || probs.includes('Backlog');
+      const hasDocs = probs.includes('Documentación');
+      const freqStr = data.frequency || 'frecuentemente';
+      const timeStr = data.estimatedTime || 'varias horas a la semana';
 
-      if (pmStep <= totalPmSteps) {
-        const pct = (pmStep / totalPmSteps) * 100;
-        counter.innerText = `Paso ${pmStep} de ${totalPmSteps}`;
-        bar.style.width = `${pct}%`;
-        if (tag) tag.innerText = `Paso ${pmStep}`;
-        if (prevBtn) prevBtn.disabled = pmStep === 1;
-      } else {
-        counter.innerText = 'Diagnóstico Completado';
-        bar.style.width = '100%';
-        if (tag) tag.innerText = 'Completado';
-        if (prevBtn) prevBtn.disabled = false;
+      if (hasResearch && hasDiscovery && hasDocs) {
+        return `Revisaría cómo pasa la información desde Research y Discovery hasta la documentación. Por lo que indicas, la fricción aparece ${freqStr} y consume ${timeStr}. En tu caso, el problema suele estar en la desconexión entre la recolección de contexto y la redacción de PRDs, no en cada tarea por separado. Se puede estructurar un flujo continuo donde la síntesis alimente tus documentos sin reescrituras manuales.`;
       }
+
+      if (hasDiscovery && hasJira) {
+        return `Revisaría la relación entre las decisiones tomadas en Discovery y los tickets en Jira o Linear. Si esta tarea consume ${timeStr}, la oportunidad está en automatizar la transferencia de especificaciones y criterios de aceptación desde las notas de entrevistas hacia el backlog del equipo técnico.`;
+      }
+
+      if (hasResearch) {
+        return `Revisaría tu proceso de búsqueda, recopilación y síntesis de información. Para tareas que ocurren ${freqStr}, estandarizar cómo extraes patrones e insights clave desde notas crudas te permitirá tomar decisiones de producto más rápidas y con menos carga mental.`;
+      }
+
+      if (hasDiscovery) {
+        return `Revisaría cómo analizas entrevistas y feedback de usuarios. En lugar de procesar cada conversación manualmente, conviene armar una matriz de patrones para conectar problemas directamente con oportunidades claras de producto.`;
+      }
+
+      if (hasJira) {
+        return `Revisaría la información que copias o actualizas manualmente entre tus documentos y Jira. Mapear este proceso evita errores de traslape y libera tiempo administrativo recurrente en tus refinamientos.`;
+      }
+
+      if (hasDocs) {
+        return `Revisaría el origen y la estructura de tus documentos y PRDs. Para flujos que se repiten ${freqStr}, conviene definir plantillas contextuales vivas que se completen a partir de las minutas de reuniones y briefs.`;
+      }
+
+      return `Revisaría cómo está estructurado tu flujo de trabajo cotidiano como PM. Con un volumen estimado de ${timeStr}, no empezaría buscando otra herramienta de IA, sino identificando los puntos exactos de duplicación manual para simplificar el proceso y ganar autonomía.`;
+    }
+
+    function updateWizardUI() {
+      const counter = document.getElementById('step-counter');
+      const bar = document.getElementById('step-progress-bar');
+      const prevBtn = document.getElementById('btn-diag-back') as HTMLButtonElement | null;
+
+      if (counter && bar) {
+        if (pmStep <= totalPmSteps) {
+          counter.innerText = `0${pmStep} / 0${totalPmSteps}`;
+          bar.style.width = `${(pmStep / totalPmSteps) * 100}%`;
+        } else if (pmStep >= 7) {
+          counter.innerText = `05 / 05`;
+          bar.style.width = `100%`;
+        }
+      }
+
+      if (prevBtn) {
+        prevBtn.classList.toggle('hidden', pmStep === 1 || pmStep >= 6);
+      }
+
+      syncButtonStates();
+    }
+
+    function syncButtonStates() {
+      // Step 1
+      document.querySelectorAll('#step1-options .diag-chip').forEach(b => {
+        const val = b.getAttribute('data-val');
+        const selected = val ? pmData.problems.includes(val) : false;
+        b.setAttribute('aria-pressed', selected ? 'true' : 'false');
+        if (selected) {
+          b.classList.add('bg-[#00685f]', 'text-white', 'font-medium');
+          b.classList.remove('border-[#E9E9E7]', 'text-[#0b1c30]');
+        } else {
+          b.classList.remove('bg-[#00685f]', 'text-white', 'font-medium');
+          b.classList.add('border-[#E9E9E7]', 'text-[#0b1c30]');
+        }
+      });
+
+      // Step 2
+      document.querySelectorAll('#step2-options .diag-single-chip').forEach(b => {
+        const val = b.getAttribute('data-val');
+        const selected = pmData.frequency === val;
+        b.setAttribute('aria-pressed', selected ? 'true' : 'false');
+        if (selected) {
+          b.classList.add('border-[#00685f]', 'bg-[#F1F1EF]');
+          b.classList.remove('border-[#E9E9E7]');
+        } else {
+          b.classList.remove('border-[#00685f]', 'bg-[#F1F1EF]');
+          b.classList.add('border-[#E9E9E7]');
+        }
+      });
+
+      // Step 3
+      document.querySelectorAll('#step3-options .diag-single-chip').forEach(b => {
+        const val = b.getAttribute('data-val');
+        const selected = pmData.estimatedTime === val;
+        b.setAttribute('aria-pressed', selected ? 'true' : 'false');
+        if (selected) {
+          b.classList.add('border-[#00685f]', 'bg-[#F1F1EF]');
+          b.classList.remove('border-[#E9E9E7]');
+        } else {
+          b.classList.remove('border-[#00685f]', 'bg-[#F1F1EF]');
+          b.classList.add('border-[#E9E9E7]');
+        }
+      });
+
+      // Step 4
+      document.querySelectorAll('#step4-options .diag-chip-tools').forEach(b => {
+        const val = b.getAttribute('data-val');
+        const selected = val ? pmData.tools.includes(val) : false;
+        b.setAttribute('aria-pressed', selected ? 'true' : 'false');
+        if (selected) {
+          b.classList.add('bg-[#00685f]', 'text-white', 'font-medium');
+          b.classList.remove('border-[#E9E9E7]', 'text-[#0b1c30]');
+        } else {
+          b.classList.remove('bg-[#00685f]', 'text-white', 'font-medium');
+          b.classList.add('border-[#E9E9E7]', 'text-[#0b1c30]');
+        }
+      });
+
+      // Step 5
+      document.querySelectorAll('#step5-options .diag-single-chip').forEach(b => {
+        const val = b.getAttribute('data-val');
+        const selected = val ? pmData.goals.includes(val) : false;
+        b.setAttribute('aria-pressed', selected ? 'true' : 'false');
+        if (selected) {
+          b.classList.add('border-[#00685f]', 'bg-[#F1F1EF]');
+          b.classList.remove('border-[#E9E9E7]');
+        } else {
+          b.classList.remove('border-[#00685f]', 'bg-[#F1F1EF]');
+          b.classList.add('border-[#E9E9E7]');
+        }
+      });
     }
 
     function pmGoToStep(step: number) {
-      document.querySelectorAll('.pm-step').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.step-view').forEach(el => el.classList.add('hidden'));
 
       pmStep = step;
+      pmData.currentStep = step;
+      saveState();
+
       if (step <= totalPmSteps) {
-        const target = document.getElementById(`pm-step-${step}`);
+        const target = document.getElementById(`step-${step}`);
         if (target) target.classList.remove('hidden');
       } else if (step === 6) {
-        const target = document.getElementById('pm-step-6');
+        const target = document.getElementById('step-processing');
         if (target) target.classList.remove('hidden');
-      } else {
-        const res = document.getElementById('pm-step-result');
-        if (res) res.classList.remove('hidden');
+        setTimeout(() => pmGoToStep(7), 500);
+      } else if (step === 7) {
+        const target = document.getElementById('step-result');
+        if (target) target.classList.remove('hidden');
+
+        const recText = generateProductRecommendation(pmData);
+        pmData.recommendationText = recText;
+        saveState();
+
+        const summaryEl = document.getElementById('res-recomendacion');
+        if (summaryEl) summaryEl.innerText = recText;
+
+        const sitEl = document.getElementById('res-situacion');
+        if (sitEl) sitEl.innerText = pmData.problems.length > 0 ? pmData.problems.join(' · ') : 'Research · Discovery';
+
+        const tEl = document.getElementById('res-tiempo');
+        if (tEl) tEl.innerText = pmData.estimatedTime || '5–10 h / semana';
+
+        const objEl = document.getElementById('res-objetivo');
+        if (objEl) objEl.innerText = pmData.goals.length > 0 ? pmData.goals.join(' · ') : 'Ahorrar tiempo';
+
+        if ((window as any).posthog) {
+          (window as any).posthog.capture('product_diagnostic_completed', {
+            problem_area: pmData.problems,
+            frequency: pmData.frequency,
+            estimated_time: pmData.estimatedTime,
+            current_tools: pmData.tools,
+            goal: pmData.goals,
+          });
+        }
+      } else if (step === 8) {
+        const target = document.getElementById('step-contact');
+        if (target) target.classList.remove('hidden');
+      } else if (step === 9) {
+        const target = document.getElementById('step-submitting');
+        if (target) target.classList.remove('hidden');
+      } else if (step === 10) {
+        const target = document.getElementById('step-success');
+        if (target) target.classList.remove('hidden');
+      } else if (step === 11) {
+        const target = document.getElementById('step-error');
+        if (target) target.classList.remove('hidden');
       }
 
-      updatePmWizardProgress();
+      updateWizardUI();
     }
 
     function pmPrevStep() {
       if (pmStep > 1 && pmStep <= totalPmSteps) {
         pmGoToStep(pmStep - 1);
-      } else if (pmStep > totalPmSteps) {
-        pmGoToStep(totalPmSteps);
+      } else if (pmStep === 8) {
+        pmGoToStep(7);
       }
     }
 
-    function pmNextStep(step: number) {
-      if (step === 4) {
-        pmGoToStep(5);
-      }
+    function pmToggleProblem(val: string) {
+      const idx = pmData.problems.indexOf(val);
+      if (idx >= 0) pmData.problems.splice(idx, 1);
+      else pmData.problems.push(val);
+      saveState();
+      syncButtonStates();
     }
 
-    function pmSelectArea(val: string, btn: HTMLElement) {
-      pmState.area = val;
-      savePmState();
-
-      const parent = btn.parentElement;
-      if (parent) {
-        parent.querySelectorAll('.diag-option').forEach(b => {
-          b.classList.remove('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
-          b.classList.add('border-slate-200', 'text-slate-700');
-        });
-      }
-      btn.classList.remove('border-slate-200', 'text-slate-700');
-      btn.classList.add('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
-
+    function pmSelectFrequency(val: string) {
+      pmData.frequency = val;
+      saveState();
+      syncButtonStates();
       if ((window as any).posthog) {
         (window as any).posthog.capture('product_diagnostic_question_answered', {
-          question: 'area_friccion_pm',
-          answer: val,
+          question_number: 2,
+          question_type: 'frequency',
         });
       }
-
-      setTimeout(() => pmGoToStep(2), 250);
     }
 
-    function pmSelectFrecuencia(val: string, btn: HTMLElement) {
-      pmState.frecuencia = val;
-      savePmState();
-
-      const parent = btn.parentElement;
-      if (parent) {
-        parent.querySelectorAll('.diag-option').forEach(b => {
-          b.classList.remove('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
-          b.classList.add('border-slate-200', 'text-slate-700');
-        });
-      }
-      btn.classList.remove('border-slate-200', 'text-slate-700');
-      btn.classList.add('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
-
+    function pmSelectEstimatedTime(val: string) {
+      pmData.estimatedTime = val;
+      saveState();
+      syncButtonStates();
       if ((window as any).posthog) {
         (window as any).posthog.capture('product_diagnostic_question_answered', {
-          question: 'frecuencia_pm',
-          answer: val,
+          question_number: 3,
+          question_type: 'estimatedTime',
         });
       }
-
-      setTimeout(() => pmGoToStep(3), 250);
     }
 
-    function pmSelectTiempo(val: string, btn: HTMLElement) {
-      pmState.tiempo = val;
-      savePmState();
-
-      const parent = btn.parentElement;
-      if (parent) {
-        parent.querySelectorAll('.diag-option').forEach(b => {
-          b.classList.remove('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
-          b.classList.add('border-slate-200', 'text-slate-700');
-        });
-      }
-      btn.classList.remove('border-slate-200', 'text-slate-700');
-      btn.classList.add('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
-
-      if ((window as any).posthog) {
-        (window as any).posthog.capture('product_diagnostic_question_answered', {
-          question: 'tiempo_estimado_pm',
-          answer: val,
-        });
-      }
-
-      setTimeout(() => pmGoToStep(4), 250);
+    function pmToggleTool(val: string) {
+      const idx = pmData.tools.indexOf(val);
+      if (idx >= 0) pmData.tools.splice(idx, 1);
+      else pmData.tools.push(val);
+      saveState();
+      syncButtonStates();
     }
 
-    function pmToggleHerramienta(val: string, btn: HTMLElement) {
-      const list: string[] = pmState.herramientas || [];
-      const idx = list.indexOf(val);
-
-      if (idx >= 0) {
-        list.splice(idx, 1);
-        btn.classList.remove('border-teal-700', 'bg-teal-50', 'text-teal-900', 'font-bold');
-        btn.classList.add('border-slate-200', 'text-slate-700');
-      } else {
-        list.push(val);
-        btn.classList.remove('border-slate-200', 'text-slate-700');
-        btn.classList.add('border-teal-700', 'bg-teal-50', 'text-teal-900', 'font-bold');
-      }
-
-      pmState.herramientas = list;
-      savePmState();
-    }
-
-    function pmSelectObjetivo(val: string, btn: HTMLElement) {
-      pmState.objetivo = val;
-      savePmState();
-
-      const parent = btn.parentElement;
-      if (parent) {
-        parent.querySelectorAll('.diag-option').forEach(b => {
-          b.classList.remove('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
-          b.classList.add('border-slate-200', 'text-slate-700');
-        });
-      }
-      btn.classList.remove('border-slate-200', 'text-slate-700');
-      btn.classList.add('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
-
-      if ((window as any).posthog) {
-        (window as any).posthog.capture('product_diagnostic_question_answered', {
-          question: 'objetivo_pm',
-          answer: val,
-        });
-      }
-
-      setTimeout(() => pmGoToStep(6), 300);
+    function pmToggleGoal(val: string) {
+      const idx = pmData.goals.indexOf(val);
+      if (idx >= 0) pmData.goals.splice(idx, 1);
+      else pmData.goals.push(val);
+      saveState();
+      syncButtonStates();
     }
 
     async function pmSubmitLead() {
@@ -900,91 +1329,130 @@ const whatsappPM = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, estuv
         return;
       }
 
-      pmState.nombre = nom;
-      pmState.email = em;
-      pmState.whatsapp = wa;
-      savePmState();
+      pmData.name = nom;
+      pmData.email = em;
+      pmData.whatsapp = wa;
+      saveState();
 
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerText = 'Enviando y calculando...';
-      }
+      if (submitBtn) submitBtn.disabled = true;
+
+      pmGoToStep(9); // Submitting
 
       try {
+        const finalRecText = pmData.recommendationText || generateProductRecommendation(pmData);
+
         const res = await fetch('/api/professional-lead', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            name: pmState.nombre,
-            email: pmState.email,
-            whatsapp: pmState.whatsapp,
-            problema_principal: pmState.area || 'Product Management',
-            frecuencia: pmState.frecuencia || 'Semanal',
-            tiempo_estimado: pmState.tiempo || '3–5 horas',
-            herramientas_actuales: pmState.herramientas,
-            objetivo: pmState.objetivo || 'Mejorar workflow PM',
-            recomendacion: 'Acompañamiento PM e IA',
+            name: pmData.name,
+            email: pmData.email,
+            whatsapp: pmData.whatsapp,
+            problema_principal: pmData.problems.length > 0 ? pmData.problems : ['Product Management'],
+            frecuencia: pmData.frequency || 'Semanal',
+            tiempo_estimado: pmData.estimatedTime || '3–5 horas',
+            herramientas_actuales: pmData.tools,
+            objetivo: pmData.goals.length > 0 ? pmData.goals : ['Ahorrar tiempo'],
+            recomendacion: finalRecText,
             fuente: 'Landing /servicios/producto',
             tipo_de_pagina: 'producto',
           }),
         });
 
-        const result = await res.json();
-        if (!res.ok && result.error) {
-          alert(result.error);
+        const result = await res.json().catch(() => ({}));
+
+        if (res.ok && result.success) {
+          if ((window as any).posthog) {
+            (window as any).posthog.capture('product_lead_submitted', {
+              problem_area: pmData.problems,
+              frequency: pmData.frequency,
+              estimated_time: pmData.estimatedTime,
+              current_tools: pmData.tools,
+              goal: pmData.goals,
+            });
+          }
+
+          const successWaBtn = document.getElementById('pm-success-wa-btn') as HTMLAnchorElement | null;
+          if (successWaBtn) {
+            const waMsg = encodeURIComponent(
+              `Hola Pablo, hice el diagnóstico de Product Management en LuciRMe y quiero hablarte sobre mi caso.`
+            );
+            successWaBtn.href = `https://wa.me/573053046180?text=${waMsg}`;
+          }
+
+          clearState();
+          pmGoToStep(10); // Success
+        } else {
+          pmGoToStep(11); // Error
         }
       } catch (err) {
-        console.error('Error enviando lead de producto:', err);
+        pmGoToStep(11); // Error
       } finally {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerText = 'Ver diagnóstico y recomendación →';
-        }
+        if (submitBtn) submitBtn.disabled = false;
       }
-
-      // Dynamic Summary
-      const summaryText = document.getElementById('pm-result-summary');
-      if (summaryText) {
-        const toolsStr = Array.isArray(pmState.herramientas) && pmState.herramientas.length > 0
-          ? pmState.herramientas.join(', ')
-          : 'herramientas habituales';
-
-        summaryText.innerHTML = `
-          Por lo que me cuentas, una parte importante de tu tiempo como PM se está yendo en el área de <strong>${pmState.area || 'documentación y análisis'}</strong>. Si esta tarea aparece <strong>${pmState.frecuencia || 'frecuentemente'}</strong> y puede estar consumiendo entre <strong>${pmState.tiempo || '3 y 5 horas'}</strong> semanales, vale la pena revisarla con más detalle. Ya utilizas algunas herramientas (<em>${toolsStr}</em>), pero todavía no existe un flujo claro entre ellas. En tu caso no empezaría buscando otra herramienta: empezaría por revisar cómo estás haciendo hoy ese trabajo y detectar qué partes realmente vale la pena simplificar o automatizar.
-        `;
-      }
-
-      if ((window as any).posthog) {
-        (window as any).posthog.capture('product_diagnostic_completed', {
-          problem_area: pmState.area,
-          frequency: pmState.frecuencia,
-          estimated_time: pmState.tiempo,
-          current_tools: pmState.herramientas,
-          goal: pmState.objetivo,
-        });
-        (window as any).posthog.capture('product_lead_submitted', {
-          problem_area: pmState.area,
-          frequency: pmState.frecuencia,
-          goal: pmState.objetivo,
-        });
-      }
-
-      pmGoToStep(7);
     }
 
-    // Window assignments
-    (window as any).pmGoToStep = pmGoToStep;
-    (window as any).pmPrevStep = pmPrevStep;
-    (window as any).pmNextStep = pmNextStep;
-    (window as any).pmSelectArea = pmSelectArea;
-    (window as any).pmSelectFrecuencia = pmSelectFrecuencia;
-    (window as any).pmSelectTiempo = pmSelectTiempo;
-    (window as any).pmToggleHerramienta = pmToggleHerramienta;
-    (window as any).pmSelectObjetivo = pmSelectObjetivo;
-    (window as any).pmSubmitLead = pmSubmitLead;
-
     document.addEventListener('DOMContentLoaded', () => {
-      updatePmWizardProgress();
+      // Step 1
+      document.querySelectorAll('#step1-options .diag-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const val = btn.getAttribute('data-val');
+          if (val) pmToggleProblem(val);
+        });
+      });
+
+      // Step 2
+      document.querySelectorAll('#step2-options .diag-single-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const val = btn.getAttribute('data-val');
+          if (val) pmSelectFrequency(val);
+        });
+      });
+
+      // Step 3
+      document.querySelectorAll('#step3-options .diag-single-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const val = btn.getAttribute('data-val');
+          if (val) pmSelectEstimatedTime(val);
+        });
+      });
+
+      // Step 4
+      document.querySelectorAll('#step4-options .diag-chip-tools').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const val = btn.getAttribute('data-val');
+          if (val) pmToggleTool(val);
+        });
+      });
+
+      // Step 5
+      document.querySelectorAll('#step5-options .diag-single-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const val = btn.getAttribute('data-val');
+          if (val) pmToggleGoal(val);
+        });
+      });
+
+      // Navigation buttons
+      const btnNext = document.getElementById('btn-diag-next');
+      if (btnNext) {
+        btnNext.addEventListener('click', () => {
+          if (pmStep <= totalPmSteps) {
+            pmGoToStep(pmStep + 1);
+          }
+        });
+      }
+
+      const btnBack = document.getElementById('btn-diag-back');
+      if (btnBack) {
+        btnBack.addEventListener('click', pmPrevStep);
+      }
+
+      if (pmData.currentStep && pmData.currentStep > 1 && pmData.currentStep <= totalPmSteps) {
+        pmStep = pmData.currentStep;
+      }
+
+      updateWizardUI();
 
       if ((window as any).posthog) {
         (window as any).posthog.capture('product_page_view', {
@@ -992,5 +1460,8 @@ const whatsappPM = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, estuv
         });
       }
     });
+
+    (window as any).pmGoToStep = pmGoToStep;
+    (window as any).pmSubmitLead = pmSubmitLead;
   </script>
 </Layout>

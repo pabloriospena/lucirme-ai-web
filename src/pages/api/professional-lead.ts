@@ -60,6 +60,14 @@ export const POST: APIRoute = async ({ request }) => {
         ? herramientas_actuales.join(', ')
         : String(herramientas_actuales || '');
 
+      const problemsFormatted = Array.isArray(problema_principal)
+        ? problema_principal.join(', ')
+        : String(problema_principal || '');
+
+      const goalsFormatted = Array.isArray(objetivo)
+        ? objetivo.join(', ')
+        : String(objetivo || '');
+
       const mailerliteBody: any = {
         email: emailStr,
         fields: {
@@ -70,14 +78,14 @@ export const POST: APIRoute = async ({ request }) => {
           city: ciudad || 'Bogotá',
           country: pais || 'Colombia',
           industria_sector: 'Product Management & Ops',
-          sesion_1_1_problema_principal: problema_principal || 'Optimización PM',
+          sesion_1_1_problema_principal: problemsFormatted || 'Optimización PM',
           sesion_1_1_frecuencia: frecuencia || 'Semanal',
           sesion_1_1_tiempo_estimado: tiempo_estimado || '3-5 horas',
           sesion_1_1_herramientas_actuales: toolsFormatted || 'Herramientas PM',
-          sesion_1_1_objetivo: objetivo || 'Ahorrar tiempo',
+          sesion_1_1_objetivo: goalsFormatted || 'Ahorrar tiempo',
           sesion_1_1_resultado_recomendacion: recomendacion || 'Sesión 1-1 PM',
-          que_quiere_mejorar: problema_principal || 'Optimización PM',
-          objetivo_de_la_pagina: objetivo || 'Ahorrar tiempo',
+          que_quiere_mejorar: problemsFormatted || 'Optimización PM',
+          objetivo_de_la_pagina: goalsFormatted || 'Ahorrar tiempo',
           que_tiene_listo: toolsFormatted || 'Herramientas PM',
           fuente: fuente || 'Landing /servicios/producto',
           tipo_de_pagina: tipo_de_pagina || 'producto',
