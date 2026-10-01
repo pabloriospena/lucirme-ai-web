@@ -146,5 +146,6 @@ export function generateBottleneckPDF(diag: BottleneckDiagnosisResult) {
   doc.setTextColor(148, 163, 184);
   doc.text('Diagnóstico generado automáticamente por LuciRMe AI · Pablo Ríos Peña', margin, y);
 
-  doc.save(`Diagnostico_Cuello_de_Botella_${diag.empresa.replace(/[^a-[#0-9a-zA-Z]/g, '_')}.pdf`);
+  const cleanEmpresaName = (diag.empresa || 'Empresa').replace(/[^a-zA-Z0-9_]/g, '_');
+  doc.save(`Diagnostico_Cuello_de_Botella_${cleanEmpresaName}.pdf`);
 }

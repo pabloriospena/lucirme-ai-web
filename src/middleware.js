@@ -5,7 +5,6 @@ const REDIRECTS = {
   "/soluciones/profesionales": "/profesionales",
   "/soluciones/startups": "/empresas",
   "/soluciones/tecnologia+tunegocio": "/empresas",
-  "/soluciones/web-veterinarios": "/empresas/pagina-comercial",
   "/servicios/producto": "/profesionales#product-managers",
   "/profesionales/product-managers": "/profesionales#product-managers",
   "/servicios": "/",

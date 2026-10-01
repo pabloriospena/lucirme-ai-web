@@ -63,12 +63,13 @@ export const POST: APIRoute = async ({ request }) => {
       ciudad,
     });
 
-    const apiToken = process.env.MAILERLITE_API_KEY || process.env.MAILERLITE_API_TOKEN;
-    const groupId = process.env.MAILERLITE_BOTTLENECK_GROUP_ID || '200080858699269701';
+    const rawToken = process.env.MAILERLITE_API_KEY || process.env.MAILERLITE_API_TOKEN || '';
+    const apiToken = rawToken.trim();
+    const groupId = (process.env.MAILERLITE_BOTTLENECK_GROUP_ID || '200080858699269701').trim();
 
     let mailerliteSuccess = false;
 
-    if (apiToken) {
+    if (apiToken && apiToken.length > 15 && apiToken !== 'undefined') {
       const mailerliteBody: any = {
         email: emailStr,
         fields: {
@@ -108,13 +109,13 @@ export const POST: APIRoute = async ({ request }) => {
           mailerliteSuccess = true;
         } else {
           const errText = await mlResponse.text();
-          console.warn(`[MailerLite Error ${mlResponse.status}]:`, errText);
+          console.warn(`[MailerLite Response ${mlResponse.status}]: ${errText}`);
         }
       } catch (mlErr) {
         console.error('[MailerLite Exception]:', mlErr);
       }
     } else {
-      console.warn('[MailerLite]: MAILERLITE_API_TOKEN missing in environment');
+      console.warn('[MailerLite Notice]: MAILERLITE_API_KEY is not configured or is invalid. Diagnostic processed locally.');
     }
 
     return new Response(
