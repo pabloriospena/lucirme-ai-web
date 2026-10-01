@@ -1,227 +1,877 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { LINKS } from "../lib/constants.js";
-import SobreMi from "../components/SobreMi.astro";
+
+const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
+const whatsapp1a1 = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, leí tu página de profesionales y quiero revisar mi caso para una sesión 1-1.")}`;
 ---
 
 <Layout
-  title="IA para Profesionales y Product Managers | LuciRMe AI"
-  description="Te acompaño a incorporar Inteligencia Artificial en tu flujo real de trabajo hasta lograr autonomía total. Para Product Managers, consultores, abogados, contadores e independientes."
+  title="Sesiones 1-1 de IA Aplicada | LuciRMe AI"
+  description="Sesiones 1-1 para profesionales que quieren aplicar IA a problemas reales de su trabajo, ahorrar tiempo y construir flujos de trabajo más simples."
+  hideHeader={true}
+  hideFooter={true}
 >
-  <!-- HERO PROFESIONALES -->
-  <header class="py-20 md:py-24 px-4 bg-slate-50 border-b border-gray-100 relative overflow-hidden">
-    <div class="max-w-4xl mx-auto text-center relative z-10">
-      <span class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-6 border border-teal/20">
-        Para Profesionales & Líderes
-      </span>
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-deep leading-tight mb-6 tracking-tight">
-        IA aplicada a tu forma <span class="text-teal underline decoration-teal/30">real</span> de trabajar.
-      </h1>
-      <p class="text-base sm:text-lg text-gray-600 leading-relaxed mb-10 max-w-2xl mx-auto font-medium">
-        Te acompaño paso a paso a incorporar IA en tu flujo diario hasta que puedas hacerlo de forma 100% autónoma. Sin teoría abstracta ni prompts genéricos.
-      </p>
+  <!-- HEADER DEDICADO PROFESIONALES -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="h-16 max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
+      <a class="flex flex-col group" href="#">
+        <span class="text-base font-bold tracking-tight text-slate-900 group-hover:text-teal-700 transition-colors">LuciRMe AI · Sesiones 1-1</span>
+        <span class="text-[11px] font-mono text-slate-500">Trabajamos sobre problemas reales de tu trabajo.</span>
+      </a>
 
-      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600">
+        <a class="hover:text-slate-900 transition-colors" href="#diagnostico-profesional">Diagnóstico</a>
+        <a class="hover:text-slate-900 transition-colors" href="#como-trabajamos">Cómo trabajamos</a>
+        <a class="hover:text-slate-900 transition-colors" href="#lo-que-trabajamos">Lo que trabajamos</a>
+        <a class="hover:text-slate-900 transition-colors" href="#formatos">Formatos</a>
+        <a class="hover:text-slate-900 transition-colors" href="#pablo">Pablo</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
         <a
-          href={LINKS.whatsapp}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-xl font-bold transition shadow-lg text-base cursor-pointer"
-          onclick="if (window.posthog) { window.posthog.capture('profesionales_whatsapp_click', { origen: 'hero_profesionales' }); }"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-teal-700 text-white text-xs font-semibold hover:bg-teal-800 transition-colors shadow-2xs cursor-pointer"
+          href="#diagnostico-profesional"
         >
-          💬 Hablar por WhatsApp (+57 305 3046180) →
-        </a>
-        <a
-          href={LINKS.calendly}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 bg-white border border-gray-300 text-deep px-8 py-4 rounded-xl font-bold hover:bg-gray-50 transition shadow-sm text-base cursor-pointer"
-          onclick="if (window.posthog) { window.posthog.capture('profesionales_calendly_click', { origen: 'hero_profesionales' }); }"
-        >
-          📅 Agendar Sesión de Diagnóstico
+          <span class="material-symbols-outlined text-[17px]">psychology</span>
+          <span>Quiero revisar mi caso</span>
         </a>
       </div>
     </div>
   </header>
 
-  <main class="py-20 px-4 bg-white">
-    <div class="max-w-5xl mx-auto space-y-20">
+  <main class="w-full bg-[#F8FAFC]">
 
-      <!-- SECCIÓN 1: PROBLEMAS REALES DEL DÍA A DÍA -->
-      <section class="bg-slate-50 rounded-3xl p-8 md:p-12 border border-gray-200/80">
-        <h2 class="text-xl sm:text-2xl font-bold text-deep mb-8 text-center">
-          ¿Te suena familiar alguna de estas situaciones en tu jornada?
+    <!-- HERO SECTION -->
+    <section class="w-full max-w-7xl mx-auto px-6 pt-12 pb-12 md:py-20 border-b border-slate-200/60">
+      <div class="max-w-3xl mx-auto flex flex-col items-center text-center gap-6">
+        
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-teal-50 border border-teal-200/80 rounded-full font-mono text-xs text-teal-800 shadow-2xs">
+          <span class="w-2 h-2 rounded-full bg-teal-600 animate-pulse"></span>
+          Acompañamiento individual en Inteligencia Artificial Aplicada
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+          ¿Sientes que podrías estar trabajando mucho mejor con IA?
+        </h1>
+
+        <p class="text-base md:text-lg text-slate-600 font-normal leading-relaxed">
+          No necesitas aprender IA por aprender IA. Podemos mirar cómo trabajas hoy, encontrar dónde estás perdiendo tiempo y construir contigo una forma más simple de hacerlo.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 w-full sm:w-auto">
+          <a
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
+            href="#diagnostico-profesional"
+            onclick="if(window.posthog) window.posthog.capture('professional_diagnostic_started');"
+          >
+            <span>Quiero revisar mi caso →</span>
+          </a>
+
+          <a
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors shadow-2xs"
+            href={whatsapp1a1}
+            rel="noopener noreferrer"
+            target="_blank"
+            onclick="if(window.posthog) window.posthog.capture('professional_session_whatsapp_click', { origen: 'hero' });"
+          >
+            <span class="material-symbols-outlined text-[18px]">chat</span>
+            <span>Hablar con Pablo</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- COMPONENTE DIAGNÓSTICO PROFESIONAL -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-12 scroll-mt-20" id="diagnostico-profesional">
+      <div class="max-w-2xl mx-auto flex flex-col gap-6">
+
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-md p-6 md:p-8 relative min-h-[400px] flex flex-col justify-between" id="pro-wizard-card">
+          
+          <!-- Wizard Header -->
+          <div class="flex flex-col gap-2 pb-4 border-b border-slate-100" id="pro-wizard-header">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="font-mono text-xs font-semibold text-slate-900 uppercase" id="pro-step-counter">Paso 1 de 5</span>
+              </div>
+              <span class="text-xs font-mono text-slate-400" id="pro-step-time">~2 min</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="bg-emerald-600 h-1.5 rounded-full transition-all duration-300 ease-out" id="pro-progress-bar" style="width: 20%;"></div>
+            </div>
+          </div>
+
+          <!-- PASO 1: ÁREA DE FRICCIÓN -->
+          <div class="pro-step flex flex-col gap-4 py-4" id="pro-step-1">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 1 · Fricción en tu trabajo</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿En qué parte de tu trabajo sientes que estás perdiendo más tiempo?</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2" id="group-pro-area">
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectArea('Correos y mensajes', this)" type="button">✉️ Correos y mensajes</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectArea('Documentos y textos', this)" type="button">📄 Documentos y textos</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectArea('Reuniones', this)" type="button">👥 Reuniones</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectArea('Investigación', this)" type="button">🔍 Investigación</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectArea('Presentaciones', this)" type="button">📊 Presentaciones</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectArea('Análisis', this)" type="button">📈 Análisis de datos</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectArea('Tareas repetitivas', this)" type="button">🔄 Tareas repetitivas</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectArea('No estoy seguro todavía', this)" type="button">❓ No estoy seguro todavía</button>
+            </div>
+          </div>
+
+          <!-- PASO 2: FRECUENCIA -->
+          <div class="pro-step hidden flex flex-col gap-4 py-4" id="pro-step-2">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 2 · Frecuencia</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿Con qué frecuencia haces ese trabajo?</h3>
+            </div>
+            <div class="flex flex-col gap-2 pt-2" id="group-pro-frecuencia">
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectFrecuencia('Varias veces al día', this)" type="button">⚡ Varias veces al día</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectFrecuencia('Todos los días', this)" type="button">📅 Todos los días</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectFrecuencia('Varias veces por semana', this)" type="button">🗓️ Varias veces por semana</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectFrecuencia('Una vez por semana', this)" type="button">📌 Una vez por semana</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectFrecuencia('De vez en cuando', this)" type="button">⏳ De vez en cuando</button>
+            </div>
+          </div>
+
+          <!-- PASO 3: TIEMPO ESTIMADO -->
+          <div class="pro-step hidden flex flex-col gap-4 py-4" id="pro-step-3">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 3 · Tiempo</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿Cuánto tiempo crees que te consume a la semana?</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2" id="group-pro-tiempo">
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectTiempo('Menos de 1 hora a la semana', this)" type="button">⏱️ Menos de 1 hora a la semana</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectTiempo('1–3 horas', this)" type="button">⏳ 1–3 horas</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectTiempo('3–5 horas', this)" type="button">📊 3–5 horas</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectTiempo('5–10 horas', this)" type="button">🔥 5–10 horas</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectTiempo('Más de 10 horas', this)" type="button">🚨 Más de 10 horas</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectTiempo('No tengo idea', this)" type="button">❓ No tengo idea</button>
+            </div>
+          </div>
+
+          <!-- PASO 4: HERRAMIENTAS -->
+          <div class="pro-step hidden flex flex-col gap-4 py-4" id="pro-step-4">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 4 · Herramientas actuales</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿Qué estás usando hoy para intentar resolverlo?</h3>
+              <p class="text-xs text-slate-500">Puedes seleccionar varias opciones.</p>
+            </div>
+            <div class="grid grid-cols-2 gap-2 pt-2" id="group-pro-herramientas">
+              <button class="multi-option p-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proToggleHerramienta('ChatGPT', this)" type="button">🤖 ChatGPT</button>
+              <button class="multi-option p-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proToggleHerramienta('Claude', this)" type="button">🧠 Claude</button>
+              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proToggleHerramienta('Gemini', this)" type="button">✨ Gemini</button>
+              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proToggleHerramienta('NotebookLM', this)" type="button">📚 NotebookLM</button>
+              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proToggleHerramienta('Copilot', this)" type="button">💻 Copilot</button>
+              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proToggleHerramienta('Automatizaciones', this)" type="button">⚡ Make / Zapier</button>
+              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proToggleHerramienta('Excel / Sheets', this)" type="button">📊 Excel / Sheets</button>
+              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proToggleHerramienta('Nada todavía', this)" type="button">⏳ Nada todavía</button>
+            </div>
+            <button
+              class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors cursor-pointer self-start mt-2"
+              onclick="window.proNextStep(4)"
+              type="button"
+            >
+              <span>Continuar →</span>
+            </button>
+          </div>
+
+          <!-- PASO 5: OBJETIVO DESEADO -->
+          <div class="pro-step hidden flex flex-col gap-4 py-4" id="pro-step-5">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 5 · Objetivo</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿Qué te gustaría conseguir trabajando juntos?</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2" id="group-pro-objetivo">
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectObjetivo('Ahorrar tiempo', this)" type="button">⏳ Ahorrar tiempo en mi día a día</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectObjetivo('Resolver una tarea concreta con IA', this)" type="button">🎯 Resolver una tarea concreta con IA</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectObjetivo('Automatizar algo repetitivo', this)" type="button">🔄 Automatizar algo repetitivo</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectObjetivo('Conectar mejor las herramientas que ya uso', this)" type="button">🔗 Conectar mejor mis herramientas</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectObjetivo('Crear un flujo de trabajo', this)" type="button">🛠️ Crear un flujo de trabajo claro</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectObjetivo('Aprender a utilizar IA aplicada', this)" type="button">🎓 Aprender IA aplicada a mi trabajo</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.proSelectObjetivo('Tener claridad sobre por dónde empezar', this)" type="button">💡 Tener claridad sobre por dónde empezar</button>
+            </div>
+          </div>
+
+          <!-- PASO 6: DATOS DE CONTACTO -->
+          <div class="pro-step hidden flex flex-col gap-4 py-4" id="pro-step-6">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 6 · Enviar Diagnóstico</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">Ya tenemos una idea mucho más clara.</h3>
+              <p class="text-sm text-slate-600">¿A dónde te envío el diagnóstico y la recomendación personalizada?</p>
+            </div>
+            <form class="flex flex-col gap-3 pt-2" onsubmit="event.preventDefault(); window.proSubmitLead();">
+              <div class="flex flex-col gap-1">
+                <label class="text-xs font-semibold text-slate-700" for="pro-input-nombre">Tu Nombre *</label>
+                <input class="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white" id="pro-input-nombre" placeholder="Ej. Camila Silva" required type="text" />
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-semibold text-slate-700" for="pro-input-email">Correo Electrónico *</label>
+                  <input class="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white" id="pro-input-email" placeholder="camila@empresa.com" required type="email" />
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-semibold text-slate-700" for="pro-input-whatsapp">Número de WhatsApp *</label>
+                  <input class="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white" id="pro-input-whatsapp" placeholder="+57 300 000 0000" required type="tel" />
+                </div>
+              </div>
+
+              <div class="pt-2">
+                <button id="pro-btn-submit" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer" type="submit">
+                  <span>Ver diagnóstico y recomendación →</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- RESULTADO PERSONALIZADO -->
+          <div class="pro-step hidden flex flex-col gap-5 py-4" id="pro-step-result">
+            <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl flex flex-col gap-2">
+              <div class="flex items-center gap-2 text-emerald-800 font-bold text-sm">
+                <span class="material-symbols-outlined text-emerald-600 text-xl">verified</span>
+                <span>Diagnóstico Inicial Completado</span>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900">Esto es lo que veo en tu caso:</h3>
+              <p class="text-xs text-slate-700 leading-relaxed" id="pro-result-summary">
+                Por lo que me cuentas, tienes una tarea que haces con alta frecuencia y que te consume bastante tiempo semanal. En tu caso tendría sentido empezar por ese problema concreto, entender cómo lo haces hoy y construir una forma más simple de resolverlo.
+              </p>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col gap-2.5 text-xs text-slate-800">
+              <span class="font-mono text-[10px] uppercase font-bold text-slate-500">Plan de trabajo sugerido:</span>
+              <ul class="flex flex-col gap-2 text-slate-700 font-medium" id="pro-result-bullets">
+                <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Mapear el flujo manual que usas hoy para esa tarea.</li>
+                <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Identificar el prompt o la integración adecuada que elimine el trabajo repetitivo.</li>
+                <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Construir en vivo contigo el nuevo flujo durante la sesión.</li>
+                <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Asegurar que salgas con total autonomía para seguir usándolo solo.</li>
+              </ul>
+            </div>
+
+            <a
+              class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors shadow-2xs text-center cursor-pointer"
+              href="#como-trabajamos"
+            >
+              <span>Ver cómo trabajamos en las sesiones 1-1 ↓</span>
+            </a>
+          </div>
+
+          <!-- Wizard Footer Navigation -->
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-2" id="pro-wizard-navigation">
+            <button
+              class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+              disabled
+              id="pro-btn-prev"
+              onclick="window.proPrevStep()"
+              type="button"
+            >
+              <span class="material-symbols-outlined text-[15px]">arrow_back</span>
+              <span>Anterior</span>
+            </button>
+            <span class="text-xs font-mono text-slate-400" id="pro-status-tag">Paso 1</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TRANSICIÓN A LAS SESIONES Y CÓMO TRABAJAMOS (5 PASOS) -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="como-trabajamos">
+      <div class="max-w-3xl mb-12 flex flex-col gap-3">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Sin rodeos ni teoría abstracta</span>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+          Podemos trabajar sobre eso.
         </h2>
-        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 text-xs text-gray-700 font-medium">
-          <div class="p-4 bg-white rounded-xl border border-gray-100 shadow-2xs">
-            <span class="text-orange font-bold text-sm block mb-1">📄 Documentación</span>
-            Pierdes horas redactando informes, correos y especificaciones que nadie lee completos.
-          </div>
-          <div class="p-4 bg-white rounded-xl border border-gray-100 shadow-2xs">
-            <span class="text-orange font-bold text-sm block mb-1">🔎 Investigación</span>
-            Pasas demasiado tiempo buscando y sintetizando información dispersa en múltiples archivos.
-          </div>
-          <div class="p-4 bg-white rounded-xl border border-gray-100 shadow-2xs">
-            <span class="text-orange font-bold text-sm block mb-1">🎙️ Reuniones</span>
-            Sientes que pasas más tiempo coordinando y anotando pendientes que ejecutando estrategia.
-          </div>
-          <div class="p-4 bg-white rounded-xl border border-gray-100 shadow-2xs">
-            <span class="text-orange font-bold text-sm block mb-1">📊 Análisis</span>
-            Procesamiento manual de datos e indicadores que podrían estar listos en segundos.
-          </div>
-          <div class="p-4 bg-white rounded-xl border border-gray-100 shadow-2xs">
-            <span class="text-orange font-bold text-sm block mb-1">⚡ Tareas Repetitivas</span>
-            Fricción constante copiando e ingresando datos entre diferentes herramientas.
-          </div>
-          <div class="p-4 bg-white rounded-xl border border-gray-100 shadow-2xs">
-            <span class="text-orange font-bold text-sm block mb-1">🧩 Información Dispersa</span>
-            Archivos, notas y fuentes en lugares diferentes sin una base de conocimiento activa.
-          </div>
-        </div>
-      </section>
+        <p class="text-sm md:text-base text-slate-600 leading-relaxed">
+          En una sesión 1-1 no vamos a sentarnos a hablar de IA durante una hora. Vamos a trabajar sobre algo que realmente haces en tu día a día y buscar una forma mejor de hacerlo.
+        </p>
+        <p class="text-xs text-slate-500 leading-relaxed italic">
+          Revisamos cómo lo haces hoy, identificamos dónde está el cuello de botella y construimos contigo una solución que puedas utilizar en tu trabajo real.
+        </p>
+      </div>
 
-      <!-- SECCIÓN 2: BLOQUE DESTACADO PRODUCT MANAGERS (#product-managers) -->
-      <section id="product-managers" class="scroll-mt-24 p-8 md:p-12 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-800 to-deep text-white shadow-xl relative overflow-hidden border border-slate-700">
-        <div class="max-w-3xl space-y-6">
-          <div class="flex flex-wrap items-center gap-2">
-            <span class="bg-teal/20 text-teal border border-teal/30 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-md">
-              Especialidad Destacada
-            </span>
-            <span class="bg-orange/20 text-orange border border-orange/30 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-md">
-              Product Managers & Digital Leaders
-            </span>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        
+        <!-- Paso 01 -->
+        <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-3">
+          <div class="w-9 h-9 rounded-xl bg-teal-50 border border-teal-200 text-teal-800 font-mono text-xs font-bold flex items-center justify-center">
+            01
           </div>
-
-          <h2 class="text-2xl sm:text-3xl font-black tracking-tight">
-            IA para Product Managers
-          </h2>
-          <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
-            Aplica IA en todo el ciclo de vida de producto con criterio profesional. Optimiza tu tiempo sin caer en el "teatro de procesos".
-          </p>
-
-          <div class="grid sm:grid-cols-3 gap-3 text-xs text-slate-200 font-medium">
-            <div class="bg-white/10 p-3 rounded-xl border border-white/10">🔍 Discovery & Research</div>
-            <div class="bg-white/10 p-3 rounded-xl border border-white/10">📄 PRDs & Documentación</div>
-            <div class="bg-white/10 p-3 rounded-xl border border-white/10">📋 Backlog & Refinamiento</div>
-            <div class="bg-white/10 p-3 rounded-xl border border-white/10">🎟️ User Stories & Tickets</div>
-            <div class="bg-white/10 p-3 rounded-xl border border-white/10">🎙️ Resumen de Reuniones</div>
-            <div class="bg-white/10 p-3 rounded-xl border border-white/10">📊 Análisis de Métricas</div>
-          </div>
-
-          <!-- MÓDULO PRODUCT MANAGEMENT SIN BULLSHIT -->
-          <div class="pt-6 border-t border-slate-700/80 space-y-4">
-            <h3 class="text-lg font-bold text-amber-400">
-              📖 Product Management Sin Bullshit
-            </h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              El sistema de trabajo desarrollado por Pablo Ríos para gestionar productos reales con la máxima eficiencia.
-            </p>
-            <div class="flex flex-wrap gap-3">
-              <a
-                href="/recursos/ebook-pm"
-                class="bg-orange hover:bg-orange/90 text-white font-bold px-5 py-2.5 rounded-xl transition text-xs shadow-md"
-                onclick="if (window.posthog) { window.posthog.capture('product_managers_cta_click', { recurso: 'ebook_vol1' }); }"
-              >
-                Ver Libro Vol. 1 ($53.000 COP) →
-              </a>
-              <a
-                href="/recursos/preventa-vol2"
-                class="bg-white/10 hover:bg-white/20 text-white font-bold px-5 py-2.5 rounded-xl border border-white/20 transition text-xs"
-                onclick="if (window.posthog) { window.posthog.capture('product_managers_cta_click', { recurso: 'preventa_vol2' }); }"
-              >
-                Preventa Vol. 2 →
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SECCIÓN 3: OTROS PROFESIONALES -->
-      <section>
-        <div class="text-center mb-10">
-          <h2 class="text-2xl sm:text-3xl font-bold text-deep">
-            Soluciones para Otros Profesionales
-          </h2>
-          <p class="text-xs text-gray-500 mt-1">
-            Si tu trabajo involucra información, decisiones, documentos y coordinación, la IA puede acelerarlo.
-          </p>
+          <h3 class="text-sm font-bold text-slate-900">Entendemos</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Miramos en detalle cómo haces hoy el trabajo y qué insumos utilizas.</p>
         </div>
 
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="p-6 rounded-2xl bg-slate-50 border border-gray-200/80">
-            <span class="text-xl mb-2 block">⚖️</span>
-            <h3 class="font-bold text-deep text-base mb-1">Abogados</h3>
-            <p class="text-xs text-gray-600 leading-relaxed">Análisis de contratos, jurisprudencia y síntesis de expedientes extensos en minutos.</p>
+        <!-- Paso 02 -->
+        <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-3">
+          <div class="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 font-mono text-xs font-bold flex items-center justify-center">
+            02
           </div>
-
-          <div class="p-6 rounded-2xl bg-slate-50 border border-gray-200/80">
-            <span class="text-xl mb-2 block">📊</span>
-            <h3 class="font-bold text-deep text-base mb-1">Contadores</h3>
-            <p class="text-xs text-gray-600 leading-relaxed">Procesamiento de facturas, conciliaciones y generación de alertas contables.</p>
-          </div>
-
-          <div class="p-6 rounded-2xl bg-slate-50 border border-gray-200/80">
-            <span class="text-xl mb-2 block">💼</span>
-            <h3 class="font-bold text-deep text-base mb-1">Consultores</h3>
-            <p class="text-xs text-gray-600 leading-relaxed">Transformación de notas sueltas en presentaciones ejecutivas para clientes.</p>
-          </div>
-
-          <div class="p-6 rounded-2xl bg-slate-50 border border-gray-200/80">
-            <span class="text-xl mb-2 block">🚀</span>
-            <h3 class="font-bold text-deep text-base mb-1">Freelancers</h3>
-            <p class="text-xs text-gray-600 leading-relaxed">Automatización de propuestas, cotizaciones y atención inicial por WhatsApp/correo.</p>
-          </div>
+          <h3 class="text-sm font-bold text-slate-900">Encontramos</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Identificamos el cuello de botella donde pierdes más tiempo o esfuerzo.</p>
         </div>
-      </section>
 
-      <!-- SECCIÓN 4: MODELO DE ACOMPAÑAMIENTO HASTA LA AUTONOMÍA -->
-      <section class="bg-slate-50 p-8 md:p-12 rounded-3xl border border-gray-200/80">
-        <div class="max-w-3xl mx-auto text-center space-y-8">
+        <!-- Paso 03 -->
+        <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-3">
+          <div class="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 font-mono text-xs font-bold flex items-center justify-center">
+            03
+          </div>
+          <h3 class="text-sm font-bold text-slate-900">Construimos</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Creamos contigo la solución, prompts o integración aplicada a tu caso.</p>
+        </div>
+
+        <!-- Paso 04 -->
+        <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-3">
+          <div class="w-9 h-9 rounded-xl bg-teal-50 border border-teal-200 text-teal-800 font-mono text-xs font-bold flex items-center justify-center">
+            04
+          </div>
+          <h3 class="text-sm font-bold text-slate-900">Practicas</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">La pruebas en vivo con tus archivos y tareas reales para afinar detalles.</p>
+        </div>
+
+        <!-- Paso 05 -->
+        <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-3">
+          <div class="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 font-mono text-xs font-bold flex items-center justify-center">
+            05
+          </div>
+          <h3 class="text-sm font-bold text-slate-900">Te independizas</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">La meta es que puedas seguir utilizándola de forma autónoma sin depender de mí.</p>
+        </div>
+
+      </div>
+
+      <div class="p-4 bg-teal-50/80 border border-teal-200 rounded-2xl mt-8 max-w-3xl text-center mx-auto text-xs text-teal-900 font-medium">
+        "No quiero que aprendas algo que después no uses. Quiero que salgas con algo que puedas aplicar de inmediato."
+      </div>
+    </section>
+
+    <!-- QUÉ PODEMOS TRABAJAR -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="lo-que-trabajamos">
+      <div class="max-w-3xl mb-12 flex flex-col gap-2">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Casos reales</span>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+          Lo que podemos trabajar en tu sesión
+        </h2>
+        <p class="text-sm text-slate-600">
+          Partimos de tu problema, no de una herramienta. Estos son ejemplos de áreas donde logramos mayor impacto:
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-xl mb-1">✍️</div>
+          <h3 class="text-base font-bold text-slate-900">Trabajo diario</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Correos complejos, documentación de proyectos, actas de reuniones, investigación rápida y tareas administrativas repetitivas.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-xl mb-1">⚡</div>
+          <h3 class="text-base font-bold text-slate-900">Productividad personal</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Diseño de flujos de trabajo eficientes que hoy requieren demasiado tipeo o traspaso manual de datos.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-xl mb-1">🤖</div>
+          <h3 class="text-base font-bold text-slate-900">IA aplicada a tu sector</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Cómo incorporar IA de forma ética, segura y útil en los procesos o entregables que ya tienes estandarizados.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-xl mb-1">🛠️</div>
+          <h3 class="text-base font-bold text-slate-900">Sácale provecho a tus herramientas</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Aprende a dominar ChatGPT, Claude, Gemini, NotebookLM o Notion AI aplicados exactamente a tus archivos.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-xl mb-1">🔄</div>
+          <h3 class="text-base font-bold text-slate-900">Automatización pragmática</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Identificar y conectar tareas manuales entre aplicaciones sin requerir conocimientos avanzados de programación.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-xl mb-1">📦</div>
+          <h3 class="text-base font-bold text-slate-900">Product Management &amp; Tech</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Investigación de usuarios, PRDs, benchmarking, síntesis de feedback, priorización y tareas del día a día de producto.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FORMATOS DE TRABAJO -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="formatos">
+      <div class="max-w-3xl mb-12 flex flex-col gap-2">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Modalidades</span>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+          Formas de trabajar juntos
+        </h2>
+        <p class="text-sm text-slate-600">
+          Elige la intensidad según el nivel de transformación que quieras lograr en tu flujo de trabajo.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Sesión 1-1 -->
+        <div class="p-8 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between">
           <div>
-            <h2 class="text-2xl sm:text-3xl font-bold text-deep mb-2">
-              Acompañamiento hasta la Autonomía
-            </h2>
-            <p class="text-xs sm:text-sm text-gray-600">
-              No solo enseño herramientas. Te acompaño a incorporar IA en tu flujo diario hasta que puedas hacerlo de forma 100% independiente.
+            <div class="w-10 h-10 rounded-xl bg-teal-50 border border-teal-200 text-teal-800 flex items-center justify-center font-bold mb-4">
+              1-1
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Sesión 1-1 Individual</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+              Para resolver un problema concreto, revisar un proceso específico o encontrar por dónde empezar a usar IA en tu trabajo.
+            </p>
+            <ul class="space-y-2 text-xs text-slate-700 font-medium">
+              <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Diagnóstico sobre pantalla compartida (60-90 min)</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Construcción de solución en vivo con tus datos real</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Grabación completa y documentación resumen en Notion</li>
+            </ul>
+          </div>
+          <a
+            class="mt-8 inline-flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-teal-800 text-white font-semibold text-xs hover:bg-teal-900 transition-colors shadow-2xs text-center cursor-pointer"
+            href="#diagnostico-profesional"
+          >
+            <span>Revisar mi caso para 1-1 →</span>
+          </a>
+        </div>
+
+        <!-- Acompañamiento -->
+        <div class="p-8 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 flex items-center justify-center font-bold mb-4">
+              360
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Acompañamiento Continuo</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+              Para trabajar varias situaciones consecutivas, implementar cambios profundos y acompañarte hasta que puedas incorporarlos de forma natural.
+            </p>
+            <ul class="space-y-2 text-xs text-slate-700 font-medium">
+              <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Múltiples sesiones de trabajo sincrónico</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Soporte asincrónico por canal privado para dudas entre sesiones</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Seguimiento hasta lograr tu total autonomía operativa</li>
+            </ul>
+          </div>
+          <a
+            class="mt-8 inline-flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-slate-900 text-white font-semibold text-xs hover:bg-slate-800 transition-colors shadow-2xs text-center cursor-pointer"
+            href={whatsapp1a1}
+            target="_blank"
+          >
+            <span>Consultar acompañamiento por WhatsApp →</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN HUMANA & PRUEBA SOCIAL -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="pablo">
+      <div class="max-w-4xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-2xs p-8 md:p-12 flex flex-col md:flex-row gap-8 items-start">
+        
+        <div class="w-16 h-16 rounded-full bg-teal-50 border border-teal-200 text-teal-800 flex items-center justify-center shrink-0 font-bold text-xl">
+          PR
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-1">
+            <span class="font-mono text-xs text-teal-800 uppercase font-semibold">Detrás de esto estoy yo</span>
+            <h2 class="text-2xl font-bold text-slate-900">Pablo Ríos</h2>
+            <p class="text-xs font-semibold text-slate-600">Consultor de Producto, Operaciones e IA</p>
+          </div>
+
+          <div class="text-xs text-slate-600 flex flex-col gap-3 leading-relaxed">
+            <p class="text-sm font-semibold text-slate-800">
+              "He trabajado con profesionales y equipos para convertir problemas concretos en soluciones que realmente puedan utilizar."
+            </p>
+            <p>
+              Mi enfoque no es venderte cursos extensos con teoría que no aplicas. En cada sesión abrimos tu pantalla, miramos tus archivos y salimos con el problema resuelto.
             </p>
           </div>
 
-          <div class="grid sm:grid-cols-2 gap-6 text-left">
-            <div class="bg-white p-6 rounded-2xl border border-gray-200/80">
-              <h3 class="font-bold text-deep text-lg mb-2">Sesión de Claridad 1:1</h3>
-              <p class="text-xs text-gray-600 mb-4 leading-relaxed">60 minutos intensivos para resolver un problema operativo puntual y estructurar tu primer asistente.</p>
-              <a href={LINKS.whatsapp} target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-teal hover:underline flex items-center gap-1">Consultar Sesión por WhatsApp →</a>
+          <div class="grid grid-cols-2 gap-4 pt-2 border-t border-slate-100">
+            <div>
+              <div class="font-bold text-base text-slate-900">+50 profesionales</div>
+              <div class="text-[11px] text-slate-500">Acompañados 1-1 en adopción práctica</div>
             </div>
-
-            <div class="bg-white p-6 rounded-2xl border border-teal/40 shadow-xs">
-              <h3 class="font-bold text-deep text-lg mb-2">Ciclo Individual de 4 Semanas</h3>
-              <p class="text-xs text-gray-600 mb-4 leading-relaxed">Acompañamiento personalizado semana a semana para transformar tu sistema de trabajo personal.</p>
-              <a href={LINKS.whatsapp} target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-teal hover:underline flex items-center gap-1">Cotizar Ciclo Individual →</a>
+            <div>
+              <div class="font-bold text-base text-slate-900">+30 empresas</div>
+              <div class="text-[11px] text-slate-500">Intervenidas en automatización de procesos</div>
             </div>
           </div>
         </div>
-      </section>
 
-    </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="cta-final">
+      <div class="p-8 md:p-12 bg-white rounded-2xl border border-slate-200 text-center flex flex-col items-center gap-5 shadow-2xs max-w-3xl mx-auto">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase font-mono">Paso Siguiente</span>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+          ¿Lo trabajamos juntos?
+        </h2>
+        <p class="text-xs md:text-sm text-slate-600 max-w-xl leading-relaxed">
+          Cuéntame qué estás intentando resolver y vemos si tiene sentido trabajarlo en una sesión 1-1.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+          <a
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
+            href="#diagnostico-profesional"
+          >
+            <span>Quiero revisar mi caso →</span>
+          </a>
+
+          <a
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors shadow-2xs"
+            href={whatsapp1a1}
+            rel="noopener noreferrer"
+            target="_blank"
+            onclick="if(window.posthog) window.posthog.capture('professional_session_whatsapp_click', { origen: 'cta_final' });"
+          >
+            <span class="material-symbols-outlined text-[18px]">chat</span>
+            <span>Hablar con Pablo</span>
+          </a>
+        </div>
+
+        <p class="text-xs font-mono text-slate-500">Sin compromisos ni ventas agresivas.</p>
+      </div>
+    </section>
+
   </main>
 
-  <section class="py-16 px-4 bg-white border-t border-gray-100">
-    <div class="max-w-4xl mx-auto">
-      <SobreMi />
+  <!-- FOOTER DEDICADO PROFESIONALES -->
+  <footer class="w-full bg-white border-t border-slate-200 py-12">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col gap-8">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="flex flex-col gap-1">
+          <span class="text-base font-bold text-slate-900">LuciRMe AI · Sesiones 1-1</span>
+          <p class="text-xs font-mono text-slate-500">Trabajamos sobre problemas reales de tu trabajo.</p>
+        </div>
+        <div class="flex items-center gap-4 text-xs text-slate-600 font-medium">
+          <a class="hover:text-slate-900 transition-colors" href={whatsapp1a1} target="_blank">WhatsApp Directo</a>
+          <a class="hover:text-slate-900 transition-colors" href="/educacion">Educación</a>
+          <a class="hover:text-slate-900 transition-colors" href="/empresas">Empresas</a>
+        </div>
+      </div>
+      <div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
+        <span>© 2026 LuciRMe AI · Todos los derechos reservados.</span>
+        <span>lucirme.com/profesionales</span>
+      </div>
     </div>
-  </section>
+  </footer>
 
-  <script is:inline>
-    document.addEventListener("DOMContentLoaded", function () {
-      if (window.posthog) {
-        window.posthog.capture("profesionales_page_view", {
-          pagina: "profesionales"
+  <!-- SCRIPT DIAGNÓSTICO PROFESIONAL Y EVENTOS POSTHOG -->
+  <script>
+    let proStep = 1;
+    const totalProSteps = 5;
+
+    const proState: Record<string, any> = {
+      area: '',
+      frecuencia: '',
+      tiempo: '',
+      herramientas: [],
+      objetivo: '',
+      nombre: '',
+      email: '',
+      whatsapp: '',
+    };
+
+    // Restore from sessionStorage
+    try {
+      const saved = sessionStorage.getItem('pro_diag_state');
+      if (saved) {
+        Object.assign(proState, JSON.parse(saved));
+      }
+    } catch (e) {}
+
+    function saveProState() {
+      try {
+        sessionStorage.setItem('pro_diag_state', JSON.stringify(proState));
+      } catch (e) {}
+    }
+
+    function updateProWizardProgress() {
+      const counter = document.getElementById('pro-step-counter');
+      const bar = document.getElementById('pro-progress-bar');
+      const tag = document.getElementById('pro-status-tag');
+      const prevBtn = document.getElementById('pro-btn-prev') as HTMLButtonElement | null;
+
+      if (!counter || !bar) return;
+
+      if (proStep <= totalProSteps) {
+        const pct = (proStep / totalProSteps) * 100;
+        counter.innerText = `Paso ${proStep} de ${totalProSteps}`;
+        bar.style.width = `${pct}%`;
+        if (tag) tag.innerText = `Paso ${proStep}`;
+        if (prevBtn) prevBtn.disabled = proStep === 1;
+      } else {
+        counter.innerText = 'Diagnóstico Completado';
+        bar.style.width = '100%';
+        if (tag) tag.innerText = 'Completado';
+        if (prevBtn) prevBtn.disabled = false;
+      }
+    }
+
+    function proGoToStep(step: number) {
+      document.querySelectorAll('.pro-step').forEach(el => el.classList.add('hidden'));
+
+      proStep = step;
+      if (step <= totalProSteps) {
+        const target = document.getElementById(`pro-step-${step}`);
+        if (target) target.classList.remove('hidden');
+      } else if (step === 6) {
+        const target = document.getElementById('pro-step-6');
+        if (target) target.classList.remove('hidden');
+      } else {
+        const res = document.getElementById('pro-step-result');
+        if (res) res.classList.remove('hidden');
+      }
+
+      updateProWizardProgress();
+    }
+
+    function proPrevStep() {
+      if (proStep > 1 && proStep <= totalProSteps) {
+        proGoToStep(proStep - 1);
+      } else if (proStep > totalProSteps) {
+        proGoToStep(totalProSteps);
+      }
+    }
+
+    function proNextStep(step: number) {
+      if (step === 4) {
+        proGoToStep(5);
+      }
+    }
+
+    function proSelectArea(val: string, btn: HTMLElement) {
+      proState.area = val;
+      saveProState();
+
+      const parent = btn.parentElement;
+      if (parent) {
+        parent.querySelectorAll('.diag-option').forEach(b => {
+          b.classList.remove('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+          b.classList.add('border-slate-200', 'text-slate-700');
         });
-        if (window.location.hash === "#product-managers") {
-          window.posthog.capture("product_managers_view", {
-            origen: "hash_anchor"
-          });
+      }
+      btn.classList.remove('border-slate-200', 'text-slate-700');
+      btn.classList.add('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('professional_diagnostic_question_answered', {
+          question: 'area_friccion',
+          answer: val,
+        });
+      }
+
+      setTimeout(() => proGoToStep(2), 250);
+    }
+
+    function proSelectFrecuencia(val: string, btn: HTMLElement) {
+      proState.frecuencia = val;
+      saveProState();
+
+      const parent = btn.parentElement;
+      if (parent) {
+        parent.querySelectorAll('.diag-option').forEach(b => {
+          b.classList.remove('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+          b.classList.add('border-slate-200', 'text-slate-700');
+        });
+      }
+      btn.classList.remove('border-slate-200', 'text-slate-700');
+      btn.classList.add('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('professional_diagnostic_question_answered', {
+          question: 'frecuencia',
+          answer: val,
+        });
+      }
+
+      setTimeout(() => proGoToStep(3), 250);
+    }
+
+    function proSelectTiempo(val: string, btn: HTMLElement) {
+      proState.tiempo = val;
+      saveProState();
+
+      const parent = btn.parentElement;
+      if (parent) {
+        parent.querySelectorAll('.diag-option').forEach(b => {
+          b.classList.remove('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+          b.classList.add('border-slate-200', 'text-slate-700');
+        });
+      }
+      btn.classList.remove('border-slate-200', 'text-slate-700');
+      btn.classList.add('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('professional_diagnostic_question_answered', {
+          question: 'tiempo_estimado',
+          answer: val,
+        });
+      }
+
+      setTimeout(() => proGoToStep(4), 250);
+    }
+
+    function proToggleHerramienta(val: string, btn: HTMLElement) {
+      const list: string[] = proState.herramientas || [];
+      const idx = list.indexOf(val);
+
+      if (idx >= 0) {
+        list.splice(idx, 1);
+        btn.classList.remove('border-teal-700', 'bg-teal-50', 'text-teal-900', 'font-bold');
+        btn.classList.add('border-slate-200', 'text-slate-700');
+      } else {
+        list.push(val);
+        btn.classList.remove('border-slate-200', 'text-slate-700');
+        btn.classList.add('border-teal-700', 'bg-teal-50', 'text-teal-900', 'font-bold');
+      }
+
+      proState.herramientas = list;
+      saveProState();
+    }
+
+    function proSelectObjetivo(val: string, btn: HTMLElement) {
+      proState.objetivo = val;
+      saveProState();
+
+      const parent = btn.parentElement;
+      if (parent) {
+        parent.querySelectorAll('.diag-option').forEach(b => {
+          b.classList.remove('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+          b.classList.add('border-slate-200', 'text-slate-700');
+        });
+      }
+      btn.classList.remove('border-slate-200', 'text-slate-700');
+      btn.classList.add('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('professional_diagnostic_question_answered', {
+          question: 'objetivo',
+          answer: val,
+        });
+      }
+
+      setTimeout(() => proGoToStep(6), 300);
+    }
+
+    async function proSubmitLead() {
+      const nomInput = document.getElementById('pro-input-nombre') as HTMLInputElement | null;
+      const emInput = document.getElementById('pro-input-email') as HTMLInputElement | null;
+      const waInput = document.getElementById('pro-input-whatsapp') as HTMLInputElement | null;
+      const submitBtn = document.getElementById('pro-btn-submit') as HTMLButtonElement | null;
+
+      const nom = nomInput?.value.trim() || '';
+      const em = emInput?.value.trim() || '';
+      const wa = waInput?.value.trim() || '';
+
+      if (!nom) {
+        alert('Por favor ingresa tu nombre.');
+        return;
+      }
+
+      if (!em || !em.includes('@')) {
+        alert('Por favor ingresa un correo electrónico válido.');
+        return;
+      }
+
+      if (!wa) {
+        alert('Por favor ingresa tu número de WhatsApp.');
+        return;
+      }
+
+      proState.nombre = nom;
+      proState.email = em;
+      proState.whatsapp = wa;
+      saveProState();
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Enviando y calculando...';
+      }
+
+      try {
+        const res = await fetch('/api/professional-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: proState.nombre,
+            email: proState.email,
+            whatsapp: proState.whatsapp,
+            problema_principal: proState.area || 'General',
+            frecuencia: proState.frecuencia || 'Diaria',
+            tiempo_estimado: proState.tiempo || '3–5 horas',
+            herramientas_actuales: proState.herramientas,
+            objetivo: proState.objetivo || 'Ahorrar tiempo',
+            recomendacion: 'Sesión 1-1 enfocada',
+          }),
+        });
+
+        const result = await res.json();
+        if (!res.ok && result.error) {
+          alert(result.error);
         }
+      } catch (err) {
+        console.error('Error enviando lead profesional:', err);
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = 'Ver diagnóstico y recomendación →';
+        }
+      }
+
+      // Dynamic Result Text
+      const summaryText = document.getElementById('pro-result-summary');
+      if (summaryText) {
+        const toolsStr = Array.isArray(proState.herramientas) && proState.herramientas.length > 0
+          ? proState.herramientas.join(', ')
+          : 'herramientas de IA básicas';
+
+        summaryText.innerHTML = `
+          Por lo que me cuentas, tienes una tarea en el área de <strong>${proState.area || 'tu trabajo diario'}</strong> que realizas <strong>${proState.frecuencia || 'frecuentemente'}</strong> y que te consume aproximadamente <strong>${proState.tiempo || 'varias horas'}</strong> a la semana. Ya utilizas algunas herramientas (<em>${toolsStr}</em>), pero todavía no tienes un flujo claro. En tu caso tendría sentido empezar por ese problema concreto y construir contigo una forma más simple de resolverlo.
+        `;
+      }
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('professional_diagnostic_completed', {
+          problem_area: proState.area,
+          frequency: proState.frecuencia,
+          time_estimate: proState.tiempo,
+          goal: proState.objetivo,
+        });
+        (window as any).posthog.capture('professional_lead_submitted', {
+          problem_area: proState.area,
+          frequency: proState.frecuencia,
+          goal: proState.objetivo,
+        });
+      }
+
+      proGoToStep(7);
+    }
+
+    // Window assignments
+    (window as any).proGoToStep = proGoToStep;
+    (window as any).proPrevStep = proPrevStep;
+    (window as any).proNextStep = proNextStep;
+    (window as any).proSelectArea = proSelectArea;
+    (window as any).proSelectFrecuencia = proSelectFrecuencia;
+    (window as any).proSelectTiempo = proSelectTiempo;
+    (window as any).proToggleHerramienta = proToggleHerramienta;
+    (window as any).proSelectObjetivo = proSelectObjetivo;
+    (window as any).proSubmitLead = proSubmitLead;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateProWizardProgress();
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('professional_session_view', {
+          url: window.location.href,
+        });
       }
     });
   </script>
