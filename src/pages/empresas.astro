@@ -16,7 +16,7 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
   <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
     <div class="h-16 max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
       <a class="flex flex-col group" href="#">
-        <span class="text-base font-bold tracking-tight text-slate-900 group-hover:text-primary-dark transition-colors">LuciRMe AI · Empresas</span>
+        <span class="text-base font-bold tracking-tight text-slate-900 group-hover:text-teal-700 transition-colors">LuciRMe AI · Empresas</span>
         <span class="text-[11px] font-mono text-slate-500">Primero el problema. Después la tecnología.</span>
       </a>
       
@@ -34,7 +34,7 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
           href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero revisar un cuello de botella operativo en mi empresa.")}`}
           rel="noopener noreferrer"
           target="_blank"
-          onclick="if (window.posthog) { window.posthog.capture('empresas_whatsapp_click', { origen: 'header_b2b' }); }"
+          onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_whatsapp_click', { origen: 'header_b2b' }); }"
         >
           <span class="material-symbols-outlined text-[17px]">chat</span>
           <span>Hablemos por WhatsApp</span>
@@ -65,6 +65,7 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
             <a
               class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors shadow-sm"
               href="#diagnostico"
+              onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_started', { origen: 'hero_btn' }); }"
             >
               <span>Empezar diagnóstico · 5 min</span>
               <span class="material-symbols-outlined text-[18px]">arrow_downward</span>
@@ -74,7 +75,7 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
               href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero conversar sobre un proceso operativo en mi empresa.")}`}
               rel="noopener noreferrer"
               target="_blank"
-              onclick="if (window.posthog) { window.posthog.capture('empresas_whatsapp_click', { origen: 'hero_direct' }); }"
+              onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_whatsapp_click', { origen: 'hero_direct' }); }"
             >
               <span class="material-symbols-outlined text-slate-500 text-[18px]">chat</span>
               <span>Hablar directamente con Pablo</span>
@@ -376,18 +377,30 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
               </div>
             </div>
 
-            <!-- Paso 7: Datos de la Empresa -->
+            <!-- Paso 7: Datos de la Empresa y Contacto -->
             <div class="wizard-step hidden flex flex-col gap-4" id="step-7">
               <div class="flex flex-col gap-1.5">
                 <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 7 · Datos de la empresa</span>
                 <h3 class="text-lg md:text-xl font-bold text-slate-900">Contexto para calibrar la solución</h3>
-                <p class="text-xs text-slate-500">Esto nos permite darte una referencia precisa para el tamaño y sector de tu operación.</p>
+                <p class="text-xs text-slate-500">Ingresa tus datos de contacto para guardar tu diagnóstico en MailerLite y generar tu PDF descargable.</p>
               </div>
               <form class="flex flex-col gap-3.5 pt-2" id="company-form" onsubmit="event.preventDefault(); submitDiagnostic();">
-                <div class="flex flex-col gap-1">
-                  <label class="text-xs font-semibold text-slate-700" for="empresa-input">Empresa</label>
-                  <input class="w-full text-xs md:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-teal-700 focus:ring-1 focus:ring-teal-700 outline-none bg-white transition-colors" id="empresa-input" placeholder="Nombre de tu empresa u organización" required type="text" value="Mi Empresa">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                  <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-700" for="nombre-input">Tu Nombre *</label>
+                    <input class="w-full text-xs md:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-teal-700 focus:ring-1 focus:ring-teal-700 outline-none bg-white transition-colors" id="nombre-input" placeholder="Ej. Ana María Pérez" required type="text" value="">
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <label class="text-xs font-semibold text-slate-700" for="email-input">Correo Corporativo *</label>
+                    <input class="w-full text-xs md:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-teal-700 focus:ring-1 focus:ring-teal-700 outline-none bg-white transition-colors" id="email-input" placeholder="ana@empresa.com" required type="email" value="">
+                  </div>
                 </div>
+
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-semibold text-slate-700" for="empresa-input">Nombre de la Empresa *</label>
+                  <input class="w-full text-xs md:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-teal-700 focus:ring-1 focus:ring-teal-700 outline-none bg-white transition-colors" id="empresa-input" placeholder="Nombre de tu empresa u organización" required type="text" value="">
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
                   <div class="flex flex-col gap-1">
                     <label class="text-xs font-semibold text-slate-700" for="tamano-select">Tamaño de la empresa</label>
@@ -411,6 +424,7 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
                     </select>
                   </div>
                 </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
                   <div class="flex flex-col gap-1">
                     <label class="text-xs font-semibold text-slate-700" for="pais-input">País</label>
@@ -421,8 +435,9 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
                     <input class="w-full text-xs md:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-teal-700 focus:ring-1 focus:ring-teal-700 outline-none bg-white transition-colors" id="ciudad-input" placeholder="Ej. Bogotá, Medellín, CDMX..." required type="text" value="Bogotá">
                   </div>
                 </div>
+
                 <div class="pt-2">
-                  <button class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer" type="submit">
+                  <button id="submit-btn" class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer" type="submit">
                     <span>Ver diagnóstico de cuello de botella →</span>
                   </button>
                 </div>
@@ -434,8 +449,8 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
               <div class="p-4 bg-teal-50 border border-teal-200 rounded-xl flex items-start gap-3">
                 <span class="material-symbols-outlined text-teal-700 text-2xl shrink-0">check_circle</span>
                 <div class="flex flex-col gap-1">
-                  <h4 class="text-sm font-bold text-slate-900">Diagnóstico completado con éxito</h4>
-                  <p class="text-xs text-slate-600">Revisa la tarjeta en el lateral con el cálculo de fuga operativa y los próximos pasos recomendados.</p>
+                  <h4 class="text-sm font-bold text-slate-900">Diagnóstico completado y registrado</h4>
+                  <p class="text-xs text-slate-600">Revisa la tarjeta en el lateral con el cálculo de fuga operativa y descarga tu informe oficial en PDF.</p>
                 </div>
               </div>
               <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl flex flex-col gap-2">
@@ -541,7 +556,7 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
               id="card-whatsapp-btn"
               rel="noopener noreferrer"
               target="_blank"
-              onclick="if (window.posthog) { window.posthog.capture('empresas_whatsapp_click', { origen: 'diagnostico_card' }); }"
+              onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_whatsapp_click', { origen: 'diagnostico_card' }); }"
             >
               <span class="material-symbols-outlined text-[19px]">chat</span>
               <span>Quiero revisar este proceso con Pablo</span>
@@ -550,7 +565,7 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
             <div class="grid grid-cols-2 gap-2.5 pt-1 w-full">
               <button
                 type="button"
-                onclick="window.print()"
+                onclick="downloadPDF()"
                 class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors shadow-2xs cursor-pointer"
               >
                 <span class="material-symbols-outlined text-[16px] text-slate-500">download</span>
@@ -726,7 +741,7 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
           href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, estuve revisando los pasos después del diagnóstico y quiero conversar sobre mi empresa.")}`}
           rel="noopener noreferrer"
           target="_blank"
-          onclick="if (window.posthog) { window.posthog.capture('empresas_whatsapp_click', { origen: 'como_trabajamos' }); }"
+          onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_whatsapp_click', { origen: 'como_trabajamos' }); }"
         >
           <span class="material-symbols-outlined text-[18px]">chat</span>
           <span>Hablar por WhatsApp con Pablo</span>
@@ -889,7 +904,7 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
             href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, tengo un proceso identificado para mejorar.")}`}
             rel="noopener noreferrer"
             target="_blank"
-            onclick="if (window.posthog) { window.posthog.capture('empresas_whatsapp_click', { origen: 'cta_final' }); }"
+            onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_whatsapp_click', { origen: 'cta_final' }); }"
           >
             <span class="material-symbols-outlined text-[18px]">chat</span>
             <span>Hablemos por WhatsApp</span>
@@ -971,6 +986,8 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
       personas: '2 a 4 personas',
       impacto: 'Afecta al cliente',
       esfuerzo: 'Moderado',
+      name: '',
+      email: '',
       empresa: 'Mi Empresa',
       tamano: '11-50 personas',
       industria: 'Tecnología/SaaS',
@@ -996,7 +1013,7 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
 
         if (currentStep === totalSteps) {
           if (nextBtn) nextBtn.classList.add('hidden');
-          if (stepHint) stepHint.innerText = 'Último paso · Contexto operativo';
+          if (stepHint) stepHint.innerText = 'Último paso · Contexto operativo y datos';
         } else {
           if (nextBtn) nextBtn.classList.remove('hidden');
           if (stepHint) stepHint.innerText = 'Selección guiada';
@@ -1138,8 +1155,13 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
       const badge = document.getElementById('card-priority-badge');
       const justification = document.getElementById('card-justification');
 
+      let prioridad = 'Media';
+      if (weeklyHours >= 12 || currentSelections.impacto.includes('ingresos') || currentSelections.impacto.includes('varios') || currentSelections.impacto.includes('cliente')) {
+        prioridad = 'Alta';
+      }
+
       if (badge && justification) {
-        if (weeklyHours >= 12 || currentSelections.impacto.includes('ingresos') || currentSelections.impacto.includes('varios') || currentSelections.impacto.includes('cliente')) {
+        if (prioridad === 'Alta') {
           badge.className = 'px-2 py-0.5 rounded font-mono text-[11px] font-bold bg-amber-100 text-amber-900 uppercase';
           badge.innerText = 'Prioridad: Alta';
           justification.innerHTML = `Este proceso merece ser intervenido pronto porque genera una fuga de aproximadamente <strong class="text-slate-900">~${weeklyHours} horas/semana</strong> combinando: <strong class="text-slate-800">Alta recurrencia · Impacto directo en la operación · Retorno rápido de inversión</strong>.`;
@@ -1166,22 +1188,79 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
         );
         waBtn.href = `https://wa.me/573053046180?text=${encodedMsg}`;
       }
+
+      window.latestDiagnosis = {
+        ...currentSelections,
+        weeklyHours,
+        prioridad,
+        prioridadBadge: prioridad === 'Alta' ? 'P1 Urgente · Alto ROI Inmediato' : 'P2 Recomendado · ROI Moderado',
+        justificacion: `Fuga aproximada de ~${weeklyHours} horas/semana.`,
+        recomendacion: 'Revisión estratégica de 30 min con Pablo Ríos.',
+        empresaTag: `${currentSelections.empresa} · ${currentSelections.industria} (${currentSelections.ciudad}, ${currentSelections.pais})`,
+      };
     }
 
-    function submitDiagnostic() {
+    async function submitDiagnostic() {
+      const nombreInput = document.getElementById('nombre-input');
+      const emailInput = document.getElementById('email-input');
       const empInput = document.getElementById('empresa-input');
       const tamSelect = document.getElementById('tamano-select');
       const indSelect = document.getElementById('industria-select');
       const paisInput = document.getElementById('pais-input');
       const cdInput = document.getElementById('ciudad-input');
+      const submitBtn = document.getElementById('submit-btn');
 
-      currentSelections.empresa = (empInput && empInput.value.trim()) || 'Mi Empresa';
+      const nameVal = (nombreInput && nombreInput.value.trim()) || '';
+      const emailVal = (emailInput && emailInput.value.trim()) || '';
+      const empVal = (empInput && empInput.value.trim()) || 'Mi Empresa';
+
+      if (!emailVal || !emailVal.includes('@')) {
+        alert('Por favor ingresa un correo electrónico corporativo válido.');
+        return;
+      }
+
+      if (!nameVal) {
+        alert('Por favor ingresa tu nombre.');
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Enviando y calculando...';
+      }
+
+      currentSelections.name = nameVal;
+      currentSelections.email = emailVal;
+      currentSelections.empresa = empVal;
       currentSelections.tamano = (tamSelect && tamSelect.value) || '11-50 personas';
       currentSelections.industria = (indSelect && indSelect.value) || 'Tecnología/SaaS';
       currentSelections.pais = (paisInput && paisInput.value.trim()) || 'Colombia';
       currentSelections.ciudad = (cdInput && cdInput.value.trim()) || 'Bogotá';
 
       recalculateAssessment();
+
+      try {
+        const response = await fetch('/api/bottleneck-diagnosis', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(currentSelections),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok && result.error) {
+          alert(result.error);
+        } else if (result.diagnosis) {
+          window.latestDiagnosis = result.diagnosis;
+        }
+      } catch (err) {
+        console.error('Error enviando diagnóstico:', err);
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = 'Ver diagnóstico de cuello de botella →';
+        }
+      }
 
       const hours = calculateEstimatedWeeklyHours();
       const sumText = document.getElementById('completion-summary-text');
@@ -1192,12 +1271,18 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
       }
 
       if (window.posthog) {
-        window.posthog.capture('empresas_diagnostico_completado', {
-          proceso: currentSelections.proceso,
-          frecuencia: currentSelections.frecuencia,
-          fuga_horas: hours,
-          empresa: currentSelections.empresa,
-          industria: currentSelections.industria
+        window.posthog.capture('bottleneck_diagnosis_completed', {
+          process: currentSelections.proceso,
+          company_size: currentSelections.tamano,
+          industry: currentSelections.industria,
+          estimated_hours_week: hours,
+          priority: window.latestDiagnosis?.prioridad || 'Alta',
+        });
+        window.posthog.capture('bottleneck_diagnosis_lead_submitted', {
+          company_size: currentSelections.tamano,
+          industry: currentSelections.industria,
+          city: currentSelections.ciudad,
+          country: currentSelections.pais,
         });
       }
 
@@ -1212,12 +1297,34 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
       goToStep(totalSteps + 1);
     }
 
+    async function downloadPDF() {
+      if (!window.latestDiagnosis) {
+        recalculateAssessment();
+      }
+      
+      try {
+        const { generateBottleneckPDF } = await import('../lib/pdfGenerator');
+        generateBottleneckPDF(window.latestDiagnosis);
+
+        if (window.posthog) {
+          window.posthog.capture('bottleneck_diagnosis_pdf_downloaded', {
+            process: currentSelections.proceso,
+            company: currentSelections.empresa,
+            estimated_hours_week: window.latestDiagnosis.weeklyHours,
+          });
+        }
+      } catch (pdfErr) {
+        console.error('Error generando PDF:', pdfErr);
+        alert('No se pudo generar el PDF en este momento. Por favor inténtalo de nuevo.');
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       updateProgressBar();
       recalculateAssessment();
 
       if (window.posthog) {
-        window.posthog.capture('empresas_page_view', {
+        window.posthog.capture('bottleneck_diagnosis_started', {
           pagina: 'empresas_b2b_custom'
         });
       }
