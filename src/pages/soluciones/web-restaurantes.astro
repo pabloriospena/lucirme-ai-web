@@ -1,0 +1,947 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { LINKS } from "../../lib/constants.js";
+
+const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
+const ctaDescuentoWA = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero aprovechar la oferta de lanzamiento (50% OFF) para la Página Comercial de mi restaurante.")}`;
+---
+
+<Layout
+  title="Página Web para Restaurantes | LuciRMe AI"
+  description="Creamos páginas comerciales profesionales para restaurantes que quieren mostrar su menú, generar confianza y facilitar reservas y contacto con sus clientes."
+  hideHeader={true}
+  hideFooter={true}
+>
+  <!-- HEADER DEDICADO RESTAURANTES -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="h-16 max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
+      <a class="flex flex-col group" href="#">
+        <span class="text-base font-bold tracking-tight text-slate-900 group-hover:text-teal-700 transition-colors">LuciRMe AI · Restaurantes</span>
+        <span class="text-[11px] font-mono text-slate-500">Página comercial profesional para restaurantes y gastronomía</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600">
+        <a class="hover:text-slate-900 transition-colors" href="#diagnostico-restaurante">Diagnóstico 2 min</a>
+        <a class="hover:text-slate-900 transition-colors" href="#que-incluye">Qué incluye</a>
+        <a class="hover:text-slate-900 transition-colors" href="#ejemplos-restaurante">Ejemplos</a>
+        <a class="hover:text-slate-900 transition-colors" href="#pablo">Pablo</a>
+        <a class="hover:text-slate-900 transition-colors font-bold text-amber-700" href="#oferta-precio">Lanzamiento 50% OFF</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-teal-700 text-white text-xs font-semibold hover:bg-teal-800 transition-colors shadow-2xs cursor-pointer"
+          href="#diagnostico-restaurante"
+        >
+          <span class="material-symbols-outlined text-[17px]">restaurant</span>
+          <span>Empezar diagnóstico</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="w-full bg-[#F8FAFC]">
+
+    <!-- HERO SECTION -->
+    <section class="w-full max-w-7xl mx-auto px-6 pt-12 pb-12 md:py-20 border-b border-slate-200/60">
+      <div class="max-w-3xl mx-auto flex flex-col items-center text-center gap-6">
+        
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-teal-50 border border-teal-200/80 rounded-full font-mono text-xs text-teal-800 shadow-2xs">
+          <span class="w-2 h-2 rounded-full bg-teal-600 animate-pulse"></span>
+          Especial para restaurantes y negocios gastronómicos
+        </div>
+
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+          ¿Tu restaurante depende demasiado de Instagram y WhatsApp?
+        </h1>
+
+        <p class="text-base md:text-lg text-slate-600 font-normal leading-relaxed">
+          Tus clientes quieren saber qué vendes, ver tu menú, saber dónde estás, cuándo abres y cómo reservar. Si hoy tienen que buscar esa información entre Instagram, WhatsApp, Google y otros enlaces, podemos organizarlo mejor.
+        </p>
+
+        <div class="p-5 bg-white border border-slate-200 rounded-2xl shadow-xs w-full max-w-xl flex flex-col items-center gap-3 mt-2">
+          <h2 class="text-base font-bold text-slate-900">
+            Hagamos una prueba rápida 🍽️
+          </h2>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            En menos de 2 minutos te ayudo a definir qué debería tener la página de tu restaurante.
+          </p>
+          <a
+            class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer w-full sm:w-auto"
+            href="#diagnostico-restaurante"
+            onclick="if(window.posthog) window.posthog.capture('diagnostic_started', { tipo_de_pagina: 'restaurante' });"
+          >
+            <span>Empezar diagnóstico →</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- COMPONENTE DIAGNÓSTICO CONVERSACIONAL (RestaurantDiagnostic) -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-12 scroll-mt-20" id="diagnostico-restaurante">
+      <div class="max-w-2xl mx-auto flex flex-col gap-6">
+
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-md p-6 md:p-8 relative min-h-[400px] flex flex-col justify-between" id="rest-wizard-card">
+          
+          <!-- Wizard Header -->
+          <div class="flex flex-col gap-2 pb-4 border-b border-slate-100" id="rest-wizard-header">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="font-mono text-xs font-semibold text-slate-900 uppercase" id="rest-step-counter">Paso 1 de 7</span>
+              </div>
+              <span class="text-xs font-mono text-slate-400" id="rest-step-time">~2 min</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="bg-emerald-600 h-1.5 rounded-full transition-all duration-300 ease-out" id="rest-progress-bar" style="width: 14.28%;"></div>
+            </div>
+          </div>
+
+          <!-- PASO 1: NOMBRE -->
+          <div class="rest-step flex flex-col gap-4 py-4" id="rest-step-1">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 1 · Identidad</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">Cuéntame un poco de tu restaurante 🍽️</h3>
+              <p class="text-sm text-slate-600">¿Cómo se llama tu restaurante o negocio gastronómico?</p>
+            </div>
+            <div class="flex flex-col gap-3 pt-2">
+              <input
+                class="w-full text-sm px-4 py-3 rounded-xl border border-slate-300 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 outline-none bg-white transition-colors"
+                id="rest-input-nombre"
+                placeholder="Ej. Restaurante La Terraza / Trattoria Bella Vista..."
+                type="text"
+              />
+              <button
+                class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors cursor-pointer self-start"
+                onclick="window.restNextStep(1)"
+                type="button"
+              >
+                <span>Continuar →</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- PASO 2: CANAL ACTUAL -->
+          <div class="rest-step hidden flex flex-col gap-4 py-4" id="rest-step-2">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 2 · Información</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿Cómo encuentran hoy tus clientes la información sobre tu restaurante?</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2" id="group-rest-canal">
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectCanal('Instagram', this)" type="button">📸 Instagram</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectCanal('WhatsApp', this)" type="button">💬 WhatsApp</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectCanal('Google', this)" type="button">🔍 Google</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectCanal('Facebook', this)" type="button">👥 Facebook</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectCanal('Página web', this)" type="button">🌐 Página web</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectCanal('Una combinación de varias', this)" type="button">🔀 Una combinación de varias</button>
+              <button class="diag-option sm:col-span-2 px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectCanal('Otro', this)" type="button">Otro</button>
+            </div>
+            <div class="hidden p-3 bg-teal-50 border border-teal-200 rounded-xl text-xs text-teal-900 font-medium" id="rest-nudge-canal"></div>
+          </div>
+
+          <!-- PASO 3: BÚSQUEDA DE MENÚ O SERVICIOS -->
+          <div class="rest-step hidden flex flex-col gap-4 py-4" id="rest-step-3">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 3 · Menú y Experiencia</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">Cuando alguien quiere conocer tu menú o lo que ofreces, ¿qué tiene que hacer?</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2" id="group-rest-menu">
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectMenu('Buscar publicaciones', this)" type="button">Buscar publicaciones</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectMenu('Escribirte por WhatsApp', this)" type="button">Escribirte por WhatsApp</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectMenu('Preguntar directamente', this)" type="button">Preguntar directamente</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectMenu('Revisar varios enlaces', this)" type="button">Revisar varios enlaces</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectMenu('Buscar en Google', this)" type="button">Buscar en Google</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectMenu('Ver un menú digital', this)" type="button">Ver un menú digital</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectMenu('Ya tenemos todo organizado', this)" type="button">Ya tenemos todo organizado</button>
+            </div>
+          </div>
+
+          <!-- PASO 4: LO QUE QUEREMOS RESOLVER -->
+          <div class="rest-step hidden flex flex-col gap-4 py-4" id="rest-step-4">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 4 · Propósito</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">Si tuvieras una página para tu restaurante, ¿qué te gustaría que resolviera principalmente?</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2" id="group-rest-resolver">
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectResolver('Mostrar mi menú', this)" type="button">Mostrar mi menú</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectResolver('Conseguir más clientes', this)" type="button">Conseguir más clientes</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectResolver('Llevar personas a WhatsApp', this)" type="button">Llevar personas a WhatsApp</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectResolver('Facilitar reservas', this)" type="button">Facilitar reservas</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectResolver('Mostrar ubicación y horarios', this)" type="button">Mostrar ubicación y horarios</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectResolver('Aparecer mejor en Google', this)" type="button">Aparecer mejor en Google</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectResolver('Tener toda la información en un solo lugar', this)" type="button">Tener todo en un solo lugar</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectResolver('Mostrar una imagen más profesional', this)" type="button">Imagen más profesional</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectResolver('Varias de las anteriores', this)" type="button">Varias de las anteriores</button>
+            </div>
+          </div>
+
+          <!-- PASO 5: WEB ACTUAL Y MATERIALES -->
+          <div class="rest-step hidden flex flex-col gap-4 py-4" id="rest-step-5">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 5 · Situación y Recursos</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿Ya tienes página web actualmente?</h3>
+            </div>
+            <div class="flex flex-col gap-2 pt-1" id="group-rest-tiene-web">
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectTieneWeb('No', this)" type="button">No</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectTieneWeb('Sí', this)" type="button">Sí</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectTieneWeb('Sí, pero quiero cambiarla', this)" type="button">Sí, pero quiero cambiarla</button>
+            </div>
+            <div class="hidden p-3 bg-teal-50 border border-teal-200 rounded-xl text-xs text-teal-900 font-medium" id="rest-nudge-web"></div>
+
+            <div class="flex flex-col gap-1.5 pt-3 border-t border-slate-100">
+              <h4 class="text-xs font-bold text-slate-900">¿Qué tienes listo para construirla?</h4>
+              <div class="grid grid-cols-2 gap-2" id="group-rest-materiales">
+                <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restToggleMaterial('Logo', this)" type="button">🎨 Logo</button>
+                <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restToggleMaterial('Fotos de mis platos', this)" type="button">📸 Fotos de platos</button>
+                <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restToggleMaterial('Fotos del restaurante', this)" type="button">🏛️ Fotos del local</button>
+                <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restToggleMaterial('Menú', this)" type="button">📜 Menú / Carta</button>
+                <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restToggleMaterial('Textos', this)" type="button">✍️ Textos</button>
+                <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restToggleMaterial('Redes sociales', this)" type="button">📲 Redes sociales</button>
+              </div>
+            </div>
+
+            <button
+              class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors cursor-pointer self-start mt-2"
+              onclick="window.restNextStep(5)"
+              type="button"
+            >
+              <span>Continuar →</span>
+            </button>
+          </div>
+
+          <!-- PASO 6: ACCIÓN PRINCIPAL DEL VISITANTE -->
+          <div class="rest-step hidden flex flex-col gap-4 py-4" id="rest-step-6">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 6 · Llamado a la acción</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">Cuando alguien entre a tu página, ¿qué quieres que haga?</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2" id="group-rest-accion">
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectAccion('Ver el menú', this)" type="button">📜 Ver el menú</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectAccion('Escribir por WhatsApp', this)" type="button">💬 Escribir por WhatsApp</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectAccion('Reservar una mesa', this)" type="button">🍷 Reservar una mesa</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectAccion('Llamar', this)" type="button">📞 Llamar</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectAccion('Ver ubicación', this)" type="button">📍 Ver ubicación</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.restSelectAccion('Ver horarios', this)" type="button">🕒 Ver horarios</button>
+            </div>
+          </div>
+
+          <!-- PASO 7: DATOS DE CONTACTO (POST-DIAGNÓSTICO) -->
+          <div class="rest-step hidden flex flex-col gap-4 py-4" id="rest-step-7">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 7 · Enviar Resultado</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">Ya tenemos una idea mucho más clara.</h3>
+              <p class="text-sm text-slate-600">¿A dónde te envío el diagnóstico y la propuesta para tu restaurante?</p>
+            </div>
+            <form class="flex flex-col gap-3 pt-2" onsubmit="event.preventDefault(); window.restSubmitLead();">
+              <div class="flex flex-col gap-1">
+                <label class="text-xs font-semibold text-slate-700" for="rest-input-contacto-nombre">Tu Nombre *</label>
+                <input class="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white" id="rest-input-contacto-nombre" placeholder="Ej. Chef Manuel Gómez" required type="text" />
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-semibold text-slate-700" for="rest-input-email">Correo Electrónico *</label>
+                  <input class="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white" id="rest-input-email" placeholder="contacto@restaurante.com" required type="email" />
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-semibold text-slate-700" for="rest-input-whatsapp">Número de WhatsApp *</label>
+                  <input class="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white" id="rest-input-whatsapp" placeholder="+57 300 000 0000" required type="tel" />
+                </div>
+              </div>
+
+              <div class="pt-2">
+                <button id="rest-btn-submit" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer" type="submit">
+                  <span>Ver resultado y propuesta →</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- RESULTADO PERSONALIZADO DEL DIAGNÓSTICO -->
+          <div class="rest-step hidden flex flex-col gap-5 py-4" id="rest-step-result">
+            <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl flex flex-col gap-2">
+              <div class="flex items-center gap-2 text-emerald-800 font-bold text-sm">
+                <span class="material-symbols-outlined text-emerald-600 text-xl">verified</span>
+                <span>Diagnóstico Completado</span>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900">Esto es lo que debería resolver tu página:</h3>
+              <p class="text-xs text-slate-700 leading-relaxed" id="rest-result-summary">
+                Por lo que me cuentas, hoy tus clientes llegan principalmente desde redes sociales, pero tienen que buscar información entre diferentes lugares para conocer tu menú, ubicación y opciones de reserva.
+              </p>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col gap-2.5 text-xs text-slate-800">
+              <span class="font-mono text-[10px] uppercase font-bold text-slate-500">Recomendaciones personalizadas:</span>
+              <ul class="flex flex-col gap-2 text-slate-700 font-medium" id="rest-result-bullets">
+                <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Mostrar claramente tu menú y especialidades de forma visual.</li>
+                <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Mostrar tus platos principales y ambiente para generar antojo y confianza.</li>
+                <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Explicar qué hace diferente a tu restaurante frente a la competencia.</li>
+                <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Facilitar reservas de mesa, datos de ubicación y horarios exactos.</li>
+                <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Llevar clientes directamente a tu WhatsApp.</li>
+              </ul>
+            </div>
+
+            <a
+              class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors shadow-2xs text-center cursor-pointer"
+              href="#oferta-precio"
+            >
+              <span>Ver oferta y precio de lanzamiento ↓</span>
+            </a>
+          </div>
+
+          <!-- Wizard Footer Navigation -->
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-2" id="rest-wizard-navigation">
+            <button
+              class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+              disabled
+              id="rest-btn-prev"
+              onclick="window.restPrevStep()"
+              type="button"
+            >
+              <span class="material-symbols-outlined text-[15px]">arrow_back</span>
+              <span>Anterior</span>
+            </button>
+            <span class="text-xs font-mono text-slate-400" id="rest-status-tag">Paso 1</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- OFERTA Y PRECIO (Aparece después del diagnóstico) -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="oferta-precio">
+      <div class="max-w-4xl mx-auto bg-slate-900 text-white rounded-3xl p-8 md:p-12 shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+        
+        <div class="flex flex-col gap-4 max-w-xl">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 rounded-full font-mono text-xs font-bold border border-emerald-500/30 uppercase">Y esto es justamente lo que hago</span>
+            <span class="px-3 py-1 bg-amber-500/20 text-amber-300 rounded-full font-mono text-xs font-bold border border-amber-500/30">50% OFF LANZAMIENTO</span>
+          </div>
+
+          <h2 class="text-2xl md:text-4xl font-bold tracking-tight">
+            Página Comercial para Restaurantes
+          </h2>
+
+          <p class="text-sm text-slate-300 leading-relaxed">
+            Construyo páginas comerciales para negocios que necesitan explicar claramente qué hacen y facilitar el siguiente paso para sus clientes.
+          </p>
+
+          <div class="flex items-baseline gap-3 pt-1">
+            <span class="text-lg text-slate-400 line-through font-mono">$2.150.000 COP</span>
+            <span class="text-3xl md:text-5xl font-extrabold text-emerald-400 font-mono">$1.075.000 COP</span>
+          </div>
+
+          <div class="flex flex-col gap-1 text-xs text-slate-400 font-mono">
+            <span>USD $275 aprox.</span>
+            <span class="text-[10px] text-slate-400">Cupos limitados hasta el viernes 9 de octubre. El precio oficial de compra es el precio en COP.</span>
+          </div>
+        </div>
+
+        <div class="w-full md:w-auto flex flex-col items-center gap-3 shrink-0">
+          <a
+            class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-emerald-500 text-slate-950 font-bold text-base hover:bg-emerald-400 transition-colors shadow-lg cursor-pointer text-center"
+            href={ctaDescuentoWA}
+            rel="noopener noreferrer"
+            target="_blank"
+            onclick="if(window.posthog) { window.posthog.capture('page_commercial_final_cta_click', { tipo_de_pagina: 'restaurante' }); window.posthog.capture('page_commercial_whatsapp_click', { origen: 'oferta_precio_rest' }); }"
+          >
+            <span class="material-symbols-outlined text-[20px]">chat</span>
+            <span>Quiero mi página</span>
+          </a>
+          <p class="text-[11px] text-slate-400 font-mono text-center">
+            Atención directa por WhatsApp con Pablo Ríos.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- QUÉ INCLUYE -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="que-incluye">
+      <div class="max-w-3xl mb-12 flex flex-col gap-2">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Sin letras chiquitas</span>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+          Lo que incluye la Página Comercial para tu Restaurante
+        </h2>
+        <p class="text-sm text-slate-600">
+          Todo listo y optimizado para que tus clientes encuentren tu restaurante, vean tu carta y reserven en segundos.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
+          <span class="text-2xl mb-1">🎨</span>
+          <h3 class="text-base font-bold text-slate-900">Diseño personalizado</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Adaptado a la personalidad, colores y concepto gastronómico de tu restaurante.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
+          <span class="text-2xl mb-1">📱</span>
+          <h3 class="text-base font-bold text-slate-900">Página responsive</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Carga rápida e impecable en celulares, tablets y computadores.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
+          <span class="text-2xl mb-1">🌐</span>
+          <h3 class="text-base font-bold text-slate-900">Dominio</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Conexión con tu propio dominio corporativo (.com o .co).</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
+          <span class="text-2xl mb-1">🔒</span>
+          <h3 class="text-base font-bold text-slate-900">Certificado SSL</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Candado de navegación segura (https) configurado desde el primer día.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
+          <span class="text-2xl mb-1">💬</span>
+          <h3 class="text-base font-bold text-slate-900">WhatsApp integrado</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Botones de contacto y pedidos directo a la línea de tu restaurante.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
+          <span class="text-2xl mb-1">📜</span>
+          <h3 class="text-base font-bold text-slate-900">Menú digital claro</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Organización visual de tus categorías, platos destacados y precios.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
+          <span class="text-2xl mb-1">🔗</span>
+          <h3 class="text-base font-bold text-slate-900">Redes sociales</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Enlaces estructurados a Instagram, Facebook, TikTok y Google Maps.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
+          <span class="text-2xl mb-1">🔍</span>
+          <h3 class="text-base font-bold text-slate-900">SEO básico</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Optimizada para búsquedas locales de tu restaurante en tu ciudad.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
+          <span class="text-2xl mb-1">🎓</span>
+          <h3 class="text-base font-bold text-slate-900">Capacitación práctica</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Te explico cómo actualizar el menú y datos para que tengas total autonomía.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EJEMPLOS DE CONTENIDO PARA RESTAURANTES -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="ejemplos-restaurante">
+      <div class="max-w-3xl mb-10 flex flex-col gap-2">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Organización Clara</span>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+          Ejemplo de cómo podemos organizar tu restaurante
+        </h2>
+        <p class="text-sm text-slate-600">
+          Adaptamos la estructura según el concepto real de tu negocio (no todos los restaurantes tienen los mismos servicios).
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Bloque Menú & Platos -->
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-4">
+          <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="material-symbols-outlined text-teal-700">menu_book</span>
+            <span>Estructura de Menú y Platos</span>
+          </h3>
+          <div class="grid grid-cols-2 gap-2 text-xs font-medium text-slate-700">
+            <span class="p-2 bg-slate-50 rounded-lg border border-slate-100">🥗 Entradas y para compartir</span>
+            <span class="p-2 bg-slate-50 rounded-lg border border-slate-100">🥩 Platos fuertes y cortes</span>
+            <span class="p-2 bg-slate-50 rounded-lg border border-slate-100">🍰 Postres de la casa</span>
+            <span class="p-2 bg-slate-50 rounded-lg border border-slate-100">🍷 Bebidas, vinos y cócteles</span>
+            <span class="p-2 bg-slate-50 rounded-lg border border-slate-100">⭐ Especialidades recomendadas</span>
+            <span class="p-2 bg-slate-50 rounded-lg border border-slate-100">🌱 Opciones vegetarianas</span>
+          </div>
+        </div>
+
+        <!-- Bloque Información Clave -->
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-4">
+          <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+            <span class="material-symbols-outlined text-teal-700">storefront</span>
+            <span>Información clave centralizada</span>
+          </h3>
+          <ul class="flex flex-col gap-2 text-xs font-medium text-slate-700">
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> Ubicación exacta y cómo llegar con Google Maps.</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> Horarios de cocina y atención por días.</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> Galería de fotos del ambiente y los platos.</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> Botón de reservas de mesa por WhatsApp o formulario.</li>
+          </ul>
+
+          <div class="mt-auto pt-3 border-t border-slate-100">
+            <a
+              class="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl bg-emerald-600 text-white font-semibold text-xs hover:bg-emerald-700 transition-colors shadow-2xs text-center cursor-pointer"
+              href={ctaDescuentoWA}
+              target="_blank"
+            >
+              <span class="material-symbols-outlined text-[16px]">table_restaurant</span>
+              <span>Ejemplo: "Reservar una mesa por WhatsApp"</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MENSAJE HUMANO & PABLO -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="pablo">
+      <div class="max-w-4xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-2xs p-8 md:p-12 flex flex-col md:flex-row gap-8 items-start">
+        
+        <div class="w-16 h-16 rounded-full bg-teal-50 border border-teal-200 text-teal-800 flex items-center justify-center shrink-0 font-bold text-xl">
+          PR
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-1">
+            <span class="font-mono text-xs text-teal-800 uppercase font-semibold">Detrás de esto estoy yo</span>
+            <h2 class="text-2xl font-bold text-slate-900">Pablo Ríos</h2>
+            <p class="text-xs font-semibold text-slate-600">Consultor de Producto, Operaciones e IA</p>
+          </div>
+
+          <div class="text-xs text-slate-600 flex flex-col gap-3 leading-relaxed">
+            <p class="text-sm font-semibold text-slate-800">
+              "Tú conoces tu restaurante. Yo me encargo de convertirlo en una página que explique bien lo que haces."
+            </p>
+            <p>
+              No necesitas saber de páginas web. Necesitas tener una que haga bien su trabajo. Primero entendemos tu negocio y después construimos la página.
+            </p>
+            <p>
+              Trabajo con negocios y profesionales para convertir problemas concretos en soluciones digitales que realmente puedan usar. La idea no es entregarte una página y desaparecer: te acompaño para que entiendas cómo funciona y puedas hacerte cargo de ella.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200">
+      <div class="p-8 md:p-12 bg-white rounded-2xl border border-slate-200 text-center flex flex-col items-center gap-5 shadow-2xs max-w-3xl mx-auto">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase font-mono">Paso Siguiente</span>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+          ¿Hacemos que tu restaurante tenga un lugar propio?
+        </h2>
+        <p class="text-xs md:text-sm text-slate-600 max-w-xl leading-relaxed">
+          Aprovecha el precio de lanzamiento de <strong class="text-slate-900">$1.075.000 COP</strong> (50% OFF) válido hasta el viernes 9 de octubre.
+        </p>
+
+        <a
+          class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
+          href={ctaDescuentoWA}
+          rel="noopener noreferrer"
+          target="_blank"
+          onclick="if(window.posthog) { window.posthog.capture('page_commercial_final_cta_click', { tipo_de_pagina: 'restaurante' }); window.posthog.capture('page_commercial_whatsapp_click', { origen: 'cta_final_rest' }); }"
+        >
+          <span class="material-symbols-outlined text-[18px]">chat</span>
+          <span>Quiero mi página</span>
+        </a>
+
+        <p class="text-xs font-mono text-slate-500">Conversación directa por WhatsApp con Pablo Ríos.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER DEDICADO RESTAURANTES -->
+  <footer class="w-full bg-white border-t border-slate-200 py-12">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col gap-8">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="flex flex-col gap-1">
+          <span class="text-base font-bold text-slate-900">LuciRMe AI · Páginas Web para Restaurantes</span>
+          <p class="text-xs font-mono text-slate-500">Tú conoces tu restaurante. Yo me encargo de convertirlo en una página que lo explique bien.</p>
+        </div>
+        <div class="flex items-center gap-4 text-xs text-slate-600 font-medium">
+          <a class="hover:text-slate-900 transition-colors" href={ctaDescuentoWA} target="_blank">WhatsApp Directo</a>
+          <a class="hover:text-slate-900 transition-colors" href="/pagina-comercial">Página Comercial General</a>
+          <a class="hover:text-slate-900 transition-colors" href="/empresas">LuciRMe Empresas</a>
+        </div>
+      </div>
+      <div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
+        <span>© 2026 LuciRMe AI · Todos los derechos reservados.</span>
+        <span>lucirme.com/soluciones/web-restaurantes</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT CONVERSACIONAL DE RESTAURANTES Y EVENTOS POSTHOG -->
+  <script>
+    let restStep = 1;
+    const totalRestSteps = 7;
+
+    const restState: Record<string, any> = {
+      nombre: '',
+      canal: '',
+      menu: '',
+      resolver: '',
+      tieneWeb: '',
+      materiales: [],
+      accion: '',
+      contactoNombre: '',
+      email: '',
+      whatsapp: '',
+    };
+
+    // Load from sessionStorage if available
+    try {
+      const saved = sessionStorage.getItem('restaurant_diag_state');
+      if (saved) {
+        Object.assign(restState, JSON.parse(saved));
+      }
+    } catch (e) {
+      console.warn('sessionStorage not available:', e);
+    }
+
+    function saveRestState() {
+      try {
+        sessionStorage.setItem('restaurant_diag_state', JSON.stringify(restState));
+      } catch (e) {}
+    }
+
+    function updateRestWizardProgress() {
+      const counter = document.getElementById('rest-step-counter');
+      const bar = document.getElementById('rest-progress-bar');
+      const tag = document.getElementById('rest-status-tag');
+      const prevBtn = document.getElementById('rest-btn-prev') as HTMLButtonElement | null;
+
+      if (!counter || !bar) return;
+
+      if (restStep <= totalRestSteps) {
+        const pct = (restStep / totalRestSteps) * 100;
+        counter.innerText = `Paso ${restStep} de ${totalRestSteps}`;
+        bar.style.width = `${pct}%`;
+        if (tag) tag.innerText = `Paso ${restStep}`;
+        if (prevBtn) prevBtn.disabled = restStep === 1;
+      } else {
+        counter.innerText = 'Diagnóstico Completado';
+        bar.style.width = '100%';
+        if (tag) tag.innerText = 'Completado';
+        if (prevBtn) prevBtn.disabled = false;
+      }
+    }
+
+    function restGoToStep(step: number) {
+      document.querySelectorAll('.rest-step').forEach(el => el.classList.add('hidden'));
+
+      restStep = step;
+      if (step <= totalRestSteps) {
+        const target = document.getElementById(`rest-step-${step}`);
+        if (target) target.classList.remove('hidden');
+      } else {
+        const res = document.getElementById('rest-step-result');
+        if (res) res.classList.remove('hidden');
+      }
+
+      updateRestWizardProgress();
+    }
+
+    function restPrevStep() {
+      if (restStep > 1 && restStep <= totalRestSteps) {
+        restGoToStep(restStep - 1);
+      } else if (restStep > totalRestSteps) {
+        restGoToStep(totalRestSteps);
+      }
+    }
+
+    function restNextStep(step: number) {
+      if (step === 1) {
+        const inp = document.getElementById('rest-input-nombre') as HTMLInputElement | null;
+        const val = inp?.value.trim() || '';
+        if (!val) {
+          alert('Por favor cuéntame el nombre de tu restaurante.');
+          return;
+        }
+        restState.nombre = val;
+        saveRestState();
+        restGoToStep(2);
+      } else if (step === 5) {
+        restGoToStep(6);
+      }
+    }
+
+    function restSelectCanal(val: string, btn: HTMLElement) {
+      restState.canal = val;
+      saveRestState();
+
+      const parent = btn.parentElement;
+      if (parent) {
+        parent.querySelectorAll('.diag-option').forEach(b => {
+          b.classList.remove('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+          b.classList.add('border-slate-200', 'text-slate-700');
+        });
+      }
+      btn.classList.remove('border-slate-200', 'text-slate-700');
+      btn.classList.add('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+
+      const nudge = document.getElementById('rest-nudge-canal');
+      if (nudge) {
+        if (val.includes('Instagram')) {
+          nudge.innerText = 'Tiene sentido. Instagram funciona muy bien para mostrar tus platos y el ambiente, pero no siempre es el mejor lugar para reunir toda la información de tu restaurante.';
+          nudge.classList.remove('hidden');
+        } else if (val.includes('WhatsApp')) {
+          nudge.innerText = 'WhatsApp es perfecto para conversar y recibir reservas. El problema aparece cuando toda la información depende de una conversación.';
+          nudge.classList.remove('hidden');
+        } else if (val.includes('Google')) {
+          nudge.innerText = 'Perfecto. Entonces tiene sentido que cuando alguien encuentre tu restaurante pueda llegar a un lugar donde entienda rápidamente qué ofreces y cómo visitarte.';
+          nudge.classList.remove('hidden');
+        } else {
+          nudge.classList.add('hidden');
+        }
+      }
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('diagnostic_question_answered', {
+          question: 'canal_actual',
+          answer: val,
+          tipo_de_pagina: 'restaurante',
+        });
+      }
+
+      setTimeout(() => restGoToStep(3), 300);
+    }
+
+    function restSelectMenu(val: string, btn: HTMLElement) {
+      restState.menu = val;
+      saveRestState();
+
+      const parent = btn.parentElement;
+      if (parent) {
+        parent.querySelectorAll('.diag-option').forEach(b => {
+          b.classList.remove('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+          b.classList.add('border-slate-200', 'text-slate-700');
+        });
+      }
+      btn.classList.remove('border-slate-200', 'text-slate-700');
+      btn.classList.add('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('diagnostic_question_answered', {
+          question: 'busqueda_menu',
+          answer: val,
+          tipo_de_pagina: 'restaurante',
+        });
+      }
+
+      setTimeout(() => restGoToStep(4), 250);
+    }
+
+    function restSelectResolver(val: string, btn: HTMLElement) {
+      restState.resolver = val;
+      saveRestState();
+
+      const parent = btn.parentElement;
+      if (parent) {
+        parent.querySelectorAll('.diag-option').forEach(b => {
+          b.classList.remove('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+          b.classList.add('border-slate-200', 'text-slate-700');
+        });
+      }
+      btn.classList.remove('border-slate-200', 'text-slate-700');
+      btn.classList.add('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('diagnostic_question_answered', {
+          question: 'que_resolver',
+          answer: val,
+          tipo_de_pagina: 'restaurante',
+        });
+      }
+
+      setTimeout(() => restGoToStep(5), 250);
+    }
+
+    function restSelectTieneWeb(val: string, btn: HTMLElement) {
+      restState.tieneWeb = val;
+      saveRestState();
+
+      const parent = btn.parentElement;
+      if (parent) {
+        parent.querySelectorAll('.diag-option').forEach(b => {
+          b.classList.remove('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+          b.classList.add('border-slate-200', 'text-slate-700');
+        });
+      }
+      btn.classList.remove('border-slate-200', 'text-slate-700');
+      btn.classList.add('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+
+      const nudge = document.getElementById('rest-nudge-web');
+      if (nudge) {
+        if (val === 'No') {
+          nudge.innerText = 'Perfecto. Entonces podemos diseñarla desde cero alrededor de lo que realmente necesita tu restaurante.';
+          nudge.classList.remove('hidden');
+        } else if (val.includes('Sí, pero')) {
+          nudge.innerText = 'Entendido. Primero identificamos qué no está funcionando y después vemos qué conviene reconstruir.';
+          nudge.classList.remove('hidden');
+        } else {
+          nudge.innerText = 'Perfecto. Entonces podemos revisar qué papel está cumpliendo hoy esa página.';
+          nudge.classList.remove('hidden');
+        }
+      }
+    }
+
+    function restToggleMaterial(val: string, btn: HTMLElement) {
+      const list: string[] = restState.materiales || [];
+      const idx = list.indexOf(val);
+
+      if (idx >= 0) {
+        list.splice(idx, 1);
+        btn.classList.remove('border-teal-700', 'bg-teal-50', 'text-teal-900', 'font-bold');
+        btn.classList.add('border-slate-200', 'text-slate-700');
+      } else {
+        list.push(val);
+        btn.classList.remove('border-slate-200', 'text-slate-700');
+        btn.classList.add('border-teal-700', 'bg-teal-50', 'text-teal-900', 'font-bold');
+      }
+
+      restState.materiales = list;
+      saveRestState();
+    }
+
+    function restSelectAccion(val: string, btn: HTMLElement) {
+      restState.accion = val;
+      saveRestState();
+
+      const parent = btn.parentElement;
+      if (parent) {
+        parent.querySelectorAll('.diag-option').forEach(b => {
+          b.classList.remove('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+          b.classList.add('border-slate-200', 'text-slate-700');
+        });
+      }
+      btn.classList.remove('border-slate-200', 'text-slate-700');
+      btn.classList.add('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('diagnostic_question_answered', {
+          question: 'accion_principal',
+          answer: val,
+          tipo_de_pagina: 'restaurante',
+        });
+      }
+
+      setTimeout(() => restGoToStep(7), 300);
+    }
+
+    async function restSubmitLead() {
+      const nomInput = document.getElementById('rest-input-contacto-nombre') as HTMLInputElement | null;
+      const emInput = document.getElementById('rest-input-email') as HTMLInputElement | null;
+      const waInput = document.getElementById('rest-input-whatsapp') as HTMLInputElement | null;
+      const submitBtn = document.getElementById('rest-btn-submit') as HTMLButtonElement | null;
+
+      const nom = nomInput?.value.trim() || '';
+      const em = emInput?.value.trim() || '';
+      const wa = waInput?.value.trim() || '';
+
+      if (!nom) {
+        alert('Por favor ingresa tu nombre.');
+        return;
+      }
+
+      if (!em || !em.includes('@')) {
+        alert('Por favor ingresa un correo electrónico válido.');
+        return;
+      }
+
+      if (!wa) {
+        alert('Por favor ingresa tu número de WhatsApp.');
+        return;
+      }
+
+      restState.contactoNombre = nom;
+      restState.email = em;
+      restState.whatsapp = wa;
+      saveRestState();
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Enviando y calculando...';
+      }
+
+      try {
+        const res = await fetch('/api/page-commercial-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: restState.contactoNombre,
+            email: restState.email,
+            whatsapp: restState.whatsapp,
+            empresa: restState.nombre || 'Restaurante',
+            dedicacion: 'Restaurante y Gastronomía',
+            ciudad: 'Colombia',
+            pais: 'Colombia',
+            tieneWeb: restState.tieneWeb,
+            queQuiereMejorar: restState.resolver,
+            tieneDominio: 'Por verificar',
+            queTieneListo: restState.materiales,
+            objetivos: [restState.resolver || 'Mostrar menú y reservas'],
+            accionPrincipal: restState.accion || 'WhatsApp',
+            tipo_de_pagina: 'restaurante',
+            tipo_de_empresa: 'restaurante',
+            fuente: 'Landing /soluciones/web-restaurantes',
+          }),
+        });
+
+        const result = await res.json();
+        if (!res.ok && result.error) {
+          alert(result.error);
+        }
+      } catch (err) {
+        console.error('Error enviando lead de restaurante:', err);
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = 'Ver resultado y propuesta →';
+        }
+      }
+
+      // Populate Result Screen
+      const sumText = document.getElementById('rest-result-summary');
+      if (sumText) {
+        sumText.innerHTML = `
+          Por lo que me cuentas, hoy los clientes de <strong>${restState.nombre || 'tu restaurante'}</strong> llegan principalmente desde <strong>${restState.canal || 'redes sociales'}</strong>, pero tienen que buscar información entre diferentes lugares para conocer tu menú, ubicación y opciones de reserva. Tu página debería reunir esa información en un solo lugar y llevar a tus clientes directamente a <strong>${restState.accion || 'conversar por WhatsApp'}</strong>.
+        `;
+      }
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('diagnostic_completed', {
+          tipo_de_pagina: 'restaurante',
+          has_website: restState.tieneWeb,
+          main_action: restState.accion,
+        });
+        (window as any).posthog.capture('page_commercial_lead_submitted', {
+          tipo_de_pagina: 'restaurante',
+          has_website: restState.tieneWeb,
+          main_action: restState.accion,
+        });
+        (window as any).posthog.capture('page_commercial_price_shown', {
+          tipo_de_pagina: 'restaurante',
+        });
+      }
+
+      restGoToStep(8);
+    }
+
+    // Window assignments
+    (window as any).restGoToStep = restGoToStep;
+    (window as any).restPrevStep = restPrevStep;
+    (window as any).restNextStep = restNextStep;
+    (window as any).restSelectCanal = restSelectCanal;
+    (window as any).restSelectMenu = restSelectMenu;
+    (window as any).restSelectResolver = restSelectResolver;
+    (window as any).restSelectTieneWeb = restSelectTieneWeb;
+    (window as any).restToggleMaterial = restToggleMaterial;
+    (window as any).restSelectAccion = restSelectAccion;
+    (window as any).restSubmitLead = restSubmitLead;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateRestWizardProgress();
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('page_commercial_view', {
+          url: window.location.href,
+          tipo_de_pagina: 'restaurante',
+        });
+      }
+    });
+  </script>
+</Layout>
