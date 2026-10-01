@@ -3,768 +3,994 @@ import Layout from "../../layouts/Layout.astro";
 import { LINKS } from "../../lib/constants.js";
 
 const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
-const ctaGeneral = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, estuve viendo la landing de IA para Producto y quiero agendar una conversación.")}`;
-const ctaRevisarProceso = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero revisar mi proceso de Producto con IA.")}`;
-const ctaProfesional = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, soy profesional de producto y quiero mejorar mi forma de trabajar con IA.")}`;
-const ctaLider = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, soy líder / head de producto y quiero incorporar IA en mi equipo.")}`;
-const ctaConsultarCaso = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, tengo un caso de uso específico de Producto que quiero consultar.")}`;
-const ctaFinalWA = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero revisar un proceso de Producto que me quita mucho tiempo.")}`;
-
-const productSeoSchema = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Service",
-      "@id": "https://lucirme.com/servicios/producto#service",
-      "name": "IA para Producto y Product Operations",
-      "serviceType": "Artificial Intelligence Consulting & Implementation",
-      "provider": {
-        "@type": "Organization",
-        "name": "LuciRMe AI",
-        "url": "https://lucirme.com"
-      },
-      "areaServed": ["Colombia", "Latinoamérica", "Global"],
-      "description": "Acompañamiento en vivo e implementación de Inteligencia Artificial para Product Managers, Product Designers, Product Ops y Heads of Product.",
-      "offers": {
-        "@type": "Offer",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/InStock"
-      }
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://lucirme.com/servicios/producto#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "¿Necesitamos saber programar o tener conocimientos técnicos de IA?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. Todos los flujos se diseñan en lenguaje natural e interfaces accesibles para cualquier perfil de producto u operaciones."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Esto sustituye nuestras herramientas actuales (Jira, Notion, Figma, Slack)?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "En absoluto. El objetivo es acoplar la IA al stack existente donde ya trabaja tu equipo."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cómo se maneja la privacidad y la seguridad de los datos de la empresa?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Utilizamos entornos corporativos y APIs con acuerdos de no retención de datos, lo que garantiza que la información no se utiliza para entrenar modelos públicos."
-          }
-        }
-      ]
-    }
-  ]
-};
+const whatsappPM = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, estuve viendo la landing de Product Management y quiero revisar mi caso.")}`;
 ---
 
-<Layout 
-  title="IA para Producto | LuciRMe AI — Acompañamiento en Vivo e Implementación"
-  description="Acompaño a profesionales, PMs y líderes de Producto a integrar IA práctica directamente en sus flujos diarios: research, feedback, síntesis de syncs, PRDs y reporting ejecutivo."
-  keywords="ia para producto, product management ia, automatizaciones de producto, consultoria ia colombia, pablo rios, product ops ia, mentorias inteligencia artificial"
-  jsonLd={productSeoSchema}
+<Layout
+  title="Product Management e IA Aplicada | LuciRMe AI"
+  description="Acompañamiento 1-1 para Product Managers y profesionales de producto que quieren mejorar sus procesos, aplicar IA y trabajar de forma más simple."
+  canonical="https://lucirme.com/servicios/producto"
+  hideHeader={true}
+  hideFooter={true}
 >
+  <!-- HEADER DEDICADO PRODUCT MANAGEMENT -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="h-16 max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
+      <a class="flex flex-col group" href="#">
+        <span class="text-base font-bold tracking-tight text-slate-900 group-hover:text-teal-700 transition-colors">LuciRMe AI · Product Management</span>
+        <span class="text-[11px] font-mono text-slate-500">Product Management aplicado a problemas reales.</span>
+      </a>
 
-  <!-- STICKY HEADER EDITORIAL -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-      
-      <!-- BRAND / LOGO -->
-      <div class="flex items-center gap-3 shrink-0">
-        <a href="/" class="flex items-center gap-1.5 font-bold text-lg tracking-tight text-slate-900 hover:text-teal-700 transition-colors">
-          <span>LuciRMe</span>
-          <span class="text-teal-600 font-extrabold">AI</span>
-        </a>
-        <span class="hidden sm:inline-block text-[10px] font-mono uppercase tracking-widest bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md border border-slate-200">
-          PRODUCTO
-        </span>
-      </div>
-
-      <!-- DESKTOP NAV -->
-      <nav class="hidden lg:flex items-center gap-6 text-xs font-semibold text-slate-600">
-        <a href="#que-resolvemos" class="hover:text-teal-600 transition-colors">Qué resolvemos</a>
-        <a href="#casos-de-uso" class="hover:text-teal-600 transition-colors">Casos de uso</a>
-        <a href="#como-trabajamos" class="hover:text-teal-600 transition-colors">Cómo trabajamos</a>
-        <a href="#sobre-mi" class="hover:text-teal-600 transition-colors">Sobre mí</a>
-        <a href="#faq" class="hover:text-teal-600 transition-colors">FAQ</a>
+      <nav class="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600">
+        <a class="hover:text-slate-900 transition-colors" href="#diagnostico-pm">Diagnóstico</a>
+        <a class="hover:text-slate-900 transition-colors" href="#en-que-trabajamos">¿En qué trabajamos?</a>
+        <a class="hover:text-slate-900 transition-colors" href="#como-trabajamos">Cómo trabajamos</a>
+        <a class="hover:text-slate-900 transition-colors" href="#pm-ia">PM + IA</a>
+        <a class="hover:text-slate-900 transition-colors" href="#pm-sin-bullshit">PM Sin Bullshit</a>
+        <a class="hover:text-slate-900 transition-colors" href="#pablo">Pablo</a>
       </nav>
 
-      <!-- RIGHT ACTIONS -->
-      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-        <a 
-          href="/rutas" 
-          class="hidden sm:inline-flex items-center text-xs font-medium text-slate-700 bg-slate-100 hover:bg-slate-200/80 px-3 py-1.5 rounded-lg transition-colors border border-slate-200"
+      <div class="flex items-center gap-3">
+        <a
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-teal-700 text-white text-xs font-semibold hover:bg-teal-800 transition-colors shadow-2xs cursor-pointer"
+          href="#diagnostico-pm"
         >
-          Rutas de Aprendizaje
-        </a>
-        <a 
-          href={ctaGeneral}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 px-3.5 py-1.5 rounded-lg transition-all shadow-xs cursor-pointer"
-        >
-          <span class="material-symbols-outlined text-[16px]">chat</span>
-          <span>Agendar conversación</span>
+          <span class="material-symbols-outlined text-[17px]">inventory_2</span>
+          <span>Quiero revisar mi caso</span>
         </a>
       </div>
-
     </div>
   </header>
 
-  <!-- MAIN WRAPPER -->
-  <main class="w-full bg-slate-50 min-h-screen">
-    
-    <!-- HERO SECTION: Editorial & Clean -->
-    <section class="w-full max-w-5xl mx-auto px-4 sm:px-6 pt-12 pb-16 flex flex-col items-start text-left">
-      
-      <!-- Eyebrow Tag -->
-      <div class="inline-flex items-center gap-2 bg-slate-100 border border-slate-200/80 px-3 py-1 rounded-full mb-6 shadow-2xs">
-        <span class="w-2 h-2 rounded-full bg-teal-600 animate-pulse"></span>
-        <span class="text-xs font-mono font-semibold text-teal-700 uppercase tracking-wider">IA APLICADA A PRODUCT MANAGEMENT & OPS</span>
-        <span class="text-slate-300">•</span>
-        <span class="text-xs text-slate-600 font-medium">Acompañamiento en vivo</span>
-      </div>
+  <main class="w-full bg-[#F8FAFC]">
 
-      <!-- Main Headline -->
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight max-w-4xl mb-4 leading-[1.15]">
-        Tu equipo de Producto tiene suficiente trabajo. 
-        <span class="text-teal-700 block mt-1">No debería perder tiempo en procesos que pueden estar mejor diseñados.</span>
-      </h1>
-
-      <p class="text-base sm:text-lg text-slate-600 max-w-3xl mb-8 leading-relaxed font-normal">
-        Acompaño a profesionales, PMs y líderes de Producto a integrar IA práctica directamente en sus flujos diarios: research, feedback, síntesis de syncs, PRDs y reporting ejecutivo. Sin teoría vacía ni cambiar el stack donde ya operas.
-      </p>
-
-      <!-- Fast Action Area -->
-      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mb-12">
-        <a 
-          href={ctaRevisarProceso}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm sm:text-base px-6 py-3.5 rounded-xl shadow-xs transition-all hover:shadow-md cursor-pointer"
-        >
-          <span class="material-symbols-outlined text-[20px]">chat</span>
-          <span>Revisar mi proceso con Pablo</span>
-          <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-        </a>
-
-        <div class="flex items-center gap-2 text-slate-500 text-xs sm:text-sm px-1">
-          <span class="material-symbols-outlined text-teal-600 text-[18px]">verified</span>
-          <span>Diagnóstico de 20 min en vivo · Sin presentaciones de venta agresivas</span>
-        </div>
-      </div>
-
-      <!-- Clean Process Ribbon -->
-      <div class="w-full bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3 shadow-2xs">
-        <div class="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
-          <span class="material-symbols-outlined text-[16px] text-teal-600">route</span>
-          Ruta de intervención:
-        </div>
-
-        <div class="flex flex-wrap items-center gap-2 text-xs font-mono text-slate-800">
-          <span class="px-2.5 py-1 bg-slate-100 rounded-md font-medium border border-slate-200/60">01 Diagnóstico</span>
-          <span class="text-slate-300">→</span>
-          <span class="px-2.5 py-1 bg-slate-100 rounded-md font-medium border border-slate-200/60">02 Diseño</span>
-          <span class="text-slate-300">→</span>
-          <span class="px-2.5 py-1 bg-slate-100 rounded-md font-medium border border-slate-200/60">03 Implementación</span>
-          <span class="text-slate-300">→</span>
-          <span class="px-2.5 py-1 bg-slate-100 rounded-md font-medium border border-slate-200/60">04 Adopción</span>
-          <span class="text-slate-300">→</span>
-          <span class="px-2.5 py-1 bg-teal-50 text-teal-800 font-bold rounded-md border border-teal-200">05 Autonomía</span>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- PROFILES / SEGMENT CARDS -->
-    <section id="que-resolvemos" class="w-full max-w-5xl mx-auto px-4 sm:px-6 mb-16">
-      <div class="flex items-center gap-2 mb-6">
-        <span class="text-xs font-mono font-bold uppercase text-slate-400 tracking-wider">Perfiles y Enfoque</span>
-        <div class="h-px bg-slate-200 flex-1"></div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- HERO SECTION -->
+    <section class="w-full max-w-7xl mx-auto px-6 pt-12 pb-12 md:py-20 border-b border-slate-200/60">
+      <div class="max-w-3xl mx-auto flex flex-col items-center text-center gap-6">
         
-        <!-- Option 1: Individual -->
-        <a 
-          href={ctaProfesional}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="group bg-white border border-slate-200/90 p-6 sm:p-8 rounded-2xl hover:border-teal-500/50 hover:shadow-md transition-all flex flex-col justify-between cursor-pointer"
-        >
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-xs font-mono font-bold uppercase bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md border border-slate-200">Para Profesionales</span>
-              <span class="material-symbols-outlined text-slate-400 group-hover:text-teal-600 transition-colors">person</span>
-            </div>
-            <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2 group-hover:text-teal-700 transition-colors">
-              Quiero optimizar mi propio flujo de trabajo diario
-            </h3>
-            <p class="text-xs sm:text-sm text-slate-600 mb-6 leading-relaxed">
-              Pensado para Product Managers, Product Designers, Product Ops y Consultores. Identifica tareas lentas, diseña tus asistentes y crea flujos autónomos sin depender de nadie.
-            </p>
-          </div>
-          <div class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-teal-700 pt-2 border-t border-slate-100">
-            <span>Soy profesional independiente o PM</span>
-            <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
-          </div>
-        </a>
-
-        <!-- Option 2: Teams & Leads -->
-        <a 
-          href={ctaLider}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="group bg-white border border-slate-200/90 p-6 sm:p-8 rounded-2xl hover:border-teal-500/50 hover:shadow-md transition-all flex flex-col justify-between cursor-pointer"
-        >
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="text-xs font-mono font-bold uppercase bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md border border-slate-200">Para Equipos y Líderes</span>
-              <span class="material-symbols-outlined text-slate-400 group-hover:text-teal-600 transition-colors">groups</span>
-            </div>
-            <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2 group-hover:text-teal-700 transition-colors">
-              Quiero elevar la capacidad operativa de mi equipo
-            </h3>
-            <p class="text-xs sm:text-sm text-slate-600 mb-6 leading-relaxed">
-              Para Heads of Product, VPs y líderes de área. Diagnosticamos dónde se fuga tiempo valioso, armamos sistemas estándar y acompañamos a las personas hasta su adopción natural.
-            </p>
-          </div>
-          <div class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-teal-700 pt-2 border-t border-slate-100">
-            <span>Lidero un equipo de Producto</span>
-            <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
-          </div>
-        </a>
-
-      </div>
-    </section>
-
-    <!-- THE PROBLEM SECTION -->
-    <section class="w-full bg-slate-100/80 py-16 border-y border-slate-200">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6">
-        
-        <div class="flex items-center gap-2 mb-3">
-          <span class="text-xs font-mono font-bold uppercase text-amber-700">El Contexto Real</span>
-          <span class="text-slate-300">•</span>
-          <span class="text-xs text-slate-500 font-medium">Diagnóstico de operaciones</span>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-slate-100 border border-slate-200/80 rounded-full font-mono text-xs text-teal-800 shadow-2xs">
+          <span class="w-2 h-2 rounded-full bg-teal-600 animate-pulse"></span>
+          PRODUCT MANAGEMENT
         </div>
 
-        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mb-2">
-          El trabajo de Producto no termina en el roadmap.
-        </h2>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+          ¿Hay algo de tu trabajo como PM que sientes que podría hacerse mucho mejor?
+        </h1>
 
-        <p class="text-sm sm:text-base text-slate-600 max-w-2xl mb-8 leading-relaxed">
-          La mayor parte de la fricción cognitiva de un equipo no proviene de pensar la estrategia, sino del volumen excesivo de micro-tareas manuales necesarias para sostenerla.
+        <p class="text-base md:text-lg text-slate-600 font-normal leading-relaxed">
+          Research, discovery, documentación, priorización, estrategia, análisis, reuniones, presentaciones… podemos revisar cómo lo estás haciendo hoy y encontrar dónde tiene sentido simplificar, mejorar o aplicar IA.
         </p>
 
-        <!-- Pill Cloud -->
-        <div class="flex flex-wrap gap-2.5 mb-8">
-          <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 shadow-2xs">Entrevistas a usuarios</span>
-          <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 shadow-2xs">Clasificación de tickets</span>
-          <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 shadow-2xs">Feedback de ventas y soporte</span>
-          <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 shadow-2xs">Syncs de alineación</span>
-          <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 shadow-2xs">Métricas & OKRs dispersos</span>
-          <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 shadow-2xs">Redacción de PRDs</span>
-          <span class="bg-white border border-slate-200 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 shadow-2xs">Informes ejecutivos</span>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 w-full sm:w-auto">
+          <a
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
+            href="#diagnostico-pm"
+            onclick="if(window.posthog) window.posthog.capture('product_diagnostic_started');"
+          >
+            <span>Quiero revisar mi caso →</span>
+          </a>
+
+          <a
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors shadow-2xs"
+            href={whatsappPM}
+            rel="noopener noreferrer"
+            target="_blank"
+            onclick="if(window.posthog) window.posthog.capture('product_whatsapp_click', { origen: 'hero' });"
+          >
+            <span class="material-symbols-outlined text-[18px]">chat</span>
+            <span>Hablar con Pablo</span>
+          </a>
         </div>
 
-        <!-- Friction Callout -->
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs max-w-3xl">
-          <div class="flex items-start gap-4">
-            <span class="material-symbols-outlined text-amber-600 mt-0.5 text-[24px]">format_quote</span>
-            <div>
-              <p class="text-base font-bold text-slate-900 mb-2">
-                El trabajo de alto valor está sepultado bajo acciones mecánicas:
-              </p>
-              <div class="flex flex-wrap items-center gap-1.5 text-xs font-mono text-slate-500 mb-4">
-                <span class="bg-slate-100 px-2 py-0.5 rounded border border-slate-200/60">Leer transcripciones</span>
-                <span>·</span>
-                <span class="bg-slate-100 px-2 py-0.5 rounded border border-slate-200/60">Buscar en 5 apps</span>
-                <span>·</span>
-                <span class="bg-slate-100 px-2 py-0.5 rounded border border-slate-200/60">Copiar y pegar</span>
-                <span>·</span>
-                <span class="bg-slate-100 px-2 py-0.5 rounded border border-slate-200/60">Clasificar</span>
-                <span>·</span>
-                <span class="bg-slate-100 px-2 py-0.5 rounded border border-slate-200/60">Sintetizar notas</span>
-                <span>·</span>
-                <span class="bg-slate-100 px-2 py-0.5 rounded border border-slate-200/60">Volver a explicar</span>
-              </div>
-              <p class="text-xs sm:text-sm text-teal-700 font-bold">
-                Ahí es exactamente donde encontramos palanca y diseñamos soluciones con IA.
-              </p>
-            </div>
-          </div>
+        <div class="p-3 bg-white border border-slate-200 rounded-xl text-xs text-slate-600 font-medium mt-2 max-w-xl">
+          💡 <strong>Filosofía de trabajo:</strong> Primero entendemos el problema. Después vemos qué herramienta, método o solución tiene sentido.
         </div>
 
       </div>
     </section>
 
-    <!-- SOLUTIONS CATALOGUE / BENTO GRID -->
-    <section id="casos-de-uso" class="w-full max-w-5xl mx-auto px-4 sm:px-6 py-16">
-      
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
-        <div>
-          <div class="flex items-center gap-2 mb-2">
-            <span class="text-xs font-mono font-bold uppercase text-teal-600">Catálogo de Soluciones</span>
-            <span class="text-slate-300">•</span>
-            <span class="text-xs text-slate-500 font-medium">Arquitectura Entrada → IA → Persona → Salida</span>
-          </div>
-          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-            Procesos clave que transformamos
-          </h2>
-        </div>
-        <p class="text-xs sm:text-sm text-slate-600 max-w-md">
-          Diseñamos sistemas donde la máquina acelera la síntesis y el humano conserva la decisión crítica.
-        </p>
-      </div>
+    <!-- COMPONENTE DIAGNÓSTICO INTERACTIVO PARA PMs -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-12 scroll-mt-20" id="diagnostico-pm">
+      <div class="max-w-2xl mx-auto flex flex-col gap-6">
 
-      <!-- BENTO GRID (6 CASES) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        
-        <!-- Case 1 -->
-        <div class="bg-white border border-slate-200/90 p-5 rounded-2xl shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-mono font-bold text-teal-700 bg-teal-50 border border-teal-200 px-2.5 py-0.5 rounded-md">01. Discovery</span>
-              <span class="material-symbols-outlined text-[20px] text-slate-400">search</span>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900 mb-1">Research → Insights</h3>
-            <p class="text-xs text-slate-600 mb-4 leading-relaxed">
-              Convierte horas de entrevistas y notas de usuario en matrices de evidencias, citas y patrones accionables.
-            </p>
-          </div>
-          <div class="bg-slate-50 rounded-xl p-3.5 space-y-2 text-xs font-mono border border-slate-100">
-            <div class="flex items-start gap-2 text-slate-600">
-              <span class="text-slate-400 font-bold">IN:</span>
-              <span>Grabaciones + notas brutas</span>
-            </div>
-            <div class="flex items-start gap-2 text-teal-700">
-              <span class="font-bold">IA:</span>
-              <span>Categoriza fricciones y agrupa patrones</span>
-            </div>
-            <div class="flex items-start gap-2 text-slate-800 font-medium">
-              <span class="text-slate-400 font-bold">TÚ:</span>
-              <span>Valida criterio y prioriza hipótesis</span>
-            </div>
-            <div class="flex items-start gap-2 text-emerald-700 font-bold pt-1 border-t border-slate-200/60">
-              <span>OUT:</span>
-              <span>Insights listos para roadmap</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Case 2 -->
-        <div class="bg-white border border-slate-200/90 p-5 rounded-2xl shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-mono font-bold text-teal-700 bg-teal-50 border border-teal-200 px-2.5 py-0.5 rounded-md">02. Feedback</span>
-              <span class="material-symbols-outlined text-[20px] text-slate-400">chat_bubble_outline</span>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900 mb-1">Feedback → Patrones</h3>
-            <p class="text-xs text-slate-600 mb-4 leading-relaxed">
-              Procesa tickets de soporte, llamadas de ventas y reseñas para detectar qué duele más sin sesgo de recencia.
-            </p>
-          </div>
-          <div class="bg-slate-50 rounded-xl p-3.5 space-y-2 text-xs font-mono border border-slate-100">
-            <div class="flex items-start gap-2 text-slate-600">
-              <span class="text-slate-400 font-bold">IN:</span>
-              <span>Zendesk, Intercom, Gong, Hubspot</span>
-            </div>
-            <div class="flex items-start gap-2 text-teal-700">
-              <span class="font-bold">IA:</span>
-              <span>Taggeo semántico y clústeres de dolor</span>
-            </div>
-            <div class="flex items-start gap-2 text-slate-800 font-medium">
-              <span class="text-slate-400 font-bold">TÚ:</span>
-              <span>Evalúa impacto en negocio y churn</span>
-            </div>
-            <div class="flex items-start gap-2 text-emerald-700 font-bold pt-1 border-t border-slate-200/60">
-              <span>OUT:</span>
-              <span>Matriz priorizada de causas raíz</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Case 3 -->
-        <div class="bg-white border border-slate-200/90 p-5 rounded-2xl shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-mono font-bold text-teal-700 bg-teal-50 border border-teal-200 px-2.5 py-0.5 rounded-md">03. Alineación</span>
-              <span class="material-symbols-outlined text-[20px] text-slate-400">sync</span>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900 mb-1">Reuniones → Acciones</h3>
-            <p class="text-xs text-slate-600 mb-4 leading-relaxed">
-              Extrae de 60 minutos de sync ejecutiva únicamente acuerdos, riesgos, fechas de entrega y tareas en Jira.
-            </p>
-          </div>
-          <div class="bg-slate-50 rounded-xl p-3.5 space-y-2 text-xs font-mono border border-slate-100">
-            <div class="flex items-start gap-2 text-slate-600">
-              <span class="text-slate-400 font-bold">IN:</span>
-              <span>Transcripción cruda de Meet/Zoom</span>
-            </div>
-            <div class="flex items-start gap-2 text-teal-700">
-              <span class="font-bold">IA:</span>
-              <span>Filtra charla casual y redacta acuerdos</span>
-            </div>
-            <div class="flex items-start gap-2 text-slate-800 font-medium">
-              <span class="text-slate-400 font-bold">TÚ:</span>
-              <span>Confirma responsables finales</span>
-            </div>
-            <div class="flex items-start gap-2 text-emerald-700 font-bold pt-1 border-t border-slate-200/60">
-              <span>OUT:</span>
-              <span>Minuta ejecutiva + tickets creados</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Case 4 -->
-        <div class="bg-white border border-slate-200/90 p-5 rounded-2xl shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-mono font-bold text-teal-700 bg-teal-50 border border-teal-200 px-2.5 py-0.5 rounded-md">04. Reporting</span>
-              <span class="material-symbols-outlined text-[20px] text-slate-400">bar_chart</span>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900 mb-1">Datos → Narrativa</h3>
-            <p class="text-xs text-slate-600 mb-4 leading-relaxed">
-              Convierte números fríos de sprint y métricas de retención en una historia ejecutiva comprensible para stakeholders.
-            </p>
-          </div>
-          <div class="bg-slate-50 rounded-xl p-3.5 space-y-2 text-xs font-mono border border-slate-100">
-            <div class="flex items-start gap-2 text-slate-600">
-              <span class="text-slate-400 font-bold">IN:</span>
-              <span>Mixpanel, Amplitude, PostHog, CSV</span>
-            </div>
-            <div class="flex items-start gap-2 text-teal-700">
-              <span class="font-bold">IA:</span>
-              <span>Detecta variaciones e hila el resumen</span>
-            </div>
-            <div class="flex items-start gap-2 text-slate-800 font-medium">
-              <span class="text-slate-400 font-bold">TÚ:</span>
-              <span>Aporta contexto de decisiones estratégicas</span>
-            </div>
-            <div class="flex items-start gap-2 text-emerald-700 font-bold pt-1 border-t border-slate-200/60">
-              <span>OUT:</span>
-              <span>Reporte ejecutivo o slide deck listo</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Case 5 -->
-        <div class="bg-white border border-slate-200/90 p-5 rounded-2xl shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-mono font-bold text-teal-700 bg-teal-50 border border-teal-200 px-2.5 py-0.5 rounded-md">05. Base de Conocimiento</span>
-              <span class="material-symbols-outlined text-[20px] text-slate-400">menu_book</span>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900 mb-1">Información → Respuestas</h3>
-            <p class="text-xs text-slate-600 mb-4 leading-relaxed">
-              Construye un asistente interno con trazabilidad exacta a tus especificaciones, políticas y wikis en Notion/Confluence.
-            </p>
-          </div>
-          <div class="bg-slate-50 rounded-xl p-3.5 space-y-2 text-xs font-mono border border-slate-100">
-            <div class="flex items-start gap-2 text-slate-600">
-              <span class="text-slate-400 font-bold">IN:</span>
-              <span>Docs técnicos, PDFs, guías de estilo</span>
-            </div>
-            <div class="flex items-start gap-2 text-teal-700">
-              <span class="font-bold">IA:</span>
-              <span>Cita la fuente y responde sin alucinar</span>
-            </div>
-            <div class="flex items-start gap-2 text-slate-800 font-medium">
-              <span class="text-slate-400 font-bold">TÚ:</span>
-              <span>Aplica la respuesta al dilema actual</span>
-            </div>
-            <div class="flex items-start gap-2 text-emerald-700 font-bold pt-1 border-t border-slate-200/60">
-              <span>OUT:</span>
-              <span>Respuestas inmediatas sin molestar a otros</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Case 6 -->
-        <div class="bg-white border border-slate-200/90 p-5 rounded-2xl shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-3">
-              <span class="text-xs font-mono font-bold text-teal-700 bg-teal-50 border border-teal-200 px-2.5 py-0.5 rounded-md">06. Especificación</span>
-              <span class="material-symbols-outlined text-[20px] text-slate-400">description</span>
-            </div>
-            <h3 class="text-lg font-bold text-slate-900 mb-1">Documentación → Sistema</h3>
-            <p class="text-xs text-slate-600 mb-4 leading-relaxed">
-              De notas dispersas de discovery a PRDs estandarizados con criterios de aceptación en Gherkin y edge-cases cubiertos.
-            </p>
-          </div>
-          <div class="bg-slate-50 rounded-xl p-3.5 space-y-2 text-xs font-mono border border-slate-100">
-            <div class="flex items-start gap-2 text-slate-600">
-              <span class="text-slate-400 font-bold">IN:</span>
-              <span>Idea base + restricciones técnicas</span>
-            </div>
-            <div class="flex items-start gap-2 text-teal-700">
-              <span class="font-bold">IA:</span>
-              <span>Estructura PRD completo y casos de error</span>
-            </div>
-            <div class="flex items-start gap-2 text-slate-800 font-medium">
-              <span class="text-slate-400 font-bold">TÚ:</span>
-              <span>Negocia alcance y viabilidad con ingeniería</span>
-            </div>
-            <div class="flex items-start gap-2 text-emerald-700 font-bold pt-1 border-t border-slate-200/60">
-              <span>OUT:</span>
-              <span>Documento listo para refinamiento</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- REASSURANCE STRIP -->
-      <div class="mt-8 p-4 bg-white border border-slate-200 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
-        <div class="flex items-center gap-2 text-xs sm:text-sm text-slate-600">
-          <span class="material-symbols-outlined text-teal-600 text-[20px]">lock_reset</span>
-          <span><strong class="text-slate-900">Cero cajas negras:</strong> Cada solución se adapta a tus plantillas y formatos habituales.</span>
-        </div>
-        <a 
-          href={ctaConsultarCaso} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="text-xs sm:text-sm font-bold text-teal-700 hover:underline flex items-center gap-1 shrink-0 cursor-pointer"
-        >
-          <span>¿Tienes un proceso distinto? Consúltamelo por WhatsApp</span> →
-        </a>
-      </div>
-
-    </section>
-
-    <!-- METHODOLOGY SECTION -->
-    <section id="como-trabajamos" class="w-full bg-white py-16 border-y border-slate-200">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6">
-        
-        <div class="max-w-2xl mb-12">
-          <span class="text-xs font-mono font-bold uppercase text-teal-600">Metodología de Trabajo</span>
-          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1 mb-2">
-            Acompañamiento en directo hasta la autonomía
-          </h2>
-          <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
-            No entrego un PDF genérico ni configuro un software misterioso para luego desaparecer. Nos conectamos y construimos la solución mientras tú operas tu pantalla.
-          </p>
-        </div>
-
-        <!-- 4 STEPS -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-md p-6 md:p-8 relative min-h-[400px] flex flex-col justify-between" id="pm-wizard-card">
           
-          <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl flex flex-col justify-between">
-            <div>
-              <span class="text-xs font-mono font-bold text-teal-700 block mb-2">FASE 01</span>
-              <h3 class="text-base font-bold text-slate-900 mb-2">Diagnóstico</h3>
-              <p class="text-xs text-slate-600 leading-relaxed">
-                Mapeamos el flujo actual del equipo, identificamos dónde se pierde más tiempo y priorizamos el caso de mayor ROI inmediato.
+          <!-- Wizard Header -->
+          <div class="flex flex-col gap-2 pb-4 border-b border-slate-100" id="pm-wizard-header">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="font-mono text-xs font-semibold text-slate-900 uppercase" id="pm-step-counter">Paso 1 de 5</span>
+              </div>
+              <span class="text-xs font-mono text-slate-400" id="pm-step-time">~2 min</span>
+            </div>
+            <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div class="bg-emerald-600 h-1.5 rounded-full transition-all duration-300 ease-out" id="pm-progress-bar" style="width: 20%;"></div>
+            </div>
+          </div>
+
+          <!-- PASO 1: ÁREA DE TRABAJO -->
+          <div class="pm-step flex flex-col gap-4 py-4" id="pm-step-1">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 1 · Área de Fricción</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿Qué parte de tu trabajo como PM te está quitando más tiempo?</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2" id="group-pm-area">
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Research', this)" type="button">🔍 Research</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Discovery', this)" type="button">🧭 Discovery</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Documentación', this)" type="button">📄 Documentación / PRDs</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Priorización', this)" type="button">📌 Priorización</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Análisis', this)" type="button">📊 Análisis cuali/cuanti</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Estrategia', this)" type="button">🎯 Estrategia</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Reuniones', this)" type="button">👥 Reuniones & Syncs</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Presentaciones', this)" type="button">🖼️ Presentaciones a Stakeholders</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Backlog', this)" type="button">📦 Backlog & Refinement</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Tareas repetitivas', this)" type="button">🔄 Tareas repetitivas</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('Otra', this)" type="button">Otra</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectArea('No estoy seguro todavía', this)" type="button">❓ No estoy seguro todavía</button>
+            </div>
+          </div>
+
+          <!-- PASO 2: FRECUENCIA -->
+          <div class="pm-step hidden flex flex-col gap-4 py-4" id="pm-step-2">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 2 · Frecuencia</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿Con qué frecuencia haces ese trabajo?</h3>
+            </div>
+            <div class="flex flex-col gap-2 pt-2" id="group-pm-frecuencia">
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectFrecuencia('Varias veces al día', this)" type="button">⚡ Varias veces al día</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectFrecuencia('Todos los días', this)" type="button">📅 Todos los días</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectFrecuencia('Varias veces por semana', this)" type="button">🗓️ Varias veces por semana</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectFrecuencia('Una vez por semana', this)" type="button">📌 Una vez por semana</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectFrecuencia('De vez en cuando', this)" type="button">⏳ De vez en cuando</button>
+            </div>
+          </div>
+
+          <!-- PASO 3: TIEMPO ESTIMADO -->
+          <div class="pm-step hidden flex flex-col gap-4 py-4" id="pm-step-3">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 3 · Tiempo invertido</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿Cuánto tiempo crees que te consume a la semana?</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2" id="group-pm-tiempo">
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectTiempo('Menos de 1 hora a la semana', this)" type="button">⏱️ Menos de 1 hora a la semana</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectTiempo('1–3 horas', this)" type="button">⏳ 1–3 horas</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectTiempo('3–5 horas', this)" type="button">📊 3–5 horas</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectTiempo('5–10 horas', this)" type="button">🔥 5–10 horas</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectTiempo('Más de 10 horas', this)" type="button">🚨 Más de 10 horas</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectTiempo('No tengo idea', this)" type="button">❓ No tengo idea</button>
+            </div>
+          </div>
+
+          <!-- PASO 4: HERRAMIENTAS ACTUALES -->
+          <div class="pm-step hidden flex flex-col gap-4 py-4" id="pm-step-4">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 4 · Stack actual</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿Qué estás usando hoy para resolverlo?</h3>
+              <p class="text-xs text-slate-500">Puedes seleccionar varias opciones.</p>
+            </div>
+            <div class="grid grid-cols-2 gap-2 pt-2" id="group-pm-herramientas">
+              <button class="multi-option p-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('ChatGPT', this)" type="button">🤖 ChatGPT</button>
+              <button class="multi-option p-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Claude', this)" type="button">🧠 Claude</button>
+              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Gemini', this)" type="button">✨ Gemini</button>
+              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('NotebookLM', this)" type="button">📚 NotebookLM</button>
+              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Copilot', this)" type="button">💻 Copilot</button>
+              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Notion', this)" type="button">📓 Notion</button>
+              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Jira', this)" type="button">🔷 Jira</button>
+              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Linear', this)" type="button">📐 Linear</button>
+              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Confluence', this)" type="button">📖 Confluence</button>
+              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Excel / Sheets', this)" type="button">📊 Excel / Sheets</button>
+              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Automatizaciones', this)" type="button">⚡ Automatizaciones</button>
+              <button class="multi-option p-2.5 rounded-lg border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmToggleHerramienta('Nada todavía', this)" type="button">⏳ Nada todavía</button>
+            </div>
+            <button
+              class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors cursor-pointer self-start mt-2"
+              onclick="window.pmNextStep(4)"
+              type="button"
+            >
+              <span>Continuar →</span>
+            </button>
+          </div>
+
+          <!-- PASO 5: OBJETIVO -->
+          <div class="pm-step hidden flex flex-col gap-4 py-4" id="pm-step-5">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 5 · Objetivo deseado</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿Qué te gustaría conseguir?</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2" id="group-pm-objetivo">
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectObjetivo('Ahorrar tiempo', this)" type="button">⏱️ Ahorrar tiempo</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectObjetivo('Resolver mejor una tarea concreta', this)" type="button">🎯 Resolver mejor una tarea concreta</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectObjetivo('Mejorar mi workflow', this)" type="button">⚙️ Mejorar mi workflow de Producto</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectObjetivo('Automatizar algo repetitivo', this)" type="button">🔄 Automatizar algo repetitivo</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectObjetivo('Conectar mejor las herramientas que ya uso', this)" type="button">🔗 Conectar herramientas que ya uso</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectObjetivo('Aplicar IA a mi trabajo', this)" type="button">🧠 Aplicar IA a mi trabajo de PM</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectObjetivo('Tener más claridad sobre por dónde empezar', this)" type="button">💡 Tener claridad sobre por dónde empezar</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.pmSelectObjetivo('Mejorar mi proceso de Product Management', this)" type="button">🚀 Mejorar mi proceso de PM</button>
+            </div>
+          </div>
+
+          <!-- PASO 6: DATOS DE CONTACTO -->
+          <div class="pm-step hidden flex flex-col gap-4 py-4" id="pm-step-6">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 6 · Enviar Diagnóstico</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">Ya tenemos una idea mucho más clara.</h3>
+              <p class="text-sm text-slate-600">¿A dónde te envío el diagnóstico y la recomendación personalizada?</p>
+            </div>
+            <form class="flex flex-col gap-3 pt-2" onsubmit="event.preventDefault(); window.pmSubmitLead();">
+              <div class="flex flex-col gap-1">
+                <label class="text-xs font-semibold text-slate-700" for="pm-input-nombre">Tu Nombre *</label>
+                <input class="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white" id="pm-input-nombre" placeholder="Ej. Andrea Gómez (PM)" required type="text" />
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-semibold text-slate-700" for="pm-input-email">Correo Electrónico *</label>
+                  <input class="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white" id="pm-input-email" placeholder="andrea@empresa.com" required type="email" />
+                </div>
+                <div class="flex flex-col gap-1">
+                  <label class="text-xs font-semibold text-slate-700" for="pm-input-whatsapp">Número de WhatsApp *</label>
+                  <input class="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white" id="pm-input-whatsapp" placeholder="+57 300 000 0000" required type="tel" />
+                </div>
+              </div>
+
+              <div class="pt-2">
+                <button id="pm-btn-submit" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer" type="submit">
+                  <span>Ver diagnóstico y recomendación →</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- RESULTADO PERSONALIZADO -->
+          <div class="pm-step hidden flex flex-col gap-5 py-4" id="pm-step-result">
+            <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl flex flex-col gap-2">
+              <div class="flex items-center gap-2 text-emerald-800 font-bold text-sm">
+                <span class="material-symbols-outlined text-emerald-600 text-xl">verified</span>
+                <span>Diagnóstico de Producto Completado</span>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900">Esto es lo que veo en tu caso:</h3>
+              <p class="text-xs text-slate-700 leading-relaxed" id="pm-result-summary">
+                Por lo que me cuentas, una parte importante de tu tiempo se está yendo en el trabajo de Producto. En tu caso no empezaría buscando otra herramienta: empezaría por revisar cómo estás haciendo hoy ese trabajo y detectar qué partes realmente vale la pena simplificar o automatizar.
               </p>
             </div>
-            <div class="pt-4 text-[11px] font-mono text-slate-400 border-t border-slate-200/60 mt-4">Sesión de 45-60 min</div>
-          </div>
 
-          <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl flex flex-col justify-between">
-            <div>
-              <span class="text-xs font-mono font-bold text-teal-700 block mb-2">FASE 02</span>
-              <h3 class="text-base font-bold text-slate-900 mb-2">Diseño del flujo</h3>
-              <p class="text-xs text-slate-600 leading-relaxed">
-                Definimos la arquitectura: qué procesa el modelo, qué criterios valida la persona y cómo se conecta con tu software habitual.
-              </p>
+            <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col gap-2.5 text-xs text-slate-800">
+              <span class="font-mono text-[10px] uppercase font-bold text-slate-500">Plan sugerido para tu caso:</span>
+              <ul class="flex flex-col gap-2 text-slate-700 font-medium" id="pm-result-bullets">
+                <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Mapear el proceso actual de Producto donde se pierde tiempo.</li>
+                <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Diseñar el flujo de trabajo o asistente con IA sobre tus insumos reales.</li>
+                <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Conectar tus herramientas actuales sin cambiar tu stack.</li>
+                <li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> Practicar en vivo durante la sesión hasta lograr total autonomía.</li>
+              </ul>
             </div>
-            <div class="pt-4 text-[11px] font-mono text-slate-400 border-t border-slate-200/60 mt-4">Definición de reglas</div>
+
+            <a
+              class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors shadow-2xs text-center cursor-pointer"
+              href="#como-trabajamos"
+            >
+              <span>Ver cómo trabajamos en la sesión ↓</span>
+            </a>
           </div>
 
-          <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl flex flex-col justify-between">
-            <div>
-              <span class="text-xs font-mono font-bold text-teal-700 block mb-2">FASE 03</span>
-              <h3 class="text-base font-bold text-slate-900 mb-2">Construcción en vivo</h3>
-              <p class="text-xs text-slate-600 leading-relaxed">
-                Desarrollamos prompts, asistentes y pipelines sobre datos y archivos de tus proyectos reales. Sin ejemplos abstractos de juguete.
-              </p>
-            </div>
-            <div class="pt-4 text-[11px] font-mono text-slate-400 border-t border-slate-200/60 mt-4">Manos en el teclado</div>
+          <!-- Wizard Footer Navigation -->
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-2" id="pm-wizard-navigation">
+            <button
+              class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+              disabled
+              id="pm-btn-prev"
+              onclick="window.pmPrevStep()"
+              type="button"
+            >
+              <span class="material-symbols-outlined text-[15px]">arrow_back</span>
+              <span>Anterior</span>
+            </button>
+            <span class="text-xs font-mono text-slate-400" id="pm-status-tag">Paso 1</span>
           </div>
 
-          <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl flex flex-col justify-between">
-            <div>
-              <span class="text-xs font-mono font-bold text-emerald-700 block mb-2">FASE 04</span>
-              <h3 class="text-base font-bold text-slate-900 mb-2">Autonomía total</h3>
-              <p class="text-xs text-slate-600 leading-relaxed">
-                El equipo domina la lógica de prompts, aprende a iterar cuando surgen cambios y opera 100% independiente.
-              </p>
-            </div>
-            <div class="pt-4 text-[11px] font-mono text-emerald-700 font-bold border-t border-slate-200/60 mt-4">Sin dependencias</div>
-          </div>
-
-        </div>
-
-        <!-- PHILOSOPHY CARD -->
-        <div class="mt-8 p-5 bg-slate-100 border border-slate-200 rounded-2xl flex items-center gap-4">
-          <span class="material-symbols-outlined text-teal-600 text-[28px] shrink-0">co_present</span>
-          <div class="text-xs sm:text-sm text-slate-800 leading-relaxed">
-            <strong class="text-slate-900">Enfoque práctico:</strong> «El mejor entrenamiento no es ver a alguien hacer algo en una demo perfecta; es resolver tu problema real mientras tú tomas el control.»
-          </div>
         </div>
 
       </div>
     </section>
 
-    <!-- ABOUT SECTION (PABLO RÍOS) -->
-    <section id="sobre-mi" class="w-full max-w-5xl mx-auto px-4 sm:px-6 py-16">
-      <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-xs">
-        <div class="flex flex-col md:flex-row items-start gap-8">
-          
-          <!-- AVATAR & META -->
-          <div class="flex md:flex-col items-center md:items-start gap-4 shrink-0">
-            <img 
-              src="/pablo-rios.jpeg" 
-              alt="Pablo Ríos — Consultor y Mentor en IA" 
-              class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover shadow-sm border-2 border-teal-500/30"
-            />
-            <div>
-              <span class="text-xs font-mono font-bold uppercase text-slate-400 block">Consultor & Mentor</span>
-              <h3 class="text-xl font-bold text-slate-900">Pablo Ríos</h3>
-              <span class="text-xs text-slate-500 font-medium">Fundador de LuciRMe AI</span>
-            </div>
-          </div>
-
-          <!-- BIO & METRICS -->
-          <div class="flex-1 space-y-6">
-            <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
-              Más de 13 años liderando tecnología, ingeniería de software y gestión de producto digital. Desde 2021 ayudo a profesionales y organizaciones a convertir la Inteligencia Artificial en una ventaja operativa tangible, eliminando el ruido y el humo del mercado.
-            </p>
-
-            <!-- 4 METRICS -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-800">
-              <div class="flex items-center gap-2 bg-slate-50 p-3 rounded-xl border border-slate-100">
-                <span class="material-symbols-outlined text-teal-600 text-[18px]">history_edu</span>
-                <span>+13 años en tecnología y software</span>
-              </div>
-              <div class="flex items-center gap-2 bg-slate-50 p-3 rounded-xl border border-slate-100">
-                <span class="material-symbols-outlined text-teal-600 text-[18px]">psychology</span>
-                <span>Especializado en IA aplicada desde 2021</span>
-              </div>
-              <div class="flex items-center gap-2 bg-slate-50 p-3 rounded-xl border border-slate-100">
-                <span class="material-symbols-outlined text-teal-600 text-[18px]">terminal</span>
-                <span>Cero jerga técnica innecesaria</span>
-              </div>
-              <div class="flex items-center gap-2 bg-slate-50 p-3 rounded-xl border border-slate-100">
-                <span class="material-symbols-outlined text-teal-600 text-[18px]">support_agent</span>
-                <span>Acompañamiento directo en vivo</span>
-              </div>
-            </div>
-
-            <div class="p-4 bg-teal-50/60 border-l-4 border-teal-600 rounded-r-xl text-xs sm:text-sm text-slate-800 italic">
-              «La IA no está para sustituir el criterio del Product Manager; está para quitarle de encima el trabajo mecánico y devolverle el tiempo para pensar estratégicamente.»
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ SECTION -->
-    <section id="faq" class="w-full max-w-5xl mx-auto px-4 sm:px-6 pb-16">
-      <div class="mb-8 text-left">
-        <span class="text-xs font-mono font-bold uppercase text-slate-400">Resolviendo Dudas</span>
-        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-1">
-          Preguntas frecuentes
+    <!-- SECCIÓN: ¿EN QUÉ PODEMOS TRABAJAR? -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="en-que-trabajamos">
+      <div class="max-w-3xl mb-12 flex flex-col gap-2">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Problemas Reales de Producto</span>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+          ¿En qué podemos trabajar?
         </h2>
-      </div>
-
-      <div class="space-y-3">
-        
-        <details class="group bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs transition-all [&_summary::-webkit-details-marker]:hidden cursor-pointer">
-          <summary class="flex items-center justify-between font-bold text-sm sm:text-base text-slate-900 select-none">
-            <span>¿Necesitamos saber programar o tener conocimientos técnicos de IA?</span>
-            <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
-          </summary>
-          <p class="text-xs sm:text-sm text-slate-600 mt-3 leading-relaxed">
-            No. Todos los flujos se diseñan en lenguaje natural y utilizando interfaces accesibles (chat, prompts estructurados o herramientas visuales no-code). Cualquier persona con perfil de diseño, producto u operaciones puede operarlos sin tocar una línea de código.
-          </p>
-        </details>
-
-        <details class="group bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs transition-all [&_summary::-webkit-details-marker]:hidden cursor-pointer">
-          <summary class="flex items-center justify-between font-bold text-sm sm:text-base text-slate-900 select-none">
-            <span>¿Esto sustituye nuestras herramientas actuales (Jira, Notion, Figma, Slack)?</span>
-            <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
-          </summary>
-          <p class="text-xs sm:text-sm text-slate-600 mt-3 leading-relaxed">
-            En absoluto. El objetivo es acoplar la IA al stack que tu equipo ya utiliza para reducir fricción. No te obligamos a migrar a una plataforma nueva ni a cambiar la forma en que colaboran tus desarrolladores y diseñadores.
-          </p>
-        </details>
-
-        <details class="group bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs transition-all [&_summary::-webkit-details-marker]:hidden cursor-pointer">
-          <summary class="flex items-center justify-between font-bold text-sm sm:text-base text-slate-900 select-none">
-            <span>¿Cómo se maneja la privacidad y la seguridad de los datos de la empresa?</span>
-            <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
-          </summary>
-          <p class="text-xs sm:text-sm text-slate-600 mt-3 leading-relaxed">
-            Utilizamos entornos corporativos y APIs con acuerdos de no retención de datos, lo que garantiza que la información de tus usuarios, finanzas y estrategia jamás se use para entrenar modelos públicos. Cumplimos con estándares de confidencialidad estrictos.
-          </p>
-        </details>
-
-        <details class="group bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs transition-all [&_summary::-webkit-details-marker]:hidden cursor-pointer">
-          <summary class="flex items-center justify-between font-bold text-sm sm:text-base text-slate-900 select-none">
-            <span>¿Cuánto tiempo toma un acompañamiento típico?</span>
-            <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
-          </summary>
-          <p class="text-xs sm:text-sm text-slate-600 mt-3 leading-relaxed">
-            Depende del alcance acordado: desde intervenciones rápidas de 1 a 2 semanas para destrabar un cuello de botella puntual (como research o syncs), hasta programas de 4 a 6 semanas para sistematizar toda la operación del equipo de producto.
-          </p>
-        </details>
-
-        <details class="group bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs transition-all [&_summary::-webkit-details-marker]:hidden cursor-pointer">
-          <summary class="flex items-center justify-between font-bold text-sm sm:text-base text-slate-900 select-none">
-            <span>¿Cuál es la diferencia respecto a un curso grabado tradicional?</span>
-            <span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
-          </summary>
-          <p class="text-xs sm:text-sm text-slate-600 mt-3 leading-relaxed">
-            Un curso grabado te muestra teoría en un entorno idealizado que raramente calza con tus datos caóticos. Aquí nos conectamos juntos, abrimos tus archivos reales y resolvemos tus problemas de hoy en tu propia pantalla.
-          </p>
-        </details>
-
-      </div>
-    </section>
-
-    <!-- FINAL CTA CARD -->
-    <section class="w-full max-w-5xl mx-auto px-4 sm:px-6 pb-20">
-      <div class="bg-white border border-slate-200 rounded-3xl p-8 sm:p-12 shadow-sm text-center flex flex-col items-center">
-        
-        <div class="w-12 h-12 rounded-2xl bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-700 mb-4">
-          <span class="material-symbols-outlined text-[24px]">schedule</span>
-        </div>
-
-        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight max-w-xl mb-3">
-          ¿Tienes un proceso de Producto que te quita demasiado tiempo?
-        </h2>
-
-        <p class="text-xs sm:text-sm text-slate-600 max-w-lg mb-8 leading-relaxed">
-          Hablemos 20 minutos por WhatsApp. Lo revisamos juntos sobre tu caso real y evaluamos si tiene sentido trabajarlo. Sin rodeos ni presión comercial.
+        <p class="text-sm text-slate-600">
+          No partimos de una herramienta. Partimos de lo que necesitas resolver en tu día a día como PM.
         </p>
+      </div>
 
-        <a 
-          href={ctaFinalWA}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm sm:text-base px-8 py-4 rounded-xl shadow-xs hover:shadow-md transition-all cursor-pointer"
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
+          <span class="text-xl mb-1">🔍</span>
+          <h3 class="text-base font-bold text-slate-900">Research</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Encontrar, organizar y sintetizar información sin pasar horas saltando entre documentos, entrevistas y herramientas.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
+          <span class="text-xl mb-1">🧭</span>
+          <h3 class="text-base font-bold text-slate-900">Discovery</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Dar estructura al trabajo de discovery y convertir información dispersa en algo que realmente ayude a tomar decisiones.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
+          <span class="text-xl mb-1">📄</span>
+          <h3 class="text-base font-bold text-slate-900">Documentación</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">PRDs, decisiones, briefs, especificaciones y documentación que no se conviertan en trabajo administrativo infinito.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
+          <span class="text-xl mb-1">📌</span>
+          <h3 class="text-base font-bold text-slate-900">Priorización</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Ordenar problemas, oportunidades y backlog para poder decidir con más claridad frente al equipo e ingeniería.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
+          <span class="text-xl mb-1">📊</span>
+          <h3 class="text-base font-bold text-slate-900">Análisis</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Trabajar con datos, información cualitativa o grandes cantidades de contenido sin hacerlo todo manualmente.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
+          <span class="text-xl mb-1">🎯</span>
+          <h3 class="text-base font-bold text-slate-900">Estrategia</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Pasar de información dispersa a hipótesis, decisiones, experimentos y planes accionables.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
+          <span class="text-xl mb-1">🖼️</span>
+          <h3 class="text-base font-bold text-slate-900">Presentaciones</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Convertir trabajo de producto en presentaciones claras y convincentes para stakeholders y equipos.</p>
+        </div>
+
+        <div class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2">
+          <span class="text-xl mb-1">🤖</span>
+          <h3 class="text-base font-bold text-slate-900">IA aplicada a producto</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Diseñar flujos concretos donde la IA realmente ayude dentro de tu trabajo cotidiano de Producto.</p>
+        </div>
+
+      </div>
+
+      <div class="p-4 bg-teal-50/80 border border-teal-200 rounded-2xl mt-8 max-w-2xl text-center mx-auto text-xs text-teal-900 font-medium">
+        "No partimos de una herramienta. Partimos de lo que necesitas resolver."
+      </div>
+    </section>
+
+    <!-- DESPUÉS DEL DIAGNÓSTICO: CÓMO TRABAJAMOS -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="como-trabajamos">
+      <div class="max-w-3xl mb-12 flex flex-col gap-3">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Acompañamiento Práctico</span>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+          Podemos trabajar sobre eso.
+        </h2>
+        <p class="text-sm md:text-base text-slate-600 leading-relaxed">
+          En una sesión 1-1 no vamos a sentarnos a hablar de Product Management durante una hora. Vamos a trabajar sobre algo que realmente haces en tu día a día.
+        </p>
+        <p class="text-xs text-slate-500 leading-relaxed italic">
+          Revisamos cómo lo haces hoy, encontramos dónde está el problema y construimos contigo una forma mejor de resolverlo.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        
+        <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-3">
+          <div class="w-9 h-9 rounded-xl bg-teal-50 border border-teal-200 text-teal-800 font-mono text-xs font-bold flex items-center justify-center">
+            01
+          </div>
+          <h3 class="text-sm font-bold text-slate-900">Entendemos</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Cómo trabajas hoy y qué estás intentando conseguir en tu proyecto.</p>
+        </div>
+
+        <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-3">
+          <div class="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 font-mono text-xs font-bold flex items-center justify-center">
+            02
+          </div>
+          <h3 class="text-sm font-bold text-slate-900">Encontramos</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Dónde está realmente el cuello de botella que frena tu flujo.</p>
+        </div>
+
+        <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-3">
+          <div class="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 font-mono text-xs font-bold flex items-center justify-center">
+            03
+          </div>
+          <h3 class="text-sm font-bold text-slate-900">Construimos</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">Una solución o flujo concreto diseñado alrededor de tu problema.</p>
+        </div>
+
+        <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-3">
+          <div class="w-9 h-9 rounded-xl bg-teal-50 border border-teal-200 text-teal-800 font-mono text-xs font-bold flex items-center justify-center">
+            04
+          </div>
+          <h3 class="text-sm font-bold text-slate-900">Practicas</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">La utilizas contigo en vivo sobre tus tareas reales, no solo en teoría.</p>
+        </div>
+
+        <div class="p-5 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-3">
+          <div class="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 font-mono text-xs font-bold flex items-center justify-center">
+            05
+          </div>
+          <h3 class="text-sm font-bold text-slate-900">Te independizas</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">La idea es que puedas seguir utilizándola de forma autónoma sin depender de mí.</p>
+        </div>
+
+      </div>
+
+      <div class="p-4 bg-teal-50/80 border border-teal-200 rounded-2xl mt-8 max-w-3xl text-center mx-auto text-xs text-teal-900 font-medium">
+        "No quiero que aprendas algo que después no uses. Quiero que salgas con algo que puedas aplicar."
+      </div>
+    </section>
+
+    <!-- SESIÓN 1-1 VS ACOMPAÑAMIENTO -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="que-necesitas">
+      <div class="max-w-3xl mb-12 flex flex-col gap-2">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Modalidades</span>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+          ¿Qué necesitas?
+        </h2>
+        <p class="text-sm text-slate-600">
+          Elegimos el formato que mejor responda a tu situación actual en Producto.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <div class="p-8 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between">
+          <div>
+            <span class="px-3 py-1 bg-teal-50 text-teal-800 rounded-full font-mono text-xs font-bold border border-teal-200 inline-block mb-4">Caso Puntual</span>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Tengo un problema concreto</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+              Una sesión 1-1 para revisar una situación específica (un PRD trabado, síntesis de research, preparar un pitch de stakeholders), construir una solución y salir con algo aplicable.
+            </p>
+          </div>
+          <a
+            class="inline-flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-teal-800 text-white font-semibold text-xs hover:bg-teal-900 transition-colors shadow-2xs text-center cursor-pointer"
+            href="#diagnostico-pm"
+          >
+            <span>Quiero revisar mi caso →</span>
+          </a>
+        </div>
+
+        <div class="p-8 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col justify-between">
+          <div>
+            <span class="px-3 py-1 bg-amber-50 text-amber-800 rounded-full font-mono text-xs font-bold border border-amber-200 inline-block mb-4">Proceso Continuo</span>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Tengo varios problemas o quiero cambiar mi forma de trabajar</h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-6">
+              Podemos trabajar durante varias sesiones para revisar procesos completos, construir workflows y acompañarte paso a paso hasta que puedas utilizarlos por tu cuenta.
+            </p>
+          </div>
+          <a
+            class="inline-flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-slate-900 text-white font-semibold text-xs hover:bg-slate-800 transition-colors shadow-2xs text-center cursor-pointer"
+            href={whatsappPM}
+            target="_blank"
+          >
+            <span>Hablar con Pablo por WhatsApp →</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PRODUCT MANAGEMENT + IA -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="pm-ia">
+      <div class="max-w-3xl mb-10 flex flex-col gap-2">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Enfoque Pragmático</span>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+          IA aplicada a Product Management
+        </h2>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          No se trata de meter IA en cada parte de tu trabajo. Se trata de identificar dónde realmente aporta algo. Podemos trabajar desde un prompt concreto hasta un flujo completo que conecte información, herramientas y decisiones.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col gap-1.5 text-xs font-mono">
+          <span class="text-teal-700 font-bold">Research</span>
+          <span class="text-slate-400">↓</span>
+          <span class="text-slate-700">síntesis</span>
+          <span class="text-slate-400">↓</span>
+          <span class="text-emerald-700 font-bold">insights accionables</span>
+        </div>
+
+        <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col gap-1.5 text-xs font-mono">
+          <span class="text-teal-700 font-bold">Entrevistas</span>
+          <span class="text-slate-400">↓</span>
+          <span class="text-slate-700">patrones</span>
+          <span class="text-slate-400">↓</span>
+          <span class="text-emerald-700 font-bold">oportunidades</span>
+        </div>
+
+        <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col gap-1.5 text-xs font-mono">
+          <span class="text-teal-700 font-bold">Documentación</span>
+          <span class="text-slate-400">↓</span>
+          <span class="text-slate-700">estructura</span>
+          <span class="text-slate-400">↓</span>
+          <span class="text-emerald-700 font-bold">PRD listo</span>
+        </div>
+
+        <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col gap-1.5 text-xs font-mono">
+          <span class="text-teal-700 font-bold">Backlog</span>
+          <span class="text-slate-400">↓</span>
+          <span class="text-slate-700">análisis</span>
+          <span class="text-slate-400">↓</span>
+          <span class="text-emerald-700 font-bold">priorización</span>
+        </div>
+
+        <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col gap-1.5 text-xs font-mono">
+          <span class="text-teal-700 font-bold">Información</span>
+          <span class="text-slate-400">↓</span>
+          <span class="text-slate-700">análisis</span>
+          <span class="text-slate-400">↓</span>
+          <span class="text-emerald-700 font-bold">decisión</span>
+        </div>
+
+        <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col gap-1.5 text-xs font-mono">
+          <span class="text-teal-700 font-bold">Reuniones</span>
+          <span class="text-slate-400">↓</span>
+          <span class="text-slate-700">notas</span>
+          <span class="text-slate-400">↓</span>
+          <span class="text-emerald-700 font-bold">acciones en Jira/Linear</span>
+        </div>
+
+        <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col gap-1.5 text-xs font-mono">
+          <span class="text-teal-700 font-bold">Datos</span>
+          <span class="text-slate-400">↓</span>
+          <span class="text-slate-700">análisis</span>
+          <span class="text-slate-400">↓</span>
+          <span class="text-emerald-700 font-bold">presentación ejecutiva</span>
+        </div>
+
+        <div class="p-4 bg-white rounded-xl border border-slate-200 flex flex-col gap-1.5 text-xs font-mono">
+          <span class="text-teal-700 font-bold">Información dispersa</span>
+          <span class="text-slate-400">↓</span>
+          <span class="text-emerald-700 font-bold">workflow reutilizable</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PRODUCT MANAGEMENT SIN BULLSHIT -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="pm-sin-bullshit">
+      <div class="p-8 md:p-10 bg-gradient-to-r from-amber-50/80 via-white to-teal-50/80 border border-slate-200 rounded-3xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-2xs">
+        
+        <div class="flex flex-col gap-2 max-w-2xl">
+          <span class="font-mono text-xs font-bold text-amber-800 uppercase">Recurso &amp; Comunidad</span>
+          <h2 class="text-2xl font-bold text-slate-900">
+            También estoy construyendo Product Management Sin Bullshit
+          </h2>
+          <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+            Recursos, ideas y herramientas para quienes trabajan en producto y quieren aprender sin tragarse teoría innecesaria ni lecciones infladas.
+          </p>
+        </div>
+
+        <a
+          class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900 text-white font-semibold text-xs hover:bg-slate-800 transition-colors shadow-2xs shrink-0 cursor-pointer"
+          href="/educacion"
         >
-          <span class="material-symbols-outlined text-[20px]">chat</span>
-          <span>Hablar por WhatsApp con Pablo</span>
-          <span class="material-symbols-outlined text-[18px]">open_in_new</span>
+          <span>Ver Product Management Sin Bullshit →</span>
         </a>
 
-        <span class="text-xs font-mono text-slate-400 mt-4">
-          Respuesta directa en menos de 24 horas hábiles · Cupos limitados por mes
-        </span>
+      </div>
+    </section>
 
+    <!-- SECCIÓN HUMANA & PABLO RÍOS -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="pablo">
+      <div class="max-w-4xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-2xs p-8 md:p-12 flex flex-col md:flex-row gap-8 items-start">
+        
+        <div class="w-16 h-16 rounded-full bg-teal-50 border border-teal-200 text-teal-800 flex items-center justify-center shrink-0 font-bold text-xl">
+          PR
+        </div>
+
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-1">
+            <span class="font-mono text-xs text-teal-800 uppercase font-semibold">Detrás de esto estoy yo</span>
+            <h2 class="text-2xl font-bold text-slate-900">Pablo Ríos</h2>
+            <p class="text-xs font-semibold text-slate-600">Consultor de Producto, Operaciones e IA</p>
+          </div>
+
+          <div class="text-xs text-slate-600 flex flex-col gap-3 leading-relaxed">
+            <p class="text-sm font-semibold text-slate-800">
+              "Trabajo con profesionales y equipos para convertir problemas concretos en soluciones que realmente puedan utilizar."
+            </p>
+            <p>
+              Mi enfoque combina Product Management, operaciones e IA aplicada. La idea no es enseñarte una herramienta porque sí: es ayudarte a encontrar una forma mejor de hacer algo que ya haces.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4 pt-2 border-t border-slate-100">
+            <div>
+              <div class="font-bold text-base text-slate-900">+50 personas</div>
+              <div class="text-[11px] text-slate-500">Acompañadas y mentoreadas 1-1</div>
+            </div>
+            <div>
+              <div class="font-bold text-base text-slate-900">+30 empresas</div>
+              <div class="text-[11px] text-slate-500">Con las que he colaborado</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="cta-final">
+      <div class="p-8 md:p-12 bg-white rounded-2xl border border-slate-200 text-center flex flex-col items-center gap-5 shadow-2xs max-w-3xl mx-auto">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase font-mono">Paso Siguiente</span>
+        <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+          ¿Hay algo de tu trabajo que quieras mejorar?
+        </h2>
+        <p class="text-xs md:text-sm text-slate-600 max-w-xl leading-relaxed">
+          Cuéntame qué estás intentando resolver y vemos si tiene sentido trabajarlo juntos.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+          <a
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
+            href="#diagnostico-pm"
+          >
+            <span>Quiero revisar mi caso →</span>
+          </a>
+
+          <a
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors shadow-2xs"
+            href={whatsappPM}
+            rel="noopener noreferrer"
+            target="_blank"
+            onclick="if(window.posthog) window.posthog.capture('product_whatsapp_click', { origen: 'cta_final' });"
+          >
+            <span class="material-symbols-outlined text-[18px]">chat</span>
+            <span>Hablar con Pablo</span>
+          </a>
+        </div>
+
+        <p class="text-xs font-mono text-slate-500">Sin compromisos ni ventas agresivas.</p>
       </div>
     </section>
 
   </main>
 
+  <!-- FOOTER DEDICADO PRODUCT MANAGEMENT -->
+  <footer class="w-full bg-white border-t border-slate-200 py-12">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col gap-8">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="flex flex-col gap-1">
+          <span class="text-base font-bold text-slate-900">LuciRMe AI · Product Management</span>
+          <p class="text-xs font-mono text-slate-500">Product Management aplicado a problemas reales.</p>
+        </div>
+        <div class="flex items-center gap-4 text-xs text-slate-600 font-medium">
+          <a class="hover:text-slate-900 transition-colors" href={whatsappPM} target="_blank">WhatsApp Directo</a>
+          <a class="hover:text-slate-900 transition-colors" href="/profesionales">Profesionales</a>
+          <a class="hover:text-slate-900 transition-colors" href="/empresas">Empresas</a>
+          <a class="hover:text-slate-900 transition-colors" href="/educacion">Educación</a>
+          <a class="hover:text-slate-900 transition-colors" href="/sobre-pablo">Sobre Pablo</a>
+        </div>
+      </div>
+      <div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
+        <span>© 2026 LuciRMe AI · Todos los derechos reservados.</span>
+        <span>lucirme.com/servicios/producto</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT DIAGNÓSTICO PM Y EVENTOS POSTHOG -->
+  <script>
+    let pmStep = 1;
+    const totalPmSteps = 5;
+
+    const pmState: Record<string, any> = {
+      area: '',
+      frecuencia: '',
+      tiempo: '',
+      herramientas: [],
+      objetivo: '',
+      nombre: '',
+      email: '',
+      whatsapp: '',
+    };
+
+    // Restore from sessionStorage
+    try {
+      const saved = sessionStorage.getItem('pm_diag_state');
+      if (saved) {
+        Object.assign(pmState, JSON.parse(saved));
+      }
+    } catch (e) {}
+
+    function savePmState() {
+      try {
+        sessionStorage.setItem('pm_diag_state', JSON.stringify(pmState));
+      } catch (e) {}
+    }
+
+    function updatePmWizardProgress() {
+      const counter = document.getElementById('pm-step-counter');
+      const bar = document.getElementById('pm-progress-bar');
+      const tag = document.getElementById('pm-status-tag');
+      const prevBtn = document.getElementById('pm-btn-prev') as HTMLButtonElement | null;
+
+      if (!counter || !bar) return;
+
+      if (pmStep <= totalPmSteps) {
+        const pct = (pmStep / totalPmSteps) * 100;
+        counter.innerText = `Paso ${pmStep} de ${totalPmSteps}`;
+        bar.style.width = `${pct}%`;
+        if (tag) tag.innerText = `Paso ${pmStep}`;
+        if (prevBtn) prevBtn.disabled = pmStep === 1;
+      } else {
+        counter.innerText = 'Diagnóstico Completado';
+        bar.style.width = '100%';
+        if (tag) tag.innerText = 'Completado';
+        if (prevBtn) prevBtn.disabled = false;
+      }
+    }
+
+    function pmGoToStep(step: number) {
+      document.querySelectorAll('.pm-step').forEach(el => el.classList.add('hidden'));
+
+      pmStep = step;
+      if (step <= totalPmSteps) {
+        const target = document.getElementById(`pm-step-${step}`);
+        if (target) target.classList.remove('hidden');
+      } else if (step === 6) {
+        const target = document.getElementById('pm-step-6');
+        if (target) target.classList.remove('hidden');
+      } else {
+        const res = document.getElementById('pm-step-result');
+        if (res) res.classList.remove('hidden');
+      }
+
+      updatePmWizardProgress();
+    }
+
+    function pmPrevStep() {
+      if (pmStep > 1 && pmStep <= totalPmSteps) {
+        pmGoToStep(pmStep - 1);
+      } else if (pmStep > totalPmSteps) {
+        pmGoToStep(totalPmSteps);
+      }
+    }
+
+    function pmNextStep(step: number) {
+      if (step === 4) {
+        pmGoToStep(5);
+      }
+    }
+
+    function pmSelectArea(val: string, btn: HTMLElement) {
+      pmState.area = val;
+      savePmState();
+
+      const parent = btn.parentElement;
+      if (parent) {
+        parent.querySelectorAll('.diag-option').forEach(b => {
+          b.classList.remove('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+          b.classList.add('border-slate-200', 'text-slate-700');
+        });
+      }
+      btn.classList.remove('border-slate-200', 'text-slate-700');
+      btn.classList.add('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('product_diagnostic_question_answered', {
+          question: 'area_friccion_pm',
+          answer: val,
+        });
+      }
+
+      setTimeout(() => pmGoToStep(2), 250);
+    }
+
+    function pmSelectFrecuencia(val: string, btn: HTMLElement) {
+      pmState.frecuencia = val;
+      savePmState();
+
+      const parent = btn.parentElement;
+      if (parent) {
+        parent.querySelectorAll('.diag-option').forEach(b => {
+          b.classList.remove('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+          b.classList.add('border-slate-200', 'text-slate-700');
+        });
+      }
+      btn.classList.remove('border-slate-200', 'text-slate-700');
+      btn.classList.add('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('product_diagnostic_question_answered', {
+          question: 'frecuencia_pm',
+          answer: val,
+        });
+      }
+
+      setTimeout(() => pmGoToStep(3), 250);
+    }
+
+    function pmSelectTiempo(val: string, btn: HTMLElement) {
+      pmState.tiempo = val;
+      savePmState();
+
+      const parent = btn.parentElement;
+      if (parent) {
+        parent.querySelectorAll('.diag-option').forEach(b => {
+          b.classList.remove('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+          b.classList.add('border-slate-200', 'text-slate-700');
+        });
+      }
+      btn.classList.remove('border-slate-200', 'text-slate-700');
+      btn.classList.add('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('product_diagnostic_question_answered', {
+          question: 'tiempo_estimado_pm',
+          answer: val,
+        });
+      }
+
+      setTimeout(() => pmGoToStep(4), 250);
+    }
+
+    function pmToggleHerramienta(val: string, btn: HTMLElement) {
+      const list: string[] = pmState.herramientas || [];
+      const idx = list.indexOf(val);
+
+      if (idx >= 0) {
+        list.splice(idx, 1);
+        btn.classList.remove('border-teal-700', 'bg-teal-50', 'text-teal-900', 'font-bold');
+        btn.classList.add('border-slate-200', 'text-slate-700');
+      } else {
+        list.push(val);
+        btn.classList.remove('border-slate-200', 'text-slate-700');
+        btn.classList.add('border-teal-700', 'bg-teal-50', 'text-teal-900', 'font-bold');
+      }
+
+      pmState.herramientas = list;
+      savePmState();
+    }
+
+    function pmSelectObjetivo(val: string, btn: HTMLElement) {
+      pmState.objetivo = val;
+      savePmState();
+
+      const parent = btn.parentElement;
+      if (parent) {
+        parent.querySelectorAll('.diag-option').forEach(b => {
+          b.classList.remove('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+          b.classList.add('border-slate-200', 'text-slate-700');
+        });
+      }
+      btn.classList.remove('border-slate-200', 'text-slate-700');
+      btn.classList.add('border-emerald-600', 'bg-emerald-50/80', 'text-emerald-900', 'font-bold');
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('product_diagnostic_question_answered', {
+          question: 'objetivo_pm',
+          answer: val,
+        });
+      }
+
+      setTimeout(() => pmGoToStep(6), 300);
+    }
+
+    async function pmSubmitLead() {
+      const nomInput = document.getElementById('pm-input-nombre') as HTMLInputElement | null;
+      const emInput = document.getElementById('pm-input-email') as HTMLInputElement | null;
+      const waInput = document.getElementById('pm-input-whatsapp') as HTMLInputElement | null;
+      const submitBtn = document.getElementById('pm-btn-submit') as HTMLButtonElement | null;
+
+      const nom = nomInput?.value.trim() || '';
+      const em = emInput?.value.trim() || '';
+      const wa = waInput?.value.trim() || '';
+
+      if (!nom) {
+        alert('Por favor ingresa tu nombre.');
+        return;
+      }
+
+      if (!em || !em.includes('@')) {
+        alert('Por favor ingresa un correo electrónico válido.');
+        return;
+      }
+
+      if (!wa) {
+        alert('Por favor ingresa tu número de WhatsApp.');
+        return;
+      }
+
+      pmState.nombre = nom;
+      pmState.email = em;
+      pmState.whatsapp = wa;
+      savePmState();
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Enviando y calculando...';
+      }
+
+      try {
+        const res = await fetch('/api/professional-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: pmState.nombre,
+            email: pmState.email,
+            whatsapp: pmState.whatsapp,
+            problema_principal: pmState.area || 'Product Management',
+            frecuencia: pmState.frecuencia || 'Semanal',
+            tiempo_estimado: pmState.tiempo || '3–5 horas',
+            herramientas_actuales: pmState.herramientas,
+            objetivo: pmState.objetivo || 'Mejorar workflow PM',
+            recomendacion: 'Acompañamiento PM e IA',
+            fuente: 'Landing /servicios/producto',
+            tipo_de_pagina: 'producto',
+          }),
+        });
+
+        const result = await res.json();
+        if (!res.ok && result.error) {
+          alert(result.error);
+        }
+      } catch (err) {
+        console.error('Error enviando lead de producto:', err);
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = 'Ver diagnóstico y recomendación →';
+        }
+      }
+
+      // Dynamic Summary
+      const summaryText = document.getElementById('pm-result-summary');
+      if (summaryText) {
+        const toolsStr = Array.isArray(pmState.herramientas) && pmState.herramientas.length > 0
+          ? pmState.herramientas.join(', ')
+          : 'herramientas habituales';
+
+        summaryText.innerHTML = `
+          Por lo que me cuentas, una parte importante de tu tiempo como PM se está yendo en el área de <strong>${pmState.area || 'documentación y análisis'}</strong>. Si esta tarea aparece <strong>${pmState.frecuencia || 'frecuentemente'}</strong> y puede estar consumiendo entre <strong>${pmState.tiempo || '3 y 5 horas'}</strong> semanales, vale la pena revisarla con más detalle. Ya utilizas algunas herramientas (<em>${toolsStr}</em>), pero todavía no existe un flujo claro entre ellas. En tu caso no empezaría buscando otra herramienta: empezaría por revisar cómo estás haciendo hoy ese trabajo y detectar qué partes realmente vale la pena simplificar o automatizar.
+        `;
+      }
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('product_diagnostic_completed', {
+          problem_area: pmState.area,
+          frequency: pmState.frecuencia,
+          estimated_time: pmState.tiempo,
+          current_tools: pmState.herramientas,
+          goal: pmState.objetivo,
+        });
+        (window as any).posthog.capture('product_lead_submitted', {
+          problem_area: pmState.area,
+          frequency: pmState.frecuencia,
+          goal: pmState.objetivo,
+        });
+      }
+
+      pmGoToStep(7);
+    }
+
+    // Window assignments
+    (window as any).pmGoToStep = pmGoToStep;
+    (window as any).pmPrevStep = pmPrevStep;
+    (window as any).pmNextStep = pmNextStep;
+    (window as any).pmSelectArea = pmSelectArea;
+    (window as any).pmSelectFrecuencia = pmSelectFrecuencia;
+    (window as any).pmSelectTiempo = pmSelectTiempo;
+    (window as any).pmToggleHerramienta = pmToggleHerramienta;
+    (window as any).pmSelectObjetivo = pmSelectObjetivo;
+    (window as any).pmSubmitLead = pmSubmitLead;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updatePmWizardProgress();
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('product_page_view', {
+          url: window.location.href,
+        });
+      }
+    });
+  </script>
 </Layout>

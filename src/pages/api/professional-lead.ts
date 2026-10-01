@@ -15,6 +15,8 @@ export const POST: APIRoute = async ({ request }) => {
       recomendacion = '',
       ciudad = 'Bogotá',
       pais = 'Colombia',
+      fuente = 'Landing /servicios/producto',
+      tipo_de_pagina = 'producto',
     } = data;
 
     const emailStr = typeof email === 'string' ? email.trim() : '';
@@ -46,9 +48,9 @@ export const POST: APIRoute = async ({ request }) => {
     const rawToken = process.env.MAILERLITE_API_KEY || process.env.MAILERLITE_API_TOKEN || '';
     const apiToken = rawToken.trim();
     const groupId = (
+      process.env.MAILERLITE_SESSIONS_GROUP_ID ||
       process.env.MAILERLITE_PROFESSIONAL_GROUP_ID ||
-      process.env.MAILERLITE_PAGE_COMMERCIAL_GROUP_ID ||
-      '200085259962811937'
+      '200155974539937533'
     ).trim();
 
     let mailerliteSuccess = false;
@@ -62,16 +64,23 @@ export const POST: APIRoute = async ({ request }) => {
         email: emailStr,
         fields: {
           name: nameStr,
-          company: 'Profesional / Sesión 1-1',
+          company: 'Product Management',
           phone: whatsappStr,
+          whatsapp: whatsappStr,
           city: ciudad || 'Bogotá',
           country: pais || 'Colombia',
-          industria_sector: 'Profesional Independiente',
-          que_quiere_mejorar: problema_principal || 'Optimización de flujo con IA',
+          industria_sector: 'Product Management & Ops',
+          sesion_1_1_problema_principal: problema_principal || 'Optimización PM',
+          sesion_1_1_frecuencia: frecuencia || 'Semanal',
+          sesion_1_1_tiempo_estimado: tiempo_estimado || '3-5 horas',
+          sesion_1_1_herramientas_actuales: toolsFormatted || 'Herramientas PM',
+          sesion_1_1_objetivo: objetivo || 'Ahorrar tiempo',
+          sesion_1_1_resultado_recomendacion: recomendacion || 'Sesión 1-1 PM',
+          que_quiere_mejorar: problema_principal || 'Optimización PM',
           objetivo_de_la_pagina: objetivo || 'Ahorrar tiempo',
-          que_tiene_listo: toolsFormatted || 'Herramientas básicas',
-          fuente: 'Landing /profesionales',
-          tipo_de_pagina: 'profesionales',
+          que_tiene_listo: toolsFormatted || 'Herramientas PM',
+          fuente: fuente || 'Landing /servicios/producto',
+          tipo_de_pagina: tipo_de_pagina || 'producto',
           tipo_de_empresa: 'profesionales',
         },
       };
@@ -101,7 +110,7 @@ export const POST: APIRoute = async ({ request }) => {
         console.error('[MailerLite Professional Lead Exception]:', mlErr);
       }
     } else {
-      console.warn('[MailerLite Notice]: MAILERLITE_API_KEY missing or invalid. Professional lead processed locally.');
+      console.warn('[MailerLite Notice]: MAILERLITE_API_KEY missing or invalid. Lead processed locally.');
     }
 
     return new Response(
