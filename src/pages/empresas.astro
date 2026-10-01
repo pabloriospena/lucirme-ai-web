@@ -46,14 +46,14 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
   <main class="w-full bg-[#F8FAFC]">
     
     <!-- 2. HERO -->
-    <section class="w-full max-w-7xl mx-auto px-6 pt-16 pb-14 md:py-20 flex flex-col items-start gap-6 border-b border-slate-200/60">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center w-full">
-        <div class="lg:col-span-7 flex flex-col items-start gap-6">
+    <section class="w-full max-w-7xl mx-auto px-6 pt-12 pb-10 md:py-16 flex flex-col items-start gap-6 border-b border-slate-200/60">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
+        <div class="lg:col-span-7 flex flex-col items-start gap-5">
           <div class="inline-flex items-center gap-2 px-3 py-1 bg-white border border-slate-200 rounded-full font-mono text-xs text-slate-700 shadow-2xs">
             <span class="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
             Primero el problema. Después la tecnología.
           </div>
-          <div class="max-w-2xl flex flex-col gap-4">
+          <div class="max-w-2xl flex flex-col gap-3">
             <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 leading-tight">
               ¿Dónde se está perdiendo el tiempo en tu empresa?
             </h1>
@@ -61,13 +61,13 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
               Hay procesos que parecen pequeños hasta que calculas cuántas veces se repiten. Encuentra un cuello de botella, mide cuánto te está costando y decide si vale la pena intervenir.
             </p>
           </div>
-          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2 w-full sm:w-auto">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 w-full sm:w-auto">
             <a
               class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors shadow-sm"
               href="#diagnostico"
               onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_started', { origen: 'hero_btn' }); }"
             >
-              <span>Empezar diagnóstico · 5 min</span>
+              <span>Empezar diagnóstico · 3 min</span>
               <span class="material-symbols-outlined text-[18px]">arrow_downward</span>
             </a>
             <a
@@ -81,7 +81,7 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
               <span>Hablar directamente con Pablo</span>
             </a>
           </div>
-          <p class="text-xs font-mono text-slate-500 pt-1">
+          <p class="text-xs font-mono text-slate-500">
             No necesitas saber de IA. Nosotros nos ocupamos de esa parte.
           </p>
         </div>
@@ -130,42 +130,32 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
       </div>
     </section>
 
-    <!-- 3 & 4. DIAGNÓSTICO OPERATIVO (CONSOLA INTERACTIVA PASO A PASO) -->
-    <section class="w-full max-w-7xl mx-auto px-6 py-16 scroll-mt-20" id="diagnostico">
-      <div class="max-w-3xl mb-10 flex flex-col gap-3">
+    <!-- 3 & 4. DIAGNÓSTICO OPERATIVO (CONSOLA INTERACTIVA COMPACTA SIN SCROLL NI PRESELECCIÓN) -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-12 scroll-mt-20" id="diagnostico">
+      <div class="max-w-3xl mb-8 flex flex-col gap-2">
         <div class="inline-flex items-center gap-2 font-mono text-xs text-teal-800 uppercase font-semibold">
           Diagnóstico Operativo
         </div>
         <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
           No necesitas saber de IA. Necesitas identificar qué está frenando al equipo.
         </h2>
-        <p class="text-sm md:text-base text-slate-600 leading-relaxed">
-          El diagnóstico te ayuda a mirar un proceso concreto y responder: ¿Cuánto tiempo consume? ¿Con qué frecuencia ocurre? ¿Cuántas personas intervienen? ¿Dónde se atasca? ¿Qué impacto tiene? ¿Qué tan difícil sería cambiarlo?
+        <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+          Responde las siguientes preguntas para medir la fuga de tiempo de tu equipo sin sesgos iniciales.
         </p>
-        <div class="mt-2 inline-flex items-center gap-2 px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-lg text-xs font-mono text-slate-700 self-start">
-          <span>Cómo funciona:</span>
-          <span class="text-slate-900 font-medium">Identifica</span>
-          <span class="text-slate-400">→</span>
-          <span class="text-slate-900 font-medium">Mide</span>
-          <span class="text-slate-400">→</span>
-          <span class="text-slate-900 font-medium">Evalúa</span>
-          <span class="text-slate-400">→</span>
-          <span class="text-teal-700 font-semibold">Prioriza</span>
-        </div>
       </div>
 
-      <!-- Consola Interactiva con Wizard de 1 pregunta a la vez -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <!-- Columna Izquierda: Wizard Paso a Paso -->
-        <div class="lg:col-span-7 flex flex-col bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm relative min-h-[460px]">
+      <!-- Consola Interactiva Compacta -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- Columna Izquierda: Wizard Paso a Paso Compacto -->
+        <div class="lg:col-span-7 flex flex-col bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm relative min-h-[380px]">
           <!-- Header del Wizard: Barra de Progreso y Paso actual -->
-          <div class="flex flex-col gap-2.5 pb-6 border-b border-slate-100">
+          <div class="flex flex-col gap-2 pb-4 border-b border-slate-100">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-teal-600 animate-pulse"></span>
                 <span class="font-mono text-xs font-semibold text-teal-800 uppercase" id="step-counter">Paso 1 de 7</span>
               </div>
-              <span class="text-[11px] font-mono text-slate-400" id="step-hint">Selección guiada</span>
+              <span class="text-[11px] font-mono text-slate-400" id="step-hint">Selecciona una opción</span>
             </div>
             <!-- Barra de progreso -->
             <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
@@ -173,238 +163,232 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
             </div>
           </div>
 
-          <!-- Contenedor dinámico de pasos -->
-          <div class="py-6 flex-1 flex flex-col justify-between" id="wizard-container">
-            <!-- Paso 1 -->
-            <div class="wizard-step flex flex-col gap-4" id="step-1">
-              <div class="flex flex-col gap-1.5">
+          <!-- Contenedor dinámico de pasos compacto -->
+          <div class="py-4 flex-1 flex flex-col justify-between" id="wizard-container">
+            
+            <!-- Paso 1: Proceso -->
+            <div class="wizard-step flex flex-col gap-3" id="step-1">
+              <div class="flex flex-col gap-1">
                 <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 1 · Proceso</span>
-                <h3 class="text-lg md:text-xl font-bold text-slate-900">¿Qué proceso te gustaría dejar de hacer de la forma en que lo haces hoy?</h3>
-                <p class="text-xs text-slate-500">Selecciona el área donde sientes que el equipo invierte más esfuerzo operativo:</p>
+                <h3 class="text-base md:text-lg font-bold text-slate-900">¿Qué proceso te gustaría mejorar en tu equipo?</h3>
               </div>
-              <div class="flex flex-col gap-2.5 pt-2" id="group-proceso">
-                <button class="diag-option active flex items-center justify-between px-4 py-3 rounded-xl border text-left text-sm font-medium transition-all border-teal-700 bg-teal-50/80 text-teal-900 cursor-pointer" onclick="selectStepOption('proceso', 'Reportes y consolidación de información', this)" type="button">
-                  <span>Reportes y consolidación de información</span>
-                  <span class="material-symbols-outlined text-[18px] text-teal-700">check_circle</span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1" id="group-proceso">
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Reportes y consolidación de información', this)" type="button">
+                  <span>Reportes e información</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Atención y seguimiento de clientes', this)" type="button">
-                  <span>Atención y seguimiento de clientes</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Atención y seguimiento de clientes', this)" type="button">
+                  <span>Atención a clientes</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Documentación', this)" type="button">
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Documentación', this)" type="button">
                   <span>Documentación</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Reuniones y seguimiento', this)" type="button">
-                  <span>Reuniones y seguimiento</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Reuniones y seguimiento', this)" type="button">
+                  <span>Reuniones y minutas</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Procesos administrativos', this)" type="button">
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Procesos administrativos', this)" type="button">
                   <span>Procesos administrativos</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Ventas y marketing', this)" type="button">
-                  <span>Ventas y marketing</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Ventas y marketing', this)" type="button">
+                  <span>Ventas y comercial</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Otro', this)" type="button">
-                  <span>Otro</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                <button class="diag-option sm:col-span-2 flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('proceso', 'Otro proceso operativo', this)" type="button">
+                  <span>Otro proceso operativo</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
               </div>
             </div>
 
-            <!-- Paso 2 -->
-            <div class="wizard-step hidden flex flex-col gap-4" id="step-2">
-              <div class="flex flex-col gap-1.5">
+            <!-- Paso 2: Frecuencia -->
+            <div class="wizard-step hidden flex flex-col gap-3" id="step-2">
+              <div class="flex flex-col gap-1">
                 <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 2 · Frecuencia</span>
-                <h3 class="text-lg md:text-xl font-bold text-slate-900">¿Con qué frecuencia ocurre?</h3>
-                <p class="text-xs text-slate-500">La recurrencia determina el efecto acumulativo de la ineficiencia:</p>
+                <h3 class="text-base md:text-lg font-bold text-slate-900">¿Con qué frecuencia se repite este proceso?</h3>
               </div>
-              <div class="flex flex-col gap-2.5 pt-2" id="group-frecuencia">
-                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('frecuencia', 'Varias veces al día', this)" type="button">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1" id="group-frecuencia">
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('frecuencia', 'Varias veces al día', this)" type="button">
                   <span>Varias veces al día</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option active flex items-center justify-between px-4 py-3.5 rounded-xl border text-left text-sm font-medium transition-all border-teal-700 bg-teal-50/80 text-teal-900 cursor-pointer" onclick="selectStepOption('frecuencia', 'Todos los días', this)" type="button">
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('frecuencia', 'Todos los días', this)" type="button">
                   <span>Todos los días</span>
-                  <span class="material-symbols-outlined text-[18px] text-teal-700">check_circle</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('frecuencia', 'Varias veces por semana', this)" type="button">
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('frecuencia', 'Varias veces por semana', this)" type="button">
                   <span>Varias veces por semana</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('frecuencia', 'Una vez por semana', this)" type="button">
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('frecuencia', 'Una vez por semana', this)" type="button">
                   <span>Una vez por semana</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('frecuencia', 'Algunas veces al mes', this)" type="button">
+                <button class="diag-option sm:col-span-2 flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('frecuencia', 'Algunas veces al mes', this)" type="button">
                   <span>Algunas veces al mes</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
               </div>
             </div>
 
-            <!-- Paso 3 -->
-            <div class="wizard-step hidden flex flex-col gap-4" id="step-3">
-              <div class="flex flex-col gap-1.5">
+            <!-- Paso 3: Tiempo -->
+            <div class="wizard-step hidden flex flex-col gap-3" id="step-3">
+              <div class="flex flex-col gap-1">
                 <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 3 · Tiempo por ejecución</span>
-                <h3 class="text-lg md:text-xl font-bold text-slate-900">¿Cuánto tiempo consume cada vez?</h3>
-                <p class="text-xs text-slate-500">Selecciona una estimación promedio por sesión o ciclo de trabajo:</p>
+                <h3 class="text-base md:text-lg font-bold text-slate-900">¿Cuánto tiempo consume cada sesión?</h3>
               </div>
-              <div class="flex flex-col gap-2.5 pt-2" id="group-tiempo">
-                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('tiempo', 'Menos de 15 minutos', this)" type="button">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1" id="group-tiempo">
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('tiempo', 'Menos de 15 minutos', this)" type="button">
                   <span>Menos de 15 minutos</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('tiempo', '15–30 minutos', this)" type="button">
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('tiempo', '15–30 minutos', this)" type="button">
                   <span>15–30 minutos</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('tiempo', '30–60 minutos', this)" type="button">
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('tiempo', '30–60 minutos', this)" type="button">
                   <span>30–60 minutos</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option active flex items-center justify-between px-4 py-3.5 rounded-xl border text-left text-sm font-medium transition-all border-teal-700 bg-teal-50/80 text-teal-900 cursor-pointer" onclick="selectStepOption('tiempo', '1–2 horas', this)" type="button">
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('tiempo', '1–2 horas', this)" type="button">
                   <span>1–2 horas</span>
-                  <span class="material-symbols-outlined text-[18px] text-teal-700">check_circle</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('tiempo', 'Más de 2 horas', this)" type="button">
+                <button class="diag-option sm:col-span-2 flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('tiempo', 'Más de 2 horas', this)" type="button">
                   <span>Más de 2 horas</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
               </div>
             </div>
 
-            <!-- Paso 4 -->
-            <div class="wizard-step hidden flex flex-col gap-4" id="step-4">
-              <div class="flex flex-col gap-1.5">
+            <!-- Paso 4: Equipo -->
+            <div class="wizard-step hidden flex flex-col gap-3" id="step-4">
+              <div class="flex flex-col gap-1">
                 <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 4 · Equipo</span>
-                <h3 class="text-lg md:text-xl font-bold text-slate-900">¿Cuántas personas participan normalmente?</h3>
-                <p class="text-xs text-slate-500">Cuantas más personas involucradas, mayor fricción de coordinación:</p>
+                <h3 class="text-base md:text-lg font-bold text-slate-900">¿Cuántas personas participan en este proceso?</h3>
               </div>
-              <div class="grid grid-cols-2 gap-3 pt-2" id="group-personas">
-                <button class="diag-option p-4 rounded-xl border border-slate-200 text-center font-medium text-slate-800 hover:border-slate-300 hover:bg-slate-50 transition-all flex flex-col items-center gap-1 cursor-pointer" onclick="selectStepOption('personas', '1 persona', this)" type="button">
-                  <span class="text-2xl font-bold font-mono">1</span>
-                  <span class="text-xs text-slate-500">Solo 1 persona</span>
+              <div class="grid grid-cols-2 gap-2.5 pt-1" id="group-personas">
+                <button class="diag-option p-3 rounded-xl border border-slate-200 text-center font-medium text-slate-800 hover:border-slate-300 hover:bg-slate-50 transition-all flex flex-col items-center justify-center cursor-pointer" onclick="selectStepOption('personas', '1 persona', this)" type="button">
+                  <span class="text-xl font-bold font-mono">1</span>
+                  <span class="text-[11px] text-slate-500">Solo 1 persona</span>
                 </button>
-                <button class="diag-option active p-4 rounded-xl border border-teal-700 bg-teal-50/80 text-teal-900 text-center font-medium transition-all flex flex-col items-center gap-1 cursor-pointer" onclick="selectStepOption('personas', '2 a 4 personas', this)" type="button">
-                  <span class="text-2xl font-bold font-mono">2–3</span>
-                  <span class="text-xs text-teal-800 font-medium">Equipo pequeño</span>
+                <button class="diag-option p-3 rounded-xl border border-slate-200 text-center font-medium text-slate-800 hover:border-slate-300 hover:bg-slate-50 transition-all flex flex-col items-center justify-center cursor-pointer" onclick="selectStepOption('personas', '2 a 4 personas', this)" type="button">
+                  <span class="text-xl font-bold font-mono">2–3</span>
+                  <span class="text-[11px] text-slate-500">Equipo pequeño</span>
                 </button>
-                <button class="diag-option p-4 rounded-xl border border-slate-200 text-center font-medium text-slate-800 hover:border-slate-300 hover:bg-slate-50 transition-all flex flex-col items-center gap-1 cursor-pointer" onclick="selectStepOption('personas', '4 a 5 personas', this)" type="button">
-                  <span class="text-2xl font-bold font-mono">4–5</span>
-                  <span class="text-xs text-slate-500">Varios roles</span>
+                <button class="diag-option p-3 rounded-xl border border-slate-200 text-center font-medium text-slate-800 hover:border-slate-300 hover:bg-slate-50 transition-all flex flex-col items-center justify-center cursor-pointer" onclick="selectStepOption('personas', '4 a 5 personas', this)" type="button">
+                  <span class="text-xl font-bold font-mono">4–5</span>
+                  <span class="text-[11px] text-slate-500">Varios roles</span>
                 </button>
-                <button class="diag-option p-4 rounded-xl border border-slate-200 text-center font-medium text-slate-800 hover:border-slate-300 hover:bg-slate-50 transition-all flex flex-col items-center gap-1 cursor-pointer" onclick="selectStepOption('personas', 'Más de 5 personas', this)" type="button">
-                  <span class="text-2xl font-bold font-mono">&gt;5</span>
-                  <span class="text-xs text-slate-500">Equipo extendido</span>
+                <button class="diag-option p-3 rounded-xl border border-slate-200 text-center font-medium text-slate-800 hover:border-slate-300 hover:bg-slate-50 transition-all flex flex-col items-center justify-center cursor-pointer" onclick="selectStepOption('personas', 'Más de 5 personas', this)" type="button">
+                  <span class="text-xl font-bold font-mono">&gt;5</span>
+                  <span class="text-[11px] text-slate-500">Equipo extendido</span>
                 </button>
               </div>
             </div>
 
-            <!-- Paso 5 -->
-            <div class="wizard-step hidden flex flex-col gap-4" id="step-5">
-              <div class="flex flex-col gap-1.5">
+            <!-- Paso 5: Impacto -->
+            <div class="wizard-step hidden flex flex-col gap-3" id="step-5">
+              <div class="flex flex-col gap-1">
                 <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 5 · Impacto</span>
-                <h3 class="text-lg md:text-xl font-bold text-slate-900">¿Qué pasa cuando este proceso se retrasa o se hace mal?</h3>
-                <p class="text-xs text-slate-500">El costo real suele estar en el daño colateral que produce:</p>
+                <h3 class="text-base md:text-lg font-bold text-slate-900">¿Cuál es el impacto principal cuando falla o se retrasa?</h3>
               </div>
-              <div class="flex flex-col gap-2.5 pt-2" id="group-impacto">
-                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('impacto', 'Solo perdemos tiempo', this)" type="button">
-                  <span>Solo perdemos tiempo</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1" id="group-impacto">
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('impacto', 'Solo perdemos tiempo', this)" type="button">
+                  <span>Pérdida de tiempo</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('impacto', 'Retrasa otras tareas', this)" type="button">
-                  <span>Retrasa otras tareas</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('impacto', 'Retrasa otras tareas', this)" type="button">
+                  <span>Retraso en entregas</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option active flex items-center justify-between px-4 py-3 rounded-xl border text-left text-sm font-medium transition-all border-teal-700 bg-teal-50/80 text-teal-900 cursor-pointer" onclick="selectStepOption('impacto', 'Afecta al cliente', this)" type="button">
-                  <span>Afecta al cliente</span>
-                  <span class="material-symbols-outlined text-[18px] text-teal-700">check_circle</span>
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('impacto', 'Afecta al cliente', this)" type="button">
+                  <span>Impacto en cliente</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('impacto', 'Genera errores o retrabajo', this)" type="button">
-                  <span>Genera errores o retrabajo</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('impacto', 'Genera errores o retrabajo', this)" type="button">
+                  <span>Errores y retrabajo</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('impacto', 'Afecta ingresos', this)" type="button">
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('impacto', 'Afecta ingresos', this)" type="button">
                   <span>Afecta ingresos</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('impacto', 'Puede generar varios de los anteriores', this)" type="button">
-                  <span>Puede generar varios de los anteriores</span>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('impacto', 'Varias de las anteriores', this)" type="button">
+                  <span>Varias anteriores</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
               </div>
             </div>
 
-            <!-- Paso 6 -->
-            <div class="wizard-step hidden flex flex-col gap-4" id="step-6">
-              <div class="flex flex-col gap-1.5">
+            <!-- Paso 6: Viabilidad -->
+            <div class="wizard-step hidden flex flex-col gap-3" id="step-6">
+              <div class="flex flex-col gap-1">
                 <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 6 · Viabilidad</span>
-                <h3 class="text-lg md:text-xl font-bold text-slate-900">¿Qué tan difícil crees que sería cambiarlo?</h3>
-                <p class="text-xs text-slate-500">Tu percepción inicial sobre la complejidad organizativa o técnica:</p>
+                <h3 class="text-base md:text-lg font-bold text-slate-900">¿Qué tan difícil crees que sería cambiarlo?</h3>
               </div>
-              <div class="flex flex-col gap-2.5 pt-2" id="group-esfuerzo">
-                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('esfuerzo', 'Fácil', this)" type="button">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1" id="group-esfuerzo">
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('esfuerzo', 'Fácil', this)" type="button">
                   <div>
-                    <div class="text-sm font-semibold text-slate-900">Fácil</div>
-                    <div class="text-xs text-slate-500">Solo ordenar o alinear hábitos</div>
+                    <div class="font-semibold text-slate-900">Fácil</div>
+                    <div class="text-[10px] text-slate-500">Alinear hábitos o plantillas</div>
                   </div>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option active flex items-center justify-between px-4 py-3.5 rounded-xl border text-left text-sm font-medium transition-all border-teal-700 bg-teal-50/80 text-teal-900 cursor-pointer" onclick="selectStepOption('esfuerzo', 'Moderado', this)" type="button">
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('esfuerzo', 'Moderado', this)" type="button">
                   <div>
-                    <div class="text-sm font-semibold text-teal-800">Moderado</div>
-                    <div class="text-xs text-teal-800">Conectar herramientas y estandarizar</div>
+                    <div class="font-semibold text-slate-900">Moderado</div>
+                    <div class="text-[10px] text-slate-500">Conectar herramientas</div>
                   </div>
-                  <span class="material-symbols-outlined text-[18px] text-teal-700">check_circle</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('esfuerzo', 'Difícil', this)" type="button">
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('esfuerzo', 'Difícil', this)" type="button">
                   <div>
-                    <div class="text-sm font-semibold text-slate-900">Difícil</div>
-                    <div class="text-xs text-slate-500">Muchos sistemas legados o dependencias externas</div>
+                    <div class="font-semibold text-slate-900">Difícil</div>
+                    <div class="text-[10px] text-slate-500">Sistemas legados</div>
                   </div>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
-                <button class="diag-option flex items-center justify-between px-4 py-3.5 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('esfuerzo', 'No tengo idea', this)" type="button">
+                <button class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer" onclick="selectStepOption('esfuerzo', 'No tengo idea', this)" type="button">
                   <div>
-                    <div class="text-sm font-semibold text-slate-900">No tengo idea</div>
-                    <div class="text-xs text-slate-500">Necesitamos explorarlo en el diagnóstico</div>
+                    <div class="font-semibold text-slate-900">No tengo idea</div>
+                    <div class="text-[10px] text-slate-500">Explorarlo en diagnóstico</div>
                   </div>
-                  <span class="material-symbols-outlined text-[18px] text-slate-300 opacity-0">circle</span>
+                  <span class="material-symbols-outlined text-[16px] text-slate-300 opacity-0">circle</span>
                 </button>
               </div>
             </div>
 
             <!-- Paso 7: Datos de la Empresa y Contacto -->
-            <div class="wizard-step hidden flex flex-col gap-4" id="step-7">
-              <div class="flex flex-col gap-1.5">
+            <div class="wizard-step hidden flex flex-col gap-3" id="step-7">
+              <div class="flex flex-col gap-1">
                 <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 7 · Datos de la empresa</span>
-                <h3 class="text-lg md:text-xl font-bold text-slate-900">Contexto para calibrar la solución</h3>
-                <p class="text-xs text-slate-500">Ingresa tus datos de contacto para guardar tu diagnóstico en MailerLite y generar tu PDF descargable.</p>
+                <h3 class="text-base md:text-lg font-bold text-slate-900">Contexto para calibrar el diagnóstico</h3>
               </div>
-              <form class="flex flex-col gap-3.5 pt-2" id="company-form" onsubmit="event.preventDefault(); submitDiagnostic();">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+              <form class="flex flex-col gap-2.5 pt-1 text-xs" id="company-form" onsubmit="event.preventDefault(); submitDiagnostic();">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <div class="flex flex-col gap-1">
-                    <label class="text-xs font-semibold text-slate-700" for="nombre-input">Tu Nombre *</label>
-                    <input class="w-full text-xs md:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-teal-700 focus:ring-1 focus:ring-teal-700 outline-none bg-white transition-colors" id="nombre-input" placeholder="Ej. Ana María Pérez" required type="text" value="">
+                    <label class="font-semibold text-slate-700" for="nombre-input">Tu Nombre *</label>
+                    <input class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="nombre-input" placeholder="Ana María Pérez" required type="text">
                   </div>
                   <div class="flex flex-col gap-1">
-                    <label class="text-xs font-semibold text-slate-700" for="email-input">Correo Corporativo *</label>
-                    <input class="w-full text-xs md:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-teal-700 focus:ring-1 focus:ring-teal-700 outline-none bg-white transition-colors" id="email-input" placeholder="ana@empresa.com" required type="email" value="">
+                    <label class="font-semibold text-slate-700" for="email-input">Correo Corporativo *</label>
+                    <input class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="email-input" placeholder="ana@empresa.com" required type="email">
                   </div>
                 </div>
 
                 <div class="flex flex-col gap-1">
-                  <label class="text-xs font-semibold text-slate-700" for="empresa-input">Nombre de la Empresa *</label>
-                  <input class="w-full text-xs md:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-teal-700 focus:ring-1 focus:ring-teal-700 outline-none bg-white transition-colors" id="empresa-input" placeholder="Nombre de tu empresa u organización" required type="text" value="">
+                  <label class="font-semibold text-slate-700" for="empresa-input">Nombre de la Empresa *</label>
+                  <input class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="empresa-input" placeholder="Nombre de tu empresa" required type="text">
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <div class="flex flex-col gap-1">
-                    <label class="text-xs font-semibold text-slate-700" for="tamano-select">Tamaño de la empresa</label>
-                    <select class="w-full text-xs md:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-teal-700 focus:ring-1 focus:ring-teal-700 outline-none bg-white transition-colors" id="tamano-select" required>
+                    <label class="font-semibold text-slate-700" for="tamano-select">Tamaño</label>
+                    <select class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="tamano-select" required>
                       <option value="1-10 personas">1–10 personas</option>
                       <option selected value="11-50 personas">11–50 personas</option>
                       <option value="51-200 personas">51–200 personas</option>
@@ -412,8 +396,8 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
                     </select>
                   </div>
                   <div class="flex flex-col gap-1">
-                    <label class="text-xs font-semibold text-slate-700" for="industria-select">Industria / Sector</label>
-                    <select class="w-full text-xs md:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-teal-700 focus:ring-1 focus:ring-teal-700 outline-none bg-white transition-colors" id="industria-select" required>
+                    <label class="font-semibold text-slate-700" for="industria-select">Sector</label>
+                    <select class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="industria-select" required>
                       <option selected value="Tecnología/SaaS">Tecnología / SaaS</option>
                       <option value="Servicios/Consultoría">Servicios / Consultoría</option>
                       <option value="Salud/Veterinaria">Salud / Veterinaria</option>
@@ -425,43 +409,43 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
                   </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <div class="flex flex-col gap-1">
-                    <label class="text-xs font-semibold text-slate-700" for="pais-input">País</label>
-                    <input class="w-full text-xs md:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-teal-700 focus:ring-1 focus:ring-teal-700 outline-none bg-white transition-colors" id="pais-input" placeholder="Ej. Colombia, México, Chile..." required type="text" value="Colombia">
+                    <label class="font-semibold text-slate-700" for="pais-input">País</label>
+                    <input class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="pais-input" placeholder="Ej. Colombia" required type="text" value="Colombia">
                   </div>
                   <div class="flex flex-col gap-1">
-                    <label class="text-xs font-semibold text-slate-700" for="ciudad-input">Ciudad</label>
-                    <input class="w-full text-xs md:text-sm px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-teal-700 focus:ring-1 focus:ring-teal-700 outline-none bg-white transition-colors" id="ciudad-input" placeholder="Ej. Bogotá, Medellín, CDMX..." required type="text" value="Bogotá">
+                    <label class="font-semibold text-slate-700" for="ciudad-input">Ciudad</label>
+                    <input class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="ciudad-input" placeholder="Ej. Bogotá" required type="text" value="Bogotá">
                   </div>
                 </div>
 
-                <div class="pt-2">
-                  <button id="submit-btn" class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer" type="submit">
+                <div class="pt-1">
+                  <button id="submit-btn" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer" type="submit">
                     <span>Ver diagnóstico de cuello de botella →</span>
                   </button>
                 </div>
               </form>
             </div>
 
-            <!-- Vista de Diagnóstico Completado (resumen en consola) -->
-            <div class="wizard-step hidden flex flex-col gap-4" id="step-completed">
-              <div class="p-4 bg-teal-50 border border-teal-200 rounded-xl flex items-start gap-3">
-                <span class="material-symbols-outlined text-teal-700 text-2xl shrink-0">check_circle</span>
-                <div class="flex flex-col gap-1">
-                  <h4 class="text-sm font-bold text-slate-900">Diagnóstico completado y registrado</h4>
-                  <p class="text-xs text-slate-600">Revisa la tarjeta en el lateral con el cálculo de fuga operativa y descarga tu informe oficial en PDF.</p>
+            <!-- Vista de Diagnóstico Completado -->
+            <div class="wizard-step hidden flex flex-col gap-3" id="step-completed">
+              <div class="p-3 bg-teal-50 border border-teal-200 rounded-xl flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-teal-700 text-xl shrink-0">check_circle</span>
+                <div class="flex flex-col gap-0.5">
+                  <h4 class="text-xs font-bold text-slate-900">Diagnóstico completado y registrado</h4>
+                  <p class="text-[11px] text-slate-600">Revisa la tarjeta en el lateral con el cálculo de fuga operativa y descarga tu PDF.</p>
                 </div>
               </div>
-              <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl flex flex-col gap-2">
-                <span class="font-mono text-[11px] uppercase font-semibold text-slate-500">Resumen procesado:</span>
+              <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-col gap-1">
+                <span class="font-mono text-[10px] uppercase font-semibold text-slate-500">Resumen procesado:</span>
                 <div class="text-xs text-slate-700 leading-relaxed" id="completion-summary-text">
                   Diagnóstico listo para analizar en conversación con Pablo.
                 </div>
               </div>
-              <div class="flex items-center gap-3 pt-2">
-                <button class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer" onclick="goToStep(1)" type="button">
-                  <span class="material-symbols-outlined text-[16px]">restart_alt</span>
+              <div class="flex items-center gap-2 pt-1">
+                <button class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer" onclick="goToStep(1)" type="button">
+                  <span class="material-symbols-outlined text-[15px]">restart_alt</span>
                   Reiniciar diagnóstico
                 </button>
               </div>
@@ -469,9 +453,9 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
           </div>
 
           <!-- Botones de Navegación del Wizard -->
-          <div class="pt-4 border-t border-slate-100 flex items-center justify-between" id="wizard-navigation">
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between" id="wizard-navigation">
             <button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer" disabled id="btn-prev" onclick="prevStep()" type="button">
-              <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+              <span class="material-symbols-outlined text-[15px]">arrow_back</span>
               <span>Anterior</span>
             </button>
             <div class="flex items-center gap-1.5" id="step-dots">
@@ -483,101 +467,101 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
               <span class="w-2 h-2 rounded-full transition-all bg-slate-200"></span>
               <span class="w-2 h-2 rounded-full transition-all bg-slate-200"></span>
             </div>
-            <button class="inline-flex items-center gap-1 px-4 py-1.5 rounded-lg bg-teal-700 text-white text-xs font-medium hover:bg-teal-800 transition-colors shadow-2xs cursor-pointer" id="btn-next" onclick="nextStep()" type="button">
+            <button class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg bg-teal-700 text-white text-xs font-medium hover:bg-teal-800 transition-colors shadow-2xs cursor-pointer" id="btn-next" onclick="nextStep()" type="button">
               <span>Siguiente</span>
-              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
             </button>
           </div>
         </div>
 
         <!-- Columna Derecha: Tarjeta Viva "Tu cuello de botella" -->
-        <div class="lg:col-span-5 lg:sticky lg:top-24">
-          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-7 flex flex-col gap-6" id="assessment-card">
-            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="lg:col-span-5 lg:sticky lg:top-20">
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 md:p-6 flex flex-col gap-4" id="assessment-card">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
               <div class="flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
                 <span class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-900">Tu cuello de botella</span>
               </div>
-              <span class="font-mono text-[11px] text-slate-500">Live Assessment</span>
+              <span class="font-mono text-[10px] text-slate-500">Live Assessment</span>
             </div>
 
             <!-- Proceso Activo -->
-            <div class="flex flex-col gap-1 bg-slate-50 p-4 rounded-xl border border-slate-100">
-              <span class="font-mono text-[11px] uppercase text-slate-500">Proceso identificado:</span>
-              <h3 class="text-base font-bold text-slate-900 leading-snug" id="card-proceso">Reportes y consolidación de información</h3>
-              <span class="text-[11px] text-slate-500 font-mono" id="card-company-tag">Mi Empresa · Tecnología/SaaS (Bogotá, Colombia)</span>
+            <div class="flex flex-col gap-1 bg-slate-50 p-3 rounded-xl border border-slate-100">
+              <span class="font-mono text-[10px] uppercase text-slate-500">Proceso identificado:</span>
+              <h3 class="text-sm font-bold text-slate-900 leading-snug" id="card-proceso">Selecciona tus respuestas...</h3>
+              <span class="text-[10px] text-slate-500 font-mono" id="card-company-tag">Tus datos aparecerán aquí</span>
             </div>
 
             <!-- Resumen en tiempo real -->
-            <div class="grid grid-cols-2 gap-3 text-xs">
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-1">
-                <span class="font-mono text-[11px] text-slate-500">Frecuencia:</span>
-                <span class="font-semibold text-slate-800" id="card-frecuencia">Todos los días</span>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-0.5">
+                <span class="font-mono text-[10px] text-slate-500">Frecuencia:</span>
+                <span class="font-semibold text-slate-800" id="card-frecuencia">-</span>
               </div>
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-1">
-                <span class="font-mono text-[11px] text-slate-500">Tiempo estimado:</span>
-                <span class="font-semibold text-teal-700" id="card-tiempo">~18.8 h/semana acumuladas</span>
+              <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-0.5">
+                <span class="font-mono text-[10px] text-slate-500">Tiempo estimado:</span>
+                <span class="font-semibold text-teal-700" id="card-tiempo">Por calcular</span>
               </div>
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-1">
-                <span class="font-mono text-[11px] text-slate-500">Personas involucradas:</span>
-                <span class="font-semibold text-slate-800" id="card-personas">2 a 4 personas</span>
+              <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-0.5">
+                <span class="font-mono text-[10px] text-slate-500">Personas involucradas:</span>
+                <span class="font-semibold text-slate-800" id="card-personas">-</span>
               </div>
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-1">
-                <span class="font-mono text-[11px] text-slate-500">Esfuerzo de mejora:</span>
-                <span class="font-semibold text-slate-800" id="card-esfuerzo">Moderado</span>
+              <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-0.5">
+                <span class="font-mono text-[10px] text-slate-500">Esfuerzo de mejora:</span>
+                <span class="font-semibold text-slate-800" id="card-esfuerzo">-</span>
               </div>
             </div>
 
-            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-1 text-xs">
-              <span class="font-mono text-[11px] text-slate-500">Impacto principal:</span>
-              <span class="font-semibold text-slate-800" id="card-impacto">Afecta al cliente</span>
+            <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-0.5 text-xs">
+              <span class="font-mono text-[10px] text-slate-500">Impacto principal:</span>
+              <span class="font-semibold text-slate-800" id="card-impacto">-</span>
             </div>
 
             <!-- Indicador Prioridad -->
-            <div class="p-4 bg-teal-50/70 border border-teal-100 rounded-xl flex flex-col gap-2">
+            <div class="p-3 bg-teal-50/70 border border-teal-100 rounded-xl flex flex-col gap-1.5">
               <div class="flex items-center justify-between">
                 <span class="text-xs font-semibold text-teal-800">¿Vale la pena intervenir?</span>
-                <span class="px-2 py-0.5 rounded font-mono text-[11px] font-bold bg-amber-100 text-amber-900 uppercase" id="card-priority-badge">Prioridad: Alta</span>
+                <span class="px-2 py-0.5 rounded font-mono text-[10px] font-bold bg-slate-100 text-slate-600 uppercase" id="card-priority-badge">Sin selección</span>
               </div>
-              <p class="text-xs text-slate-600 leading-relaxed" id="card-justification">
-                Este proceso merece ser intervenido pronto porque genera una fuga de aproximadamente <strong class="text-slate-900">~18.8 horas/semana</strong> combinando: <strong class="text-slate-800">Alta recurrencia · Impacto directo en la operación · Retorno rápido de inversión</strong>.
+              <p class="text-[11px] text-slate-600 leading-relaxed" id="card-justification">
+                Responde las preguntas del diagnóstico a la izquierda para estimar la fuga de tiempo semanal de tu equipo.
               </p>
             </div>
 
             <!-- Mensaje clave de LuciRMe -->
-            <div class="p-3.5 bg-slate-100 rounded-xl text-xs text-slate-600 leading-relaxed border border-slate-200/80">
-              <span class="font-semibold text-slate-800">Criterio LuciRMe:</span> Esto no significa que necesites IA. Primero hay que entender el proceso. La solución puede ser simplificarlo, eliminar pasos, conectar herramientas, automatizar una parte o incorporar IA.
+            <div class="p-3 bg-slate-100 rounded-xl text-[11px] text-slate-600 leading-relaxed border border-slate-200/80">
+              <span class="font-semibold text-slate-800">Criterio LuciRMe:</span> Primero entendemos el proceso real antes de proponer tecnología o IA.
             </div>
 
             <!-- Botón CTA WhatsApp -->
             <a
-              class="inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-2xs text-center cursor-pointer"
-              href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, completé el diagnóstico de LuciRMe AI para Mi Empresa (Colombia):\n\n• Proceso a mejorar: Reportes y consolidación de información\n• Frecuencia: Todos los días\n• Tiempo por sesión: 1–2 horas\n• Fuga calculada: ~18.8 hrs/semana\n• Personas involucradas: 2 a 4 personas\n• Impacto principal: Afecta al cliente\n• Esfuerzo estimado: Moderado\n• Tamaño: 11-50 personas | Sector: Tecnología/SaaS\n\nQuiero revisar este proceso contigo.")}`}
+              class="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors shadow-2xs text-center cursor-pointer"
+              href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero revisar un proceso operativo en mi empresa.")}`}
               id="card-whatsapp-btn"
               rel="noopener noreferrer"
               target="_blank"
               onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_whatsapp_click', { origen: 'diagnostico_card' }); }"
             >
-              <span class="material-symbols-outlined text-[19px]">chat</span>
+              <span class="material-symbols-outlined text-[17px]">chat</span>
               <span>Quiero revisar este proceso con Pablo</span>
             </a>
 
-            <div class="grid grid-cols-2 gap-2.5 pt-1 w-full">
+            <div class="grid grid-cols-2 gap-2 pt-0.5 w-full">
               <button
                 type="button"
                 onclick="downloadPDF()"
-                class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors shadow-2xs cursor-pointer"
+                class="inline-flex items-center justify-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 transition-colors shadow-2xs cursor-pointer"
               >
-                <span class="material-symbols-outlined text-[16px] text-slate-500">download</span>
+                <span class="material-symbols-outlined text-[15px] text-slate-500">download</span>
                 <span>Descargar PDF</span>
               </button>
               <button
                 type="button"
-                onclick="if(navigator.clipboard){navigator.clipboard.writeText(window.location.href);alert('Enlace del diagnóstico copiado al portapapeles');}else if(navigator.share){navigator.share({title:'Diagnóstico LuciRMe AI',url:window.location.href});}"
-                class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-colors shadow-2xs cursor-pointer"
+                onclick="shareDiagnostic()"
+                class="inline-flex items-center justify-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 transition-colors shadow-2xs cursor-pointer"
               >
-                <span class="material-symbols-outlined text-[16px] text-slate-500">share</span>
-                <span>Compartir resultado</span>
+                <span class="material-symbols-outlined text-[15px] text-slate-500">share</span>
+                <span>Compartir</span>
               </button>
             </div>
           </div>
@@ -974,21 +958,21 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
     </div>
   </footer>
 
-  <!-- Script interactivo del Wizard y la Tarjeta Viva de Diagnóstico (Client-side) -->
+  <!-- Script interactivo del Wizard Compacto y Sin Preselección -->
   <script is:inline>
     let currentStep = 1;
     const totalSteps = 7;
 
     const currentSelections = {
-      proceso: 'Reportes y consolidación de información',
-      frecuencia: 'Todos los días',
-      tiempo: '1–2 horas',
-      personas: '2 a 4 personas',
-      impacto: 'Afecta al cliente',
-      esfuerzo: 'Moderado',
+      proceso: '',
+      frecuencia: '',
+      tiempo: '',
+      personas: '',
+      impacto: '',
+      esfuerzo: '',
       name: '',
       email: '',
-      empresa: 'Mi Empresa',
+      empresa: '',
       tamano: '11-50 personas',
       industria: 'Tecnología/SaaS',
       pais: 'Colombia',
@@ -1013,10 +997,10 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
 
         if (currentStep === totalSteps) {
           if (nextBtn) nextBtn.classList.add('hidden');
-          if (stepHint) stepHint.innerText = 'Último paso · Contexto operativo y datos';
+          if (stepHint) stepHint.innerText = 'Último paso · Datos de contacto';
         } else {
           if (nextBtn) nextBtn.classList.remove('hidden');
-          if (stepHint) stepHint.innerText = 'Selección guiada';
+          if (stepHint) stepHint.innerText = 'Selecciona una opción';
         }
 
         if (dotsContainer) {
@@ -1073,7 +1057,7 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
       if (parent) {
         const buttons = parent.querySelectorAll('.diag-option');
         buttons.forEach(btn => {
-          btn.classList.remove('border-teal-700', 'bg-teal-50/80', 'text-teal-900');
+          btn.classList.remove('border-teal-700', 'bg-teal-50/80', 'text-teal-900', 'font-bold');
           btn.classList.add('border-slate-200', 'text-slate-700');
           const icon = btn.querySelector('.material-symbols-outlined');
           if (icon) {
@@ -1085,7 +1069,7 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
       }
 
       btnElement.classList.remove('border-slate-200', 'text-slate-700');
-      btnElement.classList.add('border-teal-700', 'bg-teal-50/80', 'text-teal-900');
+      btnElement.classList.add('border-teal-700', 'bg-teal-50/80', 'text-teal-900', 'font-bold');
       const activeIcon = btnElement.querySelector('.material-symbols-outlined');
       if (activeIcon) {
         activeIcon.innerText = 'check_circle';
@@ -1099,10 +1083,14 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
         if (currentStep < totalSteps) {
           nextStep();
         }
-      }, 280);
+      }, 260);
     }
 
     function calculateEstimatedWeeklyHours() {
+      if (!currentSelections.proceso && !currentSelections.frecuencia) {
+        return 0;
+      }
+
       let freqMultiplier = 5;
       if (currentSelections.frecuencia.includes('Varias veces al día')) freqMultiplier = 15;
       else if (currentSelections.frecuencia.includes('Todos los días')) freqMultiplier = 5;
@@ -1127,33 +1115,51 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
     }
 
     function recalculateAssessment() {
-      const weeklyHours = calculateEstimatedWeeklyHours();
-      
+      const hasSelections = !!currentSelections.proceso;
+
       const elProc = document.getElementById('card-proceso');
-      if (elProc) elProc.innerText = currentSelections.proceso;
+      if (elProc) {
+        elProc.innerText = hasSelections ? currentSelections.proceso : 'Selecciona tus respuestas...';
+      }
 
       const elFreq = document.getElementById('card-frecuencia');
-      if (elFreq) elFreq.innerText = currentSelections.frecuencia;
+      if (elFreq) {
+        elFreq.innerText = currentSelections.frecuencia || '-';
+      }
 
+      const weeklyHours = calculateEstimatedWeeklyHours();
       const elTime = document.getElementById('card-tiempo');
-      if (elTime) elTime.innerText = `~${weeklyHours} h/semana acumuladas`;
+      if (elTime) {
+        elTime.innerText = hasSelections ? `~${weeklyHours} h/semana` : 'Por calcular';
+      }
 
       const elPers = document.getElementById('card-personas');
-      if (elPers) elPers.innerText = currentSelections.personas;
+      if (elPers) elPers.innerText = currentSelections.personas || '-';
 
       const elImp = document.getElementById('card-impacto');
-      if (elImp) elImp.innerText = currentSelections.impacto;
+      if (elImp) elImp.innerText = currentSelections.impacto || '-';
 
       const elEsf = document.getElementById('card-esfuerzo');
-      if (elEsf) elEsf.innerText = currentSelections.esfuerzo;
+      if (elEsf) elEsf.innerText = currentSelections.esfuerzo || '-';
 
       const elTag = document.getElementById('card-company-tag');
       if (elTag) {
-        elTag.innerText = `${currentSelections.empresa || 'Tu empresa'} · ${currentSelections.industria} (${currentSelections.ciudad}, ${currentSelections.pais})`;
+        elTag.innerText = currentSelections.empresa ? `${currentSelections.empresa} · ${currentSelections.industria} (${currentSelections.ciudad}, ${currentSelections.pais})` : 'Tus datos aparecerán aquí';
       }
 
       const badge = document.getElementById('card-priority-badge');
       const justification = document.getElementById('card-justification');
+
+      if (!hasSelections) {
+        if (badge) {
+          badge.className = 'px-2 py-0.5 rounded font-mono text-[10px] font-bold bg-slate-100 text-slate-600 uppercase';
+          badge.innerText = 'Sin selección';
+        }
+        if (justification) {
+          justification.innerHTML = 'Responde las preguntas del diagnóstico a la izquierda para estimar la fuga de tiempo semanal de tu equipo.';
+        }
+        return;
+      }
 
       let prioridad = 'Media';
       if (weeklyHours >= 12 || currentSelections.impacto.includes('ingresos') || currentSelections.impacto.includes('varios') || currentSelections.impacto.includes('cliente')) {
@@ -1162,28 +1168,27 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
 
       if (badge && justification) {
         if (prioridad === 'Alta') {
-          badge.className = 'px-2 py-0.5 rounded font-mono text-[11px] font-bold bg-amber-100 text-amber-900 uppercase';
+          badge.className = 'px-2 py-0.5 rounded font-mono text-[10px] font-bold bg-amber-100 text-amber-900 uppercase';
           badge.innerText = 'Prioridad: Alta';
-          justification.innerHTML = `Este proceso merece ser intervenido pronto porque genera una fuga de aproximadamente <strong class="text-slate-900">~${weeklyHours} horas/semana</strong> combinando: <strong class="text-slate-800">Alta recurrencia · Impacto directo en la operación · Retorno rápido de inversión</strong>.`;
+          justification.innerHTML = `Este proceso genera una fuga de aproximadamente <strong class="text-slate-900">~${weeklyHours} horas/semana</strong> combinando alta recurrencia e impacto directo en la operación.`;
         } else {
-          badge.className = 'px-2 py-0.5 rounded font-mono text-[11px] font-bold bg-teal-100 text-teal-800 uppercase';
+          badge.className = 'px-2 py-0.5 rounded font-mono text-[10px] font-bold bg-teal-100 text-teal-800 uppercase';
           badge.innerText = 'Prioridad: Media';
-          justification.innerHTML = `Este proceso genera cerca de <strong class="text-slate-900">~${weeklyHours} horas/semana</strong>. Recomendamos simplificarlo o automatizar pasos clave antes de plantear software personalizado.`;
+          justification.innerHTML = `Este proceso genera cerca de <strong class="text-slate-900">~${weeklyHours} horas/semana</strong>. Recomendamos simplificarlo o automatizar pasos clave.`;
         }
       }
 
       const waBtn = document.getElementById('card-whatsapp-btn');
       if (waBtn) {
         const encodedMsg = encodeURIComponent(
-          `Hola Pablo, completé el diagnóstico de LuciRMe AI para ${currentSelections.empresa} (${currentSelections.pais}):\n\n` +
+          `Hola Pablo, completé el diagnóstico de LuciRMe AI para ${currentSelections.empresa || 'mi empresa'} (${currentSelections.pais}):\n\n` +
           `• Proceso a mejorar: ${currentSelections.proceso}\n` +
           `• Frecuencia: ${currentSelections.frecuencia}\n` +
           `• Tiempo por sesión: ${currentSelections.tiempo}\n` +
           `• Fuga calculada: ~${weeklyHours} hrs/semana\n` +
           `• Personas involucradas: ${currentSelections.personas}\n` +
           `• Impacto principal: ${currentSelections.impacto}\n` +
-          `• Esfuerzo estimado: ${currentSelections.esfuerzo}\n` +
-          `• Tamaño: ${currentSelections.tamano} | Sector: ${currentSelections.industria}\n\n` +
+          `• Esfuerzo estimado: ${currentSelections.esfuerzo}\n\n` +
           `Quiero revisar este proceso contigo.`
         );
         waBtn.href = `https://wa.me/573053046180?text=${encodedMsg}`;
@@ -1196,7 +1201,14 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
         prioridadBadge: prioridad === 'Alta' ? 'P1 Urgente · Alto ROI Inmediato' : 'P2 Recomendado · ROI Moderado',
         justificacion: `Fuga aproximada de ~${weeklyHours} horas/semana.`,
         recomendacion: 'Revisión estratégica de 30 min con Pablo Ríos.',
-        empresaTag: `${currentSelections.empresa} · ${currentSelections.industria} (${currentSelections.ciudad}, ${currentSelections.pais})`,
+        empresaTag: `${currentSelections.empresa || 'Mi Empresa'} · ${currentSelections.industria} (${currentSelections.ciudad}, ${currentSelections.pais})`,
+        empresa: currentSelections.empresa || 'Mi Empresa',
+        name: currentSelections.name || 'Contacto',
+        email: currentSelections.email || 'contacto@empresa.com',
+        tamano: currentSelections.tamano || '11-50 personas',
+        industria: currentSelections.industria || 'Tecnología/SaaS',
+        pais: currentSelections.pais || 'Colombia',
+        ciudad: currentSelections.ciudad || 'Bogotá',
       };
     }
 
@@ -1266,7 +1278,7 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
       const sumText = document.getElementById('completion-summary-text');
       if (sumText) {
         sumText.innerHTML = `
-          Para <strong>${currentSelections.empresa}</strong> (${currentSelections.industria}, ${currentSelections.tamano}), el proceso <strong>"${currentSelections.proceso}"</strong> representa una carga de aproximadamente <strong>~${hours} horas por semana</strong> para ${currentSelections.personas}.
+          Para <strong>${currentSelections.empresa}</strong> (${currentSelections.industria}, ${currentSelections.tamano}), el proceso <strong>"${currentSelections.proceso || 'Analizado'}"</strong> representa una carga de aproximadamente <strong>~${hours} horas por semana</strong> para ${currentSelections.personas || 'el equipo'}.
         `;
       }
 
@@ -1298,30 +1310,82 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
     }
 
     async function downloadPDF() {
-      if (!window.latestDiagnosis) {
-        recalculateAssessment();
-      }
+      recalculateAssessment();
       
+      if (!window.latestDiagnosis || !window.latestDiagnosis.proceso) {
+        window.latestDiagnosis = {
+          proceso: currentSelections.proceso || 'Reportes y consolidación de información',
+          frecuencia: currentSelections.frecuencia || 'Todos los días',
+          tiempo: currentSelections.tiempo || '1–2 horas',
+          personas: currentSelections.personas || '2 a 4 personas',
+          impacto: currentSelections.impacto || 'Afecta al cliente',
+          esfuerzo: currentSelections.esfuerzo || 'Moderado',
+          weeklyHours: calculateEstimatedWeeklyHours() || 18.8,
+          prioridad: 'Alta',
+          prioridadBadge: 'P1 Urgente · Alto ROI Inmediato',
+          justificacion: 'Fuga estimada de tiempo semanal.',
+          recomendacion: 'Agendar revisión estratégica de 30 minutos con Pablo Ríos.',
+          empresaTag: `${currentSelections.empresa || 'Mi Empresa'} · ${currentSelections.industria} (${currentSelections.ciudad}, ${currentSelections.pais})`,
+          empresa: currentSelections.empresa || 'Mi Empresa',
+          name: currentSelections.name || 'Contacto',
+          email: currentSelections.email || 'contacto@empresa.com',
+          tamano: currentSelections.tamano || '11-50 personas',
+          industria: currentSelections.industria || 'Tecnología/SaaS',
+          pais: currentSelections.pais || 'Colombia',
+          ciudad: currentSelections.ciudad || 'Bogotá',
+        };
+      }
+
       try {
         const { generateBottleneckPDF } = await import('../lib/pdfGenerator');
         generateBottleneckPDF(window.latestDiagnosis);
 
         if (window.posthog) {
           window.posthog.capture('bottleneck_diagnosis_pdf_downloaded', {
-            process: currentSelections.proceso,
-            company: currentSelections.empresa,
+            process: window.latestDiagnosis.proceso,
+            company: window.latestDiagnosis.empresa,
             estimated_hours_week: window.latestDiagnosis.weeklyHours,
           });
         }
       } catch (pdfErr) {
         console.error('Error generando PDF:', pdfErr);
-        alert('No se pudo generar el PDF en este momento. Por favor inténtalo de nuevo.');
+        alert('Ocurrió un error al generar el PDF. Por favor inténtalo de nuevo.');
+      }
+    }
+
+    async function shareDiagnostic() {
+      recalculateAssessment();
+      const hours = calculateEstimatedWeeklyHours() || 18.8;
+      const shareData = {
+        title: 'Diagnóstico de Cuello de Botella - LuciRMe AI',
+        text: `Diagnóstico operativo para ${currentSelections.empresa || 'mi empresa'}: fuga estimada de ~${hours} hrs/semana en ${currentSelections.proceso || 'proceso operativo'}.`,
+        url: window.location.href,
+      };
+
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          if (window.posthog) {
+            window.posthog.capture('bottleneck_diagnosis_shared', { method: 'native_share' });
+          }
+        } catch (err) {
+          console.log('Share cancelado o falló:', err);
+        }
+      } else if (navigator.clipboard) {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          alert('Enlace del diagnóstico copiado al portapapeles.');
+          if (window.posthog) {
+            window.posthog.capture('bottleneck_diagnosis_shared', { method: 'clipboard' });
+          }
+        } catch (clipErr) {
+          console.error('Error al copiar:', clipErr);
+        }
       }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       updateProgressBar();
-      recalculateAssessment();
 
       if (window.posthog) {
         window.posthog.capture('bottleneck_diagnosis_started', {
