@@ -1,154 +1,883 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import SobreMi from "../components/SobreMi.astro";
-import RedesSociales from "../components/RedesSociales.astro";
+import { LINKS } from "../lib/constants.js";
+
+const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
 ---
 
-<Layout title="LuciRMe AI | Soluciones, Acompañamiento y Recursos en IA">
-  <main class="max-w-5xl mx-auto py-12 md:py-20 px-4 space-y-16">
-
-    <!-- HERO LIMPIO & MANIFIESTO -->
-    <header class="text-center space-y-4 max-w-3xl mx-auto">
-      <span class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full border border-teal/20">
-        LuciRMe AI
-      </span>
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-deep leading-tight tracking-tight">
-        IA aplicada a problemas reales.
-      </h1>
-      <p class="text-base sm:text-lg text-gray-600 font-medium leading-relaxed">
-        Implemento soluciones, acompaño profesionales y creo recursos para que la IA haga parte de tu forma de trabajar.
-      </p>
-    </header>
-
-    <!-- SELECTOR DE INTENCIÓN PRINCIPAL (TRES CAMINOS PRINCIPALES) -->
-    <section class="space-y-6">
-      <div class="text-center max-w-xl mx-auto">
-        <h2 class="text-xl sm:text-2xl font-black text-deep uppercase tracking-wider">
-          ¿Qué estás buscando?
-        </h2>
-        <p class="text-xs sm:text-sm text-gray-500 mt-1">
-          Elige el camino que mejor responde a tu necesidad actual.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-8 pt-2">
-        
-        <!-- CAMINO 1: EMPRESAS -->
-        <div class="bg-white border-2 border-slate-200/80 rounded-3xl p-8 hover:border-teal transition-all shadow-sm hover:shadow-xl flex flex-col justify-between group relative overflow-hidden">
-          <div class="absolute top-0 right-0 bg-slate-100 text-slate-700 text-[10px] font-extrabold uppercase px-3 py-1 rounded-bl-xl tracking-wider">
-            B2B & Equipos
-          </div>
-          <div>
-            <div class="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-teal/10 transition-colors">🏢</div>
-            <h3 class="text-xl font-bold text-deep mb-3 group-hover:text-teal transition-colors">Empresas</h3>
-            <p class="text-xs text-gray-600 leading-relaxed mb-6">
-              Implementación de IA, automatización y soluciones digitales para equipos y negocios.
-            </p>
-            <ul class="space-y-2 text-xs text-gray-500 mb-8 font-medium">
-              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Automatización de procesos</li>
-              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Adopción e IA aplicada</li>
-              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Página Comercial + WhatsApp</li>
-            </ul>
-          </div>
-          <a
-            href="/empresas"
-            class="block w-full bg-deep hover:bg-slate-800 text-white text-center font-bold text-xs py-3.5 rounded-xl transition shadow-md cursor-pointer"
-            onclick="if (window.posthog) { window.posthog.capture('home_selector_click', { camino: 'empresas' }); }"
-          >
-            Ver soluciones →
-          </a>
+<Layout
+  title="LuciRMe AI | Inteligencia Artificial & Operaciones con Pablo Ríos"
+  description="Acompañamiento real en Inteligencia Artificial y Operaciones. Soluciones prácticas, mentoría 1-1, capacitación y páginas web comerciales sin humo."
+  hideHeader={true}
+  hideFooter={true}
+>
+  <!-- HEADER CON LOGO Y BARRAS DE NAVEGACIÓN -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-slate-200/80 shadow-xs">
+    
+    <!-- Top Announcement Bar -->
+    <div class="bg-surface-callout px-4 lg:px-8 border-b border-slate-200/60">
+      <div class="max-w-7xl mx-auto h-9 flex items-center justify-between text-xs">
+        <div class="flex items-center gap-2 truncate">
+          <span class="inline-flex items-center px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-mono text-[10px] uppercase font-bold tracking-wider">
+            Nuevo
+          </span>
+          <span class="text-slate-600 font-medium truncate">
+            Ruta Ejecutiva: Arquitectura de Agentes de IA 2026
+          </span>
         </div>
-
-        <!-- CAMINO 2: PROFESIONALES -->
-        <div class="bg-white border-2 border-teal/40 rounded-3xl p-8 hover:border-teal transition-all shadow-md hover:shadow-xl flex flex-col justify-between group relative overflow-hidden">
-          <div class="absolute top-0 right-0 bg-teal text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-bl-xl tracking-wider">
-            Acompañamiento 1:1
-          </div>
-          <div>
-            <div class="w-12 h-12 bg-teal/10 rounded-2xl flex items-center justify-center text-2xl mb-6 transition-colors">👤</div>
-            <h3 class="text-xl font-bold text-deep mb-3 group-hover:text-teal transition-colors">Profesionales</h3>
-            <p class="text-xs text-gray-600 leading-relaxed mb-6">
-              IA aplicada a tu trabajo con acompañamiento hasta que puedas hacerlo de forma autónoma.
-            </p>
-            <ul class="space-y-2 text-xs text-gray-600 mb-8 font-medium">
-              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Product Managers (PRDs & Research)</li>
-              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Product Management Sin Bullshit</li>
-              <li class="flex items-center gap-2"><span class="text-teal font-bold">✓</span> Consultores, Abogados & Independientes</li>
-            </ul>
-          </div>
-          <a
-            href="/profesionales"
-            class="block w-full bg-teal hover:bg-tealHover text-white text-center font-bold text-xs py-3.5 rounded-xl transition shadow-md cursor-pointer"
-            onclick="if (window.posthog) { window.posthog.capture('home_selector_click', { camino: 'profesionales' }); }"
-          >
-            Ver soluciones →
-          </a>
-        </div>
-
-        <!-- CAMINO 3: EDUCACIÓN -->
-        <div class="bg-white border-2 border-slate-200/80 rounded-3xl p-8 hover:border-amber-400 transition-all shadow-sm hover:shadow-xl flex flex-col justify-between group relative overflow-hidden">
-          <div class="absolute top-0 right-0 bg-amber-100 text-amber-900 text-[10px] font-extrabold uppercase px-3 py-1 rounded-bl-xl tracking-wider">
-            Aprender
-          </div>
-          <div>
-            <div class="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-amber-100 transition-colors">🎓</div>
-            <h3 class="text-xl font-bold text-deep mb-3 group-hover:text-amber-600 transition-colors">Educación</h3>
-            <p class="text-xs text-gray-600 leading-relaxed mb-6">
-              Rutas, herramientas y productos para aprender IA de forma práctica.
-            </p>
-            <ul class="space-y-2 text-xs text-gray-500 mb-8 font-medium">
-              <li class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> Rutas de aprendizaje guiadas</li>
-              <li class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> Cursos y Bots asistentes ($35 / $8)</li>
-              <li class="flex items-center gap-2"><span class="text-amber-600 font-bold">✓</span> Prompteador & Herramientas Gratis</li>
-            </ul>
-          </div>
-          <a
-            href="/educacion"
-            class="block w-full bg-amber-500 hover:bg-amber-400 text-slate-950 text-center font-bold text-xs py-3.5 rounded-xl transition shadow-md cursor-pointer"
-            onclick="if (window.posthog) { window.posthog.capture('home_selector_click', { camino: 'educacion' }); }"
-          >
-            Explorar →
-          </a>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- BLOQUE SECUNDARIO: TERMÓMETRO IA -->
-    <div class="bg-gradient-to-r from-teal/10 via-slate-50 to-orange/10 border border-teal/20 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
-      <div class="flex items-center gap-3 text-sm font-bold text-deep text-center sm:text-left">
-        <span class="p-2.5 bg-teal text-white rounded-xl text-xl shrink-0">🌡️</span>
-        <div>
-          <span class="text-deep font-black block sm:inline text-base">¿No sabes por dónde empezar?</span>
-          <span class="text-gray-600 font-normal text-xs block sm:inline"> Mide tus mayores fugas de tiempo con el Termómetro de Recuperación de Tiempo.</span>
-        </div>
-      </div>
-      <button
-        onclick="document.getElementById('selector-overlay').classList.remove('hidden'); if (window.posthog) { window.posthog.capture('home_termometro_click', { origen: 'home_secundario' }); }"
-        class="bg-teal hover:bg-tealHover text-white text-xs font-bold px-6 py-3 rounded-xl transition shrink-0 shadow-md cursor-pointer w-full sm:w-auto"
-      >
-        Realizar diagnóstico (2 min) →
-      </button>
-    </div>
-
-    <!-- PRUEBA SOCIAL & SOBRE PABLO BREVE -->
-    <section class="pt-8 border-t border-gray-200/80">
-      <SobreMi />
-      <div class="text-center pt-6">
-        <a href="/sobre-pablo" class="text-xs font-bold text-teal hover:underline inline-flex items-center gap-1">
-          Conocer más sobre Pablo Ríos y su trayectoria →
+        <a
+          class="flex items-center gap-1 text-slate-600 hover:text-emerald-700 transition-colors shrink-0 font-medium"
+          href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero consultar sobre las Rutas de Inteligencia Artificial.")}`}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <span class="material-symbols-outlined text-[16px] text-emerald-600">chat</span>
+          <span class="hidden sm:inline">Soporte directo</span>
+          <span>WhatsApp</span>
         </a>
       </div>
-    </section>
+    </div>
 
+    <!-- Main Navigation Bar -->
+    <div class="h-16 px-4 lg:px-8">
+      <div class="max-w-7xl mx-auto h-16 flex items-center justify-between gap-4">
+        
+        <!-- Logo & Main Nav Links -->
+        <div class="flex items-center gap-8">
+          <a class="flex items-center gap-2.5 group" href="/">
+            <img
+              src="/logo-lucirme-ai.png"
+              alt="LuciRMe AI"
+              class="h-8 w-auto object-contain group-hover:scale-105 transition-transform"
+            />
+            <span class="font-bold text-lg text-slate-900 tracking-tight group-hover:text-teal-800 transition-colors">
+              LuciRMe<span class="text-teal-700 ml-0.5">AI</span>
+            </span>
+          </a>
+
+          <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
+            <a class="hover:text-slate-900 transition-colors" href="/educacion">Rutas</a>
+            <a class="hover:text-slate-900 transition-colors" href="/empresas">Soluciones</a>
+            <a class="hover:text-slate-900 transition-colors" href="/recursos">Recursos</a>
+            <a class="hover:text-slate-900 transition-colors" href="/sobre-pablo">Sobre Pablo</a>
+          </nav>
+        </div>
+
+        <!-- Right Side Actions -->
+        <div class="flex items-center gap-3">
+          <a
+            class="hidden md:inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 hover:text-teal-800 transition-colors px-3 py-1.5 rounded-lg border border-slate-200/80 bg-slate-50/80"
+            href="/empresas#diagnostico"
+          >
+            <span class="material-symbols-outlined text-[18px] text-amber-600">speed</span>
+            <span>Termómetro IA</span>
+          </a>
+
+          <a
+            class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold transition-all shadow-2xs"
+            href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, leí tu página de inicio y quiero hacerte una consulta directa.")}`}
+            rel="noopener noreferrer"
+            target="_blank"
+            onclick="if (window.posthog) { window.posthog.capture('home_whatsapp_click', { origen: 'header' }); }"
+          >
+            <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+            <span>Consultar vía WhatsApp</span>
+          </a>
+
+          <div class="w-8 h-8 rounded-full overflow-hidden border border-slate-200 shrink-0">
+            <img src="/pablo-rios.jpeg" alt="Pablo Ríos" class="w-full h-full object-cover" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <main class="w-full pt-28 bg-[#F8FAFC]">
+    <div class="flex flex-col w-full">
+
+      <!-- SECTION 1: HERO CONVERSACIONAL -->
+      <section class="w-full max-w-7xl mx-auto px-4 lg:px-8 pt-8 pb-6">
+        <div class="max-w-4xl mx-auto text-center flex flex-col items-center">
+          
+          <!-- Eyebrow Badge -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-200/60 text-slate-700 text-xs font-mono font-medium uppercase tracking-wider mb-4 border border-slate-300/60">
+            <span class="w-2 h-2 rounded-full bg-teal-600 animate-pulse"></span>
+            <span>Acompañamiento real en Inteligencia Artificial &amp; Operaciones</span>
+          </div>
+
+          <!-- Main Headline -->
+          <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight max-w-3xl mb-3 leading-tight">
+            ¿Qué quieres conseguir con IA?
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed mb-8 font-normal">
+            No necesitas otra teoría abstracta ni comprar un software de moda. Dime qué estás intentando resolver y te muestro el camino más corto.
+          </p>
+
+          <!-- Pablo Personal Assistant Note -->
+          <div class="w-full max-w-2xl bg-white rounded-2xl border border-slate-200/80 shadow-xs p-4 md:p-5 text-left flex items-start gap-4 mb-4">
+            <div class="relative shrink-0">
+              <img
+                src="/pablo-rios.jpeg"
+                alt="Pablo Ríos"
+                class="w-12 h-12 rounded-full object-cover ring-2 ring-emerald-500/80"
+              />
+              <div class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 rounded-full ring-2 ring-white"></div>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-bold text-sm text-slate-900">Pablo Ríos</span>
+                <span class="text-[11px] font-mono text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 font-semibold">En línea</span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                “Hola, soy Pablo. Antes de mostrarte cursos o servicios, elijamos qué tiene sentido para ti hoy.”
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECTION 2: SELECTOR INTERACTIVO DE INTENCIÓN CON LINKS DIRECTOS -->
+      <section class="w-full max-w-7xl mx-auto px-4 lg:px-8 pb-12">
+        <div class="max-w-4xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm p-6 lg:p-8">
+          
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-6">
+            <span class="font-mono text-xs font-semibold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[18px] text-teal-700">tune</span>
+              Elige tu objetivo principal
+            </span>
+            <span class="font-mono text-xs text-slate-400">4 rutas disponibles</span>
+          </div>
+
+          <!-- Button Grid Selector con Links Directos -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6" id="intentionSelector">
+            
+            <!-- RUTA 01: APRENDER -->
+            <div
+              class="intention-btn text-left p-4 rounded-xl transition-all flex flex-col justify-between bg-teal-800 text-white shadow-xs cursor-pointer border border-teal-900 group"
+              id="btn-aprender"
+              onclick="window.selectIntention('aprender')"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="material-symbols-outlined text-[22px]">school</span>
+                  <span class="font-mono text-xs opacity-80">Ruta 01</span>
+                </div>
+                <span class="font-bold text-sm leading-snug block">Quiero aprender a usar IA en mi trabajo diario</span>
+                <span class="text-xs opacity-90 mt-1 block">Educación práctica, prompts y flujos individuales</span>
+              </div>
+              <div class="pt-3 flex items-center justify-between border-t border-white/20 mt-3">
+                <a
+                  href="/educacion"
+                  class="inline-flex items-center gap-1 text-xs font-bold text-emerald-300 hover:text-white transition-colors underline cursor-pointer"
+                  onclick="event.stopPropagation(); if (window.posthog) window.posthog.capture('home_card_direct_link', { ruta: 'aprender' });"
+                >
+                  <span>Explorar Educación</span>
+                  <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- RUTA 02: MENTORÍA 1-1 -->
+            <div
+              class="intention-btn text-left p-4 rounded-xl transition-all flex flex-col justify-between bg-slate-50 hover:bg-slate-100/80 text-slate-900 border border-slate-200 cursor-pointer group"
+              id="btn-sesion"
+              onclick="window.selectIntention('sesion')"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="material-symbols-outlined text-[22px] text-amber-700 icon-symbol">person_search</span>
+                  <span class="font-mono text-xs text-slate-500 badge-tag">Ruta 02</span>
+                </div>
+                <span class="font-bold text-sm leading-snug block">Necesito resolver un cuello de botella con ayuda 1 a 1</span>
+                <span class="text-xs text-slate-600 mt-1 block sub-text">Diagnóstico sobre tu pantalla y archivos reales</span>
+              </div>
+              <div class="pt-3 flex items-center justify-between border-t border-slate-200 mt-3 divider-line">
+                <a
+                  href="/profesionales"
+                  class="inline-flex items-center gap-1 text-xs font-bold text-teal-700 hover:text-teal-900 transition-colors underline cursor-pointer card-link"
+                  onclick="event.stopPropagation(); if (window.posthog) window.posthog.capture('home_card_direct_link', { ruta: 'sesion' });"
+                >
+                  <span>Ver Mentoría 1 a 1</span>
+                  <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- RUTA 03: EMPRESAS -->
+            <div
+              class="intention-btn text-left p-4 rounded-xl transition-all flex flex-col justify-between bg-slate-50 hover:bg-slate-100/80 text-slate-900 border border-slate-200 cursor-pointer group"
+              id="btn-empresa"
+              onclick="window.selectIntention('empresa')"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="material-symbols-outlined text-[22px] text-teal-700 icon-symbol">hub</span>
+                  <span class="font-mono text-xs text-slate-500 badge-tag">Ruta 03</span>
+                </div>
+                <span class="font-bold text-sm leading-snug block">Quiero implementar IA o automatizar procesos en mi empresa</span>
+                <span class="text-xs text-slate-600 mt-1 block sub-text">Make, Zapier, LLMs y reducción de fricción operativa</span>
+              </div>
+              <div class="pt-3 flex items-center justify-between border-t border-slate-200 mt-3 divider-line">
+                <a
+                  href="/empresas"
+                  class="inline-flex items-center gap-1 text-xs font-bold text-teal-700 hover:text-teal-900 transition-colors underline cursor-pointer card-link"
+                  onclick="event.stopPropagation(); if (window.posthog) window.posthog.capture('home_card_direct_link', { ruta: 'empresa' });"
+                >
+                  <span>Ver Soluciones Empresas</span>
+                  <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- RUTA 04: PÁGINAS WEB -->
+            <div
+              class="intention-btn text-left p-4 rounded-xl transition-all flex flex-col justify-between bg-slate-50 hover:bg-slate-100/80 text-slate-900 border border-slate-200 cursor-pointer group"
+              id="btn-web"
+              onclick="window.selectIntention('web')"
+            >
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="material-symbols-outlined text-[22px] text-amber-600 icon-symbol">web</span>
+                  <span class="font-mono text-xs text-slate-500 badge-tag">Ruta 04</span>
+                </div>
+                <span class="font-bold text-sm leading-snug block">Necesito una página web clara para mi negocio o clínica</span>
+                <span class="text-xs text-slate-600 mt-1 block sub-text">Presencia digital directa, veloz y sin complejidades</span>
+              </div>
+              <div class="pt-3 flex items-center justify-between border-t border-slate-200 mt-3 divider-line">
+                <a
+                  href="/pagina-comercial"
+                  class="inline-flex items-center gap-1 text-xs font-bold text-teal-700 hover:text-teal-900 transition-colors underline cursor-pointer card-link"
+                  onclick="event.stopPropagation(); if (window.posthog) window.posthog.capture('home_card_direct_link', { ruta: 'web' });"
+                >
+                  <span>Ver Páginas Web</span>
+                  <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Dynamic Diagnosis Panel -->
+          <div class="bg-slate-50 rounded-xl p-5 md:p-6 border border-slate-200/80" id="dynamicCard">
+            <div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
+              <div class="space-y-3 flex-1">
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                  <span class="font-mono text-xs font-semibold uppercase tracking-wider text-teal-800" id="routeBadge">
+                    Diagnóstico en vivo · Educación aplicada
+                  </span>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900" id="routeTitle">
+                  Construye tu propio criterio técnico sin perderte en novedades
+                </h3>
+                <p class="text-xs text-slate-600 leading-relaxed" id="routeDiagnosis">
+                  El problema habitual no es la falta de herramientas, sino no saber cuál encaja en tu flujo habitual. En lugar de aprender teoría de redes neuronales, nos concentramos en cómo redactar informes en 10 minutos, analizar documentación pesada con NotebookLM y sistematizar tu criterio.
+                </p>
+                <div class="bg-white p-3 rounded-lg border border-slate-200/80 flex items-center gap-2.5 text-xs">
+                  <span class="material-symbols-outlined text-teal-700 text-[18px] shrink-0">flag</span>
+                  <span class="text-slate-800" id="routeNextStep">
+                    <strong>Siguiente paso sugerido:</strong> Revisa el catálogo estructurado de las Rutas de Aprendizaje LuciRMe.
+                  </span>
+                </div>
+              </div>
+
+              <!-- Direct CTA Block with Direct Link + WhatsApp Button -->
+              <div class="md:w-64 shrink-0 flex flex-col gap-2 pt-2 md:pt-0">
+                <a
+                  class="w-full py-3 px-4 rounded-xl bg-teal-800 hover:bg-teal-900 text-white font-semibold text-xs text-center flex items-center justify-center gap-1.5 transition-colors shadow-2xs"
+                  href="/educacion"
+                  id="routePageBtn"
+                  onclick="if (window.posthog) { window.posthog.capture('home_selector_page_click', { ruta: 'aprender' }); }"
+                >
+                  <span id="routePageLabel">Ver Rutas de Educación</span>
+                  <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </a>
+
+                <a
+                  class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs text-center flex items-center justify-center gap-1.5 transition-colors shadow-2xs"
+                  href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, estoy interesado en aprender a usar IA en mi trabajo diario.")}`}
+                  id="routeWhatsApp"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  onclick="if (window.posthog) { window.posthog.capture('home_selector_cta_click', { ruta: 'aprender' }); }"
+                >
+                  <span class="material-symbols-outlined text-[16px]">chat</span>
+                  <span>Hablar por WhatsApp</span>
+                </a>
+                
+                <p class="font-mono text-[11px] text-slate-500 text-center mt-1">
+                  Cuéntame tu caso y te digo qué haría yo, sin compromiso.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECTION 3: QUIÉN SOY (PABLO RÍOS) -->
+      <section class="w-full bg-white py-16 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Left Column: Portrait & Direct Badge -->
+            <div class="lg:col-span-4 flex flex-col items-start gap-4">
+              <div class="relative w-full aspect-square max-w-sm rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 shadow-sm">
+                <img
+                  src="/pablo-rios.jpeg"
+                  alt="Pablo Ríos"
+                  class="w-full h-full object-cover"
+                />
+                <div class="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-sm p-3 rounded-xl flex items-center justify-between shadow-xs border border-slate-200/80">
+                  <div>
+                    <div class="font-bold text-xs text-slate-900">Pablo Ríos</div>
+                    <div class="font-mono text-[11px] text-slate-500">Fundador de LuciRMe AI</div>
+                  </div>
+                  <span class="material-symbols-outlined text-teal-700 text-[20px]">verified</span>
+                </div>
+              </div>
+
+              <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200/80 w-full max-w-sm">
+                <span class="font-mono text-[10px] text-slate-500 block uppercase tracking-wider mb-1 font-semibold">Principio clave</span>
+                <p class="text-xs text-slate-700 leading-relaxed italic">
+                  “Primero entendemos el proceso manual; sólo después evaluamos si la IA aporta valor real.”
+                </p>
+              </div>
+            </div>
+
+            <!-- Right Column: Story & Metrics -->
+            <div class="lg:col-span-8 flex flex-col gap-6">
+              <div>
+                <span class="font-mono text-xs text-teal-800 uppercase font-semibold tracking-wider block mb-1">
+                  Detrás de LuciRMe estoy yo
+                </span>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight mb-4">
+                  Soy Pablo. Y no creo que necesites otra clase de IA.
+                </h2>
+                <div class="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  <p class="text-slate-900 font-medium">
+                    Trabajo con personas y empresas para convertir problemas reales en soluciones que puedan usar de verdad.
+                  </p>
+                  <p>
+                    He acompañado a más de 50 personas en procesos 1-1 y he colaborado con más de 30 empresas, ayudándoles a entender, implementar y adoptar IA en su trabajo.
+                  </p>
+                  <p class="font-semibold text-slate-900">
+                    Mi objetivo no es que dependas de mí. Es que después de trabajar juntos tengas más capacidad para resolver por tu cuenta.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Credential Cards -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-teal-700 shrink-0 shadow-2xs">
+                    <span class="material-symbols-outlined text-[20px]">groups</span>
+                  </div>
+                  <div>
+                    <div class="font-bold text-sm text-slate-900">+50 personas</div>
+                    <div class="text-xs text-slate-600 leading-snug">Acompañadas 1-1 en procesos reales de trabajo y adopción directa.</div>
+                  </div>
+                </div>
+
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-teal-700 shrink-0 shadow-2xs">
+                    <span class="material-symbols-outlined text-[20px]">corporate_fare</span>
+                  </div>
+                  <div>
+                    <div class="font-bold text-sm text-slate-900">+30 empresas</div>
+                    <div class="text-xs text-slate-600 leading-snug">Intervenidas en optimización de operaciones, flujos de LLMs y automatizaciones.</div>
+                  </div>
+                </div>
+
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-amber-700 shrink-0 shadow-2xs">
+                    <span class="material-symbols-outlined text-[20px]">history_edu</span>
+                  </div>
+                  <div>
+                    <div class="font-bold text-sm text-slate-900">+13 años</div>
+                    <div class="text-xs text-slate-600 leading-snug">Liderando producto, tecnología y operaciones en startups y corporativos en Latam.</div>
+                  </div>
+                </div>
+
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
+                  <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-emerald-600 shrink-0 shadow-2xs">
+                    <span class="material-symbols-outlined text-[20px]">verified_user</span>
+                  </div>
+                  <div>
+                    <div class="font-bold text-sm text-slate-900">0% humo</div>
+                    <div class="text-xs text-slate-600 leading-snug">Primero entendemos el proceso, luego vemos si hace falta tecnología.</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bottom Button -->
+              <div class="pt-2">
+                <a
+                  class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs transition-all shadow-2xs"
+                  href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, leí tu perfil en LuciRMe y quiero hacerte una consulta.")}`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <span class="material-symbols-outlined text-[20px]">chat</span>
+                  <span>Hablar directamente con Pablo por WhatsApp</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: LAS 4 RUTAS Y SOLUCIONES -->
+      <section class="w-full max-w-7xl mx-auto px-4 lg:px-8 py-16 border-t border-slate-200">
+        <div class="mb-10 max-w-2xl">
+          <span class="font-mono text-xs text-teal-800 uppercase font-semibold tracking-wider block mb-1">
+            Ecosistema LuciRMe
+          </span>
+          <h2 class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
+            4 formas concretas de trabajar juntos
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">
+            Cada opción está diseñada para resolver una etapa específica sin compras forzadas ni módulos de relleno.
+          </p>
+        </div>
+
+        <!-- 4 Solutions Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Solución 1: Rutas de Aprendizaje -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-2xs p-6 flex flex-col justify-between hover:border-slate-300 transition-all">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-teal-700">
+                  <span class="material-symbols-outlined text-[22px]">auto_stories</span>
+                </div>
+                <span class="font-mono text-[11px] font-semibold px-2.5 py-1 rounded bg-slate-100 text-slate-700">Autodidacta / Guiado</span>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 mb-2">
+                Educación &amp; Rutas de Aprendizaje
+              </h3>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Rutas directas al grano: Comunicación ejecutiva, Product Management asistido, NotebookLM para análisis documental, empleabilidad con IA y creación visual controlada.
+              </p>
+              <ul class="space-y-1.5 mb-6 text-xs text-slate-600 font-medium">
+                <li class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                  Plantillas y prompts testeados en producción
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                  Sin suscripciones sorpresa ni relleno teórico
+                </li>
+              </ul>
+            </div>
+            <a
+              class="inline-flex items-center justify-between w-full py-2.5 px-4 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-900 text-xs font-semibold transition-colors border border-slate-200"
+              href="/educacion"
+            >
+              <span>Ver rutas de aprendizaje</span>
+              <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </a>
+          </div>
+
+          <!-- Solución 2: Mentoría 1-1 -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-2xs p-6 flex flex-col justify-between hover:border-slate-300 transition-all">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-700">
+                  <span class="material-symbols-outlined text-[22px]">co_present</span>
+                </div>
+                <span class="font-mono text-[11px] font-semibold px-2.5 py-1 rounded bg-amber-100 text-amber-900">Alta intensidad</span>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 mb-2">
+                Mentoría &amp; Sesión 1-1 Estratégica
+              </h3>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Diagnóstico quirúrgico de 60 a 90 minutos con pantalla compartida. Abrimos tus archivos, tus tareas repetitivas y configuramos las herramientas en vivo para tu día a día.
+              </p>
+              <ul class="space-y-1.5 mb-6 text-xs text-slate-600 font-medium">
+                <li class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                  Resolución de tu caso particular en la misma sesión
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                  Grabación completa y documentación resumen en Notion
+                </li>
+              </ul>
+            </div>
+            <a
+              class="inline-flex items-center justify-between w-full py-2.5 px-4 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-900 text-xs font-semibold transition-colors border border-slate-200"
+              href="/profesionales"
+            >
+              <span>Agendar sesión 1-1</span>
+              <span class="material-symbols-outlined text-[18px]">calendar_today</span>
+            </a>
+          </div>
+
+          <!-- Solución 3: Empresas -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-2xs p-6 flex flex-col justify-between hover:border-slate-300 transition-all">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-teal-700">
+                  <span class="material-symbols-outlined text-[22px]">settings_suggest</span>
+                </div>
+                <span class="font-mono text-[11px] font-semibold px-2.5 py-1 rounded bg-teal-50 text-teal-800 border border-teal-200">B2B &amp; Equipos</span>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 mb-2">
+                Soluciones para Empresas &amp; Cuellos de Botella
+              </h3>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Diagnóstico forense de operaciones. Conectamos tus sistemas con Make/Zapier y LLMs para eliminar tareas repetitivas sin sobredimensionar la factura de software mensual.
+              </p>
+              <ul class="space-y-1.5 mb-6 text-xs text-slate-600 font-medium">
+                <li class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                  Mapeo de fugas de horas por equipo de trabajo
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                  Arquitectura pragmática: sólo la IA estrictamente necesaria
+                </li>
+              </ul>
+            </div>
+            <a
+              class="inline-flex items-center justify-between w-full py-2.5 px-4 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-900 text-xs font-semibold transition-colors border border-slate-200"
+              href="/empresas"
+            >
+              <span>Ver soluciones corporativas</span>
+              <span class="material-symbols-outlined text-[18px]">business_center</span>
+            </a>
+          </div>
+
+          <!-- Solución 4: Páginas Web Claras -->
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-2xs p-6 flex flex-col justify-between hover:border-slate-300 transition-all">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600">
+                  <span class="material-symbols-outlined text-[22px]">language</span>
+                </div>
+                <span class="font-mono text-[11px] font-semibold px-2.5 py-1 rounded bg-slate-100 text-slate-800">Negocios &amp; Clínicas</span>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 mb-2">
+                Presencia &amp; Páginas Web Claras
+              </h3>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Diseñamos y montamos sitios web que tus clientes entienden a la primera. Especialmente pensadas para clínicas, servicios profesionales y firmas que quieren convertir visitas en contactos directos.
+              </p>
+              <ul class="space-y-1.5 mb-6 text-xs text-slate-600 font-medium">
+                <li class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                  Estructura legible, rápida y conectada a WhatsApp
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                  Entrega llave en mano que tú mismo puedes mantener
+                </li>
+              </ul>
+            </div>
+            <a
+              class="inline-flex items-center justify-between w-full py-2.5 px-4 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-900 text-xs font-semibold transition-colors border border-slate-200"
+              href="/pagina-comercial"
+            >
+              <span>Ver servicio de webs</span>
+              <span class="material-symbols-outlined text-[18px]">open_in_new</span>
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECTION 5: PRUEBA SOCIAL / EVIDENCIA REAL -->
+      <section class="w-full bg-slate-100/70 py-16 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+          <div class="max-w-3xl mb-10">
+            <span class="font-mono text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">
+              Resultados medibles
+            </span>
+            <h2 class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
+              Menos teoría y más horas devueltas al reloj
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-600 mt-1">
+              Casos de equipos que pasaron del caos manual a flujos fluidos y documentados.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Caso 1: Tech & SaaS (Irys) -->
+            <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-2xs flex flex-col justify-between">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="font-mono text-xs font-bold uppercase text-teal-800">Tech &amp; SaaS</span>
+                  <span class="text-base font-extrabold font-mono text-emerald-600">-65% tiempo</span>
+                </div>
+                <h3 class="text-sm font-bold text-slate-900">Irys · Operaciones de Soporte</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Unificación de base de conocimiento interna y automatización del primer borrador de respuesta técnica. El equipo redujo en 65% el tiempo de resolución inicial sin perder el toque humano.
+                </p>
+              </div>
+              <div class="mt-4 pt-2.5 border-t border-slate-100 font-mono text-[11px] text-slate-500">
+                Métricas: De 45 min a 16 min por caso complejo.
+              </div>
+            </div>
+
+            <!-- Caso 2: Fundación La Chinca -->
+            <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-2xs flex flex-col justify-between">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="font-mono text-xs font-bold uppercase text-amber-700">Operaciones &amp; Salud</span>
+                  <span class="text-base font-extrabold font-mono text-amber-700">3 días → 8 min</span>
+                </div>
+                <h3 class="text-sm font-bold text-slate-900">Fundación La Chinca</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Consolidación de reportes clínicos y financieros que consumían 3 días completos en hojas de cálculo desarticuladas. Se transformó en un flujo automatizado que entrega resultados en minutos.
+                </p>
+              </div>
+              <div class="mt-4 pt-2.5 border-t border-slate-100 font-mono text-[11px] text-slate-500">
+                Métricas: 100% de eliminación de errores de tipeo manual.
+              </div>
+            </div>
+
+            <!-- Caso 3: Almamotor -->
+            <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-2xs flex flex-col justify-between">
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="font-mono text-xs font-bold uppercase text-teal-800">Servicios Comerciales</span>
+                  <span class="text-base font-extrabold font-mono text-emerald-600">+3h libres / día</span>
+                </div>
+                <h3 class="text-sm font-bold text-slate-900">Almamotor</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Coordinación y confirmación de citas de servicio mediante automatización conversacional. El personal de recepción recuperó horas operativas para dedicarse a la atención directa en sala.
+                </p>
+              </div>
+              <div class="mt-4 pt-2.5 border-t border-slate-100 font-mono text-[11px] text-slate-500">
+                Métricas: 94% de asistencia puntual a citas agendadas.
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 6: CTA FINAL DE ALTA CONVERSIÓN -->
+      <section class="w-full max-w-7xl mx-auto px-4 lg:px-8 py-16">
+        <div class="max-w-3xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm p-8 text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center mx-auto mb-4">
+            <span class="material-symbols-outlined text-[24px]">help_outline</span>
+          </div>
+          <h2 class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight mb-2">
+            ¿No sabes por dónde empezar?
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto mb-6 leading-relaxed">
+            Cuéntame qué estás intentando resolver. Revisamos tu situación en 15 minutos de WhatsApp y te oriento con total honestidad.
+          </p>
+          <div class="flex flex-col items-center gap-2 max-w-md mx-auto">
+            <a
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs transition-all shadow-2xs cursor-pointer"
+              href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, no tengo claro por dónde empezar con IA y quiero tu orientación.")}`}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <span class="material-symbols-outlined text-[18px]">chat</span>
+              <span>Hablar con Pablo por WhatsApp</span>
+            </a>
+            <p class="font-mono text-[11px] text-slate-500 mt-2">
+              Respuesta directa de Pablo Ríos · Sin llamadas de ventas agresivas · Sin venderte tecnología porque sí.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </div>
   </main>
 
-  <RedesSociales />
+  <!-- FOOTER DEDICADO LUCI R ME AI -->
+  <footer class="w-full bg-white text-slate-600 border-t border-slate-200 py-12">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        
+        <div class="md:col-span-5 flex flex-col justify-between gap-4">
+          <div class="space-y-3">
+            <a class="flex items-center gap-2.5 group" href="/">
+              <img src="/logo-lucirme-ai.png" alt="LuciRMe AI" class="h-7 w-auto object-contain" />
+              <span class="font-bold text-base text-slate-900">LuciRMe AI</span>
+            </a>
+            <p class="text-xs text-slate-500 max-w-sm leading-relaxed">
+              Formación técnica rigurosa, soluciones de software y adopción pragmática de inteligencia artificial para profesionales y organizaciones.
+            </p>
+          </div>
+          <div class="font-mono text-xs text-slate-400">
+            © 2026 LuciRMe AI (lucirme.com). Todos los derechos reservados.
+          </div>
+        </div>
 
-  <script is:inline>
+        <div class="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-6">
+          <div class="space-y-3">
+            <span class="font-mono text-xs font-bold uppercase text-slate-900 tracking-wider block">Formación</span>
+            <ul class="space-y-2 text-xs text-slate-600">
+              <li><a class="hover:text-slate-900 transition-colors" href="/educacion">Rutas Especializadas</a></li>
+              <li><a class="hover:text-slate-900 transition-colors" href="/empresas">Para Empresas</a></li>
+              <li><a class="hover:text-slate-900 transition-colors" href="/empresas#diagnostico">Termómetro IA</a></li>
+            </ul>
+          </div>
+
+          <div class="space-y-3">
+            <span class="font-mono text-xs font-bold uppercase text-slate-900 tracking-wider block">Institucional</span>
+            <ul class="space-y-2 text-xs text-slate-600">
+              <li><a class="hover:text-slate-900 transition-colors" href="/sobre-pablo">Sobre Pablo</a></li>
+              <li><a class="hover:text-slate-900 transition-colors" href="/recursos">Recursos &amp; Notion</a></li>
+              <li><a class="text-emerald-700 hover:underline font-semibold" href={whatsappBase} rel="noopener noreferrer" target="_blank">Canal WhatsApp</a></li>
+            </ul>
+          </div>
+
+          <div class="space-y-3">
+            <span class="font-mono text-xs font-bold uppercase text-slate-900 tracking-wider block">Soluciones</span>
+            <ul class="space-y-2 text-xs text-slate-600">
+              <li><a class="hover:text-slate-900 transition-colors" href="/pagina-comercial">Página Comercial</a></li>
+              <li><a class="hover:text-slate-900 transition-colors" href="/soluciones/web-veterinarios">Web Veterinarias</a></li>
+              <li><a class="hover:text-slate-900 transition-colors" href="/soluciones/web-restaurantes">Web Restaurantes</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT INTERACTIVO DEL SELECTOR DE INTENCIÓN CON LINKS Y WHATSAPP -->
+  <script>
+    const routesData: Record<string, any> = {
+      aprender: {
+        badge: "Diagnóstico en vivo · Educación aplicada",
+        title: "Construye tu propio criterio técnico sin perderte en novedades",
+        diagnosis: "El problema habitual no es la falta de herramientas, sino no saber cuál encaja en tu flujo habitual. En lugar de aprender teoría de redes neuronales, nos concentramos en cómo redactar informes en 10 minutos, analizar documentación pesada con NotebookLM y systematizar tu criterio.",
+        nextStep: "Revisa el catálogo estructurado de las Rutas de Aprendizaje LuciRMe.",
+        pageUrl: "/educacion",
+        pageLabel: "Ver Rutas de Educación",
+        waMessage: "Hola Pablo, estoy interesado en aprender a usar IA en mi trabajo diario."
+      },
+      sesion: {
+        badge: "Diagnóstico en vivo · Mentoría 1 a 1",
+        title: "Desbloquea tu cuello de botella en una sola sesión de trabajo",
+        diagnosis: "Ideal si ya sabes lo que te quita tiempo (un informe manual, un desorden en Notion, o una tarea repetitiva) pero no das con el prompt o la integración adecuada. En 60-90 minutos compartimos pantalla, abrimos tus archivos reales y salimos con el flujo resuelto.",
+        nextStep: "Revisa la propuesta de acompañamiento individual o agenda por WhatsApp.",
+        pageUrl: "/profesionales",
+        pageLabel: "Ver Mentoría 1 a 1",
+        waMessage: "Hola Pablo, necesito resolver un cuello de botella con ayuda 1 a 1."
+      },
+      empresa: {
+        badge: "Diagnóstico en vivo · Empresas y Equipos",
+        title: "Automatiza procesos sin inflar tu costo fijo de software",
+        diagnosis: "Muchas empresas compran licencias de IA costosas que nadie utiliza. Primero hacemos un diagnóstico forense de dónde se pierden horas en tu equipo, luego armamos automatizaciones con Make/Zapier y LLMs sobre herramientas que ya dominan.",
+        nextStep: "Revisa los casos B2B y líneas de intervención para empresas.",
+        pageUrl: "/empresas",
+        pageLabel: "Ver Soluciones Empresas",
+        waMessage: "Hola Pablo, quiero implementar IA o automatizar procesos en mi empresa."
+      },
+      web: {
+        badge: "Diagnóstico en vivo · Presencia Digital",
+        title: "Una página web clara que tus clientes entiendan sin enredos",
+        diagnosis: "Tu clínica o negocio necesita que un visitante comprenda en 5 segundos qué resuelves, vea tus credenciales y haga clic en un botón de WhatsApp. Cero desarrollos interminables ni CMS imposibles de mantener.",
+        nextStep: "Calcula el costo y cotización de tu Página Comercial en 2 minutos.",
+        pageUrl: "/pagina-comercial",
+        pageLabel: "Ver Páginas Web Comerciales",
+        waMessage: "Hola Pablo, necesito una página web clara para mi negocio o clínica."
+      }
+    };
+
+    function selectIntention(key: string) {
+      const data = routesData[key];
+      if (!data) return;
+
+      const badgeEl = document.getElementById("routeBadge");
+      const titleEl = document.getElementById("routeTitle");
+      const diagEl = document.getElementById("routeDiagnosis");
+      const nextEl = document.getElementById("routeNextStep");
+      const pageBtn = document.getElementById("routePageBtn") as HTMLAnchorElement | null;
+      const pageLabel = document.getElementById("routePageLabel");
+      const waBtn = document.getElementById("routeWhatsApp") as HTMLAnchorElement | null;
+
+      if (badgeEl) badgeEl.innerText = data.badge;
+      if (titleEl) titleEl.innerText = data.title;
+      if (diagEl) diagEl.innerText = data.diagnosis;
+      if (nextEl) nextEl.innerHTML = "<strong>Siguiente paso sugerido:</strong> " + data.nextStep;
+      if (pageBtn) pageBtn.href = data.pageUrl;
+      if (pageLabel) pageLabel.innerText = data.pageLabel;
+      if (waBtn) {
+        waBtn.href = "https://wa.me/573053046180?text=" + encodeURIComponent(data.waMessage);
+      }
+
+      // Reset button styles
+      const buttons = document.querySelectorAll(".intention-btn");
+      buttons.forEach(btn => {
+        btn.className = "intention-btn text-left p-4 rounded-xl transition-all flex flex-col justify-between bg-slate-50 hover:bg-slate-100/80 text-slate-900 border border-slate-200 cursor-pointer group";
+        
+        // Reset link inside card
+        const link = btn.querySelector(".card-link");
+        if (link) {
+          link.className = "inline-flex items-center gap-1 text-xs font-bold text-teal-700 hover:text-teal-900 transition-colors underline cursor-pointer card-link";
+        }
+
+        // Reset divider
+        const div = btn.querySelector(".divider-line");
+        if (div) {
+          div.className = "pt-3 flex items-center justify-between border-t border-slate-200 mt-3 divider-line";
+        }
+
+        // Reset badge tag
+        const tag = btn.querySelector(".badge-tag");
+        if (tag) {
+          tag.className = "font-mono text-xs text-slate-500 badge-tag";
+        }
+
+        // Reset sub text
+        const sub = btn.querySelector(".sub-text");
+        if (sub) {
+          sub.className = "text-xs text-slate-600 mt-1 block sub-text";
+        }
+      });
+
+      // Highlight active button
+      const activeBtn = document.getElementById("btn-" + key);
+      if (activeBtn) {
+        activeBtn.className = "intention-btn text-left p-4 rounded-xl transition-all flex flex-col justify-between bg-teal-800 text-white shadow-xs cursor-pointer border border-teal-900 group";
+        
+        const link = activeBtn.querySelector(".card-link");
+        if (link) {
+          link.className = "inline-flex items-center gap-1 text-xs font-bold text-emerald-300 hover:text-white transition-colors underline cursor-pointer card-link";
+        }
+
+        const div = activeBtn.querySelector(".divider-line");
+        if (div) {
+          div.className = "pt-3 flex items-center justify-between border-t border-white/20 mt-3 divider-line";
+        }
+
+        const tag = activeBtn.querySelector(".badge-tag");
+        if (tag) {
+          tag.className = "font-mono text-xs text-teal-200 badge-tag";
+        }
+
+        const sub = activeBtn.querySelector(".sub-text");
+        if (sub) {
+          sub.className = "text-xs text-teal-100 mt-1 block sub-text";
+        }
+      }
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture('home_selector_click', { ruta: key });
+      }
+    }
+
+    (window as any).selectIntention = selectIntention;
+
     document.addEventListener("DOMContentLoaded", function () {
-      if (window.posthog) {
-        window.posthog.capture("home_page_view", {
+      if ((window as any).posthog) {
+        (window as any).posthog.capture("home_page_view", {
           pagina: "home"
         });
       }
