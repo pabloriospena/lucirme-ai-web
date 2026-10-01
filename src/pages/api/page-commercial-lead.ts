@@ -17,6 +17,9 @@ export const POST: APIRoute = async ({ request }) => {
       queTieneListo = [],
       objetivos = [],
       accionPrincipal = '',
+      tipo_de_pagina = 'veterinaria',
+      tipo_de_empresa = 'veterinaria',
+      fuente = 'Landing /soluciones/web-veterinarios',
     } = data;
 
     const emailStr = typeof email === 'string' ? email.trim() : '';
@@ -60,18 +63,20 @@ export const POST: APIRoute = async ({ request }) => {
         email: emailStr,
         fields: {
           name: nameStr,
-          company: empresaStr || 'Negocio',
+          company: empresaStr || 'Veterinaria',
           phone: whatsappStr,
           city: ciudad || 'Bogotá',
           country: pais || 'Colombia',
-          industria_sector: dedicacion || 'Comercial',
+          industria_sector: 'Veterinaria / Salud Animal',
           tiene_pagina_web: tieneWeb || 'No',
           que_quiere_mejorar: queQuiereMejorar || '-',
           tiene_dominio: tieneDominio || 'No',
           que_tiene_listo: listoFormatted || 'En proceso',
           objetivo_de_la_pagina: objetivosFormatted || 'Conseguir clientes',
           accion_principal: accionPrincipal || 'WhatsApp',
-          fuente: 'Landing /pagina-comercial',
+          tipo_de_pagina: tipo_de_pagina || 'veterinaria',
+          tipo_de_empresa: tipo_de_empresa || 'veterinaria',
+          fuente: fuente || 'Landing /soluciones/web-veterinarios',
         },
       };
 
@@ -94,10 +99,10 @@ export const POST: APIRoute = async ({ request }) => {
           mailerliteSuccess = true;
         } else {
           const errText = await mlResponse.text();
-          console.warn(`[MailerLite Commercial Page Lead ${mlResponse.status}]: ${errText}`);
+          console.warn(`[MailerLite Lead ${mlResponse.status}]: ${errText}`);
         }
       } catch (mlErr) {
-        console.error('[MailerLite Commercial Page Lead Exception]:', mlErr);
+        console.error('[MailerLite Lead Exception]:', mlErr);
       }
     } else {
       console.warn('[MailerLite Notice]: MAILERLITE_API_KEY missing or invalid. Lead processed locally.');
@@ -112,15 +117,9 @@ export const POST: APIRoute = async ({ request }) => {
           email: emailStr,
           whatsapp: whatsappStr,
           empresa: empresaStr,
-          dedicacion,
-          ciudad,
-          pais,
-          tieneWeb,
-          queQuiereMejorar,
-          tieneDominio,
-          queTieneListo,
-          objetivos,
-          accionPrincipal,
+          tipo_de_pagina,
+          tipo_de_empresa,
+          fuente,
         },
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
