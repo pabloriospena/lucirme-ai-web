@@ -1,6 +1,6 @@
 ---
 // src/components/SocialProof.astro
-// Componente de prueba social modular para Empresas y Mentorías 1-1
+// Componente de prueba social modular para Empresas y Mentorías 1-1 (100% libre de emojis)
 interface Props {
   tipo?: "empresas" | "mentorías" | "mentorias" | "1-1" | "profesionales" | "general" | string;
   id?: string;
@@ -22,7 +22,6 @@ const {
 interface TestimonioItem {
   nombre: string;
   rol: string;
-  icono: string;
   quote: string;
   solucion: string;
   metrica?: string;
@@ -34,7 +33,6 @@ const testimonios: TestimonioItem[] = [
   {
     nombre: "Almamotor",
     rol: "Sector Automotriz · Equipo Comercial",
-    icono: "🏢",
     quote: "Nos encantó la metodología y la manera de enseñar. Nos diste claridad práctica para aplicar lo aprendido de inmediato en el equipo.",
     solucion: "Taller de inmersión",
     categoria: "empresas",
@@ -42,7 +40,6 @@ const testimonios: TestimonioItem[] = [
   {
     nombre: "InterobrasER",
     rol: "Construcción & Infraestructura · Operaciones",
-    icono: "🏢",
     quote: "Un taller productivo y muy necesario. El equipo entendió la situación operativa y vio los beneficios reales de aplicar estos cambios.",
     solucion: "Taller de inmersión + Ciclo de autonomía",
     categoria: "empresas",
@@ -50,7 +47,6 @@ const testimonios: TestimonioItem[] = [
   {
     nombre: "Startup B2B",
     rol: "Equipo de Producto & Tech (5 personas)",
-    icono: "🚀",
     quote: "Redujimos de 12 a 4 días el ciclo de decisión de features. Sin contratar más PMs ni sumar complejidad innecesaria.",
     solucion: "Taller de inmersión + Ciclo de autonomía",
     metrica: "12 → 4 días ciclo",
@@ -59,7 +55,6 @@ const testimonios: TestimonioItem[] = [
   {
     nombre: "Empresa de Servicios B2B",
     rol: "Operaciones & RRHH (50+ colaboradores)",
-    icono: "🏢",
     quote: "Eliminamos 3 aprobaciones manuales en onboarding. El margen de error humano se redujo en un 80%.",
     solucion: "Taller de inmersión + Ciclo de autonomía",
     metrica: "-80% error humano",
@@ -68,7 +63,6 @@ const testimonios: TestimonioItem[] = [
   {
     nombre: "Fundación Universitaria La Chinca",
     rol: "Equipo Directivo & Administrativo",
-    icono: "🏛️",
     quote: "Excelente taller práctico con el equipo. Nos dio claridad inmediata para ordenar procesos internos y aplicar cambios que se sostienen.",
     solucion: "Taller de inmersión",
     categoria: "empresas",
@@ -76,7 +70,6 @@ const testimonios: TestimonioItem[] = [
   {
     nombre: "Agencia de Diseño & Producto",
     rol: "Operaciones & Gestión de Proyectos",
-    icono: "🌱",
     quote: "Automatizamos la entrega y el empaquetado de assets. 4 horas ahorradas por cada proyecto entregado al cliente.",
     solucion: "Ciclo de autonomía",
     metrica: "4h ahorradas/proyecto",
@@ -87,7 +80,6 @@ const testimonios: TestimonioItem[] = [
   {
     nombre: "Administrador Anónimo",
     rol: "Operaciones & Finanzas B2B",
-    icono: "👤",
     quote: "Recuperé 7h/semana automatizando reportes. Ahora enfoco ese tiempo en clientes que sí pagan.",
     solucion: "Sesión de enfoque + Guía personalizada",
     metrica: "7h/semana recuperadas",
@@ -96,7 +88,6 @@ const testimonios: TestimonioItem[] = [
   {
     nombre: "María Camila B.",
     rol: "Product Manager",
-    icono: "👤",
     quote: "Mi objetivo no es usar IA por moda, es dejar de apagar incendios y tener una visión más tranquila y estratégica de mi pipeline.",
     solucion: "Sesión de enfoque + Estructura de Automatización",
     categoria: "mentorias",
@@ -104,7 +95,6 @@ const testimonios: TestimonioItem[] = [
   {
     nombre: "José Madriz",
     rol: "Data Analytics & BI",
-    icono: "👤",
     quote: "LucirMe me dio el 'chip' para dejar de quebrarme la cabeza por algo que no es mío y empezar a sistematizar soluciones.",
     solucion: "Sesión de enfoque + Guía personalizada",
     categoria: "mentorias",
@@ -112,7 +102,6 @@ const testimonios: TestimonioItem[] = [
   {
     nombre: "David M. Muñoz",
     rol: "Líder de Desarrollo & Tech Lead",
-    icono: "👤",
     quote: "Pude validar el camino para mi cliente y las iniciativas de IA que estamos implementando. Fue justo lo que necesitaba para aterrizar la estrategia.",
     solucion: "Sesión de enfoque + Plan de ejecución estratégico",
     categoria: "mentorias",
@@ -120,7 +109,6 @@ const testimonios: TestimonioItem[] = [
   {
     nombre: "Cecilia Morete",
     rol: "Profesional Independiente",
-    icono: "👤",
     quote: "Qué felicidad ser parte de este proceso. Ahora tengo las herramientas organizadas y la claridad para hacer las preguntas correctas y avanzar.",
     solucion: "Acompañamiento individual",
     categoria: "mentorias",
@@ -128,7 +116,6 @@ const testimonios: TestimonioItem[] = [
   {
     nombre: "Melody Abele",
     rol: "Customer Experience · Melfa CX",
-    icono: "👤",
     quote: "Gracias a tus herramientas y devoluciones, mi proyecto hoy tiene mucho más sentido, un norte claro y gran potencial. Aprendizaje real.",
     solucion: "Sesión de enfoque + Estructura de Automatización",
     categoria: "mentorias",
@@ -136,7 +123,6 @@ const testimonios: TestimonioItem[] = [
   {
     nombre: "Consultor Tech",
     rol: "Consultoría y Soluciones B2B",
-    icono: "💼",
     quote: "Sistematicé mi propuesta de valor. El tiempo de onboarding de nuevos clientes bajó a la mitad.",
     solucion: "Sesión de enfoque",
     metrica: "-50% tiempo onboarding",
@@ -157,7 +143,7 @@ const items = esEmpresas
 
 const headerConfig = esEmpresas
   ? {
-      eyebrow: eyebrow || "Casos con Equipos · B2B",
+      eyebrow: eyebrow || "Casos de Equipos · B2B",
       titulo: titulo || "Resultados que ya conseguimos con equipos",
       subtitulo:
         subtitulo ||
@@ -203,18 +189,13 @@ const headerConfig = esEmpresas
             <div>
               <!-- Cabecera de la Tarjeta: Quién -->
               <div class="flex items-start justify-between gap-3 mb-4 pb-3.5 border-b border-slate-200/60">
-                <div class="flex items-start gap-3 min-w-0">
-                  <div class="w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-base shrink-0 shadow-2xs group-hover:border-[#0D9488]/40 transition-colors">
-                    {t.icono}
-                  </div>
-                  <div class="min-w-0">
-                    <h3 class="text-xs sm:text-sm font-bold text-slate-900 truncate group-hover:text-[#0D9488] transition-colors">
-                      {t.nombre}
-                    </h3>
-                    <p class="text-[11px] font-mono text-slate-500 truncate">
-                      {t.rol}
-                    </p>
-                  </div>
+                <div class="min-w-0 flex-1">
+                  <h3 class="text-sm font-bold text-slate-900 truncate group-hover:text-[#0D9488] transition-colors">
+                    {t.nombre}
+                  </h3>
+                  <p class="text-[11px] font-mono text-slate-500 truncate mt-0.5">
+                    {t.rol}
+                  </p>
                 </div>
                 {t.metrica && (
                   <span class="shrink-0 bg-emerald-50 text-emerald-800 border border-emerald-200/80 text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full">
