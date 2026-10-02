@@ -1,12 +1,265 @@
 ---
-// src/components/SocialProof.astro -> Re-exports and wraps Resultados.astro for full backward compatibility
-import Resultados from "./Resultados.astro";
-
+// src/components/SocialProof.astro
+// Componente de prueba social modular para Empresas y Mentorías 1-1
 interface Props {
-  tipo?: "empresas" | "mentorías" | "mentorias" | "general" | string;
+  tipo?: "empresas" | "mentorías" | "mentorias" | "1-1" | "profesionales" | "general" | string;
   id?: string;
   class?: string;
+  titulo?: string;
+  subtitulo?: string;
+  eyebrow?: string;
 }
+
+const {
+  tipo = "general",
+  id = "testimonios",
+  class: className = "",
+  titulo,
+  subtitulo,
+  eyebrow,
+} = Astro.props;
+
+interface TestimonioItem {
+  nombre: string;
+  rol: string;
+  icono: string;
+  quote: string;
+  solucion: string;
+  metrica?: string;
+  categoria: "empresas" | "mentorias";
+}
+
+const testimonios: TestimonioItem[] = [
+  // --- CASOS EMPRESAS ---
+  {
+    nombre: "Almamotor",
+    rol: "Sector Automotriz · Equipo Comercial",
+    icono: "🏢",
+    quote: "Nos encantó la metodología y la manera de enseñar. Nos diste claridad práctica para aplicar lo aprendido de inmediato en el equipo.",
+    solucion: "Taller de inmersión",
+    categoria: "empresas",
+  },
+  {
+    nombre: "InterobrasER",
+    rol: "Construcción & Infraestructura · Operaciones",
+    icono: "🏢",
+    quote: "Un taller productivo y muy necesario. El equipo entendió la situación operativa y vio los beneficios reales de aplicar estos cambios.",
+    solucion: "Taller de inmersión + Ciclo de autonomía",
+    categoria: "empresas",
+  },
+  {
+    nombre: "Startup B2B",
+    rol: "Equipo de Producto & Tech (5 personas)",
+    icono: "🚀",
+    quote: "Redujimos de 12 a 4 días el ciclo de decisión de features. Sin contratar más PMs ni sumar complejidad innecesaria.",
+    solucion: "Taller de inmersión + Ciclo de autonomía",
+    metrica: "12 → 4 días ciclo",
+    categoria: "empresas",
+  },
+  {
+    nombre: "Empresa de Servicios B2B",
+    rol: "Operaciones & RRHH (50+ colaboradores)",
+    icono: "🏢",
+    quote: "Eliminamos 3 aprobaciones manuales en onboarding. El margen de error humano se redujo en un 80%.",
+    solucion: "Taller de inmersión + Ciclo de autonomía",
+    metrica: "-80% error humano",
+    categoria: "empresas",
+  },
+  {
+    nombre: "Fundación Universitaria La Chinca",
+    rol: "Equipo Directivo & Administrativo",
+    icono: "🏛️",
+    quote: "Excelente taller práctico con el equipo. Nos dio claridad inmediata para ordenar procesos internos y aplicar cambios que se sostienen.",
+    solucion: "Taller de inmersión",
+    categoria: "empresas",
+  },
+  {
+    nombre: "Agencia de Diseño & Producto",
+    rol: "Operaciones & Gestión de Proyectos",
+    icono: "🌱",
+    quote: "Automatizamos la entrega y el empaquetado de assets. 4 horas ahorradas por cada proyecto entregado al cliente.",
+    solucion: "Ciclo de autonomía",
+    metrica: "4h ahorradas/proyecto",
+    categoria: "empresas",
+  },
+
+  // --- CASOS MENTORÍAS 1-1 / PROFESIONALES ---
+  {
+    nombre: "Administrador Anónimo",
+    rol: "Operaciones & Finanzas B2B",
+    icono: "👤",
+    quote: "Recuperé 7h/semana automatizando reportes. Ahora enfoco ese tiempo en clientes que sí pagan.",
+    solucion: "Sesión de enfoque + Guía personalizada",
+    metrica: "7h/semana recuperadas",
+    categoria: "mentorias",
+  },
+  {
+    nombre: "María Camila B.",
+    rol: "Product Manager",
+    icono: "👤",
+    quote: "Mi objetivo no es usar IA por moda, es dejar de apagar incendios y tener una visión más tranquila y estratégica de mi pipeline.",
+    solucion: "Sesión de enfoque + Estructura de Automatización",
+    categoria: "mentorias",
+  },
+  {
+    nombre: "José Madriz",
+    rol: "Data Analytics & BI",
+    icono: "👤",
+    quote: "LucirMe me dio el 'chip' para dejar de quebrarme la cabeza por algo que no es mío y empezar a sistematizar soluciones.",
+    solucion: "Sesión de enfoque + Guía personalizada",
+    categoria: "mentorias",
+  },
+  {
+    nombre: "David M. Muñoz",
+    rol: "Líder de Desarrollo & Tech Lead",
+    icono: "👤",
+    quote: "Pude validar el camino para mi cliente y las iniciativas de IA que estamos implementando. Fue justo lo que necesitaba para aterrizar la estrategia.",
+    solucion: "Sesión de enfoque + Plan de ejecución estratégico",
+    categoria: "mentorias",
+  },
+  {
+    nombre: "Cecilia Morete",
+    rol: "Profesional Independiente",
+    icono: "👤",
+    quote: "Qué felicidad ser parte de este proceso. Ahora tengo las herramientas organizadas y la claridad para hacer las preguntas correctas y avanzar.",
+    solucion: "Acompañamiento individual",
+    categoria: "mentorias",
+  },
+  {
+    nombre: "Melody Abele",
+    rol: "Customer Experience · Melfa CX",
+    icono: "👤",
+    quote: "Gracias a tus herramientas y devoluciones, mi proyecto hoy tiene mucho más sentido, un norte claro y gran potencial. Aprendizaje real.",
+    solucion: "Sesión de enfoque + Estructura de Automatización",
+    categoria: "mentorias",
+  },
+  {
+    nombre: "Consultor Tech",
+    rol: "Consultoría y Soluciones B2B",
+    icono: "💼",
+    quote: "Sistematicé mi propuesta de valor. El tiempo de onboarding de nuevos clientes bajó a la mitad.",
+    solucion: "Sesión de enfoque",
+    metrica: "-50% tiempo onboarding",
+    categoria: "mentorias",
+  },
+];
+
+const normalized = tipo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+const esEmpresas = normalized === "empresas" || normalized === "equipos";
+const esMentorias = normalized === "mentorias" || normalized === "1-1" || normalized === "profesionales";
+
+const items = esEmpresas
+  ? testimonios.filter((t) => t.categoria === "empresas")
+  : esMentorias
+  ? testimonios.filter((t) => t.categoria === "mentorias")
+  : testimonios;
+
+const headerConfig = esEmpresas
+  ? {
+      eyebrow: eyebrow || "Casos con Equipos · B2B",
+      titulo: titulo || "Resultados que ya conseguimos con equipos",
+      subtitulo:
+        subtitulo ||
+        "No hablamos de IA en abstracto. Trabajamos sobre procesos reales y buscamos cambios que el equipo pueda aplicar y sostener.",
+    }
+  : esMentorias
+  ? {
+      eyebrow: eyebrow || "Acompañamiento 1-1 · Profesionales",
+      titulo: titulo || "Personas que ya están trabajando de otra manera",
+      subtitulo:
+        subtitulo ||
+        "Cada acompañamiento parte de un problema concreto. La idea no es darte más teoría, sino ayudarte a encontrar claridad y avanzar.",
+    }
+  : {
+      eyebrow: eyebrow || "Evidencia Real",
+      titulo: titulo || "Algunos resultados",
+      subtitulo:
+        subtitulo ||
+        "Impacto medido en el trabajo real de nuestros usuarios y clientes. Sin teoría vacía.",
+    };
 ---
 
-<Resultados {...Astro.props} />
+<section id={id} class={`py-16 px-4 sm:px-6 bg-white border-t border-slate-200/80 ${className}`}>
+  <div class="max-w-6xl mx-auto">
+    <!-- Header de Sección -->
+    <div class="max-w-3xl mb-12 text-left">
+      <span class="font-mono text-xs font-semibold text-teal-800 uppercase tracking-wider block mb-2">
+        {headerConfig.eyebrow}
+      </span>
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight mb-3">
+        {headerConfig.titulo}
+      </h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+        {headerConfig.subtitulo}
+      </p>
+    </div>
+
+    <!-- Rejilla de Tarjetas -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
+      {
+        items.map((t) => (
+          <div class="group bg-[#F8FAFC] p-6 rounded-2xl border border-slate-200/80 flex flex-col justify-between hover:bg-white hover:border-[#0D9488]/40 hover:shadow-md transition-all duration-200">
+            <div>
+              <!-- Cabecera de la Tarjeta: Quién -->
+              <div class="flex items-start justify-between gap-3 mb-4 pb-3.5 border-b border-slate-200/60">
+                <div class="flex items-start gap-3 min-w-0">
+                  <div class="w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-base shrink-0 shadow-2xs group-hover:border-[#0D9488]/40 transition-colors">
+                    {t.icono}
+                  </div>
+                  <div class="min-w-0">
+                    <h3 class="text-xs sm:text-sm font-bold text-slate-900 truncate group-hover:text-[#0D9488] transition-colors">
+                      {t.nombre}
+                    </h3>
+                    <p class="text-[11px] font-mono text-slate-500 truncate">
+                      {t.rol}
+                    </p>
+                  </div>
+                </div>
+                {t.metrica && (
+                  <span class="shrink-0 bg-emerald-50 text-emerald-800 border border-emerald-200/80 text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full">
+                    {t.metrica}
+                  </span>
+                )}
+              </div>
+
+              <!-- Testimonio / Qué cambió -->
+              <blockquote class="text-slate-700 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
+                "{t.quote}"
+              </blockquote>
+            </div>
+
+            <!-- Información secundaria: Solución -->
+            <div class="pt-3.5 border-t border-slate-200/60 mt-auto flex items-center justify-between gap-2">
+              <span class="text-[10px] font-mono text-slate-500 uppercase tracking-wider shrink-0 font-medium">
+                Solución:
+              </span>
+              <div class="flex items-center gap-1.5 min-w-0">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2.5"
+                  stroke="currentColor"
+                  class="w-3.5 h-3.5 text-[#0D9488] shrink-0"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                  />
+                </svg>
+                <span
+                  class="text-[11px] font-medium text-[#0D9488] truncate text-right bg-white px-2 py-0.5 rounded-md border border-slate-200/70"
+                  title={t.solucion}
+                >
+                  {t.solucion}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
