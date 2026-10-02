@@ -1,280 +1,406 @@
 ---
 // src/components/SobreMi.astro
 import { LINKS } from "../lib/constants.js";
+
+interface Props {
+  id?: string;
+  class?: string;
+}
+
+const { id = "sobre-mi", class: className = "" } = Astro.props;
 ---
 
 <section
-  id="sobre-mi"
-  class="py-20 px-4 bg-slate-50 border-t border-b border-gray-100 relative"
+  id={id}
+  class={`py-16 px-4 sm:px-6 bg-slate-50 border-t border-b border-slate-200/80 relative scroll-mt-16 ${className}`}
 >
-  <div class="container max-w-5xl mx-auto space-y-16">
-    <!-- HEADER DE LA SECCIÓN -->
-    <div class="text-center max-w-3xl mx-auto">
-      <span class="inline-block bg-teal/10 text-teal font-bold uppercase tracking-widest text-xs px-3.5 py-1.5 rounded-full mb-3 border border-teal/20">
-        Sobre el Fundador
-      </span>
-      <h1 class="text-3xl md:text-5xl font-black text-deep tracking-tight mb-3">
-        Pablo Ríos Peña
-      </h1>
-      <p class="text-base md:text-lg text-teal font-bold max-w-2xl mx-auto">
-        Ingeniero de Sistemas (UPB) · Head of Product & Consultor en IA Estratégica
-      </p>
-    </div>
-
-    <!-- TARJETA PRINCIPAL DE INTRODUCCIÓN -->
-    <div
-      class="bg-white border border-gray-200 p-8 md:p-12 rounded-3xl shadow-sm flex flex-col md:flex-row gap-10 items-center relative overflow-hidden"
-    >
-      <div
-        class="absolute top-0 right-0 w-48 h-48 bg-teal/5 rounded-full blur-3xl pointer-events-none"
-      >
-      </div>
-
-      <!-- FOTO CON DETALLE ESTILIZADO -->
-      <div class="w-full md:w-1/3 flex flex-col items-center shrink-0">
-        <div
-          class="w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-xl relative z-10"
-        >
+  <!-- Ancla secundaria para compatibilidad con links a #pablo -->
+  {id !== "pablo" && <span id="pablo" class="absolute -top-16 opacity-0 pointer-events-none" />}
+  <div class="max-w-6xl mx-auto space-y-16">
+    <!-- ========================================== -->
+    <!-- 1. HERO PRINCIPAL (DISEÑO EXACTO DE LA IMAGEN) -->
+    <!-- ========================================== -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+      <!-- COLUMNA IZQUIERDA: FOTO CARD + PRINCIPIO CLAVE -->
+      <div class="lg:col-span-5 flex flex-col gap-4 max-w-md mx-auto lg:max-w-none w-full">
+        <!-- Tarjeta de Foto con Overlay Inferior -->
+        <div class="relative rounded-3xl overflow-hidden shadow-lg border border-slate-200/80 bg-slate-100 aspect-[4/4.6] w-full">
           <img
             src="/pablo-rios.jpeg"
-            alt="Pablo Ríos Peña"
-            class="w-full h-full object-cover"
+            alt="Pablo Ríos"
+            class="w-full h-full object-cover object-top"
           />
+
+          <!-- Overlay inferior: Identidad & Badge Verificado -->
+          <div class="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-md border border-slate-100 flex items-center justify-between">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900 leading-tight">
+                Pablo Ríos
+              </h3>
+              <p class="text-xs text-slate-500 font-mono mt-0.5">
+                Fundador de LuciRMe AI
+              </p>
+            </div>
+            <!-- Checkmark Verificado Verde / Teal -->
+            <div
+              class="w-8 h-8 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 shadow-2xs"
+              title="Perfil Verificado"
+            >
+              <svg
+                class="w-4 h-4 fill-none stroke-current stroke-[2.5]"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"
+                ></path>
+              </svg>
+            </div>
+          </div>
         </div>
 
-        <!-- Badge de Autoridad -->
-        <div
-          class="mt-6 text-center bg-slate-50 px-5 py-2.5 rounded-xl border border-gray-200"
-        >
-          <p class="text-xs font-bold text-teal uppercase tracking-wider">
-            Ingeniero de Sistemas
-          </p>
-          <p class="text-[11px] text-gray-500 mt-0.5">
-            U. Pontificia Bolivariana
+        <!-- Tarjeta: Principio Clave -->
+        <div class="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-2xs space-y-1.5">
+          <span class="font-mono text-[10px] font-bold text-slate-500 uppercase tracking-widest block">
+            PRINCIPIO CLAVE
+          </span>
+          <p class="text-xs text-slate-700 italic leading-relaxed">
+            “Primero entendemos el proceso manual; sólo después evaluamos si la IA aporta valor real.”
           </p>
         </div>
       </div>
 
-      <!-- HISTORIA Y AUTORIDAD -->
-      <div class="w-full md:w-2/3 text-left relative z-10 space-y-4 text-gray-700 leading-relaxed text-sm md:text-base">
-        <p class="font-medium text-deep text-base md:text-lg">
-          No soy un gurú de la Inteligencia Artificial. Soy un Ingeniero con más de 10 años liderando productos digitales en startups como <strong class="text-deep">Vozy</strong> y <strong class="text-deep">Datup</strong>, que se cansó de ver talento brillante quemándose en tareas absurdas.
+      <!-- COLUMNA DERECHA: TEXTO + GRID 2X2 + WHATSAPP CTA -->
+      <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
+        <div class="space-y-3">
+          <span class="font-mono text-xs font-bold text-teal-800 uppercase tracking-wider block">
+            DETRÁS DE LUCIRME ESTOY YO
+          </span>
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+            Soy Pablo. Y no creo que necesites otra clase de IA.
+          </h1>
+          <p class="text-sm sm:text-base font-medium text-slate-800 leading-relaxed pt-1">
+            Trabajo con personas y empresas para convertir problemas reales en soluciones que puedan usar de verdad.
+          </p>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            He acompañado a más de 50 personas en procesos 1-1 y he colaborado con más de 30 empresas, ayudándoles a entender, implementar y adoptar IA en su trabajo.
+          </p>
+          <p class="text-xs sm:text-sm font-bold text-slate-900 leading-relaxed">
+            Mi objetivo no es que dependas de mí. Es que después de trabajar juntos tengas más capacidad para resolver por tu cuenta.
+          </p>
+        </div>
+
+        <!-- Rejilla 2x2 de Estadísticas / Credenciales -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
+          <!-- Item 1: +50 personas -->
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 flex items-start gap-3.5 hover:border-[#0D9488]/40 transition shadow-2xs">
+            <div class="w-9 h-9 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center shrink-0 text-teal-700 shadow-2xs">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"></path>
+              </svg>
+            </div>
+            <div class="space-y-0.5">
+              <h4 class="text-sm font-bold text-slate-900">+50 personas</h4>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Acompañadas 1-1 en procesos reales de trabajo y adopción directa.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 2: +30 empresas -->
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 flex items-start gap-3.5 hover:border-[#0D9488]/40 transition shadow-2xs">
+            <div class="w-9 h-9 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center shrink-0 text-teal-700 shadow-2xs">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"></path>
+              </svg>
+            </div>
+            <div class="space-y-0.5">
+              <h4 class="text-sm font-bold text-slate-900">+30 empresas</h4>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Intervenidas en optimización de operaciones, flujos de LLMs y automatizaciones.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 3: +13 años -->
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 flex items-start gap-3.5 hover:border-[#0D9488]/40 transition shadow-2xs">
+            <div class="w-9 h-9 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center shrink-0 text-amber-700 shadow-2xs">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"></path>
+              </svg>
+            </div>
+            <div class="space-y-0.5">
+              <h4 class="text-sm font-bold text-slate-900">+13 años</h4>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Liderando producto, tecnología y operaciones en startups y corporativos en Latam.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 4: 0% humo -->
+          <div class="bg-white border border-slate-200/80 rounded-2xl p-4 flex items-start gap-3.5 hover:border-[#0D9488]/40 transition shadow-2xs">
+            <div class="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center shrink-0 text-emerald-700 shadow-2xs">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"></path>
+              </svg>
+            </div>
+            <div class="space-y-0.5">
+              <h4 class="text-sm font-bold text-slate-900">0% humo</h4>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Primero entendemos el proceso, luego vemos si hace falta tecnología.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botón Verde de WhatsApp -->
+        <div>
+          <a
+            href={LINKS.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            onclick="trackAboutContact('whatsapp')"
+            class="inline-flex items-center justify-center gap-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm px-6 py-3.5 rounded-xl transition shadow-md w-full sm:w-auto cursor-pointer"
+          >
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
+            </svg>
+            <span>Hablar directamente con Pablo por WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 2. AUTORIDAD & CONTEXTO PROFESIONAL -->
+    <!-- ========================================== -->
+    <div class="bg-white border border-slate-200/80 p-8 md:p-10 rounded-3xl shadow-2xs relative overflow-hidden">
+      <div class="space-y-5 text-slate-700 leading-relaxed text-sm md:text-base max-w-4xl">
+        <div class="inline-flex items-center gap-2 bg-teal-50 text-teal-800 font-mono text-xs font-semibold px-3 py-1 rounded-full border border-teal-200/60">
+          <span>Ingeniero de Sistemas (UPB) · Head of Product & Consultor en IA Estratégica</span>
+        </div>
+
+        <p class="font-medium text-slate-900 text-base md:text-lg">
+          No soy un gurú de la Inteligencia Artificial. Soy un Ingeniero con más de 10 años liderando productos digitales en startups como <strong class="text-slate-900">Vozy</strong> y <strong class="text-slate-900">Datup</strong>, que se cansó de ver talento brillante quemándose en tareas absurdas.
         </p>
 
-        <p class="font-bold text-teal text-base">
+        <p class="font-bold text-teal-800 text-base">
           Llegué a la IA por necesidad operativa.
         </p>
 
-        <p>
+        <p class="text-slate-600">
           Durante años vi el mismo patrón: equipos de alto nivel perdiendo horas copiando y pegando datos entre Jira, Excel, Slack y correos. Al principio creí que la solución era programar más software. La experiencia en producto me enseñó lo contrario: <strong>la tecnología sin un proceso claro es solo un juguete caro.</strong>
         </p>
 
-        <div
-          class="border-l-4 border-orange pl-4 italic text-deep font-semibold bg-orange/5 py-3 pr-3 rounded-r-xl text-sm md:text-base border border-orange/10"
-        >
+        <div class="border-l-4 border-amber-500 pl-4 italic text-slate-900 font-semibold bg-amber-50/60 py-3.5 pr-4 rounded-r-xl text-sm md:text-base border border-amber-200/60">
           "Por eso creé LuciRMe AI: para conectar la tecnología con resultados de negocio reales y devolverle el tiempo a las personas."
         </div>
 
-        <!-- REDES Y CONTACTO DIRECTO -->
-        <div
-          class="pt-4 border-t border-gray-100 flex flex-wrap gap-6 text-xs md:text-sm font-bold"
-        >
+        <!-- Contacto Directo LinkedIn & Email -->
+        <div class="pt-4 border-t border-slate-100 flex flex-wrap gap-6 text-xs md:text-sm font-bold">
           <a
-            href="https://linkedin.com/in/pabloriospena"
+            href={LINKS.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             onclick="trackAboutContact('linkedin')"
-            class="flex items-center gap-2 text-teal hover:text-deep transition-colors duration-200"
+            class="flex items-center gap-2 text-teal-800 hover:text-slate-900 transition-colors duration-200"
           >
-            <svg
-              class="w-5 h-5 shrink-0"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-              ><path
-                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
-              ></path></svg
-            >
-            linkedin.com/in/pabloriospena
+            <svg class="w-4 h-4 shrink-0 fill-current" viewBox="0 0 24 24">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+            <span>linkedin.com/in/pabloriospena</span>
           </a>
           <a
             href="mailto:pabloriospena@gmail.com"
             onclick="trackAboutContact('email')"
-            class="flex items-center gap-2 text-teal hover:text-deep transition-colors duration-200"
+            class="flex items-center gap-2 text-teal-800 hover:text-slate-900 transition-colors duration-200"
           >
-            <svg
-              class="w-5 h-5 shrink-0"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-              ><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              ></path></svg
-            >
-            pabloriospena@gmail.com
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            <span>pabloriospena@gmail.com</span>
           </a>
         </div>
       </div>
     </div>
 
-    <!-- SECCIÓN: CÓMO LLEGUÉ AQUÍ -->
+    <!-- ========================================== -->
+    <!-- 3. SECCIÓN: CÓMO LLEGUÉ AQUÍ (TRAYECTORIA) -->
+    <!-- ========================================== -->
     <div class="space-y-6">
-      <div class="text-left border-b border-gray-200 pb-3">
-        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+      <div class="text-left border-b border-slate-200/80 pb-3">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase tracking-wider block mb-1">
           Trayectoria
         </span>
-        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
           Cómo llegué aquí
         </h2>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-2 hover:border-teal/50 transition">
-          <div class="flex items-center gap-2 text-teal font-bold text-base">
-            <span class="text-lg">💻</span>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="bg-white border border-slate-200/80 p-6 rounded-2xl shadow-2xs space-y-2 hover:border-[#0D9488]/40 transition">
+          <div class="flex items-center gap-2 text-teal-800 font-bold text-base">
+            <svg class="w-4 h-4 text-teal-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"/>
+            </svg>
             <span>La ilusión del código</span>
           </div>
-          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+          <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
             En mis inicios creía que todo se resolvía programando. Aprendí rápido que automatizar un mal proceso solo produce desastres a mayor velocidad.
           </p>
         </div>
 
-        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-2 hover:border-teal/50 transition">
-          <div class="flex items-center gap-2 text-teal font-bold text-base">
-            <span class="text-lg">🚀</span>
+        <div class="bg-white border border-slate-200/80 p-6 rounded-2xl shadow-2xs space-y-2 hover:border-[#0D9488]/40 transition">
+          <div class="flex items-center gap-2 text-teal-800 font-bold text-base">
+            <svg class="w-4 h-4 text-teal-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
+            </svg>
             <span>El caos de las startups (Vozy, Datup)</span>
           </div>
-          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+          <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
             Liderar productos B2B me enseñó a priorizar, a decir "no" al exceso de funcionalidades y a enfocarme en lo que duele. Se pueden gastar meses construyendo algo que nadie usa mientras la operación se desangra. Lo único que importa es la retención y el tiempo ahorrado, no las métricas de ego.
           </p>
         </div>
 
-        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-2 hover:border-teal/50 transition">
-          <div class="flex items-center gap-2 text-teal font-bold text-base">
-            <span class="text-lg">🤖</span>
+        <div class="bg-white border border-slate-200/80 p-6 rounded-2xl shadow-2xs space-y-2 hover:border-[#0D9488]/40 transition">
+          <div class="flex items-center gap-2 text-teal-800 font-bold text-base">
+            <svg class="w-4 h-4 text-teal-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
+            </svg>
             <span>IA con criterio</span>
           </div>
-          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+          <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
             Con la llegada de los LLMs vi repetirse el error de siempre: empresas comprando licencias caras sin saber integrarlas. Empecé a rediseñar flujos de trabajo para mis equipos y pasamos de tareas de 4 horas a borradores de 15 minutos. No cambiamos el software; rediseñamos la forma de trabajar.
           </p>
         </div>
 
-        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs space-y-2 hover:border-teal/50 transition">
-          <div class="flex items-center gap-2 text-teal font-bold text-base">
-            <span class="text-lg">✨</span>
+        <div class="bg-white border border-slate-200/80 p-6 rounded-2xl shadow-2xs space-y-2 hover:border-[#0D9488]/40 transition">
+          <div class="flex items-center gap-2 text-teal-800 font-bold text-base">
+            <svg class="w-4 h-4 text-teal-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
+            </svg>
             <span>LuciRMe AI</span>
           </div>
-          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+          <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
             Empaqueté diez años de aciertos y errores en Product Management para aplicarlos a la IA. El objetivo es simple: que un profesional recupere sus fines de semana o que una empresa escale su operación sin duplicar su nómina ni arriesgar sus datos.
           </p>
         </div>
       </div>
     </div>
 
-    <!-- SECCIÓN: PRINCIPIOS DE TRABAJO -->
+    <!-- ========================================== -->
+    <!-- 4. SECCIÓN: PRINCIPIOS DE TRABAJO (FILOSOFÍA) -->
+    <!-- ========================================== -->
     <div class="space-y-6">
-      <div class="text-left border-b border-gray-200 pb-3">
-        <span class="text-xs font-bold text-orange uppercase tracking-widest bg-orange/10 px-3 py-1 rounded-full">
+      <div class="text-left border-b border-slate-200/80 pb-3">
+        <span class="font-mono text-xs font-semibold text-amber-700 uppercase tracking-wider block mb-1">
           Filosofía
         </span>
-        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
           Principios de trabajo
         </h2>
       </div>
 
       <div class="grid sm:grid-cols-2 gap-4">
-        <div class="bg-white border-l-4 border-teal border border-gray-200 p-5 rounded-r-2xl rounded-l-md shadow-xs space-y-2">
-          <h3 class="font-bold text-deep text-sm md:text-base">
+        <div class="bg-white border-l-4 border-teal-700 border border-slate-200/80 p-5 rounded-r-2xl rounded-l-md shadow-2xs space-y-2">
+          <h3 class="font-bold text-slate-900 text-sm md:text-base">
             1. El proceso manda, la tecnología obedece.
           </h3>
-          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+          <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
             No vendo "transformación digital". Mapeamos dónde pierdes tiempo y dinero, y armamos un flujo con IA que lo resuelva.
           </p>
         </div>
 
-        <div class="bg-white border-l-4 border-orange border border-gray-200 p-5 rounded-r-2xl rounded-l-md shadow-xs space-y-2">
-          <h3 class="font-bold text-deep text-sm md:text-base">
+        <div class="bg-white border-l-4 border-amber-600 border border-slate-200/80 p-5 rounded-r-2xl rounded-l-md shadow-2xs space-y-2">
+          <h3 class="font-bold text-slate-900 text-sm md:text-base">
             2. Autonomía sobre dependencia.
           </h3>
-          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+          <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
             Si necesitas de mí para siempre, fracasé. Configuro el sistema y capacito a tu equipo para que opere solo.
           </p>
         </div>
 
-        <div class="bg-white border-l-4 border-teal border border-gray-200 p-5 rounded-r-2xl rounded-l-md shadow-xs space-y-2">
-          <h3 class="font-bold text-deep text-sm md:text-base">
+        <div class="bg-white border-l-4 border-teal-700 border border-slate-200/80 p-5 rounded-r-2xl rounded-l-md shadow-2xs space-y-2">
+          <h3 class="font-bold text-slate-900 text-sm md:text-base">
             3. Métricas reales.
           </h3>
-          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+          <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
             No me importa cuántos prompts guardes. Me importa si recuperaste 10 horas a la semana o si eliminaste el error humano en tu facturación.
           </p>
         </div>
 
-        <div class="bg-white border-l-4 border-orange border border-gray-200 p-5 rounded-r-2xl rounded-l-md shadow-xs space-y-2">
-          <h3 class="font-bold text-deep text-sm md:text-base">
+        <div class="bg-white border-l-4 border-amber-600 border border-slate-200/80 p-5 rounded-r-2xl rounded-l-md shadow-2xs space-y-2">
+          <h3 class="font-bold text-slate-900 text-sm md:text-base">
             4. Criterio sobre parálisis.
           </h3>
-          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+          <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
             Lanzamos, medimos impacto real y ajustamos sobre la marcha.
           </p>
         </div>
       </div>
     </div>
 
-    <!-- SECCIÓN: CÓMO TE PUEDO AYUDAR -->
+    <!-- ========================================== -->
+    <!-- 5. SECCIÓN: CÓMO TE PUEDO AYUDAR (SOLUCIONES) -->
+    <!-- ========================================== -->
     <div class="space-y-6">
-      <div class="text-left border-b border-gray-200 pb-3">
-        <span class="text-xs font-bold text-teal uppercase tracking-widest bg-teal/10 px-3 py-1 rounded-full">
+      <div class="text-left border-b border-slate-200/80 pb-3">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase tracking-wider block mb-1">
           Soluciones
         </span>
-        <h2 class="text-2xl md:text-3xl font-extrabold text-deep mt-3">
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
           Cómo te puedo ayudar
         </h2>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-gradient-to-br from-white to-slate-50 border border-gray-200 p-6 md:p-8 rounded-2xl shadow-xs space-y-3">
-          <div class="w-10 h-10 bg-teal/10 text-teal font-bold rounded-xl flex items-center justify-center text-xl">
-            👤
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="bg-white border border-slate-200/80 p-6 md:p-8 rounded-2xl shadow-2xs space-y-3 hover:border-[#0D9488]/40 transition">
+          <div class="w-10 h-10 bg-teal-50 border border-teal-100 text-teal-800 font-bold rounded-xl flex items-center justify-center text-lg">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+            </svg>
           </div>
-          <h3 class="text-lg font-bold text-deep">
+          <h3 class="text-lg font-bold text-slate-900">
             Profesionales e independientes
           </h3>
-          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+          <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
             Diseñamos tu sistema personal con IA para que dejes de ser el asistente de tu propio trabajo y vuelvas a ser el estratega.
           </p>
         </div>
 
-        <div class="bg-gradient-to-br from-white to-slate-50 border border-gray-200 p-6 md:p-8 rounded-2xl shadow-xs space-y-3">
-          <div class="w-10 h-10 bg-orange/10 text-orange font-bold rounded-xl flex items-center justify-center text-xl">
-            🏢
+        <div class="bg-white border border-slate-200/80 p-6 md:p-8 rounded-2xl shadow-2xs space-y-3 hover:border-[#0D9488]/40 transition">
+          <div class="w-10 h-10 bg-amber-50 border border-amber-100 text-amber-800 font-bold rounded-xl flex items-center justify-center text-lg">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21"/>
+            </svg>
           </div>
-          <h3 class="text-lg font-bold text-deep">
+          <h3 class="text-lg font-bold text-slate-900">
             Empresas y CEOs
           </h3>
-          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+          <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
             Estandarizamos tu operación, protegemos la información del negocio y creamos arquitecturas de IA para escalar sin fricción.
           </p>
         </div>
       </div>
 
-      <div class="bg-deep text-white p-6 rounded-2xl text-center space-y-2 border border-slate-800">
-        <p class="text-base md:text-lg font-bold text-teal">
+      <div class="bg-slate-900 text-white p-6 rounded-2xl text-center space-y-2 border border-slate-800 shadow-md">
+        <p class="text-sm md:text-base font-bold text-teal-300">
           Menos teoría, más ejecuciones que funcionen el lunes por la mañana.
         </p>
       </div>
     </div>
 
-    <!-- TARJETA FIRMA Y CONTACTO FINAL -->
-    <div class="bg-white border border-gray-200 p-8 rounded-2xl shadow-xs flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+    <!-- ========================================== -->
+    <!-- 6. TARJETA FIRMA Y CONTACTO FINAL -->
+    <!-- ========================================== -->
+    <div class="bg-white border border-slate-200/80 p-8 rounded-2xl shadow-2xs flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
       <div class="space-y-1">
-        <h3 class="text-xl font-extrabold text-deep">Pablo Ríos Peña</h3>
-        <p class="text-xs md:text-sm text-teal font-bold">
+        <h3 class="text-xl font-extrabold text-slate-900">Pablo Ríos Peña</h3>
+        <p class="text-xs md:text-sm text-teal-800 font-bold">
           Head of Product · Consultor en IA & Estrategia de Producto
         </p>
-        <p class="text-xs text-gray-500 font-medium">
+        <p class="text-xs text-slate-500 font-medium font-mono">
           Fundador de LuciRMe AI
         </p>
       </div>
@@ -282,54 +408,63 @@ import { LINKS } from "../lib/constants.js";
       <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 text-xs md:text-sm font-bold">
         <a
           href="mailto:pabloriospena@gmail.com"
-          class="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-deep px-4 py-2.5 rounded-xl transition"
+          onclick="trackAboutContact('email')"
+          class="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-800 px-4 py-2.5 rounded-xl transition cursor-pointer"
         >
-          📩 pabloriospena@gmail.com
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          <span>pabloriospena@gmail.com</span>
         </a>
         <a
-          href="https://linkedin.com/in/pabloriospena"
+          href={LINKS.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 bg-teal text-white hover:bg-tealHover px-4 py-2.5 rounded-xl transition shadow-xs"
+          onclick="trackAboutContact('linkedin')"
+          class="inline-flex items-center gap-2 bg-teal-800 text-white hover:bg-teal-900 px-4 py-2.5 rounded-xl transition shadow-2xs cursor-pointer"
         >
-          🔗 linkedin.com/in/pabloriospena
+          <svg class="w-4 h-4 shrink-0 fill-current" viewBox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+          <span>linkedin.com/in/pabloriospena</span>
         </a>
       </div>
     </div>
 
-    <!-- BLOQUE DE RECURSO DESTACADO (EBOOK) -->
+    <!-- ========================================== -->
+    <!-- 7. BLOQUE DE RECURSO DESTACADO (EBOOK) -->
+    <!-- ========================================== -->
     <div
-      class="bg-deep p-8 md:p-10 rounded-3xl text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl shadow-slate-900/10 relative overflow-hidden border border-slate-800"
+      class="bg-slate-900 p-8 md:p-10 rounded-3xl text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl shadow-slate-900/10 relative overflow-hidden border border-slate-800"
     >
       <div
-        class="absolute top-0 right-0 w-64 h-64 bg-orange/10 rounded-full blur-3xl"
+        class="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"
       >
       </div>
 
       <div class="md:w-2/3 relative z-10">
         <span
-          class="inline-block bg-orange/20 text-orange text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded mb-3"
-          >Recurso Recomendado</span
-        >
+          class="inline-block bg-amber-500/20 text-amber-300 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded mb-3 border border-amber-500/30"
+        >Recurso Recomendado</span>
         <h4 class="text-xl font-bold mb-2 flex items-center gap-2">
-          📚 Ebook "PM Sin Bullshit"
+          <span>📘 Ebook "PM Sin Bullshit"</span>
         </h4>
-        <p class="text-gray-300 text-sm mb-5 leading-relaxed">
+        <p class="text-slate-300 text-sm mb-5 leading-relaxed">
           Diseñado para Product Managers y profesionales que quieren dejar de
           apagar incendios diarios y empezar a tomar decisiones con criterio
           tecnológico real. Sin teoría abstracta, solo frameworks prácticos
           listos para aplicar.
         </p>
         <div class="flex items-center gap-4">
-          <span class="text-2xl font-black text-orange">$53.000 COP</span>
-          <span class="text-xs text-gray-400 line-through">$100.000 COP</span>
+          <span class="text-2xl font-black text-amber-400">$53.000 COP</span>
+          <span class="text-xs text-slate-400 line-through">$100.000 COP</span>
         </div>
       </div>
 
       <a
         href={LINKS.ebook}
         onclick="trackEbookPurchase()"
-        class="relative z-10 w-full md:w-auto text-center bg-orange hover:bg-orange/95 text-white px-8 py-3.5 rounded-xl font-bold transition-all duration-200 shadow-lg shadow-orange/20"
+        class="relative z-10 w-full md:w-auto text-center bg-amber-500 hover:bg-amber-400 text-slate-950 px-8 py-3.5 rounded-xl font-black transition-all duration-200 shadow-lg cursor-pointer"
       >
         Comprar Ebook →
       </a>

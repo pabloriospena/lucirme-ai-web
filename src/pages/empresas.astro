@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SocialProof from "../components/SocialProof.astro";
+import SobreMi from "../components/SobreMi.astro";
 import { LINKS } from "../lib/constants.js";
 
 const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
@@ -1265,90 +1266,8 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
     <!-- CASOS DE EQUIPOS / PRUEBA SOCIAL -->
     <SocialProof tipo="empresas" id="casos" />
 
-    <!-- 8. PABLO -->
-    <section
-      class="w-full max-w-7xl mx-auto px-6 py-20 border-t border-slate-200"
-      id="pablo"
-    >
-      <div
-        class="max-w-4xl bg-white rounded-2xl border border-slate-200 shadow-2xs p-8 md:p-12 flex flex-col md:flex-row gap-8 items-start"
-      >
-        <div
-          class="w-16 h-16 rounded-full bg-teal-50 border border-teal-200 flex items-center justify-center shrink-0 overflow-hidden"
-        >
-          <img
-            src="/pablo-rios.jpeg"
-            alt="Mi foto de perfil"
-            class="w-full h-full object-cover"
-          />
-        </div>
-
-        <div class="flex flex-col gap-5">
-          <div class="flex flex-col gap-1">
-            <span
-              class="font-mono text-xs text-teal-800 uppercase font-semibold"
-              >Detrás de LuciRMe estoy yo</span
-            >
-            <h2 class="text-2xl font-bold text-slate-900">Pablo Ríos</h2>
-            <p class="text-sm font-medium text-slate-600">
-              Consultor de Producto, Operaciones e IA.
-            </p>
-          </div>
-          <div
-            class="text-sm text-slate-600 flex flex-col gap-3 leading-relaxed"
-          >
-            <p>
-              Trabajo con empresas y profesionales para encontrar problemas
-              concretos, diseñar soluciones y llevarlas hasta la adopción.
-            </p>
-            <p class="text-slate-800 font-medium">
-              No vengo a venderte una herramienta de moda. Primero quiero
-              entender:
-            </p>
-            <ul
-              class="flex flex-col gap-1.5 pl-1 font-mono text-xs text-slate-700"
-            >
-              <li class="flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-teal-700"></span> Qué está
-                pasando.
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-teal-700"></span> Dónde se
-                está perdiendo tiempo.
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-teal-700"></span> Qué está
-                generando fricción.
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-teal-700"></span> Qué vale
-                la pena cambiar.
-              </li>
-            </ul>
-            <p>
-              Y después decidimos juntos si la respuesta es IA, automatización,
-              una integración, una herramienta nueva o simplemente cambiar el
-              proceso.
-            </p>
-            <p class="text-slate-900 font-medium">
-              Mi objetivo no es que dependas de mí. Es que tu equipo termine
-              pudiendo resolver más cosas por sí mismo.
-            </p>
-          </div>
-          <div class="pt-2">
-            <a
-              class="inline-flex items-center gap-1 text-sm font-semibold text-teal-700 hover:underline"
-              href="/sobre-pablo"
-            >
-              <span>Conocer más sobre Pablo</span>
-              <span class="material-symbols-outlined text-[16px]"
-                >arrow_forward</span
-              >
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- 8. PABLO (SOBRE MÍ) -->
+    <SobreMi id="pablo" />
 
     <!-- 9. CTA FINAL -->
     <section

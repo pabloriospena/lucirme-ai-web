@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import SobreMi from "../components/SobreMi.astro";
 import { LINKS } from "../lib/constants.js";
 
 const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
@@ -296,117 +297,7 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
       </section>
 
       <!-- SECTION 3: QUIÉN SOY (PABLO RÍOS) -->
-      <section class="w-full bg-white py-16 border-t border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 lg:px-8">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            <!-- Left Column: Portrait & Direct Badge -->
-            <div class="lg:col-span-4 flex flex-col items-start gap-4">
-              <div class="relative w-full aspect-square max-w-sm rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 shadow-sm">
-                <img
-                  src="/pablo-rios.jpeg"
-                  alt="Pablo Ríos"
-                  class="w-full h-full object-cover"
-                />
-                <div class="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-sm p-3 rounded-xl flex items-center justify-between shadow-xs border border-slate-200/80">
-                  <div>
-                    <div class="font-bold text-xs text-slate-900">Pablo Ríos</div>
-                    <div class="font-mono text-[11px] text-slate-500">Fundador de LuciRMe AI</div>
-                  </div>
-                  <span class="material-symbols-outlined text-teal-700 text-[20px]">verified</span>
-                </div>
-              </div>
-
-              <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200/80 w-full max-w-sm">
-                <span class="font-mono text-[10px] text-slate-500 block uppercase tracking-wider mb-1 font-semibold">Principio clave</span>
-                <p class="text-xs text-slate-700 leading-relaxed italic">
-                  “Primero entendemos el proceso manual; sólo después evaluamos si la IA aporta valor real.”
-                </p>
-              </div>
-            </div>
-
-            <!-- Right Column: Story & Metrics -->
-            <div class="lg:col-span-8 flex flex-col gap-6">
-              <div>
-                <span class="font-mono text-xs text-teal-800 uppercase font-semibold tracking-wider block mb-1">
-                  Detrás de LuciRMe estoy yo
-                </span>
-                <h2 class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight mb-4">
-                  Soy Pablo. Y no creo que necesites otra clase de IA.
-                </h2>
-                <div class="space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  <p class="text-slate-900 font-medium">
-                    Trabajo con personas y empresas para convertir problemas reales en soluciones que puedan usar de verdad.
-                  </p>
-                  <p>
-                    He acompañado a más de 50 personas en procesos 1-1 y he colaborado con más de 30 empresas, ayudándoles a entender, implementar y adoptar IA en su trabajo.
-                  </p>
-                  <p class="font-semibold text-slate-900">
-                    Mi objetivo no es que dependas de mí. Es que después de trabajar juntos tengas más capacidad para resolver por tu cuenta.
-                  </p>
-                </div>
-              </div>
-
-              <!-- Credential Cards -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
-                  <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-teal-700 shrink-0 shadow-2xs">
-                    <span class="material-symbols-outlined text-[20px]">groups</span>
-                  </div>
-                  <div>
-                    <div class="font-bold text-sm text-slate-900">+50 personas</div>
-                    <div class="text-xs text-slate-600 leading-snug">Acompañadas 1-1 en procesos reales de trabajo y adopción directa.</div>
-                  </div>
-                </div>
-
-                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
-                  <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-teal-700 shrink-0 shadow-2xs">
-                    <span class="material-symbols-outlined text-[20px]">corporate_fare</span>
-                  </div>
-                  <div>
-                    <div class="font-bold text-sm text-slate-900">+30 empresas</div>
-                    <div class="text-xs text-slate-600 leading-snug">Intervenidas en optimización de operaciones, flujos de LLMs y automatizaciones.</div>
-                  </div>
-                </div>
-
-                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
-                  <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-amber-700 shrink-0 shadow-2xs">
-                    <span class="material-symbols-outlined text-[20px]">history_edu</span>
-                  </div>
-                  <div>
-                    <div class="font-bold text-sm text-slate-900">+13 años</div>
-                    <div class="text-xs text-slate-600 leading-snug">Liderando producto, tecnología y operaciones en startups y corporativos en Latam.</div>
-                  </div>
-                </div>
-
-                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
-                  <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-emerald-600 shrink-0 shadow-2xs">
-                    <span class="material-symbols-outlined text-[20px]">verified_user</span>
-                  </div>
-                  <div>
-                    <div class="font-bold text-sm text-slate-900">0% humo</div>
-                    <div class="text-xs text-slate-600 leading-snug">Primero entendemos el proceso, luego vemos si hace falta tecnología.</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Bottom Button -->
-              <div class="pt-2">
-                <a
-                  class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs transition-all shadow-2xs"
-                  href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, leí tu perfil en LuciRMe y quiero hacerte una consulta.")}`}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <span class="material-symbols-outlined text-[20px]">chat</span>
-                  <span>Hablar directamente con Pablo por WhatsApp</span>
-                </a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
+      <SobreMi id="pablo" />
 
       <!-- SECTION 4: LAS 4 RUTAS Y SOLUCIONES -->
       <section class="w-full max-w-7xl mx-auto px-4 lg:px-8 py-16 border-t border-slate-200">
