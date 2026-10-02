@@ -21,6 +21,9 @@ export default defineConfig({
       localization: esES
     })
   ],
+  devToolbar: {
+    enabled: false
+  },
   vite: {
     ssr: {
       noExternal: ['xlsx']

@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Resultados from "../components/Resultados.astro";
 import { LINKS } from "../lib/constants.js";
 
 const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
@@ -464,6 +465,9 @@ const whatsapp1a1 = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, leí
 
       </div>
     </section>
+
+    <!-- TESTIMONIOS Y RESULTADOS MENTORÍAS 1-1 -->
+    <Resultados tipo="mentorías" id="casos" />
 
     <!-- SECCIÓN HUMANA & PRUEBA SOCIAL -->
     <section class="w-full max-w-7xl mx-auto px-6 py-16 border-t border-slate-200" id="pablo">
