@@ -13,30 +13,45 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
   hideFooter={true}
 >
   <!-- HEADER CON LOGO Y BARRAS DE NAVEGACIÓN -->
-  <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-slate-200/80 shadow-xs">
-    
+  <header
+    class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-slate-200/80 shadow-xs"
+  >
     <!-- Main Navigation Bar -->
     <div class="h-16 px-4 lg:px-8">
-      <div class="max-w-7xl mx-auto h-16 flex items-center justify-between gap-4">
-        
+      <div
+        class="max-w-7xl mx-auto h-16 flex items-center justify-between gap-4"
+      >
         <!-- Logo & Main Nav Links -->
         <div class="flex items-center gap-8">
           <a class="flex items-center gap-2.5 group" href="/">
             <img
-              src="/logo-lucirme-ai.png"
+              src="/logo-lucirme.png"
               alt="LuciRMe AI"
               class="h-8 w-auto object-contain group-hover:scale-105 transition-transform"
             />
-            <span class="font-bold text-lg text-slate-900 tracking-tight group-hover:text-teal-800 transition-colors">
+            <span
+              class="font-bold text-lg text-slate-900 tracking-tight group-hover:text-teal-800 transition-colors"
+            >
               LuciRMe<span class="text-teal-700 ml-0.5">AI</span>
             </span>
           </a>
 
-          <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
-            <a class="hover:text-slate-900 transition-colors" href="/educacion">Rutas</a>
-            <a class="hover:text-slate-900 transition-colors" href="/empresas">Soluciones</a>
-            <a class="hover:text-slate-900 transition-colors" href="/recursos">Recursos</a>
-            <a class="hover:text-slate-900 transition-colors" href="/sobre-pablo">Sobre Pablo</a>
+          <nav
+            class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600"
+          >
+            <a class="hover:text-slate-900 transition-colors" href="/educacion"
+              >Rutas</a
+            >
+            <a class="hover:text-slate-900 transition-colors" href="/empresas"
+              >Soluciones</a
+            >
+            <a class="hover:text-slate-900 transition-colors" href="/recursos"
+              >Recursos</a
+            >
+            <a
+              class="hover:text-slate-900 transition-colors"
+              href="/sobre-pablo">Sobre Pablo</a
+            >
           </nav>
         </div>
 
@@ -46,7 +61,9 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
             class="hidden md:inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 hover:text-teal-800 transition-colors px-3 py-1.5 rounded-lg border border-slate-200/80 bg-slate-50/80"
             href="/empresas#diagnostico"
           >
-            <span class="material-symbols-outlined text-[18px] text-amber-600">speed</span>
+            <span class="material-symbols-outlined text-[18px] text-amber-600"
+              >speed</span
+            >
             <span>Termómetro IA</span>
           </a>
 
@@ -57,81 +74,114 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
             target="_blank"
             onclick="if (window.posthog) { window.posthog.capture('home_whatsapp_click', { origen: 'header' }); }"
           >
-            <span class="material-symbols-outlined text-[18px]">chat_bubble</span>
+            <span class="material-symbols-outlined text-[18px]"
+              >chat_bubble</span
+            >
             <span>Consultar vía WhatsApp</span>
           </a>
 
-          <div class="w-8 h-8 rounded-full overflow-hidden border border-slate-200 shrink-0">
-            <img src="/pablo-rios.jpeg" alt="Pablo Ríos" class="w-full h-full object-cover" />
+          <div
+            class="w-8 h-8 rounded-full overflow-hidden border border-slate-200 shrink-0"
+          >
+            <img
+              src="/pablo-rios.jpeg"
+              alt="Pablo Ríos"
+              class="w-full h-full object-cover"
+            />
           </div>
         </div>
-
       </div>
     </div>
   </header>
 
   <main class="w-full pt-20 bg-[#F8FAFC]">
     <div class="flex flex-col w-full">
-
       <!-- SECTION 1: HERO CONVERSACIONAL -->
       <section class="w-full max-w-7xl mx-auto px-4 lg:px-8 pt-8 pb-6">
         <div class="max-w-4xl mx-auto text-center flex flex-col items-center">
-          
           <!-- Eyebrow Badge -->
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-200/60 text-slate-700 text-xs font-mono font-medium uppercase tracking-wider mb-4 border border-slate-300/60">
+          <div
+            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-200/60 text-slate-700 text-xs font-mono font-medium uppercase tracking-wider mb-4 border border-slate-300/60"
+          >
             <span class="w-2 h-2 rounded-full bg-teal-600 animate-pulse"></span>
-            <span>Acompañamiento real en Inteligencia Artificial &amp; Operaciones</span>
+            <span
+              >Acompañamiento real en Inteligencia Artificial &amp; Operaciones</span
+            >
           </div>
 
           <!-- Main Headline -->
-          <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight max-w-3xl mb-3 leading-tight">
+          <h1
+            class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight max-w-3xl mb-3 leading-tight"
+          >
             ¿Qué quieres conseguir con IA?
           </h1>
 
           <!-- Subtitle -->
-          <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed mb-8 font-normal">
-            No necesitas otra teoría abstracta ni comprar un software de moda. Dime qué estás intentando resolver y te muestro el camino más corto.
+          <p
+            class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed mb-8 font-normal"
+          >
+            No necesitas otra teoría abstracta ni comprar un software de moda.
+            Dime qué estás intentando resolver y te muestro el camino más corto.
           </p>
 
           <!-- Pablo Personal Assistant Note -->
-          <div class="w-full max-w-2xl bg-white rounded-2xl border border-slate-200/80 shadow-xs p-4 md:p-5 text-left flex items-start gap-4 mb-4">
+          <div
+            class="w-full max-w-2xl bg-white rounded-2xl border border-slate-200/80 shadow-xs p-4 md:p-5 text-left flex items-start gap-4 mb-4"
+          >
             <div class="relative shrink-0">
               <img
                 src="/pablo-rios.jpeg"
                 alt="Pablo Ríos"
                 class="w-12 h-12 rounded-full object-cover ring-2 ring-emerald-500/80"
               />
-              <div class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 rounded-full ring-2 ring-white"></div>
+              <div
+                class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 rounded-full ring-2 ring-white"
+              >
+              </div>
             </div>
             <div class="flex-1">
               <div class="flex items-center justify-between mb-1">
                 <span class="font-bold text-sm text-slate-900">Pablo Ríos</span>
-                <span class="text-[11px] font-mono text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 font-semibold">En línea</span>
+                <span
+                  class="text-[11px] font-mono text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 font-semibold"
+                  >En línea</span
+                >
               </div>
               <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                “Hola, soy Pablo. Antes de mostrarte cursos o servicios, elijamos qué tiene sentido para ti hoy.”
+                “Hola, soy Pablo. Antes de mostrarte cursos o servicios,
+                elijamos qué tiene sentido para ti hoy.”
               </p>
             </div>
           </div>
-
         </div>
       </section>
 
       <!-- SECTION 2: SELECTOR INTERACTIVO DE INTENCIÓN CON LINKS DIRECTOS -->
       <section class="w-full max-w-7xl mx-auto px-4 lg:px-8 pb-12">
-        <div class="max-w-4xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm p-6 lg:p-8">
-          
-          <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-6">
-            <span class="font-mono text-xs font-semibold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
-              <span class="material-symbols-outlined text-[18px] text-teal-700">tune</span>
+        <div
+          class="max-w-4xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm p-6 lg:p-8"
+        >
+          <div
+            class="flex items-center justify-between pb-3 border-b border-slate-100 mb-6"
+          >
+            <span
+              class="font-mono text-xs font-semibold text-slate-900 uppercase tracking-wider flex items-center gap-1.5"
+            >
+              <span class="material-symbols-outlined text-[18px] text-teal-700"
+                >tune</span
+              >
               Elige tu objetivo principal
             </span>
-            <span class="font-mono text-xs text-slate-400">4 rutas disponibles</span>
+            <span class="font-mono text-xs text-slate-400"
+              >4 rutas disponibles</span
+            >
           </div>
 
           <!-- Button Grid Selector con Links Directos -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6" id="intentionSelector">
-            
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6"
+            id="intentionSelector"
+          >
             <!-- RUTA 01: APRENDER -->
             <div
               class="intention-btn text-left p-4 rounded-xl transition-all flex flex-col justify-between bg-teal-800 text-white shadow-xs cursor-pointer border border-teal-900 group"
@@ -140,20 +190,30 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
             >
               <div>
                 <div class="flex items-center justify-between mb-2">
-                  <span class="material-symbols-outlined text-[22px]">school</span>
+                  <span class="material-symbols-outlined text-[22px]"
+                    >school</span
+                  >
                   <span class="font-mono text-xs opacity-80">Ruta 01</span>
                 </div>
-                <span class="font-bold text-sm leading-snug block">Quiero aprender a usar IA en mi trabajo diario</span>
-                <span class="text-xs opacity-90 mt-1 block">Educación práctica, prompts y flujos individuales</span>
+                <span class="font-bold text-sm leading-snug block"
+                  >Quiero aprender a usar IA en mi trabajo diario</span
+                >
+                <span class="text-xs opacity-90 mt-1 block"
+                  >Educación práctica, prompts y flujos individuales</span
+                >
               </div>
-              <div class="pt-3 flex items-center justify-between border-t border-white/20 mt-3">
+              <div
+                class="pt-3 flex items-center justify-between border-t border-white/20 mt-3"
+              >
                 <a
                   href="/educacion"
                   class="inline-flex items-center gap-1 text-xs font-bold text-emerald-300 hover:text-white transition-colors underline cursor-pointer"
                   onclick="event.stopPropagation(); if (window.posthog) window.posthog.capture('home_card_direct_link', { ruta: 'aprender' });"
                 >
                   <span>Explorar Educación</span>
-                  <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+                  <span class="material-symbols-outlined text-[15px]"
+                    >arrow_forward</span
+                  >
                 </a>
               </div>
             </div>
@@ -166,20 +226,33 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
             >
               <div>
                 <div class="flex items-center justify-between mb-2">
-                  <span class="material-symbols-outlined text-[22px] text-amber-700 icon-symbol">person_search</span>
-                  <span class="font-mono text-xs text-slate-500 badge-tag">Ruta 02</span>
+                  <span
+                    class="material-symbols-outlined text-[22px] text-amber-700 icon-symbol"
+                    >person_search</span
+                  >
+                  <span class="font-mono text-xs text-slate-500 badge-tag"
+                    >Ruta 02</span
+                  >
                 </div>
-                <span class="font-bold text-sm leading-snug block">Necesito resolver un cuello de botella con ayuda 1 a 1</span>
-                <span class="text-xs text-slate-600 mt-1 block sub-text">Diagnóstico sobre tu pantalla y archivos reales</span>
+                <span class="font-bold text-sm leading-snug block"
+                  >Necesito resolver un cuello de botella con ayuda 1 a 1</span
+                >
+                <span class="text-xs text-slate-600 mt-1 block sub-text"
+                  >Diagnóstico sobre tu pantalla y archivos reales</span
+                >
               </div>
-              <div class="pt-3 flex items-center justify-between border-t border-slate-200 mt-3 divider-line">
+              <div
+                class="pt-3 flex items-center justify-between border-t border-slate-200 mt-3 divider-line"
+              >
                 <a
                   href="/profesionales"
                   class="inline-flex items-center gap-1 text-xs font-bold text-teal-700 hover:text-teal-900 transition-colors underline cursor-pointer card-link"
                   onclick="event.stopPropagation(); if (window.posthog) window.posthog.capture('home_card_direct_link', { ruta: 'sesion' });"
                 >
                   <span>Ver Mentoría 1 a 1</span>
-                  <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+                  <span class="material-symbols-outlined text-[15px]"
+                    >arrow_forward</span
+                  >
                 </a>
               </div>
             </div>
@@ -192,20 +265,33 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
             >
               <div>
                 <div class="flex items-center justify-between mb-2">
-                  <span class="material-symbols-outlined text-[22px] text-teal-700 icon-symbol">hub</span>
-                  <span class="font-mono text-xs text-slate-500 badge-tag">Ruta 03</span>
+                  <span
+                    class="material-symbols-outlined text-[22px] text-teal-700 icon-symbol"
+                    >hub</span
+                  >
+                  <span class="font-mono text-xs text-slate-500 badge-tag"
+                    >Ruta 03</span
+                  >
                 </div>
-                <span class="font-bold text-sm leading-snug block">Quiero implementar IA o automatizar procesos en mi empresa</span>
-                <span class="text-xs text-slate-600 mt-1 block sub-text">Make, Zapier, LLMs y reducción de fricción operativa</span>
+                <span class="font-bold text-sm leading-snug block"
+                  >Quiero implementar IA o automatizar procesos en mi empresa</span
+                >
+                <span class="text-xs text-slate-600 mt-1 block sub-text"
+                  >Make, Zapier, LLMs y reducción de fricción operativa</span
+                >
               </div>
-              <div class="pt-3 flex items-center justify-between border-t border-slate-200 mt-3 divider-line">
+              <div
+                class="pt-3 flex items-center justify-between border-t border-slate-200 mt-3 divider-line"
+              >
                 <a
                   href="/empresas"
                   class="inline-flex items-center gap-1 text-xs font-bold text-teal-700 hover:text-teal-900 transition-colors underline cursor-pointer card-link"
                   onclick="event.stopPropagation(); if (window.posthog) window.posthog.capture('home_card_direct_link', { ruta: 'empresa' });"
                 >
                   <span>Ver Soluciones Empresas</span>
-                  <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+                  <span class="material-symbols-outlined text-[15px]"
+                    >arrow_forward</span
+                  >
                 </a>
               </div>
             </div>
@@ -218,46 +304,79 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
             >
               <div>
                 <div class="flex items-center justify-between mb-2">
-                  <span class="material-symbols-outlined text-[22px] text-amber-600 icon-symbol">web</span>
-                  <span class="font-mono text-xs text-slate-500 badge-tag">Ruta 04</span>
+                  <span
+                    class="material-symbols-outlined text-[22px] text-amber-600 icon-symbol"
+                    >web</span
+                  >
+                  <span class="font-mono text-xs text-slate-500 badge-tag"
+                    >Ruta 04</span
+                  >
                 </div>
-                <span class="font-bold text-sm leading-snug block">Necesito una página web clara para mi negocio o clínica</span>
-                <span class="text-xs text-slate-600 mt-1 block sub-text">Presencia digital directa, veloz y sin complejidades</span>
+                <span class="font-bold text-sm leading-snug block"
+                  >Necesito una página web clara para mi negocio o clínica</span
+                >
+                <span class="text-xs text-slate-600 mt-1 block sub-text"
+                  >Presencia digital directa, veloz y sin complejidades</span
+                >
               </div>
-              <div class="pt-3 flex items-center justify-between border-t border-slate-200 mt-3 divider-line">
+              <div
+                class="pt-3 flex items-center justify-between border-t border-slate-200 mt-3 divider-line"
+              >
                 <a
                   href="/pagina-comercial"
                   class="inline-flex items-center gap-1 text-xs font-bold text-teal-700 hover:text-teal-900 transition-colors underline cursor-pointer card-link"
                   onclick="event.stopPropagation(); if (window.posthog) window.posthog.capture('home_card_direct_link', { ruta: 'web' });"
                 >
                   <span>Ver Páginas Web</span>
-                  <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+                  <span class="material-symbols-outlined text-[15px]"
+                    >arrow_forward</span
+                  >
                 </a>
               </div>
             </div>
-
           </div>
 
           <!-- Dynamic Diagnosis Panel -->
-          <div class="bg-slate-50 rounded-xl p-5 md:p-6 border border-slate-200/80" id="dynamicCard">
-            <div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
+          <div
+            class="bg-slate-50 rounded-xl p-5 md:p-6 border border-slate-200/80"
+            id="dynamicCard"
+          >
+            <div
+              class="flex flex-col md:flex-row md:items-start justify-between gap-6"
+            >
               <div class="space-y-3 flex-1">
                 <div class="flex items-center gap-2">
                   <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
-                  <span class="font-mono text-xs font-semibold uppercase tracking-wider text-teal-800" id="routeBadge">
+                  <span
+                    class="font-mono text-xs font-semibold uppercase tracking-wider text-teal-800"
+                    id="routeBadge"
+                  >
                     Diagnóstico en vivo · Educación aplicada
                   </span>
                 </div>
                 <h3 class="text-lg font-bold text-slate-900" id="routeTitle">
                   Construye tu propio criterio técnico sin perderte en novedades
                 </h3>
-                <p class="text-xs text-slate-600 leading-relaxed" id="routeDiagnosis">
-                  El problema habitual no es la falta de herramientas, sino no saber cuál encaja en tu flujo habitual. En lugar de aprender teoría de redes neuronales, nos concentramos en cómo redactar informes en 10 minutos, analizar documentación pesada con NotebookLM y sistematizar tu criterio.
+                <p
+                  class="text-xs text-slate-600 leading-relaxed"
+                  id="routeDiagnosis"
+                >
+                  El problema habitual no es la falta de herramientas, sino no
+                  saber cuál encaja en tu flujo habitual. En lugar de aprender
+                  teoría de redes neuronales, nos concentramos en cómo redactar
+                  informes en 10 minutos, analizar documentación pesada con
+                  NotebookLM y sistematizar tu criterio.
                 </p>
-                <div class="bg-white p-3 rounded-lg border border-slate-200/80 flex items-center gap-2.5 text-xs">
-                  <span class="material-symbols-outlined text-teal-700 text-[18px] shrink-0">flag</span>
+                <div
+                  class="bg-white p-3 rounded-lg border border-slate-200/80 flex items-center gap-2.5 text-xs"
+                >
+                  <span
+                    class="material-symbols-outlined text-teal-700 text-[18px] shrink-0"
+                    >flag</span
+                  >
                   <span class="text-slate-800" id="routeNextStep">
-                    <strong>Siguiente paso sugerido:</strong> Revisa el catálogo estructurado de las Rutas de Aprendizaje LuciRMe.
+                    <strong>Siguiente paso sugerido:</strong> Revisa el catálogo estructurado
+                    de las Rutas de Aprendizaje LuciRMe.
                   </span>
                 </div>
               </div>
@@ -271,7 +390,9 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
                   onclick="if (window.posthog) { window.posthog.capture('home_selector_page_click', { ruta: 'aprender' }); }"
                 >
                   <span id="routePageLabel">Ver Rutas de Educación</span>
-                  <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
                 </a>
 
                 <a
@@ -282,17 +403,19 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
                   target="_blank"
                   onclick="if (window.posthog) { window.posthog.capture('home_selector_cta_click', { ruta: 'aprender' }); }"
                 >
-                  <span class="material-symbols-outlined text-[16px]">chat</span>
+                  <span class="material-symbols-outlined text-[16px]">chat</span
+                  >
                   <span>Hablar por WhatsApp</span>
                 </a>
-                
-                <p class="font-mono text-[11px] text-slate-500 text-center mt-1">
+
+                <p
+                  class="font-mono text-[11px] text-slate-500 text-center mt-1"
+                >
                   Cuéntame tu caso y te digo qué haría yo, sin compromiso.
                 </p>
               </div>
             </div>
           </div>
-
         </div>
       </section>
 
@@ -300,44 +423,67 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
       <SobreMi id="pablo" />
 
       <!-- SECTION 4: LAS 4 RUTAS Y SOLUCIONES -->
-      <section class="w-full max-w-7xl mx-auto px-4 lg:px-8 py-16 border-t border-slate-200">
+      <section
+        class="w-full max-w-7xl mx-auto px-4 lg:px-8 py-16 border-t border-slate-200"
+      >
         <div class="mb-10 max-w-2xl">
-          <span class="font-mono text-xs text-teal-800 uppercase font-semibold tracking-wider block mb-1">
+          <span
+            class="font-mono text-xs text-teal-800 uppercase font-semibold tracking-wider block mb-1"
+          >
             Ecosistema LuciRMe
           </span>
-          <h2 class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
+          <h2
+            class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight"
+          >
             4 formas concretas de trabajar juntos
           </h2>
           <p class="text-xs sm:text-sm text-slate-600 mt-1">
-            Cada opción está diseñada para resolver una etapa específica sin compras forzadas ni módulos de relleno.
+            Cada opción está diseñada para resolver una etapa específica sin
+            compras forzadas ni módulos de relleno.
           </p>
         </div>
 
         <!-- 4 Solutions Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          
           <!-- Solución 1: Rutas de Aprendizaje -->
-          <div class="bg-white rounded-2xl border border-slate-200 shadow-2xs p-6 flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div
+            class="bg-white rounded-2xl border border-slate-200 shadow-2xs p-6 flex flex-col justify-between hover:border-slate-300 transition-all"
+          >
             <div>
               <div class="flex items-center justify-between mb-4">
-                <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-teal-700">
-                  <span class="material-symbols-outlined text-[22px]">auto_stories</span>
+                <div
+                  class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-teal-700"
+                >
+                  <span class="material-symbols-outlined text-[22px]"
+                    >auto_stories</span
+                  >
                 </div>
-                <span class="font-mono text-[11px] font-semibold px-2.5 py-1 rounded bg-slate-100 text-slate-700">Autodidacta / Guiado</span>
+                <span
+                  class="font-mono text-[11px] font-semibold px-2.5 py-1 rounded bg-slate-100 text-slate-700"
+                  >Autodidacta / Guiado</span
+                >
               </div>
               <h3 class="text-lg font-bold text-slate-900 mb-2">
                 Educación &amp; Rutas de Aprendizaje
               </h3>
               <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                Rutas directas al grano: Comunicación ejecutiva, Product Management asistido, NotebookLM para análisis documental, empleabilidad con IA y creación visual controlada.
+                Rutas directas al grano: Comunicación ejecutiva, Product
+                Management asistido, NotebookLM para análisis documental,
+                empleabilidad con IA y creación visual controlada.
               </p>
               <ul class="space-y-1.5 mb-6 text-xs text-slate-600 font-medium">
                 <li class="flex items-center gap-2">
-                  <span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-emerald-600"
+                    >check_circle</span
+                  >
                   Plantillas y prompts testeados en producción
                 </li>
                 <li class="flex items-center gap-2">
-                  <span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-emerald-600"
+                    >check_circle</span
+                  >
                   Sin suscripciones sorpresa ni relleno teórico
                 </li>
               </ul>
@@ -347,32 +493,51 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
               href="/educacion"
             >
               <span>Ver rutas de aprendizaje</span>
-              <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+              <span class="material-symbols-outlined text-[18px]"
+                >arrow_forward</span
+              >
             </a>
           </div>
 
           <!-- Solución 2: Mentoría 1-1 -->
-          <div class="bg-white rounded-2xl border border-slate-200 shadow-2xs p-6 flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div
+            class="bg-white rounded-2xl border border-slate-200 shadow-2xs p-6 flex flex-col justify-between hover:border-slate-300 transition-all"
+          >
             <div>
               <div class="flex items-center justify-between mb-4">
-                <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-700">
-                  <span class="material-symbols-outlined text-[22px]">co_present</span>
+                <div
+                  class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-700"
+                >
+                  <span class="material-symbols-outlined text-[22px]"
+                    >co_present</span
+                  >
                 </div>
-                <span class="font-mono text-[11px] font-semibold px-2.5 py-1 rounded bg-amber-100 text-amber-900">Alta intensidad</span>
+                <span
+                  class="font-mono text-[11px] font-semibold px-2.5 py-1 rounded bg-amber-100 text-amber-900"
+                  >Alta intensidad</span
+                >
               </div>
               <h3 class="text-lg font-bold text-slate-900 mb-2">
                 Mentoría &amp; Sesión 1-1 Estratégica
               </h3>
               <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                Diagnóstico quirúrgico de 60 a 90 minutos con pantalla compartida. Abrimos tus archivos, tus tareas repetitivas y configuramos las herramientas en vivo para tu día a día.
+                Diagnóstico quirúrgico de 60 a 90 minutos con pantalla
+                compartida. Abrimos tus archivos, tus tareas repetitivas y
+                configuramos las herramientas en vivo para tu día a día.
               </p>
               <ul class="space-y-1.5 mb-6 text-xs text-slate-600 font-medium">
                 <li class="flex items-center gap-2">
-                  <span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-emerald-600"
+                    >check_circle</span
+                  >
                   Resolución de tu caso particular en la misma sesión
                 </li>
                 <li class="flex items-center gap-2">
-                  <span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-emerald-600"
+                    >check_circle</span
+                  >
                   Grabación completa y documentación resumen en Notion
                 </li>
               </ul>
@@ -382,32 +547,51 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
               href="/profesionales"
             >
               <span>Agendar sesión 1-1</span>
-              <span class="material-symbols-outlined text-[18px]">calendar_today</span>
+              <span class="material-symbols-outlined text-[18px]"
+                >calendar_today</span
+              >
             </a>
           </div>
 
           <!-- Solución 3: Empresas -->
-          <div class="bg-white rounded-2xl border border-slate-200 shadow-2xs p-6 flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div
+            class="bg-white rounded-2xl border border-slate-200 shadow-2xs p-6 flex flex-col justify-between hover:border-slate-300 transition-all"
+          >
             <div>
               <div class="flex items-center justify-between mb-4">
-                <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-teal-700">
-                  <span class="material-symbols-outlined text-[22px]">settings_suggest</span>
+                <div
+                  class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-teal-700"
+                >
+                  <span class="material-symbols-outlined text-[22px]"
+                    >settings_suggest</span
+                  >
                 </div>
-                <span class="font-mono text-[11px] font-semibold px-2.5 py-1 rounded bg-teal-50 text-teal-800 border border-teal-200">B2B &amp; Equipos</span>
+                <span
+                  class="font-mono text-[11px] font-semibold px-2.5 py-1 rounded bg-teal-50 text-teal-800 border border-teal-200"
+                  >B2B &amp; Equipos</span
+                >
               </div>
               <h3 class="text-lg font-bold text-slate-900 mb-2">
                 Soluciones para Empresas &amp; Cuellos de Botella
               </h3>
               <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                Diagnóstico forense de operaciones. Conectamos tus sistemas con Make/Zapier y LLMs para eliminar tareas repetitivas sin sobredimensionar la factura de software mensual.
+                Diagnóstico forense de operaciones. Conectamos tus sistemas con
+                Make/Zapier y LLMs para eliminar tareas repetitivas sin
+                sobredimensionar la factura de software mensual.
               </p>
               <ul class="space-y-1.5 mb-6 text-xs text-slate-600 font-medium">
                 <li class="flex items-center gap-2">
-                  <span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-emerald-600"
+                    >check_circle</span
+                  >
                   Mapeo de fugas de horas por equipo de trabajo
                 </li>
                 <li class="flex items-center gap-2">
-                  <span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-emerald-600"
+                    >check_circle</span
+                  >
                   Arquitectura pragmática: sólo la IA estrictamente necesaria
                 </li>
               </ul>
@@ -417,32 +601,52 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
               href="/empresas"
             >
               <span>Ver soluciones corporativas</span>
-              <span class="material-symbols-outlined text-[18px]">business_center</span>
+              <span class="material-symbols-outlined text-[18px]"
+                >business_center</span
+              >
             </a>
           </div>
 
           <!-- Solución 4: Páginas Web Claras -->
-          <div class="bg-white rounded-2xl border border-slate-200 shadow-2xs p-6 flex flex-col justify-between hover:border-slate-300 transition-all">
+          <div
+            class="bg-white rounded-2xl border border-slate-200 shadow-2xs p-6 flex flex-col justify-between hover:border-slate-300 transition-all"
+          >
             <div>
               <div class="flex items-center justify-between mb-4">
-                <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600">
-                  <span class="material-symbols-outlined text-[22px]">language</span>
+                <div
+                  class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600"
+                >
+                  <span class="material-symbols-outlined text-[22px]"
+                    >language</span
+                  >
                 </div>
-                <span class="font-mono text-[11px] font-semibold px-2.5 py-1 rounded bg-slate-100 text-slate-800">Negocios &amp; Clínicas</span>
+                <span
+                  class="font-mono text-[11px] font-semibold px-2.5 py-1 rounded bg-slate-100 text-slate-800"
+                  >Negocios &amp; Clínicas</span
+                >
               </div>
               <h3 class="text-lg font-bold text-slate-900 mb-2">
                 Presencia &amp; Páginas Web Claras
               </h3>
               <p class="text-xs text-slate-600 leading-relaxed mb-4">
-                Diseñamos y montamos sitios web que tus clientes entienden a la primera. Especialmente pensadas para clínicas, servicios profesionales y firmas que quieren convertir visitas en contactos directos.
+                Diseñamos y montamos sitios web que tus clientes entienden a la
+                primera. Especialmente pensadas para clínicas, servicios
+                profesionales y firmas que quieren convertir visitas en
+                contactos directos.
               </p>
               <ul class="space-y-1.5 mb-6 text-xs text-slate-600 font-medium">
                 <li class="flex items-center gap-2">
-                  <span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-emerald-600"
+                    >check_circle</span
+                  >
                   Estructura legible, rápida y conectada a WhatsApp
                 </li>
                 <li class="flex items-center gap-2">
-                  <span class="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-emerald-600"
+                    >check_circle</span
+                  >
                   Entrega llave en mano que tú mismo puedes mantener
                 </li>
               </ul>
@@ -452,10 +656,11 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
               href="/pagina-comercial"
             >
               <span>Ver servicio de webs</span>
-              <span class="material-symbols-outlined text-[18px]">open_in_new</span>
+              <span class="material-symbols-outlined text-[18px]"
+                >open_in_new</span
+              >
             </a>
           </div>
-
         </div>
       </section>
 
@@ -463,85 +668,142 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
       <section class="w-full bg-slate-100/70 py-16 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 lg:px-8">
           <div class="max-w-3xl mb-10">
-            <span class="font-mono text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">
+            <span
+              class="font-mono text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1"
+            >
               Resultados medibles
             </span>
-            <h2 class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
+            <h2
+              class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight"
+            >
               Menos teoría y más horas devueltas al reloj
             </h2>
             <p class="text-xs sm:text-sm text-slate-600 mt-1">
-              Casos de equipos que pasaron del caos manual a flujos fluidos y documentados.
+              Casos de equipos que pasaron del caos manual a flujos fluidos y
+              documentados.
             </p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
             <!-- Caso 1: Tech & SaaS (Irys) -->
-            <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-2xs flex flex-col justify-between">
+            <div
+              class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-2xs flex flex-col justify-between"
+            >
               <div class="space-y-3">
                 <div class="flex items-center justify-between">
-                  <span class="font-mono text-xs font-bold uppercase text-teal-800">Tech &amp; SaaS</span>
-                  <span class="text-base font-extrabold font-mono text-emerald-600">-65% tiempo</span>
+                  <span
+                    class="font-mono text-xs font-bold uppercase text-teal-800"
+                    >Tech &amp; SaaS</span
+                  >
+                  <span
+                    class="text-base font-extrabold font-mono text-emerald-600"
+                    >-65% tiempo</span
+                  >
                 </div>
-                <h3 class="text-sm font-bold text-slate-900">Irys · Operaciones de Soporte</h3>
+                <h3 class="text-sm font-bold text-slate-900">
+                  Irys · Operaciones de Soporte
+                </h3>
                 <p class="text-xs text-slate-600 leading-relaxed">
-                  Unificación de base de conocimiento interna y automatización del primer borrador de respuesta técnica. El equipo redujo en 65% el tiempo de resolución inicial sin perder el toque humano.
+                  Unificación de base de conocimiento interna y automatización
+                  del primer borrador de respuesta técnica. El equipo redujo en
+                  65% el tiempo de resolución inicial sin perder el toque
+                  humano.
                 </p>
               </div>
-              <div class="mt-4 pt-2.5 border-t border-slate-100 font-mono text-[11px] text-slate-500">
+              <div
+                class="mt-4 pt-2.5 border-t border-slate-100 font-mono text-[11px] text-slate-500"
+              >
                 Métricas: De 45 min a 16 min por caso complejo.
               </div>
             </div>
 
             <!-- Caso 2: Fundación La Chinca -->
-            <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-2xs flex flex-col justify-between">
+            <div
+              class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-2xs flex flex-col justify-between"
+            >
               <div class="space-y-3">
                 <div class="flex items-center justify-between">
-                  <span class="font-mono text-xs font-bold uppercase text-amber-700">Operaciones &amp; Salud</span>
-                  <span class="text-base font-extrabold font-mono text-amber-700">3 días → 8 min</span>
+                  <span
+                    class="font-mono text-xs font-bold uppercase text-amber-700"
+                    >Operaciones &amp; Salud</span
+                  >
+                  <span
+                    class="text-base font-extrabold font-mono text-amber-700"
+                    >3 días → 8 min</span
+                  >
                 </div>
-                <h3 class="text-sm font-bold text-slate-900">Fundación La Chinca</h3>
+                <h3 class="text-sm font-bold text-slate-900">
+                  Fundación La Chinca
+                </h3>
                 <p class="text-xs text-slate-600 leading-relaxed">
-                  Consolidación de reportes clínicos y financieros que consumían 3 días completos en hojas de cálculo desarticuladas. Se transformó en un flujo automatizado que entrega resultados en minutos.
+                  Consolidación de reportes clínicos y financieros que consumían
+                  3 días completos en hojas de cálculo desarticuladas. Se
+                  transformó en un flujo automatizado que entrega resultados en
+                  minutos.
                 </p>
               </div>
-              <div class="mt-4 pt-2.5 border-t border-slate-100 font-mono text-[11px] text-slate-500">
+              <div
+                class="mt-4 pt-2.5 border-t border-slate-100 font-mono text-[11px] text-slate-500"
+              >
                 Métricas: 100% de eliminación de errores de tipeo manual.
               </div>
             </div>
 
             <!-- Caso 3: Almamotor -->
-            <div class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-2xs flex flex-col justify-between">
+            <div
+              class="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-2xs flex flex-col justify-between"
+            >
               <div class="space-y-3">
                 <div class="flex items-center justify-between">
-                  <span class="font-mono text-xs font-bold uppercase text-teal-800">Servicios Comerciales</span>
-                  <span class="text-base font-extrabold font-mono text-emerald-600">+3h libres / día</span>
+                  <span
+                    class="font-mono text-xs font-bold uppercase text-teal-800"
+                    >Servicios Comerciales</span
+                  >
+                  <span
+                    class="text-base font-extrabold font-mono text-emerald-600"
+                    >+3h libres / día</span
+                  >
                 </div>
                 <h3 class="text-sm font-bold text-slate-900">Almamotor</h3>
                 <p class="text-xs text-slate-600 leading-relaxed">
-                  Coordinación y confirmación de citas de servicio mediante automatización conversacional. El personal de recepción recuperó horas operativas para dedicarse a la atención directa en sala.
+                  Coordinación y confirmación de citas de servicio mediante
+                  automatización conversacional. El personal de recepción
+                  recuperó horas operativas para dedicarse a la atención directa
+                  en sala.
                 </p>
               </div>
-              <div class="mt-4 pt-2.5 border-t border-slate-100 font-mono text-[11px] text-slate-500">
+              <div
+                class="mt-4 pt-2.5 border-t border-slate-100 font-mono text-[11px] text-slate-500"
+              >
                 Métricas: 94% de asistencia puntual a citas agendadas.
               </div>
             </div>
-
           </div>
         </div>
       </section>
 
       <!-- SECTION 6: CTA FINAL DE ALTA CONVERSIÓN -->
       <section class="w-full max-w-7xl mx-auto px-4 lg:px-8 py-16">
-        <div class="max-w-3xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm p-8 text-center">
-          <div class="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center mx-auto mb-4">
-            <span class="material-symbols-outlined text-[24px]">help_outline</span>
+        <div
+          class="max-w-3xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm p-8 text-center"
+        >
+          <div
+            class="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center mx-auto mb-4"
+          >
+            <span class="material-symbols-outlined text-[24px]"
+              >help_outline</span
+            >
           </div>
-          <h2 class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight mb-2">
+          <h2
+            class="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight mb-2"
+          >
             ¿No sabes por dónde empezar?
           </h2>
-          <p class="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto mb-6 leading-relaxed">
-            Cuéntame qué estás intentando resolver. Revisamos tu situación en 15 minutos de WhatsApp y te oriento con total honestidad.
+          <p
+            class="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto mb-6 leading-relaxed"
+          >
+            Cuéntame qué estás intentando resolver. Revisamos tu situación en 15
+            minutos de WhatsApp y te oriento con total honestidad.
           </p>
           <div class="flex flex-col items-center gap-2 max-w-md mx-auto">
             <a
@@ -554,28 +816,35 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
               <span>Hablar con Pablo por WhatsApp</span>
             </a>
             <p class="font-mono text-[11px] text-slate-500 mt-2">
-              Respuesta directa de Pablo Ríos · Sin llamadas de ventas agresivas · Sin venderte tecnología porque sí.
+              Respuesta directa de Pablo Ríos · Sin llamadas de ventas agresivas
+              · Sin venderte tecnología porque sí.
             </p>
           </div>
         </div>
       </section>
-
     </div>
   </main>
 
   <!-- FOOTER DEDICADO LUCI R ME AI -->
-  <footer class="w-full bg-white text-slate-600 border-t border-slate-200 py-12">
+  <footer
+    class="w-full bg-white text-slate-600 border-t border-slate-200 py-12"
+  >
     <div class="max-w-7xl mx-auto px-4 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-        
         <div class="md:col-span-5 flex flex-col justify-between gap-4">
           <div class="space-y-3">
             <a class="flex items-center gap-2.5 group" href="/">
-              <img src="/logo-lucirme-ai.png" alt="LuciRMe AI" class="h-7 w-auto object-contain" />
+              <img
+                src="/logo-lucirme-ai.png"
+                alt="LuciRMe AI"
+                class="h-7 w-auto object-contain"
+              />
               <span class="font-bold text-base text-slate-900">LuciRMe AI</span>
             </a>
             <p class="text-xs text-slate-500 max-w-sm leading-relaxed">
-              Formación técnica rigurosa, soluciones de software y adopción pragmática de inteligencia artificial para profesionales y organizaciones.
+              Formación técnica rigurosa, soluciones de software y adopción
+              pragmática de inteligencia artificial para profesionales y
+              organizaciones.
             </p>
           </div>
           <div class="font-mono text-xs text-slate-400">
@@ -585,33 +854,79 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
 
         <div class="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-6">
           <div class="space-y-3">
-            <span class="font-mono text-xs font-bold uppercase text-slate-900 tracking-wider block">Formación</span>
+            <span
+              class="font-mono text-xs font-bold uppercase text-slate-900 tracking-wider block"
+              >Formación</span
+            >
             <ul class="space-y-2 text-xs text-slate-600">
-              <li><a class="hover:text-slate-900 transition-colors" href="/educacion">Rutas Especializadas</a></li>
-              <li><a class="hover:text-slate-900 transition-colors" href="/empresas">Para Empresas</a></li>
-              <li><a class="hover:text-slate-900 transition-colors" href="/empresas#diagnostico">Termómetro IA</a></li>
+              <li>
+                <a
+                  class="hover:text-slate-900 transition-colors"
+                  href="/educacion">Rutas Especializadas</a>
+              </li>
+              <li>
+                <a
+                  class="hover:text-slate-900 transition-colors"
+                  href="/empresas">Para Empresas</a>
+              </li>
+              <li>
+                <a
+                  class="hover:text-slate-900 transition-colors"
+                  href="/empresas#diagnostico">Termómetro IA</a>
+              </li>
             </ul>
           </div>
 
           <div class="space-y-3">
-            <span class="font-mono text-xs font-bold uppercase text-slate-900 tracking-wider block">Institucional</span>
+            <span
+              class="font-mono text-xs font-bold uppercase text-slate-900 tracking-wider block"
+              >Institucional</span
+            >
             <ul class="space-y-2 text-xs text-slate-600">
-              <li><a class="hover:text-slate-900 transition-colors" href="/sobre-pablo">Sobre Pablo</a></li>
-              <li><a class="hover:text-slate-900 transition-colors" href="/recursos">Recursos &amp; Notion</a></li>
-              <li><a class="text-emerald-700 hover:underline font-semibold" href={whatsappBase} rel="noopener noreferrer" target="_blank">Canal WhatsApp</a></li>
+              <li>
+                <a
+                  class="hover:text-slate-900 transition-colors"
+                  href="/sobre-pablo">Sobre Pablo</a>
+              </li>
+              <li>
+                <a
+                  class="hover:text-slate-900 transition-colors"
+                  href="/recursos">Recursos &amp; Notion</a>
+              </li>
+              <li>
+                <a
+                  class="text-emerald-700 hover:underline font-semibold"
+                  href={whatsappBase}
+                  rel="noopener noreferrer"
+                  target="_blank">Canal WhatsApp</a>
+              </li>
             </ul>
           </div>
 
           <div class="space-y-3">
-            <span class="font-mono text-xs font-bold uppercase text-slate-900 tracking-wider block">Soluciones</span>
+            <span
+              class="font-mono text-xs font-bold uppercase text-slate-900 tracking-wider block"
+              >Soluciones</span
+            >
             <ul class="space-y-2 text-xs text-slate-600">
-              <li><a class="hover:text-slate-900 transition-colors" href="/pagina-comercial">Página Comercial</a></li>
-              <li><a class="hover:text-slate-900 transition-colors" href="/soluciones/web-veterinarios">Web Veterinarias</a></li>
-              <li><a class="hover:text-slate-900 transition-colors" href="/soluciones/web-restaurantes">Web Restaurantes</a></li>
+              <li>
+                <a
+                  class="hover:text-slate-900 transition-colors"
+                  href="/pagina-comercial">Página Comercial</a>
+              </li>
+              <li>
+                <a
+                  class="hover:text-slate-900 transition-colors"
+                  href="/soluciones/web-veterinarios">Web Veterinarias</a>
+              </li>
+              <li>
+                <a
+                  class="hover:text-slate-900 transition-colors"
+                  href="/soluciones/web-restaurantes">Web Restaurantes</a>
+              </li>
             </ul>
           </div>
         </div>
-
       </div>
     </div>
   </footer>
@@ -622,39 +937,51 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
       aprender: {
         badge: "Diagnóstico en vivo · Educación aplicada",
         title: "Construye tu propio criterio técnico sin perderte en novedades",
-        diagnosis: "El problema habitual no es la falta de herramientas, sino no saber cuál encaja en tu flujo habitual. En lugar de aprender teoría de redes neuronales, nos concentramos en cómo redactar informes en 10 minutos, analizar documentación pesada con NotebookLM y systematizar tu criterio.",
-        nextStep: "Revisa el catálogo estructurado de las Rutas de Aprendizaje LuciRMe.",
+        diagnosis:
+          "El problema habitual no es la falta de herramientas, sino no saber cuál encaja en tu flujo habitual. En lugar de aprender teoría de redes neuronales, nos concentramos en cómo redactar informes en 10 minutos, analizar documentación pesada con NotebookLM y systematizar tu criterio.",
+        nextStep:
+          "Revisa el catálogo estructurado de las Rutas de Aprendizaje LuciRMe.",
         pageUrl: "/educacion",
         pageLabel: "Ver Rutas de Educación",
-        waMessage: "Hola Pablo, estoy interesado en aprender a usar IA en mi trabajo diario."
+        waMessage:
+          "Hola Pablo, estoy interesado en aprender a usar IA en mi trabajo diario.",
       },
       sesion: {
         badge: "Diagnóstico en vivo · Mentoría 1 a 1",
         title: "Desbloquea tu cuello de botella en una sola sesión de trabajo",
-        diagnosis: "Ideal si ya sabes lo que te quita tiempo (un informe manual, un desorden en Notion, o una tarea repetitiva) pero no das con el prompt o la integración adecuada. En 60-90 minutos compartimos pantalla, abrimos tus archivos reales y salimos con el flujo resuelto.",
-        nextStep: "Revisa la propuesta de acompañamiento individual o agenda por WhatsApp.",
+        diagnosis:
+          "Ideal si ya sabes lo que te quita tiempo (un informe manual, un desorden en Notion, o una tarea repetitiva) pero no das con el prompt o la integración adecuada. En 60-90 minutos compartimos pantalla, abrimos tus archivos reales y salimos con el flujo resuelto.",
+        nextStep:
+          "Revisa la propuesta de acompañamiento individual o agenda por WhatsApp.",
         pageUrl: "/profesionales",
         pageLabel: "Ver Mentoría 1 a 1",
-        waMessage: "Hola Pablo, necesito resolver un cuello de botella con ayuda 1 a 1."
+        waMessage:
+          "Hola Pablo, necesito resolver un cuello de botella con ayuda 1 a 1.",
       },
       empresa: {
         badge: "Diagnóstico en vivo · Empresas y Equipos",
         title: "Automatiza procesos sin inflar tu costo fijo de software",
-        diagnosis: "Muchas empresas compran licencias de IA costosas que nadie utiliza. Primero hacemos un diagnóstico forense de dónde se pierden horas en tu equipo, luego armamos automatizaciones con Make/Zapier y LLMs sobre herramientas que ya dominan.",
-        nextStep: "Revisa los casos B2B y líneas de intervención para empresas.",
+        diagnosis:
+          "Muchas empresas compran licencias de IA costosas que nadie utiliza. Primero hacemos un diagnóstico forense de dónde se pierden horas en tu equipo, luego armamos automatizaciones con Make/Zapier y LLMs sobre herramientas que ya dominan.",
+        nextStep:
+          "Revisa los casos B2B y líneas de intervención para empresas.",
         pageUrl: "/empresas",
         pageLabel: "Ver Soluciones Empresas",
-        waMessage: "Hola Pablo, quiero implementar IA o automatizar procesos en mi empresa."
+        waMessage:
+          "Hola Pablo, quiero implementar IA o automatizar procesos en mi empresa.",
       },
       web: {
         badge: "Diagnóstico en vivo · Presencia Digital",
         title: "Una página web clara que tus clientes entiendan sin enredos",
-        diagnosis: "Tu clínica o negocio necesita que un visitante comprenda en 5 segundos qué resuelves, vea tus credenciales y haga clic en un botón de WhatsApp. Cero desarrollos interminables ni CMS imposibles de mantener.",
-        nextStep: "Calcula el costo y cotización de tu Página Comercial en 2 minutos.",
+        diagnosis:
+          "Tu clínica o negocio necesita que un visitante comprenda en 5 segundos qué resuelves, vea tus credenciales y haga clic en un botón de WhatsApp. Cero desarrollos interminables ni CMS imposibles de mantener.",
+        nextStep:
+          "Calcula el costo y cotización de tu Página Comercial en 2 minutos.",
         pageUrl: "/pagina-comercial",
         pageLabel: "Ver Páginas Web Comerciales",
-        waMessage: "Hola Pablo, necesito una página web clara para mi negocio o clínica."
-      }
+        waMessage:
+          "Hola Pablo, necesito una página web clara para mi negocio o clínica.",
+      },
     };
 
     function selectIntention(key: string) {
@@ -665,35 +992,46 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
       const titleEl = document.getElementById("routeTitle");
       const diagEl = document.getElementById("routeDiagnosis");
       const nextEl = document.getElementById("routeNextStep");
-      const pageBtn = document.getElementById("routePageBtn") as HTMLAnchorElement | null;
+      const pageBtn = document.getElementById(
+        "routePageBtn",
+      ) as HTMLAnchorElement | null;
       const pageLabel = document.getElementById("routePageLabel");
-      const waBtn = document.getElementById("routeWhatsApp") as HTMLAnchorElement | null;
+      const waBtn = document.getElementById(
+        "routeWhatsApp",
+      ) as HTMLAnchorElement | null;
 
       if (badgeEl) badgeEl.innerText = data.badge;
       if (titleEl) titleEl.innerText = data.title;
       if (diagEl) diagEl.innerText = data.diagnosis;
-      if (nextEl) nextEl.innerHTML = "<strong>Siguiente paso sugerido:</strong> " + data.nextStep;
+      if (nextEl)
+        nextEl.innerHTML =
+          "<strong>Siguiente paso sugerido:</strong> " + data.nextStep;
       if (pageBtn) pageBtn.href = data.pageUrl;
       if (pageLabel) pageLabel.innerText = data.pageLabel;
       if (waBtn) {
-        waBtn.href = "https://wa.me/573053046180?text=" + encodeURIComponent(data.waMessage);
+        waBtn.href =
+          "https://wa.me/573053046180?text=" +
+          encodeURIComponent(data.waMessage);
       }
 
       // Reset button styles
       const buttons = document.querySelectorAll(".intention-btn");
-      buttons.forEach(btn => {
-        btn.className = "intention-btn text-left p-4 rounded-xl transition-all flex flex-col justify-between bg-slate-50 hover:bg-slate-100/80 text-slate-900 border border-slate-200 cursor-pointer group";
-        
+      buttons.forEach((btn) => {
+        btn.className =
+          "intention-btn text-left p-4 rounded-xl transition-all flex flex-col justify-between bg-slate-50 hover:bg-slate-100/80 text-slate-900 border border-slate-200 cursor-pointer group";
+
         // Reset link inside card
         const link = btn.querySelector(".card-link");
         if (link) {
-          link.className = "inline-flex items-center gap-1 text-xs font-bold text-teal-700 hover:text-teal-900 transition-colors underline cursor-pointer card-link";
+          link.className =
+            "inline-flex items-center gap-1 text-xs font-bold text-teal-700 hover:text-teal-900 transition-colors underline cursor-pointer card-link";
         }
 
         // Reset divider
         const div = btn.querySelector(".divider-line");
         if (div) {
-          div.className = "pt-3 flex items-center justify-between border-t border-slate-200 mt-3 divider-line";
+          div.className =
+            "pt-3 flex items-center justify-between border-t border-slate-200 mt-3 divider-line";
         }
 
         // Reset badge tag
@@ -712,16 +1050,19 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
       // Highlight active button
       const activeBtn = document.getElementById("btn-" + key);
       if (activeBtn) {
-        activeBtn.className = "intention-btn text-left p-4 rounded-xl transition-all flex flex-col justify-between bg-teal-800 text-white shadow-xs cursor-pointer border border-teal-900 group";
-        
+        activeBtn.className =
+          "intention-btn text-left p-4 rounded-xl transition-all flex flex-col justify-between bg-teal-800 text-white shadow-xs cursor-pointer border border-teal-900 group";
+
         const link = activeBtn.querySelector(".card-link");
         if (link) {
-          link.className = "inline-flex items-center gap-1 text-xs font-bold text-emerald-300 hover:text-white transition-colors underline cursor-pointer card-link";
+          link.className =
+            "inline-flex items-center gap-1 text-xs font-bold text-emerald-300 hover:text-white transition-colors underline cursor-pointer card-link";
         }
 
         const div = activeBtn.querySelector(".divider-line");
         if (div) {
-          div.className = "pt-3 flex items-center justify-between border-t border-white/20 mt-3 divider-line";
+          div.className =
+            "pt-3 flex items-center justify-between border-t border-white/20 mt-3 divider-line";
         }
 
         const tag = activeBtn.querySelector(".badge-tag");
@@ -736,7 +1077,7 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
       }
 
       if ((window as any).posthog) {
-        (window as any).posthog.capture('home_selector_click', { ruta: key });
+        (window as any).posthog.capture("home_selector_click", { ruta: key });
       }
     }
 
@@ -745,7 +1086,7 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
     document.addEventListener("DOMContentLoaded", function () {
       if ((window as any).posthog) {
         (window as any).posthog.capture("home_page_view", {
-          pagina: "home"
+          pagina: "home",
         });
       }
     });
