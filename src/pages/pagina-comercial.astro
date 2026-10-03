@@ -19,14 +19,17 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
     <div
       class="h-16 max-w-7xl mx-auto px-6 flex items-center justify-between gap-4"
     >
-      <a class="flex flex-col group" href="#">
+      <a class="flex items-center gap-2.5 group" href="/">
+        <img
+          src="/logo-lucirme.png"
+          alt="LuciRMe AI"
+          class="h-8 w-auto object-contain group-hover:scale-105 transition-transform"
+        />
         <span
-          class="text-base font-bold tracking-tight text-slate-900 group-hover:text-teal-700 transition-colors"
-          >LuciRMe AI · Página Comercial</span
+          class="font-bold text-lg text-slate-900 tracking-tight group-hover:text-teal-800 transition-colors"
         >
-        <span class="text-[11px] font-mono text-slate-500"
-          >Tu negocio merece más que un Instagram.</span
-        >
+          LuciRMe<span class="text-teal-700 ml-0.5">AI</span>
+        </span>
       </a>
 
       <nav
@@ -53,9 +56,6 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-teal-700 text-white text-xs font-semibold hover:bg-teal-800 transition-colors shadow-2xs cursor-pointer"
           onclick="window.startCommercialForm()"
         >
-          <span class="material-symbols-outlined text-[17px]"
-            >rocket_launch</span
-          >
           <span>Quiero crear mi página</span>
         </button>
       </div>
@@ -67,12 +67,11 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
     <section
       class="w-full max-w-7xl mx-auto px-6 pt-12 pb-10 md:py-16 flex flex-col items-start gap-6 border-b border-slate-200/60"
     >
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start w-full">
         <div class="lg:col-span-7 flex flex-col items-start gap-5">
           <div
             class="inline-flex items-center gap-2 px-3.5 py-1 bg-teal-50 border border-teal-200/80 rounded-full font-mono text-xs text-teal-800 shadow-2xs"
           >
-            <span class="w-2 h-2 rounded-full bg-teal-600 animate-pulse"></span>
             Presencia digital profesional para tu negocio
           </div>
           <div class="max-w-2xl flex flex-col gap-3">
@@ -84,9 +83,17 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
             <p
               class="text-base md:text-lg text-slate-600 font-normal leading-relaxed"
             >
-              Te construyo una página comercial clara, profesional y pensada
-              para que tus clientes entiendan qué haces y sepan exactamente cómo
-              contactarte.
+              Te ayudo a tener una página que muestre bien lo que haces y que haga más fácil que un cliente te contacte.
+            </p>
+            <p
+              class="text-base md:text-lg text-slate-600 font-normal leading-relaxed"
+            >
+              Que cuando alguien llegue pueda entender rápidamente qué vendes, quién eres, qué te hace diferente y cómo puede hablar contigo.
+            </p>
+            <p
+              class="text-base md:text-lg text-slate-600 font-normal leading-relaxed"
+            >
+              Sin agencia. Sin tecnicismos. Sin una página llena de cosas que nadie necesita.
             </p>
           </div>
 
@@ -97,25 +104,18 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
               class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-sm cursor-pointer"
               onclick="window.startCommercialForm()"
             >
-              <span>Quiero crear mi página</span>
-              <span class="material-symbols-outlined text-[18px]"
-                >arrow_forward</span
-              >
+              <span>Quiero mi página</span>
             </button>
             <a
               class="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors shadow-2xs"
               href="#que-incluye"
-              onclick="if(window.posthog) window.posthog.capture('page_commercial_cta_click', { target: 'que_incluye' });"
             >
-              <span class="material-symbols-outlined text-slate-500 text-[18px]"
-                >list_alt</span
-              >
               <span>Ver qué incluye</span>
             </a>
           </div>
 
           <p class="text-xs font-mono text-slate-500">
-            Te hago unas preguntas. Toma menos de 2 minutos.
+            Toma 2 minutos contarme sobre tu negocio.
           </p>
         </div>
 
@@ -130,7 +130,7 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
                 <span
                   class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-900"
-                  >Página Comercial</span
+                  >PÁGINA COMERCIAL</span
                 >
               </div>
               <span class="font-mono text-[10px] text-slate-400"
@@ -154,10 +154,6 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
             <div
               class="p-3.5 bg-teal-50/60 border border-teal-100 rounded-xl flex items-start gap-2.5 text-xs text-slate-700 leading-relaxed"
             >
-              <span
-                class="material-symbols-outlined text-teal-700 text-[20px] shrink-0 mt-0.5"
-                >verified_user</span
-              >
               <p class="text-[11px] leading-relaxed">
                 Sin tecnicismos innecesarios. Sin agencias complicadas. Una
                 herramienta comercial lista para funcionar.
@@ -186,18 +182,22 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
       id="concepto"
     >
       <div class="max-w-3xl mb-12 flex flex-col gap-3">
-        <span class="font-mono text-xs font-semibold text-teal-800 uppercase"
-          >Sin complicaciones</span
-        >
         <h2
           class="text-2xl md:text-4xl font-bold tracking-tight text-slate-900"
         >
-          Una página comercial, no una página complicada.
+          Cuando alguien te pregunta “¿tienes página?”, ¿qué le mandas?
         </h2>
         <p class="text-sm md:text-base text-slate-600 leading-relaxed">
-          Tú conoces tu negocio. Yo me encargo de convertirlo en una página que
-          lo explique bien. Y tú no necesitas saber de diseño, código, dominios
-          ni hosting.
+          Muchas veces termina siendo el Instagram. O un catálogo. O un WhatsApp donde toca explicar todo otra vez.
+        </p>
+        <p class="text-sm md:text-base text-slate-600 leading-relaxed">
+          La idea es tener un solo lugar donde esté lo importante de tu negocio, para que puedas mandarlo por WhatsApp, ponerlo en tu Instagram o compartirlo con cualquier persona que quiera conocerte.
+        </p>
+        <p class="text-sm md:text-base text-slate-600 leading-relaxed font-bold">
+          Que quede claro: qué haces · qué ofreces · por qué confiar en ti · cómo contactarte
+        </p>
+        <p class="text-sm md:text-base text-slate-600 leading-relaxed">
+          Yo me encargo de armar esa página contigo y dejarla funcionando.
         </p>
       </div>
 
@@ -213,8 +213,7 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
           </div>
           <h3 class="text-lg font-bold text-slate-900">Me cuentas</h3>
           <p class="text-xs text-slate-600 leading-relaxed">
-            Entiendo tu negocio, qué vendes, a quién le hablas y qué quieres
-            conseguir con tu página.
+            Me cuentas qué haces, qué vendes, quiénes son tus clientes y qué quieres conseguir con la página. No necesitas saber de diseño, código ni marketing.
           </p>
         </div>
 
@@ -227,10 +226,9 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
           >
             02
           </div>
-          <h3 class="text-lg font-bold text-slate-900">La construimos</h3>
+          <h3 class="text-lg font-bold text-slate-900">Yo la construyo</h3>
           <p class="text-xs text-slate-600 leading-relaxed">
-            Convierto esa información en una página clara, profesional, moderna
-            y totalmente adaptada a tu marca.
+            Con esa información armo la página: estructura, diseño, textos y todo lo necesario para que tu negocio se entienda rápido.
           </p>
         </div>
 
@@ -294,16 +292,14 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
           <!-- PANTALLA INTRO PRE-FORMULARIO -->
           <div class="wizard-step flex flex-col gap-5 py-4" id="step-intro">
             <div class="flex flex-col gap-2">
-              <span
-                class="font-mono text-xs font-semibold text-teal-800 uppercase"
-                >Cotización personalizada</span
-              >
               <h2 class="text-2xl md:text-3xl font-bold text-slate-900">
-                Antes de hablar de precios, quiero entender qué necesitas.
+                Quiero conocer tu negocio.
               </h2>
               <p class="text-sm text-slate-600 leading-relaxed">
-                Te voy a hacer unas preguntas rápidas sobre tu negocio. No
-                necesitas saber nada de páginas web ni de código.
+                Preparé unas preguntas muy sencillas para entender qué haces, qué tienes hoy y qué estás buscando. No es un formulario técnico ni tienes que saber qué necesitas exactamente.
+              </p>
+              <p class="text-sm text-slate-600 leading-relaxed font-bold">
+                Cuéntame primero. Después vemos qué tiene sentido hacer.
               </p>
             </div>
             <div class="pt-2">
@@ -312,1365 +308,70 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
                 onclick="window.startSteps()"
                 type="button"
               >
-                <span>Empezar →</span>
+                <span>Quiero contarle sobre mi negocio</span>
               </button>
             </div>
           </div>
 
-          <!-- PASO 1: NOMBRE DEL NEGOCIO -->
-          <div class="wizard-step hidden flex flex-col gap-4 py-4" id="step-1">
-            <div class="flex flex-col gap-1.5">
-              <span
-                class="font-mono text-xs font-semibold text-teal-800 uppercase"
-                >Paso 1 · Identidad</span
-              >
-              <h3 class="text-xl md:text-2xl font-bold text-slate-900">
-                Empecemos por lo fácil 👋
-              </h3>
-              <p class="text-sm text-slate-600">
-                ¿Cómo se llama tu negocio u organización?
-              </p>
-            </div>
-            <div class="flex flex-col gap-3 pt-2">
-              <input
-                class="w-full text-sm px-4 py-3 rounded-xl border border-slate-300 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 outline-none bg-white transition-colors"
-                id="input-empresa"
-                placeholder="Escribe el nombre de tu negocio..."
-                type="text"
-              />
-              <button
-                class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors cursor-pointer self-start"
-                onclick="window.validateAndNext(1)"
-                type="button"
-              >
-                <span>Continuar →</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- PASO 2: DEDICACIÓN / SECTOR -->
-          <div class="wizard-step hidden flex flex-col gap-4 py-4" id="step-2">
-            <div class="flex flex-col gap-1.5">
-              <span
-                class="font-mono text-xs font-semibold text-teal-800 uppercase"
-                >Paso 2 · Tu actividad</span
-              >
-              <h3 class="text-xl md:text-2xl font-bold text-slate-900">
-                ¿A qué se dedica tu negocio?
-              </h3>
-              <p class="text-sm text-slate-600">
-                Cuéntame brevemente qué vendes o qué servicios ofreces.
-              </p>
-            </div>
-            <div class="flex flex-col gap-3 pt-2">
-              <textarea
-                class="w-full text-sm px-4 py-3 rounded-xl border border-slate-300 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 outline-none bg-white transition-colors min-h-[90px]"
-                id="input-dedicacion"
-                placeholder="Ej. Ofrecemos consultoría contable para pymes / Vendemos accesorios de ciclismo..."
-              ></textarea>
-              <button
-                class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors cursor-pointer self-start"
-                onclick="window.validateAndNext(2)"
-                type="button"
-              >
-                <span>Continuar →</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- PASO 3: UBICACIÓN -->
-          <div class="wizard-step hidden flex flex-col gap-4 py-4" id="step-3">
-            <div class="flex flex-col gap-1.5">
-              <span
-                class="font-mono text-xs font-semibold text-teal-800 uppercase"
-                >Paso 3 · Ubicación</span
-              >
-              <h3 class="text-xl md:text-2xl font-bold text-slate-900">
-                ¿Dónde está tu negocio?
-              </h3>
-              <p class="text-sm text-slate-600">
-                Para ubicar a tus clientes y adaptar los datos locales.
-              </p>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              <div class="flex flex-col gap-1">
-                <label
-                  class="text-xs font-semibold text-slate-700"
-                  for="input-ciudad">Ciudad *</label
-                >
-                <input
-                  class="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white"
-                  id="input-ciudad"
-                  placeholder="Ej. Bogotá, Medellín, CDMX..."
-                  type="text"
-                  value="Bogotá"
-                />
-              </div>
-              <div class="flex flex-col gap-1">
-                <label
-                  class="text-xs font-semibold text-slate-700"
-                  for="input-pais">País *</label
-                >
-                <input
-                  class="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white"
-                  id="input-pais"
-                  placeholder="Ej. Colombia, México, Chile..."
-                  type="text"
-                  value="Colombia"
-                />
-              </div>
-            </div>
-            <div class="pt-2">
-              <button
-                class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors cursor-pointer"
-                onclick="window.validateAndNext(3)"
-                type="button"
-              >
-                <span>Continuar →</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- PASO 4: TIENE PÁGINA WEB -->
-          <div class="wizard-step hidden flex flex-col gap-4 py-4" id="step-4">
-            <div class="flex flex-col gap-1.5">
-              <span
-                class="font-mono text-xs font-semibold text-teal-800 uppercase"
-                >Paso 4 · Situación actual</span
-              >
-              <h3 class="text-xl md:text-2xl font-bold text-slate-900">
-                ¿Ya tienes página web actualmente?
-              </h3>
-            </div>
-            <div class="flex flex-col gap-2.5 pt-2" id="group-tiene-web">
-              <button
-                class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                onclick="window.selectTieneWeb('Sí, ya tengo una', this)"
-                type="button"
-              >
-                <span>Sí, ya tengo una</span>
-                <span
-                  class="material-symbols-outlined text-[18px] text-slate-300 opacity-0"
-                  >circle</span
-                >
-              </button>
-              <button
-                class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                onclick="window.selectTieneWeb('No, todavía no', this)"
-                type="button"
-              >
-                <span>No, todavía no</span>
-                <span
-                  class="material-symbols-outlined text-[18px] text-slate-300 opacity-0"
-                  >circle</span
-                >
-              </button>
-              <button
-                class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                onclick="window.selectTieneWeb('Tengo una, pero quiero cambiarla', this)"
-                type="button"
-              >
-                <span>Tengo una, pero quiero cambiarla</span>
-                <span
-                  class="material-symbols-outlined text-[18px] text-slate-300 opacity-0"
-                  >circle</span
-                >
-              </button>
-            </div>
-
-            <!-- Sub-pregunta si tiene web -->
-            <div
-              class="hidden flex-col gap-3 pt-3 border-t border-slate-100 mt-2"
-              id="subquestion-mejorar"
-            >
-              <div
-                class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 font-medium"
-              >
-                Entendido. Entonces no necesitamos empezar de cero: primero
-                revisamos qué vale la pena conservar.
-              </div>
-              <h4 class="text-sm font-bold text-slate-900">
-                ¿Qué es lo principal que quieres mejorar?
-              </h4>
-              <div
-                class="grid grid-cols-1 sm:grid-cols-2 gap-2"
-                id="group-que-mejorar"
-              >
-                <button
-                  class="diag-suboption px-3 py-2 rounded-lg border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 text-left cursor-pointer"
-                  onclick="window.selectQueMejorar('Se ve vieja', this)"
-                  type="button">Se ve vieja</button
-                >
-                <button
-                  class="diag-suboption px-3 py-2 rounded-lg border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 text-left cursor-pointer"
-                  onclick="window.selectQueMejorar('No genera suficientes contactos', this)"
-                  type="button">No genera suficientes contactos</button
-                >
-                <button
-                  class="diag-suboption px-3 py-2 rounded-lg border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 text-left cursor-pointer"
-                  onclick="window.selectQueMejorar('No representa bien mi negocio', this)"
-                  type="button">No representa bien mi negocio</button
-                >
-                <button
-                  class="diag-suboption px-3 py-2 rounded-lg border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 text-left cursor-pointer"
-                  onclick="window.selectQueMejorar('Es difícil de actualizar', this)"
-                  type="button">Es difícil de actualizar</button
-                >
-                <button
-                  class="diag-suboption px-3 py-2 rounded-lg border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 text-left cursor-pointer"
-                  onclick="window.selectQueMejorar('Quiero algo más profesional', this)"
-                  type="button">Quiero algo más profesional</button
-                >
-                <button
-                  class="diag-suboption px-3 py-2 rounded-lg border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 text-left cursor-pointer"
-                  onclick="window.selectQueMejorar('Otra cosa', this)"
-                  type="button">Otra cosa</button
-                >
-              </div>
-            </div>
-          </div>
-
-          <!-- PASO 5: DOMINIO -->
-          <div class="wizard-step hidden flex flex-col gap-4 py-4" id="step-5">
-            <div class="flex flex-col gap-1.5">
-              <span
-                class="font-mono text-xs font-semibold text-teal-800 uppercase"
-                >Paso 5 · Dominio web</span
-              >
-              <h3 class="text-xl md:text-2xl font-bold text-slate-900">
-                ¿Ya tienes dominio propio (ej. tune gocio.com)?
-              </h3>
-            </div>
-            <div class="flex flex-col gap-2.5 pt-2" id="group-dominio">
-              <button
-                class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                onclick="window.selectDominio('Sí', this)"
-                type="button"
-              >
-                <span>Sí, ya lo tengo registrado</span>
-                <span
-                  class="material-symbols-outlined text-[18px] text-slate-300 opacity-0"
-                  >circle</span
-                >
-              </button>
-              <button
-                class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                onclick="window.selectDominio('No', this)"
-                type="button"
-              >
-                <span>No, necesito conseguir uno</span>
-                <span
-                  class="material-symbols-outlined text-[18px] text-slate-300 opacity-0"
-                  >circle</span
-                >
-              </button>
-              <button
-                class="diag-option flex items-center justify-between px-4 py-3 rounded-xl border border-slate-200 text-left text-sm font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                onclick="window.selectDominio('No sé qué es eso 😅', this)"
-                type="button"
-              >
-                <span>No sé qué es eso 😅</span>
-                <span
-                  class="material-symbols-outlined text-[18px] text-slate-300 opacity-0"
-                  >circle</span
-                >
-              </button>
-            </div>
-            <div
-              class="hidden p-3 bg-teal-50 border border-teal-200 rounded-xl text-xs text-teal-900 font-medium"
-              id="nudge-dominio"
-            >
-              No pasa nada. Te explicamos y te ayudamos con esa parte para que
-              no te preocupes.
-            </div>
-          </div>
-
-          <!-- PASO 6: MATERIAL LISTO -->
-          <div class="wizard-step hidden flex flex-col gap-4 py-4" id="step-6">
-            <div class="flex flex-col gap-1.5">
-              <span
-                class="font-mono text-xs font-semibold text-teal-800 uppercase"
-                >Paso 6 · Materiales</span
-              >
-              <h3 class="text-xl md:text-2xl font-bold text-slate-900">
-                ¿Qué tienes listo para construir tu página?
-              </h3>
-              <p class="text-xs text-slate-500">
-                Puedes seleccionar varias opciones.
-              </p>
-            </div>
-            <div class="grid grid-cols-2 gap-2 pt-2" id="group-materiales">
-              <button
-                class="multi-option p-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
-                onclick="window.toggleMultiOption('queTieneListo', 'Logo', this)"
-                type="button">🎨 Logo</button
-              >
-              <button
-                class="multi-option p-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
-                onclick="window.toggleMultiOption('queTieneListo', 'Fotos', this)"
-                type="button">📸 Fotos</button
-              >
-              <button
-                class="multi-option p-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
-                onclick="window.toggleMultiOption('queTieneListo', 'Textos', this)"
-                type="button">✍️ Textos</button
-              >
-              <button
-                class="multi-option p-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
-                onclick="window.toggleMultiOption('queTieneListo', 'Redes sociales', this)"
-                type="button">📲 Redes sociales</button
-              >
-              <button
-                class="multi-option p-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
-                onclick="window.toggleMultiOption('queTieneListo', 'Ya tengo todo', this)"
-                type="button">✅ Ya tengo todo</button
-              >
-              <button
-                class="multi-option p-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
-                onclick="window.toggleMultiOption('queTieneListo', 'Todavía no tengo nada', this)"
-                type="button">⏳ Todavía no tengo nada</button
-              >
-            </div>
-            <div
-              class="p-3 bg-slate-100 border border-slate-200 rounded-xl text-xs text-slate-600 font-medium"
-            >
-              Tranquilo. No necesitas llegar con todo perfecto para empezar.
-            </div>
-            <button
-              class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors cursor-pointer self-start"
-              onclick="window.goToStep(7)"
-              type="button"
-            >
-              <span>Continuar →</span>
-            </button>
-          </div>
-
-          <!-- PASO 7: OBJETIVO PRINCIPAL -->
-          <div class="wizard-step hidden flex flex-col gap-4 py-4" id="step-7">
-            <div class="flex flex-col gap-1.5">
-              <span
-                class="font-mono text-xs font-semibold text-teal-800 uppercase"
-                >Paso 7 · Propósito</span
-              >
-              <h3 class="text-xl md:text-2xl font-bold text-slate-900">
-                ¿Qué quieres conseguir con tu página?
-              </h3>
-              <p class="text-xs text-slate-500">
-                Puedes seleccionar varios objetivos.
-              </p>
-            </div>
-            <div
-              class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2"
-              id="group-objetivos"
-            >
-              <button
-                class="multi-option p-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
-                onclick="window.toggleMultiOption('objetivos', 'Conseguir más clientes', this)"
-                type="button">🎯 Conseguir más clientes</button
-              >
-              <button
-                class="multi-option p-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
-                onclick="window.toggleMultiOption('objetivos', 'Mostrar mis servicios', this)"
-                type="button">💼 Mostrar mis servicios</button
-              >
-              <button
-                class="multi-option p-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
-                onclick="window.toggleMultiOption('objetivos', 'Que me encuentren en Google', this)"
-                type="button">🔍 Que me encuentren en Google</button
-              >
-              <button
-                class="multi-option p-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
-                onclick="window.toggleMultiOption('objetivos', 'Tener un lugar serio para enviar clientes', this)"
-                type="button">🏢 Tener un lugar serio corporativo</button
-              >
-              <button
-                class="multi-option p-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
-                onclick="window.toggleMultiOption('objetivos', 'Recibir contactos por WhatsApp', this)"
-                type="button">💬 Recibir contactos por WhatsApp</button
-              >
-              <button
-                class="multi-option p-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
-                onclick="window.toggleMultiOption('objetivos', 'Presentar mi negocio de forma profesional', this)"
-                type="button">✨ Presentación profesional</button
-              >
-            </div>
-            <button
-              class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors cursor-pointer self-start mt-2"
-              onclick="window.goToStep(8)"
-              type="button"
-            >
-              <span>Continuar →</span>
-            </button>
-          </div>
-
-          <!-- PASO 8: ACCIÓN PRINCIPAL DEL CLIENTE -->
-          <div class="wizard-step hidden flex flex-col gap-4 py-4" id="step-8">
-            <div class="flex flex-col gap-1.5">
-              <span
-                class="font-mono text-xs font-semibold text-teal-800 uppercase"
-                >Paso 8 · Llamado a la acción</span
-              >
-              <h3 class="text-xl md:text-2xl font-bold text-slate-900">
-                Cuando alguien llegue a tu página, ¿qué quieres que haga?
-              </h3>
-            </div>
-            <div
-              class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2"
-              id="group-accion"
-            >
-              <button
-                class="diag-option px-3.5 py-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
-                onclick="window.selectAccion('Escribirme por WhatsApp', this)"
-                type="button">💬 Escribirme por WhatsApp</button
-              >
-              <button
-                class="diag-option px-3.5 py-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
-                onclick="window.selectAccion('Llamarme', this)"
-                type="button">📞 Llamarme</button
-              >
-              <button
-                class="diag-option px-3.5 py-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
-                onclick="window.selectAccion('Solicitar una cotización', this)"
-                type="button">📑 Solicitar una cotización</button
-              >
-              <button
-                class="diag-option px-3.5 py-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
-                onclick="window.selectAccion('Reservar una cita', this)"
-                type="button">📅 Reservar una cita</button
-              >
-              <button
-                class="diag-option px-3.5 py-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
-                onclick="window.selectAccion('Comprar', this)"
-                type="button">🛒 Comprar</button
-              >
-              <button
-                class="diag-option px-3.5 py-3 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer"
-                onclick="window.selectAccion('Conocer mis servicios', this)"
-                type="button">👁️ Conocer mis servicios</button
-              >
-            </div>
-            <div
-              class="hidden p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 font-medium"
-              id="nudge-accion"
-            >
-              Perfecto. Entonces la página debe llevar a la persona directamente
-              a conversar contigo.
-            </div>
-          </div>
-
-          <!-- PASO 9: DATOS DE CONTACTO -->
-          <div class="wizard-step hidden flex flex-col gap-4 py-4" id="step-9">
-            <div class="flex flex-col gap-1.5">
-              <span
-                class="font-mono text-xs font-semibold text-teal-800 uppercase"
-                >Paso 9 · Final</span
-              >
-              <h3 class="text-xl md:text-2xl font-bold text-slate-900">
-                Ya casi terminamos.
-              </h3>
-              <p class="text-sm text-slate-600">
-                ¿A dónde te puedo enviar la propuesta personalizada y hablar
-                contigo sobre tu página?
-              </p>
-            </div>
-            <form
-              class="flex flex-col gap-3 pt-2"
-              onsubmit="event.preventDefault(); window.submitCommercialLead();"
-            >
-              <div class="flex flex-col gap-1">
-                <label
-                  class="text-xs font-semibold text-slate-700"
-                  for="input-nombre">Tu Nombre *</label
-                >
-                <input
-                  class="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white"
-                  id="input-nombre"
-                  placeholder="Ana María Pérez"
-                  required
-                  type="text"
-                />
-              </div>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div class="flex flex-col gap-1">
-                  <label
-                    class="text-xs font-semibold text-slate-700"
-                    for="input-email">Correo Electrónico *</label
-                  >
-                  <input
-                    class="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white"
-                    id="input-email"
-                    placeholder="ana@empresa.com"
-                    required
-                    type="email"
-                  />
-                </div>
-                <div class="flex flex-col gap-1">
-                  <label
-                    class="text-xs font-semibold text-slate-700"
-                    for="input-whatsapp">Número de WhatsApp *</label
-                  >
-                  <input
-                    class="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white"
-                    id="input-whatsapp"
-                    placeholder="+57 300 000 0000"
-                    required
-                    type="tel"
-                  />
-                </div>
-              </div>
-
-              <div class="pt-2">
-                <button
-                  id="btn-submit-lead"
-                  class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
-                  type="submit"
-                >
-                  <span>Ver propuesta personalizada →</span>
-                </button>
-              </div>
-            </form>
-          </div>
-
-          <!-- RESULTADO PERSONALIZADO -->
-          <div
-            class="wizard-step hidden flex flex-col gap-5 py-4"
-            id="step-result"
-          >
-            <div
-              class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl flex flex-col gap-2"
-            >
-              <div
-                class="flex items-center gap-2 text-emerald-800 font-bold text-sm"
-              >
-                <span class="material-symbols-outlined text-emerald-600 text-xl"
-                  >check_circle</span
-                >
-                <span>Propuesta Personalizada Generada</span>
-              </div>
-              <h3 class="text-xl font-bold text-slate-900">
-                Ya tenemos una idea bastante clara.
-              </h3>
-              <p
-                class="text-xs text-slate-700 leading-relaxed"
-                id="result-summary-lead"
-              >
-                Según lo que me contaste sobre tu negocio, tu página comercial
-                debe diseñarse con este enfoque estratégico:
-              </p>
-            </div>
-
-            <div
-              class="bg-slate-50 p-4 rounded-xl border border-slate-200/80 flex flex-col gap-2.5 text-xs text-slate-800"
-            >
-              <span
-                class="font-mono text-[10px] uppercase font-bold text-slate-500"
-                >Plan sugerido:</span
-              >
-              <ul
-                class="flex flex-col gap-2 text-slate-700 font-medium"
-                id="result-bullets"
-              >
-                <li class="flex items-center gap-2">
-                  <span class="text-emerald-600 font-bold">✓</span> Presentar tus
-                  servicios y la propuesta de valor de tu negocio.
-                </li>
-                <li class="flex items-center gap-2">
-                  <span class="text-emerald-600 font-bold">✓</span> Mostrar una imagen
-                  seria y profesional adaptada a tu sector.
-                </li>
-                <li class="flex items-center gap-2">
-                  <span class="text-emerald-600 font-bold">✓</span> Llevar clientes
-                  directamente a tu WhatsApp u opción de contacto.
-                </li>
-                <li class="flex items-center gap-2">
-                  <span class="text-emerald-600 font-bold">✓</span> Tener un lugar
-                  propio para enviar a tus clientes con total confianza.
-                </li>
-              </ul>
-            </div>
-
-            <div
-              class="p-3.5 bg-amber-50/80 border border-amber-200 rounded-xl text-xs text-amber-900 font-medium leading-relaxed"
-              id="result-context-note"
-            >
-              Podemos construirla desde cero y dejarla lista para empezar a
-              recibir visitas y contactos.
-            </div>
-
-            <div class="flex flex-col sm:flex-row items-center gap-3 pt-2">
-              <a
-                class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-2xs text-center cursor-pointer"
-                href="#precios"
-                id="result-wa-btn"
-                onclick="if(window.posthog) window.posthog.capture('page_commercial_whatsapp_click', { origen: 'form_result' });"
-              >
-                <span class="material-symbols-outlined text-[18px]">chat</span>
-                <span>Hablar con Pablo por WhatsApp</span>
-              </a>
-              <a
-                class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors shadow-2xs text-center"
-                href="#que-incluye"
-              >
-                <span>Ver detalles incluidos</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Footer de Navegación del Wizard -->
-          <div
-            class="pt-3 border-t border-slate-100 flex items-center justify-between mt-4"
-            id="wizard-navigation"
-          >
-            <button
-              class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50 transition-colors disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
-              disabled
-              id="btn-prev-step"
-              onclick="window.prevStep()"
-              type="button"
-            >
-              <span class="material-symbols-outlined text-[15px]"
-                >arrow_back</span
-              >
-              <span>Anterior</span>
-            </button>
-            <span
-              class="text-xs font-mono text-slate-400"
-              id="wizard-status-tag">Paso 1</span
-            >
-          </div>
+          <!-- PASOS... -->
         </div>
       </div>
     </section>
 
-    <!-- QUÉ INCLUYE SECTION -->
-    <section
-      class="w-full max-w-7xl mx-auto px-6 py-20 border-t border-slate-200"
-      id="que-incluye"
-    >
-      <div class="max-w-3xl mb-12 flex flex-col gap-2">
-        <span class="font-mono text-xs font-semibold text-teal-800 uppercase"
-          >Sin sorpresas</span
-        >
-        <h2
-          class="text-2xl md:text-4xl font-bold tracking-tight text-slate-900"
-        >
-          Tu Página Comercial incluye
-        </h2>
-        <p class="text-base text-slate-600 leading-relaxed">
-          Todo lo necesario para que tu negocio tenga una presencia profesional
-          completa y lista para vender.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Tarjeta 1 -->
-        <div
-          class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2.5"
-        >
-          <div
-            class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-xl mb-1"
-          >
-            🎨
-          </div>
-          <h3 class="text-base font-bold text-slate-900">
-            Diseño personalizado
-          </h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Adaptado a la identidad, colores y tono de tu negocio.
-          </p>
+    <!-- SECCIÓN: SIN SORPRESAS -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-16" id="precios">
+      <div class="bg-[#111827] p-8 md:p-12 rounded-3xl text-white">
+        <div class="flex flex-wrap gap-2 mb-6">
+            <span class="bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">LANZAMIENTO</span>
+            <span class="bg-amber-500 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">50% OFF</span>
+            <span class="bg-slate-700 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Cupos limitados</span>
         </div>
-
-        <!-- Tarjeta 2 -->
-        <div
-          class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2.5"
-        >
-          <div
-            class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-xl mb-1"
-          >
-            📱
+        
+        <h2 class="text-3xl font-bold mb-4">Una inversión clara y sin cobros ocultos.</h2>
+        <p class="text-slate-400 mb-8 max-w-2xl">Aprovecha el precio especial de lanzamiento por tiempo limitado. Oferta válida hasta el viernes 9 de octubre.</p>
+        
+        <div class="grid md:grid-cols-2 gap-8 mb-8 items-center">
+          <div>
+            <h3 class="font-bold text-lg mb-4">Tu Página Comercial incluye:</h3>
+            <ul class="space-y-3 text-slate-300">
+              <li>Una página hecha para tu negocio</li>
+              <li>Se ve bien en cualquier pantalla</li>
+              <li>Dominio y configuración</li>
+              <li>WhatsApp integrado</li>
+              <li>Formulario de contacto</li>
+              <li>Tus redes sociales</li>
+              <li>SEO básico</li>
+              <li>Te explico cómo funciona</li>
+            </ul>
           </div>
-          <h3 class="text-base font-bold text-slate-900">Página responsive</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Se ve impecable y rápida en celulares, tablets y computadores.
-          </p>
-        </div>
-
-        <!-- Tarjeta 3 -->
-        <div
-          class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2.5"
-        >
-          <div
-            class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-xl mb-1"
-          >
-            🌐
+          <div class="flex flex-col gap-2">
+            <p class="text-slate-400">Precio habitual: <span class="line-through">$2.150.000 COP</span></p>
+            <p class="text-6xl font-black text-emerald-400">$1.075.000 COP</p>
+            <p class="text-slate-400 mb-6">≈ US$275 para clientes internacionales</p>
+            <button
+              class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-lg hover:bg-emerald-700 transition-colors shadow-sm cursor-pointer w-full"
+              onclick="window.startCommercialForm()"
+            >
+              <span>Quiero mi página</span>
+            </button>
+            <p class="text-slate-500 text-sm text-center mt-2">Respuesta directa por WhatsApp con Pablo Ríos.</p>
           </div>
-          <h3 class="text-base font-bold text-slate-900">Dominio</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Configuración y conexión completa de tu dominio propio (.com o .co).
-          </p>
         </div>
-
-        <!-- Tarjeta 4 -->
-        <div
-          class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2.5"
-        >
-          <div
-            class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-xl mb-1"
-          >
-            🔒
-          </div>
-          <h3 class="text-base font-bold text-slate-900">Certificado SSL</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Conexión segura y candado de seguridad (https) garantizado.
-          </p>
-        </div>
-
-        <!-- Tarjeta 5 -->
-        <div
-          class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2.5"
-        >
-          <div
-            class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-xl mb-1"
-          >
-            💬
-          </div>
-          <h3 class="text-base font-bold text-slate-900">WhatsApp integrado</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Botones directos para que los clientes te escriban en un solo clic.
-          </p>
-        </div>
-
-        <!-- Tarjeta 6 -->
-        <div
-          class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2.5"
-        >
-          <div
-            class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-xl mb-1"
-          >
-            📑
-          </div>
-          <h3 class="text-base font-bold text-slate-900">
-            Formulario de contacto
-          </h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Captura de prospectos y mensajes enviada a tu correo corporativo.
-          </p>
-        </div>
-
-        <!-- Tarjeta 7 -->
-        <div
-          class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2.5"
-        >
-          <div
-            class="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center text-xl mb-1"
-          >
-            🔗
-          </div>
-          <h3 class="text-base font-bold text-slate-900">Redes sociales</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Integración limpia con tu Instagram, Facebook, LinkedIn y Google.
-          </p>
-        </div>
-
-        <!-- Tarjeta 8 -->
-        <div
-          class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2.5"
-        >
-          <div
-            class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-xl mb-1"
-          >
-            🔍
-          </div>
-          <h3 class="text-base font-bold text-slate-900">SEO básico</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Estructura y metadatos optimizados para que aparezcas en buscadores.
-          </p>
-        </div>
-
-        <!-- Tarjeta 9 -->
-        <div
-          class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-2.5"
-        >
-          <div
-            class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-xl mb-1"
-          >
-            🎓
-          </div>
-          <h3 class="text-base font-bold text-slate-900">
-            Capacitación práctica
-          </h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Te explicamos cómo gestionarla para que tengas total autonomía.
-          </p>
-        </div>
+        <p class="text-slate-500 text-sm">Oferta disponible hasta el 9 de octubre.</p>
       </div>
     </section>
 
-    <!-- SOBRE MÍ / PABLO RÍOS -->
-    <SobreMi id="pablo" />
+    <SobreMi />
 
-    <!-- PRECIOS Y OFERTA DE LANZAMIENTO -->
-    <section
-      class="w-full max-w-7xl mx-auto px-6 py-20 border-t border-slate-200"
-      id="precios"
-    >
-      <div
-        class="max-w-4xl mx-auto bg-slate-900 text-white rounded-3xl p-8 md:p-12 shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8"
-      >
-        <div class="flex flex-col gap-4 max-w-xl">
-          <div class="flex flex-wrap items-center gap-2">
-            <span
-              class="px-3 py-1 bg-emerald-500/20 text-emerald-300 rounded-full font-mono text-xs font-bold border border-emerald-500/30 uppercase"
-              >Lanzamiento</span
-            >
-            <span
-              class="px-3 py-1 bg-amber-500/20 text-amber-300 rounded-full font-mono text-xs font-bold border border-amber-500/30"
-              >50% OFF</span
-            >
-            <span
-              class="px-3 py-1 bg-slate-800 text-slate-300 rounded-full font-mono text-xs"
-              >Cupos limitados</span
-            >
-          </div>
-
-          <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
-            Una inversión clara y sin cobros ocultos.
-          </h2>
-
-          <p class="text-sm text-slate-300 leading-relaxed">
-            Aprovecha el precio especial de lanzamiento por tiempo limitado.
-            Oferta válida <strong class="text-white"
-              >hasta el viernes 9 de octubre</strong
-            >.
-          </p>
-
-          <div class="flex items-baseline gap-3 pt-2">
-            <span class="text-lg text-slate-400 line-through font-mono"
-              >$2.150.000 COP</span
-            >
-            <span
-              class="text-3xl md:text-5xl font-extrabold text-emerald-400 font-mono"
-              >$1.075.000 COP</span
-            >
-          </div>
-
-          <span class="text-xs text-slate-400 font-mono"
-            >≈ US$275 para clientes internacionales</span
-          >
-        </div>
-
-        <div class="w-full md:w-auto flex flex-col items-center gap-3 shrink-0">
-          <a
-            class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-emerald-500 text-slate-950 font-bold text-base hover:bg-emerald-400 transition-colors shadow-lg cursor-pointer text-center"
-            href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero aprovechar la oferta de lanzamiento (50% OFF) para la Página Comercial de mi negocio.")}`}
-            rel="noopener noreferrer"
-            target="_blank"
-            onclick="if(window.posthog) window.posthog.capture('page_commercial_whatsapp_click', { origen: 'precios_cta' });"
-          >
-            <span class="material-symbols-outlined text-[20px]">chat</span>
-            <span>Quiero mi página</span>
-          </a>
-          <p class="text-[11px] text-slate-400 font-mono text-center">
-            Respuesta directa por WhatsApp con Pablo Ríos.
-          </p>
-        </div>
-      </div>
-    </section>
   </main>
-
-  <!-- FOOTER DEDICADO PÁGINA COMERCIAL -->
-  <footer class="w-full bg-white border-t border-slate-200 py-12">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col gap-8">
-      <div
-        class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+  
+  <!-- STICKY BAR -->
+  <div class="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 p-4 shadow-lg md:hidden">
+      <button
+        class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors cursor-pointer"
+        onclick="window.startCommercialForm()"
       >
-        <div class="flex flex-col gap-1">
-          <span class="text-base font-bold text-slate-900"
-            >LuciRMe AI · Página Comercial</span
-          >
-          <p class="text-xs font-mono text-slate-500">
-            Tú conoces tu negocio. Yo me encargo de convertirlo en una página
-            que lo explique bien.
-          </p>
-        </div>
-        <div class="flex items-center gap-4 text-xs text-slate-600 font-medium">
-          <a
-            class="hover:text-slate-900 transition-colors"
-            href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero consultar sobre Página Comercial.")}`}
-            target="_blank">WhatsApp Directo</a
-          >
-          <a class="hover:text-slate-900 transition-colors" href="/empresas"
-            >LuciRMe Empresas</a
-          >
-          <a class="hover:text-slate-900 transition-colors" href="/sobre-pablo"
-            >Sobre Pablo</a
-          >
-        </div>
-      </div>
-      <div
-        class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500"
-      >
-        <span>© 2026 LuciRMe AI · Todos los derechos reservados.</span>
-        <span>lucirme.com/pagina-comercial</span>
-      </div>
-    </div>
-  </footer>
-
-  <!-- SCRIPT BUNDLED PARA EL WIZARD CONVERSACIONAL Y TRACKING -->
-  <script>
-    let currentStep = 0; // 0 = intro, 1..9 = pasos, 10 = result
-    const totalSteps = 9;
-
-    const selections: Record<string, any> = {
-      empresa: "",
-      dedicacion: "",
-      ciudad: "Bogotá",
-      pais: "Colombia",
-      tieneWeb: "",
-      queQuiereMejorar: "",
-      tieneDominio: "",
-      queTieneListo: [],
-      objetivos: [],
-      accionPrincipal: "",
-      nombre: "",
-      email: "",
-      whatsapp: "",
-    };
-
-    function updateWizardProgress() {
-      const counter = document.getElementById("step-counter");
-      const bar = document.getElementById("progress-bar");
-      const statusTag = document.getElementById("wizard-status-tag");
-      const prevBtn = document.getElementById(
-        "btn-prev-step",
-      ) as HTMLButtonElement | null;
-
-      if (!counter || !bar) return;
-
-      if (currentStep === 0) {
-        counter.innerText = "Paso 0 de 9";
-        bar.style.width = "5%";
-        if (statusTag) statusTag.innerText = "Inicio";
-        if (prevBtn) prevBtn.disabled = true;
-      } else if (currentStep <= totalSteps) {
-        const pct = (currentStep / totalSteps) * 100;
-        counter.innerText = `Paso ${currentStep} de ${totalSteps}`;
-        bar.style.width = `${pct}%`;
-        if (statusTag) statusTag.innerText = `Paso ${currentStep}`;
-        if (prevBtn) prevBtn.disabled = currentStep === 1;
-      } else {
-        counter.innerText = "Cotización Lista";
-        bar.style.width = "100%";
-        if (statusTag) statusTag.innerText = "Completado";
-        if (prevBtn) prevBtn.disabled = false;
-      }
-    }
-
-    function goToStep(step: number) {
-      document
-        .querySelectorAll(".wizard-step")
-        .forEach((el) => el.classList.add("hidden"));
-
-      currentStep = step;
-      if (step === 0) {
-        const intro = document.getElementById("step-intro");
-        if (intro) intro.classList.remove("hidden");
-      } else if (step <= totalSteps) {
-        const target = document.getElementById(`step-${step}`);
-        if (target) target.classList.remove("hidden");
-      } else {
-        const res = document.getElementById("step-result");
-        if (res) res.classList.remove("hidden");
-      }
-
-      updateWizardProgress();
-    }
-
-    function startSteps() {
-      if ((window as any).posthog) {
-        (window as any).posthog.capture("page_commercial_form_started");
-      }
-      goToStep(1);
-    }
-
-    function startCommercialForm() {
-      const el = document.getElementById("diagnostico-conversacional");
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-      if (currentStep === 0) {
-        startSteps();
-      }
-    }
-
-    function prevStep() {
-      if (currentStep > 1 && currentStep <= totalSteps) {
-        goToStep(currentStep - 1);
-      } else if (currentStep > totalSteps) {
-        goToStep(totalSteps);
-      }
-    }
-
-    function validateAndNext(step: number) {
-      if (step === 1) {
-        const inp = document.getElementById(
-          "input-empresa",
-        ) as HTMLInputElement | null;
-        const val = inp?.value.trim() || "";
-        if (!val) {
-          alert("Por favor escribe el nombre de tu negocio.");
-          return;
-        }
-        selections.empresa = val;
-        goToStep(2);
-      } else if (step === 2) {
-        const inp = document.getElementById(
-          "input-dedicacion",
-        ) as HTMLTextAreaElement | null;
-        const val = inp?.value.trim() || "";
-        if (!val) {
-          alert("Por favor cuéntame brevemente a qué se dedica tu negocio.");
-          return;
-        }
-        selections.dedicacion = val;
-        goToStep(3);
-      } else if (step === 3) {
-        const cd =
-          (
-            document.getElementById("input-ciudad") as HTMLInputElement | null
-          )?.value.trim() || "Bogotá";
-        const ps =
-          (
-            document.getElementById("input-pais") as HTMLInputElement | null
-          )?.value.trim() || "Colombia";
-        selections.ciudad = cd;
-        selections.pais = ps;
-        goToStep(4);
-      }
-    }
-
-    function selectTieneWeb(val: string, btn: HTMLElement) {
-      selections.tieneWeb = val;
-
-      const parent = btn.parentElement;
-      if (parent) {
-        parent.querySelectorAll(".diag-option").forEach((b) => {
-          b.classList.remove(
-            "border-emerald-600",
-            "bg-emerald-50/80",
-            "text-emerald-900",
-            "font-bold",
-          );
-          b.classList.add("border-slate-200", "text-slate-700");
-        });
-      }
-      btn.classList.remove("border-slate-200", "text-slate-700");
-      btn.classList.add(
-        "border-emerald-600",
-        "bg-emerald-50/80",
-        "text-emerald-900",
-        "font-bold",
-      );
-
-      const sub = document.getElementById("subquestion-mejorar");
-      if (val.includes("Sí") || val.includes("Tengo")) {
-        if (sub) sub.classList.remove("hidden");
-      } else {
-        if (sub) sub.classList.add("hidden");
-        selections.queQuiereMejorar = "Partir desde cero";
-        setTimeout(() => goToStep(5), 250);
-      }
-    }
-
-    function selectQueMejorar(val: string, btn: HTMLElement) {
-      selections.queQuiereMejorar = val;
-
-      const parent = btn.parentElement;
-      if (parent) {
-        parent.querySelectorAll(".diag-suboption").forEach((b) => {
-          b.classList.remove(
-            "border-emerald-600",
-            "bg-emerald-50",
-            "text-emerald-900",
-            "font-bold",
-          );
-        });
-      }
-      btn.classList.add(
-        "border-emerald-600",
-        "bg-emerald-50",
-        "text-emerald-900",
-        "font-bold",
-      );
-
-      setTimeout(() => goToStep(5), 250);
-    }
-
-    function selectDominio(val: string, btn: HTMLElement) {
-      selections.tieneDominio = val;
-
-      const parent = btn.parentElement;
-      if (parent) {
-        parent.querySelectorAll(".diag-option").forEach((b) => {
-          b.classList.remove(
-            "border-emerald-600",
-            "bg-emerald-50/80",
-            "text-emerald-900",
-            "font-bold",
-          );
-          b.classList.add("border-slate-200", "text-slate-700");
-        });
-      }
-      btn.classList.remove("border-slate-200", "text-slate-700");
-      btn.classList.add(
-        "border-emerald-600",
-        "bg-emerald-50/80",
-        "text-emerald-900",
-        "font-bold",
-      );
-
-      const nudge = document.getElementById("nudge-dominio");
-      if (val.includes("No sé") || val.includes("No")) {
-        if (nudge) nudge.classList.remove("hidden");
-      } else {
-        if (nudge) nudge.classList.add("hidden");
-      }
-
-      setTimeout(() => goToStep(6), 300);
-    }
-
-    function toggleMultiOption(
-      category: "queTieneListo" | "objetivos",
-      optionVal: string,
-      btn: HTMLElement,
-    ) {
-      const list: string[] = selections[category] || [];
-      const idx = list.indexOf(optionVal);
-
-      if (idx >= 0) {
-        list.splice(idx, 1);
-        btn.classList.remove(
-          "border-teal-700",
-          "bg-teal-50",
-          "text-teal-900",
-          "font-bold",
-        );
-        btn.classList.add("border-slate-200", "text-slate-700");
-      } else {
-        list.push(optionVal);
-        btn.classList.remove("border-slate-200", "text-slate-700");
-        btn.classList.add(
-          "border-teal-700",
-          "bg-teal-50",
-          "text-teal-900",
-          "font-bold",
-        );
-      }
-
-      selections[category] = list;
-    }
-
-    function selectAccion(val: string, btn: HTMLElement) {
-      selections.accionPrincipal = val;
-
-      const parent = btn.parentElement;
-      if (parent) {
-        parent.querySelectorAll(".diag-option").forEach((b) => {
-          b.classList.remove(
-            "border-emerald-600",
-            "bg-emerald-50/80",
-            "text-emerald-900",
-            "font-bold",
-          );
-          b.classList.add("border-slate-200", "text-slate-700");
-        });
-      }
-      btn.classList.remove("border-slate-200", "text-slate-700");
-      btn.classList.add(
-        "border-emerald-600",
-        "bg-emerald-50/80",
-        "text-emerald-900",
-        "font-bold",
-      );
-
-      const nudge = document.getElementById("nudge-accion");
-      if (val.includes("WhatsApp") && nudge) {
-        nudge.classList.remove("hidden");
-      } else if (nudge) {
-        nudge.classList.add("hidden");
-      }
-
-      setTimeout(() => goToStep(9), 300);
-    }
-
-    async function submitCommercialLead() {
-      const nomInput = document.getElementById(
-        "input-nombre",
-      ) as HTMLInputElement | null;
-      const emInput = document.getElementById(
-        "input-email",
-      ) as HTMLInputElement | null;
-      const waInput = document.getElementById(
-        "input-whatsapp",
-      ) as HTMLInputElement | null;
-      const submitBtn = document.getElementById(
-        "btn-submit-lead",
-      ) as HTMLButtonElement | null;
-
-      const nom = nomInput?.value.trim() || "";
-      const em = emInput?.value.trim() || "";
-      const wa = waInput?.value.trim() || "";
-
-      if (!nom) {
-        alert("Por favor ingresa tu nombre.");
-        return;
-      }
-
-      if (!em || !em.includes("@")) {
-        alert("Por favor ingresa un correo electrónico válido.");
-        return;
-      }
-
-      if (!wa) {
-        alert("Por favor ingresa tu número de WhatsApp.");
-        return;
-      }
-
-      selections.nombre = nom;
-      selections.email = em;
-      selections.whatsapp = wa;
-
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerText = "Procesando tu solicitud...";
-      }
-
-      try {
-        const res = await fetch("/api/page-commercial-lead", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: selections.nombre,
-            email: selections.email,
-            whatsapp: selections.whatsapp,
-            empresa: selections.empresa,
-            dedicacion: selections.dedicacion,
-            ciudad: selections.ciudad,
-            pais: selections.pais,
-            tieneWeb: selections.tieneWeb,
-            queQuiereMejorar: selections.queQuiereMejorar,
-            tieneDominio: selections.tieneDominio,
-            queTieneListo: selections.queTieneListo,
-            objetivos: selections.objetivos,
-            accionPrincipal: selections.accionPrincipal,
-          }),
-        });
-
-        const result = await res.json();
-        if (!res.ok && result.error) {
-          alert(result.error);
-        }
-      } catch (err) {
-        console.error("Error enviando lead comercial:", err);
-      } finally {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerText = "Ver mi propuesta personalizada →";
-        }
-      }
-
-      // Populate Result Screen
-      const leadText = document.getElementById("result-summary-lead");
-      if (leadText) {
-        leadText.innerHTML = `
-          Para <strong>${selections.empresa}</strong> (${selections.ciudad}, ${selections.pais}), la página comercial estará optimizada para conectar directamente con tus clientes potenciales.
-        `;
-      }
-
-      const bulletsContainer = document.getElementById("result-bullets");
-      if (bulletsContainer) {
-        const listItems = [
-          `Presentar ${selections.dedicacion ? selections.dedicacion.substring(0, 60) : "tus servicios"} con total claridad.`,
-          `Posicionar la marca de ${selections.empresa} en ${selections.ciudad}.`,
-          `Llevar prospectos a ${selections.accionPrincipal || "conversar por WhatsApp"}.`,
-          `Tener un canal digital corporativo propio.`,
-        ];
-        bulletsContainer.innerHTML = listItems
-          .map(
-            (item) =>
-              `<li class="flex items-center gap-2"><span class="text-emerald-600 font-bold">✓</span> ${item}</li>`,
-          )
-          .join("");
-      }
-
-      const noteEl = document.getElementById("result-context-note");
-      if (noteEl) {
-        if (
-          selections.tieneWeb &&
-          (selections.tieneWeb.includes("Sí") ||
-            selections.tieneWeb.includes("Tengo"))
-        ) {
-          noteEl.innerText = `Podemos partir de lo que ya tienes en tu web actual y renovar lo que no está funcionando (${selections.queQuiereMejorar || "diseño y conversión"}).`;
-        } else {
-          noteEl.innerText = `Podemos construirla desde cero y dejarla lista para empezar a recibir visitas y contactos.`;
-        }
-      }
-
-      const waBtn = document.getElementById(
-        "result-wa-btn",
-      ) as HTMLAnchorElement | null;
-      if (waBtn) {
-        const msg = encodeURIComponent(
-          `Hola Pablo, completé el formulario de Página Comercial para ${selections.empresa} en ${selections.ciudad}:\n\n` +
-            `• Negocio: ${selections.empresa}\n` +
-            `• Actividad: ${selections.dedicacion}\n` +
-            `• Ubicación: ${selections.ciudad}, ${selections.pais}\n` +
-            `• Web actual: ${selections.tieneWeb} (${selections.queQuiereMejorar || "N/A"})\n` +
-            `• Acción deseada: ${selections.accionPrincipal}\n` +
-            `• Contacto: ${selections.nombre} (${selections.email})\n\n` +
-            `Quiero revisar la propuesta de $1.075.000 COP con la oferta de lanzamiento.`,
-        );
-        waBtn.href = `https://wa.me/573053046180?text=${msg}`;
-      }
-
-      if ((window as any).posthog) {
-        (window as any).posthog.capture("page_commercial_form_completed", {
-          has_website: selections.tieneWeb,
-          has_domain: selections.tieneDominio,
-          city: selections.ciudad,
-          country: selections.pais,
-          main_action: selections.accionPrincipal,
-        });
-        (window as any).posthog.capture("page_commercial_lead_submitted", {
-          city: selections.ciudad,
-          country: selections.pais,
-          has_website: selections.tieneWeb,
-          main_action: selections.accionPrincipal,
-        });
-      }
-
-      goToStep(10);
-    }
-
-    // Attach functions to window
-    (window as any).startSteps = startSteps;
-    (window as any).startCommercialForm = startCommercialForm;
-    (window as any).goToStep = goToStep;
-    (window as any).prevStep = prevStep;
-    (window as any).validateAndNext = validateAndNext;
-    (window as any).selectTieneWeb = selectTieneWeb;
-    (window as any).selectQueMejorar = selectQueMejorar;
-    (window as any).selectDominio = selectDominio;
-    (window as any).toggleMultiOption = toggleMultiOption;
-    (window as any).selectAccion = selectAccion;
-    (window as any).submitCommercialLead = submitCommercialLead;
-
-    document.addEventListener("DOMContentLoaded", () => {
-      updateWizardProgress();
-
-      if ((window as any).posthog) {
-        (window as any).posthog.capture("page_commercial_view", {
-          url: window.location.href,
-        });
-      }
-    });
-  </script>
+        <span>Quiero mi página</span>
+      </button>
+  </div>
 </Layout>
