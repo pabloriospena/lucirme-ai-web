@@ -1,156 +1,89 @@
 ---
-// Footer.astro — Variant 03: Híbrido con Pre-Footer de Micro-Conversión
 import { LINKS } from "../lib/constants.js";
 
 const year = new Date().getFullYear();
 const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
-const ctaFooterWA = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, estuve revisando la web de LuciRMe AI y quiero conversar sobre un proceso que me quita tiempo.")}`;
 ---
 
-<!-- Production Footer Component V3 -->
-<footer class="font-sans text-slate-700 pt-10 pb-8 border-t border-slate-200 bg-slate-50/50" data-purpose="footer-hybrid-prefooter">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+<footer class="w-full bg-white border-t border-slate-200 py-16">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12">
     
-    <!-- Pre-Footer Card (Micro-Conversion Module) -->
-    <div class="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 lg:p-10 shadow-xs relative overflow-hidden" data-purpose="pre-footer-cta-card">
-      <!-- Background subtle accent line -->
-      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-teal-500 via-emerald-500 to-amber-400"></div>
-      
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <!-- Text Message -->
-        <div class="lg:col-span-7 space-y-2.5">
-          <div class="inline-flex items-center space-x-1.5 text-xs font-mono font-medium text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-2.5 py-0.5 rounded-full">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-            <span>Sin Compromiso · Conversación 1:1</span>
-          </div>
-          <h3 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
-            ¿Tienes un flujo o proceso que te quita demasiado tiempo?
-          </h3>
-          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed max-w-2xl">
-            Hablemos 20 minutos por WhatsApp. Lo revisamos juntos sobre tu caso real de trabajo o el de tu equipo, sin presentaciones comerciales agresivas ni teoría innecesaria.
-          </p>
-        </div>
-
-        <!-- CTA Actions -->
-        <div class="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3 lg:justify-end">
-          <!-- Main Emerald Button -->
-          <a 
-            href={ctaFooterWA}
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm px-5 py-3 rounded-lg shadow-xs hover:shadow transition-all group cursor-pointer" 
-          >
-            <svg class="w-4 h-4 fill-current text-white group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
-              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.187-2.59-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.199.534 1.286.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.178.182-.077.355.101.173.45 1.741 1.942 2.072.193.043.344.029.473-.043.159-.087.375-.434.505-.622.13-.188.26-.159.433-.087s1.097.519 1.285.607c.188.087.317.13.361.202.044.073.044.42-.1 1.225z"/>
-            </svg>
-            <span>Hablar por WhatsApp</span>
-            <span class="group-hover:translate-x-0.5 transition-transform">→</span>
-          </a>
-
-          <!-- Secondary Ghost CTA -->
-          <button 
-            onclick="document.getElementById('selector-overlay').classList.remove('hidden')"
-            class="inline-flex items-center justify-center space-x-1.5 bg-slate-100 hover:bg-slate-200/80 text-slate-800 font-medium text-sm px-4 py-3 rounded-lg border border-slate-200 transition-colors cursor-pointer"
-          >
-            <span>Hacer diagnóstico (2m)</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Lower Footer Columns -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-4 pb-8 border-b border-slate-200/80">
-      
-      <!-- Brand and philosophy column -->
-      <div class="space-y-3">
-        <div class="flex items-center space-x-2.5">
-          <img 
-            src="/logo-lucirme-ai.png" 
-            alt="LuciRMe AI Logo" 
-            class="w-8 h-8 rounded-lg border border-slate-200 p-0.5 bg-white shadow-2xs" 
-            onerror="this.onerror=null; this.src='/favicon.svg';"
-          />
-          <span class="font-bold text-slate-900 text-sm tracking-tight">LuciRMe AI</span>
-        </div>
-        <p class="text-xs text-slate-600 leading-relaxed">
-          «La Inteligencia Artificial no reemplaza el criterio profesional; amplifica a quienes saben formular las preguntas correctas y estructurar sistemas.»
-        </p>
-        <div class="text-[11px] font-mono text-slate-500">
-          — Pablo Ríos, Fundador
-        </div>
-      </div>
-
-      <!-- Navigation links 1: Rutas de Aprendizaje -->
-      <div class="space-y-2.5 text-xs">
-        <div class="font-mono font-semibold uppercase text-slate-900 tracking-wider text-[11px]">
-          Rutas de Aprendizaje
-        </div>
-        <ul class="space-y-1.5 text-slate-600">
-          <li><a class="hover:text-teal-700 transition-colors" href="/educacion#ruta-comunicacion">01. Comunicación & Presentaciones</a></li>
-          <li><a class="hover:text-teal-700 transition-colors" href="/servicios/producto">02. Product Management con IA</a></li>
-          <li><a class="hover:text-teal-700 transition-colors" href="/educacion#ruta-notebooklm">03. NotebookLM & Síntesis</a></li>
-          <li><a class="hover:text-teal-700 transition-colors" href="/educacion#ruta-empleabilidad">04. Empleabilidad y Carrera</a></li>
-          <li><a class="hover:text-teal-700 transition-colors" href="/atajos-visuales">05. Imágenes & Video (Atajos Visuales)</a></li>
-        </ul>
-      </div>
-
-      <!-- Navigation links 2: Para Equipos & Empresas -->
-      <div class="space-y-2.5 text-xs">
-        <div class="font-mono font-semibold uppercase text-slate-900 tracking-wider text-[11px]">
-          Para Equipos & Empresas
-        </div>
-        <ul class="space-y-1.5 text-slate-600">
-          <li><a class="hover:text-teal-700 transition-colors" href="/soluciones/empresas">Soluciones para Empresas</a></li>
-          <li><a class="hover:text-teal-700 transition-colors" href="/soluciones/profesionales">Para Profesionales</a></li>
-          <li><a class="hover:text-teal-700 transition-colors" href="/curso-presentaciones">Curso de Presentaciones</a></li>
-          <li><a class="hover:text-teal-700 transition-colors" href="/recomienda">Programa Recomienda</a></li>
-        </ul>
-      </div>
-
-      <!-- Security & Trust Column -->
-      <div class="space-y-2.5 text-xs">
-        <div class="font-mono font-semibold uppercase text-slate-900 tracking-wider text-[11px]">
-          Confianza & Seguridad
-        </div>
-        <div class="space-y-2 text-slate-600">
-          <div class="flex items-center space-x-2 text-[11px]">
-            <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-            </svg>
-            <span>Conexión Cifrada SSL</span>
-          </div>
-          <div class="flex items-center space-x-2 text-[11px]">
-            <svg class="w-4 h-4 text-teal-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-            </svg>
-            <span>APIs Privadas · Sin Reentrenar Modelos</span>
-          </div>
-          <div class="flex items-center space-x-2 text-[11px]">
-            <svg class="w-4 h-4 text-amber-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-            </svg>
-            <span>Garantía de Valor Práctico</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Sub-Footer V3 -->
-    <div class="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3 font-normal">
-      <div>
-        © {year} LuciRMe AI · Diseñado con sobriedad y propósito.
-      </div>
-      <div class="flex items-center space-x-4 font-mono text-[11px]">
-        <a href="/terminos" class="hover:text-slate-800 transition-colors">Términos</a>
-        <span>·</span>
-        <a href="/privacidad" class="hover:text-slate-800 transition-colors">Privacidad</a>
-        <span>·</span>
-        <span class="inline-flex items-center gap-1 text-slate-400">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-          Latam & Global
+    <!-- Logo & Description -->
+    <div class="lg:col-span-2 flex flex-col gap-4">
+      <a class="flex items-center gap-2.5" href="/">
+        <img
+          src="/logo-lucirme.png"
+          alt="LuciRMe AI"
+          class="h-8 w-auto object-contain"
+        />
+        <span class="font-bold text-lg text-slate-900 tracking-tight">
+          LuciRMe<span class="text-teal-700 ml-0.5">AI</span>
         </span>
+      </a>
+      <p class="text-sm text-slate-600 leading-relaxed max-w-xs">
+        Menos operatividad manual. Aplica Inteligencia Artificial con criterio en flujos reales de trabajo.
+      </p>
+      <div class="mt-2">
+        <p class="text-xs font-bold text-slate-900 uppercase tracking-wider">Arquitecto & Estratega</p>
+        <p class="text-sm font-semibold text-slate-700">Pablo Ríos</p>
+        <p class="text-xs text-slate-500">Consultor de Producto, Ops e IA.</p>
       </div>
     </div>
 
+    <!-- Col 1: Empresas -->
+    <div class="space-y-4">
+      <h3 class="font-bold text-sm text-slate-900">1. Empresas</h3>
+      <ul class="space-y-2 text-sm text-slate-600">
+        <li><a href="/empresas#diagnostico" class="hover:text-teal-700">Diagnóstico de Procesos</a></li>
+        <li><a href="/empresas#talleres" class="hover:text-teal-700">Talleres Inmersión B2B</a></li>
+        <li><a href="/empresas#autonomia" class="hover:text-teal-700">Ciclo Autonomía Operativa</a></li>
+        <li><a href="/empresas#casos" class="hover:text-teal-700">Casos Reales & Evidencia</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 2: Mentorías -->
+    <div class="space-y-4">
+      <h3 class="font-bold text-sm text-slate-900">2. Mentorías</h3>
+      <ul class="space-y-2 text-sm text-slate-600">
+        <li><a href="/mentoria" class="hover:text-teal-700">Mentoria 1 a 1 Estratégica</a></li>
+        <li><a href="/mentoria#producto" class="hover:text-teal-700">En Producto (PM & Discovery)</a></li>
+        <li><a href="/mentoria#educacion" class="hover:text-teal-700">En Educación & Formación</a></li>
+        <li><a href="/mentoria#cafe" class="hover:text-teal-700">Café Estrategia (30 min)</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 3: Rutas & Hub -->
+    <div class="space-y-4">
+      <h3 class="font-bold text-sm text-slate-900">3. Rutas & Hub</h3>
+      <ul class="space-y-2 text-sm text-slate-600">
+        <li><a href="/rutas" class="hover:text-teal-700">Ver todas las Rutas</a></li>
+        <li><a href="/rutas/comunicacion" class="hover:text-teal-700">01. Comunicación con IA</a></li>
+        <li><a href="/rutas/product" class="hover:text-teal-700">02. Product Management</a></li>
+        <li><a href="/rutas/notebooklm" class="hover:text-teal-700">03. NotebookLM Mastery</a></li>
+        <li><a href="/rutas/empleabilidad" class="hover:text-teal-700">04. Empleabilidad & CV</a></li>
+        <li><a href="/rutas/creacion" class="hover:text-teal-700">05. Creación Visual</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 4: Recursos & Contacto -->
+    <div class="space-y-4">
+      <h3 class="font-bold text-sm text-slate-900">4. Recursos</h3>
+      <ul class="space-y-2 text-sm text-slate-600">
+        <li><a href="/recursos/termometro" class="hover:text-teal-700">Termómetro IA</a></li>
+        <li><a href="/recursos/atajos" class="hover:text-teal-700">Atajos Visuales</a></li>
+        <li><a href="/recursos/biblioteca" class="hover:text-teal-700">Biblioteca Abierta</a></li>
+        <li><a href="/recursos/guias" class="hover:text-teal-700">Guías y Plantillas</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+    <p>© {year} LuciRMe AI · Diseñado con criterio y sobriedad técnica.</p>
+    <div class="flex gap-4">
+      <a href="/terminos" class="hover:text-slate-900">Términos</a>
+      <a href="/privacidad" class="hover:text-slate-900">Privacidad</a>
+      <a href="/etica" class="hover:text-slate-900">Código de Ética de IA</a>
+      <a href="/aviso-legal" class="hover:text-slate-900">Aviso Legal</a>
+    </div>
   </div>
 </footer>
