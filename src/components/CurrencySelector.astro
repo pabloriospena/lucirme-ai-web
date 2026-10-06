@@ -38,11 +38,17 @@
     document.addEventListener('click', (e) => {
       const toggle = e.target.closest('.currency-toggle');
       if (toggle) {
-        console.log("Toggle clicked");
+        console.log("Toggle clicked on element", toggle);
         const menu = toggle.querySelector('.currency-menu');
         if(menu) {
             e.stopPropagation();
-            menu.classList.toggle('hidden');
+            const isOpen = !menu.classList.contains('hidden');
+            // Close all menus
+            document.querySelectorAll('.currency-menu').forEach(el => el.classList.add('hidden'));
+            // Toggle clicked menu
+            if (!isOpen) {
+                menu.classList.remove('hidden');
+            }
         }
         return;
       }
