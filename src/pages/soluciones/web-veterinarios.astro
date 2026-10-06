@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import SobreMi from "../../components/SobreMi.astro";
+import CurrencySelector from "../../components/CurrencySelector.astro";
 import { LINKS } from "../../lib/constants.js";
 
 const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
@@ -311,11 +312,22 @@ const ctaDescuentoWA = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, q
             </ul>
           </div>
           <div class="flex flex-col gap-2">
-            <p class="text-slate-400">Precio habitual: <span class="line-through">$2.150.000 COP</span></p>
-            <p class="text-6xl font-black text-emerald-400">$1.075.000 COP</p>
-            <p class="text-slate-400 mb-6">≈ US$275 para clientes internacionales</p>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-slate-400 text-sm">Elige tu moneda:</span>
+              <CurrencySelector />
+            </div>
+            
+            <div data-currency-price="COP">
+                <p class="text-slate-400">Precio habitual: <span class="line-through">$2.150.000 COP</span></p>
+                <p class="text-6xl font-black text-emerald-400">$1.075.000 COP</p>
+            </div>
+            <div data-currency-price="USD" class="hidden">
+                <p class="text-slate-400">Precio habitual: <span class="line-through">$550 USD</span></p>
+                <p class="text-6xl font-black text-emerald-400">$275 USD</p>
+            </div>
+            
             <button
-              class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-lg hover:bg-emerald-700 transition-colors shadow-sm cursor-pointer w-full"
+              class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-lg hover:bg-emerald-700 transition-colors shadow-sm cursor-pointer w-full mt-4"
               onclick="window.location.href='${ctaDescuentoWA}'"
             >
               <span>Quiero mi página</span>

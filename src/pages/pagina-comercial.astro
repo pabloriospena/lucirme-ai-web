@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SobreMi from "../components/SobreMi.astro";
+import CurrencySelector from "../components/CurrencySelector.astro";
 import { LINKS } from "../lib/constants.js";
 
 const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
@@ -120,12 +121,18 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
             </div>
 
             <div class="p-3 bg-slate-100 rounded-xl text-center">
-              <span class="text-xs font-semibold text-slate-900"
-                >Lanzamiento 50% OFF:</span
-              >
-              <span class="font-bold text-emerald-600 text-xs ml-1"
-                >$1.075.000 COP</span
-              >
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-slate-500 text-[10px] font-mono">Moneda:</span>
+                <CurrencySelector />
+              </div>
+              <div data-currency-price="COP">
+                <span class="text-xs font-semibold text-slate-900">Lanzamiento 50% OFF:</span>
+                <span class="font-bold text-emerald-600 text-xs ml-1">$1.075.000 COP</span>
+              </div>
+              <div data-currency-price="USD" class="hidden">
+                <span class="text-xs font-semibold text-slate-900">Lanzamiento 50% OFF:</span>
+                <span class="font-bold text-emerald-600 text-xs ml-1">$275 USD</span>
+              </div>
               <span class="text-[10px] text-slate-500 font-mono block mt-0.5"
                 >Hasta el viernes 9 de octubre</span
               >
@@ -288,7 +295,6 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
         
         <h2 class="text-3xl font-bold mb-4">Una inversión clara y sin cobros ocultos.</h2>
         <p class="text-slate-400 mb-8 max-w-2xl">Aprovecha el precio especial de lanzamiento por tiempo limitado. Oferta válida hasta el viernes 9 de octubre.</p>
-        
         <div class="grid md:grid-cols-2 gap-8 mb-8 items-center">
           <div>
             <h3 class="font-bold text-lg mb-4">Tu Página Comercial incluye:</h3>
@@ -304,11 +310,22 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
             </ul>
           </div>
           <div class="flex flex-col gap-2">
-            <p class="text-slate-400">Precio habitual: <span class="line-through">$2.150.000 COP</span></p>
-            <p class="text-6xl font-black text-emerald-400">$1.075.000 COP</p>
-            <p class="text-slate-400 mb-6">≈ US$275 para clientes internacionales</p>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-slate-400 text-sm">Elige tu moneda:</span>
+              <CurrencySelector />
+            </div>
+            
+            <div data-currency-price="COP">
+                <p class="text-slate-400">Precio habitual: <span class="line-through">$2.150.000 COP</span></p>
+                <p class="text-6xl font-black text-emerald-400">$1.075.000 COP</p>
+            </div>
+            <div data-currency-price="USD" class="hidden">
+                <p class="text-slate-400">Precio habitual: <span class="line-through">$550 USD</span></p>
+                <p class="text-6xl font-black text-emerald-400">$275 USD</p>
+            </div>
+            
             <button
-              class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-lg hover:bg-emerald-700 transition-colors shadow-sm cursor-pointer w-full"
+              class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-lg hover:bg-emerald-700 transition-colors shadow-sm cursor-pointer w-full mt-4"
               onclick="window.startCommercialForm()"
             >
               <span>Quiero mi página</span>
