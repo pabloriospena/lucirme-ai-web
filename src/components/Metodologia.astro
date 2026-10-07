@@ -1,7 +1,7 @@
 ---
 const steps = [
   { num: "01", title: "Entiendo tu negocio", desc: "Investigo a fondo la realidad operativa y comercial de tu empresa.", details: ["Cliente ideal", "Motivaciones de compra", "Objeciones", "Propuesta de valor", "Servicios y diferenciales"], footer: "El objetivo: entender qué debe comunicar la página." },
-  { num: "02", title: "Reviso cómo estás compitiendo", desc: "Analizo el entorno de mercado y el lenguaje de otros oferentes.", details: ["Competidores", "Reputación online", "Presencia digital", "Qué están comunicando otros negocios"], callout: "PREGUNTA CLAVE: ¿Qué están diciendo todos y qué oportunidad están dejando libre?" },
+  { num: "02", title: "Reviso cómo estás compitiendo", desc: "Analizo el entorno de mercado y el lenguaje de otros oferentes.", details: ["Competidores", "Reputación online", "Presencia digital", "Qué están comunicando otros negocios"], callout: "¿Qué están diciendo todos y qué oportunidad están dejando libre?" },
   { num: "03", title: "Encuentro la oportunidad", desc: "Separo datos de suposiciones para hallar tu ángulo comercial único.", details: ["Qué deberíamos destacar", "Qué evitar copiar", "Qué hacer diferente", "Posicionamiento sugerido", "Hallazgos sobre el cliente"], mono: "HECHOS → PATRONES → INFERENCIAS", footer: "Aquí separo hechos, patrones e inferencias para no diseñar basándome en suposiciones." },
   { num: "04", title: "Convierto eso en una página", desc: "Arquitectura de información, redacción y diseño visual armónico.", details: ["Arquitectura y secciones", "Jerarquía de información", "Copy y tono de voz", "CTAs y flujo hacia WhatsApp"], pills: ["Colores", "Tipografía", "espaciado", "componentes", "imágenes", "iconografía"], footer: "El diseño nace de la investigación, no de plantillas al azar." },
   { num: "05", title: "La construyo y la dejo funcionando", desc: "Desarrollo técnico, dominio, pruebas y entrega llave en mano.", details: ["Página completamente desarrollada", "Responsive para celular, tablet y computador", "WhatsApp integrado", "Formularios cuando hagan sentido", "Navegación y enlaces funcionando", "Dominio conectado y publicación", "Revisión final y ajustes"] }
@@ -46,7 +46,7 @@ const steps = [
             <ul class="space-y-2">
               {step.details.map(d => <li class="flex items-start gap-2"><span class="text-emerald-600 font-bold">✓</span> {d}</li>)}
             </ul>
-            {step.callout && <div class="bg-slate-100 p-3 rounded-lg text-slate-800 font-medium"><strong>PREGUNTA CLAVE:</strong><br>{step.callout}</div>}
+            {step.callout && <div class="bg-slate-100 p-3 rounded-lg text-slate-800 font-medium">{step.callout}</div>}
             {step.mono && <div class="font-mono bg-slate-100 p-3 rounded-lg text-[10px] text-center font-bold tracking-tight">{step.mono}</div>}
             {step.footer && <p class="text-[10px] text-slate-500 italic pt-2 border-t border-slate-100">{step.footer}</p>}
           </div>
