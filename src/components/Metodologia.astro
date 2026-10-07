@@ -7,50 +7,22 @@ const steps = [
   { num: "05", title: "La construyo y la dejo funcionando", desc: "Desarrollo técnico, dominio, pruebas y entrega llave en mano.", details: ["Página completamente desarrollada", "Responsive para celular, tablet y computador", "WhatsApp integrado", "Formularios cuando hagan sentido", "Navegación y enlaces funcionando", "Dominio conectado y publicación", "Revisión final y ajustes"] }
 ];
 ---
-<section class="w-full bg-white py-16 sm:py-20" id="metodologia">
-  <div class="max-w-7xl mx-auto px-6">
-    
-    <!-- Encabezado -->
-    <div class="mb-16">
-      <span class="font-mono text-[11px] font-bold tracking-wider text-teal-800 uppercase bg-teal-50 px-2 py-0.5 rounded">METODOLOGÍA & CRITERIO</span>
-      <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 mt-6">
-        <h2 class="text-4xl lg:text-5xl font-bold tracking-tight text-[#0F172A] leading-tight max-w-2xl">
-          No empiezo diseñando. Primero entiendo el negocio.
-        </h2>
-        <div class="border border-slate-200 p-6 rounded-xl max-w-sm flex-shrink-0">
-          <span class="font-mono text-[10px] font-bold text-slate-500 uppercase block mb-1">IDEA RECTORA</span>
-          <p class="font-semibold text-slate-900 leading-snug">Primero entendemos el negocio. Después construimos la página.</p>
-        </div>
-      </div>
-      <p class="text-lg text-slate-600 mt-6 max-w-2xl leading-relaxed">
-        Antes de abrir Stitch o empezar a construir, investigo qué debería decir la página y qué necesita ver un cliente para tomar una decisión.
-      </p>
-    </div>
-
-    <!-- Timeline Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 items-start" id="metodologia-container">
+<section class="w-full bg-white py-16" id="metodologia">
+  <div class="max-w-4xl mx-auto px-6">
+    <h2 class="text-3xl font-bold mb-8">Metodología</h2>
+    <div class="space-y-4">
       {steps.map((step, i) => (
-        <div class="flex flex-col h-full">
-          <!-- Step Header -->
-          <div class="border-t-4 border-teal-700 pt-4 mb-6">
-            <span class="font-mono text-sm text-slate-400 block mb-1">PASO {step.num}</span>
-            <h3 class="text-lg font-bold text-slate-900 mb-2">{step.title}</h3>
-            <p class="text-xs text-slate-600 mb-4">{step.desc}</p>
-          </div>
-
-          <!-- Content Card -->
-          <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm text-xs text-slate-700 space-y-4">
-            <h4 class="font-bold text-slate-900 uppercase tracking-wide text-[10px]">
-              {i === 0 ? "INVESTIGO:" : i === 1 ? "ANALIZO:" : i === 2 ? "CON LA INVESTIGACIÓN IDENTIFICO:" : i === 3 ? "DEFINO:" : "ENTREGO:"}
-            </h4>
-            <ul class="space-y-2">
-              {step.details.map(d => <li class="flex items-start gap-2"><span class="text-emerald-600 font-bold">✓</span> {d}</li>)}
+        <details class="group bg-slate-50 p-6 rounded-xl border border-slate-200">
+          <summary class="font-bold text-lg cursor-pointer">
+            {step.num}. {step.title}
+          </summary>
+          <div class="mt-4 text-slate-600">
+            <p>{step.desc}</p>
+            <ul class="list-disc ml-5 mt-2">
+              {step.details.map(d => <li>{d}</li>)}
             </ul>
-            {step.callout && <div class="bg-slate-100 p-3 rounded-lg text-slate-800 font-medium">{step.callout}</div>}
-            {step.mono && <div class="font-mono bg-slate-100 p-3 rounded-lg text-[10px] text-center font-bold tracking-tight">{step.mono}</div>}
-            {step.footer && <p class="text-[10px] text-slate-500 italic pt-2 border-t border-slate-100">{step.footer}</p>}
           </div>
-        </div>
+        </details>
       ))}
     </div>
   </div>

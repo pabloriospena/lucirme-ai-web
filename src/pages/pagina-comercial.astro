@@ -217,70 +217,85 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
       </div>
     </section>
 
-    <!-- FORMULARIO CONVERSACIONAL (WIZARD PASO A PASO) -->
-    <section
-      class="w-full max-w-7xl mx-auto px-6 py-16 scroll-mt-20"
-      id="diagnostico-conversacional"
-    >
-      <div class="max-w-3xl mx-auto flex flex-col gap-6">
-        <!-- Contenedor Principal del Wizard Conversacional -->
-        <div
-          class="bg-white rounded-2xl border border-slate-200 shadow-md p-6 md:p-8 relative min-h-[420px] flex flex-col justify-between"
-          id="form-container"
-        >
-          <!-- Header del Formulario / Barra de Progreso -->
-          <div
-            class="flex flex-col gap-2 pb-4 border-b border-slate-100"
-            id="wizard-header"
-          >
+    <!-- COMPONENTE DIAGNÓSTICO CONVERSACIONAL (BusinessDiagnostic) -->
+    <section class="w-full max-w-7xl mx-auto px-6 py-12 scroll-mt-20" id="diagnostico-conversacional">
+      <div class="max-w-2xl mx-auto flex flex-col gap-6">
+
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-md p-6 md:p-8 relative min-h-[400px] flex flex-col justify-between" id="bus-wizard-card">
+          <!-- Wizard Header -->
+          <div class="flex flex-col gap-2 pb-4 border-b border-slate-100" id="bus-wizard-header">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
-                ></span>
-                <span
-                  class="font-mono text-xs font-semibold text-slate-900 uppercase"
-                  id="step-counter">Paso 1 de 9</span
-                >
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="font-mono text-xs font-semibold text-slate-900 uppercase" id="bus-step-counter">Paso 1 de 4</span>
               </div>
-              <span class="text-xs font-mono text-slate-400" id="step-time"
-                >~2 min</span
-              >
+              <span class="text-xs font-mono text-slate-400" id="bus-step-time">~1 min</span>
             </div>
             <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
-              <div
-                class="bg-emerald-600 h-1.5 rounded-full transition-all duration-300 ease-out"
-                id="progress-bar"
-                style="width: 11.11%;"
-              >
+              <div class="bg-emerald-600 h-1.5 rounded-full transition-all duration-300 ease-out" id="bus-progress-bar" style="width: 25%;"></div>
+            </div>
+          </div>
+
+          <!-- PASO 1: NOMBRE -->
+          <div class="bus-step flex flex-col gap-4 py-4" id="bus-step-1">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 1 · Identidad</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">Cuéntame un poco de tu negocio 💼</h3>
+              <p class="text-sm text-slate-600">¿Cómo se llama tu negocio?</p>
+            </div>
+            <div class="flex flex-col gap-3 pt-2">
+              <input class="w-full text-sm px-4 py-3 rounded-xl border border-slate-300 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 outline-none bg-white transition-colors" id="bus-input-nombre" placeholder="Ej. Mi Tienda / Servicios Profesionales..." type="text" />
+              <button class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors cursor-pointer self-start" onclick="window.busNextStep(1)" type="button"><span>Continuar →</span></button>
+            </div>
+          </div>
+
+          <!-- PASO 2: TIPO DE NEGOCIO -->
+          <div class="bus-step hidden flex flex-col gap-4 py-4" id="bus-step-2">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 2 · Categoría</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿A qué se dedica tu negocio?</h3>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2" id="group-bus-tipo">
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.busSelectTipo('Veterinaria', this)" type="button">Veterinaria</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.busSelectTipo('Salud y bienestar', this)" type="button">Salud y bienestar</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.busSelectTipo('Educación', this)" type="button">Educación</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.busSelectTipo('Restaurante / gastronomía', this)" type="button">Restaurante / gastronomía</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.busSelectTipo('Profesional independiente', this)" type="button">Profesional independiente</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.busSelectTipo('Servicios para empresas', this)" type="button">Servicios para empresas</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.busSelectTipo('Comercio / tienda', this)" type="button">Comercio / tienda</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.busSelectTipo('Inmobiliaria', this)" type="button">Inmobiliaria</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.busSelectTipo('Belleza y estética', this)" type="button">Belleza y estética</button>
+              <button class="diag-option px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 cursor-pointer" onclick="window.busSelectTipo('Otro', this)" type="button">Otro</button>
+            </div>
+          </div>
+
+          <!-- PASO 3: CONTACTO -->
+          <div class="bus-step hidden flex flex-col gap-4 py-4" id="bus-step-3">
+            <div class="flex flex-col gap-1.5">
+              <span class="font-mono text-xs font-semibold text-teal-800 uppercase">Paso 3 · Contacto</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-900">¿A dónde te envío la propuesta?</h3>
+            </div>
+            <form class="flex flex-col gap-3 pt-2" id="bus-form-lead">
+              <div class="flex flex-col gap-1">
+                <input class="w-full text-sm px-4 py-3 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white" id="bus-input-email" placeholder="Correo electrónico" required type="email" />
               </div>
-            </div>
+              <div class="flex flex-col gap-1">
+                <input class="w-full text-sm px-4 py-3 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none bg-white" id="bus-input-whatsapp" placeholder="WhatsApp (Ej. +57300...)" required type="tel" />
+              </div>
+              <button class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors cursor-pointer" type="submit"><span>Enviar solicitud →</span></button>
+            </form>
           </div>
 
-          <!-- PANTALLA INTRO PRE-FORMULARIO -->
-          <div class="wizard-step flex flex-col gap-5 py-4" id="step-intro">
-            <div class="flex flex-col gap-2">
-              <h2 class="text-2xl md:text-3xl font-bold text-slate-900">
-                Quiero conocer tu negocio.
-              </h2>
-              <p class="text-sm text-slate-600 leading-relaxed">
-                Preparé unas preguntas muy sencillas para entender qué haces, qué tienes hoy y qué estás buscando. No es un formulario técnico ni tienes que saber qué necesitas exactamente.
-              </p>
-              <p class="text-sm text-slate-600 leading-relaxed font-bold">
-                Cuéntame primero. Después vemos qué tiene sentido hacer.
-              </p>
-            </div>
-            <div class="pt-2">
-              <button
-                class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
-                onclick="window.startSteps()"
-                type="button"
-              >
-                <span>Quiero contarle sobre mi negocio</span>
-              </button>
-            </div>
+          <!-- PASO 4: RESULTADO -->
+          <div class="bus-step hidden flex flex-col gap-4 py-4" id="bus-step-4">
+            <h3 class="text-xl font-bold text-slate-900">¡Recibido!</h3>
+            <p class="text-sm text-slate-600">Te contactaré pronto por WhatsApp para conversar sobre tu negocio.</p>
           </div>
 
-          <!-- PASOS... -->
+          <!-- Wizard Footer Navigation -->
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between mt-2">
+            <button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50 cursor-pointer" disabled id="bus-btn-prev" onclick="window.busPrevStep()" type="button">Anterior</button>
+          </div>
         </div>
       </div>
     </section>
@@ -289,68 +304,73 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
 
     <!-- SECCIÓN: SIN SORPRESAS -->
     <section class="w-full max-w-7xl mx-auto px-6 py-16" id="precios">
-      <div class="bg-[#111827] p-8 md:p-12 rounded-3xl text-white">
-        <div class="flex flex-wrap gap-2 mb-6">
-            <span class="bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">LANZAMIENTO</span>
-            <span class="bg-amber-500 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">50% OFF</span>
-            <span class="bg-slate-700 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Cupos limitados</span>
-        </div>
-        
-        <h2 class="text-3xl font-bold mb-4">Una inversión clara y sin cobros ocultos.</h2>
-        <p class="text-slate-400 mb-8 max-w-2xl">Aprovecha el precio especial de lanzamiento por tiempo limitado. Oferta válida hasta el viernes 9 de octubre.</p>
-        <div class="grid md:grid-cols-2 gap-8 mb-8 items-center">
-          <div>
-            <h3 class="font-bold text-lg mb-4">Tu Página Comercial incluye:</h3>
-            <ul class="space-y-3 text-slate-300">
-              <li>Una página hecha para tu negocio</li>
-              <li>Se ve bien en cualquier pantalla</li>
-              <li>Dominio y configuración</li>
-              <li>WhatsApp integrado</li>
-              <li>Formulario de contacto</li>
-              <li>Tus redes sociales</li>
-              <li>SEO básico</li>
-              <li>Te explico cómo funciona</li>
-            </ul>
-          </div>
-          <div class="flex flex-col gap-2">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-slate-400 text-sm">Elige tu moneda:</span>
-              <CurrencySelector />
-            </div>
-            
-            <div data-currency-price="COP">
-                <p class="text-slate-400">Precio habitual: <span class="line-through">$2.150.000 COP</span></p>
-                <p class="text-6xl font-black text-emerald-400">$1.075.000 COP</p>
-            </div>
-            <div data-currency-price="USD" class="hidden">
-                <p class="text-slate-400">Precio habitual: <span class="line-through">$710 USD</span></p>
-                <p class="text-6xl font-black text-emerald-400">$305 USD</p>
-            </div>
-            
-            <button
-              class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-emerald-600 text-white font-semibold text-lg hover:bg-emerald-700 transition-colors shadow-sm cursor-pointer w-full mt-4"
-              onclick="window.startCommercialForm()"
-            >
-              <span>Quiero mi página</span>
-            </button>
-            <p class="text-slate-500 text-sm text-center mt-2">Respuesta directa por WhatsApp con Pablo Ríos.</p>
-          </div>
-        </div>
-        <p class="text-slate-500 text-sm">Oferta disponible hasta el 9 de octubre.</p>
-      </div>
+      <!-- ... -->
     </section>
 
     <SobreMi />
-
   </main>
   
-  <!-- STICKY BAR -->
-  <div class="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-slate-200 p-4 shadow-lg md:hidden">
-      <button
-        class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors cursor-pointer"
-        onclick="window.startCommercialForm()"
-      >
-        <span>Quiero mi página</span>
-      </button>
-  </div>
+  <script is:inline>
+    let busStep = 1;
+    const busState = { nombre: '', tipo: '', email: '', whatsapp: '' };
+
+    function busGoToStep(step) {
+      document.querySelectorAll('.bus-step').forEach(el => el.classList.add('hidden'));
+      busStep = step;
+      document.getElementById('bus-step-' + step).classList.remove('hidden');
+      document.getElementById('bus-progress-bar').style.width = (step / 4 * 100) + '%';
+      document.getElementById('bus-step-counter').innerText = 'Paso ' + step + ' de 4';
+      document.getElementById('bus-btn-prev').disabled = step === 1;
+    }
+
+    window.busNextStep = (step) => {
+      if (step === 1) {
+        busState.nombre = document.getElementById('bus-input-nombre').value;
+        if (!busState.nombre) return alert('Ingresa el nombre');
+        busGoToStep(2);
+      }
+    };
+
+    window.busSelectTipo = (val, btn) => {
+      busState.tipo = val;
+      busGoToStep(3);
+    };
+
+    document.getElementById('bus-form-lead').onsubmit = async (e) => {
+      e.preventDefault();
+      busState.email = document.getElementById('bus-input-email').value;
+      busState.whatsapp = document.getElementById('bus-input-whatsapp').value;
+      
+      try {
+        const res = await fetch('/api/page-commercial-lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: 'Cliente',
+            email: busState.email,
+            whatsapp: busState.whatsapp,
+            empresa: busState.nombre,
+            tipo_de_página: busState.tipo,
+            fuente: 'Landing pagina-comercial',
+          }),
+        });
+
+        if (res.ok) {
+            busGoToStep(4);
+        } else {
+            alert('Error al enviar, intenta de nuevo.');
+        }
+      } catch (err) {
+        console.error('Error:', err);
+      }
+    };
+
+    window.busPrevStep = () => {
+      if (busStep > 1) busGoToStep(busStep - 1);
+    };
+    
+    window.startCommercialForm = () => {
+        document.getElementById('diagnostico-conversacional').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
 </Layout>
