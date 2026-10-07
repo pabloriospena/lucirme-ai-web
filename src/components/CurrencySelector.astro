@@ -15,20 +15,16 @@
 </div>
 
 <script is:inline>
-  console.log("CurrencySelector initialized");
-  (function initCurrencySelectors() {
+  // Guard: only initialize once even when multiple instances exist on the page
+  if (!window.__currencySelectorInit) {
+    window.__currencySelectorInit = true;
+
     function setCurrency(currency) {
-      console.log("Setting currency to:", currency);
       localStorage.setItem('user_currency', currency);
-      
-      const priceElements = document.querySelectorAll('[data-currency-price]');
-      priceElements.forEach(el => {
+      document.querySelectorAll('[data-currency-price]').forEach(el => {
         el.classList.add('hidden');
-        if (el.dataset.currencyPrice === currency) {
-          el.classList.remove('hidden');
-        }
+        if (el.dataset.currencyPrice === currency) el.classList.remove('hidden');
       });
-      
       document.querySelectorAll('.current-currency-label').forEach(el => {
         el.innerText = currency === 'COP' ? '🇨🇴 COP' : '🌎 USD';
       });
@@ -36,55 +32,38 @@
     }
 
     document.addEventListener('click', (e) => {
-      // Handle Toggle
+      // Check currency button FIRST (it lives inside .currency-toggle)
+      const btn = e.target.closest('[data-currency]');
+      if (btn) {
+        setCurrency(btn.dataset.currency);
+        return;
+      }
+
+      // Then check toggle
       const toggle = e.target.closest('.currency-toggle');
       if (toggle) {
-        console.log("Toggle clicked on element", toggle);
         const menu = toggle.querySelector('.currency-menu');
-        if(menu) {
-            e.stopPropagation();
-            const isOpen = !menu.classList.contains('hidden');
-            // Close all menus
-            document.querySelectorAll('.currency-menu').forEach(el => el.classList.add('hidden'));
-            // Toggle clicked menu
-            if (!isOpen) {
-                menu.classList.remove('hidden');
-            }
+        if (menu) {
+          const isOpen = !menu.classList.contains('hidden');
+          document.querySelectorAll('.currency-menu').forEach(el => el.classList.add('hidden'));
+          if (!isOpen) menu.classList.remove('hidden');
         }
         return;
       }
-      
-      // Handle Selection
-      const btn = e.target.closest('[data-currency]');
-      if (btn) {
-        console.log("Currency button clicked:", btn.dataset.currency);
-        setCurrency(btn.dataset.currency);
-        // Ensure menu closes after selection
-        document.querySelectorAll('.currency-menu').forEach(el => el.classList.add('hidden'));
-        return;
-      }
-      
-      // Close all menus if clicking elsewhere
+
+      // Close all if clicking elsewhere
       document.querySelectorAll('.currency-menu').forEach(el => el.classList.add('hidden'));
     });
 
-    // Initialize based on saved preference or IP detection
+    // Initialize from saved preference or IP detection
     const saved = localStorage.getItem('user_currency');
     if (saved) {
-      console.log("Saved currency found:", saved);
       setCurrency(saved);
     } else {
-      console.log("No saved currency, detecting...");
       fetch('https://ipapi.co/json/')
         .then(res => res.json())
-        .then(data => {
-            console.log("IP detection result:", data.country_code);
-            setCurrency(data.country_code === 'CO' ? 'COP' : 'USD');
-        })
-        .catch(err => {
-            console.error("IP detection failed, defaulting to USD", err);
-            setCurrency('USD');
-        });
+        .then(data => setCurrency(data.country_code === 'CO' ? 'COP' : 'USD'))
+        .catch(() => setCurrency('USD'));
     }
-  })();
+  }
 </script>
