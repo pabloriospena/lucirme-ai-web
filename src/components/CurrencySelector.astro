@@ -36,6 +36,7 @@
     }
 
     document.addEventListener('click', (e) => {
+      // Handle Toggle
       const toggle = e.target.closest('.currency-toggle');
       if (toggle) {
         console.log("Toggle clicked on element", toggle);
@@ -53,13 +54,17 @@
         return;
       }
       
+      // Handle Selection
       const btn = e.target.closest('[data-currency]');
       if (btn) {
         console.log("Currency button clicked:", btn.dataset.currency);
         setCurrency(btn.dataset.currency);
+        // Ensure menu closes after selection
+        document.querySelectorAll('.currency-menu').forEach(el => el.classList.add('hidden'));
         return;
       }
       
+      // Close all menus if clicking elsewhere
       document.querySelectorAll('.currency-menu').forEach(el => el.classList.add('hidden'));
     });
 
