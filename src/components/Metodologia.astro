@@ -1,210 +1,57 @@
 ---
-
+const steps = [
+  { num: "01", title: "Entiendo tu negocio", desc: "Investigo a fondo la realidad operativa y comercial de tu empresa.", details: ["Cliente ideal", "Motivaciones de compra", "Objeciones", "Propuesta de valor", "Servicios y diferenciales"], footer: "El objetivo: entender qué debe comunicar la página." },
+  { num: "02", title: "Reviso cómo estás compitiendo", desc: "Analizo el entorno de mercado y el lenguaje de otros oferentes.", details: ["Competidores", "Reputación online", "Presencia digital", "Qué están comunicando otros negocios"], callout: "PREGUNTA CLAVE: ¿Qué están diciendo todos y qué oportunidad están dejando libre?" },
+  { num: "03", title: "Encuentro la oportunidad", desc: "Separo datos de suposiciones para hallar tu ángulo comercial único.", details: ["Qué deberíamos destacar", "Qué evitar copiar", "Qué hacer diferente", "Posicionamiento sugerido", "Hallazgos sobre el cliente"], mono: "HECHOS → PATRONES → INFERENCIAS", footer: "Aquí separo hechos, patrones e inferencias para no diseñar basándome en suposiciones." },
+  { num: "04", title: "Convierto eso en una página", desc: "Arquitectura de información, redacción y diseño visual armónico.", details: ["Arquitectura y secciones", "Jerarquía de información", "Copy y tono de voz", "CTAs y flujo hacia WhatsApp"], pills: ["Colores", "Tipografía", "espaciado", "componentes", "imágenes", "iconografía"], footer: "El diseño nace de la investigación, no de plantillas al azar." },
+  { num: "05", title: "La construyo y la dejo funcionando", desc: "Desarrollo técnico, dominio, pruebas y entrega llave en mano.", details: ["Página completamente desarrollada", "Responsive para celular, tablet y computador", "WhatsApp integrado", "Formularios cuando hagan sentido", "Navegación y enlaces funcionando", "Dominio conectado y publicación", "Revisión final y ajustes"] }
+];
 ---
-
-<section class="w-full bg-[#F8FAFC] py-16 sm:py-20 lg:py-24" id="metodologia">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Encabezado de la Sección -->
-    <div class="mb-12 lg:mb-16">
-      <span
-        class="font-mono text-[11px] font-bold tracking-wider text-teal-700 uppercase"
-        >Metodología & Criterio</span
-      >
-      <h2
-        class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900 mt-3 mb-6 leading-tight max-w-3xl"
-      >
-        No empiezo diseñando. Primero entiendo el negocio.
-      </h2>
-      <p class="text-lg text-slate-700 max-w-2xl mb-8 leading-relaxed">
-        Antes de empezar a construir, investigo qué debería decir la página y
-        qué necesita ver un cliente para tomar una decisión.
-      </p>
-
-      <!-- Idea Rectora -->
-      <div
-        class="border border-slate-200 bg-white p-6 rounded-xl max-w-2xl shadow-sm"
-      >
-        <span
-          class="font-mono text-[10px] font-bold text-slate-500 tracking-wider uppercase block mb-1"
-          >Idea Central</span
-        >
-        <p class="text-xl font-semibold text-slate-900 leading-snug">
-          Primero entendemos el negocio. Después construimos la página.
-        </p>
+<section class="w-full bg-white py-16 sm:py-20" id="metodologia">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <!-- Encabezado -->
+    <div class="mb-16">
+      <span class="font-mono text-[11px] font-bold tracking-wider text-teal-800 uppercase bg-teal-50 px-2 py-0.5 rounded">METODOLOGÍA & CRITERIO</span>
+      <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 mt-6">
+        <h2 class="text-4xl lg:text-5xl font-bold tracking-tight text-[#0F172A] leading-tight max-w-2xl">
+          No empiezo diseñando. Primero entiendo el negocio.
+        </h2>
+        <div class="border border-slate-200 p-6 rounded-xl max-w-sm flex-shrink-0">
+          <span class="font-mono text-[10px] font-bold text-slate-500 uppercase block mb-1">IDEA RECTORA</span>
+          <p class="font-semibold text-slate-900 leading-snug">Primero entendemos el negocio. Después construimos la página.</p>
+        </div>
       </div>
+      <p class="text-lg text-slate-600 mt-6 max-w-2xl leading-relaxed">
+        Antes de abrir Stitch o empezar a construir, investigo qué debería decir la página y qué necesita ver un cliente para tomar una decisión.
+      </p>
     </div>
 
-    <!-- Pasos Interactivos -->
-    <div class="space-y-4" id="accordion-container">
-      {
-        [
-          {
-            num: "01",
-            title: "Entiendo tu negocio",
-            desc: "Investigo a fondo la realidad operativa y comercial de tu empresa.",
-            details: [
-              "Cliente ideal",
-              "Motivaciones de compra",
-              "Objeciones frecuentes",
-              "Propuesta de valor real",
-              "Servicios y diferenciales clave",
-            ],
-            conclusion: "El objetivo: entender qué debe comunicar la página.",
-          },
-          {
-            num: "02",
-            title: "Reviso cómo estás compitiendo",
-            desc: "Analizo el entorno de mercado y el lenguaje de otros oferentes.",
-            details: [
-              "Competidores directos e indirectos",
-              "Reputación online actual",
-              "Presencia digital existente",
-              "Qué están comunicando otros negocios",
-            ],
-            callout:
-              "¿Qué están diciendo todos y qué oportunidad están dejando libre?",
-          },
-          {
-            num: "03",
-            title: "Encuentro la oportunidad",
-            desc: "Separo datos de suposiciones para hallar tu ángulo comercial único.",
-            details: [
-              "Qué deberíamos destacar con prioridad",
-              "Qué deberíamos evitar copiar del sector",
-              "Qué podemos hacer diferente",
-              "Posicionamiento comercial sugerido",
-              "Hallazgos reales sobre el cliente potencial",
-            ],
-            mono: "[ HECHOS ] → [ PATRONES ] → [ INFERENCIAS ]",
-            conclusion:
-              "Aquí separo hechos, patrones e inferencias para no diseñar basándome en suposiciones.",
-          },
-          {
-            num: "04",
-            title: "Convierto eso en una página",
-            desc: "Arquitectura de información, redacción y diseño visual armónico.",
-            details: [
-              "Arquitectura del sitio",
-              "Secciones estratégicas",
-              "Jerarquía de información",
-              "Copy y redacción persuasiva",
-              "Tono de comunicación",
-              "Llamados a la acción (CTAs)",
-              "Flujo de conversión hacia WhatsApp",
-            ],
-            conclusion:
-              "Aquí empieza el diseño, pero nace estrictamente de todo lo investigado anteriormente.",
-          },
-          {
-            num: "05",
-            title: "La construyo y la dejo funcionando",
-            desc: "Desarrollo técnico, dominio, pruebas y entrega llave en mano.",
-            details: [
-              "Desarrollada y optimizada",
-              "100% Responsive",
-              "WhatsApp integrado",
-              "Formularios de captura",
-              "Navegación auditada",
-              "Conexión técnica de dominio",
-              "Certificado SSL y publicación",
-            ],
-            conclusion:
-              "Entrego una herramienta comercial lista para funcionar.",
-          },
-        ].map((step, index) => (
-          <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-            <button
-              class="w-full text-left p-6 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 accordion-trigger focus:outline-none"
-              aria-expanded="false"
-              data-index={index}
-            >
-              <div class="flex items-center gap-4">
-                <span class="font-mono text-2xl font-bold text-slate-300">
-                  {step.num}
-                </span>
-                <div>
-                  <h3 class="text-xl font-bold text-slate-900">{step.title}</h3>
-                  <p class="text-sm text-slate-600 mt-1">{step.desc}</p>
-                </div>
-              </div>
-              <span class="sm:ml-auto text-teal-700 text-sm font-semibold whitespace-nowrap accordion-label">
-                Ver detalles →
-              </span>
-            </button>
-
-            <div class="accordion-content max-h-0 opacity-0 transition-all duration-500 ease-in-out px-6 pb-6">
-              <div class="pt-4 border-t border-slate-100 text-slate-700 text-sm space-y-4">
-                <p class="font-bold">Investigo:</p>
-                <ul class="grid sm:grid-cols-2 gap-2">
-                  {step.details.map((d) => (
-                    <li class="flex items-center gap-2">
-                      <span class="text-emerald-600">✓</span> {d}
-                    </li>
-                  ))}
-                </ul>
-                {step.callout && (
-                  <p class="font-semibold text-orange-700 bg-orange-50 p-4 rounded-lg border border-orange-100">
-                    «{step.callout}»
-                  </p>
-                )}
-                {step.mono && (
-                  <p class="font-mono bg-slate-900 text-white p-4 rounded-lg text-xs">
-                    {step.mono}
-                  </p>
-                )}
-                <p class="italic text-slate-500 font-medium">
-                  {step.conclusion}
-                </p>
-              </div>
-            </div>
+    <!-- Timeline Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 items-start" id="metodologia-container">
+      {steps.map((step, i) => (
+        <div class="flex flex-col h-full">
+          <!-- Step Header -->
+          <div class="border-t-4 border-teal-700 pt-4 mb-6">
+            <span class="font-mono text-sm text-slate-400 block mb-1">PASO {step.num}</span>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">{step.title}</h3>
+            <p class="text-xs text-slate-600 mb-4">{step.desc}</p>
           </div>
-        ))
-      }
-    </div>
 
-    <!-- Cierre Conceptual -->
-    <div
-      class="bg-slate-100/80 border border-slate-200 rounded-xl p-4 sm:p-6 text-center my-12"
-    >
-      <p
-        class="font-mono text-xs sm:text-sm font-medium text-slate-700 tracking-tight"
-      >
-        Investigo → encuentro la oportunidad → defino qué decir → diseño →
-        desarrollo → publico
-      </p>
-    </div>
-
-    <div
-      class="bg-white border border-teal-200 p-8 rounded-xl text-center shadow-sm max-w-3xl mx-auto"
-    >
-      <p
-        class="text-lg sm:text-xl font-semibold text-slate-900 leading-relaxed"
-      >
-        No te entrego solamente una página. Te entrego una página construida
-        alrededor de lo que tu negocio necesita comunicar y de lo que tu cliente
-        necesita entender.
-      </p>
+          <!-- Content Card -->
+          <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm text-xs text-slate-700 space-y-4">
+            <h4 class="font-bold text-slate-900 uppercase tracking-wide text-[10px]">
+              {i === 0 ? "INVESTIGO:" : i === 1 ? "ANALIZO:" : i === 2 ? "CON LA INVESTIGACIÓN IDENTIFICO:" : i === 3 ? "DEFINO:" : "ENTREGO:"}
+            </h4>
+            <ul class="space-y-2">
+              {step.details.map(d => <li class="flex items-start gap-2"><span class="text-emerald-600 font-bold">✓</span> {d}</li>)}
+            </ul>
+            {step.callout && <div class="bg-slate-100 p-3 rounded-lg text-slate-800 font-medium"><strong>PREGUNTA CLAVE:</strong><br>{step.callout}</div>}
+            {step.mono && <div class="font-mono bg-slate-100 p-3 rounded-lg text-[10px] text-center font-bold tracking-tight">{step.mono}</div>}
+            {step.footer && <p class="text-[10px] text-slate-500 italic pt-2 border-t border-slate-100">{step.footer}</p>}
+          </div>
+        </div>
+      ))}
     </div>
   </div>
 </section>
-
-<script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
-    const container = document.getElementById("accordion-container");
-
-    container.addEventListener("click", (e) => {
-      const trigger = e.target.closest(".accordion-trigger");
-      if (!trigger) return;
-
-      const content = trigger.nextElementSibling;
-      const label = trigger.querySelector(".accordion-label");
-      const expanded = trigger.getAttribute("aria-expanded") === "true";
-
-      // Toggle
-      trigger.setAttribute("aria-expanded", !expanded);
-      content.style.maxHeight = expanded ? null : content.scrollHeight + "px";
-      content.style.opacity = expanded ? "0" : "1";
-      label.innerText = expanded ? "Ver qué investigo →" : "Ocultar detalles ↑";
-    });
-  });
-</script>
