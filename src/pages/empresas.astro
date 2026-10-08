@@ -1791,8 +1791,9 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
 
         if (!response.ok && result.error) {
           alert(result.error);
-        } else if (result.diagnosis) {
-          (window as any).latestDiagnosis = result.diagnosis;
+        } else if (result.success) {
+          sessionStorage.setItem('diagnosticResult', JSON.stringify(result));
+          window.location.href = '/diagnostico-resultado';
         }
       } catch (err) {
         console.error("Error enviando diagnóstico:", err);

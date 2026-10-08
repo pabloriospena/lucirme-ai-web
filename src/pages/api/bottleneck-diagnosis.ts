@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { calculateBottleneckDiagnosis } from '../../lib/bottleneck';
+import Groq from 'groq-sdk';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -32,36 +33,63 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    if (!nameStr) {
+    if (!nameStr || !empresaStr) {
       return new Response(
-        JSON.stringify({ error: 'Por favor ingresa tu nombre.' }),
+        JSON.stringify({ error: 'Faltan datos requeridos (nombre o empresa).' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
-    if (!empresaStr) {
-      return new Response(
-        JSON.stringify({ error: 'Por favor ingresa el nombre de tu empresa.' }),
-        { status: 400, headers: { 'Content-Type': 'application/json' } }
-      );
-    }
-
-    // Single source of truth calculation
-    const diagnosis = calculateBottleneckDiagnosis({
-      proceso,
-      frecuencia,
-      tiempo,
-      personas,
-      impacto,
-      esfuerzo,
-      name: nameStr,
-      email: emailStr,
-      empresa: empresaStr,
-      tamano,
-      industria,
-      pais,
-      ciudad,
+    const diagnosisBase = calculateBottleneckDiagnosis({
+      proceso, frecuencia, tiempo, personas, impacto, esfuerzo,
+      name: nameStr, email: emailStr, empresa: empresaStr,
+      tamano, industria, pais, ciudad,
     });
+
+    // Generate AI Diagnostic Report
+    let aiReport = '';
+    const groqApiKey = process.env.GROQ_API_KEY;
+    if (groqApiKey) {
+      const groq = new Groq({ apiKey: groqApiKey });
+      
+      const prompt = `
+        Genera un informe de diagnóstico operativo B2B para la empresa ${empresaStr} sobre el proceso "${proceso}".
+        
+        Datos del formulario:
+        - Frecuencia: ${frecuencia}
+        - Tiempo por ejecución: ${tiempo}
+        - Personas: ${personas}
+        - Impacto principal: ${impacto}
+        - Esfuerzo percibido: ${esfuerzo}
+        
+        Cálculos previos:
+        - Horas estimadas/semana: ${diagnosisBase.weeklyHours}
+        - Prioridad: ${diagnosisBase.prioridad}
+        
+        Estructura el informe en formato Markdown con las siguientes secciones:
+        1. Resumen ejecutivo
+        2. Hallazgos principales
+        3. Carga operativa estimada
+        4. Oportunidades priorizadas (máximo 3)
+        5. Recomendaciones accionables
+        6. Qué no automatizar todavía
+        7. Plan de acción inicial
+        8. Próximos pasos con LuciRMe (invitación contextual a revisar esto por WhatsApp)
+        
+        Mantén un tono profesional pero sencillo. Diferencia claramente hechos de hipótesis. No inventes datos que no se puedan deducir de lo anterior.
+      `;
+
+      try {
+        const chatCompletion = await groq.chat.completions.create({
+          messages: [{ role: 'user', content: prompt }],
+          model: 'gemma2-9b-it',
+        });
+        aiReport = chatCompletion.choices[0]?.message?.content ?? '';
+      } catch (err) {
+        console.error('Groq error:', err);
+        aiReport = 'No pudimos generar el informe personalizado en este momento, pero puedes revisar los cálculos básicos arriba.';
+      }
+    }
 
     const rawToken = process.env.MAILERLITE_API_KEY || process.env.MAILERLITE_API_TOKEN || '';
     const apiToken = rawToken.trim();
@@ -79,14 +107,8 @@ export const POST: APIRoute = async ({ request }) => {
           country: pais || 'Colombia',
           tamano_de_la_empresa: tamano || '11-50 personas',
           industria_sector: industria || 'Tecnología/SaaS',
-          diagnostico_proceso: diagnosis.proceso,
-          diagnostico_frecuencia: diagnosis.frecuencia,
-          diagnostico_tiempo_por_ejecucion: diagnosis.tiempo,
-          diagnostico_personas: diagnosis.personas,
-          diagnostico_impacto: diagnosis.impacto,
-          diagnostico_viabilidad: diagnosis.esfuerzo,
-          diagnostico_prioridad: diagnosis.prioridad,
-          diagnostico_horas_estimadassemana: `${diagnosis.weeklyHours} hrs/semana`,
+          diagnostico_proceso: diagnosisBase.proceso,
+          diagnostico_horas_estimadassemana: `${diagnosisBase.weeklyHours} hrs/semana`,
         },
       };
 
@@ -104,24 +126,17 @@ export const POST: APIRoute = async ({ request }) => {
           },
           body: JSON.stringify(mailerliteBody),
         });
-
-        if (mlResponse.ok) {
-          mailerliteSuccess = true;
-        } else {
-          const errText = await mlResponse.text();
-          console.warn(`[MailerLite Response ${mlResponse.status}]: ${errText}`);
-        }
+        if (mlResponse.ok) mailerliteSuccess = true;
       } catch (mlErr) {
         console.error('[MailerLite Exception]:', mlErr);
       }
-    } else {
-      console.warn('[MailerLite Notice]: MAILERLITE_API_KEY is not configured or is invalid. Diagnostic processed locally.');
     }
 
     return new Response(
       JSON.stringify({
         success: true,
-        diagnosis,
+        diagnosis: diagnosisBase,
+        aiReport,
         mailerliteSaved: mailerliteSuccess,
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
