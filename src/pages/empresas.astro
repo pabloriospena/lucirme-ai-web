@@ -337,16 +337,22 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
                 </button>
                 <button
                   class="diag-option sm:col-span-2 flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('proceso', 'Otro proceso operativo', this)"
+                  onclick="window.selectStepOption('proceso', 'Otro', this); document.getElementById('otro-proceso-input').classList.toggle('hidden');"
                   type="button"
                 >
-                  <span>Otro proceso operativo</span>
+                  <span>Otro (especificar)</span>
                   <span
                     class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
                     >circle</span
                   >
                 </button>
+                <input id="otro-proceso-input" class="hidden sm:col-span-2 w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" placeholder="Describe el proceso..." type="text" oninput="currentSelections['proceso-otro'] = this.value;" />
               </div>
+              <button 
+                  class="mt-4 w-full px-4 py-3 bg-teal-700 text-white font-semibold rounded-xl hover:bg-teal-800 transition-colors"
+                  onclick="nextStep()">
+                  Continuar
+              </button>
             </div>
 
             <!-- Paso 2: Frecuencia -->
@@ -561,10 +567,10 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
               >
                 <button
                   class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('impacto', 'Solo perdemos tiempo', this)"
+                  onclick="window.selectStepOption('impacto', 'Perdemos tiempo de trabajo', this)"
                   type="button"
                 >
-                  <span>Pérdida de tiempo</span>
+                  <span>Perdemos tiempo de trabajo</span>
                   <span
                     class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
                     >circle</span
@@ -572,10 +578,10 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
                 </button>
                 <button
                   class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('impacto', 'Retrasa otras tareas', this)"
+                  onclick="window.selectStepOption('impacto', 'Tenemos que repetir tareas o corregir errores', this)"
                   type="button"
                 >
-                  <span>Retraso en entregas</span>
+                  <span>Repetir tareas / Errores</span>
                   <span
                     class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
                     >circle</span
@@ -583,10 +589,10 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
                 </button>
                 <button
                   class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('impacto', 'Afecta al cliente', this)"
+                  onclick="window.selectStepOption('impacto', 'Se retrasan otros procesos', this)"
                   type="button"
                 >
-                  <span>Impacto en cliente</span>
+                  <span>Retrasan otros procesos</span>
                   <span
                     class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
                     >circle</span
@@ -594,10 +600,10 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
                 </button>
                 <button
                   class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('impacto', 'Genera errores o retrabajo', this)"
+                  onclick="window.selectStepOption('impacto', 'Afecta la atención o satisfacción de los clientes', this)"
                   type="button"
                 >
-                  <span>Errores y retrabajo</span>
+                  <span>Afecta clientes</span>
                   <span
                     class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
                     >circle</span
@@ -605,10 +611,10 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
                 </button>
                 <button
                   class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('impacto', 'Afecta ingresos', this)"
+                  onclick="window.selectStepOption('impacto', 'Perdemos oportunidades de venta o clientes', this)"
                   type="button"
                 >
-                  <span>Afecta ingresos</span>
+                  <span>Perdemos ventas/clientes</span>
                   <span
                     class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
                     >circle</span
@@ -616,16 +622,60 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
                 </button>
                 <button
                   class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('impacto', 'Varias de las anteriores', this)"
+                  onclick="window.selectStepOption('impacto', 'Genera costos adicionales', this)"
                   type="button"
                 >
-                  <span>Varias anteriores</span>
+                  <span>Genera costos adicionales</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('impacto', 'Depende demasiado de una persona', this)"
+                  type="button"
+                >
+                  <span>Depende de una persona</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('impacto', 'No tenemos suficiente información para saber qué está fallando', this)"
+                  type="button"
+                >
+                  <span>Falta información</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('impacto', 'Otro', this); document.getElementById('otro-impacto-input').classList.toggle('hidden');"
+                  type="button"
+                >
+                  <span>Otro</span>
                   <span
                     class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
                     >circle</span
                   >
                 </button>
               </div>
+              <input
+                type="text"
+                id="otro-impacto-input"
+                class="hidden w-full mt-2 px-3 py-2 border border-slate-300 rounded-xl text-sm"
+                placeholder="Especifica el impacto..."
+                oninput="recalculateAssessment()"
+              />
+              <button 
+                  class="mt-4 w-full px-4 py-3 bg-teal-700 text-white font-semibold rounded-xl hover:bg-teal-800 transition-colors"
+                  onclick="nextStep()">
+                  Continuar
+              </button>
             </div>
 
             <!-- Paso 6: Viabilidad -->
@@ -769,6 +819,32 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
                     required
                     type="text"
                   />
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <div class="flex flex-col gap-1">
+                    <label class="font-semibold text-slate-700" for="costo-input">Costo estimado por hora (COP)</label>
+                    <input class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="costo-input" placeholder="Ej. 25000" type="number" />
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <label class="font-semibold text-slate-700" for="retrabajo-select">Frecuencia de retrabajo</label>
+                    <select class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="retrabajo-select">
+                      <option value="Nunca/Casi nunca">Nunca/Casi nunca</option>
+                      <option value="Ocasional">Ocasional</option>
+                      <option value="Frecuente">Frecuente</option>
+                      <option value="No lo sé">No lo sé</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="flex flex-col gap-1">
+                  <label class="font-semibold text-slate-700" for="consecuencia-input">Consecuencia principal de errores o demoras</label>
+                  <input class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="consecuencia-input" placeholder="Ej. Pérdida de clientes, estrés, costo extra" type="text" />
+                </div>
+                
+                <div class="flex flex-col gap-1">
+                  <label class="font-semibold text-slate-700" for="resultado-input">Resultado deseado</label>
+                  <input class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="resultado-input" placeholder="Ej. Reducir tiempo a la mitad, menos errores" type="text" />
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -1422,13 +1498,17 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
     let currentStep = 1;
     const totalSteps = 7;
 
-    const currentSelections: Record<string, string> = {
-      proceso: "",
+    const currentSelections: Record<string, any> = {
+      proceso: [],
       frecuencia: "",
       tiempo: "",
       personas: "",
-      impacto: "",
+      impacto: [],
       esfuerzo: "",
+      costoHora: "",
+      frecuenciaRetrabajo: "",
+      consecuenciaPrincipal: "",
+      resultadoDeseado: "",
       name: "",
       email: "",
       empresa: "",
@@ -1519,49 +1599,68 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
       value: string,
       btnElement: HTMLElement,
     ) {
-      currentSelections[category] = value;
-
-      const parent = btnElement.parentElement;
-      if (parent) {
-        const buttons = parent.querySelectorAll(".diag-option");
-        buttons.forEach((btn) => {
-          btn.classList.remove(
-            "border-teal-700",
-            "bg-teal-50/80",
-            "text-teal-900",
-            "font-bold",
-          );
-          btn.classList.add("border-slate-200", "text-slate-700");
-          const icon = btn.querySelector(".material-symbols-outlined");
+      if (category === 'proceso' || category === 'impacto') {
+        if (!Array.isArray(currentSelections[category])) {
+          currentSelections[category] = [];
+        }
+        const index = currentSelections[category].indexOf(value);
+        if (index > -1) {
+          currentSelections[category].splice(index, 1);
+          btnElement.classList.remove("border-teal-700", "bg-teal-50/80", "text-teal-900", "font-bold");
+          btnElement.classList.add("border-slate-200", "text-slate-700");
+          const icon = btnElement.querySelector(".material-symbols-outlined");
           if (icon) {
             icon.textContent = "circle";
             icon.classList.remove("text-teal-700");
             icon.classList.add("text-slate-300", "opacity-0");
           }
-        });
-      }
-
-      btnElement.classList.remove("border-slate-200", "text-slate-700");
-      btnElement.classList.add(
-        "border-teal-700",
-        "bg-teal-50/80",
-        "text-teal-900",
-        "font-bold",
-      );
-      const activeIcon = btnElement.querySelector(".material-symbols-outlined");
-      if (activeIcon) {
-        activeIcon.textContent = "check_circle";
-        activeIcon.classList.remove("text-slate-300", "opacity-0");
-        activeIcon.classList.add("text-teal-700");
+        } else {
+          currentSelections[category].push(value);
+          btnElement.classList.remove("border-slate-200", "text-slate-700");
+          btnElement.classList.add("border-teal-700", "bg-teal-50/80", "text-teal-900", "font-bold");
+          const icon = btnElement.querySelector(".material-symbols-outlined");
+          if (icon) {
+            icon.textContent = "check_circle";
+            icon.classList.remove("text-slate-300", "opacity-0");
+            icon.classList.add("text-teal-700");
+          }
+        }
+      } else {
+        currentSelections[category] = value;
+        const parent = btnElement.parentElement;
+        if (parent) {
+          const buttons = parent.querySelectorAll(".diag-option");
+          buttons.forEach((btn) => {
+            btn.classList.remove("border-teal-700", "bg-teal-50/80", "text-teal-900", "font-bold");
+            btn.classList.add("border-slate-200", "text-slate-700");
+            const icon = btn.querySelector(".material-symbols-outlined");
+            if (icon) {
+              icon.textContent = "circle";
+              icon.classList.remove("text-teal-700");
+              icon.classList.add("text-slate-300", "opacity-0");
+            }
+          });
+        }
+        btnElement.classList.remove("border-slate-200", "text-slate-700");
+        btnElement.classList.add("border-teal-700", "bg-teal-50/80", "text-teal-900", "font-bold");
+        const activeIcon = btnElement.querySelector(".material-symbols-outlined");
+        if (activeIcon) {
+          activeIcon.textContent = "check_circle";
+          activeIcon.classList.remove("text-slate-300", "opacity-0");
+          activeIcon.classList.add("text-teal-700");
+        }
       }
 
       recalculateAssessment();
 
-      setTimeout(() => {
-        if (currentStep < totalSteps) {
-          nextStep();
-        }
-      }, 260);
+      // Only auto-advance if it's not the multi-select process or impacto question
+      if (category !== 'proceso' && category !== 'impacto') {
+        setTimeout(() => {
+          if (currentStep < totalSteps) {
+            nextStep();
+          }
+        }, 260);
+      }
     }
 
     function calculateEstimatedWeeklyHours() {
@@ -1610,7 +1709,7 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
       const elProc = document.getElementById("card-proceso");
       if (elProc) {
         elProc.innerText = hasSelections
-          ? currentSelections.proceso
+          ? (Array.isArray(currentSelections.proceso) ? currentSelections.proceso.join(', ') : currentSelections.proceso)
           : "Selecciona tus respuestas...";
       }
 
@@ -1631,7 +1730,15 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
       if (elPers) elPers.innerText = currentSelections.personas || "-";
 
       const elImp = document.getElementById("card-impacto");
-      if (elImp) elImp.innerText = currentSelections.impacto || "-";
+      if (elImp) {
+          let impactoDisplay = Array.isArray(currentSelections.impacto) ? [...currentSelections.impacto] : [];
+          const elOtroInput = document.getElementById('otro-impacto-input') as HTMLInputElement;
+          if (elOtroInput && !elOtroInput.classList.contains('hidden') && elOtroInput.value) {
+              impactoDisplay = impactoDisplay.filter(i => i !== 'Otro');
+              impactoDisplay.push(elOtroInput.value);
+          }
+          elImp.innerText = impactoDisplay.length > 0 ? impactoDisplay.join(', ') : "-";
+      }
 
       const elEsf = document.getElementById("card-esfuerzo");
       if (elEsf) elEsf.innerText = currentSelections.esfuerzo || "-";
@@ -1777,6 +1884,17 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
       currentSelections.pais =
         (paisInput && paisInput.value.trim()) || "Colombia";
       currentSelections.ciudad = (cdInput && cdInput.value.trim()) || "Bogotá";
+      currentSelections.costoHora = (document.getElementById("costo-input") as HTMLInputElement)?.value || "";
+      currentSelections.frecuenciaRetrabajo = (document.getElementById("retrabajo-select") as HTMLSelectElement)?.value || "";
+      currentSelections.consecuenciaPrincipal = (document.getElementById("consecuencia-input") as HTMLInputElement)?.value || "";
+      currentSelections.resultadoDeseado = (document.getElementById("resultado-input") as HTMLInputElement)?.value || "";
+
+      if (currentSelections['proceso-otro']) {
+        if (!Array.isArray(currentSelections.proceso)) {
+          currentSelections.proceso = [currentSelections.proceso];
+        }
+        currentSelections.proceso.push(currentSelections['proceso-otro']);
+      }
 
       recalculateAssessment();
 

@@ -16,7 +16,7 @@ export const GET: APIRoute = async () => {
     
     const chatCompletion = await groq.chat.completions.create({
       messages: [{ role: 'user', content: 'Ping' }],
-      model: 'gemma2-9b-it',
+      model: 'openai/gpt-oss-120b',
     });
     
     return new Response(

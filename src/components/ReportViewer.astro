@@ -1,0 +1,66 @@
+---
+interface Props {
+  report: any;
+  diagnosis: any;
+}
+
+const { report, diagnosis } = Astro.props;
+---
+
+<div class="space-y-8 text-slate-800">
+  <!-- Cabecera -->
+  <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+    <div class="flex justify-between items-start">
+      <div>
+        <h1 class="text-3xl font-bold text-slate-900">Diagnóstico operativo</h1>
+        <p class="text-slate-600">{diagnosis.empresa} • {diagnosis.proceso}</p>
+      </div>
+      <span class={`px-3 py-1 rounded-full text-sm font-semibold ${diagnosis.prioridad === 'Alta' ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-800'}`}>
+        {diagnosis.prioridadBadge}
+      </span>
+    </div>
+  </div>
+
+  <!-- Resumen Ejecutivo -->
+  <section class="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
+    <h2 class="text-xl font-semibold text-indigo-900 mb-3">Resumen ejecutivo</h2>
+    <p class="text-indigo-800">{report.resumenEjecutivo}</p>
+  </section>
+
+  <!-- Hallazgos -->
+  <section>
+    <h2 class="text-2xl font-bold text-slate-900 mb-4">Hallazgos principales</h2>
+    <div class="grid gap-4 md:grid-cols-2">
+      {report.hallazgos.map((item: any) => (
+        <div class="bg-white p-5 rounded-lg border border-slate-200 shadow-sm">
+          <h3 class="font-semibold text-slate-900">{item.hallazgo}</h3>
+          <p class="text-sm text-slate-500 mt-1">{item.tipoEvidencia}</p>
+          <p class="text-slate-700 mt-2 text-sm">{item.relevancia}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Oportunidades -->
+  <section>
+    <h2 class="text-2xl font-bold text-slate-900 mb-4">Oportunidades</h2>
+    <div class="grid gap-4 md:grid-cols-3">
+      {report.oportunidadesPriorizadas.slice(0, 3).map((op: any) => (
+        <div class="bg-white p-5 rounded-lg border-t-4 border-teal-600 shadow-sm">
+          <h3 class="font-semibold text-slate-900">{op.oportunidad}</h3>
+          <p class="text-sm text-slate-600 mt-2">{op.problema}</p>
+          <p class="text-sm text-teal-700 font-medium mt-2">{op.beneficio}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- WhatsApp CTA -->
+  <section class="bg-slate-900 text-white p-8 rounded-xl text-center">
+    <h2 class="text-2xl font-bold mb-4">¿Revisamos esto juntos?</h2>
+    <p class="mb-6 opacity-90">Pablo Ríos puede ayudarte a implementar estas mejoras.</p>
+    <a href={`https://wa.me/573053046180?text=Hola Pablo, revisé mi diagnóstico operativo para ${diagnosis.proceso} y me gustaría profundizar en las recomendaciones.`} class="inline-block bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+      Contactar por WhatsApp
+    </a>
+  </section>
+</div>

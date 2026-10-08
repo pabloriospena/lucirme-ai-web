@@ -34,7 +34,86 @@ import Layout from "../layouts/Layout.astro";
       document.getElementById('results')!.classList.remove('hidden');
       
       const content = document.getElementById('report-content')!;
-      content.innerHTML = resultData.aiReport || 'Contenido del informe...';
+      const report = resultData.aiReport;
+      const diagnosis = resultData.diagnosis;
+      
+      content.innerHTML = `
+        <div class="space-y-10 text-slate-800">
+          <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+            <div class="flex justify-between items-start mb-6">
+              <div>
+                <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Diagnóstico operativo</h1>
+                <p class="text-slate-500 font-mono mt-1">${diagnosis.empresa} • ${diagnosis.proceso} • ${new Date().toLocaleDateString()}</p>
+              </div>
+              <span class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${diagnosis.prioridad === 'Alta' ? 'bg-red-50 text-red-700 border border-red-200' : 'bg-amber-50 text-amber-800 border border-amber-200'}">
+                ${diagnosis.prioridadBadge}
+              </span>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-slate-100 pt-6">
+              <div>
+                <p class="text-xs text-slate-500 uppercase font-semibold">Carga Semanal</p>
+                <p class="text-xl font-bold text-slate-900">${diagnosis.weeklyHours} hrs</p>
+              </div>
+              <div>
+                <p class="text-xs text-slate-500 uppercase font-semibold">Costo Estimado</p>
+                <p class="text-xl font-bold text-slate-900">${diagnosis.costoSemanalEstimado ? '$' + diagnosis.costoSemanalEstimado.toLocaleString() : 'N/A'}</p>
+              </div>
+              <div>
+                <p class="text-xs text-slate-500 uppercase font-semibold">Frecuencia</p>
+                <p class="text-xl font-bold text-slate-900">${diagnosis.frecuencia}</p>
+              </div>
+              <div>
+                <p class="text-xs text-slate-500 uppercase font-semibold">Impacto</p>
+                <p class="text-xl font-bold text-slate-900">${diagnosis.impacto}</p>
+              </div>
+            </div>
+          </div>
+
+          <section>
+            <h2 class="text-xl font-bold text-slate-900 mb-4">Resumen ejecutivo</h2>
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+               <p class="text-slate-700 leading-relaxed">${report.resumenEjecutivo || 'No disponible'}</p>
+            </div>
+          </section>
+
+          <section>
+            <h2 class="text-xl font-bold text-slate-900 mb-4">Hallazgos principales</h2>
+            <div class="grid gap-4 md:grid-cols-2">
+              ${report.hallazgos ? report.hallazgos.map((item: any) => `
+                <div class="bg-white p-5 rounded-lg border border-slate-200">
+                  <div class="flex items-center justify-between mb-2">
+                    <h3 class="font-bold text-slate-900">${item.hallazgo}</h3>
+                    <span class="text-[10px] bg-slate-100 px-2 py-0.5 rounded-full text-slate-600">${item.tipoEvidencia}</span>
+                  </div>
+                  <p class="text-sm text-slate-600">${item.relevancia}</p>
+                </div>
+              `).join('') : '<p>Sin hallazgos suficientes.</p>'}
+            </div>
+          </section>
+
+          <section>
+             <h2 class="text-xl font-bold text-slate-900 mb-4">Qué haría primero</h2>
+             <div class="space-y-4">
+               ${report.queHariaPrimero ? report.queHariaPrimero.map((item: any, index: number) => `
+                 <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                   <h3 class="font-bold text-lg text-slate-900 mb-2">${index + 1}. ${item.accion}</h3>
+                   <p class="text-sm text-slate-600 mb-3"><strong class="text-slate-900">Motivo:</strong> ${item.motivo}</p>
+                   <p class="text-sm text-teal-700 font-medium"><strong class="text-slate-900">Siguiente paso:</strong> ${item.siguientePaso}</p>
+                 </div>
+               `).join('') : '<p>Recomendaciones en desarrollo.</p>'}
+             </div>
+          </section>
+
+          <section class="bg-slate-900 text-white p-8 rounded-xl text-center">
+            <h2 class="text-2xl font-bold mb-2">¿Necesitas ayuda priorizando?</h2>
+            <p class="text-slate-400 mb-6 max-w-lg mx-auto">Revisemos juntos este informe y definamos si la automatización es el camino correcto o si debemos ajustar el flujo primero.</p>
+            <a href="https://wa.me/573053046180?text=Hola Pablo, revisé mi diagnóstico operativo para ${diagnosis.proceso} y me gustaría conversar sobre los resultados." class="inline-block bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+              Hablar por WhatsApp
+            </a>
+          </section>
+        </div>
+      `;
       
       // PostHog: Report Viewed
       if (window.posthog) {
@@ -44,16 +123,73 @@ import Layout from "../layouts/Layout.astro";
         });
       }
       
-      document.getElementById('download-pdf')!.addEventListener('click', () => {
+      document.getElementById('download-pdf')!.addEventListener('click', async () => {
+        const { jsPDF } = await import("jspdf");
+        const { default: autoTable } = await import("jspdf-autotable");
+        
         const doc = new jsPDF();
-        doc.text(content.innerText, 10, 10);
-        doc.save("diagnostico.pdf");
+        const pageWidth = doc.internal.pageSize.width;
+
+        // Header
+        doc.setFontSize(20);
+        doc.text("Diagnóstico operativo", 10, 20);
+        doc.setFontSize(12);
+        doc.text(`${diagnosis.empresa} • ${diagnosis.proceso}`, 10, 30);
+        doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 10, 37);
+
+        // Resumen Ejecutivo
+        doc.setFontSize(16);
+        doc.text("Resumen ejecutivo", 10, 50);
+        doc.setFontSize(11);
+        const resumenLines = doc.splitTextToSize(report.resumenEjecutivo, pageWidth - 20);
+        doc.text(resumenLines, 10, 60);
+
+        // Hallazgos
+        let currentY = 60 + (resumenLines.length * 7);
+        doc.setFontSize(16);
+        doc.text("Hallazgos principales", 10, currentY);
+        
+        const hallazgosData = report.hallazgos.map((item: any) => [
+          item.hallazgo,
+          item.tipoEvidencia,
+          item.relevancia
+        ]);
+
+        autoTable(doc, {
+          startY: currentY + 5,
+          head: [['Hallazgo', 'Tipo', 'Relevancia']],
+          body: hallazgosData,
+          theme: 'striped',
+          styles: { fontSize: 10 },
+        });
+
+        // Oportunidades
+        currentY = (doc as any).lastAutoTable.finalY + 15;
+        doc.setFontSize(16);
+        doc.text("Oportunidades", 10, currentY);
+
+        const opData = report.oportunidadesPriorizadas.slice(0, 3).map((op: any) => [
+          op.oportunidad,
+          op.problema,
+          op.beneficio
+        ]);
+
+        autoTable(doc, {
+          startY: currentY + 5,
+          head: [['Oportunidad', 'Problema', 'Beneficio']],
+          body: opData,
+          theme: 'grid',
+          styles: { fontSize: 10 },
+        });
+
+        doc.save("diagnostico-operativo.pdf");
         
         // PostHog: Report Downloaded
         if (window.posthog) {
             window.posthog.capture('diagnostico_report_downloaded');
         }
       });
+
     }
   </script>
 </Layout>

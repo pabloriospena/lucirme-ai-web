@@ -119,26 +119,33 @@ export function generateBottleneckPDF(diag: BottleneckDiagnosisResult) {
 
   y += 48;
 
-  // Section 4: Siguiente Paso Recomendado
+  // Section 4: Qué recomiendo para tu empresa
   doc.setFillColor(241, 245, 249);
   doc.setDrawColor(203, 213, 225);
-  doc.roundedRect(margin, y, contentWidth, 32, 3, 3, 'FD');
+  doc.roundedRect(margin, y, contentWidth, 60, 3, 3, 'FD');
 
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(11);
   doc.setTextColor(15, 23, 42);
-  doc.text('3. Siguiente Paso Recomendado por LuciRMe AI', margin + 5, y + 7);
+  doc.text('3. Qué recomiendo para tu empresa', margin + 5, y + 7);
 
+  doc.setFontSize(10);
+  doc.text('A. Herramienta recomendada', margin + 5, y + 15);
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(9);
-  doc.setTextColor(51, 65, 85);
-  const recLines = doc.splitTextToSize(diag.recomendacion, contentWidth - 10);
-  doc.text(recLines, margin + 5, y + 14);
+  doc.text('[Nombre de la herramienta y explicación breve]', margin + 5, y + 21);
 
   doc.setFont('helvetica', 'bold');
-  doc.text('💬 Contactar a Pablo Ríos por WhatsApp: +57 305 3046180', margin + 5, y + 26);
+  doc.setFontSize(10);
+  doc.text('B. Capacitación para tu equipo', margin + 5, y + 33);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  doc.text('Taller práctico de IA aplicada al proceso.', margin + 5, y + 39);
 
-  y += 38;
+  doc.setFont('helvetica', 'bold');
+  doc.text('💬 Contactar a Pablo Ríos por WhatsApp: +57 305 3046180', margin + 5, y + 52);
+
+  y += 66;
 
   // Footer text
   doc.setFont('helvetica', 'italic');

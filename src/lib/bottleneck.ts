@@ -1,10 +1,14 @@
 export interface BottleneckDiagnosisInput {
-  proceso: string;
+  proceso: string | string[];
   frecuencia: string;
   tiempo: string;
   personas: string;
-  impacto: string;
-  esfuerzo: string; // viabilidad
+  impacto: string | string[];
+  esfuerzo: string;
+  costoHora?: string;
+  frecuenciaRetrabajo?: string;
+  consecuenciaPrincipal?: string;
+  resultadoDeseado?: string;
   name?: string;
   email?: string;
   empresa?: string;
@@ -21,7 +25,12 @@ export interface BottleneckDiagnosisResult {
   personas: string;
   impacto: string;
   esfuerzo: string;
+  costoHora?: string;
+  frecuenciaRetrabajo?: string;
+  consecuenciaPrincipal?: string;
+  resultadoDeseado?: string;
   weeklyHours: number;
+  costoSemanalEstimado?: number;
   prioridad: 'Alta' | 'Media';
   prioridadBadge: string;
   justificacion: string;
@@ -37,12 +46,16 @@ export interface BottleneckDiagnosisResult {
 }
 
 export function calculateBottleneckDiagnosis(input: BottleneckDiagnosisInput): BottleneckDiagnosisResult {
-  const proceso = input.proceso || 'Reportes y consolidación de información';
+  const proceso = Array.isArray(input.proceso) ? input.proceso.join(', ') : (input.proceso || 'Reportes y consolidación de información');
   const frecuencia = input.frecuencia || 'Todos los días';
   const tiempo = input.tiempo || '1–2 horas';
   const personas = input.personas || '2 a 4 personas';
-  const impacto = input.impacto || 'Afecta al cliente';
+  const impacto = Array.isArray(input.impacto) ? input.impacto.join(', ') : (input.impacto || 'Afecta al cliente');
   const esfuerzo = input.esfuerzo || 'Moderado';
+  const costoHora = input.costoHora;
+  const frecuenciaRetrabajo = input.frecuenciaRetrabajo;
+  const consecuenciaPrincipal = input.consecuenciaPrincipal;
+  const resultadoDeseado = input.resultadoDeseado;
 
   const name = input.name || '';
   const email = input.email || '';
@@ -74,13 +87,18 @@ export function calculateBottleneckDiagnosis(input: BottleneckDiagnosisInput): B
   else if (personas.includes('Más de 5 personas')) personsCount = 6;
 
   const weeklyHours = Math.round(freqMultiplier * timeValue * personsCount * 10) / 10;
+  
+  let costoSemanalEstimado;
+  if (costoHora && !isNaN(parseFloat(costoHora))) {
+    costoSemanalEstimado = weeklyHours * parseFloat(costoHora);
+  }
 
   let prioridad: 'Alta' | 'Media' = 'Media';
   let prioridadBadge = 'P2 Recomendado · ROI Moderado';
   let justificacion = `Este proceso genera una fuga estimada de ~${weeklyHours} horas/semana. Recomendamos simplificar el flujo y evaluar automatización.`;
   let recomendacion = 'Realizar un taller de inmersión para identificar cuellos de botella secundarios y simplificar el flujo.';
 
-  if (weeklyHours >= 12 || impacto.includes('ingresos') || impacto.includes('varios') || impacto.includes('cliente')) {
+  if (weeklyHours >= 12 || impacto.includes('ingresos') || impacto.includes('varios') || impacto.includes('cliente') || consecuenciaPrincipal?.includes('Errores')) {
     prioridad = 'Alta';
     prioridadBadge = 'P1 Urgente · Alto ROI Inmediato';
     justificacion = `Este proceso merece ser intervenido pronto porque genera una fuga aproximada de ~${weeklyHours} horas/semana combinando alta recurrencia e impacto directo en la operación.`;
@@ -96,7 +114,12 @@ export function calculateBottleneckDiagnosis(input: BottleneckDiagnosisInput): B
     personas,
     impacto,
     esfuerzo,
+    costoHora,
+    frecuenciaRetrabajo,
+    consecuenciaPrincipal,
+    resultadoDeseado,
     weeklyHours,
+    costoSemanalEstimado,
     prioridad,
     prioridadBadge,
     justificacion,

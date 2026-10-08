@@ -19,8 +19,12 @@ export const POST: APIRoute = async ({ request }) => {
       personas = '',
       impacto = '',
       esfuerzo = '',
+      costoHora = '',
+      frecuenciaRetrabajo = '',
+      consecuenciaPrincipal = '',
+      resultadoDeseado = '',
     } = data;
-
+    
     const emailStr = typeof email === 'string' ? email.trim() : '';
     const nameStr = typeof name === 'string' ? name.trim() : '';
     const empresaStr = typeof empresa === 'string' ? empresa.trim() : '';
@@ -42,6 +46,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const diagnosisBase = calculateBottleneckDiagnosis({
       proceso, frecuencia, tiempo, personas, impacto, esfuerzo,
+      costoHora, frecuenciaRetrabajo, consecuenciaPrincipal, resultadoDeseado,
       name: nameStr, email: emailStr, empresa: empresaStr,
       tamano, industria, pais, ciudad,
     });
@@ -61,34 +66,47 @@ export const POST: APIRoute = async ({ request }) => {
         - Personas: ${personas}
         - Impacto principal: ${impacto}
         - Esfuerzo percibido: ${esfuerzo}
+        - Costo/hora estimado: ${costoHora}
+        - Frecuencia de retrabajo: ${frecuenciaRetrabajo}
+        - Consecuencia principal de fallas: ${consecuenciaPrincipal}
+        - Resultado deseado: ${resultadoDeseado}
         
         Cálculos previos:
         - Horas estimadas/semana: ${diagnosisBase.weeklyHours}
+        - Costo semanal estimado: ${diagnosisBase.costoSemanalEstimado ?? 'No calculable'}
         - Prioridad: ${diagnosisBase.prioridad}
         
-        Estructura el informe en formato Markdown con las siguientes secciones:
-        1. Resumen ejecutivo
-        2. Hallazgos principales
-        3. Carga operativa estimada
-        4. Oportunidades priorizadas (máximo 3)
-        5. Recomendaciones accionables
-        6. Qué no automatizar todavía
-        7. Plan de acción inicial
-        8. Próximos pasos con LuciRMe (invitación contextual a revisar esto por WhatsApp)
+        Responde exclusivamente en formato JSON válido con la siguiente estructura:
+        {
+          "resumenEjecutivo": "texto breve y directo",
+          "hallazgos": [ { "hallazgo": "...", "tipoEvidencia": "...", "relevancia": "..." } ],
+          "cargaOperativa": { "descripcion": "...", "datosDeclarados": "...", "valoresCalculados": "..." },
+          "oportunidadesPriorizadas": [ { "oportunidad": "...", "problema": "...", "beneficio": "...", "primerPaso": "..." } ],
+          "recomendaciones": [ "..." ],
+          "queNoAutomatizar": "...",
+          "queHariaPrimero": [ { "accion": "...", "motivo": "...", "siguientePaso": "..." } ],
+          "proximosPasos": "..."
+        }
         
-        Mantén un tono profesional pero sencillo. Diferencia claramente hechos de hipótesis. No inventes datos que no se puedan deducir de lo anterior.
+        Mantén un tono profesional. Diferencia claramente hechos de hipótesis. No inventes datos que no se puedan deducir de lo anterior.
       `;
+      
+      // Also need to handle the JSON parsing in the completion call
+      // The current code is not expecting JSON
+
 
       try {
         const chatCompletion = await groq.chat.completions.create({
           messages: [{ role: 'user', content: prompt }],
-          model: 'gemma2-9b-it',
+          model: 'openai/gpt-oss-120b',
         });
-        aiReport = chatCompletion.choices[0]?.message?.content ?? '';
+        const content = chatCompletion.choices[0]?.message?.content ?? '{}';
+        aiReport = JSON.parse(content);
       } catch (err) {
         console.error('Groq error:', err);
-        aiReport = 'No pudimos generar el informe personalizado en este momento, pero puedes revisar los cálculos básicos arriba.';
+        aiReport = { error: 'No pudimos generar el informe personalizado.' };
       }
+
     }
 
     const rawToken = process.env.MAILERLITE_API_KEY || process.env.MAILERLITE_API_TOKEN || '';
