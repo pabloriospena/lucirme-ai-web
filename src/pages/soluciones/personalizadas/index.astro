@@ -1,0 +1,32 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { LINKS } from "../../lib/constants.js";
+
+const soluciones = [
+  { name: "Café Karinaz", url: "/soluciones-personalizadas/cafe-karinaz" },
+  { name: "Café Caroceballos", url: "/soluciones-personalizadas/cafe-caroceballos" },
+  { name: "Café Mariaalejandrav", url: "/soluciones-personalizadas/cafe-mariaalejandrav" },
+  { name: "Conciliador", url: "/soluciones-personalizadas/conciliador" },
+];
+---
+
+<Layout 
+  title="Soluciones Personalizadas | LuciRMe AI"
+  description="Soluciones personalizadas y mentorías específicas diseñadas por LuciRMe AI."
+>
+  <main class="max-w-4xl mx-auto px-6 py-12">
+    <h1 class="text-3xl md:text-4xl font-black text-[#0F172A] mb-8">Soluciones Personalizadas</h1>
+    
+    <div class="grid gap-4">
+      {soluciones.map((solucion) => (
+        <a 
+          href={solucion.url}
+          class="block p-6 bg-white border border-gray-200 rounded-2xl hover:border-teal/50 transition shadow-xs"
+        >
+          <h2 class="text-xl font-bold text-[#0F172A]">{solucion.name}</h2>
+          <span class="text-teal font-semibold text-sm">Ver detalles →</span>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>
