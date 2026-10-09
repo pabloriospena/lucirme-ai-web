@@ -12,36 +12,29 @@ const whatsappKarinaz = `${whatsappBase}?text=${encodeURIComponent("Consulta Gui
   hideHeader={true}
   hideFooter={false}
 >
-  <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-slate-200">
-    <div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-4">
-      <div class="flex items-center gap-4 min-w-0">
-        <a href="/" class="flex items-center gap-3 shrink-0 group">
-          <div class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center group-hover:bg-teal-700 transition-colors">
-            <span class="text-white font-bold text-[14px] tracking-tight">LR</span>
-          </div>
-          <div class="flex flex-col">
-            <span class="font-bold text-slate-900 text-sm leading-none tracking-tight">LuciRMe AI</span>
-            <span class="text-[10px] text-slate-500 tracking-wider uppercase mt-0.5 font-mono">Advisory & Tech</span>
-          </div>
-        </a>
-        <div class="hidden md:block h-5 w-px bg-slate-200"></div>
-        <div class="hidden md:flex items-center gap-2 min-w-0">
-          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-slate-100 text-slate-700 text-xs font-mono">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>SESIÓN ACTIVA
-          </span>
-          <span class="text-xs text-slate-600 truncate">Karina Zamalloa · Product Manager</span>
-        </div>
-      </div>
-      <nav class="hidden lg:flex items-center gap-6">
-        <a class="transition-colors bg-slate-100 text-slate-900 font-semibold px-2.5 py-1 rounded text-xs" href="#resumen">Resumen</a>
-        <a class="text-xs text-slate-600 hover:text-slate-900 transition-colors" href="#conexiones">Conexiones M365</a>
-        <a class="text-xs text-slate-600 hover:text-slate-900 transition-colors" href="#frente-corporativo">Frente Corporativo</a>
-        <a class="text-xs text-slate-600 hover:text-slate-900 transition-colors" href="#frente-personal">Frente Personal</a>
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
+    <div class="h-16 max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
+      <a class="flex flex-col group" href="#">
+        <span class="text-base font-bold tracking-tight text-slate-900 group-hover:text-teal-700 transition-colors">LuciRMe AI · Sesiones 1-1</span>
+        <span class="text-[11px] font-mono text-slate-500">Trabajamos sobre problemas reales de tu trabajo.</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600">
+        <a class="hover:text-slate-900 transition-colors" href="#resumen">Resumen</a>
+        <a class="hover:text-slate-900 transition-colors" href="#conexiones">Conexiones M365</a>
+        <a class="hover:text-slate-900 transition-colors" href="#frente-corporativo">Frente Corporativo</a>
+        <a class="hover:text-slate-900 transition-colors" href="#frente-personal">Frente Personal</a>
       </nav>
-      <div class="flex items-center gap-3 shrink-0">
-        <a class="inline-flex items-center gap-2 h-9 px-3.5 rounded bg-emerald-600 text-white text-xs font-medium hover:bg-emerald-700 transition-colors shadow-sm" href={whatsappKarinaz} rel="noopener noreferrer" target="_blank">
-          <span class="material-symbols-outlined text-[16px]">chat</span>
-          <span class="font-medium hidden sm:inline">Pablo Ríos · Soporte</span>
+
+      <div class="flex items-center gap-3">
+        <a
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-teal-700 text-white text-xs font-semibold hover:bg-teal-800 transition-colors shadow-2xs cursor-pointer"
+          href={whatsappKarinaz}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <span class="material-symbols-outlined text-[17px]">chat</span>
+          <span>Quiero revisar mi caso</span>
         </a>
       </div>
     </div>
