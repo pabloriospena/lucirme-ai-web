@@ -3,52 +3,584 @@ import Layout from "../../layouts/Layout.astro";
 import { LINKS } from "../../lib/constants.js";
 
 const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
+const whatsappKarinaz = `${whatsappBase}?text=${encodeURIComponent("Consulta Guia LuciRMe AI Karina Zamalloa")}`;
 ---
 
 <Layout
-  title="Sesión Karina Zamalloa | LuciRMe AI"
-  description="Sesión personalizada para Karina Zamalloa."
+  title="LuciRMe AI — Guía Práctica de Integración de Inteligencia Artificial para Karina Zamalloa"
+  description="Estrategia integral de descompresión operativa en M365 y aceleración de portafolio fintech para Karina Zamalloa (Product Manager)"
   hideHeader={true}
-  hideFooter={true}
+  hideFooter={false}
 >
-  <!-- HEADER REPLICADO DE PROFESIONALES -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
-    <div class="h-16 max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
-      <a class="flex flex-col group" href="/">
-        <span class="text-base font-bold tracking-tight text-slate-900 group-hover:text-teal-700 transition-colors">LuciRMe AI · Karina Zamalloa</span>
-        <span class="text-[11px] font-mono text-slate-500">Sesión de trabajo personalizada.</span>
-      </a>
-
-      <div class="flex items-center gap-3">
-        <a
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-teal-700 text-white text-xs font-semibold hover:bg-teal-800 transition-colors shadow-2xs cursor-pointer"
-          href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, tengo una duda sobre la sesión personalizada.")}`}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <span class="material-symbols-outlined text-[17px]">chat</span>
-          <span>Hablemos por WhatsApp</span>
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-slate-200">
+    <div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-4 min-w-0">
+        <a href="/" class="flex items-center gap-3 shrink-0 group">
+          <div class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center group-hover:bg-teal-700 transition-colors">
+            <span class="text-white font-bold text-[14px] tracking-tight">LR</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-bold text-slate-900 text-sm leading-none tracking-tight">LuciRMe AI</span>
+            <span class="text-[10px] text-slate-500 tracking-wider uppercase mt-0.5 font-mono">Advisory & Tech</span>
+          </div>
+        </a>
+        <div class="hidden md:block h-5 w-px bg-slate-200"></div>
+        <div class="hidden md:flex items-center gap-2 min-w-0">
+          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-slate-100 text-slate-700 text-xs font-mono">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>PROTOCOLO ACTIVO
+          </span>
+          <span class="text-xs text-slate-600 truncate">Guía de Integración · Karina Zamalloa · Product Manager</span>
+        </div>
+      </div>
+      <nav class="hidden lg:flex items-center gap-6">
+        <a class="transition-colors bg-slate-100 text-slate-900 font-semibold px-2.5 py-1 rounded text-xs" href="#resumen">Resumen</a>
+        <a class="text-xs text-slate-600 hover:text-slate-900 transition-colors" href="#conexiones">Conexiones M365</a>
+        <a class="text-xs text-slate-600 hover:text-slate-900 transition-colors" href="#frente-corporativo">Frente Corporativo</a>
+        <a class="text-xs text-slate-600 hover:text-slate-900 transition-colors" href="#frente-personal">Frente Personal</a>
+      </nav>
+      <div class="flex items-center gap-3 shrink-0">
+        <a class="inline-flex items-center gap-2 h-9 px-3.5 rounded bg-emerald-600 text-white text-xs font-medium hover:bg-emerald-700 transition-colors shadow-sm" href={whatsappKarinaz} rel="noopener noreferrer" target="_blank">
+          <span class="material-symbols-outlined text-[16px]">chat</span>
+          <span class="font-medium hidden sm:inline">Pablo Ríos · Soporte</span>
         </a>
       </div>
     </div>
   </header>
 
-  <main class="w-full bg-[#F8FAFC] min-h-[calc(100vh-16rem)] py-20">
-    <div class="max-w-4xl mx-auto px-6">
-      <h1 class="text-4xl font-extrabold text-slate-900 mb-8 tracking-tight">Sesión Personalizada</h1>
+  <main class="w-full pt-16 bg-[#f8f9ff] min-h-[calc(100vh-16rem)]">
+    <div class="flex flex-col w-full text-slate-900 antialiased pb-24">
       
-      <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
-        <h2 class="text-2xl font-bold mb-4 text-slate-900">Bienvenida Karina</h2>
-        <p class="text-slate-600 mb-6 leading-relaxed">
-          Esta es tu página de sesión personalizada. Aquí encontrarás los recursos y seguimiento de nuestra colaboración.
-        </p>
-        
-        <div class="flex items-center gap-4">
-            <a href="/cafe-karinaz" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors shadow-sm">
-                Ir a Café Karinaz
-            </a>
+      <!-- 1. HEADER Y METADATOS -->
+      <section class="w-full bg-[#FBFBFA] border-b border-slate-200" id="resumen">
+        <div class="max-w-6xl mx-auto px-6 lg:px-8 pt-8 pb-10">
+          
+          <div class="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-slate-200">
+            <div class="flex items-center gap-2 flex-wrap font-mono text-xs">
+              <span class="text-slate-600 bg-slate-100 px-2 py-1 rounded">
+                [ REF_CODIGO: LRM-DOC-2026-KZ01 ]
+              </span>
+              <span class="text-slate-400">·</span>
+              <span class="text-slate-600 uppercase tracking-wider">
+                PRODUCT MANAGEMENT & FINTECH
+              </span>
+              <span class="text-slate-400">·</span>
+              <span class="inline-flex items-center gap-1.5 text-slate-900 font-semibold tracking-wider uppercase">
+                <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                PROTOCOLO ACTIVO
+              </span>
+            </div>
+          </div>
+
+          <div class="pt-8 pb-8">
+            <h1 class="text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight max-w-5xl leading-tight">
+              Guía Práctica de Integración de Inteligencia Artificial Corporativa y Personal para Karina Zamalloa (Product Manager)
+            </h1>
+            <p class="text-lg text-slate-600 mt-3 max-w-4xl">
+              Estrategia integral de descompresión operativa en M365 y aceleración de portafolio fintech
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+            <div class="bg-white p-4 rounded border border-slate-200 shadow-2xs">
+              <span class="text-[11px] text-slate-400 block uppercase tracking-wider mb-1 font-mono font-semibold">
+                CLIENTE DIRECTO
+              </span>
+              <span class="text-base font-semibold text-slate-900 block">
+                Karina Zamalloa
+              </span>
+            </div>
+            <div class="bg-white p-4 rounded border border-slate-200 shadow-2xs">
+              <span class="text-[11px] text-slate-400 block uppercase tracking-wider mb-1 font-mono font-semibold">
+                ROL
+              </span>
+              <span class="text-base font-semibold text-slate-900 block">
+                Product Manager
+              </span>
+              <span class="text-xs text-slate-600 block mt-0.5">
+                Canales Digitales & Banca
+              </span>
+            </div>
+            <div class="bg-white p-4 rounded border border-slate-200 shadow-2xs">
+              <span class="text-[11px] text-slate-400 block uppercase tracking-wider mb-1 font-mono font-semibold">
+                ENFOQUE DUAL
+              </span>
+              <span class="text-xs text-slate-900 block font-medium">
+                Conexión Claude + M365 (Eficiencia Operativa) & Portafolio Fintech + LinkedIn
+              </span>
+            </div>
+          </div>
+
+          <div class="mt-4 bg-white p-6 rounded border border-slate-200 space-y-4 shadow-2xs">
+            <div>
+              <span class="text-xs text-teal-700 uppercase font-mono block mb-1 font-semibold">
+                OBJETIVO PRINCIPAL
+              </span>
+              <p class="text-sm text-slate-700 leading-relaxed">
+                El objetivo principal definido en la mentoría es transformar tu Claude Corporativo en un asistente altamente eficiente que asuma la carga operativa diaria como Product Manager. Al conectar la inteligencia artificial con tu suite de trabajo, buscas automatizar el seguimiento de proyectos, la lectura de correos en Outlook, el escaneo de conversaciones en Teams y la consulta del Gantt corporativo. Esto te permitirá liberar capacidad operativa (capacity) dentro de tu jornada laboral para dedicar tiempo fuera de tu horario a posicionarte en LinkedIn (donde cuentas con una comunidad de más de 7,000 contactos) y construir productos digitales para tu portafolio en el sector fintech.
+              </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-slate-100">
+              <div class="bg-[#FBFBFA] p-4 rounded border border-slate-200">
+                <span class="text-xs text-teal-700 font-mono block mb-1 font-semibold">FRENTE 1 · CORPORATIVO</span>
+                <span class="text-sm font-semibold text-slate-900 block">IA para la eficiencia operativa corporativa</span>
+                <p class="text-xs text-slate-600 mt-1">
+                  Conexión de Claude con Microsoft 365 para automatizar la gestión de Teams, correo y archivos.
+                </p>
+              </div>
+              <div class="bg-[#FBFBFA] p-4 rounded border border-slate-200">
+                <span class="text-xs text-emerald-600 font-mono block mb-1 font-semibold">FRENTE 2 · PERSONAL</span>
+                <span class="text-sm font-semibold text-slate-900 block">IA para el desarrollo personal y portafolio</span>
+                <p class="text-xs text-slate-600 mt-1">
+                  Uso de Notion como "segundo cerebro digital", descarga de Skills en GitHub y aprendizaje acelerado con NotebookLM.
+                </p>
+              </div>
+            </div>
+          </div>
+
         </div>
+      </section>
+
+      <!-- CONTENT CONTAINER -->
+      <div class="max-w-6xl mx-auto px-6 lg:px-8 w-full pt-12 space-y-16">
+        
+        <!-- SECCIÓN 01: EL PODER DE LAS CONEXIONES -->
+        <section class="space-y-8" id="conexiones">
+          <div class="border-b border-slate-200 pb-4">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs text-teal-700 font-bold tracking-widest uppercase font-mono">
+                SECCIÓN 01
+              </span>
+              <span class="text-slate-300">|</span>
+              <span class="text-xs text-slate-500 uppercase tracking-wider font-mono">
+                INTEGRACIÓN CONTINUA
+              </span>
+            </div>
+            <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight">
+              El Poder de las Conexiones: Cómo la IA Asume el Trabajo Pesado
+            </h2>
+          </div>
+
+          <div class="bg-[#F1F1EF] p-5 rounded border-l-2 border-teal-700 text-slate-700 text-base leading-relaxed font-medium">
+            "El salto cualitativo en tu productividad ocurre cuando dejas de copiar y pegar información manualmente entre aplicaciones y permites que la IA consulte directamente tus herramientas de comunicación e información."
+          </div>
+
+          <!-- Bloques -->
+          <div class="space-y-6">
+            
+            <!-- Bloque 1 -->
+            <div class="bg-white p-6 rounded border border-slate-200 space-y-4 shadow-2xs">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                <h3 class="text-lg font-bold text-slate-900">
+                  Bloque 1: Gestión Automatizada de Chats en Teams
+                </h3>
+                <span class="text-xs text-teal-700 font-mono bg-[#F1F1EF] px-2 py-0.5 rounded font-semibold">
+                  MS TEAMS INTEGRATION
+                </span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-[#FBFBFA] p-4 rounded border border-slate-200 space-y-2">
+                  <span class="text-[11px] text-slate-500 uppercase font-mono block font-semibold">EL PROBLEMA HABITUAL</span>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    Las cadenas interminables de mensajes en Teams generan sobrecarga cognitiva y pérdida de tiempo filtrando qué es urgente y qué no.
+                  </p>
+                </div>
+                <div class="bg-[#FBFBFA] p-4 rounded border border-slate-200 space-y-2">
+                  <span class="text-[11px] text-teal-700 uppercase font-mono block font-semibold">CÓMO LO RESUELVE LA CONEXIÓN</span>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    Al conceder permisos de integración entre Claude y Microsoft 365 (Teams), la IA accede a los canales y conversaciones.
+                  </p>
+                </div>
+                <div class="bg-[#FBFBFA] p-4 rounded border border-slate-200 space-y-2">
+                  <span class="text-[11px] text-slate-900 uppercase font-mono block font-semibold">OPERACIÓN</span>
+                  <p class="text-xs text-slate-800 leading-relaxed">
+                    Claude escanea los hilos donde has sido mencionada (@), agrupa las discusiones por proyectos o temas clave, identifica solicitudes pendientes y redacta propuestas de respuesta contextualizadas sin que tengas que leer 200 mensajes manualmente.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bloque 2 -->
+            <div class="bg-white p-6 rounded border border-slate-200 space-y-4 shadow-2xs">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                <h3 class="text-lg font-bold text-slate-900">
+                  Bloque 2: Gestión Automatizada del Correo (Outlook)
+                </h3>
+                <span class="text-xs text-teal-700 font-mono bg-[#F1F1EF] px-2 py-0.5 rounded font-semibold">
+                  OUTLOOK INTEGRATION
+                </span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-[#FBFBFA] p-4 rounded border border-slate-200 space-y-2">
+                  <span class="text-[11px] text-slate-500 uppercase font-mono block font-semibold">EL PROBLEMA HABITUAL</span>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    La acumulación de cientos de correos de distintas iniciativas (canales digitales, datos, marcha blanca) obliga a aplicar filtros manuales por remitente o asunto.
+                  </p>
+                </div>
+                <div class="bg-[#FBFBFA] p-4 rounded border border-slate-200 space-y-2">
+                  <span class="text-[11px] text-teal-700 uppercase font-mono block font-semibold">CÓMO LO RESUELVE LA CONEXIÓN</span>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    Claude se conecta a tu bandeja de entrada de Outlook para auditar el flujo de correo entrante.
+                  </p>
+                </div>
+                <div class="bg-[#FBFBFA] p-4 rounded border border-slate-200 space-y-2">
+                  <span class="text-[11px] text-slate-900 uppercase font-mono block font-semibold">OPERACIÓN</span>
+                  <p class="text-xs text-slate-800 leading-relaxed">
+                    Puedes ordenarle que busque palabras clave específicas (ej. "proyectos de Canales Digitales" o correos de un rol clave). La IA resume el contenido de cada hilo, extrae compromisos y clasifica los mensajes en carpetas o frentes de trabajo. Si requieres revisar personalmente el correo original, le indicas que mantenga o marque el mensaje como no leído para que no pierda su visibilidad en tu bandeja.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bloque 3 -->
+            <div class="bg-white p-6 rounded border border-slate-200 space-y-4 shadow-2xs">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                <h3 class="text-lg font-bold text-slate-900">
+                  Bloque 3: Auditoría Viva del Gantt en Excel (OneDrive)
+                </h3>
+                <span class="text-xs text-teal-700 font-mono bg-[#F1F1EF] px-2 py-0.5 rounded font-semibold">
+                  ONEDRIVE / EXCEL LIVE
+                </span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-[#FBFBFA] p-4 rounded border border-slate-200 space-y-2">
+                  <span class="text-[11px] text-slate-500 uppercase font-mono block font-semibold">EL PROBLEMA HABITUAL</span>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    El avance de los entregables de "Go Live" está registrado en un archivo Excel compartido y actualizado de forma manual por tu analista en OneDrive. Abrir la hoja de cálculo constantemente para responder preguntas de estatus consume tiempo innecesario.
+                  </p>
+                </div>
+                <div class="bg-[#FBFBFA] p-4 rounded border border-slate-200 space-y-2">
+                  <span class="text-[11px] text-teal-700 uppercase font-mono block font-semibold">CÓMO LO RESUELVE LA CONEXIÓN</span>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    El archivo de Excel actúa como una fuente de datos continua u "organismo vivo" consultado por Claude.
+                  </p>
+                </div>
+                <div class="bg-[#FBFBFA] p-4 rounded border border-slate-200 space-y-2">
+                  <span class="text-[11px] text-slate-900 uppercase font-mono block font-semibold">OPERACIÓN</span>
+                  <p class="text-xs text-slate-800 leading-relaxed">
+                    Sin abrir el Excel ni editar la versión máster administrada por tu analista, le solicitas a Claude que revise el estatus de un entregable, verifique la fecha comprometida contra el estado actual y redacte el reporte de avance para enviarlo por Teams o correo a los stakeholders.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- DIAGRAMA ASCII -->
+          <div class="space-y-3 pt-2">
+            <span class="text-xs text-slate-500 uppercase font-mono block font-semibold">
+              ARQUITECTURA DE FLUJO DE INFORMACIÓN
+            </span>
+            <div class="bg-[#0b1c30] text-slate-100 rounded p-6 font-mono text-xs overflow-x-auto border border-slate-200 shadow-sm">
+              <div class="text-slate-400 text-[11px] uppercase tracking-wider mb-3 pb-2 border-b border-slate-700 flex items-center justify-between">
+                <span>DIAGRAMA DE INTEGRACIÓN SISTÉMICA</span>
+                <span class="text-teal-400">CONECTIVIDAD BIDIRECCIONAL</span>
+              </div>
+              <pre class="font-mono leading-relaxed select-all">┌─────────────────────────────────────────────────┐
+│          CLAUDE CORPORATIVO + MS 365            │
+└────────────────────────┬────────────────────────┘
+                         │
+         ┌───────────────┴───────────────┐
+         ▼                               ▼
+┌─────────────────────────┐     ┌─────────────────────────┐
+│  MICROSOFT TEAMS & MAIL │     │    EXCEL / GANTT LIVE   │
+│  - Escaneo de hilos     │     │  - Consulta de fechas   │
+│  - Priorización /ya_me  │     │  - Detección de traba   │
+│  - Mantenimiento no-leíd│     │  - Reportes a Teams     │
+└─────────────────────────┘     └─────────────────────────┘</pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- FRENTE 1: CORPORATIVO -->
+        <section class="space-y-8 pt-4" id="frente-corporativo">
+          <div class="border-b border-slate-200 pb-4">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs text-teal-700 font-bold tracking-widest uppercase font-mono">
+                FRENTE 01
+              </span>
+              <span class="text-slate-300">|</span>
+              <span class="text-xs text-slate-500 uppercase tracking-wider font-mono">
+                ÁMBITO CORPORATIVO
+              </span>
+            </div>
+            <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight">
+              Frente 1: Ámbito Corporativo (Eficiencia y Operativa Diaria)
+            </h2>
+          </div>
+
+          <div class="space-y-6">
+            
+            <!-- Paso 1 -->
+            <div class="bg-white p-6 rounded border border-slate-200 space-y-4 shadow-2xs">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs text-teal-700 font-mono bg-[#F1F1EF] px-2 py-0.5 rounded font-semibold">[ PASO 01 ]</span>
+                  <h3 class="text-base font-bold text-slate-900">Establecer la conexión con Microsoft 365</h3>
+                </div>
+                <span class="text-xs text-slate-400 font-mono uppercase">CONFIGURACIÓN INICIAL</span>
+              </div>
+              <div class="space-y-3 text-sm text-slate-600">
+                <ul class="space-y-2 list-none">
+                  <li class="flex items-start gap-2">
+                    <span class="text-teal-700 font-mono">•</span>
+                    <span>Dirígete a la sección de Configuración / Extensiones dentro de tu entorno corporativo de Claude.</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-teal-700 font-mono">•</span>
+                    <span>Otorga los permisos de lectura y acceso a la suite de Microsoft 365 (Teams, Outlook, OneDrive).</span>
+                  </li>
+                </ul>
+                <div class="bg-[#FBFBFA] p-4 rounded border border-slate-200 space-y-2 mt-2">
+                  <span class="text-xs text-slate-900 font-semibold font-mono block">[ VERIFICACIÓN DE CONEXIÓN ]</span>
+                  <p class="text-xs text-slate-600">Abre un chat y ejecuta la validación:</p>
+                  <div class="bg-[#0b1c30] text-slate-100 p-3 rounded font-mono text-xs select-all">
+                    "¿Estás conectado a mi Microsoft 365? Confírmame si puedes leer mis mensajes recientes de Teams y los últimos correos de mi bandeja."
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Paso 2 -->
+            <div class="bg-white p-6 rounded border border-slate-200 space-y-4 shadow-2xs">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs text-teal-700 font-mono bg-[#F1F1EF] px-2 py-0.5 rounded font-semibold">[ PASO 02 ]</span>
+                  <h3 class="text-base font-bold text-slate-900">Crear el Proyecto "Qué hago hoy" y definir el disparador /ya_me_desperte</h3>
+                </div>
+                <span class="text-xs text-slate-400 font-mono uppercase">ORGANIZACIÓN DIARIA</span>
+              </div>
+              <div class="space-y-3 text-sm text-slate-600">
+                <p>Abre un chat suelto fuera de cualquier proyecto y conversa con Claude sobre tus dinámicas diarias como PM. Pídele:</p>
+                <div class="bg-[#FBFBFA] p-3 rounded border border-slate-200 font-mono text-xs text-slate-900 select-all">
+                  "A partir de lo que hemos conversado sobre mi rol como Product Manager, genera las instrucciones óptimas en texto estructurado para configurar un proyecto enfocado en mi organización diaria."
+                </div>
+                <p>Crea un proyecto en Claude llamado <strong>"Qué hago hoy"</strong> y pega las instrucciones generadas.</p>
+                <div class="bg-[#F1F1EF] p-4 rounded border-l-2 border-teal-700 space-y-2 mt-2">
+                  <span class="text-xs text-slate-900 font-semibold font-mono block">[ COMANDO DISPARADOR /ya_me_desperte ]</span>
+                  <p class="text-xs text-slate-800 leading-relaxed">
+                    <strong>Acción automatizada:</strong> Al escribir <code class="font-mono bg-white px-1.5 py-0.5 rounded text-teal-700">/ya_me_desperte</code> a primera hora de la mañana, Claude ejecutará un escaneo transversal de tu correo de Outlook y tus chats de Teams, priorizará los temas urgentes, detectará bloqueos en el proyecto de Canales Digitales y te entregará una lista ordenada de tareas y borradores de respuesta.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Paso 3 -->
+            <div class="bg-white p-6 rounded border border-slate-200 space-y-4 shadow-2xs">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs text-teal-700 font-mono bg-[#F1F1EF] px-2 py-0.5 rounded font-semibold">[ PASO 03 ]</span>
+                  <h3 class="text-base font-bold text-slate-900">Automatizar consultas de estatus y redacción de respuestas</h3>
+                </div>
+                <span class="text-xs text-slate-400 font-mono uppercase">GANTT LIVE & TEAMS</span>
+              </div>
+              <div class="space-y-3 text-sm text-slate-600">
+                <p><strong>Para consultas de proyectos:</strong> Crea una conversación dentro del proyecto vinculada al Excel compartido de "Go Live" en OneDrive.</p>
+                <p>Al recibir preguntas en Teams sobre una fecha o entregable, pídele a Claude:</p>
+                <div class="bg-[#FBFBFA] p-3.5 rounded border border-slate-200 font-mono text-xs text-slate-900 select-all">
+                  "Consulta el estatus de la funcionalidad X en el archivo de Excel compartido y redacta la respuesta formal indicando responsable y avance para compartirla en el canal de Teams."
+                </div>
+              </div>
+            </div>
+
+            <!-- Paso 4 -->
+            <div class="bg-white p-6 rounded border border-slate-200 space-y-4 shadow-2xs">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs text-teal-700 font-mono bg-[#F1F1EF] px-2 py-0.5 rounded font-semibold">[ PASO 04 ]</span>
+                  <h3 class="text-base font-bold text-slate-900">Estandarizar entregables con Markdown (.md) y PRD</h3>
+                </div>
+                <span class="text-xs text-slate-400 font-mono uppercase">OPTIMIZACIÓN DE TOKENS</span>
+              </div>
+              <div class="space-y-3 text-sm text-slate-600">
+                <ul class="space-y-2 list-none">
+                  <li class="flex items-start gap-2">
+                    <span class="text-teal-700 font-mono">•</span>
+                    <span>Configura un proyecto único enfocado en la generación de Documentos de Requerimientos de Producto (PRD).</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-teal-700 font-mono">•</span>
+                    <span>Solicita a la IA que entregue sus borradores y estructuras en formato Markdown (.md). Este formato de texto plano estructurado permite una lectura más rápida por parte de las IAs y reduce drásticamente el consumo de tokens.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Paso 5 -->
+            <div class="bg-white p-6 rounded border border-slate-200 space-y-4 shadow-2xs">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs text-teal-700 font-mono bg-[#F1F1EF] px-2 py-0.5 rounded font-semibold">[ PASO 05 ]</span>
+                  <h3 class="text-base font-bold text-slate-900">Gestión estricta de Compliance y Anonimización</h3>
+                </div>
+                <span class="text-xs text-slate-400 font-mono uppercase">SEGURIDAD BANCARIA</span>
+              </div>
+              <div class="space-y-3 text-sm text-slate-600">
+                <p>Toma en cuenta las políticas de confidencialidad de tu organización. Si intentas subir capturas o documentos con candados o marcas de agua legales, los filtros corporativos impedirán su procesamiento.</p>
+                <div class="p-4 bg-[#FBFBFA] rounded border border-slate-200 space-y-1.5">
+                  <span class="text-xs text-slate-900 font-semibold font-mono block">[ ACCIÓN DE MITIGACIÓN ]</span>
+                  <p class="text-xs text-slate-700 leading-relaxed">
+                    Para analizar documentos o datos protegidos, indica previamente a la IA en el prompt que utilice patrones anonimizados (por ejemplo, reemplazar nombres de clientes por "Cliente A" o entidades bancarias por "Banco X") antes de procesar el contenido.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- FRENTE 2: PERSONAL -->
+        <section class="space-y-8 pt-4" id="frente-personal">
+          <div class="border-b border-slate-200 pb-4">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs text-emerald-600 font-bold tracking-widest uppercase font-mono">
+                FRENTE 02
+              </span>
+              <span class="text-slate-300">|</span>
+              <span class="text-xs text-slate-500 uppercase tracking-wider font-mono">
+                ÁMBITO PERSONAL
+              </span>
+            </div>
+            <h2 class="text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight">
+              Frente 2: Ámbito Personal (Portafolio, Aprendizaje y Crecimiento)
+            </h2>
+          </div>
+
+          <div class="space-y-6">
+            
+            <!-- Paso 1 -->
+            <div class="bg-white p-6 rounded border border-slate-200 space-y-4 shadow-2xs">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs text-emerald-600 font-mono bg-[#F1F1EF] px-2 py-0.5 rounded font-semibold">[ PASO 01 ]</span>
+                  <h3 class="text-base font-bold text-slate-900">Configurar Notion como "Segundo Cerebro Digital"</h3>
+                </div>
+                <span class="text-xs text-slate-400 font-mono uppercase">CONEXIÓN ASISTIDA</span>
+              </div>
+              <div class="space-y-3 text-sm text-slate-600">
+                <p>Ingresa a los complementos de ChatGPT o Claude Personal y conecta tu cuenta gratuita de Notion mediante la integración oficial (<code class="font-mono text-slate-900">@Notion</code>).</p>
+                <div class="bg-[#FBFBFA] p-4 rounded border border-slate-200 space-y-1.5">
+                  <span class="text-xs text-slate-900 font-semibold font-mono block">[ AUTOMATIZACIÓN DE FLUJO ]</span>
+                  <p class="text-xs text-slate-600">Al finalizar una investigación sobre banca, fintech o arquitectura de producto en el chat, ejecuta el comando:</p>
+                  <div class="bg-[#0b1c30] text-slate-100 p-3 rounded font-mono text-xs select-all mt-1">
+                    "@Notion crea una página en mi base de datos de Proyectos Personales con el resumen y los requerimientos clave de esta conversación."
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Paso 2 -->
+            <div class="bg-white p-6 rounded border border-slate-200 space-y-4 shadow-2xs">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs text-emerald-600 font-mono bg-[#F1F1EF] px-2 py-0.5 rounded font-semibold">[ PASO 02 ]</span>
+                  <h3 class="text-base font-bold text-slate-900">Descargar e importar Skills (skill.md) desde GitHub</h3>
+                </div>
+                <span class="text-xs text-slate-400 font-mono uppercase">MODULARIDAD TÉCNICA</span>
+              </div>
+              <div class="space-y-3 text-sm text-slate-600">
+                <ul class="space-y-2 list-none">
+                  <li class="flex items-start gap-2">
+                    <span class="text-emerald-600 font-mono">•</span>
+                    <span>Para mejorar la calidad estética y de formato de tus entregables (como presentaciones visuales estilo Napkin), busca repositorios públicos en GitHub.</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-emerald-600 font-mono">•</span>
+                    <span>Filtra las opciones evaluando la reputación del desarrollador (verificando que cuente con calificaciones o estrellas positivas).</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-emerald-600 font-mono">•</span>
+                    <span>Descarga el archivo <code class="font-mono text-slate-900">skill.md</code> del repositorio e impórtalo en la sección de Habilidades / Skills de tu interfaz de IA.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Paso 3 -->
+            <div class="bg-white p-6 rounded border border-slate-200 space-y-4 shadow-2xs">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs text-emerald-600 font-mono bg-[#F1F1EF] px-2 py-0.5 rounded font-semibold">[ PASO 03 ]</span>
+                  <h3 class="text-base font-bold text-slate-900">Aprendizaje Acelerado con NotebookLM</h3>
+                </div>
+                <span class="text-xs text-slate-400 font-mono uppercase">INGESTA DE CONOCIMIENTO</span>
+              </div>
+              <div class="space-y-3 text-sm text-slate-600">
+                <ul class="space-y-2 list-none">
+                  <li class="flex items-start gap-2">
+                    <span class="text-emerald-600 font-mono">•</span>
+                    <span>Para dominar nuevas herramientas (como Notion) o estrategias de marca personal, crea un cuaderno en NotebookLM de Google.</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span class="text-emerald-600 font-mono">•</span>
+                    <span>Carga enlaces directos de seminarios o cursos de YouTube (por ejemplo, conferencias de larga duración sobre marca personal).</span>
+                  </li>
+                </ul>
+                <div class="bg-[#FBFBFA] p-4 rounded border border-slate-200 space-y-1.5 mt-2">
+                  <span class="text-xs text-slate-900 font-semibold font-mono block">[ FILTRADO DE CALIDAD EN LA WEB ]</span>
+                  <p class="text-xs text-slate-600">Cuando solicites búsquedas en la web sobre un tema, utiliza el prompt de auditoría:</p>
+                  <div class="bg-[#0b1c30] text-slate-100 p-3 rounded font-mono text-xs select-all mt-1">
+                    "Lista y califica cada fuente encontrada del 1 al 10 evaluando su nivel de actualización, si proviene de un sitio oficial o confiable, y preséntalo en una tabla estructurada."
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- CIERRE Y SOPORTE DIRECTO -->
+        <section class="pt-8 border-t border-slate-200">
+          <div class="bg-[#F7F7F5] p-8 rounded border border-slate-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div class="space-y-2 max-w-3xl">
+              <span class="text-xs text-teal-700 uppercase font-mono tracking-widest block font-semibold">
+                PRINCIPIO DE CRITERIO INSTITUCIONAL · LUCIRME AI
+              </span>
+              <p class="text-lg font-bold text-slate-900 italic font-medium leading-snug">
+                "No dependes de automatizaciones frágiles; construyes criterio y soberanía técnica dentro y fuera del banco."
+              </p>
+              <p class="text-xs text-slate-600 pt-1">
+                Marco de referencia consultiva para la excelencia operativa, descompresión de tareas y autonomía estratégica.
+              </p>
+            </div>
+            <a class="shrink-0 inline-flex items-center gap-2 h-11 px-5 rounded bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-opacity shadow-sm" href={whatsappKarinaz} rel="noopener noreferrer" target="_blank">
+              <span class="material-symbols-outlined text-[18px]">chat</span>
+              <span>Consultas con Pablo Ríos</span>
+            </a>
+          </div>
+        </section>
+
       </div>
     </div>
   </main>
+  
+  <footer class="w-full bg-[#FBFBFA] border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-10">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-8">
+        <div class="md:col-span-5 space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-slate-900 tracking-tight">LuciRMe AI Private Advisory</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 font-mono">v2.4-STD</span>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">Documento técnico de consultoría y mentoría estratégica de canales digitales, emitido bajo estricta cláusula de reserva profesional para Karina Zamalloa.</p>
+          <p class="text-xs text-slate-400 font-mono">Dirección & Asesoría Técnica: Pablo Ríos</p>
+        </div>
+        <div class="md:col-span-4 space-y-2">
+          <span class="text-xs text-slate-900 uppercase tracking-wider block font-mono font-semibold">Marco de Cumplimiento & Seguridad</span>
+          <ul class="text-xs text-slate-600 space-y-1.5">
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-emerald-600 text-[16px]">verified_user</span><span>Alineación con directrices de ciberseguridad financiera</span></li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-slate-400 text-[16px]">lock</span><span>Información clasificada — Prohibida su divulgación externa</span></li>
+            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-slate-400 text-[16px]">policy</span><span>Control de versiones y custodia estricta de activos digitales</span></li>
+          </ul>
+        </div>
+        <div class="md:col-span-3 flex flex-col justify-between items-start md:items-end">
+          <span class="text-xs text-slate-400 uppercase tracking-widest font-mono">Ref: LRM-DOC-2026-KZ01</span>
+          <a class="inline-flex items-center gap-1.5 text-xs text-slate-700 hover:text-slate-900 transition-colors" href="#resumen"><span class="material-symbols-outlined text-[16px]">arrow_upward</span><span>Retornar al inicio</span></a>
+        </div>
+      </div>
+      <div class="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 font-mono">
+        <p>© 2026 LuciRMe AI. Todos los derechos reservados. Consultoría estratégica por Pablo Ríos.</p>
+        <div class="flex items-center gap-6"><span>Protocolo ISO/IEC 27001 Complementario</span><span>Nivel de Clasificación: Restringido</span></div>
+      </div>
+    </div>
+  </footer>
 </Layout>
