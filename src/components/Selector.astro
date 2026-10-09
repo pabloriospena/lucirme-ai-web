@@ -206,11 +206,14 @@
             </a>
             <a 
               id="res-secondary-btn" 
-              href="/content/precios" 
-              class="bg-teal hover:bg-tealHover text-white font-bold py-3 px-6 rounded-xl transition text-xs sm:text-sm text-center shadow-lg cursor-pointer"
-              onclick="if (window.posthog) { window.posthog.capture('termometro_cta_click', { tipo: 'cafe_estrategia', destino: '/content/precios' }); }"
+              href="https://wa.me/573053046180?text=Hola%20Pablo,%20hice%20el%20termómetro%20de%20LuciRMe%20AI%20y%20me%20gustaría%20agendar%20un%20Café%20de%20Estrategia." 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl transition text-xs sm:text-sm text-center shadow-lg cursor-pointer flex items-center justify-center gap-2"
+              onclick="if (window.posthog) { window.posthog.capture('termometro_cta_click', { tipo: 'cafe_estrategia', destino: 'whatsapp' }); }"
             >
-              Agendar Café de Estrategia (30 min)
+              <span class="material-symbols-outlined text-[18px]">chat</span>
+              <span>Agendar Café de Estrategia por WhatsApp</span>
             </a>
           </div>
         </div>
@@ -844,7 +847,7 @@
 
   <div class="footer">
     <strong>LuciRMe AI</strong> • Optimización de Tiempo y Automatización con Inteligencia Artificial • Pablo Ríos Peña<br>
-    Para agendar tu Café de Estrategia visita: <strong>lucirme.com/content/precios</strong>
+    Para agendar tu Café de Estrategia escríbenos por WhatsApp: <strong>wa.me/573053046180</strong>
   </div>
 ` + closeBody + `
 ` + closeHtml;

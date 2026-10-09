@@ -1358,29 +1358,17 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
           Sin venderte una herramienta porque sí.
         </p>
         <div
-          class="flex flex-col sm:flex-row items-center gap-3 pt-3 w-full sm:w-auto"
+          class="flex flex-col sm:flex-row items-center gap-3 pt-3 w-full sm:w-auto justify-center"
         >
           <a
-            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
-            href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, tengo un proceso identificado para mejorar.")}`}
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
+            href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, tengo un proceso identificado para mejorar en mi empresa.")}`}
             rel="noopener noreferrer"
             target="_blank"
             onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_whatsapp_click', { origen: 'cta_final' }); }"
           >
             <span class="material-symbols-outlined text-[18px]">chat</span>
             <span>Hablemos por WhatsApp</span>
-          </a>
-          <a
-            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white border border-slate-200 text-slate-700 text-sm font-semibold hover:bg-slate-50 transition-colors cursor-pointer"
-            href={calendlyUrl}
-            rel="noopener noreferrer"
-            target="_blank"
-            onclick="if (window.posthog) { window.posthog.capture('empresas_calendly_click', { origen: 'cta_final' }); }"
-          >
-            <span class="material-symbols-outlined text-[18px] text-slate-500"
-              >calendar_month</span
-            >
-            <span>Agendar una conversación</span>
           </a>
         </div>
         <p class="text-xs font-mono text-slate-500 pt-2">
@@ -1435,12 +1423,6 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
               href={whatsappBase}
               rel="noopener noreferrer"
               target="_blank">WhatsApp Directo</a
-            >
-            <a
-              class="hover:text-slate-900 transition-colors"
-              href={calendlyUrl}
-              rel="noopener noreferrer"
-              target="_blank">Calendly (Agenda)</a
             >
             <a
               class="hover:text-slate-900 transition-colors"
