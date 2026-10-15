@@ -47,22 +47,22 @@ export const RUTA_PRODUCTO_DATA: PasoRuta[] = [
         id: "rec-1",
         titulo: "Backlog Detox",
         descripcion: "Prioriza tu backlog con IA en minutos.",
-        tipo: "gratis-con-correo",
-        url: "TODO_RECURSO_URL"
+        tipo: "gratis",
+        url: "/recursos/backlog-detox"
       },
       {
         id: "rec-2",
         titulo: "Shape Up Builder",
         descripcion: "Define apuestas claras de producto sin ciclos infinitos de planificación.",
-        tipo: "gratis-con-correo",
-        url: "TODO_RECURSO_URL"
+        tipo: "gratis",
+        url: "/recursos/shapeup-builder"
       },
       {
         id: "rec-3",
         titulo: "Guía de prompts para PMs",
         descripcion: "Los prompts para research y síntesis.",
         tipo: "gratis-con-correo",
-        url: "TODO_RECURSO_URL"
+        url: "TODO_GUIA_PROMPTS_URL"
       }
     ]
   },

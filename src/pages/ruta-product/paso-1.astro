@@ -154,7 +154,7 @@ const groupRecursos = MAILERLITE_GROUPS.RECURSOS_GRATIS;
                       </p>
                     </div>
 
-                    <form id={formId} onsubmit={`handleMailerLiteSubmit(event, '${groupRecursos}', '${feedbackId}', '${btnId}', '${modalId}')`} class="space-y-4">
+                    <form id={formId} onsubmit={`handleMailerLiteSubmit(event, '${groupRecursos}', '${feedbackId}', '${btnId}', '${modalId}', '${rec.url}')`} class="space-y-4">
                       <div>
                         <label class="block text-xs font-medium text-slate-700 mb-1">
                           Correo electrónico
@@ -202,7 +202,7 @@ const groupRecursos = MAILERLITE_GROUPS.RECURSOS_GRATIS;
   </div>
 
   <script is:inline>
-    window.handleMailerLiteSubmit = async function(e, groupId, feedbackId, btnId, modalId) {
+    window.handleMailerLiteSubmit = async function(e, groupId, feedbackId, btnId, modalId, resourceUrl) {
       e.preventDefault();
       const form = e.target;
       const emailInput = form.querySelector('input[name="email"]');
@@ -216,8 +216,19 @@ const groupRecursos = MAILERLITE_GROUPS.RECURSOS_GRATIS;
         btn.textContent = "Procesando...";
       }
 
+      const showSuccess = () => {
+        if (feedback) {
+          if (resourceUrl && resourceUrl !== 'TODO_GUIA_PROMPTS_URL') {
+            feedback.innerHTML = `¡Desbloqueado! <a href="${resourceUrl}" target="_blank" rel="noopener noreferrer" class="underline font-bold">Accede aquí →</a>`;
+          } else {
+            feedback.textContent = "¡Registrado! Te avisaremos cuando esté disponible.";
+          }
+          feedback.classList.remove("hidden");
+        }
+      };
+
       try {
-        const res = await fetch('/api/mailerlite', {
+        await fetch('/api/mailerlite', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -225,37 +236,21 @@ const groupRecursos = MAILERLITE_GROUPS.RECURSOS_GRATIS;
             group_id: groupId
           })
         });
-
-        if (feedback) {
-          feedback.textContent = "¡Desbloqueado con éxito!";
-          feedback.classList.remove("hidden");
-        }
-
-        setTimeout(() => {
-          document.getElementById(modalId).classList.add("hidden");
-          form.reset();
-          if (feedback) feedback.classList.add("hidden");
-          if (btn) {
-            btn.disabled = false;
-            btn.textContent = "Desbloquear recurso";
-          }
-        }, 1500);
+        showSuccess();
       } catch (err) {
         console.error(err);
-        if (feedback) {
-          feedback.textContent = "¡Registrado con éxito!";
-          feedback.classList.remove("hidden");
-          feedback.className = "text-center text-xs text-emerald-600 font-semibold pt-1";
+        showSuccess();
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = "Desbloquear recurso";
         }
         setTimeout(() => {
-          document.getElementById(modalId).classList.add("hidden");
+          const modal = document.getElementById(modalId);
+          if (modal) modal.classList.add("hidden");
           form.reset();
           if (feedback) feedback.classList.add("hidden");
-          if (btn) {
-            btn.disabled = false;
-            btn.textContent = "Desbloquear recurso";
-          }
-        }, 1500);
+        }, 3000);
       }
     };
   </script>
