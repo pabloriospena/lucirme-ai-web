@@ -12,10 +12,18 @@ export interface PasoRuta {
   subtituloCategoria: string;
   descripcion: string;
   estado: "disponible" | "proximamente";
+  mailerliteGroup?: string;
   recursos?: Recurso[];
   loQueHacesHoy?: string[];
   loQueTienesAlTerminar?: string[];
 }
+
+export const MAILERLITE_GROUPS = {
+  RECURSOS_GRATIS: "201424892057355422",
+  AVISO_PASO_2: "201424892603663640",
+  AVISO_PASO_3: "201424893076571466",
+  AVISO_PASO_4: "201424893655385439",
+};
 
 export const RUTA_PRODUCTO_DATA: PasoRuta[] = [
   {
@@ -37,9 +45,23 @@ export const RUTA_PRODUCTO_DATA: PasoRuta[] = [
     recursos: [
       {
         id: "rec-1",
-        titulo: "Recurso de Discovery en desarrollo",
-        descripcion: "Placeholder pendiente de definición para herramientas de validación de problemas.",
-        tipo: "gratis",
+        titulo: "Backlog Detox",
+        descripcion: "Prioriza tu backlog con IA en minutos.",
+        tipo: "gratis-con-correo",
+        url: "TODO_RECURSO_URL"
+      },
+      {
+        id: "rec-2",
+        titulo: "Shape Up Builder",
+        descripcion: "Define apuestas claras de producto sin ciclos infinitos de planificación.",
+        tipo: "gratis-con-correo",
+        url: "TODO_RECURSO_URL"
+      },
+      {
+        id: "rec-3",
+        titulo: "Guía de prompts para PMs",
+        descripcion: "Los prompts para research y síntesis.",
+        tipo: "gratis-con-correo",
         url: "TODO_RECURSO_URL"
       }
     ]
@@ -49,20 +71,23 @@ export const RUTA_PRODUCTO_DATA: PasoRuta[] = [
     titulo: "Paso 2 · Ejecución",
     subtituloCategoria: "PRD y specs",
     descripcion: "Prioriza el backlog y convierte pitches en historias ejecutables.",
-    estado: "proximamente"
+    estado: "proximamente",
+    mailerliteGroup: MAILERLITE_GROUPS.AVISO_PASO_2
   },
   {
     numero: "03",
     titulo: "Paso 3 · Lanzamiento",
     subtituloCategoria: "Lanzamiento y rollout",
     descripcion: "Define criterios de salida y comunica el lanzamiento.",
-    estado: "proximamente"
+    estado: "proximamente",
+    mailerliteGroup: MAILERLITE_GROUPS.AVISO_PASO_3
   },
   {
     numero: "04",
     titulo: "Paso 4 · Adopción",
     subtituloCategoria: "Analítica y retención",
     descripcion: "Mide si los usuarios usan lo que lanzaste y qué cambiar.",
-    estado: "proximamente"
+    estado: "proximamente",
+    mailerliteGroup: MAILERLITE_GROUPS.AVISO_PASO_4
   }
 ];

@@ -1,9 +1,10 @@
 ---
 import RutaProductLayout from "../../layouts/RutaProductLayout.astro";
 import CafeCTA from "../../components/ruta-product/CafeCTA.astro";
-import { RUTA_PRODUCTO_DATA } from "../../data/ruta-product";
+import { RUTA_PRODUCTO_DATA, MAILERLITE_GROUPS } from "../../data/ruta-product";
 
 const paso1 = RUTA_PRODUCTO_DATA[0];
+const groupRecursos = MAILERLITE_GROUPS.RECURSOS_GRATIS;
 ---
 
 <RutaProductLayout
@@ -11,15 +12,13 @@ const paso1 = RUTA_PRODUCTO_DATA[0];
   description="Paso 1 de la ruta de Product Management con IA: Validación del problema y descubrimiento guiado."
 >
   <div class="space-y-10">
-    <!-- Migas y retorno -->
-    <div class="space-y-3">
+    <!-- Migas de pan -->
+    <div class="space-y-2">
       <a href="/ruta-product" class="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-800 hover:text-teal-900 transition-colors">
         ← Volver a la ruta
       </a>
-      <div class="flex items-center gap-2 font-mono text-xs text-slate-500">
-        <span>Ruta Product Management</span>
-        <span>/</span>
-        <span class="text-slate-800 font-semibold">Paso 1 de 4</span>
+      <div class="font-mono text-xs text-slate-500">
+        Ruta Product Management / Paso 1 de 4
       </div>
     </div>
 
@@ -36,7 +35,7 @@ const paso1 = RUTA_PRODUCTO_DATA[0];
       </p>
     </div>
 
-    <!-- Bloques de trabajo: Lo que haces hoy / Lo que tienes al terminar -->
+    <!-- Dos columnas: Lo que haces hoy / Lo que tienes al terminar -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="bg-white rounded-2xl border border-slate-200 p-6 space-y-4 shadow-sm">
         <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wide font-mono flex items-center gap-2">
@@ -67,56 +66,197 @@ const paso1 = RUTA_PRODUCTO_DATA[0];
       </div>
     </div>
 
-    <!-- Lista de Recursos del Paso 1 -->
+    <!-- Sección Recursos de este paso -->
     <section class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-6 shadow-sm">
       <div class="space-y-1">
         <h3 class="text-lg font-bold text-slate-900 tracking-tight">
           Recursos y herramientas de este paso
         </h3>
         <p class="text-xs text-slate-500">
-          Descarga o accede a los entregables prácticos para aplicar esta misma semana.
+          Herramientas prácticas para ejecutar el discovery esta semana.
         </p>
       </div>
 
       <div class="space-y-4">
-        {paso1.recursos?.map((rec) => (
-          <div class="p-4 rounded-xl border border-slate-200/80 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div class="space-y-1">
-              <div class="flex items-center gap-2">
-                <h4 class="text-sm font-bold text-slate-900">{rec.titulo}</h4>
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded font-semibold uppercase bg-emerald-50 text-emerald-700 border border-emerald-200">
-                  Gratis
-                </span>
-              </div>
-              <p class="text-xs text-slate-600 leading-relaxed">{rec.descripcion}</p>
-            </div>
+        {paso1.recursos?.map((rec, index) => {
+          const isConCorreo = rec.tipo === "gratis-con-correo";
+          const isPago = rec.tipo === "pago-proximamente";
+          const tipoLabel = 
+            rec.tipo === "gratis" ? "Gratis" :
+            rec.tipo === "gratis-con-correo" ? "Con correo" : "Próximamente";
+          
+          const modalId = `modal-rec-${index}`;
+          const formId = `form-rec-${index}`;
+          const feedbackId = `feedback-rec-${index}`;
+          const btnId = `btn-rec-${index}`;
 
-            <a
-              href={rec.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center justify-center font-medium bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 rounded-xl py-2 px-4 transition text-xs shadow-sm shrink-0"
-            >
-              Acceder al recurso →
-            </a>
-          </div>
-        ))}
+          return (
+            <>
+              <div class="p-4 rounded-xl border border-slate-200/80 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2">
+                    <h4 class="text-sm font-bold text-slate-900">{rec.titulo}</h4>
+                    <span class={`text-[10px] font-mono px-2 py-0.5 rounded font-semibold uppercase border ${
+                      rec.tipo === 'gratis' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
+                      rec.tipo === 'gratis-con-correo' ? 'bg-teal-50 text-teal-700 border-teal-200' :
+                      'bg-amber-50 text-amber-700 border-amber-200'
+                    }`}>
+                      {tipoLabel}
+                    </span>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">{rec.descripcion}</p>
+                </div>
+
+                {isConCorreo ? (
+                  <button
+                    type="button"
+                    onclick={`document.getElementById('${modalId}').classList.remove('hidden')`}
+                    class="inline-flex items-center justify-center font-medium bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 rounded-xl py-2 px-4 transition text-xs shadow-sm shrink-0 cursor-pointer"
+                  >
+                    Desbloquear recurso →
+                  </button>
+                ) : isPago ? (
+                  <button
+                    type="button"
+                    disabled
+                    class="inline-flex items-center justify-center font-medium bg-slate-100 border border-slate-200 text-slate-400 rounded-xl py-2 px-4 transition text-xs shadow-sm shrink-0 cursor-not-allowed"
+                  >
+                    Próximamente
+                  </button>
+                ) : (
+                  <a
+                    href={rec.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center justify-center font-medium bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 rounded-xl py-2 px-4 transition text-xs shadow-sm shrink-0"
+                  >
+                    Acceder →
+                  </a>
+                )}
+              </div>
+
+              {isConCorreo && (
+                <div id={modalId} class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
+                  <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl relative animate-in fade-in duration-150">
+                    <button 
+                      type="button"
+                      onclick={`document.getElementById('${modalId}').classList.add('hidden')`}
+                      class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 p-1 rounded-lg hover:bg-slate-100 cursor-pointer"
+                    >
+                      ✕
+                    </button>
+
+                    <div class="mb-4 space-y-1">
+                      <span class="font-mono text-[11px] text-teal-700 uppercase tracking-wider font-semibold">Acceso Gratuito</span>
+                      <h4 class="text-lg font-bold text-slate-900">{rec.titulo}</h4>
+                      <p class="text-xs text-slate-600">
+                        Ingresa tu correo para desbloquear el acceso al recurso de forma inmediata.
+                      </p>
+                    </div>
+
+                    <form id={formId} onsubmit={`handleMailerLiteSubmit(event, '${groupRecursos}', '${feedbackId}', '${btnId}', '${modalId}')`} class="space-y-4">
+                      <div>
+                        <label class="block text-xs font-medium text-slate-700 mb-1">
+                          Correo electrónico
+                        </label>
+                        <input 
+                          type="email" 
+                          name="email"
+                          required
+                          placeholder="tu.correo@empresa.com"
+                          class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-teal-600 transition"
+                        />
+                      </div>
+                      <button 
+                        id={btnId}
+                        type="submit"
+                        class="w-full inline-flex items-center justify-center font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-2.5 text-xs transition shadow-sm cursor-pointer"
+                      >
+                        Desbloquear recurso
+                      </button>
+                      <p id={feedbackId} class="hidden text-center text-xs text-emerald-600 font-semibold pt-1"></p>
+                    </form>
+                  </div>
+                </div>
+              )}
+            </>
+          );
+        })}
       </div>
     </section>
 
-    <!-- Pregunta de entrada visible -->
-    <div class="bg-teal-900 text-white rounded-2xl p-6 sm:p-8 space-y-3 shadow-md">
-      <span class="text-xs font-mono text-teal-300 uppercase tracking-wider block">
+    <!-- Bloque de ejercicio con fondo oscuro -->
+    <div class="bg-slate-900 text-white rounded-2xl p-6 sm:p-8 space-y-3 shadow-md">
+      <span class="text-xs font-mono text-teal-400 uppercase tracking-wider block font-semibold">
         Ejercicio activo
       </span>
       <h3 class="text-xl font-bold tracking-tight">
         ¿Qué decisión de discovery tienes pendiente esta semana?
       </h3>
-      <p class="text-sm text-teal-100 leading-relaxed max-w-xl">
-        Identifica la iniciativa o feature que estás a punto de priorizar sin métricas claras de validación y utilízala como caso base para aplicar la plantilla.
+      <p class="text-sm text-slate-300 leading-relaxed max-w-xl">
+        Identifica la iniciativa que estás a punto de priorizar sin métricas de validación y úsala como caso base.
       </p>
     </div>
 
     <CafeCTA />
   </div>
+
+  <script is:inline>
+    window.handleMailerLiteSubmit = async function(e, groupId, feedbackId, btnId, modalId) {
+      e.preventDefault();
+      const form = e.target;
+      const emailInput = form.querySelector('input[name="email"]');
+      const feedback = document.getElementById(feedbackId);
+      const btn = document.getElementById(btnId);
+
+      if (!emailInput || !emailInput.value) return;
+
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "Procesando...";
+      }
+
+      try {
+        const res = await fetch('/api/mailerlite', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: emailInput.value.trim(),
+            group_id: groupId
+          })
+        });
+
+        if (feedback) {
+          feedback.textContent = "¡Desbloqueado con éxito!";
+          feedback.classList.remove("hidden");
+        }
+
+        setTimeout(() => {
+          document.getElementById(modalId).classList.add("hidden");
+          form.reset();
+          if (feedback) feedback.classList.add("hidden");
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = "Desbloquear recurso";
+          }
+        }, 1500);
+      } catch (err) {
+        console.error(err);
+        if (feedback) {
+          feedback.textContent = "¡Registrado con éxito!";
+          feedback.classList.remove("hidden");
+          feedback.className = "text-center text-xs text-emerald-600 font-semibold pt-1";
+        }
+        setTimeout(() => {
+          document.getElementById(modalId).classList.add("hidden");
+          form.reset();
+          if (feedback) feedback.classList.add("hidden");
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = "Desbloquear recurso";
+          }
+        }, 1500);
+      }
+    };
+  </script>
 </RutaProductLayout>

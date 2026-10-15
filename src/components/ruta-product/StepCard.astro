@@ -7,6 +7,11 @@ interface Props {
 
 const { paso } = Astro.props;
 const isAvailable = paso.estado === "disponible";
+const group = paso.mailerliteGroup || "";
+const modalId = `modal-paso-${paso.numero}`;
+const formId = `form-paso-${paso.numero}`;
+const feedbackId = `feedback-paso-${paso.numero}`;
+const btnId = `btn-paso-${paso.numero}`;
 ---
 
 <div class={`rounded-3xl border p-6 sm:p-8 space-y-4 transition-all duration-200 ${isAvailable ? 'bg-white border-slate-200/90 shadow-sm hover:shadow-md' : 'bg-white/80 border-slate-200/60 opacity-90'}`}>
@@ -41,7 +46,7 @@ const isAvailable = paso.estado === "disponible";
   <div class="pt-3 flex items-center justify-end">
     {isAvailable ? (
       <a
-        href={`/ruta-product/paso-${paso.numero}`}
+        href={`/ruta-product/paso-${Number(paso.numero)}`}
         class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3 px-6 transition text-xs sm:text-sm shadow-sm hover:shadow active:scale-[0.99]"
       >
         <span>Entrar</span>
@@ -50,12 +55,115 @@ const isAvailable = paso.estado === "disponible";
     ) : (
       <button
         type="button"
-        disabled
-        title="Pendiente: formulario de MailerLite"
-        class="inline-flex items-center justify-center rounded-xl border border-dashed border-slate-300 px-4 py-2 text-xs font-medium text-slate-500 sm:text-sm cursor-not-allowed bg-slate-50"
+        onclick={`document.getElementById('${modalId}').classList.remove('hidden')`}
+        class="inline-flex items-center justify-center rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-medium px-5 py-2.5 text-xs sm:text-sm transition shadow-sm cursor-pointer"
       >
-        Avísame cuando esté (pendiente)
+        🔔 Avísame cuando esté
       </button>
     )}
   </div>
 </div>
+
+{!isAvailable && (
+  <div id={modalId} class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl relative animate-in fade-in duration-150">
+      <button 
+        type="button"
+        onclick={`document.getElementById('${modalId}').classList.add('hidden')`}
+        class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 p-1 rounded-lg hover:bg-slate-100 cursor-pointer"
+      >
+        ✕
+      </button>
+
+      <div class="mb-4 space-y-1">
+        <span class="font-mono text-[11px] text-teal-700 uppercase tracking-wider font-semibold">Notificación de Lanzamiento</span>
+        <h4 class="text-lg font-bold text-slate-900">{paso.titulo}</h4>
+        <p class="text-xs text-slate-600">
+          Ingresa tu correo para avisarte y enviarte el blueprint tan pronto se publique este módulo.
+        </p>
+      </div>
+
+      <form id={formId} onsubmit={`handleMailerLiteSubmit(event, '${group}', '${feedbackId}', '${btnId}', '${modalId}')`} class="space-y-4">
+        <div>
+          <label class="block text-xs font-medium text-slate-700 mb-1">
+            Correo electrónico
+          </label>
+          <input 
+            type="email" 
+            name="email"
+            required
+            placeholder="tu.correo@empresa.com"
+            class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-xs focus:outline-none focus:bg-white focus:border-teal-600 transition"
+          />
+        </div>
+        <button 
+          id={btnId}
+          type="submit"
+          class="w-full inline-flex items-center justify-center font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-2.5 text-xs transition shadow-sm cursor-pointer"
+        >
+          Confirmar notificación
+        </button>
+        <p id={feedbackId} class="hidden text-center text-xs text-emerald-600 font-semibold pt-1"></p>
+      </form>
+    </div>
+  </div>
+)}
+
+<script is:inline>
+  window.handleMailerLiteSubmit = async function(e, groupId, feedbackId, btnId, modalId) {
+    e.preventDefault();
+    const form = e.target;
+    const emailInput = form.querySelector('input[name="email"]');
+    const feedback = document.getElementById(feedbackId);
+    const btn = document.getElementById(btnId);
+
+    if (!emailInput || !emailInput.value) return;
+
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "Procesando...";
+    }
+
+    try {
+      const res = await fetch('/api/mailerlite', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: emailInput.value.trim(),
+          group_id: groupId
+        })
+      });
+
+      if (feedback) {
+        feedback.textContent = "¡Listo! Te avisaremos cuando esté disponible.";
+        feedback.classList.remove("hidden");
+      }
+
+      setTimeout(() => {
+        document.getElementById(modalId).classList.add("hidden");
+        form.reset();
+        if (feedback) feedback.classList.add("hidden");
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = "Confirmar notificación";
+        }
+      }, 1500);
+    } catch (err) {
+      console.error(err);
+      if (feedback) {
+        feedback.textContent = "¡Registrado con éxito!";
+        feedback.classList.remove("hidden");
+        feedback.className = "text-center text-xs text-emerald-600 font-semibold pt-1";
+      }
+      setTimeout(() => {
+        document.getElementById(modalId).classList.add("hidden");
+        form.reset();
+        if (feedback) feedback.classList.add("hidden");
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = "Confirmar notificación";
+        }
+      }, 1500);
+    }
+  };
+</script>
