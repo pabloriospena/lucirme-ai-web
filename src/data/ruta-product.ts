@@ -11,7 +11,7 @@ export interface PasoRuta {
   titulo: string;
   subtituloCategoria: string;
   descripcion: string;
-  estado: "disponible" | "proximamente";
+  estado: "disponible" | "en-construccion" | "proximamente";
   mailerliteGroup?: string;
   recursos?: Recurso[];
   loQueHacesHoy?: string[];
@@ -44,18 +44,11 @@ export const RUTA_PRODUCTO_DATA: PasoRuta[] = [
     ],
     recursos: [
       {
-        id: "rec-1",
-        titulo: "Backlog Detox",
-        descripcion: "Prioriza tu backlog con IA en minutos.",
+        id: "rec-ideador",
+        titulo: "Ideador de Productos",
+        descripcion: "Estructura, valida y prototipa tu proyecto o hipótesis con prompts guiados.",
         tipo: "gratis",
-        url: "/recursos/backlog-detox"
-      },
-      {
-        id: "rec-2",
-        titulo: "Shape Up Builder",
-        descripcion: "Define apuestas claras de producto sin ciclos infinitos de planificación.",
-        tipo: "gratis",
-        url: "/recursos/shapeup-builder"
+        url: "/recursos/ideador-producto"
       },
       {
         id: "rec-3",
@@ -71,8 +64,24 @@ export const RUTA_PRODUCTO_DATA: PasoRuta[] = [
     titulo: "Paso 2 · Ejecución",
     subtituloCategoria: "PRD y specs",
     descripcion: "Prioriza el backlog y convierte pitches en historias ejecutables.",
-    estado: "proximamente",
-    mailerliteGroup: MAILERLITE_GROUPS.AVISO_PASO_2
+    estado: "en-construccion",
+    mailerliteGroup: MAILERLITE_GROUPS.AVISO_PASO_2,
+    recursos: [
+      {
+        id: "rec-1",
+        titulo: "Backlog Detox",
+        descripcion: "Prioriza tu backlog con IA en minutos.",
+        tipo: "gratis",
+        url: "/recursos/backlog-detox"
+      },
+      {
+        id: "rec-2",
+        titulo: "Shape Up Builder",
+        descripcion: "Define apuestas claras de producto sin ciclos infinitos de planificación.",
+        tipo: "gratis",
+        url: "/recursos/shapeup-builder"
+      }
+    ]
   },
   {
     numero: "03",
