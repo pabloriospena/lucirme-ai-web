@@ -24,12 +24,11 @@ export const POST: APIRoute = async ({ request }) => {
     const groupId = process.env.MAILERLITE_GROUP_RECURSOS_GRATIS;
 
     if (!apiKey) {
-      // Sin API key no bloqueamos al usuario, solo registramos el fallo
-      console.warn('[unlock-recurso] MAILERLITE_API_KEY no está configurada en el servidor.');
-      return new Response(JSON.stringify({ ok: true }), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      console.error('[unlock-recurso] MAILERLITE_API_KEY no está configurada en el servidor.');
+      return new Response(
+        JSON.stringify({ ok: false, error: 'Error de configuración del servidor. Intenta de nuevo más tarde.' }),
+        { status: 502, headers: { 'Content-Type': 'application/json' } }
+      );
     }
 
     // 3. Llamar a la API de MailerLite
@@ -51,9 +50,21 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
     if (!mlResponse.ok) {
-      // 409/422 = suscriptor ya existe o alerta de validación → se trata como éxito
       const errorText = await mlResponse.text();
-      console.warn(`[unlock-recurso] MailerLite respondió ${mlResponse.status}: ${errorText}`);
+      // 409 / 422 = suscriptor ya existe en MailerLite → se considera ok
+      if (mlResponse.status === 409 || mlResponse.status === 422) {
+        console.info(`[unlock-recurso] MailerLite suscriptor ya existente (${mlResponse.status})`);
+        return new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+
+      console.error(`[unlock-recurso] Error MailerLite ${mlResponse.status}: ${errorText}`);
+      return new Response(
+        JSON.stringify({ ok: false, error: 'No se pudo registrar el correo. Por favor intenta de nuevo.' }),
+        { status: 502, headers: { 'Content-Type': 'application/json' } }
+      );
     }
 
     return new Response(JSON.stringify({ ok: true }), {
@@ -62,11 +73,10 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
   } catch (error: unknown) {
-    // Preferimos perder un lead antes que bloquear a un usuario real
     console.error('[unlock-recurso] Error inesperado:', error);
-    return new Response(JSON.stringify({ ok: true }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return new Response(
+      JSON.stringify({ ok: false, error: 'Ocurrió un error inesperado. Por favor intenta de nuevo.' }),
+      { status: 502, headers: { 'Content-Type': 'application/json' } }
+    );
   }
 };

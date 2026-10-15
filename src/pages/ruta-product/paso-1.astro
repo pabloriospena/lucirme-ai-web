@@ -8,7 +8,7 @@ const groupRecursos = MAILERLITE_GROUPS.RECURSOS_GRATIS;
 ---
 
 <RutaProductLayout
-  title="Discovery: decide qué problema vale la pena resolver | LuciRMe AI"
+  title="Discovery: decide qué problema vale la pena resolver"
   description="Paso 1 de la ruta de Product Management con IA: Validación del problema y descubrimiento guiado."
 >
   <div class="space-y-10">
@@ -30,9 +30,6 @@ const groupRecursos = MAILERLITE_GROUPS.RECURSOS_GRATIS;
       <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
         Discovery: decide qué problema vale la pena resolver
       </h1>
-      <p class="text-base text-slate-600 leading-relaxed max-w-2xl">
-        {paso1.descripcion}
-      </p>
     </div>
 
     <!-- Dos columnas: Lo que haces hoy / Lo que tienes al terminar -->
@@ -79,9 +76,11 @@ const groupRecursos = MAILERLITE_GROUPS.RECURSOS_GRATIS;
 
       <div class="space-y-4">
         {paso1.recursos?.map((rec, index) => {
-          const isConCorreo = rec.tipo === "gratis-con-correo";
-          const isPago = rec.tipo === "pago-proximamente";
+          const isPendingGuide = rec.url === "TODO_GUIA_PROMPTS_URL";
+          const isConCorreo = rec.tipo === "gratis-con-correo" && !isPendingGuide;
+          const isPago = rec.tipo === "pago-proximamente" || isPendingGuide;
           const tipoLabel = 
+            isPendingGuide ? "Próximamente" :
             rec.tipo === "gratis" ? "Gratis" :
             rec.tipo === "gratis-con-correo" ? "Con correo" : "Próximamente";
           
@@ -97,6 +96,7 @@ const groupRecursos = MAILERLITE_GROUPS.RECURSOS_GRATIS;
                   <div class="flex items-center gap-2">
                     <h4 class="text-sm font-bold text-slate-900">{rec.titulo}</h4>
                     <span class={`text-[10px] font-mono px-2 py-0.5 rounded font-semibold uppercase border ${
+                      isPendingGuide ? 'bg-amber-50 text-amber-700 border-amber-200' :
                       rec.tipo === 'gratis' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
                       rec.tipo === 'gratis-con-correo' ? 'bg-teal-50 text-teal-700 border-teal-200' :
                       'bg-amber-50 text-amber-700 border-amber-200'
