@@ -20,8 +20,8 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // 2. Leer credenciales exclusivamente del servidor
-    const apiKey = process.env.MAILERLITE_API_KEY;
-    const groupId = process.env.MAILERLITE_GROUP_RECURSOS_GRATIS;
+    const apiKey = (process.env.MAILERLITE_API_KEY || '').trim();
+    const groupId = (process.env.MAILERLITE_GROUP_RECURSOS_GRATIS || '').trim();
 
     if (!apiKey) {
       console.error('[unlock-recurso] MAILERLITE_API_KEY no está configurada en el servidor.');
