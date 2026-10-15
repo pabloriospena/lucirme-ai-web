@@ -1,0 +1,62 @@
+---
+import RutaProductLayout from "../../layouts/RutaProductLayout.astro";
+import StepCard from "../../components/ruta-product/StepCard.astro";
+import CafeCTA from "../../components/ruta-product/CafeCTA.astro";
+import PipelineFlow from "../../components/ruta-product/PipelineFlow.astro";
+import { RUTA_PRODUCTO_DATA } from "../../data/ruta-product";
+---
+
+<RutaProductLayout
+  title="Conecta tus herramientas de producto con IA, paso a paso | LuciRMe AI"
+  description="Una ruta por el ciclo de vida de producto, sobre tus procesos reales y no sobre un temario."
+>
+  <div class="space-y-12 pb-16">
+    <!-- Header / Hero section -->
+    <section class="space-y-5 pt-6 bg-white rounded-3xl border border-slate-200/80 p-8 shadow-sm relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-64 h-64 bg-teal-50 rounded-full blur-3xl -z-10 translate-x-20 -translate-y-20"></div>
+      
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-teal-50 border border-teal-200/80 rounded-full font-mono text-xs text-teal-800 shadow-2xs">
+        <span class="w-2 h-2 rounded-full bg-teal-600 animate-pulse"></span>
+        Rutas de Aprendizaje · Product Management con IA
+      </div>
+      
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+        Conecta tus herramientas de producto con IA, paso a paso
+      </h1>
+
+      <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+        Una ruta por el ciclo de vida de producto, sobre tus procesos reales y no sobre un temario.
+      </p>
+
+      <div class="pt-2 flex flex-wrap items-center gap-2.5 text-xs text-slate-500 font-mono">
+        <span class="font-semibold text-slate-700">Stack integrado:</span>
+        <span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg shadow-2xs text-slate-700 font-medium">Notion</span>
+        <span>·</span>
+        <span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg shadow-2xs text-slate-700 font-medium">Jira</span>
+        <span>·</span>
+        <span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg shadow-2xs text-slate-700 font-medium">Amplitude</span>
+      </div>
+    </section>
+
+    <!-- Barra de Progreso y Pipeline -->
+    <PipelineFlow />
+
+    <!-- Módulos del Framework (Listado de StepCards) -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between px-2">
+        <h2 class="text-xl font-bold text-slate-900 tracking-tight">
+          Módulos del Framework
+        </h2>
+        <span class="text-xs font-mono text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200/80">Secuencial · Ejecución Real</span>
+      </div>
+
+      <div class="space-y-4">
+        {RUTA_PRODUCTO_DATA.map((paso) => (
+          <StepCard paso={paso} />
+        ))}
+      </div>
+    </section>
+
+    <CafeCTA />
+  </div>
+</RutaProductLayout>

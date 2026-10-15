@@ -1,0 +1,46 @@
+---
+import Header from "../components/ruta-product/Header.astro";
+import Footer from "../components/ruta-product/Footer.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <style>
+      :root {
+        /* reemplazar con manual de marca */
+        --color-primary: #00685F;
+        --color-primary-hover: #005049;
+        --color-bg: #F8FAFC;
+        --color-surface: #FFFFFF;
+        --color-text: #0B1C30;
+        --color-muted: #64748B;
+        --color-border: #E2E8F0;
+        --color-accent: #059669;
+      }
+      body {
+        background-color: var(--color-bg);
+        color: var(--color-text);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col antialiased selection:bg-teal-100 selection:text-teal-900">
+    <Header />
+    <main class="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-8">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

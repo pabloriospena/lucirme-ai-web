@@ -1,0 +1,70 @@
+---
+import { RUTA_PRODUCTO_DATA } from "../../data/ruta-product";
+
+const disponibles = RUTA_PRODUCTO_DATA.filter((p) => p.estado === "disponible").length;
+const total = RUTA_PRODUCTO_DATA.length;
+
+// "01" → "paso-1". Evita el enlace roto a /ruta-product/paso-01.
+const hrefPaso = (numero: string) => `/ruta-product/paso-${Number(numero)}`;
+---
+
+<section aria-label="Flujo del ciclo de vida" class="rounded-xl bg-white p-4 shadow-sm sm:p-5">
+  <div class="mb-4 flex items-center justify-between">
+    <span class="font-mono text-[11px] font-semibold uppercase tracking-wider text-slate-600">
+      Ciclo de vida del producto
+    </span>
+    <span class="font-mono text-[11px] font-medium text-emerald-700">
+      {disponibles} de {total} etapas disponibles
+    </span>
+  </div>
+
+  <ol class="grid grid-cols-1 gap-3 md:grid-cols-4">
+    {RUTA_PRODUCTO_DATA.map((paso, i) => {
+      const activo = paso.estado === "disponible";
+      const contenido = (
+        <>
+          <div class="mb-1.5 flex items-center justify-between">
+            <span class={`font-mono text-xs font-semibold ${activo ? "text-teal-800" : "text-slate-500"}`}>
+              {paso.numero}. {paso.titulo.split("· ")[1]?.toUpperCase()}
+            </span>
+            <span
+              class={`rounded px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase ${
+                activo ? "bg-teal-700 text-white" : "bg-slate-200 text-slate-600"
+              }`}
+            >
+              {activo ? "Activo" : "Próximamente"}
+            </span>
+          </div>
+          <div class="h-1 w-full overflow-hidden rounded-full bg-slate-200">
+            <div class={`h-full ${activo ? "w-full bg-teal-700" : "w-0"}`}></div>
+          </div>
+          <p class={`mt-2 font-mono text-xs ${activo ? "text-teal-800" : "text-slate-500"}`}>
+            {paso.subtituloCategoria}
+          </p>
+        </>
+      );
+
+      return (
+        <li class="relative">
+          {activo ? (
+            <a
+              href={hrefPaso(paso.numero)}
+              class="flex flex-col rounded-lg bg-teal-50 p-3 ring-1 ring-teal-200 transition hover:ring-teal-400"
+            >
+              {contenido}
+            </a>
+          ) : (
+            <div class="flex flex-col rounded-lg bg-slate-50 p-3" aria-disabled="true">
+              {contenido}
+            </div>
+          )}
+          {i < total - 1 && (
+            <span class="absolute -right-2 top-1/2 hidden -translate-y-1/2 text-slate-300 md:block" aria-hidden="true">
+              →
+            </span>
+          )}
+        </li>
+      );
+    })}
+  </ol>
+</section>

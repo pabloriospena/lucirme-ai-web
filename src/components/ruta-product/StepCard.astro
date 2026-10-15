@@ -1,0 +1,61 @@
+---
+import type { PasoRuta } from "../../data/ruta-product";
+
+interface Props {
+  paso: PasoRuta;
+}
+
+const { paso } = Astro.props;
+const isAvailable = paso.estado === "disponible";
+---
+
+<div class={`rounded-3xl border p-6 sm:p-8 space-y-4 transition-all duration-200 ${isAvailable ? 'bg-white border-slate-200/90 shadow-sm hover:shadow-md' : 'bg-white/80 border-slate-200/60 opacity-90'}`}>
+  <div class="flex items-center justify-between gap-2">
+    <span class="font-mono text-xs font-bold text-slate-500 uppercase tracking-wider">
+      Paso {paso.numero} / 04
+    </span>
+    {isAvailable ? (
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-2xs">
+        <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span> Disponible
+      </span>
+    ) : (
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 border border-slate-200/80">
+        Próximamente
+      </span>
+    )}
+  </div>
+
+  <div class="space-y-1.5">
+    <h3 class="text-2xl font-bold text-slate-900 tracking-tight">
+      {paso.titulo}
+    </h3>
+    <p class="text-xs font-mono text-teal-800 uppercase tracking-wide font-semibold">
+      {paso.subtituloCategoria}
+    </p>
+  </div>
+
+  <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+    {paso.descripcion}
+  </p>
+
+  <div class="pt-3 flex items-center justify-end">
+    {isAvailable ? (
+      <a
+        href={`/ruta-product/paso-${paso.numero}`}
+        class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3 px-6 transition text-xs sm:text-sm shadow-sm hover:shadow active:scale-[0.99]"
+      >
+        <span>Entrar</span>
+        <span class="text-base leading-none">→</span>
+      </a>
+    ) : (
+      <button
+        type="button"
+        disabled
+        title="Pendiente: formulario de MailerLite"
+        class="inline-flex items-center justify-center rounded-xl border border-dashed border-slate-300 px-4 py-2 text-xs font-medium text-slate-500 sm:text-sm cursor-not-allowed bg-slate-50"
+      >
+        Avísame cuando esté (pendiente)
+      </button>
+    )}
+  </div>
+</div>
