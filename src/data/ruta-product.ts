@@ -61,7 +61,7 @@ export const RUTA_PRODUCTO_DATA: PasoRuta[] = [
         id: "rec-3",
         titulo: "Guía de Prompting para PMs",
         descripcion: "Los prompts para research y síntesis.",
-        tipo: "gratis-con-correo",
+        tipo: "gratis",
         url: "/recursos/checklistpm-vol1"
       }
     ]
