@@ -33,7 +33,7 @@ export const POST: APIRoute = async ({ request }) => {
       ? (process.env.MAILERLITE_GROUP_AVISO_PASO_3 || '').trim()
       : (process.env.MAILERLITE_GROUP_AVISO_PASO_4 || '').trim();
 
-    const apiKey = (process.env.MAILERLITE_API_KEY || '').trim();
+    const apiKey = (process.env.MAILERLITE_API_KEY || process.env.MAILERLITE_API_TOKEN || '').trim();
 
     if (!apiKey || !groupId) {
       console.error(`[aviso-paso] Configuración faltante: apiKey=${Boolean(apiKey)}, groupId=${Boolean(groupId)} para paso ${pasoStr}`);
