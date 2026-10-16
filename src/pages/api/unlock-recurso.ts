@@ -2,8 +2,9 @@
 // Registra un correo en el grupo MAILERLITE_GROUP_RECURSOS_GRATIS.
 // El cliente solo envía { email }. La API key y el group ID viven únicamente en el servidor.
 import type { APIRoute } from 'astro';
+import { firmar, COOKIE_NAME, COOKIE_MAX_AGE } from '../../lib/acceso-ruta';
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, cookies }) => {
   try {
     const body = await request.json().catch(() => ({}));
     const { email } = body;
@@ -54,6 +55,18 @@ export const POST: APIRoute = async ({ request }) => {
       // 409 / 422 = suscriptor ya existe en MailerLite → se considera ok
       if (mlResponse.status === 409 || mlResponse.status === 422) {
         console.info(`[unlock-recurso] MailerLite suscriptor ya existente (${mlResponse.status})`);
+        try {
+          const cookieVal = firmar(emailStr);
+          cookies.set(COOKIE_NAME, cookieVal, {
+            path: '/',
+            maxAge: COOKIE_MAX_AGE,
+            httpOnly: true,
+            secure: true,
+            sameSite: 'lax',
+          });
+        } catch (signErr) {
+          console.error('[unlock-recurso] Error al firmar cookie:', signErr);
+        }
         return new Response(JSON.stringify({ ok: true }), {
           status: 200,
           headers: { 'Content-Type': 'application/json' },
@@ -65,6 +78,19 @@ export const POST: APIRoute = async ({ request }) => {
         JSON.stringify({ ok: false, error: 'No se pudo registrar el correo. Por favor intenta de nuevo.' }),
         { status: 502, headers: { 'Content-Type': 'application/json' } }
       );
+    }
+
+    try {
+      const cookieVal = firmar(emailStr);
+      cookies.set(COOKIE_NAME, cookieVal, {
+        path: '/',
+        maxAge: COOKIE_MAX_AGE,
+        httpOnly: true,
+        secure: true,
+        sameSite: 'lax',
+      });
+    } catch (signErr) {
+      console.error('[unlock-recurso] Error al firmar cookie:', signErr);
     }
 
     return new Response(JSON.stringify({ ok: true }), {

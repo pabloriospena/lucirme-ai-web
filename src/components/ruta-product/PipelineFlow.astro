@@ -2,11 +2,11 @@
 import { RUTA_PRODUCTO_DATA } from "../../data/ruta-product";
 
 const conRecursos = RUTA_PRODUCTO_DATA.filter(
-  (p) => p.estado === "disponible" || p.estado === "en-construccion"
+  (p) => Boolean(p.recursos && p.recursos.length > 0)
 ).length;
 const total = RUTA_PRODUCTO_DATA.length;
 
-// "01" → "paso-1". Evita el enlace roto a /ruta-product/paso-01.
+// "01" → "paso-1", "00" → "paso-0".
 const hrefPaso = (numero: string) => `/ruta-product/paso-${Number(numero)}`;
 ---
 
@@ -20,7 +20,7 @@ const hrefPaso = (numero: string) => `/ruta-product/paso-${Number(numero)}`;
     </span>
   </div>
 
-  <ol class="grid grid-cols-1 gap-3 md:grid-cols-4">
+  <ol class="grid grid-cols-1 gap-3 md:grid-cols-5">
     {RUTA_PRODUCTO_DATA.map((paso, i) => {
       const activo = paso.estado === "disponible";
       const enConstruccion = paso.estado === "en-construccion";

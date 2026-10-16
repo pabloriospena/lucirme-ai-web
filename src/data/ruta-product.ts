@@ -27,6 +27,13 @@ export const MAILERLITE_GROUPS = {
 
 export const RUTA_PRODUCTO_DATA: PasoRuta[] = [
   {
+    numero: "00",
+    titulo: "Paso 0 · Conexiones",
+    subtituloCategoria: "Conexiones entre herramientas",
+    descripcion: "Conecta las herramientas que ya usas antes de empezar el ciclo de producto.",
+    estado: "en-construccion"
+  },
+  {
     numero: "01",
     titulo: "Paso 1 · Discovery",
     subtituloCategoria: "Validación del problema",
