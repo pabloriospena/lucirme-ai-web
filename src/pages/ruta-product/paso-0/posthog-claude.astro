@@ -33,6 +33,9 @@ const accesoValido = verificar(cookieAcceso);
       <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
         Conecta PostHog con Claude
       </h1>
+      <p class="text-xs sm:text-sm font-mono text-slate-500 bg-slate-100 p-2.5 rounded-lg border border-slate-200">
+        Esta conexión se puede hacer con Claude. Aquí ves cómo se ve el resultado. [VERIFICAR PLAN: conector de PostHog en plan gratuito vs Pro]
+      </p>
       <p class="text-base text-slate-600 leading-relaxed max-w-2xl">
         Prueba en cinco minutos que Claude lee tus eventos de producto.
       </p>
@@ -50,7 +53,7 @@ const accesoValido = verificar(cookieAcceso);
             Desbloquea esta guía
           </h2>
           <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
-            Ingresa tu correo para acceder al tutorial paso a paso, los prompts de lectura de eventos y la prueba de conexión.
+            Ingresa tu correo para acceder al tutorial paso a paso, los ejemplos y la prueba de conexión.
           </p>
         </div>
 
@@ -122,17 +125,9 @@ const accesoValido = verificar(cookieAcceso);
           <span class="w-2 h-2 rounded-full bg-teal-600"></span> Paso 2 · Lista tus eventos
         </h2>
         
-        <div class="space-y-2">
-          <p class="text-xs font-mono font-bold text-slate-700 uppercase tracking-wider">
-            Prompt:
-          </p>
-          <div class="code-block bg-slate-900 text-slate-200 p-5 rounded-xl font-mono text-xs relative">
-            <button class="copy-btn absolute top-3 right-3 bg-teal-700 hover:bg-teal-600 text-white px-3 py-1.5 rounded-md text-[10px] font-bold transition">
-              📋 Copiar
-            </button>
-            <pre class="whitespace-pre-wrap leading-relaxed font-mono"><code>Lista los eventos que recibió mi proyecto de PostHog en los últimos 7 días. Dame solo el nombre de cada evento y cuántas veces apareció.</code></pre>
-          </div>
-        </div>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed font-medium">
+          Pide a Claude que liste los eventos recibidos en tu proyecto de PostHog en los últimos 7 días con su nombre y frecuencia.
+        </p>
 
         <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
           Si Claude responde con una lista, la conexión funciona.
@@ -150,17 +145,9 @@ const accesoValido = verificar(cookieAcceso);
           <span class="w-2 h-2 rounded-full bg-emerald-600"></span> Paso 3 · Pide un número
         </h2>
 
-        <div class="space-y-2">
-          <p class="text-xs font-mono font-bold text-slate-700 uppercase tracking-wider">
-            Prompt:
-          </p>
-          <div class="code-block bg-slate-900 text-slate-200 p-5 rounded-xl font-mono text-xs relative">
-            <button class="copy-btn absolute top-3 right-3 bg-teal-700 hover:bg-teal-600 text-white px-3 py-1.5 rounded-md text-[10px] font-bold transition">
-              📋 Copiar
-            </button>
-            <pre class="whitespace-pre-wrap leading-relaxed font-mono"><code>¿Cuántas veces se disparó el evento "[NOMBRE DEL EVENTO]" en los últimos 7 días? Responde solo con el número y el periodo.</code></pre>
-          </div>
-        </div>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed font-medium">
+          Pide a Claude que te diga cuántas veces se disparó un evento específico en los últimos 7 días.
+        </p>
 
         <!-- Marcador de Captura -->
         <div class="p-6 bg-slate-100 rounded-xl border border-slate-200 text-center font-mono text-xs text-slate-500 font-medium">
@@ -257,19 +244,4 @@ const accesoValido = verificar(cookieAcceso);
       });
     }
   })();
-
-  // Lógica de botones copiar
-  document.querySelectorAll('.copy-btn').forEach(btn => {
-    btn.addEventListener('click', async (e) => {
-      e.preventDefault();
-      const target = e.target;
-      const codeBlock = target.closest('.code-block');
-      const code = codeBlock.querySelector('code')?.textContent || '';
-      
-      await navigator.clipboard.writeText(code.trim());
-      const original = target.textContent;
-      target.textContent = '✅ Copiado';
-      setTimeout(() => target.textContent = original, 2000);
-    });
-  });
 </script>
