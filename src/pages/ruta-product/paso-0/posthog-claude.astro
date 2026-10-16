@@ -1,0 +1,275 @@
+---
+export const prerender = false;
+
+import RutaProductLayout from "../../../layouts/RutaProductLayout.astro";
+import CafeCTA from "../../../components/ruta-product/CafeCTA.astro";
+import { verificar, COOKIE_NAME } from "../../../lib/acceso-ruta";
+
+// Verificar acceso desde la cookie firmada en el servidor
+const cookieAcceso = Astro.cookies.get(COOKIE_NAME)?.value;
+const accesoValido = verificar(cookieAcceso);
+---
+
+<RutaProductLayout
+  title="Conecta PostHog con Claude"
+  description="Prueba en cinco minutos que Claude lee tus eventos de producto."
+>
+  <div class="space-y-10">
+    <!-- Migas de pan -->
+    <div class="space-y-2">
+      <a href="/ruta-product/paso-0" class="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-800 hover:text-teal-900 transition-colors">
+        ← Volver al Paso 0
+      </a>
+      <div class="font-mono text-xs text-slate-500">
+        Ruta Product Management / Paso 0 / Contenido 3
+      </div>
+    </div>
+
+    <!-- Encabezado -->
+    <div class="space-y-3">
+      <span class="inline-block text-xs font-mono font-bold text-teal-800 bg-teal-50 px-2.5 py-1 rounded-md border border-teal-200 uppercase">
+        Paso 0 · Contenido 3
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+        Conecta PostHog con Claude
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed max-w-2xl">
+        Prueba en cinco minutos que Claude lee tus eventos de producto.
+      </p>
+    </div>
+
+    {/* Muro de correo si no tiene acceso válido */}
+    {!accesoValido && (
+      <section id="muro-posthog-claude" class="bg-white rounded-2xl p-6 sm:p-10 border border-slate-200 shadow-md max-w-2xl mx-auto my-6 space-y-6">
+        <div class="inline-flex items-center gap-2 bg-teal-50 text-teal-800 text-xs font-bold uppercase tracking-wider px-3.5 py-1 rounded-full border border-teal-200 font-mono">
+          <span>🔗</span> Paso 0 · Contenido 3
+        </div>
+
+        <div class="space-y-2">
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-tight">
+            Desbloquea esta guía
+          </h2>
+          <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+            Ingresa tu correo para acceder al tutorial paso a paso, los prompts de lectura de eventos y la prueba de conexión.
+          </p>
+        </div>
+
+        <form id="wall-form-posthog-claude" class="space-y-4 pt-2">
+          <div>
+            <label for="wall-email-posthog-claude" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 font-mono">
+              Tu Correo Electrónico *
+            </label>
+            <input
+              type="email"
+              id="wall-email-posthog-claude"
+              name="email"
+              placeholder="Ej. tu@empresa.com"
+              required
+              autocomplete="email"
+              class="w-full text-sm p-3.5 border border-slate-300 rounded-xl bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent transition"
+            />
+          </div>
+
+          <div id="wall-error-posthog-claude" class="hidden p-3 bg-red-50 border border-red-200 text-red-600 text-xs rounded-lg font-medium"></div>
+
+          <button
+            type="submit"
+            id="wall-submit-posthog-claude"
+            class="w-full bg-[#00685F] hover:bg-[#005049] text-white font-bold text-base py-3.5 px-6 rounded-xl transition shadow-md cursor-pointer flex items-center justify-center gap-2"
+          >
+            <span>Desbloquear guía</span> →
+          </button>
+        </form>
+
+        <p class="text-xs text-slate-400 text-center flex items-center justify-center gap-1.5 pt-1">
+          <span>🔒</span> Cero spam. Acceso inmediato a la guía.
+        </p>
+      </section>
+    )}
+
+    {/* Contenido protegido */}
+    <div id="contenido-posthog-claude" class={accesoValido ? "space-y-8 max-w-3xl" : "hidden space-y-8 max-w-3xl"}>
+
+      <!-- Qué necesitas -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-3 shadow-sm">
+        <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wide font-mono flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-slate-900"></span> Qué necesitas
+        </h2>
+        <ul class="space-y-2 text-sm sm:text-base text-slate-600 list-disc list-inside leading-relaxed">
+          <li>Claude con el conector de PostHog activado.</li>
+          <li>Un proyecto de PostHog con eventos en los últimos 7 días.</li>
+        </ul>
+      </div>
+
+      <!-- Paso 1 -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-4 shadow-sm">
+        <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wide font-mono flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span> Paso 1 · Activa el conector
+        </h2>
+        <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+          Abre la configuración de conectores en Claude y activa PostHog.
+        </p>
+
+        <!-- Marcador de Captura -->
+        <div class="p-6 bg-slate-100 rounded-xl border border-slate-200 text-center font-mono text-xs text-slate-500 font-medium">
+          [CAPTURA: el conector de PostHog activo en Claude]
+        </div>
+      </div>
+
+      <!-- Paso 2 -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-4 shadow-sm">
+        <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wide font-mono flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-teal-600"></span> Paso 2 · Lista tus eventos
+        </h2>
+        
+        <div class="space-y-2">
+          <p class="text-xs font-mono font-bold text-slate-700 uppercase tracking-wider">
+            Prompt:
+          </p>
+          <div class="code-block bg-slate-900 text-slate-200 p-5 rounded-xl font-mono text-xs relative">
+            <button class="copy-btn absolute top-3 right-3 bg-teal-700 hover:bg-teal-600 text-white px-3 py-1.5 rounded-md text-[10px] font-bold transition">
+              📋 Copiar
+            </button>
+            <pre class="whitespace-pre-wrap leading-relaxed font-mono"><code>Lista los eventos que recibió mi proyecto de PostHog en los últimos 7 días. Dame solo el nombre de cada evento y cuántas veces apareció.</code></pre>
+          </div>
+        </div>
+
+        <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+          Si Claude responde con una lista, la conexión funciona.
+        </p>
+
+        <!-- Marcador de Captura -->
+        <div class="p-6 bg-slate-100 rounded-xl border border-slate-200 text-center font-mono text-xs text-slate-500 font-medium">
+          [CAPTURA: respuesta de Claude con la lista de eventos]
+        </div>
+      </div>
+
+      <!-- Paso 3 -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-4 shadow-sm">
+        <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wide font-mono flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-600"></span> Paso 3 · Pide un número
+        </h2>
+
+        <div class="space-y-2">
+          <p class="text-xs font-mono font-bold text-slate-700 uppercase tracking-wider">
+            Prompt:
+          </p>
+          <div class="code-block bg-slate-900 text-slate-200 p-5 rounded-xl font-mono text-xs relative">
+            <button class="copy-btn absolute top-3 right-3 bg-teal-700 hover:bg-teal-600 text-white px-3 py-1.5 rounded-md text-[10px] font-bold transition">
+              📋 Copiar
+            </button>
+            <pre class="whitespace-pre-wrap leading-relaxed font-mono"><code>¿Cuántas veces se disparó el evento "[NOMBRE DEL EVENTO]" en los últimos 7 días? Responde solo con el número y el periodo.</code></pre>
+          </div>
+        </div>
+
+        <!-- Marcador de Captura -->
+        <div class="p-6 bg-slate-100 rounded-xl border border-slate-200 text-center font-mono text-xs text-slate-500 font-medium">
+          [CAPTURA: respuesta de Claude con el número]
+        </div>
+      </div>
+
+      <!-- Lo que acabas de probar -->
+      <div class="bg-slate-50 rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-2">
+        <h3 class="text-sm font-bold text-slate-900 uppercase font-mono tracking-wide">
+          Lo que acabas de probar
+        </h3>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+          Claude leyó tu proyecto de PostHog y te dio un número sin entrar a la plataforma. Eso es la conexión.
+        </p>
+      </div>
+
+      <!-- Pie de secuencia -->
+      <div class="pt-6 border-t border-slate-200">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-200">
+          <div>
+            <span class="text-xs font-mono text-slate-500 uppercase tracking-wider block">Siguiente contenido</span>
+            <span class="text-sm font-bold text-slate-900">Sigue con: Plantilla de conexión completa</span>
+          </div>
+          <a
+            href="/ruta-product/paso-0/plantilla-conexion"
+            onclick="if (window.posthog) { window.posthog.capture('contenido_paso_0_siguiente_click', { contenido: 'posthog-claude' }); }"
+            class="inline-flex items-center justify-center font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-2.5 px-5 transition text-xs sm:text-sm shadow-sm"
+          >
+            Continuar →
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CafeCTA -->
+    <CafeCTA ubicacion="paso-0-3" />
+  </div>
+</RutaProductLayout>
+
+<script is:inline>
+  // Evento al cargar la página
+  if (window.posthog) {
+    window.posthog.capture('contenido_paso_0_visto', { contenido: 'posthog-claude' });
+  }
+
+  // Lógica del muro de correo
+  (function () {
+    function ejecutarDesbloqueo() {
+      var muro = document.getElementById('muro-posthog-claude');
+      var contenido = document.getElementById('contenido-posthog-claude');
+      if (muro) muro.classList.add('hidden');
+      if (contenido) contenido.classList.remove('hidden');
+    }
+
+    var form = document.getElementById('wall-form-posthog-claude');
+    if (form) {
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var btn = document.getElementById('wall-submit-posthog-claude');
+        var errorEl = document.getElementById('wall-error-posthog-claude');
+        var emailVal = (document.getElementById('wall-email-posthog-claude')?.value || '').trim();
+
+        if (errorEl) errorEl.classList.add('hidden');
+        if (btn) { btn.disabled = true; btn.innerHTML = '<span>Procesando...</span>'; }
+
+        try {
+          var res = await fetch('/api/unlock-recurso', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: emailVal })
+          });
+          var data = await res.json().catch(function () { return {}; });
+
+          if (!res.ok || !data.ok) {
+            var msg = data.error || 'No se pudo registrar el correo. Por favor intenta de nuevo.';
+            if (errorEl) { errorEl.textContent = msg; errorEl.classList.remove('hidden'); }
+            if (btn) { btn.disabled = false; btn.innerHTML = '<span>Desbloquear guía</span> →'; }
+            return;
+          }
+
+          if (window.posthog) {
+            window.posthog.capture('resource_unlocked', { recurso: 'posthog-claude', paso: '0' });
+          }
+
+          ejecutarDesbloqueo();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } catch (err) {
+          console.error('[muro-posthog-claude]', err);
+          if (errorEl) { errorEl.textContent = 'Error de conexión. Intenta de nuevo.'; errorEl.classList.remove('hidden'); }
+          if (btn) { btn.disabled = false; btn.innerHTML = '<span>Desbloquear guía</span> →'; }
+        }
+      });
+    }
+  })();
+
+  // Lógica de botones copiar
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const target = e.target;
+      const codeBlock = target.closest('.code-block');
+      const code = codeBlock.querySelector('code')?.textContent || '';
+      
+      await navigator.clipboard.writeText(code.trim());
+      const original = target.textContent;
+      target.textContent = '✅ Copiado';
+      setTimeout(() => target.textContent = original, 2000);
+    });
+  });
+</script>

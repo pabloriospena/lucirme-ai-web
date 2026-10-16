@@ -9,27 +9,52 @@ const contenidos: Array<{
   numero: string;
   titulo: string;
   tipo: "Gratis" | "De pago";
-  url?: string;
+  url: string;
+  botonTexto: string;
   disponible: boolean;
+  estadoBadge?: string;
 }> = [
   {
     numero: "01",
     titulo: "Conecta tus herramientas: el mapa de la ruta",
     tipo: "Gratis",
     url: "/ruta-product/paso-0/intro",
+    botonTexto: "Empezar",
     disponible: true,
   },
   {
     numero: "02",
-    titulo: "Notion ↔ Jira: sincronización de producto",
+    titulo: "Conecta Notion con Jira usando Claude",
     tipo: "Gratis",
-    disponible: false,
+    url: "/ruta-product/paso-0/notion-jira",
+    botonTexto: "Empezar",
+    disponible: true,
   },
   {
     numero: "03",
-    titulo: "Amplitude ↔ Jira: feedback loop de métricas",
+    titulo: "Conecta PostHog con Claude",
     tipo: "Gratis",
+    url: "/ruta-product/paso-0/posthog-claude",
+    botonTexto: "Empezar",
+    disponible: true,
+  },
+  {
+    numero: "04",
+    titulo: "Plantilla de conexión completa",
+    tipo: "De pago",
+    url: "/ruta-product/paso-0/plantilla-conexion",
+    botonTexto: "Ver producto",
+    disponible: true,
+    estadoBadge: "Próximamente",
+  },
+  {
+    numero: "05",
+    titulo: "Flujo automatizado de Discovery a Delivery",
+    tipo: "De pago",
+    url: "#",
+    botonTexto: "Próximamente",
     disponible: false,
+    estadoBadge: "Próximamente",
   },
 ];
 ---
@@ -91,9 +116,9 @@ const contenidos: Array<{
                 }`}>
                   {item.tipo}
                 </span>
-                {!item.disponible && (
+                {item.estadoBadge && (
                   <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-200 text-slate-600">
-                    Próximamente
+                    {item.estadoBadge}
                   </span>
                 )}
               </div>
@@ -104,7 +129,7 @@ const contenidos: Array<{
                 href={item.url}
                 class="inline-flex items-center justify-center font-medium bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 rounded-xl py-2 px-4 transition text-xs shadow-sm shrink-0"
               >
-                Empezar
+                {item.botonTexto}
               </a>
             ) : (
               <button
@@ -112,7 +137,7 @@ const contenidos: Array<{
                 disabled
                 class="inline-flex items-center justify-center font-medium bg-slate-100 border border-slate-200 text-slate-400 rounded-xl py-2 px-4 transition text-xs shadow-sm shrink-0 cursor-not-allowed"
               >
-                Próximamente
+                {item.botonTexto}
               </button>
             )}
           </div>

@@ -1,0 +1,75 @@
+---
+import RutaProductLayout from "../../../layouts/RutaProductLayout.astro";
+import CafeCTA from "../../../components/ruta-product/CafeCTA.astro";
+---
+
+<RutaProductLayout
+  title="Plantilla de conexión completa"
+  description="El flujo completo de Notion, Claude y Jira, listo para montar en tu cuenta."
+>
+  <div class="space-y-10">
+    <!-- Migas de pan -->
+    <div class="space-y-2">
+      <a href="/ruta-product/paso-0" class="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-800 hover:text-teal-900 transition-colors">
+        ← Volver al Paso 0
+      </a>
+      <div class="font-mono text-xs text-slate-500">
+        Ruta Product Management / Paso 0 / Contenido 4
+      </div>
+    </div>
+
+    <!-- Encabezado -->
+    <div class="space-y-3">
+      <span class="inline-block text-xs font-mono font-bold text-amber-800 bg-amber-50 px-2.5 py-1 rounded-md border border-amber-200 uppercase">
+        Paso 0 · Contenido 4
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+        Plantilla de conexión completa
+      </h1>
+      <p class="text-base text-slate-600 leading-relaxed max-w-2xl">
+        El flujo completo de Notion, Claude y Jira, listo para montar en tu cuenta.
+      </p>
+    </div>
+
+    <!-- Mensaje central de Próximamente -->
+    <section class="bg-white rounded-2xl border border-slate-200 p-8 sm:p-12 text-center space-y-4 shadow-sm">
+      <div class="w-14 h-14 bg-amber-50 text-amber-700 rounded-2xl flex items-center justify-center text-2xl mx-auto border border-amber-200">
+        ⏳
+      </div>
+      <div class="space-y-2 max-w-md mx-auto">
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900">
+          Próximamente
+        </h2>
+        <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+          Esta plantilla está en preparación.
+        </p>
+      </div>
+    </section>
+
+    <!-- Pie de secuencia -->
+    <div class="pt-6 border-t border-slate-200">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-200">
+        <div>
+          <span class="text-xs font-mono text-slate-500 uppercase tracking-wider block">Navegación</span>
+          <span class="text-sm font-bold text-slate-900">Paso 0 · Conexiones</span>
+        </div>
+        <a
+          href="/ruta-product/paso-0"
+          onclick="if (window.posthog) { window.posthog.capture('contenido_paso_0_siguiente_click', { contenido: 'plantilla-conexion' }); }"
+          class="inline-flex items-center justify-center font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-2.5 px-5 transition text-xs sm:text-sm shadow-sm"
+        >
+          Vuelve a la ruta →
+        </a>
+      </div>
+    </div>
+
+    <!-- CafeCTA -->
+    <CafeCTA ubicacion="paso-0-4" />
+  </div>
+</RutaProductLayout>
+
+<script is:inline>
+  if (window.posthog) {
+    window.posthog.capture('contenido_paso_0_visto', { contenido: 'plantilla-conexion' });
+  }
+</script>

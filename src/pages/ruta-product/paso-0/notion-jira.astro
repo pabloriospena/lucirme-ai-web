@@ -12,7 +12,7 @@ const accesoValido = verificar(cookieAcceso);
 
 <RutaProductLayout
   title="Conecta Notion con Jira usando Claude"
-  description="Aprende a conectar Notion con Jira usando Claude: de notas de entrevistas y discovery a historias y tareas estructuradas sin copiar y pegar."
+  description="Prueba en cinco minutos que tus herramientas se hablan."
 >
   <div class="space-y-10">
     <!-- Migas de pan -->
@@ -34,7 +34,7 @@ const accesoValido = verificar(cookieAcceso);
         Conecta Notion con Jira usando Claude
       </h1>
       <p class="text-base text-slate-600 leading-relaxed max-w-2xl">
-        Pasa de notas de entrevistas, sesiones de discovery o documentos de producto a historias listas para Jira en minutos, manteniendo el contexto intacto.
+        Prueba en cinco minutos que tus herramientas se hablan.
       </p>
     </div>
 
@@ -50,7 +50,7 @@ const accesoValido = verificar(cookieAcceso);
             Desbloquea esta guía
           </h2>
           <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
-            Ingresa tu correo para acceder a la guía paso a paso, los prompts de conversión y la plantilla de sincronización.
+            Ingresa tu correo para acceder a la guía paso a paso, los prompts de conversión y la prueba de conexión.
           </p>
         </div>
 
@@ -89,105 +89,98 @@ const accesoValido = verificar(cookieAcceso);
 
     {/* Contenido protegido */}
     <div id="contenido-notion-jira" class={accesoValido ? "space-y-8 max-w-3xl" : "hidden space-y-8 max-w-3xl"}>
-      
+
+      <!-- Qué necesitas -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-3 shadow-sm">
+        <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wide font-mono flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-slate-900"></span> Qué necesitas
+        </h2>
+        <ul class="space-y-2 text-sm sm:text-base text-slate-600 list-disc list-inside leading-relaxed">
+          <li>Claude con los conectores de Notion y Jira activados.</li>
+          <li>Una página de Notion con una nota cualquiera.</li>
+          <li>Un proyecto de Jira donde puedas crear historias.</li>
+        </ul>
+      </div>
+
       <!-- Paso 1 -->
       <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-4 shadow-sm">
         <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wide font-mono flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-amber-500"></span> Paso 1 · Estructura tus notas en Notion
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span> Paso 1 · Activa los conectores
         </h2>
         <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
-          Antes de pedirle a la IA que cree historias, tus notas en Notion deben capturar el problema, las citas del usuario y los hallazgos principales con una estructura consistente.
+          Abre la configuración de conectores en Claude y activa Notion y Jira.
         </p>
 
         <!-- Marcador de Captura -->
         <div class="p-6 bg-slate-100 rounded-xl border border-slate-200 text-center font-mono text-xs text-slate-500 font-medium">
-          [CAPTURA: Plantilla de notas de entrevista en Notion con bloques de problema, citas y contexto]
-        </div>
-
-        <div class="space-y-2 pt-2">
-          <p class="text-xs font-mono font-bold text-slate-700 uppercase tracking-wider">
-            Prompt para sintetizar notas crudas en Notion:
-          </p>
-          <div class="code-block bg-slate-900 text-slate-200 p-5 rounded-xl font-mono text-xs relative">
-            <button class="copy-btn absolute top-3 right-3 bg-teal-700 hover:bg-teal-600 text-white px-3 py-1.5 rounded-md text-[10px] font-bold transition">
-              📋 Copiar
-            </button>
-            <pre class="whitespace-pre-wrap leading-relaxed font-mono"><code>Actúa como un Product Manager Senior. Tengo las siguientes notas desestructuradas de una sesión de discovery o entrevista:
-
-[PEGA AQUÍ TUS NOTAS DE NOTION]
-
-Por favor extrae:
-1. Problema central expresado por el usuario (en 1-2 oraciones).
-2. Evidencia y citas textuales clave.
-3. Fricciones específicas identificadas.
-4. Criterios de éxito esperados si resolviéramos este problema.
-
-Formato de salida: Viñetas claras, directas, sin jerga innecesaria.</code></pre>
-          </div>
+          [CAPTURA: los dos conectores activos en Claude]
         </div>
       </div>
 
       <!-- Paso 2 -->
       <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-4 shadow-sm">
         <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wide font-mono flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-teal-600"></span> Paso 2 · Convierte la síntesis en historias con Claude
+          <span class="w-2 h-2 rounded-full bg-teal-600"></span> Paso 2 · Lee tu nota
         </h2>
-        <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
-          Usa Claude para transformar los hallazgos estructurados en historias de usuario ejecutables con criterios de aceptación en formato Given/When/Then listos para Jira.
-        </p>
-
-        <!-- Marcador de Captura -->
-        <div class="p-6 bg-slate-100 rounded-xl border border-slate-200 text-center font-mono text-xs text-slate-500 font-medium">
-          [CAPTURA: Conversación en Claude generando historias de usuario estructuradas a partir de notas]
-        </div>
-
-        <div class="space-y-2 pt-2">
+        
+        <div class="space-y-2">
           <p class="text-xs font-mono font-bold text-slate-700 uppercase tracking-wider">
-            Prompt de generación de historias listas para Jira:
+            Prompt:
           </p>
           <div class="code-block bg-slate-900 text-slate-200 p-5 rounded-xl font-mono text-xs relative">
             <button class="copy-btn absolute top-3 right-3 bg-teal-700 hover:bg-teal-600 text-white px-3 py-1.5 rounded-md text-[10px] font-bold transition">
               📋 Copiar
             </button>
-            <pre class="whitespace-pre-wrap leading-relaxed font-mono"><code>Con base en el problema y los hallazgos validados:
-"[PEGA LA SÍNTESIS VALIDADA DEL PASO 1]"
-
-Genera una User Story lista para Jira con el siguiente formato exacto:
-- Título: [Acción clara y concisa]
-- Descripción: Como [tipo de usuario], quiero [acción específica], para [beneficio o valor medible].
-- Contexto del problema: 2 líneas resumiendo el dolor del usuario.
-- Criterios de Aceptación (Gherkin):
-  Scenario 1: [Nombre escenario principal]
-    Given [precondición]
-    When [acción]
-    Then [resultado esperado]
-  Scenario 2: [Manejo de error o caso borde]
-    Given [precondición]
-    When [acción]
-    Then [resultado esperado]
-- Fuera de alcance (Out of Scope): 2 puntos explícitos de lo que NO se debe construir en este sprint.</code></pre>
+            <pre class="whitespace-pre-wrap leading-relaxed font-mono"><code>Lee la página "[NOMBRE DE TU PÁGINA]" de mi Notion y dime en una frase de qué trata.</code></pre>
           </div>
+        </div>
+
+        <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+          Si Claude responde con el contenido, la conexión con Notion funciona.
+        </p>
+
+        <!-- Marcador de Captura -->
+        <div class="p-6 bg-slate-100 rounded-xl border border-slate-200 text-center font-mono text-xs text-slate-500 font-medium">
+          [CAPTURA: respuesta de Claude leyendo la página de Notion]
         </div>
       </div>
 
       <!-- Paso 3 -->
       <div class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-4 shadow-sm">
         <h2 class="text-sm font-bold text-slate-900 uppercase tracking-wide font-mono flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-emerald-600"></span> Paso 3 · Publica y vincula directamente en Jira
+          <span class="w-2 h-2 rounded-full bg-emerald-600"></span> Paso 3 · Crea una historia en Jira
         </h2>
+
+        <div class="space-y-2">
+          <p class="text-xs font-mono font-bold text-slate-700 uppercase tracking-wider">
+            Prompt:
+          </p>
+          <div class="code-block bg-slate-900 text-slate-200 p-5 rounded-xl font-mono text-xs relative">
+            <button class="copy-btn absolute top-3 right-3 bg-teal-700 hover:bg-teal-600 text-white px-3 py-1.5 rounded-md text-[10px] font-bold transition">
+              📋 Copiar
+            </button>
+            <pre class="whitespace-pre-wrap leading-relaxed font-mono"><code>Crea una historia en el proyecto [CLAVE DE TU PROYECTO] en Jira con el resumen "Prueba de conexión con Claude". En la descripción, escribe una frase que diga que la conexión funciona.</code></pre>
+          </div>
+        </div>
+
         <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
-          Copia las historias formateadas directamente al backlog de Jira o impórtalas manteniendo el enlace al documento de Notion original para que los desarrolladores tengan el contexto completo.
+          Si la historia aparece en Jira, la conexión con Jira funciona.
         </p>
 
         <!-- Marcador de Captura -->
         <div class="p-6 bg-slate-100 rounded-xl border border-slate-200 text-center font-mono text-xs text-slate-500 font-medium">
-          [CAPTURA: Issue en Jira con historia, criterios Gherkin y enlace de contexto a Notion]
+          [CAPTURA: la historia creada en Jira]
         </div>
+      </div>
 
-        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-600 leading-relaxed space-y-2">
-          <p class="font-bold text-slate-800 uppercase font-mono">💡 Regla de oro para el equipo:</p>
-          <p>Siempre incluye en la descripción de Jira el link de Notion con las notas de discovery. Así el equipo técnico entiende el porqué detrás de cada criterio sin intermediarios ni reuniones extra.</p>
-        </div>
+      <!-- Lo que acabas de probar -->
+      <div class="bg-slate-50 rounded-2xl border border-slate-200 p-6 sm:p-8 space-y-2">
+        <h3 class="text-sm font-bold text-slate-900 uppercase font-mono tracking-wide">
+          Lo que acabas de probar
+        </h3>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+          Claude leyó una página de Notion y creó una historia en Jira sin que copiaras nada. Eso es la conexión.
+        </p>
       </div>
 
       <!-- Pie de secuencia -->
@@ -195,7 +188,7 @@ Genera una User Story lista para Jira con el siguiente formato exacto:
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-200">
           <div>
             <span class="text-xs font-mono text-slate-500 uppercase tracking-wider block">Siguiente contenido</span>
-            <span class="text-sm font-bold text-slate-900">Sigue con: PostHog ↔ Claude</span>
+            <span class="text-sm font-bold text-slate-900">Sigue con: Conecta PostHog con Claude</span>
           </div>
           <a
             href="/ruta-product/paso-0/posthog-claude"
