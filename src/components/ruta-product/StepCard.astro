@@ -10,7 +10,6 @@ const isAvailable = paso.estado === "disponible";
 const isEnConstruccion = paso.estado === "en-construccion";
 const canEnter = isAvailable || isEnConstruccion;
 
-const group = paso.mailerliteGroup || "";
 const modalId = `modal-paso-${paso.numero}`;
 const formId = `form-paso-${paso.numero}`;
 const feedbackId = `feedback-paso-${paso.numero}`;
@@ -72,7 +71,7 @@ const btnId = `btn-paso-${paso.numero}`;
   </div>
 </div>
 
-{!isAvailable && (
+{!canEnter && (
   <div id={modalId} class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl relative animate-in fade-in duration-150">
       <button 
@@ -91,7 +90,7 @@ const btnId = `btn-paso-${paso.numero}`;
         </p>
       </div>
 
-      <form id={formId} onsubmit={`handleMailerLiteSubmit(event, '${group}', '${feedbackId}', '${btnId}', '${modalId}')`} class="space-y-4">
+      <form id={formId} onsubmit={`handleAvisoSubmit(event, '${Number(paso.numero)}', '${feedbackId}', '${btnId}', '${modalId}')`} class="space-y-4">
         <div>
           <label class="block text-xs font-medium text-slate-700 mb-1">
             Correo electrónico
@@ -111,14 +110,17 @@ const btnId = `btn-paso-${paso.numero}`;
         >
           Confirmar notificación
         </button>
-        <p id={feedbackId} class="hidden text-center text-xs text-emerald-600 font-semibold pt-1"></p>
+        <p class="text-[11px] text-slate-500 text-center leading-normal">
+          Al suscribirte aceptas recibir correos de LuciRMe AI. Consulta nuestra <a href="/privacidad" target="_blank" class="text-teal-700 underline hover:text-teal-800">Política de privacidad</a>.
+        </p>
+        <p id={feedbackId} class="hidden text-center text-xs font-semibold pt-1"></p>
       </form>
     </div>
   </div>
 )}
 
 <script is:inline>
-  window.handleMailerLiteSubmit = async function(e, groupId, feedbackId, btnId, modalId) {
+  window.handleAvisoSubmit = async function(e, pasoNum, feedbackId, btnId, modalId) {
     e.preventDefault();
     const form = e.target;
     const emailInput = form.querySelector('input[name="email"]');
@@ -127,51 +129,69 @@ const btnId = `btn-paso-${paso.numero}`;
 
     if (!emailInput || !emailInput.value) return;
 
+    if (feedback) {
+      feedback.classList.add("hidden");
+      feedback.textContent = "";
+    }
+
     if (btn) {
       btn.disabled = true;
       btn.textContent = "Procesando...";
     }
 
     try {
-      const res = await fetch('/api/mailerlite', {
+      const res = await fetch('/api/aviso-paso', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: emailInput.value.trim(),
-          group_id: groupId
+          paso: String(pasoNum)
         })
       });
 
-      if (feedback) {
-        feedback.textContent = "¡Listo! Te avisaremos cuando esté disponible.";
-        feedback.classList.remove("hidden");
-      }
+      const data = await res.json().catch(() => ({}));
 
-      setTimeout(() => {
-        document.getElementById(modalId).classList.add("hidden");
-        form.reset();
-        if (feedback) feedback.classList.add("hidden");
+      if (res.ok && data.ok) {
+        if (feedback) {
+          feedback.textContent = "Listo. Te avisamos cuando esté lista esta etapa.";
+          feedback.className = "text-center text-xs text-emerald-600 font-semibold pt-1";
+          feedback.classList.remove("hidden");
+        }
+        if (window.posthog) {
+          window.posthog.capture('aviso_paso_registrado', { paso: String(pasoNum) });
+        }
+        setTimeout(() => {
+          document.getElementById(modalId).classList.add("hidden");
+          form.reset();
+          if (feedback) feedback.classList.add("hidden");
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = "Confirmar notificación";
+          }
+        }, 2000);
+      } else {
+        const errorMsg = data.error || "No pudimos registrar tu correo. Intenta de nuevo.";
+        if (feedback) {
+          feedback.textContent = errorMsg;
+          feedback.className = "text-center text-xs text-red-600 font-semibold pt-1";
+          feedback.classList.remove("hidden");
+        }
         if (btn) {
           btn.disabled = false;
           btn.textContent = "Confirmar notificación";
         }
-      }, 1500);
-    } catch (err) {
-      console.error(err);
-      if (feedback) {
-        feedback.textContent = "¡Registrado con éxito!";
-        feedback.classList.remove("hidden");
-        feedback.className = "text-center text-xs text-emerald-600 font-semibold pt-1";
       }
-      setTimeout(() => {
-        document.getElementById(modalId).classList.add("hidden");
-        form.reset();
-        if (feedback) feedback.classList.add("hidden");
-        if (btn) {
-          btn.disabled = false;
-          btn.textContent = "Confirmar notificación";
-        }
-      }, 1500);
+    } catch (err) {
+      console.error('[aviso-paso]', err);
+      if (feedback) {
+        feedback.textContent = "No pudimos registrar tu correo. Intenta de nuevo.";
+        feedback.className = "text-center text-xs text-red-600 font-semibold pt-1";
+        feedback.classList.remove("hidden");
+      }
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = "Confirmar notificación";
+      }
     }
   };
 </script>
