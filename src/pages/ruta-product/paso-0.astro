@@ -9,10 +9,9 @@ const contenidos: Array<{
   numero: string;
   titulo: string;
   tipo: "Gratis" | "De pago";
-  url: string;
+  url?: string;
   botonTexto: string;
   disponible: boolean;
-  estadoBadge?: string;
 }> = [
   {
     numero: "01",
@@ -43,18 +42,8 @@ const contenidos: Array<{
     titulo: "Plantilla de conexión completa",
     tipo: "De pago",
     url: "/ruta-product/paso-0/plantilla-conexion",
-    botonTexto: "Ver producto",
-    disponible: true,
-    estadoBadge: "Próximamente",
-  },
-  {
-    numero: "05",
-    titulo: "Flujo automatizado de Discovery a Delivery",
-    tipo: "De pago",
-    url: "#",
     botonTexto: "Próximamente",
     disponible: false,
-    estadoBadge: "Próximamente",
   },
 ];
 ---
@@ -103,12 +92,20 @@ const contenidos: Array<{
           <div class={`p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
             item.disponible
               ? 'border-slate-200/80 bg-slate-50/50'
-              : 'border-slate-200/60 bg-slate-50/30 opacity-80'
+              : 'border-slate-200/60 bg-slate-50/30 opacity-90'
           }`}>
             <div class="space-y-1">
               <div class="flex items-center gap-2">
                 <span class="text-xs font-mono font-bold text-slate-500">{item.numero}</span>
-                <h4 class="text-sm font-bold text-slate-900">{item.titulo}</h4>
+                <h4 class="text-sm font-bold text-slate-900">
+                  {item.url ? (
+                    <a href={item.url} class="hover:underline text-slate-900 hover:text-teal-800 transition-colors">
+                      {item.titulo}
+                    </a>
+                  ) : (
+                    item.titulo
+                  )}
+                </h4>
                 <span class={`text-[10px] font-mono px-2 py-0.5 rounded font-semibold uppercase border ${
                   item.tipo === 'Gratis'
                     ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
@@ -116,11 +113,6 @@ const contenidos: Array<{
                 }`}>
                   {item.tipo}
                 </span>
-                {item.estadoBadge && (
-                  <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-200 text-slate-600">
-                    {item.estadoBadge}
-                  </span>
-                )}
               </div>
             </div>
 
