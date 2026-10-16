@@ -259,6 +259,10 @@ Tono: Colega senior, calmado, sin urgencia falsa y cero buzzwords.</code>
             return;
           }
 
+          if (window.posthog) {
+            window.posthog.capture('resource_unlocked', { recurso: 'Guía de Prompting para PMs', paso: '1' });
+          }
+
           ejecutarDesbloqueo();
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (err) {

@@ -489,6 +489,10 @@ import { LINKS } from '../../lib/constants.js';
             console.error('[muro-bd]', err);
           }
 
+          if (window.posthog) {
+            window.posthog.capture('resource_unlocked', { recurso: 'Backlog Detox', paso: '2' });
+          }
+
           ejecutarDesbloqueo();
           window.scrollTo({ top: 0, behavior: 'smooth' });
         });

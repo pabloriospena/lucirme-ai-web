@@ -1,4 +1,9 @@
 ---
+interface Props {
+  ubicacion?: "hub" | "paso-1" | "paso-2";
+}
+
+const { ubicacion = "hub" } = Astro.props;
 const whatsappCafeUrl = "https://wa.me/573053046180?text=" + encodeURIComponent("Hola Pablo, quiero agendar mi Café de Estrategia de 30 minutos sobre la Ruta de Product Management.");
 ---
 
@@ -19,6 +24,7 @@ const whatsappCafeUrl = "https://wa.me/573053046180?text=" + encodeURIComponent(
       href={whatsappCafeUrl}
       target="_blank"
       rel="noopener noreferrer"
+      onclick={`if (window.posthog) { window.posthog.capture('ruta_product_cafe_click', { ubicacion: '${ubicacion}' }); }`}
       class="inline-flex items-center justify-center gap-2.5 bg-[#059669] hover:bg-[#047857] text-white font-semibold py-3.5 px-7 rounded-xl transition text-sm shadow-md hover:shadow-lg active:scale-[0.99]"
     >
       <span class="material-symbols-outlined text-[18px]">chat</span>

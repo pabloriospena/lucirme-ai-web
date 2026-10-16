@@ -59,6 +59,7 @@ const hrefPaso = (numero: string) => `/ruta-product/paso-${Number(numero)}`;
           {accesible ? (
             <a
               href={hrefPaso(paso.numero)}
+              onclick={`if (window.posthog) { window.posthog.capture('ruta_product_step_click', { paso: '${Number(paso.numero)}', estado: '${paso.estado}' }); }`}
               class={`flex flex-col rounded-lg p-3 ring-1 transition ${
                 activo
                   ? "bg-teal-50 ring-teal-200 hover:ring-teal-400"

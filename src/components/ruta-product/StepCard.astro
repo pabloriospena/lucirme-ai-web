@@ -54,6 +54,7 @@ const btnId = `btn-paso-${paso.numero}`;
     {canEnter ? (
       <a
         href={`/ruta-product/paso-${Number(paso.numero)}`}
+        onclick={`if (window.posthog) { window.posthog.capture('ruta_product_step_click', { paso: '${Number(paso.numero)}', estado: '${paso.estado}' }); }`}
         class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3 px-6 transition text-xs sm:text-sm shadow-sm hover:shadow active:scale-[0.99]"
       >
         <span>Entrar</span>

@@ -345,6 +345,10 @@ Genera el Pitch ahora.`;
           console.error('[muro-su]', err);
         }
 
+        if (window.posthog) {
+          window.posthog.capture('resource_unlocked', { recurso: 'Shape Up Builder', paso: '2' });
+        }
+
         ejecutarDesbloqueo();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });

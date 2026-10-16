@@ -103,6 +103,7 @@ const paso1 = RUTA_PRODUCTO_DATA[0];
               ) : (
                 <a
                   href={rec.url}
+                  onclick={`if (window.posthog) { window.posthog.capture('ruta_product_resource_click', { recurso: '${rec.titulo}', paso: '1' }); }`}
                   class="inline-flex items-center justify-center font-medium bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 rounded-xl py-2 px-4 transition text-xs shadow-sm shrink-0"
                 >
                   Acceder →
@@ -127,6 +128,6 @@ const paso1 = RUTA_PRODUCTO_DATA[0];
       </p>
     </div>
 
-    <CafeCTA />
+    <CafeCTA ubicacion="paso-1" />
   </div>
 </RutaProductLayout>
