@@ -1,6 +1,8 @@
 ---
 import RutaProductLayout from "../../../layouts/RutaProductLayout.astro";
 import CafeCTA from "../../../components/ruta-product/CafeCTA.astro";
+
+const HOTMART_URL = "https://pay.hotmart.com/R108077233J?off=uc6vfm93";
 ---
 
 <RutaProductLayout
@@ -29,10 +31,23 @@ import CafeCTA from "../../../components/ruta-product/CafeCTA.astro";
       <p class="text-lg text-slate-600 leading-relaxed">
         El flujo que conecta Notion, Claude, Jira y tu herramienta de métricas, armado para que lo instales en tu cuenta hoy.
       </p>
+      <div class="pt-2">
+        <a
+          href={HOTMART_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-hotmart-cta
+          data-ubicacion="hero"
+          class="inline-flex items-center justify-center gap-2 bg-[#00685F] hover:bg-[#005049] text-white font-bold py-3.5 px-7 rounded-2xl transition text-sm sm:text-base shadow-sm"
+        >
+          <span>Quiero la plantilla</span>
+          <span class="text-base leading-none">→</span>
+        </a>
+      </div>
     </div>
 
     <!-- Caja de Precio y Compra Principal -->
-    <div class="bg-gradient-to-br from-teal-900 to-slate-900 text-white rounded-3xl p-8 sm:p-10 shadow-xl space-y-6 max-w-3xl relative overflow-hidden">
+    <div data-evento="contenido_paso_0_precio_visto" class="bg-gradient-to-br from-teal-900 to-slate-900 text-white rounded-3xl p-8 sm:p-10 shadow-xl space-y-6 max-w-3xl relative overflow-hidden">
       <div class="absolute top-0 right-0 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
       
       <div class="flex flex-wrap items-baseline gap-4">
@@ -47,16 +62,29 @@ import CafeCTA from "../../../components/ruta-product/CafeCTA.astro";
 
       <div class="pt-2">
         <a
-          href="https://pay.hotmart.com"
+          href={HOTMART_URL}
           target="_blank"
           rel="noopener noreferrer"
-          onclick="if (window.posthog) { window.posthog.capture('compra_hotmart_click', { producto: 'plantilla-conexion' }); }"
+          data-hotmart-cta
+          data-ubicacion="precio"
           class="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-extrabold py-4 px-8 rounded-2xl transition text-base shadow-lg active:scale-[0.99]"
         >
-          <span>Comprar en Hotmart</span>
+          <span>Quiero la plantilla</span>
           <span class="text-lg leading-none">→</span>
         </a>
       </div>
+    </div>
+
+    <!-- Vista previa de la plantilla -->
+    <div class="max-w-3xl space-y-3">
+      <h3 class="text-sm font-bold text-slate-900 uppercase font-mono tracking-wide">
+        Vista previa
+      </h3>
+      <img
+        src="/ruta-product/plantilla-notion-creada.png"
+        alt="Plantilla de Notion creada"
+        class="w-full max-w-[560px] mx-auto rounded-xl border border-slate-200"
+      />
     </div>
 
     <!-- Qué es -->
@@ -116,12 +144,12 @@ import CafeCTA from "../../../components/ruta-product/CafeCTA.astro";
     </div>
 
     <!-- Garantía -->
-    <section class="bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 space-y-4 shadow-sm max-w-3xl">
-      <h2 class="text-xl font-bold text-slate-900 tracking-tight font-mono uppercase text-xs text-teal-800">
-        // Garantía
+    <section data-evento="contenido_paso_0_garantia_vista" class="bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 space-y-4 shadow-sm max-w-3xl">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight">
+        Garantía de 7 días
       </h2>
       <p class="text-base text-slate-700 leading-relaxed">
-        Garantía de devolución de 7 días. Si la plantilla no te ahorra tiempo en tu primer flujo de trabajo, te devolvemos el 100% de tu dinero sin preguntas.
+        Garantía de 7 días. Si al revisar la guía sientes que no te sirve para conectar tus herramientas, escríbenos a pablo@lucirme.com dentro de los 7 días siguientes a tu compra. Te devolvemos el importe completo, sin preguntas.
       </p>
     </section>
 
@@ -144,10 +172,27 @@ import CafeCTA from "../../../components/ruta-product/CafeCTA.astro";
 
         <div class="pt-4 space-y-2">
           <h3 class="text-base font-bold text-slate-900">¿Qué pasa si no me funciona?</h3>
-          <p class="text-sm sm:text-base text-slate-600 leading-relaxed">Garantía de devolución de 7 días. Si la plantilla no te ahorra tiempo en tu primer flujo de trabajo, te devolvemos el 100% de tu dinero sin preguntas.</p>
+          <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+            Garantía de 7 días. Si al revisar la guía sientes que no te sirve para conectar tus herramientas, escríbenos a pablo@lucirme.com dentro de los 7 días siguientes a tu compra. Te devolvemos el importe completo, sin preguntas.
+          </p>
         </div>
       </div>
     </section>
+
+    <!-- CTA Final -->
+    <div class="max-w-3xl">
+      <a
+        href={HOTMART_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-hotmart-cta
+        data-ubicacion="final"
+        class="inline-flex items-center justify-center gap-2 w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-extrabold py-4 px-8 rounded-2xl transition text-base shadow-lg"
+      >
+        <span>Quiero la plantilla ahora</span>
+        <span class="text-lg leading-none">→</span>
+      </a>
+    </div>
 
     <!-- Café de Estrategia -->
     <div class="max-w-3xl space-y-3">
@@ -169,4 +214,32 @@ import CafeCTA from "../../../components/ruta-product/CafeCTA.astro";
   if (window.posthog) {
     window.posthog.capture('contenido_paso_0_visto', { contenido: 'plantilla-conexion' });
   }
+
+  document.querySelectorAll('[data-hotmart-cta]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      try {
+        window.posthog?.capture('contenido_paso_0_hotmart_click', {
+          ubicacion: btn.dataset.ubicacion,
+          precio_mostrado: 8,
+          oferta: 'uc6vfm93',
+          url_destino: 'pay.hotmart.com',
+        });
+      } catch (_) {}
+    });
+  });
+
+  const vistos = new Set();
+  const observer = new IntersectionObserver((entradas) => {
+    entradas.forEach((e) => {
+      const nombre = e.target.dataset.evento;
+      if (e.isIntersecting && !vistos.has(nombre)) {
+        vistos.add(nombre);
+        try {
+          window.posthog?.capture(nombre, { precio_mostrado: 8, precio_original: 17 });
+        } catch (_) {}
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-evento]').forEach((el) => observer.observe(el));
 </script>

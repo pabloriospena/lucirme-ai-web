@@ -2,7 +2,7 @@ export interface Recurso {
   id: string;
   titulo: string;
   descripcion: string;
-  tipo: "gratis" | "gratis-con-correo" | "pago-proximamente";
+  tipo: "gratis" | "gratis-con-correo" | "pago-proximamente" | "pago";
   url: string;
 }
 
@@ -31,7 +31,37 @@ export const RUTA_PRODUCTO_DATA: PasoRuta[] = [
     titulo: "Paso 0 · Conexiones",
     subtituloCategoria: "Conexiones entre herramientas",
     descripcion: "Conecta las herramientas que ya usas antes de empezar el ciclo de producto.",
-    estado: "en-construccion"
+    estado: "disponible",
+    recursos: [
+      {
+        id: "rec-p0-intro",
+        titulo: "Introducción al mapa de conexiones",
+        descripcion: "El mapa integral de integración entre tus herramientas de producto.",
+        tipo: "gratis-con-correo",
+        url: "/ruta-product/paso-0/intro"
+      },
+      {
+        id: "rec-p0-notion",
+        titulo: "Notion + Jira",
+        descripcion: "Sincroniza notas de entrevista y crea historias en Jira con Claude.",
+        tipo: "gratis-con-correo",
+        url: "/ruta-product/paso-0/notion-jira"
+      },
+      {
+        id: "rec-p0-posthog",
+        titulo: "PostHog + Claude",
+        descripcion: "Convierte datos analíticos y eventos de usuarios en hipótesis de discovery.",
+        tipo: "gratis-con-correo",
+        url: "/ruta-product/paso-0/posthog-claude"
+      },
+      {
+        id: "rec-p0-plantilla",
+        titulo: "Plantilla de conexión completa",
+        descripcion: "El flujo completo listo para montar en tu cuenta.",
+        tipo: "pago",
+        url: "/ruta-product/paso-0/plantilla-conexion"
+      }
+    ]
   },
   {
     numero: "01",

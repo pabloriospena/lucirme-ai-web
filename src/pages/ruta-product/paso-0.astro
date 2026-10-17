@@ -42,8 +42,8 @@ const contenidos: Array<{
     titulo: "Plantilla de conexión completa",
     tipo: "De pago",
     url: "/ruta-product/paso-0/plantilla-conexion",
-    botonTexto: "Próximamente",
-    disponible: false,
+    botonTexto: "Ver producto",
+    disponible: true,
   },
 ];
 ---
@@ -89,11 +89,7 @@ const contenidos: Array<{
 
       <div class="space-y-4">
         {contenidos.map((item) => (
-          <div class={`p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
-            item.disponible
-              ? 'border-slate-200/80 bg-slate-50/50'
-              : 'border-slate-200/60 bg-slate-50/30 opacity-90'
-          }`}>
+          <div class="p-4 rounded-xl border border-slate-200/80 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div class="space-y-1">
               <div class="flex items-center gap-2">
                 <span class="text-xs font-mono font-bold text-slate-500">{item.numero}</span>
@@ -116,22 +112,12 @@ const contenidos: Array<{
               </div>
             </div>
 
-            {item.disponible ? (
-              <a
-                href={item.url}
-                class="inline-flex items-center justify-center font-medium bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 rounded-xl py-2 px-4 transition text-xs shadow-sm shrink-0"
-              >
-                {item.botonTexto}
-              </a>
-            ) : (
-              <button
-                type="button"
-                disabled
-                class="inline-flex items-center justify-center font-medium bg-slate-100 border border-slate-200 text-slate-400 rounded-xl py-2 px-4 transition text-xs shadow-sm shrink-0 cursor-not-allowed"
-              >
-                {item.botonTexto}
-              </button>
-            )}
+            <a
+              href={item.url}
+              class="inline-flex items-center justify-center font-medium bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 rounded-xl py-2 px-4 transition text-xs shadow-sm shrink-0"
+            >
+              {item.botonTexto}
+            </a>
           </div>
         ))}
       </div>
