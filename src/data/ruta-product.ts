@@ -68,7 +68,7 @@ export const RUTA_PRODUCTO_DATA: PasoRuta[] = [
     titulo: "Paso 1 · Discovery",
     subtituloCategoria: "Validación del problema",
     descripcion: "Decide qué problema vale la pena resolver antes de construir.",
-    estado: "disponible",
+    estado: "proximamente",
     loQueHacesHoy: [
       "Recibes solicitudes de múltiples stakeholders sin un criterio claro de priorización.",
       "Inicias desarrollos basándote en opiniones o intuiciones sin métricas de validación.",
