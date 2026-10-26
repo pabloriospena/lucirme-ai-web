@@ -934,6 +934,7 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
                     <span>Ver diagnóstico de cuello de botella →</span>
                   </button>
                 </div>
+                <input type="text" name="contacto_extra" data-trampa tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
               </form>
             </div>
 
@@ -1871,6 +1872,7 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
       recalculateAssessment();
 
       try {
+        currentSelections.website = (document.querySelector('[data-trampa]') as HTMLInputElement | null)?.value || '';
         const response = await fetch("/api/bottleneck-diagnosis", {
           method: "POST",
           headers: { "Content-Type": "application/json" },

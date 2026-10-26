@@ -224,6 +224,7 @@ const whatsapp1a1 = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, leí
                   <span>Ver diagnóstico y recomendación →</span>
                 </button>
               </div>
+              <input type="text" name="contacto_extra" data-trampa tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
             </form>
           </div>
 
@@ -805,6 +806,7 @@ const whatsapp1a1 = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, leí
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             name: proState.nombre,
+            website: (document.querySelector('[data-trampa]') as HTMLInputElement | null)?.value || '',
             email: proState.email,
             whatsapp: proState.whatsapp,
             problema_principal: proState.area || 'General',

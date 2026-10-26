@@ -231,6 +231,7 @@ const ctaDescuentoWA = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, q
                   <span>Ver resultado y propuesta →</span>
                 </button>
               </div>
+              <input type="text" name="contacto_extra" data-trampa tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
             </form>
           </div>
 
@@ -820,6 +821,7 @@ const ctaDescuentoWA = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, q
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             name: vetState.contactoNombre,
+            website: (document.querySelector('[data-trampa]') as HTMLInputElement | null)?.value || '',
             email: vetState.email,
             whatsapp: vetState.whatsapp,
             empresa: vetState.nombre || 'Veterinaria',

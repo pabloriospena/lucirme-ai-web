@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { calculateBottleneckDiagnosis } from '../../lib/bottleneck';
 import Groq from 'groq-sdk';
+import { isLikelySpam } from '../../lib/spam-filter';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -50,6 +51,14 @@ export const POST: APIRoute = async ({ request }) => {
       name: nameStr, email: emailStr, empresa: empresaStr,
       tamano, industria, pais, ciudad,
     });
+
+    // Bots: se responde con el diagnóstico calculado, pero no se llama a Groq ni se guarda nada.
+    if (isLikelySpam({ email: emailStr, name: nameStr, empresa: empresaStr, honeypot: (data as any).website })) {
+      return new Response(
+        JSON.stringify({ success: true, diagnosis: diagnosisBase, aiReport: '', mailerliteSaved: false }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
 
     // Generate AI Diagnostic Report
     let aiReport = '';
