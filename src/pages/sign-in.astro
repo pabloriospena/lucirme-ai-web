@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { SignIn as ClerkSignIn } from "@clerk/astro/components";
 
 // 1. Capturamos la URL a la que el usuario quería ir originalmente
-const redirectUrl = Astro.url.searchParams.get('redirect_url') || '/dashboard';
+const redirectUrl = Astro.url.searchParams.get('redirect_url') || '/';
 
 // 2. Forzamos a TypeScript a tratar el componente como 'any' para evitar que se queje
 const SignInComponent = ClerkSignIn as any;
