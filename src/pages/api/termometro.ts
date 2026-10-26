@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { isLikelySpam } from '../../lib/spam-filter';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -16,6 +17,13 @@ export const POST: APIRoute = async ({ request }) => {
         JSON.stringify({ error: 'Por favor ingresa un correo electrónico válido.' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
+    }
+
+    if (isLikelySpam({ email: emailStr, name: nameStr, honeypot: (data as any).website })) {
+      return new Response(JSON.stringify({ ok: true }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
     const apiKey = process.env.MAILERLITE_API_KEY;

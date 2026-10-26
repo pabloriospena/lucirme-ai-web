@@ -399,6 +399,7 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
                 class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors cursor-pointer"
                 type="submit"><span>Enviar solicitud →</span></button
               >
+              <input type="text" name="contacto_extra" data-trampa tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
             </form>
           </div>
 
@@ -485,6 +486,7 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             name: "Cliente",
+            website: (document.querySelector('[data-trampa]') || {}).value || '',
             email: busState.email,
             whatsapp: busState.whatsapp,
             empresa: busState.nombre,

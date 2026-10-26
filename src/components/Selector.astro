@@ -82,6 +82,7 @@
             <span>Iniciar diagnóstico</span>
             <span>→</span>
           </button>
+          <input type="text" name="contacto_extra" data-trampa tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
         </form>
       </div>
 
@@ -594,6 +595,7 @@
           score: finalScorePct,
           nivel: nivelName,
           perfil: termState.profile,
+            website: (document.querySelector('[data-trampa]') || {}).value || '',
           respuestas: termState.answers
         })
       });
