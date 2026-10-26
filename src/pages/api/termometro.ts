@@ -32,7 +32,7 @@ export const POST: APIRoute = async ({ request }) => {
     const fieldsPayload: Record<string, string | number> = {
       name: nameStr,
       phone: whatsappStr,
-      perfil: perfil || respuestas?.p1 || 'personal',
+      audiencia: perfil || respuestas?.p1 || 'personal',
       diag_score: `${score}%`,
       diag_level: nivel || '',
       diag_pain: respuestas?.p2 || '',
