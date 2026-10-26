@@ -67,25 +67,28 @@ export const POST: APIRoute = async ({ request }) => {
       const listoFormatted = Array.isArray(queTieneListo) ? queTieneListo.join(', ') : String(queTieneListo || '');
       const objetivosFormatted = Array.isArray(objetivos) ? objetivos.join(', ') : String(objetivos || '');
 
+      const limpiarCampos = (o: Record<string, unknown>) =>
+      Object.fromEntries(
+        Object.entries(o).filter(([, v]) => v !== undefined && v !== null && String(v).trim() !== '' && v !== '-')
+      );
+
       const mailerliteBody: any = {
         email: emailStr,
-        fields: {
+        fields: limpiarCampos({
           name: nameStr,
-          company: empresaStr || 'Veterinaria',
+          company: empresaStr,
           phone: whatsappStr,
-          city: ciudad || 'Bogotá',
-          country: pais || 'Colombia',
-          industria_sector: 'Veterinaria / Salud Animal',
+          city: ciudad,
+          country: pais,
+          industria_sector: (tipo_de_pagina || 'veterinaria') === 'veterinaria' ? 'Veterinaria / Salud Animal' : undefined,
           tiene_pagina_web: tieneWeb || 'No',
-          que_quiere_mejorar: queQuiereMejorar || '-',
+          que_quiere_mejorar: queQuiereMejorar,
           tiene_dominio: tieneDominio || 'No',
-          que_tiene_listo: listoFormatted || 'En proceso',
           objetivo_de_la_pagina: objetivosFormatted || 'Conseguir clientes',
           accion_principal: accionPrincipal || 'WhatsApp',
           tipo_de_pagina: tipo_de_pagina || 'veterinaria',
-          tipo_de_empresa: tipo_de_empresa || 'veterinaria',
           fuente: fuente || 'Landing /soluciones/web-veterinarios',
-        },
+        }),
       };
 
       if (groupId) {
