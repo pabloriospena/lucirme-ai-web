@@ -101,10 +101,9 @@ Todos los procesamientos sensibles se realizan del lado del servidor para proteg
 
 1. **`POST /api/termometro`** (`src/pages/api/termometro.ts`): Recibe las respuestas del diagnóstico de 9 preguntas y sincroniza con MailerLite.
 2. **`POST /api/unlock-guia`** (`src/pages/api/unlock-guia.ts`): Desbloquea acceso a guías privadas.
-3. **`POST /api/guardar-preventa`** (`src/pages/api/guardar-preventa.js`): Registra la preventa del Libro Vol. 2 de PM Sin Bullshit.
-4. **`POST /api/optimizar-prompt`** (`src/pages/api/optimizar-prompt.js`): Backend del Prompteador R+C+T+E.
-5. **`POST /api/generar-job-prompt`** & **`POST /api/generar-cv-promtp`**: Herramientas de empleabilidad y carrera.
-6. **`POST /api/procesar-siigo`** (`src/pages/api/procesar-siigo.ts`): Procesador de extractos y facturación contable para Siigo.
+3. **`POST /api/optimizar-prompt`** (`src/pages/api/optimizar-prompt.js`): Backend del Prompteador R+C+T+E.
+4. **`POST /api/generar-job-prompt`** & **`POST /api/generar-cv-promtp`**: Herramientas de empleabilidad y carrera.
+5. **`POST /api/procesar-siigo`** (`src/pages/api/procesar-siigo.ts`): Procesador de extractos y facturación contable para Siigo.
 
 ---
 
