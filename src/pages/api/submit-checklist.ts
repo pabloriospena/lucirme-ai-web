@@ -12,7 +12,7 @@ export const POST: APIRoute = async ({ request }) => {
             fields: {
                 name: data.nombres,
                 tarea_principal: data.tarea,
-                horas_semanales: data.horas,
+                horas_semana: Number(String(data.horas ?? '').replace(/[^0-9.]/g, '')) || undefined,
                 ejemplo_listo: data.ejemplo
             },
             groups: [GROUP_ID] // Aquí le indicamos a qué grupo asignar el suscriptor

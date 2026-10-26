@@ -121,12 +121,12 @@ export const POST: APIRoute = async ({ request }) => {
         fields: {
           name: nameStr,
           company: empresaStr,
-          city: ciudad || 'Bogotá',
-          country: pais || 'Colombia',
+          city: ciudad || undefined,
+          country: pais || undefined,
           tamano_de_la_empresa: tamano || '11-50 personas',
           industria_sector: industria || 'Tecnología/SaaS',
           diagnostico_proceso: diagnosisBase.proceso,
-          diagnostico_horas_estimadassemana: `${diagnosisBase.weeklyHours} hrs/semana`,
+          diagnostico_horas_estimadassemana: Number(diagnosisBase.weeklyHours) || undefined,
         },
       };
 

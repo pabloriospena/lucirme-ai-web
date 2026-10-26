@@ -14,8 +14,8 @@ export const POST: APIRoute = async ({ request }) => {
       herramientas_actuales = [],
       objetivo = '',
       recomendacion = '',
-      ciudad = 'Bogotá',
-      pais = 'Colombia',
+      ciudad = '',
+      pais = '',
       fuente = 'Landing /servicios/producto',
       tipo_de_pagina = 'producto',
     } = data;
@@ -76,29 +76,26 @@ export const POST: APIRoute = async ({ request }) => {
         ? objetivo.join(', ')
         : String(objetivo || '');
 
+      const limpiarCampos = (o: Record<string, unknown>) =>
+      Object.fromEntries(
+        Object.entries(o).filter(([, v]) => v !== undefined && v !== null && String(v).trim() !== '' && v !== '-')
+      );
+
       const mailerliteBody: any = {
         email: emailStr,
-        fields: {
+        fields: limpiarCampos({
           name: nameStr,
-          company: 'Product Management',
           phone: whatsappStr,
-          whatsapp: whatsappStr,
-          city: ciudad || 'Bogotá',
-          country: pais || 'Colombia',
-          industria_sector: 'Product Management & Ops',
-          sesion_1_1_problema_principal: problemsFormatted || 'Optimización PM',
-          sesion_1_1_frecuencia: frecuencia || 'Semanal',
-          sesion_1_1_tiempo_estimado: tiempo_estimado || '3-5 horas',
-          sesion_1_1_herramientas_actuales: toolsFormatted || 'Herramientas PM',
-          sesion_1_1_objetivo: goalsFormatted || 'Ahorrar tiempo',
-          sesion_1_1_resultado_recomendacion: recomendacion || 'Sesión 1-1 PM',
-          que_quiere_mejorar: problemsFormatted || 'Optimización PM',
-          objetivo_de_la_pagina: goalsFormatted || 'Ahorrar tiempo',
-          que_tiene_listo: toolsFormatted || 'Herramientas PM',
+          city: ciudad,
+          country: pais,
+          sesion_1_1_problema_principal: problemsFormatted,
+          sesion_1_1_frecuencia: frecuencia,
+          sesion_1_1_tiempo_estimado: tiempo_estimado,
+          sesion_1_1_herramientas_actuales: toolsFormatted,
+          sesion_1_1_objetivo: goalsFormatted,
+          sesion_1_1_resultado_recomendacion: recomendacion,
           fuente: fuente || 'Landing /servicios/producto',
-          tipo_de_pagina: tipo_de_pagina || 'producto',
-          tipo_de_empresa: 'profesionales',
-        },
+        }),
       };
 
       if (groupId) {
