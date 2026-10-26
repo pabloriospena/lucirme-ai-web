@@ -1,0 +1,401 @@
+---
+// src/pages/propuestas/almamotor-fase2.astro
+import "../../styles/global.css";
+export const prerender = false;
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Propuesta de Trabajo · Fase 2: Información en la nube · Almamotor, Mobila y Las Fincas &amp; LuciRMe AI</title>
+    <meta name="description" content="Propuesta de trabajo Fase 2 para Almamotor, Mobila y Las Fincas: migración a la nube, Google Workspace, seguridad, hojas protegidas y uso diario de Gemini." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+      }
+      .font-mono {
+        font-family: "JetBrains Mono", monospace;
+      }
+    </style>
+  </head>
+
+  <body class="bg-[#f8f9ff] text-[#0b1c30] antialiased selection:bg-[#00685f]/20 selection:text-[#00685f]">
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#f8f9ff]/90 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+      <div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-4 shrink-0">
+          <a href="/" class="flex items-center gap-2.5">
+            <img alt="LuciRMe AI" class="h-8 w-auto object-contain" src="/logo-lucirme.png" />
+            <span class="font-semibold text-base text-[#0b1c30] tracking-tight">LuciRMe AI</span>
+          </a>
+          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full bg-[#00685f]/10 font-mono text-[11px] text-[#00685f] uppercase tracking-wider font-semibold">
+            PROPUESTA · ALMAMOTOR FASE 2
+          </span>
+        </div>
+
+        <nav class="hidden lg:flex items-center gap-1.5">
+          <a class="text-sm font-medium transition-colors py-1.5 px-3 rounded-lg text-slate-600 hover:text-[#0b1c30] hover:bg-slate-100" href="#partida">Punto de Partida</a>
+          <a class="text-sm font-medium transition-colors py-1.5 px-3 rounded-lg text-slate-600 hover:text-[#0b1c30] hover:bg-slate-100" href="#logros">Lo ya hecho</a>
+          <a class="text-sm font-medium transition-colors py-1.5 px-3 rounded-lg text-slate-600 hover:text-[#0b1c30] hover:bg-slate-100" href="#objetivos">Resultados</a>
+          <a class="text-sm font-medium transition-colors py-1.5 px-3 rounded-lg text-slate-600 hover:text-[#0b1c30] hover:bg-slate-100" href="#propuesta">Etapas</a>
+          <a class="text-sm font-medium transition-colors py-1.5 px-3 rounded-lg text-slate-600 hover:text-[#0b1c30] hover:bg-slate-100" href="#metodologia">Metodología</a>
+          <a class="text-sm font-medium transition-colors py-1.5 px-3 rounded-lg text-slate-600 hover:text-[#0b1c30] hover:bg-slate-100" href="#inversion">Inversión</a>
+        </nav>
+
+        <div class="flex items-center gap-4 shrink-0">
+          <div class="hidden md:flex flex-col text-right">
+            <span class="font-mono text-[11px] text-slate-900 font-semibold">Almamotor</span>
+            <span class="font-mono text-[10px] text-slate-500">Fechado: 26 Oct 2026</span>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-[#00685f] flex items-center justify-center shrink-0 shadow-sm text-white font-mono text-xs font-bold">
+            AM
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="pt-28 pb-20 px-6 lg:px-12 max-w-5xl mx-auto">
+      
+      <!-- HERO / INTRO -->
+      <section class="mb-16 pt-8 border-b border-slate-200 pb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-medium mb-4">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          Documento oficial · 26 de octubre de 2026
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-[#0b1c30] tracking-tight mb-6">
+          Propuesta de trabajo · Fase 2: información en la nube
+        </h1>
+        <p class="text-lg text-slate-600 leading-relaxed max-w-3xl">
+          Consolidación de la infraestructura digital, migración a Google Workspace, seguridad en la nube y optimización del trabajo diario para el equipo administrativo de Almamotor.
+        </p>
+      </section>
+
+      <!-- 1. PUNTO DE PARTIDA -->
+      <section id="partida" class="mb-16 scroll-mt-24">
+        <div class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-sm">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-[#00685f]/10 text-[#00685f] flex items-center justify-center font-mono font-bold">
+              01
+            </div>
+            <h2 class="text-2xl font-bold text-slate-900">Punto de partida</h2>
+          </div>
+          <div class="space-y-4 text-slate-700 leading-relaxed">
+            <p>
+              Almamotor y las demás empresas del grupo trabajan hoy con cuentas de Gmail normales y separadas, así que la información de la compañía vive repartida entre correos personales y no hay un lugar único donde consultarla.
+            </p>
+            <p>
+              En la primera fase del programa el equipo dio sus primeros pasos con IA. El nivel de uso y de adopción todavía es bajo, y eso pesa en esta propuesta: lo que se monte tiene que poder usarse el lunes siguiente sin depender de nadie técnico.
+            </p>
+            <p class="font-medium text-[#00685f] bg-[#00685f]/5 p-4 rounded-xl border border-[#00685f]/20">
+              Claudia pidió que la segunda fase arranque por el manejo de la información en la nube, antes que por nuevas automatizaciones.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. LO QUE YA SE HIZO -->
+      <section id="logros" class="mb-16 scroll-mt-24">
+        <div class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-sm">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-[#00685f]/10 text-[#00685f] flex items-center justify-center font-mono font-bold">
+              02
+            </div>
+            <h2 class="text-2xl font-bold text-slate-900">Lo que ya se hizo con el equipo</h2>
+          </div>
+          <p class="text-slate-600 mb-6">
+            Antes de esta fase ya hay cuatro piezas funcionando, hechas sobre tareas reales del equipo. Esta fase parte de ellas, no empieza de cero:
+          </p>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-slate-200 bg-slate-50 text-xs font-mono font-semibold text-slate-600 uppercase tracking-wider">
+                  <th class="py-3.5 px-4 rounded-l-lg">Pieza</th>
+                  <th class="py-3.5 px-4 rounded-r-lg">Qué hace hoy</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-sm">
+                <tr class="hover:bg-slate-50/50 transition-colors">
+                  <td class="py-4 px-4 font-semibold text-slate-900 align-top w-1/3">Guía de levantamiento de prenda</td>
+                  <td class="py-4 px-4 text-slate-700 align-top">Se le entrega a la IA la foto de la matrícula y devuelve la carta de levantamiento de prenda con marca, referencia, color, motor, chasis, placa y cilindraje, en el formato que usa Jeaneth, lista para copiar y pegar.</td>
+                </tr>
+                <tr class="hover:bg-slate-50/50 transition-colors">
+                  <td class="py-4 px-4 font-semibold text-slate-900 align-top">Ordenar datos, desvinculación de trabajadores y recibos de caja</td>
+                  <td class="py-4 px-4 text-slate-700 align-top">Tres flujos: ordenar los datos de vinculación y desvinculación de trabajadores a partir de un mensaje de WhatsApp y la foto de la cédula; pasar los recibos de caja menor a una tabla, llevarla a Siigo y cruzarla contra el export para ver qué valores no están en la caja menor; y filtros de Gmail que etiquetan y archivan correos solos.</td>
+                </tr>
+                <tr class="hover:bg-slate-50/50 transition-colors">
+                  <td class="py-4 px-4 font-semibold text-slate-900 align-top">Conciliador DIAN vs contabilidad</td>
+                  <td class="py-4 px-4 text-slate-700 align-top">Se suben dos archivos de Excel, el de DIAN o facturación y el de contabilidad, y la herramienta entrega el reporte de conciliación para descargar.</td>
+                </tr>
+                <tr class="hover:bg-slate-50/50 transition-colors">
+                  <td class="py-4 px-4 font-semibold text-slate-900 align-top">Validador CIFIN</td>
+                  <td class="py-4 px-4 text-slate-700 align-top">Se sube un archivo .xlsx, .xls o .csv y la herramienta lo valida, lo procesa y lo deja listo para descargar.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="mt-6 text-sm text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-200">
+            Lo que sigue en esta fase es sacar estas piezas de cuentas personales y dejarlas en una sola plataforma, con permisos por persona y respaldo.
+          </p>
+        </div>
+      </section>
+
+      <!-- 3. QUÉ SE QUIERE LOGRAR -->
+      <section id="objetivos" class="mb-16 scroll-mt-24">
+        <div class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-sm">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-[#00685f]/10 text-[#00685f] flex items-center justify-center font-mono font-bold">
+              03
+            </div>
+            <h2 class="text-2xl font-bold text-slate-900">Qué se quiere lograr</h2>
+          </div>
+          <p class="text-slate-600 mb-6">
+            Al cerrar la fase, el grupo trabaja desde una sola plataforma, con su información guardada y protegida en la nube, y sin depender del papel para lo que hoy se imprime. Son cuatro resultados, y cada uno tiene una forma sencilla de comprobarse:
+          </p>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-slate-200 bg-slate-50 text-xs font-mono font-semibold text-slate-600 uppercase tracking-wider">
+                  <th class="py-3.5 px-4 rounded-l-lg">Resultado</th>
+                  <th class="py-3.5 px-4 rounded-r-lg">Cómo se verá que funcionó</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-sm">
+                <tr class="hover:bg-slate-50/50 transition-colors">
+                  <td class="py-4 px-4 font-semibold text-slate-900 align-top w-1/3">Correos e información de la compañía en una sola plataforma, con permisos por persona</td>
+                  <td class="py-4 px-4 text-slate-700 align-top">Cada integrante entra con su cuenta institucional y ve solo lo que le corresponde; nadie usa un Gmail personal para asuntos de la empresa.</td>
+                </tr>
+                <tr class="hover:bg-slate-50/50 transition-colors">
+                  <td class="py-4 px-4 font-semibold text-slate-900 align-top">Información guardada en la nube, en un lugar seguro y consultable en cualquier momento</td>
+                  <td class="py-4 px-4 text-slate-700 align-top">Un documento del grupo se encuentra sin pedirlo a nadie, y no se pierde si un computador falla o una cuenta queda comprometida.</td>
+                </tr>
+                <tr class="hover:bg-slate-50/50 transition-colors">
+                  <td class="py-4 px-4 font-semibold text-slate-900 align-top">Avance hacia la no impresión</td>
+                  <td class="py-4 px-4 text-slate-700 align-top">Los procesos que se acuerden con el equipo se revisan en pantalla, desde cualquier lugar, en el mismo momento en que se necesitan.</td>
+                </tr>
+                <tr class="hover:bg-slate-50/50 transition-colors">
+                  <td class="py-4 px-4 font-semibold text-slate-900 align-top">Hojas de cálculo y documentos que no se dañan, con conciliación y comprobantes</td>
+                  <td class="py-4 px-4 text-slate-700 align-top">Los archivos de trabajo viven en Drive y Sheets con su estructura protegida; la conciliación se hace en la hoja; una matrícula o un comprobante de pago sale de una plantilla ordenada y queda archivado donde corresponde.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. QUÉ SE PROPONE -->
+      <section id="propuesta" class="mb-16 scroll-mt-24">
+        <div class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-sm">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-[#00685f]/10 text-[#00685f] flex items-center justify-center font-mono font-bold">
+              04
+            </div>
+            <h2 class="text-2xl font-bold text-slate-900">Qué se propone</h2>
+          </div>
+          <p class="text-slate-600 mb-8">
+            Seis etapas, en este orden, porque cada una depende de la anterior:
+          </p>
+
+          <div class="space-y-6">
+            <div class="p-6 rounded-xl bg-[#f8f9ff] border border-slate-200 flex gap-4 items-start">
+              <span class="w-8 h-8 rounded-full bg-[#00685f] text-white flex items-center justify-center font-mono font-bold shrink-0 text-sm">1</span>
+              <div>
+                <h3 class="font-bold text-slate-900 text-base mb-1">Estructura del grupo</h3>
+                <p class="text-slate-600 text-sm mb-2">Se hace el inventario de las cuentas que existen hoy y de quién usa qué. Con eso se decide cómo quedan los correos institucionales: uno por empresa o uno bajo un nombre de grupo empresarial (Claudia está pensando ese nombre).</p>
+                <div class="inline-block bg-teal-50 text-teal-800 text-xs font-mono px-3 py-1 rounded-md border border-teal-200 font-medium">
+                  Entregable: mapa de cuentas, estructura de correos y permisos por rol.
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 rounded-xl bg-[#f8f9ff] border border-slate-200 flex gap-4 items-start">
+              <span class="w-8 h-8 rounded-full bg-[#00685f] text-white flex items-center justify-center font-mono font-bold shrink-0 text-sm">2</span>
+              <div>
+                <h3 class="font-bold text-slate-900 text-base mb-1">Plataforma única</h3>
+                <p class="text-slate-600 text-sm mb-2">Como hoy usan Gmail, la recomendación es Google Workspace. Se crean las cuentas institucionales, se pasan los correos y se organiza el almacenamiento compartido por empresa y por área.</p>
+                <div class="inline-block bg-teal-50 text-teal-800 text-xs font-mono px-3 py-1 rounded-md border border-teal-200 font-medium">
+                  Entregable: plataforma funcionando con todas las cuentas del equipo.
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 rounded-xl bg-[#f8f9ff] border border-slate-200 flex gap-4 items-start">
+              <span class="w-8 h-8 rounded-full bg-[#00685f] text-white flex items-center justify-center font-mono font-bold shrink-0 text-sm">3</span>
+              <div>
+                <h3 class="font-bold text-slate-900 text-base mb-1">Seguridad y respaldo</h3>
+                <p class="text-slate-600 text-sm mb-2">Verificación en dos pasos, reglas de acceso, copia de la información y un procedimiento claro para cuando alguien entra o sale del equipo.</p>
+                <div class="inline-block bg-teal-50 text-teal-800 text-xs font-mono px-3 py-1 rounded-md border border-teal-200 font-medium">
+                  Entregable: guía corta de seguridad y lista de chequeo de accesos.
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 rounded-xl bg-[#f8f9ff] border border-slate-200 flex gap-4 items-start">
+              <span class="w-8 h-8 rounded-full bg-[#00685f] text-white flex items-center justify-center font-mono font-bold shrink-0 text-sm">4</span>
+              <div>
+                <h3 class="font-bold text-slate-900 text-base mb-1">Hojas de cálculo más inteligentes, usando Gemini con IA base y aprender a consultar con IA el contenido</h3>
+                <p class="text-slate-600 text-sm mb-2">Los archivos de trabajo del equipo pasan a Drive y Sheets con una estructura y rangos protegidos, para que las fórmulas no se dañen cuando alguien edita. La conciliación se lleva a la hoja partiendo de lo que ya existe (DIAN contra contabilidad, y caja menor contra Siigo), junto con las automatizaciones que se acuerden.</p>
+                <div class="inline-block bg-teal-50 text-teal-800 text-xs font-mono px-3 py-1 rounded-md border border-teal-200 font-medium">
+                  Entregable: hojas ordenadas y protegidas, conciliación funcionando y automatizaciones acordadas.
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 rounded-xl bg-[#f8f9ff] border border-slate-200 flex gap-4 items-start">
+              <span class="w-8 h-8 rounded-full bg-[#00685f] text-white flex items-center justify-center font-mono font-bold shrink-0 text-sm">5</span>
+              <div>
+                <h3 class="font-bold text-slate-900 text-base mb-1">Hacia cero papel</h3>
+                <p class="text-slate-600 text-sm mb-2">Con el equipo se identifican los documentos que hoy se imprimen. Los que puedan pasar a pantalla se dejan montados en esta fase. Para los que seguirán imprimiéndose, como las matrículas y los comprobantes de pago, se prepara una plantilla en Drive y Sheets para que salgan listos y queden archivados donde corresponde.</p>
+                <div class="inline-block bg-teal-50 text-teal-800 text-xs font-mono px-3 py-1 rounded-md border border-teal-200 font-medium">
+                  Entregable: lista priorizada de procesos, los primeros funcionando en digital y las plantillas de impresión acordadas.
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 rounded-xl bg-[#f8f9ff] border border-slate-200 flex gap-4 items-start">
+              <span class="w-8 h-8 rounded-full bg-[#00685f] text-white flex items-center justify-center font-mono font-bold shrink-0 text-sm">6</span>
+              <div>
+                <h3 class="font-bold text-slate-900 text-base mb-1">Gemini y uso en el día a día</h3>
+                <p class="text-slate-600 text-sm mb-2">Se activan y se enseñan las funciones de Gemini dentro de Google Workspace (según el plan que se contrate): resumir correos, buscar en Drive, redactar documentos y apoyarse en las hojas de cálculo. Las sesiones se hacen sobre la información ya ordenada del propio equipo.</p>
+                <div class="inline-block bg-teal-50 text-teal-800 text-xs font-mono px-3 py-1 rounded-md border border-teal-200 font-medium">
+                  Entregable: guía por rol con los usos que el equipo acuerde.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. CÓMO SE TRABAJA -->
+      <section id="metodologia" class="mb-16 scroll-mt-24">
+        <div class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-sm">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-[#00685f]/10 text-[#00685f] flex items-center justify-center font-mono font-bold">
+              05
+            </div>
+            <h2 class="text-2xl font-bold text-slate-900">Cómo se trabaja</h2>
+          </div>
+          <div class="space-y-4 text-slate-700 leading-relaxed">
+            <p>
+              Junto con Claudia se presenta un bosquejo de lo que se quiere lograr y ese mismo día se logra avances en la primera etapa.
+            </p>
+            <p>
+              El trabajo específico se hace con cada persona o por parejas del equipo: cada quien migra y ordena su propia información con acompañamiento, de modo que lo aprenda haciéndolo y no en una charla general.
+            </p>
+            <p>
+              Claudia es quien decide sobre la estructura del grupo y los permisos; el equipo valida que lo montado sirva para su trabajo diario.
+            </p>
+            <p class="font-medium text-slate-900 bg-slate-50 p-4 rounded-xl border border-slate-200">
+              Quedan 4 sesiones por delante, una por semana con el equipo. Si el trabajo pide más, se agregan con el mismo ritmo semanal.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. FUERA DEL ALCANCE -->
+      <section class="mb-16">
+        <div class="bg-white rounded-2xl p-8 border border-slate-200/80 shadow-sm">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-700 flex items-center justify-center font-mono font-bold">
+              06
+            </div>
+            <h2 class="text-2xl font-bold text-slate-900">Fuera del alcance</h2>
+          </div>
+          <ul class="space-y-3 text-slate-700">
+            <li class="flex items-start gap-3">
+              <span class="text-amber-600 font-bold mt-0.5">·</span>
+              <div><strong class="text-slate-900">La asesoría permanente:</strong> Por Negociar, está dentro de las posibilidades de Pablo.</div>
+            </li>
+
+            <li class="flex items-start gap-3">
+              <span class="text-amber-600 font-bold mt-0.5">·</span>
+              <div><strong class="text-slate-900">Escaneo del archivo histórico en papel:</strong> Se acuerdan los procesos que pasan a digital de aquí en adelante; digitalizar lo ya archivado es otro trabajo.</div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 7. INVERSIÓN -->
+      <section id="inversion" class="mb-16 scroll-mt-24">
+        <div class="bg-gradient-to-br from-[#0b1c30] to-[#004a43] text-white rounded-3xl p-8 lg:p-12 shadow-xl relative overflow-hidden">
+          <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+          
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-white/10 text-[#89f5e7] flex items-center justify-center font-mono font-bold backdrop-blur-md">
+              07
+            </div>
+            <h2 class="text-2xl font-bold text-white">Inversión</h2>
+          </div>
+
+          <p class="text-slate-200 text-base mb-8 max-w-2xl leading-relaxed">
+            La inversión de esta fase es de <strong class="text-[#89f5e7] font-mono text-lg">lump sum</strong> por las 4 sesiones pactadas.
+          </p>
+
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 lg:p-8 border border-white/10 mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+              <div>
+                <span class="text-xs font-mono text-teal-300 uppercase tracking-wider block mb-1">Inversión total Fase 2</span>
+                <span class="text-3xl lg:text-4xl font-extrabold font-mono text-white">$4.400.000 COP</span>
+              </div>
+              <span class="px-3 py-1.5 rounded-lg bg-teal-500/20 text-teal-200 border border-teal-500/30 text-xs font-mono">
+                4 sesiones pactadas
+              </span>
+            </div>
+
+            <div class="space-y-4 pt-6 border-t border-white/10 text-sm text-slate-200">
+              <div>
+                <span class="block font-semibold text-white mb-1">Forma de pago</span>
+                <p>Un solo pago, para agendar la sesión que tenemos pendiente</p>
+              </div>
+              <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                <span class="block font-semibold text-[#89f5e7] mb-2 font-mono text-xs uppercase tracking-wider">Datos para transferencia bancaria</span>
+                <p class="mb-1"><strong class="text-white">Banco:</strong> Bancolombia · Cuenta de Ahorros</p>
+                <p class="mb-1"><strong class="text-white">Número de cuenta:</strong> 55112702530</p>
+                <p><strong class="text-white">Titular:</strong> Pablo Ríos Peña · CC: 1128278227</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/10">
+            <div class="flex items-center gap-2 text-xs text-slate-300">
+              <span class="material-symbols-outlined text-[16px] text-teal-300">verified</span>
+              Propuesta confidencial · Almamotor, Mobila y Las Fincas &amp; LuciRMe AI
+            </div>
+            <a
+              href="https://wa.me/573128199661?text=Hola%20Pablo,%20revisamos%20la%20propuesta%20de%20la%20Fase%202%20para%20Almamotor,%20Mobila%20y%20Las%20Fincas%20y%20estamos%20listos%20para%20comenzar."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#89f5e7] text-[#00201d] font-semibold text-sm hover:bg-white transition-all shadow-lg"
+            >
+              <span class="material-symbols-outlined text-[18px]">chat</span>
+              Confirmar inicio de Fase 2
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-8 px-6 text-center text-xs text-slate-500">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <span>© 2026 LuciRMe AI &amp; Pablo Ríos Peña. Todos los derechos reservados.</span>
+
+      </div>
+    </footer>
+  </body>
+</html>
