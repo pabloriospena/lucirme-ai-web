@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { isLikelySpam } from '../../lib/spam-filter';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -46,6 +47,13 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(
         JSON.stringify({ error: 'Por favor ingresa tu número de WhatsApp.' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if (isLikelySpam({ email: emailStr, name: nameStr, empresa: empresaStr, honeypot: (data as any).website })) {
+      return new Response(
+        JSON.stringify({ success: true, mailerliteSaved: false }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
