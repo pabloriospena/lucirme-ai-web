@@ -10,6 +10,8 @@ const REDIRECTS = {
   "/recursos": "/educacion",
   "/rutas": "/educacion",
   "/content/sobremi": "/sobre-pablo",
+  "/forms/pre-taller": "/",
+  "/recursos/preventa-vol2": "/educacion",
 };
 
 export const onRequest = (context, next) => {
