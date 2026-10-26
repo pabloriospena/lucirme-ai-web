@@ -1,7 +1,9 @@
 ---
 import { LINKS } from "../lib/constants.js";
+import { diagnosticoUrl } from "../lib/diagnostico.ts";
 
 const year = new Date().getFullYear();
+const diagnosticoHref = diagnosticoUrl(Astro.url.pathname);
 const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
 ---
 
@@ -69,7 +71,7 @@ const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
     <div class="space-y-4">
       <h3 class="font-bold text-sm text-slate-900">4. Recursos</h3>
       <ul class="space-y-2 text-sm text-slate-600">
-        <li><a href="/recursos/termometro" class="hover:text-teal-700">Termómetro IA</a></li>
+        <li><a href={diagnosticoHref} class="hover:text-teal-700">Diagnóstico gratis</a></li>
         <li><a href="/recursos/atajos" class="hover:text-teal-700">Atajos Visuales</a></li>
         <li><a href="/recursos/biblioteca" class="hover:text-teal-700">Biblioteca Abierta</a></li>
         <li><a href="/recursos/guias" class="hover:text-teal-700">Guías y Plantillas</a></li>

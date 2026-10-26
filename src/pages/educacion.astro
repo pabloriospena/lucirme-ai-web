@@ -279,57 +279,7 @@ const herramientasGratuitas = [
       </div>
     </header>
 
-    <!-- 4. TERMÓMETRO IA (TERCERA VÍA PARA INDECISOS) -->
-    <section class="bg-gradient-to-r from-teal/5 via-teal/10 to-emerald-50 rounded-2xl p-6 md:p-8 border border-teal/20 relative overflow-hidden shadow-2xs" id="termometro-banner">
-      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-        <div class="flex items-start gap-4 max-w-2xl">
-          <div class="w-10 h-10 rounded-xl bg-white border border-teal/20 text-teal flex items-center justify-center shrink-0 shadow-2xs text-lg">
-            🌡️
-          </div>
-          <div>
-            <h3 class="text-lg md:text-xl text-deep tracking-tight mb-1 font-bold">
-              ¿No sabes por cuál ruta empezar?
-            </h3>
-            <p class="text-xs md:text-sm text-gray-600 leading-relaxed mb-2">
-              Responde 9 preguntas rápidas en 2 minutos y descubre qué cuello de botella te conviene destrabar primero con IA.
-            </p>
-            <div class="flex flex-wrap items-center gap-y-1 gap-x-3 text-[11px] text-gray-500 font-mono">
-              <span class="flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-teal"></span> 2 minutos
-              </span>
-              <span>•</span>
-              <span class="flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> 100% gratis
-              </span>
-              <span>•</span>
-              <span class="flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-orange"></span> Diagnóstico inmediato
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto shrink-0">
-          <button
-            onclick="if (window.posthog) { window.posthog.capture('educacion_termometro_open_click', { origen: 'banner_termometro' }); } document.getElementById('selector-overlay')?.classList.remove('hidden')"
-            class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-teal text-white font-bold text-xs hover:bg-teal/90 transition-all shadow-2xs cursor-pointer text-center"
-          >
-            <span>Descubrir mi ruta</span>
-            <span>→</span>
-          </button>
-          <a
-            href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, tengo dudas sobre qué ruta educativa tomar y quiero consultarte.")}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            onclick="if (window.posthog) { window.posthog.capture('educacion_whatsapp_click', { origen: 'banner_termometro', tipo: 'hablar_conmigo' }); }"
-            class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-50 transition-all text-center"
-          >
-            <span>💬 Hablar con Pablo</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. SECCIÓN RUTAS MAESTRAS COMPLETAS -->
+        <!-- 5. SECCIÓN RUTAS MAESTRAS COMPLETAS -->
     <main class="space-y-6 pt-2" id="rutas-maestras">
       
       <!-- Pestañas / Filtros de Categoría -->
