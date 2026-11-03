@@ -1,6 +1,7 @@
 ---
 // src/pages/soluciones-personalizadas/sesion6-blancar.astro
 import Layout from "../../layouts/Layout.astro";
+import BlancaSessionsNav from "../../components/BlancaSessionsNav.astro";
 import { LINKS } from "../../lib/constants.js";
 
 const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
@@ -13,6 +14,7 @@ const whatsappBlancar = `${whatsappBase}?text=${encodeURIComponent("Consulta Gui
   hideHeader={true}
   hideFooter={false}
 >
+  <BlancaSessionsNav current="6" />
   <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
     <div class="h-16 max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
       <a class="flex flex-col group" href="#">

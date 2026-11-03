@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import ActionHub from "../../components/ActionHub.astro";
 import RedesSociales from "../../components/RedesSociales.astro";
+import BlancaSessionsNav from "../../components/BlancaSessionsNav.astro";
 import { LINKS } from "../../lib/constants.js";
 
 const cafeEstrategiaUrl = LINKS.calendly_sesion_pago || LINKS.calendly;
@@ -9,6 +10,8 @@ const calendlyUrl = LINKS.calendly_empresa || LINKS.calendly_taller || LINKS.cal
 ---
 
 <Layout title="Sesión de Diagnóstico: Blanca Rodríguez | LuciRMe AI">
+
+  <BlancaSessionsNav current="1" />
 
   <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
   <nav class="bg-white/90 backdrop-blur-md border-b border-gray-200 px-6 py-4 sticky top-0 z-50">

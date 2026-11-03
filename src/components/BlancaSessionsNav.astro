@@ -1,0 +1,48 @@
+---
+// src/components/BlancaSessionsNav.astro
+export interface Props {
+  current?: "guia" | "1" | "2" | "3" | "4" | "5" | "6" | string;
+}
+
+const { current = "" } = Astro.props;
+
+const sessions = [
+  { id: "guia", label: "Guía Inicial", href: "/soluciones-personalizadas/guia-sesion-blanca", icon: "📖" },
+  { id: "1", label: "Sesión 1", href: "/soluciones-personalizadas/sesion-blancar", icon: "📋" },
+  { id: "2", label: "Sesión 2", href: "/soluciones-personalizadas/sesion2-blancar", icon: "🚀" },
+  { id: "3", label: "Sesión 3", href: "/soluciones-personalizadas/sesion3-blancar", icon: "⚡" },
+  { id: "4", label: "Sesión 4", href: "/soluciones-personalizadas/sesion4-blancar", icon: "🎯" },
+  { id: "5", label: "Sesión 5", href: "/soluciones-personalizadas/sesion5-blancar", icon: "💼" },
+  { id: "6", label: "Sesión 6", href: "/soluciones-personalizadas/sesion6-blancar", icon: "🛠️" },
+];
+---
+
+<div class="bg-slate-900 text-white border-b border-slate-800 px-4 py-2.5 shadow-sm">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2.5">
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
+      <span class="text-xs font-mono font-semibold uppercase tracking-wider text-teal-300">
+        Navegación Sesiones · Blanca Rodríguez
+      </span>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-center gap-1.5">
+      {sessions.map((s) => {
+        const isActive = current === s.id;
+        return (
+          <a
+            href={s.href}
+            class={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-medium transition-all ${
+              isActive
+                ? "bg-teal-600 text-white font-bold ring-1 ring-teal-400 shadow-xs"
+                : "bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white"
+            }`}
+          >
+            <span>{s.icon}</span>
+            <span>{s.label}</span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</div>
