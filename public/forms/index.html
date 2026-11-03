@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title id="page-title">Formulario de información base</title>
+  <style>
+    :root {
+      --accent: #0D9488;
+      --accent-hover: #0F766E;
+      --bg: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --text: #0F172A;
+      --text-muted: #475569;
+      --border: #CBD5E1;
+      --error: #EF4444;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      padding: 24px 16px;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Card / Box */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+      border: 1px solid #E2E8F0;
+      padding: 32px 24px;
+      margin-bottom: 24px;
+    }
+
+    @media (min-width: 640px) {
+      .card {
+        padding: 48px 40px;
+      }
+    }
+
+    /* Header */
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 12px;
+      letter-spacing: -0.025em;
+    }
+
+    .intro {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 24px;
+    }
+
+    /* Error state for invalid client */
+    .error-banner {
+      background: #FEF2F2;
+      border: 1px solid #FCA5A5;
+      color: #991B1B;
+      padding: 24px;
+      border-radius: var(--radius);
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--accent);
+      color: white;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.2s, transform 0.1s;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .btn:active {
+      transform: scale(0.99);
+    }
+
+    .btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #F1F5F9;
+      color: var(--text);
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background-color 0.2s;
+      margin-bottom: 20px;
+    }
+
+    .btn-secondary:hover {
+      background-color: #E2E8F0;
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 28px;
+      border-bottom: 1px solid #F1F5F9;
+      padding-bottom: 24px;
+    }
+
+    .form-group:last-of-type {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 32px;
+    }
+
+    label.question-label {
+      display: block;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      font-size: 1.05rem;
+    }
+
+    .required-star {
+      color: var(--error);
+      margin-left: 3px;
+    }
+
+    .help-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--text);
+      background-color: #FFFFFF;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    /* Checkboxes & Radios */
+    .checkbox-group, .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .checkbox-label, .radio-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 400;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    /* Rating (1 to 5) */
+    .rating-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .rating-btn {
+      flex: 1;
+      min-width: 48px;
+      height: 48px;
+      border: 1px solid var(--border);
+      background: #FFFFFF;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .rating-btn:hover {
+      border-color: var(--accent);
+      background: #F0FDFA;
+    }
+
+    .rating-btn.selected {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    /* Task Rows (Question 5) */
+    .task-row {
+      display: grid;
+      grid-template-columns: 1fr 120px;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 480px) {
+      .task-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .field-error {
+      color: var(--error);
+      font-size: 0.85rem;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .has-error input,
+    .has-error textarea,
+    .has-error .rating-group {
+      border-color: var(--error);
+    }
+
+    .has-error .field-error {
+      display: block;
+    }
+
+    /* Honeypot */
+    .hp-field {
+      position: absolute;
+      left: -9999px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Footer / Privacy */
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 24px;
+    }
+
+    /* Success / Thank you state */
+    .thank-you {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .thank-you h2 {
+      font-size: 1.8rem;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .thank-you p {
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      font-size: 1.1rem;
+    }
+
+    .alert-box {
+      background: #FEF2F2;
+      border: 1px solid #FCA5A5;
+      color: #991B1B;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    
+    <!-- ERROR VIEW (Invalid client) -->
+    <div id="view-error" class="card" style="display: none;">
+      <div class="error-banner">
+        Este enlace no es válido. Pide uno nuevo.
+      </div>
+    </div>
+
+    <!-- FORM VIEW -->
+    <div id="view-form" class="card" style="display: none;">
+      <div id="workshop-btn-container-top"></div>
+
+      <h1 id="form-heading">Formulario de información base</h1>
+      <p class="intro">
+        Este cuestionario está pensado para responderse por <strong>una sola persona en representación de todo el equipo</strong> antes del taller de IA. Toma aproximadamente 10 minutos.
+      </p>
+
+      <div id="submit-error-alert" class="alert-box">
+        Hubo un problema al enviar el formulario. Por favor, intenta de nuevo.
+      </div>
+
+      <form id="base-form" novalidate>
+        <!-- Hidden meta fields -->
+        <input type="hidden" id="cliente" name="cliente" value="">
+        <input type="hidden" id="cliente_slug" name="cliente_slug" value="">
+        
+        <!-- Honeypot anti-spam -->
+        <div class="hp-field">
+          <label for="website">Si eres humano, deja este campo en blanco</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <!-- 1. Contexto y asistentes -->
+        <div class="form-group" data-field="que_producen">
+          <label class="question-label" for="que_producen">
+            1. En una línea: ¿qué producen o entregan y a quién?<span class="required-star">*</span>
+          </label>
+          <textarea id="que_producen" name="que_producen" placeholder="Ej. Vendemos repuestos y asesoría técnica para talleres mecánicos en el país."></textarea>
+          <div class="field-error">Este campo es obligatorio.</div>
+        </div>
+
+        <div class="form-group" data-field="asistentes">
+          <label class="question-label" for="asistentes">
+            ¿Quiénes asisten? Nombre, cargo y área de cada uno.<span class="required-star">*</span>
+          </label>
+          <textarea id="asistentes" name="asistentes" placeholder="Ej. Ana Gómez - Gerente Comercial (Ventas), Carlos Pérez - Analista (Operaciones)..."></textarea>
+          <div class="field-error">Este campo es obligatorio.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="question-label" for="lider_ia">
+            ¿Quién empuja el tema de IA dentro del equipo?
+          </label>
+          <input type="text" id="lider_ia" name="lider_ia" placeholder="Nombre o rol (opcional)">
+        </div>
+
+        <!-- 2. Herramientas de IA -->
+        <div class="form-group" data-field="herramientas">
+          <label class="question-label">
+            2. ¿Qué herramientas de IA usan actualmente?<span class="required-star">*</span>
+          </label>
+          <span class="help-text">Selecciona todas las que apliquen.</span>
+          <div class="checkbox-group">
+            <label class="checkbox-label"><input type="checkbox" name="herramientas_cb" value="ChatGPT"> ChatGPT</label>
+            <label class="checkbox-label"><input type="checkbox" name="herramientas_cb" value="Copilot"> Copilot</label>
+            <label class="checkbox-label"><input type="checkbox" name="herramientas_cb" value="Gemini"> Gemini</label>
+            <label class="checkbox-label"><input type="checkbox" name="herramientas_cb" value="Claude"> Claude</label>
+            <label class="checkbox-label"><input type="checkbox" name="herramientas_cb" value="Otra" id="cb-otra"> Otra</label>
+            <label class="checkbox-label"><input type="checkbox" name="herramientas_cb" value="Ninguna"> Ninguna</label>
+          </div>
+          <div id="wrapper-herramientas-otra" style="margin-top: 10px; display: none;">
+            <input type="text" id="herramientas_otra" name="herramientas_otra" placeholder="¿Cuál otra herramienta usan?">
+          </div>
+          <!-- Hidden input holding comma-separated values for submission -->
+          <input type="hidden" id="herramientas" name="herramientas">
+          <div class="field-error">Selecciona al menos una opción.</div>
+        </div>
+
+        <div class="form-group" data-field="cuentas_aprobadas">
+          <label class="question-label">
+            ¿Son cuentas aprobadas por la empresa?<span class="required-star">*</span>
+          </label>
+          <div class="radio-group">
+            <label class="radio-label"><input type="radio" name="cuentas_aprobadas" value="Sí"> Sí</label>
+            <label class="radio-label"><input type="radio" name="cuentas_aprobadas" value="No"> No</label>
+            <label class="radio-label"><input type="radio" name="cuentas_aprobadas" value="Mixto"> Mixto</label>
+          </div>
+          <div class="field-error">Selecciona una opción.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="question-label" for="otras_por_su_cuenta">
+            ¿Alguien usa otras por su cuenta? ¿Cuáles?
+          </label>
+          <input type="text" id="otras_por_su_cuenta" name="otras_por_su_cuenta" placeholder="Opcional">
+        </div>
+
+        <!-- 3. Un caso que funcionó y uno que no -->
+        <div class="form-group">
+          <label class="question-label" for="caso_funciono">
+            3. Un caso donde la IA ayudó: qué tarea, qué herramienta y qué pasó.
+          </label>
+          <textarea id="caso_funciono" name="caso_funciono" placeholder="Opcional pero muy útil para conocer su experiencia previa..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="question-label" for="caso_no_funciono">
+            Un caso donde no funcionó: qué tarea, qué herramienta y qué pasó.
+          </label>
+          <textarea id="caso_no_funciono" name="caso_no_funciono" placeholder="Opcional..."></textarea>
+        </div>
+
+        <!-- 4. Comodidad del equipo con la IA -->
+        <div class="form-group" data-field="comodidad_nivel">
+          <label class="question-label">
+            4. Nivel general del equipo con la IA<span class="required-star">*</span>
+          </label>
+          <span class="help-text">1 = nada cómodo, 5 = muy cómodo</span>
+          <div class="rating-group" id="rating-container">
+            <button type="button" class="rating-btn" data-value="1">1</button>
+            <button type="button" class="rating-btn" data-value="2">2</button>
+            <button type="button" class="rating-btn" data-value="3">3</button>
+            <button type="button" class="rating-btn" data-value="4">4</button>
+            <button type="button" class="rating-btn" data-value="5">5</button>
+          </div>
+          <input type="hidden" id="comodidad_nivel" name="comodidad_nivel">
+          <div class="field-error">Selecciona un nivel del 1 al 5.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="question-label" for="comodidad_detalle">
+            Quién va más adelantado y quién más atrás.
+          </label>
+          <input type="text" id="comodidad_detalle" name="comodidad_detalle" placeholder="Breve comentario (opcional)">
+        </div>
+
+        <!-- 5. Tareas repetitivas que más tiempo consumen -->
+        <div class="form-group" data-field="tarea_1">
+          <label class="question-label">
+            5. Tareas repetitivas que más tiempo consumen<span class="required-star">*</span>
+          </label>
+          <span class="help-text">Indica la tarea y cuántas horas a la semana consume (al menos la primera fila es obligatoria).</span>
+          
+          <div class="task-row">
+            <input type="text" name="tarea_1" id="tarea_1" placeholder="Tarea 1 (Ej. Hacer informes semanales)">
+            <input type="text" name="horas_1" id="horas_1" placeholder="Horas/sem">
+          </div>
+          <div class="task-row">
+            <input type="text" name="tarea_2" placeholder="Tarea 2 (Opcional)">
+            <input type="text" name="horas_2" placeholder="Horas/sem">
+          </div>
+          <div class="task-row">
+            <input type="text" name="tarea_3" placeholder="Tarea 3 (Opcional)">
+            <input type="text" name="horas_3" placeholder="Horas/sem">
+          </div>
+          <div class="field-error">Indica al menos la Tarea 1 y sus horas semanales.</div>
+        </div>
+
+        <!-- 6. Casos reales para trabajar en el taller -->
+        <div class="form-group" data-field="casos_taller">
+          <label class="question-label" for="casos_taller">
+            6. 1 o 2 casos que quieran resolver y el entregable que esperan.<span class="required-star">*</span>
+          </label>
+          <textarea id="casos_taller" name="casos_taller" placeholder="Ej. Automatizar el resumen de cotizaciones para enviarlas en menos de 5 minutos."></textarea>
+          <div class="field-error">Este campo es obligatorio.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="question-label" for="material_disponible">
+            Qué material hay: describe el documento, plantilla o dato (sin información sensible).
+          </label>
+          <span class="help-text">Si no lo sabes, pregunta a quien hace la tarea.</span>
+          <textarea id="material_disponible" name="material_disponible" placeholder="Ej. Tenemos plantillas en Excel con el histórico de ventas (sin datos personales de clientes)."></textarea>
+        </div>
+
+        <!-- 7. Restricciones -->
+        <div class="form-group" data-field="restricciones">
+          <label class="question-label" for="restricciones">
+            7. Confidencialidad, herramientas permitidas o prohibidas, y quién aprueba el uso de IA.<span class="required-star">*</span>
+          </label>
+          <textarea id="restricciones" name="restricciones" placeholder="Ej. No se pueden subir datos de clientes a herramientas públicas; gerencia de sistemas debe aprobar cualquier API."></textarea>
+          <div class="field-error">Este campo es obligatorio.</div>
+        </div>
+
+        <!-- 8. Resultado esperado y fuera de alcance -->
+        <div class="form-group" data-field="resultado_esperado">
+          <label class="question-label" for="resultado_esperado">
+            8. ¿Qué quieren poder hacer distinto después del taller?<span class="required-star">*</span>
+          </label>
+          <textarea id="resultado_esperado" name="resultado_esperado" placeholder="Ej. Que el equipo reduzca un 50% el tiempo dedicado a tareas administrativas rutinarias."></textarea>
+          <div class="field-error">Este campo es obligatorio.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="question-label" for="fuera_de_alcance">
+            ¿Qué temas no quieren tocar?
+          </label>
+          <textarea id="fuera_de_alcance" name="fuera_de_alcance" placeholder="Ej. No queremos abordar desarrollo de software desde cero ni despliegue de modelos locales."></textarea>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" id="submit-btn" class="btn">Enviar respuestas</button>
+      </form>
+    </div>
+
+    <!-- THANK YOU VIEW -->
+    <div id="view-thankyou" class="card" style="display: none;">
+      <div class="thank-you">
+        <div id="workshop-btn-container-bottom"></div>
+        <h2>¡Gracias por tus respuestas!</h2>
+        <p>Hemos recibido la información base del equipo. Con esto prepararemos un taller práctico y ajustado a sus necesidades reales.</p>
+        <button type="button" id="retry-btn" class="btn" style="display: none; margin-top: 16px;">Reintentar envío</button>
+      </div>
+    </div>
+
+    <footer>
+      Tus respuestas solo se usan para preparar el taller.
+    </footer>
+  </main>
+
+  <script>
+    /* ==========================================================================
+       CONFIGURACIÓN (Editable)
+       ========================================================================== */
+    const MAKE_WEBHOOK_URL = "PEGAR_AQUI_URL_DEL_WEBHOOK_DE_MAKE";
+    const TALLER_URL = "PEGAR_AQUI_LINK_DEL_TALLER"; // Ej. "../taller/" o URL completa, o dejar vacío ""
+    const CLIENTES = {
+      sasa: "Sasa Consultoría",
+      cm: "Seguros CM"
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const clienteParam = urlParams.get("cliente");
+
+      const viewError = document.getElementById("view-error");
+      const viewForm = document.getElementById("view-form");
+      const viewThankYou = document.getElementById("view-thankyou");
+
+      const inputCliente = document.getElementById("cliente");
+      const inputClienteSlug = document.getElementById("cliente_slug");
+      const formHeading = document.getElementById("page-heading");
+      const pageTitle = document.getElementById("page-title");
+
+      // Validate client parameter
+      if (!clienteParam || !CLIENTES[clienteParam]) {
+        viewError.style.display = "block";
+        return;
+      }
+
+      const clienteNombre = CLIENTES[clienteParam];
+      inputCliente.value = clienteNombre;
+      inputClienteSlug.value = clienteParam;
+
+      formHeading.textContent = `Formulario de información base · ${clienteNombre}`;
+      pageTitle.textContent = `Formulario de información base · ${clienteNombre}`;
+
+      viewForm.style.display = "block";
+
+      // Setup Workshop Buttons if TALLER_URL is provided
+      setupWorkshopButtons();
+
+      // Setup Rating buttons (Question 4)
+      setupRatingButtons();
+
+      // Setup Checkbox "Otra" toggle (Question 2)
+      setupHerramientasOtra();
+
+      // Setup Form Submission
+      setupFormSubmission();
+    });
+
+    function setupWorkshopButtons() {
+      if (!TALLER_URL || TALLER_URL.trim() === "" || TALLER_URL.includes("PEGAR_AQUI")) {
+        return;
+      }
+
+      const topContainer = document.getElementById("workshop-btn-container-top");
+      const bottomContainer = document.getElementById("workshop-btn-container-bottom");
+
+      const createBtn = () => {
+        const a = document.createElement("a");
+        a.href = TALLER_URL;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.className = "btn-secondary";
+        a.innerHTML = `<span>Ver detalles del taller</span> <span style="margin-left: 6px;">↗</span>`;
+        return a;
+      };
+
+      topContainer.appendChild(createBtn());
+      bottomContainer.insertBefore(createBtn(), bottomContainer.firstChild);
+    }
+
+    function setupRatingButtons() {
+      const buttons = document.querySelectorAll(".rating-btn");
+      const hiddenInput = document.getElementById("comodidad_nivel");
+
+      buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          buttons.forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          hiddenInput.value = btn.getAttribute("data-value");
+
+          // Clear error state if present
+          const group = hiddenInput.closest(".form-group");
+          if (group) group.classList.remove("has-error");
+        });
+      });
+    }
+
+    function setupHerramientasOtra() {
+      const cbOtra = document.getElementById("cb-otra");
+      const wrapperOtra = document.getElementById("wrapper-herramientas-otra");
+
+      cbOtra.addEventListener("change", () => {
+        if (cbOtra.checked) {
+          wrapperOtra.style.display = "block";
+        } else {
+          wrapperOtra.style.display = "none";
+          document.getElementById("herramientas_otra").value = "";
+        }
+      });
+    }
+
+    function setupFormSubmission() {
+      const form = document.getElementById("base-form");
+      const submitBtn = document.getElementById("submit-btn");
+      const submitErrorAlert = document.getElementById("submit-error-alert");
+      const retryBtn = document.getElementById("retry-btn");
+      let isSubmitting = false;
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        if (isSubmitting) return;
+
+        // Reset errors
+        document.querySelectorAll(".form-group").forEach(g => g.classList.remove("has-error"));
+        submitErrorAlert.style.display = "none";
+
+        // Validate
+        if (!validateForm()) {
+          return;
+        }
+
+        // Check honeypot
+        const hp = document.getElementById("website").value;
+        if (hp) {
+          // Bot detected, silently show thank you
+          showThankYouView();
+          return;
+        }
+
+        // Prepare data
+        const formData = new FormData(form);
+        
+        // Handle checkboxes for herramientas
+        const checkboxes = document.querySelectorAll('input[name="herramientas_cb"]:checked');
+        const herramientasArr = [];
+        checkboxes.forEach(cb => {
+          if (cb.value === "Otra") {
+            const otraVal = document.getElementById("herramientas_otra").value.trim();
+            if (otraVal) herramientasArr.push(`Otra: ${otraVal}`);
+            else herramientasArr.push("Otra");
+          } else {
+            herramientasArr.push(cb.value);
+          }
+        });
+        formData.set("herramientas", herramientasArr.join(", "));
+
+        // Add enviado_en timestamp
+        formData.set("enviado_en", new Date().toISOString());
+
+        // Convert FormData to URLSearchParams
+        const payload = new URLSearchParams();
+        for (const [key, value] of formData.entries()) {
+          if (key !== "herramientas_cb") {
+            payload.append(key, value);
+          }
+        }
+
+        // Send
+        isSubmitting = true;
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Enviando…";
+
+        try {
+          await fetch(MAKE_WEBHOOK_URL, {
+            method: "POST",
+            mode: "no-cors",
+            body: payload
+          });
+
+          // If fetch doesn't throw, success
+          showThankYouView();
+        } catch (error) {
+          console.error("Submission error:", error);
+          submitErrorAlert.style.display = "block";
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Enviar respuestas";
+          retryBtn.style.display = "inline-flex";
+          isSubmitting = false;
+        }
+      });
+
+      retryBtn.addEventListener("click", () => {
+        form.dispatchEvent(new Event("submit", { cancelable: true }));
+      });
+    }
+
+    function validateForm() {
+      let isValid = true;
+
+      // Helper function to check and mark error
+      const checkRequired = (fieldName, elementId) => {
+        const el = document.getElementById(elementId);
+        const group = el.closest(".form-group");
+        if (!el.value.trim()) {
+          group.classList.add("has-error");
+          isValid = false;
+        }
+      };
+
+      // 1. que_producen
+      checkRequired("que_producen", "que_producen");
+
+      // 1. asistentes
+      checkRequired("asistentes", "asistentes");
+
+      // 2. herramientas (at least one checkbox checked)
+      const checkedHerramientas = document.querySelectorAll('input[name="herramientas_cb"]:checked');
+      const groupHerramientas = document.querySelector('[data-field="herramientas"]');
+      if (checkedHerramientas.length === 0) {
+        groupHerramientas.classList.add("has-error");
+        isValid = false;
+      }
+
+      // 2. cuentas_aprobadas (radio)
+      const selectedCuenta = document.querySelector('input[name="cuentas_aprobadas"]:checked');
+      const groupCuenta = document.querySelector('[data-field="cuentas_aprobadas"]');
+      if (!selectedCuenta) {
+        groupCuenta.classList.add("has-error");
+        isValid = false;
+      }
+
+      // 4. comodidad_nivel
+      const comodidadVal = document.getElementById("comodidad_nivel").value;
+      const groupComodidad = document.querySelector('[data-field="comodidad_nivel"]');
+      if (!comodidadVal) {
+        groupComodidad.classList.add("has-error");
+        isValid = false;
+      }
+
+      // 5. tarea_1 / horas_1
+      const tarea1 = document.getElementById("tarea_1").value.trim();
+      const horas1 = document.getElementById("horas_1").value.trim();
+      const groupTarea = document.querySelector('[data-field="tarea_1"]');
+      if (!tarea1 || !horas1) {
+        groupTarea.classList.add("has-error");
+        isValid = false;
+      }
+
+      // 6. casos_taller
+      checkRequired("casos_taller", "casos_taller");
+
+      // 7. restricciones
+      checkRequired("restricciones", "restricciones");
+
+      // 8. resultado_esperado
+      checkRequired("resultado_esperado", "resultado_esperado");
+
+      if (!isValid) {
+        // Scroll to first error
+        const firstError = document.querySelector(".has-error");
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+
+      return isValid;
+    }
+
+    function showThankYouView() {
+      document.getElementById("view-form").style.display = "none";
+      document.getElementById("view-thankyou").style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
