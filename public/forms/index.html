@@ -333,15 +333,15 @@
 
   <main class="container">
     
-    <!-- ERROR VIEW (Invalid client) -->
+    <!-- ERROR VIEW (Invalid client) - Hidden by default -->
     <div id="view-error" class="card" style="display: none;">
       <div class="error-banner">
         Este enlace no es válido. Pide uno nuevo.
       </div>
     </div>
 
-    <!-- FORM VIEW -->
-    <div id="view-form" class="card" style="display: none;">
+    <!-- FORM VIEW - Visible by default -->
+    <div id="view-form" class="card">
       <div id="workshop-btn-container-top"></div>
 
       <h1 id="form-heading">Formulario de información base</h1>
@@ -537,7 +537,7 @@
       </form>
     </div>
 
-    <!-- THANK YOU VIEW -->
+    <!-- THANK YOU VIEW - Hidden by default -->
     <div id="view-thankyou" class="card" style="display: none;">
       <div class="thank-you">
         <div id="workshop-btn-container-bottom"></div>
@@ -564,43 +564,50 @@
     };
 
     document.addEventListener("DOMContentLoaded", () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const clienteParam = urlParams.get("cliente");
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const clienteParam = urlParams.get("cliente");
 
-      const viewError = document.getElementById("view-error");
-      const viewForm = document.getElementById("view-form");
-      const viewThankYou = document.getElementById("view-thankyou");
+        const viewError = document.getElementById("view-error");
+        const viewForm = document.getElementById("view-form");
+        const inputCliente = document.getElementById("cliente");
+        const inputClienteSlug = document.getElementById("cliente_slug");
+        const formHeading = document.getElementById("form-heading");
+        const pageTitle = document.getElementById("page-title");
 
-      const inputCliente = document.getElementById("cliente");
-      const inputClienteSlug = document.getElementById("cliente_slug");
-      const formHeading = document.getElementById("page-heading");
-      const pageTitle = document.getElementById("page-title");
+        // Validate client parameter
+        if (!clienteParam || !CLIENTES[clienteParam]) {
+          if (viewError) viewError.style.display = "block";
+          if (viewForm) viewForm.style.display = "none";
+          return;
+        }
 
-      // Validate client parameter
-      if (!clienteParam || !CLIENTES[clienteParam]) {
-        viewError.style.display = "block";
-        return;
+        const clienteNombre = CLIENTES[clienteParam];
+        if (inputCliente) inputCliente.value = clienteNombre;
+        if (inputClienteSlug) inputClienteSlug.value = clienteParam;
+
+        if (formHeading) {
+          formHeading.textContent = `Formulario de información base · ${clienteNombre}`;
+        }
+        if (pageTitle) {
+          pageTitle.textContent = `Formulario de información base · ${clienteNombre}`;
+        }
+
+        if (viewError) viewError.style.display = "none";
+        if (viewForm) viewForm.style.display = "block";
+
+      } catch (err) {
+        console.error("Error al procesar el parámetro de cliente:", err);
+        const viewError = document.getElementById("view-error");
+        const viewForm = document.getElementById("view-form");
+        if (viewError) viewError.style.display = "block";
+        if (viewForm) viewForm.style.display = "none";
       }
 
-      const clienteNombre = CLIENTES[clienteParam];
-      inputCliente.value = clienteNombre;
-      inputClienteSlug.value = clienteParam;
-
-      formHeading.textContent = `Formulario de información base · ${clienteNombre}`;
-      pageTitle.textContent = `Formulario de información base · ${clienteNombre}`;
-
-      viewForm.style.display = "block";
-
-      // Setup Workshop Buttons if TALLER_URL is provided
+      // Setup UI handlers with null checks
       setupWorkshopButtons();
-
-      // Setup Rating buttons (Question 4)
       setupRatingButtons();
-
-      // Setup Checkbox "Otra" toggle (Question 2)
       setupHerramientasOtra();
-
-      // Setup Form Submission
       setupFormSubmission();
     });
 
@@ -622,13 +629,14 @@
         return a;
       };
 
-      topContainer.appendChild(createBtn());
-      bottomContainer.insertBefore(createBtn(), bottomContainer.firstChild);
+      if (topContainer) topContainer.appendChild(createBtn());
+      if (bottomContainer) bottomContainer.insertBefore(createBtn(), bottomContainer.firstChild);
     }
 
     function setupRatingButtons() {
       const buttons = document.querySelectorAll(".rating-btn");
       const hiddenInput = document.getElementById("comodidad_nivel");
+      if (!hiddenInput) return;
 
       buttons.forEach(btn => {
         btn.addEventListener("click", () => {
@@ -646,13 +654,15 @@
     function setupHerramientasOtra() {
       const cbOtra = document.getElementById("cb-otra");
       const wrapperOtra = document.getElementById("wrapper-herramientas-otra");
+      if (!cbOtra || !wrapperOtra) return;
 
       cbOtra.addEventListener("change", () => {
         if (cbOtra.checked) {
           wrapperOtra.style.display = "block";
         } else {
           wrapperOtra.style.display = "none";
-          document.getElementById("herramientas_otra").value = "";
+          const otraInput = document.getElementById("herramientas_otra");
+          if (otraInput) otraInput.value = "";
         }
       });
     }
@@ -662,6 +672,8 @@
       const submitBtn = document.getElementById("submit-btn");
       const submitErrorAlert = document.getElementById("submit-error-alert");
       const retryBtn = document.getElementById("retry-btn");
+      if (!form || !submitBtn) return;
+
       let isSubmitting = false;
 
       form.addEventListener("submit", async (e) => {
@@ -671,7 +683,7 @@
 
         // Reset errors
         document.querySelectorAll(".form-group").forEach(g => g.classList.remove("has-error"));
-        submitErrorAlert.style.display = "none";
+        if (submitErrorAlert) submitErrorAlert.style.display = "none";
 
         // Validate
         if (!validateForm()) {
@@ -679,7 +691,8 @@
         }
 
         // Check honeypot
-        const hp = document.getElementById("website").value;
+        const websiteInput = document.getElementById("website");
+        const hp = websiteInput ? websiteInput.value : "";
         if (hp) {
           // Bot detected, silently show thank you
           showThankYouView();
@@ -694,7 +707,8 @@
         const herramientasArr = [];
         checkboxes.forEach(cb => {
           if (cb.value === "Otra") {
-            const otraVal = document.getElementById("herramientas_otra").value.trim();
+            const otraInput = document.getElementById("herramientas_otra");
+            const otraVal = otraInput ? otraInput.value.trim() : "";
             if (otraVal) herramientasArr.push(`Otra: ${otraVal}`);
             else herramientasArr.push("Otra");
           } else {
@@ -730,82 +744,74 @@
           showThankYouView();
         } catch (error) {
           console.error("Submission error:", error);
-          submitErrorAlert.style.display = "block";
+          if (submitErrorAlert) submitErrorAlert.style.display = "block";
           submitBtn.disabled = false;
           submitBtn.textContent = "Enviar respuestas";
-          retryBtn.style.display = "inline-flex";
+          if (retryBtn) retryBtn.style.display = "inline-flex";
           isSubmitting = false;
         }
       });
 
-      retryBtn.addEventListener("click", () => {
-        form.dispatchEvent(new Event("submit", { cancelable: true }));
-      });
+      if (retryBtn) {
+        retryBtn.addEventListener("click", () => {
+          form.dispatchEvent(new Event("submit", { cancelable: true }));
+        });
+      }
     }
 
     function validateForm() {
       let isValid = true;
 
-      // Helper function to check and mark error
-      const checkRequired = (fieldName, elementId) => {
+      const checkRequired = (elementId) => {
         const el = document.getElementById(elementId);
+        if (!el) return;
         const group = el.closest(".form-group");
         if (!el.value.trim()) {
-          group.classList.add("has-error");
+          if (group) group.classList.add("has-error");
           isValid = false;
         }
       };
 
-      // 1. que_producen
-      checkRequired("que_producen", "que_producen");
+      checkRequired("que_producen");
+      checkRequired("asistentes");
 
-      // 1. asistentes
-      checkRequired("asistentes", "asistentes");
-
-      // 2. herramientas (at least one checkbox checked)
       const checkedHerramientas = document.querySelectorAll('input[name="herramientas_cb"]:checked');
       const groupHerramientas = document.querySelector('[data-field="herramientas"]');
       if (checkedHerramientas.length === 0) {
-        groupHerramientas.classList.add("has-error");
+        if (groupHerramientas) groupHerramientas.classList.add("has-error");
         isValid = false;
       }
 
-      // 2. cuentas_aprobadas (radio)
       const selectedCuenta = document.querySelector('input[name="cuentas_aprobadas"]:checked');
       const groupCuenta = document.querySelector('[data-field="cuentas_aprobadas"]');
       if (!selectedCuenta) {
-        groupCuenta.classList.add("has-error");
+        if (groupCuenta) groupCuenta.classList.add("has-error");
         isValid = false;
       }
 
-      // 4. comodidad_nivel
-      const comodidadVal = document.getElementById("comodidad_nivel").value;
+      const comodidadInput = document.getElementById("comodidad_nivel");
+      const comodidadVal = comodidadInput ? comodidadInput.value : "";
       const groupComodidad = document.querySelector('[data-field="comodidad_nivel"]');
       if (!comodidadVal) {
-        groupComodidad.classList.add("has-error");
+        if (groupComodidad) groupComodidad.classList.add("has-error");
         isValid = false;
       }
 
-      // 5. tarea_1 / horas_1
-      const tarea1 = document.getElementById("tarea_1").value.trim();
-      const horas1 = document.getElementById("horas_1").value.trim();
+      const tarea1El = document.getElementById("tarea_1");
+      const horas1El = document.getElementById("horas_1");
       const groupTarea = document.querySelector('[data-field="tarea_1"]');
+      const tarea1 = tarea1El ? tarea1El.value.trim() : "";
+      const horas1 = horas1El ? horas1El.value.trim() : "";
       if (!tarea1 || !horas1) {
-        groupTarea.classList.add("has-error");
+        if (groupTarea) groupTarea.classList.add("has-error");
         isValid = false;
       }
 
-      // 6. casos_taller
-      checkRequired("casos_taller", "casos_taller");
-
-      // 7. restricciones
-      checkRequired("restricciones", "restricciones");
-
-      // 8. resultado_esperado
-      checkRequired("resultado_esperado", "resultado_esperado");
+      checkRequired("casos_taller");
+      checkRequired("restricciones");
+      checkRequired("resultado_esperado");
 
       if (!isValid) {
-        // Scroll to first error
         const firstError = document.querySelector(".has-error");
         if (firstError) {
           firstError.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -816,8 +822,10 @@
     }
 
     function showThankYouView() {
-      document.getElementById("view-form").style.display = "none";
-      document.getElementById("view-thankyou").style.display = "block";
+      const viewForm = document.getElementById("view-form");
+      const viewThankYou = document.getElementById("view-thankyou");
+      if (viewForm) viewForm.style.display = "none";
+      if (viewThankYou) viewThankYou.style.display = "block";
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   </script>
