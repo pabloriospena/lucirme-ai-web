@@ -556,7 +556,7 @@
     /* ==========================================================================
        CONFIGURACIÓN (Editable)
        ========================================================================== */
-    const MAKE_WEBHOOK_URL = "PEGAR_AQUI_URL_DEL_WEBHOOK_DE_MAKE";
+    const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/eg6vornj63j819a4a44pf1uzgdd7yjms";
     const TALLER_URL = "PEGAR_AQUI_LINK_DEL_TALLER"; // Ej. "../taller/" o URL completa, o dejar vacío ""
     const CLIENTES = {
       sasa: "Sasa Consultoría",
@@ -690,6 +690,15 @@
           return;
         }
 
+        // Check if webhook is configured
+        if (!MAKE_WEBHOOK_URL || MAKE_WEBHOOK_URL.trim() === "" || MAKE_WEBHOOK_URL.includes("PEGAR_AQUI")) {
+          if (submitErrorAlert) {
+            submitErrorAlert.textContent = "Falta configurar el envío.";
+            submitErrorAlert.style.display = "block";
+          }
+          return;
+        }
+
         // Check honeypot
         const websiteInput = document.getElementById("website");
         const hp = websiteInput ? websiteInput.value : "";
@@ -734,17 +743,22 @@
         submitBtn.textContent = "Enviando…";
 
         try {
-          await fetch(MAKE_WEBHOOK_URL, {
+          const res = await fetch(MAKE_WEBHOOK_URL, {
             method: "POST",
-            mode: "no-cors",
             body: payload
           });
 
-          // If fetch doesn't throw, success
-          showThankYouView();
+          if (res.ok) {
+            showThankYouView();
+          } else {
+            throw new Error(`Server returned status ${res.status}`);
+          }
         } catch (error) {
           console.error("Submission error:", error);
-          if (submitErrorAlert) submitErrorAlert.style.display = "block";
+          if (submitErrorAlert) {
+            submitErrorAlert.textContent = "Hubo un problema al enviar el formulario. Por favor, intenta de nuevo.";
+            submitErrorAlert.style.display = "block";
+          }
           submitBtn.disabled = false;
           submitBtn.textContent = "Enviar respuestas";
           if (retryBtn) retryBtn.style.display = "inline-flex";
