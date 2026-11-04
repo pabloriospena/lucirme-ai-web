@@ -190,6 +190,14 @@
       resize: vertical;
     }
 
+    .char-counter {
+      text-align: right;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
     /* Checkboxes & Radios */
     .checkbox-group, .radio-group {
       display: flex;
@@ -369,7 +377,8 @@
           <label class="question-label" for="que_producen">
             1. En una frase: ¿qué hace tu empresa y para quién trabaja?<span class="required-star">*</span>
           </label>
-          <textarea id="que_producen" name="que_producen" placeholder="Ej. Vendemos repuestos y asesoría técnica para talleres mecánicos en el país."></textarea>
+          <textarea id="que_producen" name="que_producen" maxlength="1900" placeholder="Ej. Vendemos repuestos y asesoría técnica para talleres mecánicos en el país."></textarea>
+          <div class="char-counter">0/1900</div>
           <div class="field-error">Este campo es obligatorio.</div>
         </div>
 
@@ -377,7 +386,8 @@
           <label class="question-label" for="asistentes">
             ¿Quiénes asisten al taller? Nombre, cargo y área de cada uno.<span class="required-star">*</span>
           </label>
-          <textarea id="asistentes" name="asistentes" placeholder="Ej. Ana Gómez - Gerente Comercial (Ventas), Carlos Pérez - Analista (Operaciones)..."></textarea>
+          <textarea id="asistentes" name="asistentes" maxlength="1900" placeholder="Ej. Ana Gómez - Gerente Comercial (Ventas), Carlos Pérez - Analista (Operaciones)..."></textarea>
+          <div class="char-counter">0/1900</div>
           <div class="field-error">Este campo es obligatorio.</div>
         </div>
 
@@ -385,7 +395,7 @@
           <label class="question-label" for="lider_ia">
             ¿Quién es la persona que más usa y recomienda la IA dentro del equipo?
           </label>
-          <input type="text" id="lider_ia" name="lider_ia" placeholder="Nombre o rol (opcional)">
+          <input type="text" id="lider_ia" name="lider_ia" maxlength="1900" placeholder="Nombre o rol (opcional)">
         </div>
 
         <!-- 2. Herramientas de IA -->
@@ -403,7 +413,7 @@
             <label class="checkbox-label"><input type="checkbox" name="herramientas_cb" value="Ninguna"> Ninguna</label>
           </div>
           <div id="wrapper-herramientas-otra" style="margin-top: 10px; display: none;">
-            <input type="text" id="herramientas_otra" name="herramientas_otra" placeholder="¿Cuál otra herramienta usan?">
+            <input type="text" id="herramientas_otra" name="herramientas_otra" maxlength="1900" placeholder="¿Cuál otra herramienta usan?">
           </div>
           <!-- Hidden input holding comma-separated values for submission -->
           <input type="hidden" id="herramientas" name="herramientas">
@@ -426,7 +436,7 @@
           <label class="question-label" for="otras_por_su_cuenta">
             ¿Alguien usa otras por su cuenta? ¿Cuáles?
           </label>
-          <input type="text" id="otras_por_su_cuenta" name="otras_por_su_cuenta" placeholder="Opcional">
+          <input type="text" id="otras_por_su_cuenta" name="otras_por_su_cuenta" maxlength="1900" placeholder="Opcional">
         </div>
 
         <!-- 3. Un caso que funcionó y uno que no -->
@@ -434,14 +444,16 @@
           <label class="question-label" for="caso_funciono">
             3. Un caso donde la IA ayudó: qué tarea, qué herramienta y qué pasó.
           </label>
-          <textarea id="caso_funciono" name="caso_funciono" placeholder="Opcional pero muy útil para conocer su experiencia previa..."></textarea>
+          <textarea id="caso_funciono" name="caso_funciono" maxlength="1900" placeholder="Opcional pero muy útil para conocer su experiencia previa..."></textarea>
+          <div class="char-counter">0/1900</div>
         </div>
 
         <div class="form-group">
           <label class="question-label" for="caso_no_funciono">
             Un caso donde no funcionó: qué tarea, qué herramienta y qué pasó.
           </label>
-          <textarea id="caso_no_funciono" name="caso_no_funciono" placeholder="Opcional..."></textarea>
+          <textarea id="caso_no_funciono" name="caso_no_funciono" maxlength="1900" placeholder="Opcional..."></textarea>
+          <div class="char-counter">0/1900</div>
         </div>
 
         <!-- 4. Comodidad del equipo con la IA -->
@@ -465,7 +477,7 @@
           <label class="question-label" for="comodidad_detalle">
             Quién va más adelantado y quién más atrás.
           </label>
-          <input type="text" id="comodidad_detalle" name="comodidad_detalle" placeholder="Breve comentario (opcional)">
+          <input type="text" id="comodidad_detalle" name="comodidad_detalle" maxlength="1900" placeholder="Breve comentario (opcional)">
         </div>
 
         <!-- 5. Tareas repetitivas que más tiempo consumen -->
@@ -476,16 +488,16 @@
           <span class="help-text">Indica la tarea y cuántas horas a la semana consume (al menos la primera fila es obligatoria).</span>
           
           <div class="task-row">
-            <input type="text" name="tarea_1" id="tarea_1" placeholder="Tarea 1 (Ej. Hacer informes semanales)">
-            <input type="text" name="horas_1" id="horas_1" placeholder="Horas/sem">
+            <input type="text" name="tarea_1" id="tarea_1" maxlength="1900" placeholder="Tarea 1 (Ej. Hacer informes semanales)">
+            <input type="text" name="horas_1" id="horas_1" maxlength="1900" placeholder="Horas/sem">
           </div>
           <div class="task-row">
-            <input type="text" name="tarea_2" placeholder="Tarea 2 (Opcional)">
-            <input type="text" name="horas_2" placeholder="Horas/sem">
+            <input type="text" name="tarea_2" maxlength="1900" placeholder="Tarea 2 (Opcional)">
+            <input type="text" name="horas_2" maxlength="1900" placeholder="Horas/sem">
           </div>
           <div class="task-row">
-            <input type="text" name="tarea_3" placeholder="Tarea 3 (Opcional)">
-            <input type="text" name="horas_3" placeholder="Horas/sem">
+            <input type="text" name="tarea_3" maxlength="1900" placeholder="Tarea 3 (Opcional)">
+            <input type="text" name="horas_3" maxlength="1900" placeholder="Horas/sem">
           </div>
           <div class="field-error">Indica al menos la Tarea 1 y sus horas semanales.</div>
         </div>
@@ -495,7 +507,8 @@
           <label class="question-label" for="casos_taller">
             6. 1 o 2 casos que quieran resolver y el entregable que esperan.<span class="required-star">*</span>
           </label>
-          <textarea id="casos_taller" name="casos_taller" placeholder="Ej.: preparar el reporte mensual de ventas a partir de las bases del equipo. Entregable: un informe de una página."></textarea>
+          <textarea id="casos_taller" name="casos_taller" maxlength="1900" placeholder="Ej.: preparar el reporte mensual de ventas a partir de las bases del equipo. Entregable: un informe de una página."></textarea>
+          <div class="char-counter">0/1900</div>
           <div class="field-error">Este campo es obligatorio.</div>
         </div>
 
@@ -504,7 +517,8 @@
             Qué material hay: describe el documento, plantilla o dato (sin información sensible).
           </label>
           <span class="help-text">Si no lo sabes, pregunta a quien hace la tarea.</span>
-          <textarea id="material_disponible" name="material_disponible" placeholder="Ej. Tenemos plantillas en Excel con el histórico de ventas (sin datos personales de clientes)."></textarea>
+          <textarea id="material_disponible" name="material_disponible" maxlength="1900" placeholder="Ej. Tenemos plantillas en Excel con el histórico de ventas (sin datos personales de clientes)."></textarea>
+          <div class="char-counter">0/1900</div>
         </div>
 
         <!-- 7. Restricciones -->
@@ -512,7 +526,8 @@
           <label class="question-label" for="restricciones">
             7. Confidencialidad, herramientas permitidas o prohibidas, y quién aprueba el uso de IA.<span class="required-star">*</span>
           </label>
-          <textarea id="restricciones" name="restricciones" placeholder="Ej. No se pueden subir datos de clientes a herramientas públicas; gerencia de sistemas debe aprobar cualquier API."></textarea>
+          <textarea id="restricciones" name="restricciones" maxlength="1900" placeholder="Ej. No se pueden subir datos de clientes a herramientas públicas; gerencia de sistemas debe aprobar cualquier API."></textarea>
+          <div class="char-counter">0/1900</div>
           <div class="field-error">Este campo es obligatorio.</div>
         </div>
 
@@ -521,7 +536,8 @@
           <label class="question-label" for="resultado_esperado">
             8. ¿Qué quieren poder hacer distinto después del taller?<span class="required-star">*</span>
           </label>
-          <textarea id="resultado_esperado" name="resultado_esperado" placeholder="Ej. Que el equipo reduzca un 50% el tiempo dedicado a tareas administrativas rutinarias."></textarea>
+          <textarea id="resultado_esperado" name="resultado_esperado" maxlength="1900" placeholder="Ej. Que el equipo reduzca un 50% el tiempo dedicado a tareas administrativas rutinarias."></textarea>
+          <div class="char-counter">0/1900</div>
           <div class="field-error">Este campo es obligatorio.</div>
         </div>
 
@@ -529,7 +545,8 @@
           <label class="question-label" for="fuera_de_alcance">
             ¿Qué temas no quieren tocar?
           </label>
-          <textarea id="fuera_de_alcance" name="fuera_de_alcance" placeholder="Ej. No queremos abordar desarrollo de software desde cero ni despliegue de modelos locales."></textarea>
+          <textarea id="fuera_de_alcance" name="fuera_de_alcance" maxlength="1900" placeholder="Ej. No queremos abordar desarrollo de software desde cero ni despliegue de modelos locales."></textarea>
+          <div class="char-counter">0/1900</div>
         </div>
 
         <!-- Submit button -->
@@ -574,11 +591,21 @@
         const inputClienteSlug = document.getElementById("cliente_slug");
         const formHeading = document.getElementById("form-heading");
         const pageTitle = document.getElementById("page-title");
+        const submitBtn = document.getElementById("submit-btn");
 
-        // Validate client parameter
+        // Validate client parameter: must be "sasa" or "cm"
         if (!clienteParam || !CLIENTES[clienteParam]) {
-          if (viewError) viewError.style.display = "block";
+          if (viewError) {
+            viewError.style.display = "block";
+            // Ensure exact message required: "Este enlace no es válido. Pide uno nuevo."
+            const banner = viewError.querySelector(".error-banner");
+            if (banner) banner.textContent = "Este enlace no es válido. Pide uno nuevo.";
+          }
           if (viewForm) viewForm.style.display = "none";
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.title = "Este enlace no es válido. Pide uno nuevo.";
+          }
           return;
         }
 
@@ -600,16 +627,41 @@
         console.error("Error al procesar el parámetro de cliente:", err);
         const viewError = document.getElementById("view-error");
         const viewForm = document.getElementById("view-form");
-        if (viewError) viewError.style.display = "block";
+        const submitBtn = document.getElementById("submit-btn");
+        if (viewError) {
+          viewError.style.display = "block";
+          const banner = viewError.querySelector(".error-banner");
+          if (banner) banner.textContent = "Este enlace no es válido. Pide uno nuevo.";
+        }
         if (viewForm) viewForm.style.display = "none";
+        if (submitBtn) submitBtn.disabled = true;
       }
 
       // Setup UI handlers with null checks
       setupWorkshopButtons();
       setupRatingButtons();
       setupHerramientasOtra();
+      setupCharCounters();
       setupFormSubmission();
     });
+
+    function setupCharCounters() {
+      const textareas = document.querySelectorAll("textarea[maxlength='1900']");
+      textareas.forEach(ta => {
+        const counterEl = ta.nextElementSibling && ta.nextElementSibling.classList.contains("char-counter")
+          ? ta.nextElementSibling
+          : null;
+        
+        if (counterEl) {
+          const updateCount = () => {
+            const len = ta.value.length;
+            counterEl.textContent = `${len}/1900`;
+          };
+          updateCount();
+          ta.addEventListener("input", updateCount);
+        }
+      });
+    }
 
     function setupWorkshopButtons() {
       if (!TALLER_URL || TALLER_URL.trim() === "" || TALLER_URL.includes("PEGAR_AQUI")) {
@@ -680,6 +732,13 @@
         e.preventDefault();
 
         if (isSubmitting) return;
+
+        // Double check client validity on submit guard
+        const urlParams = new URLSearchParams(window.location.search);
+        const clienteParam = urlParams.get("cliente");
+        if (!clienteParam || !CLIENTES[clienteParam]) {
+          return; // Under no condition send anything
+        }
 
         // Reset errors
         document.querySelectorAll(".form-group").forEach(g => g.classList.remove("has-error"));
