@@ -166,6 +166,7 @@
     }
 
     input[type="text"],
+    input[type="number"],
     textarea {
       width: 100%;
       padding: 12px 16px;
@@ -179,6 +180,7 @@
     }
 
     input[type="text"]:focus,
+    input[type="number"]:focus,
     textarea:focus {
       outline: none;
       border-color: var(--accent);
@@ -263,7 +265,7 @@
     /* Task Rows (Question 5) */
     .task-row {
       display: grid;
-      grid-template-columns: 1fr 120px;
+      grid-template-columns: 1fr 140px;
       gap: 12px;
       margin-bottom: 12px;
     }
@@ -485,21 +487,21 @@
           <label class="question-label">
             5. Tareas repetitivas que más tiempo consumen<span class="required-star">*</span>
           </label>
-          <span class="help-text">Indica la tarea y cuántas horas a la semana consume (al menos la primera fila es obligatoria).</span>
+          <span class="help-text">Indica la tarea y cuántas horas a la semana consume (al menos la primera fila es obligatoria). Si varía, escribe un promedio.</span>
           
           <div class="task-row">
             <input type="text" name="tarea_1" id="tarea_1" maxlength="1900" placeholder="Tarea 1 (Ej. Hacer informes semanales)">
-            <input type="text" name="horas_1" id="horas_1" maxlength="1900" placeholder="Horas/sem">
+            <input type="number" name="horas_1" id="horas_1" min="0" max="100" step="0.5" inputmode="decimal" placeholder="Ej. 4">
           </div>
           <div class="task-row">
-            <input type="text" name="tarea_2" maxlength="1900" placeholder="Tarea 2 (Opcional)">
-            <input type="text" name="horas_2" maxlength="1900" placeholder="Horas/sem">
+            <input type="text" name="tarea_2" id="tarea_2" maxlength="1900" placeholder="Tarea 2 (Opcional)">
+            <input type="number" name="horas_2" id="horas_2" min="0" max="100" step="0.5" inputmode="decimal" placeholder="Ej. 4">
           </div>
           <div class="task-row">
-            <input type="text" name="tarea_3" maxlength="1900" placeholder="Tarea 3 (Opcional)">
-            <input type="text" name="horas_3" maxlength="1900" placeholder="Horas/sem">
+            <input type="text" name="tarea_3" id="tarea_3" maxlength="1900" placeholder="Tarea 3 (Opcional)">
+            <input type="number" name="horas_3" id="horas_3" min="0" max="100" step="0.5" inputmode="decimal" placeholder="Ej. 4">
           </div>
-          <div class="field-error">Indica al menos la Tarea 1 y sus horas semanales.</div>
+          <div class="field-error" id="error-tarea-1">Indica al menos la Tarea 1 y sus horas semanales (solo números, por ejemplo 4 o 2.5).</div>
         </div>
 
         <!-- 6. Casos reales para trabajar en el taller -->
@@ -597,7 +599,6 @@
         if (!clienteParam || !CLIENTES[clienteParam]) {
           if (viewError) {
             viewError.style.display = "block";
-            // Ensure exact message required: "Este enlace no es válido. Pide uno nuevo."
             const banner = viewError.querySelector(".error-banner");
             if (banner) banner.textContent = "Este enlace no es válido. Pide uno nuevo.";
           }
@@ -637,6 +638,9 @@
         if (submitBtn) submitBtn.disabled = true;
       }
 
+      // Prevent scientific notation / letters like 'e', '+', '-' in number inputs
+      setupNumberInputs();
+
       // Setup UI handlers with null checks
       setupWorkshopButtons();
       setupRatingButtons();
@@ -644,6 +648,24 @@
       setupCharCounters();
       setupFormSubmission();
     });
+
+    function setupNumberInputs() {
+      const numberInputs = document.querySelectorAll("input[type='number']");
+      numberInputs.forEach(input => {
+        input.addEventListener("keydown", (e) => {
+          // Block 'e', 'E', '+', '-'
+          if (["e", "E", "+", "-"].includes(e.key)) {
+            e.preventDefault();
+          }
+        });
+        input.addEventListener("paste", (e) => {
+          const pasteData = e.clipboardData.getData("text");
+          if (/[eE+\-]/.test(pasteData)) {
+            e.preventDefault();
+          }
+        });
+      });
+    }
 
     function setupCharCounters() {
       const textareas = document.querySelectorAll("textarea[maxlength='1900']");
@@ -870,13 +892,45 @@
         isValid = false;
       }
 
-      const tarea1El = document.getElementById("tarea_1");
-      const horas1El = document.getElementById("horas_1");
+      // Question 5 validation: horas_1 is mandatory. horas_2 and horas_3 only mandatory if their task has text.
+      // Must be valid numbers. Error message: "Escribe solo un número, por ejemplo 4 o 2.5."
       const groupTarea = document.querySelector('[data-field="tarea_1"]');
-      const tarea1 = tarea1El ? tarea1El.value.trim() : "";
-      const horas1 = horas1El ? horas1El.value.trim() : "";
-      if (!tarea1 || !horas1) {
+      const errorTareaEl = document.getElementById("error-tarea-1");
+
+      const tarea1 = document.getElementById("tarea_1") ? document.getElementById("tarea_1").value.trim() : "";
+      const horas1Str = document.getElementById("horas_1") ? document.getElementById("horas_1").value.trim() : "";
+
+      const tarea2 = document.getElementById("tarea_2") ? document.getElementById("tarea_2").value.trim() : "";
+      const horas2Str = document.getElementById("horas_2") ? document.getElementById("horas_2").value.trim() : "";
+
+      const tarea3 = document.getElementById("tarea_3") ? document.getElementById("tarea_3").value.trim() : "";
+      const horas3Str = document.getElementById("horas_3") ? document.getElementById("horas_3").value.trim() : "";
+
+      let q5Valid = true;
+
+      // horas_1 is required and must be a number
+      if (!horas1Str || isNaN(Number(horas1Str))) {
+        q5Valid = false;
+      }
+
+      // if tarea_2 has text, horas_2 must be a valid number. Also if horas_2 has text, tarea_2 should have text or at least horas_2 must be a number if filled. Specifically: "horas_2 y horas_3 solo son obligatorias si su tarea tiene texto."
+      if (tarea2 !== "" && (!horas2Str || isNaN(Number(horas2Str)))) {
+        q5Valid = false;
+      }
+      if (horas2Str !== "" && isNaN(Number(horas2Str))) {
+        q5Valid = false;
+      }
+
+      if (tarea3 !== "" && (!horas3Str || isNaN(Number(horas3Str)))) {
+        q5Valid = false;
+      }
+      if (horas3Str !== "" && isNaN(Number(horas3Str))) {
+        q5Valid = false;
+      }
+
+      if (!q5Valid) {
         if (groupTarea) groupTarea.classList.add("has-error");
+        if (errorTareaEl) errorTareaEl.textContent = "Escribe solo un número, por ejemplo 4 o 2.5.";
         isValid = false;
       }
 
