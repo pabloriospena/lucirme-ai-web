@@ -1,237 +1,514 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import Footer from "../../components/Footer.astro";
+// src/pages/propuestas/propuesta-general.astro
+import "../../styles/global.css";
+export const prerender = false;
 ---
 
-<Layout title="Propuesta Comercial Corporativa | LuciRMe AI">
-  <!-- BOTÓN DE IMPRESIÓN (no-print para el PDF final) -->
-  <div class="max-w-5xl mx-auto my-8 p-4 no-print animate-fade-in">
-    <div
-      class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-200"
-    >
-      <p class="text-sm text-gray-500">
-        Fundador: <strong class="text-deep">Pablo Ríos</strong> | Propuesta General
-        de Servicios.
-      </p>
-      <button
-        onclick="window.print()"
-        class="bg-teal hover:bg-tealHover text-white font-bold py-2.5 px-6 rounded-lg shadow-md transition flex items-center gap-2 text-sm cursor-pointer"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-4 w-4"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-          ></path>
-        </svg>
-        Descargar Propuesta en PDF
-      </button>
-    </div>
-  </div>
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Propuesta · LuciRMe AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
 
-  <!-- CUERPO DE LA PROPUESTA (Área imprimible) -->
-  <main class="max-w-5xl mx-auto px-4 py-8">
-    <article
-      class="print-area bg-white text-deep border border-gray-200 rounded-3xl shadow-sm p-8 md:p-12 space-y-12 animate-fade-in"
+    <style>
+      body {
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+      }
+      .font-mono {
+        font-family: "JetBrains Mono", monospace;
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-[#f8f9ff] text-[#0b1c30] antialiased selection:bg-[#89f5e7] selection:text-[#00201d]"
+  >
+    <!-- HEADER -->
+    <header
+      class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200/80 shadow-[0_1px_8px_rgba(0,0,0,0.04)]"
     >
-      <!-- HEADER -->
-      <header
-        class="flex justify-between items-start border-b border-gray-200 pb-8 mb-8"
+      <div
+        class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-4"
       >
-        <div>
+        <div class="flex items-center gap-4 shrink-0">
+          <a href="/" class="flex items-center gap-2.5">
+            <img
+              alt="LuciRMe AI"
+              class="h-8 w-auto object-contain"
+              src="/logo-lucirme.png"
+            />
+            <span class="font-semibold text-base text-[#0b1c30] tracking-tight"
+              >LuciRMe AI</span
+            >
+          </a>
           <span
-            class="text-xs font-bold uppercase tracking-widest text-teal bg-teal/10 px-3 py-1 rounded-full"
-            >Propuesta Exclusiva para Empresas</span
+            class="hidden sm:inline-block px-2.5 py-0.5 rounded-full bg-[#e5eeff] font-mono text-[11px] text-[#00685f] uppercase tracking-wider font-semibold"
           >
-          <h1 class="text-3xl font-black tracking-tight text-deep mt-4">
-            Recuperemos tiempo ejecutando con IA
-          </h1>
-          <p class="text-sm text-gray-500 mt-1 max-w-xl">
-            Tu equipo tiene el potencial de recuperar tiempo y mejorar los
-            procesos integrando IA directamente en sus herramientas actuales.
-            Sin desarrollos complejos ni fricción tecnológica.
-          </p>
+            PROPUESTA DE TRABAJO
+          </span>
         </div>
-        <div class="text-right flex-shrink-0">
-          <span class="font-bold text-lg text-deep tracking-tight"
-            >🚀 LucirMe AI</span
+
+        <nav class="hidden lg:flex items-center gap-1.5">
+          <a
+            class="text-sm font-medium transition-colors py-1.5 px-3 rounded-lg text-slate-600 hover:text-[#0b1c30] hover:bg-slate-100"
+            href="#enfoque">Enfoque</a
           >
-          <p class="text-xs text-gray-400 mt-1">lucirme.com</p>
-        </div>
-      </header>
+          <a
+            class="text-sm font-medium transition-colors py-1.5 px-3 rounded-lg text-slate-600 hover:text-[#0b1c30] hover:bg-slate-100"
+            href="#mi-dia">Mi Día</a
+          >
+          <a
+            class="text-sm font-medium transition-colors py-1.5 px-3 rounded-lg text-slate-600 hover:text-[#0b1c30] hover:bg-slate-100"
+            href="#proyectos">Proyectos</a
+          >
+          <a
+            class="text-sm font-medium transition-colors py-1.5 px-3 rounded-lg text-slate-600 hover:text-[#0b1c30] hover:bg-slate-100"
+            href="#notion">Notion</a
+          >
+          <a
+            class="text-sm font-medium transition-colors py-1.5 px-3 rounded-lg text-slate-600 hover:text-[#0b1c30] hover:bg-slate-100"
+            href="#su-equipo">Su equipo</a
+          >
+          <a
+            class="text-sm font-medium transition-colors py-1.5 px-3 rounded-lg text-slate-600 hover:text-[#0b1c30] hover:bg-slate-100"
+            href="#ruta">Ruta</a
+          >
+          <a
+            class="text-sm font-medium transition-colors py-1.5 px-3 rounded-lg text-slate-600 hover:text-[#0b1c30] hover:bg-slate-100"
+            href="#siguiente-paso">Siguiente paso</a
+          >
+        </nav>
 
-      <!-- EL MODELO DE 2 FASES -->
-      <div class="grid md:grid-cols-2 gap-8 items-stretch mb-10">
-        <!-- FASE 1: Taller de Inmersión -->
-        <div
-          class="bg-white p-8 rounded-2xl border border-gray-200 flex flex-col justify-between shadow-sm hover:border-teal transition-all"
-        >
-          <div class="space-y-4">
-            <span
-              class="text-xs font-bold text-gray-400 uppercase tracking-widest block"
-              >Fase 1: Diagnóstico Operativo</span
-            >
-            <h3 class="text-2xl font-bold text-deep">Taller de Inmersión</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">
-              Identificamos los cuellos de botella críticos en las tareas del
-              día a día y dejamos configurado el primer flujo automatizado en
-              tiempo real.
-            </p>
-
-            <div class="py-4 border-b border-gray-100">
-              <p class="text-3xl font-black text-deep">
-                $620.000 <span class="text-sm font-normal text-gray-400"
-                  >COP</span>
-              </p>
-              <span class="text-xs text-gray-500 font-medium">/ ~170 USD</span>
-            </div>
-
-            <ul class="space-y-2 text-sm text-gray-600">
-              <li>
-                • <strong>Duración:</strong> 2 a 3 horas (Sesión ejecutiva en vivo).
-              </li>
-              <li>• Mapeo de fricción en flujos de información actuales.</li>
-              <li>
-                • <strong>1 Flujo prioritario con IA</strong> implementado y operativo.
-              </li>
-              <li>• Roadmap de optimización personalizado para el equipo.</li>
-            </ul>
-          </div>
-
+        <div class="flex items-center gap-4 shrink-0">
           <div
-            class="mt-6 p-4 bg-gray-50 border-l-4 border-gray-400 rounded-r-lg text-xs text-gray-600"
+            class="w-8 h-8 rounded-full bg-[#00685f] flex items-center justify-center shrink-0 shadow-sm"
           >
-            <strong>Forma de pago:</strong> 100% anticipado al agendar la sesión para
-            asegurar el espacio en agenda. <br />
-            <strong>Precios no incluyen transporte</strong>
-          </div>
-        </div>
-
-        <!-- FASE 2: Ciclo de Autonomía -->
-        <div
-          class="bg-white p-8 rounded-2xl border-2 border-teal flex flex-col justify-between shadow-lg relative overflow-hidden"
-        >
-          <div class="space-y-4">
-            <span
-              class="text-xs font-bold text-teal uppercase tracking-widest block"
-              >Fase 2: Escalamiento No-Tech</span
+            <span class="material-symbols-outlined text-white text-[18px]"
+              >person</span
             >
-            <h3 class="text-2xl font-bold text-deep">Ciclo de Autonomía</h3>
-            <p class="text-sm text-gray-600 leading-relaxed">
-              Transformación integral de flujos manuales. Diseñado
-              específicamente para que equipos administrativos, contables y de
-              negocio escalen su capacidad operativa sin depender de código.
-            </p>
-
-            <div class="py-4 border-b border-gray-100">
-              <p class="text-3xl font-black text-deep">
-                $8.800.000 <span class="text-sm font-normal text-gray-400"
-                  >COP</span>
-              </p>
-              <span class="text-xs text-gray-500 font-medium">/ ~2.600 USD</span
-              >
-            </div>
-
-            <ul class="space-y-2 text-sm text-gray-600">
-              <li>
-                • <strong>Duración:</strong> 8 semanas de acompañamiento estratégico.
-              </li>
-              <li>
-                • Reingeniería y automatización de procesos repetitivos y
-                reportes.
-              </li>
-              <li>
-                • <strong>Entrenamiento interno práctico</strong> adaptado al ritmo
-                del equipo.
-              </li>
-              <li>• Estructura pedagógica y documentación de autonomía</li>
-            </ul>
-          </div>
-
-          <div
-            class="mt-6 p-4 bg-[#ecfdf5] border-l-4 border-teal rounded-r-lg text-xs text-[#065f46]"
-          >
-            <strong>Esquema de inversión (Una vez terminado el taller):</strong>
-            <ul class="list-disc pl-4 mt-1">
-              <li>50% al iniciar el ciclo / 50% al finalizar.</li>
-              <li>
-                <strong>💡 Beneficio:</strong> 10% de descuento por pago total anticipado
-                al inicio de la Fase 2.
-              </li>
-            </ul>
           </div>
         </div>
       </div>
+    </header>
 
-      <hr class="border-gray-200 my-8" />
+    <main class="w-full pt-16 bg-[#f8f9ff]">
+      <div class="max-w-7xl mx-auto px-6 lg:px-12 py-10">
+        <div class="flex flex-col w-full space-y-20">
 
-      <!-- CONTACTO DIRECTO -->
-      <div class="text-center py-6">
-        <h3 class="text-2xl font-bold text-deep mb-2">
-          ¿Listo para liberar la capacidad operativa de tu equipo?
-        </h3>
-        <p class="text-gray-500 mb-8 text-sm">
-          Hablemos directamente para coordinar el Taller de Inmersión o evaluar
-          tus procesos:
-        </p>
+          <!-- SECCIÓN 1: ENFOQUE (HERO) -->
+          <section class="w-full pt-6" id="enfoque">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              <div class="flex flex-col gap-4">
+                <span class="font-mono text-xs font-semibold text-[#00685f] uppercase tracking-wider block">
+                  METODOLOGÍA DE TRANSFERENCIA
+                </span>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0b1c30] tracking-tight leading-tight">
+                  Qué puede cambiar en el día a día de su equipo
+                </h1>
+                <p class="text-lg text-slate-600 leading-relaxed">
+                  Una propuesta estructurada para identificar fricciones operativas, resolver tareas reales de trabajo con inteligencia artificial y desarrollar autonomía directa en su equipo.
+                </p>
+              </div>
 
-        <div
-          class="flex flex-wrap justify-center gap-4 text-xs font-bold text-gray-500"
-        >
-          <a
-            href="mailto:pablo@lucirme.com"
-            class="p-4 bg-gray-50 border border-gray-200 rounded-xl hover:border-teal hover:bg-white transition flex items-center gap-2"
-          >
-            <span>✉️</span> pablo@lucirme.com
-          </a>
-          <a
-            href="https://wa.me/573128199661"
-            target="_blank"
-            class="p-4 bg-gray-50 border border-gray-200 rounded-xl hover:border-teal hover:bg-white transition flex items-center gap-2"
-          >
-            <span>📱</span> +57 312 819 9661
-          </a>
-          <a
-            href="https://www.linkedin.com/in/pabloriospena/"
-            target="_blank"
-            class="p-4 bg-gray-50 border border-gray-200 rounded-xl hover:border-teal hover:bg-white transition flex items-center gap-2"
-          >
-            <span>🔗</span> LinkedIn de Pablo
-          </a>
+              <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col justify-between gap-6">
+                <div>
+                  <span class="font-mono text-[11px] uppercase tracking-wider text-slate-500 block mb-4 font-semibold">
+                    FICHA TÉCNICA
+                  </span>
+                  <dl class="flex flex-col gap-3">
+                    <div class="flex items-baseline justify-between pb-2 border-b border-slate-100">
+                      <dt class="text-sm text-slate-600">Proveedor</dt>
+                      <dd class="text-base text-[#0b1c30] font-bold">LuciRMe AI</dd>
+                    </div>
+                    <div class="flex items-baseline justify-between pb-2 border-b border-slate-100">
+                      <dt class="text-sm text-slate-600">Responsable</dt>
+                      <dd class="text-base text-[#0b1c30] font-bold">Pablo Ríos</dd>
+                    </div>
+                  </dl>
+                </div>
+                <div class="bg-[#e5eeff] p-4 rounded-xl border border-[#00685f]/20 font-mono text-xs text-[#00685f] leading-relaxed">
+                  &gt; Capacitación práctica orientada a resultados medibles y sin teoría innecesaria.
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECCIÓN 2: MI DÍA -->
+          <section class="w-full" id="mi-dia">
+            <div class="mb-8">
+              <span class="font-mono text-xs font-semibold text-[#00685f] uppercase tracking-wider block mb-2">
+                OPERACIÓN DIARIA
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-bold text-[#0b1c30] tracking-tight">
+                Mi Día en el equipo
+              </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="font-mono text-xs font-bold text-[#00685f] bg-[#e5eeff] px-2.5 py-1 rounded-md">01 / 03</span>
+                    <span class="material-symbols-outlined text-[#00685f]">schedule</span>
+                  </div>
+                  <h3 class="font-bold text-slate-900 text-lg mb-2">Priorización Automática</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                    Clasificación de correos, solicitudes y pendientes diarios sin depender de revisiones manuales repetitivas.
+                  </p>
+                </div>
+                <div class="bg-[#f8f9ff] p-3.5 rounded-xl border border-slate-200/80 font-mono text-xs text-slate-700">
+                  <span class="font-bold text-[#00685f] block mb-1">Demo en vivo:</span>
+                  Bandeja inteligente con filtrado de prioridades en 1 clic.
+                </div>
+              </div>
+
+              <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="font-mono text-xs font-bold text-[#00685f] bg-[#e5eeff] px-2.5 py-1 rounded-md">02 / 03</span>
+                    <span class="material-symbols-outlined text-[#00685f]">task_alt</span>
+                  </div>
+                  <h3 class="font-bold text-slate-900 text-lg mb-2">Resúmenes Operativos</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                    Extracción instantánea de minutas, actas y compromisos clave de reuniones o documentos extensos.
+                  </p>
+                </div>
+                <div class="bg-[#f8f9ff] p-3.5 rounded-xl border border-slate-200/80 font-mono text-xs text-slate-700">
+                  <span class="font-bold text-[#00685f] block mb-1">Demo en vivo:</span>
+                  Generación de reporte ejecutivo en segundos.
+                </div>
+              </div>
+
+              <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="font-mono text-xs font-bold text-[#00685f] bg-[#e5eeff] px-2.5 py-1 rounded-md">03 / 03</span>
+                    <span class="material-symbols-outlined text-[#00685f]">bolt</span>
+                  </div>
+                  <h3 class="font-bold text-slate-900 text-lg mb-2">Respuestas Asistidas</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                    Redacción de comunicados y respuestas frecuentes basadas en el tono y las políticas internas del equipo.
+                  </p>
+                </div>
+                <div class="bg-[#f8f9ff] p-3.5 rounded-xl border border-slate-200/80 font-mono text-xs text-slate-700">
+                  <span class="font-bold text-[#00685f] block mb-1">Demo en vivo:</span>
+                  Plantillas dinámicas con contexto corporativo.
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECCIÓN 3: PROYECTOS -->
+          <section class="w-full" id="proyectos">
+            <div class="mb-8">
+              <span class="font-mono text-xs font-semibold text-[#00685f] uppercase tracking-wider block mb-2">
+                EJECUCIÓN TÉCNICA
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-bold text-[#0b1c30] tracking-tight">
+                Proyectos del equipo
+              </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="font-mono text-xs font-bold text-[#00685f] bg-[#e5eeff] px-2.5 py-1 rounded-md">01 / 03</span>
+                    <span class="material-symbols-outlined text-[#00685f]">folder</span>
+                  </div>
+                  <h3 class="font-bold text-slate-900 text-lg mb-2">Gestión de Tareas</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                    Estructuración de tableros y flujos de trabajo conectados a los objetivos del equipo.
+                  </p>
+                </div>
+                <div class="bg-[#f8f9ff] p-3.5 rounded-xl border border-slate-200/80 font-mono text-xs text-slate-700">
+                  <span class="font-bold text-[#00685f] block mb-1">Demo en vivo:</span>
+                  Tablero sincronizado y automatizado.
+                </div>
+              </div>
+
+              <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="font-mono text-xs font-bold text-[#00685f] bg-[#e5eeff] px-2.5 py-1 rounded-md">02 / 03</span>
+                    <span class="material-symbols-outlined text-[#00685f]">trending_up</span>
+                  </div>
+                  <h3 class="font-bold text-slate-900 text-lg mb-2">Seguimiento de Metas</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                    Tableros de control y métricas de avance para supervisar entregables sin reuniones innecesarias.
+                  </p>
+                </div>
+                <div class="bg-[#f8f9ff] p-3.5 rounded-xl border border-slate-200/80 font-mono text-xs text-slate-700">
+                  <span class="font-bold text-[#00685f] block mb-1">Demo en vivo:</span>
+                  Dashboard de indicadores en tiempo real.
+                </div>
+              </div>
+
+              <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="font-mono text-xs font-bold text-[#00685f] bg-[#e5eeff] px-2.5 py-1 rounded-md">03 / 03</span>
+                    <span class="material-symbols-outlined text-[#00685f]">sync</span>
+                  </div>
+                  <h3 class="font-bold text-slate-900 text-lg mb-2">Sincronización</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                    Integración entre herramientas de mensajería, bases de datos y tableros de control.
+                  </p>
+                </div>
+                <div class="bg-[#f8f9ff] p-3.5 rounded-xl border border-slate-200/80 font-mono text-xs text-slate-700">
+                  <span class="font-bold text-[#00685f] block mb-1">Demo en vivo:</span>
+                  Flujo cruzado automático.
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECCIÓN 4: NOTION -->
+          <section class="w-full" id="notion">
+            <div class="mb-8">
+              <span class="font-mono text-xs font-semibold text-[#00685f] uppercase tracking-wider block mb-2">
+                BASE DE CONOCIMIENTO
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-bold text-[#0b1c30] tracking-tight">
+                Notion como fuente de verdad
+              </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="font-mono text-xs font-bold text-[#00685f] bg-[#e5eeff] px-2.5 py-1 rounded-md">01 / 03</span>
+                    <span class="material-symbols-outlined text-[#00685f]">article</span>
+                  </div>
+                  <h3 class="font-bold text-slate-900 text-lg mb-2">Wiki Centralizada</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                    Estructura documental ordenada para que ningún proceso crítico dependa de la memoria individual.
+                  </p>
+                </div>
+                <div class="bg-[#f8f9ff] p-3.5 rounded-xl border border-slate-200/80 font-mono text-xs text-slate-700">
+                  <span class="font-bold text-[#00685f] block mb-1">Demo en vivo:</span>
+                  Navegación por manuales y procesos en 2 clics.
+                </div>
+              </div>
+
+              <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="font-mono text-xs font-bold text-[#00685f] bg-[#e5eeff] px-2.5 py-1 rounded-md">02 / 03</span>
+                    <span class="material-symbols-outlined text-[#00685f]">hub</span>
+                  </div>
+                  <h3 class="font-bold text-slate-900 text-lg mb-2">Bases Relacionadas</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                    Conexión entre proyectos, tareas, responsables y entregables en una sola vista coherente.
+                  </p>
+                </div>
+                <div class="bg-[#f8f9ff] p-3.5 rounded-xl border border-slate-200/80 font-mono text-xs text-slate-700">
+                  <span class="font-bold text-[#00685f] block mb-1">Demo en vivo:</span>
+                  Bases de datos con relaciones cruzadas.
+                </div>
+              </div>
+
+              <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="font-mono text-xs font-bold text-[#00685f] bg-[#e5eeff] px-2.5 py-1 rounded-md">03 / 03</span>
+                    <span class="material-symbols-outlined text-[#00685f]">auto_stories</span>
+                  </div>
+                  <h3 class="font-bold text-slate-900 text-lg mb-2">IA en Documentación</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                    Uso de consultas inteligentes sobre el espacio de trabajo para encontrar respuestas inmediatas.
+                  </p>
+                </div>
+                <div class="bg-[#f8f9ff] p-3.5 rounded-xl border border-slate-200/80 font-mono text-xs text-slate-700">
+                  <span class="font-bold text-[#00685f] block mb-1">Demo en vivo:</span>
+                  Búsqueda semántica dentro de la wiki.
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECCIÓN 5: SU EQUIPO -->
+          <section class="w-full" id="su-equipo">
+            <div class="mb-8">
+              <span class="font-mono text-xs font-semibold text-[#00685f] uppercase tracking-wider block mb-2">
+                ORGANIZACIÓN Y ROLES
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-bold text-[#0b1c30] tracking-tight">
+                Su equipo
+              </h2>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm">
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr class="border-b border-slate-200 bg-slate-50 text-xs font-mono font-semibold text-slate-600 uppercase tracking-wider">
+                      <th class="py-3.5 px-4 rounded-l-lg">Área / Rol</th>
+                      <th class="py-3.5 px-4 rounded-r-lg">Enfoque de Adopción</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-100 text-sm">
+                    <tr class="hover:bg-slate-50/50 transition-colors">
+                      <td class="py-4 px-4 font-semibold text-slate-900 w-1/3">Gerencia &amp; Liderazgo</td>
+                      <td class="py-4 px-4 text-slate-700">Supervisión de indicadores clave, reportes ejecutivos automatizados y toma de decisiones basada en datos unificados.</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50/50 transition-colors">
+                      <td class="py-4 px-4 font-semibold text-slate-900">Operaciones &amp; Procesos</td>
+                      <td class="py-4 px-4 text-slate-700">Eliminación de tareas repetitivas, gestión eficiente de flujos de trabajo y estandarización documental.</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50/50 transition-colors">
+                      <td class="py-4 px-4 font-semibold text-slate-900">Atención &amp; Soporte</td>
+                      <td class="py-4 px-4 text-slate-700">Respuestas asistidas, plantillas dinámicas y reducción de tiempos de atención al cliente interno y externo.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECCIÓN 6: RUTA -->
+          <section class="w-full" id="ruta">
+            <div class="mb-8">
+              <span class="font-mono text-xs font-semibold text-[#00685f] uppercase tracking-wider block mb-2">
+                METODOLOGÍA DE TRABAJO
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-bold text-[#0b1c30] tracking-tight">
+                Ruta del programa
+              </h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+              <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                  <span class="font-mono text-xs font-bold text-[#00685f] bg-[#e5eeff] px-2.5 py-1 rounded-md inline-block mb-4">FASE 1</span>
+                  <h3 class="text-xl font-bold text-slate-900 mb-3">Taller de Inmersión</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                    Sesión ejecutiva en vivo para mapear cuellos de botella operativos y dejar configurado el primer flujo automatizado sobre un problema real del equipo.
+                  </p>
+                </div>
+                <div class="font-mono text-xs text-slate-500 border-t border-slate-100 pt-4">
+                  Duración: 2 a 3 horas · Práctico y directo al problema
+                </div>
+              </div>
+
+              <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col justify-between">
+                <div>
+                  <span class="font-mono text-xs font-bold text-[#00685f] bg-[#e5eeff] px-2.5 py-1 rounded-md inline-block mb-4">FASE 2</span>
+                  <h3 class="text-xl font-bold text-slate-900 mb-3">Ciclo de Autonomía</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                    Acompañamiento iterativo por sesiones semanales para consolidar la adopción de herramientas, proteger la información y asegurar que el equipo opere sin depender de terceros.
+                  </p>
+                </div>
+                <div class="font-mono text-xs text-slate-500 border-t border-slate-100 pt-4">
+                  Metodología: Aprender haciendo en el día a día
+                </div>
+              </div>
+            </div>
+
+            <!-- Cuatro resultados como tarjetas de dato -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                <span class="font-mono text-[11px] text-[#00685f] uppercase tracking-wider block mb-2 font-semibold">RESULTADO 01</span>
+                <h4 class="text-lg font-bold text-slate-900 mb-1">Claridad Operativa</h4>
+                <p class="text-xs text-slate-600">Procesos estandarizados y visibles para todo el equipo.</p>
+              </div>
+
+              <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                <span class="font-mono text-[11px] text-[#00685f] uppercase tracking-wider block mb-2 font-semibold">RESULTADO 02</span>
+                <h4 class="text-lg font-bold text-slate-900 mb-1">Ahorro de Tiempo</h4>
+                <p class="text-xs text-slate-600">Reducción drástica de horas en tareas manuales y repetitivas.</p>
+              </div>
+
+              <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                <span class="font-mono text-[11px] text-[#00685f] uppercase tracking-wider block mb-2 font-semibold">RESULTADO 03</span>
+                <h4 class="text-lg font-bold text-slate-900 mb-1">Autonomía Real</h4>
+                <p class="text-xs text-slate-600">Capacidad interna para crear y ajustar flujos con IA.</p>
+              </div>
+
+              <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                <span class="font-mono text-[11px] text-[#00685f] uppercase tracking-wider block mb-2 font-semibold">RESULTADO 04</span>
+                <h4 class="text-lg font-bold text-slate-900 mb-1">Cero Fricción</h4>
+                <p class="text-xs text-slate-600">Adopción fluida sobre las herramientas que ya utilizan.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECCIÓN 7: SIGUIENTE PASO (INVERSIÓN) -->
+          <section class="w-full" id="siguiente-paso">
+            <div class="mb-8">
+              <span class="font-mono text-xs font-semibold text-[#00685f] uppercase tracking-wider block mb-2">
+                INVERSIÓN Y COMPROMISO
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-bold text-[#0b1c30] tracking-tight">
+                Siguiente paso
+              </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                <span class="font-mono text-[11px] text-slate-500 uppercase tracking-wider block mb-2 font-semibold">MODALIDAD</span>
+                <div class="text-2xl font-bold text-slate-900 mb-1">Fase 1 + Fase 2</div>
+                <p class="text-xs text-slate-600">Programa completo de inmersión y autonomía.</p>
+              </div>
+
+              <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                <span class="font-mono text-[11px] text-slate-500 uppercase tracking-wider block mb-2 font-semibold">DURACIÓN</span>
+                <div class="text-2xl font-bold text-slate-900 mb-1">A medida</div>
+                <p class="text-xs text-slate-600">Sesiones adaptadas al ritmo operativo del equipo.</p>
+              </div>
+
+              <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                <span class="font-mono text-[11px] text-slate-500 uppercase tracking-wider block mb-2 font-semibold">FORMATO</span>
+                <div class="text-2xl font-bold text-slate-900 mb-1">Práctico / 1-1</div>
+                <p class="text-xs text-slate-600">Trabajo directo sobre problemas reales.</p>
+              </div>
+            </div>
+
+            <!-- Caja destacada con borde verde para la inversión -->
+            <div class="bg-white p-8 lg:p-10 rounded-3xl border-2 border-[#00685f] shadow-md relative overflow-hidden">
+              <div class="absolute -right-16 -bottom-16 w-64 h-64 bg-[#00685f]/5 rounded-full blur-2xl pointer-events-none"></div>
+              <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div>
+                  <span class="font-mono text-xs font-bold text-[#00685f] bg-[#e5eeff] px-3 py-1 rounded-md inline-block mb-3">PROPUESTA ECONÓMICA</span>
+                  <h3 class="text-2xl font-bold text-slate-900 mb-2">Inversión para el equipo</h3>
+                  <p class="text-slate-600 text-sm max-w-xl">
+                    Incluye el Taller de Inmersión y el Ciclo de Autonomía estructurado para garantizar resultados tangibles.
+                  </p>
+                </div>
+                <div class="text-left md:text-right shrink-0">
+                  <span class="font-mono text-xs text-slate-500 block mb-1">Valor total del programa</span>
+                  <span class="text-3xl lg:text-4xl font-extrabold font-mono text-[#00685f]">A consultar</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
         </div>
       </div>
-    </article>
-  </main>
-</Layout>
+    </main>
 
-<style is:global>
-  @media print {
-    .no-print {
-      display: none !important;
-    }
-    body {
-      background-color: #ffffff !important;
-      color: #0f172a !important;
-    }
-    .print-area {
-      border: none !important;
-      box-shadow: none !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      max-w: 100% !important;
-      background: transparent !important;
-    }
-    section,
-    table,
-    footer {
-      page-break-inside: avoid;
-    }
-  }
-</style>
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-8 px-6 text-center font-mono text-xs text-slate-500">
+      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[#00685f]">shield</span>
+          <span>LuciRMe AI · Propuesta de Trabajo</span>
+        </div>
+        <span>© 2026 LuciRMe AI &amp; Pablo Ríos Peña. Todos los derechos reservados.</span>
+      </div>
+    </footer>
+  </body>
+</html>
