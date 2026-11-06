@@ -1,0 +1,302 @@
+---
+// Página para que las personas del taller respondan desde el celular.
+// Sesión con ?s=sasa-t1 (por defecto).
+import Layout from "../../../layouts/Layout.astro";
+
+const sesionParam = Astro.url.searchParams.get("s") ?? "sasa-t1";
+const sesion = /^[a-z0-9-]{3,30}$/.test(sesionParam) ? sesionParam : "sasa-t1";
+
+const roles = [
+    "Gerencia",
+    "Comercial",
+    "Soporte",
+    "Servicios administrados",
+    "Proyectos y consultoría",
+    "Procesos",
+    "Tecnología y desarrollo",
+    "Administración",
+    "Otro",
+];
+const herramientas = [
+    "ChatGPT",
+    "Gemini",
+    "Claude",
+    "Cursor",
+    "NotebookLM",
+    "Grok",
+    "DeepSeek",
+    "Copilot",
+    "Otra",
+    "Ninguna",
+];
+const campo =
+    "w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900 focus:border-teal-600 focus:ring-2 focus:ring-teal-100 outline-none";
+const etiqueta = "block text-xs font-semibold text-slate-600 mb-1";
+---
+
+<Layout title="Tu aporte al taller | LuciRMe AI" hideHeader hideFooter noindex>
+    <div class="min-h-screen bg-slate-50 py-6 px-4" data-sesion={sesion} id="raiz">
+        <div class="max-w-xl mx-auto">
+            <p class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-1">
+                Taller de inmersión
+            </p>
+            <h1 class="text-2xl font-bold text-slate-900 tracking-tight mb-1">
+                Tu aporte
+            </h1>
+            <p class="text-sm text-slate-600 mb-5">
+                Escribe con tus palabras. No incluyas nombres de clientes ni
+                datos sensibles.
+            </p>
+
+            <div class="flex gap-2 mb-5" role="tablist">
+                <button
+                    type="button"
+                    data-tab="uso"
+                    role="tab"
+                    class="tab flex-1 rounded-lg px-3 py-2 text-sm font-semibold border"
+                    >1. Cómo uso IA hoy</button
+                >
+                <button
+                    type="button"
+                    data-tab="dolores"
+                    role="tab"
+                    class="tab flex-1 rounded-lg px-3 py-2 text-sm font-semibold border"
+                    >2. Mis dolores</button
+                >
+            </div>
+
+            <!-- FORMULARIO 1: USO -->
+            <form id="form-uso" class="panel space-y-5 bg-white border border-slate-200 rounded-xl p-5 shadow-sm" novalidate>
+                <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+                <fieldset>
+                    <legend class={etiqueta}>¿Qué herramientas usas?</legend>
+                    <div class="grid grid-cols-2 gap-2">
+                        {
+                            herramientas.map((h) => (
+                                <label class="flex items-center gap-2 text-sm text-slate-700 border border-slate-200 rounded-lg px-3 py-2 cursor-pointer">
+                                    <input type="checkbox" name="herramientas" value={h} class="accent-teal-600" />
+                                    {h}
+                                </label>
+                            ))
+                        }
+                    </div>
+                </fieldset>
+                <div>
+                    <label class={etiqueta} for="para_que">¿Para qué la usas?</label>
+                    <textarea id="para_que" name="para_que" rows="3" maxlength="300" class={campo} placeholder="Por ejemplo: para ordenar notas de reuniones"></textarea>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class={etiqueta} for="uso_frecuencia">¿Cada cuánto?</label>
+                        <select id="uso_frecuencia" name="frecuencia" class={campo}>
+                            <option value="">Elige</option>
+                            <option value="diaria">Todos los días</option>
+                            <option value="semanal">Cada semana</option>
+                            <option value="mensual">Cada mes</option>
+                            <option value="casi-nunca">Casi nunca</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class={etiqueta} for="uso_rol">Tu rol</label>
+                        <select id="uso_rol" name="rol" class={campo}>
+                            <option value="">Elige</option>
+                            {roles.map((r) => <option value={r}>{r}</option>)}
+                        </select>
+                    </div>
+                </div>
+                <p class="msg text-sm hidden" role="status"></p>
+                <button type="submit" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-lg py-3 text-sm transition">
+                    Enviar
+                </button>
+            </form>
+
+            <!-- FORMULARIO 2: DOLORES -->
+            <form id="form-dolores" class="panel hidden space-y-5" novalidate>
+                <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+                <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm grid grid-cols-2 gap-3">
+                    <div>
+                        <label class={etiqueta} for="d_rol">Tu rol</label>
+                        <select id="d_rol" name="rol" class={campo}>
+                            <option value="">Elige</option>
+                            {roles.map((r) => <option value={r}>{r}</option>)}
+                        </select>
+                    </div>
+                    <div>
+                        <label class={etiqueta} for="d_nombre">Tu nombre (opcional)</label>
+                        <input id="d_nombre" name="nombre" type="text" maxlength="60" class={campo} />
+                    </div>
+                </div>
+
+                {
+                    [1, 2, 3].map((n) => (
+                        <div class="dolor bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-4" data-n={n}>
+                            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                                Tarea {n} {n > 1 ? "(opcional)" : ""}
+                            </p>
+                            <div>
+                                <label class={etiqueta} for={`tarea${n}`}>¿Qué tarea te quita tiempo?</label>
+                                <textarea id={`tarea${n}`} name="tarea" rows="2" maxlength="300" class={campo} placeholder="Con tus palabras"></textarea>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class={etiqueta} for={`horas${n}`}>Horas por semana</label>
+                                    <input id={`horas${n}`} name="horas_semana" type="number" min="0" max="80" step="0.5" inputmode="decimal" class={campo} placeholder="Ej: 3" />
+                                </div>
+                                <div>
+                                    <label class={etiqueta} for={`frec${n}`}>¿Cada cuánto?</label>
+                                    <select id={`frec${n}`} name="frecuencia" class={campo}>
+                                        <option value="">Elige</option>
+                                        <option value="diaria">Todos los días</option>
+                                        <option value="semanal">Cada semana</option>
+                                        <option value="mensual">Cada mes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <p class="text-[11px] text-slate-400 -mt-2">
+                                Si es mensual, reparte: 4 horas al mes son 1 hora por semana.
+                            </p>
+                            <fieldset>
+                                <legend class={etiqueta}>¿Hay un procedimiento escrito?</legend>
+                                <div class="flex gap-2">
+                                    {[["si", "Sí"], ["parcial", "Más o menos"], ["no", "No"]].map(([v, t]) => (
+                                        <label class="flex-1 text-center text-sm border border-slate-200 rounded-lg px-2 py-2 cursor-pointer has-[:checked]:bg-teal-600 has-[:checked]:text-white has-[:checked]:border-teal-600">
+                                            <input type="radio" name={`procedimiento${n}`} value={v} class="sr-only" />
+                                            {t}
+                                        </label>
+                                    ))}
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend class={etiqueta}>¿El resultado es una tabla, un documento o un listado?</legend>
+                                <div class="flex gap-2">
+                                    {[["si", "Sí"], ["no", "No"]].map(([v, t]) => (
+                                        <label class="flex-1 text-center text-sm border border-slate-200 rounded-lg px-2 py-2 cursor-pointer has-[:checked]:bg-teal-600 has-[:checked]:text-white has-[:checked]:border-teal-600">
+                                            <input type="radio" name={`estructurado${n}`} value={v} class="sr-only" />
+                                            {t}
+                                        </label>
+                                    ))}
+                                </div>
+                            </fieldset>
+                        </div>
+                    ))
+                }
+                <p class="msg text-sm hidden" role="status"></p>
+                <button type="submit" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-lg py-3 text-sm transition">
+                    Enviar mis dolores
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <style is:global>
+        .tab {
+            background: #fff;
+            color: #475569;
+            border-color: #e2e8f0;
+        }
+        .tab[aria-selected="true"] {
+            background: #0f172a;
+            color: #fff;
+            border-color: #0f172a;
+        }
+    </style>
+
+    <script>
+        const raiz = document.getElementById("raiz") as HTMLElement;
+        const sesion = raiz.dataset.sesion ?? "sasa-t1";
+        const tabs = document.querySelectorAll<HTMLButtonElement>(".tab");
+        const formUso = document.getElementById("form-uso") as HTMLFormElement;
+        const formDolores = document.getElementById("form-dolores") as HTMLFormElement;
+
+        function mostrar(cual: "uso" | "dolores") {
+            formUso.classList.toggle("hidden", cual !== "uso");
+            formDolores.classList.toggle("hidden", cual !== "dolores");
+            tabs.forEach((t) => t.setAttribute("aria-selected", String(t.dataset.tab === cual)));
+        }
+        tabs.forEach((t) => t.addEventListener("click", () => mostrar(t.dataset.tab as "uso" | "dolores")));
+        mostrar(new URLSearchParams(location.search).get("t") === "dolores" ? "dolores" : "uso");
+
+        function aviso(form: HTMLFormElement, texto: string, bien: boolean) {
+            const m = form.querySelector<HTMLElement>(".msg")!;
+            m.textContent = texto;
+            m.className = `msg text-sm ${bien ? "text-emerald-700" : "text-red-600"}`;
+        }
+
+        async function enviar(form: HTMLFormElement, cuerpo: Record<string, unknown>) {
+            const boton = form.querySelector<HTMLButtonElement>("button[type=submit]")!;
+            boton.disabled = true;
+            try {
+                const r = await fetch("/api/taller/enviar", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ sesion, website: (form.elements.namedItem("website") as HTMLInputElement).value, ...cuerpo }),
+                });
+                const d = await r.json().catch(() => ({}));
+                if (!r.ok || !d.ok) {
+                    aviso(form, d.error || "No se pudo enviar. Intenta de nuevo.", false);
+                    return false;
+                }
+                return true;
+            } catch {
+                aviso(form, "Sin conexión. Intenta de nuevo.", false);
+                return false;
+            } finally {
+                boton.disabled = false;
+            }
+        }
+
+        formUso.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const fd = new FormData(formUso);
+            const ok = await enviar(formUso, {
+                tipo: "uso",
+                herramientas: fd.getAll("herramientas"),
+                para_que: fd.get("para_que"),
+                frecuencia: fd.get("frecuencia"),
+                rol: fd.get("rol"),
+            });
+            if (ok) {
+                formUso.reset();
+                aviso(formUso, "Listo, gracias. Ahora cuéntanos tus dolores en la pestaña 2.", true);
+            }
+        });
+
+        formDolores.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const fd = new FormData(formDolores);
+            if (!fd.get("rol")) {
+                aviso(formDolores, "Elige tu rol.", false);
+                return;
+            }
+            const items = [1, 2, 3]
+                .map((n) => {
+                    const bloque = formDolores.querySelector(`.dolor[data-n="${n}"]`)!;
+                    const val = (nombre: string) => (bloque.querySelector(`[name="${nombre}"]`) as HTMLInputElement | null)?.value ?? "";
+                    const radio = (nombre: string) => (bloque.querySelector(`[name="${nombre}${n}"]:checked`) as HTMLInputElement | null)?.value ?? "";
+                    return {
+                        tarea: val("tarea"),
+                        rol: fd.get("rol"),
+                        nombre: fd.get("nombre"),
+                        horas_semana: val("horas_semana"),
+                        frecuencia: val("frecuencia"),
+                        procedimiento: radio("procedimiento"),
+                        estructurado: radio("estructurado"),
+                    };
+                })
+                .filter((i) => String(i.tarea).trim().length >= 5);
+            if (!items.length) {
+                aviso(formDolores, "Escribe al menos una tarea (mínimo 5 letras).", false);
+                return;
+            }
+            const ok = await enviar(formDolores, { tipo: "dolores", items });
+            if (ok) {
+                const rol = formDolores.querySelector<HTMLSelectElement>("#d_rol")!.value;
+                const nombre = formDolores.querySelector<HTMLInputElement>("#d_nombre")!.value;
+                formDolores.reset();
+                formDolores.querySelector<HTMLSelectElement>("#d_rol")!.value = rol;
+                formDolores.querySelector<HTMLInputElement>("#d_nombre")!.value = nombre;
+                aviso(formDolores, `Recibido (${items.length}). Puedes enviar más si se te ocurren.`, true);
+            }
+        });
+    </script>
+</Layout>

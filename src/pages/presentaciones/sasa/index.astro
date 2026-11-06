@@ -1,0 +1,1342 @@
+---
+// Taller de inmersión · Sasa Consultoría
+// La sesión en vivo se elige con ?s=sasa-t1 (por defecto). Para otro grupo: ?s=sasa-t2
+import Layout from "../../../layouts/Layout.astro";
+
+const sesionParam = Astro.url.searchParams.get("s") ?? "sasa-t1";
+const sesion = /^[a-z0-9-]{3,30}$/.test(sesionParam) ? sesionParam : "sasa-t1";
+
+const cliente = "Sasa Consultoría";
+const fecha = "Lunes 9 de noviembre de 2026";
+const hora = "2:00 pm";
+const duracion = "3 horas";
+const lider = "Sandra Arango";
+const resultadoEsperado =
+    "Incorporar la IA en labores rutinarias y desarrollar herramientas que permitan automatizar procesos operativos y administrativos.";
+
+const urlAportar =
+    sesion === "sasa-t1"
+        ? "lucirme.com/sasa"
+        : `lucirme.com/presentaciones/sasa/aportar?s=${sesion}`;
+const linkedin = "https://linkedin.com/in/pabloriospena";
+const prompteador = "https://lucirme.com/recursos/prompteador";
+---
+
+<Layout
+    title={`Taller de inmersión · ${cliente} | LuciRMe AI`}
+    hideHeader
+    hideFooter
+    noindex
+>
+    <button
+        id="fullscreen-btn"
+        class="fixed top-6 left-6 z-50 bg-white/80 backdrop-blur-sm p-2.5 rounded-full border border-slate-200 shadow-sm hover:bg-slate-100 transition-colors text-slate-600"
+        aria-label="Pantalla completa"
+    >
+        <svg
+            id="fs-icon-enter"
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><path
+                d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
+            ></path></svg
+        >
+        <svg
+            id="fs-icon-exit"
+            class="hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><path
+                d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"
+            ></path></svg
+        >
+    </button>
+
+    <div
+        class="fixed top-6 right-6 text-xs font-semibold text-slate-500 bg-white/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-slate-200 shadow-sm z-50"
+    >
+        <span id="current">01</span> / <span id="total">13</span>
+    </div>
+
+    <nav
+        class="fixed right-6 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-50 bg-white/80 backdrop-blur-sm p-2 rounded-full border border-slate-200 shadow-sm"
+        id="navDots"
+    >
+    </nav>
+
+    <main
+        class="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth"
+        id="slider"
+        data-sesion={sesion}
+    >
+        <!-- 01 PORTADA -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50 relative"
+        >
+            <div class="max-w-4xl w-full">
+                <p
+                    class="text-xs font-semibold text-slate-500 mb-5 tracking-wide"
+                >
+                    Taller de inmersión · {fecha} · {hora} · Presencial · {
+                        duracion
+                    }
+                </p>
+                <h1
+                    class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.05] mb-4"
+                >
+                    {cliente}
+                </h1>
+                <p class="text-xl md:text-2xl text-teal-700 font-semibold mb-8">
+                    IA aplicada a la operación del equipo
+                </p>
+                <div class="grid md:grid-cols-3 gap-3 mb-6">
+                    <div
+                        class="bg-white border border-slate-200 rounded-lg p-4 shadow-sm"
+                    >
+                        <p
+                            class="text-[11px] uppercase tracking-wider font-semibold text-slate-400 mb-1"
+                        >
+                            Líder de IA
+                        </p>
+                        <p class="text-sm font-bold text-slate-800">{lider}</p>
+                    </div>
+                    <div
+                        class="bg-white border border-slate-200 rounded-lg p-4 shadow-sm md:col-span-1"
+                    >
+                        <p
+                            class="text-[11px] uppercase tracking-wider font-semibold text-slate-400 mb-1"
+                        >
+                            Resultado esperado
+                        </p>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            {resultadoEsperado}
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white border border-slate-200 rounded-lg p-4 shadow-sm"
+                    >
+                        <p
+                            class="text-[11px] uppercase tracking-wider font-semibold text-slate-400 mb-1"
+                        >
+                            Comodidad con IA
+                        </p>
+                        <p class="text-sm font-bold text-slate-800">
+                            3 de 5 <span
+                                class="font-normal text-xs text-slate-500"
+                                >(según el formulario)</span
+                            >
+                        </p>
+                    </div>
+                </div>
+                <div
+                    class="bg-teal-50 border-l-4 border-teal-600 rounded-r-lg p-4 mb-8"
+                >
+                    <p class="text-sm text-slate-700 leading-relaxed">
+                        <strong>Para aprovechar la sesión:</strong> trae el computador
+                        y un ejemplo real de tu trabajo, sin nombres de clientes ni
+                        datos sensibles. Puede ser un hilo de correos, un acta, un
+                        caso de soporte o una toma de requerimientos.
+                    </p>
+                </div>
+                <div>
+                    <p
+                        class="text-[11px] text-slate-500 uppercase tracking-wider font-semibold"
+                    >
+                        Facilitador
+                    </p>
+                    <p class="text-lg font-bold text-slate-900">
+                        Pablo Ríos Peña
+                    </p>
+                    <p class="text-xs text-slate-500">
+                        LuciRMe AI · Tu negocio es tu talento, no tu operatividad
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02 EN QUÉ USAN IA HOY (en vivo) -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-white"
+        >
+            <div class="max-w-5xl w-full">
+                <p
+                    class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+                >
+                    Punto de partida
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+                >
+                    ¿En qué usan IA hoy?
+                </h2>
+                <div class="w-10 h-1 bg-teal-600 rounded-full mb-5"></div>
+                <div class="grid md:grid-cols-5 gap-6">
+                    <div class="md:col-span-2">
+                        <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+                            Respondan desde el celular. Son dos minutos y es
+                            anónimo: herramienta, para qué la usan y cada cuánto.
+                        </p>
+                        <div
+                            class="bg-slate-900 text-white rounded-xl p-5 mb-3"
+                        >
+                            <p
+                                class="text-[11px] uppercase tracking-wider text-slate-400 mb-1"
+                            >
+                                Entra en
+                            </p>
+                            <p
+                                class="text-2xl md:text-3xl font-extrabold tracking-tight break-all"
+                            >
+                                {urlAportar}
+                            </p>
+                        </div>
+                        <p class="text-xs text-slate-500">
+                            Respuestas recibidas: <strong
+                                id="uso-total"
+                                class="text-slate-800">0</strong
+                            >
+                        </p>
+                    </div>
+                    <div class="md:col-span-3 space-y-4">
+                        <div
+                            class="bg-slate-50 border border-slate-200 rounded-lg p-4"
+                        >
+                            <p
+                                class="text-xs font-semibold text-slate-500 mb-3"
+                            >
+                                Herramientas que usan
+                            </p>
+                            <div id="uso-herramientas" class="space-y-2">
+                                <p class="text-xs text-slate-400">
+                                    Esperando respuestas...
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-slate-50 border border-slate-200 rounded-lg p-4"
+                        >
+                            <p
+                                class="text-xs font-semibold text-slate-500 mb-3"
+                            >
+                                Para qué la usan (en sus palabras)
+                            </p>
+                            <ul
+                                id="uso-paraque"
+                                class="space-y-1.5 text-sm text-slate-700"
+                            >
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03 QUIÉN SOY -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50"
+        >
+            <div
+                class="max-w-4xl w-full grid md:grid-cols-2 gap-8 items-center"
+            >
+                <div>
+                    <p
+                        class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+                    >
+                        Tu facilitador
+                    </p>
+                    <h2
+                        class="text-3xl font-bold text-slate-900 tracking-tight mb-2"
+                    >
+                        Pablo Ríos Peña
+                    </h2>
+                    <div class="w-10 h-1 bg-teal-600 rounded-full mb-4"></div>
+                    <blockquote
+                        class="text-base italic text-slate-600 border-l-2 border-teal-500 pl-4 mb-4"
+                    >
+                        "Mejorar la vida de las personas con tecnología. Ese es
+                        el propósito."
+                    </blockquote>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        No vengo a vender herramientas. Vengo a compartir lo que
+                        me ha funcionado para que ustedes decidan qué aplicar en
+                        su equipo.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="bg-teal-100 text-teal-700 px-2.5 py-1 rounded-full text-[11px] font-semibold"
+                            >12+ años en Product Management</span
+                        >
+                        <span
+                            class="bg-orange-100 text-orange-700 px-2.5 py-1 rounded-full text-[11px] font-semibold"
+                            >IA aplicada desde 2021</span
+                        >
+                        <span
+                            class="bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full text-[11px] font-semibold"
+                            >Fundador de LuciRMe AI</span
+                        >
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div
+                        class="bg-white border border-slate-200 rounded-lg p-4 shadow-sm"
+                    >
+                        <h3 class="text-sm font-semibold text-teal-600 mb-2">
+                            Cómo vamos a trabajar
+                        </h3>
+                        <ul class="space-y-1.5 text-sm text-slate-600 lista-ok">
+                            <li>70% práctica, 30% explicación</li>
+                            <li>Con ejemplos reales de ustedes</li>
+                            <li>La IA propone, la persona valida siempre</li>
+                        </ul>
+                    </div>
+                    <div
+                        class="bg-white border border-slate-200 rounded-lg p-4 shadow-sm"
+                    >
+                        <h3 class="text-sm font-semibold text-slate-500 mb-2">
+                            Formación
+                        </h3>
+                        <div class="flex flex-wrap gap-1.5">
+                            {
+                                [
+                                    "Design Thinking",
+                                    "Scrum Master",
+                                    "User Story Mapping",
+                                    "Product-Led Growth",
+                                ].map((f) => (
+                                    <span class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded text-[11px] font-medium">
+                                        {f}
+                                    </span>
+                                ))
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 LO QUE NOS DIJERON -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-white"
+        >
+            <div class="max-w-5xl w-full">
+                <p
+                    class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+                >
+                    Su formulario
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+                >
+                    Lo que nos dijeron
+                </h2>
+                <div class="w-10 h-1 bg-teal-600 rounded-full mb-5"></div>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="space-y-4">
+                        <div
+                            class="bg-slate-50 border border-slate-200 rounded-lg p-4"
+                        >
+                            <h3 class="text-xs font-bold text-slate-500 mb-2">
+                                A qué se dedican
+                            </h3>
+                            <p class="text-xs text-slate-700 leading-relaxed">
+                                Ayudan a sus clientes a tomar el control de los
+                                procesos de cara al cliente: gestión de leads,
+                                proceso comercial y servicio al cliente.
+                                Atienden empresas medianas y maduras de
+                                Servicios, Distribución y Manufactura en
+                                Latinoamérica.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-slate-50 border border-slate-200 rounded-lg p-4"
+                        >
+                            <h3 class="text-xs font-bold text-slate-500 mb-2">
+                                Dónde están hoy
+                            </h3>
+                            <ul class="text-xs text-slate-700 space-y-1">
+                                <li>
+                                    Usan ChatGPT, Gemini, Claude, Cursor y
+                                    NotebookLM
+                                </li>
+                                <li>Cuentas aprobadas por la empresa</li>
+                                <li>Aún sin política de uso de IA</li>
+                                <li>Comodidad general: 3 de 5</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div
+                            class="bg-teal-50 border border-teal-200 rounded-lg p-4"
+                        >
+                            <h3 class="text-xs font-bold text-teal-700 mb-2">
+                                Tareas rutinarias que quieren mejorar
+                            </h3>
+                            <ol
+                                class="text-sm text-slate-800 space-y-1 list-decimal list-inside"
+                            >
+                                <li>Responder emails</li>
+                                <li>Documentación de proyectos</li>
+                                <li>Informes y actas</li>
+                            </ol>
+                        </div>
+                        <div
+                            class="bg-teal-50 border border-teal-200 rounded-lg p-4"
+                        >
+                            <h3 class="text-xs font-bold text-teal-700 mb-2">
+                                Casos para el taller
+                            </h3>
+                            <ol
+                                class="text-sm text-slate-800 space-y-1 list-decimal list-inside"
+                            >
+                                <li>Toma de requerimientos</li>
+                                <li>Triage de casos de soporte y diagnóstico inicial</li>
+                                <li>
+                                    Proyección de facturación vinculada con
+                                    oportunidades
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div
+                            class="bg-emerald-50 border border-emerald-200 rounded-lg p-4"
+                        >
+                            <h3 class="text-xs font-bold text-emerald-700 mb-2">
+                                Lo que les ha funcionado
+                            </h3>
+                            <p class="text-xs text-slate-700 leading-relaxed">
+                                Ahorro de tiempo, optimización de tareas
+                                operativas y repetitivas, estructurar
+                                requerimientos y apoyo para aprender
+                                herramientas nuevas.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-orange-50 border border-orange-200 rounded-lg p-4"
+                        >
+                            <h3 class="text-xs font-bold text-orange-700 mb-2">
+                                Lo que se les ha complicado
+                            </h3>
+                            <p class="text-xs text-slate-700 leading-relaxed">
+                                Contextos muy grandes, bugs complejos, elementos
+                                visuales avanzados y decisiones críticas que
+                                necesitan criterio humano.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 POR QUÉ UNAS COSAS FUNCIONAN Y OTRAS NO -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50"
+        >
+            <div class="max-w-4xl w-full">
+                <p
+                    class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+                >
+                    Fundamentos
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+                >
+                    Por qué unas cosas funcionan y otras no
+                </h2>
+                <div class="w-10 h-1 bg-teal-600 rounded-full mb-5"></div>
+                <p class="text-base text-slate-600 mb-6">
+                    Lo que ustedes ya vivieron tiene una explicación.
+                </p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div
+                        class="bg-white border border-slate-200 rounded-lg p-5 shadow-sm"
+                    >
+                        <h3 class="text-sm font-bold text-emerald-600 mb-3">
+                            Funciona cuando
+                        </h3>
+                        <ul class="space-y-2 text-sm text-slate-600 lista-ok">
+                            <li>La tarea es acotada y se repite</li>
+                            <li>Hay un procedimiento o un ejemplo de cómo se hace</li>
+                            <li>
+                                El resultado es estructurado: tabla, acta, listado
+                            </li>
+                            <li>Una persona revisa antes de usarlo</li>
+                        </ul>
+                    </div>
+                    <div
+                        class="bg-white border border-slate-200 rounded-lg p-5 shadow-sm"
+                    >
+                        <h3 class="text-sm font-bold text-orange-600 mb-3">
+                            Se complica cuando
+                        </h3>
+                        <ul class="space-y-2 text-sm text-slate-600 lista-no">
+                            <li>
+                                Le damos un contexto enorme y sin organizar
+                            </li>
+                            <li>
+                                Pedimos algo que exige seguir muchas piezas a la
+                                vez, como un bug complejo
+                            </li>
+                            <li>
+                                Esperamos un resultado visual avanzado de un
+                                solo intento
+                            </li>
+                            <li>
+                                La decisión es crítica y nadie pone criterio
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div
+                    class="mt-6 text-center p-4 bg-white rounded-lg border border-slate-200"
+                >
+                    <p class="text-lg font-semibold text-slate-800">
+                        La IA sugiere. <span class="text-teal-600"
+                            >Ustedes deciden.</span
+                        >
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06 DOLORES DEL EQUIPO (captura en vivo) -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-white"
+        >
+            <div class="max-w-5xl w-full">
+                <p
+                    class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+                >
+                    Dinámica
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+                >
+                    ¿Dónde pierden más tiempo?
+                </h2>
+                <div class="w-10 h-1 bg-teal-600 rounded-full mb-5"></div>
+                <div class="grid md:grid-cols-5 gap-6">
+                    <div class="md:col-span-3">
+                        <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+                            Cada persona cuenta hasta 3 tareas que le quitan
+                            tiempo. Para cada una:
+                        </p>
+                        <ul class="space-y-2 text-sm text-slate-700 lista-ok mb-5">
+                            <li>Qué es, con sus palabras</li>
+                            <li>Su rol y cuántas horas a la semana le dedica</li>
+                            <li>Cada cuánto la hace</li>
+                            <li>Si existe un procedimiento escrito</li>
+                            <li>Si el resultado es una tabla, un documento o un listado</li>
+                        </ul>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Sin nombres de clientes ni datos sensibles. Mientras
+                            vemos lo que sigue, agrupamos lo que llegue para ver
+                            dónde está el dolor.
+                        </p>
+                    </div>
+                    <div class="md:col-span-2">
+                        <div
+                            class="bg-slate-900 text-white rounded-xl p-5 mb-4"
+                        >
+                            <p
+                                class="text-[11px] uppercase tracking-wider text-slate-400 mb-1"
+                            >
+                                Entra en
+                            </p>
+                            <p
+                                class="text-2xl md:text-3xl font-extrabold tracking-tight break-all"
+                            >
+                                {urlAportar}
+                            </p>
+                        </div>
+                        <div
+                            class="bg-teal-50 border border-teal-200 rounded-xl p-5 text-center"
+                        >
+                            <p
+                                id="dolores-total"
+                                class="text-5xl font-extrabold text-teal-700"
+                            >
+                                0
+                            </p>
+                            <p class="text-xs text-slate-600 mt-1">
+                                dolores recibidos
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07 CHAT VS AGENTE -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50"
+        >
+            <div class="max-w-4xl w-full">
+                <p
+                    class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+                >
+                    Contexto
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+                >
+                    Del chat suelto al agente con contexto
+                </h2>
+                <div class="w-10 h-1 bg-teal-600 rounded-full mb-6"></div>
+                <div class="grid md:grid-cols-2 gap-4 mb-5">
+                    <div
+                        class="bg-white border border-slate-200 rounded-lg p-4 shadow-sm"
+                    >
+                        <h3 class="text-sm font-semibold text-slate-800 mb-2">
+                            Chat tradicional
+                        </h3>
+                        <ul class="space-y-1.5 text-xs text-slate-600 lista-no">
+                            <li>Responde con lo que sabe en general</li>
+                            <li>Puede inventar datos con total seguridad</li>
+                            <li>No conoce su empresa ni sus procesos</li>
+                            <li>
+                                Si le pegan demasiado, se pierde y mezcla cosas
+                            </li>
+                        </ul>
+                    </div>
+                    <div
+                        class="bg-white border-2 border-teal-500 rounded-lg p-4 shadow-sm"
+                    >
+                        <h3 class="text-sm font-semibold text-teal-600 mb-2">
+                            Agente con sus documentos (NotebookLM)
+                        </h3>
+                        <ul class="space-y-1.5 text-xs text-slate-600 lista-ok">
+                            <li>Responde con base en las fuentes que suben</li>
+                            <li>Muestra de dónde sacó cada respuesta</li>
+                            <li>
+                                Conoce sus procedimientos, plantillas y actas
+                                anteriores
+                            </li>
+                            <li>Mantiene el contexto entre preguntas</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-lg p-4">
+                    <h3 class="text-sm font-semibold text-slate-800 mb-3">
+                        Cuando el contexto es muy grande
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-3 text-xs text-slate-600">
+                        <p>
+                            <strong class="text-slate-800 block mb-0.5"
+                                >Dividan por tema</strong
+                            >
+                            Una fuente por asunto, no un solo archivo con todo.
+                        </p>
+                        <p>
+                            <strong class="text-slate-800 block mb-0.5"
+                                >Pidan la fuente</strong
+                            >
+                            Que indique de dónde sale cada dato para poder verificarlo.
+                        </p>
+                        <p>
+                            <strong class="text-slate-800 block mb-0.5"
+                                >Trabajen por etapas</strong
+                            >
+                            Primero resumir, luego estructurar y al final redactar.
+                        </p>
+                    </div>
+                    <a
+                        href={prompteador}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-block mt-4 text-xs font-semibold text-teal-700 hover:text-teal-800"
+                        >Prompteador de LuciRMe: para pedir con estructura →</a
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- 08 ALCANCE -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-white"
+        >
+            <div class="max-w-4xl w-full">
+                <p
+                    class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+                >
+                    Alcance
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+                >
+                    Dos conversaciones distintas
+                </h2>
+                <div class="w-10 h-1 bg-teal-600 rounded-full mb-6"></div>
+                <div class="grid md:grid-cols-2 gap-5">
+                    <div
+                        class="bg-teal-50 border-2 border-teal-500 rounded-lg p-5"
+                    >
+                        <p
+                            class="text-[11px] font-bold uppercase tracking-wider text-teal-700 mb-1"
+                        >
+                            Hoy
+                        </p>
+                        <h3 class="text-lg font-bold text-slate-900 mb-3">
+                            Usar IA en la operación de {cliente}
+                        </h3>
+                        <ul class="space-y-1.5 text-sm text-slate-700 lista-ok">
+                            <li>Responder correos y preparar informes y actas</li>
+                            <li>Documentar proyectos y estructurar requerimientos</li>
+                            <li>Clasificar casos de soporte y proponer un primer diagnóstico</li>
+                            <li>Decidir qué tareas atacar primero</li>
+                        </ul>
+                    </div>
+                    <div
+                        class="bg-slate-50 border border-slate-200 rounded-lg p-5"
+                    >
+                        <p
+                            class="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1"
+                        >
+                            Fuera de este taller
+                        </p>
+                        <h3 class="text-lg font-bold text-slate-900 mb-3">
+                            Desarrollar soluciones con IA para los clientes de {
+                                cliente
+                            }
+                        </h3>
+                        <ul class="space-y-1.5 text-sm text-slate-600 lista-no">
+                            <li>Construir software o agentes que se entregan a un cliente</li>
+                            <li>Integraciones y automatizaciones sobre sus sistemas</li>
+                        </ul>
+                        <p class="text-xs text-slate-500 mt-3">
+                            Si el equipo ve potencial ahí, es una conversación
+                            aparte, con otro formato y otros tiempos.
+                        </p>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-500 mt-5 text-center">
+                    Mientras no exista una política de uso, una pauta para hoy:
+                    ejemplos reales sin nombres ni datos de clientes.
+                </p>
+            </div>
+        </section>
+
+        <!-- 09 DEMO 1: TOMA DE REQUERIMIENTOS -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50"
+        >
+            <div class="max-w-4xl w-full">
+                <p
+                    class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+                >
+                    Demo 1
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+                >
+                    Toma de requerimientos
+                </h2>
+                <div class="w-10 h-1 bg-teal-600 rounded-full mb-5"></div>
+                <p class="text-base text-slate-600 mb-5">
+                    Es lo que ya les funcionó. Hoy lo hacemos con método.
+                </p>
+                <div class="grid md:grid-cols-3 gap-3 mb-5">
+                    {
+                        [
+                            [
+                                "1",
+                                "Crear el cuaderno",
+                                "Un cuaderno nuevo en NotebookLM para este caso.",
+                            ],
+                            [
+                                "2",
+                                "Subir las fuentes",
+                                "Notas o transcripción de la reunión y su plantilla de requerimientos.",
+                            ],
+                            [
+                                "3",
+                                "Pedir con estructura",
+                                "Rol, contexto, tarea y formato de salida.",
+                            ],
+                        ].map(([n, t, d]) => (
+                            <div class="bg-white border border-slate-200 rounded-lg p-4 shadow-sm">
+                                <span class="inline-flex w-6 h-6 items-center justify-center rounded-full bg-teal-600 text-white text-xs font-bold mb-2">
+                                    {n}
+                                </span>
+                                <h3 class="text-sm font-semibold text-slate-800">
+                                    {t}
+                                </h3>
+                                <p class="text-xs text-slate-500 mt-1">{d}</p>
+                            </div>
+                        ))
+                    }
+                </div>
+                <div class="bg-slate-900 rounded-lg p-4 mb-3">
+                    <p
+                        class="text-[11px] uppercase tracking-wider text-slate-400 mb-2"
+                    >
+                        Prompt de ejemplo
+                    </p>
+                    <p class="text-sm text-slate-100 leading-relaxed">
+                        "Actúa como analista de requerimientos. Con las notas de
+                        la reunión que subí, arma una tabla con: requerimiento,
+                        tipo (funcional o no funcional), prioridad propuesta,
+                        supuestos y dudas abiertas. Marca como «por confirmar»
+                        todo lo que no esté dicho de forma explícita en las
+                        notas."
+                    </p>
+                </div>
+                <p class="text-xs text-slate-500">
+                    Qué revisamos juntos: que no invente requerimientos y que
+                    cada fila se pueda rastrear a lo que dijo el cliente.
+                </p>
+            </div>
+        </section>
+
+        <!-- 10 DEMO 2: TRIAGE DE SOPORTE -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-white"
+        >
+            <div class="max-w-4xl w-full">
+                <p
+                    class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+                >
+                    Demo 2
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+                >
+                    Triage de casos de soporte
+                </h2>
+                <div class="w-10 h-1 bg-teal-600 rounded-full mb-5"></div>
+                <p class="text-base text-slate-600 mb-5">
+                    De un caso que llega a una primera lectura ordenada.
+                </p>
+                <div class="grid md:grid-cols-2 gap-4 mb-5">
+                    <div
+                        class="bg-slate-50 border border-slate-200 rounded-lg p-4"
+                    >
+                        <h3 class="text-sm font-semibold text-slate-800 mb-2">
+                            Qué le pedimos
+                        </h3>
+                        <ul class="space-y-1.5 text-xs text-slate-600 lista-ok">
+                            <li>Tipo de caso</li>
+                            <li>Urgencia, con una frase que la justifique</li>
+                            <li>Hipótesis de causa, de más a menos probable</li>
+                            <li>Preguntas para el cliente y datos que faltan</li>
+                        </ul>
+                    </div>
+                    <div
+                        class="bg-orange-50 border-l-4 border-orange-500 rounded-r-lg p-4"
+                    >
+                        <h3 class="text-sm font-semibold text-slate-800 mb-2">
+                            Lo que no hace
+                        </h3>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            El diagnóstico inicial es una hipótesis. Lo valida
+                            el analista antes de responderle al cliente.
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-slate-900 rounded-lg p-4">
+                    <p
+                        class="text-[11px] uppercase tracking-wider text-slate-400 mb-2"
+                    >
+                        Prompt de ejemplo
+                    </p>
+                    <p class="text-sm text-slate-100 leading-relaxed">
+                        "Actúa como líder de soporte. Lee el caso adjunto y
+                        devuélveme: tipo de caso, urgencia (alta, media o baja)
+                        con una frase de justificación, hipótesis de causa
+                        ordenadas de más a menos probable, preguntas que debo
+                        hacerle al cliente y qué información falta. Si algo no
+                        se puede saber con lo que hay, dilo."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11 TAREAS DE TODOS -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50"
+        >
+            <div class="max-w-5xl w-full">
+                <p
+                    class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+                >
+                    Manos a la obra
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+                >
+                    Tareas de todos, por grupo de rol
+                </h2>
+                <div class="w-10 h-1 bg-teal-600 rounded-full mb-4"></div>
+                <p class="text-sm text-slate-600 mb-5">
+                    Cada grupo elige una tarea de su día a día, la prueba con su
+                    ejemplo real y cuenta qué tuvo que corregir.
+                </p>
+                <div
+                    class="bg-white border border-slate-200 rounded-lg overflow-hidden shadow-sm mb-4"
+                >
+                    <table class="w-full text-left text-sm">
+                        <thead
+                            class="bg-slate-100 text-slate-600 text-xs uppercase tracking-wider"
+                        >
+                            <tr>
+                                <th class="p-3">Grupo</th>
+                                <th class="p-3">Tarea para probar</th>
+                                <th class="p-3">Qué traer</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-slate-700">
+                            {
+                                [
+                                    [
+                                        "Gerencia y comercial",
+                                        "Responder emails con el tono y el contexto correctos",
+                                        "Un hilo de correos real",
+                                    ],
+                                    [
+                                        "Proyectos y consultoría",
+                                        "Informes y actas a partir de notas de reunión",
+                                        "Notas de una reunión reciente",
+                                    ],
+                                    [
+                                        "Soporte y servicios administrados",
+                                        "Documentar casos resueltos para reutilizarlos",
+                                        "Dos o tres casos ya cerrados",
+                                    ],
+                                    [
+                                        "Procesos y tecnología",
+                                        "Documentación de proyectos y procesos",
+                                        "Un proceso o proyecto por documentar",
+                                    ],
+                                    [
+                                        "Administración",
+                                        "Informes y comunicaciones internas",
+                                        "Un informe o comunicado que se repita",
+                                    ],
+                                ].map(([g, t, q]) => (
+                                    <tr>
+                                        <td class="p-3 font-semibold text-slate-800">
+                                            {g}
+                                        </td>
+                                        <td class="p-3">{t}</td>
+                                        <td class="p-3 text-slate-500">{q}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-lg p-4">
+                    <p class="text-xs font-semibold text-slate-500 mb-2">
+                        Esquema para pedir
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        {
+                            [
+                                "Rol",
+                                "Contexto",
+                                "Tarea",
+                                "Formato de salida",
+                                "Cómo verificar",
+                            ].map((p, i) => (
+                                <span class="inline-flex items-center gap-1.5 bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md font-medium">
+                                    <span class="text-teal-600 font-bold">
+                                        {i + 1}
+                                    </span>
+                                    {p}
+                                </span>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12 PRIORIZACIÓN (matriz en vivo) -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-white"
+        >
+            <div class="max-w-6xl w-full">
+                <p
+                    class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+                >
+                    Priorización
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+                >
+                    Dónde está el dolor
+                </h2>
+                <div class="w-10 h-1 bg-teal-600 rounded-full mb-4"></div>
+                <div id="matriz-vacia" class="p-6 bg-slate-50 border border-dashed border-slate-300 rounded-lg text-sm text-slate-500">
+                    La matriz aparece aquí cuando se publica desde el panel del facilitador.
+                </div>
+                <div id="matriz" class="hidden grid md:grid-cols-5 gap-5">
+                    <div class="md:col-span-3">
+                        <div id="matriz-grafico"></div>
+                        <p class="text-[11px] text-slate-400 mt-2">
+                            Alto = por encima del promedio de horas semanales de
+                            los grupos. Viable = 60% o más entre procedimiento
+                            escrito y resultado estructurado. Los números salen de
+                            lo que respondió el equipo.
+                        </p>
+                    </div>
+                    <div class="md:col-span-2 space-y-3" id="matriz-lista"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13 PLAN DE ACCIÓN -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-slate-50"
+        >
+            <div class="max-w-4xl w-full">
+                <p
+                    class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+                >
+                    Plan de acción
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+                >
+                    Qué se llevan de hoy
+                </h2>
+                <div class="w-10 h-1 bg-teal-600 rounded-full mb-5"></div>
+                <div
+                    class="bg-white border border-slate-200 rounded-lg overflow-hidden shadow-sm mb-6"
+                >
+                    <table class="w-full text-left text-sm">
+                        <thead
+                            class="bg-slate-100 text-slate-600 text-xs uppercase tracking-wider"
+                        >
+                            <tr>
+                                <th class="p-3">Tarea priorizada</th>
+                                <th class="p-3">Responsable</th>
+                                <th class="p-3">Criterio de éxito</th>
+                                <th class="p-3">Primer hito</th>
+                            </tr>
+                        </thead>
+                        <tbody
+                            id="plan-filas"
+                            class="divide-y divide-slate-100 text-slate-700"
+                        >
+                            {
+                                [1, 2, 3].map(() => (
+                                    <tr>
+                                        <td class="p-3 font-semibold plan-tarea text-slate-400 italic">
+                                            Por definir
+                                        </td>
+                                        <td class="p-3 text-slate-400 italic">
+                                            Por definir
+                                        </td>
+                                        <td class="p-3 text-slate-400 italic">
+                                            Por definir
+                                        </td>
+                                        <td class="p-3 text-slate-400 italic">
+                                            Por definir
+                                        </td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-xs text-slate-500 mb-6">
+                    Si la matriz ya está publicada, la primera columna se llena
+                    con los grupos de "Empezar ya". El resto lo acordamos en la
+                    sala.
+                </p>
+                <div class="flex gap-3 flex-wrap mb-6">
+                    <a
+                        href={linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center bg-teal-600 text-white px-4 py-2 rounded-md text-xs font-semibold hover:bg-teal-700 transition-colors shadow-sm"
+                        >LinkedIn: Pablo Ríos</a
+                    >
+                    <a
+                        href="mailto:pablo@lucirme.com"
+                        class="inline-flex items-center bg-white text-slate-700 border border-slate-200 px-4 py-2 rounded-md text-xs font-semibold hover:bg-slate-50 transition-colors shadow-sm"
+                        >pablo@lucirme.com</a
+                    >
+                </div>
+                <p class="text-[11px] text-slate-400">
+                    LuciRMe AI · Tu negocio es tu talento, no tu operatividad
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <style is:global>
+        .lista-ok li::before {
+            content: "✓";
+            color: #10b981;
+            font-weight: 700;
+            margin-right: 0.5rem;
+        }
+        .lista-no li::before {
+            content: "✕";
+            color: #ef4444;
+            font-weight: 700;
+            margin-right: 0.5rem;
+        }
+        main::-webkit-scrollbar {
+            display: none;
+        }
+        main {
+            scrollbar-width: none;
+        }
+    </style>
+
+    <script>
+        const slider = document.getElementById("slider") as HTMLElement | null;
+        const slides = document.querySelectorAll("main > section");
+        const navDots = document.getElementById("navDots") as HTMLElement | null;
+        const currentEl = document.getElementById("current") as HTMLElement | null;
+        const totalEl = document.getElementById("total") as HTMLElement | null;
+        const sesion = slider?.dataset.sesion ?? "sasa-t1";
+
+        // ---------- Pantalla completa ----------
+        const fsBtn = document.getElementById("fullscreen-btn") as HTMLElement | null;
+        const fsIn = document.getElementById("fs-icon-enter") as HTMLElement | null;
+        const fsOut = document.getElementById("fs-icon-exit") as HTMLElement | null;
+        if (fsBtn && fsIn && fsOut) {
+            fsBtn.addEventListener("click", () => {
+                if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+                else document.exitFullscreen();
+            });
+            document.addEventListener("fullscreenchange", () => {
+                const on = Boolean(document.fullscreenElement);
+                fsIn.classList.toggle("hidden", on);
+                fsOut.classList.toggle("hidden", !on);
+                fsBtn.setAttribute("aria-label", on ? "Salir de pantalla completa" : "Pantalla completa");
+            });
+        }
+
+        // ---------- Navegación ----------
+        if (slider && navDots && currentEl && totalEl && slides.length > 0) {
+            totalEl.textContent = String(slides.length).padStart(2, "0");
+            const inactivo = "w-2 h-2 rounded-full bg-slate-300 border-none cursor-pointer transition-all p-0 hover:bg-slate-400";
+            const activo = "w-2 h-6 rounded bg-teal-500 border-none cursor-pointer transition-all p-0";
+            slides.forEach((_, i) => {
+                const dot = document.createElement("button");
+                dot.className = i === 0 ? activo : inactivo;
+                dot.setAttribute("aria-label", `Ir a la diapositiva ${i + 1}`);
+                dot.addEventListener("click", () => slides[i].scrollIntoView({ behavior: "smooth" }));
+                navDots.appendChild(dot);
+            });
+            const dots = navDots.querySelectorAll("button");
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (!entry.isIntersecting) return;
+                        const index = [...slides].indexOf(entry.target as Element);
+                        dots.forEach((d, i) => (d.className = i === index ? activo : inactivo));
+                        currentEl.textContent = String(index + 1).padStart(2, "0");
+                    });
+                },
+                { root: slider, threshold: 0.6 },
+            );
+            slides.forEach((s) => observer.observe(s));
+            document.addEventListener("keydown", (e) => {
+                if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+                const h = window.innerHeight;
+                if (e.key === "ArrowDown" || e.key === "ArrowRight" || e.key === "PageDown") {
+                    e.preventDefault();
+                    slider.scrollBy({ top: h, behavior: "smooth" });
+                } else if (e.key === "ArrowUp" || e.key === "ArrowLeft" || e.key === "PageUp") {
+                    e.preventDefault();
+                    slider.scrollBy({ top: -h, behavior: "smooth" });
+                } else if (e.key === "f" || e.key === "F") {
+                    fsBtn?.click();
+                }
+            });
+        }
+
+        // ---------- Datos en vivo ----------
+        type Grupo = {
+            id: string; nombre: string; dolor_de_fondo: string; n: number; personas: number;
+            roles: string[]; impacto: number; con_horas: number; viabilidad: number | null;
+            cuadrante: string; frecuencia_predominante: string | null;
+        };
+        type Estado = {
+            ok: boolean; dolores_total: number; uso_total: number;
+            uso: { herramientas: { nombre: string; n: number }[]; para_que: string[] };
+            publicada: boolean;
+            matriz: { umbral_impacto: number; umbral_viabilidad: number; grupos: Grupo[] } | null;
+        };
+
+        const NS = "http://www.w3.org/2000/svg";
+        const svg = (tag: string, attrs: Record<string, string | number>, texto?: string) => {
+            const e = document.createElementNS(NS, tag);
+            for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, String(v));
+            if (texto !== undefined) e.textContent = texto;
+            return e;
+        };
+        const el = (tag: string, cls: string, texto?: string) => {
+            const e = document.createElement(tag);
+            e.className = cls;
+            if (texto !== undefined) e.textContent = texto;
+            return e;
+        };
+
+        const CUADRANTES: Record<string, { nombre: string; color: string; fondo: string }> = {
+            "empezar-ya": { nombre: "Empezar ya", color: "#0d9488", fondo: "bg-teal-50 border-teal-200" },
+            "preparar-datos": { nombre: "Preparar datos primero", color: "#d97706", fondo: "bg-amber-50 border-amber-200" },
+            "ganancia-pequena": { nombre: "Ganancia pequeña", color: "#2563eb", fondo: "bg-blue-50 border-blue-200" },
+            "dejar-por-ahora": { nombre: "Dejar por ahora", color: "#64748b", fondo: "bg-slate-50 border-slate-200" },
+            "sin-datos": { nombre: "Sin datos para ubicar", color: "#94a3b8", fondo: "bg-white border-slate-200" },
+        };
+
+        function pintarUso(e: Estado) {
+            const total = document.getElementById("uso-total");
+            if (total) total.textContent = String(e.uso_total);
+            const cont = document.getElementById("uso-herramientas");
+            if (cont) {
+                cont.replaceChildren();
+                const max = Math.max(1, ...e.uso.herramientas.map((h) => h.n));
+                if (!e.uso.herramientas.length) cont.appendChild(el("p", "text-xs text-slate-400", "Esperando respuestas..."));
+                for (const h of e.uso.herramientas) {
+                    const fila = el("div", "flex items-center gap-3");
+                    fila.appendChild(el("span", "w-24 text-xs text-slate-700 shrink-0", h.nombre));
+                    const barra = el("div", "flex-1 bg-slate-200 rounded-full h-2.5 overflow-hidden");
+                    const relleno = el("div", "h-full bg-teal-500 rounded-full transition-all");
+                    relleno.style.width = `${(h.n / max) * 100}%`;
+                    barra.appendChild(relleno);
+                    fila.appendChild(barra);
+                    fila.appendChild(el("span", "w-6 text-right text-xs font-semibold text-slate-700", String(h.n)));
+                    cont.appendChild(fila);
+                }
+            }
+            const lista = document.getElementById("uso-paraque");
+            if (lista) {
+                lista.replaceChildren();
+                for (const t of e.uso.para_que) lista.appendChild(el("li", "border-l-2 border-teal-400 pl-3", t));
+            }
+        }
+
+        function pintarMatriz(e: Estado) {
+            const vacia = document.getElementById("matriz-vacia");
+            const caja = document.getElementById("matriz");
+            const grafico = document.getElementById("matriz-grafico");
+            const lista = document.getElementById("matriz-lista");
+            if (!vacia || !caja || !grafico || !lista) return;
+            if (!e.matriz || !e.matriz.grupos.length) {
+                vacia.classList.remove("hidden");
+                caja.classList.add("hidden");
+                return;
+            }
+            vacia.classList.add("hidden");
+            caja.classList.remove("hidden");
+
+            const { grupos, umbral_impacto, umbral_viabilidad } = e.matriz;
+            const ubicables = grupos.filter((g) => g.cuadrante !== "sin-datos" && g.viabilidad !== null);
+            const W = 560, H = 380, L = 54, R = 16, T = 16, B = 44;
+            const maxImp = Math.max(1, umbral_impacto * 2, ...ubicables.map((g) => g.impacto)) * 1.1;
+            const x = (v: number) => L + (W - L - R) * (0.05 + (v / 100) * 0.9);
+            const y = (v: number) => H - B - (v / maxImp) * (H - T - B);
+
+            const s = svg("svg", { viewBox: `0 0 ${W} ${H}`, class: "w-full h-auto", role: "img", "aria-label": "Matriz de dolores: horas por semana contra viabilidad" });
+            s.appendChild(svg("rect", { x: L, y: T, width: W - L - R, height: H - T - B, fill: "#f8fafc", stroke: "#e2e8f0" }));
+            const xv = x(umbral_viabilidad), yv = y(umbral_impacto);
+            s.appendChild(svg("rect", { x: xv, y: T, width: W - R - xv, height: yv - T, fill: "#ccfbf1", opacity: 0.5 }));
+            s.appendChild(svg("line", { x1: xv, y1: T, x2: xv, y2: H - B, stroke: "#94a3b8", "stroke-dasharray": "4 4" }));
+            s.appendChild(svg("line", { x1: L, y1: yv, x2: W - R, y2: yv, stroke: "#94a3b8", "stroke-dasharray": "4 4" }));
+            const rot = (txt: string, px: number, py: number, anchor = "start") =>
+                s.appendChild(svg("text", { x: px, y: py, "font-size": 10, fill: "#64748b", "text-anchor": anchor, "font-weight": 600 }, txt));
+            rot("Empezar ya", W - R - 6, T + 14, "end");
+            rot("Preparar datos primero", L + 6, T + 14);
+            rot("Ganancia pequeña", W - R - 6, H - B - 8, "end");
+            rot("Dejar por ahora", L + 6, H - B - 8);
+            s.appendChild(svg("text", { x: (L + W - R) / 2, y: H - 10, "font-size": 11, fill: "#475569", "text-anchor": "middle" }, "Viabilidad (procedimiento escrito y resultado estructurado) →"));
+            const ty = svg("text", { x: 14, y: (T + H - B) / 2, "font-size": 11, fill: "#475569", "text-anchor": "middle", transform: `rotate(-90 14 ${(T + H - B) / 2})` }, "Horas por semana →");
+            s.appendChild(ty);
+
+            ubicables.forEach((g, i) => {
+                const q = CUADRANTES[g.cuadrante];
+                const r = 10 + Math.min(14, g.personas * 3);
+                const cx = x(g.viabilidad as number), cy = y(g.impacto);
+                const c = svg("g", {});
+                c.appendChild(svg("circle", { cx, cy, r, fill: q.color, opacity: 0.85, stroke: "#fff", "stroke-width": 2 }));
+                c.appendChild(svg("text", { x: cx, y: cy + 4, "font-size": 11, "font-weight": 700, fill: "#fff", "text-anchor": "middle" }, String(i + 1)));
+                const t = svg("title", {}, `${g.nombre}: ${g.impacto} h/sem, viabilidad ${g.viabilidad}%`);
+                c.appendChild(t);
+                s.appendChild(c);
+            });
+            grafico.replaceChildren(s);
+
+            lista.replaceChildren();
+            const orden = ["empezar-ya", "preparar-datos", "ganancia-pequena", "dejar-por-ahora", "sin-datos"];
+            for (const q of orden) {
+                const delGrupo = grupos.filter((g) => g.cuadrante === q);
+                if (!delGrupo.length) continue;
+                const info = CUADRANTES[q];
+                const bloque = el("div", `border rounded-lg p-3 ${info.fondo}`);
+                bloque.appendChild(el("p", "text-[11px] font-bold uppercase tracking-wider text-slate-600 mb-2", info.nombre));
+                for (const g of delGrupo) {
+                    const num = ubicables.indexOf(g) + 1;
+                    const fila = el("div", "mb-2 last:mb-0");
+                    fila.appendChild(el("p", "text-sm font-semibold text-slate-800", `${num > 0 ? num + ". " : ""}${g.nombre}`));
+                    if (g.dolor_de_fondo) fila.appendChild(el("p", "text-xs text-slate-600 leading-snug", g.dolor_de_fondo));
+                    const datos = [`${g.n} ${g.n === 1 ? "dolor" : "dolores"}`];
+                    if (g.con_horas > 0) datos.push(`${g.impacto} h/sem`);
+                    if (g.viabilidad !== null) datos.push(`viabilidad ${g.viabilidad}%`);
+                    fila.appendChild(el("p", "text-[11px] text-slate-400 mt-0.5", datos.join(" · ")));
+                    bloque.appendChild(fila);
+                }
+                lista.appendChild(bloque);
+            }
+        }
+
+        function pintarPlan(e: Estado) {
+            const celdas = document.querySelectorAll<HTMLElement>("#plan-filas .plan-tarea");
+            const top = (e.matriz?.grupos ?? [])
+                .filter((g) => g.cuadrante === "empezar-ya")
+                .sort((a, b) => b.impacto - a.impacto)
+                .slice(0, celdas.length);
+            celdas.forEach((c, i) => {
+                const g = top[i];
+                if (g) {
+                    c.textContent = g.nombre;
+                    c.className = "p-3 font-semibold plan-tarea text-slate-800";
+                } else {
+                    c.textContent = "Por definir";
+                    c.className = "p-3 font-semibold plan-tarea text-slate-400 italic";
+                }
+            });
+        }
+
+        async function actualizar() {
+            try {
+                const r = await fetch(`/api/taller/estado?sesion=${encodeURIComponent(sesion)}`, { cache: "no-store" });
+                if (!r.ok) return;
+                const e: Estado = await r.json();
+                if (!e.ok) return;
+                const d = document.getElementById("dolores-total");
+                if (d) d.textContent = String(e.dolores_total);
+                pintarUso(e);
+                pintarMatriz(e);
+                pintarPlan(e);
+            } catch {
+                /* sin conexión: se reintenta en el siguiente ciclo */
+            }
+        }
+        actualizar();
+        setInterval(() => {
+            if (!document.hidden) actualizar();
+        }, 4000);
+    </script>
+</Layout>
