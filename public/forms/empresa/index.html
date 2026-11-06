@@ -290,6 +290,8 @@ function construirFilas() {
   leerAreaForms().forEach((f) => {
     filas.push({
       ...base, tipo: "area", area: f.area,
+      // En el envío de empresa solo la fila de la empresa avisa por Telegram; en el del líder de área sí avisa.
+      ...(modoArea ? {} : { notificar: "no" }),
       lider_nombre: f.lider_nombre || "", lider_cargo: f.lider_cargo || "", lider_correo: f.lider_correo || "",
       pendiente_lider: !!f.lo_responde_lider,
       semana: f.semana || "", tareas: f.tareas || "", docs: f.docs || "", ia: f.ia || "",
