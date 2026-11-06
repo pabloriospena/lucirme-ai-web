@@ -576,6 +576,7 @@
        CONFIGURACIÓN (Editable)
        ========================================================================== */
     const MAKE_WEBHOOK_URL = "https://hook.us2.make.com/eg6vornj63j819a4a44pf1uzgdd7yjms";
+    const FORM_TOKEN = "O7gpNfva9dzEdHK0tg9pSEFk";   // Make exige este código en cada envío
     const TALLER_URL = "PEGAR_AQUI_LINK_DEL_TALLER"; // Ej. "../taller/" o URL completa, o dejar vacío ""
     const CLIENTES = {
       sasa: "Sasa Consultoría",
@@ -817,6 +818,8 @@
             payload.append(key, value);
           }
         }
+
+        payload.append("token", FORM_TOKEN);
 
         // Send
         isSubmitting = true;
