@@ -9,7 +9,8 @@ const isVercel = Boolean(process.env.VERCEL || process.env.VERCEL_ENV);
 export default defineConfig({
   output: 'server',
   redirects: {
-    '/whatsapp': 'https://wa.me/573053046180'
+    '/whatsapp': 'https://wa.me/573053046180',
+    '/sasa': '/presentaciones/sasa/aportar'
   },
   adapter: isVercel ? vercel() : node({ mode: 'standalone' }),
   server: {
