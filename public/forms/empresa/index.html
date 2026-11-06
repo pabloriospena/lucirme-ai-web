@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Información base del taller · LuciRMe AI</title>
+<style>
+  :root{
+    /* Paleta LucirMe AI */
+    --light:#F8FAFC; --deep:#0F172A; --gray:#64748B;
+    --teal:#0D9488; --orange:#EA580C; --success:#10B981;
+    --bg:var(--light); --card:#FFFFFF; --ink:var(--deep); --mute:var(--gray);
+    --line:rgba(100,116,139,.35); --err:#B91C1C;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .wrap{max-width:720px;margin:0 auto;padding:32px 16px 96px}
+  header h1{font-size:28px;line-height:1.2;margin:0 0 8px}
+  header p{margin:0;color:var(--mute)}
+  .badge{display:inline-block;font:600 12px/1 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+  .progress{display:flex;gap:6px;margin:28px 0 20px}
+  .progress span{flex:1;height:4px;background:var(--line);border-radius:2px}
+  .progress span.on{background:var(--teal)}
+  section.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(15,23,42,.06)}
+  section.card h2{font-size:20px;margin:0 0 4px}
+  section.card .sub{color:var(--mute);margin:0 0 20px;font-size:15px}
+  label{display:block;font:600 14px/1.3 system-ui,sans-serif;margin:18px 0 6px}
+  .hint{font:400 13px/1.4 system-ui,sans-serif;color:var(--mute);margin:-2px 0 6px}
+  input,textarea,select{width:100%;font:16px/1.4 system-ui,sans-serif;color:var(--ink);background:var(--light);border:1px solid var(--line);border-radius:8px;padding:12px 16px}
+  input::placeholder,textarea::placeholder{color:var(--gray)}
+  textarea{min-height:92px;resize:vertical}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,148,136,.12)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:560px){.row{grid-template-columns:1fr}}
+  .area-card{border:1px dashed var(--line);border-radius:12px;padding:16px;margin-top:14px}
+  .area-card h3{margin:0 0 4px;font-size:17px}
+  .area-head{display:grid;grid-template-columns:1fr 110px 36px;gap:8px;margin-top:10px}
+  .area-head button{padding:0}
+  .nav{display:flex;justify-content:space-between;gap:12px;margin-top:20px}
+  button{font:600 15px/1 system-ui,sans-serif;border-radius:8px;padding:14px 28px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+  button.primary{background:var(--orange);color:#FFFFFF;border-color:var(--orange)}
+  button.link{border:none;padding:6px 0;color:var(--teal);background:none;font-weight:600}
+  .area-head button{padding:0}
+  button:disabled{opacity:.5;cursor:default}
+  .err{color:var(--err);font:14px/1.4 system-ui,sans-serif;margin-top:10px;display:none}
+  .done{text-align:center;padding:48px 16px}
+  .done h2{font-size:26px;color:var(--success)}
+  .linkbox{font:13px/1.4 ui-monospace,Menlo,monospace;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;word-break:break-all;margin-top:6px}
+  .hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="badge" id="badge">LuciRMe AI</div>
+    <h1 id="title">Información base para el taller de IA</h1>
+    <p id="intro">Estas preguntas me ayudan a preparar un taller que parta de cómo trabajan ustedes de verdad. Tarda unos 10 minutos. No incluyas información confidencial de sus clientes: basta con describir los procesos.</p>
+  </header>
+
+  <div class="progress" id="progress"></div>
+
+  <form id="form" novalidate>
+    <!-- BLOQUE A -->
+    <section class="card step" data-step="A">
+      <h2>1. La empresa</h2>
+      <p class="sub">Lo responde una sola persona, la que mejor conozca cómo está organizada la empresa.</p>
+      <div class="row">
+        <div><label for="a_nombre">Tu nombre</label><input id="a_nombre" required></div>
+        <div><label for="a_cargo">Tu cargo</label><input id="a_cargo" required></div>
+      </div>
+      <label for="a_correo">Correo de contacto</label><input id="a_correo" type="email" required>
+
+      <label>Áreas o equipos de la empresa</label>
+      <div class="hint">Agrega cada área y cuántas personas tiene. Con esto defino cuántos talleres hacen falta.</div>
+      <div id="areas"></div>
+      <button type="button" class="link" id="addArea">+ Agregar área</button>
+
+      <label for="a_gemini">¿Quiénes usan hoy herramientas de IA (por ejemplo Gemini) y para qué?</label>
+      <textarea id="a_gemini" required></textarea>
+
+      <label for="a_datos">¿Qué información NO se puede subir a una herramienta de IA?</label>
+      <div class="hint">Por ejemplo datos de clientes, reportes de reputación, contratos. Si tienen una política escrita, mencionala.</div>
+      <textarea id="a_datos" required></textarea>
+
+      <label for="a_objetivo">¿Qué quieren lograr con la capacitación y cómo sabrían que funcionó?</label>
+      <textarea id="a_objetivo" required></textarea>
+
+      <label for="a_coord">¿Quién coordina agendas y accesos?</label>
+      <input id="a_coord" placeholder="Nombre y correo">
+      <div class="err" id="err-A"></div>
+    </section>
+
+    <!-- BLOQUE B -->
+    <section class="card step hidden" data-step="B">
+      <h2 id="bTitle">2. Cada área</h2>
+      <p class="sub" id="bSub">Responde una por área. Si prefieres que lo conteste el líder de cada una, copia su enlace.</p>
+      <div id="areaForms"></div>
+      <div class="err" id="err-B"></div>
+    </section>
+
+    <!-- BLOQUE C -->
+    <section class="card step hidden" data-step="C">
+      <h2>3. Logística</h2>
+      <p class="sub">Los talleres son remotos.</p>
+      <label for="c_plataforma">Plataforma de videollamada que prefieren</label>
+      <input id="c_plataforma" placeholder="Meet, Teams, Zoom…">
+      <label for="c_horarios">Días y horarios que les funcionan</label>
+      <textarea id="c_horarios"></textarea>
+      <label for="c_personas">¿Cuántas personas entrarían de verdad a cada taller?</label>
+      <input id="c_personas" placeholder="Por ejemplo: 25 en Consultores, 12 en RR. HH.">
+      <label for="c_extra">Algo más que deba saber</label>
+      <textarea id="c_extra"></textarea>
+      <div class="err" id="err-C"></div>
+    </section>
+
+    <div class="nav">
+      <button type="button" id="back" class="hidden">Atrás</button>
+      <button type="button" id="next" class="primary">Siguiente</button>
+    </div>
+  </form>
+
+  <section class="card done hidden" id="done">
+    <h2>Gracias, ya quedó registrado</h2>
+    <p id="doneMsg">Reviso tus respuestas y te escribo para coordinar el taller.</p>
+    <div id="doneLinks"></div>
+  </section>
+</div>
+
+<script>
+/* ===== Configuración ===== */
+// URL del webhook de Make que escribe en la base de Notion. Pégala aquí.
+const WEBHOOK_URL = "";
+
+/* ===== Estado ===== */
+const params = new URLSearchParams(location.search);
+const cliente = (params.get("cliente") || "").trim();
+const areaParam = (params.get("area") || "").trim();   // modo líder de área
+const modoArea = !!areaParam;
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const v = (id) => ($(id) ? $(id).value.trim() : "");
+
+const PREGUNTAS_AREA = [
+  ["semana", "¿Qué hace el área en una semana típica?"],
+  ["tareas", "Las 3 tareas que más tiempo consumen o más se repiten"],
+  ["docs", "¿Qué documentos producen con más frecuencia?", "Informes, presentaciones, análisis, correos…"],
+  ["ia", "¿Qué han intentado con IA y qué no les funcionó?"],
+  ["caso", "Un caso real para trabajar en el taller", "Descríbelo sin datos sensibles: qué se hace, con qué insumos y qué se entrega."],
+  ["dudas", "Dudas o resistencias del equipo frente a la IA"]
+];
+
+let steps = modoArea ? ["B"] : ["A", "B", "C"];
+let current = 0;
+
+if (cliente) { $("badge").textContent = "LuciRMe AI · " + cliente; }
+if (modoArea) {
+  $("title").textContent = "Área: " + areaParam;
+  $("intro").textContent = "Estas preguntas me ayudan a preparar el taller para tu área. Tarda unos 5 minutos. No incluyas información confidencial de clientes: basta con describir los procesos.";
+}
+
+/* ===== Áreas (bloque A) ===== */
+function addAreaRow(nombre = "", personas = "") {
+  const d = document.createElement("div");
+  d.className = "area-head";
+  d.innerHTML = `<input class="aname" placeholder="Nombre del área" value="${esc(nombre)}">
+                 <input class="acount" type="number" min="1" placeholder="Personas" value="${esc(personas)}">
+                 <button type="button" aria-label="Quitar" title="Quitar">×</button>`;
+  d.querySelector("button").onclick = () => { d.remove(); };
+  $("areas").appendChild(d);
+}
+if (!modoArea) { addAreaRow(); addAreaRow(); }
+$("addArea").onclick = () => addAreaRow();
+
+function leerAreas() {
+  return [...document.querySelectorAll("#areas .area-head")]
+    .map((r) => ({ nombre: r.querySelector(".aname").value.trim(), personas: r.querySelector(".acount").value.trim() }))
+    .filter((a) => a.nombre);
+}
+
+/* ===== Formularios por área (bloque B) ===== */
+function buildAreaForms() {
+  const wrap = $("areaForms");
+  wrap.innerHTML = "";
+  const lista = modoArea ? [{ nombre: areaParam, personas: "" }] : leerAreas();
+  lista.forEach((a, i) => {
+    const box = document.createElement("div");
+    box.className = "area-card";
+    box.dataset.area = a.nombre;
+    let html = `<h3>${esc(a.nombre)}${a.personas ? " · " + esc(a.personas) + " personas" : ""}</h3>`;
+    if (modoArea) {
+      html += `<div class="row"><div><label>Tu nombre</label><input data-k="lider_nombre"></div>
+               <div><label>Tu cargo</label><input data-k="lider_cargo"></div></div>
+               <label>Tu correo</label><input data-k="lider_correo" type="email">`;
+    } else {
+      html += `<div class="row"><div><label>Líder del área</label><input data-k="lider_nombre"></div>
+               <div><label>Correo del líder</label><input data-k="lider_correo" type="email"></div></div>
+               <div class="hint">Puedes responder tú, o pasarle este enlace al líder para que lo haga en 5 minutos:</div>
+               <div class="linkbox">${esc(enlaceArea(a.nombre))}</div>
+               <label style="display:flex;gap:8px;align-items:center;font-weight:400;margin-top:10px">
+                 <input type="checkbox" data-k="lo_responde_lider" style="width:auto"> Prefiero que lo responda el líder (lo dejo pendiente)
+               </label>`;
+    }
+    PREGUNTAS_AREA.forEach(([k, q, h]) => {
+      html += `<label>${esc(q)}</label>${h ? `<div class="hint">${esc(h)}</div>` : ""}<textarea data-k="${k}"></textarea>`;
+    });
+    box.innerHTML = html;
+    wrap.appendChild(box);
+  });
+}
+function enlaceArea(nombre) {
+  const u = new URL(location.href.split("?")[0]);
+  if (cliente) u.searchParams.set("cliente", cliente);
+  u.searchParams.set("area", nombre);
+  return u.toString();
+}
+function leerAreaForms() {
+  return [...document.querySelectorAll("#areaForms .area-card")].map((box) => {
+    const o = { area: box.dataset.area };
+    box.querySelectorAll("[data-k]").forEach((el) => {
+      o[el.dataset.k] = el.type === "checkbox" ? el.checked : el.value.trim();
+    });
+    return o;
+  });
+}
+
+/* ===== Navegación ===== */
+function renderProgress() {
+  $("progress").innerHTML = steps.map((_, i) => `<span class="${i <= current ? "on" : ""}"></span>`).join("");
+}
+function show() {
+  document.querySelectorAll(".step").forEach((s) => s.classList.toggle("hidden", s.dataset.step !== steps[current]));
+  $("back").classList.toggle("hidden", current === 0);
+  $("next").textContent = current === steps.length - 1 ? "Enviar" : "Siguiente";
+  renderProgress();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+function error(step, msg) {
+  const e = $("err-" + step);
+  e.textContent = msg; e.style.display = msg ? "block" : "none";
+}
+function validar(step) {
+  error(step, "");
+  if (step === "A") {
+    const req = ["a_nombre", "a_cargo", "a_correo", "a_gemini", "a_datos", "a_objetivo"];
+    if (req.some((id) => !v(id))) { error("A", "Faltan campos obligatorios."); return false; }
+    if (!leerAreas().length) { error("A", "Agrega al menos un área."); return false; }
+  }
+  if (step === "B") {
+    const forms = leerAreaForms();
+    const incompleto = forms.some((f) => !f.lo_responde_lider && (!f.tareas || !f.caso));
+    if (incompleto) { error("B", "En cada área responde al menos las tareas más repetidas y el caso real, o marca que lo responderá el líder."); return false; }
+    if (modoArea && !forms[0].lider_nombre) { error("B", "Falta tu nombre."); return false; }
+  }
+  return true;
+}
+
+$("back").onclick = () => { current--; show(); };
+$("next").onclick = async () => {
+  const step = steps[current];
+  if (!validar(step)) return;
+  if (current < steps.length - 1) {
+    current++;
+    if (steps[current] === "B") buildAreaForms();
+    show();
+    return;
+  }
+  await enviar();
+};
+
+if (modoArea) { buildAreaForms(); }
+show();
+
+/* ===== Envío ===== */
+async function enviar() {
+  const payload = {
+    cliente: cliente || "(sin cliente)",
+    modo: modoArea ? "area" : "empresa",
+    enviado_en: new Date().toISOString(),
+    empresa: modoArea ? null : {
+      nombre: v("a_nombre"), cargo: v("a_cargo"), correo: v("a_correo"),
+      areas: leerAreas(), uso_ia_hoy: v("a_gemini"), datos_restringidos: v("a_datos"),
+      objetivo: v("a_objetivo"), coordinador: v("a_coord")
+    },
+    areas: leerAreaForms(),
+    logistica: modoArea ? null : {
+      plataforma: v("c_plataforma"), horarios: v("c_horarios"),
+      personas_por_taller: v("c_personas"), extra: v("c_extra")
+    }
+  };
+  $("next").disabled = true; $("next").textContent = "Enviando…";
+  try {
+    if (!WEBHOOK_URL) throw new Error("Falta configurar WEBHOOK_URL");
+    const r = await fetch(WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    terminar(payload);
+  } catch (e) {
+    $("next").disabled = false; $("next").textContent = "Enviar";
+    error(steps[current], "No pude enviar tus respuestas (" + e.message + "). Descárgalas y envíalas por correo a pablo@lucirme.com.");
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = "Descargar respuestas"; b.style.marginTop = "10px";
+    b.onclick = () => {
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+      a.download = "respuestas-" + (cliente || "formulario") + ".json"; a.click();
+    };
+    if (!document.getElementById("dl")) { b.id = "dl"; $("err-" + steps[current]).after(b); }
+  }
+}
+function terminar(payload) {
+  $("form").classList.add("hidden"); $("progress").classList.add("hidden");
+  $("done").classList.remove("hidden");
+  if (!modoArea) {
+    const pend = payload.areas.filter((a) => a.lo_responde_lider);
+    if (pend.length) {
+      $("doneMsg").textContent = "Quedaron pendientes las áreas que responderán sus líderes. Compárteles estos enlaces:";
+      $("doneLinks").innerHTML = pend.map((a) => `<p><strong>${esc(a.area)}</strong></p><div class="linkbox">${esc(enlaceArea(a.area))}</div>`).join("");
+    }
+  }
+  window.scrollTo({ top: 0 });
+}
+</script>
+</body>
+</html>
