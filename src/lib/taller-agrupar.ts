@@ -1,10 +1,11 @@
 // src/lib/taller-agrupar.ts
-// Agrupa dolores parecidos con Groq (mismo patrón que /api/diagnosticar: llama-3.3-70b + JSON).
+// Agrupa dolores parecidos con Groq (JSON). El modelo se puede cambiar con TALLER_GROQ_MODELO.
 // La IA solo propone grupos; el código valida y la persona facilitadora corrige antes de proyectar.
 
 import type { Dolor, GrupoGuardado } from './taller-matriz';
 
-const MODELO = 'llama-3.3-70b-versatile';
+// Mismo modelo que ya responde en /api/test-groq. llama-3.3-70b-versatile ya no está disponible en esta cuenta.
+const MODELO_POR_DEFECTO = 'openai/gpt-oss-120b';
 
 const PROMPT_SISTEMA = `Eres un facilitador de talleres de IA aplicada. Recibes dolores de trabajo escritos por personas de un equipo y los agrupas por el problema de fondo que comparten.
 
@@ -51,23 +52,29 @@ export async function agruparConGroq(dolores: Dolor[]): Promise<GrupoGuardado[]>
 
   const entrada = dolores.map((d) => ({ id: d.id, rol: d.rol, dolor: d.tarea }));
 
-  const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: MODELO,
-      temperature: 0.2,
-      response_format: { type: 'json_object' },
-      messages: [
-        { role: 'system', content: PROMPT_SISTEMA },
-        { role: 'user', content: `Dolores a agrupar (JSON):\n${JSON.stringify(entrada)}` },
-      ],
-    }),
-  });
+  const modelo = (process.env.TALLER_GROQ_MODELO || '').trim() || MODELO_POR_DEFECTO;
+  const llamar = (conJson: boolean) =>
+    fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: modelo,
+        temperature: 0.2,
+        ...(conJson ? { response_format: { type: 'json_object' } } : {}),
+        messages: [
+          { role: 'system', content: PROMPT_SISTEMA },
+          { role: 'user', content: `Dolores a agrupar (JSON):\n${JSON.stringify(entrada)}` },
+        ],
+      }),
+    });
+
+  let r = await llamar(true);
+  // Algunos modelos no aceptan response_format: se reintenta sin él y se extrae el JSON del texto.
+  if (r.status === 400) r = await llamar(false);
 
   if (!r.ok) {
     const detalle = await r.text().catch(() => '');
-    throw new Error(`Groq respondió ${r.status}. ${detalle.slice(0, 200)}`);
+    throw new Error(`Groq respondió ${r.status} (modelo ${modelo}). ${detalle.slice(0, 200)}`);
   }
   const data = await r.json();
   const contenido = data?.choices?.[0]?.message?.content ?? '{}';
@@ -75,7 +82,13 @@ export async function agruparConGroq(dolores: Dolor[]): Promise<GrupoGuardado[]>
   try {
     parsed = JSON.parse(contenido);
   } catch {
-    throw new Error('Groq devolvió un JSON que no se pudo leer.');
+    const ini = contenido.indexOf('{');
+    const fin = contenido.lastIndexOf('}');
+    try {
+      parsed = JSON.parse(contenido.slice(ini, fin + 1));
+    } catch {
+      throw new Error('Groq devolvió un JSON que no se pudo leer.');
+    }
   }
   return normalizarGrupos(parsed, dolores);
 }
