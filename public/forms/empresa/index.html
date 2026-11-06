@@ -47,6 +47,11 @@
   .done h2{font-size:26px;color:var(--success)}
   .linkbox{font:13px/1.4 ui-monospace,Menlo,monospace;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;word-break:break-all;margin-top:6px}
   .hidden{display:none!important}
+  .bad{border-color:var(--err)!important;outline:none}
+  .cnt{font:12px/1.2 system-ui,sans-serif;color:#64748B;text-align:right;margin-top:3px}
+  .cnt.near{color:var(--err)}
+  .note{font:14px/1.4 system-ui,sans-serif;background:#F0FDFA;border:1px solid #0D9488;color:#0F172A;border-radius:10px;padding:10px 12px;margin:0 0 14px}
+  .note button{margin-left:8px}
 </style>
 </head>
 <body>
@@ -122,6 +127,7 @@
   <section class="card done hidden" id="done">
     <h2>Gracias, ya quedó registrado</h2>
     <p id="doneMsg">Reviso tus respuestas y te escribo para coordinar el taller.</p>
+    <p id="doneId" class="hint"></p>
     <div id="doneLinks"></div>
   </section>
 </div>
@@ -206,6 +212,7 @@ function buildAreaForms() {
     box.innerHTML = html;
     wrap.appendChild(box);
   });
+  ponerLimites();
 }
 function enlaceArea(nombre) {
   const u = new URL(location.href.split("?")[0]);
@@ -240,16 +247,41 @@ function error(step, msg) {
 }
 function validar(step) {
   error(step, "");
+  limpiarMarcas();
   if (step === "A") {
-    const req = ["a_nombre", "a_cargo", "a_correo", "a_gemini", "a_datos", "a_objetivo"];
-    if (req.some((id) => !v(id))) { error("A", "Faltan campos obligatorios."); return false; }
-    if (!leerAreas().length) { error("A", "Agrega al menos un área."); return false; }
+    const vacios = ["a_nombre", "a_cargo", "a_correo", "a_gemini", "a_datos", "a_objetivo"].filter((id) => !sustancia(v(id), ["a_nombre", "a_cargo", "a_correo"].includes(id) ? 2 : 3));
+    if (vacios.length) { marcar(vacios.map($)); error("A", "Faltan campos obligatorios, o la respuesta es demasiado corta para entenderla."); return false; }
+    if (!correoValido(v("a_correo"))) { marcar([$("a_correo")]); error("A", "El correo no parece válido. Revisa que tenga la forma nombre@empresa.com."); return false; }
+    const filas = [...document.querySelectorAll("#areas .area-head")];
+    const conNombre = filas.filter((r) => r.querySelector(".aname").value.trim());
+    if (!conNombre.length) { marcar([filas[0] && filas[0].querySelector(".aname")]); error("A", "Agrega al menos un área."); return false; }
+    const malas = conNombre.filter((r) => !sustancia(r.querySelector(".aname").value, 2) || (r.querySelector(".acount").value && !(+r.querySelector(".acount").value > 0)));
+    if (malas.length) { marcar(malas.map((r) => r.querySelector(".aname"))); error("A", "Revisa los nombres de las áreas y que el número de personas sea mayor que cero."); return false; }
+    const nombres = conNombre.map((r) => r.querySelector(".aname").value.trim().toLowerCase());
+    const dup = nombres.find((n, i) => nombres.indexOf(n) !== i);
+    if (dup) { marcar(conNombre.filter((r) => r.querySelector(".aname").value.trim().toLowerCase() === dup).map((r) => r.querySelector(".aname"))); error("A", "Hay un área repetida: " + dup + "."); return false; }
   }
   if (step === "B") {
-    const forms = leerAreaForms();
-    const incompleto = forms.some((f) => !f.lo_responde_lider && (!f.tareas || !f.caso));
-    if (incompleto) { error("B", "En cada área responde al menos las tareas más repetidas y el caso real, o marca que lo responderá el líder."); return false; }
-    if (modoArea && !forms[0].lider_nombre) { error("B", "Falta tu nombre."); return false; }
+    const cajas = [...document.querySelectorAll("#areaForms .area-card")];
+    const malos = [];
+    cajas.forEach((box) => {
+      const get = (k) => box.querySelector('[data-k="' + k + '"]');
+      const pendiente = get("lo_responde_lider") && get("lo_responde_lider").checked;
+      if (!pendiente) { ["tareas", "caso"].forEach((k) => { if (!sustancia(get(k).value)) malos.push(get(k)); }); }
+      const mail = get("lider_correo");
+      if (mail && mail.value.trim() && !correoValido(mail.value.trim())) malos.push(mail);
+      if (modoArea) {
+        if (!sustancia(get("lider_nombre").value, 2)) malos.push(get("lider_nombre"));
+        if (!correoValido(mail.value.trim())) malos.push(mail);
+      }
+    });
+    if (malos.length) {
+      marcar(malos);
+      error("B", modoArea
+        ? "Falta tu nombre y tu correo (con formato válido), y responder al menos las tareas más repetidas y el caso real."
+        : "En cada área responde al menos las tareas más repetidas y el caso real (con algo de detalle), o marca que lo responderá el líder. Revisa también los correos.");
+      return false;
+    }
   }
   return true;
 }
@@ -262,20 +294,104 @@ $("next").onclick = async () => {
     current++;
     if (steps[current] === "B") buildAreaForms();
     show();
+    guardarBorrador();
     return;
   }
   await enviar();
 };
 
-if (modoArea) { buildAreaForms(); }
-show();
+
+
+/* ===== Utilidades de validación ===== */
+const sustancia = (t, min = 3) => ((t || "").match(/[\p{L}\p{N}]/gu) || []).length >= min;   // no vale "." ni "  " ni "n"
+const correoValido = (t) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(t || "");
+function limpiarMarcas(scope) { (scope || document).querySelectorAll(".bad").forEach((el) => el.classList.remove("bad")); }
+function marcar(els) {
+  const lista = els.filter(Boolean);
+  lista.forEach((el) => el.classList.add("bad"));
+  if (lista[0]) { lista[0].scrollIntoView({ block: "center", behavior: "smooth" }); lista[0].focus({ preventScroll: true }); }
+}
+document.addEventListener("input", (e) => e.target.classList && e.target.classList.remove("bad"));
+
+/* ===== Límites y contadores (Notion corta a 2.000 caracteres) ===== */
+function ponerLimites() {
+  document.querySelectorAll("textarea").forEach((t) => {
+    if (t.dataset.cnt) return;
+    t.maxLength = 2000; t.dataset.cnt = "1";
+    const c = document.createElement("div"); c.className = "cnt";
+    t.after(c);
+    const act = () => { c.textContent = t.value.length + " / 2000"; c.classList.toggle("near", t.value.length >= 1800); };
+    t.addEventListener("input", act); act();
+  });
+  document.querySelectorAll("input:not([type=checkbox]):not([type=number]):not([maxlength])").forEach((i) => { i.maxLength = 300; });
+}
+
+/* ===== Código de envío y borrador local ===== */
+function nuevoId() {
+  const a = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"; let r = "";
+  const b = (window.crypto && crypto.getRandomValues) ? crypto.getRandomValues(new Uint8Array(5)) : Array.from({ length: 5 }, () => Math.floor(Math.random() * 256));
+  for (let i = 0; i < 5; i++) r += a[b[i] % a.length];
+  return "E-" + r;
+}
+let envioId = nuevoId();
+let enviadoOk = false, tocado = false;
+const DRAFT_KEY = "lucirme-form-empresa:" + (cliente || "-") + ":" + (areaParam || "-");
+const CAMPOS_FIJOS = ["a_nombre", "a_cargo", "a_correo", "a_gemini", "a_datos", "a_objetivo", "a_coord", "c_plataforma", "c_horarios", "c_personas", "c_extra"];
+
+function guardarBorrador() {
+  if (enviadoOk) return;
+  try {
+    const campos = {}; CAMPOS_FIJOS.forEach((id) => { if ($(id)) campos[id] = $(id).value; });
+    const areas = [...document.querySelectorAll("#areas .area-head")].map((r) => ({ n: r.querySelector(".aname").value, c: r.querySelector(".acount").value }));
+    const formsArea = {};
+    document.querySelectorAll("#areaForms .area-card").forEach((box) => {
+      const o = {}; box.querySelectorAll("[data-k]").forEach((el) => { o[el.dataset.k] = el.type === "checkbox" ? el.checked : el.value; });
+      formsArea[box.dataset.area] = o;
+    });
+    localStorage.setItem(DRAFT_KEY, JSON.stringify({ t: Date.now(), envioId, step: current, campos, areas, formsArea, enviados: [...enviados] }));
+  } catch (e) { /* sin almacenamiento: el formulario sigue funcionando */ }
+}
+let _tg;
+function programarGuardado() { tocado = true; clearTimeout(_tg); _tg = setTimeout(guardarBorrador, 400); }
+document.addEventListener("input", programarGuardado);
+document.addEventListener("change", programarGuardado);
+
+function borrarBorrador() { try { localStorage.removeItem(DRAFT_KEY); } catch (e) {} }
+
+function restaurarBorrador() {
+  let d;
+  try { d = JSON.parse(localStorage.getItem(DRAFT_KEY) || "null"); } catch (e) { d = null; }
+  if (!d || Date.now() - d.t > 14 * 24 * 3600 * 1000) return;
+  const algo = Object.values(d.campos || {}).some((x) => (x || "").trim()) || Object.values(d.formsArea || {}).some((o) => Object.values(o).some((x) => x === true || (typeof x === "string" && x.trim())));
+  if (!algo) return;
+  envioId = d.envioId || envioId;
+  (d.enviados || []).forEach((i) => enviados.add(i));
+  Object.entries(d.campos || {}).forEach(([id, val]) => { if ($(id)) $(id).value = val; });
+  if (!modoArea && d.areas && d.areas.length) { $("areas").innerHTML = ""; d.areas.forEach((a) => addAreaRow(a.n, a.c)); }
+  current = Math.min(Math.max(d.step || 0, 0), steps.length - 1);
+  if (steps[current] === "B" || modoArea) {
+    buildAreaForms();
+    document.querySelectorAll("#areaForms .area-card").forEach((box) => {
+      const o = (d.formsArea || {})[box.dataset.area]; if (!o) return;
+      box.querySelectorAll("[data-k]").forEach((el) => { if (o[el.dataset.k] === undefined) return; if (el.type === "checkbox") el.checked = !!o[el.dataset.k]; else el.value = o[el.dataset.k]; });
+    });
+  }
+  const n = document.createElement("div"); n.className = "note";
+  n.innerHTML = "Recuperé lo que ya habías escrito en este navegador. <button type=\"button\" class=\"link\" id=\"empezarDeNuevo\">Empezar de nuevo</button>";
+  $("progress").before(n);
+  $("empezarDeNuevo").onclick = () => { borrarBorrador(); enviadoOk = true; location.reload(); };
+}
+
+window.addEventListener("beforeunload", (e) => {
+  if (tocado && !enviadoOk) { e.preventDefault(); e.returnValue = ""; }
+});
 
 /* ===== Envío ===== */
 // Cada envío llega a Make como una fila plana: una "empresa" y una por cada "area".
 const enviados = new Set();
 
 function construirFilas() {
-  const base = { cliente: cliente || "(sin cliente)", enviado_en: new Date().toISOString() };
+  const base = { cliente: cliente || "(sin cliente)", envio_id: envioId, enviado_en: new Date().toISOString() };
   const filas = [];
   if (!modoArea) {
     filas.push({
@@ -308,9 +424,16 @@ async function enviar() {
     if (!WEBHOOK_URL) throw new Error("Falta configurar WEBHOOK_URL");
     for (let i = 0; i < filas.length; i++) {
       if (enviados.has(i)) continue;
-      const r = await fetch(WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(filas[i]) });
+      const ctl = new AbortController(); const to = setTimeout(() => ctl.abort(), 15000);
+      let r;
+      try {
+        r = await fetch(WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(filas[i]), signal: ctl.signal });
+      } catch (err) {
+        throw new Error(err && err.name === "AbortError" ? "el servidor tardó más de 15 segundos" : "sin conexión");
+      } finally { clearTimeout(to); }
       if (!r.ok) throw new Error("HTTP " + r.status);
       enviados.add(i);
+      guardarBorrador();
     }
     terminar(filas);
   } catch (e) {
@@ -322,14 +445,17 @@ async function enviar() {
       b.onclick = () => {
         const blob = new Blob([JSON.stringify(filas, null, 2)], { type: "application/json" });
         const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
-        a.download = "respuestas-" + (cliente || "formulario") + ".json"; a.click();
+        a.download = "respuestas-" + (cliente || "formulario") + "-" + envioId + ".json"; a.click();
       };
       $("err-" + steps[current]).after(b);
     }
   }
 }
 function terminar(filas) {
+  enviadoOk = true; borrarBorrador();
+  $("doneId").textContent = "Código de tu envío: " + envioId + " (guárdalo por si necesitas escribirme sobre este formulario).";
   $("form").classList.add("hidden"); $("progress").classList.add("hidden");
+  document.querySelectorAll(".note").forEach((n) => n.remove());
   $("done").classList.remove("hidden");
   if (!modoArea) {
     const pend = filas.filter((f) => f.tipo === "area" && f.pendiente_lider);
@@ -340,6 +466,12 @@ function terminar(filas) {
   }
   window.scrollTo({ top: 0 });
 }
+
+/* ===== Arranque (al final, cuando todo lo anterior ya está definido) ===== */
+if (modoArea) { buildAreaForms(); }
+restaurarBorrador();
+ponerLimites();
+show();
 </script>
 </body>
 </html>
