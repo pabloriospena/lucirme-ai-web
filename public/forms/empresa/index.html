@@ -140,6 +140,7 @@
     <h2>Gracias, ya quedó registrado</h2>
     <p id="doneMsg">Reviso tus respuestas y te escribo para coordinar el taller.</p>
     <p id="doneId" class="hint"></p>
+    <button type="button" id="copia">Descargar copia de mis respuestas</button>
     <div id="doneLinks"></div>
   </section>
 </div>
@@ -148,6 +149,8 @@
 /* ===== Configuración ===== */
 // Webhook de Make. El escenario distingue este formulario por el campo "tipo" y guarda en la base "Respuestas formulario empresa" de Notion.
 const WEBHOOK_URL = "https://hook.us2.make.com/eg6vornj63j819a4a44pf1uzgdd7yjms";
+// Código que Make exige en cada envío. No es un secreto fuerte (viaja en la página); solo evita que cualquiera que tenga la URL del webhook le meta datos.
+const FORM_TOKEN = "O7gpNfva9dzEdHK0tg9pSEFk";
 
 /* ===== Estado ===== */
 const params = new URLSearchParams(location.search);
@@ -418,12 +421,23 @@ function renderResumen() {
   }).join("");
 }
 
+function descargarCopia(filas) {
+  const partes = ["Copia de tus respuestas · " + (cliente || "formulario") + " · código " + envioId + "\n"];
+  filas.forEach((f) => {
+    partes.push("\n== " + (f.tipo === "empresa" ? "La empresa" : "Área: " + f.area + (f.pendiente_lider ? " (la responderá el líder)" : "")) + " ==");
+    Object.keys(ETIQUETAS).forEach((k) => { if (f[k] !== undefined && String(f[k]).trim() !== "") partes.push(ETIQUETAS[k] + ": " + f[k]); });
+  });
+  const blob = new Blob([partes.join("\n") + "\n"], { type: "text/plain;charset=utf-8" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = "mis-respuestas-" + envioId + ".txt"; a.click();
+}
+
 /* ===== Envío ===== */
 // Cada envío llega a Make como una fila plana: una "empresa" y una por cada "area".
 const enviados = new Set();
 
 function construirFilas() {
-  const base = { cliente: cliente || "(sin cliente)", envio_id: envioId, enviado_en: new Date().toISOString() };
+  const base = { token: FORM_TOKEN, cliente: cliente || "(sin cliente)", envio_id: envioId, enviado_en: new Date().toISOString() };
   const filas = [];
   if (!modoArea) {
     filas.push({
@@ -446,7 +460,18 @@ function construirFilas() {
       caso: f.caso || "", dudas: f.dudas || ""
     });
   });
+  filas.forEach((f, i) => { f.fila = (i + 1) + "/" + filas.length; });   // "2/3": en Notion se ve si un envío quedó a medias
   return filas;
+}
+
+let _fallaAvisada = "";
+function avisarFalla(msg, total) {
+  // Mejor esfuerzo: si el envío falló pero Make todavía responde, te llega un aviso por Telegram.
+  const clave = envioId + "|" + msg; if (_fallaAvisada === clave) return; _fallaAvisada = clave;
+  try {
+    fetch(WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, keepalive: true,
+      body: JSON.stringify({ token: FORM_TOKEN, tipo: "falla_cliente", cliente: cliente || "(sin cliente)", envio_id: envioId, error: String(msg).slice(0, 200), enviadas: enviados.size, total: total, enviado_en: new Date().toISOString() }) }).catch(() => {});
+  } catch (e) {}
 }
 
 async function enviar() {
@@ -469,6 +494,7 @@ async function enviar() {
     }
     terminar(filas);
   } catch (e) {
+    avisarFalla(e.message, filas.length);
     $("next").disabled = false; $("next").textContent = "Reintentar envío";
     error(steps[current], "No pude enviar tus respuestas (" + e.message + "). Puedes reintentar, o descargarlas y enviarlas por correo a pablo@lucirme.com.");
     if (!document.getElementById("dl")) {
@@ -486,6 +512,7 @@ async function enviar() {
 function terminar(filas) {
   enviadoOk = true; borrarBorrador();
   $("doneId").textContent = "Código de tu envío: " + envioId + " (guárdalo por si necesitas escribirme sobre este formulario).";
+  $("copia").onclick = () => descargarCopia(filas);
   $("form").classList.add("hidden"); $("progress").classList.add("hidden");
   document.querySelectorAll(".note").forEach((n) => n.remove());
   $("done").classList.remove("hidden");
