@@ -10,7 +10,8 @@ export default defineConfig({
   output: 'server',
   redirects: {
     '/whatsapp': 'https://wa.me/573053046180',
-    '/sasa': '/presentaciones/sasa/aportar'
+    '/sasa': '/presentaciones/sasa/aportar',
+    '/cm': '/presentaciones/cm/aportar'
   },
   adapter: isVercel ? vercel() : node({ mode: 'standalone' }),
   server: {

@@ -34,6 +34,14 @@ const PRECARGA: string[] = [
   'Proyección de facturación vinculada con oportunidades',
 ];
 
+// Sesiones de Seguros CM (cm-t1, cm-t2...): precargan las 3 tareas de su formulario.
+const PRECARGA_CM: string[] = [
+  'Informe de renovaciones',
+  'Lectura de documentación de siniestros de seguros generales',
+  'Búsqueda de documentación e historial de cliente',
+];
+const precargaDe = (sesion: string) => (sesion.startsWith('cm-') ? PRECARGA_CM : PRECARGA);
+
 function noAutorizado() {
   if (!(process.env.TALLER_FACILITADOR_KEY || '').trim()) {
     return json({ ok: false, error: 'Falta configurar TALLER_FACILITADOR_KEY en el servidor.' }, 503);
@@ -126,7 +134,7 @@ export const POST: APIRoute = async ({ request }) => {
       case 'precargar': {
         const actuales = await leerLista<Dolor>(k.dolores);
         const yaEsta = new Set(actuales.filter((d) => d.origen === 'formulario').map((d) => d.tarea));
-        for (const tarea of PRECARGA) {
+        for (const tarea of precargaDe(sesion)) {
           if (yaEsta.has(tarea)) continue;
           const d: Dolor = {
             id: crypto.randomUUID().replace(/-/g, '').slice(0, 8),
