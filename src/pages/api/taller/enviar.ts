@@ -19,6 +19,14 @@ const ROLES = [
   'Tecnología y desarrollo',
   'Administración',
   'Otro',
+  // Seguros CM
+  'Dirección comercial y administrativa',
+  'Operativa y suscripción empresarial',
+  'Negocio empresarial',
+  'Autos y copropiedades',
+  'Salud y hogar',
+  'Cartera, cumplimiento y vida',
+  'Comunicación',
 ];
 const HERRAMIENTAS = ['ChatGPT', 'Gemini', 'Claude', 'Cursor', 'NotebookLM', 'Grok', 'DeepSeek', 'Copilot', 'Otra', 'Ninguna'];
 

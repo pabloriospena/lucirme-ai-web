@@ -1,0 +1,369 @@
+---
+// Panel de quien dirige el taller. Requiere la clave TALLER_FACILITADOR_KEY.
+import Layout from "../../../layouts/Layout.astro";
+
+const sesionParam = Astro.url.searchParams.get("s") ?? "cm-t1";
+const sesion = /^[a-z0-9-]{3,30}$/.test(sesionParam) ? sesionParam : "cm-t1";
+const boton =
+    "rounded-lg px-3 py-2 text-xs font-bold transition disabled:opacity-50";
+---
+
+<Layout title="Panel del facilitador | LuciRMe AI" hideHeader hideFooter noindex>
+    <div class="min-h-screen bg-slate-50 py-6 px-4" id="raiz" data-sesion={sesion}>
+        <div class="max-w-5xl mx-auto">
+            <div class="flex flex-wrap items-end justify-between gap-3 mb-4">
+                <div>
+                    <p class="text-xs font-bold tracking-widest uppercase text-teal-600">Facilitador</p>
+                    <h1 class="text-2xl font-bold text-slate-900 tracking-tight">
+                        Sesión <span id="sesion-nombre" class="font-mono text-teal-700"></span>
+                    </h1>
+                </div>
+                <div class="text-xs text-slate-500 space-y-0.5 text-right" id="estado-sistema"></div>
+            </div>
+
+            <!-- ACCESO -->
+            <form id="acceso" class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm max-w-md">
+                <label class="block text-xs font-semibold text-slate-600 mb-1" for="clave">Clave del facilitador</label>
+                <div class="flex gap-2">
+                    <input id="clave" type="password" autocomplete="off" class="flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm" />
+                    <button class={`${boton} bg-slate-900 text-white hover:bg-slate-800`} type="submit">Entrar</button>
+                </div>
+                <p id="acceso-msg" class="text-xs text-red-600 mt-2 hidden"></p>
+            </form>
+
+            <!-- PANEL -->
+            <div id="panel" class="hidden space-y-5">
+                <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                    <div class="flex flex-wrap items-center gap-2 mb-3">
+                        <button id="b-precargar" class={`${boton} bg-white border border-slate-300 text-slate-700 hover:bg-slate-50`}>Precargar los 3 del formulario</button>
+                        <button id="b-agrupar" class={`${boton} bg-teal-600 text-white hover:bg-teal-700`}>Agrupar con Groq</button>
+                        <button id="b-publicar" class={`${boton} bg-slate-900 text-white hover:bg-slate-800`}>Publicar matriz</button>
+                        <button id="b-copiar" class={`${boton} bg-white border border-slate-300 text-slate-700 hover:bg-slate-50`}>Copiar para Claude</button>
+                        <button id="b-reiniciar" class={`${boton} bg-white border border-red-300 text-red-700 hover:bg-red-50 ml-auto`}>Reiniciar sesión</button>
+                    </div>
+                    <p id="conteos" class="text-sm text-slate-600"></p>
+                    <p id="msg" class="text-xs mt-2 hidden" role="status"></p>
+                </div>
+
+                <details class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                    <summary class="text-sm font-semibold text-slate-700 cursor-pointer">Cargar la agrupación hecha en Claude</summary>
+                    <p class="text-xs text-slate-500 my-2">
+                        Pega aquí el JSON que te devuelva Claude (forma: grupos con nombre, dolor_de_fondo e ids).
+                    </p>
+                    <textarea id="json-claude" rows="6" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs font-mono"></textarea>
+                    <button id="b-cargar" class={`${boton} bg-teal-600 text-white hover:bg-teal-700 mt-2`}>Cargar agrupación</button>
+                </details>
+
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <h2 class="text-lg font-bold text-slate-900">Grupos</h2>
+                        <div class="flex gap-2">
+                            <button id="b-nuevo" class={`${boton} bg-white border border-slate-300 text-slate-700 hover:bg-slate-50`}>Nuevo grupo</button>
+                            <button id="b-guardar" class={`${boton} bg-teal-600 text-white hover:bg-teal-700`}>Guardar cambios</button>
+                        </div>
+                    </div>
+                    <p id="sucio" class="text-xs text-amber-700 mb-2 hidden">Tienes cambios sin guardar.</p>
+                    <div id="grupos" class="grid md:grid-cols-2 gap-4"></div>
+                </div>
+
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900 mb-2">Sin grupo</h2>
+                    <div id="sin-grupo" class="bg-white border border-slate-200 rounded-xl p-3 shadow-sm space-y-2"></div>
+                </div>
+
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900 mb-2">Lo que calcula el sistema</h2>
+                    <div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-100 text-slate-500 uppercase tracking-wider">
+                                <tr>
+                                    <th class="p-2">Grupo</th>
+                                    <th class="p-2">Dolores</th>
+                                    <th class="p-2">Horas/sem</th>
+                                    <th class="p-2">Viabilidad</th>
+                                    <th class="p-2">Cuadrante</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-matriz" class="divide-y divide-slate-100 text-slate-700"></tbody>
+                        </table>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-1">
+                        Las horas son la suma de lo que declaró cada persona; la viabilidad, el promedio de procedimiento escrito y resultado estructurado. Lo que no se declaró no se inventa.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        type Dolor = {
+            id: string; tarea: string; rol: string; nombre?: string; horas_semana: number | null;
+            frecuencia: string | null; procedimiento: string | null; estructurado: string | null; origen?: string;
+        };
+        type GrupoG = { id: string; nombre: string; dolor_de_fondo: string; ids: string[] };
+        type Calc = { id: string; nombre: string; n: number; impacto: number; con_horas: number; viabilidad: number | null; cuadrante: string };
+        type Estado = {
+            ok: boolean; almacenamiento: string; groq: boolean; dolores: Dolor[]; uso: unknown[];
+            agrupacion: { grupos: GrupoG[]; publicada: boolean; fuente: string } | null;
+            matriz: { grupos: Calc[]; sin_grupo: Dolor[]; umbral_impacto: number };
+        };
+
+        const raiz = document.getElementById("raiz") as HTMLElement;
+        const sesion = raiz.dataset.sesion ?? "cm-t1";
+        document.getElementById("sesion-nombre")!.textContent = sesion;
+
+        const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
+        const el = (tag: string, cls: string, texto?: string) => {
+            const e = document.createElement(tag);
+            e.className = cls;
+            if (texto !== undefined) e.textContent = texto;
+            return e;
+        };
+
+        let clave = sessionStorage.getItem("taller-clave") ?? "";
+        let estado: Estado | null = null;
+        let grupos: GrupoG[] = []; // copia editable
+        let sucio = false;
+
+        const NOMBRE_Q: Record<string, string> = {
+            "empezar-ya": "Empezar ya",
+            "preparar-datos": "Preparar datos primero",
+            "ganancia-pequena": "Ganancia pequeña",
+            "dejar-por-ahora": "Dejar por ahora",
+            "sin-datos": "Sin datos para ubicar",
+        };
+
+        function aviso(texto: string, bien = true) {
+            const m = $("msg");
+            m.textContent = texto;
+            m.className = `text-xs mt-2 ${bien ? "text-emerald-700" : "text-red-600"}`;
+        }
+        function marcarSucio(v: boolean) {
+            sucio = v;
+            $("sucio").classList.toggle("hidden", !v);
+        }
+
+        async function llamar(metodo: "GET" | "POST", cuerpo?: Record<string, unknown>, extra = "") {
+            const r = await fetch(`/api/taller/facilitador?sesion=${encodeURIComponent(sesion)}${extra}`, {
+                method: metodo,
+                headers: { "Content-Type": "application/json", "x-facilitador-key": clave },
+                body: metodo === "POST" ? JSON.stringify({ sesion, ...cuerpo }) : undefined,
+            });
+            return r;
+        }
+
+        function pintarSistema() {
+            const s = $("estado-sistema");
+            s.replaceChildren();
+            if (!estado) return;
+            const memoria = estado.almacenamiento === "memoria";
+            s.appendChild(el("p", memoria ? "text-red-600 font-semibold" : "text-emerald-700", memoria ? "Almacenamiento: memoria (NO fiable en Vercel; configura Upstash)" : "Almacenamiento: Upstash Redis"));
+            s.appendChild(el("p", estado.groq ? "text-emerald-700" : "text-red-600", estado.groq ? "Groq configurado" : "Falta GROQ_API_KEY"));
+        }
+
+        function pintarConteos() {
+            if (!estado) return;
+            const delTaller = estado.dolores.filter((d) => d.origen !== "formulario").length;
+            const pre = estado.dolores.length - delTaller;
+            const partes = [`${delTaller} dolores recibidos`, `${estado.uso.length} respuestas de uso de IA`];
+            if (pre) partes.push(`${pre} precargados del formulario`);
+            if (estado.agrupacion) partes.push(`agrupación: ${estado.agrupacion.fuente}`);
+            $("conteos").textContent = partes.join(" · ");
+            const pub = Boolean(estado.agrupacion?.publicada);
+            $("b-publicar").textContent = pub ? "Ocultar matriz" : "Publicar matriz";
+        }
+
+        function filaDolor(d: Dolor, selector: HTMLElement) {
+            const fila = el("div", "border border-slate-100 rounded-lg p-2 bg-slate-50");
+            fila.appendChild(el("p", "text-xs text-slate-800", d.tarea));
+            const datos = [d.rol];
+            if (d.nombre) datos.push(d.nombre);
+            if (d.horas_semana !== null) datos.push(`${d.horas_semana} h/sem`);
+            if (d.frecuencia) datos.push(d.frecuencia);
+            if (d.procedimiento) datos.push(`procedimiento: ${d.procedimiento}`);
+            if (d.estructurado) datos.push(`estructurado: ${d.estructurado}`);
+            fila.appendChild(el("p", "text-[11px] text-slate-400 mt-0.5", datos.join(" · ")));
+            fila.appendChild(selector);
+            return fila;
+        }
+
+        function selectorDe(dolorId: string, actual: string | null) {
+            const sel = document.createElement("select");
+            sel.className = "mt-1 w-full rounded border border-slate-300 text-[11px] px-1 py-1 bg-white";
+            const op0 = new Option("Sin grupo", "");
+            sel.appendChild(op0);
+            grupos.forEach((g) => sel.appendChild(new Option(g.nombre || "(sin nombre)", g.id)));
+            sel.value = actual ?? "";
+            sel.addEventListener("change", () => {
+                grupos.forEach((g) => (g.ids = g.ids.filter((i) => i !== dolorId)));
+                if (sel.value) grupos.find((g) => g.id === sel.value)?.ids.push(dolorId);
+                marcarSucio(true);
+                pintarEditor();
+            });
+            return sel;
+        }
+
+        function pintarEditor() {
+            if (!estado) return;
+            const porId = new Map(estado.dolores.map((d) => [d.id, d]));
+            const cont = $("grupos");
+            cont.replaceChildren();
+            if (!grupos.length) cont.appendChild(el("p", "text-sm text-slate-500", "Todavía no hay grupos. Agrupa con Groq o crea uno."));
+            for (const g of grupos) {
+                const caja = el("div", "bg-white border border-slate-200 rounded-xl p-3 shadow-sm space-y-2");
+                const nombre = document.createElement("input");
+                nombre.className = "w-full rounded border border-slate-300 px-2 py-1.5 text-sm font-semibold";
+                nombre.value = g.nombre;
+                nombre.placeholder = "Nombre del grupo";
+                nombre.addEventListener("input", () => { g.nombre = nombre.value; marcarSucio(true); });
+                const fondo = document.createElement("textarea");
+                fondo.className = "w-full rounded border border-slate-300 px-2 py-1.5 text-xs";
+                fondo.rows = 2;
+                fondo.value = g.dolor_de_fondo;
+                fondo.placeholder = "Dolor de fondo, en una frase";
+                fondo.addEventListener("input", () => { g.dolor_de_fondo = fondo.value; marcarSucio(true); });
+                caja.append(nombre, fondo);
+                for (const id of g.ids) {
+                    const d = porId.get(id);
+                    if (d) caja.appendChild(filaDolor(d, selectorDe(id, g.id)));
+                }
+                const borrar = el("button", "text-[11px] text-red-600 hover:underline", "Eliminar grupo (sus dolores quedan sin grupo)");
+                borrar.addEventListener("click", () => {
+                    grupos = grupos.filter((x) => x !== g);
+                    marcarSucio(true);
+                    pintarEditor();
+                });
+                caja.appendChild(borrar);
+                cont.appendChild(caja);
+            }
+
+            const asignados = new Set(grupos.flatMap((g) => g.ids));
+            const libres = estado.dolores.filter((d) => !asignados.has(d.id));
+            const sg = $("sin-grupo");
+            sg.replaceChildren();
+            if (!libres.length) sg.appendChild(el("p", "text-xs text-slate-400", "Todos los dolores tienen grupo."));
+            for (const d of libres) sg.appendChild(filaDolor(d, selectorDe(d.id, null)));
+
+            const tbody = $("tabla-matriz");
+            tbody.replaceChildren();
+            for (const g of estado.matriz.grupos) {
+                const tr = document.createElement("tr");
+                const celdas = [
+                    g.nombre,
+                    String(g.n),
+                    g.con_horas ? String(g.impacto) : "sin dato",
+                    g.viabilidad !== null ? `${g.viabilidad}%` : "sin dato",
+                    NOMBRE_Q[g.cuadrante] ?? g.cuadrante,
+                ];
+                celdas.forEach((c, i) => tr.appendChild(el("td", `p-2 ${i === 0 ? "font-semibold" : ""}`, c)));
+                tbody.appendChild(tr);
+            }
+        }
+
+        function aplicar(e: Estado, forzarEditor = false) {
+            estado = e;
+            pintarSistema();
+            pintarConteos();
+            if (!sucio || forzarEditor) {
+                grupos = (e.agrupacion?.grupos ?? []).map((g) => ({ ...g, ids: [...g.ids] }));
+                marcarSucio(false);
+                pintarEditor();
+            }
+        }
+
+        async function cargar(forzarEditor = false) {
+            const r = await llamar("GET");
+            if (r.status === 401 || r.status === 503) {
+                const d = await r.json().catch(() => ({}));
+                throw new Error(d.error || "No autorizado");
+            }
+            const e: Estado = await r.json();
+            if (!e.ok) throw new Error("No se pudo leer la sesión");
+            aplicar(e, forzarEditor);
+        }
+
+        async function accion(cuerpo: Record<string, unknown>, ok: string) {
+            const r = await llamar("POST", cuerpo);
+            const d = await r.json().catch(() => ({}));
+            if (!r.ok || !d.ok) {
+                aviso(d.error || "No se pudo completar la acción.", false);
+                return;
+            }
+            aplicar(d as Estado, true);
+            aviso(ok);
+        }
+
+        // ---- acceso ----
+        async function entrar() {
+            try {
+                await cargar(true);
+                sessionStorage.setItem("taller-clave", clave);
+                $("acceso").classList.add("hidden");
+                $("panel").classList.remove("hidden");
+                setInterval(() => { if (!document.hidden) cargar(false).catch(() => {}); }, 5000);
+            } catch (err: any) {
+                const m = $("acceso-msg");
+                m.textContent = err.message;
+                m.classList.remove("hidden");
+            }
+        }
+        $("acceso").addEventListener("submit", (ev) => {
+            ev.preventDefault();
+            clave = ($("clave") as HTMLInputElement).value.trim();
+            entrar();
+        });
+        if (clave) entrar();
+
+        // ---- acciones ----
+        $("b-precargar").addEventListener("click", () => accion({ accion: "precargar" }, "Se agregaron los 3 ítems del formulario."));
+        $("b-agrupar").addEventListener("click", async () => {
+            const b = $("b-agrupar") as HTMLButtonElement;
+            b.disabled = true;
+            aviso("Agrupando con Groq...");
+            await accion({ accion: "agrupar" }, "Agrupación lista. Revísala y corrige antes de publicar.");
+            b.disabled = false;
+        });
+        $("b-publicar").addEventListener("click", () =>
+            accion({ accion: "publicar", publicada: !estado?.agrupacion?.publicada }, estado?.agrupacion?.publicada ? "Matriz oculta." : "Matriz publicada en la diapositiva."),
+        );
+        $("b-guardar").addEventListener("click", () =>
+            accion({ accion: "guardar", grupos, fuente: "manual" }, "Cambios guardados."),
+        );
+        $("b-nuevo").addEventListener("click", () => {
+            const n = grupos.length + 1;
+            let id = `g${n}`;
+            while (grupos.some((g) => g.id === id)) id += "x";
+            grupos.push({ id, nombre: `Grupo ${n}`, dolor_de_fondo: "", ids: [] });
+            marcarSucio(true);
+            pintarEditor();
+        });
+        $("b-reiniciar").addEventListener("click", () => {
+            const t = prompt("Esto borra todo lo de la sesión. Escribe REINICIAR para confirmar.");
+            if (t === "REINICIAR") accion({ accion: "reiniciar", confirmar: "REINICIAR" }, "Sesión reiniciada.");
+        });
+        $("b-cargar").addEventListener("click", () => {
+            const crudo = ($("json-claude") as HTMLTextAreaElement).value.replace(/```json|```/g, "").trim();
+            try {
+                const parsed = JSON.parse(crudo);
+                accion({ accion: "guardar", grupos: parsed.grupos, fuente: "claude" }, "Agrupación de Claude cargada. Revísala y publica.");
+            } catch {
+                aviso("Ese texto no es un JSON válido.", false);
+            }
+        });
+        $("b-copiar").addEventListener("click", async () => {
+            const r = await llamar("GET", undefined, "&formato=texto");
+            const filas = await r.text();
+            const instruccion =
+                "Agrupa estos dolores de trabajo por el problema de fondo que comparten. Devuelve SOLO un JSON con esta forma: " +
+                '{"grupos":[{"nombre":"máx. 5 palabras","dolor_de_fondo":"una frase de máx. 25 palabras con lo que realmente duele","ids":["..."]}]}. ' +
+                "Entre 3 y 8 grupos, cada id en exactamente un grupo, sin inventar cifras ni nombres, en español de Colombia.\n\nDolores:\n";
+            try {
+                await navigator.clipboard.writeText(instruccion + filas);
+                aviso("Copiado. Pégalo en Claude y luego carga el JSON que te devuelva.");
+            } catch {
+                aviso("No se pudo copiar automáticamente.", false);
+            }
+        });
+        window.addEventListener("beforeunload", (e) => { if (sucio) e.preventDefault(); });
+    </script>
+</Layout>
