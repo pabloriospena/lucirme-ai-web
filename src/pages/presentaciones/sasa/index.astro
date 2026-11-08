@@ -69,7 +69,7 @@ const prompteador = "https://lucirme.com/recursos/prompteador";
     <div
         class="fixed top-6 right-6 text-xs font-semibold text-slate-500 bg-white/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-slate-200 shadow-sm z-50"
     >
-        <span id="current">01</span> / <span id="total">13</span>
+        <span id="current">01</span> / <span id="total">14</span>
     </div>
 
     <nav
@@ -661,6 +661,136 @@ const prompteador = "https://lucirme.com/recursos/prompteador";
                         class="inline-block mt-4 text-xs font-semibold text-teal-700 hover:text-teal-800"
                         >Prompteador de LuciRMe: para pedir con estructura →</a
                     >
+                </div>
+            </div>
+        </section>
+
+        <!-- 07b IA CONECTADA -->
+        <section
+            class="min-h-screen snap-start flex items-center justify-center p-8 bg-white"
+        >
+            <div class="max-w-5xl w-full">
+                <p
+                    class="text-xs font-bold tracking-widest uppercase text-teal-600 mb-2"
+                >
+                    Más allá del chat
+                </p>
+                <h2
+                    class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-2"
+                >
+                    IA conectada a las herramientas del equipo
+                </h2>
+                <div class="w-10 h-1 bg-teal-600 rounded-full mb-4"></div>
+                <p class="text-base text-slate-600 mb-5">
+                    Hasta ahora la IA recibe lo que le pegamos. Conectada, puede
+                    leer y preparar trabajo donde el equipo ya trabaja: correo,
+                    calendario, documentos y SugarCRM.
+                </p>
+                <div class="grid md:grid-cols-3 gap-3 mb-5">
+                    <div
+                        class="bg-slate-50 border border-slate-200 rounded-lg p-4"
+                    >
+                        <p
+                            class="text-[11px] uppercase tracking-wider font-semibold text-slate-400 mb-1"
+                        >
+                            Nivel 1
+                        </p>
+                        <h3 class="text-sm font-semibold text-slate-800 mb-1">
+                            IA aislada
+                        </h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-2">
+                            Copiar y pegar información en un chat.
+                        </p>
+                        <p class="text-xs text-slate-500">
+                            Ejemplo: pedir el borrador de un correo.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-slate-50 border border-slate-200 rounded-lg p-4"
+                    >
+                        <p
+                            class="text-[11px] uppercase tracking-wider font-semibold text-slate-400 mb-1"
+                        >
+                            Nivel 2
+                        </p>
+                        <h3 class="text-sm font-semibold text-slate-800 mb-1">
+                            IA con contexto
+                        </h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-2">
+                            Darle documentos, plantillas y fuentes propias.
+                        </p>
+                        <p class="text-xs text-slate-500">
+                            Ejemplo: NotebookLM con las notas de una reunión y
+                            la plantilla de requerimientos.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-white border-2 border-teal-500 rounded-lg p-4 shadow-sm"
+                    >
+                        <p
+                            class="text-[11px] uppercase tracking-wider font-semibold text-teal-600 mb-1"
+                        >
+                            Nivel 3
+                        </p>
+                        <h3 class="text-sm font-semibold text-teal-700 mb-1">
+                            IA conectada
+                        </h3>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-2">
+                            Conectarla con correo, calendario, documentos y CRM
+                            para que lea y prepare, con permisos controlados.
+                        </p>
+                        <p class="text-xs text-slate-500">
+                            Ejemplo: leer un correo de un cliente, resumirlo y
+                            dejar una nota y una tarea en SugarCRM.
+                        </p>
+                    </div>
+                </div>
+                <div
+                    class="bg-slate-50 border border-slate-200 rounded-lg p-4 mb-4"
+                >
+                    <p class="text-xs font-semibold text-slate-500 mb-2">
+                        Un caso dentro de la operación de {cliente}
+                    </p>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        {
+                            [
+                                "Llega un correo de un cliente",
+                                "La IA lo clasifica (solicitud, incidencia, consulta o cambio de alcance) y lo resume",
+                                "Revisa lo que ya hay del cliente en SugarCRM",
+                                "Deja una nota o una tarea y propone un borrador de respuesta",
+                                "Un consultor revisa, ajusta y envía",
+                            ].map((p, i) => (
+                                <span class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 px-2.5 py-1 rounded-md font-medium">
+                                    <span class="text-teal-600 font-bold">
+                                        {i + 1}
+                                    </span>
+                                    {p}
+                                </span>
+                            ))
+                        }
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-3">
+                    <div
+                        class="bg-teal-50 border-l-4 border-teal-600 rounded-r-lg p-4"
+                    >
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            <strong>Esto es IA conectada al trabajo de {
+                                cliente
+                            }, para el equipo de {cliente}.</strong> Construir algo
+                            así para un cliente es otra conversación, la de la diapositiva
+                            que sigue.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-orange-50 border-l-4 border-orange-500 rounded-r-lg p-4"
+                    >
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            <strong>Conectar exige cuidado:</strong> permisos y control
+                            de acceso, datos ordenados y una persona que valide antes
+                            de enviar o guardar. No se trata de conectar todo.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
