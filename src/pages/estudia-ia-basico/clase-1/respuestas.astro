@@ -1,0 +1,72 @@
+---
+// Vista privada de las respuestas anónimas de la clase 1 (básico). Exige ?k=<TALLER_FACILITADOR_KEY>.
+// Sesión con &s=basico-clase-1 (por defecto). Se actualiza sola cada 20 segundos.
+import Layout from "../../../layouts/Layout.astro";
+import { leerLista, sesionDe } from "../../../lib/taller-store";
+
+export const prerender = false;
+Astro.response.headers.set("Cache-Control", "no-store");
+
+const esperada = (process.env.TALLER_FACILITADOR_KEY || "").trim();
+const dada = (Astro.url.searchParams.get("k") || "").trim();
+let autorizado = esperada.length > 0 && dada.length === esperada.length;
+if (autorizado) {
+    let diff = 0;
+    for (let i = 0; i < esperada.length; i++) diff |= esperada.charCodeAt(i) ^ dada.charCodeAt(i);
+    autorizado = diff === 0;
+}
+
+const sesion = sesionDe(Astro.url.searchParams.get("s") ?? "basico-clase-1") ?? "basico-clase-1";
+let respuestas: any[] = [];
+let error = "";
+if (autorizado) {
+    try {
+        respuestas = (await leerLista(`estudia:${sesion}:conversemos`)).reverse();
+    } catch {
+        error = "No se pudieron leer las respuestas.";
+    }
+}
+const preguntas = [
+    { campo: "herramientas", texto: "¿Qué herramientas digitales usas a diario?" },
+    { campo: "hecho_con_ia", texto: "¿Qué has hecho ya con IA, si algo?" },
+    { campo: "quiere_lograr", texto: "¿Qué te gustaría poder hacer al terminar?" },
+    { campo: "preocupa", texto: "¿Qué te preocupa de este proceso?" },
+];
+---
+
+<Layout title="Respuestas | Estud-IA" hideHeader hideFooter noindex>
+    <div class="min-h-screen bg-slate-50 py-8 px-4">
+        <div class="max-w-3xl mx-auto">
+            {
+                !autorizado ? (
+                    <p class="text-sm text-slate-600">No autorizado.</p>
+                ) : (
+                    <>
+                        <p class="text-xs font-bold tracking-widest uppercase text-orange-600 mb-1">Estud-IA · IA nivel básico · Clase 1</p>
+                        <h1 class="text-2xl font-bold text-slate-900 tracking-tight mb-1">Cuéntanos de dónde partes</h1>
+                        <p class="text-sm text-slate-600 mb-6">
+                            {respuestas.length} {respuestas.length === 1 ? "respuesta" : "respuestas"} · anónimas · se actualiza sola
+                        </p>
+                        {error && <p class="text-sm text-red-600 mb-4">{error}</p>}
+                        {!respuestas.length && !error && <p class="text-sm text-slate-500">Aún no hay respuestas.</p>}
+                        <ul class="space-y-4">
+                            {respuestas.map((r) => (
+                                <li class="rounded-xl border border-slate-200 bg-white p-4 space-y-3">
+                                    {preguntas.map((p) =>
+                                        r[p.campo] ? (
+                                            <div>
+                                                <p class="text-xs font-semibold text-slate-500">{p.texto}</p>
+                                                <p class="text-slate-900 whitespace-pre-wrap">{r[p.campo]}</p>
+                                            </div>
+                                        ) : null,
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+                    </>
+                )
+            }
+        </div>
+    </div>
+    {autorizado && <script is:inline>setTimeout(() => location.reload(), 20000);</script>}
+</Layout>
