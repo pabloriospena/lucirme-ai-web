@@ -108,7 +108,7 @@
     prepararPasos(slides[actual], atras);
     slides.forEach((slide, posicion) => slide.classList.toggle('activa', posicion === actual));
     barra.style.width = `${((actual + 1) / slides.length) * 100}%`;
-    history.replaceState(null, '', `#${actual + 1}`);
+    history.replaceState(null, '', location.pathname + location.search + `#${actual + 1}`);
     animarNumeros(slides[actual]);
     arrancarRelojes(slides[actual]);
     pintarPips();
