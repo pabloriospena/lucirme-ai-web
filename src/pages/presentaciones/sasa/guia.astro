@@ -16,6 +16,7 @@ const icons: Record<string, string> = {
     info: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
     shield: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
     route: "M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7",
+    clock: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
 };
 
 // Las seis conexiones que salieron en el taller, tal como las nombró Pablo.
@@ -94,6 +95,41 @@ const conexiones = [
     },
 ];
 
+const tareasProgramadas = [
+    {
+        id: "resumen-correos",
+        icono: "clock",
+        titulo: "Resumen de correos",
+        que: [
+            "Cada mañana revisa los correos nuevos.",
+            "Los clasifica como incidente, requerimiento o solicitud.",
+            "Entrega un resumen ordenado con lo más urgente arriba.",
+        ],
+        prompt: "Todos los días a las [hora], revisa los correos nuevos que hayan llegado a mi bandeja de entrada desde ayer. Clasifícalos en incidentes, requerimientos o solicitudes. Entrega un resumen ordenado con lo más urgente arriba. No archives, elimines ni muevas ningún correo.",
+    },
+    {
+        id: "mensajes-chat",
+        icono: "clock",
+        titulo: "Mensajes del chat",
+        que: [
+            "Al cierre del día resume lo conversado en los espacios de cada proyecto.",
+            "Lista pendientes y preguntas sin respuesta.",
+        ],
+        prompt: "Todos los días a las [hora], revisa los mensajes y actividad de los chats de nuestros proyectos. Genera un resumen de lo conversado, lista los pendientes abiertos y destaca las preguntas que aún no tienen respuesta. No archives, elimines ni muevas ningún mensaje.",
+    },
+    {
+        id: "actualizacion-doc",
+        icono: "clock",
+        titulo: "Actualización de documentaciones",
+        que: [
+            "Cada semana lee la carpeta del proyecto en Drive.",
+            "Compara con la plantilla de documentación.",
+            "Deja los borradores de lo que esté desactualizado.",
+        ],
+        prompt: "Todos los [día] a las [hora], revisa la carpeta del proyecto en Google Drive, compárala con nuestra plantilla estándar de documentación e identifica qué documentos están desactualizados. Deja redactados los borradores de actualización listos para revisión. No archives, elimines ni muevas ningún archivo.",
+    },
+];
+
 const dimensionesInstancia = [
     {
         nombre: "Técnica",
@@ -162,6 +198,7 @@ const buenasPracticas = [
 const toc = [
     { id: "resumen", label: "Resumen" },
     { id: "google", label: "1. Gemini y Google" },
+    { id: "programadas", label: "Tareas programadas" },
     { id: "equipo", label: "2. Casos del equipo" },
     { id: "sugar", label: "3. Sugar por MCP" },
     { id: "limites", label: "4. Alcances y límites" },
@@ -316,6 +353,58 @@ const toc = [
                                 </div>
                             </article>
                         ))}
+                    </div>
+
+                    <!-- TAREAS PROGRAMADAS -->
+                    <div id="programadas" class="pt-6 space-y-4">
+                        <div class="pb-2 border-b border-[#E9E9E7]">
+                            <h3 class="text-base font-bold">Tareas programadas</h3>
+                            <p class="text-xs text-[#787774] mt-1">
+                                Además de pedirle cosas a Gemini en el momento, se le puede pedir que haga una tarea repetitiva por su cuenta cuando la programemos (por ejemplo, todos los días a una hora fija), para no tener que acordarse de pedirla.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            {tareasProgramadas.map((t) => (
+                                <article class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-8 h-8 rounded-md bg-[#F1F1EF] border border-[#E9E9E7] flex items-center justify-center shrink-0">
+                                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons[t.icono]}></path>
+                                            </svg>
+                                        </div>
+                                        <h4 class="text-sm font-bold">{t.titulo}</h4>
+                                    </div>
+                                    <ul class="space-y-2 text-xs text-[#5A5A58]">
+                                        {t.que.map((q) => (
+                                            <li class="flex items-start gap-2">
+                                                <svg class="w-4 h-4 text-teal-700 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                </svg>
+                                                <span>{q}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <div class="pt-2 border-t border-[#F1F1EF]">
+                                        <button
+                                            type="button"
+                                            data-prompt={t.prompt}
+                                            class="copy-prompt text-[11px] font-semibold text-[#37352F] hover:text-teal-700 transition flex items-center gap-1.5 cursor-pointer print:hidden"
+                                        >
+                                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                            </svg>
+                                            Copiar petición de ejemplo
+                                        </button>
+                                        <p class="hidden print:block text-[11px] text-[#5A5A58] italic">{t.prompt}</p>
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
+
+                        <p class="text-xs text-[#787774] leading-relaxed">
+                            En la prueba del taller, la cuenta corporativa de Gemini no dejó archivar ni eliminar correos de forma automática; las tareas programadas sirven para clasificar, resumir y dejar borradores, y una persona revisa el resultado.
+                        </p>
                     </div>
 
                     <p class="text-xs text-[#787774] leading-relaxed">
@@ -558,26 +647,6 @@ const toc = [
                                 <p class="text-xs text-[#5A5A58] leading-relaxed">{b.detalle}</p>
                             </div>
                         ))}
-                    </div>
-                </section>
-
-                <!-- CTA -->
-                <section class="bg-white border border-[#E9E9E7] rounded-xl p-6 shadow-2xs">
-                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <div class="text-xs text-[#787774]">
-                            ¿Dudas o algo que quieras sumar antes del taller 2? Escríbeme y lo incluimos.
-                        </div>
-                        <a
-                            href="https://lucirme.com/whatsapp?text=Hola%20Pablo,%20estuve%20revisando%20la%20guia%20del%20taller%201%20de%20Sasa"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2 bg-[#37352F] hover:bg-black text-white font-semibold text-xs px-4 py-2.5 rounded-md transition shadow-2xs shrink-0 cursor-pointer print:hidden"
-                        >
-                            <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons.chat}></path>
-                            </svg>
-                            <span>Conversar con Pablo Ríos en WhatsApp</span>
-                        </a>
                     </div>
                 </section>
             </main>
