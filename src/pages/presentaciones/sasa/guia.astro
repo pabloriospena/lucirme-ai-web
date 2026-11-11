@@ -1,0 +1,621 @@
+---
+// Guía post-taller 1 · Sasa Consultoría.
+// Contexto general: conectar Gemini con el ecosistema de Google de Sasa y su instancia de Sugar (por MCP).
+// Formato de documento tipo Notion, igual que la guía de Copilot para Siigo (design.md, sección 6).
+import Layout from "../../../layouts/Layout.astro";
+
+const icons: Record<string, string> = {
+    calendar: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z",
+    folder: "M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z",
+    mic: "M19 11a7 7 0 01-14 0m7 7v3m-4 0h8M12 3a3 3 0 00-3 3v5a3 3 0 006 0V6a3 3 0 00-3-3z",
+    mail: "M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+    chat: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z",
+    tasks: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4",
+    db: "M4 7c0-1.657 3.582-3 8-3s8 1.343 8 3-3.582 3-8 3-8-1.343-8-3zm0 0v5c0 1.657 3.582 3 8 3s8-1.343 8-3V7m0 5v5c0 1.657-3.582 3-8 3s-8-1.343-8-3v-5",
+    spark: "M13 10V3L4 14h7v7l9-11h-7z",
+    info: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+    shield: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    route: "M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7",
+};
+
+// Las seis conexiones que salieron en el taller, tal como las nombró Pablo.
+const conexiones = [
+    {
+        id: "calendario",
+        icono: "calendar",
+        titulo: "Calendario",
+        que: [
+            "Ver la agenda del día y de la semana desde un chat.",
+            "Detectar choques entre reuniones y proponer cómo reorganizarlas.",
+            "Servir de base para el \"mi día\" de cada integrante.",
+        ],
+        prompt:
+            "Revisa mi calendario de hoy y de mañana. Dime qué reuniones tengo, cuáles se cruzan y cuánto tiempo libre real me queda para trabajo de foco.",
+    },
+    {
+        id: "drive",
+        icono: "folder",
+        titulo: "Drive: archivos y carpetas",
+        que: [
+            "Leer lo específico de cada proyecto para mantener la documentación al día.",
+            "Proponer cómo ordenar las carpetas por proyecto o por cliente.",
+            "Adelantar borradores a partir de las plantillas de documentación.",
+        ],
+        prompt:
+            "Lee la carpeta del proyecto [nombre] y compárala con la plantilla de documentación. Dime qué documentos faltan o están desactualizados y deja un borrador de cada uno. No muevas ni borres archivos.",
+    },
+    {
+        id: "transcripciones",
+        icono: "mic",
+        titulo: "Transcripciones de reuniones",
+        que: [
+            "Guardar la grabación y la transcripción de cada reunión en Drive.",
+            "Trabajar con la transcripción literal y no con notas automáticas, que pueden inventar o resumir mal.",
+            "Sacar decisiones, responsables y fechas para pasarlas a tareas.",
+        ],
+        prompt:
+            "Con la transcripción de la reunión del [fecha], extrae las decisiones, los responsables y las fechas acordadas. Lo que no esté claro en la transcripción márcalo como \"por confirmar\"; no lo supongas.",
+    },
+    {
+        id: "correos",
+        icono: "mail",
+        titulo: "Correos",
+        que: [
+            "Clasificar los correos nuevos como incidente, requerimiento o solicitud.",
+            "Resumir lo que llegó en la mañana y marcar lo urgente.",
+            "Cruzar un correo con el archivo al que afecta (por ejemplo, vacaciones).",
+        ],
+        prompt:
+            "Revisa los correos nuevos de la bandeja y clasifícalos como incidente, requerimiento o solicitud. Dame una tabla con remitente, resumen en una línea y prioridad. No archives ni elimines nada.",
+    },
+    {
+        id: "chat",
+        icono: "chat",
+        titulo: "Chat de Google",
+        que: [
+            "Resumir lo conversado en los espacios de cada proyecto.",
+            "Sacar pendientes y preguntas sin respuesta.",
+            "Alimentar el contexto del proyecto sin releer todo el hilo.",
+        ],
+        prompt:
+            "Resume lo conversado esta semana en el espacio [nombre]. Lista los pendientes con responsable y las preguntas que quedaron sin respuesta.",
+    },
+    {
+        id: "tareas",
+        icono: "tasks",
+        titulo: "Gestión de tareas",
+        que: [
+            "Convertir correos y reuniones en tareas con fecha.",
+            "Ver qué está vencido y qué viene esta semana.",
+            "Mantener la lista de pendientes sin copiarla a mano.",
+        ],
+        prompt:
+            "Con mis tareas y los correos de hoy, arma una lista de pendientes ordenada por fecha. Marca las vencidas y propón qué mover para la próxima semana.",
+    },
+];
+
+const dimensionesInstancia = [
+    {
+        nombre: "Técnica",
+        detalle: "Módulos activos, campos personalizados, procesos y flujos de trabajo, integraciones y deuda técnica conocida.",
+    },
+    {
+        nombre: "Upsell",
+        detalle: "Qué usa hoy el cliente, qué módulos o mejoras le faltan y qué incrementos ha pedido.",
+    },
+    {
+        nombre: "Soporte",
+        detalle: "Incidentes frecuentes, cómo se resolvieron y qué hay que saber antes de tocar la instancia.",
+    },
+    {
+        nombre: "Comunicación",
+        detalle: "Con quién se habla en el cliente, qué se acordó y cuándo fue el último contacto.",
+    },
+];
+
+const ruta = [
+    {
+        paso: "1",
+        titulo: "Drive y plantillas",
+        con: "Juan Hoyos",
+        detalle: "Conectar Gemini con el Drive de los proyectos y las plantillas de documentación; probar con un proyecto de un cliente que pidió mejoras.",
+    },
+    {
+        paso: "2",
+        titulo: "Correo y archivos administrativos",
+        con: "Clara",
+        detalle: "Conectar el correo con los archivos de vacaciones y gestiones administrativas; empezar con la actualización de un solo archivo.",
+    },
+    {
+        paso: "3",
+        titulo: "\"Mi día\" por integrante",
+        con: "Todo el equipo",
+        detalle: "Con calendario, correo y tareas conectados, que cada persona reciba su día ordenado antes de abrir el primer mensaje.",
+    },
+    {
+        paso: "4",
+        titulo: "MCP de Sugar",
+        con: "El grupo",
+        detalle: "Conectar la instancia propia de Sasa con permisos de solo lectura y sumar después el dashboard y la documentación por cliente.",
+    },
+];
+
+const buenasPracticas = [
+    {
+        titulo: "Un chat por tema o proyecto",
+        detalle: "Mezclar proyectos en una misma conversación contamina el contexto y baja la calidad de las respuestas.",
+    },
+    {
+        titulo: "Transcripción literal",
+        detalle: "Las notas automáticas pueden inventar o resumir mal; la transcripción de la reunión es la fuente confiable.",
+    },
+    {
+        titulo: "Pedir por capas en instancias grandes",
+        detalle: "En vez de una consulta enorme, pedir módulo por módulo, o proceso por proceso.",
+    },
+    {
+        titulo: "Criterio humano al final",
+        detalle: "Quien conoce el proyecto revisa lo que la IA deja escrito antes de que salga al cliente.",
+    },
+];
+
+const toc = [
+    { id: "resumen", label: "Resumen" },
+    { id: "google", label: "1. Gemini y Google" },
+    { id: "equipo", label: "2. Casos del equipo" },
+    { id: "sugar", label: "3. Sugar por MCP" },
+    { id: "limites", label: "4. Alcances y límites" },
+    { id: "ruta", label: "5. Ruta de arranque" },
+    { id: "practicas", label: "6. Buenas prácticas" },
+];
+---
+
+<Layout title="Guía post-taller 1 | Sasa Consultoría" hideHeader hideFooter noindex>
+    <div class="min-h-screen bg-[#FBFBFA] text-[#37352F] font-sans antialiased selection:bg-slate-200">
+        <!-- BARRA SUPERIOR -->
+        <div class="w-full bg-white border-b border-[#E9E9E7] px-4 py-3 sticky top-0 z-30 flex items-center justify-between text-xs text-[#787774] print:hidden">
+            <div class="flex items-center gap-2 overflow-hidden">
+                <span class="font-medium shrink-0">LuciRMe AI</span>
+                <span>/</span>
+                <span class="font-medium shrink-0">Sasa Consultoría</span>
+                <span>/</span>
+                <span class="text-[#37352F] font-semibold truncate">Guía post-taller 1</span>
+            </div>
+            <button
+                type="button"
+                onclick="window.print()"
+                class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded border border-[#E9E9E7] hover:bg-[#F1F1EF] transition text-[#37352F] font-medium text-xs cursor-pointer shrink-0"
+            >
+                <svg class="w-3.5 h-3.5 text-[#787774]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                </svg>
+                <span class="hidden sm:inline">Exportar / Imprimir</span>
+            </button>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-6 py-10 md:py-14 grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <!-- TABLA DE CONTENIDO -->
+            <aside class="hidden lg:block lg:col-span-3 sticky top-20 self-start text-xs text-[#787774] print:hidden">
+                <div class="text-[11px] font-semibold uppercase tracking-wider text-[#9B9A97] mb-2">En esta guía</div>
+                <nav class="space-y-1 font-medium">
+                    {toc.map((t) => (
+                        <a href={`#${t.id}`} class="block px-2.5 py-1.5 rounded hover:bg-[#F1F1EF] hover:text-[#37352F] transition">
+                            {t.label}
+                        </a>
+                    ))}
+                </nav>
+            </aside>
+
+            <main class="lg:col-span-9 space-y-12">
+                <!-- ENCABEZADO -->
+                <header class="space-y-6 pb-6 border-b border-[#E9E9E7]">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-xl bg-[#F1F1EF] border border-[#E9E9E7] flex items-center justify-center text-[#37352F] shadow-2xs shrink-0">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d={icons.spark}></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono uppercase tracking-widest text-[#9B9A97]">Guía post-taller</span>
+                            <h1 class="text-2xl sm:text-3xl font-extrabold text-[#37352F] tracking-tight">
+                                Mantener todo al día con Gemini y Sugar conectados
+                            </h1>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#F7F7F5] border border-[#E9E9E7] rounded-lg p-4 text-xs space-y-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#9B9A97] w-24 shrink-0 font-medium">Para:</span>
+                                <span class="text-[#37352F] font-semibold">Equipo de Sasa Consultoría</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#9B9A97] w-24 shrink-0 font-medium">Taller:</span>
+                                <span class="text-[#37352F] font-semibold">Inmersión 1 · 9 de noviembre de 2026</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#9B9A97] w-24 shrink-0 font-medium">Elaborado por:</span>
+                                <span class="text-[#37352F] font-semibold">Pablo Ríos · LuciRMe AI</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#9B9A97] w-24 shrink-0 font-medium">Objetivo:</span>
+                                <span class="text-[#37352F] font-semibold">Dar el contexto general de las conexiones</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="resumen" class="bg-[#F1F1EF] border border-[#E9E9E7] rounded-lg p-4 flex gap-3 text-xs leading-relaxed">
+                        <div class="shrink-0 pt-0.5">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons.info}></path>
+                            </svg>
+                        </div>
+                        <div class="space-y-2">
+                            <strong class="font-bold block">Resumen</strong>
+                            <p class="text-[#5A5A58]">
+                                En el taller hablamos mucho de conexiones. Sasa ya trabaja con Gemini, y Gemini está conectado a todo el
+                                ecosistema de Google que ustedes usan: calendario, Drive, transcripciones de reuniones, correos, chat y
+                                tareas. Eso significa que se puede mantener todo actualizado desde los chats de Gemini, sin pasar la
+                                información a mano de un lado a otro.
+                            </p>
+                            <p class="text-[#5A5A58]">
+                                La segunda conexión es Sugar: por MCP se puede conectar la instancia propia de Sasa para consultar
+                                clientes, actividades, reuniones y estado de proyectos con permisos de solo lectura, y para documentar
+                                lo que tiene cada instancia de cliente.
+                            </p>
+                            <p class="text-[#5A5A58]">
+                                Esta guía no es un manual paso a paso: es el mapa de qué se conecta, para qué y con quién empezamos.
+                            </p>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- 1. GOOGLE -->
+                <section id="google" class="space-y-4">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">1. Gemini y el ecosistema de Google</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            Seis conexiones que ya tienen disponibles. Cada tarjeta trae una petición de ejemplo que puedes copiar y
+                            adaptar.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {conexiones.map((c) => (
+                            <article id={c.id} class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-md bg-[#F1F1EF] border border-[#E9E9E7] flex items-center justify-center shrink-0">
+                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons[c.icono]}></path>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-sm font-bold">{c.titulo}</h3>
+                                </div>
+                                <ul class="space-y-2 text-xs text-[#5A5A58]">
+                                    {c.que.map((q) => (
+                                        <li class="flex items-start gap-2">
+                                            <svg class="w-4 h-4 text-teal-700 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                            <span>{q}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <div class="pt-2 border-t border-[#F1F1EF]">
+                                    <button
+                                        type="button"
+                                        data-prompt={c.prompt}
+                                        class="copy-prompt text-[11px] font-semibold text-[#37352F] hover:text-teal-700 transition flex items-center gap-1.5 cursor-pointer print:hidden"
+                                    >
+                                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                        </svg>
+                                        Copiar petición de ejemplo
+                                    </button>
+                                    <p class="hidden print:block text-[11px] text-[#5A5A58] italic">{c.prompt}</p>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+
+                    <p class="text-xs text-[#787774] leading-relaxed">
+                        Qué puede hacer Gemini exactamente en cada conexión depende de la cuenta de Google Workspace de Sasa; lo
+                        validamos juntos al configurarlo.
+                    </p>
+                </section>
+
+                <!-- 2. CASOS DEL EQUIPO -->
+                <section id="equipo" class="space-y-4">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">2. Casos del equipo</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            Tres usos concretos que salieron del taller y que se pueden armar con las conexiones de arriba.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <article class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                            <div class="flex items-center justify-between gap-2">
+                                <h3 class="text-sm font-bold">Drive ordenado y documentación al día</h3>
+                                <span class="text-[10px] font-mono text-[#9B9A97] shrink-0">Con Juan Hoyos</span>
+                            </div>
+                            <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                Gemini conectado al Drive para mantener organizados los proyectos de los clientes, sobre todo los que
+                                han pedido mejoras e incrementos en sus instancias.
+                            </p>
+                            <ul class="space-y-2 text-xs text-[#5A5A58] list-disc pl-5">
+                                <li>Leer lo específico de cada proyecto para mantener la documentación al día.</li>
+                                <li>Adelantar borradores y tener el contexto del cliente a la mano.</li>
+                                <li>Usar las plantillas de documentación para que cada espacio quede en el mismo orden.</li>
+                            </ul>
+                        </article>
+
+                        <article class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                            <div class="flex items-center justify-between gap-2">
+                                <h3 class="text-sm font-bold">Datos administrativos actualizados desde el correo</h3>
+                                <span class="text-[10px] font-mono text-[#9B9A97] shrink-0">Con Clara</span>
+                            </div>
+                            <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                Conexión entre el correo y los archivos donde se manejan las vacaciones y las gestiones
+                                administrativas en general.
+                            </p>
+                            <ul class="space-y-2 text-xs text-[#5A5A58] list-disc pl-5">
+                                <li>Lo que llega por correo se refleja en el archivo correspondiente.</li>
+                                <li>Menos tiempo editando, arreglando y agregando archivos del Drive a mano.</li>
+                            </ul>
+                        </article>
+
+                        <article class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                            <div class="flex items-center justify-between gap-2">
+                                <h3 class="text-sm font-bold">"Mi día" para cada integrante</h3>
+                                <span class="text-[10px] font-mono text-[#9B9A97] shrink-0">Todo el equipo</span>
+                            </div>
+                            <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                Con calendario, correo y tareas conectados, cada persona puede empezar el día sabiendo qué reuniones
+                                tiene, qué está vencido y qué debe hacer de verdad, antes de ponerse a contestar mensajes.
+                            </p>
+                            <div class="pt-2 border-t border-[#F1F1EF]">
+                                <button
+                                    type="button"
+                                    data-prompt="Arma mi día de hoy: mis reuniones, las tareas vencidas y los correos que necesitan respuesta. Dame las 3 cosas que de verdad debo hacer hoy y lo que puede esperar."
+                                    class="copy-prompt text-[11px] font-semibold text-[#37352F] hover:text-teal-700 transition flex items-center gap-1.5 cursor-pointer print:hidden"
+                                >
+                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                    Copiar petición de ejemplo
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- 3. SUGAR POR MCP -->
+                <section id="sugar" class="space-y-4">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">3. Sugar conectado por MCP</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            Conectar la instancia propia de Sasa para consultarla en lenguaje natural, sin escribir reportes a mano.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-8 h-8 rounded-md bg-[#F1F1EF] border border-[#E9E9E7] flex items-center justify-center shrink-0">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons.db}></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-sm font-bold">Qué se puede hacer</h3>
+                            </div>
+                            <ul class="space-y-2 text-xs text-[#5A5A58] list-disc pl-5">
+                                <li>Gestionar clientes.</li>
+                                <li>Sacar reportes con permisos de solo lectura.</li>
+                                <li>Consultar actividades y reuniones.</li>
+                                <li>Ver el estado actual de cada proyecto.</li>
+                                <li>Tener un dashboard que se actualice y entregue información sin armarlo a mano.</li>
+                            </ul>
+                            <div class="pt-2 border-t border-[#F1F1EF]">
+                                <button
+                                    type="button"
+                                    data-prompt="Con acceso de solo lectura a Sugar, dame el estado del cliente [nombre]: oportunidades abiertas, últimas actividades, reuniones recientes y cualquier proyecto en curso. No modifiques ningún registro."
+                                    class="copy-prompt text-[11px] font-semibold text-[#37352F] hover:text-teal-700 transition flex items-center gap-1.5 cursor-pointer print:hidden"
+                                >
+                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                    Copiar petición de ejemplo
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-[#FBFBFA] border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-8 h-8 rounded-md bg-[#F1F1EF] border border-[#E9E9E7] flex items-center justify-center shrink-0">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons.shield}></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-sm font-bold">Por qué solo lectura primero</h3>
+                            </div>
+                            <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                Empezar solo consultando permite probar qué tan útil es la conexión sin riesgo para los datos de los
+                                clientes. Si más adelante conviene que escriba registros, se decide por separado y con otros permisos.
+                            </p>
+                            <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                Un MCP universal para Sugar, reutilizable por cada cliente, quedó como acuerdo del grupo en el taller.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 pt-2">
+                        <h3 class="text-sm font-bold">Documentar lo que tiene cada instancia de cliente</h3>
+                        <p class="text-xs text-[#5A5A58] leading-relaxed">
+                            Con la conexión se puede identificar qué tiene cada instancia y dejarlo documentado en cuatro frentes,
+                            para actualizar, dar soporte y atender mejor a clientes nuevos.
+                        </p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs border border-[#E9E9E7] rounded-lg overflow-hidden bg-white">
+                                <thead>
+                                    <tr class="bg-[#F7F7F5] text-left text-[#787774]">
+                                        <th class="px-3 py-2 font-semibold w-32">Frente</th>
+                                        <th class="px-3 py-2 font-semibold">Qué queda documentado</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-[#5A5A58]">
+                                    {dimensionesInstancia.map((d) => (
+                                        <tr class="border-t border-[#E9E9E7]">
+                                            <td class="px-3 py-2 font-semibold text-[#37352F]">{d.nombre}</td>
+                                            <td class="px-3 py-2">{d.detalle}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-xs text-[#787774]">
+                            Las instancias muy grandes (varias unidades de negocio) se consultan por capas, no en una sola petición.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 4. ALCANCES Y LIMITES -->
+                <section id="limites" class="space-y-4">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">4. Alcances y límites</h2>
+                        <p class="text-xs text-[#787774] mt-1">Lo que aprendimos en la prueba en vivo y conviene tener claro.</p>
+                    </div>
+
+                    <div class="bg-[#F1F1EF] border border-[#E9E9E7] rounded-lg p-4 flex gap-3 text-xs leading-relaxed">
+                        <div class="shrink-0 pt-0.5">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons.info}></path>
+                            </svg>
+                        </div>
+                        <ul class="space-y-2 text-[#5A5A58] list-disc pl-4">
+                            <li>
+                                <strong class="text-[#37352F]">Correo en cuenta corporativa:</strong> en la prueba, Gemini no pudo archivar
+                                ni eliminar mensajes de forma automática. Sí sirve para clasificar y priorizar.
+                            </li>
+                            <li>
+                                <strong class="text-[#37352F]">Carpetas en Drive:</strong> que se puedan crear o mover depende de los
+                                permisos de propiedad de la unidad compartida; por eso conviene tener las unidades compartidas bien
+                                organizadas.
+                            </li>
+                            <li>
+                                <strong class="text-[#37352F]">Solo lectura en Sugar:</strong> la primera versión consulta, no modifica.
+                            </li>
+                            <li>
+                                <strong class="text-[#37352F]">Revisión humana:</strong> todo lo que la IA escribe lo revisa alguien que
+                                conozca el proyecto.
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 5. RUTA DE ARRANQUE -->
+                <section id="ruta" class="space-y-4">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">5. Ruta de arranque propuesta</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            Un orden sugerido de menor a mayor complejidad. Las fechas se definen con el equipo.
+                        </p>
+                    </div>
+
+                    <ol class="space-y-3">
+                        {ruta.map((r) => (
+                            <li class="bg-white border border-[#E9E9E7] rounded-lg p-4 flex gap-3 shadow-2xs">
+                                <div class="w-6 h-6 rounded bg-teal-100 text-teal-800 flex items-center justify-center text-xs font-bold shrink-0">
+                                    {r.paso}
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                                        <h3 class="text-sm font-bold">{r.titulo}</h3>
+                                        <span class="text-[10px] font-mono text-[#9B9A97]">{r.con}</span>
+                                    </div>
+                                    <p class="text-xs text-[#5A5A58] leading-relaxed">{r.detalle}</p>
+                                </div>
+                            </li>
+                        ))}
+                    </ol>
+
+                    <p class="text-xs text-[#787774]">
+                        El taller 2 es el miércoles 18 de noviembre, 2:00 pm.
+                    </p>
+                </section>
+
+                <!-- 6. BUENAS PRACTICAS -->
+                <section id="practicas" class="space-y-4">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">6. Para que las conexiones den buen resultado</h2>
+                        <p class="text-xs text-[#787774] mt-1">Cuatro hábitos que salieron en el taller.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {buenasPracticas.map((b) => (
+                            <div class="bg-white border border-[#E9E9E7] rounded-lg p-4 space-y-1.5 shadow-2xs">
+                                <h3 class="text-xs font-bold">{b.titulo}</h3>
+                                <p class="text-xs text-[#5A5A58] leading-relaxed">{b.detalle}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                <!-- CTA -->
+                <section class="bg-white border border-[#E9E9E7] rounded-xl p-6 shadow-2xs">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="text-xs text-[#787774]">
+                            ¿Dudas o algo que quieras sumar antes del taller 2? Escríbeme y lo incluimos.
+                        </div>
+                        <a
+                            href="https://lucirme.com/whatsapp?text=Hola%20Pablo,%20estuve%20revisando%20la%20guia%20del%20taller%201%20de%20Sasa"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 bg-[#37352F] hover:bg-black text-white font-semibold text-xs px-4 py-2.5 rounded-md transition shadow-2xs shrink-0 cursor-pointer print:hidden"
+                        >
+                            <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons.chat}></path>
+                            </svg>
+                            <span>Conversar con Pablo Ríos en WhatsApp</span>
+                        </a>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</Layout>
+
+<!-- AVISO DE COPIADO -->
+<div
+    id="toast"
+    class="fixed bottom-5 right-5 z-50 transform translate-y-10 opacity-0 transition-all duration-200 pointer-events-none print:hidden"
+>
+    <div class="bg-[#37352F] text-white text-xs px-3.5 py-2 rounded-md shadow-lg flex items-center gap-2">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span>Petición copiada al portapapeles</span>
+    </div>
+</div>
+
+<script>
+    const toast = document.getElementById("toast");
+
+    function showToast() {
+        if (!toast) return;
+        toast.classList.remove("translate-y-10", "opacity-0");
+        setTimeout(() => toast.classList.add("translate-y-10", "opacity-0"), 2200);
+    }
+
+    document.querySelectorAll<HTMLButtonElement>(".copy-prompt").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+            const text = btn.dataset.prompt ?? "";
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast();
+            } catch {
+                // Sin permiso de portapapeles: no se muestra aviso falso.
+            }
+        });
+    });
+</script>
