@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<base href="/estudia-ia-intermedio/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Estud-IA · Inteligencia artificial, nivel intermedio · Clase 1</title>
+<link rel="stylesheet" href="estudia.css">
+<style>
+  /* Marca los textos que aún faltan por confirmar. Se quita al reemplazarlos. */
+  .pend { background: #ffe45c; color: #000; padding: 0 10px; border-radius: 6px; font-weight: 700; letter-spacing: 0; text-transform: none; }
+  .qr-chico { width: 270px; height: 270px; border: 10px solid var(--naranja); background: #fff; display: block; }
+  .qr-chico img { width: 100%; height: 100%; display: block; }
+  .rail--hitos { margin-top: 36px; }
+  .rail--hitos b { font-size: 54px; }
+  .rail--hitos span { font-size: 28px; line-height: 1.28; }
+</style>
+</head>
+<body>
+<div class="escenario">
+
+  <!-- 1 · PORTADA -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 130px">Estud-IA · Capa 2 · Nivel intermedio</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Inteligencia artificial</h1>
+      <p class="docente" style="font-size: 46px">Clase 1</p>
+      <p class="docente" style="margin-top: 6px">Pablo Ríos Peña</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+  <!-- 2 · CASO DE APERTURA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · El reto"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Una historia para empezar</span>
+    <h2 class="titulo" style="font-size: 68px">Un museo recibe 3.000 mensajes y 5.000 fotos</h2>
+    <div class="rail" style="--n: 4; margin-top: 56px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Martes, 8:00</b><span>Julián trabaja en el área digital de un museo. Esta semana llegaron 3.000 mensajes de visitantes y 5.000 fotos de objetos de la colección.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Dos tareas distintas</b><span>Los mensajes deben ordenarse por motivo. Las fotos, por tipo de objeto. A mano, tomaría semanas.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Un modelo ya hecho</b><span>Un modelo existente etiqueta todo en pocos minutos, para texto y para imagen.</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>¿Y ahora qué?</b><span>¿Funciona igual en los dos casos? ¿Cómo lo comprobamos y qué haríamos si falla?</span></div>
+    </div>
+    <p class="nota" style="margin-top: 30px">Caso ilustrativo, con datos sintéticos.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 3 · QUIÉN SOY -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Quién soy"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Mucho gusto</span>
+    <div class="dividido" style="grid-template-columns: 1fr 300px; flex: none; margin-top: 0; align-items: start">
+      <div>
+        <h2 class="titulo" style="font-size: 92px">Pablo Ríos Peña</h2>
+        <ul class="lista" style="font-size: 38px; gap: 14px; margin-top: 26px">
+          <li class="sin-paso">Ingeniero de Sistemas, UPB (2015)</li>
+          <li class="sin-paso">Más de 10 años como Product Manager</li>
+          <li class="sin-paso">Fundador de LuciRMe AI (2026)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="qr-chico"><img src="estudia/qr-linkedin.svg" alt="QR de LinkedIn de Pablo Ríos Peña"></div>
+        <p class="nota" style="margin-top: 14px; font-size: 24px; user-select: all">linkedin.com/in/pabloriospena</p>
+      </div>
+    </div>
+    <div class="rail rail--hitos" style="--n: 6">
+      <div data-paso="1" style="--c: #ff7c1a"><b>2013</b><span>Mi primer proyecto con IA, siendo estudiante</span></div>
+      <div data-paso="2" style="--c: #e0509e"><b>2015</b><span>Ingeniero de Sistemas, UPB</span></div>
+      <div data-paso="3" style="--c: #7fc200"><b>2021</b><span>Vozy · caso vacunas contra el coronavirus</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><b>2022</b><span>Whale and Jaguar · caso políticos y reputación</span></div>
+      <div data-paso="5" style="--c: #ff7c1a"><b>2024</b><span>Datup · caso de una empresa gigante colombiana y su cadena de suministro</span></div>
+      <div data-paso="6" style="--c: #e0509e"><b>2026</b><span>Fundador de LuciRMe AI</span></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 4 · AGENDA -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Punto de partida"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Hoy · 3 horas</span>
+    <h2 class="titulo" style="font-size: 84px">Lo que vamos a hacer</h2>
+    <div class="dividido" style="grid-template-columns: 1.25fr 1fr; gap: 90px; align-items: start; margin-top: 40px">
+      <ol class="lista lista--num" style="font-size: 38px; gap: 8px; margin-top: 0">
+        <li data-paso="1"><span>Conocernos y ver de dónde partimos<small style="color: #cfd6ee; font-size: 28px; margin-top: 0">≈ 45 min</small></span></li>
+        <li data-paso="2"><span>Nuestro pacto<small style="color: #cfd6ee; font-size: 28px; margin-top: 0">≈ 40 min</small></span></li>
+        <li data-paso="3"><span>Pausa<small style="color: #cfd6ee; font-size: 28px; margin-top: 0">10 min</small></span></li>
+        <li data-paso="4"><span>Mirada rápida a un modelo<small style="color: #cfd6ee; font-size: 28px; margin-top: 0">≈ 20 min</small></span></li>
+        <li data-paso="5"><span>Tu proyecto: dos oportunidades<small style="color: #cfd6ee; font-size: 28px; margin-top: 0">≈ 50 min</small></span></li>
+        <li data-paso="6"><span>Cierre<small style="color: #cfd6ee; font-size: 28px; margin-top: 0">≈ 15 min</small></span></li>
+      </ol>
+      <div class="bloque bloque--tinta" data-paso="7" style="margin-top: 0">
+        <h3 style="font-size: 46px">Al terminar tendremos</h3>
+        <p>El pacto del grupo, acordado entre todos.</p>
+        <p>Dos oportunidades de IA y una idea de proyecto para cada persona.</p>
+      </div>
+    </div>
+    <p class="nota" style="color: #cfd6ee; margin-top: auto">Tiempos aproximados.</p>
+  </section>
+
+  <!-- 5 · ¿QUÉ CONOCES? -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Punto de partida"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Punto de partida</span>
+    <h2 class="titulo" style="font-size: 76px">¿Qué tanto manejas hoy?</h2>
+    <p class="sub" style="color: #cfd6ee; font-size: 38px">Escribe en el chat un número por concepto: 1 nunca lo he hecho, 2 tengo algo de experiencia, 3 lo manejo con soltura. No se califica.</p>
+    <ol class="lista lista--num" style="font-size: 40px; gap: 14px; margin-top: 30px; columns: 2; column-gap: 90px; display: block">
+      <li data-paso="1" style="margin-bottom: 14px">Python: funciones, listas y diccionarios</li>
+      <li data-paso="2" style="margin-bottom: 14px">Leer, explorar y limpiar datos</li>
+      <li data-paso="3" style="margin-bottom: 14px">Entrenar y evaluar un modelo</li>
+      <li data-paso="4" style="margin-bottom: 14px">Redes neuronales: capas y pesos</li>
+      <li data-paso="5" style="margin-bottom: 14px">Usar un modelo ya entrenado, de texto o imagen</li>
+      <li data-paso="6" style="margin-bottom: 14px">Colab y GitHub</li>
+    </ol>
+    <p class="nota" style="color: #cfd6ee; margin-top: auto">Ejemplo de respuesta: 3-2-2-1-2-3</p>
+  </section>
+
+  <!-- 6 · CUÉNTANOS DE DÓNDE PARTES -->
+  <section class="slide slide--magenta slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Punto de partida"></div>
+    <span class="etiqueta">Conversemos</span>
+    <h2 class="titulo titulo--sm">Cuéntanos de dónde partes</h2>
+    <p class="sub" style="margin-top: 14px">Por voz o por chat, como prefieras.</p>
+    <div class="preguntas" style="margin-top: 40px">
+      <div class="pregunta-g" style="font-size: 48px"><b style="color: #fff">1</b>¿Qué has hecho con Python o con datos?</div>
+      <div class="pregunta-g" style="font-size: 48px"><b style="color: #fff">2</b>¿Has usado un modelo ya entrenado? ¿Para qué?</div>
+      <div class="pregunta-g" style="font-size: 48px"><b style="color: #fff">3</b>¿Te interesa más trabajar con texto o con imágenes?</div>
+      <div class="pregunta-g" style="font-size: 48px"><b style="color: #fff">4</b>¿Qué tarea te gustaría resolver con IA durante el curso?</div>
+    </div>
+  </section>
+
+  <!-- 7 · EL PLAN DEL NIVEL -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Punto de partida"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">El plan del nivel</span>
+    <h2 class="titulo" style="font-size: 76px">Cinco semanas, un proyecto tuyo</h2>
+    <div class="rail" style="--n: 5; margin-top: 56px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b style="font-size: 44px">Semana 1</b><span><strong>Comunidad y pacto</strong><br>Tarea modelo de referencia y arquitectura básica</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b style="font-size: 44px">Semana 2</b><span><strong>Texto y modelos</strong><br>Inferencia preentrenada y evaluación inicial</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b style="font-size: 44px">Semana 3</b><span><strong>Transferencia</strong><br>Diseño del experimento y primera ejecución</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b style="font-size: 44px">Semana 4</b><span><strong>Adaptación eficiente</strong><br>Comparación reproducible, versiones e inferencia</span></div>
+      <div data-paso="5" style="--c: #ff7c1a"><i>5</i><b style="font-size: 44px">Semana 5</b><span><strong>Validación final</strong><br>Documentación de portafolio y defensa</span></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 8 · CÓMO FUNCIONA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Punto de partida"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Cómo funciona el curso</span>
+    <h2 class="titulo" style="font-size: 76px">En vivo, en Platzi y en tu proyecto</h2>
+    <div class="stats" style="margin-top: 80px">
+      <div data-paso="1"><b>10</b><span>encuentros en vivo de 3 horas, dos por semana.</span></div>
+      <div data-paso="2"><b>30 h</b><span>sincrónicas: práctica, demos y mentoría.</span></div>
+      <div data-paso="3"><b>12 h</b><span>asincrónicas en Platzi, a tu ritmo.</span></div>
+      <div data-paso="4"><b>1</b><span>proyecto propio de lenguaje o visión.</span></div>
+    </div>
+    <p class="sub" data-paso="5" style="font-size: 40px; margin-top: 30px">Platzi te da la base. En vivo la llevamos a la práctica, en tu proyecto y con acompañamiento.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 9 · ANTES DE ACORDAR -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Nuestro pacto"></div>
+    <span class="etiqueta">Antes de acordar</span>
+    <h2 class="mensaje" style="font-size: 108px; margin-top: 30px">¿Qué necesitas para aprender y participar con confianza?</h2>
+    <p class="sub">Piensa en una experiencia que te haya ayudado a aprender y comparte una condición que quieras cuidar en este grupo. Por voz o por chat.</p>
+    <div style="display: flex; align-items: center; gap: 40px; margin-top: auto">
+      <div class="reloj" data-segundos="120">2:00</div>
+      <span class="bono" style="color: var(--negro)">Escuchamos antes de definir los acuerdos</span>
+    </div>
+  </section>
+
+  <!-- 10 · LOS SEIS ACUERDOS -->
+  <section class="slide slide--azul slide--ruta slide--foto">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Nuestro pacto"></div>
+    <div class="foto-lado"><div class="texto-foto">Seis acuerdos para aprender juntos</div></div>
+    <div class="foto-cuerpo">
+      <div class="acuerdos">
+        <div data-paso="1" style="--c: #ff7c1a"><i>1</i><div><b>Nos tratamos con respeto</b><span>Comentamos las ideas y los trabajos sin descalificar a sus autores.</span></div></div>
+        <div data-paso="2" style="--c: #e0509e"><i>2</i><div><b>Participamos por distintos medios</b><span>Voz, chat o escrito cuentan igual. La cámara encendida no es condición.</span></div></div>
+        <div data-paso="3" style="--c: #7fc200"><i>3</i><div><b>Cuidamos el tiempo común</b><span>Nos conectamos a tiempo y avisamos si hay un imprevisto.</span></div></div>
+        <div data-paso="4" style="--c: #11c9ee"><i>4</i><div><b>Aprendemos de los errores</b><span>Probamos, revisamos y volvemos a intentar.</span></div></div>
+        <div data-paso="5" style="--c: #ff7c1a"><i>5</i><div><b>Protegemos los datos y usamos IA con criterio</b><span>Información permitida o ficticia, credenciales a salvo, y verificamos lo que responde la IA.</span></div></div>
+        <div data-paso="6" style="--c: #ffffff"><i>6</i><div><b>Escuchamos y reconocemos los aportes</b><span>Respetamos turnos y no presionamos a nadie a hablar en público.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · UN ACUERDO PROPIO DEL NIVEL -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Nuestro pacto"></div>
+    <span class="etiqueta">Un acuerdo propio de este nivel</span>
+    <h2 class="mensaje" style="font-size: 100px; margin-top: 30px">Distinguimos lo que se ejecutó, lo que se preparó y lo que está pendiente</h2>
+    <p class="sub">Identificamos fuentes y versiones. Así, un resultado nunca se confunde con una conclusión.</p>
+  </section>
+
+  <!-- 12 · EL PACTO VA EN LAS DOS DIRECCIONES -->
+  <section class="slide slide--azul slide--ruta slide--diagonal">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Nuestro pacto"></div>
+    <span class="etiqueta">El pacto va en las dos direcciones</span>
+    <div class="compromisos" style="grid-template-columns: .8fr 1.2fr">
+      <div>
+        <h3>Yo me comprometo a</h3>
+        <ul style="max-width: 640px">
+          <li data-paso="1">Explicar el propósito de cada actividad y cómo revisar el resultado</li>
+          <li data-paso="2">Escuchar tus preguntas y orientarte para continuar</li>
+          <li data-paso="3">Darte retroalimentación concreta y tiempo para usarla</li>
+          <li data-paso="4">Ajustar el apoyo cuando aparezcan barreras de acceso o de comprensión</li>
+        </ul>
+      </div>
+      <div class="der">
+        <h3>Te pido</h3>
+        <ul>
+          <li data-paso="1">Participar por el medio que prefieras</li>
+          <li data-paso="2">Avisar si hay dificultades de acceso</li>
+          <li data-paso="3">Proteger los datos y comprobar lo que sugiere la IA</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 · LA IA EN ESTE CURSO -->
+  <section class="slide slide--magenta slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Nuestro pacto"></div>
+    <span class="etiqueta">La IA en este curso</span>
+    <h2 class="mensaje" style="font-size: 96px; margin-top: 26px">Usa la IA. Pero entiende lo que entregas.</h2>
+    <div class="verbos">
+      <div class="v" data-paso="1"><b>Pedir</b><span>Explica qué necesitas y con qué datos.</span></div>
+      <div class="v" data-paso="2"><b>Revisar</b><span>Lo que responde la IA es un borrador, no un hecho.</span></div>
+      <div class="v" data-paso="3"><b>Corregir</b><span>Ejecútalo, pruébalo y contrástalo con la documentación.</span></div>
+      <div class="v" data-paso="4"><b>Explicar</b><span>Cuéntalo con tus palabras y di cómo usaste la IA.</span></div>
+    </div>
+    <p class="sub" data-paso="5" style="margin-top: auto; font-size: 54px; font-weight: 700; opacity: 1">Si no puedes explicarlo, todavía no es tuyo.</p>
+  </section>
+
+  <!-- 14 · SITUACIÓN PARA CONVERSAR -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Nuestro pacto"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Una situación para conversar</span>
+    <div class="chat">
+      <div class="burbuja" data-paso="1"><small>Un compañero comparte su resultado</small>«Mi modelo acierta el 95 %, pero no sé con qué datos lo probé.»</div>
+      <div class="burbuja burbuja--der" data-paso="2">¿Qué le preguntaríamos para entender lo que hizo?</div>
+      <div class="burbuja burbuja--der m" data-paso="3">¿Cómo comprobamos que el 95 % significa algo?</div>
+      <div class="burbuja burbuja--der v" data-paso="4">¿Qué acuerdo del pacto nos orienta aquí?</div>
+    </div>
+    <p class="sub" data-paso="5" style="margin-top: 0; font-size: 42px; color: var(--tinta); font-weight: 700">La conversación debe permitirle aprender y seguir.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 15 · NUESTRO PACTO DE GRUPO -->
+  <section class="slide slide--magenta slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Nuestro pacto"></div>
+    <span class="etiqueta">Nuestro pacto de grupo</span>
+    <h2 class="titulo titulo--sm">Los acuerdos se construyen y se revisan juntos</h2>
+    <div class="dividido" style="grid-template-columns: 1.5fr 1fr">
+      <div class="preguntas" style="margin-top: 0">
+        <div class="pregunta-g" style="font-size: 52px"><b style="color: #fff">1</b>¿Qué acuerdo conservamos tal como está?</div>
+        <div class="pregunta-g" style="font-size: 52px"><b style="color: #fff">2</b>¿Qué necesitamos ajustar o agregar?</div>
+        <div class="pregunta-g" style="font-size: 52px"><b style="color: #fff">3</b>¿Dónde consultaremos la versión acordada y cómo la revisaremos?</div>
+      </div>
+      <div class="reloj sin-paso" style="text-align: center" data-segundos="240">4:00</div>
+    </div>
+  </section>
+
+  <!-- 16 · PAUSA -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Mirada rápida"></div>
+    <span class="etiqueta">Pausa</span>
+    <h2 class="mensaje" style="font-size: 120px; margin-top: 30px">Volvemos en 10 minutos</h2>
+    <p class="sub">Aléjate de la pantalla, estira las piernas y toma agua.</p>
+    <div style="display: flex; align-items: center; gap: 40px; margin-top: auto">
+      <div class="reloj" data-segundos="600">10:00</div>
+    </div>
+  </section>
+
+  <!-- 17 · UN MODELO, CUATRO DECISIONES -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Mirada rápida"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Mirada rápida</span>
+    <h2 class="titulo" style="font-size: 80px">Un modelo, cuatro decisiones</h2>
+    <p class="sub" style="color: #cfd6ee; font-size: 38px">Sirve igual para mensajes que para fotos.</p>
+    <div class="rail" style="--n: 4; margin-top: 70px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Datos</b><span>Qué ejemplos tenemos y quién los etiquetó.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Representación</b><span>Cómo se convierte un texto o una imagen en números.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Modelo</b><span>Entrada, capas, pesos y salida.</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Evaluación</b><span>Con qué casos y con qué criterio decidimos si funciona.</span></div>
+    </div>
+  </section>
+
+  <!-- 18 · DOS PREDICCIONES -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Mirada rápida"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Mirada rápida</span>
+    <h2 class="titulo" style="font-size: 72px">Una predicción correcta y una equivocada</h2>
+    <div class="dos" style="margin-top: 36px; gap: 40px; flex: none">
+      <div class="bloque bloque--verde" data-paso="1" style="padding: 34px 40px"><h3 style="font-size: 44px">Correcta</h3><p style="font-size: 36px">«El producto llegó roto.»<br><b>Modelo: queja.</b></p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 34px 40px"><h3 style="font-size: 44px">Equivocada</h3><p style="font-size: 36px">«No estoy insatisfecho con el servicio.»<br><b>Modelo: queja.</b></p></div>
+    </div>
+    <p class="sub" data-paso="3" style="font-size: 44px; margin-top: 34px; color: var(--tinta); font-weight: 700">¿El error está en la etiqueta, en el contexto o en un límite del modelo?</p>
+  </section>
+
+  <!-- 19 · RETO · TU PROYECTO -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Tu proyecto"></div>
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="">
+    <span class="etiqueta">Reto · Tu proyecto</span>
+    <h2 class="mensaje" style="font-size: 92px; margin-top: 30px">Durante el curso vas a adaptar un modelo existente a una tarea tuya</h2>
+    <p class="sub" style="color: #fff; font-size: 44px">Puede ser de lenguaje o de visión. Hoy no lo defines: escribes dos oportunidades y eliges una como punto de partida.</p>
+  </section>
+
+  <!-- 20 · RETO · TU FICHA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Tu proyecto"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Reto · Dos oportunidades de IA</span>
+    <h2 class="titulo" style="font-size: 76px">Escribe tu ficha, dos veces</h2>
+    <div class="dividido" style="grid-template-columns: 1.4fr 1fr; gap: 70px; align-items: start; margin-top: 30px">
+      <ol class="lista lista--num" style="font-size: 40px; gap: 18px; margin-top: 0">
+        <li data-paso="1">¿Quién usaría el resultado?</li>
+        <li data-paso="2">¿Lenguaje o visión? ¿Qué tipo de dato entra?</li>
+        <li data-paso="3">¿Qué resultado esperas?</li>
+        <li data-paso="4">¿Cómo revisarías un error que importa?</li>
+      </ol>
+      <div>
+        <div class="bloque bloque--tinta" data-paso="5" style="padding: 32px 36px"><h3 style="font-size: 42px">Reglas</h3><p style="font-size: 34px">Solo datos ficticios o permitidos.<br>Una tarea que se pueda comprobar, no «un modelo para todo».</p></div>
+        <div class="reloj sin-paso" data-segundos="1500" style="font-size: 130px; margin-top: 30px">25:00</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 21 · RETO · ELIGE UNA -->
+  <section class="slide slide--magenta slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Tu proyecto"></div>
+    <span class="etiqueta">Reto · Elige una</span>
+    <h2 class="titulo titulo--sm">¿Cuál llevarías como proyecto?</h2>
+    <div class="preguntas" style="margin-top: 40px">
+      <div class="pregunta-g" data-paso="1" style="font-size: 48px"><b style="color: #fff">1</b>¿Es una sola tarea, con un usuario y unas etiquetas claras?</div>
+      <div class="pregunta-g" data-paso="2" style="font-size: 48px"><b style="color: #fff">2</b>¿Puedes conseguir datos ficticios o permitidos para probarla?</div>
+      <div class="pregunta-g" data-paso="3" style="font-size: 48px"><b style="color: #fff">3</b>¿Sabrías reconocer si el modelo se equivoca?</div>
+      <div class="pregunta-g" data-paso="4" style="font-size: 48px"><b style="color: #fff">4</b>¿Tienes los recursos para ejecutarla, o un plan B?</div>
+    </div>
+  </section>
+
+  <!-- 22 · TICKET DE SALIDA -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Tu proyecto"></div>
+    <span class="etiqueta">Ticket de salida</span>
+    <h2 class="mensaje" style="font-size: 96px; margin-top: 30px">Escribe en el chat tu idea de proyecto en una línea</h2>
+    <p class="sub">Y una condición de viabilidad: qué datos o recursos necesitarías.</p>
+    <p class="nota" style="color: var(--negro); margin-top: auto">No incluyas datos personales ni de clientes.</p>
+  </section>
+
+  <!-- 23 · PRÓXIMOS PASOS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Tu proyecto"></div>
+    <img class="marca" src="estudia/img/logo-estudia-claro.png" alt="">
+    <span class="etiqueta">Próximos pasos</span>
+    <h2 class="titulo" style="font-size: 96px">Tres pasos para continuar</h2>
+    <div class="camino" style="margin-top: 110px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><h3>Guarda tus dos oportunidades</h3><p>Con usuario, dato y resultado esperado.</p></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><h3>Revisa tu condición de viabilidad</h3><p>Qué datos o recursos necesitas y cómo los conseguirías.</p></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><h3>Avanza con Platzi</h3><p>Módulo 1: fundamentos de redes neuronales y Deep Learning.</p></div>
+    </div>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 24 · CIERRE -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-oscuro.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 250px">Nos vemos en la próxima sesión</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Gracias</h1>
+      <p class="docente">Pablo Ríos Peña · <span style="user-select: all">linkedin.com/in/pabloriospena</span></p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+</div>
+<div class="progreso"></div>
+<script src="motor.js"></script>
+</body>
+</html>
