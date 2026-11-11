@@ -1,0 +1,105 @@
+---
+// Respuestas anónimas de la clase 1 de Estud-IA, nivel básico (slide "Conversemos").
+// Sesión con ?s=basico-clase-1 (por defecto).
+import Layout from "../../../layouts/Layout.astro";
+
+const sesionParam = Astro.url.searchParams.get("s") ?? "basico-clase-1";
+const sesion = /^[a-z0-9-]{3,30}$/.test(sesionParam) ? sesionParam : "basico-clase-1";
+
+const preguntas = [
+    { name: "herramientas", n: 1, texto: "¿Qué herramientas digitales usas a diario?" },
+    { name: "hecho_con_ia", n: 2, texto: "¿Qué has hecho ya con IA, si algo?" },
+    { name: "quiere_lograr", n: 3, texto: "¿Qué te gustaría poder hacer al terminar?" },
+    { name: "preocupa", n: 4, texto: "¿Qué te preocupa de este proceso?" },
+];
+const campo =
+    "w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 focus:border-orange-500 focus:ring-2 focus:ring-orange-100 outline-none";
+---
+
+<Layout title="Cuéntanos de dónde partes | Estud-IA" hideHeader hideFooter noindex>
+    <div class="min-h-screen bg-slate-50 py-6 px-4" data-sesion={sesion} id="raiz">
+        <div class="max-w-xl mx-auto">
+            <p class="text-xs font-bold tracking-widest uppercase text-orange-600 mb-1">
+                Estud-IA · IA nivel básico
+            </p>
+            <h1 class="text-2xl font-bold text-slate-900 tracking-tight mb-1">
+                Cuéntanos de dónde partes
+            </h1>
+            <p class="text-sm text-slate-600 mb-5">
+                Es anónimo: no pedimos nombre ni correo. Responde lo que quieras; puedes dejar preguntas en blanco.
+                No escribas datos personales.
+            </p>
+
+            <form id="form" class="space-y-5 bg-white border border-slate-200 rounded-xl p-5 shadow-sm" novalidate>
+                <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+                {
+                    preguntas.map((p) => (
+                        <div>
+                            <label for={p.name} class="block text-sm font-semibold text-slate-800 mb-1">
+                                {p.n}. {p.texto}
+                            </label>
+                            <textarea id={p.name} name={p.name} rows="3" maxlength="600" class={campo}></textarea>
+                        </div>
+                    ))
+                }
+                <button
+                    type="submit"
+                    class="w-full rounded-lg bg-orange-500 px-4 py-3 text-base font-bold text-white hover:bg-orange-600 disabled:opacity-50"
+                    >Enviar</button
+                >
+                <p class="msg text-sm" role="status" aria-live="polite"></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const raiz = document.getElementById("raiz")!;
+        const sesion = raiz.dataset.sesion!;
+        const form = document.getElementById("form") as HTMLFormElement;
+        const msg = form.querySelector<HTMLElement>(".msg")!;
+
+        function aviso(texto: string, bien: boolean) {
+            msg.textContent = texto;
+            msg.className = `msg text-sm ${bien ? "text-emerald-700" : "text-red-600"}`;
+        }
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const fd = new FormData(form);
+            const hay = ["herramientas", "hecho_con_ia", "quiere_lograr", "preocupa"].some(
+                (k) => String(fd.get(k) ?? "").trim().length > 0,
+            );
+            if (!hay) {
+                aviso("Escribe al menos una respuesta.", false);
+                return;
+            }
+            const boton = form.querySelector<HTMLButtonElement>("button[type=submit]")!;
+            boton.disabled = true;
+            try {
+                const r = await fetch("/api/estudia/respuestas", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        sesion,
+                        website: fd.get("website"),
+                        herramientas: fd.get("herramientas"),
+                        hecho_con_ia: fd.get("hecho_con_ia"),
+                        quiere_lograr: fd.get("quiere_lograr"),
+                        preocupa: fd.get("preocupa"),
+                    }),
+                });
+                const d = await r.json().catch(() => ({}));
+                if (!r.ok || !d.ok) {
+                    aviso(d.error || "No se pudo enviar. Intenta de nuevo.", false);
+                } else {
+                    form.reset();
+                    aviso("Listo, gracias. Si se te ocurre algo más, puedes enviar de nuevo.", true);
+                }
+            } catch {
+                aviso("Sin conexión. Intenta de nuevo.", false);
+            } finally {
+                boton.disabled = false;
+            }
+        });
+    </script>
+</Layout>
