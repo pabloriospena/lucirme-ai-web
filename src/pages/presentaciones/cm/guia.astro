@@ -1,0 +1,699 @@
+---
+// Guía post-sesión · Seguros CM.
+// Grupo de nivel básico en IA: qué es, los tres niveles de uso (chat, contexto, conectores),
+// qué se logra con conectores y cómo conectar la información del equipo.
+// Formato de documento tipo Notion, igual que la guía de Sasa (design.md, sección 6).
+import Layout from "../../../layouts/Layout.astro";
+
+const icons: Record<string, string> = {
+    folder: "M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z",
+    mail: "M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+    chat: "M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z",
+    db: "M4 7c0-1.657 3.582-3 8-3s8 1.343 8 3-3.582 3-8 3-8-1.343-8-3zm0 0v5c0 1.657 3.582 3 8 3s8-1.343 8-3V7m0 5v5c0 1.657-3.582 3-8 3s-8-1.343-8-3v-5",
+    spark: "M13 10V3L4 14h7v7l9-11h-7z",
+    info: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+    shield: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    clock: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z",
+    chart: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z",
+};
+
+const copyIcon =
+    "M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z";
+
+// Los tres niveles que se explicaron en la sesión.
+const niveles = [
+    {
+        paso: "1",
+        id: "chat",
+        titulo: "Chat",
+        resumen: "Le escribes, o le subes un archivo, y te responde.",
+        que: [
+            "Sirve para investigar, resumir y redactar.",
+            "No hay nada que configurar: se empieza hoy.",
+            "Cada archivo o texto se entrega a mano, en la conversación.",
+        ],
+        prompt:
+            "Resume este correo de un cliente en tres líneas: qué pide y para cuándo. Si algo no queda claro, dime qué debería preguntarle. Correo: [pegar texto]",
+    },
+    {
+        paso: "2",
+        id: "contexto",
+        titulo: "Contexto",
+        resumen: "Guardas documentos e instrucciones fijas en un espacio de trabajo, y cada conversación nueva parte de ahí.",
+        que: [
+            "Sirve para comparar archivos y para redactar con los documentos de referencia a la mano.",
+            "Los documentos se suben una vez y no hay que pegarlos en cada chat.",
+            "Qué espacio de trabajo ofrece cada herramienta depende del plan; lo validamos juntos.",
+        ],
+        prompt:
+            "Compara estos dos documentos. Dame una tabla con lo que es igual, lo que cambió y lo que falta en el segundo. Marca lo que no puedas confirmar.",
+    },
+    {
+        paso: "3",
+        id: "conectores",
+        titulo: "Conectores",
+        resumen: "La IA lee directamente tus herramientas, como OneDrive o el correo, con los permisos que ya tienes.",
+        que: [
+            "Consulta información en tiempo real, sin subir archivos a mano.",
+            "Cita de qué archivo sale cada dato, para poder verificarlo.",
+            "Está pendiente separar OneDrive de la Nube de Sura para poder conectarlo.",
+        ],
+        prompt:
+            "Busca en mi OneDrive los archivos del cliente [nombre] y dime en qué estado está y qué falta. Cita de qué archivo sacas cada dato.",
+    },
+];
+
+// Lo que se puede lograr con IA conectada, tal como salió en la sesión.
+const casos = [
+    {
+        id: "comparar",
+        icono: "folder",
+        titulo: "Comparar archivos",
+        que: [
+            "Poner dos versiones de un documento lado a lado y ver qué cambió.",
+            "Encontrar lo que falta en uno y sí está en el otro.",
+        ],
+        prompt:
+            "Compara el documento [A] con el documento [B]. Dame una tabla con las diferencias y dime cuáles pueden afectar al cliente. Si algo no es claro, márcalo como \"por confirmar\".",
+    },
+    {
+        id: "clientes",
+        icono: "db",
+        titulo: "Información de clientes en tiempo real",
+        que: [
+            "Preguntar por un cliente y recibir su estado según los archivos más recientes.",
+            "Ver de qué archivo sale cada dato, para revisarlo.",
+        ],
+        prompt:
+            "Dame el estado del cliente [nombre]: qué documentos tiene, qué está pendiente y cuál fue el último movimiento. Indica de qué archivo sacas cada dato.",
+    },
+    {
+        id: "respuestas",
+        icono: "mail",
+        titulo: "Respuestas con datos actualizados",
+        que: [
+            "Redactar la respuesta a un cliente a partir de la información vigente.",
+            "Dejarla como borrador para que una persona la revise antes de enviarla.",
+        ],
+        prompt:
+            "Redacta una respuesta amable y directa a este cliente usando solo los datos que te paso. Si falta un dato, dime cuál en vez de inventarlo. Datos: [pegar]. Mensaje del cliente: [pegar]",
+    },
+    {
+        id: "vencimientos",
+        icono: "clock",
+        titulo: "Oportunidades de venta y alertas de vencimientos",
+        que: [
+            "Detectar qué renovaciones y vencimientos se acercan, ordenados por fecha.",
+            "Avisar con tiempo para que cada vencimiento sea una oportunidad de venta y no una sorpresa.",
+        ],
+        prompt:
+            "De esta lista, dime qué vence en los próximos 30 días, ordenado por fecha, y propón un mensaje de aviso para cada cliente. Lista: [archivo]",
+    },
+    {
+        id: "dashboard",
+        icono: "chart",
+        titulo: "Dashboard de cifras importantes",
+        que: [
+            "Ver en un solo lugar cómo van las cifras clave del negocio.",
+            "Que se actualice con los datos nuevos, en vez de armarlo a mano cada semana.",
+        ],
+        prompt:
+            "Con esta hoja, arma un resumen semanal: qué subió, qué bajó y qué pide atención. Hoja: [archivo]",
+    },
+];
+
+const glosario = [
+    { termino: "IA generativa", significado: "Programas que escriben, resumen o comparan a partir de lo que les pides." },
+    { termino: "Modelo", significado: "El motor que hay detrás de cada herramienta (Claude, GPT, Gemini). Cambia el empaque, pero la base es parecida." },
+    { termino: "Chat", significado: "La conversación donde le escribes a la IA." },
+    { termino: "Prompt o petición", significado: "La instrucción que le escribes." },
+    { termino: "Contexto", significado: "Todo lo que la IA tiene a la vista para responderte: tu mensaje, los archivos y las instrucciones." },
+    { termino: "Ventana de contexto", significado: "Cuánto cabe a la vez. Un chat muy largo, o con temas mezclados, responde peor." },
+    { termino: "Alucinación", significado: "Cuando responde con seguridad algo falso o inventado." },
+    { termino: "Proyecto o espacio de trabajo", significado: "Un lugar con archivos e instrucciones fijas; cada chat nuevo arranca desde ahí." },
+    { termino: "Conector", significado: "El enlace que se configura una vez entre la IA y una cuenta que ya usas, como OneDrive o el correo." },
+    { termino: "Agente", significado: "IA que, además de responder, ejecuta pasos por su cuenta. Lo nombramos, pero no es para esta etapa." },
+    { termino: "Plan gratis y plan de pago", significado: "Cambian los límites de uso y algunas funciones. Es lo que el equipo va a medir antes de pedir licencia." },
+];
+
+const partesPeticion = [
+    { parte: "Quién es la IA", ejemplo: "Eres un asesor de una aseguradora." },
+    { parte: "Qué debe hacer", ejemplo: "Redacta una respuesta amable y directa." },
+    { parte: "Con qué información", ejemplo: "Usa solo los datos que te pego abajo." },
+    { parte: "En qué formato", ejemplo: "Máximo cinco líneas. Si falta un dato, dime cuál en vez de inventarlo." },
+];
+
+const ruta = [
+    {
+        paso: "1",
+        titulo: "Hoy, en el chat",
+        detalle: "Sube el archivo o pega el texto y pide la tarea. No hay nada que configurar.",
+    },
+    {
+        paso: "2",
+        titulo: "Hoy, con contexto",
+        detalle:
+            "Crea un espacio de trabajo en la herramienta, sube los documentos de referencia con nombres claros y deja escritas las instrucciones fijas: a quién se escribe, con qué tono y qué no se inventa. Quita o actualiza los archivos viejos para que no los cite.",
+    },
+    {
+        paso: "3",
+        titulo: "Cuando OneDrive esté separado, conectarlo",
+        detalle:
+            "En Claude: Customize, luego Connectors, busca Microsoft 365 y pulsa Connect. Si la cuenta es de la empresa, un administrador de Microsoft debe aprobar el conector antes.",
+    },
+    {
+        paso: "4",
+        titulo: "Probar con una pregunta simple",
+        detalle:
+            "Pide: \"Lista los documentos de mi OneDrive que mencionan [cliente]\". Si responde bien, ya puedes usar las peticiones del nivel 3.",
+    },
+];
+
+const buenasPracticas = [
+    {
+        titulo: "El problema primero, la herramienta después",
+        detalle: "Parte de una tarea que hoy te quita tiempo, no de las ganas de usar IA.",
+    },
+    {
+        titulo: "Un chat por tema",
+        detalle: "Mezclar temas en una misma conversación contamina el contexto: la IA responde con seguridad, pero mal.",
+    },
+    {
+        titulo: "La IA propone, tú decides",
+        detalle: "Quien conoce el negocio revisa lo que la IA escribe antes de que salga al cliente.",
+    },
+    {
+        titulo: "Cuidado con los datos de clientes",
+        detalle:
+            "Antes de subir un archivo con datos de clientes, acuerda con quien administra los sistemas qué se puede subir. En los planes gratis de algunas herramientas, los chats pueden usarse para mejorar el modelo si no se desactiva esa opción.",
+    },
+    {
+        titulo: "Primero gratis, después licencia",
+        detalle: "Usa Claude o ChatGPT en su versión gratis, anota qué se te queda corto y con eso se decide la licencia.",
+    },
+];
+
+const toc = [
+    { id: "resumen", label: "Resumen" },
+    { id: "niveles", label: "1. Tres niveles de uso" },
+    { id: "casos", label: "2. Qué se logra conectando" },
+    { id: "palabras", label: "3. Palabras que vas a oír" },
+    { id: "peticiones", label: "4. Cómo pedir bien" },
+    { id: "conectar", label: "5. Conectar tu información" },
+    { id: "practicas", label: "6. Buenas prácticas" },
+    { id: "siguiente", label: "7. Lo que sigue" },
+];
+---
+
+<Layout title="Guía post-sesión | Seguros CM" hideHeader hideFooter noindex>
+    <div class="min-h-screen bg-[#FBFBFA] text-[#37352F] font-sans antialiased selection:bg-slate-200">
+        <!-- BARRA SUPERIOR -->
+        <div class="w-full bg-white border-b border-[#E9E9E7] px-4 py-3 sticky top-0 z-30 flex items-center justify-between text-xs text-[#787774] print:hidden">
+            <div class="flex items-center gap-2 overflow-hidden">
+                <span class="font-medium shrink-0">LuciRMe AI</span>
+                <span>/</span>
+                <span class="font-medium shrink-0">Seguros CM</span>
+                <span>/</span>
+                <span class="text-[#37352F] font-semibold truncate">Guía post-sesión</span>
+            </div>
+            <button
+                type="button"
+                onclick="window.print()"
+                class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded border border-[#E9E9E7] hover:bg-[#F1F1EF] transition text-[#37352F] font-medium text-xs cursor-pointer shrink-0"
+            >
+                <svg class="w-3.5 h-3.5 text-[#787774]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                </svg>
+                <span class="hidden sm:inline">Exportar / Imprimir</span>
+            </button>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-6 py-10 md:py-14 grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <!-- TABLA DE CONTENIDO -->
+            <aside class="hidden lg:block lg:col-span-3 sticky top-20 self-start text-xs text-[#787774] print:hidden">
+                <div class="text-[11px] font-semibold uppercase tracking-wider text-[#9B9A97] mb-2">En esta guía</div>
+                <nav class="space-y-1 font-medium">
+                    {toc.map((t) => (
+                        <a href={`#${t.id}`} class="block px-2.5 py-1.5 rounded hover:bg-[#F1F1EF] hover:text-[#37352F] transition">
+                            {t.label}
+                        </a>
+                    ))}
+                </nav>
+            </aside>
+
+            <main class="lg:col-span-9 space-y-12">
+                <!-- ENCABEZADO -->
+                <header class="space-y-6 pb-6 border-b border-[#E9E9E7]">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-xl bg-[#F1F1EF] border border-[#E9E9E7] flex items-center justify-center text-[#37352F] shadow-2xs shrink-0">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d={icons.spark}></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono uppercase tracking-widest text-[#9B9A97]">Guía post-sesión</span>
+                            <h1 class="text-2xl sm:text-3xl font-extrabold text-[#37352F] tracking-tight">
+                                Empezar a usar IA en el trabajo de Seguros CM
+                            </h1>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#F7F7F5] border border-[#E9E9E7] rounded-lg p-4 text-xs space-y-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#9B9A97] w-24 shrink-0 font-medium">Para:</span>
+                                <span class="text-[#37352F] font-semibold">Equipo de Seguros CM</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#9B9A97] w-24 shrink-0 font-medium">Sesión:</span>
+                                <span class="text-[#37352F] font-semibold">Inmersión · 10 de noviembre de 2026</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#9B9A97] w-24 shrink-0 font-medium">Elaborado por:</span>
+                                <span class="text-[#37352F] font-semibold">Pablo Ríos · LuciRMe AI</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#9B9A97] w-24 shrink-0 font-medium">Objetivo:</span>
+                                <span class="text-[#37352F] font-semibold">Un mapa simple para empezar</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="resumen" class="bg-[#F1F1EF] border border-[#E9E9E7] rounded-lg p-4 flex gap-3 text-xs leading-relaxed">
+                        <div class="shrink-0 pt-0.5">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons.info}></path>
+                            </svg>
+                        </div>
+                        <div class="space-y-2">
+                            <strong class="font-bold block">Resumen</strong>
+                            <p class="text-[#5A5A58]">
+                                En la sesión vimos qué es la IA y qué se puede lograr con ella: investigar, resumir y redactar. También
+                                quedó acordado cómo empezar sin comprar nada: el equipo usa Claude o ChatGPT en su versión gratis, mira
+                                qué se le queda corto y con eso se decide si hace falta una licencia.
+                            </p>
+                            <p class="text-[#5A5A58]">
+                                La IA se usa en tres niveles: chat, contexto y conectores. Cada uno suma algo al anterior, y los tres se
+                                pueden recorrer a su ritmo. Esta guía los junta, explica las palabras que vas a oír y trae peticiones de
+                                ejemplo que puedes copiar y ajustar.
+                            </p>
+                            <p class="text-[#5A5A58]">
+                                No es un manual paso a paso: es el mapa de qué hay, para qué sirve y por dónde empezar.
+                            </p>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- 1. NIVELES -->
+                <section id="niveles" class="space-y-4">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">1. Tres niveles de uso</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            Se empieza por el chat y se sube de nivel cuando haga falta. Cada tarjeta trae una petición de ejemplo.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {niveles.map((n) => (
+                            <article id={n.id} class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded bg-teal-100 text-teal-800 flex items-center justify-center text-xs font-bold shrink-0">
+                                        {n.paso}
+                                    </div>
+                                    <h3 class="text-sm font-bold">{n.titulo}</h3>
+                                </div>
+                                <p class="text-xs text-[#37352F] leading-relaxed font-medium">{n.resumen}</p>
+                                <ul class="space-y-2 text-xs text-[#5A5A58]">
+                                    {n.que.map((q) => (
+                                        <li class="flex items-start gap-2">
+                                            <svg class="w-4 h-4 text-teal-700 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                            <span>{q}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <div class="pt-2 border-t border-[#F1F1EF]">
+                                    <button
+                                        type="button"
+                                        data-prompt={n.prompt}
+                                        class="copy-prompt text-[11px] font-semibold text-[#37352F] hover:text-teal-700 transition flex items-center gap-1.5 cursor-pointer print:hidden"
+                                    >
+                                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={copyIcon}></path>
+                                        </svg>
+                                        Copiar petición de ejemplo
+                                    </button>
+                                    <p class="hidden print:block text-[11px] text-[#5A5A58] italic">{n.prompt}</p>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                </section>
+
+                <!-- 2. CASOS -->
+                <section id="casos" class="space-y-4">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">2. Qué se logra con la IA conectada</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            Cinco usos que salieron en la sesión y una recomendación para las renovaciones de autos. Varios se pueden
+                            probar ya en el nivel 2, subiendo los archivos; con el nivel 3 se hacen sin subirlos.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {casos.map((c) => (
+                            <article id={c.id} class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-8 h-8 rounded-md bg-[#F1F1EF] border border-[#E9E9E7] flex items-center justify-center shrink-0">
+                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons[c.icono]}></path>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-sm font-bold">{c.titulo}</h3>
+                                </div>
+                                <ul class="space-y-2 text-xs text-[#5A5A58]">
+                                    {c.que.map((q) => (
+                                        <li class="flex items-start gap-2">
+                                            <svg class="w-4 h-4 text-teal-700 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                            <span>{q}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <div class="pt-2 border-t border-[#F1F1EF]">
+                                    <button
+                                        type="button"
+                                        data-prompt={c.prompt}
+                                        class="copy-prompt text-[11px] font-semibold text-[#37352F] hover:text-teal-700 transition flex items-center gap-1.5 cursor-pointer print:hidden"
+                                    >
+                                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={copyIcon}></path>
+                                        </svg>
+                                        Copiar petición de ejemplo
+                                    </button>
+                                    <p class="hidden print:block text-[11px] text-[#5A5A58] italic">{c.prompt}</p>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+
+                    <!-- RECOMENDACIÓN: RENOVACIONES DE AUTOS -->
+                    <article id="renovaciones-autos" class="bg-[#F1F1EF] border border-[#E9E9E7] rounded-lg p-5 space-y-3">
+                        <div class="flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-8 h-8 rounded-md bg-white border border-[#E9E9E7] flex items-center justify-center shrink-0">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons.folder}></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-sm font-bold">Renovaciones de autos: cotizaciones por placa</h3>
+                            </div>
+                            <span class="text-[10px] font-mono text-[#9B9A97] shrink-0">Recomendación de Sebastián Fuentes</span>
+                        </div>
+                        <p class="text-xs text-[#5A5A58] leading-relaxed">
+                            Para facilitar el trabajo en las renovaciones de autos, lo importante es tener la conexión con OneDrive.
+                            Con ella, ChatGPT busca entre los archivos las cotizaciones ya realizadas, las asocia con la placa del
+                            vehículo y hace el comparativo en Excel.
+                        </p>
+                        <ul class="space-y-2 text-xs text-[#5A5A58]">
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 text-teal-700 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Encuentra las cotizaciones de un mismo vehículo, aunque estén en carpetas distintas.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 text-teal-700 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Deja el comparativo en Excel, listo para revisarlo antes de hablar con el cliente.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 text-teal-700 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Depende de que OneDrive quede separado de la Nube de Sura; mientras tanto, se puede probar subiendo a mano las cotizaciones de una placa.</span>
+                            </li>
+                        </ul>
+                        <div class="pt-2 border-t border-[#E9E9E7]">
+                            <button
+                                type="button"
+                                data-prompt="Busca en mi OneDrive las cotizaciones que ya se hicieron para el vehículo con placa [placa] y asócialas a esa placa. Arma un comparativo en Excel con una fila por cotización y las diferencias principales. Indica de qué archivo sacas cada dato y marca como &quot;por confirmar&quot; lo que no encuentres."
+                                class="copy-prompt text-[11px] font-semibold text-[#37352F] hover:text-teal-700 transition flex items-center gap-1.5 cursor-pointer print:hidden"
+                            >
+                                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={copyIcon}></path>
+                                </svg>
+                                Copiar petición de ejemplo
+                            </button>
+                            <p class="hidden print:block text-[11px] text-[#5A5A58] italic">
+                                Busca en mi OneDrive las cotizaciones que ya se hicieron para el vehículo con placa [placa] y asócialas a
+                                esa placa. Arma un comparativo en Excel con una fila por cotización y las diferencias principales.
+                                Indica de qué archivo sacas cada dato y marca como "por confirmar" lo que no encuentres.
+                            </p>
+                        </div>
+                    </article>
+
+                    <p class="text-xs text-[#787774] leading-relaxed">
+                        Qué puede hacer la IA exactamente depende de la herramienta, del plan y de los permisos de la empresa; lo
+                        validamos juntos al configurarlo.
+                    </p>
+                </section>
+
+                <!-- 3. GLOSARIO -->
+                <section id="palabras" class="space-y-4">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">3. Palabras que vas a oír</h2>
+                        <p class="text-xs text-[#787774] mt-1">Once términos, explicados sin tecnicismos.</p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs border border-[#E9E9E7] rounded-lg overflow-hidden bg-white">
+                            <thead>
+                                <tr class="bg-[#F7F7F5] text-left text-[#787774]">
+                                    <th class="px-3 py-2 font-semibold w-48">Término</th>
+                                    <th class="px-3 py-2 font-semibold">Qué significa</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-[#5A5A58]">
+                                {glosario.map((g) => (
+                                    <tr class="border-t border-[#E9E9E7]">
+                                        <td class="px-3 py-2 font-semibold text-[#37352F]">{g.termino}</td>
+                                        <td class="px-3 py-2">{g.significado}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 4. PETICIONES -->
+                <section id="peticiones" class="space-y-4">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">4. Cómo pedir bien</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            Una buena petición dice quién es la IA en esa tarea, qué debe hacer, con qué información y en qué formato
+                            responder.
+                        </p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs border border-[#E9E9E7] rounded-lg overflow-hidden bg-white">
+                            <thead>
+                                <tr class="bg-[#F7F7F5] text-left text-[#787774]">
+                                    <th class="px-3 py-2 font-semibold w-40">Parte</th>
+                                    <th class="px-3 py-2 font-semibold">Ejemplo</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-[#5A5A58]">
+                                {partesPeticion.map((p) => (
+                                    <tr class="border-t border-[#E9E9E7]">
+                                        <td class="px-3 py-2 font-semibold text-[#37352F]">{p.parte}</td>
+                                        <td class="px-3 py-2">{p.ejemplo}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-8 h-8 rounded-md bg-[#F1F1EF] border border-[#E9E9E7] flex items-center justify-center shrink-0">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons.chat}></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-sm font-bold">Cuando no sabes cómo pedirlo</h3>
+                        </div>
+                        <p class="text-xs text-[#5A5A58] leading-relaxed">
+                            Dile lo que quieres lograr y deja que sea la IA quien pregunte lo que le falta, antes de responder.
+                        </p>
+                        <div class="pt-2 border-t border-[#F1F1EF]">
+                            <button
+                                type="button"
+                                data-prompt="Quiero lograr [objetivo]. Hazme las preguntas que necesites antes de responder."
+                                class="copy-prompt text-[11px] font-semibold text-[#37352F] hover:text-teal-700 transition flex items-center gap-1.5 cursor-pointer print:hidden"
+                            >
+                                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={copyIcon}></path>
+                                </svg>
+                                Copiar petición de ejemplo
+                            </button>
+                            <p class="hidden print:block text-[11px] text-[#5A5A58] italic">
+                                Quiero lograr [objetivo]. Hazme las preguntas que necesites antes de responder.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. CONECTAR -->
+                <section id="conectar" class="space-y-4">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">5. Conectar tu información</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            La ruta va de lo que se puede hacer hoy a lo que se habilita cuando OneDrive quede separado de la Nube de
+                            Sura.
+                        </p>
+                    </div>
+
+                    <ol class="space-y-3">
+                        {ruta.map((r) => (
+                            <li class="bg-white border border-[#E9E9E7] rounded-lg p-4 flex gap-3 shadow-2xs">
+                                <div class="w-6 h-6 rounded bg-teal-100 text-teal-800 flex items-center justify-center text-xs font-bold shrink-0">
+                                    {r.paso}
+                                </div>
+                                <div class="space-y-1">
+                                    <h3 class="text-sm font-bold">{r.titulo}</h3>
+                                    <p class="text-xs text-[#5A5A58] leading-relaxed">{r.detalle}</p>
+                                </div>
+                            </li>
+                        ))}
+                    </ol>
+
+                    <div class="bg-[#F1F1EF] border border-[#E9E9E7] rounded-lg p-4 flex gap-3 text-xs leading-relaxed">
+                        <div class="shrink-0 pt-0.5">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons.info}></path>
+                            </svg>
+                        </div>
+                        <div class="space-y-2">
+                            <strong class="font-bold block">Si no aparece un documento</strong>
+                            <ul class="space-y-1.5 text-[#5A5A58] list-disc pl-4">
+                                <li>Confirma que está guardado en OneDrive o SharePoint, y no solo en el computador.</li>
+                                <li>Si lo acabas de subir, puede tardar un rato en aparecer.</li>
+                                <li>Búscalo por el nombre exacto del archivo.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. BUENAS PRACTICAS -->
+                <section id="practicas" class="space-y-4">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">6. Para que la IA dé buen resultado</h2>
+                        <p class="text-xs text-[#787774] mt-1">Cinco hábitos para empezar con buen pie.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {buenasPracticas.map((b) => (
+                            <div class="bg-white border border-[#E9E9E7] rounded-lg p-4 space-y-1.5 shadow-2xs">
+                                <div class="flex items-center gap-2">
+                                    <svg class="w-4 h-4 text-teal-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons.shield}></path>
+                                    </svg>
+                                    <h3 class="text-xs font-bold">{b.titulo}</h3>
+                                </div>
+                                <p class="text-xs text-[#5A5A58] leading-relaxed">{b.detalle}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                <!-- 7. LO QUE SIGUE -->
+                <section id="siguiente" class="space-y-4">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">7. Lo que sigue</h2>
+                        <p class="text-xs text-[#787774] mt-1">Lo acordado en la sesión.</p>
+                    </div>
+
+                    <ol class="space-y-3">
+                        <li class="bg-white border border-[#E9E9E7] rounded-lg p-4 flex gap-3 shadow-2xs">
+                            <div class="w-6 h-6 rounded bg-teal-100 text-teal-800 flex items-center justify-center text-xs font-bold shrink-0">1</div>
+                            <div class="space-y-1">
+                                <h3 class="text-sm font-bold">Primera sesión de autonomía</h3>
+                                <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                    Miércoles 18 de noviembre, en la mañana, con Sara y Juan. Es el primer equipo en trabajar con sus
+                                    propios casos.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="bg-white border border-[#E9E9E7] rounded-lg p-4 flex gap-3 shadow-2xs">
+                            <div class="w-6 h-6 rounded bg-teal-100 text-teal-800 flex items-center justify-center text-xs font-bold shrink-0">2</div>
+                            <div class="space-y-1">
+                                <h3 class="text-sm font-bold">Uso de Claude y ChatGPT en versión gratis</h3>
+                                <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                    El equipo las usa en su trabajo y anota qué necesita. Con eso se decide si hace falta una licencia.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="bg-white border border-[#E9E9E7] rounded-lg p-4 flex gap-3 shadow-2xs">
+                            <div class="w-6 h-6 rounded bg-teal-100 text-teal-800 flex items-center justify-center text-xs font-bold shrink-0">3</div>
+                            <div class="space-y-1">
+                                <h3 class="text-sm font-bold">Separar OneDrive de la Nube de Sura</h3>
+                                <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                    Queda a cargo de Daniel Osorio. Es lo que permite conectar OneDrive con la IA.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="bg-white border border-[#E9E9E7] rounded-lg p-4 flex gap-3 shadow-2xs">
+                            <div class="w-6 h-6 rounded bg-teal-100 text-teal-800 flex items-center justify-center text-xs font-bold shrink-0">4</div>
+                            <div class="space-y-1">
+                                <h3 class="text-sm font-bold">Taller para todo el equipo</h3>
+                                <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                    Después de las primeras 4 sesiones, sin costo adicional.
+                                </p>
+                            </div>
+                        </li>
+                    </ol>
+                </section>
+            </main>
+        </div>
+    </div>
+</Layout>
+
+<!-- AVISO DE COPIADO -->
+<div
+    id="toast"
+    class="fixed bottom-5 right-5 z-50 transform translate-y-10 opacity-0 transition-all duration-200 pointer-events-none print:hidden"
+>
+    <div class="bg-[#37352F] text-white text-xs px-3.5 py-2 rounded-md shadow-lg flex items-center gap-2">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span>Petición copiada al portapapeles</span>
+    </div>
+</div>
+
+<script>
+    const toast = document.getElementById("toast");
+
+    function showToast() {
+        if (!toast) return;
+        toast.classList.remove("translate-y-10", "opacity-0");
+        setTimeout(() => toast.classList.add("translate-y-10", "opacity-0"), 2200);
+    }
+
+    document.querySelectorAll<HTMLButtonElement>(".copy-prompt").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+            const text = btn.dataset.prompt ?? "";
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast();
+            } catch {
+                // Sin permiso de portapapeles: no se muestra aviso falso.
+            }
+        });
+    });
+</script>
