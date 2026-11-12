@@ -247,3 +247,50 @@ html, body { height: 100%; background: #0b0d12; overflow: hidden; font-family: v
 .rail b { display: block; font-size: 50px; line-height: 1.1; margin-top: 26px; }
 .rail span { display: block; font-size: 33px; line-height: 1.3; margin-top: 10px; color: var(--oscuro); }
 .slide--azul .rail span { color: #e6e7ea; }
+
+/* ===== Diseño institucional 2026-11 (plantilla nueva de Estud-IA / Alcaldía de Medellín) =====
+   Banda negra de 192 px con el logo, línea tricolor y escudo de la Alcaldía abajo al centro.
+   Portada y cierre con el fondo nuevo. Todo se sobrescribe aquí; el tema anterior queda arriba intacto. */
+.slide:not(.slide--portada)::after {
+  content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background:
+    url('estudia/img/alcaldia-caja.png') center bottom / 212px 162px no-repeat,
+    url('estudia/img/logo-estudia-nuevo.png') 745px 56px / 431px 81px no-repeat,
+    linear-gradient(90deg, #ff7c1a 0 60%, #cb318e 60% 80%, #7fc200 80% 100%) 0 192px / 100% 13px no-repeat,
+    linear-gradient(#000, #000) 0 0 / 100% 192px no-repeat;
+}
+.slide .marca { display: none; }
+.slide:not(.slide--portada) .pie, .slide .pie-blanco { display: none; }
+.slide:not(.slide--portada) .ruta-cap { top: 70px; z-index: 5; color: #fff; --base: rgb(255 255 255 / .28); --acento: #fff; }
+.slide--ruta { padding-top: 238px; padding-bottom: 190px; }
+.slide--foto { padding-top: 0; padding-bottom: 0; }
+.slide--foto .foto-cuerpo { padding-top: 250px; }
+.slide--foto .foto-lado { z-index: 0; }
+.slide--foto .foto-lado .texto-foto { bottom: 190px; }
+.numero-slide { z-index: 6; }
+
+/* Portada y cierre */
+.slide--portada { background: #020a2e url('estudia/img/portada-nueva.jpg') center / cover; padding: 230px 289px 220px; align-items: center; text-align: center; }
+.slide--portada:last-of-type { background-image: url('estudia/img/cierre-nuevo.jpg'); }
+.slide--portada::before { display: none; }
+.slide--portada .etiqueta { margin-top: 0 !important; color: var(--naranja); opacity: 1; }
+.slide--portada .etiqueta::before { display: none; }
+.slide--portada .portada-titulo { margin-top: 28px !important; max-width: none; width: 1342px; display: flex; flex-direction: column; align-items: center; }
+.slide--portada:not(:last-of-type) .portada-titulo { border: 4px solid #fff; border-radius: 32px; padding: 40px 56px 44px; background: rgb(2 10 46 / .55); }
+.slide--portada .titulo { font-size: 112px !important; margin-top: 0; max-width: none; }
+.slide--portada .docente { margin-top: 18px !important; }
+.slide--portada:last-of-type { align-items: flex-start; text-align: left; padding-left: 128px; }
+.slide--portada:last-of-type .portada-titulo { width: 1000px; align-items: flex-start; }
+
+/* Ajustes puntuales para que ningún contenido toque el escudo de la Alcaldía (centro inferior) */
+.slide--foto .foto-cuerpo { padding-top: 232px; padding-bottom: 40px; }
+.slide--foto .acuerdos { gap: 12px; margin-top: 0; }
+.slide--foto .acuerdos i { font-size: 56px; }
+.slide--foto .acuerdos b { font-size: 38px; }
+.slide--foto .acuerdos span { font-size: 26px; margin-top: 2px; }
+.slide:nth-of-type(4) .titulo { font-size: 72px !important; }
+.slide:nth-of-type(4) .lista li small { display: inline; margin-left: 18px; }
+.slide .camino { margin-top: 56px !important; }
+.slide .camino h3 { font-size: 50px; margin-top: 28px; }
+.slide .camino p { font-size: 34px; }
+.slide--foto .foto-cuerpo { justify-content: flex-start; }
