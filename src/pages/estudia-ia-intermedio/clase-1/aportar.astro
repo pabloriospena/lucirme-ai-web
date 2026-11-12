@@ -1,0 +1,96 @@
+---
+// Diagnóstico anónimo de la clase 1 de Estud-IA, nivel intermedio (diapositiva "¿Qué tanto manejas hoy?").
+// Sesión con ?s=intermedio-clase-1 (por defecto).
+import Layout from "../../../layouts/Layout.astro";
+import { CONCEPTOS, NIVELES } from "../../../lib/estudia-diagnostico";
+
+const sesionParam = Astro.url.searchParams.get("s") ?? "intermedio-clase-1";
+const sesion = /^[a-z0-9-]{3,30}$/.test(sesionParam) ? sesionParam : "intermedio-clase-1";
+---
+
+<Layout title="¿Qué tanto manejas hoy? | Estud-IA" hideHeader hideFooter noindex>
+    <div class="min-h-screen bg-slate-50 py-6 px-4" data-sesion={sesion} id="raiz">
+        <div class="max-w-xl mx-auto">
+            <p class="text-xs font-bold tracking-widest uppercase text-orange-600 mb-1">
+                Estud-IA · IA nivel intermedio
+            </p>
+            <h1 class="text-2xl font-bold text-slate-900 tracking-tight mb-1">¿Qué tanto manejas hoy?</h1>
+            <p class="text-sm text-slate-600 mb-5">
+                Es anónimo y no se califica: nos ayuda a ajustar la clase. No pedimos nombre ni correo.
+            </p>
+
+            <form id="form" class="space-y-5 bg-white border border-slate-200 rounded-xl p-5 shadow-sm" novalidate>
+                <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+                {
+                    CONCEPTOS.map((c, i) => (
+                        <fieldset>
+                            <legend class="block text-sm font-semibold text-slate-800 mb-2">
+                                {i + 1}. {c}
+                            </legend>
+                            <div class="grid grid-cols-3 gap-2">
+                                {NIVELES.map((n) => (
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name={`c${i}`} value={n.valor} class="peer sr-only" />
+                                        <span class="block rounded-lg border border-slate-300 bg-white px-2 py-2 text-center text-xs text-slate-700 peer-checked:border-orange-500 peer-checked:bg-orange-50 peer-checked:font-bold peer-focus-visible:ring-2 peer-focus-visible:ring-orange-300">
+                                            <b class="block text-base">{n.valor}</b>
+                                            {n.texto}
+                                        </span>
+                                    </label>
+                                ))}
+                            </div>
+                        </fieldset>
+                    ))
+                }
+                <button
+                    type="submit"
+                    class="w-full rounded-lg bg-orange-500 px-4 py-3 text-base font-bold text-white hover:bg-orange-600 disabled:opacity-50"
+                    >Enviar</button
+                >
+                <p class="msg text-sm" role="status" aria-live="polite"></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const raiz = document.getElementById("raiz")!;
+        const sesion = raiz.dataset.sesion!;
+        const form = document.getElementById("form") as HTMLFormElement;
+        const msg = form.querySelector<HTMLElement>(".msg")!;
+        const TOTAL = 6;
+
+        function aviso(texto: string, bien: boolean) {
+            msg.textContent = texto;
+            msg.className = `msg text-sm ${bien ? "text-emerald-700" : "text-red-600"}`;
+        }
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const fd = new FormData(form);
+            const niveles = Array.from({ length: TOTAL }, (_, i) => Number(fd.get(`c${i}`)));
+            if (niveles.some((n) => ![1, 2, 3].includes(n))) {
+                aviso("Responde los seis conceptos.", false);
+                return;
+            }
+            const boton = form.querySelector<HTMLButtonElement>("button[type=submit]")!;
+            boton.disabled = true;
+            try {
+                const r = await fetch("/api/estudia/diagnostico", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ sesion, website: fd.get("website"), niveles }),
+                });
+                const d = await r.json().catch(() => ({}));
+                if (!r.ok || !d.ok) {
+                    aviso(d.error || "No se pudo enviar. Intenta de nuevo.", false);
+                } else {
+                    form.reset();
+                    aviso("Listo, gracias. Ya puedes volver a la clase.", true);
+                }
+            } catch {
+                aviso("Sin conexión. Intenta de nuevo.", false);
+            } finally {
+                boton.disabled = false;
+            }
+        });
+    </script>
+</Layout>
