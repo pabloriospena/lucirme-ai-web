@@ -1,0 +1,86 @@
+---
+// Vista privada del diagnóstico anónimo de la clase 1 (intermedio). Exige ?k=<TALLER_FACILITADOR_KEY>.
+// Sesión con &s=intermedio-clase-1 (por defecto). Se actualiza sola cada 15 segundos.
+import Layout from "../../../layouts/Layout.astro";
+import { leerLista, sesionDe } from "../../../lib/taller-store";
+import { CONCEPTOS, NIVELES, claveDiagnostico } from "../../../lib/estudia-diagnostico";
+
+export const prerender = false;
+Astro.response.headers.set("Cache-Control", "no-store");
+
+const esperada = (process.env.TALLER_FACILITADOR_KEY || "").trim();
+const dada = (Astro.url.searchParams.get("k") || "").trim();
+let autorizado = esperada.length > 0 && dada.length === esperada.length;
+if (autorizado) {
+    let diff = 0;
+    for (let i = 0; i < esperada.length; i++) diff |= esperada.charCodeAt(i) ^ dada.charCodeAt(i);
+    autorizado = diff === 0;
+}
+
+const sesion = sesionDe(Astro.url.searchParams.get("s") ?? "intermedio-clase-1") ?? "intermedio-clase-1";
+let respuestas: { niveles: number[] }[] = [];
+let error = "";
+if (autorizado) {
+    try {
+        respuestas = await leerLista(claveDiagnostico(sesion));
+    } catch {
+        error = "No se pudieron leer las respuestas.";
+    }
+}
+const total = respuestas.length;
+const resumen = CONCEPTOS.map((concepto, i) => {
+    const conteo = [1, 2, 3].map((n) => respuestas.filter((r) => r.niveles?.[i] === n).length);
+    const sum = conteo[0] + conteo[1] * 2 + conteo[2] * 3;
+    const n = conteo[0] + conteo[1] + conteo[2];
+    return { concepto, conteo, promedio: n ? (sum / n).toFixed(1).replace(".", ",") : "–" };
+});
+const colores = ["bg-rose-400", "bg-amber-400", "bg-emerald-500"];
+---
+
+<Layout title="Diagnóstico | Estud-IA" hideHeader hideFooter noindex>
+    <div class="min-h-screen bg-slate-50 py-8 px-4">
+        <div class="max-w-3xl mx-auto">
+            {
+                !autorizado ? (
+                    <p class="text-sm text-slate-600">No autorizado.</p>
+                ) : (
+                    <>
+                        <p class="text-xs font-bold tracking-widest uppercase text-orange-600 mb-1">Estud-IA · IA nivel intermedio · Clase 1</p>
+                        <h1 class="text-2xl font-bold text-slate-900 tracking-tight mb-1">¿Qué tanto manejas hoy?</h1>
+                        <p class="text-sm text-slate-600 mb-4">
+                            {total} {total === 1 ? "respuesta" : "respuestas"} · anónimas · se actualiza sola
+                        </p>
+                        <div class="flex flex-wrap gap-4 text-xs text-slate-600 mb-6">
+                            {NIVELES.map((n, i) => (
+                                <span class="inline-flex items-center gap-1.5">
+                                    <span class={`inline-block w-3 h-3 rounded-sm ${colores[i]}`} />
+                                    {n.valor} · {n.texto}
+                                </span>
+                            ))}
+                        </div>
+                        {error && <p class="text-sm text-red-600 mb-4">{error}</p>}
+                        {!total && !error && <p class="text-sm text-slate-500">Aún no hay respuestas.</p>}
+                        <ul class="space-y-4">
+                            {total > 0 && resumen.map((r) => (
+                                <li class="rounded-xl border border-slate-200 bg-white p-4">
+                                    <div class="flex items-baseline justify-between gap-4 mb-2">
+                                        <p class="font-semibold text-slate-900">{r.concepto}</p>
+                                        <p class="text-xs text-slate-500 whitespace-nowrap">promedio {r.promedio}</p>
+                                    </div>
+                                    <div class="flex h-7 w-full overflow-hidden rounded-md bg-slate-100">
+                                        {r.conteo.map((c, i) => c > 0 && (
+                                            <div class={`${colores[i]} flex items-center justify-center text-xs font-bold text-white`} style={`width:${(c / total) * 100}%`}>
+                                                {c}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </>
+                )
+            }
+        </div>
+    </div>
+    {autorizado && <script is:inline>setTimeout(() => location.reload(), 15000);</script>}
+</Layout>
