@@ -1,6 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import LeadFormEmpresa from "../../components/empresas/LeadFormEmpresa.astro";
+import HeaderLanding from "../../components/empresas/HeaderLanding.astro";
+import FooterLanding from "../../components/empresas/FooterLanding.astro";
 
 const fugas = [
   "Horas de gente bien paga en tareas que no necesitan su criterio.",
@@ -45,7 +47,10 @@ const frentes = [
   title="Claude en tu empresa: recupera margen en la operación | LuciRMe AI"
   description="Encuentra dónde se te va tiempo y plata en la operación y rehaz esos procesos con Claude sobre las herramientas que ya usas. Cada propuesta se arma a la medida. Por Pablo Ríos."
   canonical="https://lucirme.com/empresas/claude-m"
+  hideHeader={true}
+  hideFooter={true}
 >
+  <HeaderLanding landing="claude-m" />
   <main class="py-14 md:py-20 px-4 bg-[#F8FAFC]">
     <div class="max-w-4xl mx-auto space-y-14">
 
@@ -137,6 +142,8 @@ const frentes = [
 
     </div>
   </main>
+
+  <FooterLanding />
 
   <script is:inline>
     document.addEventListener("DOMContentLoaded", function () {
