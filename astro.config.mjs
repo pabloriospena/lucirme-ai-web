@@ -10,6 +10,7 @@ export default defineConfig({
   output: 'server',
   redirects: {
     '/whatsapp': 'https://wa.me/573053046180',
+    '/propuestas/serna-echeverry': '/propuestas/serna-echeverri',
     '/sasa': '/presentaciones/sasa/aportar',
     '/cm': '/presentaciones/cm/aportar'
   },
