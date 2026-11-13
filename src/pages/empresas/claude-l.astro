@@ -1,6 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import LeadFormEmpresa from "../../components/empresas/LeadFormEmpresa.astro";
+import HeaderLanding from "../../components/empresas/HeaderLanding.astro";
+import FooterLanding from "../../components/empresas/FooterLanding.astro";
 
 const situaciones = [
   "El reporte que alguien rearma a mano cada semana.",
@@ -34,7 +36,10 @@ const pasos = [
   title="Claude en tu equipo, sobre el trabajo que ya hacen | LuciRMe AI"
   description="Que todo tu equipo use Claude con criterio común, sobre las herramientas que ya tiene y en las tareas donde sí vale la pena. Cada propuesta se arma a la medida. Por Pablo Ríos."
   canonical="https://lucirme.com/empresas/claude-l"
+  hideHeader={true}
+  hideFooter={true}
 >
+  <HeaderLanding landing="claude-l" />
   <main class="py-14 md:py-20 px-4 bg-[#F8FAFC]">
     <div class="max-w-3xl mx-auto space-y-14">
 
@@ -121,6 +126,8 @@ const pasos = [
 
     </div>
   </main>
+
+  <FooterLanding />
 
   <script is:inline>
     document.addEventListener("DOMContentLoaded", function () {

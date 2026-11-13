@@ -1,0 +1,26 @@
+---
+// Header propio de las landings de /empresas/claude-*: solo marca y un botón que baja al formulario.
+// Nada aquí lleva a otras secciones de la web.
+interface Props {
+  landing: 'claude-m' | 'claude-l';
+}
+const { landing } = Astro.props;
+---
+
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200">
+  <div class="h-16 max-w-4xl mx-auto px-4 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-2.5">
+      <img src="/logo-lucirme.png" alt="" class="h-8 w-auto object-contain" />
+      <span class="font-bold text-lg text-slate-900 tracking-tight">
+        LuciRMe<span class="text-teal-700 ml-0.5">AI</span>
+      </span>
+    </div>
+    <a
+      href="#contacto"
+      class="px-4 py-2 rounded-lg bg-[#EA580C] text-white text-sm font-bold hover:bg-[#C2410C] transition"
+      onclick={`if (window.posthog) { window.posthog.capture('empresas_cta_click', { landing: '${landing}', origen: 'header' }); }`}
+    >
+      Hablemos
+    </a>
+  </div>
+</header>
