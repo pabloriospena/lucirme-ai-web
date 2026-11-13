@@ -2,8 +2,8 @@ import type { APIRoute } from 'astro';
 import { isLikelySpam } from '../../lib/spam-filter';
 
 // Leads de las landings /empresas/claude-m y /empresas/claude-l.
-// Se guardan en MailerLite en el grupo MAILERLITE_EMPRESAS_LANDING_GROUP_ID. Mientras esa variable
-// no exista, caen en el grupo del diagnóstico de cuello de botella (MAILERLITE_BOTTLENECK_GROUP_ID).
+// Se guardan en MailerLite en el grupo "Empresas · Landing Claude" (204054484403357208), que se puede
+// cambiar con la variable MAILERLITE_EMPRESAS_LANDING_GROUP_ID.
 // `fuente` distingue la página y, si llegó con ?ref=, quién refirió ("... · ref: diego").
 
 const LANDINGS: Record<string, string> = {
@@ -56,11 +56,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const apiToken = (process.env.MAILERLITE_API_KEY || process.env.MAILERLITE_API_TOKEN || '').trim();
-    const groupId = (
-      process.env.MAILERLITE_EMPRESAS_LANDING_GROUP_ID ||
-      process.env.MAILERLITE_BOTTLENECK_GROUP_ID ||
-      '200080858699269701'
-    ).trim();
+    const groupId = (process.env.MAILERLITE_EMPRESAS_LANDING_GROUP_ID || '204054484403357208').trim();
 
     let mailerliteSaved = false;
 
