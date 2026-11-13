@@ -1,0 +1,158 @@
+---
+// Formulario corto de las landings /empresas/claude-m y /empresas/claude-l.
+// Envía a /api/empresas-lead. El origen (?ref=) viaja como dato interno, no se muestra.
+interface Props {
+  landing: 'claude-m' | 'claude-l';
+  titulo: string;
+  intro: string;
+  procesoLabel: string;
+  procesoPlaceholder: string;
+  boton: string;
+}
+
+const { landing, titulo, intro, procesoLabel, procesoPlaceholder, boton } = Astro.props;
+const formId = `form-${landing}`;
+---
+
+<section id="contacto" class="bg-white p-6 md:p-10 rounded-2xl border border-[#E9E9E7] shadow-2xs">
+  <div class="max-w-xl mx-auto flex flex-col gap-6">
+    <div class="flex flex-col gap-2">
+      <h2 class="text-2xl font-bold tracking-tight text-deep">{titulo}</h2>
+      <p class="text-sm md:text-base text-gray-600 leading-relaxed">{intro}</p>
+    </div>
+
+    <form id={formId} class="flex flex-col gap-4 text-sm" novalidate data-landing={landing}>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="flex flex-col gap-1.5">
+          <label for={`${formId}-name`} class="font-semibold text-slate-700">Nombre</label>
+          <input id={`${formId}-name`} name="name" type="text" required autocomplete="name"
+            class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 outline-none" />
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label for={`${formId}-email`} class="font-semibold text-slate-700">Correo</label>
+          <input id={`${formId}-email`} name="email" type="email" required autocomplete="email"
+            class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 outline-none" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="flex flex-col gap-1.5">
+          <label for={`${formId}-empresa`} class="font-semibold text-slate-700">Empresa</label>
+          <input id={`${formId}-empresa`} name="empresa" type="text" required autocomplete="organization"
+            class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 outline-none" />
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label for={`${formId}-rol`} class="font-semibold text-slate-700">Tu rol</label>
+          <input id={`${formId}-rol`} name="rol" type="text" autocomplete="organization-title"
+            class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 outline-none" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="flex flex-col gap-1.5">
+          <label for={`${formId}-tamano`} class="font-semibold text-slate-700">Tamaño del equipo</label>
+          <select id={`${formId}-tamano`} name="tamano"
+            class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 outline-none">
+            <option value="">Selecciona</option>
+            <option>1 a 5 personas</option>
+            <option>6 a 15 personas</option>
+            <option>16 a 50 personas</option>
+            <option>Más de 50 personas</option>
+          </select>
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label for={`${formId}-whatsapp`} class="font-semibold text-slate-700">WhatsApp <span class="font-normal text-gray-mid">(opcional)</span></label>
+          <input id={`${formId}-whatsapp`} name="whatsapp" type="tel" autocomplete="tel"
+            class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 outline-none" />
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label for={`${formId}-proceso`} class="font-semibold text-slate-700">{procesoLabel}</label>
+        <textarea id={`${formId}-proceso`} name="proceso" rows="4" required placeholder={procesoPlaceholder}
+          class="w-full px-3 py-2.5 rounded-lg border border-slate-300 bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 outline-none resize-y"></textarea>
+      </div>
+
+      <!-- Campo trampa: un humano no lo ve ni lo llena -->
+      <div aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+        <label>Sitio web <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+      </div>
+
+      <p data-error class="hidden text-sm text-red-600 font-medium" role="alert"></p>
+
+      <button type="submit" data-submit
+        class="w-full sm:w-auto self-start px-6 py-3 rounded-lg bg-[#EA580C] text-white font-bold hover:bg-[#C2410C] transition disabled:opacity-60 disabled:cursor-not-allowed">
+        {boton}
+      </button>
+    </form>
+
+    <div data-ok class="hidden rounded-xl border border-teal-600/30 bg-teal-50 p-5 text-sm text-slate-800 leading-relaxed" role="status">
+      <p class="font-semibold text-deep mb-1">Recibido.</p>
+      <p>Te escribo yo, directamente, para ver si tiene sentido empezar.</p>
+    </div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ formId, landing }}>
+  (function () {
+    var form = document.getElementById(formId);
+    if (!form) return;
+    var errorEl = form.querySelector('[data-error]');
+    var btn = form.querySelector('[data-submit]');
+    var ok = form.parentElement.querySelector('[data-ok]');
+    var ref = '';
+    try { ref = new URLSearchParams(window.location.search).get('ref') || ''; } catch (e) {}
+
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      errorEl.classList.add('hidden');
+
+      var fd = new FormData(form);
+      var payload = {
+        landing: landing,
+        ref: ref,
+        name: fd.get('name'),
+        email: fd.get('email'),
+        empresa: fd.get('empresa'),
+        rol: fd.get('rol'),
+        tamano: fd.get('tamano'),
+        whatsapp: fd.get('whatsapp'),
+        proceso: fd.get('proceso'),
+        website: fd.get('website'),
+      };
+
+      if (!payload.name || !payload.email || !payload.empresa || !payload.proceso) {
+        errorEl.textContent = 'Completa nombre, correo, empresa y el proceso que más les pesa.';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      btn.disabled = true;
+      var textoOriginal = btn.textContent;
+      btn.textContent = 'Enviando...';
+
+      fetch('/api/empresas-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
+        .then(function (res) {
+          if (!res.ok || !res.body.success) {
+            throw new Error((res.body && res.body.error) || 'No se pudo enviar.');
+          }
+          if (window.posthog) {
+            window.posthog.capture('empresas_lead_submitted', { landing: landing, ref: ref || null });
+          }
+          form.classList.add('hidden');
+          ok.classList.remove('hidden');
+        })
+        .catch(function (err) {
+          errorEl.textContent = err.message || 'No se pudo enviar. Intenta de nuevo.';
+          errorEl.classList.remove('hidden');
+          btn.disabled = false;
+          btn.textContent = textoOriginal;
+        });
+    });
+  })();
+</script>

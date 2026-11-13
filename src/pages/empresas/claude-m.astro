@@ -1,0 +1,148 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import LeadFormEmpresa from "../../components/empresas/LeadFormEmpresa.astro";
+
+const fugas = [
+  "Horas de gente bien paga en tareas que no necesitan su criterio.",
+  "Cotizar, facturar o conciliar a mano, con errores que se terminan pagando después.",
+  "Reprocesos: lo que se hace dos veces porque la información llegó incompleta.",
+  "Ventas que se enfrían porque nadie hizo el seguimiento a tiempo.",
+  "Decisiones tomadas sin dato, o con un dato que llegó tarde.",
+];
+
+const pasos = [
+  {
+    t: "Ponerle números al proceso de hoy",
+    d: "Cuánto tarda, quién lo hace, cuántas veces al mes y qué cuesta. Los números salen de la empresa, no de un promedio.",
+  },
+  {
+    t: "Elegir dos o tres procesos",
+    d: "Los que más pesan, no todos.",
+  },
+  {
+    t: "Rehacerlos antes de automatizarlos",
+    d: "Un proceso malo con IA sigue siendo malo, solo que más rápido.",
+  },
+  {
+    t: "Montarlos con Claude sobre lo que ya usan",
+    d: "Hojas de cálculo, correo y los sistemas actuales. Sin migraciones.",
+  },
+  {
+    t: "Medir contra el punto de partida",
+    d: "Lo que se anotó en el paso 1 es la vara.",
+  },
+];
+
+const frentes = [
+  { t: "Operaciones", d: "Tareas repetitivas, reportes e información dispersa." },
+  { t: "Ventas", d: "Seguimiento, propuestas y preparación de reuniones." },
+  { t: "Indicadores", d: "Qué medir, de dónde sale el dato y quién lo mira." },
+  { t: "Equipo", d: "Que quienes hacen el trabajo sepan mantener lo que se monta." },
+];
+---
+
+<Layout
+  title="Claude en tu empresa: recupera margen en la operación | LuciRMe AI"
+  description="Encuentra dónde se te va tiempo y plata en la operación y rehaz esos procesos con Claude sobre las herramientas que ya usas. Cada propuesta se arma a la medida. Por Pablo Ríos."
+  canonical="https://lucirme.com/empresas/claude-m"
+>
+  <main class="py-14 md:py-20 px-4 bg-[#F8FAFC]">
+    <div class="max-w-4xl mx-auto space-y-14">
+
+      <!-- 1. ARRANQUE -->
+      <section class="space-y-6">
+        <span class="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#E9E9E7] rounded-full font-mono text-xs text-slate-700 shadow-2xs">
+          <span class="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
+          Para empresas · Margen
+        </span>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-deep leading-tight max-w-3xl">
+          Tu margen se escapa en tareas que nadie está contando.
+        </h1>
+        <p class="text-base md:text-lg text-gray-600 leading-relaxed max-w-2xl">
+          Trabajo con equipos para encontrar dónde se les va tiempo y plata en la operación, y rehacer esos procesos con Claude sobre las herramientas que ya usan.
+        </p>
+        <div>
+          <a
+            href="#contacto"
+            class="inline-block px-6 py-3.5 rounded-lg bg-[#EA580C] text-white font-bold hover:bg-[#C2410C] transition"
+            onclick="if (window.posthog) { window.posthog.capture('empresas_cta_click', { landing: 'claude-m', origen: 'hero' }); }"
+          >
+            Mándame el proceso que más te cuesta
+          </a>
+        </div>
+      </section>
+
+      <!-- 2. DÓNDE SUELE ESTAR LA FUGA -->
+      <section class="space-y-5">
+        <h2 class="text-2xl font-bold tracking-tight text-deep">Dónde suele estar la fuga</h2>
+        <ul class="bg-white rounded-2xl border border-[#E9E9E7] divide-y divide-[#E9E9E7] shadow-2xs">
+          {fugas.map((f) => (
+            <li class="px-5 py-4 text-sm md:text-base text-slate-700 leading-relaxed">{f}</li>
+          ))}
+        </ul>
+      </section>
+
+      <!-- 3. CÓMO LO TRABAJAMOS -->
+      <section class="space-y-5">
+        <h2 class="text-2xl font-bold tracking-tight text-deep">Cómo lo trabajamos</h2>
+        <ol class="grid gap-3">
+          {pasos.map((p, i) => (
+            <li class="flex gap-4 bg-white rounded-xl border border-[#E9E9E7] p-5 shadow-2xs">
+              <span class="shrink-0 w-8 h-8 rounded-full bg-teal-600 text-white text-sm font-bold flex items-center justify-center">{i + 1}</span>
+              <div>
+                <h3 class="font-semibold text-deep">{p.t}</h3>
+                <p class="text-sm text-gray-600 leading-relaxed mt-1">{p.d}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <p class="text-sm md:text-base text-slate-700 leading-relaxed">
+          Se empieza con un taller de inmersión. Si los números justifican seguir, se arma un ciclo de trabajo a la medida.
+        </p>
+      </section>
+
+      <!-- 4. POR DÓNDE SE EMPIEZA -->
+      <section class="space-y-5">
+        <h2 class="text-2xl font-bold tracking-tight text-deep">Por dónde se empieza</h2>
+        <div class="grid sm:grid-cols-2 gap-3">
+          {frentes.map((f) => (
+            <div class="bg-white rounded-xl border border-[#E9E9E7] p-5 shadow-2xs">
+              <h3 class="font-semibold text-deep">{f.t}</h3>
+              <p class="text-sm text-gray-600 leading-relaxed mt-1">{f.d}</p>
+            </div>
+          ))}
+        </div>
+        <p class="text-sm md:text-base text-slate-700 leading-relaxed">
+          No hay paquete fijo: cada empresa entra por el proceso que más le cuesta.
+        </p>
+      </section>
+
+      <!-- 5. CÓMO SE MIDE -->
+      <section class="rounded-2xl border border-[#E9E9E7] bg-[#F1F1EF] p-6 md:p-8 space-y-2">
+        <h2 class="text-xl font-bold tracking-tight text-deep">Cómo se mide</h2>
+        <p class="text-sm md:text-base text-slate-700 leading-relaxed max-w-2xl">
+          Antes de tocar nada se deja por escrito el punto de partida, y al final se compara contra él. No prometo de antemano una cifra de ahorro: la define cada empresa con sus propios números.
+        </p>
+      </section>
+
+      <!-- 6. CIERRE + FORMULARIO -->
+      <LeadFormEmpresa
+        landing="claude-m"
+        titulo="Mándame el proceso que más te cuesta."
+        intro="Trabajo con pocas empresas a la vez, así que cada propuesta se arma desde cero."
+        procesoLabel="Qué proceso les cuesta más y cuánta gente lo toca"
+        procesoPlaceholder="Ej. Armamos el cierre de ventas a mano cada mes; lo tocan 3 personas y tarda dos días."
+        boton="Enviar el proceso"
+      />
+
+    </div>
+  </main>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.posthog) {
+        window.posthog.capture("empresas_landing_view", { landing: "claude-m", pagina: "empresas/claude-m" });
+      }
+    });
+  </script>
+</Layout>

@@ -1,0 +1,132 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import LeadFormEmpresa from "../../components/empresas/LeadFormEmpresa.astro";
+
+const situaciones = [
+  "El reporte que alguien rearma a mano cada semana.",
+  "Seguimientos y cotizaciones que dependen de la memoria de cada vendedor.",
+  "Información repartida entre correos, hojas de cálculo y chats.",
+  "Indicadores que existen, pero que nadie mira a la hora de decidir.",
+  "Gente que ya usa IA por su cuenta, cada uno a su manera y sin criterio común.",
+];
+
+const pasos = [
+  {
+    t: "Mirar cómo se hace hoy",
+    d: "Nos sentamos con el equipo a ver el trabajo real, sin cambiar nada todavía.",
+  },
+  {
+    t: "Decidir qué sí y qué no",
+    d: "No todo se mejora con IA. Se eligen las tareas donde sí vale la pena.",
+  },
+  {
+    t: "Montarlo con ellos, sobre lo que ya tienen",
+    d: "Claude entra en las herramientas actuales; no hay que migrar nada.",
+  },
+  {
+    t: "Dejar al equipo solo",
+    d: "Quienes hacen el trabajo aprenden a mantenerlo y mejorarlo sin depender de mí.",
+  },
+];
+---
+
+<Layout
+  title="Claude en tu equipo, sobre el trabajo que ya hacen | LuciRMe AI"
+  description="Que todo tu equipo use Claude con criterio común, sobre las herramientas que ya tiene y en las tareas donde sí vale la pena. Cada propuesta se arma a la medida. Por Pablo Ríos."
+  canonical="https://lucirme.com/empresas/claude-l"
+>
+  <main class="py-14 md:py-20 px-4 bg-[#F8FAFC]">
+    <div class="max-w-3xl mx-auto space-y-14">
+
+      <!-- 1. ARRANQUE -->
+      <section class="space-y-6">
+        <span class="inline-flex items-center gap-2 px-3 py-1 bg-white border border-[#E9E9E7] rounded-full font-mono text-xs text-slate-700 shadow-2xs">
+          <span class="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
+          Para empresas · Tiempo y adopción
+        </span>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-deep leading-tight">
+          Claude en tu equipo, sobre el trabajo que ya hacen.
+        </h1>
+        <p class="text-base md:text-lg text-gray-600 leading-relaxed">
+          Trabajo con equipos de empresas para meter IA en su día a día: que la usen todos, con criterio común y sobre las herramientas que ya tienen.
+        </p>
+        <div>
+          <a
+            href="#contacto"
+            class="inline-block px-6 py-3.5 rounded-lg bg-[#EA580C] text-white font-bold hover:bg-[#C2410C] transition"
+            onclick="if (window.posthog) { window.posthog.capture('empresas_cta_click', { landing: 'claude-l', origen: 'hero' }); }"
+          >
+            Quiero contarte cómo trabaja mi equipo
+          </a>
+        </div>
+      </section>
+
+      <!-- 2. LO QUE SE VE POR DENTRO -->
+      <section class="space-y-5">
+        <h2 class="text-2xl font-bold tracking-tight text-deep">
+          Si en tu empresa pasan dos de estas, hay por dónde empezar.
+        </h2>
+        <ul class="space-y-2.5">
+          {situaciones.map((s) => (
+            <li class="flex gap-3 text-sm md:text-base text-slate-700 leading-relaxed">
+              <span class="mt-2 w-1.5 h-1.5 rounded-full bg-teal-600 shrink-0"></span>
+              <span>{s}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <!-- 3. POR QUÉ MUCHOS EQUIPOS NO DESPEGAN -->
+      <section class="border-l-4 border-teal-600 bg-white rounded-r-xl pl-6 pr-5 py-6 shadow-2xs space-y-2">
+        <h2 class="text-xl font-bold tracking-tight text-deep">Por qué muchos equipos no despegan</h2>
+        <p class="text-sm md:text-base text-slate-700 leading-relaxed">
+          Tener Claude no es lo mismo que trabajar con él. Una o dos personas lo aprovechan, el resto lo abre de vez en cuando, y nadie sabe qué está funcionando. La adopción se arma con el equipo, tarea por tarea.
+        </p>
+      </section>
+
+      <!-- 4. CÓMO TRABAJAMOS -->
+      <section class="space-y-6">
+        <h2 class="text-2xl font-bold tracking-tight text-deep">Cómo trabajamos</h2>
+        <ol class="relative space-y-6 pl-10 before:absolute before:left-[15px] before:top-2 before:bottom-2 before:w-px before:bg-[#E2E8F0]">
+          {pasos.map((p, i) => (
+            <li class="relative">
+              <span class="absolute -left-10 top-0 w-8 h-8 rounded-full bg-white border-2 border-teal-600 text-teal-700 text-sm font-bold flex items-center justify-center">{i + 1}</span>
+              <h3 class="font-semibold text-deep">{p.t}</h3>
+              <p class="text-sm md:text-base text-gray-600 leading-relaxed mt-1">{p.d}</p>
+            </li>
+          ))}
+        </ol>
+        <p class="text-sm md:text-base text-slate-700 leading-relaxed">
+          Se empieza con un taller de inmersión. Si hay por dónde seguir, se arma un ciclo de trabajo a la medida.
+        </p>
+      </section>
+
+      <!-- 5. QUÉ SE PUEDE REVISAR AL FINAL -->
+      <section class="rounded-2xl border border-[#E9E9E7] bg-[#F1F1EF] p-6 md:p-8 space-y-2">
+        <h2 class="text-xl font-bold tracking-tight text-deep">Qué se puede revisar al final</h2>
+        <p class="text-sm md:text-base text-slate-700 leading-relaxed">
+          No prometo un porcentaje de ahorro. Lo que sí se puede revisar: qué tareas dejaron de hacerse a mano, qué indicadores se están mirando y cuánta gente del equipo usa Claude con criterio.
+        </p>
+      </section>
+
+      <!-- 6. HABLEMOS -->
+      <LeadFormEmpresa
+        landing="claude-l"
+        titulo="Cuéntame cómo trabaja tu equipo hoy."
+        intro="Y vemos si tiene sentido empezar. Trabajo con pocas empresas a la vez, así que cada propuesta se arma desde cero."
+        procesoLabel="Qué tarea les pesa más"
+        procesoPlaceholder="Ej. El equipo comercial pierde medio día armando cotizaciones y nadie las sigue."
+        boton="Enviar"
+      />
+
+    </div>
+  </main>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.posthog) {
+        window.posthog.capture("empresas_landing_view", { landing: "claude-l", pagina: "empresas/claude-l" });
+      }
+    });
+  </script>
+</Layout>
