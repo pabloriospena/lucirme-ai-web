@@ -3,7 +3,7 @@ import RutaProductLayout from "../../layouts/RutaProductLayout.astro";
 import CafeCTA from "../../components/ruta-product/CafeCTA.astro";
 import { RUTA_PRODUCTO_DATA } from "../../data/ruta-product";
 
-const paso2 = RUTA_PRODUCTO_DATA[1];
+const paso2 = RUTA_PRODUCTO_DATA[2];
 const tieneHoy = Boolean(paso2.loQueHacesHoy && paso2.loQueHacesHoy.length > 0);
 const tieneTerminar = Boolean(paso2.loQueTienesAlTerminar && paso2.loQueTienesAlTerminar.length > 0);
 const mostrarColumnas = tieneHoy || tieneTerminar;
