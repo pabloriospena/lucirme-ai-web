@@ -24,7 +24,8 @@ const hrefPaso = (numero: string) => `/ruta-product/paso-${Number(numero)}`;
     {RUTA_PRODUCTO_DATA.map((paso, i) => {
       const activo = paso.estado === "disponible";
       const enConstruccion = paso.estado === "en-construccion";
-      const accesible = activo || enConstruccion;
+      const lleno = activo || enConstruccion;
+      const accesible = lleno || paso.entrable === true;
 
       const tagText = activo ? "Activo" : enConstruccion ? "En construcción" : "Próximamente";
       const tagClass = activo
@@ -35,18 +36,18 @@ const hrefPaso = (numero: string) => `/ruta-product/paso-${Number(numero)}`;
 
       const contenido = (
         <>
-          <div class="mb-1.5 flex items-center justify-between">
+          <div class="mb-2 flex flex-col items-start gap-1.5">
             <span class={`font-mono text-xs font-semibold ${activo ? "text-teal-800" : enConstruccion ? "text-amber-900" : "text-slate-500"}`}>
               {paso.numero}. {paso.titulo.split("· ")[1]?.toUpperCase()}
             </span>
             <span
-              class={`rounded px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase ${tagClass}`}
+              class={`rounded px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase leading-none ${tagClass}`}
             >
               {tagText}
             </span>
           </div>
           <div class="h-1 w-full overflow-hidden rounded-full bg-slate-200">
-            <div class={`h-full ${accesible ? "w-full bg-teal-700" : "w-0"}`}></div>
+            <div class={`h-full ${lleno ? "w-full bg-teal-700" : "w-0"}`}></div>
           </div>
           <p class={`mt-2 font-mono text-xs ${activo ? "text-teal-800" : enConstruccion ? "text-amber-900" : "text-slate-500"}`}>
             {paso.subtituloCategoria}
@@ -63,7 +64,9 @@ const hrefPaso = (numero: string) => `/ruta-product/paso-${Number(numero)}`;
               class={`flex flex-col rounded-lg p-3 ring-1 transition ${
                 activo
                   ? "bg-teal-50 ring-teal-200 hover:ring-teal-400"
-                  : "bg-amber-50/70 ring-amber-200 hover:ring-amber-400"
+                  : enConstruccion
+                  ? "bg-amber-50/70 ring-amber-200 hover:ring-amber-400"
+                  : "bg-slate-50 ring-slate-200 hover:ring-slate-400"
               }`}
             >
               {contenido}
