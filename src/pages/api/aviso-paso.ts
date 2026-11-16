@@ -1,5 +1,5 @@
 // src/pages/api/aviso-paso.ts
-// Registra un correo en el grupo de MailerLite correspondiente al paso 3 o 4.
+// Registra un correo en el grupo de MailerLite correspondiente al paso 1, 3 o 4.
 // El cliente solo envía { email, paso }. La API key y los group IDs viven únicamente en el servidor.
 import type { APIRoute } from 'astro';
 
@@ -8,9 +8,9 @@ export const POST: APIRoute = async ({ request }) => {
     const body = await request.json().catch(() => ({}));
     const { email, paso } = body;
 
-    // 1. Validar paso permitido: solo "3" o "4"
+    // 1. Validar paso permitido: solo "1", "3" o "4" (el paso 2 ya tiene contenido y no usa aviso)
     const pasoStr = String(paso ?? '').trim();
-    if (pasoStr !== '3' && pasoStr !== '4') {
+    if (pasoStr !== '1' && pasoStr !== '3' && pasoStr !== '4') {
       return new Response(
         JSON.stringify({ ok: false, error: 'Paso no válido.' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
@@ -29,9 +29,12 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // 3. Determinar el grupo exclusivamente desde las variables de entorno del servidor
-    const groupId = pasoStr === '3'
-      ? (process.env.MAILERLITE_GROUP_AVISO_PASO_3 || '').trim()
-      : (process.env.MAILERLITE_GROUP_AVISO_PASO_4 || '').trim();
+    const groupEnvByPaso: Record<string, string | undefined> = {
+      '1': process.env.MAILERLITE_GROUP_AVISO_PASO_1,
+      '3': process.env.MAILERLITE_GROUP_AVISO_PASO_3,
+      '4': process.env.MAILERLITE_GROUP_AVISO_PASO_4,
+    };
+    const groupId = (groupEnvByPaso[pasoStr] || '').trim();
 
     const apiKey = (process.env.MAILERLITE_API_KEY || process.env.MAILERLITE_API_TOKEN || '').trim();
 

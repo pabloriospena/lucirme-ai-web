@@ -20,6 +20,7 @@ export interface PasoRuta {
 
 export const MAILERLITE_GROUPS = {
   RECURSOS_GRATIS: "201424892057355422",
+  AVISO_PASO_1: "204243655956891051",
   AVISO_PASO_2: "201424892603663640",
   AVISO_PASO_3: "201424893076571466",
   AVISO_PASO_4: "201424893655385439",
@@ -69,6 +70,7 @@ export const RUTA_PRODUCTO_DATA: PasoRuta[] = [
     subtituloCategoria: "Validación del problema",
     descripcion: "Decide qué problema vale la pena resolver antes de construir.",
     estado: "proximamente",
+    mailerliteGroup: MAILERLITE_GROUPS.AVISO_PASO_1,
     loQueHacesHoy: [
       "Recibes solicitudes de múltiples stakeholders sin un criterio claro de priorización.",
       "Inicias desarrollos basándote en opiniones o intuiciones sin métricas de validación.",
