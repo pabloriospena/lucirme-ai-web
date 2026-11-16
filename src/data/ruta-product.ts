@@ -120,8 +120,18 @@ export const RUTA_PRODUCTO_DATA: PasoRuta[] = [
     titulo: "Paso 2 · Ejecución",
     subtituloCategoria: "PRD y specs",
     descripcion: "Prioriza el backlog y convierte pitches en historias ejecutables.",
-    estado: "en-construccion",
+    estado: "disponible",
     mailerliteGroup: MAILERLITE_GROUPS.AVISO_PASO_2,
+    loQueHacesHoy: [
+      "Tu backlog crece más rápido de lo que el equipo ejecuta y nadie sabe qué sacar.",
+      "Las ideas llegan como pitches largos que cuesta convertir en historias que el equipo pueda tomar.",
+      "Priorizas por quién insiste más y no por un criterio escrito.",
+    ],
+    loQueTienesAlTerminar: [
+      "Un backlog ordenado con un criterio explícito que puedes defender.",
+      "Apuestas de producto con alcance claro y un límite de tiempo.",
+      "Historias listas para pasar a Jira, con lo necesario para empezar.",
+    ],
     recursos: [
       {
         id: "rec-1",
@@ -144,15 +154,53 @@ export const RUTA_PRODUCTO_DATA: PasoRuta[] = [
     titulo: "Paso 3 · Lanzamiento",
     subtituloCategoria: "Lanzamiento y rollout",
     descripcion: "Define criterios de salida y comunica el lanzamiento.",
-    estado: "proximamente",
-    mailerliteGroup: MAILERLITE_GROUPS.AVISO_PASO_3
+    estado: "disponible",
+    mailerliteGroup: MAILERLITE_GROUPS.AVISO_PASO_3,
+    loQueHacesHoy: [
+      "Lanzas cuando se cumple la fecha, sin una lista de condiciones que se pueda comprobar.",
+      "Soporte y ventas se enteran del cambio el mismo día o después.",
+      "Cuentas el lanzamiento igual para todos, sin pensar en quién lo lee.",
+    ],
+    loQueTienesAlTerminar: [
+      "Criterios de salida con una forma de comprobarse y una persona responsable.",
+      "Un plan de lanzamiento por etapas con señales para avanzar o volver atrás.",
+      "Tres mensajes, para usuarios, equipo interno y stakeholders.",
+    ],
+    recursos: [
+      {
+        id: "rec-p3-guia",
+        titulo: "Guía de lanzamiento",
+        descripcion: "Criterios de salida, lanzamiento por etapas y tres prompts para prepararlo desde Notion.",
+        tipo: "gratis-con-correo",
+        url: "/ruta-product/paso-3/guia-lanzamiento"
+      }
+    ]
   },
   {
     numero: "04",
     titulo: "Paso 4 · Adopción",
     subtituloCategoria: "Analítica y retención",
     descripcion: "Mide si los usuarios usan lo que lanzaste y qué cambiar.",
-    estado: "proximamente",
-    mailerliteGroup: MAILERLITE_GROUPS.AVISO_PASO_4
+    estado: "disponible",
+    mailerliteGroup: MAILERLITE_GROUPS.AVISO_PASO_4,
+    loQueHacesHoy: [
+      "Miras visitas y clics y los tomas como señal de que el feature se usa.",
+      "No hay una acción clave escrita, así que cada persona interpreta distinto los números.",
+      "Cuando algo no se usa, se discute por opinión y no por evidencia.",
+    ],
+    loQueTienesAlTerminar: [
+      "Una acción clave definida, con su evento y su ventana de tiempo.",
+      "Cuatro números de adopción leídos desde PostHog con un filtro fijo.",
+      "Una decisión de mantener, cambiar o retirar, con la evidencia que la respalda.",
+    ],
+    recursos: [
+      {
+        id: "rec-p4-guia",
+        titulo: "Guía de adopción",
+        descripcion: "La acción clave, los cuatro números y tres prompts para decidir qué cambiar.",
+        tipo: "gratis-con-correo",
+        url: "/ruta-product/paso-4/guia-adopcion"
+      }
+    ]
   }
 ];

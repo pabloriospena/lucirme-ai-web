@@ -1,0 +1,17 @@
+---
+export const prerender = false;
+
+import RutaProductLayout from "../../../layouts/RutaProductLayout.astro";
+import GuiaPaso from "../../../components/ruta-product/GuiaPaso.astro";
+import { GUIA_ADOPCION } from "../../../data/ruta-guias";
+import { verificar, COOKIE_NAME } from "../../../lib/acceso-ruta";
+
+const accesoValido = verificar(Astro.cookies.get(COOKIE_NAME)?.value);
+---
+
+<RutaProductLayout
+  title="Guía de adopción"
+  description={GUIA_ADOPCION.intro}
+>
+  <GuiaPaso guia={GUIA_ADOPCION} accesoValido={accesoValido} />
+</RutaProductLayout>
