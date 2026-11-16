@@ -1,0 +1,23 @@
+---
+interface Props {
+  ubicacion: string;
+}
+const { ubicacion } = Astro.props;
+const href = `/comunidad?utm_source=web&utm_medium=cta&utm_campaign=comunidad-lista&utm_content=${ubicacion}`;
+---
+
+<section class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+  <div class="space-y-1.5 max-w-xl">
+    <h2 class="text-lg font-bold text-slate-900 tracking-tight">Comunidad de producto con IA</h2>
+    <p class="text-sm text-slate-600 leading-relaxed">
+      Estamos armando un espacio para PMs que quieren aplicar IA a su trabajo con casos reales. Todavía no abre. Puedes entrar a la lista de espera.
+    </p>
+  </div>
+  <a
+    href={href}
+    onclick={`try { window.posthog?.capture('comunidad_cta_click', { ubicacion: '${ubicacion}' }); } catch (_) {}`}
+    class="inline-flex items-center justify-center font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3 px-5 text-sm transition shadow-sm whitespace-nowrap"
+  >
+    Quiero entrar a la lista
+  </a>
+</section>

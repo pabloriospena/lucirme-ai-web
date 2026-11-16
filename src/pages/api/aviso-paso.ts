@@ -1,16 +1,16 @@
 // src/pages/api/aviso-paso.ts
-// Registra un correo en el grupo de MailerLite correspondiente al paso 1, 3 o 4.
+// Registra un correo en el grupo de MailerLite correspondiente al paso 1, 3 o 4, o a la lista de espera de la comunidad.
 // El cliente solo envía { email, paso }. La API key y los group IDs viven únicamente en el servidor.
 import type { APIRoute } from 'astro';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json().catch(() => ({}));
-    const { email, paso } = body;
+    const { email, paso, interes } = body;
 
-    // 1. Validar paso permitido: solo "1", "3" o "4" (el paso 2 ya tiene contenido y no usa aviso)
+    // 1. Validar paso permitido: "1", "3", "4" o "comunidad" (el paso 2 ya tiene contenido y no usa aviso)
     const pasoStr = String(paso ?? '').trim();
-    if (pasoStr !== '1' && pasoStr !== '3' && pasoStr !== '4') {
+    if (pasoStr !== '1' && pasoStr !== '3' && pasoStr !== '4' && pasoStr !== 'comunidad') {
       return new Response(
         JSON.stringify({ ok: false, error: 'Paso no válido.' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
@@ -33,6 +33,7 @@ export const POST: APIRoute = async ({ request }) => {
       '1': process.env.MAILERLITE_GROUP_AVISO_PASO_1,
       '3': process.env.MAILERLITE_GROUP_AVISO_PASO_3,
       '4': process.env.MAILERLITE_GROUP_AVISO_PASO_4,
+      'comunidad': process.env.MAILERLITE_GROUP_COMUNIDAD,
     };
     const groupId = (groupEnvByPaso[pasoStr] || '').trim();
 
@@ -47,20 +48,37 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // 4. Llamar a MailerLite
-    const mailerliteBody = {
+    const mailerliteBody: Record<string, unknown> = {
       email: emailStr,
       groups: [groupId],
     };
 
-    const mlResponse = await fetch('https://connect.mailerlite.com/api/subscribers', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify(mailerliteBody),
-    });
+    // Solo la comunidad guarda el interés elegido, con una lista cerrada de valores
+    const INTERESES = ['discovery', 'priorizacion', 'metricas', 'documentar'];
+    const interesStr = typeof interes === 'string' ? interes.trim() : '';
+    if (pasoStr === 'comunidad' && INTERESES.includes(interesStr)) {
+      mailerliteBody.fields = { interes_comunidad: interesStr };
+    }
+
+    const enviar = (cuerpo: Record<string, unknown>) =>
+      fetch('https://connect.mailerlite.com/api/subscribers', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(cuerpo),
+      });
+
+    let mlResponse = await enviar(mailerliteBody);
+
+    // Si el campo personalizado aún no existe en MailerLite, registra el correo igual y sin el campo
+    if (mlResponse.status === 422 && mailerliteBody.fields) {
+      console.warn('[aviso-paso] Campo interes_comunidad no aceptado, se reintenta sin campos');
+      const { fields: _omitido, ...sinCampos } = mailerliteBody;
+      mlResponse = await enviar(sinCampos);
+    }
 
     if (!mlResponse.ok) {
       const errorText = await mlResponse.text();
