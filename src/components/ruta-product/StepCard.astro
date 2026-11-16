@@ -8,7 +8,8 @@ interface Props {
 const { paso } = Astro.props;
 const isAvailable = paso.estado === "disponible";
 const isEnConstruccion = paso.estado === "en-construccion";
-const canEnter = isAvailable || isEnConstruccion;
+const canEnter = isAvailable || isEnConstruccion || paso.entrable === true;
+const showAviso = paso.estado === "proximamente";
 
 const modalId = `modal-paso-${paso.numero}`;
 const formId = `form-paso-${paso.numero}`;
@@ -49,7 +50,16 @@ const btnId = `btn-paso-${paso.numero}`;
     {paso.descripcion}
   </p>
 
-  <div class="pt-3 flex items-center justify-end">
+  <div class="pt-3 flex items-center justify-end gap-3">
+    {canEnter && showAviso && (
+      <button
+        type="button"
+        onclick={`document.getElementById('${modalId}').classList.remove('hidden')`}
+        class="text-xs font-medium text-slate-600 hover:text-slate-900 underline underline-offset-2 cursor-pointer"
+      >
+        Avísame cuando esté el kit
+      </button>
+    )}
     {canEnter ? (
       <a
         href={`/ruta-product/paso-${Number(paso.numero)}`}
@@ -71,7 +81,7 @@ const btnId = `btn-paso-${paso.numero}`;
   </div>
 </div>
 
-{!canEnter && (
+{showAviso && (
   <div id={modalId} class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl relative animate-in fade-in duration-150">
       <button 

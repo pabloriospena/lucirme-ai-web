@@ -12,6 +12,8 @@ export interface PasoRuta {
   subtituloCategoria: string;
   descripcion: string;
   estado: "disponible" | "en-construccion" | "proximamente";
+  /** Permite entrar a la página del paso aunque su estado sea "proximamente". */
+  entrable?: boolean;
   mailerliteGroup?: string;
   recursos?: Recurso[];
   loQueHacesHoy?: string[];
@@ -70,6 +72,7 @@ export const RUTA_PRODUCTO_DATA: PasoRuta[] = [
     subtituloCategoria: "Validación del problema",
     descripcion: "Decide qué problema vale la pena resolver antes de construir.",
     estado: "proximamente",
+    entrable: true,
     mailerliteGroup: MAILERLITE_GROUPS.AVISO_PASO_1,
     loQueHacesHoy: [
       "Recibes solicitudes de múltiples stakeholders sin un criterio claro de priorización.",
@@ -95,6 +98,20 @@ export const RUTA_PRODUCTO_DATA: PasoRuta[] = [
         descripcion: "Los prompts para research y síntesis.",
         tipo: "gratis",
         url: "/recursos/checklistpm-vol1"
+      },
+      {
+        id: "rec-p1-ejemplo",
+        titulo: "De entrevista a decisión: un ejemplo resuelto",
+        descripcion: "Tres entrevistas analizadas con la regla de la cita, y el prompt para hacerlo con la tuya.",
+        tipo: "gratis-con-correo",
+        url: "/ruta-product/paso-1/ejemplo-discovery"
+      },
+      {
+        id: "rec-p1-kit",
+        titulo: "Kit de Discovery",
+        descripcion: "Base de Notion, guion de entrevista y prompts para pasar de entrevistas a decisiones.",
+        tipo: "pago-proximamente",
+        url: "/ruta-product/paso-1"
       }
     ]
   },
