@@ -3,6 +3,7 @@ export const prerender = false;
 
 import RutaProductLayout from "../../../layouts/RutaProductLayout.astro";
 import CafeCTA from "../../../components/ruta-product/CafeCTA.astro";
+import ComunidadCTA from "../../../components/ruta-product/ComunidadCTA.astro";
 import { verificar, COOKIE_NAME } from "../../../lib/acceso-ruta";
 
 const cookieAcceso = Astro.cookies.get(COOKIE_NAME)?.value;
@@ -295,6 +296,8 @@ const entrevistas = [
         <p id="aviso-kit-msg" class="hidden text-xs font-semibold"></p>
       </div>
     </div>
+
+    <ComunidadCTA ubicacion="paso-1-ejemplo" />
 
     <CafeCTA ubicacion="paso-1-ejemplo" />
   </div>
