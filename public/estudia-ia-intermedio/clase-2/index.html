@@ -12,11 +12,20 @@
   .ruta-tag { display: inline-block; font-size: 30px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 6px 22px; border-radius: 8px; color: #fff; }
   .ruta-tag--gen { background: var(--naranja); color: #000; }
   .ruta-tag--ml { background: var(--magenta); }
-  .tabla-pred { width: 100%; border-collapse: collapse; margin-top: 18px; font-size: 32px; }
-  .tabla-pred th { text-align: left; font-size: 26px; letter-spacing: .12em; text-transform: uppercase; opacity: .7; padding: 0 20px 12px 0; border-bottom: 3px solid rgb(0 0 0 / .25); }
-  .tabla-pred td { padding: 10px 20px 10px 0; border-bottom: 2px solid rgb(0 0 0 / .12); }
-  .tabla-pred tr.ok td:last-child { color: #3d7a00; font-weight: 700; }
-  .tabla-pred tr.mal td:last-child { color: #cb318e; font-weight: 700; }
+  .tabla { width: 100%; border-collapse: collapse; font-size: 30px; }
+  .tabla th { text-align: left; background: #000; color: #fff; padding: 14px 22px; font-size: 24px; letter-spacing: .1em; text-transform: uppercase; }
+  .tabla td { padding: 13px 22px; border-bottom: 2px solid rgb(0 0 0 / .12); vertical-align: top; line-height: 1.25; }
+  .tabla tbody tr:nth-child(even) td { background: var(--suave); }
+  .tabla td:first-child { font-weight: 700; }
+  .tabla .ok { color: #3d7a00; font-weight: 700; }
+  .tabla .mal { color: var(--magenta); font-weight: 700; }
+  .matriz { display: grid; grid-template-columns: repeat(5, 82px); gap: 6px; }
+  .matriz span { height: 82px; display: grid; place-items: center; font: 700 30px var(--font-code); }
+  .matriz .n { background: #000; color: #fff; }
+  .matriz .b { background: #fff; color: #000; outline: 3px solid #000; outline-offset: -3px; }
+  .codigo { margin: 0; padding: 24px 32px; background: var(--tinta); color: #e6e7ea; font: 24px/1.36 var(--font-code); border-top: 12px solid var(--naranja); white-space: pre; }
+  .codigo b { color: var(--naranja); font-weight: 400; }
+  .cierre-linea { font-size: 38px; font-weight: 700; color: var(--tinta); margin-top: 26px; line-height: 1.25; }
 </style>
 </head>
 <body>
@@ -28,26 +37,23 @@
     <span class="etiqueta" style="margin-top: 130px">Estud-IA · Capa 2 · Nivel intermedio</span>
     <div class="portada-titulo" style="margin-top: 26px">
       <h1 class="titulo" style="font-size: 150px; line-height: 1">Inteligencia artificial</h1>
-      <p class="docente" style="font-size: 46px">Clase 2 · Tarea y modelo de referencia</p>
+      <p class="docente" style="font-size: 46px">Clase 2 · Cómo aprende una red y cómo analizarla</p>
       <p class="docente" style="margin-top: 6px">Pablo Ríos Peña</p>
     </div>
     <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
   </section>
 
-  <!-- 2 · CASO DE APERTURA -->
+  <!-- 2 · OBJETIVOS -->
   <section class="slide slide--ruta">
     <div class="ruta-cap" style="--c: 1" data-nombre="1 · Retomamos"></div>
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
-    <span class="etiqueta">Una historia para empezar</span>
-    <h2 class="titulo" style="font-size: 72px">Julián debe justificar sus etiquetas</h2>
-    <div class="rail" style="--n: 4; margin-top: 56px">
-      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Miércoles, 9:00</b><span>Su jefa le pide explicar por qué el museo usa ese modelo para ordenar mensajes y fotos.</span></div>
-      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Solo tiene resultados</b><span>Tiene miles de etiquetas, pero no sabe qué modelo ni qué versión las produjo.</span></div>
-      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Prueba con una muestra</b><span>Toma 20 mensajes y 20 fotos y compara lo que esperaba con lo que respondió el modelo.</span></div>
-      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>¿Qué necesita?</b><span>Una tarea clara, un modelo base identificado y una primera predicción que se pueda comprobar.</span></div>
+    <span class="etiqueta">Hoy</span>
+    <h2 class="titulo" style="font-size: 76px">Objetivos de esta sesión</h2>
+    <div class="rail" style="--n: 3; margin-top: 60px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Comprender</b><span>Explicar desde la base qué es una red neuronal, cómo aprende y qué agrega una CNN.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Analizar</b><span>Usar un modelo existente, encontrar un error y explicar dónde nace: preparación, representación o decisión.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Proponer</b><span>Formular dos oportunidades de proyecto comprobables, de lenguaje o visión, donde adaptar un modelo tenga sentido.</span></div>
     </div>
-    <p class="nota" style="margin-top: 30px">Caso ilustrativo, con datos sintéticos.</p>
-    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
   </section>
 
   <!-- 3 · AGENDA -->
@@ -56,20 +62,21 @@
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
     <span class="etiqueta">Hoy · 3 horas</span>
     <h2 class="titulo" style="font-size: 72px">Lo que vamos a hacer</h2>
-    <div class="dividido" style="grid-template-columns: 1.25fr 1fr; gap: 90px; align-items: start; margin-top: 10px">
-      <ol class="lista lista--num agenda" style="font-size: 34px; gap: 12px; margin-top: 0">
-        <li data-paso="1"><span>Retomamos tus dos oportunidades<small style="color: #cfd6ee">15 min</small></span></li>
-        <li data-paso="2"><span>Tarea, modelo base y predicción<small style="color: #cfd6ee">25 min</small></span></li>
-        <li data-paso="3"><span>Práctica guiada, en dos rutas<small style="color: #cfd6ee">30 min</small></span></li>
-        <li data-paso="4"><span>Pausa<small style="color: #cfd6ee">10 min</small></span></li>
-        <li data-paso="5"><span>Brief y primera inferencia<small style="color: #cfd6ee">65 min</small></span></li>
-        <li data-paso="6"><span>Revisión por parejas<small style="color: #cfd6ee">25 min</small></span></li>
-        <li data-paso="7"><span>Cierre<small style="color: #cfd6ee">10 min</small></span></li>
+    <div class="dividido" style="grid-template-columns: 1.3fr 1fr; gap: 80px; align-items: start; margin-top: 6px">
+      <ol class="lista lista--num agenda" style="font-size: 31px; gap: 9px; margin-top: 0">
+        <li data-paso="1"><span>Retomamos tus dos oportunidades<small style="color: #cfd6ee">10 min</small></span></li>
+        <li data-paso="2"><span>A · Desde la base<small style="color: #cfd6ee">45 min</small></span></li>
+        <li data-paso="3"><span>B · Analizar una predicción<small style="color: #cfd6ee">10 min</small></span></li>
+        <li data-paso="4"><span>C · Práctica guiada<small style="color: #cfd6ee">35 min</small></span></li>
+        <li data-paso="5"><span>Pausa<small style="color: #cfd6ee">10 min</small></span></li>
+        <li data-paso="6"><span>Proponer: dos oportunidades comprobables<small style="color: #cfd6ee">50 min</small></span></li>
+        <li data-paso="7"><span>Revisión por parejas<small style="color: #cfd6ee">15 min</small></span></li>
+        <li data-paso="8"><span>Cierre<small style="color: #cfd6ee">5 min</small></span></li>
       </ol>
-      <div class="bloque bloque--tinta" data-paso="8" style="margin-top: 0">
+      <div class="bloque bloque--tinta" data-paso="9" style="margin-top: 0">
         <h3 style="font-size: 46px">Al terminar tendremos</h3>
-        <p>Un brief con tu tarea, tu mínimo, lo que dejas fuera y cómo vas a evaluar.</p>
-        <p>Un modelo base identificado y una primera inferencia, o una salida de muestra marcada como tal.</p>
+        <p>Una explicación propia de cómo aprende una red y cómo se analiza un error.</p>
+        <p>Dos oportunidades de proyecto, con el modelo existente que probarías y cómo lo comprobarías.</p>
       </div>
     </div>
   </section>
@@ -87,144 +94,604 @@
     <p class="sub" data-paso="4" style="margin-top: auto; font-size: 44px; font-weight: 700; color: #fff">Dos personas cuentan; las demás anotan una pregunta.</p>
   </section>
 
-  <!-- 5 · DOS RUTAS, MISMO OBJETIVO -->
-  <section class="slide slide--ruta">
-    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Tarea y modelo"></div>
-    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
-    <span class="etiqueta">Dos rutas, un mismo objetivo</span>
-    <h2 class="titulo titulo--sm" style="font-size: 70px">Usamos un modelo existente de dos maneras</h2>
-    <div class="dos" style="margin-top: 36px">
-      <div class="bloque" data-paso="1" style="border-top-color: var(--naranja)">
-        <h3>IA generativa</h3>
-        <p style="font-size: 33px">Sin programar. Usas un modelo desde una herramienta, con un <b>prompt y ejemplos</b>, y comparas sus respuestas con las que esperabas.</p>
-      </div>
-      <div class="bloque" data-paso="2" style="border-top-color: var(--magenta)">
-        <h3>Machine learning</h3>
-        <p style="font-size: 33px">Con Python. Ejecutas un <b>modelo en un notebook</b>, ves sus capas y pesos, y lees cómo evolucionan el entrenamiento y la validación.</p>
-      </div>
-    </div>
-    <p class="nota" data-paso="3" style="margin-top: 26px; font-size: 32px">Las dos rutas terminan con lo mismo: tarea acordada, modelo base identificado y primera predicción comprobable.</p>
-    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
-  </section>
-
-  <!-- 6 · EL BRIEF -->
-  <section class="slide slide--ruta">
-    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Tarea y modelo"></div>
-    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
-    <span class="etiqueta">El brief · Ejemplo (escenario ficticio)</span>
-    <h2 class="titulo" style="font-size: 70px">Una página que dice qué vas a comprobar</h2>
-    <div class="ficha-ej">
-      <div data-paso="1"><b>Tarea</b><span>Clasificar mensajes de clientes por motivo.</span></div>
-      <div data-paso="2"><b>Etiquetas</b><span>Pagos, envíos, acceso a la cuenta, otro. Con un ejemplo y un contraejemplo de cada una.</span></div>
-      <div data-paso="3"><b>Datos</b><span>300 mensajes sintéticos, sin datos personales.</span></div>
-      <div data-paso="4"><b>Modelo disponible</b><span>Un modelo preentrenado en español, con su versión anotada.</span></div>
-      <div data-paso="5"><b>Recursos</b><span>Notebook en la nube o chat; sin GPU.</span></div>
-      <div data-paso="6"><b>Cómo voy a evaluar</b><span>Casos reservados y errores por categoría, no solo un promedio.</span></div>
+  <!-- 5 · SECCIÓN A -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Desde la base"></div>
+    <div class="seccion-num" style="color: var(--negro)">A</div>
+    <div class="seccion-info">
+      <h2 class="titulo" style="font-size: 100px">Desde la base</h2>
+      <p class="sub" style="font-size: 40px">Qué es un dato, un modelo, una neurona y una red; cómo aprende y qué agrega una CNN.</p>
     </div>
   </section>
 
-  <!-- 7 · UN PASO DE PREDICCIÓN -->
+  <!-- 6 · QUÉ ES UN DATO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Desde la base"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Desde la base</span>
+    <h2 class="titulo" style="font-size: 72px">¿Qué es un dato para una máquina?</h2>
+    <div class="dividido" style="grid-template-columns: .85fr 1.15fr; gap: 70px; align-items: stretch; margin-top: 26px; flex: none">
+      <div class="bloque bloque--naranja" data-paso="1" style="display: flex; flex-direction: column; justify-content: center">
+        <span class="bono" style="color: var(--negro)">Todo entra como números</span>
+        <h3 style="font-size: 52px; margin-top: 16px">Una red neuronal no ve fotos ni lee palabras: recibe números y devuelve números.</h3>
+      </div>
+      <ul class="lista" style="font-size: 33px; gap: 20px; margin-top: 0; align-self: center">
+        <li data-paso="2"><span><b>Una imagen</b> en escala de grises es una tabla de brillos: 0 = negro, 255 = blanco. En color son 3 tablas (rojo, verde, azul).</span></li>
+        <li data-paso="3"><span><b>Un texto</b> puede convertirse en un vector: una posición por palabra del vocabulario, con 1 si aparece («bolsa de palabras»).</span></li>
+        <li data-paso="4"><span><b>Una etiqueta</b> («envío», «gato») también se vuelve un número: 0, 1, 2…</span></li>
+      </ul>
+    </div>
+    <p class="cierre-linea" data-paso="5">Lo que la red «sabe» depende de cómo preparamos esos números.</p>
+  </section>
+
+  <!-- 7 · IMAGEN DE 5 × 5 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Desde la base"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Lo voy a mostrar en vivo en Colab</span>
+    <h2 class="titulo" style="font-size: 64px">Una imagen de 5 × 5 son 25 números</h2>
+    <div class="dividido" style="grid-template-columns: auto 1fr; gap: 64px; align-items: start; margin-top: 26px; flex: none">
+      <div class="matriz" data-paso="1">
+        <span class="b">255</span><span class="b">255</span><span class="b">255</span><span class="b">255</span><span class="b">255</span>
+        <span class="n">0</span><span class="n">0</span><span class="n">0</span><span class="n">0</span><span class="b">255</span>
+        <span class="b">255</span><span class="b">255</span><span class="b">255</span><span class="b">255</span><span class="b">255</span>
+        <span class="b">255</span><span class="n">0</span><span class="n">0</span><span class="n">0</span><span class="n">0</span>
+        <span class="b">255</span><span class="b">255</span><span class="b">255</span><span class="b">255</span><span class="b">255</span>
+      </div>
+      <pre class="codigo" data-paso="2"><b>import</b> tensorflow <b>as</b> tf
+<b>import</b> matplotlib.pyplot <b>as</b> plt
+dos = tf.constant([
+    [255, 255, 255, 255, 255],
+    [  0,   0,   0,   0, 255],
+    [255, 255, 255, 255, 255],
+    [255,   0,   0,   0,   0],
+    [255, 255, 255, 255, 255],
+])
+plt.imshow(dos, cmap="gray", vmin=0, vmax=255)
+plt.show()</pre>
+    </div>
+    <p class="nota" data-paso="3" style="margin-top: 12px; font-size: 27px">0 = negro, 255 = blanco. Las posiciones y los valores forman la figura; no hay una instrucción que diga «dibuja un dos».</p>
+  </section>
+
+  <!-- 8 · RETO: CAMBIAR UN PÍXEL -->
   <section class="slide slide--azul slide--ruta">
-    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Tarea y modelo"></div>
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Desde la base"></div>
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
-    <span class="etiqueta">Lo voy a mostrar en vivo</span>
-    <h2 class="titulo" style="font-size: 80px">De una entrada a una predicción</h2>
-    <p class="sub" style="color: #cfd6ee; font-size: 38px">No hace falta todo el cálculo: lo que importa es qué cambia y qué se compara.</p>
-    <div class="rail" style="--n: 4; margin-top: 70px">
-      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Recorrido hacia adelante</b><span>La entrada pasa por las capas y sale una predicción.</span></div>
-      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Pérdida</b><span>Mide qué tan lejos quedó la predicción de la etiqueta.</span></div>
-      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Gradientes</b><span>Indican hacia dónde mover cada peso para reducir esa pérdida.</span></div>
-      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Optimizador</b><span>Actualiza los pesos. Esto es lo que ocurre al entrenar.</span></div>
-    </div>
+    <span class="etiqueta">Reto · 3 minutos</span>
+    <h2 class="mensaje" style="font-size: 96px; margin-top: 30px">Cambia un 255 por 0 y vuelve a ejecutar</h2>
+    <p class="sub" data-paso="1" style="color: #fff; font-size: 46px">Antes de ejecutar, predice: ¿qué pasará con la figura?</p>
+    <p class="sub" data-paso="2" style="color: #cfd6ee; font-size: 38px">Después: ¿cambió el número? ¿Sigue siendo reconocible? ¿Y si cambiamos muchos píxeles?</p>
   </section>
 
-  <!-- 8 · QUÉ CAMBIA EN CADA RUTA -->
+  <!-- 9 · MNIST Y COLOR -->
   <section class="slide slide--ruta">
-    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Tarea y modelo"></div>
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Desde la base"></div>
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
-    <span class="etiqueta">Qué cambia en tu ruta</span>
-    <h2 class="titulo" style="font-size: 68px">Los pesos cambian solo si entrenas</h2>
+    <span class="etiqueta">A · Del ejemplo a un modelo real</span>
+    <h2 class="titulo" style="font-size: 72px">Cuántos números recibe una red</h2>
+    <div class="stats" style="margin-top: 50px; margin-bottom: 0">
+      <div data-paso="1"><b>25</b><span>Nuestro ejemplo: 5 × 5 píxeles en escala de grises.</span></div>
+      <div data-paso="2"><b>784</b><span>Un dígito escrito a mano de MNIST: 28 × 28 píxeles.</span></div>
+      <div data-paso="3"><b>× 3</b><span>En color hay tres canales por posición: rojo, verde y azul.</span></div>
+    </div>
+    <p class="cierre-linea" data-paso="4" style="margin-top: 60px">¿Cómo descubre la red que esos números son un dos, un cinco o un ocho? Ahí empieza el aprendizaje.</p>
+  </section>
+
+  <!-- 10 · QUÉ ES UN MODELO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Desde la base"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Desde la base</span>
+    <h2 class="titulo" style="font-size: 72px">¿Qué es un modelo?</h2>
     <div class="dos" style="margin-top: 30px; gap: 40px; flex: none">
-      <div class="bloque" data-paso="1" style="padding: 30px 38px; border-top-color: var(--naranja)">
-        <h3 style="font-size: 44px">IA generativa</h3>
-        <p style="font-size: 31px; margin-top: 10px">El modelo ya aprendió. Tú cambias la instrucción y los ejemplos, no los pesos.<br>Mejorar un prompt adapta el flujo; <b>no es fine-tuning</b> y así lo escribimos en el brief.</p>
+      <div class="bloque bloque--tinta" data-paso="1" style="padding: 30px 40px">
+        <span class="bono">Software tradicional</span>
+        <h3 style="font-size: 46px; margin-top: 10px">Una persona escribe las reglas</h3>
+        <p style="font-size: 32px">Reglas + datos → respuestas.<br>IVA en Excel: $100.000 → $19.000, siempre.</p>
       </div>
-      <div class="bloque" data-paso="2" style="padding: 30px 38px; border-top-color: var(--magenta)">
-        <h3 style="font-size: 44px">Machine learning</h3>
-        <p style="font-size: 31px; margin-top: 10px">Al entrenar, el optimizador mueve los pesos para bajar la pérdida.<br>La curva de validación te dice si lo aprendido sirve con casos nuevos.</p>
+      <div class="bloque bloque--naranja" data-paso="2" style="padding: 30px 40px; border-top-color: var(--negro)">
+        <span class="bono" style="color: var(--negro)">Modelo de machine learning</span>
+        <h3 style="font-size: 46px; margin-top: 10px">El sistema aprende las reglas</h3>
+        <p style="font-size: 32px">Datos + respuestas → reglas (el modelo).<br>Spam: aprendió de millones de correos marcados.</p>
       </div>
     </div>
-    <p class="sub" data-paso="3" style="font-size: 38px; margin-top: 30px; color: var(--tinta); font-weight: 700">Antes de cada resultado, una predicción: ¿qué espero que salga?</p>
+    <p class="cierre-linea" data-paso="3" style="font-weight: 400; font-size: 36px">Un <b>modelo</b> es una función que recibe una entrada y produce una salida. Sus <b>parámetros</b>, los números internos, no los escribe nadie: se ajustan con ejemplos.</p>
   </section>
 
-  <!-- 9 · PRÁCTICA · TRAMO COMÚN -->
+  <!-- 11 · EL RETO DEL GATO -->
   <section class="slide slide--ruta">
-    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Desde la base"></div>
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
-    <span class="etiqueta">Práctica guiada · Para todos · 5 min</span>
-    <h2 class="titulo" style="font-size: 62px">Describe lo que ves, antes de explicarlo</h2>
-    <table class="tabla-pred">
-      <thead><tr><th>Mensaje</th><th>Esperado</th><th>Modelo</th></tr></thead>
+    <span class="etiqueta">A · El reto del gato</span>
+    <h2 class="titulo" style="font-size: 62px">¿Cómo escribirías las reglas para reconocer un gato?</h2>
+    <div class="dos" style="margin-top: 34px; gap: 40px; flex: none">
+      <div class="bloque" data-paso="1" style="padding: 32px 40px; border-top-color: var(--negro)">
+        <h3 style="font-size: 44px">Escribir las reglas</h3>
+        <p style="font-size: 34px">Orejas puntiagudas, bigotes, cuatro patas… ¿y si está de espaldas, borroso o dibujado? ¿Y si es un perro parecido? Imposible cubrirlo todo.</p>
+      </div>
+      <div class="bloque bloque--naranja" data-paso="2" style="padding: 32px 40px; border-top-color: var(--negro)">
+        <h3 style="font-size: 44px">Aprender de ejemplos</h3>
+        <p style="font-size: 34px">Con miles de fotos etiquetadas, el modelo descubre solo los patrones y clasifica fotos nuevas.</p>
+      </div>
+    </div>
+    <p class="cierre-linea" data-paso="3" style="color: var(--magenta)">Antes de abrir Colab: ¿lo reconocerá o lo confundirá con otro animal? ¿Por qué?</p>
+  </section>
+
+  <!-- 12 · SOLUCIÓN DEL GATO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Desde la base"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Solución al reto</span>
+    <h2 class="titulo" style="font-size: 66px">No necesitamos escribir todas las reglas</h2>
+    <div class="dividido" style="grid-template-columns: .7fr 1.3fr; gap: 60px; align-items: start; margin-top: 20px; flex: none">
+      <div data-paso="1">
+        <span class="bono" style="color: var(--negro); background: var(--naranja); display: block; padding: 8px 20px">Entrada · un gato</span>
+        <img src="estudia/img/gato-chelsea.jpg" alt="Fotografía de un gato" style="display: block; width: 100%; margin-top: 0">
+        <p class="nota" style="font-size: 22px; margin-top: 6px">Imagen de ejemplo: scikit-image · chelsea()</p>
+      </div>
+      <ol class="lista lista--num" style="font-size: 33px; gap: 18px; margin-top: 0">
+        <li data-paso="2"><span><b>Representación.</b> La imagen se convierte en números (píxeles RGB).</span></li>
+        <li data-paso="3"><span><b>Modelo preentrenado.</b> MobileNetV2 usa pesos que aprendió antes.</span></li>
+        <li data-paso="4"><span><b>Predicción.</b> Devuelve etiquetas posibles y sus puntuaciones.</span></li>
+      </ol>
+    </div>
+    <p class="cierre-linea" data-paso="5" style="color: var(--magenta); margin-top: 14px">Idea clave: inferir no es volver a entrenar.</p>
+  </section>
+
+  <!-- 13 · CÓMO APRENDE UNA MÁQUINA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Desde la base"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Desde la base</span>
+    <h2 class="titulo" style="font-size: 58px">Cómo aprende una máquina: datos, entrenamiento, uso</h2>
+    <div class="rail" style="--n: 3; margin-top: 56px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Datos</b><span>Muchos ejemplos del problema con su respuesta: fotos de prendas con su nombre, mensajes con su área.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Entrenamiento</b><span>El modelo ajusta sus parámetros para equivocarse menos en esos ejemplos. El resultado es un modelo entrenado.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Uso (inferencia)</b><span>El modelo entrenado responde casos nuevos. Aquí ya no aprende: aplica lo aprendido.</span></div>
+    </div>
+    <p class="cierre-linea" data-paso="4" style="margin-top: 44px">Entrenar es caro y se hace pocas veces; usar es barato. Por eso reutilizar modelos ya entrenados es tan útil.</p>
+  </section>
+
+  <!-- 14 · LA NEURONA ARTIFICIAL -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Desde la base"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Desde la base</span>
+    <h2 class="titulo" style="font-size: 68px">La neurona artificial</h2>
+    <div class="dividido" style="grid-template-columns: 1.55fr 1fr; gap: 50px; align-items: start; margin-top: 20px; flex: none">
+      <div>
+        <svg viewBox="0 0 1080 400" width="100%" role="img" aria-label="Neurona con tres entradas, pesos, suma con sesgo y activación sigmoide">
+          <g data-paso="1">
+            <rect x="0" y="36" width="250" height="68" rx="14" fill="#f2f2f2"/><text x="22" y="80" font-size="30" font-weight="700" fill="#16181d">nubes = 0,8</text>
+            <rect x="0" y="166" width="250" height="68" rx="14" fill="#f2f2f2"/><text x="22" y="210" font-size="30" font-weight="700" fill="#16181d">lluvia = 0,7</text>
+            <rect x="0" y="296" width="250" height="68" rx="14" fill="#f2f2f2"/><text x="22" y="340" font-size="30" font-weight="700" fill="#16181d">carro = 0</text>
+            <line x1="250" y1="70" x2="500" y2="200" stroke="#5b6170" stroke-width="3"/>
+            <line x1="250" y1="200" x2="500" y2="200" stroke="#5b6170" stroke-width="3"/>
+            <line x1="250" y1="330" x2="500" y2="200" stroke="#5b6170" stroke-width="3"/>
+            <text x="266" y="56" font-size="27" font-weight="700" fill="#ff7c1a">peso 2</text>
+            <text x="266" y="186" font-size="27" font-weight="700" fill="#ff7c1a">peso 3</text>
+            <text x="266" y="372" font-size="27" font-weight="700" fill="#ff7c1a">peso −4</text>
+          </g>
+          <g data-paso="2">
+            <ellipse cx="600" cy="200" rx="100" ry="76" fill="#000"/>
+            <text x="600" y="198" font-size="44" font-weight="700" fill="#fff" text-anchor="middle">Σ</text>
+            <text x="600" y="236" font-size="24" fill="#fff" text-anchor="middle">suma + sesgo</text>
+            <text x="600" y="312" font-size="27" font-weight="700" fill="#ff7c1a" text-anchor="middle">sesgo −2</text>
+          </g>
+          <g data-paso="3">
+            <line x1="700" y1="200" x2="790" y2="200" stroke="#5b6170" stroke-width="3"/>
+            <rect x="790" y="150" width="170" height="100" rx="10" fill="#ff7c1a"/>
+            <text x="875" y="196" font-size="26" font-weight="700" fill="#000" text-anchor="middle">activación</text>
+            <text x="875" y="228" font-size="26" font-weight="700" fill="#000" text-anchor="middle">(sigmoide)</text>
+            <line x1="960" y1="200" x2="1000" y2="200" stroke="#5b6170" stroke-width="3"/>
+            <rect x="1000" y="164" width="80" height="72" fill="#fff" stroke="#000" stroke-width="4"/>
+            <text x="1040" y="210" font-size="28" font-weight="700" fill="#000" text-anchor="middle">0,85</text>
+          </g>
+        </svg>
+        <p class="nota" data-paso="5" style="font-size: 28px; line-height: 1.3; margin-top: 10px">Peso grande = esa entrada importa mucho. Peso negativo = esa entrada resta (ir en carro baja las ganas de llevar paraguas). Sesgo = la tendencia sin información.</p>
+      </div>
+      <div data-paso="4">
+        <h3 style="font-size: 44px">¿Llevo paraguas?</h3>
+        <p style="font-size: 34px; line-height: 1.3; margin-top: 12px">0,8·2 + 0,7·3 + 0·(−4) − 2 = <b>1,7</b><br>sigmoide(1,7) = <b>0,85</b> → sí</p>
+        <p style="font-size: 33px; line-height: 1.3; margin-top: 22px">Una neurona <b>multiplica</b> cada entrada por un peso, <b>suma</b> y agrega un sesgo, y pasa el resultado por una <b>activación</b>.</p>
+        <p style="font-size: 33px; line-height: 1.3; margin-top: 22px; color: var(--magenta); font-weight: 700">Aprender = encontrar buenos pesos y sesgos con ejemplos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 · FUNCIONES DE ACTIVACIÓN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Desde la base"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Desde la base</span>
+    <h2 class="titulo" style="font-size: 68px">Funciones de activación</h2>
+    <table class="tabla" style="margin-top: 24px">
+      <thead><tr><th style="width: 190px">Activación</th><th>Qué hace</th><th style="width: 380px">Dónde se usa</th><th style="width: 420px">Ejemplo</th></tr></thead>
       <tbody>
-        <tr class="ok" data-paso="1"><td>«Quiero cambiar mi dirección de envío»</td><td>envíos</td><td>envíos</td></tr>
-        <tr class="ok" data-paso="1"><td>«Me cobraron dos veces»</td><td>pagos</td><td>pagos</td></tr>
-        <tr class="ok" data-paso="1"><td>«No puedo entrar a mi cuenta»</td><td>acceso</td><td>acceso</td></tr>
-        <tr class="mal" data-paso="2"><td>«Mi pago no pasó y tampoco puedo entrar»</td><td>pagos</td><td>acceso</td></tr>
-        <tr class="mal" data-paso="2"><td>«Gracias, todo bien»</td><td>otro</td><td>pagos</td></tr>
+        <tr data-paso="1"><td>ReLU</td><td>Si el valor es negativo devuelve 0; si es positivo lo deja igual.</td><td>Capas ocultas (la más común)</td><td>ReLU(−3) = 0 · ReLU(2,5) = 2,5</td></tr>
+        <tr data-paso="2"><td>Sigmoide</td><td>Aplasta cualquier número entre 0 y 1.</td><td>Salida sí/no (binaria)</td><td>sigmoide(0) = 0,5</td></tr>
+        <tr data-paso="3"><td>Softmax</td><td>Convierte una lista de números en probabilidades que suman 1.</td><td>Salida con varias clases</td><td>[2, 1, 0] → [0,67; 0,24; 0,09]</td></tr>
       </tbody>
     </table>
-    <p class="sub" data-paso="3" style="font-size: 38px; margin-top: 30px; color: var(--magenta); font-weight: 700">Por el chat: ¿en qué casos falla? Solo lo que observas; las causas, después.</p>
-    <p class="nota" style="margin-top: 14px">Salida preparada, no ejecutada. Mensajes ficticios.</p>
+    <p class="cierre-linea" data-paso="4" style="font-weight: 400; font-size: 31px; margin-top: 24px"><b>¿Por qué existen?</b> Sin activación, apilar 10 capas sería igual a tener una sola: todo sería una suma ponderada.<br><b style="color: var(--magenta)">Ojo con softmax:</b> un 95 % es la confianza del modelo, no una garantía de acierto.</p>
   </section>
 
-  <!-- 10 · PRÁCTICA · RUTA IA GENERATIVA -->
+  <!-- 16 · LA RED NEURONAL: CAPAS -->
   <section class="slide slide--ruta">
-    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Desde la base"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Desde la base</span>
+    <h2 class="titulo" style="font-size: 68px">La red neuronal: capas de neuronas</h2>
+    <div class="dividido" style="grid-template-columns: 1.05fr 1fr; gap: 50px; align-items: start; margin-top: 16px; flex: none">
+      <div data-paso="1"><svg viewBox="0 0 900 460" width="100%" role="img" aria-label="Red con capa de entrada, dos capas ocultas y salida">
+<line x1="90" y1="124" x2="330" y2="82" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="124" x2="330" y2="166" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="124" x2="330" y2="250" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="124" x2="330" y2="334" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="124" x2="330" y2="418" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="208" x2="330" y2="82" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="208" x2="330" y2="166" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="208" x2="330" y2="250" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="208" x2="330" y2="334" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="208" x2="330" y2="418" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="292" x2="330" y2="82" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="292" x2="330" y2="166" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="292" x2="330" y2="250" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="292" x2="330" y2="334" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="292" x2="330" y2="418" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="376" x2="330" y2="82" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="376" x2="330" y2="166" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="376" x2="330" y2="250" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="376" x2="330" y2="334" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="90" y1="376" x2="330" y2="418" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="82" x2="570" y2="82" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="82" x2="570" y2="166" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="82" x2="570" y2="250" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="82" x2="570" y2="334" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="82" x2="570" y2="418" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="166" x2="570" y2="82" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="166" x2="570" y2="166" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="166" x2="570" y2="250" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="166" x2="570" y2="334" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="166" x2="570" y2="418" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="250" x2="570" y2="82" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="250" x2="570" y2="166" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="250" x2="570" y2="250" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="250" x2="570" y2="334" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="250" x2="570" y2="418" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="334" x2="570" y2="82" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="334" x2="570" y2="166" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="334" x2="570" y2="250" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="334" x2="570" y2="334" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="334" x2="570" y2="418" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="418" x2="570" y2="82" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="418" x2="570" y2="166" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="418" x2="570" y2="250" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="418" x2="570" y2="334" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="330" y1="418" x2="570" y2="418" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="570" y1="82" x2="810" y2="166" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="570" y1="82" x2="810" y2="250" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="570" y1="82" x2="810" y2="334" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="570" y1="166" x2="810" y2="166" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="570" y1="166" x2="810" y2="250" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="570" y1="166" x2="810" y2="334" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="570" y1="250" x2="810" y2="166" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="570" y1="250" x2="810" y2="250" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="570" y1="250" x2="810" y2="334" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="570" y1="334" x2="810" y2="166" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="570" y1="334" x2="810" y2="250" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="570" y1="334" x2="810" y2="334" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="570" y1="418" x2="810" y2="166" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="570" y1="418" x2="810" y2="250" stroke="#d9d9d9" stroke-width="2"/>
+<line x1="570" y1="418" x2="810" y2="334" stroke="#d9d9d9" stroke-width="2"/>
+<text x="90" y="40" text-anchor="middle" font-size="28" font-weight="700" fill="#5b6170">Entrada</text>
+<circle cx="90" cy="124" r="28" fill="#ff7c1a"/>
+<circle cx="90" cy="208" r="28" fill="#ff7c1a"/>
+<circle cx="90" cy="292" r="28" fill="#ff7c1a"/>
+<circle cx="90" cy="376" r="28" fill="#ff7c1a"/>
+<text x="330" y="40" text-anchor="middle" font-size="28" font-weight="700" fill="#5b6170">Oculta 1</text>
+<circle cx="330" cy="82" r="28" fill="#cb318e"/>
+<circle cx="330" cy="166" r="28" fill="#cb318e"/>
+<circle cx="330" cy="250" r="28" fill="#cb318e"/>
+<circle cx="330" cy="334" r="28" fill="#cb318e"/>
+<circle cx="330" cy="418" r="28" fill="#cb318e"/>
+<text x="570" y="40" text-anchor="middle" font-size="28" font-weight="700" fill="#5b6170">Oculta 2</text>
+<circle cx="570" cy="82" r="28" fill="#7fc200"/>
+<circle cx="570" cy="166" r="28" fill="#7fc200"/>
+<circle cx="570" cy="250" r="28" fill="#7fc200"/>
+<circle cx="570" cy="334" r="28" fill="#7fc200"/>
+<circle cx="570" cy="418" r="28" fill="#7fc200"/>
+<text x="810" y="40" text-anchor="middle" font-size="28" font-weight="700" fill="#5b6170">Salida</text>
+<circle cx="810" cy="166" r="28" fill="#000"/>
+<circle cx="810" cy="250" r="28" fill="#000"/>
+<circle cx="810" cy="334" r="28" fill="#000"/>
+</svg></div>
+      <ul class="lista" style="font-size: 29px; gap: 14px; margin-top: 8px">
+        <li data-paso="2"><span><b>Entrada:</b> recibe los números (784 píxeles).</span></li>
+        <li data-paso="3"><span><b>Ocultas:</b> transforman la información; cada capa combina lo que produjo la anterior.</span></li>
+        <li data-paso="4"><span><b>Salida:</b> una neurona por clase (10 prendas), con softmax.</span></li>
+        <li data-paso="5"><span><b>Densa (Dense):</b> cada neurona se conecta con todas las entradas.</span></li>
+      </ul>
+    </div>
+    <p class="cierre-linea" data-paso="6" style="font-size: 34px; margin-top: 8px">Parámetros de una capa densa = entradas × neuronas + neuronas</p>
+  </section>
+
+  <!-- 17 · CÁLCULO DE PARÁMETROS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Desde la base"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Desde la base</span>
+    <h2 class="titulo" style="font-size: 66px">¿De dónde salen los 101.770 parámetros?</h2>
+    <div class="stats" style="margin-top: 36px; margin-bottom: 0">
+      <div data-paso="1"><b style="font-size: 96px">784</b><span>Entradas: una imagen de 28 × 28 píxeles.</span></div>
+      <div data-paso="2"><b style="font-size: 96px">100.480</b><span>Primera capa oculta: (784 × 128) + 128.</span></div>
+      <div data-paso="3"><b style="font-size: 96px">1.290</b><span>Capa de salida: (128 × 10) + 10.</span></div>
+      <div data-paso="4"><b style="font-size: 96px">101.770</b><span>Total: números ajustables (pesos y sesgos).</span></div>
+    </div>
+    <div class="pills" data-paso="5" style="margin-top: 36px">
+      <span class="pill pill--naranja">Camiseta 67 %</span><span class="pill pill--magenta">Pantalón 24 %</span><span class="pill pill--verde">Zapato 9 %</span><span class="pill">… suman 100 %</span>
+    </div>
+    <p class="cierre-linea" data-paso="6" style="font-weight: 400; font-size: 34px; margin-top: 22px">Esos valores no son reglas que programamos: son números que la red ajusta al entrenar.</p>
+  </section>
+
+  <!-- 18 · TASA DE APRENDIZAJE -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Desde la base"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Desde la base</span>
+    <h2 class="titulo" style="font-size: 68px">Bajar la montaña: la tasa de aprendizaje</h2>
+    <div class="dividido" style="grid-template-columns: .9fr 1.1fr; gap: 60px; align-items: stretch; margin-top: 26px; flex: none">
+      <div class="bloque bloque--naranja" data-paso="1" style="border-top-color: var(--negro); display: flex; flex-direction: column; justify-content: center">
+        <span class="bono" style="color: var(--negro)">La analogía</span>
+        <h3 style="font-size: 44px; margin-top: 14px">Entrenar es bajar una montaña con niebla: no vemos el valle, pero sentimos la inclinación bajo los pies.</h3>
+      </div>
+      <div>
+        <h3 style="font-size: 44px">El tamaño del paso importa</h3>
+        <ul class="lista" style="font-size: 31px; gap: 16px; margin-top: 22px">
+          <li data-paso="2"><span><b>Paso pequeño</b> (tasa 0,05): llega, pero muy despacio.</span></li>
+          <li data-paso="3"><span><b>Paso adecuado</b> (tasa 0,3): llega rápido al mínimo.</span></li>
+          <li data-paso="4"><span><b>Paso enorme</b> (tasa 1,05): se pasa del valle y se aleja; en una red se ve como <i>loss: nan</i>.</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="cierre-linea" data-paso="5" style="font-weight: 400; font-size: 32px">La pérdida es la altura; el gradiente, la inclinación; la <b>tasa de aprendizaje</b> (<i>learning rate</i>), el largo de la zancada.</p>
+  </section>
+
+  <!-- 19 · RED DENSA FRENTE A CNN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Desde la base"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Deep learning para visión</span>
+    <h2 class="titulo" style="font-size: 72px">¿Por qué una CNN?</h2>
+    <div class="dos" style="margin-top: 30px; gap: 40px; flex: none">
+      <div class="bloque bloque--tinta" data-paso="1" style="padding: 30px 40px">
+        <span class="bono">Red densa</span>
+        <h3 style="font-size: 46px; margin-top: 10px">Cada píxel con cada neurona</h3>
+        <p style="font-size: 32px">784 → 128 → 10 = <b>101.770</b> parámetros</p>
+      </div>
+      <div class="bloque bloque--naranja" data-paso="2" style="padding: 30px 40px; border-top-color: var(--negro)">
+        <span class="bono" style="color: var(--negro)">Red convolucional (CNN)</span>
+        <h3 style="font-size: 46px; margin-top: 10px">Filtros que recorren la imagen</h3>
+        <p style="font-size: 32px">Conv → Pool → Conv → Pool → Dense = <b>12.810</b> parámetros</p>
+      </div>
+    </div>
+    <p class="cierre-linea" data-paso="3" style="font-weight: 400; font-size: 35px">Como el mismo filtro se usa en toda la imagen, la CNN tiene unas <b>8 veces menos parámetros</b> y logra una exactitud muy parecida (en clase: 83,6 % frente a 83,9 % de la densa).</p>
+  </section>
+
+  <!-- 20 · CÓMO TRABAJA UNA CNN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Desde la base"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Deep learning para visión</span>
+    <h2 class="titulo" style="font-size: 72px">Cómo trabaja una CNN</h2>
+    <div class="tres" style="margin-top: 34px; gap: 36px; flex: none">
+      <div class="bloque" data-paso="1" style="padding: 30px 34px"><h3 style="font-size: 42px">Filtro 3×3</h3><p style="font-size: 31px">Busca un patrón: un borde, una textura.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 30px 34px"><h3 style="font-size: 42px">Pooling</h3><p style="font-size: 31px">Resume la información y reduce el tamaño.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 30px 34px"><h3 style="font-size: 42px">Capas</h3><p style="font-size: 31px">Bordes → formas → partes → «camisa».</p></div>
+    </div>
+    <p class="cierre-linea" data-paso="4" style="margin-top: 34px">Primero extrae patrones; al final, una capa densa decide.</p>
+  </section>
+
+  <!-- 21 · MODELO PREENTRENADO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Desde la base"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Deep learning para visión</span>
+    <h2 class="titulo" style="font-size: 72px">Una CNN que ya viene entrenada</h2>
+    <div class="dos" style="margin-top: 34px; gap: 40px; flex: none">
+      <div class="bloque" data-paso="1" style="padding: 32px 40px; border-top-color: var(--negro)">
+        <h3 style="font-size: 44px">MobileNetV2</h3>
+        <p style="font-size: 33px">Una CNN que Google entrenó con más de un millón de fotos de 1.000 categorías.</p>
+      </div>
+      <div class="bloque bloque--naranja" data-paso="2" style="padding: 32px 40px; border-top-color: var(--negro)">
+        <h3 style="font-size: 44px">Por qué sirve reutilizarla</h3>
+        <p style="font-size: 33px">Sus primeras capas ya saben ver bordes y texturas útiles para casi cualquier imagen.</p>
+      </div>
+    </div>
+    <p class="cierre-linea" data-paso="3" style="color: var(--magenta)">¿Qué ventaja tiene una CNN frente a una red densa al reconocer imágenes?</p>
+  </section>
+
+  <!-- 22 · USAR O ADAPTAR -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Desde la base"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Hacia tu proyecto</span>
+    <h2 class="titulo" style="font-size: 68px">Usar un modelo existente o adaptarlo</h2>
+    <div class="dos" style="margin-top: 22px; gap: 40px; flex: none">
+      <div class="bloque bloque--tinta" data-paso="1" style="padding: 22px 36px">
+        <span class="bono">Usar</span>
+        <h3 style="font-size: 38px; margin-top: 6px">Tal cual, sin cambiar pesos</h3>
+        <p style="font-size: 28px; margin-top: 8px">Solo responde lo que ya sabe hacer.</p>
+      </div>
+      <div class="bloque bloque--naranja" data-paso="2" style="padding: 22px 36px; border-top-color: var(--negro)">
+        <span class="bono" style="color: var(--negro)">Adaptar</span>
+        <h3 style="font-size: 38px; margin-top: 6px">Cambiar algo para una tarea propia</h3>
+        <p style="font-size: 28px; margin-top: 8px">Y comprobar si de verdad mejora.</p>
+      </div>
+    </div>
+    <table class="tabla" data-paso="3" style="margin-top: 20px; font-size: 27px">
+      <thead><tr><th>Opción (semana 3)</th><th style="width: 380px">Qué se entrena</th><th style="width: 560px">Cuándo conviene</th></tr></thead>
+      <tbody>
+        <tr><td>Usar el modelo tal cual</td><td>Nada</td><td>Si la tarea y las categorías ya coinciden</td></tr>
+        <tr><td>Entrenar una salida nueva sobre la base congelada (transfer learning)</td><td>Solo la última capa</td><td>Pocos datos propios y poco cómputo</td></tr>
+        <tr><td>Ajustar parte del modelo (fine-tuning, LoRA)</td><td>Algunas capas o adaptadores</td><td>Más datos y una tarea muy distinta</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 23 · SECCIÓN B -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Analizar"></div>
+    <div class="seccion-num">B</div>
+    <div class="seccion-info">
+      <h2 class="titulo" style="font-size: 100px">Analizar una predicción</h2>
+      <p class="sub" style="font-size: 40px">Usar un modelo existente, encontrar un error y explicar dónde nace.</p>
+    </div>
+  </section>
+
+  <!-- 24 · ANALIZAR UNA PREDICCIÓN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Analizar"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">B · Analizar</span>
+    <h2 class="titulo" style="font-size: 72px">Tres eslabones donde puede nacer un error</h2>
+    <div class="rail" style="--n: 3; margin-top: 56px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Preparación de la entrada</b><span>¿Qué le hicimos al dato? Tamaño, escala, minúsculas, palabras desconocidas.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Representación</b><span>¿Qué números ve el modelo? Píxeles borrosos, una bolsa de palabras sin orden.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Decisión del modelo</b><span>¿Entre qué opciones elige y con qué aprendió? Sus categorías, sus ejemplos.</span></div>
+    </div>
+    <p class="cierre-linea" data-paso="4" style="color: var(--magenta); margin-top: 48px">Origen del error: ¿la etiqueta, el contexto o una limitación del modelo?</p>
+  </section>
+
+  <!-- 25 · ASISTENCIA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Analizar"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Antes de la práctica</span>
+    <h2 class="titulo" style="font-size: 72px">Registro de asistencia</h2>
+    <div class="dividido" style="grid-template-columns: 1.3fr 1fr; gap: 80px; margin-top: 20px">
+      <div>
+        <p class="cuerpo" data-paso="1" style="font-size: 40px">Escanea el código QR o ingresa al enlace que también comparte el auxiliar en el chat.</p>
+        <p class="cuerpo" data-paso="2" style="font-size: 40px; margin-top: 22px">Tienes <b>5 minutos</b> para diligenciarlo.</p>
+        <p class="cuerpo" data-paso="3" style="font-size: 40px; margin-top: 22px">Recuerda: para certificarte se requiere como mínimo el <b>80 % de asistencia</b>.</p>
+      </div>
+      <div data-paso="1" style="justify-self: center; text-align: center"><img src="estudia/qr-asistencia.png" alt="QR de asistencia" style="width: 430px; display: block; border: 14px solid var(--naranja)"><p class="nota" style="font-size: 24px; margin-top: 12px">mentes.corpogem.gov.co/asistencia_estudia/zazmx5gnqtbt</p></div>
+    </div>
+  </section>
+
+  <!-- 26 · SECCIÓN C -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Práctica guiada"></div>
+    <div class="dividido" style="grid-template-columns: 1fr 1fr; gap: 70px; align-items: stretch; margin-top: 0">
+      <div style="display: flex; flex-direction: column">
+        <div class="seccion-num" style="color: var(--negro)">C</div>
+        <div class="seccion-info">
+          <h2 class="titulo" style="font-size: 84px">Práctica guiada</h2>
+          <p class="sub" style="font-size: 36px">El reto: un clasificador de mensajes que se equivoca. ¿Dónde y por qué?</p>
+        </div>
+      </div>
+      <div class="bloque bloque--tinta" style="display: flex; align-items: center; border-top-color: var(--naranja)">
+        <div class="acuerdos" style="gap: 34px; margin-top: 0">
+          <div data-paso="1" style="--c: var(--naranja)"><i>01</i><b style="font-size: 38px">Entrenar una red pequeña con 30 mensajes</b></div>
+          <div data-paso="2" style="--c: var(--naranja)"><i>02</i><b style="font-size: 38px">Probarla con 6 mensajes nuevos</b></div>
+          <div data-paso="3" style="--c: var(--naranja)"><i>03</i><b style="font-size: 38px">Explicar el error y proponer cómo adaptarla</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 27 · EL RETO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">C · Práctica guiada</span>
+    <h2 class="titulo" style="font-size: 62px">El reto · El clasificador de mensajes de soporte</h2>
+    <div class="dividido" style="grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 20px; flex: none">
+      <div>
+        <p class="cuerpo" data-paso="1" style="font-size: 32px; line-height: 1.32">Una tienda en línea recibe mensajes de clientes y quiere enviarlos al área correcta: <b>facturación, envío o devolución</b>. Con 30 mensajes inventados (10 por categoría) entrenamos una red pequeña: bolsa de palabras → Dense(16, ReLU) → Dense(3, softmax). Después la probamos con 6 mensajes que nunca vio.</p>
+        <p class="cierre-linea" data-paso="3" style="font-size: 36px; color: var(--magenta); margin-top: 24px">Predice antes de ejecutar: ¿cuáles de los 6 mensajes fallarán? ¿Por qué?</p>
+      </div>
+      <table class="tabla" data-paso="2" style="font-size: 30px">
+        <thead><tr><th>Mensajes de prueba (nunca vistos)</th></tr></thead>
+        <tbody>
+          <tr><td style="font-weight: 400">«me cobraron el envío dos veces»</td></tr>
+          <tr><td style="font-weight: 400">«no quiero devolver nada, solo saber dónde está mi pedido»</td></tr>
+          <tr><td style="font-weight: 400">«parce, nada que me llega el chunche»</td></tr>
+          <tr><td style="font-weight: 400">«la factura llegó pero el producto no»</td></tr>
+          <tr><td style="font-weight: 400">«quiero la devolución del dinero porque me cobraron de más»</td></tr>
+          <tr><td style="font-weight: 400">«el producto está roto»</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 28 · RUTA MACHINE LEARNING -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Práctica guiada"></div>
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
     <span class="etiqueta">Práctica guiada · 20 min</span>
-    <h2 class="titulo" style="font-size: 60px"><span class="ruta-tag ruta-tag--gen" style="margin-right: 24px">IA generativa</span>Sin programar</h2>
-    <ol class="lista lista--num" style="font-size: 33px; gap: 14px; margin-top: 24px">
-      <li data-paso="1">Pega tu prompt con tres ejemplos en la herramienta y pásale 10 casos con su etiqueta esperada.</li>
-      <li data-paso="2">Anota en una tabla lo esperado y lo obtenido de cada caso, como en el ejemplo.</li>
-      <li data-paso="3">Repite el mismo prompt tres veces con un solo caso: ¿la respuesta cambia?</li>
+    <h2 class="titulo" style="font-size: 62px">Entrena la red y analiza sus errores</h2>
+    <ol class="lista lista--num" style="font-size: 32px; gap: 14px; margin-top: 22px">
+      <li data-paso="1">Abre el notebook en Colab y ejecuta las celdas en orden: bolsa de palabras → Dense(16, ReLU) → Dense(3, softmax).</li>
+      <li data-paso="2">Antes de ver las predicciones, escribe en el chat cuáles de los 6 mensajes crees que fallarán.</li>
+      <li data-paso="3">Compara lo esperado con lo que respondió la red y con la probabilidad de cada predicción.</li>
       <li data-paso="4">Describe un acierto y un error antes de explicarlos: ¿falla la etiqueta, el contexto o el modelo?</li>
-      <li data-paso="5">Dibuja entrada → modelo → salida y marca qué tendría que cambiar para adaptarlo a tu tarea.</li>
+      <li data-paso="5">Si el resultado cambia al volver a ejecutar, anótalo: las predicciones pueden variar levemente.</li>
     </ol>
-    <div class="reloj sin-paso" data-segundos="1200" style="font-size: 90px; margin-top: auto; align-self: flex-end">20:00</div>
+    <div class="reloj sin-paso" data-segundos="1200" style="font-size: 80px; margin-top: auto; align-self: flex-end">20:00</div>
   </section>
 
-  <!-- 11 · PRÁCTICA · RUTA MACHINE LEARNING -->
+  <!-- 30 · RESULTADOS -->
   <section class="slide slide--ruta">
-    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Práctica guiada"></div>
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
-    <span class="etiqueta">Práctica guiada · 20 min</span>
-    <h2 class="titulo" style="font-size: 60px"><span class="ruta-tag ruta-tag--ml" style="margin-right: 24px">Machine learning</span>Con Python</h2>
-    <ol class="lista lista--num" style="font-size: 33px; gap: 14px; margin-top: 24px">
-      <li data-paso="1">Abre el notebook y ejecuta las celdas en orden. Mira cuántas capas y cuántos pesos tiene el modelo.</li>
-      <li data-paso="2">Antes de ver cada predicción, escribe en el chat qué categoría esperas.</li>
-      <li data-paso="3">Lee la curva de entrenamiento y validación y descríbela, sin explicarla todavía.</li>
-      <li data-paso="4">Si mejora en entrenamiento y no en validación, revisa la partición antes de pedir más épocas.</li>
-      <li data-paso="5">Compara un acierto y un error: ¿falla la etiqueta, el contexto o el modelo?</li>
-    </ol>
-    <div class="reloj sin-paso" data-segundos="1200" style="font-size: 90px; margin-top: auto; align-self: flex-end">20:00</div>
+    <span class="etiqueta">C · Resultados</span>
+    <h2 class="titulo" style="font-size: 62px">Lo que respondió la red</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 27px">
+      <thead><tr><th style="width: 70px"></th><th>Mensaje</th><th style="width: 190px">Esperada</th><th style="width: 190px">Predicha</th><th style="width: 120px">Prob.</th></tr></thead>
+      <tbody>
+        <tr><td class="ok">✓</td><td style="font-weight: 400">me cobraron el envío dos veces</td><td>facturación</td><td>facturación</td><td>38 %</td></tr>
+        <tr><td class="mal">✗</td><td style="font-weight: 400">no quiero devolver nada, solo saber dónde está mi pedido</td><td>envío</td><td>devolución</td><td>50 %</td></tr>
+        <tr><td class="ok">✓</td><td style="font-weight: 400">parce, nada que me llega el chunche</td><td>envío</td><td>envío</td><td>42 %</td></tr>
+        <tr><td class="mal">✗</td><td style="font-weight: 400">la factura llegó pero el producto no</td><td>envío</td><td>facturación</td><td>58 %</td></tr>
+        <tr><td class="mal">✗</td><td style="font-weight: 400">quiero la devolución del dinero porque me cobraron de más</td><td>facturación</td><td>devolución</td><td>57 %</td></tr>
+        <tr><td class="ok">✓</td><td style="font-weight: 400">el producto está roto</td><td>devolución</td><td>devolución</td><td>57 %</td></tr>
+      </tbody>
+    </table>
+    <p class="nota" data-paso="2" style="margin-top: 14px; font-size: 26px"><b>Aciertos: 3 de 6.</b> Resultado de la ejecución con TensorFlow 2.21.0 y semilla 42 (puede variar levemente en otra versión).</p>
   </section>
 
-  <!-- 12 · PRÁCTICA · COMPARTIMOS -->
+  <!-- 31 · SOLUCIÓN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">C · Solución</span>
+    <h2 class="titulo" style="font-size: 64px">¿Por qué se confunde con estos mensajes?</h2>
+    <div class="tres" style="margin-top: 30px; gap: 34px; flex: none">
+      <div class="bloque" data-paso="1" style="padding: 26px 32px"><span class="bono">Representación</span><h3 style="font-size: 38px; margin-top: 8px">Palabras sin orden</h3><p style="font-size: 29px">«No quiero devolver…»: la bolsa de palabras ve «devolver» y pierde la negación.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 26px 32px"><span class="bono" style="color: #fff">Decisión del modelo</span><h3 style="font-size: 38px; margin-top: 8px">Mensajes ambiguos</h3><p style="font-size: 29px">Facturación y envío se mezclan: «La factura llegó pero el producto no».</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 26px 32px"><span class="bono">Preparación</span><h3 style="font-size: 38px; margin-top: 8px">Vocabulario limitado</h3><p style="font-size: 29px">Con 30 mensajes, «chunche» puede ser una palabra desconocida.</p></div>
+    </div>
+    <div class="bloque bloque--naranja" data-paso="4" style="margin-top: 26px; padding: 22px 36px; border-top-color: var(--negro)"><p style="margin: 0; font-size: 38px; font-weight: 700">Clave · No basta con reconocer palabras: debemos comprobar la intención.</p></div>
+    <p class="nota" style="margin-top: 10px; font-size: 24px">Referencia de la presentación: 3 de 6 aciertos. En Colab pueden variar las predicciones.</p>
+  </section>
+
+  <!-- 32 · COMPARTIMOS -->
   <section class="slide slide--magenta slide--ruta">
-    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Práctica guiada"></div>
     <span class="etiqueta">Compartimos · 5 min</span>
-    <h2 class="titulo titulo--sm">Una persona de cada ruta cuenta qué encontró</h2>
+    <h2 class="titulo titulo--sm">Dos personas cuentan qué encontraron</h2>
     <div class="preguntas" style="margin-top: 40px">
       <div class="pregunta-g" data-paso="1" style="font-size: 50px"><b style="color: #fff">1</b>¿Qué observaste antes de explicar nada?</div>
       <div class="pregunta-g" data-paso="2" style="font-size: 50px"><b style="color: #fff">2</b>¿Qué dato ayudaría a saber dónde está el error?</div>
-      <div class="pregunta-g" data-paso="3" style="font-size: 50px"><b style="color: #fff">3</b>¿Qué cambiarías primero en tu tarea?</div>
+      <div class="pregunta-g" data-paso="3" style="font-size: 50px"><b style="color: #fff">3</b>¿Qué cambiarías primero en tu modelo o en tu tarea?</div>
     </div>
     <p class="sub" data-paso="4" style="margin-top: auto; font-size: 44px; font-weight: 700; color: #fff">Si solo enumeras clics, vuelve a la pregunta: ¿qué permitió saber cada paso?</p>
   </section>
 
-  <!-- 13 · PAUSA -->
+  <!-- 33 · PAUSA -->
   <section class="slide slide--naranja slide--ruta">
-    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Práctica guiada"></div>
     <span class="etiqueta">Pausa</span>
     <h2 class="mensaje" style="font-size: 120px; margin-top: 30px">Volvemos en 10 minutos</h2>
     <p class="sub">Aléjate de la pantalla, estira las piernas y toma agua.</p>
@@ -233,104 +700,108 @@
     </div>
   </section>
 
-  <!-- 14 · TU PROYECTO -->
+  <!-- 34 · PROPONER -->
   <section class="slide slide--azul slide--ruta">
-    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Tu proyecto"></div>
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Proponer"></div>
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
-    <span class="etiqueta">Construcción · 65 min</span>
-    <h2 class="mensaje" style="font-size: 92px; margin-top: 30px">Hoy acuerdas tu tarea y obtienes una primera predicción del modelo base</h2>
-    <p class="sub" style="color: #fff; font-size: 44px">Si hoy no corre, usa una salida de muestra y márcala como tal. Lo importante es que quede registrado qué se ejecutó y qué no.</p>
+    <span class="etiqueta">Construcción · 50 min</span>
+    <h2 class="mensaje" style="font-size: 92px; margin-top: 30px">Hoy formulas dos oportunidades de proyecto que se puedan comprobar</h2>
+    <p class="sub" style="color: #fff; font-size: 42px">De lenguaje o de visión, donde adaptar un modelo existente tenga sentido. Si algo no corre hoy, márcalo como salida de muestra y deja claro qué se ejecutó y qué no.</p>
   </section>
 
-  <!-- 15 · REGISTRO DE LA PRIMERA INFERENCIA -->
-  <section class="slide slide--magenta slide--ruta">
-    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Tu proyecto"></div>
-    <span class="etiqueta">Registro de la primera inferencia</span>
-    <h2 class="titulo titulo--sm">Lo que dejas por escrito</h2>
-    <div class="registro">
-      <div data-paso="1"><b>Modelo y versión, y cómo lo usas (herramienta, prompt o código)</b><span class="linea"></span></div>
-      <div data-paso="2"><b>Entradas que probaste y predicciones obtenidas</b><span class="linea"></span></div>
-      <div data-paso="3"><b>¿Se ejecutó o es una salida de muestra? ¿Qué falta por comprobar?</b><span class="linea"></span></div>
-    </div>
-    <p class="nota" style="margin-top: auto">Se completa en tu archivo mientras construyes.</p>
-  </section>
-
-  <!-- 16 · CONSTRUCCIÓN -->
+  <!-- 35 · UNA OPORTUNIDAD EN UNA PÁGINA -->
   <section class="slide slide--ruta">
-    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Tu proyecto"></div>
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Proponer"></div>
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
-    <span class="etiqueta">Construcción · 65 min</span>
-    <h2 class="titulo" style="font-size: 62px">Tu turno: brief y primera inferencia</h2>
-    <div class="dividido" style="grid-template-columns: 1.6fr 1fr; gap: 70px; align-items: start; margin-top: 30px">
-      <ol class="lista lista--num" style="font-size: 34px; gap: 16px; margin-top: 0">
-        <li data-paso="1">Acuerda tu tarea principal, tu mínimo y lo que dejas fuera.</li>
-        <li data-paso="2">Define tus etiquetas con un ejemplo y un contraejemplo de cada una.</li>
-        <li data-paso="3">Corre el modelo base con una muestra pequeña y guarda versión e instrucciones.</li>
-        <li data-paso="4">Escribe cómo vas a evaluar y qué casos reservas.</li>
+    <span class="etiqueta">Una oportunidad · Ejemplo (escenario ficticio)</span>
+    <h2 class="titulo" style="font-size: 66px">Una página que dice qué vas a comprobar</h2>
+    <div class="ficha-ej" style="gap: 8px; margin-top: 18px">
+      <div data-paso="1" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Tarea</b><span style="font-size: 31px">Clasificar mensajes de clientes por motivo.</span></div>
+      <div data-paso="2" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Etiquetas</b><span style="font-size: 31px">Facturación, envío, devolución; con un ejemplo y un contraejemplo de cada una.</span></div>
+      <div data-paso="3" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Datos</b><span style="font-size: 31px">300 mensajes sintéticos, sin datos personales.</span></div>
+      <div data-paso="4" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Modelo existente</b><span style="font-size: 31px">Un modelo preentrenado en español, con su versión anotada.</span></div>
+      <div data-paso="5" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">¿Usar o adaptar?</b><span style="font-size: 31px">Probarlo tal cual; adaptarlo solo si falla de forma sistemática.</span></div>
+      <div data-paso="6" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Dónde podría nacer el error</b><span style="font-size: 31px">Preparación (jerga), representación (negaciones) o decisión (categorías ambiguas).</span></div>
+      <div data-paso="7" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Cómo voy a comprobarlo</b><span style="font-size: 31px">Casos reservados y errores por categoría, no solo un promedio.</span></div>
+    </div>
+  </section>
+
+  <!-- 36 · CONSTRUCCIÓN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Proponer"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Construcción · 50 min</span>
+    <h2 class="titulo" style="font-size: 62px">Tu turno: dos oportunidades comprobables</h2>
+    <div class="dividido" style="grid-template-columns: 1.6fr 1fr; gap: 60px; align-items: start; margin-top: 22px">
+      <ol class="lista lista--num" style="font-size: 30px; gap: 12px; margin-top: 0">
+        <li data-paso="1">Escribe tus dos oportunidades, de lenguaje o de visión, cada una en una línea.</li>
+        <li data-paso="2">Para cada una: qué entra, qué sale y qué etiquetas, con un ejemplo y un contraejemplo.</li>
+        <li data-paso="3">Elige un modelo existente que probarías y decide si lo usarías tal cual o lo adaptarías, y por qué.</li>
+        <li data-paso="4">Anota dónde podría nacer un error: preparación, representación o decisión.</li>
+        <li data-paso="5">Escribe cómo lo comprobarías y qué casos reservas.</li>
       </ol>
       <div>
-        <div class="bloque bloque--tinta" data-paso="5" style="padding: 30px 34px"><h3 style="font-size: 40px">Mientras atiendo a alguien</h3><p style="font-size: 30px">Repite tu inferencia desde el inicio o revisa tus etiquetas con ejemplos de otro compañero.</p></div>
-        <div class="reloj sin-paso" data-segundos="3900" style="font-size: 110px; margin-top: 24px">65:00</div>
+        <div class="bloque bloque--tinta" data-paso="6" style="padding: 26px 30px"><h3 style="font-size: 36px">Mientras atiendo a alguien</h3><p style="font-size: 27px">Prueba tu modelo existente con 5 casos tuyos o revisa tus etiquetas con ejemplos de otro compañero.</p></div>
+        <div class="reloj sin-paso" data-segundos="3000" style="font-size: 100px; margin-top: 20px">50:00</div>
       </div>
     </div>
   </section>
 
-  <!-- 17 · SI TE BLOQUEAS -->
+  <!-- 37 · SI TE BLOQUEAS -->
   <section class="slide slide--ruta">
-    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Tu proyecto"></div>
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Proponer"></div>
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
     <span class="etiqueta">Si te bloqueas</span>
     <h2 class="titulo" style="font-size: 72px">Tres salidas, sin salirte de tu proyecto</h2>
     <div class="tres" style="margin-top: 40px; flex: none">
       <div class="bloque" data-paso="1" style="padding: 32px 34px"><h3 style="font-size: 40px">Mis etiquetas se confunden</h3><p style="font-size: 31px">Escribe el criterio de cada una con ejemplos y contraejemplos, antes de seguir.</p></div>
-      <div class="bloque bloque--magenta" data-paso="2" style="padding: 32px 34px"><h3 style="font-size: 40px">Mejora en entrenamiento, no en validación</h3><p style="font-size: 31px">Revisa la partición y la capacidad del modelo antes de prometer que más épocas lo arreglan.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 32px 34px"><h3 style="font-size: 40px">No sé dónde nace el error</h3><p style="font-size: 31px">Recorre los tres eslabones: preparación, representación y decisión del modelo.</p></div>
       <div class="bloque bloque--tinta" data-paso="3" style="padding: 32px 34px"><h3 style="font-size: 40px">No tengo GPU</h3><p style="font-size: 31px">Reduce el modelo o la muestra, y conserva la pregunta que quieres comparar.</p></div>
     </div>
   </section>
 
-  <!-- 18 · REVISIÓN POR PAREJAS -->
+  <!-- 38 · REVISIÓN POR PAREJAS -->
   <section class="slide slide--ruta">
-    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Contraste"></div>
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Proponer"></div>
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
-    <span class="etiqueta">Contraste · 25 min</span>
+    <span class="etiqueta">Contraste · 15 min</span>
     <h2 class="titulo" style="font-size: 76px">Revisión por parejas</h2>
     <div class="dividido" style="grid-template-columns: 1.6fr 1fr; gap: 70px; align-items: start; margin-top: 30px">
-      <ol class="lista lista--num" style="font-size: 38px; gap: 22px; margin-top: 0">
-        <li data-paso="1">Tu pareja explica qué entra, qué produce el modelo y cómo se revisará.</li>
-        <li data-paso="2">Te pregunta algo sobre tu brief o sobre una condición del modelo de referencia.</li>
+      <ol class="lista lista--num" style="font-size: 36px; gap: 22px; margin-top: 0">
+        <li data-paso="1">Tu pareja explica qué entra, qué produce el modelo y cómo se comprobaría.</li>
+        <li data-paso="2">Te pregunta: ¿dónde podría nacer un error en tu oportunidad?</li>
         <li data-paso="3">Tú precisas una de las dos cosas y explicas qué cambió.</li>
       </ol>
-      <div class="reloj sin-paso" data-segundos="1500" style="font-size: 130px">25:00</div>
+      <div class="reloj sin-paso" data-segundos="900" style="font-size: 130px">15:00</div>
     </div>
     <p class="sub" data-paso="4" style="font-size: 38px; margin-top: 30px; color: var(--magenta); font-weight: 700">Reconocer un límite o descartar una hipótesis también cuenta.</p>
   </section>
 
-  <!-- 19 · TICKET DE SALIDA -->
+  <!-- 39 · TICKET DE SALIDA -->
   <section class="slide slide--naranja slide--ruta">
     <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
     <span class="etiqueta">Ticket de salida</span>
-    <h2 class="mensaje" style="font-size: 92px; margin-top: 30px">Escribe en el chat tu tarea y tu modelo base en una línea</h2>
-    <p class="sub">Y una pregunta sobre tus datos.</p>
+    <h2 class="mensaje" style="font-size: 92px; margin-top: 30px">Escribe en el chat tu mejor oportunidad en una línea</h2>
+    <p class="sub">Con el modelo existente que probarías, y una pregunta sobre tus datos.</p>
     <p class="nota" style="color: var(--negro); font-size: 34px; margin-top: 18px">Ejemplo: «Clasificar reclamos por motivo con un modelo preentrenado en español. Pregunta: ¿mis 300 mensajes alcanzan para reservar casos de prueba?»</p>
     <p class="nota" style="color: var(--negro); margin-top: auto">No incluyas datos personales ni de clientes.</p>
   </section>
 
-  <!-- 20 · PRÓXIMOS PASOS -->
+  <!-- 40 · PRÓXIMOS PASOS -->
   <section class="slide slide--ruta">
     <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
     <span class="etiqueta">Próximos pasos</span>
     <h2 class="titulo" style="font-size: 80px">Tres pasos para continuar</h2>
     <div class="camino" style="margin-top: 40px">
-      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><h3 style="font-size: 42px">Guarda tu brief y tu inferencia</h3><p style="font-size: 29px">Con la versión del modelo y lo que falta comprobar.</p></div>
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><h3 style="font-size: 42px">Guarda tus dos oportunidades</h3><p style="font-size: 29px">Con el modelo que probarías y dónde podría fallar.</p></div>
       <div data-paso="2" style="--c: #cb318e"><i>2</i><h3 style="font-size: 42px">Busca un caso difícil</h3><p style="font-size: 29px">Una negación, una jerga o una foto con sombra.</p></div>
       <div data-paso="3" style="--c: #5c9100"><i>3</i><h3 style="font-size: 42px">Avanza con Platzi</h3><p style="font-size: 29px">Módulo 1: redes neuronales y Deep Learning.</p></div>
     </div>
     <p class="sub" data-paso="4" style="font-size: 34px; margin-top: 30px; color: var(--tinta)"><b>Próximo encuentro:</b> cómo se representa un texto, con una clínica que también sirve si eliges visión.</p>
-    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
   </section>
 
-  <!-- 21 · CIERRE -->
+  <!-- 41 · CIERRE -->
   <section class="slide slide--portada">
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="Estud-IA">
     <span class="etiqueta" style="margin-top: 250px">Nos vemos en la próxima sesión</span>
