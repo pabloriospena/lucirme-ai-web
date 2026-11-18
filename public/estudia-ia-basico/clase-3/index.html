@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<base href="/estudia-ia-basico/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Estud-IA · Inteligencia artificial, nivel básico · Clase 3</title>
+<link rel="stylesheet" href="estudia.css">
+<link rel="stylesheet" href="estudia-nuevo.css">
+<style>
+  .agenda small { display: inline !important; margin-left: 22px; font-size: .78em; }
+  .ruta-tag { display: inline-block; font-size: 30px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 6px 22px; border-radius: 8px; color: #fff; }
+  .ruta-tag--gen { background: var(--naranja); color: #000; }
+  .ruta-tag--ml { background: var(--magenta); }
+  .ficha-ej--dic > div { grid-template-columns: 420px 1fr; }
+</style>
+</head>
+<body>
+<div class="escenario">
+
+  <!-- 1 · PORTADA -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 130px">Estud-IA · Capa 2 · Nivel básico</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Inteligencia artificial</h1>
+      <p class="docente" style="font-size: 46px">Clase 3 · Conectamos y exploramos tus datos</p>
+      <p class="docente" style="margin-top: 6px">Pablo Ríos Peña</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+  <!-- 2 · CASO DE APERTURA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Retomamos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Una historia para empezar</span>
+    <h2 class="titulo" style="font-size: 72px">Camila hace la misma pregunta y recibe otra respuesta</h2>
+    <div class="rail" style="--n: 4; margin-top: 56px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Lunes, 9:00</b><span>Camila conecta el asistente a su hoja de solicitudes y pregunta cuántas son urgentes. Responde: 112.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Miércoles, 9:00</b><span>Hace la misma pregunta. Ahora responde: 131.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>¿Se equivocó?</b><span>No: llegaron solicitudes nuevas. Pero Camila no anotó de dónde ni cuándo salió el 112.</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>¿Qué le faltó?</b><span>Saber qué lee la IA, anotar la fuente y la fecha, y comprobar el conteo. Eso armamos hoy.</span></div>
+    </div>
+    <p class="nota" style="margin-top: 30px">Caso ilustrativo, con datos sintéticos.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 3 · AGENDA -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Retomamos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Hoy · 3 horas</span>
+    <h2 class="titulo" style="font-size: 72px">Lo que vamos a hacer</h2>
+    <div class="dividido" style="grid-template-columns: 1.25fr 1fr; gap: 90px; align-items: start; margin-top: 10px">
+      <ol class="lista lista--num agenda" style="font-size: 34px; gap: 12px; margin-top: 0">
+        <li data-paso="1"><span>Retomamos tu proyecto<small style="color: #cfd6ee">15 min</small></span></li>
+        <li data-paso="2"><span>Conectamos y exploramos<small style="color: #cfd6ee">20 min</small></span></li>
+        <li data-paso="3"><span>Práctica guiada, en dos rutas<small style="color: #cfd6ee">30 min</small></span></li>
+        <li data-paso="4"><span>Pausa<small style="color: #cfd6ee">10 min</small></span></li>
+        <li data-paso="5"><span>Construimos tu diccionario de datos<small style="color: #cfd6ee">60 min</small></span></li>
+        <li data-paso="6"><span>Prueba en frío<small style="color: #cfd6ee">25 min</small></span></li>
+        <li data-paso="7"><span>Cierre<small style="color: #cfd6ee">10 min</small></span></li>
+      </ol>
+      <div class="bloque bloque--tinta" data-paso="8" style="margin-top: 0">
+        <h3 style="font-size: 46px">Al terminar tendremos</h3>
+        <p>Un diccionario de datos de tu fuente.</p>
+        <p>Tres conteos comprobados contra la fuente.</p>
+        <p>Un registro que permite repetir la consulta.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · RETOMAMOS -->
+  <section class="slide slide--magenta slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Retomamos"></div>
+    <span class="etiqueta">Retomamos</span>
+    <h2 class="titulo titulo--sm">Tu proyecto y tus datos</h2>
+    <div class="preguntas" style="margin-top: 40px">
+      <div class="pregunta-g" data-paso="1" style="font-size: 50px"><b style="color: #fff">1</b>¿Dónde viven tus datos hoy: una hoja, Drive, Notion, el correo?</div>
+      <div class="pregunta-g" data-paso="2" style="font-size: 50px"><b style="color: #fff">2</b>¿Qué representa una fila?</div>
+      <div class="pregunta-g" data-paso="3" style="font-size: 50px"><b style="color: #fff">3</b>¿Qué te falta confirmar de ellos?</div>
+    </div>
+    <p class="sub" data-paso="4" style="margin-top: auto; font-size: 44px; font-weight: 700; color: #fff">Por voz o por chat. Dos personas cuentan; las demás anotan una pregunta.</p>
+  </section>
+
+  <!-- 5 · ARCHIVO CARGADO VS CONECTOR -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Conectamos y exploramos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Dos formas de darle datos a la IA</span>
+    <h2 class="titulo titulo--sm" style="font-size: 72px">Una copia fija o una fuente viva</h2>
+    <div class="dos" style="margin-top: 36px">
+      <div class="bloque" data-paso="1" style="border-top-color: var(--naranja)">
+        <h3>Archivo cargado</h3>
+        <p style="font-size: 34px">Una <b>copia</b> de tus datos en un momento. Si la fuente cambia, la copia no.</p>
+      </div>
+      <div class="bloque" data-paso="2" style="border-top-color: var(--magenta)">
+        <h3>Conector</h3>
+        <p style="font-size: 34px">Una <b>conexión</b> a la fuente. Lee lo que hay ahora, y por eso la respuesta puede cambiar.</p>
+      </div>
+    </div>
+    <p class="nota" data-paso="3" style="margin-top: 26px; font-size: 32px">Cambia la forma de entrar los datos, no lo que vamos a comprobar.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 6 · ANTES DE CONECTAR -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Conectamos y exploramos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Antes de conectar</span>
+    <h2 class="titulo" style="font-size: 72px">Conectar es dar acceso</h2>
+    <div class="tres" style="margin-top: 40px; flex: none">
+      <div class="bloque bloque--verde" data-paso="1" style="padding: 32px 34px"><h3 style="font-size: 42px">Lo mínimo</h3><p style="font-size: 31px">Conecta solo la hoja o la carpeta que necesitas, no toda tu cuenta.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 32px 34px"><h3 style="font-size: 42px">Solo lectura</h3><p style="font-size: 31px">Si el conector permite escribir o borrar, desactívalo. Hoy solo leemos.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 32px 34px"><h3 style="font-size: 42px">Sin datos personales</h3><p style="font-size: 31px">Fuentes públicas, sintéticas o con permiso, como en el pacto de la clase 1.</p></div>
+    </div>
+    <p class="sub" data-paso="4" style="font-size: 38px; margin-top: 36px; color: var(--tinta); font-weight: 700">Si tienes dudas, no la conectes todavía. Primero valida.</p>
+  </section>
+
+  <!-- 7 · DEMO EN VIVO -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Conectamos y exploramos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Lo voy a mostrar en vivo</span>
+    <h2 class="titulo" style="font-size: 72px">¿Cambia la respuesta si cambia la fuente?</h2>
+    <ol class="lista lista--num" style="font-size: 36px; gap: 16px; margin-top: 28px">
+      <li data-paso="1">Conecto una hoja de práctica y pido: «Describe esta fuente».</li>
+      <li data-paso="2">Pregunto cuántas filas tiene y cuántas celdas vacías.</li>
+      <li data-paso="3">Agrego una fila a la hoja.</li>
+      <li data-paso="4">Repito la pregunta.</li>
+    </ol>
+    <p class="sub" data-paso="5" style="font-size: 44px; margin-top: auto; color: #fff; font-weight: 700">Antes de cada resultado, una predicción: ¿qué espero que salga?</p>
+  </section>
+
+  <!-- 8 · PRÁCTICA · TRAMO COMÚN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Práctica guiada · Para todos · 5 min</span>
+    <h2 class="titulo" style="font-size: 66px">Mira la hoja antes de preguntarle a nadie</h2>
+    <div class="dividido" style="grid-template-columns: 1.3fr 1fr; margin-top: 30px">
+      <div>
+        <p class="enorme" data-paso="1" style="font-size: 56px">Abre la hoja de práctica, en solo lectura.</p>
+        <p class="enorme" data-paso="2" style="font-size: 64px; color: var(--naranja); margin-top: 30px">¿Cuántas filas ves y cuántas celdas vacías?</p>
+        <p class="sub" data-paso="3" style="font-size: 40px">Escribe tu cuenta en el chat. Te comparto el enlace de la hoja ahí mismo.</p>
+      </div>
+    </div>
+    <p class="etiqueta" data-paso="4" style="margin-top: auto">Primero contamos nosotros, después preguntamos a la herramienta.</p>
+  </section>
+
+  <!-- 9 · PRÁCTICA · RUTA IA GENERATIVA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Práctica guiada · 20 min</span>
+    <h2 class="titulo" style="font-size: 62px"><span class="ruta-tag ruta-tag--gen" style="margin-right: 24px">IA generativa</span>Sin programar</h2>
+    <ol class="lista lista--num" style="font-size: 31px; gap: 12px; margin-top: 24px">
+      <li data-paso="1">Conecta el asistente a la hoja de práctica, en solo lectura.</li>
+      <li data-paso="2">Pide: «Describe esta fuente: qué representa cada columna y cuántas filas tiene».</li>
+      <li data-paso="3">Compara con la hoja tres conteos: filas, celdas vacías y una categoría.</li>
+      <li data-paso="4">Haz una pregunta que la hoja permita responder y otra que no. ¿La IA inventa o dice que no puede?</li>
+      <li data-paso="5">Anota la fuente, la fecha y tu prompt. Si no logras conectar en 5 minutos, usa la copia estática y márcala como copia.</li>
+    </ol>
+    <div class="reloj sin-paso" data-segundos="1200" style="font-size: 90px; margin-top: auto; align-self: flex-end">20:00</div>
+  </section>
+
+  <!-- 10 · PRÁCTICA · RUTA MACHINE LEARNING -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Práctica guiada · 20 min</span>
+    <h2 class="titulo" style="font-size: 62px"><span class="ruta-tag ruta-tag--ml" style="margin-right: 24px">Machine learning</span>Con Python</h2>
+    <ol class="lista lista--num" style="font-size: 31px; gap: 12px; margin-top: 24px">
+      <li data-paso="1">Abre el notebook preparado y lee la hoja de práctica con Pandas.</li>
+      <li data-paso="2">Ejecuta <code>head</code>, <code>shape</code>, <code>dtypes</code> e <code>isna</code>. Predice antes de ejecutar.</li>
+      <li data-paso="3">Compara con la hoja tres conteos: filas, celdas vacías y una categoría.</li>
+      <li data-paso="4">Escribe una pregunta que la hoja permita responder y otra que no.</li>
+      <li data-paso="5">Reinicia y ejecuta todo. Anota la fuente y la fecha, y guarda una versión con un mensaje de lo que cambiaste.</li>
+    </ol>
+    <div class="reloj sin-paso" data-segundos="1200" style="font-size: 90px; margin-top: auto; align-self: flex-end">20:00</div>
+  </section>
+
+  <!-- 11 · PRÁCTICA · COMPARTIMOS -->
+  <section class="slide slide--magenta slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <span class="etiqueta">Compartimos · 5 min</span>
+    <h2 class="titulo titulo--sm">Una persona de cada ruta cuenta qué pasó</h2>
+    <div class="preguntas" style="margin-top: 40px">
+      <div class="pregunta-g" data-paso="1" style="font-size: 50px"><b style="color: #fff">1</b>¿Coincidió lo que dijo la herramienta con lo que contaste en la hoja?</div>
+      <div class="pregunta-g" data-paso="2" style="font-size: 50px"><b style="color: #fff">2</b>¿Qué pregunta no podía responder la fuente?</div>
+      <div class="pregunta-g" data-paso="3" style="font-size: 50px"><b style="color: #fff">3</b>¿Qué todavía no puedes afirmar?</div>
+    </div>
+    <p class="sub" data-paso="4" style="margin-top: auto; font-size: 44px; font-weight: 700; color: #fff">Si solo cuentas clics, vuelve a la pregunta: ¿qué te permitió saber cada paso?</p>
+  </section>
+
+  <!-- 12 · PAUSA -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <span class="etiqueta">Pausa</span>
+    <h2 class="mensaje" style="font-size: 120px; margin-top: 30px">Volvemos en 10 minutos</h2>
+    <p class="sub">Aléjate de la pantalla, estira las piernas y toma agua.</p>
+    <div style="display: flex; align-items: center; gap: 40px; margin-top: auto">
+      <div class="reloj" data-segundos="600">10:00</div>
+    </div>
+  </section>
+
+  <!-- 13 · TU PROYECTO -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Tu proyecto"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Construcción · 60 min</span>
+    <h2 class="mensaje" style="font-size: 96px; margin-top: 30px">Hoy conectas tu fuente y entiendes lo que hay en ella</h2>
+    <p class="sub" style="color: #fff; font-size: 44px">Un diccionario de datos, tres conteos comprobados y un registro que cualquiera pueda repetir.</p>
+  </section>
+
+  <!-- 14 · DICCIONARIO DE DATOS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Tu proyecto"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Diccionario de datos · Ejemplo (escenario ficticio)</span>
+    <h2 class="titulo" style="font-size: 70px">Qué significa cada columna, incluso cuando está vacía</h2>
+    <div class="ficha-ej ficha-ej--dic">
+      <div data-paso="1"><b>fecha</b><span>Día en que llegó la solicitud. Formato día/mes/año.</span></div>
+      <div data-paso="2"><b>barrio</b><span>Barrio de quien solicita. Vacío: no lo informó.</span></div>
+      <div data-paso="3"><b>tema</b><span>Categoría asignada. Vacío: aún sin clasificar.</span></div>
+      <div data-paso="4"><b>valor_reclamado</b><span>Pesos. Un 0 es válido: no hay cobro de por medio.</span></div>
+      <div data-paso="5"><b>urgente</b><span>Sí o No. Vacío: nadie la ha revisado.</span></div>
+    </div>
+  </section>
+
+  <!-- 15 · EL REGISTRO -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Tu proyecto"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Registro de la consulta</span>
+    <h2 class="titulo" style="font-size: 80px">Cuatro datos para poder repetirla</h2>
+    <p class="sub" style="color: #cfd6ee; font-size: 38px">Con una fuente viva, el resultado de hoy puede no ser el de mañana.</p>
+    <div class="rail" style="--n: 4; margin-top: 70px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Fuente</b><span>De dónde leíste: qué hoja, carpeta o página.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Fecha y hora</b><span>Cuándo hiciste la consulta.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Instrucción</b><span>El prompt o el código que usaste.</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Comprobación</b><span>El conteo que verificaste a mano y si coincidió.</span></div>
+    </div>
+  </section>
+
+  <!-- 16 · CONSTRUCCIÓN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Tu proyecto"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Construcción · 60 min</span>
+    <h2 class="titulo" style="font-size: 64px">Tu turno: conecta, explora y documenta</h2>
+    <div class="dividido" style="grid-template-columns: 1.6fr 1fr; gap: 70px; align-items: start; margin-top: 30px">
+      <ol class="lista lista--num" style="font-size: 33px; gap: 14px; margin-top: 0">
+        <li data-paso="1">Conecta tu fuente en solo lectura, o usa una muestra sintética.</li>
+        <li data-paso="2">Arma tu diccionario: qué es una fila, qué es cada columna y qué significa un vacío.</li>
+        <li data-paso="3">Comprueba tres conteos contra la fuente.</li>
+        <li data-paso="4">Escribe una pregunta que tu fuente permite responder y otra que no.</li>
+        <li data-paso="5">Completa el registro: fuente, fecha, instrucción y comprobación.</li>
+      </ol>
+      <div>
+        <div class="bloque bloque--tinta" data-paso="6" style="padding: 30px 34px"><h3 style="font-size: 40px">Mientras atiendo a alguien</h3><p style="font-size: 30px">Repite tus tres conteos desde el inicio, en un chat nuevo o reiniciando el notebook.</p></div>
+        <div class="reloj sin-paso" data-segundos="3600" style="font-size: 110px; margin-top: 24px">60:00</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17 · SI TE BLOQUEAS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Tu proyecto"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Si te bloqueas</span>
+    <h2 class="titulo" style="font-size: 72px">Tres salidas, sin salirte de tu proyecto</h2>
+    <div class="tres" style="margin-top: 40px; flex: none">
+      <div class="bloque" data-paso="1" style="padding: 32px 34px"><h3 style="font-size: 40px">No puedo conectar</h3><p style="font-size: 31px">Usa una copia estática y escribe en tu registro que es una copia, con la fecha en que la sacaste.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 32px 34px"><h3 style="font-size: 40px">No tengo datos</h3><p style="font-size: 31px">Usa una muestra sintética y anota que es inventada y qué no puedes afirmar con ella.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 32px 34px"><h3 style="font-size: 40px">Depende de un pago</h3><p style="font-size: 31px">Busca una alternativa gratuita o una respuesta preparada, y márcala como tal.</p></div>
+    </div>
+  </section>
+
+  <!-- 18 · PRUEBA EN FRÍO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Contraste"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Contraste · 25 min</span>
+    <h2 class="titulo" style="font-size: 76px">Prueba en frío</h2>
+    <div class="dividido" style="grid-template-columns: 1.6fr 1fr; gap: 70px; align-items: start; margin-top: 30px">
+      <ol class="lista lista--num" style="font-size: 34px; gap: 18px; margin-top: 0">
+        <li data-paso="1">Abre un chat nuevo o reinicia el notebook.</li>
+        <li data-paso="2">Repite tus tres conteos usando solo tu registro, sin mirar tus notas.</li>
+        <li data-paso="3">Anota qué cambió y por qué: ¿cambió la fuente o cambió la respuesta?</li>
+        <li data-paso="4">Después, tres o cuatro voluntarios muestran su pantalla y el grupo les hace preguntas.</li>
+      </ol>
+      <div class="reloj sin-paso" data-segundos="1500" style="font-size: 130px">25:00</div>
+    </div>
+    <p class="sub" data-paso="5" style="font-size: 38px; margin-top: 30px; color: var(--magenta); font-weight: 700">Nadie queda obligado a mostrar. Reconocer un límite o descartar una idea también cuenta.</p>
+  </section>
+
+  <!-- 19 · TICKET DE SALIDA -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <span class="etiqueta">Ticket de salida</span>
+    <h2 class="mensaje" style="font-size: 90px; margin-top: 30px">Escribe en el chat qué representa una fila de tu fuente</h2>
+    <p class="sub">Y un conteo que comprobaste.</p>
+    <p class="nota" style="color: var(--negro); margin-top: auto">No incluyas datos personales ni de clientes.</p>
+  </section>
+
+  <!-- 20 · PRÓXIMOS PASOS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Próximos pasos</span>
+    <h2 class="titulo" style="font-size: 88px">Tres pasos para continuar</h2>
+    <div class="camino" style="margin-top: 60px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><h3 style="font-size: 44px">Guarda tu diccionario y tu registro</h3><p style="font-size: 30px">Con la fuente y la fecha de tu última consulta.</p></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><h3 style="font-size: 44px">Marca dos problemas</h3><p style="font-size: 30px">Vacíos, repetidos o valores raros que convenga revisar. Sin borrar nada todavía.</p></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><h3 style="font-size: 44px">Avanza con Platzi</h3><p style="font-size: 30px">Módulo 1: Python para datos e IA. Módulo 2: carga y exploración de datos.</p></div>
+    </div>
+    <p class="sub" data-paso="4" style="font-size: 36px; margin-top: 40px; color: var(--tinta)"><b>Próximo encuentro:</b> limpiamos y transformamos tus datos.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 21 · CIERRE -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 250px">Nos vemos en la próxima sesión</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Gracias</h1>
+      <p class="docente">Pablo Ríos Peña · <span style="user-select: all">linkedin.com/in/pabloriospena</span></p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+</div>
+<div class="progreso"></div>
+<script src="motor.js"></script>
+</body>
+</html>
