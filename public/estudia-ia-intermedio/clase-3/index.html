@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<base href="/estudia-ia-intermedio/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Estud-IA · Inteligencia artificial, nivel intermedio · Clase 3</title>
+<link rel="stylesheet" href="estudia.css">
+<style>
+  .agenda small { display: inline !important; margin-left: 22px; font-size: .78em; }
+  .ruta-tag { display: inline-block; font-size: 30px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 6px 22px; border-radius: 8px; color: #fff; }
+  .ruta-tag--gen { background: var(--naranja); color: #000; }
+  .ruta-tag--ml { background: var(--magenta); }
+  .tabla { width: 100%; border-collapse: collapse; font-size: 30px; }
+  .tabla th { text-align: left; background: #000; color: #fff; padding: 14px 22px; font-size: 24px; letter-spacing: .1em; text-transform: uppercase; }
+  .tabla td { padding: 13px 22px; border-bottom: 2px solid rgb(0 0 0 / .12); vertical-align: top; line-height: 1.25; }
+  .tabla tbody tr:nth-child(even) td { background: var(--suave); }
+  .tabla td:first-child { font-weight: 700; }
+  .tabla .ok { color: #3d7a00; font-weight: 700; }
+  .tabla .mal { color: var(--magenta); font-weight: 700; }
+  .matriz { display: grid; grid-template-columns: repeat(5, 82px); gap: 6px; }
+  .matriz span { height: 82px; display: grid; place-items: center; font: 700 30px var(--font-code); }
+  .matriz .n { background: #000; color: #fff; }
+  .matriz .b { background: #fff; color: #000; outline: 3px solid #000; outline-offset: -3px; }
+  .codigo { margin: 0; padding: 24px 32px; background: var(--tinta); color: #e6e7ea; font: 24px/1.36 var(--font-code); border-top: 12px solid var(--naranja); white-space: pre; }
+  .codigo b { color: var(--naranja); font-weight: 400; }
+  .cierre-linea { font-size: 38px; font-weight: 700; color: var(--tinta); margin-top: 26px; line-height: 1.25; }
+</style>
+</head>
+<body>
+<div class="escenario">
+
+  <!-- 1 · PORTADA -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 130px">Estud-IA · Capa 2 · Nivel intermedio</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Inteligencia artificial</h1>
+      <p class="docente" style="font-size: 46px">Clase 3 · Cómo se representa un texto y cómo elegir un modelo</p>
+      <p class="docente" style="margin-top: 6px">Pablo Ríos Peña</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+  <!-- 2 · OBJETIVOS -->
+  <section class="slide slide--ruta">
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Hoy</span>
+    <h2 class="titulo" style="font-size: 76px">Objetivos de esta sesión</h2>
+    <div class="rail" style="--n: 3; margin-top: 60px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Comprender</b><span>Explicar cómo un texto se convierte en números y qué se puede perder en el camino.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Analizar</b><span>Encontrar un caso difícil, como una negación o una jerga, y explicar si el efecto nace en la preparación, la representación o la decisión.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Decidir</b><span>Elegir un modelo existente para tu oportunidad según su idioma, su tarea y sus etiquetas.</span></div>
+    </div>
+  </section>
+
+  <!-- 3 · AGENDA -->
+  <section class="slide slide--azul slide--ruta">
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Hoy · 3 horas</span>
+    <h2 class="titulo" style="font-size: 72px">Lo que vamos a hacer</h2>
+    <div class="dividido" style="grid-template-columns: 1.3fr 1fr; gap: 80px; align-items: start; margin-top: 6px">
+      <ol class="lista lista--num agenda" style="font-size: 31px; gap: 9px; margin-top: 0">
+        <li data-paso="1"><span>A · Del texto a números<small style="color: #cfd6ee">40 min</small></span></li>
+        <li data-paso="2"><span>B · Elegir un modelo existente<small style="color: #cfd6ee">20 min</small></span></li>
+        <li data-paso="3"><span>C · Práctica guiada<small style="color: #cfd6ee">35 min</small></span></li>
+        <li data-paso="4"><span>Pausa<small style="color: #cfd6ee">10 min</small></span></li>
+        <li data-paso="5"><span>Decidir: tu modelo candidato<small style="color: #cfd6ee">50 min</small></span></li>
+        <li data-paso="6"><span>Prueba tu elección<small style="color: #cfd6ee">15 min</small></span></li>
+        <li data-paso="7"><span>Cierre<small style="color: #cfd6ee">5 min</small></span></li>
+      </ol>
+      <div class="bloque bloque--tinta" data-paso="8" style="margin-top: 0">
+        <h3 style="font-size: 46px">Al terminar tendremos</h3>
+        <p>Una explicación propia de qué se pierde al convertir un texto en números.</p>
+        <p>Una ficha de selección de tu modelo candidato y un caso difícil con su efecto observado.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · RETOMAMOS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Del texto a números"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Retomamos la clase 2</span>
+    <h2 class="titulo" style="font-size: 66px">Un error que dejamos abierto</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 26px; font-size: 30px">
+      <thead><tr><th>Mensaje</th><th style="width: 190px">Esperada</th><th style="width: 190px">Predicha</th><th style="width: 120px">Prob.</th></tr></thead>
+      <tbody><tr><td style="font-weight: 400">no quiero devolver nada, solo saber dónde está mi pedido</td><td>envío</td><td class="mal">devolución</td><td>50 %</td></tr></tbody>
+    </table>
+    <p class="cuerpo" data-paso="2" style="font-size: 36px; margin-top: 30px">La red leyó «devolver» y no pudo distinguir la negación.</p>
+    <p class="cierre-linea" data-paso="3" style="color: var(--magenta)">Hoy buscamos por qué ocurre y cómo evitarlo. Primero, cómo se convierte un texto en números.</p>
+  </section>
+
+  <!-- 5 · SECCIÓN A -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Del texto a números"></div>
+    <div class="seccion-num" style="color: var(--negro)">A</div>
+    <div class="seccion-info">
+      <h2 class="titulo" style="font-size: 100px">Del texto a números</h2>
+      <p class="sub" style="font-size: 40px">Tokens, preparación, bolsa de palabras y vectores: qué conserva cada paso y qué pierde.</p>
+    </div>
+  </section>
+
+  <!-- 6 · TOKENIZAR -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Del texto a números"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Del texto a números</span>
+    <h2 class="titulo" style="font-size: 72px">Primero se parte el texto en unidades</h2>
+    <div class="dos" style="margin-top: 36px; gap: 40px; flex: none">
+      <div class="bloque" data-paso="1" style="padding: 32px 40px; border-top-color: var(--negro)">
+        <h3 style="font-size: 44px">Por palabras</h3>
+        <p style="font-size: 34px">«No quiero devolver el pedido» → <b>no · quiero · devolver · el · pedido</b>. Una palabra que el vocabulario no conoce queda sin representar.</p>
+      </div>
+      <div class="bloque bloque--naranja" data-paso="2" style="padding: 32px 40px; border-top-color: var(--negro)">
+        <h3 style="font-size: 44px">Por subpalabras</h3>
+        <p style="font-size: 34px">Los modelos preentrenados parten las palabras raras en trozos que sí conocen. Una jerga como «chunche» se descompone en vez de desaparecer.</p>
+      </div>
+    </div>
+    <p class="cierre-linea" data-paso="3">Cada modelo trae su propio tokenizador: se usa el mismo con el que fue entrenado.</p>
+  </section>
+
+  <!-- 7 · PREPARAR ES DECIDIR -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Del texto a números"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Del texto a números</span>
+    <h2 class="titulo" style="font-size: 72px">Preparar es tomar decisiones</h2>
+    <div class="tres" style="margin-top: 36px; gap: 34px; flex: none">
+      <div class="bloque" data-paso="1" style="padding: 28px 32px"><h3 style="font-size: 40px">Minúsculas y signos</h3><p style="font-size: 30px">Unifica «Devolver» y «devolver». Pero «¡NO!» y «no» ya no se distinguen.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 28px 32px"><h3 style="font-size: 40px">Quitar palabras vacías</h3><p style="font-size: 30px">Elimina palabras muy frecuentes como «el» y «de». Y también otras que importan.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 28px 32px"><h3 style="font-size: 40px">Lemas</h3><p style="font-size: 30px">«Quiero» y «quieres» pasan a «querer». Se gana en simplicidad y se pierde la persona.</p></div>
+    </div>
+    <p class="cierre-linea" data-paso="4" style="color: var(--magenta)">Cada paso ayuda a una cosa y puede borrar otra. Hay que decidirlo con la tarea en mente.</p>
+  </section>
+
+  <!-- 8 · RETO: PALABRAS VACÍAS -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Del texto a números"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Reto · 3 minutos</span>
+    <h2 class="mensaje" style="font-size: 78px; margin-top: 20px">Si quitamos las palabras vacías, ¿en qué quedan estas dos frases?</h2>
+    <div class="dos" style="margin-top: 36px; gap: 40px; flex: none">
+      <div class="bloque bloque--tinta" data-paso="1" style="padding: 30px 40px"><p style="font-size: 44px; margin: 0">«Quiero devolver el pedido»</p></div>
+      <div class="bloque bloque--tinta" data-paso="1" style="padding: 30px 40px"><p style="font-size: 44px; margin: 0">«No quiero devolver el pedido»</p></div>
+    </div>
+    <p class="sub" data-paso="2" style="color: #fff; font-size: 40px; margin-top: 30px; font-weight: 700">Predice y escríbelo en el chat: ¿quedan iguales o distintas?</p>
+  </section>
+
+  <!-- 9 · SOLUCIÓN DEL RETO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Del texto a números"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Solución</span>
+    <h2 class="titulo" style="font-size: 68px">La negación desapareció en la preparación</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 22px; font-size: 30px">
+      <thead><tr><th>Frase</th><th>Después de quitar palabras vacías</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight: 400">Quiero devolver el pedido</td><td>quiero · devolver · pedido</td></tr>
+        <tr><td style="font-weight: 400">No quiero devolver el pedido</td><td class="mal">quiero · devolver · pedido</td></tr>
+      </tbody>
+    </table>
+    <div class="bloque bloque--naranja" data-paso="2" style="margin-top: 30px; padding: 22px 36px; border-top-color: var(--negro)"><p style="margin: 0; font-size: 38px; font-weight: 700">Clave · spaCy marca «no» como palabra vacía. Si la quitamos, dos intenciones opuestas quedan idénticas.</p></div>
+    <p class="nota" style="margin-top: 14px; font-size: 24px">Resultado con spaCy 3.8 y es_core_news_md 3.8.0.</p>
+  </section>
+
+  <!-- 10 · BOLSA DE PALABRAS Y BIGRAMAS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Del texto a números"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Del texto a números</span>
+    <h2 class="titulo" style="font-size: 68px">La bolsa de palabras cuenta y pierde el orden</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 20px; font-size: 29px">
+      <thead><tr><th>Frase</th><th>devolver</th><th>el</th><th>no</th><th>pedido</th><th>quiero</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight: 400">Quiero devolver el pedido</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+        <tr><td style="font-weight: 400">No quiero devolver el pedido</td><td>1</td><td>1</td><td class="mal">1</td><td>1</td><td>1</td></tr>
+      </tbody>
+    </table>
+    <p class="cuerpo" data-paso="2" style="font-size: 34px; margin-top: 26px">Los vectores se diferencian en una sola columna, y un modelo con pocos ejemplos puede darle poco peso.</p>
+    <div class="bloque bloque--naranja" data-paso="3" style="margin-top: 22px; padding: 22px 36px; border-top-color: var(--negro)"><p style="margin: 0; font-size: 34px; font-weight: 700">Con bigramas (pares de palabras seguidas) las columnas pasan de 5 a 9 y aparece «no quiero»: se conserva un poco de orden.</p></div>
+  </section>
+
+  <!-- 11 · VECTORES -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Del texto a números"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Del texto a números</span>
+    <h2 class="titulo" style="font-size: 72px">Vectores: cada palabra, un punto en un espacio</h2>
+    <div class="dividido" style="grid-template-columns: .85fr 1.15fr; gap: 70px; align-items: stretch; margin-top: 26px; flex: none">
+      <div class="bloque bloque--naranja" data-paso="1" style="display: flex; flex-direction: column; justify-content: center">
+        <span class="bono" style="color: var(--negro)">Embedding</span>
+        <h3 style="font-size: 50px; margin-top: 16px">Una lista de números que resume cómo se usa una palabra.</h3>
+      </div>
+      <ul class="lista" style="font-size: 33px; gap: 20px; margin-top: 0; align-self: center">
+        <li data-paso="2"><span>Palabras que se usan en contextos parecidos quedan <b>cerca</b>.</span></li>
+        <li data-paso="3"><span>Una frase puede representarse con el <b>promedio</b> de los vectores de sus palabras.</span></li>
+        <li data-paso="4"><span>Cuanto más cerca están dos vectores, mayor es su <b>similitud</b>, entre 0 y 1.</span></li>
+      </ul>
+    </div>
+    <p class="cierre-linea" data-paso="5">Pregunta: ¿cerca significa «quiere lo mismo»?</p>
+  </section>
+
+  <!-- 12 · CERCANO NO ES IGUAL -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Del texto a números"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Cercano no es igual</span>
+    <h2 class="titulo" style="font-size: 66px">La similitud no mide si el significado coincide</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 20px; font-size: 29px">
+      <thead><tr><th>Comparo «Quiero devolver el pedido» con…</th><th style="width: 170px">Similitud</th><th style="width: 330px">¿Significa lo mismo?</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight: 400">«No quiero devolver el pedido»</td><td>0,73</td><td class="mal">No: es lo contrario</td></tr>
+        <tr><td style="font-weight: 400">«Deseo regresar la compra»</td><td>0,18</td><td class="ok">Sí: dice lo mismo</td></tr>
+        <tr><td style="font-weight: 400">«La factura llegó con otro nombre»</td><td>0,07</td><td>No: otro tema</td></tr>
+      </tbody>
+    </table>
+    <div class="bloque bloque--naranja" data-paso="2" style="margin-top: 26px; padding: 22px 36px; border-top-color: var(--negro)"><p style="margin: 0; font-size: 36px; font-weight: 700">Clave · La frase contraria sale más cercana que la sinónima. Una similitud alta no garantiza el mismo significado.</p></div>
+    <p class="nota" style="margin-top: 12px; font-size: 24px">Resultado con spaCy 3.8 y es_core_news_md 3.8.0; promedio de vectores de palabras. Otro modelo puede dar otros valores.</p>
+  </section>
+
+  <!-- 13 · CIERRE DE A -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Del texto a números"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Lo que nos llevamos</span>
+    <h2 class="titulo" style="font-size: 76px">Tres eslabones donde se decide qué ve el modelo</h2>
+    <div class="rail" style="--n: 3; margin-top: 56px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Tokenizar</b><span>Cómo se parte el texto: por palabras o por subpalabras.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Preparar</b><span>Qué se quita o se cambia: signos, palabras vacías, lemas.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Representar</b><span>Qué números resultan: conteos que pierden el orden o vectores que acercan lo opuesto.</span></div>
+    </div>
+    <p class="cierre-linea" data-paso="4" style="color: var(--magenta); margin-top: 48px">Lo que el modelo puede distinguir depende de lo que dejaste pasar.</p>
+  </section>
+
+  <!-- 14 · SECCIÓN B -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Elegir un modelo"></div>
+    <div class="seccion-num" style="color: var(--naranja)">B</div>
+    <div class="seccion-info">
+      <h2 class="titulo" style="font-size: 100px">Elegir un modelo existente</h2>
+      <p class="sub" style="font-size: 40px">Qué herramienta usar para qué, y qué revisar antes de creerle a una salida.</p>
+    </div>
+  </section>
+
+  <!-- 15 · SPACY Y TRANSFORMERS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Elegir un modelo"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">B · Herramientas</span>
+    <h2 class="titulo" style="font-size: 66px">spaCy y Transformers hacen cosas distintas</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 20px; font-size: 28px">
+      <thead><tr><th style="width: 230px"></th><th>spaCy</th><th>Transformers (Hugging Face)</th></tr></thead>
+      <tbody>
+        <tr><td>Qué es</td><td style="font-weight: 400">Biblioteca de procesamiento: tokens, lemas, categorías gramaticales y dependencias</td><td style="font-weight: 400">Biblioteca para cargar modelos preentrenados y su tokenizador</td></tr>
+        <tr><td>Para qué la usas</td><td style="font-weight: 400">Preparar y analizar el texto</td><td style="font-weight: 400">Clasificar, puntuar sentimiento o comparar textos</td></tr>
+        <tr><td>Recursos</td><td style="font-weight: 400">Modelos pequeños que corren en un computador común</td><td style="font-weight: 400">Modelos más pesados; en Colab, con GPU, corren mejor</td></tr>
+      </tbody>
+    </table>
+    <p class="cierre-linea" data-paso="2" style="margin-top: 24px">No compiten: se puede preparar con una y decidir con la otra.</p>
+  </section>
+
+  <!-- 16 · CUATRO PREGUNTAS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Elegir un modelo"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">B · Antes de confiar en un modelo</span>
+    <h2 class="titulo" style="font-size: 72px">Cuatro preguntas para su ficha</h2>
+    <div class="rail" style="--n: 4; margin-top: 56px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>¿Qué idioma?</b><span>Un modelo en inglés no entiende tu jerga paisa.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>¿Qué tarea?</b><span>Sentimiento, categorías, respuestas: no son intercambiables.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>¿Qué etiquetas devuelve?</b><span>¿Coinciden con las de tu proyecto?</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>¿Con qué aprendió?</b><span>Reseñas, noticias, redes sociales: el tipo de texto cuenta.</span></div>
+    </div>
+    <p class="cierre-linea" data-paso="5" style="margin-top: 48px">Se leen en la ficha del modelo, antes de ejecutarlo.</p>
+  </section>
+
+  <!-- 17 · ETIQUETAS QUE ENGAÑAN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Elegir un modelo"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">B · Ejemplo</span>
+    <h2 class="titulo" style="font-size: 66px">Un modelo que funciona no es un modelo pertinente</h2>
+    <div class="dos" style="margin-top: 34px; gap: 40px; flex: none">
+      <div class="bloque" data-paso="1" style="padding: 32px 40px; border-top-color: var(--negro)">
+        <h3 style="font-size: 44px">Tu proyecto</h3>
+        <p style="font-size: 34px">Etiquetas: <b>facturación, envío, devolución</b>. Importa el motivo del mensaje.</p>
+      </div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 32px 40px; border-top-color: var(--negro)">
+        <h3 style="font-size: 44px">Un modelo de sentimiento multilingüe</h3>
+        <p style="font-size: 34px">Etiquetas: <b>estrellas de 1 a 5</b>. Mide cuán satisfecha suena la persona, no por qué escribe.</p>
+      </div>
+    </div>
+    <p class="cierre-linea" data-paso="3" style="color: var(--magenta)">Si las etiquetas no coinciden, no puedes interpretar la salida como tu respuesta.</p>
+    <p class="nota" style="margin-top: 10px; font-size: 24px">Ejemplo: nlptown/bert-base-multilingual-uncased-sentiment. Confirma sus etiquetas en la ficha del modelo.</p>
+  </section>
+
+  <!-- 18 · USAR O ADAPTAR -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Elegir un modelo"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">B · Usar o adaptar</span>
+    <h2 class="titulo" style="font-size: 72px">Adaptar viene después de entender</h2>
+    <div class="rail" style="--n: 3; margin-top: 56px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Prueba tal cual</b><span>Con tus casos, incluidos los difíciles.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Ubica el fallo</b><span>¿Preparación, representación o decisión del modelo?</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Adapta si se repite</b><span>Si falla de forma sistemática y el cambio de datos o de modelo lo puede corregir.</span></div>
+    </div>
+    <p class="cierre-linea" data-paso="4" style="margin-top: 48px">Muchos fallos se corrigen cambiando la preparación, sin tocar el modelo.</p>
+  </section>
+
+  <!-- 19 · SECCIÓN C -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <div class="seccion-num" style="color: var(--negro)">C</div>
+    <div class="seccion-info">
+      <h2 class="titulo" style="font-size: 100px">Práctica guiada</h2>
+      <p class="sub" style="font-size: 40px">Dos frases casi iguales con intenciones opuestas: observa qué cambia en cada paso.</p>
+    </div>
+  </section>
+
+  <!-- 20 · EL RETO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">C · Práctica guiada</span>
+    <h2 class="titulo" style="font-size: 62px">El reto · Dos frases, una negación</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 20px; font-size: 29px">
+      <thead><tr><th>Frase A</th><th>Frase B</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight: 400">Quiero devolver el pedido</td><td style="font-weight: 400">No quiero devolver el pedido</td></tr>
+        <tr><td style="font-weight: 400">El envío llegó rápido</td><td style="font-weight: 400">El envío no llegó rápido</td></tr>
+        <tr><td style="font-weight: 400">parce, nada que me llega el chunche</td><td style="font-weight: 400">Todavía no me llega el pedido</td></tr>
+      </tbody>
+    </table>
+    <p class="cuerpo" data-paso="2" style="font-size: 32px; margin-top: 24px">Observa qué ve cada herramienta en cada frase y registra qué cambió entre A y B.</p>
+    <p class="cierre-linea" data-paso="3" style="font-size: 36px; color: var(--magenta)">Predice antes de ejecutar: ¿en qué pareja crees que la herramienta no notará la diferencia?</p>
+  </section>
+
+  <!-- 21 · RUTA IA GENERATIVA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Práctica guiada · 20 min</span>
+    <h2 class="titulo" style="font-size: 62px"><span class="ruta-tag ruta-tag--gen" style="margin-right: 24px">IA generativa</span>Sin programar</h2>
+    <ol class="lista lista--num" style="font-size: 31px; gap: 12px; margin-top: 22px">
+      <li data-paso="1">Abre un asistente y pega las dos frases de una pareja.</li>
+      <li data-paso="2">Pide: «Clasifica cada frase como facturación, envío o devolución y explica en una línea por qué».</li>
+      <li data-paso="3">Escribe qué esperas antes de leer la respuesta y compara A con B.</li>
+      <li data-paso="4">Prueba la jerga y un mensaje ambiguo. Pregunta: «¿Qué no puedes saber con este texto?». ¿Inventa o lo reconoce?</li>
+      <li data-paso="5">Guarda tu prompt y las respuestas, y anota qué cambió entre A y B.</li>
+    </ol>
+    <div class="reloj sin-paso" data-segundos="1200" style="font-size: 80px; margin-top: auto; align-self: flex-end">20:00</div>
+  </section>
+
+  <!-- 22 · RUTA MACHINE LEARNING -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Práctica guiada · 20 min</span>
+    <h2 class="titulo" style="font-size: 62px"><span class="ruta-tag ruta-tag--ml" style="margin-right: 24px">Machine learning</span>Con Python</h2>
+    <ol class="lista lista--num" style="font-size: 31px; gap: 12px; margin-top: 22px">
+      <li data-paso="1">Abre el notebook en Colab y ejecuta las Partes 1 a 3 en orden.</li>
+      <li data-paso="2">Antes de ejecutar cada celda, escribe en el chat qué esperas.</li>
+      <li data-paso="3">Compara la bolsa de palabras, los bigramas y la similitud de la pareja A y B.</li>
+      <li data-paso="4">En la Parte 4, lee la ficha del modelo antes de ejecutar: idioma, tarea y etiquetas.</li>
+      <li data-paso="5">Anota qué cambió entre A y B en cada paso y dónde se perdió la diferencia.</li>
+    </ol>
+    <div class="reloj sin-paso" data-segundos="1200" style="font-size: 80px; margin-top: auto; align-self: flex-end">20:00</div>
+  </section>
+
+  <!-- 23 · RESULTADOS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">C · Resultados</span>
+    <h2 class="titulo" style="font-size: 62px">Lo que mostró el notebook con «quiero» y «no quiero»</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 28px">
+      <thead><tr><th>Paso</th><th>Qué se observa</th></tr></thead>
+      <tbody>
+        <tr><td>Bolsa de palabras</td><td style="font-weight: 400">Los vectores se diferencian en una sola columna: «no».</td></tr>
+        <tr><td>Bigramas</td><td style="font-weight: 400">De 5 a 9 columnas; aparece «no quiero».</td></tr>
+        <tr><td>Sin palabras vacías</td><td class="mal" style="font-weight: 400">Las dos frases quedan idénticas: quiero · devolver · pedido.</td></tr>
+        <tr><td>Similitud de vectores</td><td style="font-weight: 400">0,73 con la frase contraria y 0,18 con la que dice lo mismo con otras palabras.</td></tr>
+      </tbody>
+    </table>
+    <p class="nota" data-paso="2" style="margin-top: 14px; font-size: 26px">Resultados con scikit-learn y spaCy 3.8 (es_core_news_md 3.8.0). La Parte 4 depende del modelo que elijas: léela en tu pantalla.</p>
+  </section>
+
+  <!-- 24 · SOLUCIÓN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">C · Solución</span>
+    <h2 class="titulo" style="font-size: 64px">¿Dónde nace el efecto de la negación?</h2>
+    <div class="tres" style="margin-top: 30px; gap: 34px; flex: none">
+      <div class="bloque" data-paso="1" style="padding: 26px 32px"><span class="bono">Preparación</span><h3 style="font-size: 38px; margin-top: 8px">Quitar «no»</h3><p style="font-size: 29px">Una limpieza razonable borra la palabra que cambia la intención.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 26px 32px"><span class="bono" style="color: #fff">Representación</span><h3 style="font-size: 38px; margin-top: 8px">Cercano no es igual</h3><p style="font-size: 29px">Un promedio de vectores deja muy cerca frases opuestas.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 26px 32px"><span class="bono">Decisión del modelo</span><h3 style="font-size: 38px; margin-top: 8px">Otra tarea, otras etiquetas</h3><p style="font-size: 29px">Un modelo de sentimiento no sabe de facturación, envío ni devolución.</p></div>
+    </div>
+    <div class="bloque bloque--naranja" data-paso="4" style="margin-top: 26px; padding: 22px 36px; border-top-color: var(--negro)"><p style="margin: 0; font-size: 38px; font-weight: 700">Clave · La preparación y la representación deciden qué puede distinguir el modelo.</p></div>
+  </section>
+
+  <!-- 25 · COMPARTIMOS -->
+  <section class="slide slide--magenta slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <span class="etiqueta">Compartimos · 5 min</span>
+    <h2 class="titulo titulo--sm">Dos personas, una de cada ruta, cuentan qué encontraron</h2>
+    <div class="preguntas" style="margin-top: 40px">
+      <div class="pregunta-g" data-paso="1" style="font-size: 50px"><b style="color: #fff">1</b>¿Qué esperabas y qué observaste?</div>
+      <div class="pregunta-g" data-paso="2" style="font-size: 50px"><b style="color: #fff">2</b>¿En qué paso se perdió la diferencia entre A y B?</div>
+      <div class="pregunta-g" data-paso="3" style="font-size: 50px"><b style="color: #fff">3</b>¿Qué todavía no puedes afirmar?</div>
+    </div>
+    <p class="sub" data-paso="4" style="margin-top: auto; font-size: 44px; font-weight: 700; color: #fff">Si solo cuentas clics, vuelve a la pregunta: ¿qué permitió saber cada paso?</p>
+  </section>
+
+  <!-- 26 · PAUSA -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <span class="etiqueta">Pausa</span>
+    <h2 class="mensaje" style="font-size: 120px; margin-top: 30px">Volvemos en 10 minutos</h2>
+    <p class="sub">Aléjate de la pantalla, estira las piernas y toma agua.</p>
+    <div style="display: flex; align-items: center; gap: 40px; margin-top: auto">
+      <div class="reloj" data-segundos="600">10:00</div>
+    </div>
+  </section>
+
+  <!-- 27 · DECIDIR -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Decidir"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Construcción · 50 min</span>
+    <h2 class="mensaje" style="font-size: 92px; margin-top: 30px">Hoy decides con evidencia qué modelo probarías para tu oportunidad</h2>
+    <p class="sub" style="color: #fff; font-size: 42px">Con un caso difícil tuyo, la preparación que usarías y una ficha de selección. Si algo no corre hoy, márcalo como salida de muestra y deja claro qué se ejecutó y qué no.</p>
+  </section>
+
+  <!-- 28 · FICHA DE SELECCIÓN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Decidir"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Ficha de selección · Ejemplo (escenario ficticio)</span>
+    <h2 class="titulo" style="font-size: 66px">Una página que justifica tu elección</h2>
+    <div class="ficha-ej" style="gap: 8px; margin-top: 18px">
+      <div data-paso="1" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Tarea</b><span style="font-size: 31px">Clasificar mensajes de clientes por motivo.</span></div>
+      <div data-paso="2" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Idioma de los textos</b><span style="font-size: 31px">Español, con jerga colombiana.</span></div>
+      <div data-paso="3" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Modelo candidato</b><span style="font-size: 31px">Un modelo preentrenado en español, con su versión anotada.</span></div>
+      <div data-paso="4" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Etiquetas del modelo y las mías</b><span style="font-size: 31px">Debo poder mapear las suyas a facturación, envío y devolución.</span></div>
+      <div data-paso="5" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Preparación que aplicaría</b><span style="font-size: 31px">Minúsculas y signos; conservo «no» y «sin».</span></div>
+      <div data-paso="6" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Qué podría perder la representación</b><span style="font-size: 31px">Orden de las palabras y la negación.</span></div>
+      <div data-paso="7" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Caso difícil y cómo lo comprobaría</b><span style="font-size: 31px">«no quiero devolver nada, solo saber dónde está mi pedido».</span></div>
+    </div>
+  </section>
+
+  <!-- 29 · CONSTRUCCIÓN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Decidir"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Construcción · 50 min</span>
+    <h2 class="titulo" style="font-size: 62px">Tu turno: elige y prueba tu modelo candidato</h2>
+    <div class="dividido" style="grid-template-columns: 1.6fr 1fr; gap: 60px; align-items: start; margin-top: 22px">
+      <ol class="lista lista--num" style="font-size: 30px; gap: 12px; margin-top: 0">
+        <li data-paso="1">Elige el modelo candidato para tu oportunidad y lee su ficha: idioma, tarea, etiquetas y datos de entrenamiento.</li>
+        <li data-paso="2">Reúne 5 casos tuyos, incluidos una negación o una jerga, o una foto difícil.</li>
+        <li data-paso="3">Decide la preparación que usarías y anota qué podría perder.</li>
+        <li data-paso="4">Ejecuta el modelo con tus casos y guarda entradas, salidas y versión.</li>
+        <li data-paso="5">Completa tu ficha de selección.</li>
+      </ol>
+      <div>
+        <div class="bloque bloque--tinta" data-paso="6" style="padding: 26px 30px"><h3 style="font-size: 36px">Mientras atiendo a alguien</h3><p style="font-size: 27px">Sigue con tus 5 casos y anota, para cada uno, qué esperas antes de ejecutar.</p></div>
+        <div class="reloj sin-paso" data-segundos="3000" style="font-size: 100px; margin-top: 20px">50:00</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 30 · SI TRABAJAS CON IMÁGENES -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Decidir"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Si tu proyecto es de visión</span>
+    <h2 class="titulo" style="font-size: 70px">El mismo criterio con una imagen</h2>
+    <div class="tres" style="margin-top: 36px; gap: 34px; flex: none">
+      <div class="bloque bloque--verde" data-paso="1" style="padding: 28px 32px"><h3 style="font-size: 40px">Normalizar</h3><p style="font-size: 30px">Cambia la escala de los valores, no el contenido. Hazlo como pide el modelo.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 28px 32px"><h3 style="font-size: 40px">Voltear o rotar</h3><p style="font-size: 30px">Cambia el contenido: un «2» volteado deja de ser un «2».</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 28px 32px"><h3 style="font-size: 40px">Bajar la resolución</h3><p style="font-size: 30px">Mezcla detalles: un objeto pequeño puede desaparecer.</p></div>
+    </div>
+    <p class="cierre-linea" data-paso="4" style="color: var(--magenta)">Pregunta: ¿qué cambio conserva lo que tu modelo necesita? Prueba la Parte 5 del notebook.</p>
+  </section>
+
+  <!-- 31 · SI TE BLOQUEAS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Decidir"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Si te bloqueas</span>
+    <h2 class="titulo" style="font-size: 72px">Tres salidas, sin salirte de tu proyecto</h2>
+    <div class="tres" style="margin-top: 40px; flex: none">
+      <div class="bloque" data-paso="1" style="padding: 32px 34px"><h3 style="font-size: 40px">No encuentro un modelo en español</h3><p style="font-size: 31px">Busca uno multilingüe, lee su ficha y anota qué no cubre.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 32px 34px"><h3 style="font-size: 40px">Sus etiquetas no son las mías</h3><p style="font-size: 31px">Escribe cómo las mapearías y qué casos quedarían sin respuesta.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 32px 34px"><h3 style="font-size: 40px">No tengo GPU</h3><p style="font-size: 31px">Usa un modelo más pequeño o menos casos, y conserva la pregunta que quieres comparar.</p></div>
+    </div>
+  </section>
+
+  <!-- 32 · PRUEBA TU ELECCIÓN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Decidir"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Contraste · 15 min</span>
+    <h2 class="titulo" style="font-size: 76px">Prueba tu elección</h2>
+    <div class="dividido" style="grid-template-columns: 1.6fr 1fr; gap: 70px; align-items: start; margin-top: 30px">
+      <ol class="lista lista--num" style="font-size: 33px; gap: 18px; margin-top: 0">
+        <li data-paso="1">Escribe cuáles de tus 5 casos crees que fallarán y por qué.</li>
+        <li data-paso="2">Ejecuta tu modelo candidato con ellos, sin mirar tus notas.</li>
+        <li data-paso="3">Marca dónde nace cada fallo: preparación, representación o decisión.</li>
+        <li data-paso="4">Dos o tres voluntarios muestran su pantalla y el grupo les hace preguntas.</li>
+      </ol>
+      <div class="reloj sin-paso" data-segundos="900" style="font-size: 130px">15:00</div>
+    </div>
+    <p class="sub" data-paso="5" style="font-size: 36px; margin-top: 26px; color: var(--magenta); font-weight: 700">Nadie queda obligado a mostrar. Reconocer un límite o descartar una hipótesis también cuenta.</p>
+  </section>
+
+  <!-- 33 · TICKET DE SALIDA -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Cierre"></div>
+    <span class="etiqueta">Ticket de salida</span>
+    <h2 class="mensaje" style="font-size: 88px; margin-top: 30px">Escribe en el chat el modelo que probarías y un caso donde crees que fallará</h2>
+    <p class="sub">Y en qué eslabón: preparación, representación o decisión.</p>
+    <p class="nota" style="color: var(--negro); font-size: 34px; margin-top: 18px">Ejemplo: «Un modelo preentrenado en español para clasificar reclamos. Caso difícil: "no quiero devolver nada, solo saber dónde está mi pedido". Eslabón: representación.»</p>
+    <p class="nota" style="color: var(--negro); margin-top: auto">No incluyas datos personales ni de clientes.</p>
+  </section>
+
+  <!-- 34 · PRÓXIMOS PASOS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Cierre"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Próximos pasos</span>
+    <h2 class="titulo" style="font-size: 80px">Tres pasos para continuar</h2>
+    <div class="camino" style="margin-top: 40px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><h3 style="font-size: 42px">Guarda tu ficha de selección</h3><p style="font-size: 29px">Con el modelo, su versión y sus etiquetas.</p></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><h3 style="font-size: 42px">Guarda un caso difícil</h3><p style="font-size: 29px">Con el efecto de la preparación o del contexto que observaste.</p></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><h3 style="font-size: 42px">Avanza con Platzi</h3><p style="font-size: 29px">Módulo 2: tokenización, embeddings y bibliotecas de lenguaje natural.</p></div>
+    </div>
+    <p class="sub" data-paso="4" style="font-size: 34px; margin-top: 30px; color: var(--tinta)"><b>Próximo encuentro:</b> evaluamos un modelo existente con etiquetas que podamos explicar.</p>
+  </section>
+
+  <!-- 35 · CIERRE -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 250px">Nos vemos en la próxima sesión</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Gracias</h1>
+      <p class="docente">Pablo Ríos Peña · <span style="user-select: all">linkedin.com/in/pabloriospena</span></p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+</div>
+<div class="progreso"></div>
+<script src="motor.js"></script>
+</body>
+</html>
