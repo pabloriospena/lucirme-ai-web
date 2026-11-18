@@ -11,6 +11,20 @@ export interface PromptGuia {
   texto: string;
 }
 
+export interface FilaCaso {
+  criterio: string;
+  bloque: string;
+  comprobacion: string;
+}
+
+export interface CasoReal {
+  titulo: string;
+  intro: string;
+  filas: FilaCaso[];
+  etapas: string[];
+  nota: string;
+}
+
 export interface GuiaRuta {
   slug: string;
   paso: string;
@@ -24,6 +38,7 @@ export interface GuiaRuta {
   checklistTitulo: string;
   checklist: string[];
   avisoSinEjemplo: string;
+  casoReal?: CasoReal;
   siguiente: { texto: string; href: string };
 }
 
@@ -117,6 +132,45 @@ Reglas. No prometas nada que la página no confirme. Si un dato falta, déjalo e
   ],
   avisoSinEjemplo:
     "Esta guía es un método. Todavía no tiene un ejemplo con datos reales y no voy a inventar uno. Lo agrego cuando tenga un lanzamiento que pueda mostrar con permiso.",
+  casoReal: {
+    titulo: "Un caso real: lanzar la comunidad de LuciRMe",
+    intro:
+      "Estoy aplicando esta guía a mi propio lanzamiento, la comunidad de producto. Esto lo escribí antes de lanzar. Cada criterio dice cómo se comprueba. Lo que todavía no sé aparece como pendiente.",
+    filas: [
+      {
+        criterio: "El formulario guarda el correo y el tema que elige la persona",
+        bloque: "El producto funciona",
+        comprobacion: "Envío un correo de prueba en la página y lo busco en el grupo de la lista de espera con su tema.",
+      },
+      {
+        criterio: "El correo de bienvenida llega y se ve bien",
+        bloque: "El producto funciona",
+        comprobacion: "Recibo la bienvenida en una bandeja real, reviso remitente, texto y enlaces. Requiere que el dominio esté autenticado.",
+      },
+      {
+        criterio: "Nadie puede creer que la comunidad ya existe",
+        bloque: "Las personas están listas",
+        comprobacion: "Releo la página y cada publicación que la enlace. Todas deben decir que todavía no abre.",
+      },
+      {
+        criterio: "Los eventos de la comunidad llegan a PostHog",
+        bloque: "La medición está lista",
+        comprobacion: "Hago el recorrido completo y confirmo que aparecen la visita a la página, el clic en el aviso y el registro en la lista.",
+      },
+      {
+        criterio: "Sé cómo apagarlo si algo falla",
+        bloque: "Hay plan de reversa",
+        comprobacion: "Si el correo de prueba no llega al grupo, quito el aviso del hub y de las publicaciones. Decido yo.",
+      },
+    ],
+    etapas: [
+      "Interno. Hago yo el recorrido completo con un correo mío, que no cuenta como lead real.",
+      "Grupo pequeño. Las primeras personas que lleguen por redes. Miro si completan el formulario sin ayuda.",
+      "Todos. Solo cuando los cinco criterios estén cumplidos. El número de personas en la lista para abrir el primer grupo todavía no está definido.",
+    ],
+    nota:
+      "La decisión de lanzar, con lo que se cumplió y lo que no, la agrego aquí cuando la tome. Hoy no hay datos suficientes para decir que funcionó.",
+  },
   siguiente: { texto: "Siguiente, Paso 4 · Adopción", href: "/ruta-product/paso-4" },
 };
 
