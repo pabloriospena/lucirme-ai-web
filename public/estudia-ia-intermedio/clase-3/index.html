@@ -63,10 +63,10 @@
     <div class="dividido" style="grid-template-columns: 1.3fr 1fr; gap: 80px; align-items: start; margin-top: 6px">
       <ol class="lista lista--num agenda" style="font-size: 31px; gap: 9px; margin-top: 0">
         <li data-paso="1"><span>A · Del texto a números<small style="color: #cfd6ee">40 min</small></span></li>
-        <li data-paso="2"><span>B · Elegir un modelo existente<small style="color: #cfd6ee">20 min</small></span></li>
+        <li data-paso="2"><span>B · Elegir un modelo existente<small style="color: #cfd6ee">25 min</small></span></li>
         <li data-paso="3"><span>C · Práctica guiada<small style="color: #cfd6ee">35 min</small></span></li>
         <li data-paso="4"><span>Pausa<small style="color: #cfd6ee">10 min</small></span></li>
-        <li data-paso="5"><span>Decidir: tu modelo candidato<small style="color: #cfd6ee">50 min</small></span></li>
+        <li data-paso="5"><span>Decidir: tu modelo candidato<small style="color: #cfd6ee">45 min</small></span></li>
         <li data-paso="6"><span>Prueba tu elección<small style="color: #cfd6ee">15 min</small></span></li>
         <li data-paso="7"><span>Cierre<small style="color: #cfd6ee">5 min</small></span></li>
       </ol>
@@ -162,7 +162,7 @@
       </tbody>
     </table>
     <div class="bloque bloque--naranja" data-paso="2" style="margin-top: 30px; padding: 22px 36px; border-top-color: var(--negro)"><p style="margin: 0; font-size: 38px; font-weight: 700">Clave · spaCy marca «no» como palabra vacía. Si la quitamos, dos intenciones opuestas quedan idénticas.</p></div>
-    <p class="nota" style="margin-top: 14px; font-size: 24px">Resultado con spaCy 3.8 y es_core_news_md 3.8.0.</p>
+    <p class="nota" style="margin-top: 14px; font-size: 24px">Resultado con es_core_news_md 3.8.0, el pipeline de spaCy en español (ver su ficha en la sección B).</p>
   </section>
 
   <!-- 10 · BOLSA DE PALABRAS Y BIGRAMAS -->
@@ -217,7 +217,7 @@
       </tbody>
     </table>
     <div class="bloque bloque--naranja" data-paso="2" style="margin-top: 26px; padding: 22px 36px; border-top-color: var(--negro)"><p style="margin: 0; font-size: 36px; font-weight: 700">Clave · La frase contraria sale más cercana que la sinónima. Una similitud alta no garantiza el mismo significado.</p></div>
-    <p class="nota" style="margin-top: 12px; font-size: 24px">Resultado con spaCy 3.8 y es_core_news_md 3.8.0; promedio de vectores de palabras. Otro modelo puede dar otros valores.</p>
+    <p class="nota" style="margin-top: 12px; font-size: 24px">Modelo: es_core_news_md 3.8.0 (spaCy, español, vectores de 300 dimensiones). La similitud es el promedio de los vectores de las palabras; otro modelo puede dar otros valores.</p>
   </section>
 
   <!-- 13 · CIERRE DE A -->
@@ -276,6 +276,30 @@
     <p class="cierre-linea" data-paso="5" style="margin-top: 48px">Se leen en la ficha del modelo, antes de ejecutarlo.</p>
   </section>
 
+  <!-- 17 · FICHA SPACY -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Elegir un modelo"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">B · Ficha de un modelo</span>
+    <h2 class="titulo" style="font-size: 62px">es_core_news_md 3.8.0 · spaCy en español</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 28px">
+      <tbody><tr><td>Qué es</td><td style="font-weight: 400">Un pipeline de spaCy para español, optimizado para correr en CPU.</td></tr><tr><td>Idioma</td><td style="font-weight: 400">Español.</td></tr><tr><td>Tarea</td><td style="font-weight: 400">Tokens, lemas, categorías gramaticales, dependencias y entidades. Incluye vectores de palabras.</td></tr><tr><td>Qué devuelve</td><td style="font-weight: 400">Anotaciones y vectores. No devuelve las etiquetas de tu proyecto.</td></tr><tr><td>Con qué aprendió</td><td style="font-weight: 400">UD Spanish AnCora y WikiNER (textos anotados) y vectores fastText de 300 dimensiones.</td></tr><tr><td>Tamaño</td><td style="font-weight: 400">Unos 54 MB instalado.</td></tr></tbody>
+    </table>
+    <p class="nota" data-paso="2" style="margin-top: 14px; font-size: 24px">Fuente: metadatos del modelo instalado (versión 3.8.0, licencia GNU GPL 3.0).</p>
+  </section>
+
+  <!-- 18 · FICHA NLPTOWN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Elegir un modelo"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">B · Ficha de un modelo</span>
+    <h2 class="titulo" style="font-size: 54px">nlptown/bert-base-multilingual-uncased-sentiment</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 28px">
+      <tbody><tr><td>Qué es</td><td style="font-weight: 400">BERT multilingüe (no distingue mayúsculas) afinado para sentimiento.</td></tr><tr><td>Idioma</td><td style="font-weight: 400">Seis: inglés, neerlandés, alemán, francés, italiano y español.</td></tr><tr><td>Tarea</td><td style="font-weight: 400">Sentimiento de reseñas de producto.</td></tr><tr><td>Qué devuelve</td><td style="font-weight: 400">De 1 a 5 estrellas. No devuelve facturación, envío ni devolución.</td></tr><tr><td>Con qué aprendió</td><td style="font-weight: 400">Unas 629 mil reseñas de producto; 50 mil en español.</td></tr><tr><td>Qué tan bien</td><td style="font-weight: 400">En español acierta las estrellas exactas en 58 % y con error de una estrella en 95 %, medido en reseñas.</td></tr></tbody>
+    </table>
+    <p class="nota" data-paso="2" style="margin-top: 14px; font-size: 24px">Fuente: ficha del modelo en Hugging Face (licencia MIT). Esas cifras son sobre reseñas, no sobre tus mensajes.</p>
+  </section>
+
   <!-- 17 · ETIQUETAS QUE ENGAÑAN -->
   <section class="slide slide--ruta">
     <div class="ruta-cap" style="--c: 2" data-nombre="2 · Elegir un modelo"></div>
@@ -293,7 +317,7 @@
       </div>
     </div>
     <p class="cierre-linea" data-paso="3" style="color: var(--magenta)">Si las etiquetas no coinciden, no puedes interpretar la salida como tu respuesta.</p>
-    <p class="nota" style="margin-top: 10px; font-size: 24px">Ejemplo: nlptown/bert-base-multilingual-uncased-sentiment. Confirma sus etiquetas en la ficha del modelo.</p>
+    <p class="nota" style="margin-top: 10px; font-size: 24px">Modelo del ejemplo: nlptown/bert-base-multilingual-uncased-sentiment (BERT multilingüe afinado con reseñas de producto; ver su ficha).</p>
   </section>
 
   <!-- 18 · USAR O ADAPTAR -->
@@ -334,24 +358,8 @@
         <tr><td style="font-weight: 400">parce, nada que me llega el chunche</td><td style="font-weight: 400">Todavía no me llega el pedido</td></tr>
       </tbody>
     </table>
-    <p class="cuerpo" data-paso="2" style="font-size: 32px; margin-top: 24px">Observa qué ve cada herramienta en cada frase y registra qué cambió entre A y B.</p>
-    <p class="cierre-linea" data-paso="3" style="font-size: 36px; color: var(--magenta)">Predice antes de ejecutar: ¿en qué pareja crees que la herramienta no notará la diferencia?</p>
-  </section>
-
-  <!-- 21 · RUTA IA GENERATIVA -->
-  <section class="slide slide--ruta">
-    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
-    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
-    <span class="etiqueta">Práctica guiada · 20 min</span>
-    <h2 class="titulo" style="font-size: 62px"><span class="ruta-tag ruta-tag--gen" style="margin-right: 24px">IA generativa</span>Sin programar</h2>
-    <ol class="lista lista--num" style="font-size: 31px; gap: 12px; margin-top: 22px">
-      <li data-paso="1">Abre un asistente y pega las dos frases de una pareja.</li>
-      <li data-paso="2">Pide: «Clasifica cada frase como facturación, envío o devolución y explica en una línea por qué».</li>
-      <li data-paso="3">Escribe qué esperas antes de leer la respuesta y compara A con B.</li>
-      <li data-paso="4">Prueba la jerga y un mensaje ambiguo. Pregunta: «¿Qué no puedes saber con este texto?». ¿Inventa o lo reconoce?</li>
-      <li data-paso="5">Guarda tu prompt y las respuestas, y anota qué cambió entre A y B.</li>
-    </ol>
-    <div class="reloj sin-paso" data-segundos="1200" style="font-size: 80px; margin-top: auto; align-self: flex-end">20:00</div>
+    <p class="cuerpo" data-paso="2" style="font-size: 32px; margin-top: 24px">Observa qué cambia en cada paso (bolsa de palabras, preparación, vectores, modelo) y registra qué cambió entre A y B.</p>
+    <p class="cierre-linea" data-paso="3" style="font-size: 36px; color: var(--magenta)">Predice antes de ejecutar: ¿en qué pareja crees que ningún paso notará la diferencia?</p>
   </section>
 
   <!-- 22 · RUTA MACHINE LEARNING -->
@@ -359,7 +367,7 @@
     <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
     <span class="etiqueta">Práctica guiada · 20 min</span>
-    <h2 class="titulo" style="font-size: 62px"><span class="ruta-tag ruta-tag--ml" style="margin-right: 24px">Machine learning</span>Con Python</h2>
+    <h2 class="titulo" style="font-size: 62px">Prepara, representa y compara en Colab</h2>
     <ol class="lista lista--num" style="font-size: 31px; gap: 12px; margin-top: 22px">
       <li data-paso="1">Abre el notebook en Colab y ejecuta las Partes 1 a 3 en orden.</li>
       <li data-paso="2">Antes de ejecutar cada celda, escribe en el chat qué esperas.</li>
@@ -375,7 +383,7 @@
     <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
     <span class="etiqueta">C · Resultados</span>
-    <h2 class="titulo" style="font-size: 62px">Lo que mostró el notebook con «quiero» y «no quiero»</h2>
+    <h2 class="titulo" style="font-size: 62px">Lo que mostró Colab con «quiero» y «no quiero»</h2>
     <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 28px">
       <thead><tr><th>Paso</th><th>Qué se observa</th></tr></thead>
       <tbody>
@@ -385,7 +393,7 @@
         <tr><td>Similitud de vectores</td><td style="font-weight: 400">0,73 con la frase contraria y 0,18 con la que dice lo mismo con otras palabras.</td></tr>
       </tbody>
     </table>
-    <p class="nota" data-paso="2" style="margin-top: 14px; font-size: 26px">Resultados con scikit-learn y spaCy 3.8 (es_core_news_md 3.8.0). La Parte 4 depende del modelo que elijas: léela en tu pantalla.</p>
+    <p class="nota" data-paso="2" style="margin-top: 14px; font-size: 26px">Bolsa de palabras y bigramas con scikit-learn; palabras vacías y vectores con es_core_news_md 3.8.0 (spaCy, español). La Parte 4 usa otro modelo: léela en tu pantalla.</p>
   </section>
 
   <!-- 24 · SOLUCIÓN -->
@@ -406,7 +414,7 @@
   <section class="slide slide--magenta slide--ruta">
     <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
     <span class="etiqueta">Compartimos · 5 min</span>
-    <h2 class="titulo titulo--sm">Dos personas, una de cada ruta, cuentan qué encontraron</h2>
+    <h2 class="titulo titulo--sm">Dos personas cuentan qué encontraron</h2>
     <div class="preguntas" style="margin-top: 40px">
       <div class="pregunta-g" data-paso="1" style="font-size: 50px"><b style="color: #fff">1</b>¿Qué esperabas y qué observaste?</div>
       <div class="pregunta-g" data-paso="2" style="font-size: 50px"><b style="color: #fff">2</b>¿En qué paso se perdió la diferencia entre A y B?</div>
@@ -430,7 +438,7 @@
   <section class="slide slide--azul slide--ruta">
     <div class="ruta-cap" style="--c: 4" data-nombre="4 · Decidir"></div>
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
-    <span class="etiqueta">Construcción · 50 min</span>
+    <span class="etiqueta">Construcción · 45 min</span>
     <h2 class="mensaje" style="font-size: 92px; margin-top: 30px">Hoy decides con evidencia qué modelo probarías para tu oportunidad</h2>
     <p class="sub" style="color: #fff; font-size: 42px">Con un caso difícil tuyo, la preparación que usarías y una ficha de selección. Si algo no corre hoy, márcalo como salida de muestra y deja claro qué se ejecutó y qué no.</p>
   </section>
@@ -442,13 +450,13 @@
     <span class="etiqueta">Ficha de selección · Ejemplo (escenario ficticio)</span>
     <h2 class="titulo" style="font-size: 66px">Una página que justifica tu elección</h2>
     <div class="ficha-ej" style="gap: 8px; margin-top: 18px">
-      <div data-paso="1" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Tarea</b><span style="font-size: 31px">Clasificar mensajes de clientes por motivo.</span></div>
+      <div data-paso="1" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Tarea</b><span style="font-size: 31px">Medir cuán satisfecho queda el cliente con su pedido.</span></div>
       <div data-paso="2" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Idioma de los textos</b><span style="font-size: 31px">Español, con jerga colombiana.</span></div>
-      <div data-paso="3" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Modelo candidato</b><span style="font-size: 31px">Un modelo preentrenado en español, con su versión anotada.</span></div>
-      <div data-paso="4" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Etiquetas del modelo y las mías</b><span style="font-size: 31px">Debo poder mapear las suyas a facturación, envío y devolución.</span></div>
-      <div data-paso="5" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Preparación que aplicaría</b><span style="font-size: 31px">Minúsculas y signos; conservo «no» y «sin».</span></div>
-      <div data-paso="6" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Qué podría perder la representación</b><span style="font-size: 31px">Orden de las palabras y la negación.</span></div>
-      <div data-paso="7" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Caso difícil y cómo lo comprobaría</b><span style="font-size: 31px">«no quiero devolver nada, solo saber dónde está mi pedido».</span></div>
+      <div data-paso="3" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Modelo candidato</b><span style="font-size: 31px">nlptown/bert-base-multilingual-uncased-sentiment: BERT multilingüe afinado con reseñas de producto.</span></div>
+      <div data-paso="4" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Etiquetas del modelo y las mías</b><span style="font-size: 31px">Sale en estrellas, de 1 a 5; mi escala también es de 1 a 5: coinciden.</span></div>
+      <div data-paso="5" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Con qué aprendió</b><span style="font-size: 31px">Reseñas de producto, unas 50 mil en español: no son mensajes de soporte.</span></div>
+      <div data-paso="6" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Preparación que aplicaría</b><span style="font-size: 31px">Minúsculas y signos; conservo «no» y «sin».</span></div>
+      <div data-paso="7" style="grid-template-columns: 560px 1fr"><b style="font-size: 31px">Caso difícil y cómo lo comprobaría</b><span style="font-size: 31px">«El envío no llegó rápido»: lo comparo con mi propia lectura.</span></div>
     </div>
   </section>
 
@@ -456,7 +464,7 @@
   <section class="slide slide--ruta">
     <div class="ruta-cap" style="--c: 4" data-nombre="4 · Decidir"></div>
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
-    <span class="etiqueta">Construcción · 50 min</span>
+    <span class="etiqueta">Construcción · 45 min</span>
     <h2 class="titulo" style="font-size: 62px">Tu turno: elige y prueba tu modelo candidato</h2>
     <div class="dividido" style="grid-template-columns: 1.6fr 1fr; gap: 60px; align-items: start; margin-top: 22px">
       <ol class="lista lista--num" style="font-size: 30px; gap: 12px; margin-top: 0">
@@ -468,7 +476,7 @@
       </ol>
       <div>
         <div class="bloque bloque--tinta" data-paso="6" style="padding: 26px 30px"><h3 style="font-size: 36px">Mientras atiendo a alguien</h3><p style="font-size: 27px">Sigue con tus 5 casos y anota, para cada uno, qué esperas antes de ejecutar.</p></div>
-        <div class="reloj sin-paso" data-segundos="3000" style="font-size: 100px; margin-top: 20px">50:00</div>
+        <div class="reloj sin-paso" data-segundos="2700" style="font-size: 100px; margin-top: 20px">45:00</div>
       </div>
     </div>
   </section>
@@ -524,7 +532,7 @@
     <span class="etiqueta">Ticket de salida</span>
     <h2 class="mensaje" style="font-size: 88px; margin-top: 30px">Escribe en el chat el modelo que probarías y un caso donde crees que fallará</h2>
     <p class="sub">Y en qué eslabón: preparación, representación o decisión.</p>
-    <p class="nota" style="color: var(--negro); font-size: 34px; margin-top: 18px">Ejemplo: «Un modelo preentrenado en español para clasificar reclamos. Caso difícil: "no quiero devolver nada, solo saber dónde está mi pedido". Eslabón: representación.»</p>
+    <p class="nota" style="color: var(--negro); font-size: 34px; margin-top: 18px">Ejemplo: «Probaría nlptown/bert-base-multilingual-uncased-sentiment (BERT multilingüe afinado con reseñas, sale en estrellas). Caso difícil: "el envío no llegó rápido". Eslabón: representación.»</p>
     <p class="nota" style="color: var(--negro); margin-top: auto">No incluyas datos personales ni de clientes.</p>
   </section>
 
