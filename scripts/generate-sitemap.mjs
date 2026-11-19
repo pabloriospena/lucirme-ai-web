@@ -3,6 +3,7 @@
 // Uso: npm run sitemap  (necesita el historial completo de git)
 import { execFileSync } from "node:child_process";
 import { writeFileSync } from "node:fs";
+import { publicados } from "../src/data/biblioteca.js";
 
 const SITE = "https://lucirme.com";
 
@@ -57,9 +58,21 @@ const lastmod = (file) => {
   return out;
 };
 
-const urls = PAGES.map(([path, file]) => `  <url>
+const entries = PAGES.map(([path, file]) => ({ path, date: lastmod(file) }));
+
+// Biblioteca: solo artículos publicados (borrador en false). lastmod es la fecha real de actualización.
+const articulos = publicados();
+if (articulos.length > 0) {
+  const ultima = articulos.map((a) => a.actualizado || a.publicado).sort().at(-1);
+  entries.push({ path: "/biblioteca", date: ultima });
+  for (const a of articulos) {
+    entries.push({ path: `/biblioteca/${a.slug}`, date: a.actualizado || a.publicado });
+  }
+}
+
+const urls = entries.map(({ path, date }) => `  <url>
     <loc>${SITE}${path}</loc>
-    <lastmod>${lastmod(file)}</lastmod>
+    <lastmod>${date}</lastmod>
   </url>`).join("\n");
 
 writeFileSync(
@@ -70,4 +83,4 @@ ${urls}
 </urlset>
 `,
 );
-console.log(`sitemap.xml generado con ${PAGES.length} URLs`);
+console.log(`sitemap.xml generado con ${entries.length} URLs`);
