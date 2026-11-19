@@ -19,38 +19,63 @@ const {
   noindex = false,
 } = Astro.props;
 
-const canonicalUrl = canonical || Astro.url.href;
+// Canonical sin query string: los enlaces con UTM no deben crear URLs canónicas distintas.
+const canonicalUrl =
+  canonical || new URL(Astro.url.pathname, "https://lucirme.com").href;
 const diagnosticoHref = diagnosticoUrl(Astro.url.pathname);
 
 const locals = Astro.locals as any;
 const auth = locals.auth;
 const userId = typeof auth === "function" ? auth().userId : auth?.userId;
 
-// Default Organization & Person Schema
-const defaultOrganizationSchema = {
+// Schema.org por defecto en todas las páginas: Organization, Person y WebSite enlazados por @id.
+const SITE = "https://lucirme.com";
+const defaultSchema = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "LuciRMe AI",
-  url: "https://lucirme.com",
-  logo: "https://lucirme.com/logo-lucirme.png",
-  founder: {
-    "@type": "Person",
-    name: "Pablo Ríos",
-    jobTitle: "Consultor & Mentor en Inteligencia Artificial",
-    sameAs: [
-      "https://linkedin.com/in/pabloriospena",
-      "https://www.instagram.com/lucirmeai/",
-      "https://www.tiktok.com/@pabloriosp",
-    ],
-  },
-  contactPoint: {
-    "@type": "ContactPoint",
-    contactType: "Customer Support",
-    url: "https://wa.me/573053046180",
-    email: "pablo@lucirme.com",
-  },
-  description:
-    "Sistemas de Inteligencia Artificial de alto impacto, consultoría técnica y mentoría en vivo para profesionales y equipos.",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE}/#organization`,
+      name: "LuciRMe AI",
+      url: SITE,
+      logo: `${SITE}/logo-lucirme.png`,
+      description:
+        "Consultoría, mentoría y formación práctica para aplicar inteligencia artificial al trabajo real de profesionales y equipos.",
+      founder: { "@id": `${SITE}/#pablo-rios` },
+      sameAs: [
+        "https://www.instagram.com/lucirmeai/",
+        "https://www.tiktok.com/@pabloriosp",
+      ],
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "Customer Support",
+        url: "https://wa.me/573053046180",
+        email: "pablo@lucirme.com",
+        availableLanguage: "es",
+      },
+    },
+    {
+      "@type": "Person",
+      "@id": `${SITE}/#pablo-rios`,
+      name: "Pablo Ríos",
+      url: `${SITE}/sobre-pablo`,
+      jobTitle: "Consultor y mentor en inteligencia artificial aplicada",
+      worksFor: { "@id": `${SITE}/#organization` },
+      sameAs: [
+        "https://www.linkedin.com/in/pabloriospena",
+        "https://www.instagram.com/lucirmeai/",
+        "https://www.tiktok.com/@pabloriosp",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE}/#website`,
+      url: SITE,
+      name: "LuciRMe AI",
+      inLanguage: "es",
+      publisher: { "@id": `${SITE}/#organization` },
+    },
+  ],
 };
 ---
 
@@ -101,7 +126,7 @@ const defaultOrganizationSchema = {
     <!-- Schema.org JSON-LD Structured Data for Search Engines & AI Models -->
     <script
       type="application/ld+json"
-      set:html={JSON.stringify(defaultOrganizationSchema)}
+      set:html={JSON.stringify(defaultSchema)}
     />
     {
       jsonLd && (
@@ -492,7 +517,7 @@ const defaultOrganizationSchema = {
 
           <div class="space-y-1">
             <a
-              href="/soluciones/profesionales"
+              href="/profesionales"
               class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group"
             >
               <span class="group-hover:text-teal-700"
@@ -504,7 +529,7 @@ const defaultOrganizationSchema = {
             </a>
 
             <a
-              href="/soluciones/empresas"
+              href="/empresas"
               class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group"
             >
               <span class="group-hover:text-teal-700"
@@ -562,7 +587,7 @@ const defaultOrganizationSchema = {
             </a>
 
             <a
-              href="/recursos"
+              href="/educacion"
               class="flex items-center justify-between p-2 rounded-lg hover:bg-slate-50 transition-colors text-xs text-slate-700 font-medium group"
             >
               <span class="group-hover:text-teal-700"

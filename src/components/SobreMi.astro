@@ -5,9 +5,12 @@ import { LINKS } from "../lib/constants.js";
 interface Props {
   id?: string;
   class?: string;
+  /** false cuando la página ya tiene su propio H1 (home, empresas). */
+  h1?: boolean;
 }
 
-const { id = "sobre-mi", class: className = "" } = Astro.props;
+const { id = "sobre-mi", class: className = "", h1 = true } = Astro.props;
+const Heading = h1 ? "h1" : "h2";
 ---
 
 <section
@@ -169,12 +172,12 @@ const { id = "sobre-mi", class: className = "" } = Astro.props;
             <span class="text-slate-500 font-medium">Sobre Pablo Ríos</span>
           </div>
 
-          <h1
+          <Heading
             class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight"
           >
             Soy Ingeniero de Sistemas y llevo más de 13 años trabajando entre
             producto, tecnología e Inteligencia Artificial.
-          </h1>
+          </Heading>
 
           <p class="text-sm sm:text-base text-slate-700 leading-relaxed pt-0.5">
             Trabajando en el mundo de las startups en producto y tecnología

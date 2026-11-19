@@ -3,9 +3,36 @@ import Layout from "../layouts/Layout.astro";
 import SobreMi from "../components/SobreMi.astro";
 import ActionHub from "../components/ActionHub.astro";
 import RedesSociales from "../components/RedesSociales.astro";
+
+const profileJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  url: "https://lucirme.com/sobre-pablo",
+  mainEntity: {
+    "@type": "Person",
+    "@id": "https://lucirme.com/#pablo-rios",
+    name: "Pablo Ríos",
+    description:
+      "Ingeniero de Sistemas con más de 13 años trabajando entre producto, tecnología e inteligencia artificial.",
+    alumniOf: {
+      "@type": "EducationalOrganization",
+      name: "Universidad Pontificia Bolivariana",
+    },
+    knowsAbout: [
+      "Product Management",
+      "Inteligencia artificial aplicada",
+      "Automatización de procesos",
+      "Discovery y research de producto",
+    ],
+  },
+};
 ---
 
-<Layout title="Sobre Pablo Ríos | LuciRMe AI">
+<Layout
+  title="Sobre Pablo Ríos | LuciRMe AI"
+  description="Pablo Ríos es Ingeniero de Sistemas con más de 13 años en producto, tecnología e inteligencia artificial. Fundador de LuciRMe AI."
+  jsonLd={profileJsonLd}
+>
   <main class="py-12 bg-white">
     <SobreMi />
   </main>
