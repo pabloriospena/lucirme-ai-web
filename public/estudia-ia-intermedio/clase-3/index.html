@@ -25,6 +25,11 @@
   .matriz .b { background: #fff; color: #000; outline: 3px solid #000; outline-offset: -3px; }
   .codigo { margin: 0; padding: 24px 32px; background: var(--tinta); color: #e6e7ea; font: 24px/1.36 var(--font-code); border-top: 12px solid var(--naranja); white-space: pre; }
   .codigo b { color: var(--naranja); font-weight: 400; }
+  .rail--c { margin-top: 20px !important; }
+  .rail--c b { font-size: 38px; margin-top: 16px; }
+  .rail--c span { font-size: 27px; margin-top: 6px; }
+  .tabla--c td { padding: 9px 18px; }
+  .tabla--c th { padding: 11px 18px; }
   .cierre-linea { font-size: 38px; font-weight: 700; color: var(--tinta); margin-top: 26px; line-height: 1.25; }
 </style>
 </head>
@@ -62,7 +67,7 @@
     <h2 class="titulo" style="font-size: 72px">Lo que vamos a hacer</h2>
     <div class="dividido" style="grid-template-columns: 1.3fr 1fr; gap: 80px; align-items: start; margin-top: 6px">
       <ol class="lista lista--num agenda" style="font-size: 31px; gap: 9px; margin-top: 0">
-        <li data-paso="1"><span>A · Del texto a números<small style="color: #cfd6ee">40 min</small></span></li>
+        <li data-paso="1"><span>A · Del texto a números<small style="color: #cfd6ee">45 min</small></span></li>
         <li data-paso="2"><span>B · Elegir un modelo existente<small style="color: #cfd6ee">25 min</small></span></li>
         <li data-paso="3"><span>C · Práctica guiada<small style="color: #cfd6ee">35 min</small></span></li>
         <li data-paso="4"><span>Pausa<small style="color: #cfd6ee">10 min</small></span></li>
@@ -78,6 +83,22 @@
     </div>
   </section>
 
+  <!-- NUEVA · MAPA DE LA CLASE -->
+  <section class="slide slide--ruta">
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Hoy · Qué vamos a usar</span>
+    <h2 class="titulo" style="font-size: 66px">Cuatro piezas que usaremos hoy</h2>
+    <table class="tabla tabla--c" data-paso="1" style="margin-top: 12px; font-size: 24px">
+      <thead><tr><th style="width: 330px">Pieza</th><th>Qué hace</th><th style="width: 410px">Qué verás</th><th style="width: 190px">Notebook</th></tr></thead>
+      <tbody>
+        <tr><td>CountVectorizer (scikit-learn)</td><td style="font-weight: 400">Cuenta palabras y pares de palabras. No viene entrenado con otros textos.</td><td style="font-weight: 400">Una tabla de conteos en la que solo cambia la columna «no».</td><td style="font-weight: 400">Parte 1</td></tr>
+        <tr><td>spaCy · es_core_news_md</td><td style="font-weight: 400">Parte el texto, saca el lema y marca las palabras vacías. Trae vectores de palabras.</td><td style="font-weight: 400">Cada palabra con su lema, y la similitud entre frases.</td><td style="font-weight: 400">Partes 2 y 3</td></tr>
+        <tr><td>BERT multilingüe de sentimiento (nlptown)</td><td style="font-weight: 400">Lee un texto y responde con una puntuación de 1 a 5 estrellas.</td><td style="font-weight: 400">Una etiqueta de estrellas y un porcentaje por cada frase.</td><td style="font-weight: 400">Parte 4</td></tr>
+        <tr><td>NumPy y Matplotlib</td><td style="font-weight: 400">Representan y dibujan una imagen como una matriz de números.</td><td style="font-weight: 400">Un «2» original, normalizado y volteado, y una matriz reducida.</td><td style="font-weight: 400">Parte 5 (visión)</td></tr>
+      </tbody>
+    </table>
+    <p class="nota" data-paso="2" style="font-size: 27px; font-weight: 700; margin-top: 14px">De cada una veremos: qué hace, cómo funciona, qué esperar y qué haces tú.</p>
+  </section>
   <!-- 4 · RETOMAMOS -->
   <section class="slide slide--ruta">
     <div class="ruta-cap" style="--c: 1" data-nombre="1 · Del texto a números"></div>
@@ -135,6 +156,24 @@
     <p class="cierre-linea" data-paso="4" style="color: var(--magenta)">Cada paso ayuda a una cosa y puede borrar otra. Hay que decidirlo con la tarea en mente.</p>
   </section>
 
+  <!-- NUEVA · TEORÍA SPACY -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Del texto a números"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Teoría · spaCy paso a paso</span>
+    <h2 class="titulo" style="font-size: 64px">Cómo prepara el texto spaCy</h2>
+    <div class="rail rail--c" style="--n: 4">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Tokenizar</b><span>Parte la frase en unidades: palabras y signos.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Etiquetar</b><span>Asigna a cada palabra su categoría gramatical y su lema.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Marcar vacías</b><span>Señala si la palabra está en la lista de palabras vacías del español.</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Entregar un doc</b><span>Tú recorres sus palabras y decides cuáles conservar.</span></div>
+    </div>
+    <div class="dos" style="margin-top: 22px; gap: 36px; flex: none">
+      <div class="bloque" data-paso="5" style="padding: 18px 30px; border-top-color: var(--negro)"><h3 style="font-size: 34px">Qué esperas ver</h3><p style="font-size: 26px; margin-top: 10px">Una línea por palabra con su lema y True o False en «¿palabra vacía?». «Quiero» tendrá el lema «querer».</p></div>
+      <div class="bloque bloque--naranja" data-paso="6" style="padding: 18px 30px; border-top-color: var(--negro)"><h3 style="font-size: 34px">Dónde se usa</h3><p style="font-size: 26px; margin-top: 10px">Limpiar textos antes de contarlos, sacar nombres de personas y lugares, y buscar patrones en mensajes.</p></div>
+    </div>
+    <p class="nota" data-paso="7" style="font-size: 27px; margin-top: 14px; font-weight: 700; color: var(--magenta)">Tu parte: antes de ejecutar, adivina qué palabras marcará como vacías.</p>
+  </section>
   <!-- 8 · RETO: PALABRAS VACÍAS -->
   <section class="slide slide--azul slide--ruta">
     <div class="ruta-cap" style="--c: 1" data-nombre="1 · Del texto a números"></div>
@@ -165,6 +204,23 @@
     <p class="nota" style="margin-top: 14px; font-size: 24px">Resultado con es_core_news_md 3.8.0, el pipeline de spaCy en español (ver su ficha en la sección B).</p>
   </section>
 
+  <!-- NUEVA · TEORÍA BOLSA DE PALABRAS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Del texto a números"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Teoría · CountVectorizer paso a paso</span>
+    <h2 class="titulo" style="font-size: 64px">Cómo se arma una bolsa de palabras</h2>
+    <div class="rail rail--c" style="--n: 3">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Armar el vocabulario</b><span>Junta las palabras distintas de todas las frases y las ordena: devolver, el, no, pedido, quiero.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Contar por frase</b><span>Para cada frase anota cuántas veces aparece cada palabra del vocabulario.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Entregar una matriz</b><span>Una fila por frase y una columna por palabra. Esa tabla es lo que recibe un modelo.</span></div>
+    </div>
+    <div class="dos" style="margin-top: 22px; gap: 36px; flex: none">
+      <div class="bloque" data-paso="4" style="padding: 18px 30px; border-top-color: var(--negro)"><h3 style="font-size: 34px">Qué esperas ver</h3><p style="font-size: 26px; margin-top: 10px">Dos filas casi iguales: solo cambia la columna «no». Con bigramas, de 5 a 9 columnas.</p></div>
+      <div class="bloque bloque--naranja" data-paso="5" style="padding: 18px 30px; border-top-color: var(--negro)"><h3 style="font-size: 34px">Dónde se usa</h3><p style="font-size: 26px; margin-top: 10px">Clasificar mensajes por tema, filtrar correo no deseado y buscar documentos. Sirve de línea base antes de probar modelos más complejos.</p></div>
+    </div>
+    <p class="nota" data-paso="6" style="margin-top: 12px; font-size: 23px">Ojo: por defecto pasa todo a minúsculas e ignora las palabras de una sola letra. También es una decisión de preparación.</p>
+  </section>
   <!-- 10 · BOLSA DE PALABRAS Y BIGRAMAS -->
   <section class="slide slide--ruta">
     <div class="ruta-cap" style="--c: 1" data-nombre="1 · Del texto a números"></div>
@@ -202,6 +258,23 @@
     <p class="cierre-linea" data-paso="5">Pregunta: ¿cerca significa «quiere lo mismo»?</p>
   </section>
 
+  <!-- NUEVA · TEORÍA SIMILITUD -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Del texto a números"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Teoría · similitud paso a paso</span>
+    <h2 class="titulo" style="font-size: 64px">Cómo se calcula la similitud de dos frases</h2>
+    <div class="rail rail--c" style="--n: 3">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Un vector por palabra</b><span>Cada palabra tiene su lista de 300 números, aprendida de muchos textos.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Promediar la frase</b><span>Se promedian los vectores de sus palabras: la frase queda en una sola lista de 300 números.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Comparar los ángulos</b><span>La similitud del coseno mide qué tan alineados están dos vectores. Hoy sale entre 0 y 1.</span></div>
+    </div>
+    <div class="dos" style="margin-top: 22px; gap: 36px; flex: none">
+      <div class="bloque bloque--magenta" data-paso="4" style="padding: 18px 30px; border-top-color: var(--negro)"><h3 style="font-size: 34px">Por qué la contraria sale tan cerca</h3><p style="font-size: 26px; margin-top: 10px">Casi todas sus palabras coinciden y «no» pesa poco en el promedio. El orden no cuenta.</p></div>
+      <div class="bloque bloque--naranja" data-paso="5" style="padding: 18px 30px; border-top-color: var(--negro)"><h3 style="font-size: 34px">Dónde se usa</h3><p style="font-size: 26px; margin-top: 10px">Buscar textos parecidos, agrupar mensajes y detectar duplicados. Siempre con una revisión humana de los casos difíciles.</p></div>
+    </div>
+    <p class="nota" data-paso="6" style="font-size: 27px; margin-top: 14px; font-weight: 700">Qué esperas ver: 0,73 con la contraria, 0,18 con la sinónima y 0,07 con otro tema.</p>
+  </section>
   <!-- 12 · CERCANO NO ES IGUAL -->
   <section class="slide slide--ruta">
     <div class="ruta-cap" style="--c: 1" data-nombre="1 · Del texto a números"></div>
@@ -294,12 +367,29 @@
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
     <span class="etiqueta">B · Ficha de un modelo</span>
     <h2 class="titulo" style="font-size: 54px">nlptown/bert-base-multilingual-uncased-sentiment</h2>
-    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 28px">
-      <tbody><tr><td>Qué es</td><td style="font-weight: 400">BERT multilingüe (no distingue mayúsculas) afinado para sentimiento.</td></tr><tr><td>Idioma</td><td style="font-weight: 400">Seis: inglés, neerlandés, alemán, francés, italiano y español.</td></tr><tr><td>Tarea</td><td style="font-weight: 400">Sentimiento de reseñas de producto.</td></tr><tr><td>Qué devuelve</td><td style="font-weight: 400">De 1 a 5 estrellas. No devuelve facturación, envío ni devolución.</td></tr><tr><td>Con qué aprendió</td><td style="font-weight: 400">Unas 629 mil reseñas de producto; 50 mil en español.</td></tr><tr><td>Qué tan bien</td><td style="font-weight: 400">En español acierta las estrellas exactas en 58 % y con error de una estrella en 95 %, medido en reseñas.</td></tr></tbody>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 26px">
+      <tbody><tr><td>Qué es</td><td style="font-weight: 400">BERT multilingüe (no distingue mayúsculas) afinado para sentimiento.</td></tr><tr><td>Idioma</td><td style="font-weight: 400">Seis: inglés, neerlandés, alemán, francés, italiano y español.</td></tr><tr><td>Tarea</td><td style="font-weight: 400">Sentimiento de reseñas de producto.</td></tr><tr><td>Qué devuelve</td><td style="font-weight: 400">De 1 a 5 estrellas. No devuelve facturación, envío ni devolución.</td></tr><tr><td>Con qué aprendió</td><td style="font-weight: 400">Unas 629 mil reseñas de producto; 50 mil en español.</td></tr><tr><td>Tamaño</td><td style="font-weight: 400">Unos 0,2 mil millones de parámetros (≈ 200 millones).</td></tr><tr><td>Qué tan bien</td><td style="font-weight: 400">En español acierta las estrellas exactas en 58 % y con error de una estrella en 95 %, medido en reseñas.</td></tr></tbody>
     </table>
     <p class="nota" data-paso="2" style="margin-top: 14px; font-size: 24px">Fuente: ficha del modelo en Hugging Face (licencia MIT). Esas cifras son sobre reseñas, no sobre tus mensajes.</p>
   </section>
 
+  <!-- NUEVA · TEORÍA BERT SENTIMIENTO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Elegir un modelo"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">B · Teoría · cómo responde el modelo</span>
+    <h2 class="titulo" style="font-size: 60px">Un BERT de sentimiento, paso a paso</h2>
+    <div class="rail rail--c" style="--n: 3">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Su tokenizador</b><span>Parte el texto en subpalabras. Al ser «uncased», no distingue mayúsculas.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Lee la frase completa</b><span>Cada palabra se interpreta con las demás a la vista, así que «no» puede cambiar el resto.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Responde</b><span>Calcula una puntuación por cada estrella, de 1 a 5, y devuelve la mayor con su porcentaje.</span></div>
+    </div>
+    <div class="dos" style="margin-top: 22px; gap: 36px; flex: none">
+      <div class="bloque" data-paso="4" style="padding: 18px 30px; border-top-color: var(--negro)"><h3 style="font-size: 34px">Qué esperas ver</h3><p style="font-size: 26px; margin-top: 10px">Por cada frase, una etiqueta como «4 stars» y un porcentaje. Si distingue la negación, no está garantizado: lo comprobamos.</p></div>
+      <div class="bloque bloque--naranja" data-paso="5" style="padding: 18px 30px; border-top-color: var(--negro)"><h3 style="font-size: 34px">Dónde se usa</h3><p style="font-size: 26px; margin-top: 10px">Medir la satisfacción en reseñas, priorizar quejas y seguir la tendencia en un panel. Hoy no entrenamos nada: solo lo usamos.</p></div>
+    </div>
+    <p class="nota" data-paso="6" style="font-size: 27px; margin-top: 14px; font-weight: 700; color: var(--magenta)">El porcentaje es la confianza del modelo en su respuesta, no la probabilidad de que acierte.</p>
+  </section>
   <!-- 17 · ETIQUETAS QUE ENGAÑAN -->
   <section class="slide slide--ruta">
     <div class="ruta-cap" style="--c: 2" data-nombre="2 · Elegir un modelo"></div>
@@ -362,6 +452,38 @@
     <p class="cierre-linea" data-paso="3" style="font-size: 36px; color: var(--magenta)">Predice antes de ejecutar: ¿en qué pareja crees que ningún paso notará la diferencia?</p>
   </section>
 
+  <!-- NUEVA · GUÍA NOTEBOOK 1 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">C · Guía del notebook</span>
+    <h2 class="titulo" style="font-size: 62px">Partes 1 y 2: qué hace cada una y qué debes ver</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 20px; font-size: 27px">
+      <thead><tr><th style="width: 330px">Parte</th><th>Qué hace y qué deberías ver</th><th style="width: 520px">Qué haces tú</th></tr></thead>
+      <tbody>
+        <tr><td>1 · Bolsa de palabras</td><td style="font-weight: 400">CountVectorizer arma un vocabulario de 5 palabras y una matriz de 2 filas. Solo cambia la columna «no». Con bigramas pasa de 5 a 9 columnas y aparece «no quiero».</td><td style="font-weight: 400">Antes de ejecutar, escribe en el chat en qué se diferencian las dos filas.</td></tr>
+        <tr><td>2 · Preparación con spaCy</td><td style="font-weight: 400">Una línea por palabra con su lema, su categoría y si es vacía. Al final, las dos frases quedan igual: quiero · devolver · pedido.</td><td style="font-weight: 400">Adivina qué palabras marcará como vacías y comprueba si «no» está entre ellas.</td></tr>
+      </tbody>
+    </table>
+    <p class="nota" data-paso="2" style="margin-top: 16px; font-size: 26px">Si spacy.load falla, ejecuta una vez la línea de descarga que viene comentada en la celda y vuelve a intentar.</p>
+  </section>
+
+  <!-- NUEVA · GUÍA NOTEBOOK 2 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">C · Guía del notebook</span>
+    <h2 class="titulo" style="font-size: 62px">Partes 3, 4 y 5: qué hace cada una y qué debes ver</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 20px; font-size: 26px">
+      <thead><tr><th style="width: 300px">Parte</th><th>Qué hace y qué deberías ver</th><th style="width: 520px">Qué haces tú</th></tr></thead>
+      <tbody>
+        <tr><td>3 · Vectores</td><td style="font-weight: 400">Tres pares de frases con su similitud: 0,73 con la contraria, 0,18 con la sinónima y 0,07 con otro tema.</td><td style="font-weight: 400">Escribe qué dice la similitud de cada par y si sirve para decidir la intención.</td></tr>
+        <tr><td>4 · Modelo de Hugging Face</td><td style="font-weight: 400">Primero, las subpalabras de dos frases (mira cómo se parte «chunche»). Después, una etiqueta de estrellas con su porcentaje para cinco frases.</td><td style="font-weight: 400">Lee la ficha antes de ejecutar. Predice qué cambia entre una frase y su versión con «no».</td></tr>
+        <tr><td>5 · Imágenes (visión)</td><td style="font-weight: 400">El «2» original, normalizado y volteado, y una matriz de 4 × 4 reducida a 2 × 2.</td><td style="font-weight: 400">Decide cuál cambio conservaría lo que tu modelo necesita.</td></tr>
+      </tbody>
+    </table>
+    <p class="nota" data-paso="2" style="margin-top: 16px; font-size: 26px">La primera vez, la Parte 4 descarga el modelo y puede tardar: ejecútala pronto y sigue con otra mientras carga.</p>
+  </section>
   <!-- 22 · RUTA MACHINE LEARNING -->
   <section class="slide slide--ruta">
     <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
@@ -460,6 +582,20 @@
     </div>
   </section>
 
+  <!-- NUEVA · TU FICHA QUEDA BIEN SI -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Decidir"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Construcción · Antes de empezar</span>
+    <h2 class="titulo" style="font-size: 66px">Tu ficha queda bien si…</h2>
+    <ul class="lista lista--check" style="font-size: 33px; gap: 18px; margin-top: 30px">
+      <li data-paso="1"><span>Dice el nombre y la <b>versión</b> del modelo, y para qué fue entrenado.</span></li>
+      <li data-paso="2"><span>Compara <b>sus etiquetas con las tuyas</b> y dice si coinciden o cómo las mapearías.</span></li>
+      <li data-paso="3"><span>Tiene un <b>caso difícil</b> con lo que esperabas antes de ejecutar y lo que ocurrió.</span></li>
+      <li data-paso="4"><span>Indica la <b>preparación</b> que usarías y qué podría perder.</span></li>
+      <li data-paso="5"><span>Separa <b>lo que puedes afirmar</b> de lo que todavía no.</span></li>
+    </ul>
+  </section>
   <!-- 29 · CONSTRUCCIÓN -->
   <section class="slide slide--ruta">
     <div class="ruta-cap" style="--c: 4" data-nombre="4 · Decidir"></div>
