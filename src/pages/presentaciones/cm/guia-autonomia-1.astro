@@ -1,0 +1,754 @@
+---
+// Guía post-sesión de autonomía 1 · Seguros CM (18 de noviembre de 2026).
+// Paso a paso, descriptivo, para un grupo de nivel básico: herramientas con enlaces, los tres flujos
+// que se trabajaron (correos de renovaciones, asignación de renovaciones, redacción de cobro),
+// cómo armar el cuaderno de NotebookLM y lo que hoy se hace a mano.
+// Mismo formato de documento tipo Notion que las demás guías (design.md, sección 6).
+import Layout from "../../../layouts/Layout.astro";
+import PromptBox from "../../../components/PromptBox.astro";
+
+const toc = [
+    { id: "resumen", label: "Resumen" },
+    { id: "herramientas", label: "1. Las herramientas" },
+    { id: "cuaderno", label: "2. Armar el cuaderno" },
+    { id: "correos", label: "3. Correos de renovaciones" },
+    { id: "asignacion", label: "4. Asignación de renovaciones" },
+    { id: "cobro", label: "5. Redacción de cobro" },
+    { id: "limites", label: "6. Tokens y comparación" },
+    { id: "manual", label: "7. Lo que hoy es manual" },
+    { id: "reglas", label: "8. Reglas para todos" },
+    { id: "siguiente", label: "9. Lo que sigue" },
+];
+
+const herramientas = [
+    {
+        nombre: "NotebookLM",
+        enlace: "https://notebooklm.google.com",
+        que: "Un cuaderno donde cargas tus documentos y la IA responde solo a partir de ellos, indicando de qué fuente sale cada dato.",
+        sirve: "Redactar correos de renovación con los documentos del caso a la vista y poder verificar cada cifra.",
+        probamos: "Correos de renovaciones, junto con Gemini conectado al cuaderno.",
+        ojo: "Cada cuaderno admite hasta 50 fuentes. No importa carpetas completas ni enlaces que piden usuario y contraseña: se agregan archivos uno por uno.",
+    },
+    {
+        nombre: "Gemini",
+        enlace: "https://gemini.google.com",
+        que: "El asistente de Google. Puede trabajar con un cuaderno de NotebookLM como fuente.",
+        sirve: "Pedir el correo desde una conversación usando el cuaderno ya armado.",
+        probamos: "Correos de renovaciones, conectado al cuaderno.",
+        ojo: "Qué funciones ves, por ejemplo los cuadernos dentro de Gemini, depende del plan de la cuenta.",
+    },
+    {
+        nombre: "Claude",
+        enlace: "https://claude.ai",
+        que: "Asistente de Anthropic. Permite guardar instrucciones fijas (una skill o un proyecto) para repetir una tarea siempre igual.",
+        sirve: "Armar la asignación diaria de renovaciones y redactar correos de cobro con una skill.",
+        probamos: "Asignación de renovaciones y redacción de cobro. Es la que más le ha gustado al equipo hasta ahora.",
+        ojo: "En la versión gratis el uso tiene un límite y se acaba. En la sesión se agotaron los tokens al comparar datos.",
+    },
+    {
+        nombre: "ChatGPT",
+        enlace: "https://chatgpt.com",
+        que: "Asistente de OpenAI, el que el equipo ya tiene aprobado en la empresa.",
+        sirve: "Redactar y resumir pegando el texto en el chat.",
+        probamos: "Correos de renovaciones.",
+        ojo: "Para que use tus documentos hay que subirlos o pegarlos en cada conversación.",
+    },
+    {
+        nombre: "Copilot",
+        enlace: "https://copilot.microsoft.com",
+        que: "Asistente de Microsoft, también con cuenta aprobada por la empresa.",
+        sirve: "Redactar y resumir dentro del entorno Microsoft que ya usan.",
+        probamos: "Correos de renovaciones.",
+        ojo: "Conectarlo con OneDrive depende de que la Nube de Sura quede separada.",
+    },
+    {
+        nombre: "Qwen",
+        enlace: "https://chat.qwen.ai",
+        que: "Asistente de Alibaba, gratuito.",
+        sirve: "Se probó como alternativa cuando se acabaron los tokens de Claude.",
+        probamos: "Comparación de datos. El resultado fue regular.",
+        ojo: "Por ahora no lo usaría para cifras de clientes: revisa siempre contra la fuente.",
+    },
+];
+
+const cuadernoPasos = [
+    {
+        titulo: "Entra y crea el cuaderno",
+        detalle:
+            "Abre notebooklm.google.com con tu cuenta de Google y pulsa para crear un cuaderno nuevo. Ponle un nombre que diga qué es: \"Renovaciones · noviembre 2026\". Un cuaderno por tarea o por mes, no uno para todo.",
+    },
+    {
+        titulo: "Junta los documentos del caso antes de subirlos",
+        detalle:
+            "Guarda cada correo importante como PDF y ponle un nombre claro: \"Renovación Aseguradora X · Cliente Y.pdf\". Los nombres claros ayudan a ti y a la IA a saber qué es cada cosa.",
+    },
+    {
+        titulo: "Agrega las fuentes, una por una",
+        detalle:
+            "Usa Agregar fuente y sube cada archivo. Para redactar el correo de una renovación sirven: la cotización o propuesta de renovación, las condiciones de la póliza actual, la comparación con las otras aseguradoras si la hay, y uno o dos correos anteriores ya aprobados para copiar el tono.",
+    },
+    {
+        titulo: "Agrega un documento de instrucciones",
+        detalle:
+            "Crea un documento con las reglas de redacción (tono, qué se menciona siempre, qué no se inventa) y agrégalo como una fuente más. Abajo tienes un texto de partida para copiar.",
+    },
+    {
+        titulo: "Deja marcadas solo las fuentes que aplican",
+        detalle:
+            "Si hay documentos de otro cliente o versiones viejas, desmárcalos o quítalos. Mezclar fuentes es la causa más común de respuestas confusas.",
+    },
+    {
+        titulo: "Haz una pregunta de prueba",
+        detalle:
+            "Antes de pedir el correo, pregunta algo que ya sabes: \"¿Cuál es el incremento de la prima frente a la póliza actual?\". Si responde bien y cita la fuente correcta, el cuaderno está listo.",
+    },
+    {
+        titulo: "Pide el correo y revisa contra las citas",
+        detalle:
+            "Cada dato trae un número de cita. Haz clic y verifica cifras, fechas y nombres antes de copiar el texto al correo.",
+    },
+];
+
+const instruccionesCuaderno = `Eres un asesor de seguros de CM Seguros que escribe correos a clientes sobre sus renovaciones.
+
+Tono: cercano, claro y profesional. Frases cortas. Sin tecnicismos que el cliente no use.
+
+Reglas:
+1. Usa solo la información de las fuentes de este cuaderno. Si falta un dato, dilo; no lo inventes.
+2. Cifras, porcentajes, deducibles, sublímites y fechas se copian tal cual aparecen en la fuente.
+3. Si hay cotizaciones de varias aseguradoras, preséntalas en el mismo orden y con los mismos criterios.
+4. Empieza por lo que más le importa al cliente: qué cambia y cuánto cuesta.
+5. Cierra con el siguiente paso y la fecha límite para decidir.
+6. Entrega el correo como borrador. Una persona lo revisa antes de enviarlo.`;
+
+const promptCorreoRenovacion = `Redacta el correo de renovación para [nombre del cliente] con las fuentes del cuaderno.
+
+Incluye:
+- Qué cambia frente a la póliza actual: porcentaje de incremento, cambios en deducibles o sublímites y mejoras en amparos.
+- Si hay cotizaciones de otras aseguradoras, una comparación corta con las diferencias que importan.
+- Tu recomendación en una frase y el siguiente paso con la fecha límite.
+
+Máximo 200 palabras. Tono según las instrucciones del cuaderno. Si falta algún dato, dime cuál en lugar de inventarlo. Al final, lista qué fuentes usaste.`;
+
+const promptVerificar = `Revisa el correo que acabas de escribir contra las fuentes. Dame una tabla con cada cifra o fecha del correo, de qué fuente sale y si coincide. Marca cualquier dato que no puedas confirmar.`;
+
+const promptSinCuaderno = `Rol: asesor de seguros de CM Seguros.
+Objetivo: redactar un correo de renovación para un cliente.
+Datos (usa solo estos): [pegar aquí la cotización, las condiciones y el incremento].
+Reglas: tono cercano y profesional, máximo 200 palabras, no inventes datos; si falta uno, dime cuál.
+Formato: asunto y cuerpo del correo, como borrador.`;
+
+const pasosAsignacion = [
+    {
+        titulo: "Abre Claude y crea un espacio para esta tarea",
+        detalle:
+            "Entra a claude.ai. Si tu plan tiene proyectos, crea uno llamado \"Asignación de renovaciones\"; si no, abre un chat nuevo solo para esto. Un chat por tarea.",
+    },
+    {
+        titulo: "Dale el correo mensual de renovaciones",
+        detalle:
+            "Pega el texto del correo mensual o adjunta el archivo. Revisa que estén todas las renovaciones del mes y que no se haya quedado ninguna fuera.",
+    },
+    {
+        titulo: "Dile cómo se reparte el trabajo",
+        detalle:
+            "Escribe quién atiende cada tipo de renovación o cómo quieres repartirlas. Si no se lo dices, la IA inventa un criterio. Si hay reglas, pon todas.",
+    },
+    {
+        titulo: "Pide la asignación por día en tabla",
+        detalle: "Con el prompt de abajo. Pide formato de tabla: se copia directo al Excel.",
+    },
+    {
+        titulo: "Revisa que no falte ni sobre nada",
+        detalle:
+            "Cuenta: el número de renovaciones de la tabla debe ser igual al del correo. Pídele que lo confirme y revísalo tú también.",
+    },
+    {
+        titulo: "Pásalo al Excel de seguimiento",
+        detalle: "Copia la tabla al Excel. Si algo cambia durante el mes, pide solo el ajuste en el mismo chat.",
+    },
+];
+
+const promptAsignacion = `Con el correo mensual de renovaciones que te adjunto, arma las asignaciones por día.
+
+Criterio de reparto: [por ejemplo: cada persona atiende ciertos ramos, o se reparte por igual].
+Personas: [nombres].
+Regla de fechas: cada renovación se trabaja [X] días antes de su vencimiento.
+
+Entrégame una tabla con estas columnas: día de trabajo, cliente, ramo, fecha de vencimiento, responsable.
+Al final dime cuántas renovaciones había en el correo y cuántas quedaron en la tabla. Si alguna no cabe en las reglas, déjala aparte con el motivo.`;
+
+const pasosCobro = [
+    {
+        titulo: "Entiende qué es una skill",
+        detalle:
+            "Es un conjunto de instrucciones que se guardan una vez y la IA usa cada vez que le pides esa tarea. Así no repites el tono ni las reglas en cada correo y todos en el equipo redactan igual.",
+    },
+    {
+        titulo: "Escribe las instrucciones",
+        detalle:
+            "Copia el texto de abajo a un documento y ajústalo con la política real de cartera: cuántos recordatorios se envían, qué se ofrece y qué tono se usa.",
+    },
+    {
+        titulo: "Guárdalas en Claude",
+        detalle:
+            "En Claude, entra a Customize y busca Skills para crear una nueva con ese texto. Si tu plan no la muestra, guarda las mismas instrucciones como instrucciones de un proyecto o pégalas al empezar el chat.",
+    },
+    {
+        titulo: "Pide el correo con los datos del caso",
+        detalle: "Escribe solo los datos de la póliza y del cliente; las reglas ya están guardadas.",
+    },
+    {
+        titulo: "Revisa y envía tú",
+        detalle:
+            "Comprueba valor, fecha límite y nombre. La IA propone el borrador; quien conoce al cliente decide si se envía.",
+    },
+];
+
+const instruccionesCobro = `Nombre: correo de cobro de CM Seguros
+Cuándo usarla: cuando te pida redactar un correo para cobrar una póliza o una cuota pendiente.
+
+Qué debe tener el correo:
+1. Saludo cordial con el nombre del cliente.
+2. Qué se cobra: póliza, ramo, valor y fecha límite de pago.
+3. Cómo puede pagar y a quién escribir si tiene dudas.
+4. Cierre amable.
+
+Tono: respetuoso, claro y firme. Nunca amenazante ni culpabilizador.
+Reglas:
+- Usa solo los datos que te doy. Si falta el valor, la fecha o el medio de pago, pídelo; no lo inventes.
+- Si es el primer aviso, usa un tono recordatorio. Si es un segundo o tercer aviso, usa uno más directo, pero siempre cordial.
+- Máximo 120 palabras.
+- Entrega asunto y cuerpo, como borrador.`;
+
+const promptCobro = `Redacta el correo de cobro con estos datos:
+Cliente: [nombre]
+Póliza y ramo: [dato]
+Valor pendiente: [valor en COP]
+Fecha límite: [fecha]
+Medio de pago: [dato]
+Aviso número: [1, 2 o 3]`;
+
+const sinHacer = [
+    {
+        titulo: "Siniestros",
+        hoy: "Se consultan en Fasecolda, el sistema para ver los siniestros de los carros, y la comparación de la información se hace a mano.",
+        idea: "Con la información ya descargada, pedir a la IA que compare y resuma los siniestros por vehículo. Antes hay que resolver con qué herramienta, porque Claude se quedó sin tokens y Qwen dio un resultado regular.",
+        enlace: "https://www.fasecolda.com",
+        etiqueta: "Sitio de Fasecolda",
+    },
+    {
+        titulo: "Radicados de seguimiento",
+        hoy: "Primero se cotiza y luego se mira el estado. La información está en Sider y en una carpeta compartida de OneDrive.",
+        idea: "Cuando OneDrive esté conectado, preguntar el estado de un radicado y recibir la respuesta citando el archivo de donde sale.",
+    },
+    {
+        titulo: "Recordatorios de seguimiento",
+        hoy: "Es una idea a futuro. Se quiere un recordatorio con fecha, motivo y estado, y esos datos viven en Sider.",
+        idea: "Hace falta que la IA pueda leer esos datos de Sider, o exportarlos, para poder avisar. Es un paso para después de los flujos que ya funcionan.",
+    },
+    {
+        titulo: "SOAT en Excel",
+        hoy: "Todo se hace a mano: una persona llena el Excel con la información de Sura; otra actualiza Sider y lleva el registro en Excel; se verifica si el vehículo está en el RUNT vigente y, si no está, se avisa a comercial para que informe al cliente.",
+        idea: "La IA puede ayudar con el paso del aviso: a partir de la lista de vehículos que no están vigentes, redactar el mensaje para comercial. La consulta al RUNT sigue siendo manual.",
+        enlace: "https://www.runt.com.co",
+        etiqueta: "Sitio del RUNT",
+    },
+];
+
+const promptAvisoSoat = `De esta lista de vehículos que no aparecen con SOAT vigente en el RUNT, redacta un aviso corto para el área comercial.
+
+Para cada caso incluye: placa, cliente, fecha en que se revisó y qué debe hacer comercial (contactar al cliente para informarle).
+Lista: [pegar]
+Usa solo los datos de la lista; si falta alguno, dime cuál.`;
+
+const promptComparar = `Compara estos dos archivos: [A] y [B].
+
+Entrégame una tabla con tres columnas: lo que coincide, lo que cambió y lo que está solo en uno de los dos.
+Si un dato no se puede comparar o no estás seguro, márcalo como "por confirmar". No completes datos que no estén en los archivos.`;
+
+const ahorroTokens = [
+    { titulo: "Un chat por tema", detalle: "Una conversación larga o mezclada gasta más y responde peor. Cuando cambies de tarea, abre un chat nuevo." },
+    { titulo: "Pide una tarea concreta", detalle: "\"Compara estos dos archivos y dame una tabla\" gasta menos que una conversación de ida y vuelta de diez mensajes." },
+    { titulo: "No subas lo que no necesitas", detalle: "Un archivo enorme consume muchos tokens. Si solo importan dos hojas, sube solo esas." },
+    { titulo: "Tenlo en cuenta al planificar", detalle: "Si el límite se acaba en medio de una tarea, pasa a otra herramienta, pero revisa más el resultado." },
+    { titulo: "Anota qué se te queda corto", detalle: "Eso es lo que decide, más adelante, si vale la pena una licencia." },
+];
+
+const reglas = [
+    {
+        titulo: "El problema primero, la herramienta después",
+        detalle: "Parte de una tarea que hoy te quita tiempo, no de las ganas de usar IA.",
+    },
+    {
+        titulo: "La IA propone, tú decides",
+        detalle: "Cada correo que sale al cliente lo revisa una persona. Valores, fechas y nombres se verifican contra la fuente.",
+    },
+    {
+        titulo: "Pide siempre las fuentes",
+        detalle: "Termina el prompt con \"dime de dónde sacaste cada dato\". Si no puede decirlo, no lo uses.",
+    },
+    {
+        titulo: "Cuidado con los datos de clientes",
+        detalle:
+            "Antes de subir cédulas, datos de pólizas o información sensible a una herramienta, acuerda con quien administra los sistemas qué se puede subir. En los planes gratis de algunas herramientas, los chats pueden usarse para mejorar el modelo si no se desactiva esa opción. Mientras no esté definido, usa nombres de ejemplo o quita lo que no haga falta.",
+    },
+    {
+        titulo: "Un chat por tema",
+        detalle: "Mezclar temas contamina la respuesta: la IA contesta con seguridad, pero mal.",
+    },
+    {
+        titulo: "Primero gratis, después licencia",
+        detalle: "Se acordó usar Claude y ChatGPT en su versión gratis, medir el uso y luego decidir la licencia.",
+    },
+];
+
+const pendientes = [
+    { titulo: "Trabajar con otras dos personas del equipo", detalle: "La sesión fue con tres personas. Falta repetir el recorrido con dos más." },
+    {
+        titulo: "Confirmar las próximas sesiones",
+        detalle: "Quedaron por definir los martes y jueves por la tarde del ciclo y la fecha del saldo.",
+    },
+    {
+        titulo: "Separar OneDrive de la Nube de Sura",
+        detalle: "Es lo que falta para conectar la IA con las carpetas compartidas, como la de los radicados de seguimiento.",
+    },
+    {
+        titulo: "Taller para todo el equipo",
+        detalle: "Se hará después de las primeras cuatro sesiones, sin costo adicional.",
+    },
+    {
+        titulo: "Llevar los prompts a la práctica",
+        detalle: "Prueba los de esta guía con un caso real y anota qué ajustarías. Con eso afinamos la guía en la próxima sesión.",
+    },
+];
+---
+
+<Layout title="Guía sesión de autonomía 1 | Seguros CM" hideHeader hideFooter noindex>
+    <div class="min-h-screen bg-[#FBFBFA] text-[#37352F] font-sans antialiased selection:bg-slate-200">
+        <!-- BARRA SUPERIOR -->
+        <div class="w-full bg-white border-b border-[#E9E9E7] px-4 py-3 sticky top-0 z-30 flex items-center justify-between text-xs text-[#787774] print:hidden">
+            <div class="flex items-center gap-2 overflow-hidden">
+                <span class="font-medium shrink-0">LuciRMe AI</span>
+                <span>/</span>
+                <span class="font-medium shrink-0">Seguros CM</span>
+                <span>/</span>
+                <span class="text-[#37352F] font-semibold truncate">Guía sesión de autonomía 1</span>
+            </div>
+            <button
+                type="button"
+                onclick="window.print()"
+                class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded border border-[#E9E9E7] hover:bg-[#F1F1EF] transition text-[#37352F] font-medium text-xs cursor-pointer shrink-0"
+            >
+                <svg class="w-3.5 h-3.5 text-[#787774]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                </svg>
+                <span class="hidden sm:inline">Exportar / Imprimir</span>
+            </button>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-6 py-10 md:py-14 grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <!-- TABLA DE CONTENIDO -->
+            <aside class="hidden lg:block lg:col-span-3 sticky top-20 self-start text-xs text-[#787774] print:hidden">
+                <div class="text-[11px] font-semibold uppercase tracking-wider text-[#9B9A97] mb-2">En esta guía</div>
+                <nav class="space-y-1 font-medium">
+                    {toc.map((t) => (
+                        <a href={`#${t.id}`} class="block px-2.5 py-1.5 rounded hover:bg-[#F1F1EF] hover:text-[#37352F] transition">
+                            {t.label}
+                        </a>
+                    ))}
+                </nav>
+            </aside>
+
+            <main class="lg:col-span-9 space-y-12 min-w-0">
+                <!-- ENCABEZADO -->
+                <header class="space-y-6 pb-6 border-b border-[#E9E9E7]">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-xl bg-[#F1F1EF] border border-[#E9E9E7] flex items-center justify-center text-[#37352F] shadow-2xs shrink-0">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono uppercase tracking-widest text-[#9B9A97]">Guía post-sesión</span>
+                            <h1 class="text-2xl sm:text-3xl font-extrabold text-[#37352F] tracking-tight">
+                                Renovaciones y cobro con IA: paso a paso
+                            </h1>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#F7F7F5] border border-[#E9E9E7] rounded-lg p-4 text-xs space-y-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#9B9A97] w-24 shrink-0 font-medium">Para:</span>
+                                <span class="text-[#37352F] font-semibold">Equipo de Seguros CM</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#9B9A97] w-24 shrink-0 font-medium">Sesión:</span>
+                                <span class="text-[#37352F] font-semibold">Autonomía 1 · 18 de noviembre de 2026</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#9B9A97] w-24 shrink-0 font-medium">Elaborado por:</span>
+                                <span class="text-[#37352F] font-semibold">Pablo Ríos · LuciRMe AI</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#9B9A97] w-24 shrink-0 font-medium">Objetivo:</span>
+                                <span class="text-[#37352F] font-semibold">Repetir lo de la sesión sin ayuda</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="resumen" class="bg-[#F1F1EF] border border-[#E9E9E7] rounded-lg p-4 flex gap-3 text-xs leading-relaxed">
+                        <div class="shrink-0 pt-0.5">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="space-y-2">
+                            <strong class="font-bold block">Resumen</strong>
+                            <p class="text-[#5A5A58]">
+                                En la sesión trabajamos tres tareas de renovaciones y cobro, y probamos varias herramientas para que el
+                                equipo se familiarizara. Hasta ahora la que más ha gustado es Claude. Esta guía deja cada tarea como un
+                                paso a paso, con las herramientas y sus enlaces, los prompts para copiar y lo que hay que revisar.
+                            </p>
+                            <ul class="text-[#5A5A58] list-disc pl-4 space-y-1">
+                                <li><strong class="text-[#37352F]">Correos de renovaciones:</strong> con un cuaderno de NotebookLM y Gemini conectado.</li>
+                                <li><strong class="text-[#37352F]">Asignación de renovaciones:</strong> con Claude, a partir del correo mensual, por día.</li>
+                                <li><strong class="text-[#37352F]">Redacción de cobro:</strong> con una skill de Claude.</li>
+                            </ul>
+                            <p class="text-[#787774]">
+                                Los prompts son un punto de partida: reemplaza lo que está entre [corchetes] y pruébalos con un caso real
+                                antes de darlos por buenos. Lo que hoy se hace a mano, como siniestros, radicados y SOAT, está en la
+                                sección 7 como ideas, no como algo ya resuelto.
+                            </p>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- 1. HERRAMIENTAS -->
+                <section id="herramientas" class="space-y-5">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">1. Las herramientas que probamos</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            No hace falta dominarlas todas. Cada tarjeta dice qué es, para qué sirve y qué probamos con ella.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {herramientas.map((h) => (
+                            <article class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                                <div class="flex items-center justify-between gap-2">
+                                    <h3 class="text-sm font-bold">{h.nombre}</h3>
+                                    <a
+                                        href={h.enlace}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="text-[11px] font-semibold text-teal-700 hover:text-teal-900 underline underline-offset-2 shrink-0"
+                                    >
+                                        Abrir
+                                    </a>
+                                </div>
+                                <p class="text-xs text-[#37352F] leading-relaxed">{h.que}</p>
+                                <dl class="text-xs space-y-1.5 pt-2 border-t border-[#F1F1EF]">
+                                    <div>
+                                        <dt class="text-[11px] font-semibold uppercase tracking-wider text-[#9B9A97]">Sirve para</dt>
+                                        <dd class="text-[#5A5A58]">{h.sirve}</dd>
+                                    </div>
+                                    <div>
+                                        <dt class="text-[11px] font-semibold uppercase tracking-wider text-[#9B9A97]">Qué probamos</dt>
+                                        <dd class="text-[#5A5A58]">{h.probamos}</dd>
+                                    </div>
+                                    <div>
+                                        <dt class="text-[11px] font-semibold uppercase tracking-wider text-[#9B9A97]">Ten en cuenta</dt>
+                                        <dd class="text-[#5A5A58]">{h.ojo}</dd>
+                                    </div>
+                                </dl>
+                            </article>
+                        ))}
+                    </div>
+                </section>
+
+                <!-- 2. ARMAR EL CUADERNO -->
+                <section id="cuaderno" class="space-y-5">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">2. Armar el cuaderno con la información para redactar el correo</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            Un cuaderno es un espacio con sus propias fuentes: la IA responde a partir de ellas y marca de dónde sacó cada
+                            dato. Esto es lo que hace que sirva para correos a clientes, porque puedes comprobar las cifras.
+                        </p>
+                    </div>
+
+                    <ol class="space-y-3">
+                        {cuadernoPasos.map((p, i) => (
+                            <li class="bg-white border border-[#E9E9E7] rounded-lg p-4 flex gap-3 shadow-2xs">
+                                <div class="w-6 h-6 rounded bg-teal-100 text-teal-800 flex items-center justify-center text-xs font-bold shrink-0">
+                                    {i + 1}
+                                </div>
+                                <div class="space-y-1 min-w-0">
+                                    <h3 class="text-sm font-bold">{p.titulo}</h3>
+                                    <p class="text-xs text-[#5A5A58] leading-relaxed">{p.detalle}</p>
+                                </div>
+                            </li>
+                        ))}
+                    </ol>
+
+                    <PromptBox titulo="Documento de instrucciones para agregar como fuente" prompt={instruccionesCuaderno} />
+
+                    <div class="bg-[#F1F1EF] border border-[#E9E9E7] rounded-lg p-4 text-xs leading-relaxed space-y-1">
+                        <strong class="font-bold block">Datos que hay que cuidar al armarlo</strong>
+                        <p class="text-[#5A5A58]">
+                            Un cuaderno por cliente o por mes, con pocas fuentes y vigentes, funciona mejor que uno con todo. Antes de subir
+                            documentos con datos personales, revisa la regla de la sección 8.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 3. CORREOS DE RENOVACIONES -->
+                <section id="correos" class="space-y-5">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">3. Correos de renovaciones</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            Es la tarea que más tiempo consume en el equipo, y la que probamos con más herramientas: NotebookLM con Gemini
+                            conectado, ChatGPT y Copilot.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-bold">Camino recomendado: cuaderno de NotebookLM</h3>
+                        <p class="text-xs text-[#5A5A58] leading-relaxed">
+                            Arma el cuaderno como en la sección 2 y pide el correo. Después, pide la verificación: es el paso que más
+                            confianza da.
+                        </p>
+                        <PromptBox titulo="Pedir el correo" prompt={promptCorreoRenovacion} />
+                        <PromptBox titulo="Verificar cifras y fechas" prompt={promptVerificar} />
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <article class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-2 shadow-2xs">
+                            <h3 class="text-sm font-bold">Si prefieres hacerlo desde Gemini</h3>
+                            <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                Con Gemini conectado al cuaderno puedes pedir el correo desde una conversación de Gemini y usar el mismo
+                                cuaderno como fuente. Sirve cuando quieres mezclar la tarea con otras en el mismo lugar. Si no ves los
+                                cuadernos en Gemini, probablemente es el plan de la cuenta: trabaja directamente en NotebookLM.
+                            </p>
+                        </article>
+                        <article class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                            <h3 class="text-sm font-bold">Si usas ChatGPT o Copilot</h3>
+                            <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                Estas herramientas no guardan tus documentos como un cuaderno: pega en el chat los datos del caso cada vez.
+                                Usa este formato para que la respuesta sea más precisa.
+                            </p>
+                            <PromptBox prompt={promptSinCuaderno} />
+                        </article>
+                    </div>
+
+                    <div class="bg-[#F1F1EF] border border-[#E9E9E7] rounded-lg p-4 text-xs leading-relaxed space-y-1">
+                        <strong class="font-bold block">Qué revisar antes de enviar</strong>
+                        <ul class="text-[#5A5A58] list-disc pl-4 space-y-1">
+                            <li>Porcentaje de incremento, deducibles y sublímites: iguales a la fuente.</li>
+                            <li>Nombre del cliente y de la aseguradora.</li>
+                            <li>Fecha límite para decidir.</li>
+                            <li>Que el tono suene a CM Seguros y no a plantilla.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 4. ASIGNACIÓN -->
+                <section id="asignacion" class="space-y-5">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">4. Asignación de renovaciones con Claude</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            En la sesión usamos Claude para tomar el correo mensual de renovaciones y armar las asignaciones por día.
+                        </p>
+                    </div>
+
+                    <ol class="space-y-3">
+                        {pasosAsignacion.map((p, i) => (
+                            <li class="bg-white border border-[#E9E9E7] rounded-lg p-4 flex gap-3 shadow-2xs">
+                                <div class="w-6 h-6 rounded bg-teal-100 text-teal-800 flex items-center justify-center text-xs font-bold shrink-0">
+                                    {i + 1}
+                                </div>
+                                <div class="space-y-1 min-w-0">
+                                    <h3 class="text-sm font-bold">{p.titulo}</h3>
+                                    <p class="text-xs text-[#5A5A58] leading-relaxed">{p.detalle}</p>
+                                </div>
+                            </li>
+                        ))}
+                    </ol>
+
+                    <PromptBox titulo="Pedir la asignación por día" prompt={promptAsignacion} />
+                </section>
+
+                <!-- 5. COBRO -->
+                <section id="cobro" class="space-y-5">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">5. Redacción de cobro con una skill de Claude</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            Para los correos de cobro creamos una skill. La ventaja es que todos redactan con el mismo tono y las mismas
+                            reglas, sin tener que escribirlas cada vez.
+                        </p>
+                    </div>
+
+                    <ol class="space-y-3">
+                        {pasosCobro.map((p, i) => (
+                            <li class="bg-white border border-[#E9E9E7] rounded-lg p-4 flex gap-3 shadow-2xs">
+                                <div class="w-6 h-6 rounded bg-teal-100 text-teal-800 flex items-center justify-center text-xs font-bold shrink-0">
+                                    {i + 1}
+                                </div>
+                                <div class="space-y-1 min-w-0">
+                                    <h3 class="text-sm font-bold">{p.titulo}</h3>
+                                    <p class="text-xs text-[#5A5A58] leading-relaxed">{p.detalle}</p>
+                                </div>
+                            </li>
+                        ))}
+                    </ol>
+
+                    <PromptBox titulo="Instrucciones de la skill (ajusta con la política de cartera)" prompt={instruccionesCobro} />
+                    <PromptBox titulo="Pedir un correo de cobro" prompt={promptCobro} />
+                </section>
+
+                <!-- 6. TOKENS Y COMPARACIÓN -->
+                <section id="limites" class="space-y-5">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">6. Cuando se acaban los tokens: comparación de datos</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            Al comparar datos se agotaron los tokens de Claude. Probamos Qwen para seguir con la comparación, pero el
+                            resultado fue regular.
+                        </p>
+                    </div>
+
+                    <div class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-2 shadow-2xs">
+                        <h3 class="text-sm font-bold">Qué son los tokens</h3>
+                        <p class="text-xs text-[#5A5A58] leading-relaxed">
+                            Los tokens son la medida de cuánto texto procesa la IA. En la versión gratis hay un límite de uso, y cuanto más
+                            larga es la conversación o más grande el archivo, más rápido se gasta. Cuando se acaba, hay que esperar a que se
+                            renueve el cupo o usar otra herramienta.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {ahorroTokens.map((a) => (
+                            <div class="bg-white border border-[#E9E9E7] rounded-lg p-4 space-y-1.5 shadow-2xs">
+                                <h3 class="text-xs font-bold">{a.titulo}</h3>
+                                <p class="text-xs text-[#5A5A58] leading-relaxed">{a.detalle}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <PromptBox titulo="Prompt de comparación (por probar con otras herramientas)" prompt={promptComparar} />
+                </section>
+
+                <!-- 7. LO QUE HOY ES MANUAL -->
+                <section id="manual" class="space-y-5">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">7. Lo que hoy se hace a mano</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            Estos procesos no se trabajaron con IA en la sesión. Dejo cómo funcionan hoy y por dónde podría empezar la
+                            ayuda; son ideas para decidir juntos, no algo ya probado.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        {sinHacer.map((s) => (
+                            <article class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                                <div class="flex items-center justify-between gap-2">
+                                    <h3 class="text-sm font-bold">{s.titulo}</h3>
+                                    {s.enlace && (
+                                        <a
+                                            href={s.enlace}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="text-[11px] font-semibold text-teal-700 hover:text-teal-900 underline underline-offset-2 shrink-0"
+                                        >
+                                            {s.etiqueta}
+                                        </a>
+                                    )}
+                                </div>
+                                <dl class="text-xs space-y-2">
+                                    <div>
+                                        <dt class="text-[11px] font-semibold uppercase tracking-wider text-[#9B9A97]">Hoy</dt>
+                                        <dd class="text-[#5A5A58] leading-relaxed">{s.hoy}</dd>
+                                    </div>
+                                    <div>
+                                        <dt class="text-[11px] font-semibold uppercase tracking-wider text-[#9B9A97]">Por dónde podría ayudar la IA</dt>
+                                        <dd class="text-[#5A5A58] leading-relaxed">{s.idea}</dd>
+                                    </div>
+                                </dl>
+                            </article>
+                        ))}
+                    </div>
+
+                    <PromptBox titulo="Ejemplo para el aviso del SOAT a comercial" prompt={promptAvisoSoat} />
+                </section>
+
+                <!-- 8. REGLAS -->
+                <section id="reglas" class="space-y-5">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">8. Reglas para todos</h2>
+                        <p class="text-xs text-[#787774] mt-1">Seis acuerdos simples que valen para cualquier herramienta.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {reglas.map((r) => (
+                            <div class="bg-white border border-[#E9E9E7] rounded-lg p-4 space-y-1.5 shadow-2xs">
+                                <h3 class="text-xs font-bold">{r.titulo}</h3>
+                                <p class="text-xs text-[#5A5A58] leading-relaxed">{r.detalle}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                <!-- 9. LO QUE SIGUE -->
+                <section id="siguiente" class="space-y-5">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">9. Lo que sigue</h2>
+                    </div>
+
+                    <ul class="space-y-3">
+                        {pendientes.map((p) => (
+                            <li class="bg-white border border-[#E9E9E7] rounded-lg p-4 space-y-1 shadow-2xs">
+                                <h3 class="text-sm font-bold">{p.titulo}</h3>
+                                <p class="text-xs text-[#5A5A58] leading-relaxed">{p.detalle}</p>
+                            </li>
+                        ))}
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+</Layout>
+
+<!-- AVISO DE COPIADO -->
+<div
+    id="toast"
+    class="fixed bottom-5 right-5 z-50 transform translate-y-10 opacity-0 transition-all duration-200 pointer-events-none print:hidden"
+>
+    <div class="bg-[#37352F] text-white text-xs px-3.5 py-2 rounded-md shadow-lg flex items-center gap-2">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span>Petición copiada al portapapeles</span>
+    </div>
+</div>
+
+<script>
+    const toast = document.getElementById("toast");
+
+    function showToast() {
+        if (!toast) return;
+        toast.classList.remove("translate-y-10", "opacity-0");
+        setTimeout(() => toast.classList.add("translate-y-10", "opacity-0"), 2200);
+    }
+
+    document.querySelectorAll<HTMLButtonElement>(".copy-prompt").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+            const text = btn.dataset.prompt ?? "";
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast();
+            } catch {
+                // Sin permiso de portapapeles: no se muestra aviso falso.
+            }
+        });
+    });
+</script>
