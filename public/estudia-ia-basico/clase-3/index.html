@@ -14,6 +14,11 @@
   .ruta-tag--gen { background: var(--naranja); color: #000; }
   .ruta-tag--ml { background: var(--magenta); }
   .ficha-ej--dic > div { grid-template-columns: 420px 1fr; }
+  .tabla { width: 100%; border-collapse: collapse; font-size: 28px; }
+  .tabla th { text-align: left; background: #000; color: #fff; padding: 14px 22px; font-size: 24px; letter-spacing: .1em; text-transform: uppercase; }
+  .tabla td { padding: 13px 22px; border-bottom: 2px solid rgb(0 0 0 / .12); vertical-align: top; line-height: 1.25; font-weight: 400; }
+  .tabla tbody tr:nth-child(even) td { background: var(--suave); }
+  .tabla td:first-child { font-weight: 700; }
 </style>
 </head>
 <body>
@@ -103,6 +108,40 @@
     </div>
     <p class="nota" data-paso="3" style="margin-top: 26px; font-size: 32px">Cambia la forma de entrar los datos, no lo que vamos a comprobar.</p>
     <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 5B · HERRAMIENTAS Y CONECTORES -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Conectamos y exploramos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Herramientas posibles</span>
+    <h2 class="titulo" style="font-size: 66px">Qué herramientas se conectan a tus datos</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 16px; font-size: 26px">
+      <thead><tr><th style="width: 250px">Herramienta</th><th>Qué puede leer</th><th style="width: 470px">Plan gratuito</th></tr></thead>
+      <tbody>
+        <tr><td>Claude</td><td>Google Drive, Notion, Slack, Canva y más, desde su directorio de conectores</td><td>Hay conectores; uno personalizado como máximo. Míralo en Conectores.</td></tr>
+        <tr><td>ChatGPT</td><td>Google Drive (con Docs, Sheets y Slides), Gmail, Outlook, SharePoint, Dropbox</td><td>Por lo general, plan de pago.</td></tr>
+        <tr><td>Gemini</td><td>Google Workspace: Drive, Docs, Sheets, Gmail, Calendar</td><td>Sí, con la actividad de Gemini activada.</td></tr>
+        <tr><td>Copilot</td><td>OneDrive, Outlook.com, Google Drive, Gmail</td><td>Confírmalo en tu cuenta.</td></tr>
+        <tr><td>Sin conector</td><td>Pandas en Colab: lee la hoja publicada o una API pública</td><td>Gratis.</td></tr>
+      </tbody>
+    </table>
+    <p class="nota" data-paso="2" style="margin-top: 12px; font-size: 26px">Los planes cambian seguido. Confirma qué tiene tu cuenta antes de depender de un conector.</p>
+    <img class="pie" src="estudia/img/logos-institucionales.png" alt="">
+  </section>
+
+  <!-- 5C · FUENTES POSIBLES -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Conectamos y exploramos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Fuentes posibles</span>
+    <h2 class="titulo" style="font-size: 72px">¿Qué conectar y qué no?</h2>
+    <div class="tres" style="margin-top: 36px; flex: none">
+      <div class="bloque bloque--verde" data-paso="1" style="padding: 30px 34px"><h3 style="font-size: 42px">Para hoy</h3><p style="font-size: 30px">Una hoja de cálculo de práctica, en solo lectura.</p><p style="font-size: 30px">Una carpeta de Drive con archivos de práctica.</p><p style="font-size: 30px">Datos abiertos o una API pública, como datos.gov.co.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 30px 34px"><h3 style="font-size: 42px">Con cuidado</h3><p style="font-size: 30px">Una base de datos o una hoja de tu trabajo.</p><p style="font-size: 30px">Notion o Slack de tu equipo.</p><p style="font-size: 30px">Solo con permiso y sin datos personales.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 30px 34px"><h3 style="font-size: 42px">Hoy no</h3><p style="font-size: 30px">Tu correo y tu calendario.</p><p style="font-size: 30px">Chats y carpetas personales.</p><p style="font-size: 30px">Cualquier fuente con datos de otras personas.</p></div>
+    </div>
+    <p class="sub" data-paso="4" style="font-size: 36px; margin-top: 30px; color: var(--tinta); font-weight: 700">Tu proyecto: una fuente de la columna verde o, con permiso, de la del medio.</p>
   </section>
 
   <!-- 6 · ANTES DE CONECTAR -->
@@ -201,6 +240,7 @@
     <span class="etiqueta">Pausa</span>
     <h2 class="mensaje" style="font-size: 120px; margin-top: 30px">Volvemos en 10 minutos</h2>
     <p class="sub">Aléjate de la pantalla, estira las piernas y toma agua.</p>
+    <p class="mensaje" style="font-size: 88px; margin-top: 40px; color: #000">¿Tomamos asistencia?</p>
     <div style="display: flex; align-items: center; gap: 40px; margin-top: auto">
       <div class="reloj" data-segundos="600">10:00</div>
     </div>
@@ -277,6 +317,21 @@
       <div class="bloque bloque--magenta" data-paso="2" style="padding: 32px 34px"><h3 style="font-size: 40px">No tengo datos</h3><p style="font-size: 31px">Usa una muestra sintética y anota que es inventada y qué no puedes afirmar con ella.</p></div>
       <div class="bloque bloque--tinta" data-paso="3" style="padding: 32px 34px"><h3 style="font-size: 40px">Depende de un pago</h3><p style="font-size: 31px">Busca una alternativa gratuita o una respuesta preparada, y márcala como tal.</p></div>
     </div>
+  </section>
+
+  <!-- 17B · SI SE ACABAN LOS TOKENS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Tu proyecto"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Si se te acaban los tokens</span>
+    <h2 class="titulo" style="font-size: 66px">El límite de uso no frena tu proyecto</h2>
+    <p class="sub" data-paso="1" style="font-size: 32px; margin-top: 6px">En un plan gratuito el uso tiene tope y se renueva con el tiempo. El aviso dice cuándo; en Claude, cada cinco horas.</p>
+    <div class="tres" style="margin-top: 26px; flex: none">
+      <div class="bloque bloque--verde" data-paso="2" style="padding: 28px 32px"><h3 style="font-size: 40px">Antes de que pase</h3><p style="font-size: 28px">Un chat por tarea.</p><p style="font-size: 28px">Pega una muestra de 20 filas, no toda la tabla.</p><p style="font-size: 28px">Pide solo lo que necesitas.</p></div>
+      <div class="bloque bloque--magenta" data-paso="3" style="padding: 28px 32px"><h3 style="font-size: 40px">Cuando pase</h3><p style="font-size: 28px">Lee el aviso: trae la hora de renovación.</p><p style="font-size: 28px">Pasa tu registro a otra herramienta.</p><p style="font-size: 28px">O sigue con Pandas o con la hoja, sin IA.</p></div>
+      <div class="bloque bloque--tinta" data-paso="4" style="padding: 28px 32px"><h3 style="font-size: 40px">Déjalo anotado</h3><p style="font-size: 28px">En tu registro: herramienta, hora del límite y qué quedó pendiente.</p><p style="font-size: 28px">Si el resultado vino de otra herramienta, dilo.</p></div>
+    </div>
+    <p class="sub" data-paso="5" style="font-size: 34px; margin-top: 26px; color: var(--tinta); font-weight: 700">Guarda margen para la prueba en frío: usa un chat nuevo.</p>
   </section>
 
   <!-- 18 · PRUEBA EN FRÍO -->
