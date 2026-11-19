@@ -1,0 +1,40 @@
+---
+// Caja de petición (prompt) con botón de copiar, para las guías de los talleres.
+// El script que copia vive en cada página de guía (clase .copy-prompt, atributo data-prompt).
+interface Props {
+    prompt: string;
+    titulo?: string;
+    tono?: "normal" | "antes";
+}
+
+const { prompt, titulo, tono = "normal" } = Astro.props;
+const esAntes = tono === "antes";
+---
+
+<div class={`rounded-lg border ${esAntes ? "border-[#E9E9E7] bg-[#F7F7F5]" : "border-teal-200 bg-teal-50/40"}`}>
+    <div class="flex items-center justify-between gap-2 px-3 pt-2.5">
+        <span class={`text-[11px] font-semibold uppercase tracking-wider ${esAntes ? "text-[#9B9A97]" : "text-teal-800"}`}>
+            {titulo ?? (esAntes ? "Antes" : "Petición")}
+        </span>
+        {
+            !esAntes && (
+                <button
+                    type="button"
+                    data-prompt={prompt}
+                    class="copy-prompt text-[11px] font-semibold text-[#37352F] hover:text-teal-700 transition flex items-center gap-1.5 cursor-pointer print:hidden"
+                >
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                        />
+                    </svg>
+                    Copiar
+                </button>
+            )
+        }
+    </div>
+    <pre class="px-3 pb-3 pt-1.5 text-xs leading-relaxed text-[#37352F] font-mono whitespace-pre-wrap break-words">{prompt}</pre>
+</div>
