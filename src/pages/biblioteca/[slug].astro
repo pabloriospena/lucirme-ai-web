@@ -1,0 +1,137 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { ARTICULOS, TEMAS } from "../../data/biblioteca.js";
+
+const { slug } = Astro.params;
+const articulo = ARTICULOS.find((a) => a.slug === slug);
+
+// Un borrador solo se ve en desarrollo. En producción responde 404.
+if (!articulo || (articulo.borrador && !import.meta.env.DEV)) {
+  return new Response(null, { status: 404 });
+}
+
+const SITE = "https://lucirme.com";
+const url = `${SITE}/biblioteca/${articulo.slug}`;
+
+const formatoFecha = (iso) =>
+  new Date(`${iso}T12:00:00-05:00`).toLocaleDateString("es-CO", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+const articleLd = {
+  "@type": "Article",
+  "@id": `${url}#article`,
+  headline: articulo.titulo,
+  description: articulo.descripcion,
+  inLanguage: "es",
+  mainEntityOfPage: url,
+  author: { "@id": `${SITE}/#pablo-rios` },
+  publisher: { "@id": `${SITE}/#organization` },
+  isPartOf: { "@id": `${SITE}/#website` },
+  articleSection: TEMAS[articulo.tema],
+  ...(articulo.publicado ? { datePublished: articulo.publicado } : {}),
+  ...(articulo.actualizado || articulo.publicado
+    ? { dateModified: articulo.actualizado || articulo.publicado }
+    : {}),
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    articleLd,
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Biblioteca de IA aplicada", item: `${SITE}/biblioteca` },
+        { "@type": "ListItem", position: 2, name: articulo.titulo, item: url },
+      ],
+    },
+  ],
+};
+---
+
+<Layout
+  title={`${articulo.titulo} | LuciRMe AI`}
+  description={articulo.descripcion}
+  canonical={url}
+  type="article"
+  jsonLd={jsonLd}
+>
+  <main class="py-16 px-4 sm:px-6 bg-white">
+    <article class="max-w-3xl mx-auto">
+      <nav class="font-mono text-xs uppercase tracking-wider text-slate-500 mb-6">
+        <a href="/biblioteca" class="hover:text-teal-700">Biblioteca</a>
+        <span class="text-slate-300 mx-2">/</span>
+        <span>{TEMAS[articulo.tema]}</span>
+      </nav>
+
+      {
+        articulo.borrador && (
+          <p class="mb-6 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-sm px-4 py-3">
+            Borrador sin publicar. En producción esta página responde 404 hasta que Pablo la apruebe.
+          </p>
+        )
+      }
+
+      <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+        {articulo.titulo}
+      </h1>
+
+      <p class="mt-4 text-sm text-slate-500">
+        Por Pablo Ríos
+        {
+          articulo.publicado && (
+            <span>
+              {" "}· Publicado el {formatoFecha(articulo.publicado)}
+              {articulo.actualizado && articulo.actualizado !== articulo.publicado
+                ? ` · Actualizado el ${formatoFecha(articulo.actualizado)}`
+                : ""}
+            </span>
+          )
+        }
+      </p>
+
+      {
+        articulo.secciones.map((s) => (
+          <section class="mt-10">
+            <h2 class="text-xl font-bold text-slate-900 mb-3">{s.titulo}</h2>
+            {s.parrafos.map((p) => (
+              <p class="text-slate-700 leading-relaxed mb-4">{p}</p>
+            ))}
+          </section>
+        ))
+      }
+
+      {
+        articulo.recurso && (
+          <aside class="mt-12 rounded-xl bg-slate-50 border border-slate-200 p-6">
+            <p class="text-slate-800 leading-relaxed">{articulo.recurso.texto}</p>
+            <a
+              href={articulo.recurso.href}
+              class="mt-4 inline-flex items-center rounded-lg bg-teal-700 px-4 py-2 text-sm font-bold text-white hover:bg-teal-800 transition-colors"
+            >
+              {articulo.recurso.etiqueta}
+            </a>
+          </aside>
+        )
+      }
+
+      {
+        articulo.relacionados?.length > 0 && (
+          <section class="mt-10">
+            <h2 class="text-sm font-bold text-slate-900 mb-2">Para seguir</h2>
+            <ul class="space-y-1 text-sm">
+              {articulo.relacionados.map((r) => (
+                <li>
+                  <a href={r.href} class="text-teal-700 hover:underline">{r.texto}</a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+    </article>
+  </main>
+</Layout>

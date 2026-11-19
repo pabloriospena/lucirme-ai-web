@@ -4,6 +4,19 @@ import { LINKS } from "../../lib/constants.js";
 
 const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
 const whatsappPM = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, llegué a la página de Product Management y quiero hablarte sobre un problema que tengo en mi trabajo como PM.")}`;
+
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "IA aplicada a Product Management",
+  url: "https://lucirme.com/servicios/producto",
+  description: "Acompañamiento 1-1 para Product Managers que quieren mejorar Research, Discovery, documentación, Jira y sus procesos de trabajo con IA y automatización.",
+  provider: { "@id": "https://lucirme.com/#organization" },
+  areaServed: "Latinoamérica",
+  availableLanguage: "es",
+  audience: { "@type": "Audience", audienceType: "Product Managers y equipos de producto" },
+};
+
 ---
 
 <Layout
@@ -11,6 +24,7 @@ const whatsappPM = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, llegu
   description="Acompañamiento 1-1 para Product Managers que quieren mejorar Research, Discovery, documentación, Jira y sus procesos de trabajo con IA y automatización."
   canonical="https://lucirme.com/servicios/producto"
   hideHeader={true}
+  jsonLd={serviceJsonLd}
   hideFooter={true}
 >
   <header class="fixed top-0 left-0 right-0 z-50 bg-[#F8FAFC]/85 backdrop-blur-xl border-b border-[#E2E8F0]">

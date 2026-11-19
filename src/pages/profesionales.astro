@@ -5,12 +5,26 @@ import { LINKS } from "../lib/constants.js";
 
 const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
 const whatsapp1a1 = `${whatsappBase}?text=${encodeURIComponent("Hola Pablo, leí tu página de profesionales y quiero revisar mi caso para una sesión 1-1.")}`;
+
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Sesiones 1-1 de IA aplicada para profesionales",
+  url: "https://lucirme.com/profesionales",
+  description: "Sesiones 1-1 para profesionales que quieren aplicar IA a problemas reales de su trabajo, ahorrar tiempo y construir flujos de trabajo más simples.",
+  provider: { "@id": "https://lucirme.com/#organization" },
+  areaServed: "Latinoamérica",
+  availableLanguage: "es",
+  audience: { "@type": "Audience", audienceType: "Profesionales y emprendedores" },
+};
+
 ---
 
 <Layout
   title="Sesiones 1-1 de IA Aplicada | LuciRMe AI"
   description="Sesiones 1-1 para profesionales que quieren aplicar IA a problemas reales de su trabajo, ahorrar tiempo y construir flujos de trabajo más simples."
   hideHeader={true}
+  jsonLd={serviceJsonLd}
   hideFooter={true}
 >
   <!-- HEADER DEDICADO PROFESIONALES -->

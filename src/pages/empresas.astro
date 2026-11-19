@@ -6,12 +6,26 @@ import { LINKS } from "../lib/constants.js";
 
 const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
 const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
+
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "IA aplicada a procesos para empresas",
+  url: "https://lucirme.com/empresas",
+  description: "Encuentra un cuello de botella operativo en tu empresa, mide cuánto te está costando y decide si vale la pena intervenir, con IA, automatización y adopción autónoma.",
+  provider: { "@id": "https://lucirme.com/#organization" },
+  areaServed: "Latinoamérica",
+  availableLanguage: "es",
+  audience: { "@type": "Audience", audienceType: "Empresas y equipos" },
+};
+
 ---
 
 <Layout
   title="LuciRMe AI · Empresas | Primero el problema. Después la tecnología."
   description="Encuentra un cuello de botella operativo en tu empresa, mide cuánto te está costando y decide si vale la pena intervenir. Soluciones con IA, automatización y adopción autónoma por Pablo Ríos."
   hideHeader={true}
+  jsonLd={serviceJsonLd}
   hideFooter={true}
 >
   <!-- 1. NAVEGACIÓN DEDICADA B2B (HEADER) -->
@@ -1334,7 +1348,7 @@ const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
     <SocialProof tipo="empresas" id="casos" />
 
     <!-- 8. PABLO (SOBRE MÍ) -->
-    <SobreMi id="pablo" />
+    <SobreMi id="pablo" h1={false} />
 
     <!-- 9. CTA FINAL -->
     <section

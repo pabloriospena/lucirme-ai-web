@@ -1,32 +1,49 @@
-User-agent: *
-Allow: /
+# Rastreo abierto para buscadores y asistentes de IA en el contenido público.
+# Las rutas de abajo son privadas (clientes, talleres, formularios, API) y se excluyen para todos.
+# Cada grupo de bots repite las reglas porque un bot con grupo propio ignora el grupo "*".
 
-# AI Search & LLM Crawlers Allowed for Generative Engine Optimization (GEO)
+# Buscador de ChatGPT (aparecer en las respuestas). Independiente de GPTBot.
+User-agent: OAI-SearchBot
+# Entrenamiento de modelos de OpenAI. Hoy permitido. Cambiar a "Disallow: /" si Pablo decide no autorizarlo.
 User-agent: GPTBot
-Allow: /
-
+# Visitas de ChatGPT cuando un usuario pide abrir una página.
 User-agent: ChatGPT-User
-Allow: /
-
 User-agent: ClaudeBot
-Allow: /
-
 User-agent: Claude-Web
-Allow: /
-
 User-agent: PerplexityBot
-Allow: /
-
 User-agent: Google-Extended
-Allow: /
-
 User-agent: GoogleOther
-Allow: /
-
 User-agent: Applebot-Extended
-Allow: /
-
 User-agent: Bytespider
 Allow: /
+Disallow: /api/
+Disallow: /soluciones-personalizadas/
+Disallow: /propuestas/
+Disallow: /propuesta
+Disallow: /presentaciones/
+Disallow: /estudia-ia-basico/
+Disallow: /estudia-ia-intermedio/
+Disallow: /forms/
+Disallow: /sign-in
+Disallow: /sign-up
+Disallow: /gracias
+Disallow: /resultado
+Disallow: /diagnostico-resultado
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /soluciones-personalizadas/
+Disallow: /propuestas/
+Disallow: /propuesta
+Disallow: /presentaciones/
+Disallow: /estudia-ia-basico/
+Disallow: /estudia-ia-intermedio/
+Disallow: /forms/
+Disallow: /sign-in
+Disallow: /sign-up
+Disallow: /gracias
+Disallow: /resultado
+Disallow: /diagnostico-resultado
 
 Sitemap: https://lucirme.com/sitemap.xml

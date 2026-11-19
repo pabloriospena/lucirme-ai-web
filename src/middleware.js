@@ -14,6 +14,29 @@ const REDIRECTS = {
   "/recursos/preventa-vol2": "/educacion",
 };
 
+// Rutas con contenido de clientes, talleres o respuestas de formularios: no deben indexarse.
+const PRIVATE_PREFIXES = [
+  "/soluciones-personalizadas/",
+  "/propuestas/",
+  "/presentaciones/",
+  "/estudia-ia-basico/",
+  "/estudia-ia-intermedio/",
+  "/forms/",
+  "/api/",
+];
+
+const isPrivate = (pathname) =>
+  PRIVATE_PREFIXES.some((prefix) => pathname.startsWith(prefix)) ||
+  pathname === "/propuesta";
+
+const withRobotsHeader = async (pathname, run) => {
+  const response = await run();
+  if (response && isPrivate(pathname)) {
+    response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+  }
+  return response;
+};
+
 export const onRequest = (context, next) => {
   const url = new URL(context.request.url);
   const pathname = url.pathname;
@@ -24,10 +47,10 @@ export const onRequest = (context, next) => {
 
   const publishableKey = import.meta.env.PUBLIC_CLERK_PUBLISHABLE_KEY || process.env.PUBLIC_CLERK_PUBLISHABLE_KEY;
   const secretKey = import.meta.env.CLERK_SECRET_KEY || process.env.CLERK_SECRET_KEY;
-  
+
   if (!publishableKey && !secretKey) {
-    return next();
+    return withRobotsHeader(pathname, () => next());
   }
-  
-  return clerkMiddleware()(context, next);
+
+  return withRobotsHeader(pathname, () => clerkMiddleware()(context, next));
 };

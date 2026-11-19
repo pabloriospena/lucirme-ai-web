@@ -1,0 +1,83 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { ARTICULOS, TEMAS, publicados } from "../../data/biblioteca.js";
+
+// En producción solo se listan los artículos publicados. Los borradores se ven en desarrollo.
+const lista = import.meta.env.DEV ? ARTICULOS : publicados();
+if (lista.length === 0) {
+  return new Response(null, { status: 404 });
+}
+
+const porTema = Object.entries(TEMAS)
+  .map(([clave, nombre]) => ({
+    nombre,
+    articulos: lista.filter((a) => a.tema === clave),
+  }))
+  .filter((g) => g.articulos.length > 0);
+
+const formatoFecha = (iso) =>
+  iso
+    ? new Date(`${iso}T12:00:00-05:00`).toLocaleDateString("es-CO", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : null;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Biblioteca de IA aplicada",
+  url: "https://lucirme.com/biblioteca",
+  inLanguage: "es",
+  isPartOf: { "@id": "https://lucirme.com/#website" },
+  hasPart: publicados().map((a) => ({
+    "@type": "Article",
+    headline: a.titulo,
+    url: `https://lucirme.com/biblioteca/${a.slug}`,
+  })),
+};
+---
+
+<Layout
+  title="Biblioteca de IA aplicada | LuciRMe AI"
+  description="Respuestas prácticas de Pablo Ríos sobre cómo aplicar inteligencia artificial al trabajo real de profesionales y equipos, con ejemplos que puedes comprobar."
+  jsonLd={jsonLd}
+>
+  <main class="py-16 px-4 sm:px-6 bg-white">
+    <div class="max-w-3xl mx-auto">
+      <p class="font-mono text-xs uppercase tracking-wider text-teal-800 font-bold mb-3">Biblioteca</p>
+      <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+        Biblioteca de IA aplicada
+      </h1>
+      <p class="mt-4 text-slate-700 leading-relaxed">
+        Cada artículo responde una pregunta concreta sobre cómo usar IA en el trabajo real. Si algo es opinión mía, lo digo. Si es un ejemplo, lo marco como ejemplo.
+      </p>
+
+      {
+        porTema.map((grupo) => (
+          <section class="mt-12">
+            <h2 class="text-xl font-bold text-slate-900 mb-4">{grupo.nombre}</h2>
+            <ul class="space-y-4">
+              {grupo.articulos.map((a) => (
+                <li class="border border-slate-200 rounded-xl p-5 hover:border-teal-600 transition-colors">
+                  <a href={`/biblioteca/${a.slug}`} class="block">
+                    <h3 class="font-bold text-slate-900">{a.pregunta}</h3>
+                    <p class="mt-2 text-sm text-slate-600 leading-relaxed">{a.descripcion}</p>
+                    {a.borrador ? (
+                      <p class="mt-2 text-xs font-mono text-amber-700">Borrador, solo visible en desarrollo</p>
+                    ) : (
+                      <p class="mt-2 text-xs text-slate-500">
+                        Actualizado el {formatoFecha(a.actualizado || a.publicado)}
+                      </p>
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+  </main>
+</Layout>
