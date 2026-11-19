@@ -119,7 +119,35 @@ const pasoHref = `/ruta-product/paso-${guia.paso}`;
       </ul>
     </div>
 
-    <p class="text-xs text-slate-500 leading-relaxed">{guia.avisoSinEjemplo}</p>
+    {guia.casoReal && (
+      <div class="bg-white rounded-2xl border border-teal-200 p-6 sm:p-8 space-y-5 shadow-sm">
+        <div class="space-y-2">
+          <span class="inline-block text-xs font-mono font-bold text-teal-800 bg-teal-50 px-2.5 py-1 rounded-md border border-teal-200 uppercase">Caso real</span>
+          <h2 class="text-lg font-bold text-slate-900 tracking-tight">{guia.casoReal.titulo}</h2>
+          <p class="text-sm text-slate-600 leading-relaxed">{guia.casoReal.intro}</p>
+        </div>
+        <div class="space-y-3">
+          {guia.casoReal.filas.map((f) => (
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/60 space-y-1">
+              <div class="text-[10px] font-mono font-semibold uppercase text-teal-800">{f.bloque}</div>
+              <div class="text-sm font-bold text-slate-900">{f.criterio}</div>
+              <div class="text-xs text-slate-600 leading-relaxed">{f.comprobacion}</div>
+            </div>
+          ))}
+        </div>
+        <div class="space-y-2">
+          <h3 class="text-sm font-bold text-slate-900">Las tres etapas</h3>
+          <ul class="space-y-2 text-sm text-slate-700">
+            {guia.casoReal.etapas.map((e) => (
+              <li class="flex items-start gap-2"><span class="text-teal-700 font-bold mt-0.5">•</span><span>{e}</span></li>
+            ))}
+          </ul>
+        </div>
+        <p class="text-xs text-slate-500 leading-relaxed">{guia.casoReal.nota}</p>
+      </div>
+    )}
+
+    {!guia.casoReal && <p class="text-xs text-slate-500 leading-relaxed">{guia.avisoSinEjemplo}</p>}
 
     <a href={guia.siguiente.href} class="inline-flex items-center gap-2 font-semibold text-sm text-teal-800 hover:text-teal-900 transition-colors">
       {guia.siguiente.texto} →
