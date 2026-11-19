@@ -1,0 +1,1131 @@
+---
+// Guía post-taller 2 · Sasa Consultoría (taller del 18 de noviembre de 2026).
+// Cómo pedir mejor, conectar Gemini con Workspace, armar cuadernos de NotebookLM y programar tareas.
+// Mismo formato de documento tipo Notion que la guía post-taller 1 (design.md, sección 6).
+import Layout from "../../../layouts/Layout.astro";
+import PromptBox from "../../../components/PromptBox.astro";
+
+const toc = [
+    { id: "resumen", label: "Resumen" },
+    { id: "conceptos", label: "1. Conceptos clave" },
+    { id: "prompt", label: "2. Escribir un buen prompt" },
+    { id: "prompts", label: "3. Prompts listos para copiar" },
+    { id: "conectar", label: "4. Conectar Gemini" },
+    { id: "notebooklm", label: "5. Guía de NotebookLM" },
+    { id: "programadas", label: "6. Tareas programadas" },
+    { id: "fallas", label: "7. Cuando la IA falla" },
+    { id: "proximos", label: "8. Próximos pasos" },
+];
+
+const niveles = [
+    {
+        nombre: "IA aislada",
+        que: "Pregunta sin ningún contexto.",
+        ejemplo: "\"¿Qué regalo le puedo dar a un bebé que acaba de nacer?\"",
+        riesgo: "Respuesta genérica.",
+    },
+    {
+        nombre: "IA con contexto",
+        que: "Se le entrega un documento o se le explica el caso dentro del chat.",
+        ejemplo: "Subir el Word de un cliente y pedir un resumen de pendientes.",
+        riesgo: "El documento queda congelado: si cambia, el chat sigue con la versión vieja.",
+    },
+    {
+        nombre: "IA conectada",
+        que: "La IA consulta la fuente directamente: Drive, correo, calendario, CRM.",
+        ejemplo: "Gemini leyendo la carpeta del cliente en Drive.",
+        riesgo: "Hay que cuidar los permisos y que la fuente esté ordenada.",
+    },
+];
+
+const piezas = [
+    { n: "1", titulo: "Rol", detalle: "Quién debe ser la IA en esta tarea: \"actúa como apoyo comercial de Sasa\"." },
+    { n: "2", titulo: "Objetivo", detalle: "Qué debe entregar y para quién." },
+    { n: "3", titulo: "Fuentes", detalle: "De dónde debe sacar la información, nombradas una por una." },
+    { n: "4", titulo: "Reglas", detalle: "Tono, qué no debe inventar, qué debe respetar tal cual." },
+    { n: "5", titulo: "Formato", detalle: "Cómo quieren recibir la respuesta: secciones, tabla, borrador en Docs." },
+];
+
+const plantillaBase = `Rol: [quién es la IA en esta tarea].
+Objetivo: [qué debe entregar y para quién lo leerá].
+Fuentes: usa solo [fuente 1] y [fuente 2]. Si falta un dato, dímelo; no lo inventes.
+Reglas: [tono, términos que se mantienen, cosas que no debe hacer].
+Formato: [estructura de la respuesta].
+Al final, lista qué fuentes usaste y qué datos no encontraste.`;
+
+const casos = [
+    {
+        titulo: "Pedir un documento sobre una plantilla (caso real del taller)",
+        antes: "Utiliza esta plantilla para agregarla en este documento.",
+        nota: "El grupo concluyó que era ambiguo: no dice cuál plantilla, qué se agrega ni dónde. La IA tomó una plantilla por su cuenta y el resultado no era el esperado.",
+        despues:
+            "Haz una copia de la plantilla comercial de Sasa (documento adjunto como fuente) y, en esa copia, agrega el contenido organizado de la documentación de las dailies de esta semana. No modifiques la plantilla original.",
+    },
+    {
+        titulo: "Propuesta comercial",
+        antes: "Haz la propuesta comercial.",
+        nota: "",
+        despues:
+            "Elabora la propuesta comercial para [cliente] usando el documento funcional y el Excel de estimación que están como fuentes. Sigue la estructura estándar de Sasa. Escribe en lenguaje comercial y funcional, sin términos de ingeniería. Respeta los valores del Excel. Si encuentras inconsistencias entre los dos documentos, lístalas antes de redactar.",
+    },
+    {
+        titulo: "Correo a un cliente",
+        antes: "Mejora este correo.",
+        nota: "",
+        despues:
+            "Reescribe este correo para un director comercial que no es técnico. Tono cercano y profesional, máximo 120 palabras. Mantén la fecha de entrega y el nombre del módulo tal cual. Dame dos versiones: una directa y una más cálida.",
+    },
+];
+
+const errores = [
+    {
+        titulo: "Asumir que la IA sabe lo que uno piensa",
+        detalle: "Un prompt que a quien lo escribe le parece claro puede ser ambiguo para cualquier otra persona.",
+    },
+    {
+        titulo: "Mezclar tareas en un mismo chat",
+        detalle: "Cada tarea va en su propio chat o cuaderno; si no, la IA mezcla lo que le pidieron antes con lo nuevo.",
+    },
+    {
+        titulo: "\"Haz lo tuyo\" sin contexto fuerte",
+        detalle: "Funciona solo cuando las fuentes y las instrucciones ya están bien cargadas; si no, la IA improvisa.",
+    },
+    {
+        titulo: "Dar demasiadas fuentes",
+        detalle: "Mejor pocos documentos, vigentes y de lo que realmente se necesita, que una carpeta entera.",
+    },
+];
+
+const instruccionesMaestras = `Rol: apoyo especializado en propuestas comerciales de Sasa Consultoría, partner oficial de Sugar.
+
+Objetivo: convertir un documento funcional y una estimación en una propuesta comercial sólida, técnicamente fiel y clara para un cliente que no es técnico.
+
+Tono: cálido y cercano, consultivo, persuasivo, estratégico. Lenguaje ejecutivo y comercial. Frases claras; evita textos largos, repetitivos o recargados.
+
+Reglas:
+1. Respeta íntegramente el contenido técnico del documento funcional.
+2. Mantén los nombres de módulos y campos tal cual están escritos.
+3. Traduce los términos de ingeniería a palabras funcionales que entienda una persona sin conocimiento técnico.
+4. Toma valores, tarifas, horas y descuentos solo de la estimación vigente. Si falta un dato económico, dímelo; no lo inventes.
+5. Antes de redactar, lista las inconsistencias entre los documentos y los datos faltantes.
+
+Estructura estándar: [carta, portada, contexto, objetivo, alcance, exclusiones, detalle de actividades propuestas, criterios de aceptación, estimación; ajustar al orden real de la plantilla comercial de Sasa].`;
+
+const promptsRol = [
+    {
+        id: "propuestas",
+        titulo: "Propuestas comerciales",
+        uso: "Instrucciones maestras: guárdenlas en un documento de Drive y cárguenlas como una fuente más del cuaderno. Así no hay que repetirlas en cada propuesta.",
+        prompts: [
+            { titulo: "Instrucciones maestras", prompt: instruccionesMaestras },
+            {
+                titulo: "Prompt de uso (se pega en el cuaderno, con las fuentes ya cargadas)",
+                prompt:
+                    "Elabora la propuesta comercial para [cliente] con las fuentes del cuaderno: [documento funcional] y [Excel de estimación]. Sigue las instrucciones maestras y la plantilla comercial de Sasa.\n\nPrimero lista inconsistencias y datos faltantes. Luego redacta sección por sección y espera mi aprobación antes de pasar a la siguiente.",
+            },
+        ],
+    },
+    {
+        id: "analisis",
+        titulo: "Análisis: revisar el requerimiento antes de que pase a comercial",
+        uso: "Sirve para que el documento llegue a comercial en un estado más limpio, que fue uno de los cuellos de botella que mencionó el equipo.",
+        prompts: [
+            {
+                titulo: "Revisión de requerimiento",
+                prompt:
+                    "Rol: analista funcional que revisa documentos antes de que los use el área comercial.\n\nRevisa el documento [nombre] y entrégame:\n1. Secciones que faltan frente a la estructura estándar (objetivo, alcance, exclusiones, criterios de aceptación).\n2. Términos técnicos que un cliente no entendería, con una frase equivalente en lenguaje funcional.\n3. Contradicciones entre secciones.\n4. Preguntas abiertas que alguien debe responder antes de estimar.\n\nNo reescribas el documento: dame solo la lista, ordenada por importancia.",
+            },
+        ],
+    },
+    {
+        id: "soporte",
+        titulo: "Soporte",
+        uso: "Hoy sirve con casos que se pegan o se cargan como fuente. Con la conexión a Sugar (ver Próximos pasos) podría consultar el historial directamente.",
+        prompts: [
+            {
+                titulo: "Análisis de un caso",
+                prompt:
+                    "Rol: analista de soporte de Sugar con experiencia en [módulo o producto].\n\nCaso: [pegar la descripción del cliente y los pasos para reproducirlo].\nFuentes: [casos anteriores resueltos y documentación cargados en el cuaderno].\n\nEntrégame: (a) posibles causas, de la más a la menos probable; (b) si un caso parecido ya se resolvió y cómo, citando la fuente; (c) los pasos de verificación; (d) un borrador de respuesta al cliente en lenguaje claro. Si no encuentras un caso parecido en las fuentes, dilo.",
+            },
+        ],
+    },
+    {
+        id: "operaciones",
+        titulo: "Operaciones y gerencia: resumen semanal de las dailies",
+        uso: "",
+        prompts: [
+            {
+                titulo: "Resumen de la semana",
+                prompt:
+                    "Resume las dailies de la semana del [fecha] a [fecha] (transcripciones de Meet). Entrégamelo en un documento de Google:\n- Avances por proyecto.\n- Bloqueos y quién debe resolverlos.\n- Tareas acordadas por persona, con fecha si se mencionó.\n- Decisiones tomadas.\nGuárdalo en la carpeta [nombre de la carpeta] con el nombre \"Dailies semana del [fecha]\".",
+            },
+        ],
+    },
+    {
+        id: "reuniones",
+        titulo: "Reuniones con clientes",
+        uso: "",
+        prompts: [
+            {
+                titulo: "Documentar una reunión",
+                prompt:
+                    "Rol: asistente que documenta reuniones con clientes para Sasa.\n\nFuente: transcripción de la reunión del [fecha] con [cliente].\n\nEntrégame: resumen en máximo 8 líneas, necesidades nuevas del cliente, compromisos de cada lado con fecha, y riesgos o dudas. Marca con [revisar] cualquier cosa que no quedó clara en la transcripción.",
+            },
+        ],
+    },
+    {
+        id: "migrar",
+        titulo: "Mover el contexto de ChatGPT a Gemini o a un cuaderno",
+        uso: "El truco para no empezar de cero: pedirle a ChatGPT sus propias instrucciones y llevarlas como fuente. Copien el resultado a un documento, revísenlo y cárguenlo; verifiquen que no traiga instrucciones que ya no aplican.",
+        prompts: [
+            {
+                titulo: "Exportar el contexto",
+                prompt:
+                    "Dame en formato Markdown (.md) todo el contexto, las instrucciones y el tono que has aprendido de mí para [propuestas comerciales]. Incluye rol, tono y estilo, reglas de redacción y estructura estándar.",
+            },
+        ],
+    },
+];
+
+const pasosGemini = [
+    {
+        titulo: "Entren a Gemini con su cuenta de Sasa",
+        detalle: "Las funciones de cuadernos requieren plan Pro; con la cuenta gratuita no aparecen.",
+    },
+    {
+        titulo: "Abran la configuración",
+        detalle: "Está en la tuerca, abajo, junto al nombre de usuario. Busquen la opción de aplicaciones conectadas.",
+    },
+    {
+        titulo: "Confirmen que Google Workspace y NotebookLM estén activos",
+        detalle: "En el taller ya los tenían instalados. La ubicación exacta de cada opción puede variar según la versión de Gemini.",
+    },
+    {
+        titulo: "Hagan una prueba pequeña de lectura",
+        detalle: "Sin pedirle que cree nada todavía.",
+    },
+    {
+        titulo: "Recién después prueben escritura",
+        detalle: "Crear un documento en una carpeta, empezando por algo pequeño.",
+    },
+];
+
+const queTenerEnCuenta = [
+    { titulo: "Gemini ve lo que su cuenta ve", detalle: "Si una carpeta no está compartida con ustedes, no la encuentra." },
+    {
+        titulo: "Pidan formatos de Google",
+        detalle: "Digan \"documento de Google\" u \"hoja de cálculo de Google\", no \"Word\" o \"Excel\". En el taller Gemini tuvo problemas para abrir o crear archivos de Microsoft.",
+    },
+    {
+        titulo: "Un solo documento vigente por proyecto",
+        detalle: "Con varias copias del mismo documento, la IA puede tomar la equivocada. El acuerdo del taller fue trabajar siempre sobre el mismo documento y archivar las versiones viejas.",
+    },
+    {
+        titulo: "Conecten el archivo, no lo peguen",
+        detalle: "Un archivo subido al chat queda congelado; un enlace o una fuente conectada se mantiene actualizada.",
+    },
+    {
+        titulo: "Siempre pregunten por las fuentes",
+        detalle: "Terminen el prompt con \"dime qué fuentes consultaste\" y compárenlas con lo que esperaban.",
+    },
+];
+
+const dondeUsar = [
+    { necesitan: "Entender una normativa o una documentación extensa", usen: "NotebookLM", porque: "Responde solo con las fuentes cargadas y las cita." },
+    { necesitan: "Sacar información de varios documentos a la vez", usen: "NotebookLM", porque: "Las fuentes quedan guardadas y ordenadas." },
+    { necesitan: "Aprender de un video (por ejemplo, el último release de Sugar)", usen: "NotebookLM", porque: "Se pega el enlace del video y se conversa con él." },
+    { necesitan: "Crear el documento final en una carpeta de Drive", usen: "Gemini, con el cuaderno", porque: "Puede generar el archivo directamente." },
+    { necesitan: "Mezclar el cuaderno con otras tareas en la misma conversación", usen: "Gemini, con el cuaderno", porque: "También permite usar conversaciones anteriores como referencia." },
+];
+
+const pasosCuaderno = [
+    {
+        titulo: "Creen un cuaderno nuevo",
+        detalle: "Con un nombre que diga qué es: \"Propuesta · [cliente] · [proyecto]\".",
+    },
+    {
+        titulo: "Agreguen las fuentes desde Drive, una por una",
+        detalle: "El documento funcional del proyecto, el Excel de estimación vigente, la plantilla comercial de Sasa y las instrucciones maestras.",
+    },
+    {
+        titulo: "Dejen marcadas solo las fuentes que aplican",
+        detalle: "En el taller se desmarcaron las conversaciones anteriores y la propuesta de otro proyecto porque confundían a la IA.",
+    },
+    {
+        titulo: "Pidan la propuesta con el prompt de uso",
+        detalle: "No basta con \"haz lo tuyo\", salvo que las fuentes y las instrucciones ya estén bien cargadas.",
+    },
+    {
+        titulo: "Revisen contra las fuentes",
+        detalle: "Cada dato trae un número de cita; verifiquen especialmente valores, fechas y nombres de módulos.",
+    },
+    {
+        titulo: "Si algo falla, corrijan las instrucciones, no solo el chat",
+        detalle: "La primera versión salió demasiado técnica; al agregar a las instrucciones la regla de traducir a lenguaje funcional, mejoró.",
+    },
+    {
+        titulo: "Pidan el documento",
+        detalle: "Desde Gemini se puede pedir que lo cree en la carpeta del cliente; desde NotebookLM, se copia y se pega en un documento de Google.",
+    },
+];
+
+const organizar = [
+    {
+        opcion: "Un cuaderno por proyecto o propuesta",
+        conviene: "Cuando se trabaja un requerimiento o una oferta concreta.",
+        limite: "Hay que crear uno nuevo para cada proyecto.",
+    },
+    {
+        opcion: "Un cuaderno compartido por etapa del proceso",
+        conviene: "Para que quien hace el requerimiento, quien estima y quien arma la propuesta usen el mismo insumo.",
+        limite: "Requiere acordar el flujo entre áreas (ver Próximos pasos).",
+    },
+    {
+        opcion: "Un cuaderno de formatos",
+        conviene: "Para plantillas, tono y estilo que se reutilizan.",
+        limite: "Hay que mantenerlo al día.",
+    },
+    {
+        opcion: "Un cuaderno por cliente",
+        conviene: "Para ordenar conversaciones y consultas sobre un cliente.",
+        limite: "Solo sirve si se cargan fuentes resumidas, no toda la carpeta.",
+    },
+];
+
+const limitesNotebook = [
+    { titulo: "Carpetas completas", detalle: "En el taller no se pudo importar una carpeta de Drive entera; se agregan documentos individuales." },
+    {
+        titulo: "Páginas con usuario y contraseña",
+        detalle: "No se pueden usar como fuente (la guía de reseller de Sugar, por ejemplo). Descarguen el archivo y súbanlo.",
+    },
+    { titulo: "Videos de YouTube", detalle: "Peguen el enlace del video específico, no el del canal." },
+    { titulo: "Versiones duplicadas", detalle: "Dejen seleccionada solo la vigente." },
+    { titulo: "Cifras", detalle: "Gemini confundió pesos con dólares en un resultado; verifiquen contra el Excel." },
+    {
+        titulo: "Cuenta gratuita",
+        detalle: "Los cuadernos dentro de Gemini no aparecieron en la versión gratuita, y los créditos para videos se acaban rápido.",
+    },
+];
+
+const pasosTarea = [
+    { titulo: "Abran una conversación normal en Gemini", detalle: "" },
+    {
+        titulo: "Pídanlo en lenguaje natural",
+        detalle: "Qué debe hacer, a qué hora y con qué frecuencia. En el taller pedí un resumen de los correos de Make para ese mismo día a una hora exacta.",
+    },
+    {
+        titulo: "Digan dónde quieren recibir el resultado",
+        detalle: "Las opciones que comentamos: notificación en la app del celular, un correo o una conversación nueva en Gemini. Si no se aclara, la IA decide.",
+    },
+    {
+        titulo: "Confirmen o acepten la tarea",
+        detalle: "En el taller, una compañera vio que la tarea se había creado pero aún no le había dado aceptar.",
+    },
+    {
+        titulo: "Verifiquen en la sección \"Programada\"",
+        detalle: "Está en la barra lateral izquierda. Ahí aparece la tarea con su estado y se puede editar o pausar.",
+    },
+];
+
+const tareas = [
+    {
+        titulo: "Resumen de la mañana",
+        autor: "Idea de Alejandro",
+        prompt:
+            "Todos los días a las 7:30 a.m., de lunes a viernes, revisa mis correos, mis mensajes de Teams y las reuniones de ayer. Dame una lista de lo que debo hacer hoy, ordenada por urgencia, y dime de dónde salió cada tarea. Envía el resultado como notificación a mi celular.",
+    },
+    {
+        titulo: "Mis tareas de las dailies",
+        autor: "Idea de Zhoe",
+        prompt:
+            "Después de cada daily, crea un documento donde se vea qué tareas se acordaron a mi nombre, en qué proyecto y con qué fecha. Guarda un solo documento por semana en la carpeta [nombre de la carpeta].",
+    },
+    {
+        titulo: "Resumen semanal de las dailies",
+        autor: "Para gerencia y operaciones",
+        prompt:
+            "Cada viernes a las 4:00 p.m., resume las dailies de la semana: avances por proyecto, bloqueos, tareas por persona y decisiones. Créalo como documento de Google en la carpeta [nombre de la carpeta] y mándame el enlace por correo.",
+    },
+    {
+        titulo: "Casos de soporte nuevos",
+        autor: "Ejemplo del taller, sin probar",
+        prompt:
+            "Cada [2] horas en horario laboral, revisa el correo [buzón de soporte] y dime si llegó un caso nuevo. Si lo hay, resúmelo en tres líneas y mándame una notificación.",
+    },
+];
+
+const practicasTarea = [
+    { titulo: "Prueben primero una sola vez", detalle: "Pidan la tarea \"solo hoy a las [hora]\" para ver si el resultado sirve antes de repetirla todos los días." },
+    { titulo: "Un propósito por tarea", detalle: "Una tarea que resume, clasifica y escribe a clientes es difícil de revisar." },
+    { titulo: "Pidan siempre las fuentes", detalle: "Así saben si Gemini miró donde debía." },
+    { titulo: "Revisen el resultado las primeras semanas", detalle: "Una tarea que corre sola también puede equivocarse sola." },
+    {
+        titulo: "Nada que cambie cosas importantes",
+        detalle: "Enviar correos a clientes o modificar el CRM no se delega todavía: que la tarea resuma y avise, y que una persona decida.",
+    },
+];
+
+const fallas = [
+    {
+        pasa: "La propuesta sale demasiado técnica",
+        causa: "Las instrucciones no piden lenguaje funcional, o el documento de origen ya es muy técnico.",
+        hacer: "Agregar la regla de traducir términos de ingeniería; si el origen es el problema, revisarlo con el prompt de análisis.",
+    },
+    {
+        pasa: "Aparecen capítulos que no se pidieron o faltan los criterios de aceptación",
+        causa: "La estructura estándar no está en las fuentes, o hay otra plantilla cargada.",
+        hacer: "Nombrar la estructura en el prompt y dejar una sola plantilla seleccionada.",
+    },
+    {
+        pasa: "Usa una plantilla equivocada",
+        causa: "Hay varias plantillas o el prompt no dice cuál.",
+        hacer: "Nombrar la plantilla exacta; archivar las demás.",
+    },
+    {
+        pasa: "Gemini responde distinto a lo que daba ChatGPT",
+        causa: "Las instrucciones de la gema no son las mismas que las del chat original.",
+        hacer: "Exportar las instrucciones de ChatGPT, unificarlas y cargarlas como fuente.",
+    },
+    {
+        pasa: "Mezcla pesos con dólares o cambia una cifra",
+        causa: "La IA interpreta mal el dato.",
+        hacer: "Tomar los valores solo del Excel y verificarlos antes de enviar.",
+    },
+    {
+        pasa: "Responde cosas que no vienen de las fuentes",
+        causa: "Contexto saturado o fuentes mezcladas.",
+        hacer: "Abrir un cuaderno o chat nuevo, cargar solo las fuentes necesarias y pedir que use solo esas.",
+    },
+    {
+        pasa: "No abre un Word o un Excel",
+        causa: "Gemini tiene límites con formatos de Microsoft.",
+        hacer: "Convertir a documento u hoja de Google.",
+    },
+    {
+        pasa: "No puede leer un enlace",
+        causa: "Es privado o requiere usuario y contraseña.",
+        hacer: "Descargar el archivo y subirlo, o dar permisos.",
+    },
+    {
+        pasa: "Tras varios mensajes la respuesta no mejora",
+        causa: "Ya hay demasiada corrección acumulada en el chat.",
+        hacer: "Abrir un chat nuevo con un prompt completo en lugar de seguir corrigiendo.",
+    },
+];
+
+const compromisos = [
+    { quien: "Pablo", que: "Enviar esta guía antes del viernes." },
+    { quien: "Pablo", que: "Coordinar con Desarrollo (Juan Diego y John) la viabilidad de conectar la IA con Sugar, por API o agentes." },
+    {
+        quien: "Adriana",
+        que: "Crear los cuadernos por cliente o proyecto en NotebookLM/Gemini, con fuentes de Drive (máximo 50 por cuaderno), y probar el flujo de propuestas.",
+    },
+    { quien: "Equipo", que: "Empezar a usar NotebookLM para manejar el contexto de los proyectos." },
+    { quien: "Equipo", que: "Probar una tarea programada en Gemini, por ejemplo el resumen diario de correos o reuniones." },
+    { quien: "Equipo", que: "Exportar los prompts que usan en ChatGPT para reutilizarlos en Gemini." },
+];
+
+const usosSugar = [
+    {
+        titulo: "Referencias para una propuesta",
+        detalle: "Si un cliente grande pide ejemplos de instancias parecidas a lo que necesita, la IA podría buscar cuáles de las instancias de Sasa tienen requerimientos similares.",
+    },
+    { titulo: "Historial de soporte", detalle: "Ante un bug, revisar si ya ocurrió en otra instancia y cómo se resolvió." },
+    { titulo: "Propuesta a oportunidad", detalle: "Llevar el documento de la propuesta a la oportunidad en Sugar sin copiar y pegar." },
+    { titulo: "Tablero de vencimientos", detalle: "Avisar de las tareas de Sugar que están por vencer." },
+];
+---
+
+<Layout title="Guía post-taller 2 | Sasa Consultoría" hideHeader hideFooter noindex>
+    <div class="min-h-screen bg-[#FBFBFA] text-[#37352F] font-sans antialiased selection:bg-slate-200">
+        <!-- BARRA SUPERIOR -->
+        <div class="w-full bg-white border-b border-[#E9E9E7] px-4 py-3 sticky top-0 z-30 flex items-center justify-between text-xs text-[#787774] print:hidden">
+            <div class="flex items-center gap-2 overflow-hidden">
+                <span class="font-medium shrink-0">LuciRMe AI</span>
+                <span>/</span>
+                <span class="font-medium shrink-0">Sasa Consultoría</span>
+                <span>/</span>
+                <span class="text-[#37352F] font-semibold truncate">Guía post-taller 2</span>
+            </div>
+            <button
+                type="button"
+                onclick="window.print()"
+                class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded border border-[#E9E9E7] hover:bg-[#F1F1EF] transition text-[#37352F] font-medium text-xs cursor-pointer shrink-0"
+            >
+                <svg class="w-3.5 h-3.5 text-[#787774]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                </svg>
+                <span class="hidden sm:inline">Exportar / Imprimir</span>
+            </button>
+        </div>
+
+        <div class="max-w-5xl mx-auto px-6 py-10 md:py-14 grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <!-- TABLA DE CONTENIDO -->
+            <aside class="hidden lg:block lg:col-span-3 sticky top-20 self-start text-xs text-[#787774] print:hidden">
+                <div class="text-[11px] font-semibold uppercase tracking-wider text-[#9B9A97] mb-2">En esta guía</div>
+                <nav class="space-y-1 font-medium">
+                    {toc.map((t) => (
+                        <a href={`#${t.id}`} class="block px-2.5 py-1.5 rounded hover:bg-[#F1F1EF] hover:text-[#37352F] transition">
+                            {t.label}
+                        </a>
+                    ))}
+                </nav>
+            </aside>
+
+            <main class="lg:col-span-9 space-y-12 min-w-0">
+                <!-- ENCABEZADO -->
+                <header class="space-y-6 pb-6 border-b border-[#E9E9E7]">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-xl bg-[#F1F1EF] border border-[#E9E9E7] flex items-center justify-center text-[#37352F] shadow-2xs shrink-0">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono uppercase tracking-widest text-[#9B9A97]">Guía post-taller</span>
+                            <h1 class="text-2xl sm:text-3xl font-extrabold text-[#37352F] tracking-tight">
+                                Pedir mejor, conectar y programar: guía del taller 2
+                            </h1>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#F7F7F5] border border-[#E9E9E7] rounded-lg p-4 text-xs space-y-2">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#9B9A97] w-24 shrink-0 font-medium">Para:</span>
+                                <span class="text-[#37352F] font-semibold">Equipo de Sasa Consultoría</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#9B9A97] w-24 shrink-0 font-medium">Taller:</span>
+                                <span class="text-[#37352F] font-semibold">Taller 2 · 18 de noviembre de 2026</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#9B9A97] w-24 shrink-0 font-medium">Elaborado por:</span>
+                                <span class="text-[#37352F] font-semibold">Pablo Ríos · LuciRMe AI</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#9B9A97] w-24 shrink-0 font-medium">Objetivo:</span>
+                                <span class="text-[#37352F] font-semibold">Repetir lo del taller sin ayuda</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="resumen" class="bg-[#F1F1EF] border border-[#E9E9E7] rounded-lg p-4 flex gap-3 text-xs leading-relaxed">
+                        <div class="shrink-0 pt-0.5">
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="space-y-2">
+                            <strong class="font-bold block">Resumen</strong>
+                            <p class="text-[#5A5A58]">
+                                En el taller quedaron tres ideas: la IA falla cuando recibe poco contexto o demasiado y desordenado, un
+                                cuaderno con fuentes reales rinde más que un chat largo, y una tarea programada hace que la IA trabaje
+                                sin que se lo pidan cada vez. Esta guía deja cada idea con ejemplos, prompts y pasos para repetirla.
+                            </p>
+                            <ul class="text-[#5A5A58] list-disc pl-4 space-y-1">
+                                <li><strong class="text-[#37352F]">Entender por qué la IA inventa o se confunde:</strong> Conceptos clave.</li>
+                                <li><strong class="text-[#37352F]">Pedir mejor lo que ya piden:</strong> Escribir un buen prompt y Prompts listos.</li>
+                                <li><strong class="text-[#37352F]">Dejar de pegar documentos en el chat:</strong> Conectar Gemini y NotebookLM.</li>
+                                <li><strong class="text-[#37352F]">Que la IA trabaje sola cada mañana:</strong> Tareas programadas.</li>
+                            </ul>
+                            <p class="text-[#787774]">
+                                Todo se probó en Gemini Pro y NotebookLM con cuentas de Workspace. Algunas funciones dependen del plan: en
+                                el taller, quienes tenían la versión gratuita no veían los cuadernos dentro de Gemini.
+                            </p>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- 1. CONCEPTOS CLAVE -->
+                <section id="conceptos" class="space-y-5">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">1. Conceptos clave</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            La IA responde con el contexto que tiene a mano, y ese contexto se acaba: cuanto más largo y desordenado es un
+                            chat, más fácil es que se confunda y conteste cosas que no son. A eso se le llama alucinación.
+                        </p>
+                    </div>
+
+                    <div class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-2 shadow-2xs">
+                        <h3 class="text-sm font-bold">Por qué una respuesta incorrecta suena bien</h3>
+                        <p class="text-xs text-[#5A5A58] leading-relaxed">
+                            La IA está hecha para responder rápido y para sonar convincente. En el taller lo vimos con una prueba: le
+                            escribí "hola, acabo de nacer" y respondió con alegría, emojis y un "ya abriste los ojos". No tenía sentido,
+                            pero sonaba perfecto. Por eso una respuesta bien redactada no prueba que sea correcta: hay que contrastarla
+                            con la fuente.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-white border border-[#E9E9E7] rounded-lg p-4 space-y-1.5 shadow-2xs">
+                            <h3 class="text-xs font-bold text-teal-800">Funciona</h3>
+                            <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                Una tarea acotada que se repite, con instrucciones claras y fuentes ordenadas.
+                            </p>
+                        </div>
+                        <div class="bg-white border border-[#E9E9E7] rounded-lg p-4 space-y-1.5 shadow-2xs">
+                            <h3 class="text-xs font-bold text-[#C2410C]">Falla</h3>
+                            <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                Un contexto enorme y sin organizar, o un chat donde se mezclan muchas tareas. Ejemplo del taller: en el
+                                mismo chat de una propuesta se pidió "mejora los colores de esta presentación", y desde ahí la IA
+                                empezó a mezclar ambas cosas.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-bold">Los tres niveles de uso</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            {niveles.map((n, i) => (
+                                <article class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="w-6 h-6 rounded bg-teal-100 text-teal-800 flex items-center justify-center text-xs font-bold shrink-0">
+                                            {i + 1}
+                                        </div>
+                                        <h4 class="text-sm font-bold">{n.nombre}</h4>
+                                    </div>
+                                    <p class="text-xs text-[#5A5A58] leading-relaxed">{n.que}</p>
+                                    <dl class="text-xs space-y-1.5 pt-2 border-t border-[#F1F1EF]">
+                                        <div>
+                                            <dt class="text-[11px] font-semibold uppercase tracking-wider text-[#9B9A97]">Ejemplo</dt>
+                                            <dd class="text-[#5A5A58]">{n.ejemplo}</dd>
+                                        </div>
+                                        <div>
+                                            <dt class="text-[11px] font-semibold uppercase tracking-wider text-[#9B9A97]">Riesgo</dt>
+                                            <dd class="text-[#5A5A58]">{n.riesgo}</dd>
+                                        </div>
+                                    </dl>
+                                </article>
+                            ))}
+                        </div>
+                        <p class="text-xs text-[#787774] leading-relaxed">
+                            La diferencia práctica: si el archivo se actualiza de la versión del 9 de noviembre a la del 18, un chat con el
+                            archivo subido responde sobre el viejo; una fuente conectada responde sobre el nuevo.
+                        </p>
+                    </div>
+
+                    <div class="bg-[#F1F1EF] border border-[#E9E9E7] rounded-lg p-4 text-xs leading-relaxed space-y-2">
+                        <strong class="font-bold block">Gema o cuaderno</strong>
+                        <p class="text-[#5A5A58]">
+                            Una gema es un conjunto de instrucciones: le dice a la IA cómo responder. Un cuaderno es una base de
+                            conocimiento: le dice de dónde sacar la información. Si la gema está mal escrita o se contradice, la IA hace lo
+                            que le parece. Lo ideal es combinarlas: las instrucciones como una fuente más del cuaderno (se explica en la
+                            guía de NotebookLM).
+                        </p>
+                        <p class="text-[#5A5A58]">
+                            Las gemas se están moviendo hacia las "habilidades", así que conviene tener las instrucciones guardadas en un
+                            documento y no solo dentro de la gema.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 2. ESCRIBIR UN BUEN PROMPT -->
+                <section id="prompt" class="space-y-5">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">2. Cómo escribir un buen prompt</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            Un prompt es una conversación, no una búsqueda de Google: mientras más específico, mejor la respuesta. En el
+                            taller lo mostramos con una pizza. "Pizza en Marinilla" sirve como búsqueda; para que la IA acierte hay que
+                            decirle qué tipo de pizza, qué horario, si debe quedar cerca del centro y si necesita parqueadero.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-bold">Estructura de cinco piezas</h3>
+                        <ol class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            {piezas.map((p) => (
+                                <li class="bg-white border border-[#E9E9E7] rounded-lg p-4 flex gap-3 shadow-2xs">
+                                    <div class="w-6 h-6 rounded bg-teal-100 text-teal-800 flex items-center justify-center text-xs font-bold shrink-0">
+                                        {p.n}
+                                    </div>
+                                    <div class="space-y-0.5">
+                                        <h4 class="text-sm font-bold">{p.titulo}</h4>
+                                        <p class="text-xs text-[#5A5A58] leading-relaxed">{p.detalle}</p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ol>
+                        <PromptBox titulo="Plantilla base para copiar" prompt={plantillaBase} />
+                    </div>
+
+                    <div class="space-y-4">
+                        <h3 class="text-sm font-bold">Antes y después</h3>
+                        {casos.map((c, i) => (
+                            <article class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                                <h4 class="text-sm font-bold">Caso {i + 1}: {c.titulo}</h4>
+                                <PromptBox tono="antes" prompt={c.antes} />
+                                {c.nota && <p class="text-xs text-[#5A5A58] leading-relaxed">{c.nota}</p>}
+                                <PromptBox titulo="Después" prompt={c.despues} />
+                            </article>
+                        ))}
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-bold">Errores que aparecieron en el taller</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {errores.map((e) => (
+                                <div class="bg-white border border-[#E9E9E7] rounded-lg p-4 space-y-1.5 shadow-2xs">
+                                    <h4 class="text-xs font-bold">{e.titulo}</h4>
+                                    <p class="text-xs text-[#5A5A58] leading-relaxed">{e.detalle}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div class="bg-[#F1F1EF] border border-[#E9E9E7] rounded-lg p-4 text-xs leading-relaxed space-y-2">
+                        <strong class="font-bold block">Para mejorar el resultado</strong>
+                        <ul class="text-[#5A5A58] list-disc pl-4 space-y-2">
+                            <li>
+                                <strong class="text-[#37352F]">Pidan que revise su trabajo:</strong> "¿Cumpliste con las instrucciones?
+                                Lista qué regla aplicaste a cada sección." Contrasten la respuesta con el documento: la IA puede afirmar que
+                                cumplió algo que no hizo.
+                            </li>
+                            <li>
+                                <strong class="text-[#37352F]">Cambien el modelo o el modo de razonamiento</strong> en Gemini cuando la tarea
+                                es compleja, por ejemplo una propuesta con muchas fuentes. Responde más lento, pero suele cometer menos
+                                errores.
+                            </li>
+                            <li>
+                                <strong class="text-[#37352F]">Corrijan en el mismo hilo</strong> ("el tono es muy técnico, usa lenguaje
+                                funcional") y, cuando la corrección funcione, pásenla a las instrucciones guardadas para no repetirla.
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 3. PROMPTS LISTOS -->
+                <section id="prompts" class="space-y-5">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">3. Prompts listos para copiar</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            Cada prompt usa la estructura de cinco piezas. Reemplacen lo que está entre [corchetes] y pruébenlos con un caso
+                            real antes de darlos por buenos.
+                        </p>
+                    </div>
+
+                    {promptsRol.map((g) => (
+                        <article id={g.id} class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                            <h3 class="text-sm font-bold">{g.titulo}</h3>
+                            {g.uso && <p class="text-xs text-[#5A5A58] leading-relaxed">{g.uso}</p>}
+                            <div class="space-y-3">
+                                {g.prompts.map((p) => (
+                                    <PromptBox titulo={p.titulo} prompt={p.prompt} />
+                                ))}
+                            </div>
+                        </article>
+                    ))}
+                </section>
+
+                <!-- 4. CONECTAR GEMINI -->
+                <section id="conectar" class="space-y-5">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">4. Conectar Gemini con Workspace y Drive</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            Una IA conectada consulta sus archivos, correos y reuniones donde están, en lugar de recibirlos pegados en el
+                            chat. Como Sasa ya trabaja en Google, el primer paso es activar lo que ya tienen.
+                        </p>
+                    </div>
+
+                    <ol class="space-y-3">
+                        {pasosGemini.map((p, i) => (
+                            <li class="bg-white border border-[#E9E9E7] rounded-lg p-4 flex gap-3 shadow-2xs">
+                                <div class="w-6 h-6 rounded bg-teal-100 text-teal-800 flex items-center justify-center text-xs font-bold shrink-0">
+                                    {i + 1}
+                                </div>
+                                <div class="space-y-1">
+                                    <h3 class="text-sm font-bold">{p.titulo}</h3>
+                                    <p class="text-xs text-[#5A5A58] leading-relaxed">{p.detalle}</p>
+                                </div>
+                            </li>
+                        ))}
+                    </ol>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <article class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                            <h3 class="text-sm font-bold">Prueba de lectura</h3>
+                            <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                En el taller Alejandro escribió solo "dailies" y Gemini entendió que eran reuniones, fue a Meet y trajo las
+                                conclusiones de la semana. Para que sea más confiable, pídanlo con más detalle.
+                            </p>
+                            <PromptBox
+                                prompt="Busca en mis reuniones de Meet las dailies del [fecha] al [fecha]. Dame los avances, bloqueos y tareas acordadas. Al final dime qué reuniones consultaste."
+                            />
+                        </article>
+                        <article class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                            <h3 class="text-sm font-bold">Prueba de escritura</h3>
+                            <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                En el taller se pidió crear un documento dentro de una carpeta nueva de Drive y no quedó claro que se
+                                hubiera guardado; lo atribuimos a permisos. Prueben primero con algo pequeño.
+                            </p>
+                            <PromptBox
+                                prompt="Crea un documento de Google llamado &quot;Prueba Gemini&quot; en la carpeta [nombre de una carpeta donde tengo permiso de edición], con un resumen de tres líneas de la daily de ayer. Dime la ruta donde quedó."
+                            />
+                            <p class="text-xs text-[#787774] leading-relaxed">
+                                Si no se crea, el problema casi siempre es de permisos sobre la carpeta. Pidan a quien administra el Drive
+                                que confirme que su cuenta puede editar ahí.
+                            </p>
+                        </article>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-bold">Qué tener en cuenta</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {queTenerEnCuenta.map((q) => (
+                                <div class="bg-white border border-[#E9E9E7] rounded-lg p-4 space-y-1.5 shadow-2xs">
+                                    <h4 class="text-xs font-bold">{q.titulo}</h4>
+                                    <p class="text-xs text-[#5A5A58] leading-relaxed">{q.detalle}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div class="bg-[#F1F1EF] border border-[#E9E9E7] rounded-lg p-4 text-xs leading-relaxed space-y-1">
+                        <strong class="font-bold block">Todavía no conectado</strong>
+                        <p class="text-[#5A5A58]">
+                            Sugar (el CRM) no está conectado a la IA. Eso requiere trabajo del equipo de desarrollo y se trata en Próximos
+                            pasos. Mientras tanto, los datos de Sugar que necesiten se exportan o se resumen en un documento de Drive y se
+                            usan como fuente.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 5. NOTEBOOKLM -->
+                <section id="notebooklm" class="space-y-5">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">5. Guía de NotebookLM</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            Un cuaderno es un espacio con sus propias fuentes: la IA responde a partir de ellas y marca con números de
+                            dónde sacó cada dato. Cada cuaderno admite hasta 50 fuentes. Se puede trabajar desde NotebookLM o desde
+                            Gemini, y los cuadernos creados en uno aparecen en el otro.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-bold">Cuándo usar NotebookLM y cuándo Gemini</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs border border-[#E9E9E7] rounded-lg overflow-hidden bg-white">
+                                <thead>
+                                    <tr class="bg-[#F7F7F5] text-left text-[#787774]">
+                                        <th class="px-3 py-2 font-semibold">Necesitan</th>
+                                        <th class="px-3 py-2 font-semibold w-44">Usen</th>
+                                        <th class="px-3 py-2 font-semibold">Por qué</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-[#5A5A58]">
+                                    {dondeUsar.map((d) => (
+                                        <tr class="border-t border-[#E9E9E7]">
+                                            <td class="px-3 py-2">{d.necesitan}</td>
+                                            <td class="px-3 py-2 font-semibold text-[#37352F]">{d.usen}</td>
+                                            <td class="px-3 py-2">{d.porque}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-bold">Armar un cuaderno para una propuesta comercial</h3>
+                        <p class="text-xs text-[#5A5A58] leading-relaxed">
+                            Es el caso que trabajamos con Adriana. El resultado mejoró cuando las fuentes eran pocas, vigentes y cada una
+                            tenía un papel claro.
+                        </p>
+                        <ol class="space-y-3">
+                            {pasosCuaderno.map((p, i) => (
+                                <li class="bg-white border border-[#E9E9E7] rounded-lg p-4 flex gap-3 shadow-2xs">
+                                    <div class="w-6 h-6 rounded bg-teal-100 text-teal-800 flex items-center justify-center text-xs font-bold shrink-0">
+                                        {i + 1}
+                                    </div>
+                                    <div class="space-y-1">
+                                        <h4 class="text-sm font-bold">{p.titulo}</h4>
+                                        <p class="text-xs text-[#5A5A58] leading-relaxed">{p.detalle}</p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ol>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-bold">Cómo organizar los cuadernos</h3>
+                        <p class="text-xs text-[#5A5A58] leading-relaxed">
+                            No cabe todo un cliente en un cuaderno: uno de los clientes tiene unas 85 carpetas, muy por encima de las 50
+                            fuentes. Además, una propuesta no necesita la historia completa del cliente, sino el insumo del proyecto
+                            puntual.
+                        </p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs border border-[#E9E9E7] rounded-lg overflow-hidden bg-white">
+                                <thead>
+                                    <tr class="bg-[#F7F7F5] text-left text-[#787774]">
+                                        <th class="px-3 py-2 font-semibold w-56">Opción</th>
+                                        <th class="px-3 py-2 font-semibold">Cuándo conviene</th>
+                                        <th class="px-3 py-2 font-semibold">Límite</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-[#5A5A58]">
+                                    {organizar.map((o) => (
+                                        <tr class="border-t border-[#E9E9E7]">
+                                            <td class="px-3 py-2 font-semibold text-[#37352F]">{o.opcion}</td>
+                                            <td class="px-3 py-2">{o.conviene}</td>
+                                            <td class="px-3 py-2">{o.limite}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-xs text-[#787774]">
+                            La recomendación del taller: empezar con un cuaderno por proyecto y probar el compartido por etapa en cuanto
+                            se defina el flujo.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-bold">Errores y límites que aparecieron</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {limitesNotebook.map((l) => (
+                                <div class="bg-white border border-[#E9E9E7] rounded-lg p-4 space-y-1.5 shadow-2xs">
+                                    <h4 class="text-xs font-bold">{l.titulo}</h4>
+                                    <p class="text-xs text-[#5A5A58] leading-relaxed">{l.detalle}</p>
+                                </div>
+                            ))}
+                        </div>
+                        <p class="text-xs text-[#787774] leading-relaxed">
+                            Además de responder, NotebookLM puede generar tarjetas de estudio, un resumen en formato podcast,
+                            presentaciones y videos a partir de las fuentes. Son útiles para estudiar un tema nuevo; revisen el resultado
+                            antes de enviarlo a un cliente.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 6. TAREAS PROGRAMADAS -->
+                <section id="programadas" class="space-y-5">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">6. Tareas programadas en Gemini</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            Una tarea programada hace que Gemini ejecute un pedido a una hora fija, sin que alguien lo escriba cada vez. La
+                            diferencia con una automatización: la tarea programada ejecuta lo que se le dijo; la automatización decide según
+                            lo que pasa ("si ocurre esto, hago aquello"). Hoy se puede lo primero; lo segundo es el siguiente nivel.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-bold">Cómo crear una tarea</h3>
+                        <ol class="space-y-3">
+                            {pasosTarea.map((p, i) => (
+                                <li class="bg-white border border-[#E9E9E7] rounded-lg p-4 flex gap-3 shadow-2xs">
+                                    <div class="w-6 h-6 rounded bg-teal-100 text-teal-800 flex items-center justify-center text-xs font-bold shrink-0">
+                                        {i + 1}
+                                    </div>
+                                    <div class="space-y-1">
+                                        <h4 class="text-sm font-bold">{p.titulo}</h4>
+                                        {p.detalle && <p class="text-xs text-[#5A5A58] leading-relaxed">{p.detalle}</p>}
+                                    </div>
+                                </li>
+                            ))}
+                        </ol>
+                        <p class="text-xs text-[#787774] leading-relaxed">
+                            Gemini avisó que la tarea puede retrasarse un poco o tardar en estar lista, y que enviaría una notificación al
+                            celular a la hora programada.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-bold">Ideas de tareas para el equipo</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {tareas.map((t) => (
+                                <article class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <h4 class="text-sm font-bold">{t.titulo}</h4>
+                                        <span class="text-[10px] font-mono text-[#9B9A97] shrink-0">{t.autor}</span>
+                                    </div>
+                                    <PromptBox prompt={t.prompt} />
+                                </article>
+                            ))}
+                        </div>
+                        <p class="text-xs text-[#787774] leading-relaxed">
+                            La tarea de casos de soporte es el ejemplo que di en el taller y no la probamos; háganla con calma.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-bold">Buenas prácticas</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {practicasTarea.map((b) => (
+                                <div class="bg-white border border-[#E9E9E7] rounded-lg p-4 space-y-1.5 shadow-2xs">
+                                    <h4 class="text-xs font-bold">{b.titulo}</h4>
+                                    <p class="text-xs text-[#5A5A58] leading-relaxed">{b.detalle}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div class="bg-[#F1F1EF] border border-[#E9E9E7] rounded-lg p-4 text-xs leading-relaxed space-y-1">
+                        <strong class="font-bold block">Qué no se puede todavía</strong>
+                        <p class="text-[#5A5A58]">
+                            Sandra Liliana preguntó si Gemini podría avisar de las tareas de Sugar que están por vencer. Hoy sería un
+                            proceso manual, porque Sugar no está conectado a la IA. Cuando exista esa conexión, un tablero de vencimientos
+                            es una de las primeras aplicaciones naturales.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 7. CUANDO LA IA FALLA -->
+                <section id="fallas" class="space-y-5">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">7. Cuando la IA falla</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            La mayoría de los fallos del taller venían del contexto o de las instrucciones, no de la herramienta. Antes de
+                            cambiar de IA, revisen esta tabla.
+                        </p>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs border border-[#E9E9E7] rounded-lg overflow-hidden bg-white">
+                            <thead>
+                                <tr class="bg-[#F7F7F5] text-left text-[#787774]">
+                                    <th class="px-3 py-2 font-semibold">Qué pasa</th>
+                                    <th class="px-3 py-2 font-semibold">Causa probable</th>
+                                    <th class="px-3 py-2 font-semibold">Qué hacer</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-[#5A5A58]">
+                                {fallas.map((f) => (
+                                    <tr class="border-t border-[#E9E9E7] align-top">
+                                        <td class="px-3 py-2 font-semibold text-[#37352F]">{f.pasa}</td>
+                                        <td class="px-3 py-2">{f.causa}</td>
+                                        <td class="px-3 py-2">{f.hacer}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-2 shadow-2xs">
+                            <h3 class="text-sm font-bold">Cuando la tarea es compleja</h3>
+                            <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                Gemini permite elegir el modelo y el nivel de razonamiento. Para tareas con muchas fuentes, como una
+                                propuesta, prueben el modo pensado para problemas complejos: responde más lento, pero en el taller lo
+                                recomendé para cuando las respuestas venían con errores básicos.
+                            </p>
+                        </div>
+                        <div class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-2 shadow-2xs">
+                            <h3 class="text-sm font-bold">Qué herramienta usar</h3>
+                            <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                En el equipo hay opiniones distintas: algunas personas sienten que ChatGPT cubre los casos de uso de forma
+                                más completa, y yo veo a Claude como el más potente de los tres. Hoy Sasa trabaja con Gemini porque está
+                                integrado a Workspace, y con buen contexto y buenos prompts la diferencia entre herramientas se reduce.
+                                Claude sigue en exploración; antes de decidir hay que evaluar costos y cómo se integraría al trabajo del
+                                equipo.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 8. PROXIMOS PASOS -->
+                <section id="proximos" class="space-y-5">
+                    <div class="pb-2 border-b border-[#E9E9E7]">
+                        <h2 class="text-lg font-bold">8. Próximos pasos</h2>
+                        <p class="text-xs text-[#787774] mt-1">
+                            Quedaron tres frentes: lo que cada persona puede probar esta semana, la conexión de la IA con Sugar, y ordenar el
+                            proceso de propuestas de punta a punta.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-bold">Compromisos del taller</h3>
+                        <ul class="space-y-3">
+                            {compromisos.map((c) => (
+                                <li class="bg-white border border-[#E9E9E7] rounded-lg p-4 flex gap-3 shadow-2xs">
+                                    <span class="text-[10px] font-mono text-[#9B9A97] w-16 shrink-0 pt-0.5">{c.quien}</span>
+                                    <p class="text-xs text-[#5A5A58] leading-relaxed">{c.que}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h3 class="text-sm font-bold">Conexión con Sugar</h3>
+                        <p class="text-xs text-[#5A5A58] leading-relaxed">
+                            El objetivo es que la IA consulte y actualice la información de Sugar, que es donde están los contactos, las
+                            oportunidades y el historial del cliente. Requiere trabajo del equipo de desarrollo. Los usos que mencionamos:
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {usosSugar.map((u) => (
+                                <div class="bg-white border border-[#E9E9E7] rounded-lg p-4 space-y-1.5 shadow-2xs">
+                                    <h4 class="text-xs font-bold">{u.titulo}</h4>
+                                    <p class="text-xs text-[#5A5A58] leading-relaxed">{u.detalle}</p>
+                                </div>
+                            ))}
+                        </div>
+                        <p class="text-xs text-[#787774] leading-relaxed">
+                            Sugar es una instancia que Sasa controla, así que también se podría pedir un diagnóstico de datos desordenados.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-2 shadow-2xs">
+                            <h3 class="text-sm font-bold">Agentes</h3>
+                            <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                Después de tener la IA conectada viene el nivel de agentes: la IA toma decisiones a partir de lo que pasa. El
+                                ejemplo del taller: un agente que revisa el correo de soporte, analiza cada caso nuevo y crea la tarea en
+                                Sugar. Es un paso para semanas más adelante, una vez resuelta la conexión.
+                            </p>
+                        </div>
+                        <div class="bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-2 shadow-2xs">
+                            <h3 class="text-sm font-bold">Ordenar el proceso de propuestas</h3>
+                            <p class="text-xs text-[#5A5A58] leading-relaxed">
+                                El cuello de botella no está solo en redactar la propuesta, sino en toda la cadena: se hace el requerimiento,
+                                con él se estima, se revisa la estimación y recién ahí se arma la oferta. Hoy cada paso trabaja con su
+                                propio insumo. Para una sesión futura queda definir ese flujo y probar un cuaderno compartido por etapa.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#F1F1EF] border border-[#E9E9E7] rounded-lg p-4 text-xs leading-relaxed space-y-1">
+                        <strong class="font-bold block">Pendiente del taller</strong>
+                        <p class="text-[#5A5A58]">
+                            El formulario de dolores tuvo 13 respuestas durante la sesión y fue enviado a Sandra Arango. Falta analizarlo
+                            para priorizar qué tareas del equipo conviene atacar primero con IA.
+                        </p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</Layout>
+
+<!-- AVISO DE COPIADO -->
+<div
+    id="toast"
+    class="fixed bottom-5 right-5 z-50 transform translate-y-10 opacity-0 transition-all duration-200 pointer-events-none print:hidden"
+>
+    <div class="bg-[#37352F] text-white text-xs px-3.5 py-2 rounded-md shadow-lg flex items-center gap-2">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span>Petición copiada al portapapeles</span>
+    </div>
+</div>
+
+<script>
+    const toast = document.getElementById("toast");
+
+    function showToast() {
+        if (!toast) return;
+        toast.classList.remove("translate-y-10", "opacity-0");
+        setTimeout(() => toast.classList.add("translate-y-10", "opacity-0"), 2200);
+    }
+
+    document.querySelectorAll<HTMLButtonElement>(".copy-prompt").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+            const text = btn.dataset.prompt ?? "";
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast();
+            } catch {
+                // Sin permiso de portapapeles: no se muestra aviso falso.
+            }
+        });
+    });
+</script>
