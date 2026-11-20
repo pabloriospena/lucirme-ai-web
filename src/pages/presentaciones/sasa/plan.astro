@@ -126,8 +126,8 @@ import { jsPDF } from "jspdf";
 
 /* ===== Valores que edita Pablo en el código (no aparecen como campos editables) ===== */
 var PRICE_TOTAL = 8000000;      // valor de todo el programa (9 sesiones y el taller de regalo), en COP
-var ENDPOINT = "https://hook.us2.make.com/7xfcxjps5p2mj89iu4x2gjlwutc3k2lc"; // webhook de Make que guarda el plan en Notion
-var ENDPOINT_TOKEN = "5VeHj2TbzkirhYWo5w3Ei3LY";
+var ENDPOINT = "https://hook.us2.make.com/eg6vornj63j819a4a44pf1uzgdd7yjms"; // webhook de Make que guarda el plan en Notion
+var ENDPOINT_TOKEN = "O7gpNfva9dzEdHK0tg9pSEFk";
 var DISCOUNT = 0.10;            // descuento por pago total anticipado
 var SPLIT = [0.5, 0.5];         // pago 1 antes de la sesión 1, pago 2 antes de la sesión 5
 var SPLIT_AT = [1, 5];
@@ -490,7 +490,6 @@ async function save(goResumen){
     try{
       var fd=new FormData();
       fd.append("token",ENDPOINT_TOKEN);
-      fd.append("cliente","Sasa Consultoría");
       fd.append("guardado",state.savedAt);
       fd.append("notion_body",notionBody());
       var r=await fetch(ENDPOINT,{method:"POST",body:fd});
@@ -503,11 +502,13 @@ async function save(goResumen){
 /* ===== Envío a Notion (vía Make) ===== */
 function notionBody(){
   var txt=summaryText(), blocks=[];
+  var cur="";
   txt.split("\n").forEach(function(line){
-    if(!line.trim()) return;
-    while(line.length>1900){ blocks.push(line.slice(0,1900)); line=line.slice(1900); }
-    blocks.push(line);
+    while(line.length>1800){ if(cur){ blocks.push(cur); cur=""; } blocks.push(line.slice(0,1800)); line=line.slice(1800); }
+    if(cur.length+line.length+1>1800){ blocks.push(cur); cur=line; }
+    else cur=cur?cur+"\n"+line:line;
   });
+  if(cur) blocks.push(cur);
   blocks=blocks.slice(0,99);
   var d=new Date(state.savedAt);
   var fecha=d.toLocaleDateString("es-CO",{day:"numeric",month:"short",year:"numeric",timeZone:"America/Bogota"});
