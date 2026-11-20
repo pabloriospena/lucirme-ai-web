@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estud-IA · Intermedio · Ajustemos las clases</title>
+<style>
+  :root{--light:#F8FAFC;--deep:#0F172A;--gray:#64748B;--teal:#0D9488;--orange:#EA580C;--success:#10B981;--line:rgba(100,116,139,.35);--err:#B91C1C}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--light);color:var(--deep);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  main{max-width:720px;margin:0 auto;padding:32px 16px 96px}
+  .badge{display:inline-block;font:600 12px/1 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+  h1{font-size:28px;line-height:1.2;margin:0 0 8px}
+  .sub{color:var(--gray);margin:0 0 24px}
+  form{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(15,23,42,.06)}
+  fieldset{border:0;padding:0;margin:0 0 24px}
+  legend,label.q{display:block;font:600 15px/1.3 system-ui,sans-serif;margin-bottom:6px}
+  .hint{font:400 13px/1.4 system-ui,sans-serif;color:var(--gray);margin:0 0 8px}
+  .opt{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:8px;margin-bottom:6px;background:var(--light);cursor:pointer}
+  .opt input{margin-top:4px;accent-color:var(--teal)}
+  textarea,input[type=text]{width:100%;font:16px/1.4 system-ui,sans-serif;color:var(--deep);background:var(--light);border:1px solid var(--line);border-radius:8px;padding:12px 16px}
+  textarea{min-height:92px;resize:vertical}
+  textarea:focus,input[type=text]:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,148,136,.12)}
+  button{font:600 15px/1 system-ui,sans-serif;border-radius:8px;padding:14px 28px;border:1px solid var(--orange);background:var(--orange);color:#fff;cursor:pointer}
+  button[disabled]{opacity:.5;cursor:default}
+  #msg{margin-top:14px}.err{color:var(--err)}.ok{color:var(--success);font-weight:600}
+  .hp{position:absolute;left:-9999px}
+</style>
+</head>
+<body>
+<main>
+  <span class="badge">Estud-IA · IA Intermedio</span>
+  <h1>Ajustemos las clases del grupo Intermedio</h1>
+  <p class="sub">Son 2 minutos y es anónimo. Lo uso para preparar la clase del martes.</p>
+
+  <form id="f" novalidate>
+    <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off">
+
+    <fieldset data-key="nivel" data-type="select" data-required="1">
+      <legend>1. ¿Cómo te han parecido las clases?</legend>
+      <label class="opt"><input type="radio" name="nivel" value="Muy básico">Muy básicas</label>
+      <label class="opt"><input type="radio" name="nivel" value="Justo">En su punto</label>
+      <label class="opt"><input type="radio" name="nivel" value="Algo avanzado">Algo avanzadas</label>
+      <label class="opt"><input type="radio" name="nivel" value="Muy avanzado">Muy avanzadas</label>
+    </fieldset>
+
+    <fieldset data-key="sirve" data-type="select" data-required="1">
+      <legend>2. ¿Qué te sirve más?</legend>
+      <label class="opt"><input type="radio" name="sirve" value="Más práctica con casos y proyectos">Más práctica con casos y proyectos</label>
+      <label class="opt"><input type="radio" name="sirve" value="Más técnica y código">Más técnica y código</label>
+      <label class="opt"><input type="radio" name="sirve" value="Una mezcla">Una mezcla</label>
+    </fieldset>
+
+    <fieldset data-key="python" data-type="select" data-required="1">
+      <legend>3. ¿Cómo estás hoy con Python?</legend>
+      <label class="opt"><input type="radio" name="python" value="Nada">Nada</label>
+      <label class="opt"><input type="radio" name="python" value="Básico">Básico</label>
+      <label class="opt"><input type="radio" name="python" value="Medio">Medio</label>
+      <label class="opt"><input type="radio" name="python" value="Alto">Alto</label>
+    </fieldset>
+
+    <fieldset data-key="uso" data-type="multi" data-required="1">
+      <legend>4. ¿Para qué vas a usar la IA?</legend>
+      <p class="hint">Puedes marcar varias.</p>
+      <label class="opt"><input type="checkbox" name="uso" value="Emprender algo propio">Emprender algo propio</label>
+      <label class="opt"><input type="checkbox" name="uso" value="Mi portafolio profesional">Mi portafolio profesional</label>
+      <label class="opt"><input type="checkbox" name="uso" value="Mi negocio actual">Mi negocio actual</label>
+      <label class="opt"><input type="checkbox" name="uso" value="Mi empleo actual">Mi empleo actual</label>
+      <label class="opt"><input type="checkbox" name="uso" value="Otro">Otro</label>
+    </fieldset>
+
+    <div style="margin-bottom:26px">
+      <label class="q" for="resolver">5. ¿Qué quieres resolver con ese uso? (una frase)</label>
+      <input type="text" id="resolver" maxlength="300">
+    </div>
+
+    <fieldset data-key="temas" data-type="multi">
+      <legend>6. ¿Qué temas quieres ver en las próximas clases?</legend>
+      <p class="hint">Puedes marcar varios.</p>
+      <label class="opt"><input type="checkbox" name="temas" value="Todo lo que pasa por detrás de la IA generativa">Todo lo que pasa por detrás de la IA generativa</label>
+      <label class="opt"><input type="checkbox" name="temas" value="Optimización de tokens y memoria">Optimización de tokens y memoria</label>
+      <label class="opt"><input type="checkbox" name="temas" value="PDF a Markdown y preparación de datos">PDF a Markdown y preparación de datos</label>
+      <label class="opt"><input type="checkbox" name="temas" value="Conectores y automatización">Conectores y automatización</label>
+      <label class="opt"><input type="checkbox" name="temas" value="Cómo escribir buenos prompts para mi proyecto">Cómo escribir buenos prompts para mi proyecto</label>
+      <label class="opt"><input type="checkbox" name="temas" value="Limpieza y visualización de datos">Limpieza y visualización de datos</label>
+      <label class="opt"><input type="checkbox" name="temas" value="Redes neuronales y ML más técnico">Redes neuronales y ML más técnico</label>
+    </fieldset>
+
+    <fieldset data-key="glosario" data-type="select">
+      <legend>7. ¿Te sirve un glosario por clase?</legend>
+      <label class="opt"><input type="radio" name="glosario" value="Sí me sirve">Sí me sirve</label>
+      <label class="opt"><input type="radio" name="glosario" value="No">No</label>
+      <label class="opt"><input type="radio" name="glosario" value="Ya llevo el mío">Ya llevo el mío</label>
+    </fieldset>
+
+    <fieldset data-key="material" data-type="multi">
+      <legend>8. ¿Qué material quieres después de clase?</legend>
+      <label class="opt"><input type="checkbox" name="material" value="Grabación">Grabación</label>
+      <label class="opt"><input type="checkbox" name="material" value="Transcripción">Transcripción</label>
+      <label class="opt"><input type="checkbox" name="material" value="Diapositivas">Diapositivas</label>
+      <label class="opt"><input type="checkbox" name="material" value="Notebook">Notebook</label>
+    </fieldset>
+
+    <div style="margin-bottom:26px">
+      <label class="q" for="confuso">9. ¿Qué fue lo más confuso de la clase del 19 de noviembre?</label>
+      <textarea id="confuso" maxlength="1900"></textarea>
+    </div>
+
+    <div style="margin-bottom:26px">
+      <label class="q" for="extra">10. ¿Algo más que quieras decirme?</label>
+      <textarea id="extra" maxlength="1900"></textarea>
+    </div>
+
+    <button type="submit" id="go">Enviar</button>
+    <div id="msg" role="status"></div>
+  </form>
+</main>
+
+<script>
+const HOOK = "https://hook.us2.make.com/eg6vornj63j819a4a44pf1uzgdd7yjms";
+const TOKEN = "O7gpNfva9dzEdHK0tg9pSEFk";
+const DATA_SOURCE_ID = "41e98835-1bd4-811e-926f-000b1dc6766a";
+
+const f = document.getElementById("f");
+const msg = document.getElementById("msg");
+const go = document.getElementById("go");
+
+const rt = v => ({ rich_text: v ? [{ text: { content: v.slice(0, 1900) } }] : [] });
+
+function read() {
+  const out = {};
+  document.querySelectorAll("fieldset[data-key]").forEach(fs => {
+    const k = fs.dataset.key;
+    const checked = [...fs.querySelectorAll("input:checked")].map(i => i.value);
+    out[k] = fs.dataset.type === "multi" ? checked : (checked[0] || "");
+  });
+  out.resolver = document.getElementById("resolver").value.trim();
+  out.confuso = document.getElementById("confuso").value.trim();
+  out.extra = document.getElementById("extra").value.trim();
+  return out;
+}
+
+f.addEventListener("submit", async e => {
+  e.preventDefault();
+  msg.className = ""; msg.textContent = "";
+  if (f.website.value) return; // honeypot
+  const d = read();
+  const missing = [];
+  if (!d.nivel) missing.push("1");
+  if (!d.sirve) missing.push("2");
+  if (!d.python) missing.push("3");
+  if (!d.uso.length) missing.push("4");
+  if (!d.resolver) missing.push("5");
+  if (missing.length) { msg.className = "err"; msg.textContent = "Falta responder: " + missing.join(", "); return; }
+
+  const properties = {
+    "¿Qué quieres resolver con ese uso? (una frase)": { title: [{ text: { content: d.resolver.slice(0, 300) } }] },
+    "Nivel de las clases": { select: { name: d.nivel } },
+    "Qué te sirve más": { select: { name: d.sirve } },
+    "Python hoy": { select: { name: d.python } },
+    "Para qué usarás la IA": { multi_select: d.uso.map(name => ({ name })) },
+    "Temas para las próximas clases": { multi_select: d.temas.map(name => ({ name })) },
+    "Material después de clase": { multi_select: d.material.map(name => ({ name })) },
+    "Lo más confuso de la clase del 19 nov": rt(d.confuso),
+    "Algo más": rt(d.extra)
+  };
+  if (d.glosario) properties["Glosario por clase"] = { select: { name: d.glosario } };
+
+  const payload = {
+    token: TOKEN,
+    notion_body: {
+      parent: { type: "data_source_id", data_source_id: DATA_SOURCE_ID },
+      properties
+    }
+  };
+
+  go.disabled = true; go.textContent = "Enviando…";
+  try {
+    const r = await fetch(HOOK, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+    if (!r.ok) throw new Error(r.status);
+    f.reset();
+    msg.className = "ok";
+    msg.textContent = "Gracias, ya quedó. Lo reviso antes de la clase del martes.";
+  } catch (err) {
+    msg.className = "err";
+    msg.textContent = "No se pudo enviar. Intenta de nuevo en un momento.";
+  } finally {
+    go.disabled = false; go.textContent = "Enviar";
+  }
+});
+</script>
+</body>
+</html>
