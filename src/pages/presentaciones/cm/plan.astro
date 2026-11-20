@@ -252,8 +252,11 @@ function whenText(s){
 }
 function dateOf(s){ if(s.hecha) return s.fecha; if(!s.franja||!s.semana) return null; return slotsFor(s.semana).filter(function(x){return x.k===s.franja;})[0].date; }
 /* ===== Estado ===== */
-var state, view="plan", sel=0, dirty=false, notice="";
+var state, view="plan", sel=1, dirty=false, notice="";
 var LS="plan-cm-borrador-v1";
+function isOpen(i){ return state.sessions[i].num===2; } // solo la sesión 2 está activa
+var PEND="Se define con Pablo después de la sesión 2.";
+function closedLine(s){ return s.hecha ? "Realizada el "+fmtDate(s.fecha)+"." : PEND; }
 
 function loadState(){
   var emb=null;
@@ -281,7 +284,7 @@ function render(){
    +'<header class="top"><div><p class="brand">LuciRMe AI para Seguros CM</p><h1>Plan de trabajo: 8 sesiones y un taller para todo el equipo</h1>'
    +'<p class="sub">Ciclo de autonomía con el equipo de Seguros CM. Una base para ajustar entre Daniel y Pablo.</p></div>'+statusHTML()+'</header>'
    +'<div class="tabs" role="tablist"><button class="tab" role="tab" data-act="view" data-v="plan" aria-selected="'+(view==="plan")+'">1. Plan</button>'
-   +'<button class="tab" role="tab" data-act="view" data-v="resumen" aria-selected="'+(view==="resumen")+'">2. Resumen y pago</button></div>'
+   +'<button class="tab" role="tab" data-act="view" data-v="resumen" aria-selected="'+(view==="resumen")+'">2. Resumen</button></div>'
    +'<main class="panel">'+(view==="plan"?planHTML():resumenHTML())+'</main></div>'
    +(view==="plan"?barHTML():"")+'<div id="toast-slot"></div>';
   app.innerHTML=h;
@@ -293,8 +296,8 @@ function barHTML(){
 }
 
 function planHTML(){
-  var h='<ol class="steps"><li>Revisa cada sesión: personas, temas y fecha.</li><li>Cambia lo que haga falta. Cada tema tiene punto de partida y resultado para medir.</li><li>Elige la semana y el día de cada sesión y envía el plan a Pablo.</li></ol>'
-   +'<p class="lead">Los temas salen del formulario base del 3 de noviembre (tareas que más tiempo consumen y caso para el taller), de la sesión de autonomía del 18 de noviembre y de lo acordado con Daniel. Las personas, los temas y el orden son una propuesta: cámbialos. La sesión 1 ya se hizo. Las fechas se agendan la próxima semana: escoge la semana y el día de cada sesión. El 8 de diciembre es festivo.</p>'
+  var h='<ol class="steps"><li>Revisa la sesión 2: personas, temas y fecha.</li><li>Cambia lo que haga falta. Cada tema tiene punto de partida y resultado para medir.</li><li>Elige la semana y el día de la sesión 2 y envía el plan a Pablo.</li></ol>'
+   +'<p class="lead">Los temas salen del formulario base del 3 de noviembre (tareas que más tiempo consumen y caso para el taller), de la sesión de autonomía del 18 de noviembre y de lo acordado con Daniel. Las personas, los temas y el orden son una propuesta: cámbialos. La sesión 1 ya se hizo. Por ahora solo está abierta la sesión 2: escoge su semana y su día, que se agendan la próxima semana. Las demás se definen después. El 8 de diciembre es festivo.</p>'
    +'<div class="note">Antes de seguir: lunes 23 de noviembre, 10:00 a. m. a 11:00 a. m., sesión virtual con Cider sobre la conexión del CRM con la IA. No cuenta dentro de las 8 sesiones.</div>'
    +'<div class="tl-scroll"><div class="tl" id="tl">'+timelineHTML()+'</div></div>'
    +'<div class="editor" id="editor">'+editorHTML()+'</div>'
@@ -304,9 +307,12 @@ function planHTML(){
 
 function timelineHTML(){
   return state.sessions.map(function(s,i){
-    var d=dateOf(s), corta=d?fmtDate(d).replace(/^\S+ /,""):"";
-    var small=s.hecha?"Realizada · "+esc(corta):(d?esc(corta):(s.semana?esc(weekRange(s.semana))+" · por elegir":"Semana por elegir"));
-    return '<button class="node'+(d?" set":"")+'" data-act="sel" data-i="'+i+'" aria-current="'+(i===sel)+'"><b>'+esc(lbl(s))+'</b><span>'+esc(s.titulo)+'</span><small>'+small+'</small></button>';
+    if(!isOpen(i)){
+      var corta=s.hecha?fmtDate(s.fecha).replace(/^\S+ /,""):"";
+      return '<button class="node locked" disabled aria-disabled="true"><b>'+esc(lbl(s))+'</b><span>'+esc(s.titulo)+'</span><small>'+(s.hecha?"Realizada · "+esc(corta):"Por definir")+'</small></button>';
+    }
+    var d=dateOf(s), c2=d?fmtDate(d).replace(/^\S+ /,""):"";
+    return '<button class="node'+(d?" set":"")+'" data-act="sel" data-i="'+i+'" aria-current="'+(i===sel)+'"><b>'+esc(lbl(s))+'</b><span>'+esc(s.titulo)+'</span><small>'+(d?esc(c2):(s.semana?esc(weekRange(s.semana))+" · por elegir":"Semana por elegir"))+'</small></button>';
   }).join("");
 }
 function warningsFor(i){
@@ -352,7 +358,7 @@ function editorHTML(){
      +'<label class="fuente"><span>De dónde sale</span><input type="text" data-t="'+k+'" data-f="fuente" value="'+esc(t.fuente)+'"></label></article>';
   });
   h+='<button class="btn" data-act="addtema">Añadir tema</button>'
-   +'<div class="nav"><button class="btn" data-act="sel" data-i="'+(i-1)+'"'+(i===0?" disabled":"")+'>Sesión anterior</button><button class="btn" data-act="sel" data-i="'+(i+1)+'"'+(i===state.sessions.length-1?" disabled":"")+'>Sesión siguiente</button></div>';
+   +'<div class="nav"><button class="btn" data-act="sel" data-i="'+(i-1)+'"'+(i===0||!isOpen(i-1)?" disabled":"")+'>Sesión anterior</button><button class="btn" data-act="sel" data-i="'+(i+1)+'"'+(i===state.sessions.length-1||!isOpen(i+1)?" disabled":"")+'>Sesión siguiente</button></div>';
   return h;
 }
 
@@ -367,7 +373,9 @@ function resumenHTML(){
   var h='<h2 style="font-size:26px;margin-bottom:6px">Resumen del plan</h2>'
    +'<p class="small-print" style="margin:0 0 4px">'+(state.savedAt?'Guardado el '+esc(new Date(state.savedAt).toLocaleString("es-CO",{day:"numeric",month:"long",hour:"numeric",minute:"2-digit"})):'Aún no guardado')+(dirty?' · hay cambios sin guardar':'')+'</p>'
    +'<div class="actions"><button class="btn primary" data-act="copy">Copiar resumen</button><button class="btn" data-act="pdf">Descargar PDF</button><button class="btn" data-act="view" data-v="plan">Volver al plan</button></div>';
+  h+='<p class="note" style="margin-top:12px">Este plan tiene la sesión 2 completa. Las demás quedan por definir.</p>';
   state.sessions.forEach(function(s,i){
+    if(!isOpen(i)){ h+='<section class="sum-session"><h3>'+esc(lbl(s))+'. '+esc(s.titulo)+'</h3><p style="margin:6px 0 0"><span class="small-print">Área propuesta: '+esc(s.area)+'. '+esc(closedLine(s))+'</span></p></section>'; return; }
     var ppl=s.personas.concat(s.invitados);
     h+='<section class="sum-session"><h3>'+esc(lbl(s))+'. '+esc(s.titulo)+'</h3>'
      +'<dl class="sum-meta"><dt>Área</dt><dd>'+esc(s.area)+'</dd><dt>Fecha</dt><dd>'+esc(whenText(s))+' ('+esc(s.duracion)+' h)</dd><dt>Personas</dt><dd>'+(ppl.length?esc(ppl.join(", ")):"Por definir")+'</dd><dt>Objetivo</dt><dd>'+esc(s.objetivo)+'</dd></dl>'
@@ -392,8 +400,10 @@ function summaryText(){
   L.push("Ciclo de autonomía · 8 sesiones y un taller para todo el equipo"+(state.savedAt?" · guardado el "+new Date(state.savedAt).toLocaleDateString("es-CO",{day:"numeric",month:"long",year:"numeric"}):""));
   L.push("");
   L.push("Antes de seguir: lunes 23 de noviembre, 10:00 a. m. a 11:00 a. m., sesión virtual con Cider sobre la conexión del CRM con la IA (no cuenta dentro de las 8 sesiones)."); L.push("");
+  L.push("Este plan tiene la sesión 2 completa. Las demás quedan por definir."); L.push("");
   state.sessions.forEach(function(s,i){
     L.push(lbl(s).toUpperCase()+" · "+s.titulo);
+    if(!isOpen(i)){ L.push("Área propuesta: "+s.area); L.push(closedLine(s)); L.push(""); return; }
     L.push("Área: "+s.area);
     L.push("Fecha: "+whenText(s)+" ("+s.duracion+" h)");
     var ppl=s.personas.concat(s.invitados);
@@ -429,6 +439,7 @@ function makePdf(){
   state.sessions.forEach(function(s,i){
     if(y>235){ doc.addPage(); y=M; }
     para(lbl(s)+". "+s.titulo,{size:14,style:"bold",color:ACC,after:1.5});
+    if(!isOpen(i)){ para("Área propuesta: "+s.area,{after:.5}); para(closedLine(s),{size:9,color:MUT,after:2}); y+=2; return; }
     var ppl=s.personas.concat(s.invitados);
     para("Área: "+s.area,{after:.5}); para("Fecha: "+whenText(s)+" ("+s.duracion+" h)",{after:.5});
     para("Personas: "+(ppl.length?ppl.join(", "):"por definir"),{after:.5}); para("Objetivo: "+s.objetivo,{after:2});
