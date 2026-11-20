@@ -36,6 +36,9 @@ import Layout from "../../../layouts/Layout.astro";
 #plan-root .steps li::before{content:counter(s);display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--p-ink);color:var(--p-paper);font-weight:600;font-size:13px;margin-right:8px}
 #plan-root .lead{margin:0 0 20px;max-width:70ch}
 #plan-root .tl-scroll{overflow-x:auto;margin:0 -4px 20px;padding:4px}
+#plan-root .node.locked{opacity:.55;cursor:default;border-style:dashed}
+#plan-root .decide{margin-top:24px;padding:18px 20px;border:1px solid var(--p-line);border-radius:12px;background:var(--p-accent-soft)}
+#plan-root .decide p{margin:6px 0 12px}
 #plan-root .tl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
 #plan-root .node{text-align:left;padding:10px;border:1px solid var(--p-line);border-radius:10px;background:var(--p-paper);cursor:pointer;display:flex;flex-direction:column;gap:2px}
 #plan-root .node:hover{border-color:var(--p-accent)}
@@ -279,6 +282,9 @@ function loadState(){
   return s;
 }
 
+function isOpen(i){ return i===0 || !!state.expanded; }
+var PEND="Se define con Pablo después de la sesión 1, o la completa Sandra en el plan.";
+
 /* ===== Vistas ===== */
 var app=document.getElementById("app");
 
@@ -302,21 +308,29 @@ function render(){
 
 function barHTML(){
   return '<div class="bar"><div class="bar-in"><p>'+(notice?esc(notice):'Edita lo que necesites. Al guardar se arma el resumen.')+'</p>'
-   +'<button class="btn primary" data-act="save">Guardar plan y ver resumen</button></div></div>';
+   +'<button class="btn primary" data-act="save">'+(state.expanded?'Guardar plan y ver resumen':'Guardar y ver resumen')+'</button></div></div>';
 }
 
 function planHTML(){
-  var h='<ol class="steps"><li>Revisa cada sesión: personas, temas y fecha.</li><li>Cambia lo que haga falta. Cada tema tiene punto de partida y resultado para medir.</li><li>Guarda el plan y genera el resumen.</li></ol>'
-   +'<p class="lead">Los temas salen del formulario de dolores (13 respuestas), del formulario base del 6 de noviembre, de los talleres del 9 y 18 de noviembre y de las reuniones con Sandra. Las personas por sesión son una propuesta: cámbialas. El taller de regalo va antes de la sesión 5. La semana del 7 de diciembre no está disponible. Este plan no incluye desarrollo de software.</p>'
+  var h='<ol class="steps"><li>Revisa la sesión 1: personas, temas y fecha.</li><li>Cambia lo que haga falta. Cada tema tiene punto de partida y resultado para medir.</li><li>Decide si llenas las demás sesiones o envías el plan así.</li></ol>'
+   +'<p class="lead">Los temas salen del formulario de dolores (13 respuestas), del formulario base del 6 de noviembre, de los talleres del 9 y 18 de noviembre y de las reuniones con Sandra. Las personas son una propuesta: cámbialas. Solo la sesión 1 está abierta; las demás se pueden llenar después. El taller de regalo va antes de la sesión 5. La semana del 7 de diciembre no está disponible. Este plan no incluye desarrollo de software.</p>'
    +'<div class="tl-scroll"><div class="tl" id="tl">'+timelineHTML()+'</div></div>'
    +'<div class="editor" id="editor">'+editorHTML()+'</div>'
+   +decisionHTML()
    +'<h3>Notas generales del plan</h3><label><span class="small-print">Alcance, fuera de alcance y acuerdos</span><textarea id="notas" rows="3" data-g="notas">'+esc(state.notas)+'</textarea></label>';
   return h;
+}
+
+function decisionHTML(){
+  if(state.expanded) return '<div class="decide"><p><b>Estás llenando todas las sesiones.</b> Escoge una en la línea de arriba. Si prefieres, puedes dejar el resto para después.</p><div class="actions"><button class="btn" data-act="collapse">Volver a solo la sesión 1</button></div></div>';
+  return '<div class="decide"><h3 style="margin-top:0">¿Qué sigue?</h3><p>Las sesiones 2 a 9 ya tienen un título y un área propuestos, pero sin personas, fechas ni temas confirmados. Puedes llenarlas ahora o enviar el plan con lo de la sesión 1 y definir el resto después.</p>'
+   +'<div class="actions"><button class="btn primary" data-act="expand">Llenar las demás sesiones</button><button class="btn" data-act="save">Enviar con la sesión 1</button></div></div>';
 }
 
 function timelineHTML(){
   return state.sessions.map(function(s,i){
     var d=dateOf(s);
+    if(!isOpen(i)) return '<button class="node locked" disabled aria-disabled="true"><b>'+esc(lbl(s))+'</b><span>'+esc(s.titulo)+'</span><small>Por definir</small></button>';
     return '<button class="node'+(d?" set":"")+'" data-act="sel" data-i="'+i+'" aria-current="'+(i===sel)+'"><b>'+esc(lbl(s))+'</b><span>'+esc(s.titulo)+'</span><small>'+(d?esc(fmtDate(d).replace(/^\S+ /,"")):esc(weekRange(s.semana))+" · por elegir")+'</small></button>';
   }).join("");
 }
@@ -360,7 +374,7 @@ function editorHTML(){
      +'<label class="fuente"><span>De dónde sale</span><input type="text" data-t="'+k+'" data-f="fuente" value="'+esc(t.fuente)+'"></label></article>';
   });
   h+='<button class="btn" data-act="addtema">Añadir tema</button>'
-   +'<div class="nav"><button class="btn" data-act="sel" data-i="'+(i-1)+'"'+(i===0?" disabled":"")+'>Sesión anterior</button><button class="btn" data-act="sel" data-i="'+(i+1)+'"'+(i===state.sessions.length-1?" disabled":"")+'>Sesión siguiente</button></div>';
+   +'<div class="nav"><button class="btn" data-act="sel" data-i="'+(i-1)+'"'+(i===0?" disabled":"")+'>Sesión anterior</button><button class="btn" data-act="sel" data-i="'+(i+1)+'"'+(i===state.sessions.length-1||!isOpen(i+1)?" disabled":"")+'>Sesión siguiente</button></div>';
   return h;
 }
 
@@ -395,7 +409,9 @@ function resumenHTML(){
   var h='<h2 style="font-size:26px;margin-bottom:6px">Resumen del plan</h2>'
    +'<p class="small-print" style="margin:0 0 4px">'+(state.savedAt?'Guardado el '+esc(new Date(state.savedAt).toLocaleString("es-CO",{day:"numeric",month:"long",hour:"numeric",minute:"2-digit"})):'Aún no guardado')+(dirty?' · hay cambios sin guardar':'')+'</p>'
    +'<div class="actions"><button class="btn primary" data-act="copy">Copiar resumen</button><button class="btn" data-act="pdf">Descargar PDF</button><button class="btn" data-act="view" data-v="plan">Volver al plan</button></div>';
+  if(!state.expanded) h+='<p class="note" style="margin-top:12px">Este plan tiene la sesión 1 completa. Las sesiones 2 a 9 quedan por definir.</p>';
   state.sessions.forEach(function(s,i){
+    if(!isOpen(i)){ h+='<section class="sum-session"><h3>'+esc(lbl(s))+'. '+esc(s.titulo)+'</h3><p style="margin:6px 0 0"><span class="small-print">Área propuesta: '+esc(s.area)+'. '+esc(PEND)+'</span></p></section>'; return; }
     var ppl=s.personas.concat(s.invitados);
     h+='<section class="sum-session"><h3>'+esc(lbl(s))+'. '+esc(s.titulo)+'</h3>'
      +'<dl class="sum-meta"><dt>Área</dt><dd>'+esc(s.area)+'</dd><dt>Fecha</dt><dd>'+esc(whenText(s))+' ('+esc(s.duracion)+' h)</dd><dt>Personas</dt><dd>'+(ppl.length?esc(ppl.join(", ")):"Por definir")+'</dd><dt>Objetivo</dt><dd>'+esc(s.objetivo)+'</dd></dl>'
@@ -418,8 +434,10 @@ function summaryText(){
   L.push("PLAN DE TRABAJO · SASA CONSULTORÍA");
   L.push("Ciclo de autonomía · 9 sesiones y un taller de regalo"+(state.savedAt?" · guardado el "+new Date(state.savedAt).toLocaleDateString("es-CO",{day:"numeric",month:"long",year:"numeric"}):""));
   L.push("");
+  if(!state.expanded){ L.push("Este plan tiene la sesión 1 completa. Las sesiones 2 a 9 quedan por definir."); L.push(""); }
   state.sessions.forEach(function(s,i){
     L.push(lbl(s).toUpperCase()+" · "+s.titulo);
+    if(!isOpen(i)){ L.push("Área propuesta: "+s.area); L.push(PEND); L.push(""); return; }
     L.push("Área: "+s.area);
     L.push("Fecha: "+whenText(s)+" ("+s.duracion+" h)");
     var ppl=s.personas.concat(s.invitados);
@@ -456,6 +474,7 @@ function makePdf(){
   state.sessions.forEach(function(s,i){
     if(y>235){ doc.addPage(); y=M; }
     para(lbl(s)+". "+s.titulo,{size:14,style:"bold",color:ACC,after:1.5});
+    if(!isOpen(i)){ para("Área propuesta: "+s.area,{after:.5}); para(PEND,{size:9,color:MUT,after:2}); y+=2; return; }
     var ppl=s.personas.concat(s.invitados);
     para("Área: "+s.area,{after:.5}); para("Fecha: "+whenText(s)+" ("+s.duracion+" h)",{after:.5});
     para("Personas: "+(ppl.length?ppl.join(", "):"por definir"),{after:.5}); para("Objetivo: "+s.objetivo,{after:2});
@@ -555,6 +574,8 @@ app.addEventListener("click",function(e){
   if(a==="addtema"){ s.temas.push(T("Nuevo tema","Propuesto por Sandra","","")); markDirty(); refresh(); return; }
   if(a==="rmtema"){ s.temas.splice(+b.dataset.k,1); markDirty(); refresh(); return; }
   if(a==="pay"){ state.payment=b.dataset.v; markDirty(); render(); return; }
+  if(a==="expand"){ state.expanded=true; sel=1; markDirty(); render(); var ed2=document.getElementById("editor"); if(ed2) ed2.scrollIntoView({block:"start"}); return; }
+  if(a==="collapse"){ state.expanded=false; sel=0; markDirty(); render(); window.scrollTo(0,0); return; }
   if(a==="save"){ save(view==="plan"); return; }
   if(a==="copy"){
     var txt=summaryText();
