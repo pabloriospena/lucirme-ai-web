@@ -125,8 +125,9 @@ import { jsPDF } from "jspdf";
 
 
 /* ===== Valores que edita Pablo en el código (no aparecen como campos editables) ===== */
-var PRICE_TOTAL = 8000000;      // valor del programa de 8 sesiones, en COP
-var ENDPOINT = "";              // opcional: URL de un webhook (Make) que reciba el plan guardado
+var PRICE_TOTAL = 8000000;      // valor de todo el programa (9 sesiones y el taller de regalo), en COP
+var ENDPOINT = "https://hook.us2.make.com/eg6vornj63j819a4a44pf1uzgdd7yjms"; // webhook de Make que guarda el plan en Notion
+var ENDPOINT_TOKEN = "O7gpNfva9dzEdHK0tg9pSEFk";
 var DISCOUNT = 0.10;            // descuento por pago total anticipado
 var SPLIT = [0.5, 0.5];         // pago 1 antes de la sesión 1, pago 2 antes de la sesión 5
 var SPLIT_AT = [1, 5];
@@ -135,8 +136,9 @@ var DIAS = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"
 var MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
 var MESES_C = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
 var HOLIDAYS = {"2026-12-08":"festivo","2026-12-25":"festivo","2027-01-01":"festivo","2027-01-11":"festivo","2027-03-22":"festivo"};
+var BLOCKED_WEEKS = {"2026-12-07":true}; // semanas no disponibles
 var MONDAYS = [];
-(function(){ var d=Date.UTC(2026,11,7); for(var i=0;i<16;i++){ MONDAYS.push(iso(new Date(d+i*7*86400000))); } })();
+(function(){ var d=Date.UTC(2026,10,23); for(var i=0;i<18;i++){ var m=iso(new Date(d+i*7*86400000)); if(!BLOCKED_WEEKS[m]) MONDAYS.push(m); } })();
 
 var ROSTER = [
   ["Sandra Arango","Gerente General"],
@@ -238,7 +240,7 @@ function defaultState(){
         T("Decisión sobre la siguiente fase","Resultados medidos","Resultados medidos del ciclo.","Decisión de Sandra con números en la mano.")
       ]})
   ];
-  list.forEach(function(s,i){ s.semana=MONDAYS[[0,1,2,5,6,7,8,9,10,11][i]]; });
+  list.forEach(function(s,i){ s.semana=MONDAYS[[0,1,2,3,6,7,8,9,10,11][i]]; });
   return {version:2,savedAt:null,payment:null,
     notas:"Fuera de alcance según el formulario del 6 de noviembre: desarrollo de software. Los dolores técnicos reportados (bugs, instancias de backend, empalme de proyectos en curso, interfaz gráfica) no entran en este plan.",
     sessions:list};
@@ -305,7 +307,7 @@ function barHTML(){
 
 function planHTML(){
   var h='<ol class="steps"><li>Revisa cada sesión: personas, temas y fecha.</li><li>Cambia lo que haga falta. Cada tema tiene punto de partida y resultado para medir.</li><li>Guarda el plan y genera el resumen.</li></ol>'
-   +'<p class="lead">Los temas salen del formulario de dolores (13 respuestas), del formulario base del 6 de noviembre, de los talleres del 9 y 18 de noviembre y de las reuniones con Sandra. Las personas por sesión son una propuesta: cámbialas. El taller de regalo va antes de la sesión 5.</p>'
+   +'<p class="lead">Los temas salen del formulario de dolores (13 respuestas), del formulario base del 6 de noviembre, de los talleres del 9 y 18 de noviembre y de las reuniones con Sandra. Las personas por sesión son una propuesta: cámbialas. El taller de regalo va antes de la sesión 5. La semana del 7 de diciembre no está disponible. Este plan no incluye desarrollo de software.</p>'
    +'<div class="tl-scroll"><div class="tl" id="tl">'+timelineHTML()+'</div></div>'
    +'<div class="editor" id="editor">'+editorHTML()+'</div>'
    +'<h3>Notas generales del plan</h3><label><span class="small-print">Alcance, fuera de alcance y acuerdos</span><textarea id="notas" rows="3" data-g="notas">'+esc(state.notas)+'</textarea></label>';
@@ -403,7 +405,7 @@ function resumenHTML(){
   });
   if(state.notas) h+='<section class="sum-session"><h3>Notas del plan</h3><p style="margin:6px 0 0">'+esc(state.notas)+'</p></section>';
   h+='<h2 style="font-size:24px;margin:28px 0 4px">Siguiente paso: pago</h2>'
-   +'<p class="lead" style="margin-bottom:0">Para empezar hay que pagar las sesiones. Elige cómo.</p>'+payHTML()
+   +'<p class="lead" style="margin-bottom:0">Para empezar hay que pagar el programa. El valor incluye las 9 sesiones y el taller de regalo. Elige cómo.</p>'+payHTML()
    +'<p style="margin:16px 0 0"><b>'+esc(payLine())+'</b></p>'
    +'<div class="actions"><button class="btn primary" data-act="save">Guardar elección</button></div>'
    +'<p class="small-print">Después de guardar, descarga el PDF o copia el resumen y envíaselo a Pablo para confirmar fechas y coordinar el pago.</p>';
@@ -486,11 +488,40 @@ async function save(goResumen){
   var msg=okLocal?"Plan guardado en este navegador.":"No se pudo guardar en este navegador. Copia el resumen para no perder los cambios.";
   if(ENDPOINT){
     try{
-      var r=await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({cliente:"Sasa Consultoría",guardado:state.savedAt,resumen:summaryText(),plan:state})});
+      var fd=new FormData();
+      fd.append("token",ENDPOINT_TOKEN);
+      fd.append("guardado",state.savedAt);
+      fd.append("notion_body",notionBody());
+      var r=await fetch(ENDPOINT,{method:"POST",body:fd});
       msg=r.ok?"Plan guardado y enviado a Pablo.":msg+" No se pudo enviar a Pablo: copia el resumen y mándaselo.";
     }catch(e){ msg=msg+" No se pudo enviar a Pablo: copia el resumen y mándaselo."; }
   }
   toast(msg);
+}
+
+/* ===== Envío a Notion (vía Make) ===== */
+function notionBody(){
+  var txt=summaryText(), blocks=[];
+  var cur="";
+  txt.split("\n").forEach(function(line){
+    while(line.length>1800){ if(cur){ blocks.push(cur); cur=""; } blocks.push(line.slice(0,1800)); line=line.slice(1800); }
+    if(cur.length+line.length+1>1800){ blocks.push(cur); cur=line; }
+    else cur=cur?cur+"\n"+line:line;
+  });
+  if(cur) blocks.push(cur);
+  blocks=blocks.slice(0,99);
+  var d=new Date(state.savedAt);
+  var fecha=d.toLocaleDateString("es-CO",{day:"numeric",month:"short",year:"numeric",timeZone:"America/Bogota"});
+  return JSON.stringify({
+    parent:{type:"data_source_id",data_source_id:"41e98835-1bd4-8104-9843-000bd4ca1911"},
+    properties:{
+      "Plan":{title:[{text:{content:"Plan Sasa · "+fecha}}]},
+      "Cliente":{rich_text:[{text:{content:"Sasa Consultoría"}}]},
+      "Guardado":{date:{start:state.savedAt}},
+      "Pago elegido":{rich_text:[{text:{content:payLine().slice(0,1900)}}]}
+    },
+    children:blocks.map(function(t){ return {object:"block",type:"paragraph",paragraph:{rich_text:[{type:"text",text:{content:t}}]}}; })
+  });
 }
 
 /* ===== Eventos ===== */
