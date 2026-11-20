@@ -1,0 +1,517 @@
+---
+// Plan de trabajo con Seguros CM: 8 sesiones del ciclo de autonomía y un taller para todo el equipo.
+// Página interactiva: Daniel edita personas, temas y fechas, guarda en su navegador,
+// genera el resumen (copiar o PDF). La parte del saldo está apagada: PAGO_ACTIVO en el script.
+// El envío a Notion (ENDPOINT) queda vacío hasta que exista el webhook de Make de CM.
+import Layout from "../../../layouts/Layout.astro";
+---
+
+<Layout title="Plan de trabajo | Seguros CM" hideHeader hideFooter noindex>
+  <div id="plan-root">
+    <div class="topbar"><b>LuciRMe AI</b><span>/</span><span>Seguros CM</span><span>/</span><span>Plan de trabajo</span></div>
+    <div id="app"></div>
+  </div>
+</Layout>
+
+<style is:global>
+#plan-root *{box-sizing:border-box}
+#plan-root{background:var(--p-paper);color:var(--p-ink);font-family:var(--p-font-body);font-size:16px;line-height:1.5;--p-ink:#0F172A;--p-paper:#FBFBFA;--p-card:#FFFFFF;--p-line:#E9E9E7;--p-muted:#64748B;--p-accent:#0F766E;--p-accent-soft:#E6F6F4;--p-warn:#B45309;--p-warn-soft:#FEF3C7;--p-bad:#B91C1C;--p-font-display:ui-sans-serif,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--p-font-body:ui-sans-serif,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;min-height:100vh}
+#plan-root h1,#plan-root h2,#plan-root h3{font-family:var(--p-font-display);text-wrap:balance;margin:0}
+#plan-root button,#plan-root input,#plan-root select,#plan-root textarea{font:inherit;color:inherit}
+#plan-root .wrap{max-width:980px;margin:0 auto;padding:24px 16px 120px}
+#plan-root .topbar{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--p-line);padding:12px 16px;font-size:12px;color:#787774;display:flex;gap:8px;align-items:center}
+#plan-root .topbar b{font-weight:600;color:var(--p-ink)}
+#plan-root .top{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-end;padding-bottom:20px;border-bottom:1px solid var(--p-line)}
+#plan-root .brand{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--p-muted);margin:0 0 6px}
+#plan-root h1{font-size:clamp(28px,5vw,44px);line-height:1.05;font-weight:700}
+#plan-root .sub{margin:8px 0 0;color:var(--p-muted);max-width:60ch}
+#plan-root .status{display:inline-flex;align-items:center;gap:8px;font-size:14px;padding:6px 12px;border:1px solid var(--p-line);border-radius:999px;background:var(--p-card)}
+#plan-root .dot{width:9px;height:9px;border-radius:50%;background:var(--p-warn)}
+#plan-root .status.ok .dot{background:var(--p-accent)}
+#plan-root .tabs{display:flex;gap:4px;margin:20px 0 0}
+#plan-root .tab{padding:10px 18px;border:1px solid var(--p-line);border-bottom:none;background:transparent;border-radius:10px 10px 0 0;cursor:pointer;color:var(--p-muted);font-weight:500}
+#plan-root .tab[aria-selected="true"]{background:var(--p-card);color:var(--p-ink);font-weight:600}
+#plan-root .panel{background:var(--p-card);border:1px solid var(--p-line);border-radius:0 12px 12px 12px;padding:20px}
+#plan-root .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px;padding:0;list-style:none;counter-reset:s}
+#plan-root .steps li{counter-increment:s;padding:12px 14px;border:1px solid var(--p-line);border-radius:10px;font-size:15px;background:var(--p-paper)}
+#plan-root .steps li::before{content:counter(s);display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--p-ink);color:var(--p-paper);font-weight:600;font-size:13px;margin-right:8px}
+#plan-root .lead{margin:0 0 20px;max-width:70ch}
+#plan-root .tl-scroll{overflow-x:auto;margin:0 -4px 20px;padding:4px}
+#plan-root .node.locked{opacity:.55;cursor:default;border-style:dashed}
+#plan-root .decide{margin-top:24px;padding:18px 20px;border:1px solid var(--p-line);border-radius:12px;background:var(--p-accent-soft)}
+#plan-root .decide p{margin:6px 0 12px}
+#plan-root .tl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+#plan-root .node{text-align:left;padding:10px;border:1px solid var(--p-line);border-radius:10px;background:var(--p-paper);cursor:pointer;display:flex;flex-direction:column;gap:2px}
+#plan-root .node:hover{border-color:var(--p-accent)}
+#plan-root .node[aria-current="true"]{border-color:var(--p-accent);background:var(--p-accent-soft);box-shadow:inset 0 3px 0 var(--p-accent)}
+#plan-root .node b{font-family:var(--p-font-display);font-size:13px;color:var(--p-muted)}
+#plan-root .node span{font-size:14px;font-weight:600;line-height:1.25}
+#plan-root .node small{font-size:12px;color:var(--p-muted)}
+#plan-root .node.set small{color:var(--p-accent);font-weight:600}
+#plan-root .editor{border-top:1px solid var(--p-line);padding-top:20px}
+#plan-root .kicker{font-size:13px;color:var(--p-muted);margin:0 0 4px;font-weight:600}
+#plan-root .titulo{width:100%;font-family:var(--p-font-display);font-size:clamp(22px,3.4vw,30px);font-weight:700;border:1px solid transparent;border-radius:8px;padding:4px 8px;margin:0 0 12px -8px;background:transparent}
+#plan-root .titulo:hover,#plan-root .titulo:focus{border-color:var(--p-line);background:var(--p-paper)}
+#plan-root .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#plan-root .grid2 .narrow{max-width:none}
+#plan-root .row2{display:grid;grid-template-columns:2fr 1fr;gap:12px}
+#plan-root label{display:flex;flex-direction:column;gap:4px;font-size:14px;font-weight:600;color:var(--p-muted)}
+#plan-root input[type=text],#plan-root input[type=number],#plan-root select,#plan-root textarea{width:100%;padding:9px 11px;border:1px solid var(--p-line);border-radius:8px;background:var(--p-paper);color:var(--p-ink);font-weight:400;font-size:15px}
+#plan-root textarea{resize:vertical;min-height:64px}
+#plan-root input:focus-visible,#plan-root select:focus-visible,#plan-root textarea:focus-visible,#plan-root button:focus-visible{outline:3px solid var(--p-accent);outline-offset:1px}
+#plan-root h3{font-size:18px;margin:24px 0 10px}
+#plan-root .note{background:var(--p-warn-soft);color:var(--p-ink);border-left:4px solid var(--p-warn);padding:10px 14px;border-radius:6px;font-size:14px;margin:12px 0}
+#plan-root .chips{display:flex;flex-wrap:wrap;gap:8px}
+#plan-root .chip{display:flex;flex-direction:column;align-items:flex-start;padding:7px 12px;border:1px solid var(--p-line);border-radius:10px;background:var(--p-paper);cursor:pointer;text-align:left;min-width:140px}
+#plan-root .chip small{font-size:12px;color:var(--p-muted)}
+#plan-root .chip[aria-pressed="true"]{background:var(--p-accent-soft);border-color:var(--p-accent)}
+#plan-root .chip[aria-pressed="true"] b::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--p-accent);margin-right:7px}
+#plan-root .chip b{font-size:14px}
+#plan-root .guest{display:flex;gap:8px;margin-top:10px;max-width:420px}
+#plan-root .btn{padding:9px 16px;border-radius:8px;border:1px solid var(--p-ink);background:transparent;cursor:pointer;font-weight:600}
+#plan-root .btn:hover{background:var(--p-paper)}
+#plan-root .btn.primary{background:var(--p-accent);border-color:var(--p-accent);color:#fff}
+#plan-root .btn.primary:hover{filter:brightness(1.08)}
+#plan-root .btn.small{padding:5px 10px;font-size:13px}
+#plan-root .btn.danger{border-color:var(--p-line);color:var(--p-bad)}
+#plan-root .slots{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+#plan-root .slot{padding:12px;border:1px solid var(--p-line);border-radius:10px;background:var(--p-paper);cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:2px}
+#plan-root .slot[aria-pressed="true"]{border-color:var(--p-accent);background:var(--p-accent-soft);box-shadow:inset 0 3px 0 var(--p-accent)}
+#plan-root .slot[disabled]{opacity:.5;cursor:not-allowed}
+#plan-root .slot b{font-size:15px}
+#plan-root .slot span{font-size:14px}
+#plan-root .slot small{font-size:12px;color:var(--p-muted)}
+#plan-root .warn{color:var(--p-warn);font-size:14px;margin:8px 0 0}
+#plan-root .tema{border:1px solid var(--p-line);border-radius:12px;padding:14px;margin-bottom:12px;background:var(--p-paper)}
+#plan-root .tema-head{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px}
+#plan-root .tema-name{font-weight:600;font-size:16px;margin-bottom:10px}
+#plan-root .tema .fuente{margin-top:10px}
+#plan-root .tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--p-accent-soft);color:var(--p-accent)}
+#plan-root .start-lbl{color:var(--p-warn)}
+#plan-root .end-lbl{color:var(--p-accent)}
+#plan-root .nav{display:flex;justify-content:space-between;gap:12px;margin-top:20px}
+#plan-root .bar{position:fixed;left:0;right:0;bottom:0;background:var(--p-card);border-top:1px solid var(--p-line);padding:12px 16px;z-index:5}
+#plan-root .bar-in{max-width:980px;margin:0 auto;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+#plan-root .bar-in p{margin:0;font-size:14px;color:var(--p-muted)}
+#plan-root .sum-session{border:1px solid var(--p-line);border-radius:12px;padding:16px;margin-bottom:12px;background:var(--p-paper)}
+#plan-root .sum-session h3{margin:0 0 4px;font-size:19px}
+#plan-root .sum-meta{display:grid;grid-template-columns:110px 1fr;gap:4px 12px;font-size:15px;margin:10px 0}
+#plan-root .sum-meta dt{color:var(--p-muted);font-weight:600}
+#plan-root .sum-meta dd{margin:0}
+#plan-root .sum-temas{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+#plan-root .sum-temas th,#plan-root .sum-temas td{text-align:left;vertical-align:top;padding:8px 10px;border-top:1px solid var(--p-line)}
+#plan-root .sum-temas th{color:var(--p-muted);font-size:13px}
+#plan-root .wide{overflow-x:auto}
+#plan-root .pay{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+#plan-root .pay-card{text-align:left;border:1px solid var(--p-line);border-radius:12px;padding:16px;background:var(--p-paper);cursor:pointer;display:flex;flex-direction:column;gap:6px}
+#plan-root .pay-card[aria-pressed="true"]{border-color:var(--p-accent);background:var(--p-accent-soft);box-shadow:inset 0 3px 0 var(--p-accent)}
+#plan-root .pay-card h4{margin:0;font-family:var(--p-font-display);font-size:18px}
+#plan-root .pay-card .amt{font-family:var(--p-font-display);font-size:26px;font-weight:700}
+#plan-root .pay-card ul{margin:0;padding-left:18px;font-size:14px}
+#plan-root .actions{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+#plan-root .toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);background:var(--p-ink);color:var(--p-paper);padding:10px 18px;border-radius:8px;font-size:14px;z-index:9;max-width:90vw}
+#plan-root .small-print{font-size:13px;color:var(--p-muted)}
+@media (max-width:700px){
+#plan-root .tl{grid-template-columns:repeat(9,150px);min-width:1370px}#plan-root .steps,#plan-root .grid2,#plan-root .row2,#plan-root .slots,#plan-root .pay{grid-template-columns:1fr}
+#plan-root .sum-meta{grid-template-columns:1fr}
+#plan-root .panel{padding:14px}
+
+}
+@media (prefers-reduced-motion:reduce){#plan-root *{transition:none!important;animation:none!important}}
+
+
+</style>
+
+<script>
+import { jsPDF } from "jspdf";
+
+
+
+
+/* ===== Valores que edita Pablo en el código (no aparecen como campos editables) ===== */
+var SALDO = 6100000;   // saldo pendiente del programa, en COP (Notion: tarea del 13 nov y CRM)
+var PAGO_ACTIVO = false; // false: el plan no muestra el saldo ni la fecha de pago. Pasa a true cuando Pablo lo indique.
+var ENDPOINT = "";     // webhook de Make de CM que guarda el plan en Notion; vacío hasta crearlo
+var ENDPOINT_TOKEN = "";
+
+var DIAS = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+var MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+var MESES_C = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+var HOLIDAYS = {"2026-12-08":"festivo","2026-12-25":"festivo","2027-01-01":"festivo","2027-01-11":"festivo","2027-03-22":"festivo"};
+var MONDAYS = [];
+(function(){ var d=Date.UTC(2026,10,23); for(var i=0;i<18;i++){ MONDAYS.push(iso(new Date(d+i*7*86400000))); } })();
+
+var ROSTER = [
+  ["Carlos Mario Osorio Franco","Gerente fundador"],
+  ["Carlos Daniel Osorio Mejía","Director comercial y administrativo, líder de IA"],
+  ["Yenni Patricia Giraldo","Líder operativa y de suscripción empresarial"],
+  ["Sebastián Fuertes","Analista de negocio empresarial"],
+  ["Juan Fernando Marín","Auxiliar de autos y copropiedades"],
+  ["Sara Restrepo","Auxiliar de salud y hogar"],
+  ["Estefany Pérez","Auxiliar de cartera, cumplimiento y vida"],
+  ["Daniela Torres","Externa de comunicación organizacional"]
+];
+
+function T(nombre,fuente,inicio,cierre){ return {nombre:nombre,fuente:fuente,inicio:inicio,cierre:cierre}; }
+
+function S(o){ return {num:o.num||null,tipo:o.tipo||"sesion",titulo:o.titulo,area:o.area,duracion:o.duracion||3,semana:o.semana||null,franja:o.franja||null,hecha:!!o.hecha,fecha:o.fecha||null,horario:o.horario||"",personas:o.personas||[],invitados:[],objetivo:o.objetivo,nota:o.nota||"",temas:o.temas}; }
+
+function defaultState(){
+  var list=[
+    S({num:1,titulo:"Renovaciones: correos, asignación y cobro",area:"Renovaciones y cartera",hecha:true,fecha:"2026-11-18",horario:"8:00 a. m. a 12:00 m.",duracion:4,
+      personas:["Juan Fernando Marín","Sara Restrepo","Estefany Pérez"],
+      objetivo:"Probar con casos reales de renovaciones qué herramienta le sirve al equipo para los correos, la asignación diaria y el cobro.",
+      nota:"Sesión realizada el 18 de noviembre. Falta trabajar con otras 2 personas del equipo.",
+      temas:[
+        T("Correos de renovaciones","Sesión del 18 nov","Trazabilidad de las renovaciones en correos.","Correos trabajados con NotebookLM y Gemini conectado. También se probaron ChatGPT y Copilot."),
+        T("Asignación de renovaciones por día","Sesión del 18 nov","Correo mensual de renovaciones como punto de partida.","Asignación diaria armada con Claude a partir de ese correo."),
+        T("Redacción de cobro","Sesión del 18 nov","Tarea de redacción de cobro.","Redacción de cobro con una skill de Claude."),
+        T("Comparación de herramientas","Sesión del 18 nov","Se acabaron los tokens de Claude durante la sesión.","Se probó Qwen para comparar datos, con resultado regular. Claude es la que más le ha gustado al equipo hasta ahora.")
+      ]}),
+    S({num:2,titulo:"Informe mensual de renovaciones",area:"Renovaciones empresariales",personas:["Yenni Patricia Giraldo","Sebastián Fuertes"],
+      objetivo:"Bajar el tiempo del informe de renovaciones, la tarea que más horas consume según el formulario.",
+      temas:[
+        T("Línea base del grupo","Formulario base, 3 nov","Informe de renovaciones: 8 a 10 horas por semana reportadas.","Tabla de partida (horas, frecuencia y calidad del resultado) para comparar en la segunda ronda."),
+        T("Reporte mensual de renovaciones en los ramos","Formulario base, caso para el taller","Material disponible: trazabilidad en correos y diligenciamiento manual en cotizadores.","Reporte del mes con porcentaje de incremento, cambios en deducibles o sublímites, mejoras en amparos y cotizaciones de otras aseguradoras, armado con IA y revisado contra las fuentes."),
+        T("Instrucciones para repetir el informe","Sesión del 18 nov","Cuaderno de la sesión 1 como modelo.","Instrucciones guardadas para repetir el informe cada mes sin partir de cero.")
+      ]}),
+    S({num:3,titulo:"Siniestros y radicados",area:"Seguros generales",personas:["Juan Fernando Marín","Sara Restrepo"],
+      objetivo:"Reducir el tiempo de lectura de la documentación de siniestros de seguros generales y ordenar los radicados.",
+      temas:[
+        T("Línea base del grupo","Formulario base, 3 nov","Lectura de documentación de siniestros de seguros generales: una de las tres tareas que más tiempo consumen, sin dato de horas.","Horas por semana medidas en la sesión para comparar en la segunda ronda."),
+        T("Lectura de documentación de siniestros","Formulario base, tarea 2","Documentación leída a mano, sin dato de horas.","Resumen de un siniestro real con IA, contrastado con los documentos originales."),
+        T("Radicados","Sesión del 18 nov","Siguen a mano.","Procedimiento de radicado escrito y primera prueba con IA.")
+      ]}),
+    S({num:4,titulo:"Historial y documentos del cliente",area:"Acceso a la información",personas:["Estefany Pérez","Carlos Daniel Osorio Mejía"],
+      objetivo:"Encontrar la documentación y el historial de un cliente sin buscar a mano en correos y carpetas.",
+      nota:"Depende de que Daniel separe OneDrive de la Nube de Sura para poder conectarlo.",
+      temas:[
+        T("Línea base del grupo","Formulario base, 3 nov","Búsqueda de documentación e historial de cliente: una de las tres tareas que más tiempo consumen, sin dato de horas.","Tiempo de una búsqueda real medido para comparar al final."),
+        T("Conectar OneDrive","Acuerdo de la sesión del 18 nov","OneDrive y la Nube de Sura están juntos. Daniel los separa.","Una carpeta de clientes conectada a la IA y una prueba de lectura."),
+        T("Preguntarle a la carpeta de un cliente","Formulario base, resultado esperado","La trazabilidad está en correos.","Una consulta real sobre un cliente, respondida con las fuentes citadas.")
+      ]}),
+    S({tipo:"taller",titulo:"Taller para todo el equipo",area:"Todo el equipo",personas:["Carlos Mario Osorio Franco","Carlos Daniel Osorio Mejía","Yenni Patricia Giraldo","Sebastián Fuertes","Juan Fernando Marín","Sara Restrepo","Estefany Pérez","Daniela Torres"],
+      objetivo:"Compartir con todo el equipo lo que funcionó en las sesiones 1 a 4.",
+      nota:"Va después de las primeras 4 sesiones y no tiene costo adicional. Fecha y horario por definir.",
+      temas:[
+        T("Lo que funcionó en las sesiones 1 a 4","Acuerdo con Daniel","Grupos pequeños con prompts y cuadernos propios.","Lista de los prompts y cuadernos que se comparten con todos."),
+        T("Primeros pasos del resto del equipo","Formulario base, comodidad 2 de 5","El equipo se ubicó en 2 de 5 en comodidad con la IA.","Cada persona con una tarea propia probada con Claude o ChatGPT en su versión gratis.")
+      ]}),
+    S({num:5,titulo:"Recordatorios y SOAT",area:"Cartera y obligatorios",personas:["Estefany Pérez","Sara Restrepo"],
+      objetivo:"Pasar de hacer a mano los recordatorios y el SOAT a una rutina con apoyo de IA.",
+      temas:[
+        T("Línea base del grupo","Sesión del 18 nov","Recordatorios y SOAT siguen a mano.","Horas y frecuencia medidas para comparar en la segunda ronda."),
+        T("Recordatorios","Sesión del 18 nov","A mano.","Plantilla de recordatorio y una rutina probada durante una semana."),
+        T("SOAT","Sesión del 18 nov","A mano.","Pasos del SOAT escritos y la parte que la IA puede hacer, probada en un caso.")
+      ]}),
+    S({num:6,titulo:"Conexión del CRM con la IA",area:"Dirección y comercial",personas:["Carlos Mario Osorio Franco","Carlos Daniel Osorio Mejía"],
+      objetivo:"Definir qué se le consulta al CRM con IA y quién lo usa, a partir de la sesión del 23 de noviembre con Cider.",
+      nota:"El contenido de esta sesión depende de lo que salga de la sesión virtual del 23 de noviembre.",
+      temas:[
+        T("Lo que salió de la sesión con Cider","Sesión del 23 nov, agendada","Por definir: la sesión aún no ocurre.","Decisión de qué se conecta primero y quién lo prueba."),
+        T("Primera consulta al CRM con IA","Sesión del 23 nov, agendada","Por definir.","Una consulta real al CRM respondida por la IA, o una decisión documentada sobre su viabilidad."),
+        T("Reglas de uso de la IA","Formulario base, restricciones","No hay un sistema que permita o prohíba el uso de IA.","Una página con qué herramientas se usan, con qué datos y qué se revisa siempre.")
+      ]}),
+    S({num:7,titulo:"Segunda ronda: medir lo ganado",area:"Renovaciones, cobro y siniestros",personas:["Juan Fernando Marín","Sara Restrepo","Estefany Pérez"],
+      objetivo:"Medir lo ganado en las sesiones 1 a 3 frente a la línea base y ajustar lo que no sirvió.",
+      temas:[
+        T("Medición frente a la línea base","Sesiones 1 a 3","Prompts, cuadernos y skills en uso durante varias semanas.","Tabla de antes y después por tarea: horas, frecuencia y calidad."),
+        T("Ajuste de instrucciones","Sesión del 18 nov","Cuaderno de renovaciones y skill de cobro en uso.","Instrucciones corregidas con lo que falló.")
+      ]}),
+    S({num:8,titulo:"Cierre: resultados y cómo sigue CM",area:"Todo el equipo",personas:["Carlos Mario Osorio Franco","Carlos Daniel Osorio Mejía"],
+      objetivo:"Ver los resultados de todos los grupos y decidir qué sigue sin acompañamiento.",
+      temas:[
+        T("Comparación contra la línea base de todos los grupos","Sesiones 1 a 7","Línea base de cada grupo y resultados de la segunda ronda.","Tabla de antes y después por grupo y tarea."),
+        T("Quién sigue solo y cómo","Sesiones 1 a 7","Grupos con prompts y cuadernos propios, sin rutina fija.","Cada grupo con responsable, cuaderno al día y una reunión de revisión agendada."),
+        T("Licencias","Acuerdo con Daniel","Se usan Claude y ChatGPT en su versión gratis; no se compran licencias hasta que el equipo demuestre uso.","Decisión con los números del ciclo: qué licencias hacen falta, si alguna.")
+      ]})
+  ];
+  return {version:1,savedAt:null,saldoFecha:null,
+    notas:"Fuera de alcance según el formulario del 3 de noviembre: ningún tema. Restricción: no hay un sistema que permita o prohíba el uso de IA. Acuerdos: no se compran licencias hasta que el equipo demuestre uso, y el taller para todo el equipo va después de las primeras 4 sesiones, sin costo adicional. Pendiente: Daniel separa OneDrive de la Nube de Sura para conectarlo.",
+    sessions:list};
+}
+
+/* ===== Utilidades ===== */
+function lbl(s){ return s.tipo==="taller"?"Taller":"Sesión "+s.num; }
+function numSes(n){ return state.sessions.filter(function(x){return x.num===n;})[0]; }
+function iso(d){ return d.toISOString().slice(0,10); }
+function parse(s){ var p=s.split("-"); return new Date(Date.UTC(+p[0],+p[1]-1,+p[2])); }
+function addDays(s,n){ return iso(new Date(parse(s).getTime()+n*86400000)); }
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function fmtDate(s){ var d=parse(s); var y=d.getUTCFullYear(); return DIAS[d.getUTCDay()]+" "+d.getUTCDate()+" de "+MESES[d.getUTCMonth()]+(y!==2026?" de "+y:""); }
+function weekRange(m){ var a=parse(m), b=parse(addDays(m,4)); var sameM=a.getUTCMonth()===b.getUTCMonth(); return a.getUTCDate()+(sameM?"":" "+MESES_C[a.getUTCMonth()])+" al "+b.getUTCDate()+" de "+MESES_C[b.getUTCMonth()]+(b.getUTCFullYear()!==2026?" "+b.getUTCFullYear():""); }
+function fmt12(h){ var H=Math.floor(h), M=Math.round((h-H)*60); if(H===12&&M===0) return "12:00 m."; var s=H>=12?"p. m.":"a. m."; return (H%12||12)+":"+String(M).padStart(2,"0")+" "+s; }
+function money(n){ return "$"+Math.round(n).toLocaleString("es-CO")+" COP"; }
+function slotsFor(m){ if(!m) return []; return [{k:"mar",off:1,name:"Martes"},{k:"jue",off:3,name:"Jueves"}].map(function(s){ s.date=addDays(m,s.off); s.holiday=!!HOLIDAYS[s.date]; return s; }); }
+function slotTime(k,dur){ return fmt12(14)+" a "+fmt12(14+dur); }
+function whenText(s){
+  if(s.hecha) return fmtDate(s.fecha)+", "+s.horario+", realizada";
+  if(!s.semana) return "Semana por elegir (martes o jueves por la tarde)";
+  if(s.franja){ var sl=slotsFor(s.semana).filter(function(x){return x.k===s.franja;})[0]; return fmtDate(sl.date)+", "+slotTime(s.franja,s.duracion)+" (horario por confirmar con CM)"; }
+  return "Semana del "+weekRange(s.semana)+", día por elegir";
+}
+function dateOf(s){ if(s.hecha) return s.fecha; if(!s.franja||!s.semana) return null; return slotsFor(s.semana).filter(function(x){return x.k===s.franja;})[0].date; }
+/* ===== Estado ===== */
+var state, view="plan", sel=0, dirty=false, notice="";
+var LS="plan-cm-borrador-v1";
+
+function loadState(){
+  var emb=null;
+  var s=emb&&emb.sessions?emb:defaultState();
+  try{
+    var raw=localStorage.getItem(LS);
+    if(raw){ var loc=JSON.parse(raw); if(loc&&loc.sessions&&loc.savedAt&&loc.savedAt>(s.savedAt||"")){ s=loc; notice="Hay cambios guardados en este navegador que aún no están en la versión compartida."; } }
+  }catch(e){}
+  return s;
+}
+
+
+/* ===== Vistas ===== */
+var app=document.getElementById("app");
+
+function statusHTML(){
+  if(dirty) return '<span class="status" id="status"><span class="dot"></span>Cambios sin guardar</span>';
+  if(state.savedAt){ var d=new Date(state.savedAt); return '<span class="status ok" id="status"><span class="dot"></span>Guardado '+esc(d.toLocaleString("es-CO",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit"}))+'</span>'; }
+  return '<span class="status" id="status"><span class="dot"></span>Borrador sin guardar</span>';
+}
+function setStatus(){ var el=document.getElementById("status"); if(el) el.outerHTML=statusHTML(); }
+
+function render(){
+  var h='<div class="wrap">'
+   +'<header class="top"><div><p class="brand">LuciRMe AI para Seguros CM</p><h1>Plan de trabajo: 8 sesiones y un taller para todo el equipo</h1>'
+   +'<p class="sub">Ciclo de autonomía con el equipo de Seguros CM. Una base para ajustar entre Daniel y Pablo.</p></div>'+statusHTML()+'</header>'
+   +'<div class="tabs" role="tablist"><button class="tab" role="tab" data-act="view" data-v="plan" aria-selected="'+(view==="plan")+'">1. Plan</button>'
+   +'<button class="tab" role="tab" data-act="view" data-v="resumen" aria-selected="'+(view==="resumen")+'">2. Resumen y pago</button></div>'
+   +'<main class="panel">'+(view==="plan"?planHTML():resumenHTML())+'</main></div>'
+   +(view==="plan"?barHTML():"")+'<div id="toast-slot"></div>';
+  app.innerHTML=h;
+}
+
+function barHTML(){
+  return '<div class="bar"><div class="bar-in"><p>'+(notice?esc(notice):'Edita lo que necesites. Al guardar se arma el resumen.')+'</p>'
+   +'<button class="btn primary" data-act="save">'+'Guardar y ver resumen'+'</button></div></div>';
+}
+
+function planHTML(){
+  var h='<ol class="steps"><li>Revisa cada sesión: personas, temas y fecha.</li><li>Cambia lo que haga falta. Cada tema tiene punto de partida y resultado para medir.</li><li>Elige la semana y el día de cada sesión y envía el plan a Pablo.</li></ol>'
+   +'<p class="lead">Los temas salen del formulario base del 3 de noviembre (tareas que más tiempo consumen y caso para el taller), de la sesión de autonomía del 18 de noviembre y de lo acordado con Daniel. Las personas, los temas y el orden son una propuesta: cámbialos. La sesión 1 ya se hizo. Las fechas se agendan la próxima semana: escoge la semana y el día de cada sesión. El 8 de diciembre es festivo.</p>'
+   +'<div class="note">Antes de seguir: lunes 23 de noviembre, 10:00 a. m. a 11:00 a. m., sesión virtual con Cider sobre la conexión del CRM con la IA. No cuenta dentro de las 8 sesiones.</div>'
+   +'<div class="tl-scroll"><div class="tl" id="tl">'+timelineHTML()+'</div></div>'
+   +'<div class="editor" id="editor">'+editorHTML()+'</div>'
+   +'<h3>Notas generales del plan</h3><label><span class="small-print">Alcance, fuera de alcance y acuerdos</span><textarea id="notas" rows="3" data-g="notas">'+esc(state.notas)+'</textarea></label>';
+  return h;
+}
+
+function timelineHTML(){
+  return state.sessions.map(function(s,i){
+    var d=dateOf(s), corta=d?fmtDate(d).replace(/^\S+ /,""):"";
+    var small=s.hecha?"Realizada · "+esc(corta):(d?esc(corta):(s.semana?esc(weekRange(s.semana))+" · por elegir":"Semana por elegir"));
+    return '<button class="node'+(d?" set":"")+'" data-act="sel" data-i="'+i+'" aria-current="'+(i===sel)+'"><b>'+esc(lbl(s))+'</b><span>'+esc(s.titulo)+'</span><small>'+small+'</small></button>';
+  }).join("");
+}
+function warningsFor(i){
+  var s=state.sessions[i], w=[];
+  if(s.hecha) return w;
+  if(i>0&&s.semana&&state.sessions[i-1].semana&&s.semana<state.sessions[i-1].semana) w.push("Queda en una semana anterior a: "+lbl(state.sessions[i-1])+".");
+  var d=dateOf(s);
+  if(d) state.sessions.forEach(function(o,j){ if(j!==i&&dateOf(o)===d) w.push("Coincide con: "+lbl(o)+", el mismo día."); });
+  if(!s.personas.length&&!s.invitados.length) w.push("Falta definir quién participa.");
+  return w;
+}
+function editorHTML(){
+  var s=state.sessions[sel], i=sel;
+  var h='<p class="kicker">'+lbl(s)+(s.tipo==="taller"?'':' de 8')+'</p>'
+   +'<input type="text" class="titulo" data-f="titulo" value="'+esc(s.titulo)+'" aria-label="Título de la sesión">'
+   +'<div class="row2"><label>Área<input type="text" data-f="area" value="'+esc(s.area)+'"></label>'
+   +'<label>Duración en horas<input type="number" data-f="duracion" min="1" max="6" step="0.5" value="'+esc(s.duracion)+'"></label></div>'
+   +'<label style="margin-top:12px">Objetivo de la sesión<textarea data-f="objetivo" rows="2">'+esc(s.objetivo)+'</textarea></label>'
+   +(s.nota?'<div class="note">'+esc(s.nota)+'</div>':'');
+  h+='<h3>Quién participa</h3><div class="chips">';
+  ROSTER.forEach(function(p){ var on=s.personas.indexOf(p[0])>-1; h+='<button class="chip" data-act="person" data-n="'+esc(p[0])+'" aria-pressed="'+on+'"><b>'+esc(p[0])+'</b><small>'+esc(p[1])+'</small></button>'; });
+  s.invitados.forEach(function(g,k){ h+='<button class="chip" data-act="rmguest" data-k="'+k+'" aria-pressed="true" title="Quitar invitado"><b>'+esc(g)+'</b><small>Invitado, toca para quitar</small></button>'; });
+  h+='</div><div class="guest"><input type="text" id="guest" placeholder="Otra persona" aria-label="Otra persona"><button class="btn small" data-act="addguest">Añadir</button></div>';
+  h+='<h3>Cuándo</h3>';
+  if(s.hecha){
+    h+='<p class="note">'+esc(whenText(s))+'</p>';
+  } else {
+    h+='<label style="max-width:360px">Semana<select data-f="semana"><option value=""'+(s.semana?"":" selected")+'>Semana por elegir</option>'
+     +MONDAYS.map(function(m){ return '<option value="'+m+'"'+(m===s.semana?" selected":"")+'>Semana del '+esc(weekRange(m))+'</option>'; }).join("")+'</select></label>'
+     +'<div class="slots">';
+    slotsFor(s.semana).forEach(function(sl){
+      h+='<button class="slot" data-act="slot" data-k="'+sl.k+'" aria-pressed="'+(s.franja===sl.k)+'"'+(sl.holiday?" disabled":"")+'><b>'+sl.name+' '+parse(sl.date).getUTCDate()+' de '+MESES[parse(sl.date).getUTCMonth()]+'</b><span>'+(sl.holiday?"Festivo":esc(slotTime(sl.k,s.duracion)))+'</span>'+(sl.holiday?'':'<small>Horario por confirmar con CM</small>')+'</button>';
+    });
+    h+='</div>';
+  }
+  warningsFor(i).forEach(function(w){ h+='<p class="warn">'+esc(w)+'</p>'; });
+  h+='<h3>Temas a trabajar</h3>';
+  s.temas.forEach(function(t,k){
+    h+='<article class="tema"><div class="tema-head"><span class="tag">'+esc(t.fuente||"Sin fuente")+'</span><button class="btn small danger" data-act="rmtema" data-k="'+k+'">Quitar tema</button></div>'
+     +'<input type="text" class="tema-name" data-t="'+k+'" data-f="nombre" value="'+esc(t.nombre)+'" aria-label="Nombre del tema">'
+     +'<div class="grid2"><label><span class="start-lbl">Cómo empezamos</span><textarea data-t="'+k+'" data-f="inicio" rows="3">'+esc(t.inicio)+'</textarea></label>'
+     +'<label><span class="end-lbl">Con qué terminamos</span><textarea data-t="'+k+'" data-f="cierre" rows="3">'+esc(t.cierre)+'</textarea></label></div>'
+     +'<label class="fuente"><span>De dónde sale</span><input type="text" data-t="'+k+'" data-f="fuente" value="'+esc(t.fuente)+'"></label></article>';
+  });
+  h+='<button class="btn" data-act="addtema">Añadir tema</button>'
+   +'<div class="nav"><button class="btn" data-act="sel" data-i="'+(i-1)+'"'+(i===0?" disabled":"")+'>Sesión anterior</button><button class="btn" data-act="sel" data-i="'+(i+1)+'"'+(i===state.sessions.length-1?" disabled":"")+'>Sesión siguiente</button></div>';
+  return h;
+}
+
+
+function payHTML(){
+  return '<label style="max-width:320px">Fecha en que quedará pagado el saldo<input type="date" data-g="saldoFecha" value="'+esc(state.saldoFecha||"")+'"></label>';
+}
+function payLine(){
+  return "Saldo pendiente: "+money(SALDO)+". "+(state.saldoFecha?"Fecha de pago: "+fmtDate(state.saldoFecha)+".":"Fecha de pago por definir.");
+}
+function resumenHTML(){
+  var h='<h2 style="font-size:26px;margin-bottom:6px">Resumen del plan</h2>'
+   +'<p class="small-print" style="margin:0 0 4px">'+(state.savedAt?'Guardado el '+esc(new Date(state.savedAt).toLocaleString("es-CO",{day:"numeric",month:"long",hour:"numeric",minute:"2-digit"})):'Aún no guardado')+(dirty?' · hay cambios sin guardar':'')+'</p>'
+   +'<div class="actions"><button class="btn primary" data-act="copy">Copiar resumen</button><button class="btn" data-act="pdf">Descargar PDF</button><button class="btn" data-act="view" data-v="plan">Volver al plan</button></div>';
+  state.sessions.forEach(function(s,i){
+    var ppl=s.personas.concat(s.invitados);
+    h+='<section class="sum-session"><h3>'+esc(lbl(s))+'. '+esc(s.titulo)+'</h3>'
+     +'<dl class="sum-meta"><dt>Área</dt><dd>'+esc(s.area)+'</dd><dt>Fecha</dt><dd>'+esc(whenText(s))+' ('+esc(s.duracion)+' h)</dd><dt>Personas</dt><dd>'+(ppl.length?esc(ppl.join(", ")):"Por definir")+'</dd><dt>Objetivo</dt><dd>'+esc(s.objetivo)+'</dd></dl>'
+     +'<div class="wide"><table class="sum-temas"><thead><tr><th>Tema</th><th>Cómo empezamos</th><th>Con qué terminamos</th></tr></thead><tbody>'
+     +s.temas.map(function(t){ return '<tr><td><b>'+esc(t.nombre)+'</b><br><span class="small-print">'+esc(t.fuente)+'</span></td><td>'+esc(t.inicio)+'</td><td>'+esc(t.cierre)+'</td></tr>'; }).join("")
+     +'</tbody></table></div></section>';
+  });
+  if(state.notas) h+='<section class="sum-session"><h3>Notas del plan</h3><p style="margin:6px 0 0">'+esc(state.notas)+'</p></section>';
+  if(!PAGO_ACTIVO) return h+'<p class="small-print" style="margin-top:20px">Descarga el PDF o copia el resumen y envíaselo a Pablo para confirmar las fechas.</p>';
+  h+='<h2 style="font-size:24px;margin:28px 0 4px">Siguiente paso: el saldo</h2>'
+   +'<p class="lead" style="margin-bottom:12px">Queda un saldo pendiente del programa. Elige la fecha en que quedará pagado.</p>'+payHTML()
+   +'<p style="margin:16px 0 0"><b>'+esc(payLine())+'</b></p>'
+   +'<div class="actions"><button class="btn primary" data-act="save">Guardar fecha</button></div>'
+   +'<p class="small-print">Después de guardar, descarga el PDF o copia el resumen y envíaselo a Pablo para confirmar fechas.</p>';
+  return h;
+}
+
+/* ===== Resumen en texto ===== */
+function summaryText(){
+  var L=[];
+  L.push("PLAN DE TRABAJO · SEGUROS CM");
+  L.push("Ciclo de autonomía · 8 sesiones y un taller para todo el equipo"+(state.savedAt?" · guardado el "+new Date(state.savedAt).toLocaleDateString("es-CO",{day:"numeric",month:"long",year:"numeric"}):""));
+  L.push("");
+  L.push("Antes de seguir: lunes 23 de noviembre, 10:00 a. m. a 11:00 a. m., sesión virtual con Cider sobre la conexión del CRM con la IA (no cuenta dentro de las 8 sesiones)."); L.push("");
+  state.sessions.forEach(function(s,i){
+    L.push(lbl(s).toUpperCase()+" · "+s.titulo);
+    L.push("Área: "+s.area);
+    L.push("Fecha: "+whenText(s)+" ("+s.duracion+" h)");
+    var ppl=s.personas.concat(s.invitados);
+    L.push("Personas: "+(ppl.length?ppl.join(", "):"por definir"));
+    L.push("Objetivo: "+s.objetivo);
+    L.push("Temas:");
+    s.temas.forEach(function(t,k){
+      L.push("  "+(k+1)+". "+t.nombre+" ("+t.fuente+")");
+      L.push("     Empezamos: "+t.inicio);
+      L.push("     Terminamos: "+t.cierre);
+    });
+    L.push("");
+  });
+  if(state.notas){ L.push("NOTAS"); L.push(state.notas); L.push(""); }
+  if(PAGO_ACTIVO){ L.push("SALDO"); L.push(payLine()); }
+  return L.join("\n");
+}
+
+/* ===== PDF ===== */
+function clean(t){ return String(t).replace(/[–—]/g,"-").replace(/[“”]/g,'"').replace(/[‘’]/g,"'").replace(/ /g," "); }
+function makePdf(){
+  var J=jsPDF;
+  var doc=new J({unit:"mm",format:"a4"});
+  var W=210, M=18, y=M, ACC=[11,122,102], INK=[18,38,43], MUT=[86,101,104];
+  function para(t,o){
+    o=o||{}; var size=o.size||10.5, x=M+(o.x||0), w=W-M-x, lh=size*0.3528*1.4;
+    doc.setFont("helvetica",o.style||"normal"); doc.setFontSize(size); doc.setTextColor.apply(doc,o.color||INK);
+    doc.splitTextToSize(clean(t),w).forEach(function(l){ if(y+lh>285){ doc.addPage(); y=M; } doc.text(l,x,y); y+=lh; });
+    y+=(o.after==null?1.2:o.after);
+  }
+  para("Plan de trabajo · Seguros CM",{size:20,style:"bold",after:1});
+  para("Ciclo de autonomía · 8 sesiones y un taller para todo el equipo"+(state.savedAt?" · guardado el "+new Date(state.savedAt).toLocaleDateString("es-CO",{day:"numeric",month:"long",year:"numeric"}):""),{color:MUT,after:6});
+  state.sessions.forEach(function(s,i){
+    if(y>235){ doc.addPage(); y=M; }
+    para(lbl(s)+". "+s.titulo,{size:14,style:"bold",color:ACC,after:1.5});
+    var ppl=s.personas.concat(s.invitados);
+    para("Área: "+s.area,{after:.5}); para("Fecha: "+whenText(s)+" ("+s.duracion+" h)",{after:.5});
+    para("Personas: "+(ppl.length?ppl.join(", "):"por definir"),{after:.5}); para("Objetivo: "+s.objetivo,{after:2});
+    s.temas.forEach(function(t,k){
+      para((k+1)+". "+t.nombre,{style:"bold",x:3,after:.3});
+      para("Fuente: "+t.fuente,{size:9,color:MUT,x:6,after:.3});
+      para("Empezamos: "+t.inicio,{x:6,after:.3});
+      para("Terminamos: "+t.cierre,{x:6,after:2});
+    });
+    y+=4;
+  });
+  if(state.notas){ para("Notas del plan",{size:14,style:"bold",color:ACC,after:1.5}); para(state.notas,{after:5}); }
+  if(PAGO_ACTIVO){ para("Saldo",{size:14,style:"bold",color:ACC,after:1.5}); para(payLine()); }
+  return doc;
+}
+
+/* ===== Guardado ===== */
+function toast(msg){
+  var slot=document.getElementById("toast-slot"); if(!slot) return;
+  slot.innerHTML='<div class="toast" role="status">'+esc(msg)+'</div>';
+  setTimeout(function(){ if(slot) slot.innerHTML=""; },5000);
+}
+async function save(goResumen){
+  state.savedAt=new Date().toISOString();
+  var okLocal=true;
+  try{ localStorage.setItem(LS,JSON.stringify(state)); }catch(e){ okLocal=false; }
+  dirty=false; notice="";
+  if(goResumen) view="resumen";
+  render();
+  var msg=okLocal?"Plan guardado en este navegador.":"No se pudo guardar en este navegador. Copia el resumen para no perder los cambios.";
+  // Envío a Notion: pendiente hasta que exista el webhook de Make de CM (ENDPOINT).
+  if(!ENDPOINT) msg=msg+" Para enviárselo a Pablo, copia el resumen o descarga el PDF.";
+  toast(msg);
+}
+
+/* ===== Eventos ===== */
+function markDirty(){ if(!dirty){ dirty=true; setStatus(); } try{ state.draftAt=new Date().toISOString(); }catch(e){} }
+
+app.addEventListener("input",function(e){
+  var t=e.target, f=t.dataset.f, s=state.sessions[sel];
+  if(t.dataset.g==="notas"){ state.notas=t.value; markDirty(); return; }
+  if(!f) return;
+  if(t.dataset.t!==undefined){ s.temas[+t.dataset.t][f]=t.value; markDirty(); return; }
+  if(f==="semana") return;
+  if(f==="duracion"){ var n=parseFloat(t.value); if(n>0) s.duracion=n; else return; }
+  else s[f]=t.value;
+  markDirty();
+});
+app.addEventListener("change",function(e){
+  var t=e.target, f=t.dataset.f;
+  if(t.dataset.g==="saldoFecha"){ state.saldoFecha=t.value||null; markDirty(); render(); return; }
+  if(f==="semana"){ var s=state.sessions[sel]; s.semana=t.value||null; if(!s.semana) s.franja=null; if(s.franja){ var sl=slotsFor(s.semana).filter(function(x){return x.k===s.franja;})[0]; if(sl.holiday) s.franja=null; } markDirty(); refresh(); return; }
+  if(f==="titulo"||f==="duracion"){ refresh(); }
+});
+function refresh(){ var tl=document.getElementById("tl"), ed=document.getElementById("editor"); if(tl) tl.innerHTML=timelineHTML(); if(ed) ed.innerHTML=editorHTML(); }
+app.addEventListener("click",function(e){
+  var b=e.target.closest("[data-act]"); if(!b) return;
+  var a=b.dataset.act, s=state.sessions[sel];
+  if(a==="view"){ view=b.dataset.v; render(); window.scrollTo(0,0); return; }
+  if(a==="sel"){ var i=+b.dataset.i; if(i>=0&&i<state.sessions.length){ sel=i; refresh(); var ed=document.getElementById("editor"); if(ed) ed.scrollIntoView({block:"start"}); } return; }
+  if(a==="person"){ var n=b.dataset.n, k=s.personas.indexOf(n); if(k>-1) s.personas.splice(k,1); else s.personas.push(n); markDirty(); refresh(); return; }
+  if(a==="addguest"){ var inp=document.getElementById("guest"); var v=inp&&inp.value.trim(); if(v){ s.invitados.push(v); markDirty(); refresh(); } return; }
+  if(a==="rmguest"){ s.invitados.splice(+b.dataset.k,1); markDirty(); refresh(); return; }
+  if(a==="slot"){ s.franja=(s.franja===b.dataset.k)?null:b.dataset.k; markDirty(); refresh(); return; }
+  if(a==="addtema"){ s.temas.push(T("Nuevo tema","Propuesto por CM","","")); markDirty(); refresh(); return; }
+  if(a==="rmtema"){ s.temas.splice(+b.dataset.k,1); markDirty(); refresh(); return; }
+  if(a==="save"){ save(view==="plan"); return; }
+  if(a==="copy"){
+    var txt=summaryText();
+    var done=function(){ toast("Resumen copiado."); };
+    var fallback=function(){ var ta=document.createElement("textarea"); ta.value=txt; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); try{ document.execCommand("copy"); done(); }catch(err){ toast("No se pudo copiar. Selecciona el texto del resumen a mano."); } document.body.removeChild(ta); };
+    try{ navigator.clipboard.writeText(txt).then(done,fallback); }catch(err){ fallback(); }
+    return;
+  }
+  if(a==="pdf"){
+    var doc=makePdf();
+    if(!doc){ toast("No se pudo preparar el PDF. Usa Copiar resumen."); return; }
+    try{ doc.save("plan-de-trabajo-seguros-cm.pdf"); toast("PDF listo."); }catch(err){ toast("No se pudo guardar el PDF. Usa Copiar resumen."); }
+    return;
+  }
+  });
+
+/* ===== Arranque ===== */
+state=loadState();
+render();
+</script>
