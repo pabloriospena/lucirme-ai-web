@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Estud-IA · IA Intermedio · Ajustemos las clases</title>
+  <style>
+    :root {
+      --accent: #0D9488;
+      --accent-hover: #0F766E;
+      --bg: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --text: #0F172A;
+      --text-muted: #475569;
+      --border: #CBD5E1;
+      --error: #EF4444;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      padding: 24px 16px;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Card / Box */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+      border: 1px solid #E2E8F0;
+      padding: 32px 24px;
+      margin-bottom: 24px;
+    }
+
+    @media (min-width: 640px) {
+      .card {
+        padding: 48px 40px;
+      }
+    }
+
+    /* Header */
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 12px;
+      letter-spacing: -0.025em;
+    }
+
+    .intro {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 24px;
+    }
+
+    /* Error state for invalid client */
+    .error-banner {
+      background: #FEF2F2;
+      border: 1px solid #FCA5A5;
+      color: #991B1B;
+      padding: 24px;
+      border-radius: var(--radius);
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--accent);
+      color: white;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.2s, transform 0.1s;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .btn:active {
+      transform: scale(0.99);
+    }
+
+    .btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #F1F5F9;
+      color: var(--text);
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background-color 0.2s;
+      margin-bottom: 20px;
+    }
+
+    .btn-secondary:hover {
+      background-color: #E2E8F0;
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 28px;
+      border-bottom: 1px solid #F1F5F9;
+      padding-bottom: 24px;
+    }
+
+    .form-group:last-of-type {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 32px;
+    }
+
+    label.question-label {
+      display: block;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      font-size: 1.05rem;
+    }
+
+    .required-star {
+      color: var(--error);
+      margin-left: 3px;
+    }
+
+    .help-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--text);
+      background-color: #FFFFFF;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .char-counter {
+      text-align: right;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Checkboxes & Radios */
+    .checkbox-group, .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .checkbox-label, .radio-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 400;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    /* Rating (1 to 5) */
+    .rating-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .rating-btn {
+      flex: 1;
+      min-width: 48px;
+      height: 48px;
+      border: 1px solid var(--border);
+      background: #FFFFFF;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .rating-btn:hover {
+      border-color: var(--accent);
+      background: #F0FDFA;
+    }
+
+    .rating-btn.selected {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    /* Task Rows (Question 5) */
+    .task-row {
+      display: grid;
+      grid-template-columns: 1fr 140px;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 480px) {
+      .task-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .field-error {
+      color: var(--error);
+      font-size: 0.85rem;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .has-error input,
+    .has-error textarea,
+    .has-error .rating-group {
+      border-color: var(--error);
+    }
+
+    .has-error .field-error {
+      display: block;
+    }
+
+    /* Honeypot */
+    .hp-field {
+      position: absolute;
+      left: -9999px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Footer / Privacy */
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 24px;
+    }
+
+    /* Success / Thank you state */
+    .thank-you {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .thank-you h2 {
+      font-size: 1.8rem;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .thank-you p {
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      font-size: 1.1rem;
+    }
+
+    .alert-box {
+      background: #FEF2F2;
+      border: 1px solid #FCA5A5;
+      color: #991B1B;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+      display: none;
+    }
+  
+    .hp-field{position:absolute;left:-9999px;opacity:0;pointer-events:none}
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div id="view-form" class="card">
+      <h1>Ajustemos las clases del grupo Intermedio</h1>
+      <p class="intro">Son unos 2 minutos y es anónimo. Lo uso para preparar la clase del martes.</p>
+
+      <div id="submit-error-alert" class="alert-box">Hubo un problema al enviar el formulario. Por favor, intenta de nuevo.</div>
+
+      <form id="base-form" novalidate>
+        <div class="hp-field"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
+
+        <div class="form-group" data-key="nivel" data-req="1">
+          <label class="question-label">1. ¿Cómo te han parecido las clases?<span class="required-star">*</span></label>
+          <div class="radio-group"><label class="radio-label"><input type="radio" name="nivel" value="Muy básico"> Muy básicas</label><label class="radio-label"><input type="radio" name="nivel" value="Justo"> En su punto</label><label class="radio-label"><input type="radio" name="nivel" value="Algo avanzado"> Algo avanzadas</label><label class="radio-label"><input type="radio" name="nivel" value="Muy avanzado"> Muy avanzadas</label></div>
+          <div class="field-error">Responde esta pregunta.</div>
+        </div>
+        <div class="form-group" data-key="sirve" data-req="1">
+          <label class="question-label">2. ¿Qué te sirve más?<span class="required-star">*</span></label>
+          <div class="radio-group"><label class="radio-label"><input type="radio" name="sirve" value="Más práctica con casos y proyectos"> Más práctica con casos y proyectos</label><label class="radio-label"><input type="radio" name="sirve" value="Más técnica y código"> Más técnica y código</label><label class="radio-label"><input type="radio" name="sirve" value="Una mezcla"> Una mezcla</label></div>
+          <div class="field-error">Responde esta pregunta.</div>
+        </div>
+        <div class="form-group" data-key="python" data-req="1">
+          <label class="question-label">3. ¿Cómo estás hoy con Python?<span class="required-star">*</span></label>
+          <div class="radio-group"><label class="radio-label"><input type="radio" name="python" value="Nada"> Nada</label><label class="radio-label"><input type="radio" name="python" value="Básico"> Básico</label><label class="radio-label"><input type="radio" name="python" value="Medio"> Medio</label><label class="radio-label"><input type="radio" name="python" value="Alto"> Alto</label></div>
+          <div class="field-error">Responde esta pregunta.</div>
+        </div>
+        <div class="form-group" data-key="uso" data-req="1">
+          <label class="question-label">4. ¿Para qué vas a usar la IA?<span class="required-star">*</span></label><span class="help-text">Puedes marcar varias.</span>
+          <div class="checkbox-group"><label class="checkbox-label"><input type="checkbox" name="uso" value="Emprender algo propio"> Emprender algo propio</label><label class="checkbox-label"><input type="checkbox" name="uso" value="Mi portafolio profesional"> Mi portafolio profesional</label><label class="checkbox-label"><input type="checkbox" name="uso" value="Mi negocio actual"> Mi negocio actual</label><label class="checkbox-label"><input type="checkbox" name="uso" value="Mi empleo actual"> Mi empleo actual</label><label class="checkbox-label"><input type="checkbox" name="uso" value="Otro"> Otro</label></div>
+          <div class="field-error">Responde esta pregunta.</div>
+        </div>
+        <div class="form-group" data-key="resolver" data-req="1">
+          <label class="question-label" for="resolver">5. ¿Qué quieres resolver con ese uso? (una frase)<span class="required-star">*</span></label>
+          <input type="text" id="resolver" maxlength="300">
+          <div class="char-counter"><span id="c_resolver">0</span> / 300</div>
+          <div class="field-error">Responde esta pregunta.</div>
+        </div>
+        <div class="form-group" data-key="temas" data-req="0">
+          <label class="question-label">6. ¿Qué temas quieres ver en las próximas clases?</label><span class="help-text">Puedes marcar varios.</span>
+          <div class="checkbox-group"><label class="checkbox-label"><input type="checkbox" name="temas" value="Todo lo que pasa por detrás de la IA generativa"> Todo lo que pasa por detrás de la IA generativa</label><label class="checkbox-label"><input type="checkbox" name="temas" value="Optimización de tokens y memoria"> Optimización de tokens y memoria</label><label class="checkbox-label"><input type="checkbox" name="temas" value="PDF a Markdown y preparación de datos"> PDF a Markdown y preparación de datos</label><label class="checkbox-label"><input type="checkbox" name="temas" value="Conectores y automatización"> Conectores y automatización</label><label class="checkbox-label"><input type="checkbox" name="temas" value="Cómo escribir buenos prompts para mi proyecto"> Cómo escribir buenos prompts para mi proyecto</label><label class="checkbox-label"><input type="checkbox" name="temas" value="Limpieza y visualización de datos"> Limpieza y visualización de datos</label><label class="checkbox-label"><input type="checkbox" name="temas" value="Redes neuronales y ML más técnico"> Redes neuronales y ML más técnico</label></div>
+          <div class="field-error">Responde esta pregunta.</div>
+        </div>
+        <div class="form-group" data-key="glosario" data-req="0">
+          <label class="question-label">7. ¿Te sirve un glosario por clase?</label>
+          <div class="radio-group"><label class="radio-label"><input type="radio" name="glosario" value="Sí me sirve"> Sí me sirve</label><label class="radio-label"><input type="radio" name="glosario" value="No"> No</label><label class="radio-label"><input type="radio" name="glosario" value="Ya llevo el mío"> Ya llevo el mío</label></div>
+          <div class="field-error">Responde esta pregunta.</div>
+        </div>
+        <div class="form-group" data-key="material" data-req="0">
+          <label class="question-label">8. ¿Qué material quieres después de clase?</label>
+          <div class="checkbox-group"><label class="checkbox-label"><input type="checkbox" name="material" value="Grabación"> Grabación</label><label class="checkbox-label"><input type="checkbox" name="material" value="Transcripción"> Transcripción</label><label class="checkbox-label"><input type="checkbox" name="material" value="Diapositivas"> Diapositivas</label><label class="checkbox-label"><input type="checkbox" name="material" value="Notebook"> Notebook</label></div>
+          <div class="field-error">Responde esta pregunta.</div>
+        </div>
+        <div class="form-group" data-key="confuso" data-req="0">
+          <label class="question-label" for="confuso">9. ¿Qué fue lo más confuso de la clase del 19 de noviembre?</label>
+          <textarea id="confuso" maxlength="1900"></textarea>
+          <div class="char-counter"><span id="c_confuso">0</span> / 1900</div>
+          <div class="field-error">Responde esta pregunta.</div>
+        </div>
+        <div class="form-group" data-key="extra" data-req="0">
+          <label class="question-label" for="extra">10. ¿Algo más que quieras decirme?</label>
+          <textarea id="extra" maxlength="1900"></textarea>
+          <div class="char-counter"><span id="c_extra">0</span> / 1900</div>
+          <div class="field-error">Responde esta pregunta.</div>
+        </div>
+        <button type="submit" class="btn" id="submit-btn">Enviar respuestas</button>
+      </form>
+    </div>
+
+    <div id="view-thanks" class="card" style="display:none;">
+      <div class="thank-you">
+        <h2>Gracias, ya quedó</h2>
+        <p>Reviso las respuestas antes de la clase del martes.</p>
+      </div>
+    </div>
+    <footer>Estud-IA 2026 · IA Intermedio</footer>
+  </main>
+
+<script>
+const HOOK = "https://hook.us2.make.com/eg6vornj63j819a4a44pf1uzgdd7yjms";
+const TOKEN = "O7gpNfva9dzEdHK0tg9pSEFk";
+const DATA_SOURCE_ID = "41e98835-1bd4-811e-926f-000b1dc6766a";
+
+const form = document.getElementById("base-form");
+const btn = document.getElementById("submit-btn");
+const alertBox = document.getElementById("submit-error-alert");
+
+["resolver","confuso","extra"].forEach(id => {
+  const el = document.getElementById(id), c = document.getElementById("c_" + id);
+  el.addEventListener("input", () => c.textContent = el.value.length);
+});
+
+const rt = v => ({ rich_text: v ? [{ text: { content: v.slice(0, 1900) } }] : [] });
+const vals = g => [...g.querySelectorAll("input:checked")].map(i => i.value);
+const grp = k => form.querySelector('.form-group[data-key="' + k + '"]');
+
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+  alertBox.style.display = "none";
+  if (form.website.value) return;
+
+  let bad = null;
+  form.querySelectorAll(".form-group").forEach(g => {
+    g.classList.remove("has-error");
+    if (g.dataset.req !== "1") return;
+    const k = g.dataset.key;
+    const empty = ["resolver"].includes(k) ? !document.getElementById(k).value.trim() : vals(g).length === 0;
+    if (empty) { g.classList.add("has-error"); bad = bad || g; }
+  });
+  if (bad) { bad.scrollIntoView({ behavior: "smooth", block: "center" }); return; }
+
+  const properties = {
+    "¿Qué quieres resolver con ese uso? (una frase)": { title: [{ text: { content: document.getElementById("resolver").value.trim().slice(0, 300) } }] },
+    "Nivel de las clases": { select: { name: vals(grp("nivel"))[0] } },
+    "Qué te sirve más": { select: { name: vals(grp("sirve"))[0] } },
+    "Python hoy": { select: { name: vals(grp("python"))[0] } },
+    "Para qué usarás la IA": { multi_select: vals(grp("uso")).map(name => ({ name })) },
+    "Temas para las próximas clases": { multi_select: vals(grp("temas")).map(name => ({ name })) },
+    "Material después de clase": { multi_select: vals(grp("material")).map(name => ({ name })) },
+    "Lo más confuso de la clase del 19 nov": rt(document.getElementById("confuso").value.trim()),
+    "Algo más": rt(document.getElementById("extra").value.trim())
+  };
+  const gl = vals(grp("glosario"))[0];
+  if (gl) properties["Glosario por clase"] = { select: { name: gl } };
+
+  btn.disabled = true; btn.textContent = "Enviando…";
+  try {
+    const r = await fetch(HOOK, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: TOKEN, notion_body: { parent: { type: "data_source_id", data_source_id: DATA_SOURCE_ID }, properties } })
+    });
+    if (!r.ok) throw new Error(r.status);
+    document.getElementById("view-form").style.display = "none";
+    document.getElementById("view-thanks").style.display = "block";
+    window.scrollTo({ top: 0 });
+  } catch (err) {
+    alertBox.style.display = "block";
+    btn.disabled = false; btn.textContent = "Enviar respuestas";
+  }
+});
+</script>
+</body>
+</html>
