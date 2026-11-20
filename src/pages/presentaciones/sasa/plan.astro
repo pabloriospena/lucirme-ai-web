@@ -1,0 +1,546 @@
+---
+// Plan de trabajo con Sasa Consultoría: 9 sesiones y un taller de regalo.
+// Página interactiva: Sandra edita personas, temas y fechas, guarda en su navegador,
+// genera el resumen (copiar o PDF) y elige la forma de pago. Valores de pago: PRICE_TOTAL en el script.
+import Layout from "../../../layouts/Layout.astro";
+---
+
+<Layout title="Plan de trabajo | Sasa Consultoría" hideHeader hideFooter noindex>
+  <div id="plan-root">
+    <div class="topbar"><b>LuciRMe AI</b><span>/</span><span>Sasa Consultoría</span><span>/</span><span>Plan de trabajo</span></div>
+    <div id="app"></div>
+  </div>
+</Layout>
+
+<style is:global>
+#plan-root *{box-sizing:border-box}
+#plan-root{background:var(--p-paper);color:var(--p-ink);font-family:var(--p-font-body);font-size:16px;line-height:1.5;--p-ink:#0F172A;--p-paper:#FBFBFA;--p-card:#FFFFFF;--p-line:#E9E9E7;--p-muted:#64748B;--p-accent:#0F766E;--p-accent-soft:#E6F6F4;--p-warn:#B45309;--p-warn-soft:#FEF3C7;--p-bad:#B91C1C;--p-font-display:ui-sans-serif,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--p-font-body:ui-sans-serif,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;min-height:100vh}
+#plan-root h1,#plan-root h2,#plan-root h3{font-family:var(--p-font-display);text-wrap:balance;margin:0}
+#plan-root button,#plan-root input,#plan-root select,#plan-root textarea{font:inherit;color:inherit}
+#plan-root .wrap{max-width:980px;margin:0 auto;padding:24px 16px 120px}
+#plan-root .topbar{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--p-line);padding:12px 16px;font-size:12px;color:#787774;display:flex;gap:8px;align-items:center}
+#plan-root .topbar b{font-weight:600;color:var(--p-ink)}
+#plan-root .top{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-end;padding-bottom:20px;border-bottom:1px solid var(--p-line)}
+#plan-root .brand{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--p-muted);margin:0 0 6px}
+#plan-root h1{font-size:clamp(28px,5vw,44px);line-height:1.05;font-weight:700}
+#plan-root .sub{margin:8px 0 0;color:var(--p-muted);max-width:60ch}
+#plan-root .status{display:inline-flex;align-items:center;gap:8px;font-size:14px;padding:6px 12px;border:1px solid var(--p-line);border-radius:999px;background:var(--p-card)}
+#plan-root .dot{width:9px;height:9px;border-radius:50%;background:var(--p-warn)}
+#plan-root .status.ok .dot{background:var(--p-accent)}
+#plan-root .tabs{display:flex;gap:4px;margin:20px 0 0}
+#plan-root .tab{padding:10px 18px;border:1px solid var(--p-line);border-bottom:none;background:transparent;border-radius:10px 10px 0 0;cursor:pointer;color:var(--p-muted);font-weight:500}
+#plan-root .tab[aria-selected="true"]{background:var(--p-card);color:var(--p-ink);font-weight:600}
+#plan-root .panel{background:var(--p-card);border:1px solid var(--p-line);border-radius:0 12px 12px 12px;padding:20px}
+#plan-root .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 20px;padding:0;list-style:none;counter-reset:s}
+#plan-root .steps li{counter-increment:s;padding:12px 14px;border:1px solid var(--p-line);border-radius:10px;font-size:15px;background:var(--p-paper)}
+#plan-root .steps li::before{content:counter(s);display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--p-ink);color:var(--p-paper);font-weight:600;font-size:13px;margin-right:8px}
+#plan-root .lead{margin:0 0 20px;max-width:70ch}
+#plan-root .tl-scroll{overflow-x:auto;margin:0 -4px 20px;padding:4px}
+#plan-root .tl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+#plan-root .node{text-align:left;padding:10px;border:1px solid var(--p-line);border-radius:10px;background:var(--p-paper);cursor:pointer;display:flex;flex-direction:column;gap:2px}
+#plan-root .node:hover{border-color:var(--p-accent)}
+#plan-root .node[aria-current="true"]{border-color:var(--p-accent);background:var(--p-accent-soft);box-shadow:inset 0 3px 0 var(--p-accent)}
+#plan-root .node b{font-family:var(--p-font-display);font-size:13px;color:var(--p-muted)}
+#plan-root .node span{font-size:14px;font-weight:600;line-height:1.25}
+#plan-root .node small{font-size:12px;color:var(--p-muted)}
+#plan-root .node.set small{color:var(--p-accent);font-weight:600}
+#plan-root .editor{border-top:1px solid var(--p-line);padding-top:20px}
+#plan-root .kicker{font-size:13px;color:var(--p-muted);margin:0 0 4px;font-weight:600}
+#plan-root .titulo{width:100%;font-family:var(--p-font-display);font-size:clamp(22px,3.4vw,30px);font-weight:700;border:1px solid transparent;border-radius:8px;padding:4px 8px;margin:0 0 12px -8px;background:transparent}
+#plan-root .titulo:hover,#plan-root .titulo:focus{border-color:var(--p-line);background:var(--p-paper)}
+#plan-root .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#plan-root .grid2 .narrow{max-width:none}
+#plan-root .row2{display:grid;grid-template-columns:2fr 1fr;gap:12px}
+#plan-root label{display:flex;flex-direction:column;gap:4px;font-size:14px;font-weight:600;color:var(--p-muted)}
+#plan-root input[type=text],#plan-root input[type=number],#plan-root select,#plan-root textarea{width:100%;padding:9px 11px;border:1px solid var(--p-line);border-radius:8px;background:var(--p-paper);color:var(--p-ink);font-weight:400;font-size:15px}
+#plan-root textarea{resize:vertical;min-height:64px}
+#plan-root input:focus-visible,#plan-root select:focus-visible,#plan-root textarea:focus-visible,#plan-root button:focus-visible{outline:3px solid var(--p-accent);outline-offset:1px}
+#plan-root h3{font-size:18px;margin:24px 0 10px}
+#plan-root .note{background:var(--p-warn-soft);color:var(--p-ink);border-left:4px solid var(--p-warn);padding:10px 14px;border-radius:6px;font-size:14px;margin:12px 0}
+#plan-root .chips{display:flex;flex-wrap:wrap;gap:8px}
+#plan-root .chip{display:flex;flex-direction:column;align-items:flex-start;padding:7px 12px;border:1px solid var(--p-line);border-radius:10px;background:var(--p-paper);cursor:pointer;text-align:left;min-width:140px}
+#plan-root .chip small{font-size:12px;color:var(--p-muted)}
+#plan-root .chip[aria-pressed="true"]{background:var(--p-accent-soft);border-color:var(--p-accent)}
+#plan-root .chip[aria-pressed="true"] b::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--p-accent);margin-right:7px}
+#plan-root .chip b{font-size:14px}
+#plan-root .guest{display:flex;gap:8px;margin-top:10px;max-width:420px}
+#plan-root .btn{padding:9px 16px;border-radius:8px;border:1px solid var(--p-ink);background:transparent;cursor:pointer;font-weight:600}
+#plan-root .btn:hover{background:var(--p-paper)}
+#plan-root .btn.primary{background:var(--p-accent);border-color:var(--p-accent);color:#fff}
+#plan-root .btn.primary:hover{filter:brightness(1.08)}
+#plan-root .btn.small{padding:5px 10px;font-size:13px}
+#plan-root .btn.danger{border-color:var(--p-line);color:var(--p-bad)}
+#plan-root .slots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+#plan-root .slot{padding:12px;border:1px solid var(--p-line);border-radius:10px;background:var(--p-paper);cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:2px}
+#plan-root .slot[aria-pressed="true"]{border-color:var(--p-accent);background:var(--p-accent-soft);box-shadow:inset 0 3px 0 var(--p-accent)}
+#plan-root .slot[disabled]{opacity:.5;cursor:not-allowed}
+#plan-root .slot b{font-size:15px}
+#plan-root .slot span{font-size:14px}
+#plan-root .slot small{font-size:12px;color:var(--p-muted)}
+#plan-root .warn{color:var(--p-warn);font-size:14px;margin:8px 0 0}
+#plan-root .tema{border:1px solid var(--p-line);border-radius:12px;padding:14px;margin-bottom:12px;background:var(--p-paper)}
+#plan-root .tema-head{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:10px}
+#plan-root .tema-name{font-weight:600;font-size:16px;margin-bottom:10px}
+#plan-root .tema .fuente{margin-top:10px}
+#plan-root .tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--p-accent-soft);color:var(--p-accent)}
+#plan-root .start-lbl{color:var(--p-warn)}
+#plan-root .end-lbl{color:var(--p-accent)}
+#plan-root .nav{display:flex;justify-content:space-between;gap:12px;margin-top:20px}
+#plan-root .bar{position:fixed;left:0;right:0;bottom:0;background:var(--p-card);border-top:1px solid var(--p-line);padding:12px 16px;z-index:5}
+#plan-root .bar-in{max-width:980px;margin:0 auto;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+#plan-root .bar-in p{margin:0;font-size:14px;color:var(--p-muted)}
+#plan-root .sum-session{border:1px solid var(--p-line);border-radius:12px;padding:16px;margin-bottom:12px;background:var(--p-paper)}
+#plan-root .sum-session h3{margin:0 0 4px;font-size:19px}
+#plan-root .sum-meta{display:grid;grid-template-columns:110px 1fr;gap:4px 12px;font-size:15px;margin:10px 0}
+#plan-root .sum-meta dt{color:var(--p-muted);font-weight:600}
+#plan-root .sum-meta dd{margin:0}
+#plan-root .sum-temas{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+#plan-root .sum-temas th,#plan-root .sum-temas td{text-align:left;vertical-align:top;padding:8px 10px;border-top:1px solid var(--p-line)}
+#plan-root .sum-temas th{color:var(--p-muted);font-size:13px}
+#plan-root .wide{overflow-x:auto}
+#plan-root .pay{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+#plan-root .pay-card{text-align:left;border:1px solid var(--p-line);border-radius:12px;padding:16px;background:var(--p-paper);cursor:pointer;display:flex;flex-direction:column;gap:6px}
+#plan-root .pay-card[aria-pressed="true"]{border-color:var(--p-accent);background:var(--p-accent-soft);box-shadow:inset 0 3px 0 var(--p-accent)}
+#plan-root .pay-card h4{margin:0;font-family:var(--p-font-display);font-size:18px}
+#plan-root .pay-card .amt{font-family:var(--p-font-display);font-size:26px;font-weight:700}
+#plan-root .pay-card ul{margin:0;padding-left:18px;font-size:14px}
+#plan-root .actions{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+#plan-root .toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);background:var(--p-ink);color:var(--p-paper);padding:10px 18px;border-radius:8px;font-size:14px;z-index:9;max-width:90vw}
+#plan-root .small-print{font-size:13px;color:var(--p-muted)}
+@media (max-width:700px){
+#plan-root .tl{grid-template-columns:repeat(10,150px);min-width:1520px}#plan-root .steps,#plan-root .grid2,#plan-root .row2,#plan-root .slots,#plan-root .pay{grid-template-columns:1fr}
+#plan-root .sum-meta{grid-template-columns:1fr}
+#plan-root .panel{padding:14px}
+
+}
+@media (prefers-reduced-motion:reduce){#plan-root *{transition:none!important;animation:none!important}}
+
+
+</style>
+
+<script>
+import { jsPDF } from "jspdf";
+
+
+
+
+/* ===== Valores que edita Pablo en el código (no aparecen como campos editables) ===== */
+var PRICE_TOTAL = 8000000;      // valor del programa de 8 sesiones, en COP
+var ENDPOINT = "";              // opcional: URL de un webhook (Make) que reciba el plan guardado
+var DISCOUNT = 0.10;            // descuento por pago total anticipado
+var SPLIT = [0.5, 0.5];         // pago 1 antes de la sesión 1, pago 2 antes de la sesión 5
+var SPLIT_AT = [1, 5];
+
+var DIAS = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+var MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+var MESES_C = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+var HOLIDAYS = {"2026-12-08":"festivo","2026-12-25":"festivo","2027-01-01":"festivo","2027-01-11":"festivo","2027-03-22":"festivo"};
+var MONDAYS = [];
+(function(){ var d=Date.UTC(2026,11,7); for(var i=0;i<16;i++){ MONDAYS.push(iso(new Date(d+i*7*86400000))); } })();
+
+var ROSTER = [
+  ["Sandra Arango","Gerente General"],
+  ["Sandra Quiroz","Gerente Técnica y Operaciones"],
+  ["Diego Granados","Socio y Asesor de Estrategia"],
+  ["Clara Monsalve","Directora Administrativa"],
+  ["Adriana Bedoya","Directora Comercial"],
+  ["Juan Esteban Hoyos","Líder de Proyectos"],
+  ["Zhoe Acevedo","Líder de Proyectos"],
+  ["Alejandro Muñoz","Analista de diseño de procesos"],
+  ["Sergio Berrio","Líder de Servicios Administrados"],
+  ["Fabian Rivera","Analista de Soporte"],
+  ["Wilmar Galvis","Analista de Soporte"],
+  ["Juan Diego Rojas","Líder de Tecnología"],
+  ["John Mantilla","Analista de Desarrollo"]
+];
+
+function T(nombre,fuente,inicio,cierre){ return {nombre:nombre,fuente:fuente,inicio:inicio,cierre:cierre}; }
+
+function S(o){ return {num:o.num||null,tipo:o.tipo||"sesion",titulo:o.titulo,area:o.area,duracion:3,semana:null,franja:null,personas:o.personas||[],invitados:[],objetivo:o.objetivo,nota:o.nota||"",temas:o.temas}; }
+
+function defaultState(){
+  var list=[
+    S({num:1,titulo:"Proyectos",area:"Proyectos y consultoría",personas:["Zhoe Acevedo","Juan Esteban Hoyos","Alejandro Muñoz"],
+      objetivo:"Bajar el tiempo de cronogramas, estimaciones y seguimiento de varios proyectos, y fijar la línea base del grupo.",
+      temas:[
+        T("Línea base del grupo","Acuerdo para medir el ciclo","Horas por semana reportadas en el formulario de dolores: cronogramas 8, estimaciones 8, gestión de varios proyectos 2.","Tabla de partida por tarea (horas, frecuencia y calidad del resultado) para comparar en la ronda 2."),
+        T("Cronogramas","Formulario de dolores","Proceso estructurado a medias. 8 horas por semana reportadas.","Prompt de cronograma a partir del alcance, probado en un proyecto en curso."),
+        T("Estimaciones","Formulario de dolores","Estimaciones hechas a mano. 8 horas por semana reportadas.","Plantilla de estimación con IA probada en 2 casos y horas comparadas con la partida."),
+        T("Pendientes semanales de varios proyectos","Formulario de dolores","Actualización a mano de los pendientes de cada proyecto. 2 horas por semana reportadas.","Resumen semanal por proyecto con tarea programada en Gemini, revisado por cada líder.")
+      ]}),
+    S({num:2,titulo:"Comercial",area:"Comercial",personas:["Adriana Bedoya","Diego Granados"],
+      objetivo:"Acelerar las propuestas comerciales y conectar las oportunidades con la proyección de facturación.",
+      temas:[
+        T("Línea base del grupo","Acuerdo para medir el ciclo","Tiempo actual por propuesta, por medir en la sesión.","Tiempo de partida registrado para comparar en la ronda 2."),
+        T("Cuaderno de NotebookLM para propuestas comerciales","Taller 18 nov, caso de Adriana","Propuesta armada a mano desde el documento técnico y la plantilla de Sasa.","Cuaderno con las fuentes del Drive, prompt validado y una propuesta real generada con el tiempo medido."),
+        T("Proyección de facturación ligada a oportunidades","Casos para el taller, formulario base","Por confirmar en la sesión: cómo se proyecta hoy y de dónde salen los datos.","Modelo de proyección con oportunidades, probado con datos reales de un mes.")
+      ]}),
+    S({num:3,titulo:"Soporte",area:"Soporte y servicios administrados",personas:["Fabian Rivera","Wilmar Galvis","Sergio Berrio"],
+      objetivo:"Clasificar casos de soporte con diagnóstico inicial y bajar las horas de análisis e informes.",
+      temas:[
+        T("Línea base del grupo","Acuerdo para medir el ciclo","Horas reportadas: análisis de procesos existentes 15 por semana, informes y auditoría de bolsa 5 al mes.","Tabla de partida por tarea para comparar al final del ciclo."),
+        T("Triage de casos de soporte y diagnóstico inicial","Casos para el taller, formulario base","Casos clasificados a mano al llegar, sin diagnóstico inicial estándar.","Criterios de triage y prompt de diagnóstico inicial probados con casos históricos."),
+        T("Análisis de procesos existentes","Formulario de dolores","15 horas por semana reportadas. Procedimiento parcial.","Ruta de análisis con IA aplicada a un proceso real, con las horas comparadas."),
+        T("Informes y auditoría de bolsa","Formulario de dolores","Informe mensual hecho a mano y sin procedimiento escrito.","Procedimiento escrito y primer informe generado con apoyo de IA.")
+      ]}),
+    S({num:4,titulo:"Tecnología",area:"Tecnología y desarrollo",personas:["Juan Diego Rojas","John Mantilla"],
+      objetivo:"Probar si la IA puede consultar SugarCRM y dejar Gemini conectado a las carpetas de Drive de cada proyecto.",
+      nota:"El formulario del 6 de noviembre marca el desarrollo de software como fuera de alcance. Esta sesión se limita a conectar la IA con Sugar y Workspace, y a manejar mejor el contexto. No es una sesión de programación.",
+      temas:[
+        T("Línea base del grupo","Acuerdo para medir el ciclo","Hoy usan Gemini para consultas rápidas y Cursor para desarrollo, según el formulario de dolores.","Medida de partida: tiempo de una consulta a Sugar hecha a mano, para compararla con la hecha por IA."),
+        T("Conexión de la IA con SugarCRM","Taller 18 nov, acuerdos","IA sin acceso a Sugar. Viabilidad (API o agentes) por validar con Desarrollo.","Prueba de lectura: una consulta real a Sugar respondida por la IA, o decisión documentada de viabilidad."),
+        T("Gemini conectado a Workspace y Drive","Taller 18 nov","Gemini usado en chats sueltos, con contexto que se agota.","Cada grupo con su Gemini conectado a las carpetas de Drive de un proyecto."),
+        T("Contextos grandes y problemas con poco contexto","Formulario base, caso que no funcionó","Los chats largos agotan el contexto y la IA responde peor.","Regla de cuándo abrir un cuaderno nuevo y cómo pasarle contexto limpio.")
+      ]}),
+    S({tipo:"regalo",titulo:"Segundo taller (regalo)",area:"Todos los grupos",personas:[],
+      objetivo:"Taller de regalo antes de la sesión 5. Alcance y público por definir con Sandra.",
+      nota:"Por definir: quién asiste, formato y fecha. Se afina con lo que dejen las sesiones 1 a 4.",
+      temas:[
+        T("Lo que funcionó en las sesiones 1 a 4","Regalo acordado","Cuatro grupos con prompts y cuadernos propios, sin circular entre ellos.","Lista de los prompts y cuadernos que se comparten con todos."),
+        T("Tema por definir con Sandra","Regalo acordado","Por definir.","Por definir.")
+      ]}),
+    S({num:5,titulo:"Administrativo",area:"Administración",personas:["Clara Monsalve","Sandra Quiroz"],
+      objetivo:"Quitar horas de correos, actas, informes y archivos del Drive.",
+      temas:[
+        T("Línea base del grupo","Acuerdo para medir el ciclo","Horas reportadas: responder emails 8, documentación de proyectos 8, informes y actas 8, edición de archivos del Drive 3.","Tabla de partida por tarea para comparar en la ronda 2."),
+        T("Correos y resúmenes con tareas programadas","Formulario base y taller 18 nov","Correos respondidos y resumidos a mano.","Una tarea programada en Gemini con el resumen diario de correos, revisada durante una semana."),
+        T("Informes y actas","Formulario base, tarea 3","Informes y actas redactados a mano.","Actas e informes con formato fijo a partir de la grabación, con el tiempo por acta comparado."),
+        T("Orden de archivos del Drive","Formulario de dolores","3 horas por semana editando y ordenando archivos, sin procedimiento.","Criterio de nombres y carpetas, y prompt para editar y ordenar archivos en lote.")
+      ]}),
+    S({num:6,titulo:"Gerencia",area:"Gerencia",personas:["Sandra Arango","Sandra Quiroz","Diego Granados"],
+      objetivo:"Dejar reglas de uso de la IA y quitar horas de revisión de datos y planeación.",
+      temas:[
+        T("Línea base del grupo","Acuerdo para medir el ciclo","Horas reportadas: revisión de datos en Excel 10 por semana, plan de sostenibilidad 10 por semana.","Tabla de partida por tarea para comparar en la sesión 9."),
+        T("Política de uso de IA y de datos","Formulario base, 6 nov","Sin política escrita. Cada rol usa herramientas distintas, algunas por cuenta propia.","Política de una página aprobada por Sandra y lista de herramientas autorizadas según el tipo de dato."),
+        T("Revisión de datos en Excel","Formulario de dolores","Revisión manual diaria, sin procedimiento.","Rutina de revisión con IA y lista de alertas, con las horas comparadas."),
+        T("Plan de sostenibilidad de la empresa","Formulario de dolores","Trabajo semanal sin estructura.","Borrador del plan en un cuaderno con las fuentes de Sasa.")
+      ]}),
+    S({num:7,titulo:"Proyectos, segunda ronda",area:"Proyectos y consultoría",personas:["Zhoe Acevedo","Juan Esteban Hoyos","Alejandro Muñoz"],
+      objetivo:"Medir lo ganado en la sesión 1 y llevar la IA a requerimientos y documentación.",
+      temas:[
+        T("Medición frente a la línea base del grupo","Sesión 1","Prompts y plantillas de la sesión 1 en uso durante varias semanas.","Tabla de antes y después por tarea: horas, frecuencia y calidad."),
+        T("Toma de requerimientos","Casos para el taller, formulario base","Requerimientos tomados en reunión y redactados después.","Prompt y plantilla que convierten una reunión en requerimientos estructurados, probados en una reunión real."),
+        T("Documentación de proyectos","Formulario base, tarea 2","Documentos dispersos por proyecto.","Un cuaderno por proyecto con sus fuentes del Drive al día.")
+      ]}),
+    S({num:8,titulo:"Comercial y administración, segunda ronda",area:"Comercial y administración",personas:["Adriana Bedoya","Clara Monsalve","Diego Granados"],
+      objetivo:"Medir lo ganado en las sesiones 2 y 5 y ajustar lo que no dio resultado.",
+      temas:[
+        T("Medición frente a la línea base de ambos grupos","Sesiones 2 y 5","Cuaderno de propuestas y tareas programadas en uso.","Tabla de antes y después: tiempo por propuesta y horas de las tareas administrativas."),
+        T("Segunda propuesta con el cuaderno ajustado","Taller 18 nov, caso de Adriana","Primera propuesta generada en la sesión 2.","Segunda propuesta real con el cuaderno corregido y el tiempo medido."),
+        T("Ajuste de tareas programadas","Taller 18 nov","Tareas programadas con una semana o más de uso.","Cuáles se quedan, cuáles se corrigen y cuáles se retiran.")
+      ]}),
+    S({num:9,titulo:"Gerencia, cierre",area:"Gerencia",personas:["Sandra Arango","Sandra Quiroz","Diego Granados"],
+      objetivo:"Ver los resultados de todos los grupos y decidir cómo sigue Sasa solo.",
+      temas:[
+        T("Comparación contra la línea base de todos los grupos","Sesión 1 a 8","Línea base de cada grupo y los resultados de las rondas 2.","Tabla de antes y después por grupo y tarea."),
+        T("Grupos de 2 o 3 que siguen solos","Pendiente del taller 18 nov","Grupos definidos, sin rutina propia ni fecha de arranque.","Cada grupo con responsable, cuaderno, prompts guardados y una reunión de revisión agendada."),
+        T("Biblioteca de prompts y cuadernos","Reunión del 6 nov","Prompts y cuadernos repartidos entre personas.","Una biblioteca en el Drive de Sasa con responsable y reglas de actualización."),
+        T("Decisión sobre la siguiente fase","Resultados medidos","Resultados medidos del ciclo.","Decisión de Sandra con números en la mano.")
+      ]})
+  ];
+  list.forEach(function(s,i){ s.semana=MONDAYS[[0,1,2,5,6,7,8,9,10,11][i]]; });
+  return {version:2,savedAt:null,payment:null,
+    notas:"Fuera de alcance según el formulario del 6 de noviembre: desarrollo de software. Los dolores técnicos reportados (bugs, instancias de backend, empalme de proyectos en curso, interfaz gráfica) no entran en este plan.",
+    sessions:list};
+}
+
+/* ===== Utilidades ===== */
+function lbl(s){ return s.tipo==="regalo"?"Regalo":"Sesión "+s.num; }
+function numSes(n){ return state.sessions.filter(function(x){return x.num===n;})[0]; }
+function iso(d){ return d.toISOString().slice(0,10); }
+function parse(s){ var p=s.split("-"); return new Date(Date.UTC(+p[0],+p[1]-1,+p[2])); }
+function addDays(s,n){ return iso(new Date(parse(s).getTime()+n*86400000)); }
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function fmtDate(s){ var d=parse(s); var y=d.getUTCFullYear(); return DIAS[d.getUTCDay()]+" "+d.getUTCDate()+" de "+MESES[d.getUTCMonth()]+(y!==2026?" de "+y:""); }
+function weekRange(m){ var a=parse(m), b=parse(addDays(m,4)); var sameM=a.getUTCMonth()===b.getUTCMonth(); return a.getUTCDate()+(sameM?"":" "+MESES_C[a.getUTCMonth()])+" al "+b.getUTCDate()+" de "+MESES_C[b.getUTCMonth()]+(b.getUTCFullYear()!==2026?" "+b.getUTCFullYear():""); }
+function fmt12(h){ var H=Math.floor(h), M=Math.round((h-H)*60); if(H===12&&M===0) return "12:00 m."; var s=H>=12?"p. m.":"a. m."; return (H%12||12)+":"+String(M).padStart(2,"0")+" "+s; }
+function money(n){ return "$"+Math.round(n).toLocaleString("es-CO")+" COP"; }
+function slotsFor(m){ return [{k:"lun",off:0,name:"Lunes"},{k:"mie",off:2,name:"Miércoles"},{k:"vie",off:4,name:"Viernes"}].map(function(s){ s.date=addDays(m,s.off); s.holiday=!!HOLIDAYS[s.date]; return s; }); }
+function slotTime(k,dur){ return k==="mie" ? fmt12(14)+" a "+fmt12(14+dur) : "8:00 a. m. a 12:00 m. (hora exacta a convenir)"; }
+function whenText(s){
+  if(s.franja){ var sl=slotsFor(s.semana).filter(function(x){return x.k===s.franja;})[0]; return fmtDate(sl.date)+", "+slotTime(s.franja,s.duracion); }
+  return "Semana del "+weekRange(s.semana)+", franja por elegir";
+}
+function dateOf(s){ if(!s.franja) return null; return slotsFor(s.semana).filter(function(x){return x.k===s.franja;})[0].date; }
+
+/* ===== Estado ===== */
+var state, view="plan", sel=0, dirty=false, notice="";
+var LS="plan-sasa-borrador-v2";
+
+function loadState(){
+  var emb=null;
+  var s=emb&&emb.sessions?emb:defaultState();
+  try{
+    var raw=localStorage.getItem(LS);
+    if(raw){ var loc=JSON.parse(raw); if(loc&&loc.sessions&&loc.savedAt&&loc.savedAt>(s.savedAt||"")){ s=loc; notice="Hay cambios guardados en este navegador que aún no están en la versión compartida."; } }
+  }catch(e){}
+  return s;
+}
+
+/* ===== Vistas ===== */
+var app=document.getElementById("app");
+
+function statusHTML(){
+  if(dirty) return '<span class="status" id="status"><span class="dot"></span>Cambios sin guardar</span>';
+  if(state.savedAt){ var d=new Date(state.savedAt); return '<span class="status ok" id="status"><span class="dot"></span>Guardado '+esc(d.toLocaleString("es-CO",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit"}))+'</span>'; }
+  return '<span class="status" id="status"><span class="dot"></span>Borrador sin guardar</span>';
+}
+function setStatus(){ var el=document.getElementById("status"); if(el) el.outerHTML=statusHTML(); }
+
+function render(){
+  var h='<div class="wrap">'
+   +'<header class="top"><div><p class="brand">LuciRMe AI para Sasa Consultoría</p><h1>Plan de trabajo: 9 sesiones y un taller de regalo</h1>'
+   +'<p class="sub">Ciclo de autonomía con los equipos de Sasa. Una base para ajustar entre Sandra y Pablo.</p></div>'+statusHTML()+'</header>'
+   +'<div class="tabs" role="tablist"><button class="tab" role="tab" data-act="view" data-v="plan" aria-selected="'+(view==="plan")+'">1. Plan</button>'
+   +'<button class="tab" role="tab" data-act="view" data-v="resumen" aria-selected="'+(view==="resumen")+'">2. Resumen y pago</button></div>'
+   +'<main class="panel">'+(view==="plan"?planHTML():resumenHTML())+'</main></div>'
+   +(view==="plan"?barHTML():"")+'<div id="toast-slot"></div>';
+  app.innerHTML=h;
+}
+
+function barHTML(){
+  return '<div class="bar"><div class="bar-in"><p>'+(notice?esc(notice):'Edita lo que necesites. Al guardar se arma el resumen.')+'</p>'
+   +'<button class="btn primary" data-act="save">Guardar plan y ver resumen</button></div></div>';
+}
+
+function planHTML(){
+  var h='<ol class="steps"><li>Revisa cada sesión: personas, temas y fecha.</li><li>Cambia lo que haga falta. Cada tema tiene punto de partida y resultado para medir.</li><li>Guarda el plan y genera el resumen.</li></ol>'
+   +'<p class="lead">Los temas salen del formulario de dolores (13 respuestas), del formulario base del 6 de noviembre, de los talleres del 9 y 18 de noviembre y de las reuniones con Sandra. Las personas por sesión son una propuesta: cámbialas. El taller de regalo va antes de la sesión 5.</p>'
+   +'<div class="tl-scroll"><div class="tl" id="tl">'+timelineHTML()+'</div></div>'
+   +'<div class="editor" id="editor">'+editorHTML()+'</div>'
+   +'<h3>Notas generales del plan</h3><label><span class="small-print">Alcance, fuera de alcance y acuerdos</span><textarea id="notas" rows="3" data-g="notas">'+esc(state.notas)+'</textarea></label>';
+  return h;
+}
+
+function timelineHTML(){
+  return state.sessions.map(function(s,i){
+    var d=dateOf(s);
+    return '<button class="node'+(d?" set":"")+'" data-act="sel" data-i="'+i+'" aria-current="'+(i===sel)+'"><b>'+esc(lbl(s))+'</b><span>'+esc(s.titulo)+'</span><small>'+(d?esc(fmtDate(d).replace(/^\S+ /,"")):esc(weekRange(s.semana))+" · por elegir")+'</small></button>';
+  }).join("");
+}
+
+function warningsFor(i){
+  var s=state.sessions[i], w=[];
+  if(i>0&&s.semana<state.sessions[i-1].semana) w.push("Queda en una semana anterior a: "+lbl(state.sessions[i-1])+".");
+  var d=dateOf(s);
+  if(d) state.sessions.forEach(function(o,j){ if(j!==i&&dateOf(o)===d&&o.franja===s.franja) w.push("Coincide con: "+lbl(o)+", en fecha y franja."); });
+  if(s.franja&&s.franja!=="mie"&&s.duracion>4) w.push("La duración supera la franja de 8:00 a. m. a 12:00 m.");
+  if(!s.personas.length&&!s.invitados.length) w.push("Falta definir quién participa.");
+  return w;
+}
+
+function editorHTML(){
+  var s=state.sessions[sel], i=sel;
+  var h='<p class="kicker">'+lbl(s)+(s.tipo==="regalo"?'':' de 9')+'</p>'
+   +'<input type="text" class="titulo" data-f="titulo" value="'+esc(s.titulo)+'" aria-label="Título de la sesión">'
+   +'<div class="row2"><label>Área<input type="text" data-f="area" value="'+esc(s.area)+'"></label>'
+   +'<label>Duración en horas<input type="number" data-f="duracion" min="1" max="6" step="0.5" value="'+esc(s.duracion)+'"></label></div>'
+   +'<label style="margin-top:12px">Objetivo de la sesión<textarea data-f="objetivo" rows="2">'+esc(s.objetivo)+'</textarea></label>'
+   +(s.nota?'<div class="note">'+esc(s.nota)+'</div>':'');
+  h+='<h3>Quién participa</h3><div class="chips">';
+  ROSTER.forEach(function(p){ var on=s.personas.indexOf(p[0])>-1; h+='<button class="chip" data-act="person" data-n="'+esc(p[0])+'" aria-pressed="'+on+'"><b>'+esc(p[0])+'</b><small>'+esc(p[1])+'</small></button>'; });
+  s.invitados.forEach(function(g,k){ h+='<button class="chip" data-act="rmguest" data-k="'+k+'" aria-pressed="true" title="Quitar invitado"><b>'+esc(g)+'</b><small>Invitado, toca para quitar</small></button>'; });
+  h+='</div><div class="guest"><input type="text" id="guest" placeholder="Otra persona" aria-label="Otra persona"><button class="btn small" data-act="addguest">Añadir</button></div>';
+  h+='<h3>Cuándo</h3><label style="max-width:360px">Semana<select data-f="semana">'
+   +MONDAYS.map(function(m){ return '<option value="'+m+'"'+(m===s.semana?" selected":"")+'>Semana del '+esc(weekRange(m))+'</option>'; }).join("")+'</select></label>'
+   +'<div class="slots">';
+  slotsFor(s.semana).forEach(function(sl){
+    h+='<button class="slot" data-act="slot" data-k="'+sl.k+'" aria-pressed="'+(s.franja===sl.k)+'"'+(sl.holiday?" disabled":"")+'><b>'+sl.name+' '+parse(sl.date).getUTCDate()+' de '+MESES[parse(sl.date).getUTCMonth()]+'</b><span>'+(sl.holiday?"Festivo":esc(slotTime(sl.k,s.duracion).replace(" (hora exacta a convenir)","")))+'</span>'+(sl.k!=="mie"&&!sl.holiday?'<small>Hora exacta a convenir</small>':'')+'</button>';
+  });
+  h+='</div>';
+  warningsFor(i).forEach(function(w){ h+='<p class="warn">'+esc(w)+'</p>'; });
+  h+='<h3>Temas a trabajar</h3>';
+  s.temas.forEach(function(t,k){
+    h+='<article class="tema"><div class="tema-head"><span class="tag">'+esc(t.fuente||"Sin fuente")+'</span><button class="btn small danger" data-act="rmtema" data-k="'+k+'">Quitar tema</button></div>'
+     +'<input type="text" class="tema-name" data-t="'+k+'" data-f="nombre" value="'+esc(t.nombre)+'" aria-label="Nombre del tema">'
+     +'<div class="grid2"><label><span class="start-lbl">Cómo empezamos</span><textarea data-t="'+k+'" data-f="inicio" rows="3">'+esc(t.inicio)+'</textarea></label>'
+     +'<label><span class="end-lbl">Con qué terminamos</span><textarea data-t="'+k+'" data-f="cierre" rows="3">'+esc(t.cierre)+'</textarea></label></div>'
+     +'<label class="fuente"><span>De dónde sale</span><input type="text" data-t="'+k+'" data-f="fuente" value="'+esc(t.fuente)+'"></label></article>';
+  });
+  h+='<button class="btn" data-act="addtema">Añadir tema</button>'
+   +'<div class="nav"><button class="btn" data-act="sel" data-i="'+(i-1)+'"'+(i===0?" disabled":"")+'>Sesión anterior</button><button class="btn" data-act="sel" data-i="'+(i+1)+'"'+(i===state.sessions.length-1?" disabled":"")+'>Sesión siguiente</button></div>';
+  return h;
+}
+
+function payInfo(){
+  var s1=numSes(SPLIT_AT[0]), s5=numSes(SPLIT_AT[1]);
+  function when(s){ var d=dateOf(s); return d?fmtDate(d):"semana del "+weekRange(s.semana); }
+  var full=PRICE_TOTAL*(1-DISCOUNT);
+  return {
+    full:full, saving:PRICE_TOTAL-full,
+    p1:PRICE_TOTAL*SPLIT[0], p2:PRICE_TOTAL*SPLIT[1],
+    w1:when(s1), w5:when(s5)
+  };
+}
+
+function payHTML(){
+  var p=payInfo();
+  return '<div class="pay">'
+   +'<button class="pay-card" data-act="pay" data-v="anticipado" aria-pressed="'+(state.payment==="anticipado")+'"><h4>Todo anticipado</h4><span class="amt">'+money(p.full)+'</span>'
+   +'<ul><li>Un solo pago antes de la sesión 1 ('+esc(p.w1)+').</li><li>Incluye 10% de descuento: ahorras '+money(p.saving)+'.</li></ul></button>'
+   +'<button class="pay-card" data-act="pay" data-v="fases" aria-pressed="'+(state.payment==="fases")+'"><h4>En 2 fases</h4><span class="amt">'+money(PRICE_TOTAL)+'</span>'
+   +'<ul><li>Pago 1 de '+money(p.p1)+' antes de la sesión 1 ('+esc(p.w1)+').</li><li>Pago 2 de '+money(p.p2)+' antes de la sesión 5 ('+esc(p.w5)+').</li></ul></button></div>';
+}
+
+function payLine(){
+  var p=payInfo();
+  if(state.payment==="anticipado") return "Todo anticipado: "+money(p.full)+" en un solo pago antes de la sesión 1 ("+p.w1+"), con 10% de descuento.";
+  if(state.payment==="fases") return "En 2 fases: "+money(p.p1)+" antes de la sesión 1 ("+p.w1+") y "+money(p.p2)+" antes de la sesión 5 ("+p.w5+"). Total "+money(PRICE_TOTAL)+".";
+  return "Forma de pago por elegir.";
+}
+
+function resumenHTML(){
+  var h='<h2 style="font-size:26px;margin-bottom:6px">Resumen del plan</h2>'
+   +'<p class="small-print" style="margin:0 0 4px">'+(state.savedAt?'Guardado el '+esc(new Date(state.savedAt).toLocaleString("es-CO",{day:"numeric",month:"long",hour:"numeric",minute:"2-digit"})):'Aún no guardado')+(dirty?' · hay cambios sin guardar':'')+'</p>'
+   +'<div class="actions"><button class="btn primary" data-act="copy">Copiar resumen</button><button class="btn" data-act="pdf">Descargar PDF</button><button class="btn" data-act="view" data-v="plan">Volver al plan</button></div>';
+  state.sessions.forEach(function(s,i){
+    var ppl=s.personas.concat(s.invitados);
+    h+='<section class="sum-session"><h3>'+esc(lbl(s))+'. '+esc(s.titulo)+'</h3>'
+     +'<dl class="sum-meta"><dt>Área</dt><dd>'+esc(s.area)+'</dd><dt>Fecha</dt><dd>'+esc(whenText(s))+' ('+esc(s.duracion)+' h)</dd><dt>Personas</dt><dd>'+(ppl.length?esc(ppl.join(", ")):"Por definir")+'</dd><dt>Objetivo</dt><dd>'+esc(s.objetivo)+'</dd></dl>'
+     +'<div class="wide"><table class="sum-temas"><thead><tr><th>Tema</th><th>Cómo empezamos</th><th>Con qué terminamos</th></tr></thead><tbody>'
+     +s.temas.map(function(t){ return '<tr><td><b>'+esc(t.nombre)+'</b><br><span class="small-print">'+esc(t.fuente)+'</span></td><td>'+esc(t.inicio)+'</td><td>'+esc(t.cierre)+'</td></tr>'; }).join("")
+     +'</tbody></table></div></section>';
+  });
+  if(state.notas) h+='<section class="sum-session"><h3>Notas del plan</h3><p style="margin:6px 0 0">'+esc(state.notas)+'</p></section>';
+  h+='<h2 style="font-size:24px;margin:28px 0 4px">Siguiente paso: pago</h2>'
+   +'<p class="lead" style="margin-bottom:0">Para empezar hay que pagar las sesiones. Elige cómo.</p>'+payHTML()
+   +'<p style="margin:16px 0 0"><b>'+esc(payLine())+'</b></p>'
+   +'<div class="actions"><button class="btn primary" data-act="save">Guardar elección</button></div>'
+   +'<p class="small-print">Después de guardar, descarga el PDF o copia el resumen y envíaselo a Pablo para confirmar fechas y coordinar el pago.</p>';
+  return h;
+}
+
+/* ===== Resumen en texto ===== */
+function summaryText(){
+  var L=[];
+  L.push("PLAN DE TRABAJO · SASA CONSULTORÍA");
+  L.push("Ciclo de autonomía · 9 sesiones y un taller de regalo"+(state.savedAt?" · guardado el "+new Date(state.savedAt).toLocaleDateString("es-CO",{day:"numeric",month:"long",year:"numeric"}):""));
+  L.push("");
+  state.sessions.forEach(function(s,i){
+    L.push(lbl(s).toUpperCase()+" · "+s.titulo);
+    L.push("Área: "+s.area);
+    L.push("Fecha: "+whenText(s)+" ("+s.duracion+" h)");
+    var ppl=s.personas.concat(s.invitados);
+    L.push("Personas: "+(ppl.length?ppl.join(", "):"por definir"));
+    L.push("Objetivo: "+s.objetivo);
+    L.push("Temas:");
+    s.temas.forEach(function(t,k){
+      L.push("  "+(k+1)+". "+t.nombre+" ("+t.fuente+")");
+      L.push("     Empezamos: "+t.inicio);
+      L.push("     Terminamos: "+t.cierre);
+    });
+    L.push("");
+  });
+  if(state.notas){ L.push("NOTAS"); L.push(state.notas); L.push(""); }
+  L.push("FORMA DE PAGO");
+  L.push(payLine());
+  return L.join("\n");
+}
+
+/* ===== PDF ===== */
+function clean(t){ return String(t).replace(/[–—]/g,"-").replace(/[“”]/g,'"').replace(/[‘’]/g,"'").replace(/ /g," "); }
+function makePdf(){
+  var J=jsPDF;
+  var doc=new J({unit:"mm",format:"a4"});
+  var W=210, M=18, y=M, ACC=[11,122,102], INK=[18,38,43], MUT=[86,101,104];
+  function para(t,o){
+    o=o||{}; var size=o.size||10.5, x=M+(o.x||0), w=W-M-x, lh=size*0.3528*1.4;
+    doc.setFont("helvetica",o.style||"normal"); doc.setFontSize(size); doc.setTextColor.apply(doc,o.color||INK);
+    doc.splitTextToSize(clean(t),w).forEach(function(l){ if(y+lh>285){ doc.addPage(); y=M; } doc.text(l,x,y); y+=lh; });
+    y+=(o.after==null?1.2:o.after);
+  }
+  para("Plan de trabajo · Sasa Consultoría",{size:20,style:"bold",after:1});
+  para("Ciclo de autonomía · 9 sesiones y un taller de regalo"+(state.savedAt?" · guardado el "+new Date(state.savedAt).toLocaleDateString("es-CO",{day:"numeric",month:"long",year:"numeric"}):""),{color:MUT,after:6});
+  state.sessions.forEach(function(s,i){
+    if(y>235){ doc.addPage(); y=M; }
+    para(lbl(s)+". "+s.titulo,{size:14,style:"bold",color:ACC,after:1.5});
+    var ppl=s.personas.concat(s.invitados);
+    para("Área: "+s.area,{after:.5}); para("Fecha: "+whenText(s)+" ("+s.duracion+" h)",{after:.5});
+    para("Personas: "+(ppl.length?ppl.join(", "):"por definir"),{after:.5}); para("Objetivo: "+s.objetivo,{after:2});
+    s.temas.forEach(function(t,k){
+      para((k+1)+". "+t.nombre,{style:"bold",x:3,after:.3});
+      para("Fuente: "+t.fuente,{size:9,color:MUT,x:6,after:.3});
+      para("Empezamos: "+t.inicio,{x:6,after:.3});
+      para("Terminamos: "+t.cierre,{x:6,after:2});
+    });
+    y+=4;
+  });
+  if(state.notas){ para("Notas del plan",{size:14,style:"bold",color:ACC,after:1.5}); para(state.notas,{after:5}); }
+  para("Forma de pago",{size:14,style:"bold",color:ACC,after:1.5}); para(payLine());
+  return doc;
+}
+
+/* ===== Guardado ===== */
+function toast(msg){
+  var slot=document.getElementById("toast-slot"); if(!slot) return;
+  slot.innerHTML='<div class="toast" role="status">'+esc(msg)+'</div>';
+  setTimeout(function(){ if(slot) slot.innerHTML=""; },5000);
+}
+async function save(goResumen){
+  state.savedAt=new Date().toISOString();
+  var okLocal=true;
+  try{ localStorage.setItem(LS,JSON.stringify(state)); }catch(e){ okLocal=false; }
+  dirty=false; notice="";
+  if(goResumen) view="resumen";
+  render();
+  var msg=okLocal?"Plan guardado en este navegador.":"No se pudo guardar en este navegador. Copia el resumen para no perder los cambios.";
+  if(ENDPOINT){
+    try{
+      var r=await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({cliente:"Sasa Consultoría",guardado:state.savedAt,resumen:summaryText(),plan:state})});
+      msg=r.ok?"Plan guardado y enviado a Pablo.":msg+" No se pudo enviar a Pablo: copia el resumen y mándaselo.";
+    }catch(e){ msg=msg+" No se pudo enviar a Pablo: copia el resumen y mándaselo."; }
+  }
+  toast(msg);
+}
+
+/* ===== Eventos ===== */
+function markDirty(){ if(!dirty){ dirty=true; setStatus(); } try{ state.draftAt=new Date().toISOString(); }catch(e){} }
+
+app.addEventListener("input",function(e){
+  var t=e.target, f=t.dataset.f, s=state.sessions[sel];
+  if(t.dataset.g==="notas"){ state.notas=t.value; markDirty(); return; }
+  if(!f) return;
+  if(t.dataset.t!==undefined){ s.temas[+t.dataset.t][f]=t.value; markDirty(); return; }
+  if(f==="semana") return;
+  if(f==="duracion"){ var n=parseFloat(t.value); if(n>0) s.duracion=n; else return; }
+  else s[f]=t.value;
+  markDirty();
+});
+app.addEventListener("change",function(e){
+  var t=e.target, f=t.dataset.f;
+  if(f==="semana"){ var s=state.sessions[sel]; s.semana=t.value; if(s.franja){ var sl=slotsFor(s.semana).filter(function(x){return x.k===s.franja;})[0]; if(sl.holiday) s.franja=null; } markDirty(); refresh(); return; }
+  if(f==="titulo"||f==="duracion"){ refresh(); }
+});
+function refresh(){ var tl=document.getElementById("tl"), ed=document.getElementById("editor"); if(tl) tl.innerHTML=timelineHTML(); if(ed) ed.innerHTML=editorHTML(); }
+app.addEventListener("click",function(e){
+  var b=e.target.closest("[data-act]"); if(!b) return;
+  var a=b.dataset.act, s=state.sessions[sel];
+  if(a==="view"){ view=b.dataset.v; render(); window.scrollTo(0,0); return; }
+  if(a==="sel"){ var i=+b.dataset.i; if(i>=0&&i<state.sessions.length){ sel=i; refresh(); var ed=document.getElementById("editor"); if(ed) ed.scrollIntoView({block:"start"}); } return; }
+  if(a==="person"){ var n=b.dataset.n, k=s.personas.indexOf(n); if(k>-1) s.personas.splice(k,1); else s.personas.push(n); markDirty(); refresh(); return; }
+  if(a==="addguest"){ var inp=document.getElementById("guest"); var v=inp&&inp.value.trim(); if(v){ s.invitados.push(v); markDirty(); refresh(); } return; }
+  if(a==="rmguest"){ s.invitados.splice(+b.dataset.k,1); markDirty(); refresh(); return; }
+  if(a==="slot"){ s.franja=(s.franja===b.dataset.k)?null:b.dataset.k; markDirty(); refresh(); return; }
+  if(a==="addtema"){ s.temas.push(T("Nuevo tema","Propuesto por Sandra","","")); markDirty(); refresh(); return; }
+  if(a==="rmtema"){ s.temas.splice(+b.dataset.k,1); markDirty(); refresh(); return; }
+  if(a==="pay"){ state.payment=b.dataset.v; markDirty(); render(); return; }
+  if(a==="save"){ save(view==="plan"); return; }
+  if(a==="copy"){
+    var txt=summaryText();
+    var done=function(){ toast("Resumen copiado."); };
+    var fallback=function(){ var ta=document.createElement("textarea"); ta.value=txt; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); try{ document.execCommand("copy"); done(); }catch(err){ toast("No se pudo copiar. Selecciona el texto del resumen a mano."); } document.body.removeChild(ta); };
+    try{ navigator.clipboard.writeText(txt).then(done,fallback); }catch(err){ fallback(); }
+    return;
+  }
+  if(a==="pdf"){
+    var doc=makePdf();
+    if(!doc){ toast("No se pudo preparar el PDF. Usa Copiar resumen."); return; }
+    try{ doc.save("plan-de-trabajo-sasa.pdf"); toast("PDF listo."); }catch(err){ toast("No se pudo guardar el PDF. Usa Copiar resumen."); }
+    return;
+  }
+  });
+
+/* ===== Arranque ===== */
+state=loadState();
+render();
+</script>
