@@ -1,0 +1,115 @@
+---
+interface Props {
+  ubicacion?: string;
+}
+
+const { ubicacion = "hub" } = Astro.props;
+const formId = `form-evidencia-${ubicacion}`;
+const feedbackId = `feedback-evidencia-${ubicacion}`;
+const btnId = `btn-evidencia-${ubicacion}`;
+---
+
+<div class="bg-white rounded-3xl border border-slate-200/90 p-8 sm:p-12 shadow-sm text-center space-y-5 my-14 relative overflow-hidden">
+  <div class="absolute bottom-0 right-0 w-48 h-48 bg-emerald-50 rounded-full blur-3xl -z-10 translate-x-10 translate-y-10"></div>
+
+  <span class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest block bg-slate-50 py-1 px-3 rounded-full w-fit mx-auto border border-slate-200/60">
+    Ruta Evidencia
+  </span>
+  <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+    Entra a la ruta
+  </h3>
+  <p class="text-sm sm:text-base text-slate-600 max-w-xl mx-auto leading-relaxed">
+    Deja tu correo y te escribo cuando estén los pasos gratis. Después te cuento cuándo abre el kit.
+  </p>
+
+  <form
+    id={formId}
+    onsubmit={`handleEvidenciaSubmit(event, '${ubicacion}', '${feedbackId}', '${btnId}')`}
+    class="max-w-md mx-auto space-y-3 text-left"
+  >
+    <label class="block text-xs font-medium text-slate-700" for={`email-${formId}`}>
+      Correo electrónico
+    </label>
+    <input
+      id={`email-${formId}`}
+      type="email"
+      name="email"
+      required
+      autocomplete="email"
+      placeholder="tu.correo@empresa.com"
+      class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:bg-white focus:border-teal-600 transition"
+    />
+    <!-- Campo trampa para bots, no se ve ni se llena a mano -->
+    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
+    <button
+      id={btnId}
+      type="submit"
+      class="w-full inline-flex items-center justify-center font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3.5 px-6 transition text-sm shadow-md cursor-pointer"
+    >
+      Quiero entrar
+    </button>
+    <p class="text-[11px] text-slate-500 text-center leading-normal">
+      Al dejar tu correo aceptas recibir mensajes de LuciRMe AI. Consulta la
+      <a href="/privacidad" target="_blank" class="text-teal-700 underline hover:text-teal-800">política de privacidad</a>.
+    </p>
+    <p id={feedbackId} class="hidden text-center text-xs font-semibold pt-1"></p>
+  </form>
+</div>
+
+<script is:inline>
+  window.handleEvidenciaSubmit = async function (e, ubicacion, feedbackId, btnId) {
+    e.preventDefault();
+    const form = e.target;
+    const emailInput = form.querySelector('input[name="email"]');
+    const trampa = form.querySelector('input[name="website"]');
+    const feedback = document.getElementById(feedbackId);
+    const btn = document.getElementById(btnId);
+
+    if (!emailInput || !emailInput.value) return;
+
+    const mostrar = (texto, ok) => {
+      if (!feedback) return;
+      feedback.textContent = texto;
+      feedback.className = ok
+        ? 'text-center text-xs text-emerald-600 font-semibold pt-1'
+        : 'text-center text-xs text-red-600 font-semibold pt-1';
+    };
+
+    if (feedback) feedback.classList.add('hidden');
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'Procesando...';
+    }
+
+    try {
+      const res = await fetch('/api/ruta-evidencia-registro', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: emailInput.value.trim(),
+          honeypot: trampa ? trampa.value : '',
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.ok) {
+        mostrar('Listo. Te escribo cuando estén los pasos.', true);
+        form.reset();
+        if (window.posthog) {
+          window.posthog.capture('ruta_evidencia_registro', { ubicacion: ubicacion });
+        }
+      } else {
+        mostrar(data.error || 'No pudimos registrar tu correo. Intenta de nuevo.', false);
+      }
+    } catch (err) {
+      console.error('[ruta-evidencia-registro]', err);
+      mostrar('No pudimos registrar tu correo. Intenta de nuevo.', false);
+    }
+
+    if (feedback) feedback.classList.remove('hidden');
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = 'Quiero entrar';
+    }
+  };
+</script>
