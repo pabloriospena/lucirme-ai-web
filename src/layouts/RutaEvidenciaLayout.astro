@@ -19,6 +19,7 @@ const {
 } = Astro.props;
 
 const fullTitle = `${title} | LuciRMe AI`;
+const mostrarBarra = !Astro.url.pathname.startsWith("/ruta-evidencia/kit");
 const canonicalUrl = canonical || new URL(Astro.url.pathname, "https://lucirme.com").href;
 ---
 
@@ -71,9 +72,27 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, "https://lucirme.c
   </head>
   <body class="min-h-screen flex flex-col antialiased selection:bg-teal-100 selection:text-teal-900">
     <Header />
-    <main class="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-8">
+    <main class={`flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-8 ${mostrarBarra ? "pb-28" : ""}`}>
       <slot />
     </main>
     <Footer />
+    {mostrarBarra && (
+      <div class="fixed bottom-0 inset-x-0 z-40 border-t border-slate-200 bg-white/95 backdrop-blur shadow-[0_-4px_16px_rgba(15,23,42,0.08)]">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+          <p class="text-sm text-slate-700 leading-snug">
+            <span class="font-semibold text-slate-900">Mira la ruta completa.</span>
+            <span class="hidden sm:inline"> Los Pasos 2, 3 y 4 forman el kit.</span>
+          </p>
+          <a
+            href="/ruta-evidencia/kit"
+            onclick="if (window.posthog) { window.posthog.capture('ruta_evidencia_sticky_click', { ruta: location.pathname }); }"
+            class="inline-flex items-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-2.5 px-5 transition text-sm shadow-md"
+          >
+            <span>Ver la ruta completa</span>
+            <span class="text-base leading-none">→</span>
+          </a>
+        </div>
+      </div>
+    )}
   </body>
 </html>
