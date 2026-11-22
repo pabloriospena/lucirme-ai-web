@@ -859,6 +859,34 @@ import { LINKS } from "../lib/constants.js";
               </a>
             </div>
           </div>
+
+          <!-- RUTA EVIDENCIA: entrevistas con usuarios -->
+          <div
+            class="p-4 md:p-5 rounded-xl bg-orange/5 border border-orange/30 flex flex-col md:flex-row md:items-center justify-between gap-4"
+          >
+            <div class="max-w-2xl">
+              <span
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] bg-emerald-100 text-emerald-800 font-bold mb-2 font-mono"
+              >
+                Nueva • Dos pasos gratis
+              </span>
+              <h5 class="text-sm md:text-base text-deep font-bold">
+                Ruta Evidencia: de tus entrevistas a una decisión
+              </h5>
+              <p class="text-xs text-gray-600 mt-1 leading-relaxed">
+                Si haces entrevistas con usuarios, aprende a separar lo que
+                dijeron de lo que supones: cada afirmación atada a una cita.
+              </p>
+            </div>
+            <a
+              href="/ruta-evidencia"
+              onclick="if (window.posthog) { window.posthog.capture('rutas_free_resource_click', { ruta: 'ruta-pm', recurso: 'ruta-evidencia' }); }"
+              class="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-xl bg-white border border-gray-200 text-deep font-bold text-xs hover:bg-gray-100 transition-colors shrink-0"
+            >
+              <span>Ver la ruta</span>
+              <span>→</span>
+            </a>
+          </div>
         </article>
 
         <!-- ========================================================= -->
