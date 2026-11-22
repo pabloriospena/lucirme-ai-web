@@ -94,5 +94,33 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, "https://lucirme.c
         </div>
       </div>
     )}
+    <script is:inline>
+      (function () {
+        var ruta = 'ruta_claude';
+        var partes = location.pathname.replace(/\/+$/, '').split('/');
+        var pagina = partes.length > 2 ? partes[2] : 'hub';
+        var params = new URLSearchParams(location.search);
+        function enviar(nombre, props) {
+          if (window.posthog) window.posthog.capture(nombre, props);
+        }
+        window.addEventListener('load', function () {
+          enviar(ruta + '_pagina_vista', { pagina: pagina, referido: params.has('ref') });
+          if (params.has('ref')) enviar(ruta + '_visita_referida', { pagina: pagina });
+        });
+        var enviado = false;
+        window.addEventListener('scroll', function () {
+          if (enviado) return;
+          var alto = document.documentElement.scrollHeight - window.innerHeight;
+          if (alto > 0 && window.scrollY / alto >= 0.75) {
+            enviado = true;
+            enviar(ruta + '_scroll_75', { pagina: pagina });
+          }
+        }, { passive: true });
+        document.addEventListener('click', function (e) {
+          var a = e.target && e.target.closest ? e.target.closest('a[href="#avisame"]') : null;
+          if (a) enviar(ruta + '_avisame_click', { pagina: pagina });
+        });
+      })();
+    </script>
   </body>
 </html>
