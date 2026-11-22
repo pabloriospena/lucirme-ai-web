@@ -1,0 +1,174 @@
+---
+import RutaClaudeLayout from "../../layouts/RutaClaudeLayout.astro";
+import EmailCTA from "../../components/ruta-claude/EmailCTA.astro";
+import Compartir from "../../components/ruta-claude/Compartir.astro";
+import { HOTMART_KIT_URL } from "../../data/ruta-claude";
+
+const incluye = [
+  "Prompts listos para Claude. Para armar tu proyecto, para pedir con cita, para comprobar respuestas y para convertir tareas en rutina.",
+  "Una plantilla de instrucciones de proyecto que podés ajustar a tu trabajo en cinco minutos.",
+  "Un inventario de fuentes para decidir qué documentos entran, cuáles mandan y cuáles se quedan afuera.",
+  "Una lista de comprobación con tres verificaciones rápidas y las señales de alerta más comunes.",
+  "Una guía de rutina semanal para dejar escritas tus tres tareas que más se repiten.",
+  "Un ejemplo resuelto de punta a punta, con datos inventados para no exponer a nadie.",
+];
+
+const ganas = [
+  "Dejás de explicarle tu trabajo a Claude en cada conversación, porque tu proyecto ya trae tus documentos y tus instrucciones.",
+  "Sabés cuándo creerle a una respuesta, porque cada afirmación llega con la frase de tu documento y la comprobás en minutos.",
+  "Tenés tus tareas repetidas escritas una vez, y cada semana solo cambias el material.",
+  "Sabés en qué tareas no conviene usar Claude, y eso te ahorra errores caros.",
+];
+
+const pasos = [
+  { href: "/ruta-claude/paso-2", titulo: "Paso 2. Dale tus documentos a Claude", texto: "Armás un proyecto con tus fuentes ordenadas y unas instrucciones claras, para que cada conversación empiece con el contexto listo." },
+  { href: "/ruta-claude/paso-3", titulo: "Paso 3. Comprobá lo que dice Claude", texto: "Pedís la cita de cada respuesta, la comparás con tu fuente y aprendés a detectar cuándo no usarla." },
+  { href: "/ruta-claude/paso-4", titulo: "Paso 4. Convertilo en rutina", texto: "Dejás escritas tres tareas que repetís cada semana, con su comprobación, para hacerlas siempre igual." },
+];
+
+const preguntas = [
+  { p: "¿Necesito saber programar?", r: "No. Todo se hace escribiendo y configurando cosas en las herramientas que ya usás." },
+  { p: "¿Qué necesito para usarlo?", r: "Una cuenta de Claude y tus documentos en Google Drive, en Notion o en archivos que puedas subir. Lo que incluye cada plan de Claude cambia con el tiempo, así que conviene revisar el tuyo antes de comprar." },
+  { p: "¿Cuánto tiempo me ahorra?", r: "Todavía no lo medí con compradores reales y por eso no te prometo una cifra. El kit te explica cómo medirlo en tu propio trabajo." },
+  { p: "¿Y si mi empresa no permite subir documentos?", r: "Preguntá primero por la política de IA de tu empresa. Si no permite usar Claude con tu material, trabajá con textos sin datos sensibles o esperá a tener permiso. Este kit no te pide saltarte ninguna regla." },
+  { p: "¿Funciona con mis herramientas?", r: "Lo probé con Claude, Google Drive y Notion. OneDrive y Microsoft 365 siguen la misma lógica, pero no los probé." },
+  { p: "¿Qué pasa con mis datos?", r: "El kit no te los pide ni los guarda. Lo que subís a Claude queda en tu cuenta de Claude, y la regla de qué pegar y qué no la vemos en el Paso 0, que es gratis." },
+];
+---
+
+<RutaClaudeLayout
+  title="Kit Claude desde cero. Trabajá con Claude sobre tus documentos"
+  description="Un kit para usar Claude con tus propios documentos, con prompts, una plantilla de proyecto y una lista para comprobar cada respuesta."
+>
+  <div class="space-y-14 pb-16">
+    <nav class="text-xs font-mono text-slate-500 px-2">
+      <a href="/ruta-claude" class="hover:text-teal-700 underline-offset-2 hover:underline">Ruta Claude desde cero</a>
+      <span aria-hidden="true" class="mx-2 inline-block h-1 w-1 rounded-full bg-slate-300 align-middle"></span>
+      <span class="text-slate-700">El kit</span>
+    </nav>
+
+    <section class="space-y-5 bg-white rounded-3xl border border-slate-200/80 p-8 sm:p-10 shadow-sm">
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border bg-amber-50 text-amber-800 border-amber-200">En preventa, se está terminando de probar</span>
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.12]">
+        Claude trabajando sobre tus propios documentos
+      </h1>
+      <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+        Un kit para profesionales y empleados que ya probaron Claude y quieren que responda con base en su material, con respuestas que puedan comprobar. Los Pasos 0 y 1 son gratis y el kit son los Pasos 2, 3 y 4.
+      </p>
+      <p class="text-sm text-slate-500">Todavía no se puede comprar. Dejá tu correo y te aviso cuando abra la preventa.</p>
+      {HOTMART_KIT_URL ? (
+        <a
+          href={HOTMART_KIT_URL}
+          onclick="if (window.posthog) { window.posthog.capture('ruta_claude_kit_comprar_click', { ubicacion: 'hero' }); }"
+          class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3.5 px-6 transition text-sm shadow-md"
+        >
+          <span>Reservar mi cupo</span>
+          <span class="text-base leading-none">→</span>
+        </a>
+      ) : (
+        <a
+          href="#avisame"
+          class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3.5 px-6 transition text-sm shadow-md"
+        >
+          <span>Avisame cuando abra</span>
+          <span class="text-base leading-none">↓</span>
+        </a>
+      )}
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight px-2">Qué ganás</h2>
+      <ul class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-3 text-sm sm:text-base text-slate-700 leading-relaxed">
+        {ganas.map((g) => (
+          <li class="flex gap-3"><span aria-hidden="true" class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700"></span><span>{g}</span></li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="space-y-4 px-2">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">El problema</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+        Abrís Claude, le explicás tu situación, te responde algo decente y a la semana siguiente repetís todo desde cero. Además, a veces responde con seguridad algo que no está en tus documentos, y no te das cuenta hasta que ya lo usaste.
+      </p>
+    </section>
+
+    <section class="space-y-4 px-2">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">La regla del kit</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+        Una respuesta de Claude solo se usa si trae la frase de tu documento en la que se apoya, y vos la comprobás. Si no la trae, queda como una idea para verificar. Con esa regla sabés qué podés mandar con tu nombre y qué todavía necesita revisión.
+      </p>
+      <p class="text-sm text-slate-600">
+        Podés ver la regla en acción, gratis, en el <a href="/ruta-claude/paso-1" class="text-teal-700 underline hover:text-teal-800">Paso 1</a>.
+      </p>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight px-2">Qué recibís</h2>
+      <ul class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-3 text-sm sm:text-base text-slate-700 leading-relaxed">
+        {incluye.map((i) => (
+          <li class="flex gap-3"><span aria-hidden="true" class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700"></span><span>{i}</span></li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight px-2">Los tres pasos del kit</h2>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">Los Pasos 0 y 1 son gratis. Cada paso del kit tiene una vista previa con un ejemplo.</p>
+      <div class="grid gap-4 sm:grid-cols-3">
+        {pasos.map((p) => (
+          <a href={p.href} class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2 hover:border-teal-600 transition">
+            <h3 class="font-bold text-slate-900">{p.titulo}</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">{p.texto}</p>
+            <span class="text-xs font-semibold text-teal-700">Ver vista previa →</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="space-y-4 px-2">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Un ejemplo honesto</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+        El ejemplo del kit usa casos inventados, para no exponer a ninguna persona ni empresa. Lo armé con los patrones que más se repiten en talleres y acompañamientos, sin usar material de nadie. Todavía no tengo resultados de gente que haya usado el kit en su trabajo, y por eso no los muestro.
+      </p>
+    </section>
+
+    <section class="space-y-4 px-2">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Dónde se compra</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+        {HOTMART_KIT_URL
+          ? "Se compra desde el botón Reservar mi cupo de esta misma página, y el contenido de pago llega a tu área de miembros."
+          : "Todavía no se puede comprar. Cuando abra la preventa, el botón de compra aparece en esta misma página y el contenido de pago llega a tu área de miembros. Si dejás tu correo abajo, te aviso el día que abra."}
+      </p>
+    </section>
+
+    <section class="space-y-4 px-2">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Cómo funciona la preventa</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+        Hay cupos limitados para quienes entren primero. El kit se termina de armar y de probar con ellos, y cada comprador de preventa me cuenta qué falló y qué faltó. El precio, la fecha de entrega y la garantía se publican cuando abra la preventa. Dejá tu correo y te aviso antes que a nadie.
+      </p>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight px-2">Preguntas frecuentes</h2>
+      <div class="space-y-4">
+        {preguntas.map((q) => (
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2">
+            <h3 class="font-bold text-slate-900">{q.p}</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">{q.r}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <div id="avisame">
+      <EmailCTA
+        ubicacion="kit"
+        titulo="Avisame cuando abra la preventa"
+        texto="Dejá tu correo y te aviso cuando abra, con el precio, la fecha de entrega y la garantía."
+        boton="Avisame"
+      />
+    </div>
+
+    <Compartir ubicacion="kit" />
+  </div>
+</RutaClaudeLayout>

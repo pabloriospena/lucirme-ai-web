@@ -1,0 +1,69 @@
+---
+import RutaClaudeLayout from "../../layouts/RutaClaudeLayout.astro";
+import PreviewPaso from "../../components/ruta-claude/PreviewPaso.astro";
+
+const recibes = [
+  "Un prompt para que cada afirmación de Claude llegue con la frase de tu documento y el lugar donde está.",
+  "Un método de tres comprobaciones que podés hacer en unos minutos antes de usar una respuesta.",
+  "Una lista de señales de alerta, como cifras redondas que no están en tu material o frases demasiado seguras.",
+  "Una guía de tareas en las que no conviene usar Claude, o solo con revisión de otra persona.",
+  "Una hoja de auditoría para anotar qué comprobaste y qué falló, para que el método mejore con tu uso.",
+];
+
+const limites = [
+  "No garantiza que Claude no se equivoque. Reduce el riesgo y te enseña a detectar el error antes de usarlo.",
+  "No reemplaza la revisión de un experto en temas legales, médicos o financieros.",
+  "No decide por vos qué nivel de error aceptás en tu trabajo.",
+];
+
+const filas = [
+  { afirmacion: "El reembolso máximo por noche es de ciento veinte dólares.", cita: "Tope por noche de hospedaje, ciento veinte dólares.", resultado: "Coincide con la política" },
+  { afirmacion: "Los viajes de menos de dos días no necesitan aprobación.", cita: "sin cita", resultado: "No está en el documento, no se usa" },
+  { afirmacion: "Las comidas se reembolsan con factura.", cita: "Toda comida debe soportarse con factura electrónica.", resultado: "Coincide, pero dice electrónica" },
+];
+---
+
+<RutaClaudeLayout
+  title="Paso 3. Comprobá lo que dice Claude"
+  description="Pedile a Claude la cita de cada respuesta, compará con tu fuente y aprendé cuándo no confiar en lo que responde."
+>
+  <PreviewPaso
+    numero="03"
+    titulo="Comprobá lo que dice Claude"
+    resumen="Una respuesta que suena bien todavía no es una respuesta correcta. Acá aprendés a pedir la cita, a comprobarla rápido y a saber cuándo dejarla de lado."
+    recibes={recibes}
+    limites={limites}
+    anterior={{ href: "/ruta-claude/paso-2", texto: "Paso 2" }}
+    siguiente={{ href: "/ruta-claude/paso-4", texto: "Paso 4" }}
+  >
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Cómo se ve</h2>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        Siguiendo el caso inventado de la analista de compras, estas son tres afirmaciones de Claude con su cita y lo que ella encontró al comprobarlas.
+      </p>
+      <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-x-auto">
+        <table class="w-full text-sm text-left min-w-[640px]">
+          <thead class="bg-slate-50 text-xs font-mono uppercase tracking-wider text-slate-500">
+            <tr>
+              <th class="px-4 py-3">Afirmación</th>
+              <th class="px-4 py-3">Cita</th>
+              <th class="px-4 py-3">Resultado</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700 align-top">
+            {filas.map((f) => (
+              <tr>
+                <td class="px-4 py-3">{f.afirmacion}</td>
+                <td class="px-4 py-3">{f.cita}</td>
+                <td class="px-4 py-3">{f.resultado}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        Una de las tres no tenía respaldo, y otra tenía un matiz que cambia lo que se le responde al equipo. Sin la comprobación, las dos habrían salido como ciertas.
+      </p>
+    </section>
+  </PreviewPaso>
+</RutaClaudeLayout>

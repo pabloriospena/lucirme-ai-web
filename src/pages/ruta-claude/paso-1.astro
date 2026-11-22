@@ -1,0 +1,196 @@
+---
+import RutaClaudeLayout from "../../layouts/RutaClaudeLayout.astro";
+import EmailCTA from "../../components/ruta-claude/EmailCTA.astro";
+import Compartir from "../../components/ruta-claude/Compartir.astro";
+
+const promptFlojo = `Escribime una respuesta para un cliente que está molesto.`;
+
+const promptBueno = `Situación. Soy coordinadora administrativa de una empresa de servicios. Un cliente escribió molesto porque su pedido llegó tres días tarde. La demora fue por un error nuestro en la programación.
+
+Tarea. Escribí una respuesta para ese cliente.
+
+Material. Este es su correo, sin su nombre.
+[pegá acá el correo]
+
+Formato. Un correo de máximo ciento cincuenta palabras, con un saludo, el reconocimiento del error, lo que hacemos para repararlo y una despedida.
+
+Límites. No prometas descuentos ni fechas que no te di. No culpes a un tercero. Si te falta un dato para responder bien, preguntame antes de escribir.`;
+
+const promptBase = `Situación. [quién sos, para quién trabajás y qué está pasando]
+
+Tarea. [qué querés que haga Claude, en una frase]
+
+Material. [el texto, la tabla o las notas sobre las que tiene que trabajar]
+
+Formato. [cómo querés la respuesta, por ejemplo un correo corto, una tabla o cinco puntos]
+
+Límites. [lo que no debe hacer, y qué debe hacer si le falta información]`;
+
+const promptFuente = `Respondé solo con lo que está en el material que te pasé. Si algo no está en el material, escribí exactamente, no está en el material, y no lo completes con lo que sabés de otros lugares.
+
+Cada vez que afirmes algo, pegá al lado la frase del material en la que te apoyás.
+
+Material.
+[pegá acá tu documento o adjuntalo]
+
+Pregunta.
+[tu pregunta]`;
+---
+
+<RutaClaudeLayout
+  title="Paso 1. El prompt es el contexto"
+  description="Aprendé a pedirle a Claude con situación, tarea, material, formato y límites, y a darle una sola fuente para que no invente."
+>
+  <div class="space-y-12 pb-16">
+    <nav class="text-xs font-mono text-slate-500 px-2">
+      <a href="/ruta-claude" class="hover:text-teal-700 underline-offset-2 hover:underline">Ruta Claude desde cero</a>
+      <span aria-hidden="true" class="mx-2 inline-block h-1 w-1 rounded-full bg-slate-300 align-middle"></span>
+      <span class="text-slate-700">Paso 1</span>
+    </nav>
+
+    <section class="space-y-5 bg-white rounded-3xl border border-slate-200/80 p-8 shadow-sm">
+      <span class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">Paso 1, gratis</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+        El prompt es el contexto
+      </h1>
+      <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+        Claude responde con lo que tiene delante. Lo que no le das, lo adivina. Este paso te enseña a darle lo justo para que la primera respuesta ya sirva.
+      </p>
+    </section>
+
+    <section class="space-y-4 px-2">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight">Una idea para llevarte</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+        Cuando una respuesta sale floja, casi siempre faltó información en lo que pediste. Un prompt con situación, tarea, material, formato y límites le quita a Claude las dudas, y con eso se reducen las respuestas que suenan bien pero no dicen lo que necesitás.
+      </p>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">El mismo pedido, de dos maneras</h2>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        El caso es inventado. Una coordinadora tiene que responderle a un cliente por una entrega tardía.
+      </p>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="space-y-2">
+          <p class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest px-1">Pedido flojo</p>
+          <pre class="bg-slate-50 border border-slate-200 text-slate-800 text-xs rounded-xl p-4 overflow-x-auto whitespace-pre-wrap leading-relaxed h-full">{promptFlojo}</pre>
+        </div>
+        <div class="space-y-2">
+          <p class="text-xs font-mono font-bold text-teal-800 uppercase tracking-widest px-1">Pedido con contexto</p>
+          <pre class="bg-slate-900 text-slate-100 text-xs rounded-xl p-4 overflow-x-auto whitespace-pre-wrap leading-relaxed">{promptBueno}</pre>
+        </div>
+      </div>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        El pedido flojo no dice quién escribe, qué pasó, qué se puede prometer ni cuánto debe medir. Claude tiene que inventar todo eso. El segundo lo dice, y además le da permiso de preguntar cuando le falte algo.
+      </p>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Las cinco partes</h2>
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-3 text-sm sm:text-base text-slate-700 leading-relaxed">
+        <p><span class="font-semibold text-slate-900">Situación.</span> Quién sos, para quién trabajás y qué está pasando.</p>
+        <p><span class="font-semibold text-slate-900">Tarea.</span> Lo que querés que haga, en una frase.</p>
+        <p><span class="font-semibold text-slate-900">Material.</span> El texto, la tabla o las notas sobre las que tiene que trabajar.</p>
+        <p><span class="font-semibold text-slate-900">Formato.</span> Cómo querés la respuesta, con su largo.</p>
+        <p><span class="font-semibold text-slate-900">Límites.</span> Lo que no debe hacer y qué hacer si le falta información.</p>
+      </div>
+      <pre id="prompt-base-texto" class="bg-slate-900 text-slate-100 text-xs sm:text-sm rounded-2xl p-6 overflow-x-auto whitespace-pre-wrap leading-relaxed">{promptBase}</pre>
+      <button
+        id="btn-copiar-prompt-base"
+        type="button"
+        class="inline-flex items-center font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3 px-5 transition text-sm shadow-md cursor-pointer"
+      >
+        Copiar plantilla
+      </button>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Dale una sola fuente</h2>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        Cuando la respuesta tiene que salir de un documento tuyo, pedile que se quede en ese documento. Una fuente solo responde lo que contiene. Si no lo aclarás, Claude puede completar con lo que sabe de otros lugares, y ahí aparecen las respuestas que suenan seguras y no están en tu material.
+      </p>
+      <pre id="prompt-fuente-texto" class="bg-slate-900 text-slate-100 text-xs sm:text-sm rounded-2xl p-6 overflow-x-auto whitespace-pre-wrap leading-relaxed">{promptFuente}</pre>
+      <button
+        id="btn-copiar-prompt-fuente"
+        type="button"
+        class="inline-flex items-center font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3 px-5 transition text-sm shadow-md cursor-pointer"
+      >
+        Copiar prompt
+      </button>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Antes de confiar en el resultado</h2>
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-3">
+        <p class="text-sm text-slate-600 leading-relaxed">Elegí tres afirmaciones al azar y buscalas en tu documento.</p>
+        <ul class="text-sm text-slate-600 space-y-1.5 list-disc pl-5 leading-relaxed">
+          <li>¿La frase que cita Claude está escrita igual en tu material?</li>
+          <li>¿Está donde dice Claude?</li>
+          <li>¿Alguna afirmación no trae frase de respaldo?</li>
+        </ul>
+        <p class="text-sm text-slate-600 leading-relaxed pt-1">
+          Si alguna falla, esa afirmación no se usa. Si fallan varias, repetí el prompt pidiéndole que copie solo lo que puede encontrar.
+        </p>
+      </div>
+    </section>
+
+    <section class="space-y-3 px-2">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight">Cuándo abrir una conversación nueva</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+        Una conversación muy larga puede hacer que Claude pierda detalles del comienzo y responda con menos precisión. Si notás que se confunde o repite cosas, abrí una nueva y pegá un resumen corto de lo que ya decidiste. Para no repetir ese trabajo cada vez, existen los proyectos, que son el Paso 2.
+      </p>
+    </section>
+
+    <section class="bg-white rounded-3xl border border-teal-200 p-8 shadow-sm space-y-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Continuá con la ruta</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+        Ya sabés pedir con contexto y darle una fuente a Claude. Los Pasos 2, 3 y 4 hacen que trabaje sobre todos tus documentos, que comprobés lo que responde y que lo conviertas en rutina.
+      </p>
+      <div class="flex flex-wrap items-center gap-4">
+        <a
+          href="/ruta-claude/kit"
+          onclick="if (window.posthog) { window.posthog.capture('ruta_claude_continuar_click', { desde: 'paso-1' }); }"
+          class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3.5 px-6 transition text-sm shadow-md"
+        >
+          <span>Continuar con la ruta</span>
+          <span class="text-base leading-none">→</span>
+        </a>
+        <a href="/ruta-claude/paso-2" class="text-sm text-teal-700 underline hover:text-teal-800">Ver la vista previa del Paso 2</a>
+      </div>
+    </section>
+
+    <Compartir ubicacion="paso-1" />
+
+    <EmailCTA ubicacion="paso-1" />
+  </div>
+</RutaClaudeLayout>
+
+<script is:inline>
+  (function () {
+    function enlazar(botonId, textoId, nombre, original) {
+      var boton = document.getElementById(botonId);
+      if (!boton) return;
+      boton.addEventListener('click', function () {
+        var el = document.getElementById(textoId);
+        if (!el) return;
+        var texto = el.textContent || '';
+        var listo = function () {
+          boton.textContent = 'Copiado';
+          if (window.posthog) {
+            window.posthog.capture('prompt_copiado', { recurso: 'ruta-claude', prompt: nombre, paso: '1' });
+          }
+          setTimeout(function () { boton.textContent = original; }, 2000);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(texto).then(listo).catch(function () {
+            window.prompt('Copiá el texto:', texto);
+          });
+        } else {
+          window.prompt('Copiá el texto:', texto);
+        }
+      });
+    }
+    enlazar('btn-copiar-prompt-base', 'prompt-base-texto', 'plantilla-cinco-partes', 'Copiar plantilla');
+    enlazar('btn-copiar-prompt-fuente', 'prompt-fuente-texto', 'una-sola-fuente', 'Copiar prompt');
+  })();
+</script>

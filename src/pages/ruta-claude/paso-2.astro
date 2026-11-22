@@ -1,0 +1,77 @@
+---
+import RutaClaudeLayout from "../../layouts/RutaClaudeLayout.astro";
+import PreviewPaso from "../../components/ruta-claude/PreviewPaso.astro";
+
+const recibes = [
+  "Un inventario de tus fuentes, con qué documento sirve para qué y cuál manda cuando dos dicen cosas distintas.",
+  "Una plantilla de instrucciones de proyecto, para que Claude arranque cada conversación sabiendo quién sos, qué hacés y cómo querés las respuestas.",
+  "Una guía para decidir cuándo subir un archivo y cuándo conectar tu Google Drive o tu Notion.",
+  "Tres prompts listos para pedirle a Claude trabajo sobre todo tu material a la vez.",
+  "La estructura de carpetas para Google Drive y Notion. OneDrive y Microsoft 365 siguen la misma lógica, pero no los probé.",
+];
+
+const limites = [
+  "No sube nada por vos. Vos decidís qué documentos entran, y los datos sensibles se quedan afuera.",
+  "No promete que Claude lea bien documentos escaneados mal. Si el archivo es una foto borrosa, el resultado se nota.",
+  "No reemplaza tu criterio sobre cuál fuente manda.",
+];
+
+const filas = [
+  { fuente: "Política de viajes, versión vigente", sirve: "Responder dudas de reembolsos", manda: "Sí, es la oficial" },
+  { fuente: "Correo de la jefa sobre un caso especial", sirve: "Excepciones puntuales", manda: "Solo para ese caso" },
+  { fuente: "Notas sueltas de una reunión", sirve: "Recordar lo que se habló", manda: "No, es apoyo" },
+];
+
+const instrucciones = `Soy analista de compras en una empresa mediana. Mi trabajo es revisar solicitudes de viaje y responder dudas al equipo.
+
+Respondé siempre en español, en un tono cordial y directo.
+Cuando la respuesta salga de un documento del proyecto, decime de cuál.
+Si dos documentos se contradicen, mostrame los dos y no elijas.
+Si algo no está en los documentos, decímelo y no lo completes.`;
+---
+
+<RutaClaudeLayout
+  title="Paso 2. Dale tus documentos a Claude"
+  description="Armá un proyecto con tus documentos y sus instrucciones para no empezar de cero en cada conversación con Claude."
+>
+  <PreviewPaso
+    numero="02"
+    titulo="Dale tus documentos a Claude"
+    resumen="En el Paso 1 le diste una fuente a Claude. Acá le dejás todas las que usás en tu trabajo, ordenadas, para que cada conversación empiece con el contexto listo."
+    recibes={recibes}
+    limites={limites}
+    anterior={{ href: "/ruta-claude/paso-1", texto: "Paso 1" }}
+    siguiente={{ href: "/ruta-claude/paso-3", texto: "Paso 3" }}
+  >
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Cómo se ve</h2>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        Imaginá a una analista de compras que responde dudas sobre viajes. Este es un pedazo de su inventario de fuentes. El caso es inventado.
+      </p>
+      <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-x-auto">
+        <table class="w-full text-sm text-left min-w-[520px]">
+          <thead class="bg-slate-50 text-xs font-mono uppercase tracking-wider text-slate-500">
+            <tr>
+              <th class="px-4 py-3">Fuente</th>
+              <th class="px-4 py-3">Sirve para</th>
+              <th class="px-4 py-3">¿Manda?</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700 align-top">
+            {filas.map((f) => (
+              <tr>
+                <td class="px-4 py-3">{f.fuente}</td>
+                <td class="px-4 py-3">{f.sirve}</td>
+                <td class="px-4 py-3">{f.manda}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        Y estas son las instrucciones del proyecto que escribiría con ese inventario a la mano.
+      </p>
+      <pre class="bg-slate-900 text-slate-100 text-xs sm:text-sm rounded-2xl p-6 overflow-x-auto whitespace-pre-wrap leading-relaxed">{instrucciones}</pre>
+    </section>
+  </PreviewPaso>
+</RutaClaudeLayout>

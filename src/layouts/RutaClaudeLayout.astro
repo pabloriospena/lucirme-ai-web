@@ -1,0 +1,98 @@
+---
+import Header from "../components/ruta-claude/Header.astro";
+import Footer from "../components/ruta-claude/Footer.astro";
+import PostHog from "../components/PostHog.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  canonical?: string;
+}
+
+const {
+  title,
+  description,
+  image = "https://lucirme.com/logo-lucirme.png",
+  canonical,
+} = Astro.props;
+
+const fullTitle = `${title} | LuciRMe AI`;
+const mostrarBarra = !Astro.url.pathname.startsWith("/ruta-claude/kit");
+const canonicalUrl = canonical || new URL(Astro.url.pathname, "https://lucirme.com").href;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Pablo Ríos - LuciRMe AI" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="LuciRMe AI" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={image} />
+    <meta property="og:locale" content="es_CO" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <PostHog />
+
+    <style>
+      :root {
+        /* reemplazar con manual de marca */
+        --color-primary: #00685F;
+        --color-primary-hover: #005049;
+        --color-bg: #F8FAFC;
+        --color-surface: #FFFFFF;
+        --color-text: #0B1C30;
+        --color-muted: #64748B;
+        --color-border: #E2E8F0;
+        --color-accent: #059669;
+      }
+      body {
+        background-color: var(--color-bg);
+        color: var(--color-text);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col antialiased selection:bg-teal-100 selection:text-teal-900">
+    <Header />
+    <main class={`flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-8 ${mostrarBarra ? "pb-28" : ""}`}>
+      <slot />
+    </main>
+    <Footer />
+    {mostrarBarra && (
+      <div class="fixed bottom-0 inset-x-0 z-40 border-t border-slate-200 bg-white/95 backdrop-blur shadow-[0_-4px_16px_rgba(15,23,42,0.08)]">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+          <p class="text-sm text-slate-700 leading-snug">
+            <span class="font-semibold text-slate-900">Mirá la ruta completa.</span>
+            <span class="hidden sm:inline"> Los Pasos 2, 3 y 4 forman el kit.</span>
+          </p>
+          <a
+            href="/ruta-claude/kit"
+            onclick="if (window.posthog) { window.posthog.capture('ruta_claude_sticky_click', { ruta: location.pathname }); }"
+            class="inline-flex items-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-2.5 px-5 transition text-sm shadow-md"
+          >
+            <span>Ver la ruta completa</span>
+            <span class="text-base leading-none">→</span>
+          </a>
+        </div>
+      </div>
+    )}
+  </body>
+</html>
