@@ -1,0 +1,101 @@
+---
+import RutaEvidenciaLayout from "../../layouts/RutaEvidenciaLayout.astro";
+import PreviewPaso from "../../components/ruta-evidencia/PreviewPaso.astro";
+
+const recibes = [
+  "Un espacio para escribir tu criterio antes de mirar la evidencia, por ejemplo cuántas entrevistas de perfiles distintos necesitas para dar algo por confirmado. El kit no inventa un mínimo, lo pones tú.",
+  "Por cada hipótesis, su estado según tu criterio. Confirmada, contradicha o sin evidencia suficiente.",
+  "Una recomendación entre cuatro opciones, seguir, ajustar, descartar o entrevistar más, cada una con su razón.",
+  "Una comprobación de citas antes de decidir, con los hallazgos que más pesan en tu decisión.",
+];
+
+const limites = [
+  "No decide por ti. La decisión final es tuya y queda escrita como tuya.",
+  "No promete que la decisión sea acertada. Te dice qué respalda cada opción y qué no.",
+  "Con pocas entrevistas, lo más probable es que la recomendación sea entrevistar más. Eso también es una decisión de producto.",
+];
+
+const filas = [
+  {
+    hipotesis: "Armar el reporte a mano consume horas",
+    estado: "Sin evidencia suficiente",
+    razon: "La respaldan 2 perfiles con cita. Tu criterio pide 3.",
+  },
+  {
+    hipotesis: "Las cifras no cuadran entre fuentes",
+    estado: "Contradicha",
+    razon: "Finanzas la desmiente con cita, y tu criterio da por contradicha una hipótesis con una sola desmentida.",
+  },
+  {
+    hipotesis: "El reporte es demasiado largo",
+    estado: "Sin evidencia suficiente",
+    razon: "Ninguna entrevista la tocó.",
+  },
+];
+---
+
+<RutaEvidenciaLayout
+  title="Paso 3. Decide con criterio"
+  description="Escribe tu criterio antes de mirar la evidencia. Claude compara cada hipótesis contra él y recomienda, pero la decisión es tuya."
+>
+  <PreviewPaso
+    numero="03"
+    titulo="Decide con criterio"
+    resumen="Antes de mirar la evidencia escribes cuándo darás una hipótesis por confirmada. Después Claude compara y recomienda, y tú decides."
+    recibes={recibes}
+    limites={limites}
+    anterior={{ href: "/ruta-evidencia/paso-2", texto: "Paso 2" }}
+    siguiente={{ href: "/ruta-evidencia/paso-4", texto: "Paso 4" }}
+  >
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Cómo se ve</h2>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        Seguimos con el reporte semanal de los pasos anteriores. Primero va el criterio, escrito antes de ver los resultados.
+      </p>
+
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2">
+        <span class="text-xs font-mono font-bold text-teal-700">Tu criterio</span>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+          Una hipótesis se da por confirmada cuando tres entrevistas de perfiles distintos la respaldan con cita. Se da por contradicha cuando un perfil la desmiente con cita.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-x-auto">
+        <table class="w-full text-sm text-left min-w-[560px]">
+          <thead class="bg-slate-50 text-xs font-mono uppercase tracking-wider text-slate-500">
+            <tr>
+              <th class="px-4 py-3">Hipótesis</th>
+              <th class="px-4 py-3">Estado</th>
+              <th class="px-4 py-3">Razón</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700 align-top">
+            {filas.map((f) => (
+              <tr>
+                <td class="px-4 py-3 font-semibold">{f.hipotesis}</td>
+                <td class="px-4 py-3">
+                  <span class={f.estado === "Contradicha" ? "px-2 py-0.5 rounded-md bg-red-50 text-red-700 text-xs font-bold" : "px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 text-xs font-bold"}>{f.estado}</span>
+                </td>
+                <td class="px-4 py-3">{f.razon}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2">
+        <span class="text-xs font-mono font-bold text-teal-700">Recomendación</span>
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+          Entrevistar más. Ninguna hipótesis llegó al umbral que pusiste, y faltan dos perfiles por escuchar. La decisión final es tuya.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2">
+        <h3 class="font-bold text-slate-900">Antes de decidir</h3>
+        <p class="text-sm text-slate-600 leading-relaxed">
+          Abres tres de las citas que sostienen la recomendación y las comparas con la fuente. Si alguna falla, ese hallazgo pasa a hipótesis y el estado se recalcula.
+        </p>
+      </div>
+    </section>
+  </PreviewPaso>
+</RutaEvidenciaLayout>

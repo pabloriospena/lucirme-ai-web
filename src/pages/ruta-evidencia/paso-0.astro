@@ -1,0 +1,157 @@
+---
+import RutaEvidenciaLayout from "../../layouts/RutaEvidenciaLayout.astro";
+import EmailCTA from "../../components/ruta-evidencia/EmailCTA.astro";
+import Compartir from "../../components/ruta-evidencia/Compartir.astro";
+
+const promptPrueba = `Busca en mi última reunión de entrevista con un usuario y dame una frase textual de la persona entrevistada, tal como quedó en la transcripción.
+
+Dime también:
+1. Quién la dijo (nombre o rol, no el mío).
+2. En qué parte de la reunión (minuto o posición en la transcripción).
+3. En qué reunión la encontraste (título y fecha).
+
+Si no puedes sacar la frase textual, dímelo. No la reconstruyas ni la resumas.`;
+
+const promptManual = `Voy a pegarte la transcripción de una entrevista. Cuando la tengas, dame una frase textual de la persona entrevistada, quién la dijo y en qué parte de la transcripción está. Si no puedes darla textual, dímelo.`;
+---
+
+<RutaEvidenciaLayout
+  title="Paso 0. Conecta tus fuentes"
+  description="Conecta Claude a tus transcripciones y a donde las guardas, y compruébalo en 2 minutos con una frase textual de una reunión real."
+>
+  <div class="space-y-12 pb-16">
+    <nav class="text-xs font-mono text-slate-500 px-2">
+      <a href="/ruta-evidencia" class="hover:text-teal-700 underline-offset-2 hover:underline">Ruta Evidencia</a>
+      <span aria-hidden="true" class="mx-2 inline-block h-1 w-1 rounded-full bg-slate-300 align-middle"></span>
+      <span class="text-slate-700">Paso 0</span>
+    </nav>
+
+    <section class="space-y-5 bg-white rounded-3xl border border-slate-200/80 p-8 shadow-sm">
+      <span class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">Paso 0, gratis</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+        Conecta tus fuentes
+      </h1>
+      <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+        Antes de pedirle nada a Claude sobre tus entrevistas, necesita poder leerlas. Este paso deja tres cosas listas.
+      </p>
+      <ul class="space-y-2 text-sm sm:text-base text-slate-700 max-w-2xl">
+        <li class="flex gap-3"><span class="text-teal-700 font-bold">1.</span><span>Claude conectado a la herramienta donde se graban tus reuniones.</span></li>
+        <li class="flex gap-3"><span class="text-teal-700 font-bold">2.</span><span>Claude conectado al lugar donde vas a guardar lo que organice.</span></li>
+        <li class="flex gap-3"><span class="text-teal-700 font-bold">3.</span><span>Una prueba de 2 minutos que te confirma que lee tus reuniones de verdad.</span></li>
+      </ul>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">1. Elige tus piezas</h2>
+      <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+        <table class="w-full text-sm text-left">
+          <thead class="bg-slate-50 text-xs font-mono uppercase tracking-wider text-slate-500">
+            <tr>
+              <th class="px-5 py-3">Pieza</th>
+              <th class="px-5 py-3">Opciones</th>
+              <th class="px-5 py-3">Qué haces con ella</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700">
+            <tr>
+              <td class="px-5 py-4 font-semibold">Transcripciones</td>
+              <td class="px-5 py-4">Fathom, Granola u otra</td>
+              <td class="px-5 py-4">De aquí Claude trae lo que dijo cada persona.</td>
+            </tr>
+            <tr>
+              <td class="px-5 py-4 font-semibold">Almacén</td>
+              <td class="px-5 py-4">Notion, Google Drive u OneDrive</td>
+              <td class="px-5 py-4">Aquí Claude deja las fuentes ordenadas. Notion es el almacén que recomiendo para consultarlas.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        Lo he probado completo con Fathom, Notion y Google Drive. Granola y OneDrive siguen la misma lógica, pero no los he probado de punta a punta.
+      </p>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">2. Conecta cada herramienta</h2>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        Las conexiones se hacen en la configuración de conectores de Claude. Un conector puede aparecer como conectado y aun así hay que activarlo en la conversación donde lo vas a usar. Verifica también qué exige tu plan de Claude, porque cambia según el plan.
+      </p>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2">
+          <h3 class="font-bold text-slate-900">Fathom</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">Tiene conector oficial en Claude. Conéctalo desde los conectores y autoriza tu cuenta de Fathom.</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2">
+          <h3 class="font-bold text-slate-900">Granola</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">En la configuración de Claude busca Granola y conéctalo. Si queda conectado pero Claude dice que no tiene herramientas, desconéctalo y vuelve a conectarlo.</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2">
+          <h3 class="font-bold text-slate-900">Notion</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">Conéctalo y dale acceso a la página o carpeta donde quieres guardar tus fuentes. Solo lo que le compartas lo puede leer.</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2">
+          <h3 class="font-bold text-slate-900">Google Drive</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">Conéctalo con tu cuenta de Google y elige una carpeta para las fuentes.</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2 sm:col-span-2">
+          <h3 class="font-bold text-slate-900">OneDrive con Microsoft 365</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">Va por el conector de Microsoft 365, que también cubre SharePoint, Outlook y Teams. Está pensado para cuentas de trabajo o de estudio. En los planes Team y Enterprise lo configura primero un administrador, y en Microsoft eso suele pasar por el administrador de Entra. Es lo que más puede frenarte si estás en una empresa.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">3. Prueba de 2 minutos</h2>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        Abre una conversación nueva en Claude, activa tus conectores y pega esto. Esta prueba es la regla de la ruta en pequeño. Lo que Claude te diga tiene que poder comprobarse en la fuente.
+      </p>
+
+      <pre class="bg-slate-900 text-slate-100 text-xs sm:text-sm rounded-2xl p-6 overflow-x-auto whitespace-pre-wrap leading-relaxed">{promptPrueba}</pre>
+
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2">
+        <h3 class="font-bold text-slate-900">Qué comprobar</h3>
+        <ul class="text-sm text-slate-600 space-y-1.5 list-disc pl-5 leading-relaxed">
+          <li>Abre esa reunión en tu herramienta y busca la frase. ¿Está escrita igual?</li>
+          <li>¿La dijo la persona que Claude te nombró?</li>
+          <li>¿Está en el lugar que te indicó?</li>
+        </ul>
+        <p class="text-sm text-slate-600 leading-relaxed pt-2">
+          Si las tres coinciden, estás listo. Si la frase cambió palabras o no existe, no sigas. La conexión no está leyendo la transcripción completa.
+        </p>
+      </div>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Si no funciona</h2>
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-4 text-sm text-slate-600 leading-relaxed">
+        <p><span class="font-semibold text-slate-900">Claude dice que no tiene acceso a tus reuniones.</span> Revisa que el conector esté activado en esa conversación, no solo conectado.</p>
+        <p><span class="font-semibold text-slate-900">No puedes conectar nada porque tu empresa lo bloquea.</span> Hay una salida que no necesita conectores. Sube la transcripción a un proyecto de Claude, o pégala en la conversación, y usa esta versión de la prueba.</p>
+        <pre class="bg-slate-50 border border-slate-200 text-slate-800 text-xs rounded-xl p-4 overflow-x-auto whitespace-pre-wrap">{promptManual}</pre>
+        <p><span class="font-semibold text-slate-900">Necesitas que tu administrador lo habilite.</span> Puedes mandarle este mensaje.</p>
+        <blockquote class="border-l-4 border-teal-600 pl-4 text-slate-700">
+          Hola, quiero usar Claude con el conector de mi herramienta de documentos para analizar transcripciones de entrevistas con usuarios de mi equipo de producto. ¿Puedes habilitar el conector para mi cuenta o decirme qué alternativa aprobada tenemos?
+        </blockquote>
+      </div>
+    </section>
+
+    <Compartir ubicacion="paso-0" />
+
+    <section class="space-y-3 px-2">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight">Siguiente</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+        El Paso 1 es la regla de la cita. Separas lo que dijo la persona de lo que tú supones, y lo haces con una de tus entrevistas.
+      </p>
+      <a
+        href="/ruta-evidencia/paso-1"
+        onclick="if (window.posthog) { window.posthog.capture('ruta_evidencia_step_click', { paso: '1', origen: 'paso-0' }); }"
+        class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3 px-5 transition text-sm shadow-md"
+      >
+        <span>Ir al Paso 1</span>
+        <span class="text-base leading-none">→</span>
+      </a>
+    </section>
+
+    <EmailCTA ubicacion="paso-0" />
+  </div>
+</RutaEvidenciaLayout>

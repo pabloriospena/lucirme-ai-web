@@ -1,0 +1,91 @@
+---
+import RutaEvidenciaLayout from "../../layouts/RutaEvidenciaLayout.astro";
+import PreviewPaso from "../../components/ruta-evidencia/PreviewPaso.astro";
+
+const recibes = [
+  "Una hoja para tus stakeholders con la decisión, las tres evidencias más fuertes con su cita, lo que todavía no sabes y qué harías distinto según lo que salga.",
+  "Borradores de épica o historia para tu gestor de tareas, cada uno con su cita, su ubicación y quién la dijo adjuntas. Pensado para Jira. Linear sigue la misma lógica, pero no lo he probado.",
+  "Una regla de seguridad para el paso a ejecución. Todo sale como borrador y lo revisas tú antes de que lo vea tu equipo.",
+];
+
+const limites = [
+  "No crea tickets directamente en tu gestor. Te deja el borrador para que lo pegues o lo apruebes.",
+  "No sustituye tu revisión. Un borrador es tan bueno como la evidencia que lo respalda.",
+  "No te dice qué construir si la evidencia no alcanza. En ese caso el borrador es el plan para entrevistar más.",
+];
+
+const hoja = [
+  { titulo: "Decisión", texto: "Entrevistar más antes de construir el reporte automático." },
+  {
+    titulo: "Tres evidencias más fuertes",
+    texto: "Armar el reporte toma dos horas cada lunes, según la analista. Las cifras no cuadran entre fuentes, según la analista. Finanzas dice que sí cuadran, porque salen de una sola fuente.",
+  },
+  { titulo: "Lo que no sabemos", texto: "Qué piensa quien recibe el reporte y si lo lee completo." },
+  {
+    titulo: "Qué haríamos distinto",
+    texto: "Si quien lo recibe confirma que no lo lee, hay que replantear el reporte. Si lo lee, automatizar el armado pasa a ser la apuesta.",
+  },
+];
+
+const borrador = [
+  { campo: "Título", valor: "Entrevistar a quienes reciben el reporte semanal" },
+  { campo: "Tipo", valor: "Historia" },
+  { campo: "Descripción", valor: "Antes de automatizar el armado, entender si el reporte se lee y qué se usa de él." },
+  {
+    campo: "Evidencia",
+    valor: "Me toma como dos horas cada lunes. Camila, analista, entrevista 1, respuesta 1.",
+  },
+  { campo: "Estado", valor: "Borrador sin crear. Pendiente de tu revisión." },
+];
+---
+
+<RutaEvidenciaLayout
+  title="Paso 4. Llévalo a tu equipo"
+  description="Convierte tu decisión en una hoja para stakeholders y en borradores para Jira o Linear, con la cita y la fuente pegadas."
+>
+  <PreviewPaso
+    numero="04"
+    titulo="Llévalo a tu equipo"
+    resumen="Convierte la decisión en una hoja para tus stakeholders y en borradores para tu gestor de tareas, con la cita y la fuente pegadas a cada uno."
+    recibes={recibes}
+    limites={limites}
+    anterior={{ href: "/ruta-evidencia/paso-3", texto: "Paso 3" }}
+  >
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Cómo se ve</h2>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        Con la decisión del paso anterior, así quedan la hoja y el borrador.
+      </p>
+
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-4">
+        <span class="text-xs font-mono font-bold text-teal-700">Hoja para stakeholders</span>
+        {hoja.map((b) => (
+          <div class="space-y-1">
+            <h3 class="font-bold text-slate-900 text-sm">{b.titulo}</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">{b.texto}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+        <div class="px-6 pt-5">
+          <span class="text-xs font-mono font-bold text-teal-700">Borrador para Jira o Linear</span>
+        </div>
+        <table class="w-full text-sm text-left mt-3">
+          <tbody class="divide-y divide-slate-100 text-slate-700 align-top">
+            {borrador.map((b) => (
+              <tr>
+                <td class="px-6 py-3 font-semibold w-36">{b.campo}</td>
+                <td class="px-6 py-3">{b.valor}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        Empiezas por flujos donde tú eres la única persona que audita, y solo después dejas que algo llegue al tablero de tu equipo.
+      </p>
+    </section>
+  </PreviewPaso>
+</RutaEvidenciaLayout>

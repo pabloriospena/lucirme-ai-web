@@ -1,0 +1,218 @@
+---
+import RutaEvidenciaLayout from "../../layouts/RutaEvidenciaLayout.astro";
+import EmailCTA from "../../components/ruta-evidencia/EmailCTA.astro";
+import Compartir from "../../components/ruta-evidencia/Compartir.astro";
+
+const promptCita = `Lee esta fuente: [reunión de Fathom o Granola, página de Notion, archivo de Drive u OneDrive, o la transcripción pegada aquí]. Es una entrevista con un usuario sobre [el tema o la feature].
+
+Devuelve una tabla con los problemas que la persona entrevistada mencionó. Una fila por problema, con estas columnas:
+- Problema: título corto.
+- Etiqueta: Hallazgo o Hipótesis.
+- Cita: la frase tal cual, entre comillas, sin cambiar palabras.
+- Ubicación: minuto o posición en la transcripción donde está la frase.
+- Quién la dijo: nombre o rol.
+
+Reglas:
+1. Hallazgo solo si hay cita textual de la persona que vive el problema. Si falta la cita, la ubicación o quién la dijo, es Hipótesis, y en Cita escribes: sin cita.
+2. No cuenta lo que dijo el entrevistador, ni lo que la persona cuenta de otros ("mi jefe dice que..."). Eso es Hipótesis.
+3. No resumas ni mejores la frase. Si no puedes copiarla textual, dilo.
+4. No agregues problemas que la persona no mencionó.
+
+Al final, dime qué no puedes saber con esta sola entrevista.`;
+
+const entrevista = [
+  { quien: "Entrevistador", texto: "¿Cómo armas hoy el reporte para tu jefa?" },
+  { quien: "Camila", texto: "Exporto a Excel, limpio las columnas a mano y lo pego en una presentación. Me toma como dos horas cada lunes." },
+  { quien: "Entrevistador", texto: "¿Y qué es lo que más te frustra de eso?" },
+  { quien: "Camila", texto: "Que cada semana alguna cifra no cuadra y no sé cuál de las dos fuentes está bien." },
+  { quien: "Camila", texto: "Mi jefa dice que el reporte es demasiado largo, pero a mí nunca me lo ha dicho en la cara." },
+  { quien: "Entrevistador", texto: "Si pudieras cambiar una cosa, ¿qué sería?" },
+  { quien: "Camila", texto: "No sé, quizá algo que lo hiciera solo." },
+];
+
+const filas = [
+  {
+    problema: "Pierde horas armando el reporte a mano",
+    etiqueta: "Hallazgo",
+    cita: "Me toma como dos horas cada lunes.",
+    ubicacion: "Respuesta 1 de Camila",
+    quien: "Camila, quien arma el reporte",
+  },
+  {
+    problema: "Las cifras no cuadran entre fuentes",
+    etiqueta: "Hallazgo",
+    cita: "Cada semana alguna cifra no cuadra y no sé cuál de las dos fuentes está bien.",
+    ubicacion: "Respuesta 2 de Camila",
+    quien: "Camila",
+  },
+  {
+    problema: "El reporte es demasiado largo",
+    etiqueta: "Hipótesis",
+    cita: "sin cita",
+    ubicacion: "Sin ubicación",
+    quien: "Lo dice la jefa, no la persona entrevistada",
+  },
+  {
+    problema: "Quiere que el reporte se arme solo",
+    etiqueta: "Hipótesis",
+    cita: "sin cita",
+    ubicacion: "Sin ubicación",
+    quien: "Una idea suelta, sin una situación que la persona haya vivido",
+  },
+];
+---
+
+<RutaEvidenciaLayout
+  title="Paso 1. La regla de la cita"
+  description="Sin cita textual, con su ubicación y quién la dijo, no hay hallazgo: es hipótesis. Aprende la regla con un ejemplo y aplícala a una de tus entrevistas."
+>
+  <div class="space-y-12 pb-16">
+    <nav class="text-xs font-mono text-slate-500 px-2">
+      <a href="/ruta-evidencia" class="hover:text-teal-700 underline-offset-2 hover:underline">Ruta Evidencia</a>
+      <span aria-hidden="true" class="mx-2 inline-block h-1 w-1 rounded-full bg-slate-300 align-middle"></span>
+      <span class="text-slate-700">Paso 1</span>
+    </nav>
+
+    <section class="space-y-5 bg-white rounded-3xl border border-slate-200/80 p-8 shadow-sm">
+      <span class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">Paso 1, gratis</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+        La regla de la cita
+      </h1>
+      <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+        Una afirmación sobre tus usuarios es un hallazgo solo si puedes señalar la frase que la respalda. Si no puedes, es una hipótesis. Esa diferencia decide qué merece entrar a una decisión.
+      </p>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Qué es una cita válida</h2>
+      <div class="grid gap-4 sm:grid-cols-3">
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2">
+          <span class="text-xs font-mono font-bold text-teal-700">1. Textual</span>
+          <p class="text-sm text-slate-600 leading-relaxed">La frase tal cual quedó en la transcripción. Con las mismas palabras, no un resumen ni una mejora.</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2">
+          <span class="text-xs font-mono font-bold text-teal-700">2. Con ubicación</span>
+          <p class="text-sm text-slate-600 leading-relaxed">El minuto o el lugar de la transcripción donde está, para que cualquiera la encuentre en segundos.</p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2">
+          <span class="text-xs font-mono font-bold text-teal-700">3. De quien vive el problema</span>
+          <p class="text-sm text-slate-600 leading-relaxed">La dijo la persona entrevistada. Lo que cuenta de otros, o lo que dijo quien entrevista, no cuenta.</p>
+        </div>
+      </div>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">Si falta una de las tres, es hipótesis. Una hipótesis es algo que todavía tienes que comprobar.</p>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Un ejemplo</h2>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        Esta entrevista es inventada, para que veas la regla sin exponer a nadie. Léela y piensa qué problemas hay con cita y cuáles no.
+      </p>
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-3">
+        {entrevista.map((linea) => (
+          <p class="text-sm text-slate-700 leading-relaxed">
+            <span class={linea.quien === "Entrevistador" ? "font-semibold text-slate-500" : "font-semibold text-teal-700"}>{linea.quien}:</span>
+            {" "}{linea.texto}
+          </p>
+        ))}
+      </div>
+
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">Así queda el análisis con la regla.</p>
+      <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-x-auto">
+        <table class="w-full text-sm text-left min-w-[640px]">
+          <thead class="bg-slate-50 text-xs font-mono uppercase tracking-wider text-slate-500">
+            <tr>
+              <th class="px-4 py-3">Problema</th>
+              <th class="px-4 py-3">Etiqueta</th>
+              <th class="px-4 py-3">Cita</th>
+              <th class="px-4 py-3">Ubicación</th>
+              <th class="px-4 py-3">Quién</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700 align-top">
+            {filas.map((fila) => (
+              <tr>
+                <td class="px-4 py-3 font-semibold">{fila.problema}</td>
+                <td class="px-4 py-3">
+                  <span class={fila.etiqueta === "Hallazgo" ? "px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-xs font-bold" : "px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 text-xs font-bold"}>{fila.etiqueta}</span>
+                </td>
+                <td class="px-4 py-3">{fila.cita}</td>
+                <td class="px-4 py-3">{fila.ubicacion}</td>
+                <td class="px-4 py-3">{fila.quien}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        Fíjate en las dos últimas filas. Las dos suenan a información útil y ninguna es un hallazgo. Una es de segunda mano y la otra es una idea suelta. Sin la regla, las dos habrían terminado en tu decisión como si fueran hechos.
+      </p>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Aplícalo a una entrevista tuya</h2>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        Usa una sola entrevista, la que quieras. Si no has hecho el <a href="/ruta-evidencia/paso-0" class="text-teal-700 underline hover:text-teal-800">Paso 0</a>, también sirve pegar la transcripción en la conversación.
+      </p>
+      <pre id="prompt-cita-texto" class="bg-slate-900 text-slate-100 text-xs sm:text-sm rounded-2xl p-6 overflow-x-auto whitespace-pre-wrap leading-relaxed">{promptCita}</pre>
+      <button
+        id="btn-copiar-prompt-cita"
+        type="button"
+        class="inline-flex items-center font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3 px-5 transition text-sm shadow-md cursor-pointer"
+      >
+        Copiar prompt
+      </button>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Antes de confiar en el resultado</h2>
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-3">
+        <p class="text-sm text-slate-600 leading-relaxed">Elige tres hallazgos al azar y comprueba cada uno en la fuente.</p>
+        <ul class="text-sm text-slate-600 space-y-1.5 list-disc pl-5 leading-relaxed">
+          <li>¿La frase está escrita igual?</li>
+          <li>¿Está donde dice Claude?</li>
+          <li>¿La dijo quien dice Claude?</li>
+        </ul>
+        <p class="text-sm text-slate-600 leading-relaxed pt-1">
+          Si alguno falla, ese hallazgo pasa a hipótesis. Si fallan varios, no uses ese resultado y repite el prompt pidiéndole que copie solo lo que puede encontrar.
+        </p>
+      </div>
+    </section>
+
+    <section class="space-y-3 px-2">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight">Lo que una sola entrevista no te dice</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+        Una persona con un problema es un caso. Para saber si algo se repite hay que juntar varias fuentes y ver dónde coinciden y dónde se contradicen. Eso es lo que sigue en la ruta, y es parte del kit.
+      </p>
+    </section>
+
+    <Compartir ubicacion="paso-1" />
+
+    <EmailCTA ubicacion="paso-1" />
+  </div>
+</RutaEvidenciaLayout>
+
+<script is:inline>
+  (function () {
+    var boton = document.getElementById('btn-copiar-prompt-cita');
+    if (!boton) return;
+    boton.addEventListener('click', function () {
+      var el = document.getElementById('prompt-cita-texto');
+      if (!el) return;
+      var texto = el.textContent || '';
+      var listo = function () {
+        boton.textContent = 'Copiado';
+        if (window.posthog) {
+          window.posthog.capture('prompt_copiado', { recurso: 'ruta-evidencia', prompt: 'regla-de-la-cita', paso: '1' });
+        }
+        setTimeout(function () { boton.textContent = 'Copiar prompt'; }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(texto).then(listo).catch(function () {
+          window.prompt('Copia el prompt:', texto);
+        });
+      } else {
+        window.prompt('Copia el prompt:', texto);
+      }
+    });
+  })();
+</script>

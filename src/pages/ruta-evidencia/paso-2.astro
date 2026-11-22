@@ -1,0 +1,109 @@
+---
+import RutaEvidenciaLayout from "../../layouts/RutaEvidenciaLayout.astro";
+import PreviewPaso from "../../components/ruta-evidencia/PreviewPaso.astro";
+
+const recibes = [
+  "Una página por feature que reúne la evidencia de todas tus fuentes, cada afirmación con su cita, su ubicación y quién la dijo.",
+  "Por cada hipótesis, cuántas entrevistas la apoyan, cuántas la contradicen y cuántas no tocan el tema.",
+  "Las contradicciones entre perfiles de usuario, con la cita de cada lado.",
+  "La lista de perfiles que todavía no has entrevistado.",
+  "Una estructura estándar para guardar tus fuentes en Notion o en Google Drive. OneDrive sigue la misma lógica, pero no lo he probado.",
+];
+
+const limites = [
+  "No cuenta como evidencia lo que otra persona dice de tus usuarios. Eso queda como hipótesis.",
+  "No inventa citas. Si no encuentra la frase en la fuente, lo dice.",
+  "No decide por ti. Ordena la evidencia para que decidas en el paso siguiente.",
+];
+
+const filas = [
+  {
+    hipotesis: "Armar el reporte a mano consume horas",
+    apoyan: 2,
+    contradicen: 0,
+    notocan: 1,
+    cita: "Me toma como dos horas cada lunes.",
+    quien: "Camila, analista, entrevista 1",
+  },
+  {
+    hipotesis: "Las cifras no cuadran entre fuentes",
+    apoyan: 1,
+    contradicen: 1,
+    notocan: 1,
+    cita: "Cada semana alguna cifra no cuadra y no sé cuál de las dos fuentes está bien.",
+    quien: "Camila, analista, entrevista 1",
+  },
+  {
+    hipotesis: "El reporte es demasiado largo",
+    apoyan: 0,
+    contradicen: 0,
+    notocan: 3,
+    cita: "sin cita",
+    quien: "Nadie lo dijo en una entrevista",
+  },
+];
+---
+
+<RutaEvidenciaLayout
+  title="Paso 2. Organiza todas tus fuentes"
+  description="Junta lo que dicen todas tus entrevistas sobre una feature y mira dónde coinciden y dónde se contradicen, con cada afirmación atada a una cita."
+>
+  <PreviewPaso
+    numero="02"
+    titulo="Organiza todas tus fuentes"
+    resumen="En el Paso 1 procesaste una entrevista. Aquí juntas todas las que tienes sobre una feature y ves qué se repite, qué se contradice y a quién te falta escuchar."
+    recibes={recibes}
+    limites={limites}
+    anterior={{ href: "/ruta-evidencia/paso-1", texto: "Paso 1" }}
+    siguiente={{ href: "/ruta-evidencia/paso-3", texto: "Paso 3" }}
+  >
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Cómo se ve</h2>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        Imagina tres entrevistas sobre un reporte semanal, con una analista, un líder de equipo y una persona de finanzas. Así queda la sección de evidencia de la feature.
+      </p>
+
+      <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-x-auto">
+        <table class="w-full text-sm text-left min-w-[680px]">
+          <thead class="bg-slate-50 text-xs font-mono uppercase tracking-wider text-slate-500">
+            <tr>
+              <th class="px-4 py-3">Hipótesis</th>
+              <th class="px-4 py-3">Apoyan</th>
+              <th class="px-4 py-3">Contradicen</th>
+              <th class="px-4 py-3">No tocan</th>
+              <th class="px-4 py-3">Cita más fuerte</th>
+              <th class="px-4 py-3">Quién</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700 align-top">
+            {filas.map((f) => (
+              <tr>
+                <td class="px-4 py-3 font-semibold">{f.hipotesis}</td>
+                <td class="px-4 py-3">{f.apoyan}</td>
+                <td class="px-4 py-3">{f.contradicen}</td>
+                <td class="px-4 py-3">{f.notocan}</td>
+                <td class="px-4 py-3">{f.cita}</td>
+                <td class="px-4 py-3">{f.quien}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2">
+          <h3 class="font-bold text-slate-900">Dónde se contradicen</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            La analista dice que las cifras no cuadran entre fuentes. La persona de finanzas dice que sí cuadran porque salen de una sola fuente. Cada lado queda con su cita y su perfil, para que no se mezclen en un promedio.
+          </p>
+        </div>
+        <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2">
+          <h3 class="font-bold text-slate-900">A quién te falta escuchar</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Nadie que reciba el reporte, y nadie del equipo de producto que lo use para decidir. La tercera hipótesis sigue sin cita porque ninguno de los entrevistados la tocó.
+          </p>
+        </div>
+      </div>
+    </section>
+  </PreviewPaso>
+</RutaEvidenciaLayout>
