@@ -1,4 +1,4 @@
-export type EstadoPasoEvidencia = "en-construccion" | "proximamente";
+export type EstadoPasoEvidencia = "disponible" | "en-construccion" | "proximamente";
 export type AccesoPasoEvidencia = "gratis" | "pago";
 
 export interface PasoEvidencia {
@@ -26,7 +26,7 @@ export const RUTA_EVIDENCIA_DATA: PasoEvidencia[] = [
     descripcion:
       "Conecta Claude con tus transcripciones y con el lugar donde las vas a guardar, Notion, Drive u OneDrive.",
     acceso: "gratis",
-    estado: "en-construccion",
+    estado: "disponible",
     href: "/ruta-evidencia/paso-0",
   },
   {
@@ -36,7 +36,7 @@ export const RUTA_EVIDENCIA_DATA: PasoEvidencia[] = [
     descripcion:
       "Procesa una sola fuente y separa lo que dijo la persona de lo que tú supones. Sin cita, es hipótesis.",
     acceso: "gratis",
-    estado: "en-construccion",
+    estado: "disponible",
     href: "/ruta-evidencia/paso-1",
   },
   {
