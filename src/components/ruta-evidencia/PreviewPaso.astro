@@ -19,7 +19,7 @@ const { numero, titulo, resumen, recibes, limites, anterior, siguiente } = Astro
 <div class="space-y-12 pb-16">
   <nav class="text-xs font-mono text-slate-500 px-2">
     <a href="/ruta-evidencia" class="hover:text-teal-700 underline-offset-2 hover:underline">Ruta Evidencia</a>
-    <span class="mx-1.5">/</span>
+    <span aria-hidden="true" class="mx-2 inline-block h-1 w-1 rounded-full bg-slate-300 align-middle"></span>
     <span class="text-slate-700">Paso {Number(numero)}</span>
   </nav>
 
@@ -40,7 +40,7 @@ const { numero, titulo, resumen, recibes, limites, anterior, siguiente } = Astro
     <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Qué recibes en este paso</h2>
     <ul class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-3 text-sm sm:text-base text-slate-700 leading-relaxed">
       {recibes.map((r) => (
-        <li class="flex gap-3"><span class="text-teal-700 font-bold">+</span><span>{r}</span></li>
+        <li class="flex gap-3"><span aria-hidden="true" class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700"></span><span>{r}</span></li>
       ))}
     </ul>
   </section>
@@ -51,7 +51,7 @@ const { numero, titulo, resumen, recibes, limites, anterior, siguiente } = Astro
     <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Lo que este paso no hace</h2>
     <ul class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-3 text-sm sm:text-base text-slate-600 leading-relaxed">
       {limites.map((l) => (
-        <li class="flex gap-3"><span class="text-slate-400 font-bold">·</span><span>{l}</span></li>
+        <li class="flex gap-3"><span aria-hidden="true" class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-300"></span><span>{l}</span></li>
       ))}
     </ul>
   </section>
