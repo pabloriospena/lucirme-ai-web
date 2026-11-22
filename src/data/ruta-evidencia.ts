@@ -37,6 +37,7 @@ export const RUTA_EVIDENCIA_DATA: PasoEvidencia[] = [
       "Procesa una sola fuente y separa lo que dijo la persona de lo que tú supones. Sin cita, es hipótesis.",
     acceso: "gratis",
     estado: "en-construccion",
+    href: "/ruta-evidencia/paso-1",
   },
   {
     numero: "02",
