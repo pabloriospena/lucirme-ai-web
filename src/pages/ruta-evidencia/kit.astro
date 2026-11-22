@@ -13,6 +13,13 @@ const incluye = [
   "Una guía de configuración que reutiliza lo que ya conectaste en el Paso 0.",
 ];
 
+const ganas = [
+  "Sabes qué puedes defender y qué todavía es una suposición, porque cada hallazgo lleva su cita, su ubicación y quién la dijo.",
+  "Dejas de decidir con lo que recuerdas. Ves en una sola página dónde coinciden tus entrevistas y dónde se contradicen.",
+  "Decides con un criterio que escribes tú antes de mirar la evidencia, y recibes una recomendación que dice cuándo falta información.",
+  "Llevas la decisión a tu equipo con una hoja clara y borradores de tareas que traen la cita y la fuente pegadas.",
+];
+
 const pasos = [
   { href: "/ruta-evidencia/paso-2", titulo: "Paso 2. Organiza todas tus fuentes", texto: "Juntas lo que dicen todas tus entrevistas sobre una feature y ves dónde coinciden y dónde se contradicen." },
   { href: "/ruta-evidencia/paso-3", titulo: "Paso 3. Decide con criterio", texto: "Escribes tu criterio antes de mirar la evidencia. Claude compara y recomienda, y la decisión es tuya." },
@@ -45,8 +52,9 @@ const preguntas = [
         De tus entrevistas a una decisión de producto
       </h1>
       <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
-        Un kit para product leads, PMs y POs que usan Claude con sus entrevistas y quieren que cada afirmación lleve una cita.
+        Un kit para product leads, PMs y POs que usan Claude con sus entrevistas y quieren que cada afirmación lleve una cita. Incluye seis prompts, una estructura para guardar tus fuentes y una base de Notion lista para duplicar. Los Pasos 0 y 1 son gratis y el kit son los Pasos 2, 3 y 4.
       </p>
+      <p class="text-sm text-slate-500">Todavía no se puede comprar. Deja tu correo y te aviso cuando abra la preventa.</p>
       {HOTMART_KIT_URL ? (
         <a
           href={HOTMART_KIT_URL}
@@ -65,6 +73,15 @@ const preguntas = [
           <span class="text-base leading-none">↓</span>
         </a>
       )}
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight px-2">Qué ganas</h2>
+      <ul class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-3 text-sm sm:text-base text-slate-700 leading-relaxed">
+        {ganas.map((g) => (
+          <li class="flex gap-3"><span aria-hidden="true" class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700"></span><span>{g}</span></li>
+        ))}
+      </ul>
     </section>
 
     <section class="space-y-4 px-2">
@@ -111,6 +128,15 @@ const preguntas = [
       <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Un ejemplo honesto</h2>
       <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
         El ejemplo del kit usa entrevistas inventadas, para no exponer a ninguna persona. Todavía no tengo resultados de gente que haya usado el kit con sus propias entrevistas, y por eso no los muestro. Los primeros compradores me ayudan a probarlo y a ajustarlo.
+      </p>
+    </section>
+
+    <section class="space-y-4 px-2">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Dónde se compra</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+        {HOTMART_KIT_URL
+          ? "Se compra desde el botón Reservar mi cupo de esta misma página, y el contenido de pago llega a tu área de miembros."
+          : "Todavía no se puede comprar. Cuando abra la preventa, el botón de compra aparece en esta misma página y el contenido de pago llega a tu área de miembros. Si dejas tu correo abajo, te aviso el día que abra."}
       </p>
     </section>
 

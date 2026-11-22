@@ -36,6 +36,19 @@ const { numero, titulo, resumen, recibes, limites, anterior, siguiente } = Astro
     </p>
   </section>
 
+  <section class="space-y-3 bg-teal-50 rounded-2xl border border-teal-200 p-6">
+    <h2 class="text-base font-bold text-slate-900">Este paso es parte del Kit de Evidencia</h2>
+    <p class="text-sm text-slate-700 leading-relaxed">
+      El kit es un conjunto de seis prompts para Claude, una estructura para guardar tus fuentes y una base de Notion lista para duplicar. Con él llevas tus entrevistas a una decisión de producto, con cada afirmación atada a una cita.
+    </p>
+    <p class="text-sm text-slate-700 leading-relaxed">
+      Todavía no se puede comprar. Abre en preventa con cupos limitados y la compra se hará en la página del kit. Mientras tanto puedes ver todo lo que incluye y dejar tu correo para que te avise primero.
+    </p>
+    {LANDING_KIT_URL && (
+      <a href={LANDING_KIT_URL} class="inline-flex text-sm font-semibold text-teal-800 underline hover:text-teal-900">Ver qué incluye el kit y qué ganas</a>
+    )}
+  </section>
+
   <section class="space-y-4">
     <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Qué recibes en este paso</h2>
     <ul class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-3 text-sm sm:text-base text-slate-700 leading-relaxed">

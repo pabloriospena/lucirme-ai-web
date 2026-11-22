@@ -185,6 +185,24 @@ const filas = [
       </p>
     </section>
 
+    <section class="bg-white rounded-3xl border border-teal-200 p-8 shadow-sm space-y-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Continúa con la ruta</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+        Ya aplicaste la regla a una entrevista. Los Pasos 2, 3 y 4 hacen lo mismo con todas tus fuentes, te ayudan a decidir y te dejan llevar la decisión a tu equipo.
+      </p>
+      <div class="flex flex-wrap items-center gap-4">
+        <a
+          href="/ruta-evidencia/kit"
+          onclick="if (window.posthog) { window.posthog.capture('ruta_evidencia_continuar_click', { desde: 'paso-1' }); }"
+          class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3.5 px-6 transition text-sm shadow-md"
+        >
+          <span>Continuar con la ruta</span>
+          <span class="text-base leading-none">→</span>
+        </a>
+        <a href="/ruta-evidencia/paso-2" class="text-sm text-teal-700 underline hover:text-teal-800">Ver la vista previa del Paso 2</a>
+      </div>
+    </section>
+
     <Compartir ubicacion="paso-1" />
 
     <EmailCTA ubicacion="paso-1" />
