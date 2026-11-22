@@ -18,8 +18,11 @@ export const FUENTES_EVIDENCIA = {
   mismaLogicaSinProbar: ["Granola", "OneDrive", "Linear"],
 };
 
-/** Cuando exista la landing de venta del kit, se pone aquí su URL y los pasos de pago muestran el botón. */
-export const LANDING_KIT_URL = "";
+/** Landing de venta del kit. Los pasos de pago muestran el botón hacia ella. */
+export const LANDING_KIT_URL = "/ruta-evidencia/kit";
+
+/** Enlace de checkout del kit en Hotmart. Mientras esté vacío, la landing pide el correo en vez de vender. */
+export const HOTMART_KIT_URL = "";
 
 export const RUTA_EVIDENCIA_DATA: PasoEvidencia[] = [
   {

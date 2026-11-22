@@ -1,0 +1,147 @@
+---
+import RutaEvidenciaLayout from "../../layouts/RutaEvidenciaLayout.astro";
+import EmailCTA from "../../components/ruta-evidencia/EmailCTA.astro";
+import Compartir from "../../components/ruta-evidencia/Compartir.astro";
+import { HOTMART_KIT_URL } from "../../data/ruta-evidencia";
+
+const incluye = [
+  "Seis prompts para Claude. Traer tus fuentes, procesar una entrevista, juntarlas por feature, apoyarte para decidir, armar la hoja para stakeholders y preparar borradores para tu gestor de tareas.",
+  "Una estructura estándar para guardar tus fuentes en Notion o en Google Drive. OneDrive sigue la misma lógica, pero no lo he probado.",
+  "Una base de Notion lista para duplicar, con una página por entrevista y otra por feature, conectadas entre sí.",
+  "Un guion de entrevista de siete preguntas sobre lo que la persona hizo la última vez, no sobre lo que opina.",
+  "Un ejemplo resuelto de punta a punta, con datos inventados para no exponer a nadie.",
+  "Una guía de configuración que reutiliza lo que ya conectaste en el Paso 0.",
+];
+
+const pasos = [
+  { href: "/ruta-evidencia/paso-2", titulo: "Paso 2. Organiza todas tus fuentes", texto: "Juntas lo que dicen todas tus entrevistas sobre una feature y ves dónde coinciden y dónde se contradicen." },
+  { href: "/ruta-evidencia/paso-3", titulo: "Paso 3. Decide con criterio", texto: "Escribes tu criterio antes de mirar la evidencia. Claude compara y recomienda, y la decisión es tuya." },
+  { href: "/ruta-evidencia/paso-4", titulo: "Paso 4. Llévalo a tu equipo", texto: "Una hoja para tus stakeholders y borradores para Jira o Linear, con la cita y la fuente pegadas." },
+];
+
+const preguntas = [
+  { p: "¿Qué necesito para usarlo?", r: "Claude con los conectores activados, una herramienta donde se graben tus reuniones y un lugar donde guardar las fuentes. El Paso 0 te lleva por eso, y es gratis." },
+  { p: "¿Cuánto tarda en montarse?", r: "Todavía no lo he medido. Te cuento el tiempo real cuando los primeros compradores lo prueben." },
+  { p: "¿Qué pasa si hago pocas entrevistas?", r: "El kit te dice cuándo la evidencia no alcanza, y eso también sirve para decidir. Con pocas entrevistas lo más probable es que la recomendación sea entrevistar más." },
+  { p: "¿Y si mi empresa bloquea los conectores?", r: "Puedes subir las transcripciones a un proyecto de Claude y trabajar desde ahí. Si tu empresa restringe por completo el uso de datos de entrevistas, este kit no es para ti todavía." },
+  { p: "¿Funciona con mis herramientas?", r: "La cadena que uso yo es Fathom, Notion, Google Drive y Jira. Granola, OneDrive y Linear siguen la misma lógica, pero no los he probado." },
+];
+---
+
+<RutaEvidenciaLayout
+  title="Kit de Evidencia para PMs. De tus entrevistas a una decisión"
+  description="Seis prompts, una estructura de fuentes y un ejemplo resuelto para llevar tus entrevistas a una decisión de producto, con cada afirmación atada a una cita."
+>
+  <div class="space-y-14 pb-16">
+    <nav class="text-xs font-mono text-slate-500 px-2">
+      <a href="/ruta-evidencia" class="hover:text-teal-700 underline-offset-2 hover:underline">Ruta Evidencia</a>
+      <span aria-hidden="true" class="mx-2 inline-block h-1 w-1 rounded-full bg-slate-300 align-middle"></span>
+      <span class="text-slate-700">El kit</span>
+    </nav>
+
+    <section class="space-y-5 bg-white rounded-3xl border border-slate-200/80 p-8 sm:p-10 shadow-sm">
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border bg-amber-50 text-amber-800 border-amber-200">En preventa, se está terminando de probar</span>
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.12]">
+        De tus entrevistas a una decisión de producto
+      </h1>
+      <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+        Un kit para product leads, PMs y POs que usan Claude con sus entrevistas y quieren que cada afirmación lleve una cita.
+      </p>
+      {HOTMART_KIT_URL ? (
+        <a
+          href={HOTMART_KIT_URL}
+          onclick="if (window.posthog) { window.posthog.capture('ruta_evidencia_kit_comprar_click', { ubicacion: 'hero' }); }"
+          class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3.5 px-6 transition text-sm shadow-md"
+        >
+          <span>Reservar mi cupo</span>
+          <span class="text-base leading-none">→</span>
+        </a>
+      ) : (
+        <a
+          href="#avisame"
+          class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3.5 px-6 transition text-sm shadow-md"
+        >
+          <span>Avísame cuando abra</span>
+          <span class="text-base leading-none">↓</span>
+        </a>
+      )}
+    </section>
+
+    <section class="space-y-4 px-2">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">El problema</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+        Haces entrevistas, las transcripciones se acumulan y casi nadie las vuelve a leer. Cuando llega la hora de decidir qué construir, decides con lo que recuerdas. Y si le pides a una IA que resuma, puede mezclar conclusiones que en la conversación nunca se dijeron.
+      </p>
+    </section>
+
+    <section class="space-y-4 px-2">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">La regla del kit</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+        Un hallazgo solo es hallazgo si tiene una cita textual de la persona que vive el problema, con su ubicación en la fuente y quién la dijo. Sin eso, es una hipótesis. Claude trabaja con esa regla sobre tus fuentes y deja cada cosa marcada como Hallazgo o como Hipótesis. Así sabes qué puedes defender y qué todavía te falta confirmar.
+      </p>
+      <p class="text-sm text-slate-600">
+        Puedes ver la regla en acción, gratis, en el <a href="/ruta-evidencia/paso-1" class="text-teal-700 underline hover:text-teal-800">Paso 1</a>.
+      </p>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight px-2">Qué recibes</h2>
+      <ul class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-3 text-sm sm:text-base text-slate-700 leading-relaxed">
+        {incluye.map((i) => (
+          <li class="flex gap-3"><span aria-hidden="true" class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700"></span><span>{i}</span></li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight px-2">Los tres pasos del kit</h2>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">Los Pasos 0 y 1 son gratis. Cada paso del kit tiene una vista previa con un ejemplo.</p>
+      <div class="grid gap-4 sm:grid-cols-3">
+        {pasos.map((p) => (
+          <a href={p.href} class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2 hover:border-teal-600 transition">
+            <h3 class="font-bold text-slate-900">{p.titulo}</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">{p.texto}</p>
+            <span class="text-xs font-semibold text-teal-700">Ver vista previa →</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="space-y-4 px-2">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Un ejemplo honesto</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+        El ejemplo del kit usa entrevistas inventadas, para no exponer a ninguna persona. Todavía no tengo resultados de gente que haya usado el kit con sus propias entrevistas, y por eso no los muestro. Los primeros compradores me ayudan a probarlo y a ajustarlo.
+      </p>
+    </section>
+
+    <section class="space-y-4 px-2">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Cómo funciona la preventa</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+        Hay cupos limitados para quienes entren primero. El kit se termina de armar y de probar con ellos, y cada comprador de preventa me cuenta qué falló y qué faltó. El precio, la fecha de entrega y la garantía se publican cuando abra la preventa. Deja tu correo y te aviso antes que a nadie.
+      </p>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight px-2">Preguntas frecuentes</h2>
+      <div class="space-y-4">
+        {preguntas.map((q) => (
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2">
+            <h3 class="font-bold text-slate-900">{q.p}</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">{q.r}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <div id="avisame">
+      <EmailCTA
+        ubicacion="kit"
+        titulo="Avísame cuando abra la preventa"
+        texto="Deja tu correo y te aviso cuando abra, con el precio, la fecha de entrega y la garantía."
+        boton="Avísame"
+      />
+    </div>
+
+    <Compartir ubicacion="kit" />
+  </div>
+</RutaEvidenciaLayout>

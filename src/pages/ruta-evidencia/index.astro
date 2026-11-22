@@ -55,6 +55,17 @@ import { RUTA_EVIDENCIA_DATA, FUENTES_EVIDENCIA } from "../../data/ruta-evidenci
       </div>
     </section>
 
+    <div class="px-2">
+      <a
+        href="/ruta-evidencia/kit"
+        onclick="if (window.posthog) { window.posthog.capture('ruta_evidencia_landing_click', { origen: 'hub' }); }"
+        class="inline-flex items-center justify-center gap-2 font-semibold bg-white border border-slate-300 hover:border-teal-600 text-slate-800 rounded-xl py-3.5 px-6 transition text-sm"
+      >
+        <span>Ver el kit completo</span>
+        <span class="text-base leading-none">→</span>
+      </a>
+    </div>
+
     <EmailCTA ubicacion="hub" />
   </div>
 </RutaEvidenciaLayout>
