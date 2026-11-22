@@ -27,6 +27,7 @@ export const RUTA_EVIDENCIA_DATA: PasoEvidencia[] = [
       "Conecta Claude con tus transcripciones y con el lugar donde las vas a guardar, Notion, Drive u OneDrive.",
     acceso: "gratis",
     estado: "en-construccion",
+    href: "/ruta-evidencia/paso-0",
   },
   {
     numero: "01",
