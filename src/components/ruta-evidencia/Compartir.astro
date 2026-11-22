@@ -19,7 +19,10 @@ const id = `compartir-${ubicacion}`;
     Entre más compartas, más beneficios tendrás
   </h3>
   <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl">
-    Si conoces a alguien de producto que trabaje con entrevistas, mándale la ruta. Cada persona que entre por tu enlace cuenta.
+    Si conoces a alguien de producto que trabaje con entrevistas, mándale la ruta. Cada persona nueva que deje su correo por tu enlace cuenta, y con eso ganas recursos extra, descuentos y acceso anticipado.
+  </p>
+  <p class="compartir-aviso text-xs text-slate-500 hidden">
+    Para que te contemos a quiénes trajiste, deja tu correo en el formulario de abajo y vuelve a compartir: tu enlace será personal.
   </p>
 
   <div class="flex flex-wrap gap-3">
@@ -63,6 +66,10 @@ const id = `compartir-${ubicacion}`;
       if (bloque.dataset.listo) return;
       bloque.dataset.listo = '1';
       var feedback = bloque.querySelector('.compartir-feedback');
+      var aviso = bloque.querySelector('.compartir-aviso');
+      try {
+        if (aviso && !window.localStorage.getItem('ruta_evidencia_ref')) aviso.classList.remove('hidden');
+      } catch (e) {}
 
       bloque.querySelectorAll('.compartir-btn').forEach(function (btn) {
         btn.addEventListener('click', function () {
