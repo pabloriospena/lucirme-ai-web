@@ -18,6 +18,9 @@ export const FUENTES_EVIDENCIA = {
   mismaLogicaSinProbar: ["Granola", "OneDrive", "Linear"],
 };
 
+/** Cuando exista la landing de venta del kit, se pone aquí su URL y los pasos de pago muestran el botón. */
+export const LANDING_KIT_URL = "";
+
 export const RUTA_EVIDENCIA_DATA: PasoEvidencia[] = [
   {
     numero: "00",
@@ -47,6 +50,7 @@ export const RUTA_EVIDENCIA_DATA: PasoEvidencia[] = [
       "Junta lo que dicen todas tus fuentes sobre una feature y mira dónde se contradicen.",
     acceso: "pago",
     estado: "proximamente",
+    href: "/ruta-evidencia/paso-2",
   },
   {
     numero: "03",
@@ -56,6 +60,7 @@ export const RUTA_EVIDENCIA_DATA: PasoEvidencia[] = [
       "Pon tu criterio por escrito y comprueba cada cita contra su fuente antes de decidir.",
     acceso: "pago",
     estado: "proximamente",
+    href: "/ruta-evidencia/paso-3",
   },
   {
     numero: "04",
@@ -65,5 +70,6 @@ export const RUTA_EVIDENCIA_DATA: PasoEvidencia[] = [
       "Una hoja para tus stakeholders y borradores en Jira o Linear, con la cita y la fuente pegadas.",
     acceso: "pago",
     estado: "proximamente",
+    href: "/ruta-evidencia/paso-4",
   },
 ];

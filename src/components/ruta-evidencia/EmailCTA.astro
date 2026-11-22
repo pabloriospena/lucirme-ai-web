@@ -1,9 +1,17 @@
 ---
 interface Props {
   ubicacion?: string;
+  titulo?: string;
+  texto?: string;
+  boton?: string;
 }
 
-const { ubicacion = "hub" } = Astro.props;
+const {
+  ubicacion = "hub",
+  titulo = "Entra a la ruta",
+  texto = "Deja tu correo y te escribo cuando estén los pasos gratis. Después te cuento cuándo abre el kit.",
+  boton = "Quiero entrar",
+} = Astro.props;
 const formId = `form-evidencia-${ubicacion}`;
 const feedbackId = `feedback-evidencia-${ubicacion}`;
 const btnId = `btn-evidencia-${ubicacion}`;
@@ -16,10 +24,10 @@ const btnId = `btn-evidencia-${ubicacion}`;
     Ruta Evidencia
   </span>
   <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-    Entra a la ruta
+    {titulo}
   </h3>
   <p class="text-sm sm:text-base text-slate-600 max-w-xl mx-auto leading-relaxed">
-    Deja tu correo y te escribo cuando estén los pasos gratis. Después te cuento cuándo abre el kit.
+    {texto}
   </p>
 
   <form
@@ -43,10 +51,11 @@ const btnId = `btn-evidencia-${ubicacion}`;
     <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
     <button
       id={btnId}
+      data-texto={boton}
       type="submit"
       class="w-full inline-flex items-center justify-center font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3.5 px-6 transition text-sm shadow-md cursor-pointer"
     >
-      Quiero entrar
+      {boton}
     </button>
     <p class="text-[11px] text-slate-500 text-center leading-normal">
       Al dejar tu correo aceptas recibir mensajes de LuciRMe AI. Consulta la
@@ -128,7 +137,7 @@ const btnId = `btn-evidencia-${ubicacion}`;
     if (feedback) feedback.classList.remove('hidden');
     if (btn) {
       btn.disabled = false;
-      btn.textContent = 'Quiero entrar';
+      btn.textContent = btn.dataset.texto || 'Quiero entrar';
     }
   };
 </script>
