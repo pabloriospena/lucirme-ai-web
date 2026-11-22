@@ -1,0 +1,60 @@
+---
+import RutaEvidenciaLayout from "../../layouts/RutaEvidenciaLayout.astro";
+import PasoCard from "../../components/ruta-evidencia/PasoCard.astro";
+import CafeCTA from "../../components/ruta-product/CafeCTA.astro";
+import { RUTA_EVIDENCIA_DATA, FUENTES_EVIDENCIA } from "../../data/ruta-evidencia";
+---
+
+<RutaEvidenciaLayout
+  title="Ruta Evidencia"
+  description="Claude conectado a tus transcripciones y a tu Notion, Drive u OneDrive. Cada hallazgo con su cita, su ubicación y quién la dijo."
+>
+  <div class="space-y-12 pb-16">
+    <section class="space-y-5 pt-6 bg-white rounded-3xl border border-slate-200/80 p-8 shadow-sm relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-64 h-64 bg-teal-50 rounded-full blur-3xl -z-10 translate-x-20 -translate-y-20"></div>
+
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-teal-50 border border-teal-200/80 rounded-full font-mono text-xs text-teal-800 shadow-2xs">
+        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+        Rutas de Aprendizaje · Product · En construcción
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+        De tus entrevistas a una decisión, con cada afirmación atada a una cita
+      </h1>
+
+      <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+        Claude trae tus transcripciones, las organiza donde ya trabajas y te dice qué hallazgo tiene cita y cuál es solo hipótesis. Para product leads, PMs y POs.
+      </p>
+
+      <div class="pt-2 space-y-2 text-xs text-slate-500 font-mono">
+        <div class="flex flex-wrap items-center gap-2.5">
+          <span class="font-semibold text-slate-700">Probado:</span>
+          {FUENTES_EVIDENCIA.probado.map((f) => (
+            <span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg shadow-2xs text-slate-700 font-medium">{f}</span>
+          ))}
+        </div>
+        <div class="flex flex-wrap items-center gap-2.5">
+          <span class="font-semibold text-slate-700">Misma lógica, sin probar:</span>
+          {FUENTES_EVIDENCIA.mismaLogicaSinProbar.map((f) => (
+            <span class="px-3 py-1 bg-white border border-dashed border-slate-300 rounded-lg text-slate-600 font-medium">{f}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="space-y-6">
+      <div class="flex items-center justify-between px-2">
+        <h2 class="text-xl font-bold text-slate-900 tracking-tight">Los pasos</h2>
+        <span class="text-xs font-mono text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200/80">Dos gratis · Tres en el kit</span>
+      </div>
+
+      <div class="space-y-4">
+        {RUTA_EVIDENCIA_DATA.map((paso) => (
+          <PasoCard paso={paso} />
+        ))}
+      </div>
+    </section>
+
+    <CafeCTA ubicacion="evidencia-hub" />
+  </div>
+</RutaEvidenciaLayout>
