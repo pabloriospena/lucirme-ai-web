@@ -1,5 +1,5 @@
 ---
-// Respuestas del taller de Sasa Consultoría: crudas (tal cual las escribieron) y agrupadas (como se proyectó).
+// Respuestas del taller de Sasa Consultoría: crudas (tal cual las escribieron) y agrupadas con IA.
 // Datos estáticos en src/data/taller-sasa-t1.ts. No usa Redis, así que no vence.
 import Layout from "../../../layouts/Layout.astro";
 import { dolores, usos, grupos } from "../../../data/taller-sasa-t1";
@@ -27,7 +27,7 @@ const hayGrupos = grupos.length > 0;
                 Respuestas del equipo
             </h1>
             <p class="text-sm text-slate-600 mb-6">
-                Sasa Consultoría · lunes 9 de noviembre de 2026 · {dolores.length} dolores y {usos.length} usos de IA
+                Sasa Consultoría · talleres del 9 y 18 de noviembre de 2026 · {dolores.length} dolores y {usos.length} usos de IA
                 registrados en vivo.
             </p>
 
@@ -85,7 +85,7 @@ const hayGrupos = grupos.length > 0;
                     <>
                         <div class="flex items-center justify-between mb-3">
                             <p class="text-sm text-slate-600">
-                                Los {dolores.length} dolores agrupados por el problema de fondo que comparten, como se proyectó en el taller.
+                                Los {dolores.length} dolores agrupados por el problema de fondo que comparten, con apoyo de IA.
                                 Suman {horasTotales} h/semana.
                             </p>
                             <button type="button" data-copiar="lista-grupos" class="copiar text-xs font-semibold text-teal-700 border border-teal-200 rounded-md px-2.5 py-1 hover:bg-teal-50">Copiar</button>

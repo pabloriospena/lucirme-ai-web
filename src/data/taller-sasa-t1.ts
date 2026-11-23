@@ -1,6 +1,6 @@
-// Respuestas originales de la actividad en vivo del taller de Sasa Consultoría (lunes 9 de nov 2026).
+// Respuestas originales de la actividad en vivo del taller de Sasa Consultoría (9 y 18 de nov 2026, sesión sasa-t1).
 // Exportadas tal cual de Upstash (taller:sasa-t1:dolores y :uso). No se editan.
-// La agrupación es la que se proyectó en el taller (taller:sasa-t1:agrupacion).
+// La agrupación es la guardada en Upstash en taller:sasa-t1:agrupacion.
 
 export interface DolorCrudo {
   id: string;
@@ -44,6 +44,19 @@ export const dolores: DolorCrudo[] = [
   {"id":"2cf576b3","tarea":"Cronogramas","rol":"Proyectos y consultoría","horas_semana":8,"frecuencia":"mensual","procedimiento":"parcial","estructurado":"si","origen":"taller","creado":"2026-11-09T20:19:46.957Z"},
   {"id":"6a1cf04f","tarea":"Estimaciones","rol":"Proyectos y consultoría","horas_semana":8,"frecuencia":"mensual","procedimiento":null,"estructurado":null,"origen":"taller","creado":"2026-11-09T20:19:46.962Z"},
   {"id":"9d7e3ba9","tarea":"Análisis de procesos existentes","rol":"Soporte","nombre":"Fabian","horas_semana":15,"frecuencia":"semanal","procedimiento":"parcial","estructurado":"si","origen":"taller","creado":"2026-11-09T20:33:50.481Z"},
+  {"id":"d813fd54","tarea":"Cronograma","rol":"Proyectos y consultoría","nombre":"Zhoe Acevedo","horas_semana":3,"frecuencia":"mensual","procedimiento":"si","estructurado":"si","origen":"taller","creado":"2026-11-18T20:03:47.779Z"},
+  {"id":"c5920266","tarea":"estructurar todo el alcance de las propuestas","rol":"Proyectos y consultoría","nombre":"Zhoe Acevedo","horas_semana":3,"frecuencia":"semanal","procedimiento":"si","estructurado":"si","origen":"taller","creado":"2026-11-18T20:03:47.788Z"},
+  {"id":"e3e10a7d","tarea":"Documentar proceso","rol":"Proyectos y consultoría","nombre":"Zhoe Acevedo","horas_semana":4,"frecuencia":"mensual","procedimiento":"si","estructurado":"si","origen":"taller","creado":"2026-11-18T20:03:47.793Z"},
+  {"id":"876eb3e1","tarea":"Convertir la documentación tecnica en comercial","rol":"Comercial","nombre":"Adriana Bedoya","horas_semana":1.5,"frecuencia":"semanal","procedimiento":"si","estructurado":"si","origen":"taller","creado":"2026-11-18T20:03:47.807Z"},
+  {"id":"eaf3ca3e","tarea":"Generar información para licitaciones cuando llegan","rol":"Comercial","nombre":"Adriana Bedoya","horas_semana":null,"frecuencia":"mensual","procedimiento":"si","estructurado":"si","origen":"taller","creado":"2026-11-18T20:03:47.813Z"},
+  {"id":"376f6352","tarea":"Responder cadenas de correos sin fin","rol":"Servicios administrados","nombre":"Análisis de casos","horas_semana":4,"frecuencia":"diaria","procedimiento":"no","estructurado":"no","origen":"taller","creado":"2026-11-18T20:03:54.801Z"},
+  {"id":"25c93795","tarea":"Entender procesos no documentados","rol":"Servicios administrados","nombre":"Análisis de casos","horas_semana":3,"frecuencia":"mensual","procedimiento":"no","estructurado":"no","origen":"taller","creado":"2026-11-18T20:03:54.807Z"},
+  {"id":"14d5cf30","tarea":"Documentar seguimientos","rol":"Servicios administrados","nombre":"Análisis de casos","horas_semana":5,"frecuencia":"diaria","procedimiento":"no","estructurado":"no","origen":"taller","creado":"2026-11-18T20:03:54.812Z"},
+  {"id":"03dbd5de","tarea":"identificar los esfuerzos reales del equipo en la ejecución de actividades, generar informes y métricas para identificar la operacion","rol":"Gerencia","nombre":"sandra liliana","horas_semana":4,"frecuencia":"semanal","procedimiento":"parcial","estructurado":"si","origen":"taller","creado":"2026-11-18T20:04:01.051Z"},
+  {"id":"007e6d6c","tarea":"revisar documentación para corregir","rol":"Gerencia","nombre":"sandra liliana","horas_semana":4,"frecuencia":"semanal","procedimiento":"no","estructurado":"si","origen":"taller","creado":"2026-11-18T20:04:01.055Z"},
+  {"id":"e2456c0f","tarea":"definir procesos que generen estandarizacion para trabajo de equipo","rol":"Gerencia","nombre":"sandra liliana","horas_semana":2,"frecuencia":"mensual","procedimiento":"parcial","estructurado":"si","origen":"taller","creado":"2026-11-18T20:04:01.061Z"},
+  {"id":"ceb25a0c","tarea":"Analizar casos complejos, redactar respuestas y explicaciones técnicas detalladas para los clientes en los tickets de soporte","rol":"Soporte","nombre":"Wilmar","horas_semana":3,"frecuencia":"diaria","procedimiento":"no","estructurado":"no","origen":"taller","creado":"2026-11-18T20:04:05.034Z"},
+  {"id":"8ed0318a","tarea":"Monitoreo de instancias","rol":"Soporte","nombre":"Wilmar","horas_semana":4,"frecuencia":"semanal","procedimiento":"parcial","estructurado":"no","origen":"taller","creado":"2026-11-18T20:04:05.039Z"},
 ];
 
 export const usos: UsoCrudo[] = [
@@ -57,7 +70,15 @@ export const usos: UsoCrudo[] = [
   {"id":"d1037b17","herramientas":["ChatGPT","Claude"],"para_que":"Claude: laboralmente hago factibilidades, presentaciones, cuadros comparativos, resumen contratos etc \nChatGPT: uso mas personal","frecuencia":"semanal","rol":"Proyectos y consultoría","creado":"2026-11-09T19:20:14.262Z"},
   {"id":"c0de721a","herramientas":["ChatGPT","Gemini","Claude"],"para_que":"¨Personal y Trabajo","frecuencia":"diaria","rol":"Gerencia","creado":"2026-11-09T19:21:39.850Z"},
   {"id":"37a9c074","herramientas":["ChatGPT","Gemini","DeepSeek"],"para_que":"Documentar, responder correos","frecuencia":"diaria","rol":"Soporte","creado":"2026-11-09T20:11:25.097Z"},
+  {"id":"184f8b3f","herramientas":["ChatGPT","Gemini","NotebookLM"],"para_que":"Actividades laborales, educativo y personal","frecuencia":"diaria","rol":"Proyectos y consultoría","creado":"2026-11-18T20:04:06.943Z"},
+  {"id":"fc8c7ae6","herramientas":["ChatGPT","Gemini","Claude"],"para_que":"Para que me ayude agilizar en las propuestas ypresentaciones comerciales","frecuencia":"diaria","rol":"Comercial","creado":"2026-11-18T20:04:24.869Z"},
 ];
 
-// Pendiente: pegar aquí la agrupación exportada de Upstash (taller:sasa-t1:agrupacion → campo "grupos").
-export const grupos: GrupoSasa[] = [];
+// Agrupación hecha con Groq desde el panel del facilitador (taller:sasa-t1:agrupacion, 23 nov 2026).
+export const grupos: GrupoSasa[] = [
+  {"nombre":"Coordinación y planificación de proyectos","dolor_de_fondo":"Dificultad para gestionar varios proyectos simultáneos, organizar agenda, crear cronogramas, estimar y estructurar alcances, y empalmar con proyectos en curso.","ids":["3ad7d7e8","2cf576b3","6a1cf04f","d813fd54","c5920266","e3e10a7d","bbe9aada"]},
+  {"nombre":"Documentación, informes y estandarización","dolor_de_fondo":"Necesidad de generar informes, revisar datos en Excel, analizar procesos existentes, entender procesos no documentados, documentar seguimientos y estandarizar procesos de equipo.","ids":["0acad228","030ffe8d","9d7e3ba9","25c93795","14d5cf30","03dbd5de","007e6d6c","e2456c0f"]},
+  {"nombre":"Resolución y monitoreo técnico","dolor_de_fondo":"Resolver bugs, problemas sin contexto, de interfaz gráfica y backend, analizar casos complejos, redactar respuestas técnicas y monitorear instancias.","ids":["6685529d","72b53833","1457d7ab","eb29b082","ceb25a0c","8ed0318a"]},
+  {"nombre":"Manejo y transformación de información","dolor_de_fondo":"Editar y agregar archivos en Drive, convertir documentación técnica a comercial, generar información para licitaciones y responder cadenas de correos interminables.","ids":["fafb49e2","876eb3e1","eaf3ca3e","376f6352"]},
+  {"nombre":"Estrategia de sostenibilidad","dolor_de_fondo":"Definir un plan de sostenibilidad para la empresa.","ids":["1906f0e3"]},
+];
