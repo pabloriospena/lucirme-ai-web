@@ -1,0 +1,177 @@
+---
+import RutaClaudeLayout from "../../layouts/RutaClaudeLayout.astro";
+import EmailCTA from "./EmailCTA.astro";
+import Compartir from "./Compartir.astro";
+import { EJEMPLOS_CLAUDE } from "../../data/ruta-claude-ejemplos";
+import type { EjemploClaude } from "../../data/ruta-claude-ejemplos";
+
+interface Props {
+  ejemplo: EjemploClaude;
+}
+
+const { ejemplo } = Astro.props;
+const otros = EJEMPLOS_CLAUDE.filter((e) => e.slug !== ejemplo.slug);
+const ubicacion = `ejemplo-${ejemplo.slug}`;
+---
+
+<RutaClaudeLayout title={ejemplo.titulo} description={ejemplo.descripcion}>
+  <div class="space-y-12 pb-16">
+    <nav class="text-xs font-mono text-slate-500 px-2">
+      <a href="/ruta-claude" class="hover:text-teal-700 underline-offset-2 hover:underline">Ruta Claude desde cero</a>
+      <span aria-hidden="true" class="mx-2 inline-block h-1 w-1 rounded-full bg-slate-300 align-middle"></span>
+      <a href="/ruta-claude/ejemplos" class="hover:text-teal-700 underline-offset-2 hover:underline">Ejemplos</a>
+      <span aria-hidden="true" class="mx-2 inline-block h-1 w-1 rounded-full bg-slate-300 align-middle"></span>
+      <span class="text-slate-700">{ejemplo.segmento}</span>
+    </nav>
+
+    <section class="space-y-5 bg-white rounded-3xl border border-slate-200/80 p-8 shadow-sm">
+      <span class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">{ejemplo.segmento}, gratis</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+        {ejemplo.titulo}
+      </h1>
+      <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">{ejemplo.intro}</p>
+      <p class="text-sm text-slate-500 max-w-2xl leading-relaxed">{ejemplo.caso}</p>
+    </section>
+
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">{ejemplo.materialTitulo}</h2>
+      {ejemplo.materialTabla && (
+        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-x-auto">
+          <table class="w-full text-sm text-left min-w-[420px]">
+            <thead class="bg-slate-50 text-xs font-mono uppercase tracking-wider text-slate-500">
+              <tr>
+                {ejemplo.materialTabla.cabeceras.map((c) => (
+                  <th class="px-4 py-3">{c}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-700">
+              {ejemplo.materialTabla.filas.map((fila) => (
+                <tr>
+                  {fila.map((celda) => (
+                    <td class="px-4 py-3">{celda}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      {ejemplo.materialTexto && (
+        <pre class="bg-slate-50 border border-slate-200 text-slate-800 text-xs sm:text-sm rounded-2xl p-6 overflow-x-auto whitespace-pre-wrap leading-relaxed">{ejemplo.materialTexto}</pre>
+      )}
+    </section>
+
+    <section class="space-y-6">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Copialo y probalo con tu propio material</h2>
+      {ejemplo.prompts.map((p) => (
+        <div class="space-y-3">
+          <p class="text-xs font-mono font-bold text-teal-800 uppercase tracking-widest px-1">{p.titulo}</p>
+          <pre id={`prompt-${p.id}`} class="bg-slate-900 text-slate-100 text-xs sm:text-sm rounded-2xl p-6 overflow-x-auto whitespace-pre-wrap leading-relaxed">{p.texto}</pre>
+          <button
+            type="button"
+            data-copiar={`prompt-${p.id}`}
+            data-nombre={`${ejemplo.slug}-${p.id}`}
+            class="btn-copiar inline-flex items-center font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3 px-5 transition text-sm shadow-md cursor-pointer"
+          >
+            Copiar prompt
+          </button>
+        </div>
+      ))}
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        Antes de pegar tu material, aplicá la regla de los datos del <a href="/ruta-claude/paso-0" class="text-teal-700 underline hover:text-teal-800">Paso 0</a>.
+      </p>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Lo que deberías ver</h2>
+      <ul class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-3 text-sm sm:text-base text-slate-700 leading-relaxed">
+        {ejemplo.deberiasVer.map((d) => (
+          <li class="flex gap-3"><span aria-hidden="true" class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700"></span><span>{d}</span></li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Comprobá antes de usarlo</h2>
+      <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-3">
+        <ul class="text-sm text-slate-600 space-y-1.5 list-disc pl-5 leading-relaxed">
+          {ejemplo.comprobaciones.map((c) => (
+            <li>{c}</li>
+          ))}
+        </ul>
+        <p class="text-sm text-slate-600 leading-relaxed pt-1">
+          Si algo falla, esa parte no se usa. Si fallan varias, repetí el pedido y recordale que use solo tu material.
+        </p>
+      </div>
+    </section>
+
+    <section class="space-y-3 px-2">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight">El error que más se repite</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">{ejemplo.errorComun}</p>
+    </section>
+
+    <section class="space-y-3 px-2">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight">Cómo seguir</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">{ejemplo.cierre}</p>
+      <div class="flex flex-wrap items-center gap-4 pt-2">
+        <a
+          href="/ruta-claude/paso-1"
+          onclick="if (window.posthog) { window.posthog.capture('ruta_claude_step_click', { paso: '1', origen: 'ejemplo' }); }"
+          class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3 px-5 transition text-sm shadow-md"
+        >
+          <span>Ver el Paso 1</span>
+          <span class="text-base leading-none">→</span>
+        </a>
+        <a href="/ruta-claude/conectores" class="text-sm text-teal-700 underline hover:text-teal-800">Conectores, MCP y artefactos</a>
+      </div>
+    </section>
+
+    <section class="space-y-3">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Los otros ejemplos</h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {otros.map((o) => (
+          <a
+            href={`/ruta-claude/ejemplos/${o.slug}`}
+            onclick={`if (window.posthog) { window.posthog.capture('ruta_claude_ejemplo_click', { ejemplo: '${o.slug}', origen: '${ejemplo.slug}' }); }`}
+            class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2 hover:border-teal-600 transition"
+          >
+            <span class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">{o.segmento}</span>
+            <h3 class="font-bold text-slate-900">{o.titulo}</h3>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <Compartir ubicacion={ubicacion} />
+
+    <EmailCTA ubicacion={ubicacion} />
+  </div>
+</RutaClaudeLayout>
+
+<script is:inline>
+  (function () {
+    var botones = document.querySelectorAll('.btn-copiar');
+    botones.forEach(function (boton) {
+      boton.addEventListener('click', function () {
+        var el = document.getElementById(boton.getAttribute('data-copiar'));
+        if (!el) return;
+        var texto = el.textContent || '';
+        var listo = function () {
+          boton.textContent = 'Copiado';
+          if (window.posthog) {
+            window.posthog.capture('prompt_copiado', { recurso: 'ruta-claude', prompt: boton.getAttribute('data-nombre'), paso: 'ejemplo' });
+          }
+          setTimeout(function () { boton.textContent = 'Copiar prompt'; }, 2000);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(texto).then(listo).catch(function () {
+            window.prompt('Copiá el prompt:', texto);
+          });
+        } else {
+          window.prompt('Copiá el prompt:', texto);
+        }
+      });
+    });
+  })();
+</script>
