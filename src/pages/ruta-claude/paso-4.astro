@@ -1,0 +1,50 @@
+---
+import RutaClaudeLayout from "../../layouts/RutaClaudeLayout.astro";
+import PreviewPaso from "../../components/ruta-claude/PreviewPaso.astro";
+
+const recibes = [
+  "Un inventario para anotar las tareas que repetís cada semana y elegir tres para empezar.",
+  "Una plantilla para escribir cada tarea como instrucción reutilizable, con entrada, pasos, formato de salida y comprobación.",
+  "Una guía para guardar esas instrucciones donde las encuentres, dentro de un proyecto de Claude o en tu Notion.",
+  "Una revisión semanal de diez minutos para ajustar lo que no funcionó.",
+  "Tres ejemplos completos y de apoyo, inventados, para ver cómo queda una tarea ya escrita.",
+];
+
+const limites = [
+  "No promete un ahorro de tiempo. Cada persona y cada tarea son distintas, y por eso el kit te da cómo medirlo y no una cifra.",
+  "No automatiza por vos. Claude hace la tarea cuando se la pedís, y la revisión sigue siendo tuya.",
+  "No sirve para tareas que cambian de fondo cada vez. Funciona mejor con las que se parecen.",
+];
+
+const tarea = `Tarea. Resumen semanal de solicitudes de viaje.
+
+Entrada. La lista de solicitudes de la semana, sin nombres de personas.
+Pasos. Agrupá por área, marcá las que superan el tope de la política y listá las que faltan por aprobar.
+Salida. Una tabla con área, cantidad, valor total y pendientes, y debajo tres frases con lo más importante.
+Comprobación. Las sumas coinciden con la lista original y cada solicitud marcada trae la regla que incumple.`;
+---
+
+<RutaClaudeLayout
+  title="Paso 4. Convertilo en rutina"
+  description="Elegí tres tareas que repetís cada semana y dejalas escritas para que Claude las haga igual cada vez, con una revisión que las mejore."
+>
+  <PreviewPaso
+    numero="04"
+    titulo="Convertilo en rutina"
+    resumen="Cuando una tarea se repite, escribirla bien una vez te evita explicarla cada semana. Acá elegís tres y las dejás listas, con su comprobación."
+    recibes={recibes}
+    limites={limites}
+    anterior={{ href: "/ruta-claude/paso-3", texto: "Paso 3" }}
+  >
+    <section class="space-y-5">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">Cómo se ve</h2>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        Siguiendo el caso inventado de la analista de compras, así queda una de sus tareas semanales escrita como instrucción reutilizable.
+      </p>
+      <pre class="bg-slate-900 text-slate-100 text-xs sm:text-sm rounded-2xl p-6 overflow-x-auto whitespace-pre-wrap leading-relaxed">{tarea}</pre>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed">
+        Con esto guardado, la semana siguiente solo cambia la lista de solicitudes. La comprobación del final es la que del Paso 3 pasa a ser parte de la rutina.
+      </p>
+    </section>
+  </PreviewPaso>
+</RutaClaudeLayout>
