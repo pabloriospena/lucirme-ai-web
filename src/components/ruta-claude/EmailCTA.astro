@@ -1,9 +1,17 @@
 ---
 interface Props {
+  /** Dónde está el formulario. Viaja en el evento ruta_claude_registro. */
   ubicacion?: string;
   titulo?: string;
   texto?: string;
   boton?: string;
+  /** hero: campo y botón en una fila, sin tarjeta. bloque: tarjeta completa. */
+  variante?: "hero" | "bloque";
+  /** Paso al que se sigue después de dejar el correo. */
+  siguienteHref?: string;
+  siguienteTexto?: string;
+  /** La pregunta emprendedor, empleado o PM va después de enviar el correo, nunca antes. */
+  preguntarSegmento?: boolean;
 }
 
 const {
@@ -11,58 +19,103 @@ const {
   titulo = "Entrá a la ruta",
   texto = "Dejá tu correo y te escribo con los pasos gratis. Después te cuento cuándo abre el kit.",
   boton = "Quiero entrar",
+  variante = "bloque",
+  siguienteHref = "/ruta-claude/paso-0",
+  siguienteTexto = "Seguir con el Paso 0",
+  preguntarSegmento = true,
 } = Astro.props;
 const formId = `form-claude-${ubicacion}`;
 const feedbackId = `feedback-claude-${ubicacion}`;
 const btnId = `btn-claude-${ubicacion}`;
+const exitoId = `exito-claude-${ubicacion}`;
+const esHero = variante === "hero";
 ---
 
-<div class="bg-white rounded-3xl border border-slate-200/90 p-8 sm:p-12 shadow-sm text-center space-y-5 my-14 relative overflow-hidden">
-  <div class="absolute bottom-0 right-0 w-48 h-48 bg-emerald-50 rounded-full blur-3xl -z-10 translate-x-10 translate-y-10"></div>
-
-  <span class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest block bg-slate-50 py-1 px-3 rounded-full w-fit mx-auto border border-slate-200/60">
-    Ruta Claude desde cero
-  </span>
-  <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-    {titulo}
-  </h3>
-  <p class="text-sm sm:text-base text-slate-600 max-w-xl mx-auto leading-relaxed">
-    {texto}
-  </p>
+<div
+  id={`registro-${ubicacion}`}
+  data-registro
+  data-ubicacion-registro={ubicacion}
+  class={esHero
+    ? "space-y-3"
+    : "bg-white rounded-3xl border border-slate-200/90 p-8 sm:p-12 shadow-sm text-center space-y-5 my-14 relative overflow-hidden"}
+>
+  {!esHero && (
+    <>
+      <span class="text-xs font-mono font-bold text-slate-500 uppercase tracking-widest block bg-slate-50 py-1 px-3 rounded-full w-fit mx-auto border border-slate-200/60">
+        Ruta Claude desde cero
+      </span>
+      <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+        {titulo}
+      </h3>
+      <p class="text-sm sm:text-base text-slate-600 max-w-xl mx-auto leading-relaxed">
+        {texto}
+      </p>
+    </>
+  )}
 
   <form
     id={formId}
-    onsubmit={`handleClaudeSubmit(event, '${ubicacion}', '${feedbackId}', '${btnId}')`}
-    class="max-w-md mx-auto space-y-3 text-left"
+    data-form-registro
+    onsubmit={`handleClaudeSubmit(event, '${ubicacion}', '${feedbackId}', '${btnId}', '${exitoId}')`}
+    class={esHero ? "max-w-xl space-y-3 text-left" : "max-w-md mx-auto space-y-3 text-left"}
   >
-    <label class="block text-xs font-medium text-slate-700" for={`email-${formId}`}>
+    <label class="block text-sm font-medium text-slate-700" for={`email-${formId}`}>
       Correo electrónico
     </label>
-    <input
-      id={`email-${formId}`}
-      type="email"
-      name="email"
-      required
-      autocomplete="email"
-      placeholder="tu.correo@ejemplo.com"
-      class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:bg-white focus:border-teal-600 transition"
-    />
-    <!-- Campo trampa para bots, no se ve ni se llena a mano -->
-    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
-    <button
-      id={btnId}
-      data-texto={boton}
-      type="submit"
-      class="w-full inline-flex items-center justify-center font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3.5 px-6 transition text-sm shadow-md cursor-pointer"
-    >
-      {boton}
-    </button>
-    <p class="text-[11px] text-slate-500 text-center leading-normal">
+    <div class={esHero ? "flex flex-col sm:flex-row gap-3" : "space-y-3"}>
+      <input
+        id={`email-${formId}`}
+        type="email"
+        name="email"
+        required
+        autocomplete="email"
+        placeholder="tu.correo@ejemplo.com"
+        class={`w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-base focus:outline-none focus:bg-white focus:border-teal-600 focus-visible:ring-2 focus-visible:ring-teal-600 transition ${esHero ? "sm:flex-1" : ""}`}
+      />
+      <!-- Campo trampa para bots, no se ve ni se llena a mano -->
+      <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
+      <button
+        id={btnId}
+        data-texto={boton}
+        type="submit"
+        class={`inline-flex items-center justify-center font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3.5 px-6 transition text-sm shadow-md cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600 ${esHero ? "sm:shrink-0" : "w-full"}`}
+      >
+        {boton}
+      </button>
+    </div>
+    <p class={`text-sm text-slate-600 leading-normal ${esHero ? "" : "text-center"}`}>
       Al dejar tu correo aceptás recibir mensajes de LuciRMe AI. Consultá la
       <a href="/privacidad" target="_blank" class="text-teal-700 underline hover:text-teal-800">política de privacidad</a>.
     </p>
-    <p id={feedbackId} class="hidden text-center text-xs font-semibold pt-1"></p>
+    <p id={feedbackId} role="status" aria-live="polite" class="hidden text-sm font-semibold pt-1"></p>
   </form>
+
+  <!-- Estado después de dejar el correo -->
+  <div id={exitoId} class={`hidden space-y-4 ${esHero ? "max-w-xl" : "max-w-md mx-auto text-center"}`} aria-live="polite">
+    <p class="text-sm sm:text-base font-semibold text-emerald-700">
+      Listo, ya quedaste dentro. Revisá tu correo en unos minutos.
+    </p>
+    <a
+      href={siguienteHref}
+      data-siguiente
+      onclick={`if (window.posthog) { window.posthog.capture('ruta_claude_landing_click', { ubicacion: '${ubicacion}_siguiente' }); }`}
+      class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3.5 px-6 transition text-sm shadow-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600"
+    >
+      <span>{siguienteTexto}</span>
+      <span class="text-base leading-none">→</span>
+    </a>
+    {preguntarSegmento && (
+      <div data-segmento class="space-y-2">
+        <p class="text-sm text-slate-700">¿Cómo trabajás hoy?</p>
+        <div class={`flex flex-wrap gap-2 ${esHero ? "" : "justify-center"}`}>
+          <button type="button" data-segmento-op="emprendedor" class="px-4 py-2 rounded-xl border border-slate-300 bg-white text-slate-800 text-sm font-semibold hover:border-teal-600 cursor-pointer focus-visible:ring-2 focus-visible:ring-teal-600">Emprendedor</button>
+          <button type="button" data-segmento-op="empleado" class="px-4 py-2 rounded-xl border border-slate-300 bg-white text-slate-800 text-sm font-semibold hover:border-teal-600 cursor-pointer focus-visible:ring-2 focus-visible:ring-teal-600">Empleado</button>
+          <button type="button" data-segmento-op="pm" class="px-4 py-2 rounded-xl border border-slate-300 bg-white text-slate-800 text-sm font-semibold hover:border-teal-600 cursor-pointer focus-visible:ring-2 focus-visible:ring-teal-600">PM</button>
+        </div>
+        <p data-segmento-gracias class="hidden text-sm text-slate-600">Gracias, lo tengo en cuenta.</p>
+      </div>
+    )}
+  </div>
 </div>
 
 <script is:inline>
@@ -74,7 +127,16 @@ const btnId = `btn-claude-${ubicacion}`;
     } catch (e) {}
   })();
 
-  window.handleClaudeSubmit = async function (e, ubicacion, feedbackId, btnId) {
+  // Quien ya dejó su correo ve el siguiente paso, no el formulario otra vez.
+  window.rutaClaudeMostrarExito = function (ubicacion, exitoId) {
+    var form = document.getElementById('form-claude-' + ubicacion);
+    var exito = document.getElementById(exitoId);
+    if (form) form.classList.add('hidden');
+    if (exito) exito.classList.remove('hidden');
+    document.documentElement.setAttribute('data-ruta-claude-registrado', '1');
+  };
+
+  window.handleClaudeSubmit = async function (e, ubicacion, feedbackId, btnId, exitoId) {
     e.preventDefault();
     const form = e.target;
     const emailInput = form.querySelector('input[name="email"]');
@@ -88,14 +150,14 @@ const btnId = `btn-claude-${ubicacion}`;
       if (!feedback) return;
       feedback.textContent = texto;
       feedback.className = ok
-        ? 'text-center text-xs text-emerald-600 font-semibold pt-1'
-        : 'text-center text-xs text-red-600 font-semibold pt-1';
+        ? 'text-sm text-emerald-700 font-semibold pt-1'
+        : 'text-sm text-red-700 font-semibold pt-1';
     };
 
     if (feedback) feedback.classList.add('hidden');
     if (btn) {
       btn.disabled = true;
-      btn.textContent = 'Procesando...';
+      btn.textContent = 'Enviando';
     }
 
     try {
@@ -117,18 +179,19 @@ const btnId = `btn-claude-${ubicacion}`;
       const data = await res.json().catch(() => ({}));
 
       if (res.ok && data.ok) {
-        mostrar('Listo. Revisá tu correo en unos minutos.', true);
         try {
           // Su código personal: desde ahora sus botones de compartir usan su enlace.
           if (data.ref) window.localStorage.setItem('ruta_claude_ref', data.ref);
+          window.localStorage.setItem('ruta_claude_registrado', '1');
         } catch (e) {}
         form.reset();
         if (window.posthog) {
           window.posthog.capture('ruta_claude_registro', { ubicacion: ubicacion });
         }
-      } else {
-        mostrar(data.error || 'No pudimos registrar tu correo. Intentá de nuevo.', false);
+        window.rutaClaudeMostrarExito(ubicacion, exitoId);
+        return;
       }
+      mostrar(data.error || 'No pudimos registrar tu correo. Intentá de nuevo.', false);
     } catch (err) {
       console.error('[ruta-claude-registro]', err);
       mostrar('No pudimos registrar tu correo. Intentá de nuevo.', false);
@@ -140,4 +203,47 @@ const btnId = `btn-claude-${ubicacion}`;
       btn.textContent = btn.dataset.texto || 'Quiero entrar';
     }
   };
+
+  (function () {
+    // Pregunta de segmento, después del correo. Por ahora solo se mide en PostHog,
+    // guardarla en MailerLite espera la aprobación de Pablo (Reglas, sección 9).
+    document.querySelectorAll('[data-segmento]').forEach(function (bloque) {
+      if (bloque.dataset.listo) return;
+      bloque.dataset.listo = '1';
+      var ubicacion = bloque.closest('[data-registro]').dataset.ubicacionRegistro;
+      bloque.querySelectorAll('[data-segmento-op]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          if (window.posthog) {
+            window.posthog.capture('ruta_claude_segmento', {
+              segmento: b.dataset.segmentoOp,
+              ubicacion: ubicacion,
+            });
+          }
+          bloque.querySelectorAll('[data-segmento-op]').forEach(function (o) {
+            o.disabled = true;
+            o.setAttribute('aria-pressed', o === b ? 'true' : 'false');
+          });
+          var gracias = bloque.querySelector('[data-segmento-gracias]');
+          if (gracias) gracias.classList.remove('hidden');
+        });
+      });
+    });
+
+    // Si ya dejó el correo en otra visita, el formulario se cambia por el siguiente paso.
+    try {
+      if (window.localStorage.getItem('ruta_claude_registrado') === '1') {
+        document.documentElement.setAttribute('data-ruta-claude-registrado', '1');
+        document.querySelectorAll('[data-registro]').forEach(function (r) {
+          var u = r.dataset.ubicacionRegistro;
+          if (u === 'kit') return;
+          var exito = r.querySelector('[id^="exito-claude-"]');
+          var seg = r.querySelector('[data-segmento]');
+          if (seg) seg.classList.add('hidden');
+          var ok = exito && exito.querySelector('p');
+          if (ok) ok.textContent = 'Ya dejaste tu correo. Seguí con la ruta.';
+          window.rutaClaudeMostrarExito(u, exito && exito.id);
+        });
+      }
+    } catch (e) {}
+  })();
 </script>

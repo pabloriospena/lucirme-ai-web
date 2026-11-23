@@ -150,7 +150,7 @@ Pregunta.
         <a
           href="/ruta-claude/kit"
           onclick="if (window.posthog) { window.posthog.capture('ruta_claude_continuar_click', { desde: 'paso-1' }); }"
-          class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3.5 px-6 transition text-sm shadow-md"
+          class="inline-flex items-center justify-center gap-2 font-semibold bg-white border border-slate-300 hover:border-teal-600 text-slate-800 rounded-xl py-3.5 px-6 transition text-sm"
         >
           <span>Continuar con la ruta</span>
           <span class="text-base leading-none">→</span>
@@ -161,7 +161,14 @@ Pregunta.
 
     <Compartir ubicacion="paso-1" />
 
-    <EmailCTA ubicacion="paso-1" />
+    <EmailCTA
+      ubicacion="paso-1"
+      titulo="Dejá tu correo y seguí con la ruta"
+      texto="Te cuento cuándo abre el kit con los Pasos 2, 3 y 4. Es un solo campo."
+      boton="Quiero entrar"
+      siguienteHref="/ruta-claude/kit"
+      siguienteTexto="Ver el kit"
+    />
   </div>
 </RutaClaudeLayout>
 
