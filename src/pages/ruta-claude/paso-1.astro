@@ -2,6 +2,9 @@
 import RutaClaudeLayout from "../../layouts/RutaClaudeLayout.astro";
 import EmailCTA from "../../components/ruta-claude/EmailCTA.astro";
 import Compartir from "../../components/ruta-claude/Compartir.astro";
+import Leccion from "../../components/ruta-claude/Leccion.astro";
+import PromptCopiable from "../../components/ruta-claude/PromptCopiable.astro";
+import YaLoProbe from "../../components/ruta-claude/YaLoProbe.astro";
 
 const promptFlojo = `Escribime una respuesta para un cliente que está molesto.`;
 
@@ -41,22 +44,12 @@ Pregunta.
   title="Paso 1. El prompt es el contexto"
   description="Aprendé a pedirle a Claude con situación, tarea, material, formato y límites, y a darle una sola fuente para que no invente."
 >
-  <div class="space-y-12 pb-16">
-    <nav class="text-xs font-mono text-slate-500 px-2">
-      <a href="/ruta-claude" class="hover:text-teal-700 underline-offset-2 hover:underline">Ruta Claude desde cero</a>
-      <span aria-hidden="true" class="mx-2 inline-block h-1 w-1 rounded-full bg-slate-300 align-middle"></span>
-      <span class="text-slate-700">Paso 1</span>
-    </nav>
-
-    <section class="space-y-5 bg-white rounded-3xl border border-slate-200/80 p-8 shadow-sm">
-      <span class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">Paso 1, gratis</span>
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
-        El prompt es el contexto
-      </h1>
-      <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+  <Leccion paso="01" eyebrow="Paso 1, gratis" titulo="El prompt es el contexto">
+    <Fragment slot="intro">
+      <p>
         Claude responde con lo que tiene delante. Lo que no le das, lo adivina. Este paso te enseña a darle lo justo para que la primera respuesta ya sirva.
       </p>
-    </section>
+    </Fragment>
 
     <section class="space-y-4 px-2">
       <h2 class="text-xl font-bold text-slate-900 tracking-tight">Una idea para llevarte</h2>
@@ -66,18 +59,21 @@ Pregunta.
     </section>
 
     <section class="space-y-5">
-      <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">El mismo pedido, de dos maneras</h2>
+      <div class="flex flex-wrap items-center gap-3 px-2">
+        <h2 class="text-xl font-bold text-slate-900 tracking-tight">El mismo pedido, de dos maneras</h2>
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border bg-amber-50 text-amber-800 border-amber-200">Ejemplo inventado</span>
+      </div>
       <p class="text-sm text-slate-600 px-2 leading-relaxed">
         El caso es inventado. Una coordinadora tiene que responderle a un cliente por una entrega tardía.
       </p>
       <div class="grid gap-4 sm:grid-cols-2">
         <div class="space-y-2">
-          <p class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest px-1">Pedido flojo</p>
-          <pre class="bg-slate-50 border border-slate-200 text-slate-800 text-xs rounded-xl p-4 overflow-x-auto whitespace-pre-wrap leading-relaxed h-full">{promptFlojo}</pre>
+          <p class="text-xs font-mono font-bold text-slate-600 uppercase tracking-widest px-1">Pedido flojo</p>
+          <pre tabindex="0" aria-label="Pedido flojo, ejemplo inventado" class="bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl p-4 overflow-x-auto whitespace-pre-wrap leading-relaxed h-full focus-visible:ring-2 focus-visible:ring-teal-600 focus:outline-none">{promptFlojo}</pre>
         </div>
         <div class="space-y-2">
           <p class="text-xs font-mono font-bold text-teal-800 uppercase tracking-widest px-1">Pedido con contexto</p>
-          <pre class="bg-slate-900 text-slate-100 text-xs rounded-xl p-4 overflow-x-auto whitespace-pre-wrap leading-relaxed">{promptBueno}</pre>
+          <pre tabindex="0" aria-label="Pedido con contexto, ejemplo inventado" class="bg-slate-900 text-slate-100 text-sm rounded-xl p-4 overflow-x-auto whitespace-pre-wrap leading-relaxed focus-visible:ring-2 focus-visible:ring-teal-600 focus:outline-none">{promptBueno}</pre>
         </div>
       </div>
       <p class="text-sm text-slate-600 px-2 leading-relaxed">
@@ -94,14 +90,14 @@ Pregunta.
         <p><span class="font-semibold text-slate-900">Formato.</span> Cómo querés la respuesta, con su largo.</p>
         <p><span class="font-semibold text-slate-900">Límites.</span> Lo que no debe hacer y qué hacer si le falta información.</p>
       </div>
-      <pre id="prompt-base-texto" class="bg-slate-900 text-slate-100 text-xs sm:text-sm rounded-2xl p-6 overflow-x-auto whitespace-pre-wrap leading-relaxed">{promptBase}</pre>
-      <button
-        id="btn-copiar-prompt-base"
-        type="button"
-        class="inline-flex items-center font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3 px-5 transition text-sm shadow-md cursor-pointer"
-      >
-        Copiar plantilla
-      </button>
+      <PromptCopiable
+        id="prompt-base"
+        prompt="plantilla-cinco-partes"
+        paso="1"
+        texto={promptBase}
+        boton="Copiar plantilla"
+        etiqueta="Plantilla de las cinco partes"
+      />
     </section>
 
     <section class="space-y-5">
@@ -109,14 +105,13 @@ Pregunta.
       <p class="text-sm text-slate-600 px-2 leading-relaxed">
         Cuando la respuesta tiene que salir de un documento tuyo, pedile que se quede en ese documento. Una fuente solo responde lo que contiene. Si no lo aclarás, Claude puede completar con lo que sabe de otros lugares, y ahí aparecen las respuestas que suenan seguras y no están en tu material.
       </p>
-      <pre id="prompt-fuente-texto" class="bg-slate-900 text-slate-100 text-xs sm:text-sm rounded-2xl p-6 overflow-x-auto whitespace-pre-wrap leading-relaxed">{promptFuente}</pre>
-      <button
-        id="btn-copiar-prompt-fuente"
-        type="button"
-        class="inline-flex items-center font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3 px-5 transition text-sm shadow-md cursor-pointer"
-      >
-        Copiar prompt
-      </button>
+      <PromptCopiable
+        id="prompt-fuente"
+        prompt="una-sola-fuente"
+        paso="1"
+        texto={promptFuente}
+        etiqueta="Prompt de una sola fuente"
+      />
     </section>
 
     <section class="space-y-5">
@@ -132,6 +127,13 @@ Pregunta.
           Si alguna falla, esa afirmación no se usa. Si fallan varias, repetí el prompt pidiéndole que copie solo lo que puede encontrar.
         </p>
       </div>
+      <YaLoProbe
+        paso="1"
+        prompt="una-sola-fuente"
+        siguienteHref="/ruta-claude/kit"
+        siguienteTexto="Ver el kit"
+        registroId="registro-paso-1"
+      />
     </section>
 
     <section class="space-y-3 px-2">
@@ -141,7 +143,7 @@ Pregunta.
       </p>
     </section>
 
-    <section class="bg-white rounded-3xl border border-teal-200 p-8 shadow-sm space-y-4">
+    <section class="bg-white rounded-3xl border border-teal-200 p-6 sm:p-8 shadow-sm space-y-4">
       <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Continuá con la ruta</h2>
       <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
         Ya sabés pedir con contexto y darle una fuente a Claude. Los Pasos 2, 3 y 4 hacen que trabaje sobre todos tus documentos, que comprobés lo que responde y que lo conviertas en rutina.
@@ -169,35 +171,5 @@ Pregunta.
       siguienteHref="/ruta-claude/kit"
       siguienteTexto="Ver el kit"
     />
-  </div>
+  </Leccion>
 </RutaClaudeLayout>
-
-<script is:inline>
-  (function () {
-    function enlazar(botonId, textoId, nombre, original) {
-      var boton = document.getElementById(botonId);
-      if (!boton) return;
-      boton.addEventListener('click', function () {
-        var el = document.getElementById(textoId);
-        if (!el) return;
-        var texto = el.textContent || '';
-        var listo = function () {
-          boton.textContent = 'Copiado';
-          if (window.posthog) {
-            window.posthog.capture('prompt_copiado', { recurso: 'ruta-claude', prompt: nombre, paso: '1' });
-          }
-          setTimeout(function () { boton.textContent = original; }, 2000);
-        };
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(texto).then(listo).catch(function () {
-            window.prompt('Copiá el texto:', texto);
-          });
-        } else {
-          window.prompt('Copiá el texto:', texto);
-        }
-      });
-    }
-    enlazar('btn-copiar-prompt-base', 'prompt-base-texto', 'plantilla-cinco-partes', 'Copiar plantilla');
-    enlazar('btn-copiar-prompt-fuente', 'prompt-fuente-texto', 'una-sola-fuente', 'Copiar prompt');
-  })();
-</script>

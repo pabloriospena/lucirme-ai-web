@@ -12,6 +12,8 @@ interface Props {
   siguienteTexto?: string;
   /** La pregunta emprendedor, empleado o PM va después de enviar el correo, nunca antes. */
   preguntarSegmento?: boolean;
+  /** Aviso de apertura del Kit. No lleva siguiente paso ni pregunta de segmento. */
+  avisame?: boolean;
 }
 
 const {
@@ -22,8 +24,10 @@ const {
   variante = "bloque",
   siguienteHref = "/ruta-claude/paso-0",
   siguienteTexto = "Seguir con el Paso 0",
-  preguntarSegmento = true,
+  preguntarSegmento: preguntarSegmentoProp = true,
+  avisame = false,
 } = Astro.props;
+const preguntarSegmento = avisame ? false : preguntarSegmentoProp;
 const formId = `form-claude-${ubicacion}`;
 const feedbackId = `feedback-claude-${ubicacion}`;
 const btnId = `btn-claude-${ubicacion}`;
@@ -35,6 +39,7 @@ const esHero = variante === "hero";
   id={`registro-${ubicacion}`}
   data-registro
   data-ubicacion-registro={ubicacion}
+  data-avisame={avisame ? "1" : undefined}
   class={esHero
     ? "space-y-3"
     : "bg-white rounded-3xl border border-slate-200/90 p-8 sm:p-12 shadow-sm text-center space-y-5 my-14 relative overflow-hidden"}
@@ -93,8 +98,9 @@ const esHero = variante === "hero";
   <!-- Estado después de dejar el correo -->
   <div id={exitoId} class={`hidden space-y-4 ${esHero ? "max-w-xl" : "max-w-md mx-auto text-center"}`} aria-live="polite">
     <p class="text-sm sm:text-base font-semibold text-emerald-700">
-      Listo, ya quedaste dentro. Revisá tu correo en unos minutos.
+      {avisame ? "Listo, te aviso cuando abra el Kit." : "Listo, ya quedaste dentro. Revisá tu correo en unos minutos."}
     </p>
+    {!avisame && (
     <a
       href={siguienteHref}
       data-siguiente
@@ -104,6 +110,7 @@ const esHero = variante === "hero";
       <span>{siguienteTexto}</span>
       <span class="text-base leading-none">→</span>
     </a>
+    )}
     {preguntarSegmento && (
       <div data-segmento class="space-y-2">
         <p class="text-sm text-slate-700">¿Cómo trabajás hoy?</p>
@@ -235,7 +242,7 @@ const esHero = variante === "hero";
         document.documentElement.setAttribute('data-ruta-claude-registrado', '1');
         document.querySelectorAll('[data-registro]').forEach(function (r) {
           var u = r.dataset.ubicacionRegistro;
-          if (u === 'kit') return;
+          if (r.dataset.avisame) return;
           var exito = r.querySelector('[id^="exito-claude-"]');
           var seg = r.querySelector('[data-segmento]');
           if (seg) seg.classList.add('hidden');

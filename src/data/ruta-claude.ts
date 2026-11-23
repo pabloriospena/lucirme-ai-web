@@ -23,6 +23,21 @@ export const LANDING_KIT_URL = "/ruta-claude/kit";
 /** Enlace de checkout del kit en Hotmart. Mientras esté vacío, la landing pide el correo en vez de vender. */
 export const HOTMART_KIT_URL = "";
 
+/** Fecha de entrega y garantía de la preventa. Se llenan cuando Pablo las apruebe. No llevan precio, el precio vive en Reglas sección 3 y en Hotmart. */
+export const KIT_FECHA_ENTREGA = "";
+export const KIT_GARANTIA = "";
+
+/** El Kit está abierto a la compra solo cuando hay enlace de Hotmart. */
+export const KIT_ABIERTO = HOTMART_KIT_URL !== "";
+
+export type EtiquetaPaso = "Gratis" | "Preventa" | "Próximamente";
+
+/** Un solo vocabulario de estado en el hub, la lista lateral y el kit. */
+export function etiquetaPaso(p: PasoClaude): EtiquetaPaso {
+  if (p.acceso === "gratis") return "Gratis";
+  return KIT_ABIERTO ? "Preventa" : "Próximamente";
+}
+
 export const RUTA_CLAUDE_DATA: PasoClaude[] = [
   {
     numero: "00",
