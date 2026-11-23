@@ -1,5 +1,7 @@
 # Design System & Guidelines — LucirMe AI
 
+> La fuente vigente del design system es la página Design System LuciRMe AI en Notion (carpeta Marca y audiencia). Si este archivo y Notion no coinciden, gana Notion. Este archivo se mantiene como resumen para quien trabaja el código. Actualizado el 23 nov 2026.
+
 ## 1. Overview & Brand Identity
 
 LucirMe AI is built on a clean, professional, high-contrast light theme inspired by Notion and modern developer documentation. The design prioritizes content legibility, fast scanability, and focused action without clutter, distracting heavy gradients, or unsolicited emojis.
@@ -14,7 +16,7 @@ LucirMe AI is built on a clean, professional, high-contrast light theme inspired
 ### Primary Brand Palette
 - **Deep Slate (`--color-deep`):** `#0F172A` (Slate 900) — Used for primary headings, high-priority text, and dark headers.
 - **Teal Accent (`--color-teal`):** `#0D9488` (Teal 600) — Used for primary interactive actions, links, and success states.
-- **Orange Energy (`--color-orange`):** `#EA580C` (Orange 600) — Used for high-urgency call-to-actions, badges, and key highlight triggers.
+- **Orange Energy (`--color-orange`):** `#EA580C` (Orange 600) — Hoy se usa en un solo lugar: el botón de entrada del Prompteador. No se usa para generar urgencia. Es también el naranja del logo.
 - **Emerald Green:** `#059669` (Emerald 600) — Used for direct WhatsApp links and conversion buttons.
 - **Amber Gold:** `#F59E0B` (Amber 500) — Used for course highlights, featured products, and premium tags.
 
@@ -66,7 +68,7 @@ LucirMe AI is built on a clean, professional, high-contrast light theme inspired
 
 ### Buttons & CTAs
 - **Primary Action (Teal):** `bg-[#0D9488] text-white hover:bg-[#0F766E] font-bold rounded-lg transition`.
-- **Urgent / Conversion (Orange/Amber):** `bg-[#EA580C] text-white hover:bg-[#C2410C]` or `bg-[#F59E0B] text-slate-950 font-black`.
+- **Naranja y ámbar:** `bg-[#EA580C] text-white` solo en el botón de entrada del Prompteador (contraste 3.56, usar texto grande y en negrita). El ámbar `bg-[#F59E0B] text-slate-950` anuncia lo de pago. Ninguno de los dos se usa para presionar al visitante.
 - **Direct Messaging (WhatsApp):** `bg-emerald-600 text-white hover:bg-emerald-500 font-bold rounded-lg`.
 - **Secondary / Ghost:** `bg-white border border-gray-200 hover:bg-gray-50 text-gray-700`.
 
