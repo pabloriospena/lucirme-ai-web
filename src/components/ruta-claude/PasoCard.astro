@@ -17,16 +17,16 @@ const estilo: Record<string, string> = {
 
 <div class="rounded-3xl border bg-white border-slate-200/90 p-6 sm:p-8 space-y-4 shadow-sm">
   <div class="flex items-center justify-between gap-2">
-    <span class="font-mono text-xs font-bold text-slate-500 uppercase tracking-wider">
+    <span class="font-mono text-sm font-bold text-slate-500 uppercase tracking-wider">
       Paso {Number(paso.numero)} de 4
     </span>
     <div class="flex items-center gap-2">
       {esPago && (
-        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border bg-slate-900 text-white border-slate-900">
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold border bg-slate-900 text-white border-slate-900">
           En el kit
         </span>
       )}
-      <span class={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border ${estilo[etiqueta]}`}>
+      <span class={`inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold border ${estilo[etiqueta]}`}>
         {etiqueta}
       </span>
     </div>
@@ -34,7 +34,7 @@ const estilo: Record<string, string> = {
 
   <div class="space-y-1.5">
     <h3 class="text-2xl font-bold text-slate-900 tracking-tight">{paso.titulo}</h3>
-    <p class="text-xs font-mono text-teal-800 uppercase tracking-wide font-semibold">
+    <p class="text-sm font-mono text-teal-800 uppercase tracking-wide font-semibold">
       {paso.subtituloCategoria}
     </p>
   </div>

@@ -5,6 +5,8 @@ import PostHog from "../components/PostHog.astro";
 import "../styles/global.css";
 
 interface Props {
+  /** completo deja que la página use todo el contenedor de 1280 px. */
+  ancho?: "texto" | "completo";
   title: string;
   description: string;
   image?: string;
@@ -12,6 +14,7 @@ interface Props {
 }
 
 const {
+  ancho = "texto",
   title,
   description,
   image = "https://lucirme.com/logo-lucirme.png",
@@ -55,29 +58,16 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, "https://lucirme.c
     <PostHog />
 
     <style is:global>
-      :root {
-        /* reemplazar con manual de marca */
-        --color-primary: #00685F;
-        --color-primary-hover: #005049;
-        --color-bg: #F8FAFC;
-        --color-surface: #FFFFFF;
-        --color-text: #0B1C30;
-        --color-muted: #64748B;
-        --color-border: #E2E8F0;
-        --color-accent: #059669;
-      }
       [data-oculto="1"] { display: none !important; }
       [data-ruta-claude-registrado="1"] [data-solo-sin-registro] { display: none; }
-      body {
-        background-color: var(--color-bg);
-        color: var(--color-text);
-      }
     </style>
   </head>
-  <body class="min-h-screen flex flex-col antialiased selection:bg-teal-100 selection:text-teal-900">
+  <body class="min-h-screen flex flex-col antialiased bg-slate-50 text-slate-900 font-sans selection:bg-teal-100 selection:text-teal-900">
     <Header />
-    <main class={`flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-8 ${mostrarBarra ? "pb-28 sm:pb-8" : ""}`}>
-      <slot />
+    <main class={`flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 ${mostrarBarra ? "pb-28 sm:pb-8" : ""}`}>
+      <div class={ancho === "texto" ? "max-w-4xl mx-auto" : ""}>
+        <slot />
+      </div>
     </main>
     <Footer />
     {mostrarBarra && (
@@ -88,7 +78,7 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, "https://lucirme.c
         <a
           id="barra-registro-cta"
           href="/ruta-claude#registro-hero"
-          class="flex w-full items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3.5 px-5 transition text-base shadow-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600"
+          class="flex w-full items-center justify-center gap-2 font-semibold bg-teal-700 hover:bg-teal-800 text-white rounded-xl py-3.5 px-5 transition text-base shadow-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600"
         >
           <span>Empezar Paso 0 gratis</span>
           <span class="text-base leading-none">→</span>

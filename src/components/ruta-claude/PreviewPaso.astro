@@ -17,7 +17,7 @@ const { numero, titulo, resumen, recibes, limites, anterior, siguiente } = Astro
 ---
 
 <div class="space-y-12 pb-16">
-  <nav class="text-xs font-mono text-slate-500 px-2">
+  <nav class="text-sm font-mono text-slate-500 px-2">
     <a href="/ruta-claude" class="hover:text-teal-700 underline-offset-2 hover:underline">Ruta Claude desde cero</a>
     <span aria-hidden="true" class="mx-2 inline-block h-1 w-1 rounded-full bg-slate-300 align-middle"></span>
     <span class="text-slate-700">Paso {Number(numero)}</span>
@@ -25,14 +25,14 @@ const { numero, titulo, resumen, recibes, limites, anterior, siguiente } = Astro
 
   <section class="space-y-5 bg-white rounded-3xl border border-slate-200/80 p-8 shadow-sm">
     <div class="flex flex-wrap items-center gap-2">
-      <span class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">Paso {Number(numero)}</span>
-      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border bg-slate-900 text-white border-slate-900">En el kit</span>
-      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border bg-slate-100 text-slate-700 border-slate-300">{KIT_ABIERTO ? "Preventa" : "Próximamente"}</span>
-      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border bg-white text-slate-700 border-slate-300">Vista previa</span>
+      <span class="text-sm font-mono font-bold text-slate-600 uppercase tracking-widest">Paso {Number(numero)}</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold border bg-slate-900 text-white border-slate-900">En el kit</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold border bg-slate-100 text-slate-700 border-slate-300">{KIT_ABIERTO ? "Preventa" : "Próximamente"}</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold border bg-white text-slate-700 border-slate-300">Vista previa</span>
     </div>
     <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">{titulo}</h1>
     <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">{resumen}</p>
-    <p class="text-xs text-slate-500 leading-relaxed max-w-2xl">
+    <p class="text-sm text-slate-500 leading-relaxed max-w-2xl">
       Esto es una vista previa de lo que hace este paso. El kit se está terminando de armar y de probar. Los datos del ejemplo son inventados.
     </p>
   </section>
