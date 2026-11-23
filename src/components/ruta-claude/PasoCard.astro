@@ -48,7 +48,7 @@ const textoEstado: Record<string, string> = {
       <a
         href={paso.href}
         onclick={`if (window.posthog) { window.posthog.capture('ruta_claude_step_click', { paso: '${Number(paso.numero)}' }); }`}
-        class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3 px-6 transition text-xs sm:text-sm shadow-sm"
+        class="inline-flex items-center justify-center gap-2 font-semibold bg-white border border-slate-300 hover:border-teal-600 text-slate-800 rounded-xl py-3 px-6 transition text-sm"
       >
         <span>{esPago ? "Ver qué incluye" : "Entrar"}</span>
         <span class="text-base leading-none">→</span>

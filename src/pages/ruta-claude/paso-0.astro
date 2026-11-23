@@ -111,14 +111,21 @@ Texto:
       <a
         href="/ruta-claude/paso-1"
         onclick="if (window.posthog) { window.posthog.capture('ruta_claude_step_click', { paso: '1', origen: 'paso-0' }); }"
-        class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3 px-5 transition text-sm shadow-md"
+        class="inline-flex items-center justify-center gap-2 font-semibold bg-white border border-slate-300 hover:border-teal-600 text-slate-800 rounded-xl py-3 px-5 transition text-sm"
       >
         <span>Ir al Paso 1</span>
         <span class="text-base leading-none">→</span>
       </a>
     </section>
 
-    <EmailCTA ubicacion="paso-0" />
+    <EmailCTA
+      ubicacion="paso-0"
+      titulo="Dejá tu correo y seguí con la ruta"
+      texto="Te escribo con el Paso 1 y con lo que viene después. Es un solo campo."
+      boton="Quiero entrar"
+      siguienteHref="/ruta-claude/paso-1"
+      siguienteTexto="Seguir con el Paso 1"
+    />
   </div>
 </RutaClaudeLayout>
 

@@ -27,6 +27,22 @@ import { EJEMPLOS_CLAUDE } from "../../data/ruta-claude-ejemplos";
         Pasás de preguntarle cosas a una IA a trabajar con Claude sobre lo que ya tenés, con respuestas que podés comprobar. Sin saber programar y sin vueltas teóricas.
       </p>
 
+      <EmailCTA
+        variante="hero"
+        ubicacion="hero"
+        boton="Empezar Paso 0 gratis"
+        siguienteHref="/ruta-claude/paso-0"
+        siguienteTexto="Seguir con el Paso 0"
+      />
+      <p data-solo-sin-registro class="text-sm text-slate-600">
+        ¿Preferís ir directo?
+        <a
+          href="/ruta-claude/paso-0"
+          onclick="if (window.posthog) { window.posthog.capture('ruta_claude_landing_click', { ubicacion: 'hero_directo' }); }"
+          class="text-teal-700 font-semibold underline underline-offset-2 hover:text-teal-800"
+        >Entrá al Paso 0 sin dejar el correo</a>.
+      </p>
+
       <div class="pt-2 space-y-2 text-xs text-slate-500 font-mono">
         <div class="flex flex-wrap items-center gap-2.5">
           <span class="font-semibold text-slate-700">Probado con</span>
@@ -85,7 +101,7 @@ import { EJEMPLOS_CLAUDE } from "../../data/ruta-claude-ejemplos";
     <div class="px-2">
       <a
         href="/ruta-claude/kit"
-        onclick="if (window.posthog) { window.posthog.capture('ruta_claude_landing_click', { origen: 'hub' }); }"
+        onclick="if (window.posthog) { window.posthog.capture('ruta_claude_landing_click', { ubicacion: 'hub_kit' }); }"
         class="inline-flex items-center justify-center gap-2 font-semibold bg-white border border-slate-300 hover:border-teal-600 text-slate-800 rounded-xl py-3.5 px-6 transition text-sm"
       >
         <span>Ver el kit completo</span>
@@ -93,6 +109,5 @@ import { EJEMPLOS_CLAUDE } from "../../data/ruta-claude-ejemplos";
       </a>
     </div>
 
-    <EmailCTA ubicacion="hub" />
   </div>
 </RutaClaudeLayout>

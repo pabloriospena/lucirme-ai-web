@@ -19,7 +19,9 @@ const {
 } = Astro.props;
 
 const fullTitle = `${title} | LuciRMe AI`;
-const mostrarBarra = !Astro.url.pathname.startsWith("/ruta-claude/kit");
+const ruta = Astro.url.pathname.replace(/\/+$/, "");
+// La barra fija de registro solo va donde hay un formulario de correo de registro.
+const mostrarBarra = ["/ruta-claude", "/ruta-claude/paso-0", "/ruta-claude/paso-1"].includes(ruta);
 const canonicalUrl = canonical || new URL(Astro.url.pathname, "https://lucirme.com").href;
 ---
 
@@ -52,7 +54,7 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, "https://lucirme.c
 
     <PostHog />
 
-    <style>
+    <style is:global>
       :root {
         /* reemplazar con manual de marca */
         --color-primary: #00685F;
@@ -64,6 +66,8 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, "https://lucirme.c
         --color-border: #E2E8F0;
         --color-accent: #059669;
       }
+      [data-oculto="1"] { display: none !important; }
+      [data-ruta-claude-registrado="1"] [data-solo-sin-registro] { display: none; }
       body {
         background-color: var(--color-bg);
         color: var(--color-text);
@@ -72,26 +76,23 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, "https://lucirme.c
   </head>
   <body class="min-h-screen flex flex-col antialiased selection:bg-teal-100 selection:text-teal-900">
     <Header />
-    <main class={`flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-8 ${mostrarBarra ? "pb-28" : ""}`}>
+    <main class={`flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 py-8 ${mostrarBarra ? "pb-28 sm:pb-8" : ""}`}>
       <slot />
     </main>
     <Footer />
     {mostrarBarra && (
-      <div class="fixed bottom-0 inset-x-0 z-40 border-t border-slate-200 bg-white/95 backdrop-blur shadow-[0_-4px_16px_rgba(15,23,42,0.08)]">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
-          <p class="text-sm text-slate-700 leading-snug">
-            <span class="font-semibold text-slate-900">Mirá la ruta completa.</span>
-            <span class="hidden sm:inline"> Los Pasos 2, 3 y 4 forman el kit.</span>
-          </p>
-          <a
-            href="/ruta-claude/kit"
-            onclick="if (window.posthog) { window.posthog.capture('ruta_claude_sticky_click', { ruta: location.pathname }); }"
-            class="inline-flex items-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-2.5 px-5 transition text-sm shadow-md"
-          >
-            <span>Ver la ruta completa</span>
-            <span class="text-base leading-none">→</span>
-          </a>
-        </div>
+      <div
+        id="barra-registro"
+        class="sm:hidden fixed bottom-0 inset-x-0 z-40 border-t border-slate-200 bg-white/95 backdrop-blur shadow-[0_-4px_16px_rgba(15,23,42,0.08)] px-4 py-3"
+      >
+        <a
+          id="barra-registro-cta"
+          href="/ruta-claude#registro-hero"
+          class="flex w-full items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3.5 px-5 transition text-base shadow-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600"
+        >
+          <span>Empezar Paso 0 gratis</span>
+          <span class="text-base leading-none">→</span>
+        </a>
       </div>
     )}
     <script is:inline>
@@ -116,6 +117,35 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, "https://lucirme.c
             enviar(ruta + '_scroll_75', { pagina: pagina });
           }
         }, { passive: true });
+        // Barra fija y botón del encabezado: un solo botón de registro por pantalla.
+        var barraCta = document.getElementById('barra-registro-cta');
+        var barra = document.getElementById('barra-registro');
+        var headerCta = document.getElementById('header-cta-registro');
+        var formularios = document.querySelectorAll('[data-registro]');
+        var registro = null;
+        try { registro = window.localStorage.getItem('ruta_claude_registrado') === '1'; } catch (e) {}
+        var primero = formularios.length ? formularios[0] : null;
+        if (barraCta && primero) barraCta.setAttribute('href', '#' + primero.id);
+        if (registro) {
+          if (barra) barra.setAttribute('data-oculto', '1');
+          if (headerCta) headerCta.setAttribute('data-oculto', '1');
+        } else if (formularios.length && 'IntersectionObserver' in window) {
+          var visibles = 0;
+          var io = new IntersectionObserver(function (items) {
+            items.forEach(function (it) { visibles += it.isIntersecting ? 1 : -1; });
+            var ocultar = visibles > 0 ? '1' : '';
+            [barra, headerCta].forEach(function (el) {
+              if (!el) return;
+              if (ocultar) el.setAttribute('data-oculto', '1'); else el.removeAttribute('data-oculto');
+            });
+          }, { threshold: 0.2 });
+          formularios.forEach(function (f) { io.observe(f); });
+        }
+        if (barraCta) {
+          barraCta.addEventListener('click', function () {
+            enviar(ruta + '_sticky_click', { ubicacion: 'sticky', pagina: pagina });
+          });
+        }
         document.addEventListener('click', function (e) {
           var a = e.target && e.target.closest ? e.target.closest('a[href="#avisame"]') : null;
           if (a) enviar(ruta + '_avisame_click', { pagina: pagina });
