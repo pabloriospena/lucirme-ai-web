@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<base href="/estudia-ia-basico/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Estud-IA · IA básico · Clase 4 · Guía paso a paso: prompts, loops y system prompts</title>
+<style>
+  :root { --negro:#000; --tinta:#16181d; --gris:#5b6170; --suave:#f2f2f2; --linea:#d9d9d9; --naranja:#ff7c1a; --magenta:#cb318e; --verde:#7fc200; --cian:#11c9ee; --azul:#011a61; --font: Arial, Helvetica, sans-serif; --code: Consolas, 'Courier New', monospace; }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font); color: var(--tinta); background: #fff; line-height: 1.55; font-size: 18px; -webkit-font-smoothing: antialiased; }
+  header.banda { background: #000; padding: 22px 24px; border-bottom: 8px solid var(--naranja); }
+  header.banda img { display: block; height: 52px; margin: 0 auto; }
+  .tricolor { height: 6px; background: linear-gradient(90deg, var(--naranja) 0 60%, var(--magenta) 60% 80%, var(--verde) 80% 100%); }
+  main { max-width: 900px; margin: 0 auto; padding: 40px 22px 90px; }
+  .etq { font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); }
+  .etq::before { content: ''; display: block; width: 56px; height: 7px; background: var(--naranja); margin-bottom: 14px; }
+  h1 { font-size: 40px; line-height: 1.1; letter-spacing: -.01em; margin: 10px 0 14px; }
+  h2 { font-size: 30px; line-height: 1.15; margin: 0 0 12px; }
+  h3 { font-size: 21px; margin: 26px 0 8px; }
+  p { margin: 10px 0; }
+  .lead { font-size: 21px; color: var(--gris); }
+  ul, ol { margin: 10px 0 10px 26px; } li { margin: 6px 0; }
+  code { font-family: var(--code); background: var(--suave); padding: 1px 6px; border-radius: 4px; font-size: .92em; }
+  nav.indice { background: var(--suave); border-left: 8px solid var(--naranja); padding: 20px 26px; margin: 28px 0; }
+  nav.indice ol { margin: 8px 0 0 22px; columns: 2; column-gap: 40px; }
+  nav.indice a { color: var(--tinta); text-decoration: none; } nav.indice a:hover { text-decoration: underline; }
+  section.paso { margin-top: 56px; padding-top: 10px; border-top: 3px solid var(--linea); }
+  .num { display: inline-grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--tinta); color: #fff; font-weight: 700; font-size: 26px; margin-right: 12px; vertical-align: middle; }
+  section.paso h2 { display: flex; align-items: center; }
+  .meta { font-size: 15px; color: var(--gris); margin: 2px 0 10px 64px; }
+  .caja { border-radius: 4px; padding: 16px 20px; margin: 18px 0; background: var(--suave); border-top: 6px solid var(--naranja); }
+  .caja b.t { display: block; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; }
+  .caja.haz { border-top-color: var(--verde); } .caja.cuida { border-top-color: var(--magenta); } .caja.ojo { border-top-color: var(--cian); }
+  .copiable { padding-right: 100px !important; position: relative; background: #0f1218; color: #f2f3f5; border-radius: 6px; padding: 18px 20px 18px; margin: 16px 0; font-family: var(--code); font-size: 15.5px; line-height: 1.5; white-space: pre-wrap; border-left: 8px solid var(--naranja); }
+  .copiable .rot { display: block; font-family: var(--font); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #ffb27a; margin-bottom: 8px; }
+  .copiable button { position: absolute; top: 10px; right: 10px; font: 700 12px var(--font); background: var(--naranja); color: #000; border: 0; border-radius: 4px; padding: 6px 12px; cursor: pointer; }
+  .copiable button:hover { background: #ff9a4d; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 16px; }
+  th { text-align: left; background: #000; color: #fff; padding: 10px 12px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--linea); vertical-align: top; }
+  tbody tr:nth-child(even) td { background: var(--suave); }
+  td:first-child { font-weight: 700; }
+  .tabla-scroll { overflow-x: auto; }
+  .check li { list-style: none; margin-left: -22px; padding-left: 30px; position: relative; }
+  .check li::before { content: '☐'; position: absolute; left: 0; color: var(--magenta); font-size: 20px; }
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; } @media (max-width: 700px) { .dos { grid-template-columns: 1fr; } nav.indice ol { columns: 1; } h1 { font-size: 32px; } }
+  footer { background: var(--suave); border-top: 6px solid var(--naranja); padding: 24px; text-align: center; color: var(--gris); font-size: 15px; }
+  @media print { header.banda, .tricolor, .copiable button { display: none; } .copiable { background: #fff; color: #000; border: 1px solid #999; } section.paso { break-inside: avoid-page; } }
+</style>
+</head>
+<body>
+<header class="banda"><img src="estudia/img/logo-estudia-nuevo.png" alt="Estud-IA"></header>
+<div class="tricolor"></div>
+<main>
+
+  <span class="etq">Estud-IA · Capa 2 · IA básico · Clase 4</span>
+  <h1>Guía paso a paso: prompts, loops y system prompts</h1>
+  <p class="lead">Para hacerlo por tu cuenta, sin saber programar. Al terminar tendrás un prompt de cinco partes probado, un loop con criterio de parada, un registro de tu consulta y el system prompt de tu proyecto, probado con tres casos.</p>
+  <p><b>Cuánto tarda:</b> entre 2 y 3 horas la primera vez. <b>Qué necesitas:</b> una herramienta de IA con plan gratuito (Claude, ChatGPT, Gemini o Copilot), una fuente de datos permitida y un lugar donde anotar.</p>
+  <nav class="indice"><b>Contenido</b><ol>
+    <li><a href="#entender">Entender: prompt, loop y system prompt</a></li>
+    <li><a href="#antes">Antes de empezar</a></li>
+    <li><a href="#p1">Paso 1 · Conecta tu fuente</a></li>
+    <li><a href="#p2">Paso 2 · Prompt de cinco partes</a></li>
+    <li><a href="#p3">Paso 3 · Descompón la tarea</a></li>
+    <li><a href="#p4">Paso 4 · Haz un loop</a></li>
+    <li><a href="#p5">Paso 5 · Pregunta trampa</a></li>
+    <li><a href="#p6">Paso 6 · Comprueba y registra</a></li>
+    <li><a href="#p7">Paso 7 · Escribe tu system prompt</a></li>
+    <li><a href="#p8">Paso 8 · Dónde se añade</a></li>
+    <li><a href="#p9">Paso 9 · Tres casos de prueba</a></li>
+    <li><a href="#p10">Paso 10 · ¿Instrucción o fuente?</a></li>
+    <li><a href="#p11">Paso 11 · Prueba cruzada y evidencias</a></li>
+    <li><a href="#fallas">Si algo sale mal</a></li>
+    <li><a href="#glosario">Glosario y lista final</a></li>
+  </ol></nav>
+
+  <section class="paso" id="entender">
+    <h2>Entender: prompt, loop y system prompt</h2>
+    <p>Un <b>prompt</b> es lo que pides durante la conversación. Cambia según cómo preguntes cada día. Un <b>system prompt</b> es lo que dejas escrito <b>antes</b> de que empiece, para que el asistente se comporte igual siempre.</p>
+    <p>Un <b>loop</b> es un ciclo que repites hasta que se cumpla una condición: <b>pedir, revisar, corregir y decidir</b>. No es pedir lo mismo varias veces.</p>
+    <div class="tabla-scroll"><table>
+      <thead><tr><th>Forma de pedir</th><th>Qué haces</th><th>Riesgo</th></tr></thead>
+      <tbody>
+        <tr><td>Un solo prompt</td><td>Pides una vez y aceptas la respuesta.</td><td>Aceptas sin revisar.</td></tr>
+        <tr><td>Insistir</td><td>Repites «hazlo mejor» sin decir qué falló.</td><td>No sabes cuándo parar y gastas tu límite de uso.</td></tr>
+        <tr><td>Descomponer</td><td>Partes la tarea en pasos y pides uno por vez.</td><td>Cada paso necesita su revisión.</td></tr>
+        <tr><td>Loop</td><td>Pides, revisas con criterio, corriges lo que falló y paras con una condición.</td><td>Pasarte de 3 vueltas sin una razón.</td></tr>
+      </tbody>
+    </table></div>
+    <p>Se combinan: descompones la tarea y haces un loop en cada paso.</p>
+  </section>
+
+  <section class="paso" id="antes">
+    <h2>Antes de empezar</h2>
+    <h3>Lo que necesitas</h3>
+    <ul class="check">
+      <li>Una herramienta de IA con cuenta gratuita: Claude, ChatGPT, Gemini o Copilot.</li>
+      <li>Una <b>fuente de datos</b> de tu proyecto: una hoja de Sheets, una página o base de Notion, o una carpeta de Drive. Si no puedes conectarla, usa una muestra de 20 filas. Si no tienes datos, usa la hoja de práctica que comparte tu profesor.</li>
+      <li>Un documento o una hoja donde anotar: ahí llevarás tu registro de consulta y tus pruebas.</li>
+    </ul>
+    <div class="caja cuida"><b class="t">Cuida la información</b>Usa solo información <b>veraz</b> y con <b>permiso</b> de tu empresa o de las personas que aparecen en ella. Si dudas, usa datos ficticios o una muestra recortada. No pegues datos personales ni de clientes sin autorización.</div>
+    <div class="caja"><b class="t">Cómo leer esta guía</b>Cada paso trae qué haces, un ejemplo y cómo sabes que quedó bien. Los textos en recuadro oscuro se copian con el botón «Copiar». Lo que va entre [corchetes] lo reemplazas con lo tuyo.</div>
+  </section>
+
+  <section class="paso" id="p1">
+    <h2><span class="num">1</span>Conecta tu fuente y haz una pregunta vaga</h2>
+    <p class="meta">15 minutos</p>
+    <ol>
+      <li>Si tu herramienta tiene conectores, conecta solo la hoja, página o carpeta que necesitas, <b>en solo lectura</b>. No conectes toda tu cuenta.</li>
+      <li>Pídele: «Describe esta fuente: qué contiene y de qué trata».</li>
+      <li>Comprueba que la descripción sea cierta mirando tú la fuente.</li>
+      <li>Haz una pregunta vaga y guarda la respuesta como punto de partida:</li>
+    </ol>
+    <div class="copiable" data-copy><span class="rot">Pregunta vaga (línea base)</span>Resume mi fuente y dime qué es importante.</div>
+    <p>Léela con tu criterio y tu conocimiento de tu proyecto: ¿es cierto?, ¿es útil?, ¿qué falta? Anota una cosa de la respuesta de la que no sabes de dónde salió.</p>
+    <p>Si no logras conectar en 5 minutos, pega una muestra de 20 filas y anótalo como «copia» con la fecha.</p>
+    <div class="caja cuida"><b class="t">Cuida</b>Si el conector permite escribir o borrar, desactívalo. Hoy solo se lee.</div>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>Tienes la respuesta a una pregunta vaga y una lista de lo que no puedes verificar de ella.</div>
+  </section>
+
+  <section class="paso" id="p2">
+    <h2><span class="num">2</span>Escribe el prompt de cinco partes</h2>
+    <p class="meta">20 minutos</p>
+    <p>Un prompt completo tiene cinco partes: <b>tarea, datos, formato, criterio</b> y <b>qué hacer si falta información</b>.</p>
+    <div class="copiable" data-copy><span class="rot">Plantilla</span>Tarea: [qué quieres que haga].
+Datos: la [hoja/página/carpeta] conectada «[nombre]», en solo lectura. No me pidas pegar nada.
+Formato: [cómo quieres la respuesta: tabla, lista, número].
+Criterio: [qué cuenta como importante, urgente o bueno para ti].
+Si falta: si algo no está en la fuente, escribe «no está en la fuente», no lo inventes. Al final, di qué leíste.</div>
+<p><b>Ejemplo (datos ficticios):</b></p>
+    <div class="copiable"><span class="rot">Ejemplo</span>Tarea: revisa los registros más recientes y dime cuáles requieren mi atención esta semana.
+Datos: la hoja conectada «Solicitudes», en solo lectura. No me pidas pegar nada.
+Formato: una tabla con el registro, el motivo y qué harías tú.
+Criterio: requiere atención si lleva más de cinco días sin respuesta o tiene un valor alto.
+Si falta: si algo no está en la fuente, escribe «no está en la fuente», no lo inventes. Al final, di qué leíste.</div>
+    <h3>Pruébalo quitando una parte</h3>
+    <ol><li>Corre el prompt completo con tu fuente conectada y guarda la respuesta.</li><li>Bórrale una parte, por ejemplo «si falta información», y corre otra vez.</li><li>Lee las dos respuestas con tu criterio: ¿cuál puedes defender?</li><li>Anota qué parte cambió más la respuesta.</li></ol>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>El prompt completo da una respuesta que puedes revisar, y sabes qué parte le aporta más.</div>
+  </section>
+
+  <section class="paso" id="p3">
+    <h2><span class="num">3</span>Descompón la tarea</h2>
+    <p class="meta">15 minutos</p>
+    <p>Una petición grande, como «prepárame un informe para mi jefe», se parte en pasos y se pide <b>un paso a la vez</b>, comprobando cada uno antes de seguir.</p>
+    <div class="tabla-scroll"><table>
+      <thead><tr><th>Paso</th><th>Ejemplo (solicitudes)</th><th>Quién lo revisa</th></tr></thead>
+      <tbody>
+        <tr><td>1 · Revisar</td><td>Qué requiere atención.</td><td>Tú, con tu criterio.</td></tr>
+        <tr><td>2 · Agrupar</td><td>Por tema.</td><td>Tú.</td></tr>
+        <tr><td>3 · Señalar</td><td>Lo que la fuente no permite saber.</td><td>Tú.</td></tr>
+        <tr><td>4 · Redactar</td><td>Tres líneas para el jefe, al final.</td><td>Tú, antes de enviar.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="copiable" data-copy><span class="rot">Plantilla</span>Tarea grande: [una frase].
+Paso 1: [verbo + qué].
+Paso 2: [verbo + qué].
+Paso 3: [verbo + qué].
+Paso 4 (opcional): [verbo + qué].
+Puede hacerlo la IA sola: [pasos]. Necesita mi revisión: [pasos].</div>
+    <p>Regla útil: contar y clasificar se revisan siempre; redactar va al final. Si un paso podría fallar sin que te des cuenta, ponlo aparte.</p>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>Tienes entre tres y cuatro pasos de un verbo cada uno, y sabes cuáles necesitan tu revisión.</div>
+  </section>
+
+  <section class="paso" id="p4">
+    <h2><span class="num">4</span>Haz un loop con criterio de parada</h2>
+    <p class="meta">25 minutos</p>
+    <p>Elige uno de tus pasos y ejecútalo como loop: <b>pedir → revisar → corregir → decidir</b>, con un máximo de <b>3 vueltas</b>.</p>
+    <h3>4.1 · Escribe tu lista de control</h3>
+    <p>Tres condiciones que debe cumplir la respuesta para darla por buena:</p>
+    <div class="copiable" data-copy><span class="rot">Plantilla</span>1. Usa solo datos de mi fuente.
+2. Dice qué leyó.
+3. [una condición propia: por ejemplo, no inventa motivos].</div>
+    <h3>4.2 · Primera vuelta</h3>
+    <p>Pide el paso con tu prompt de cinco partes. Revisa la respuesta contra la lista, condición por condición.</p>
+    <h3>4.3 · Si algo falló, corrige diciendo qué falló</h3>
+    <div class="copiable" data-copy><span class="rot">Pídele la corrección así</span>Revisé tu respuesta con esta lista de control: [pega tu lista].
+Falló la condición [número]: [qué pasó].
+Corrige solo eso y vuelve a entregar. Si algo no está en la fuente, responde «no está en la fuente».</div>
+    <h3>4.4 · Cuándo paras</h3>
+    <ul><li>Cuando la respuesta cumple las tres condiciones.</li><li>O al llegar a la vuelta 3, aunque no cumpla. En ese caso anota por qué y qué cambiarías.</li></ul>
+    <p>Anota cuántas vueltas necesitaste y por qué paraste.</p>
+    <div class="caja cuida"><b class="t">Ojo</b>Sin criterio de parada seguimos pidiendo sin saber cuándo está bien, y se gasta el límite gratuito de uso.</div>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>Terminaste en 3 vueltas o menos, y puedes explicar por qué paraste.</div>
+  </section>
+
+  <section class="paso" id="p5">
+    <h2><span class="num">5</span>Prueba una pregunta trampa</h2>
+    <p class="meta">10 minutos</p>
+    <p>Una buena regla nace de un fallo que viste, no de una suposición. Haz una pregunta que tu fuente no puede responder.</p>
+    <ol><li>Pregunta por algo que tu fuente no tiene. Por ejemplo, el motivo de cada solicitud, si la hoja no tiene columna de motivo.</li><li>Antes de ver la respuesta, escribe tu predicción: ¿inventa o dice que no puede?</li><li>Si inventó, agrega a tu lista de control: «Si la fuente no lo dice, responde “no está en la fuente”».</li><li>Repite la pregunta y comprueba que ahora diga que no está en la fuente.</li></ol>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>Tu asistente responde «no está en la fuente» cuando no tiene el dato.</div>
+  </section>
+
+  <section class="paso" id="p6">
+    <h2><span class="num">6</span>Comprueba con criterio y registra tu consulta</h2>
+    <p class="meta">15 minutos</p>
+    <h3>Tres reglas de bolsillo</h3>
+    <ul><li><b>Comprueba con criterio:</b> contrasta cada resultado con tu conocimiento. ¿Tiene sentido? ¿Lo puedes defender?</li><li><b>Cuida:</b> información veraz y con permiso de la empresa o de las personas que aparecen en ella.</li><li><b>Anota lo que falló:</b> lo que no se registra no se puede repetir ni defender.</li></ul>
+    <h3>Tu registro de la consulta</h3>
+    <div class="copiable" data-copy><span class="rot">Plantilla</span>Fuente: [de dónde leíste: qué hoja, carpeta o página; conexión o copia].
+Fecha y hora: [cuándo consultaste].
+Instrucción: [el prompt que usaste].
+Comprobación: [qué verificaste con tu criterio y si coincidió].
+Vueltas: [cuántas hizo el loop y por qué paraste].</div>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>Otra persona podría repetir tu consulta leyendo solo tu registro.</div>
+  </section>
+
+  <h2 style="margin-top:60px;color:var(--magenta)">Segunda parte: system prompts</h2>
+  <p>Hasta aquí pediste en cada chat. Ahora dejas el asistente configurado para que se comporte igual siempre.</p>
+
+  <section class="paso" id="p7">
+    <h2><span class="num">7</span>Escribe tu system prompt</h2>
+    <p class="meta">25 minutos</p>
+    <p>Un system prompt lleva cinco bloques: <b>propósito, rol, reglas, formato</b> y <b>cuándo para o escala a una persona</b>.</p>
+    <div class="copiable" data-copy><span class="rot">Plantilla</span>Propósito y rol: eres el apoyo de [quién] para [tarea].
+Reglas: solo usas [la fuente]. [Qué haces]; no [qué no haces]. Si algo no está en la fuente, dices «no está en la fuente».
+Formato: [cómo respondes]. Siempre dices qué leíste.
+Cuándo paras: si [situación], lo marcas para que [persona] lo revise.</div>
+<p><b>Ejemplo (datos ficticios):</b></p>
+    <div class="copiable"><span class="rot">Ejemplo</span>Propósito y rol: eres el apoyo de Camila para revisar solicitudes de ciudadanos.
+Reglas: solo usas la hoja conectada que ella te indique. Revisas y clasificas; no explicas motivos que la hoja no tenga.
+Formato: siempre dices qué registros leíste.
+Cuándo paras: si algo es ambiguo, lo marcas para que Camila lo revise.</div>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>Tu system prompt cabe en pocas líneas y dice qué hacer cuando falta información o hay dudas.</div>
+  </section>
+
+  <section class="paso" id="p8">
+    <h2><span class="num">8</span>Añade el system prompt en tu herramienta</h2>
+    <p class="meta">10 minutos</p>
+    <div class="tabla-scroll"><table>
+      <thead><tr><th>Herramienta</th><th>Dónde pegarlo</th><th>Sin pago</th></tr></thead>
+      <tbody>
+        <tr><td>Claude</td><td>Crea un proyecto y pégalo en «instrucciones del proyecto». Para todos tus chats: Ajustes → General.</td><td>Sí. Hasta 5 proyectos.</td></tr>
+        <tr><td>ChatGPT</td><td>Crea un proyecto y pégalo en sus instrucciones. Para todos tus chats: Ajustes → Personalización.</td><td>Sí. No puedes crear GPT personalizados.</td></tr>
+        <tr><td>Gemini</td><td>En sus instrucciones, o dentro de un cuaderno o Gem si tu cuenta lo ofrece.</td><td>Confírmalo en tu cuenta.</td></tr>
+        <tr><td>Copilot</td><td>Ajustes → Personalización → instrucciones personalizadas.</td><td>Confírmalo en tu cuenta.</td></tr>
+        <tr><td>Si no lo ves</td><td>Pégalo como primer mensaje de un chat nuevo: «Sigue esto en toda la conversación».</td><td>Siempre funciona.</td></tr>
+      </tbody>
+    </table></div>
+    <p>Lo ideal es un proyecto: ahí viven las instrucciones y tu fuente conectada. Los planes gratuitos cambian seguido; confirma qué ofrece tu cuenta.</p>
+    <ol><li>Pega el system prompt en el lugar que corresponda.</li><li>Repite la pregunta vaga del paso 1: «Resume mi fuente y dime qué es importante».</li><li>Anota qué cambió frente a la primera vez.</li></ol>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>La respuesta a la misma pregunta vaga ya se comporta distinto: respeta tus reglas.</div>
+  </section>
+
+  <section class="paso" id="p9">
+    <h2><span class="num">9</span>Pruébalo con tres casos</h2>
+    <p class="meta">25 minutos</p>
+    <p>El alcance de un asistente se define probando lo que <b>no debe hacer</b>.</p>
+    <div class="tabla-scroll"><table>
+      <thead><tr><th>Caso</th><th>Qué es</th><th>Ejemplo</th><th>Qué debe pasar</th></tr></thead>
+      <tbody>
+        <tr><td>Normal</td><td>Lo que sí debe hacer.</td><td>«Dime qué requiere atención esta semana.»</td><td>Respuesta correcta y revisable.</td></tr>
+        <tr><td>Fuera de alcance</td><td>Algo que no debería hacer.</td><td>«Redacta la respuesta oficial al ciudadano.»</td><td>Se niega o te devuelve el control.</td></tr>
+        <tr><td>Trampa</td><td>Algo que la fuente no contiene.</td><td>«¿Por qué reclaman?», si no hay columna de motivo.</td><td>Responde «no está en la fuente».</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Si un caso falla</h3>
+    <ol><li>Agrega <b>una regla</b> a tu system prompt que cierre ese hueco.</li><li>Vuelve a probar el caso.</li><li>Pregúntate: ¿la regla cierra el hueco o solo lo tapa? Cierra si el caso trampa ahora responde «no está en la fuente».</li><li>Anota en una frase qué caso falló y qué regla agregaste.</li></ol>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>Los tres casos pasan, o tienes anotado cuál falló y qué regla agregaste.</div>
+  </section>
+
+  <section class="paso" id="p10">
+    <h2><span class="num">10</span>¿Instrucción o fuente?</h2>
+    <p class="meta">10 minutos</p>
+    <p>Las <b>reglas y el criterio</b> van en las instrucciones. La <b>información real</b> va en las fuentes. Responde <b>I</b> (instrucción) o <b>F</b> (fuente) para cada ítem y luego compara.</p>
+    <div class="tabla-scroll"><table>
+      <thead><tr><th>Ítem</th><th style="width:130px">Tu respuesta</th><th style="width:150px">Solución</th></tr></thead>
+      <tbody>
+        <tr><td>Responde en máximo 80 palabras</td><td>&nbsp;</td><td>I</td></tr>
+        <tr><td>Las 300 solicitudes de noviembre</td><td>&nbsp;</td><td>F</td></tr>
+        <tr><td>Urgente = afecta la seguridad o un servicio básico</td><td>&nbsp;</td><td>I (criterio)</td></tr>
+        <tr><td>La lista de precios de las cotizaciones</td><td>&nbsp;</td><td>F</td></tr>
+        <tr><td>Si no está en la fuente, di «no lo sé»</td><td>&nbsp;</td><td>I</td></tr>
+        <tr><td>Habla de usted y con tono formal</td><td>&nbsp;</td><td>I</td></tr>
+        <tr><td>Los correos de clientes del mes</td><td>&nbsp;</td><td>F</td></tr>
+        <tr><td>Cita siempre la fila o el archivo de donde sacas el dato</td><td>&nbsp;</td><td>I</td></tr>
+      </tbody>
+    </table></div>
+    <p>Ahora revisa tu propio system prompt: ¿hay datos pegados dentro de las instrucciones que deberían estar en una fuente?</p>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>Sabes qué va en las instrucciones y qué va en la fuente, y tu system prompt no lleva datos que cambian.</div>
+  </section>
+
+  <section class="paso" id="p11">
+    <h2><span class="num">11</span>Prueba cruzada y evidencias</h2>
+    <p class="meta">15 minutos</p>
+    <ol><li>Si tienes con quién, pega tu system prompt con un caso de prueba y pide a otra persona que lo ejecute: ¿lo cumpliría o lo rompería?</li><li>Máximo dos intercambios por persona.</li><li>Guarda tus evidencias (lista abajo).</li></ol>
+    <p>Un asistente se revisa con casos de otra persona, no solo con los propios.</p>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>Alguien más probó tu asistente y sabes qué cambiarías.</div>
+  </section>
+
+  <section class="paso" id="fallas">
+    <h2>Si algo sale mal</h2>
+    <div class="tabla-scroll"><table>
+      <thead><tr><th>Qué pasa</th><th>Qué haces</th></tr></thead>
+      <tbody>
+        <tr><td>No logro conectar la fuente.</td><td>Usa una muestra de 20 filas y anótalo como «copia» con la fecha.</td></tr>
+        <tr><td>No tengo datos de mi proyecto.</td><td>Usa la hoja de práctica y anota que es de práctica y qué no puedes afirmar con ella.</td></tr>
+        <tr><td>La IA inventa datos.</td><td>Agrega la regla «si no está en la fuente, responde “no está en la fuente”» y repite la pregunta trampa.</td></tr>
+        <tr><td>El loop no termina bien en 3 vueltas.</td><td>Para. Anota qué condición no se cumplió y si el problema es el prompt, la fuente o la lista de control.</td></tr>
+        <tr><td>No encuentro dónde pegar el system prompt.</td><td>Pégalo como primer mensaje de un chat nuevo.</td></tr>
+        <tr><td>Se acabó el límite de uso.</td><td>Lee el aviso: trae la hora de renovación. Un chat por tarea y una muestra de 20 filas. Anota en tu registro qué quedó pendiente.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="paso" id="glosario">
+    <h2>Glosario y lista final</h2>
+    <div class="dos">
+      <div class="caja"><b class="t">Palabras</b>
+        <p><b>Prompt:</b> lo que pides en la conversación.</p>
+        <p><b>System prompt:</b> instrucciones fijas escritas antes de la conversación.</p>
+        <p><b>Loop:</b> ciclo de pedir, revisar, corregir y decidir hasta cumplir una condición.</p>
+        <p><b>Criterio de parada:</b> la condición que dice cuándo terminar.</p>
+        <p><b>Lista de control:</b> condiciones que revisas en cada respuesta.</p>
+        <p><b>Fuente:</b> de donde la IA toma los datos.</p>
+        <p><b>Registro de la consulta:</b> fuente, fecha y hora, instrucción, comprobación y vueltas.</p>
+      </div>
+      <div class="caja haz"><b class="t">Lo que debes guardar</b>
+        <ul class="check">
+          <li>Tu registro de la consulta, con las vueltas del loop.</li>
+          <li>Tu prompt final de cinco partes.</li>
+          <li>Tu system prompt, con el caso problemático y la regla que lo arregló.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+</main>
+<footer>Estud-IA · Alcaldía de Medellín · Pablo Ríos Peña · Los ejemplos usan datos ficticios.</footer>
+<script>
+  document.querySelectorAll('.copiable[data-copy]').forEach(function (el) {
+    var b = document.createElement('button'); b.type = 'button'; b.textContent = 'Copiar';
+    b.addEventListener('click', function () {
+      var rot = el.querySelector('.rot'); var texto = el.innerText.replace(/^Copiar\s*/, '');
+      if (rot) texto = texto.replace(rot.innerText, '').replace(/^\s+/, '');
+      texto = texto.replace(/\s*Copiar\s*$/, '');
+      var listo = function () { b.textContent = 'Copiado'; setTimeout(function () { b.textContent = 'Copiar'; }, 1500); };
+      try { navigator.clipboard.writeText(texto).then(listo, function () { b.textContent = 'Selecciona y copia'; }); }
+      catch (e) { b.textContent = 'Selecciona y copia'; }
+    });
+    el.appendChild(b);
+  });
+</script>
+</body>
+</html>

@@ -155,7 +155,7 @@
     else if (tecla.toLowerCase() === 's') { modoPasos = !modoPasos; ir(actual, true); }
     else if (tecla.toLowerCase() === 'f') document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
   });
-  document.addEventListener('click', (evento) => (evento.clientX < window.innerWidth * 0.25 ? retroceder() : avanzar()));
+  document.addEventListener('click', (evento) => (evento.target.closest('a') ? null : evento.clientX < window.innerWidth * 0.25 ? retroceder() : avanzar()));
 
   ajustar();
   ir((Number(location.hash.slice(1)) || 1) - 1);
