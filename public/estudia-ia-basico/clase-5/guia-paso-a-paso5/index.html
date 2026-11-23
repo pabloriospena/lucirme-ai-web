@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<base href="/estudia-ia-basico/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Estud-IA · IA básico · Clase 5 · Guía paso a paso: construye tu agente</title>
+<style>
+  :root { --negro:#000; --tinta:#16181d; --gris:#5b6170; --suave:#f2f2f2; --linea:#d9d9d9; --naranja:#ff7c1a; --magenta:#cb318e; --verde:#7fc200; --cian:#11c9ee; --azul:#011a61; --font: Arial, Helvetica, sans-serif; --code: Consolas, 'Courier New', monospace; }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font); color: var(--tinta); background: #fff; line-height: 1.55; font-size: 18px; -webkit-font-smoothing: antialiased; }
+  header.banda { background: #000; padding: 22px 24px; border-bottom: 8px solid var(--naranja); }
+  header.banda img { display: block; height: 52px; margin: 0 auto; }
+  .tricolor { height: 6px; background: linear-gradient(90deg, var(--naranja) 0 60%, var(--magenta) 60% 80%, var(--verde) 80% 100%); }
+  main { max-width: 900px; margin: 0 auto; padding: 40px 22px 90px; }
+  .etq { font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); }
+  .etq::before { content: ''; display: block; width: 56px; height: 7px; background: var(--naranja); margin-bottom: 14px; }
+  h1 { font-size: 40px; line-height: 1.1; letter-spacing: -.01em; margin: 10px 0 14px; }
+  h2 { font-size: 30px; line-height: 1.15; margin: 0 0 12px; }
+  h3 { font-size: 21px; margin: 26px 0 8px; }
+  p { margin: 10px 0; }
+  .lead { font-size: 21px; color: var(--gris); }
+  ul, ol { margin: 10px 0 10px 26px; } li { margin: 6px 0; }
+  code { font-family: var(--code); background: var(--suave); padding: 1px 6px; border-radius: 4px; font-size: .92em; }
+  nav.indice { background: var(--suave); border-left: 8px solid var(--naranja); padding: 20px 26px; margin: 28px 0; }
+  nav.indice ol { margin: 8px 0 0 22px; columns: 2; column-gap: 40px; }
+  nav.indice a { color: var(--tinta); text-decoration: none; } nav.indice a:hover { text-decoration: underline; }
+  section.paso { margin-top: 56px; padding-top: 10px; border-top: 3px solid var(--linea); }
+  .num { display: inline-grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--tinta); color: #fff; font-weight: 700; font-size: 26px; margin-right: 12px; vertical-align: middle; }
+  section.paso h2 { display: flex; align-items: center; }
+  .meta { font-size: 15px; color: var(--gris); margin: 2px 0 10px 64px; }
+  .caja { border-radius: 4px; padding: 16px 20px; margin: 18px 0; background: var(--suave); border-top: 6px solid var(--naranja); }
+  .caja b.t { display: block; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; }
+  .caja.haz { border-top-color: var(--verde); } .caja.cuida { border-top-color: var(--magenta); } .caja.ojo { border-top-color: var(--cian); }
+  .copiable { padding-right: 100px !important; position: relative; background: #0f1218; color: #f2f3f5; border-radius: 6px; padding: 18px 20px 18px; margin: 16px 0; font-family: var(--code); font-size: 15.5px; line-height: 1.5; white-space: pre-wrap; border-left: 8px solid var(--naranja); }
+  .copiable .rot { display: block; font-family: var(--font); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #ffb27a; margin-bottom: 8px; }
+  .copiable button { position: absolute; top: 10px; right: 10px; font: 700 12px var(--font); background: var(--naranja); color: #000; border: 0; border-radius: 4px; padding: 6px 12px; cursor: pointer; }
+  .copiable button:hover { background: #ff9a4d; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 16px; }
+  th { text-align: left; background: #000; color: #fff; padding: 10px 12px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--linea); vertical-align: top; }
+  tbody tr:nth-child(even) td { background: var(--suave); }
+  td:first-child { font-weight: 700; }
+  .tabla-scroll { overflow-x: auto; }
+  .check li { list-style: none; margin-left: -22px; padding-left: 30px; position: relative; }
+  .check li::before { content: '☐'; position: absolute; left: 0; color: var(--magenta); font-size: 20px; }
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; } @media (max-width: 700px) { .dos { grid-template-columns: 1fr; } nav.indice ol { columns: 1; } h1 { font-size: 32px; } }
+  footer { background: var(--suave); border-top: 6px solid var(--naranja); padding: 24px; text-align: center; color: var(--gris); font-size: 15px; }
+  @media print { header.banda, .tricolor, .copiable button { display: none; } .copiable { background: #fff; color: #000; border: 1px solid #999; } section.paso { break-inside: avoid-page; } }
+</style>
+</head>
+<body>
+<header class="banda"><img src="estudia/img/logo-estudia-nuevo.png" alt="Estud-IA"></header>
+<div class="tricolor"></div>
+<main>
+
+  <span class="etq">Estud-IA · Capa 2 · IA básico · Clase 5</span>
+  <h1>Guía paso a paso: construye tu agente</h1>
+  <p class="lead">Una guía para hacerlo por tu cuenta, sin saber programar. Al final tendrás una tarea de tu proyecto repartida entre varios asistentes, con permisos claros, supervisión tuya y una propuesta de una página.</p>
+  <p><b>Cuánto tarda:</b> entre 90 y 120 minutos la primera vez. <b>Qué necesitas:</b> una herramienta de IA con plan gratuito (Claude, ChatGPT, Gemini o Copilot), una fuente de datos permitida y un lugar donde anotar.</p>
+
+  <nav class="indice">
+    <b>Contenido</b>
+    <ol>
+      <li><a href="#entender">Entender: asistente o agente</a></li>
+      <li><a href="#antes">Antes de empezar</a></li>
+      <li><a href="#p1">Paso 1 · Escoge la tarea</a></li>
+      <li><a href="#p2">Paso 2 · Escribe el objetivo</a></li>
+      <li><a href="#p3">Paso 3 · Divide en responsabilidades</a></li>
+      <li><a href="#p4">Paso 4 · Permisos y supervisión</a></li>
+      <li><a href="#p5">Paso 5 · System prompt de cada subagente</a></li>
+      <li><a href="#p6">Paso 6 · Prepara los espacios</a></li>
+      <li><a href="#p7">Paso 7 · Conecta o pega la fuente</a></li>
+      <li><a href="#p8">Paso 8 · Ejecuta el recorrido</a></li>
+      <li><a href="#p9">Paso 9 · Pruébalo con tres casos</a></li>
+      <li><a href="#p10">Paso 10 · Tu propuesta de agente</a></li>
+      <li><a href="#fallas">Si algo sale mal</a></li>
+      <li><a href="#glosario">Glosario y lista final</a></li>
+    </ol>
+  </nav>
+
+  <!-- ENTENDER -->
+  <section class="paso" id="entender">
+    <h2>Entender: asistente o agente</h2>
+    <p>Un <b>asistente</b> responde lo que le pides en la conversación. Tú decides cada paso. Un <b>agente</b> recibe un <b>objetivo</b>, usa <b>herramientas</b> (por ejemplo, leer una hoja) y decide varios pasos para lograrlo. Por eso necesita reglas, permisos medidos y supervisión.</p>
+    <p>Un <b>subagente</b> es un asistente con <b>una sola responsabilidad</b>. Un <b>orquestador</b> reparte el trabajo entre ellos. En esta guía el orquestador eres tú, con ayuda de un chat.</p>
+    <div class="tabla-scroll"><table>
+      <thead><tr><th>Situación (datos ficticios)</th><th>Como asistente</th><th>Como agente</th></tr></thead>
+      <tbody>
+        <tr><td>Cotizaciones de una empresa</td><td>«Redacta una respuesta para este cliente.» Una respuesta; tú la pegas donde quieras.</td><td>«Revisa las cotizaciones nuevas de la hoja, marca las que superan el presupuesto y deja un borrador por cada una para que yo apruebe.» Varios pasos, con la hoja como herramienta.</td></tr>
+        <tr><td>Solicitudes de ciudadanos</td><td>«Explícame qué es una solicitud urgente.»</td><td>«Lee las solicitudes de la semana, clasifícalas por tema y marca las dudosas para revisión humana.»</td></tr>
+        <tr><td>Correos de clientes</td><td>«Mejora el tono de este correo.»</td><td>«Lee los correos del mes en esta carpeta, agrúpalos por motivo y propón una respuesta para cada grupo.»</td></tr>
+        <tr><td>Prospectos de un emprendimiento</td><td>«Dame ideas de cómo presentar mi producto.»</td><td>«Toma la lista de prospectos, ordénala según mi criterio y prepara el primer mensaje de cada uno, sin enviarlo.»</td></tr>
+      </tbody>
+    </table></div>
+    <div class="caja ojo"><b class="t">Cómo distinguirlos</b>
+      <ul><li>¿Cuántos pasos hace con una sola petición? Uno: asistente. Varios: agente.</li><li>¿Quién decide el paso siguiente? Tú: asistente. Él, dentro de unas reglas: agente.</li><li>¿Toca una fuente o una herramienta por su cuenta? Si sí, se parece a un agente.</li></ul>
+      <p>Un chat con instrucciones guardadas sigue siendo un asistente. Se vuelve agente cuando recibe un objetivo y recorre pasos con herramientas.</p>
+    </div>
+    <div class="caja cuida"><b class="t">Importante</b>Más autonomía no significa más confianza. Por eso en esta guía cada agente tiene permisos mínimos y tú revisas cada traspaso.</div>
+  </section>
+
+  <!-- ANTES -->
+  <section class="paso" id="antes">
+    <h2>Antes de empezar</h2>
+    <h3>Lo que necesitas</h3>
+    <ul class="check">
+      <li>Una herramienta de IA con cuenta gratuita: Claude, ChatGPT, Gemini o Copilot.</li>
+      <li>Tu <b>system prompt de la clase 4</b> (el de tu proyecto). Si no lo tienes, escribe uno corto con propósito, rol, reglas, formato y cuándo escala a una persona.</li>
+      <li>Una <b>fuente de datos</b>: una hoja de Sheets, una página o base de Notion, o una carpeta de Drive. Si no puedes conectarla, usa una muestra de 20 filas. Si no tienes datos, usa la hoja de práctica que comparte tu profesor.</li>
+      <li>Un documento o una hoja donde anotar: ahí llevarás tu registro de traspasos y tu propuesta.</li>
+    </ul>
+    <div class="caja cuida"><b class="t">Cuida la información</b>Usa solo información <b>veraz</b> y con <b>permiso</b> de tu empresa o de las personas que aparecen en ella. Si dudas, usa datos ficticios o una muestra recortada. No pegues datos personales ni de clientes sin autorización.</div>
+    <div class="caja"><b class="t">Cómo leer esta guía</b>Cada paso trae: qué haces, un ejemplo y cómo sabes que quedó bien. Los textos en recuadro oscuro se copian con el botón «Copiar». Lo que va entre [corchetes] lo reemplazas con lo tuyo.</div>
+  </section>
+
+  <!-- P1 -->
+  <section class="paso" id="p1">
+    <h2><span class="num">1</span>Escoge la tarea</h2>
+    <p class="meta">10 minutos</p>
+    <p>No todas las tareas piden un agente. Empieza por una que cumpla casi todo esto:</p>
+    <ul class="check"><li>Se repite: la haces cada semana, cada mes o con cada cliente.</li><li>Tiene pasos claros: se puede contar como una lista.</li><li>Tiene una fuente a la que puedes acceder.</li><li>Un error no causa daño grave y puedes revisarlo.</li><li>Puedes decir cómo se ve un resultado bueno.</li></ul>
+    <h3>Cómo la escribes</h3>
+    <div class="copiable" data-copy><span class="rot">Plantilla</span>Cada [frecuencia] necesito [resultado] a partir de [fuente], y lo reviso yo antes de usarlo.</div>
+    <p><b>Ejemplo:</b> «Cada semana necesito un resumen de las solicitudes nuevas, agrupadas por tema, a partir de la hoja de solicitudes, y lo reviso yo antes de usarlo.»</p>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>Tu frase nombra una frecuencia, un resultado, una fuente y dice que una persona revisa.</div>
+  </section>
+
+  <!-- P2 -->
+  <section class="paso" id="p2">
+    <h2><span class="num">2</span>Escribe el objetivo del agente</h2>
+    <p class="meta">10 minutos</p>
+    <p>El objetivo es lo único que le darás al orquestador. Debe decir qué se logra, con qué fuente y cómo sabrás que salió bien.</p>
+    <div class="copiable" data-copy><span class="rot">Plantilla</span>Objetivo: [qué se debe lograr].
+Fuente: [nombre de mi hoja, página o carpeta], solo lectura.
+Criterio de éxito: [cómo sé que el resultado es bueno, en 2 o 3 condiciones].
+Límite: [lo que el agente nunca debe hacer].</div>
+    <p><b>Ejemplo (datos ficticios):</b></p>
+    <div class="copiable" data-copy>Objetivo: clasificar las solicitudes nuevas por tema y dejar un resumen para revisión.
+Fuente: la hoja «Solicitudes», solo lectura.
+Criterio de éxito: cada solicitud tiene un tema; las que no encajan quedan como «sin clasificar»; el resumen no afirma nada que la hoja no diga.
+Límite: no inventa motivos, no responde a ciudadanos y no modifica la hoja.</div>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>Otra persona puede leer tu objetivo y decir, sin preguntarte, si un resultado cumple o no cumple.</div>
+  </section>
+
+  <!-- P3 -->
+  <section class="paso" id="p3">
+    <h2><span class="num">3</span>Divide en responsabilidades</h2>
+    <p class="meta">15 minutos</p>
+    <p>Reparte el trabajo en <b>tres subagentes</b>. Cada uno hace una sola cosa. Un buen reparto casi siempre es: <b>leer</b>, <b>analizar</b> y <b>revisar</b>.</p>
+    <div class="tabla-scroll"><table>
+      <thead><tr><th>Tarea</th><th>Lector</th><th>Analista</th><th>Revisor</th></tr></thead>
+      <tbody>
+        <tr><td>Solicitudes de ciudadanos</td><td>Extrae las solicitudes de la semana.</td><td>Las clasifica por tema y resume.</td><td>Comprueba que cada tema esté justificado.</td></tr>
+        <tr><td>Cotizaciones</td><td>Extrae las cotizaciones nuevas y sus valores.</td><td>Marca las que superan el presupuesto y redacta un borrador.</td><td>Comprueba que los valores del borrador coincidan con la hoja.</td></tr>
+        <tr><td>Correos de clientes</td><td>Extrae los correos del mes.</td><td>Los agrupa por motivo y propone una respuesta por grupo.</td><td>Comprueba tono, datos y que no prometa lo que no puedes cumplir.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="caja ojo"><b class="t">Prueba rápida</b>Si no puedes describir a un subagente con <b>un solo verbo</b> (leer, clasificar, revisar), está haciendo demasiado. Pártelo.</div>
+    <p>Si tu tarea es pequeña, empieza con dos subagentes: analista y revisor. Es mejor un reparto simple que funcione.</p>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>Tienes tres nombres con una frase cada uno, y lo que entrega uno es justo lo que recibe el siguiente.</div>
+  </section>
+
+  <!-- P4 -->
+  <section class="paso" id="p4">
+    <h2><span class="num">4</span>Decide permisos y supervisión</h2>
+    <p class="meta">10 minutos</p>
+    <p>Un <b>permiso</b> es lo que un subagente tiene permitido hacer. Empieza por el mínimo:</p>
+    <div class="tabla-scroll"><table>
+      <thead><tr><th>Nivel</th><th>Qué significa</th><th>Cuándo darlo</th></tr></thead>
+      <tbody>
+        <tr><td>Leer</td><td>Ver la fuente, sin tocarla.</td><td>Casi siempre. Es lo primero.</td></tr>
+        <tr><td>Proponer</td><td>Sugerir un cambio sin hacerlo.</td><td>Cuando quieres borradores que tú apruebas.</td></tr>
+        <tr><td>Cambiar</td><td>Escribir, enviar o borrar.</td><td>Solo con tu aprobación y en datos de práctica.</td></tr>
+      </tbody>
+    </table></div>
+    <p>Completa esta tabla para tus subagentes:</p>
+    <div class="copiable" data-copy><span class="rot">Plantilla</span>Subagente | Puede | No puede | Quién supervisa
+Lector | Leer [mi fuente] | Escribir ni borrar | Yo, con una muestra
+Analista | Clasificar y resumir lo que recibe | Buscar fuera de lo recibido | Yo, contra mi criterio
+Revisor | Comparar contra mi criterio | Corregir por su cuenta | Yo, antes de usar el resultado</div>
+    <h3>Cuatro momentos donde decides tú</h3>
+    <ol><li><b>Antes:</b> apruebas el objetivo y los permisos.</li><li><b>Entre:</b> revisas cada traspaso antes de pasarlo al siguiente.</li><li><b>Al final:</b> decides si el resultado se usa.</li><li><b>Siempre:</b> puedes parar el proceso.</li></ol>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>Ningún subagente tiene un permiso que no necesita, y sabes en qué momento intervienes.</div>
+  </section>
+
+  <!-- P5 -->
+  <section class="paso" id="p5">
+    <h2><span class="num">5</span>Escribe el system prompt de cada subagente</h2>
+    <p class="meta">25 minutos</p>
+    <p>Un <b>system prompt</b> es lo que dejas escrito antes de que empiece la conversación. Para un subagente usa cinco líneas: <b>objetivo, qué recibe, reglas, entrega y cuándo te devuelve el control</b>. Copia cada uno y cambia lo que está entre [corchetes].</p>
+
+    <div class="copiable" data-copy><span class="rot">Subagente 1 · Lector</span>Objetivo: extraer de [mi fuente] solo los registros que cumplan este criterio: [criterio].
+Qué recibes: la fuente y el criterio. No corriges ni interpretas.
+Reglas: si algo no está en la fuente, escribe «no está en la fuente». No inventes datos. No uses información de fuera de la fuente.
+Entrega: una tabla con las columnas [columna 1, columna 2, columna 3] y, al final, cuántos registros leíste y cuántos extrajiste.
+Devuélveme el control si el criterio es ambiguo o falta un dato.</div>
+
+    <div class="copiable" data-copy><span class="rot">Subagente 2 · Analista</span>Objetivo: clasificar y resumir los registros que te entrega el lector.
+Qué recibes: solo la tabla del lector. No busques información en otra parte.
+Reglas: usa solo estas categorías: [categoría 1, categoría 2, categoría 3] y «sin clasificar». Si un registro no encaja, ponlo en «sin clasificar» y explica por qué. No expliques motivos que la tabla no tenga.
+Entrega: una tabla con el registro, la categoría y una frase de justificación; después, un resumen de máximo 5 líneas.
+Devuélveme el control si más de [3] registros quedan en «sin clasificar».</div>
+
+    <div class="copiable" data-copy><span class="rot">Subagente 3 · Revisor</span>Objetivo: verificar el trabajo del analista contra mi criterio y contra lo que entregó el lector.
+Qué recibes: la tabla del lector y la tabla del analista.
+Reglas: no corriges nada. Marca cada línea como «cumple», «no cumple» o «dudosa», con el motivo. Revisa si hay datos que no estaban en la tabla del lector, si alguna categoría no tiene justificación y si el resumen afirma algo que la tabla no dice.
+Entrega: una lista de hallazgos y una conclusión: «listo para usar» o «necesita otra vuelta».
+Devuélveme siempre la decisión final.</div>
+
+    <div class="caja cuida"><b class="t">Ojo</b>No copies estos textos sin cambiarlos. Las categorías, el criterio y las columnas deben ser los de <b>tu</b> proyecto. Si no puedes llenar un corchete, vuelve al paso 2.</div>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>Cada system prompt cabe en un párrafo corto, tiene una sola responsabilidad y dice qué hacer cuando falta información.</div>
+  </section>
+
+  <!-- P6 -->
+  <section class="paso" id="p6">
+    <h2><span class="num">6</span>Prepara los espacios de trabajo</h2>
+    <p class="meta">10 minutos</p>
+    <p>Cada subagente vive en un espacio distinto, para que no se mezclen las instrucciones. Necesitas cuatro: orquestador, lector, analista y revisor. Ponles nombre claro.</p>
+    <div class="tabla-scroll"><table>
+      <thead><tr><th>Si tu herramienta tiene…</th><th>Haz esto</th></tr></thead>
+      <tbody>
+        <tr><td>Proyectos (Claude, ChatGPT)</td><td>Crea un proyecto por subagente y pega su system prompt en las instrucciones del proyecto. En los planes gratuitos hay límites de cantidad y de archivos; revísalos en tu cuenta.</td></tr>
+        <tr><td>Instrucciones o espacios propios (Gemini, Copilot)</td><td>Busca dónde se pegan las instrucciones. Si tu cuenta no lo ofrece, usa la opción siguiente.</td></tr>
+        <tr><td>Nada de lo anterior</td><td>Abre un chat nuevo por subagente y pega su system prompt como <b>primer mensaje</b>, seguido de: «Sigue estas instrucciones en toda la conversación».</td></tr>
+      </tbody>
+    </table></div>
+    <p>Los planes gratuitos cambian seguido. Confirma qué ofrece tu cuenta antes de depender de una función.</p>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>Tienes cuatro chats o proyectos con nombre: «Orquestador», «Lector», «Analista» y «Revisor».</div>
+  </section>
+
+  <!-- P7 -->
+  <section class="paso" id="p7">
+    <h2><span class="num">7</span>Conecta o pega la fuente</h2>
+    <p class="meta">10 minutos</p>
+    <p>Solo el <b>lector</b> necesita la fuente. Los demás reciben lo que él entrega.</p>
+    <ol>
+      <li>Si tu herramienta tiene conectores, conecta solo la hoja, página o carpeta que necesitas, <b>en solo lectura</b>. No conectes toda tu cuenta.</li>
+      <li>Pídele al lector: «Describe esta fuente: qué contiene y cuántos registros tiene».</li>
+      <li>Comprueba con tu criterio que la descripción sea cierta. Mira la fuente y compara.</li>
+      <li>Si no logras conectar en 5 minutos, pega una <b>muestra de 20 filas</b> y anótalo en tu registro como «copia».</li>
+    </ol>
+    <div class="caja cuida"><b class="t">Cuida</b>Si el conector permite escribir o borrar, desactívalo. Hoy solo se lee. Con una fuente viva el resultado de hoy puede no ser el de mañana: anota la fecha y la hora de la consulta.</div>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>El lector describe tu fuente de forma que reconoces como cierta, y sabes si es una conexión o una copia.</div>
+  </section>
+
+  <!-- P8 -->
+  <section class="paso" id="p8">
+    <h2><span class="num">8</span>Ejecuta el recorrido</h2>
+    <p class="meta">25 minutos</p>
+    <p>Ahora el agente trabaja. Tú pasas las salidas de un espacio a otro y las revisas en cada traspaso. Esto se llama <b>recorrido manual</b>: está bien, y es la forma más segura de aprender.</p>
+
+    <h3>8.1 · Orquestador: pide el plan</h3>
+    <div class="copiable" data-copy><span class="rot">Pégalo en el chat «Orquestador»</span>Eres el orquestador de tres asistentes: lector, analista y revisor.
+Mi objetivo es: [pega aquí tu objetivo del paso 2].
+Parte la tarea en tres pasos, uno por asistente. Para cada paso dime qué recibe, qué entrega y cómo sabré que salió bien.
+No ejecutes los pasos tú. Si falta información para dividir la tarea, pregúntame antes.</div>
+    <p>Compara el plan con tu reparto del paso 3. Si difiere, decide tú cuál te sirve.</p>
+
+    <h3>8.2 · Lector: extrae</h3>
+    <p>En el chat «Lector» pide: «Extrae los registros que cumplan el criterio y entrégalos en la tabla definida». <b>Antes de ver la respuesta, escribe tu predicción</b>: qué esperas que salga. Luego compara.</p>
+    <p>Revisa con tu criterio: ¿los registros existen en la fuente? ¿dice cuántos leyó?</p>
+
+    <h3>8.3 · Primer traspaso: del lector al analista</h3>
+    <p>Copia <b>solo la tabla</b> del lector y pégala en el chat «Analista» con: «Clasifica y resume esta tabla según tus instrucciones».</p>
+
+    <h3>8.4 · Segundo traspaso: al revisor</h3>
+    <p>Pega en el chat «Revisor» la tabla del lector y la del analista, con: «Verifica el trabajo del analista según tus instrucciones».</p>
+
+    <h3>8.5 · Tu decisión</h3>
+    <p>Lee la conclusión del revisor. Decide: «listo para usar», o «otra vuelta». Una vuelta es corregir lo que falló y repetir el paso afectado. <b>Máximo 3 vueltas</b>; si no se cumple, para y anota por qué.</p>
+
+    <h3>Llena tu registro de traspasos</h3>
+    <p>Después de cada traspaso, anota una línea:</p>
+    <div class="copiable" data-copy><span class="rot">Registro de traspasos</span>Traspaso | De → a | Qué entregó | Qué esperaba | ¿Coincidió? | Qué se perdió o cambió
+1 | Lector → Analista | [resumen de lo entregado] | [tu predicción] | Sí / No | [anota]
+2 | Analista → Revisor | [resumen de lo entregado] | [tu predicción] | Sí / No | [anota]
+Fuente y fecha/hora de la consulta: [anota]
+Vueltas del loop y por qué paré: [anota]</div>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>Tienes una conclusión del revisor, tu decisión y un registro donde cada traspaso dice qué se entregó, qué esperabas y qué se perdió.</div>
+  </section>
+
+  <!-- P9 -->
+  <section class="paso" id="p9">
+    <h2><span class="num">9</span>Pruébalo con tres casos</h2>
+    <p class="meta">20 minutos</p>
+    <p>Un agente se define probando lo que <b>no debe hacer</b>. Corre el recorrido tres veces, con tres casos:</p>
+    <div class="tabla-scroll"><table>
+      <thead><tr><th>Caso</th><th>Qué es</th><th>Ejemplo (solicitudes)</th><th>Qué debe pasar</th></tr></thead>
+      <tbody>
+        <tr><td>Normal</td><td>Lo que sí debe hacer.</td><td>Clasifica las solicitudes de la semana.</td><td>Tabla, categorías y resumen correctos.</td></tr>
+        <tr><td>Fuera de alcance</td><td>Algo que no debería hacer.</td><td>«Responde a cada ciudadano.»</td><td>Se niega o te devuelve el control.</td></tr>
+        <tr><td>Trampa</td><td>Algo que la fuente no contiene.</td><td>«¿Por qué reclaman?», si la hoja no tiene motivo.</td><td>Responde «no está en la fuente».</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Si un caso falla</h3>
+    <ol><li>Identifica en qué subagente falló.</li><li>Agrega <b>una regla</b> a su system prompt que cierre ese hueco.</li><li>Vuelve a correr el caso.</li><li>Pregúntate: ¿la regla cierra el hueco o solo lo tapa? Cierra si el caso trampa ahora responde «no está en la fuente».</li></ol>
+    <h3>Prueba cruzada</h3>
+    <p>Si tienes con quién, pásale tu propuesta (paso 10) y un caso de prueba. Que otra persona la ejecute: ¿se cumple o se rompe? Un agente se revisa con casos de otra persona, no solo con los propios.</p>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>Los tres casos pasan, o tienes anotado cuál falló y qué regla agregaste. Guarda el caso problemático: es parte de tu evidencia.</div>
+  </section>
+
+  <!-- P10 -->
+  <section class="paso" id="p10">
+    <h2><span class="num">10</span>Escribe tu propuesta de agente</h2>
+    <p class="meta">20 minutos</p>
+    <p>Reúne todo en una ficha de una página, con siete campos.</p>
+    <div class="copiable" data-copy><span class="rot">Ficha de propuesta</span>1. Objetivo: [qué tarea de mi proyecto resuelve]
+2. Subagentes: [cuáles y qué responsabilidad tiene cada uno]
+3. Herramientas: [qué fuentes o apps toca]
+4. Permisos: [leer, proponer o cambiar, por subagente]
+5. Supervisión: [en qué momentos interviene una persona]
+6. Prueba: [un caso normal y un caso problemático, con el resultado]
+7. Límites: [lo que no debe hacer ni afirmar]</div>
+    <p><b>Ejemplo completo (datos ficticios):</b></p>
+    <div class="copiable">1. Objetivo: clasificar las solicitudes nuevas de la semana por tema y dejar un resumen para revisión.
+2. Subagentes: lector (extrae solicitudes), analista (clasifica y resume), revisor (verifica que cada tema esté justificado).
+3. Herramientas: la hoja «Solicitudes», en solo lectura.
+4. Permisos: lector solo lee; analista y revisor no tocan la hoja; ninguno escribe ni envía.
+5. Supervisión: apruebo objetivo y permisos antes; reviso cada traspaso; decido al final si el resumen se usa.
+6. Prueba: caso normal correcto; caso trampa («¿por qué reclaman?») respondió «no está en la fuente» tras agregar una regla al analista.
+7. Límites: no inventa motivos, no responde a ciudadanos, no modifica la hoja.</div>
+    <h3>Separa lo que comprobaste de lo que no</h3>
+    <p>Al final de tu ficha, agrega tres líneas:</p>
+    <ul><li><b>Comprobado:</b> lo que ejecutaste y verificaste con tu criterio.</li><li><b>Recorrido manual:</b> lo que hiciste pasando salidas entre chats a mano.</li><li><b>Conexión pendiente:</b> lo que haría falta conectar o permitir y todavía no está.</li></ul>
+    <p>Decir qué es cada cosa también es parte de tu evidencia.</p>
+    <div class="caja haz"><b class="t">Así sabes que quedó bien</b>Alguien que no estuvo en clase puede leer tu ficha, entender qué hace tu agente y saber qué le falta.</div>
+  </section>
+
+  <!-- FALLAS -->
+  <section class="paso" id="fallas">
+    <h2>Si algo sale mal</h2>
+    <div class="tabla-scroll"><table>
+      <thead><tr><th>Qué pasa</th><th>Qué haces</th></tr></thead>
+      <tbody>
+        <tr><td>No logro conectar la fuente.</td><td>Usa una muestra de 20 filas y anótalo como «copia» con la fecha.</td></tr>
+        <tr><td>No tengo datos de mi proyecto.</td><td>Usa la hoja de práctica y anota que es de práctica y qué no puedes afirmar con ella.</td></tr>
+        <tr><td>El lector inventa datos.</td><td>Refuerza la regla «si no está en la fuente, escribe “no está en la fuente”» y pídele el origen de cada dato.</td></tr>
+        <tr><td>El analista usa algo que no recibió.</td><td>Pásale solo la tabla del lector, sin el resto de la conversación, y repite la regla de usar solo lo recibido.</td></tr>
+        <tr><td>El revisor aprueba todo.</td><td>Dale criterios concretos (qué revisar y cuándo marcar «no cumple») y pruébalo con el caso trampa.</td></tr>
+        <tr><td>Se acabó el límite de uso.</td><td>Lee el aviso: trae la hora de renovación. Corre un subagente a la vez, con una muestra pequeña. Anota en tu registro qué quedó pendiente. Si pasas a otra herramienta, dilo.</td></tr>
+        <tr><td>Se me hace demasiado largo.</td><td>Reduce a dos subagentes (analista y revisor) y vuelve a empezar.</td></tr>
+        <tr><td>No sé qué dividir.</td><td>Pregúntate: ¿qué paso podría fallar sin que yo me dé cuenta? Ese va en un subagente aparte.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- GLOSARIO -->
+  <section class="paso" id="glosario">
+    <h2>Glosario y lista final</h2>
+    <div class="dos">
+      <div class="caja"><b class="t">Palabras</b>
+        <p><b>Asistente:</b> responde lo que le pides.</p>
+        <p><b>Agente:</b> recibe un objetivo, usa herramientas y decide pasos.</p>
+        <p><b>Subagente:</b> agente con una sola responsabilidad.</p>
+        <p><b>Orquestador:</b> quien reparte el trabajo entre subagentes.</p>
+        <p><b>Traspaso:</b> la entrega de un subagente al siguiente.</p>
+        <p><b>Permiso:</b> lo que un subagente tiene permitido hacer.</p>
+        <p><b>System prompt:</b> instrucciones fijas escritas antes de la conversación.</p>
+        <p><b>Fuente:</b> de donde la IA toma los datos.</p>
+      </div>
+      <div class="caja haz"><b class="t">Lo que debes guardar</b>
+        <ul class="check">
+          <li>Tu objetivo y tus tres subagentes con su system prompt.</li>
+          <li>Tu tabla de permisos y supervisión.</li>
+          <li>Tu registro de traspasos, con fuente, fecha y vueltas.</li>
+          <li>Tu caso problemático y la regla que lo arregló.</li>
+          <li>Tu propuesta de agente de una página.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="caja ojo"><b class="t">Terminal, SDK y harness</b>Los verás en clase. La <b>terminal</b> es una ventana donde se escriben órdenes en texto. Un <b>SDK</b> es un kit para llamar a un modelo de IA desde un programa. Un <b>harness</b> es el armazón que le da a un modelo herramientas, permisos y un ciclo de trabajo. No los necesitas para completar esta guía.</div>
+  </section>
+
+</main>
+<footer>Estud-IA · Alcaldía de Medellín · Pablo Ríos Peña · Los ejemplos usan datos ficticios.</footer>
+<script>
+  document.querySelectorAll('.copiable[data-copy]').forEach(function (el) {
+    var b = document.createElement('button'); b.type = 'button'; b.textContent = 'Copiar';
+    b.addEventListener('click', function () {
+      var rot = el.querySelector('.rot'); var texto = el.innerText.replace(/^Copiar\s*/, '');
+      if (rot) texto = texto.replace(rot.innerText, '').replace(/^\s+/, '');
+      texto = texto.replace(/\s*Copiar\s*$/, '');
+      var listo = function () { b.textContent = 'Copiado'; setTimeout(function () { b.textContent = 'Copiar'; }, 1500); };
+      try { navigator.clipboard.writeText(texto).then(listo, function () { b.textContent = 'Selecciona y copia'; }); }
+      catch (e) { b.textContent = 'Selecciona y copia'; }
+    });
+    el.appendChild(b);
+  });
+</script>
+</body>
+</html>

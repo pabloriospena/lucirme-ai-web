@@ -122,6 +122,23 @@
   <section class="slide slide--ruta">
     <div class="ruta-cap" style="--c: 2" data-nombre="2 · Agentes y subagentes"></div>
     <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Ejemplos · Datos ficticios</span>
+    <h2 class="titulo" style="font-size: 62px">La misma situación, como asistente y como agente</h2>
+    <table class="tabla" style="margin-top: 12px; font-size: 24px">
+      <thead><tr><th style="width: 260px">Situación</th><th>Asistente</th><th>Agente</th></tr></thead>
+      <tbody>
+        <tr data-paso="1"><td>Cotizaciones</td><td>«Redacta una respuesta para este cliente.»</td><td>Revisa la hoja, marca las que superan el presupuesto y deja un borrador por cada una para que yo apruebe.</td></tr>
+        <tr data-paso="2"><td>Solicitudes</td><td>«Explícame qué es urgente.»</td><td>Lee las solicitudes de la semana, las clasifica y marca las dudosas.</td></tr>
+        <tr data-paso="3"><td>Correos</td><td>«Mejora el tono de este correo.»</td><td>Agrupa los correos del mes por motivo y propone una respuesta por grupo.</td></tr>
+        <tr data-paso="4"><td>Prospectos</td><td>«Dame ideas para presentar mi producto.»</td><td>Ordena la lista según mi criterio y prepara el primer mensaje, sin enviarlo.</td></tr>
+      </tbody>
+    </table>
+    <p class="sub" data-paso="5" style="font-size: 32px; margin-top: 22px; color: var(--tinta); font-weight: 700">Asistente: un paso que tú decides. Agente: varios pasos hacia un objetivo, con herramientas.</p>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Agentes y subagentes"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
     <span class="etiqueta">Orquestación</span>
     <h2 class="titulo" style="font-size: 68px">Un orquestador reparte; cada subagente hace una cosa</h2>
     <div class="rail" style="--n: 4; margin-top: 56px">
@@ -156,7 +173,7 @@
     <h2 class="titulo" style="font-size: 70px">La misma tarea, repartida en chats separados</h2>
     <ol class="lista lista--num" style="font-size: 34px; gap: 16px; margin-top: 28px">
       <li data-paso="1">Chat orquestador: le pido que parta la tarea en pasos y asigne responsabilidades.</li>
-      <li data-paso="2">Chat lector: extrae de la fuente conectada solo lo pedido.</li>
+      <li data-paso="2">Chat lector: extrae de la fuente conectada solo lo pedido; chat analista: clasifica lo que el lector entregó.</li>
       <li data-paso="3">Chat revisor: verifica esa salida contra mi criterio.</li>
       <li data-paso="4">Yo paso las salidas de un chat al siguiente y anoto cada traspaso.</li>
     </ol>
@@ -170,6 +187,30 @@
     <h2 class="titulo" style="font-size: 64px">Cinco líneas por subagente</h2>
     <div class="prompt-caja" data-paso="1" style="margin-top: 30px"><b>Objetivo:</b> extraer de la fuente conectada los registros que cumplan el criterio.<br><b>Parámetros:</b> recibe solo la fuente y el criterio; no corrige ni interpreta.<br><b>Reglas:</b> si algo no está en la fuente, escribe «no está en la fuente».<br><b>Entrega:</b> una tabla con el registro y su origen, para el analista.<br><b>Devuelve a una persona:</b> si el criterio es ambiguo o falta un dato.</div>
     <p class="sub" data-paso="2" style="font-size: 36px; margin-top: 30px; color: var(--tinta); font-weight: 700">Es un system prompt corto, por responsabilidad.</p>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Agentes y subagentes"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Cómo se construye · Guía paso a paso</span>
+    <h2 class="titulo" style="font-size: 66px">Diez pasos para construir tu agente</h2>
+    <div class="dividido" style="grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-top: 24px">
+      <ol class="lista lista--num" style="font-size: 30px; gap: 10px; margin-top: 0">
+        <li data-paso="1">Escoge la tarea.</li>
+        <li data-paso="2">Escribe el objetivo.</li>
+        <li data-paso="3">Divide en responsabilidades.</li>
+        <li data-paso="4">Decide permisos y supervisión.</li>
+        <li data-paso="5">Escribe el system prompt de cada subagente.</li>
+      </ol>
+      <ol class="lista lista--num" start="6" style="font-size: 30px; gap: 10px; margin-top: 0; counter-reset: paso 5">
+        <li data-paso="6">Prepara los espacios de trabajo.</li>
+        <li data-paso="7">Conecta o pega la fuente.</li>
+        <li data-paso="8">Ejecuta el recorrido.</li>
+        <li data-paso="9">Pruébalo con tres casos.</li>
+        <li data-paso="10">Escribe tu propuesta.</li>
+      </ol>
+    </div>
+    <p class="sub" data-paso="11" style="font-size: 32px; margin-top: auto; color: var(--tinta); font-weight: 700">Todo con ejemplos y textos para copiar: <span style="user-select: all">/estudia-ia-basico/clase-5/guia-paso-a-paso5/</span></p>
   </section>
 
   <section class="slide slide--ruta">
@@ -373,7 +414,7 @@
       <div data-paso="2" style="--c: #cb318e"><i>2</i><h3 style="font-size: 44px">Tu registro de traspasos</h3><p style="font-size: 30px">Qué entregó y qué se perdió en cada uno.</p></div>
       <div data-paso="3" style="--c: #5c9100"><i>3</i><h3 style="font-size: 44px">Tu caso problemático</h3><p style="font-size: 30px">Qué falló y qué regla lo arregló.</p></div>
     </div>
-    <p class="sub" data-paso="4" style="font-size: 34px; margin-top: 36px; color: var(--tinta)"><b>Asistencia:</b> el enlace va en el chat. <b>Próximo encuentro:</b> clasificación práctica con reglas y rúbricas. Sigue tu ruta en Platzi.</p>
+    <p class="sub" data-paso="4" style="font-size: 34px; margin-top: 36px; color: var(--tinta)"><b>Asistencia:</b> el enlace va en el chat. <b>Guía paso a paso:</b> /estudia-ia-basico/clase-5/guia-paso-a-paso5/. <b>Próximo encuentro:</b> clasificación práctica con reglas y rúbricas. Sigue tu ruta en Platzi.</p>
   </section>
 
   <section class="slide slide--portada">
