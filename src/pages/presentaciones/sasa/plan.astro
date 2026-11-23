@@ -110,6 +110,14 @@ import Layout from "../../../layouts/Layout.astro";
 #plan-root .actions{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
 #plan-root .toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);background:var(--p-ink);color:var(--p-paper);padding:10px 18px;border-radius:8px;font-size:14px;z-index:9;max-width:90vw}
 #plan-root .small-print{font-size:13px;color:var(--p-muted)}
+#plan-root .dol{margin-top:36px}
+#plan-root .dol-t{min-width:900px}
+#plan-root .dol-t td:first-child{color:var(--p-muted)}
+#plan-root .dol-l{margin:0;padding-left:16px}
+#plan-root .dol-e{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;margin-bottom:4px}
+#plan-root .dol-ok{background:#E6F4F1;color:#0B6B62}
+#plan-root .dol-parcial{background:#FEF3C7;color:#92400E}
+#plan-root .dol-fuera{background:#F1F1EF;color:#475569}
 @media (max-width:700px){
 #plan-root .tl{grid-template-columns:repeat(10,150px);min-width:1520px}#plan-root .steps,#plan-root .grid2,#plan-root .row2,#plan-root .slots,#plan-root .pay{grid-template-columns:1fr}
 #plan-root .sum-meta{grid-template-columns:1fr}
@@ -313,11 +321,44 @@ function barHTML(){
 
 function planHTML(){
   var h='<ol class="steps"><li>Revisa la sesión 1: personas, temas y fecha.</li><li>Cambia lo que haga falta. Cada tema tiene punto de partida y resultado para medir.</li><li>Decide si llenas las demás sesiones o envías el plan así.</li></ol>'
-   +'<p class="lead">Los temas salen del formulario de dolores (13 respuestas), del formulario base del 6 de noviembre, de los talleres del 9 y 18 de noviembre y de las reuniones con Sandra. Las personas son una propuesta: cámbialas. Solo la sesión 1 está abierta; las demás se pueden llenar después. El taller de regalo va antes de la sesión 5. La semana del 7 de diciembre no está disponible. Este plan no incluye desarrollo de software.</p>'
+   +'<p class="lead">Los temas salen del formulario de dolores (26 respuestas: 13 del 9 de noviembre y 13 del 18; <a href="#dolores">ver la tabla</a>), del formulario base del 6 de noviembre, de los talleres del 9 y 18 de noviembre y de las reuniones con Sandra. Las personas son una propuesta: cámbialas. Solo la sesión 1 está abierta; las demás se pueden llenar después. El taller de regalo va antes de la sesión 5. La semana del 7 de diciembre no está disponible. Este plan no incluye desarrollo de software.</p>'
    +'<div class="tl-scroll"><div class="tl" id="tl">'+timelineHTML()+'</div></div>'
    +'<div class="editor" id="editor">'+editorHTML()+'</div>'
    +decisionHTML()
-   +'<h3>Notas generales del plan</h3><label><span class="small-print">Alcance, fuera de alcance y acuerdos</span><textarea id="notas" rows="3" data-g="notas">'+esc(state.notas)+'</textarea></label>';
+   +'<h3>Notas generales del plan</h3><label><span class="small-print">Alcance, fuera de alcance y acuerdos</span><textarea id="notas" rows="3" data-g="notas">'+esc(state.notas)+'</textarea></label>'
+   +doloresHTML();
+  return h;
+}
+
+/* ===== Dolores del equipo: 26 respuestas reunidas en 13 filas (datos fijos, no se editan ni se guardan) ===== */
+var DOLORES_FILAS=[
+  {t:"Cronogramas y estimaciones",q:"Zhoe Acevedo y dos respuestas sin nombre (Proyectos y consultoría)",h:"19",i:["Cronogramas","Estimaciones","Cronograma"],p:"Sesión 1 (línea base, prompt de cronograma y plantilla de estimación) y sesión 7 (medición).",e:"ok"},
+  {t:"Gestión de varios proyectos y alcance de propuestas",q:"Susana y Zhoe Acevedo",h:"5",i:["Gestión de varios proyectos en simultáneo, agenda y pendientes semanales","Estructurar todo el alcance de las propuestas"],p:"Sesión 1 (pendientes semanales de varios proyectos) y sesión 7 (toma de requerimientos).",e:"ok"},
+  {t:"Entender y analizar procesos existentes",q:"Fabian y una respuesta de Servicios administrados",h:"18",i:["Análisis de procesos existentes","Entender procesos no documentados"],p:"Sesión 3 (ruta de análisis de procesos con IA).",e:"ok"},
+  {t:"Documentar procesos y seguimientos",q:"Zhoe Acevedo, Sandra Liliana y Servicios administrados",h:"13",i:["Documentar proceso","Documentar seguimientos","Revisar documentación para corregir"],p:"Sesión 7 (documentación de proyectos) y sesión 5 (actas e informes). Los seguimientos de soporte y la revisión de documentos no tienen tema propio.",e:"parcial"},
+  {t:"Informes y métricas de la operación",q:"Sergio y Sandra Liliana",h:"9",i:["Informes, auditoría de bolsa","Identificar los esfuerzos reales del equipo, informes y métricas"],p:"Sesión 3 (informes y auditoría de bolsa). Las métricas de esfuerzo del equipo no tienen tema propio.",e:"parcial"},
+  {t:"Plan de sostenibilidad y estandarización",q:"Sandra y Sandra Liliana (Gerencia)",h:"12",i:["Definir un plan de sostenibilidad para la empresa","Definir procesos que generen estandarización para el trabajo de equipo"],p:"Sesión 6 (plan de sostenibilidad). La estandarización de procesos no tiene tema propio.",e:"parcial"},
+  {t:"Revisión de datos en Excel",q:"Diego (Gerencia)",h:"10",i:["Revisión de datos en Excel"],p:"Sesión 6 (rutina de revisión con IA).",e:"ok"},
+  {t:"Archivos del Drive y correos",q:"Clara Monsalve y una respuesta de Servicios administrados",h:"7",i:["Cambiar o editar archivos del Drive","Responder cadenas de correos sin fin"],p:"Sesión 5 (orden del Drive y resumen de correos con tareas programadas).",e:"ok"},
+  {t:"Propuestas comerciales y licitaciones",q:"Adriana Bedoya (Comercial)",h:"1,5",i:["Convertir la documentación técnica en comercial","Generar información para licitaciones cuando llegan"],p:"Sesión 2 (cuaderno de NotebookLM para propuestas). Las licitaciones no tienen tema propio.",e:"parcial"},
+  {t:"Casos de soporte y problemas con poco contexto",q:"Wilmar y Jhon Edinson Mantilla",h:"7",i:["Analizar casos complejos y redactar respuestas técnicas en tickets","Solucionar problemas con poco contexto"],p:"Sesión 3 (triage y diagnóstico inicial) y sesión 4 (contextos grandes).",e:"ok"},
+  {t:"Bugs e interfaz gráfica",q:"Juan Diego y Jhon Edinson Mantilla (Tecnología y desarrollo)",h:"11",i:["La solución de bugs","Solucionar problemas de interfaz gráfica"],p:"Desarrollo de software: queda fuera del plan, según el formulario del 6 de noviembre.",e:"fuera"},
+  {t:"Instancias: backend y monitoreo",q:"Jhon Edinson Mantilla y Wilmar",h:"7",i:["Solucionar problemas de las instancias en backend","Monitoreo de instancias"],p:"El backend queda fuera del plan. El monitoreo de instancias está por confirmar con Sandra.",e:"fuera"},
+  {t:"Empalme con proyectos en curso",q:"Juan Diego (Tecnología y desarrollo)",h:"16",i:["El empalme con proyectos o instancias que vienen en curso"],p:"Queda fuera del plan: se trata como parte del desarrollo de software.",e:"fuera"}
+];
+var DOLORES_ESTADO={ok:"En el plan",parcial:"Parcial",fuera:"Fuera del plan"};
+function doloresHTML(){
+  var n=0; DOLORES_FILAS.forEach(function(f){ n+=f.i.length; });
+  var h='<section id="dolores" class="dol"><h3>Los dolores del equipo</h3>'
+   +'<p class="lead">El formulario de dolores tiene <b>'+n+' respuestas</b>: 13 del taller del 9 de noviembre y 13 del taller del 18. Para leerlas más fácil las reunimos en <b>'+DOLORES_FILAS.length+' filas</b>. Cada fila dice qué respuestas incluye y dónde las atiende el plan. Las horas por semana son las que cada persona declaró y suman 135,5.</p>'
+   +'<div class="wide"><table class="sum-temas dol-t"><thead><tr><th>#</th><th>Dolor</th><th>Quién lo reporta</th><th>Horas por semana</th><th>Respuestas que incluye</th><th>Dónde lo atiende el plan</th></tr></thead><tbody>';
+  DOLORES_FILAS.forEach(function(f,i){
+    h+='<tr><td>'+(i+1)+'</td><td><b>'+esc(f.t)+'</b></td><td>'+esc(f.q)+'</td><td>'+esc(f.h)+'</td>'
+     +'<td><ul class="dol-l">'+f.i.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ul></td>'
+     +'<td><span class="dol-e dol-'+f.e+'">'+esc(DOLORES_ESTADO[f.e])+'</span><br>'+esc(f.p)+'</td></tr>';
+  });
+  h+='</tbody></table></div>'
+   +'<p class="small-print">Esta tabla es una propuesta de LuciRMe AI: corrígela si alguna respuesta debería ir en otra fila. Para ver las 26 respuestas completas, con su persona, área y frecuencia, entra a <a href="/presentaciones/sasa/dolores">la página de dolores</a>.</p></section>';
   return h;
 }
 
