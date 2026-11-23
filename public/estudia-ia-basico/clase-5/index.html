@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<base href="/estudia-ia-basico/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Estud-IA · Inteligencia artificial, nivel básico · Clase 5</title>
+<link rel="stylesheet" href="estudia.css">
+<link rel="stylesheet" href="estudia-nuevo.css">
+<style>
+  .agenda small { display: inline !important; margin-left: 22px; font-size: .78em; }
+  .tabla { width: 100%; border-collapse: collapse; font-size: 28px; }
+  .tabla th { text-align: left; background: #000; color: #fff; padding: 14px 22px; font-size: 24px; letter-spacing: .1em; text-transform: uppercase; }
+  .tabla td { padding: 13px 22px; border-bottom: 2px solid rgb(0 0 0 / .12); vertical-align: top; line-height: 1.25; font-weight: 400; }
+  .tabla tbody tr:nth-child(even) td { background: var(--suave); }
+  .tabla td:first-child { font-weight: 700; }
+  .tabla--datos { font-size: 24px; }
+  .tabla--datos th { padding: 9px 20px; font-size: 21px; }
+  .tabla--datos td { padding: 6px 20px; font-weight: 400 !important; }
+  .ficha-ag > div { grid-template-columns: 330px 1fr; }
+  .ficha-ag b, .ficha-ag span { font-size: 30px; }
+  .rail--5 b { font-size: 42px; }
+  .rail--5 span { font-size: 28px; }
+  .prompt-caja { background: var(--suave); border-left: 12px solid var(--naranja); padding: 30px 40px; font-family: var(--font-code); font-size: 30px; line-height: 1.4; color: var(--tinta); }
+  .prompt-caja b { color: var(--magenta); }
+  .slide--azul .prompt-caja { background: rgb(255 255 255 / .1); color: #fff; }
+  .slide--azul .prompt-caja b { color: var(--naranja); }
+  .tabla .ok { font-weight: 700; color: var(--magenta); }
+</style>
+</head>
+<body>
+<div class="escenario">
+
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 130px">Estud-IA · Capa 2 · Nivel básico</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Inteligencia artificial</h1>
+      <p class="docente" style="font-size: 46px">Clase 5 · Orquestamos agentes y subagentes</p>
+      <p class="docente" style="margin-top: 6px">Pablo Ríos Peña</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Puente"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Donde quedamos</span>
+    <h2 class="titulo" style="font-size: 68px">Un asistente bien configurado todavía hace todo solo</h2>
+    <div class="rail" style="--n: 3; margin-top: 56px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Lo que tienes</b><span>Un system prompt probado con tres casos y una fuente conectada.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Lo que pasa</b><span>Si le pides toda la tarea junta, mezcla pasos y cuesta saber dónde falló.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Lo que hacemos hoy</b><span>Repartir el trabajo entre varios asistentes, cada uno con una responsabilidad.</span></div>
+    </div>
+  </section>
+
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Puente"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Hoy · 3 horas</span>
+    <h2 class="titulo" style="font-size: 72px">Lo que vamos a hacer</h2>
+    <div class="dividido" style="grid-template-columns: 1.25fr 1fr; gap: 90px; align-items: start; margin-top: 10px">
+      <ol class="lista lista--num agenda" style="font-size: 34px; gap: 12px; margin-top: 0">
+        <li data-paso="1"><span>Puente: toda la tarea junta<small style="color: #cfd6ee">10 min</small></span></li>
+        <li data-paso="2"><span>Agentes y subagentes<small style="color: #cfd6ee">30 min</small></span></li>
+        <li data-paso="3"><span>Diseñas tu orquestación<small style="color: #cfd6ee">40 min</small></span></li>
+        <li data-paso="4"><span>Pausa<small style="color: #cfd6ee">10 min</small></span></li>
+        <li data-paso="5"><span>Terminal, SDK y harness; permisos<small style="color: #cfd6ee">30 min</small></span></li>
+        <li data-paso="6"><span>Tu propuesta de agente<small style="color: #cfd6ee">35 min</small></span></li>
+        <li data-paso="7"><span>Prueba cruzada y cierre<small style="color: #cfd6ee">25 min</small></span></li>
+      </ol>
+      <div class="bloque bloque--tinta" data-paso="8" style="margin-top: 0">
+        <h3 style="font-size: 46px">Al terminar tendrás</h3>
+        <p>Una tarea repartida entre subagentes, ensayada.</p>
+        <p>Los permisos y la supervisión de cada uno.</p>
+        <p>Una propuesta de agente de una página.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Puente"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Hacemos juntos · 8 min</span>
+    <h2 class="titulo" style="font-size: 62px">Pídele toda la tarea de una vez</h2>
+    <div class="dividido" style="grid-template-columns: 1.6fr 1fr; gap: 70px; align-items: start; margin-top: 30px">
+      <ol class="lista lista--num" style="font-size: 33px; gap: 16px; margin-top: 0">
+        <li data-paso="1">Abre el asistente de la clase 4, con tu system prompt y tu fuente conectada.</li>
+        <li data-paso="2">Pídele en un solo mensaje: leer la fuente, clasificar lo que encuentre, redactar un resumen y revisarlo.</li>
+        <li data-paso="3">Lee la respuesta con tu criterio. Anota dónde se mezclaron los pasos.</li>
+      </ol>
+      <div class="reloj sin-paso" data-segundos="480" style="font-size: 130px">8:00</div>
+    </div>
+  </section>
+
+  <section class="slide slide--magenta slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Puente"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Compartimos · 3 min</span>
+    <h2 class="titulo titulo--sm">¿Qué pasó con la tarea completa?</h2>
+    <div class="preguntas" style="margin-top: 40px">
+      <div class="pregunta-g" data-paso="1" style="font-size: 46px"><b style="color: #fff">1</b>¿Qué parte te costó más revisar?</div>
+      <div class="pregunta-g" data-paso="2" style="font-size: 46px"><b style="color: #fff">2</b>¿Dónde mezcló pasos que debían ir separados?</div>
+      <div class="pregunta-g" data-paso="3" style="font-size: 46px"><b style="color: #fff">3</b>¿Dónde no sabes qué hizo en realidad?</div>
+    </div>
+    <p class="sub" data-paso="4" style="margin-top: auto; font-size: 42px; font-weight: 700; color: #fff">Un asistente con muchas responsabilidades es difícil de revisar.</p>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Agentes y subagentes"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Módulo 4 · Agentes</span>
+    <h2 class="titulo" style="font-size: 70px">Un asistente responde; un agente actúa</h2>
+    <div class="dos" style="margin-top: 36px; flex: none">
+      <div class="bloque" data-paso="1" style="border-top-color: var(--naranja)"><h3>Asistente</h3><p style="font-size: 34px">Responde lo que le pides, en la conversación. Tú decides cada paso.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2"><h3>Agente</h3><p style="font-size: 34px">Recibe un <b>objetivo</b>, usa <b>herramientas</b> y decide varios pasos para lograrlo.</p></div>
+    </div>
+    <p class="sub" data-paso="3" style="font-size: 38px; margin-top: 34px; color: var(--tinta); font-weight: 700">Más autonomía exige más reglas, más permisos medidos y más supervisión.</p>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Agentes y subagentes"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Orquestación</span>
+    <h2 class="titulo" style="font-size: 68px">Un orquestador reparte; cada subagente hace una cosa</h2>
+    <div class="rail" style="--n: 4; margin-top: 56px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Orquestador</b><span>Recibe el objetivo, lo parte y decide a quién le toca cada parte.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Lector</b><span>Solo extrae de la fuente lo que se le pide.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Analista</b><span>Solo clasifica o resume lo que el lector entregó.</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Revisor</b><span>Solo verifica contra el criterio y avisa lo que falla.</span></div>
+    </div>
+    <p class="sub" data-paso="5" style="font-size: 36px; margin-top: 40px; color: var(--tinta); font-weight: 700">Una responsabilidad por subagente. Tú puedes ser el orquestador.</p>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Agentes y subagentes"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Qué lo diferencia</span>
+    <h2 class="titulo" style="font-size: 62px">Tres formas de trabajar con IA</h2>
+    <table class="tabla" style="margin-top: 12px; font-size: 26px">
+      <thead><tr><th style="width: 330px">Forma</th><th>Qué hace</th><th style="width: 480px">Riesgo</th></tr></thead>
+      <tbody>
+        <tr data-paso="1"><td>Un solo asistente</td><td>Hace toda la tarea en una respuesta.</td><td>Pasos mezclados; no sabes dónde falló.</td></tr>
+        <tr data-paso="2"><td>Un agente con herramientas</td><td>Decide pasos y usa herramientas para un objetivo.</td><td>Actúa más de lo que esperabas.</td></tr>
+        <tr data-paso="3"><td>Orquestación con subagentes</td><td>Cada subagente tiene su responsabilidad y se revisan los traspasos.</td><td>Se pierde información entre traspasos.</td></tr>
+      </tbody>
+    </table>
+    <p class="sub" data-paso="4" style="font-size: 32px; margin-top: 22px; color: var(--tinta); font-weight: 700">Se pueden ensayar a mano, en chats separados, sin programar.</p>
+  </section>
+
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Agentes y subagentes"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Lo voy a mostrar en vivo</span>
+    <h2 class="titulo" style="font-size: 70px">La misma tarea, repartida en chats separados</h2>
+    <ol class="lista lista--num" style="font-size: 34px; gap: 16px; margin-top: 28px">
+      <li data-paso="1">Chat orquestador: le pido que parta la tarea en pasos y asigne responsabilidades.</li>
+      <li data-paso="2">Chat lector: extrae de la fuente conectada solo lo pedido.</li>
+      <li data-paso="3">Chat revisor: verifica esa salida contra mi criterio.</li>
+      <li data-paso="4">Yo paso las salidas de un chat al siguiente y anoto cada traspaso.</li>
+    </ol>
+    <p class="sub" data-paso="5" style="font-size: 40px; margin-top: auto; color: #fff; font-weight: 700">Antes de cada traspaso, una predicción: ¿qué debería llegar?</p>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Agentes y subagentes"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Plantilla de un subagente</span>
+    <h2 class="titulo" style="font-size: 64px">Cinco líneas por subagente</h2>
+    <div class="prompt-caja" data-paso="1" style="margin-top: 30px"><b>Objetivo:</b> extraer de la fuente conectada los registros que cumplan el criterio.<br><b>Parámetros:</b> recibe solo la fuente y el criterio; no corrige ni interpreta.<br><b>Reglas:</b> si algo no está en la fuente, escribe «no está en la fuente».<br><b>Entrega:</b> una tabla con el registro y su origen, para el analista.<br><b>Devuelve a una persona:</b> si el criterio es ambiguo o falta un dato.</div>
+    <p class="sub" data-paso="2" style="font-size: 36px; margin-top: 30px; color: var(--tinta); font-weight: 700">Es un system prompt corto, por responsabilidad.</p>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Tu orquestación"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Tu turno · 25 min</span>
+    <h2 class="titulo" style="font-size: 62px">Reparte la tarea de tu proyecto</h2>
+    <div class="dividido" style="grid-template-columns: 1.6fr 1fr; gap: 70px; align-items: start; margin-top: 30px">
+      <ol class="lista lista--num" style="font-size: 32px; gap: 16px; margin-top: 0">
+        <li data-paso="1">Escribe en una frase la tarea completa de tu proyecto.</li>
+        <li data-paso="2">Pártela en tres responsabilidades: leer, analizar y revisar.</li>
+        <li data-paso="3">Escribe el system prompt de cada subagente con la plantilla.</li>
+        <li data-paso="4">Córrelos en chats separados y pasa las salidas de uno a otro.</li>
+        <li data-paso="5">Anota qué se perdió o cambió en cada traspaso.</li>
+      </ol>
+      <div class="reloj sin-paso" data-segundos="1500" style="font-size: 130px">25:00</div>
+    </div>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Tu orquestación"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Si te bloqueas</span>
+    <h2 class="titulo" style="font-size: 70px">Tres salidas, sin salirte de tu proyecto</h2>
+    <div class="tres" style="margin-top: 40px; flex: none">
+      <div class="bloque bloque--verde" data-paso="1" style="padding: 32px 34px"><h3 style="font-size: 42px">No hay fuente</h3><p style="font-size: 30px">Usa la hoja de práctica y anótalo en tu registro.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 32px 34px"><h3 style="font-size: 42px">Se acaba el límite de uso</h3><p style="font-size: 30px">Corre un subagente a la vez y pásale solo una muestra de 20 filas.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 32px 34px"><h3 style="font-size: 42px">No sé cómo dividir</h3><p style="font-size: 30px">Pregúntate: ¿qué paso podría fallar sin que yo me dé cuenta? Ese va aparte.</p></div>
+    </div>
+  </section>
+
+  <section class="slide slide--magenta slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Tu orquestación"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Compartimos · 5 min</span>
+    <h2 class="titulo titulo--sm">Una persona cuenta qué pasó en sus traspasos</h2>
+    <div class="preguntas" style="margin-top: 40px">
+      <div class="pregunta-g" data-paso="1" style="font-size: 46px"><b style="color: #fff">1</b>¿Dónde se perdió información entre un chat y otro?</div>
+      <div class="pregunta-g" data-paso="2" style="font-size: 46px"><b style="color: #fff">2</b>¿Qué subagente falló y cómo lo notaste?</div>
+      <div class="pregunta-g" data-paso="3" style="font-size: 46px"><b style="color: #fff">3</b>¿Qué regla le agregarías?</div>
+    </div>
+    <p class="sub" data-paso="4" style="margin-top: auto; font-size: 42px; font-weight: 700; color: #fff">Si solo cuentas pasos, vuelve a la pregunta: ¿qué te permitió ver el reparto?</p>
+  </section>
+
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Tu orquestación"></div>
+    <span class="etiqueta">Pausa</span>
+    <h2 class="mensaje" style="font-size: 120px; margin-top: 30px">Volvemos en 10 minutos</h2>
+    <p class="sub">Aléjate de la pantalla, estira las piernas y toma agua.</p>
+    <p class="mensaje" style="font-size: 88px; margin-top: 40px; color: #000">¿Tomamos asistencia?</p>
+    <div style="display: flex; align-items: center; gap: 40px; margin-top: auto">
+      <div class="reloj" data-segundos="600">10:00</div>
+    </div>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Permisos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Palabras que vas a oír</span>
+    <h2 class="titulo" style="font-size: 70px">Terminal, SDK y harness, sin programar</h2>
+    <div class="tres" style="margin-top: 40px; flex: none">
+      <div class="bloque bloque--verde" data-paso="1" style="padding: 32px 34px"><h3 style="font-size: 42px">Terminal</h3><p style="font-size: 30px">Una ventana donde se escriben órdenes al computador en texto.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 32px 34px"><h3 style="font-size: 42px">SDK</h3><p style="font-size: 30px">Un kit de herramientas para llamar a un modelo de IA desde un programa.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 32px 34px"><h3 style="font-size: 42px">Harness</h3><p style="font-size: 30px">El armazón que le da a un modelo herramientas, permisos y un ciclo de trabajo.</p></div>
+    </div>
+    <p class="sub" data-paso="4" style="font-size: 36px; margin-top: 36px; color: var(--tinta); font-weight: 700">Hoy no programamos: entendemos qué son y qué controlan.</p>
+  </section>
+
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Permisos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Demostración · Según el acceso disponible</span>
+    <h2 class="titulo" style="font-size: 70px">Un agente trabajando con permisos</h2>
+    <ol class="lista lista--num" style="font-size: 34px; gap: 16px; margin-top: 28px">
+      <li data-paso="1">Le doy un archivo de práctica y un objetivo.</li>
+      <li data-paso="2">Veo qué herramientas pide usar y qué permiso solicita.</li>
+      <li data-paso="3">Apruebo una lectura y rechazo una escritura.</li>
+      <li data-paso="4">Reviso el registro de lo que hizo.</li>
+    </ol>
+    <p class="sub" data-paso="5" style="font-size: 40px; margin-top: auto; color: #fff; font-weight: 700">Es una demostración: ustedes no necesitan instalar nada hoy.</p>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Permisos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Herramientas, permisos y supervisión</span>
+    <h2 class="titulo" style="font-size: 62px">Qué puede y qué no puede cada subagente</h2>
+    <table class="tabla" style="margin-top: 12px; font-size: 26px">
+      <thead><tr><th style="width: 230px">Subagente</th><th>Puede</th><th>No puede</th><th>Quién supervisa</th></tr></thead>
+      <tbody>
+        <tr data-paso="1"><td>Lector</td><td>Leer la fuente conectada</td><td>Escribir ni borrar</td><td>Tú, con una muestra</td></tr>
+        <tr data-paso="2"><td>Analista</td><td>Clasificar y resumir lo recibido</td><td>Buscar fuera de lo recibido</td><td>Tú, contra tu criterio</td></tr>
+        <tr data-paso="3"><td>Revisor</td><td>Comparar contra el criterio</td><td>Corregir por su cuenta</td><td>Tú, antes de usar el resultado</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Permisos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Permisos mínimos</span>
+    <h2 class="titulo" style="font-size: 70px">Empieza por lo menos que necesites</h2>
+    <div class="tres" style="margin-top: 40px; flex: none">
+      <div class="bloque bloque--verde" data-paso="1" style="padding: 32px 34px"><h3 style="font-size: 42px">Leer</h3><p style="font-size: 30px">La fuente, en solo lectura. Lo primero y casi siempre suficiente.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 32px 34px"><h3 style="font-size: 42px">Proponer</h3><p style="font-size: 30px">Sugerir un cambio sin hacerlo. Tú decides si se aplica.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 32px 34px"><h3 style="font-size: 42px">Cambiar</h3><p style="font-size: 30px">Escribir, enviar o borrar, solo con tu aprobación y en datos de práctica.</p></div>
+    </div>
+    <p class="sub" data-paso="4" style="font-size: 36px; margin-top: 36px; color: var(--tinta); font-weight: 700">Si dudas de un permiso, no lo des todavía.</p>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Permisos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Supervisión</span>
+    <h2 class="titulo" style="font-size: 68px">Cuatro momentos donde una persona decide</h2>
+    <div class="rail" style="--n: 4; margin-top: 56px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Antes</b><span>Apruebas el objetivo y los permisos.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Entre</b><span>Revisas cada traspaso.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Al final</b><span>Decides si el resultado se usa.</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Siempre</b><span>Puedes parar el proceso.</span></div>
+    </div>
+    <p class="sub" data-paso="5" style="font-size: 36px; margin-top: 40px; color: var(--tinta); font-weight: 700">Una automatización sin supervisión es un riesgo, no un ahorro.</p>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Tu propuesta"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Propuesta de agente · Ficha de una página</span>
+    <h2 class="titulo" style="font-size: 62px">Siete campos para tu propuesta</h2>
+    <div class="ficha-ej ficha-ag">
+      <div data-paso="1"><b>Objetivo</b><span>Qué tarea de tu proyecto resuelve.</span></div>
+      <div data-paso="2"><b>Subagentes</b><span>Cuáles y qué responsabilidad tiene cada uno.</span></div>
+      <div data-paso="3"><b>Herramientas</b><span>Qué fuentes o apps toca.</span></div>
+      <div data-paso="4"><b>Permisos</b><span>Leer, proponer o cambiar, por subagente.</span></div>
+      <div data-paso="5"><b>Supervisión</b><span>Dónde interviene una persona.</span></div>
+      <div data-paso="6"><b>Prueba</b><span>Un caso normal y un caso problemático.</span></div>
+      <div data-paso="7"><b>Límites</b><span>Lo que no debe hacer ni afirmar.</span></div>
+    </div>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Tu propuesta"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Tu turno · 25 min</span>
+    <h2 class="titulo" style="font-size: 62px">Completa la propuesta de tu agente</h2>
+    <div class="dividido" style="grid-template-columns: 1.6fr 1fr; gap: 70px; align-items: start; margin-top: 30px">
+      <ol class="lista lista--num" style="font-size: 33px; gap: 16px; margin-top: 0">
+        <li data-paso="1">Llena los siete campos con tu proyecto.</li>
+        <li data-paso="2">Prueba un caso normal con tu recorrido de chats.</li>
+        <li data-paso="3">Prueba un caso problemático y anota qué pasó.</li>
+        <li data-paso="4">Escribe en el chat una frase con tu objetivo.</li>
+      </ol>
+      <div class="reloj sin-paso" data-segundos="1500" style="font-size: 130px">25:00</div>
+    </div>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Tu propuesta"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Prueba cruzada · 10 min</span>
+    <h2 class="titulo" style="font-size: 62px">Ejecuta la propuesta de otra persona</h2>
+    <div class="dividido" style="grid-template-columns: 1.6fr 1fr; gap: 70px; align-items: start; margin-top: 30px">
+      <ol class="lista lista--num" style="font-size: 33px; gap: 16px; margin-top: 0">
+        <li data-paso="1">Pega tu propuesta en el chat con un caso de prueba.</li>
+        <li data-paso="2">Otra persona la ejecuta: ¿se cumple o se rompe?</li>
+        <li data-paso="3">Máximo dos intercambios por persona.</li>
+      </ol>
+      <div class="reloj sin-paso" data-segundos="600" style="font-size: 130px">10:00</div>
+    </div>
+    <p class="sub" data-paso="4" style="font-size: 34px; margin-top: auto; color: var(--tinta); font-weight: 700">Un agente se revisa con casos de otra persona, no con los propios.</p>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Lo que presentas</span>
+    <h2 class="titulo" style="font-size: 70px">Separa lo que comprobaste de lo que no</h2>
+    <div class="tres" style="margin-top: 40px; flex: none">
+      <div class="bloque bloque--verde" data-paso="1" style="padding: 32px 34px"><h3 style="font-size: 42px">Comprobado</h3><p style="font-size: 30px">Lo que ejecutaste y verificaste con tu criterio.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 32px 34px"><h3 style="font-size: 42px">Recorrido manual</h3><p style="font-size: 30px">Lo que hiciste pasando salidas entre chats a mano.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 32px 34px"><h3 style="font-size: 42px">Conexión pendiente</h3><p style="font-size: 30px">Lo que se necesitaría conectar o permitir, y todavía no está.</p></div>
+    </div>
+    <p class="sub" data-paso="4" style="font-size: 36px; margin-top: 36px; color: var(--tinta); font-weight: 700">Decir qué es cada cosa también es parte de tu evidencia.</p>
+  </section>
+
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Ticket de salida</span>
+    <h2 class="mensaje" style="font-size: 84px; margin-top: 30px">Escribe en el chat los subagentes de tu propuesta y el permiso más delicado</h2>
+    <p class="nota" style="color: var(--negro); margin-top: auto">No incluyas datos personales ni de clientes.</p>
+  </section>
+
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Evidencia y próximos pasos</span>
+    <h2 class="titulo" style="font-size: 80px">Tres cosas para guardar</h2>
+    <div class="camino" style="margin-top: 60px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><h3 style="font-size: 44px">Tu propuesta de agente</h3><p style="font-size: 30px">Los siete campos completos.</p></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><h3 style="font-size: 44px">Tu registro de traspasos</h3><p style="font-size: 30px">Qué entregó y qué se perdió en cada uno.</p></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><h3 style="font-size: 44px">Tu caso problemático</h3><p style="font-size: 30px">Qué falló y qué regla lo arregló.</p></div>
+    </div>
+    <p class="sub" data-paso="4" style="font-size: 34px; margin-top: 36px; color: var(--tinta)"><b>Asistencia:</b> el enlace va en el chat. <b>Próximo encuentro:</b> clasificación práctica con reglas y rúbricas. Sigue tu ruta en Platzi.</p>
+  </section>
+
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 250px">Nos vemos en la próxima sesión</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Gracias</h1>
+      <p class="docente">Pablo Ríos Peña · <span style="user-select: all">linkedin.com/in/pabloriospena</span></p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+</div>
+<div class="progreso"></div>
+<script src="motor.js"></script>
+</body>
+</html>
