@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<base href="/estudia-ia-intermedio/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Estud-IA · IA intermedio · Clase 5 · Guía paso a paso: decide qué cambiar y diseña el experimento</title>
+<style>
+  :root { --negro:#000; --tinta:#16181d; --gris:#5b6170; --suave:#f2f2f2; --linea:#d9d9d9; --naranja:#ff7c1a; --magenta:#cb318e; --verde:#7fc200; --cian:#11c9ee; --azul:#011a61; --font: Arial, Helvetica, sans-serif; --code: Consolas, 'Courier New', monospace; }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font); color: var(--tinta); background: #fff; line-height: 1.55; font-size: 18px; -webkit-font-smoothing: antialiased; }
+  header.banda { background: #000; padding: 22px 24px; border-bottom: 8px solid var(--naranja); }
+  header.banda img { display: block; height: 52px; margin: 0 auto; }
+  .tricolor { height: 6px; background: linear-gradient(90deg, var(--naranja) 0 60%, var(--magenta) 60% 80%, var(--verde) 80% 100%); }
+  main { max-width: 900px; margin: 0 auto; padding: 40px 22px 90px; }
+  .etq { font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); }
+  .etq::before { content: ''; display: block; width: 56px; height: 7px; background: var(--naranja); margin-bottom: 14px; }
+  h1 { font-size: 40px; line-height: 1.1; letter-spacing: -.01em; margin: 10px 0 14px; }
+  h2 { font-size: 30px; line-height: 1.15; margin: 0 0 12px; }
+  h3 { font-size: 21px; margin: 26px 0 8px; }
+  p { margin: 10px 0; }
+  .lead { font-size: 21px; color: var(--gris); }
+  ul, ol { margin: 10px 0 10px 26px; } li { margin: 6px 0; }
+  code { font-family: var(--code); background: var(--suave); padding: 1px 6px; border-radius: 4px; font-size: .92em; }
+  nav.indice { background: var(--suave); border-left: 8px solid var(--naranja); padding: 20px 26px; margin: 28px 0; }
+  nav.indice ol { margin: 8px 0 0 22px; columns: 2; column-gap: 40px; }
+  nav.indice a { color: var(--tinta); text-decoration: none; } nav.indice a:hover { text-decoration: underline; }
+  section.paso { margin-top: 56px; padding-top: 10px; border-top: 3px solid var(--linea); }
+  .num { display: inline-grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--tinta); color: #fff; font-weight: 700; font-size: 26px; margin-right: 12px; vertical-align: middle; }
+  section.paso h2 { display: flex; align-items: center; }
+  .meta { font-size: 15px; color: var(--gris); margin: 2px 0 10px 64px; }
+  .caja { border-radius: 4px; padding: 16px 20px; margin: 18px 0; background: var(--suave); border-top: 6px solid var(--naranja); }
+  .caja b.t { display: block; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; }
+  .caja.haz { border-top-color: var(--verde); } .caja.cuida { border-top-color: var(--magenta); } .caja.ojo { border-top-color: var(--cian); }
+  .copiable { padding-right: 100px !important; position: relative; background: #0f1218; color: #f2f3f5; border-radius: 6px; padding: 18px 20px 18px; margin: 16px 0; font-family: var(--code); font-size: 15.5px; line-height: 1.5; white-space: pre-wrap; border-left: 8px solid var(--naranja); }
+  .copiable .rot { display: block; font-family: var(--font); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #ffb27a; margin-bottom: 8px; }
+  .copiable button { position: absolute; top: 10px; right: 10px; font: 700 12px var(--font); background: var(--naranja); color: #000; border: 0; border-radius: 4px; padding: 6px 12px; cursor: pointer; }
+  .copiable button:hover { background: #ff9a4d; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 16px; }
+  th { text-align: left; background: #000; color: #fff; padding: 10px 12px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--linea); vertical-align: top; }
+  tbody tr:nth-child(even) td { background: var(--suave); }
+  td:first-child { font-weight: 700; }
+  .tabla-scroll { overflow-x: auto; }
+  .check li { list-style: none; margin-left: -22px; padding-left: 30px; position: relative; }
+  .check li::before { content: '☐'; position: absolute; left: 0; color: var(--magenta); font-size: 20px; }
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; } @media (max-width: 700px) { .dos { grid-template-columns: 1fr; } nav.indice ol { columns: 1; } h1 { font-size: 32px; } }
+  footer { background: var(--suave); border-top: 6px solid var(--naranja); padding: 24px; text-align: center; color: var(--gris); font-size: 15px; }
+  @media print { header.banda, .tricolor, .copiable button { display: none; } .copiable { background: #fff; color: #000; border: 1px solid #999; } section.paso { break-inside: avoid-page; } }
+  .cuadro { background: var(--suave); border: 2px solid var(--linea); border-radius: 6px; padding: 14px 18px; margin: 14px 0; }
+  .btn-descarga { display: inline-block; background: var(--naranja); color: #000; font-weight: 700; text-decoration: none; padding: 10px 18px; border-radius: 4px; margin: 4px 8px 4px 0; }
+  .btn-descarga:hover { background: #ff9a4d; }
+  .flujo-mini { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 14px 0; text-align: center; font-size: 15px; }
+  .flujo-mini div { background: #000; color: #fff; padding: 12px 8px; border-bottom: 6px solid var(--naranja); }
+  .flujo-mini div:nth-child(2) { border-bottom-color: var(--magenta); } .flujo-mini div:nth-child(3) { border-bottom-color: var(--verde); }
+</style>
+</head>
+<body>
+<header class="banda"><img src="estudia/img/logo-estudia-nuevo.png" alt="Estud-IA"></header>
+<div class="tricolor"></div>
+<main>
+
+  <span class="etq">Estud-IA · Capa 2 · IA intermedio · Clase 5</span>
+  <h1>Guía paso a paso: decide qué cambiar y diseña el experimento</h1>
+  <p class="lead">Una guía para hacerlo por tu cuenta, con el código completo. Al final habrás probado dos caminos para usar un modelo que ya existe, habrás diseñado un tercero sin fingir que lo entrenaste, y tendrás una ficha de hipótesis con un único cambio.</p>
+  <p><b>Cuánto tarda:</b> entre 2 y 3 horas la primera vez. <b>Qué necesitas:</b> una cuenta de Google para Colab, el notebook de la clase y acceso a Claude, ChatGPT o Gemini con plan gratuito.</p>
+
+  <nav class="indice">
+    <b>Contenido</b>
+    <ol>
+      <li><a href="#entender">Entender: transferir un modelo sin tocarlo de más</a></li>
+      <li><a href="#p1">Paso 1 · Abre Colab y carga el notebook</a></li><li><a href="#p2">Paso 2 · Los mismos datos y la misma partición</a></li><li><a href="#p3">Paso 3 · Entiende los tres caminos antes de ejecutar</a></li><li><a href="#p4">Paso 4 · Camino A: el modelo tal cual</a></li><li><a href="#p5">Paso 5 · Camino A con ejemplos en el prompt</a></li><li><a href="#p6">Paso 6 · Camino B: de un mensaje a una lista de números</a></li><li><a href="#p7">Paso 7 · Entrena la salida y mide cuánto confiar</a></li><li><a href="#p8">Paso 8 · Camino C: se diseña, no se entrena</a></li><li><a href="#p9">Paso 9 · Compara y mira qué errores cambian</a></li><li><a href="#p10">Paso 10 · Cómo empezar con otro modelo de Hugging Face</a></li><li><a href="#p11">Paso 11 · Escribe tu ficha de hipótesis</a></li>
+      <li><a href="#fallas">Si algo sale mal</a></li>
+      <li><a href="#glosario">Glosario y lista final</a></li>
+    </ol>
+  </nav>
+
+  <section class="paso" id="entender">
+    <h2>Entender: transferir un modelo sin tocarlo de más</h2>
+    <p>En la clase 4 medimos un modelo y separamos sus errores. Hoy decidimos <b>cuánto del modelo tocar</b> y escribimos el experimento para comprobarlo.</p>
+    <div class="flujo-mini"><div>A · Tal cual<br><small>cambias cómo lo usas</small></div><div>B · Salida entrenada<br><small>modelo congelado</small></div><div>C · Afinar<br><small>solo se diseña</small></div></div>
+    <div class="caja cuida"><b class="t">Importante</b>Un modelo que da respuestas con seguridad no es un modelo correcto. Todo lo que pruebes se mide contra la misma referencia y los mismos 66 mensajes de validación, y la prueba no se abre.</div>
+  </section>
+
+  <section class="paso" id="antes">
+    <h2>Antes de empezar</h2>
+    <ul class="check">
+      <li>Una cuenta de Google para entrar a Colab.</li>
+      <li>El notebook y los datos: <a class="btn-descarga" href="clase-5/notebook/Clase5_Intermedio_EstudIA.ipynb" download>Notebook</a><a class="btn-descarga" href="clase-5/datos/mensajes_servicio.csv" download>mensajes_servicio.csv</a></li>
+      <li>Si los tienes, <code>predicciones_base.csv</code> y <code>protocolo_inicial.json</code> de la clase 4.</li>
+      <li>Una herramienta de IA generativa con plan gratuito (Claude, ChatGPT o Gemini).</li>
+      <li>Un documento donde anotar lo que esperabas antes de ejecutar cada paso, y lo que viste.</li>
+    </ul>
+    <div class="caja cuida"><b class="t">Cuida la información</b>Todos los mensajes de esta guía son ficticios. Si luego aplicas esto a tu proyecto, usa solo información veraz y con permiso, sin nombres, cédulas ni teléfonos.</div>
+    <div class="caja haz"><b class="t">Cómo leer esta guía</b>Cada paso trae qué haces, el código que se copia con el botón «Copiar», cómo se lee el resultado y cómo sabes que quedó bien. <b>Antes de ejecutar, escribe qué esperas.</b> Es la mejor manera de aprender de un resultado.</div>
+  </section>
+
+  <section class="paso" id="p1">
+    <h2><span class="num">1</span>Abre Colab y carga el notebook</h2>
+    <p class="meta">10 min</p>
+    
+<p><b>Qué haces.</b> Preparas el lugar donde vas a trabajar.</p>
+<ol>
+<li>Descarga el notebook: <a class="btn-descarga" href="clase-5/notebook/Clase5_Intermedio_EstudIA.ipynb" download>Notebook de la clase 5</a> y, si prefieres armar el tuyo, los datos: <a class="btn-descarga" href="clase-5/datos/mensajes_servicio.csv" download>mensajes_servicio.csv</a></li>
+<li>Entra a <code>colab.research.google.com</code> con tu cuenta de Google. Elige <b>Archivo → Subir cuaderno</b> y selecciona el archivo.</li>
+<li>Opcional: <b>Entorno de ejecución → Cambiar tipo de entorno → GPU</b>. Acelera el paso de los modelos, pero funciona sin GPU.</li>
+<li>Si guardaste <code>predicciones_base.csv</code> en la clase 4, súbelo al panel de archivos de Colab (la carpeta de la izquierda). Si no, el notebook calcula lo que necesita.</li>
+<li>Ejecuta la primera celda de código (Parte 0) con <code>Ctrl + Enter</code>.</li>
+</ol>
+<div class="copiable" data-copy><span class="rot">Celda de código</span>import os, re, io, json, time
+import numpy as np
+import pandas as pd
+import torch
+import transformers
+from transformers import AutoTokenizer, AutoModel, pipeline
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, f1_score, classification_report
+from sklearn.model_selection import GroupShuffleSplit
+
+SEMILLA = 1540
+CLASES = [&quot;facturación&quot;, &quot;envío&quot;, &quot;devolución&quot;]
+pd.set_option(&quot;display.max_colwidth&quot;, 100)
+pd.set_option(&quot;display.width&quot;, 160)
+
+# Cuaderno de experimentos: cada prueba queda escrita con su único cambio
+LOG = []
+def registrar(experimento, cambio, reales, predichas):
+    k = int((np.array(reales) == np.array(predichas)).sum())
+    LOG.append({&quot;experimento&quot;: experimento, &quot;único cambio&quot;: cambio, &quot;aciertos&quot;: f&quot;{k} de {len(reales)}&quot;})
+    return k
+
+print(&quot;transformers&quot;, transformers.__version__, &quot;| torch&quot;, torch.__version__)</div>
+
+<div class="caja ojo"><b class="t">Así sabes que quedó bien</b>La celda imprime las versiones de <code>transformers</code> y <code>torch</code>, sin errores. Anótalas: el resultado de los modelos puede variar un poco con la versión.</div>
+  </section>
+
+  <section class="paso" id="p2">
+    <h2><span class="num">2</span>Los mismos datos y la misma partición</h2>
+    <p class="meta">10 min</p>
+    
+<p><b>Qué haces.</b> Recreas la partición de la clase 4 para comparar contra lo que ya mediste. Misma semilla (<code>1540</code>), mismo código: 208 mensajes de entrenamiento, 66 de validación y 70 de prueba, repartidos por <code>grupo</code>.</p>
+<div class="copiable" data-copy><span class="rot">Celda de código</span>df = pd.read_csv(&quot;mensajes_servicio.csv&quot;)
+
+# La misma partición por grupo de la clase 4 (misma semilla, mismo código)
+g1 = GroupShuffleSplit(n_splits=1, test_size=0.20, random_state=SEMILLA)
+idx_resto, idx_prueba = next(g1.split(df, groups=df[&quot;grupo&quot;]))
+resto = df.iloc[idx_resto]
+g2 = GroupShuffleSplit(n_splits=1, test_size=0.25, random_state=SEMILLA)
+i_ent, i_val = next(g2.split(resto, groups=resto[&quot;grupo&quot;]))
+df[&quot;conjunto&quot;] = &quot;entrenamiento&quot;
+df.loc[resto.index[i_val], &quot;conjunto&quot;] = &quot;validación&quot;
+df.loc[df.index[idx_prueba], &quot;conjunto&quot;] = &quot;prueba&quot;
+
+print(df[&quot;conjunto&quot;].value_counts().to_dict())
+print(&quot;La prueba se queda sin abrir:&quot;, int((df[&quot;conjunto&quot;] == &quot;prueba&quot;).sum()), &quot;mensajes.&quot;)
+
+ent = df[df[&quot;conjunto&quot;] == &quot;entrenamiento&quot;].copy()
+va = df[df[&quot;conjunto&quot;] == &quot;validación&quot;].copy()</div>
+
+<p>Después se vuelven a definir las referencias. Las palabras clave son reglas escritas a mano y la clase más grande es la referencia mínima:</p>
+<div class="copiable" data-copy><span class="rot">Celda de código</span>CLASE_MAYOR = ent[&quot;etiqueta&quot;].mode()[0]
+PALABRAS = {
+    &quot;facturación&quot;: [&quot;factur&quot;, &quot;cobr&quot;, &quot;iva&quot;, &quot;nit&quot;, &quot;pago&quot;, &quot;pagu&quot;, &quot;nota crédito&quot;, &quot;nota credito&quot;, &quot;valor&quot;, &quot;cargo&quot;, &quot;cuota&quot;, &quot;descuento&quot;, &quot;cupón&quot;, &quot;cupon&quot;, &quot;extracto&quot;],
+    &quot;envío&quot;:       [&quot;guía&quot;, &quot;guia&quot;, &quot;llega&quot;, &quot;llegó&quot;, &quot;llego&quot;, &quot;entrega&quot;, &quot;dirección&quot;, &quot;direccion&quot;, &quot;mensajero&quot;, &quot;paquete&quot;, &quot;despacho&quot;, &quot;seguimiento&quot;, &quot;transportadora&quot;, &quot;domicilio&quot;, &quot;pedido&quot;],
+    &quot;devolución&quot;:  [&quot;devol&quot;, &quot;reembols&quot;, &quot;cambio&quot;, &quot;garantía&quot;, &quot;garantia&quot;, &quot;defectuos&quot;, &quot;dañado&quot;, &quot;danado&quot;, &quot;talla&quot;, &quot;retracto&quot;, &quot;no me sirve&quot;, &quot;no lo quiero&quot;],
+}
+def por_palabras(mensaje):
+    m = mensaje.lower()
+    puntos = {c: sum(p in m for p in lista) for c, lista in PALABRAS.items()}
+    mejor = max(puntos.values())
+    if mejor == 0:
+        return CLASE_MAYOR
+    return [c for c in CLASES if puntos[c] == mejor][0]
+
+def resumen(reales, predichas, nombre):
+    aciertos = int((np.array(reales) == np.array(predichas)).sum())
+    return {&quot;método&quot;: nombre, &quot;aciertos&quot;: f&quot;{aciertos} de {len(reales)}&quot;,
+            &quot;exactitud&quot;: round(accuracy_score(reales, predichas), 2),
+            &quot;F1 macro&quot;: round(f1_score(reales, predichas, labels=CLASES, average=&quot;macro&quot;, zero_division=0), 2)}
+
+va[&quot;pred_palabras&quot;] = va[&quot;mensaje&quot;].apply(por_palabras)
+print(resumen(va[&quot;etiqueta&quot;], va[&quot;pred_palabras&quot;], &quot;palabras clave&quot;))</div>
+
+<div class="caja ojo"><b class="t">Así sabes que quedó bien</b>Salen 208, 66 y 70, y las palabras clave aciertan 56 de 66. Si no coincide, algo cambió en el archivo o en la semilla.</div>
+<div class="caja cuida"><b class="t">Cuida la prueba</b>La prueba queda sin abrir. Hoy se decide solo con validación. Cada decisión tomada mirando la prueba la gasta.</div>
+  </section>
+
+  <section class="paso" id="p3">
+    <h2><span class="num">3</span>Entiende los tres caminos antes de ejecutar</h2>
+    <p class="meta">15 min</p>
+    
+<p><b>Qué haces.</b> Lees la tabla y escribes cuál crees que funcionará mejor en tus 66 mensajes y por qué. Esa suposición es tu hipótesis de partida.</p>
+<div class='tabla-scroll'><table><thead><tr><th>Camino</th><th>Qué cambia</th><th>Qué necesita</th><th>Riesgo principal</th></tr></thead><tbody><tr><td><b>A · Tal cual</b></td><td>Nada del modelo. Cambias etiquetas, plantilla o prompt.</td><td>Ninguna etiqueta propia.</td><td>No se adapta a tu jerga.</td></tr><tr><td><b>B · Salida entrenada sobre representaciones congeladas</b></td><td>Una capa pequeña. El modelo grande queda congelado.</td><td>Cientos de ejemplos etiquetados.</td><td>Sobreajuste con pocos datos o duplicados.</td></tr><tr><td><b>C · Afinar parte del modelo</b></td><td>Las últimas capas: millones de parámetros.</td><td>Miles de ejemplos, GPU y tiempo.</td><td>Costo y olvidar lo aprendido.</td></tr></tbody></table></div>
+<div class="caja ojo"><b class="t">Un cambio a la vez</b>Cada prueba cambia una sola cosa. Si cambias las etiquetas y la plantilla a la vez, no sabrás cuál movió el resultado. El notebook lleva un cuaderno de experimentos (<code>LOG</code>) y anota cada prueba con su único cambio.</div>
+<div class="caja cuida"><b class="t">Hoy ejecutamos A y B</b>El camino C solo se diseña. No se entrena y no se cuenta como hecho.</div>
+  </section>
+
+  <section class="paso" id="p4">
+    <h2><span class="num">4</span>Camino A: el modelo tal cual</h2>
+    <p class="meta">20 min</p>
+    
+<p><b>Qué haces.</b> Mides el modelo de la clase 4 en los 66 mensajes de validación y cambias <b>solo el nombre de las etiquetas</b> para ver si el nombre importa.</p>
+<p>El modelo es <code>Recognai/bert-base-spanish-wwm-cased-xnli</code>: BETO (BERT en español), ajustado para inferencia de lenguaje natural, con tres etiquetas de origen (entailment, neutral, contradiction). Con <i>zero-shot</i> arma una hipótesis por cada clase («Este ejemplo es envío.») y mide cuál se sigue más del mensaje. No se entrena nada.</p>
+<h3>4.1 El modelo tal cual</h3>
+<div class="copiable" data-copy><span class="rot">Celda de código</span>PLANTILLA = &quot;Este ejemplo es {}.&quot;
+MODELO_NLI = &quot;Recognai/bert-base-spanish-wwm-cased-xnli&quot;
+
+if os.path.exists(&quot;predicciones_base.csv&quot;):
+    base = pd.read_csv(&quot;predicciones_base.csv&quot;)[[&quot;id&quot;, &quot;pred_modelo&quot;, &quot;confianza&quot;]]
+    va = va.merge(base, on=&quot;id&quot;, how=&quot;left&quot;)
+    print(&quot;Usé predicciones_base.csv de la clase 4.&quot;)
+else:
+    clf = pipeline(&quot;zero-shot-classification&quot;, model=MODELO_NLI, device=0 if torch.cuda.is_available() else -1)
+    t0 = time.time()
+    res = clf(va[&quot;mensaje&quot;].tolist(), candidate_labels=CLASES, hypothesis_template=PLANTILLA, batch_size=16)
+    va[&quot;pred_modelo&quot;] = [r[&quot;labels&quot;][0] for r in res]
+    va[&quot;confianza&quot;] = [round(r[&quot;scores&quot;][0], 3) for r in res]
+    print(f&quot;Calculé {len(va)} predicciones en {time.time() - t0:.0f} s.&quot;)
+
+registrar(&quot;A0 modelo tal cual&quot;, &quot;punto de partida (plantilla «Este ejemplo es {}.», etiquetas originales)&quot;, va[&quot;etiqueta&quot;], va[&quot;pred_modelo&quot;])
+registrar(&quot;referencia: palabras clave&quot;, &quot;no es un modelo, solo la regla a mano&quot;, va[&quot;etiqueta&quot;], va[&quot;pred_palabras&quot;])
+pd.DataFrame(LOG)</div>
+
+<h3>4.2 Un único cambio: el nombre de las etiquetas</h3>
+<p>Antes de ejecutar, escribe si crees que mejorará, empeorará o dará igual.</p>
+<div class="copiable" data-copy><span class="rot">Celda de código</span>ETIQ_ALT = {&quot;facturación&quot;: &quot;cobros y facturas&quot;, &quot;envío&quot;: &quot;entrega del pedido&quot;, &quot;devolución&quot;: &quot;devolver o cambiar el producto&quot;}
+inversa = {v: k for k, v in ETIQ_ALT.items()}
+
+if &quot;clf&quot; not in globals():
+    clf = pipeline(&quot;zero-shot-classification&quot;, model=MODELO_NLI, device=0 if torch.cuda.is_available() else -1)
+res_alt = clf(va[&quot;mensaje&quot;].tolist(), candidate_labels=list(ETIQ_ALT.values()), hypothesis_template=PLANTILLA, batch_size=16)
+va[&quot;pred_modelo_alt&quot;] = [inversa[r[&quot;labels&quot;][0]] for r in res_alt]
+
+registrar(&quot;A1 etiquetas con otras palabras&quot;, &quot;solo cambia el nombre de las etiquetas&quot;, va[&quot;etiqueta&quot;], va[&quot;pred_modelo_alt&quot;])
+cambiaron = int((va[&quot;pred_modelo&quot;] != va[&quot;pred_modelo_alt&quot;]).sum())
+print(&quot;Mensajes cuya predicción cambió:&quot;, cambiaron, &quot;de&quot;, len(va))
+pd.DataFrame(LOG)</div>
+
+<div class="caja ojo"><b class="t">Cómo se lee</b>Mira cuántos mensajes <b>cambiaron de predicción</b>, no solo cuántos aciertos hay. Pueden cambiar 8 y que el acierto quede igual, porque unos mejoran y otros empeoran. Con 66 mensajes, dos o tres aciertos de diferencia pueden ser azar.</div>
+<div class="caja ojo"><b class="t">Así sabes que quedó bien</b>El cuaderno <code>LOG</code> tiene tres filas: A0, la referencia de palabras clave y A1, cada una con su único cambio.</div>
+  </section>
+
+  <section class="paso" id="p5">
+    <h2><span class="num">5</span>Camino A con ejemplos en el prompt</h2>
+    <p class="meta">15 min</p>
+    
+<p><b>Qué haces.</b> Le das al chat de IA generativa 9 ejemplos con su etiqueta antes de los mensajes. El chat no cambia sus parámetros: solo lee tus ejemplos como parte de su contexto. Los ejemplos salen <b>solo del entrenamiento</b>, así la validación sigue limpia.</p>
+<div class="copiable" data-copy><span class="rot">Celda de código</span>ejemplos = (ent[ent[&quot;ambiguo&quot;] == 0].groupby(&quot;etiqueta&quot;).sample(3, random_state=SEMILLA)
+            .sample(frac=1, random_state=SEMILLA))
+bloque_ej = &quot;\n&quot;.join(f&quot;Mensaje: {m}\nEtiqueta: {e}\n&quot; for m, e in zip(ejemplos[&quot;mensaje&quot;], ejemplos[&quot;etiqueta&quot;]))
+
+PROMPT = f&quot;&quot;&quot;Clasifica cada mensaje de servicio al cliente de una tienda en línea ficticia.
+Etiquetas posibles: facturación, envío, devolución.
+Responde solo con una línea por mensaje, con el formato &quot;número: etiqueta&quot;. Sin explicaciones.
+
+Ejemplos:
+
+{bloque_ej}
+Mensajes por clasificar:
+&quot;&quot;&quot;
+
+lote = va.sample(30, random_state=SEMILLA).reset_index(drop=True)
+texto_lote = &quot;\n&quot;.join(f&quot;{i + 1}. {m}&quot; for i, m in enumerate(lote[&quot;mensaje&quot;]))
+print(PROMPT + texto_lote)
+print(&quot;\n--- Tokens aproximados del prompt:&quot;, len((PROMPT + texto_lote).split()) * 2, &quot;---&quot;)</div>
+
+<ol>
+<li>Copia todo lo que imprime la celda (prompt y lote de 30 mensajes) y pégalo en Claude, ChatGPT o Gemini. Solo datos ficticios.</li>
+<li>Copia la respuesta del chat y pégala entre las comillas de <code>RESPUESTA_CHAT</code>, una línea por mensaje (por ejemplo, <code>1: envío</code>).</li>
+<li>Ejecuta la celda.</li>
+</ol>
+<div class="copiable" data-copy><span class="rot">Celda de código</span># Pega entre las comillas la respuesta de tu chat (una línea por mensaje, por ejemplo &quot;1: envío&quot;).
+RESPUESTA_CHAT = &quot;&quot;&quot;
+
+&quot;&quot;&quot;
+
+def leer_respuesta(texto, n):
+    quitar = str.maketrans(&quot;áéíóú&quot;, &quot;aeiou&quot;)
+    salida = [&quot;sin clasificar&quot;] * n
+    for num, palabra in re.findall(r&quot;(\d+)\s*[:.\-)]\s*([A-Za-zÁÉÍÓÚáéíóúñ]+)&quot;, texto):
+        i = int(num) - 1
+        for c in CLASES:
+            if palabra.lower().translate(quitar) == c.translate(quitar) and 0 &lt;= i &lt; n:
+                salida[i] = c
+    return salida
+
+if RESPUESTA_CHAT.strip():
+    lote[&quot;pred_chat&quot;] = leer_respuesta(RESPUESTA_CHAT, len(lote))
+    lote[&quot;pred_palabras&quot;] = lote[&quot;mensaje&quot;].apply(por_palabras)
+    lote[&quot;pred_modelo&quot;] = va.set_index(&quot;id&quot;).loc[lote[&quot;id&quot;], &quot;pred_modelo&quot;].values
+    print(&quot;Etiquetas no reconocidas:&quot;, int((lote[&quot;pred_chat&quot;] == &quot;sin clasificar&quot;).sum()))
+    registrar(&quot;A2 chat con 9 ejemplos en el prompt (lote de 30)&quot;, &quot;se agregan ejemplos al prompt&quot;, lote[&quot;etiqueta&quot;], lote[&quot;pred_chat&quot;])
+    print(pd.DataFrame([resumen(lote[&quot;etiqueta&quot;], lote[&quot;pred_palabras&quot;], &quot;palabras clave&quot;),
+                        resumen(lote[&quot;etiqueta&quot;], lote[&quot;pred_modelo&quot;], &quot;modelo preentrenado (zero-shot)&quot;),
+                        resumen(lote[&quot;etiqueta&quot;], lote[&quot;pred_chat&quot;], &quot;chat con ejemplos&quot;)]))
+else:
+    print(&quot;Pega la respuesta de tu chat arriba y vuelve a ejecutar esta celda.&quot;)</div>
+
+<div class="caja ojo"><b class="t">Cómo se lee</b>Con 30 mensajes, un acierto son 3 puntos porcentuales: no declares ganador. Si en la clase 4 hiciste este lote <b>sin ejemplos</b>, compara: es la forma justa de saber si los ejemplos ayudaron. Anota el nombre y la versión del chat; puede variar de una vez a otra.</div>
+<div class="caja cuida"><b class="t">Tokens y contexto</b>Los 9 ejemplos ocupan parte del contexto del chat y cuestan tokens. Un prompt más largo no siempre rinde más.</div>
+  </section>
+
+  <section class="paso" id="p6">
+    <h2><span class="num">6</span>Camino B: de un mensaje a una lista de números</h2>
+    <p class="meta">20 min</p>
+    
+<p><b>Qué haces.</b> Conviertes cada mensaje en un vector de 384 números con un modelo que queda <b>congelado</b>.</p>
+<h3>6.1 Qué es una representación</h3>
+<p>Un <i>encoder</i> convierte una frase en una lista de números (un vector). Frases con el mismo significado quedan con vectores parecidos aunque usen otras palabras. Si no actualizamos ningún parámetro del encoder, decimos que está <b>congelado</b>.</p>
+<h3>6.2 El modelo, con su ficha</h3>
+<div class='tabla-scroll'><table><thead><tr><th>Pregunta</th><th>Respuesta</th></tr></thead><tbody><tr><td>Nombre</td><td><code>sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2</code></td></tr><tr><td>¿Qué es?</td><td>Un encoder de la familia BERT con 12 capas y unos 118 millones de parámetros. Devuelve 384 números por frase.</td></tr><tr><td>¿Idioma?</td><td>50 idiomas, entre ellos español.</td></tr><tr><td>¿Para qué se entrenó?</td><td>Para que frases con el mismo significado queden cerca entre sí (similitud de oraciones).</td></tr><tr><td>¿Qué NO tiene?</td><td>Ninguna salida de clases: no sabe qué es «facturación» ni «envío».</td></tr><tr><td>Licencia y tamaño</td><td>Apache 2.0, unos 470 MB. Lee hasta 128 tokens.</td></tr></tbody></table></div>
+<p>Es distinto al modelo de la clase 4: aquel decide si una hipótesis se sigue del mensaje; este solo produce vectores.</p>
+<h3>6.3 Cargarlo y congelarlo</h3>
+<div class="copiable" data-copy><span class="rot">Celda de código</span>MODELO_EMB = &quot;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&quot;
+tok_emb = AutoTokenizer.from_pretrained(MODELO_EMB)
+enc = AutoModel.from_pretrained(MODELO_EMB)
+enc.eval()
+for p in enc.parameters():
+    p.requires_grad = False          # congelado: ningún parámetro del modelo se va a actualizar
+
+total = sum(p.numel() for p in enc.parameters())
+entrenables = sum(p.numel() for p in enc.parameters() if p.requires_grad)
+print(f&quot;Parámetros del modelo: {total / 1e6:.0f} millones | entrenables ahora: {entrenables}&quot;)</div>
+
+<div class="caja ojo"><b class="t">Así sabes que quedó bien</b>Dice «Parámetros del modelo: 118 millones | entrenables ahora: 0». La primera vez descarga el modelo; sigue leyendo mientras carga.</div>
+<h3>6.4 De texto a vector</h3>
+<p>El modelo da un vector por cada token. Se promedian los de la frase (ignorando el relleno) y queda uno por mensaje, que es lo que recomienda la ficha del modelo.</p>
+<div class="copiable" data-copy><span class="rot">Celda de código</span>def incrustar(textos, lote=32):
+    &quot;&quot;&quot;Devuelve una matriz (mensajes x 384) con el vector de cada mensaje.&quot;&quot;&quot;
+    salidas = []
+    for i in range(0, len(textos), lote):
+        ent_ = tok_emb(textos[i:i + lote], padding=True, truncation=True, max_length=128, return_tensors=&quot;pt&quot;)
+        with torch.no_grad():
+            h = enc(**ent_).last_hidden_state                 # (frases, tokens, 384)
+        m = ent_[&quot;attention_mask&quot;].unsqueeze(-1).float()      # 1 en tokens reales, 0 en relleno
+        salidas.append(((h * m).sum(1) / m.sum(1)).numpy())   # promedio sobre los tokens reales
+    return np.vstack(salidas)
+
+t0 = time.time()
+X = incrustar(df[&quot;mensaje&quot;].tolist())
+print(f&quot;Matriz de representaciones: {X.shape} en {time.time() - t0:.0f} s&quot;)
+print(&quot;Primeros 5 números del primer mensaje:&quot;, np.round(X[0, :5], 3))</div>
+
+<h3>6.5 ¿Se parecen los vectores de frases con el mismo significado?</h3>
+<p>La <b>similitud coseno</b> vale 1 si dos vectores apuntan en la misma dirección. Escribe antes cuáles esperas que sean mayores.</p>
+<div class="copiable" data-copy><span class="rot">Celda de código</span>def coseno(a, b):
+    return float(a @ b / (np.linalg.norm(a) * np.linalg.norm(b)))
+
+par = incrustar([&quot;me cobraron dos veces el pedido&quot;, &quot;me hicieron un cargo doble por la compra&quot;, &quot;mi paquete no ha llegado todavía&quot;])
+print(&quot;cobro doble  vs  cargo doble :&quot;, round(coseno(par[0], par[1]), 2), &quot;(mismo significado, otras palabras)&quot;)
+print(&quot;cobro doble  vs  paquete     :&quot;, round(coseno(par[0], par[2]), 2), &quot;(otro tema)&quot;)</div>
+
+<div class="caja ojo"><b class="t">Cómo se lee</b>Si «cobro doble» y «cargo doble» salen con una similitud claramente mayor que «cobro doble» y «paquete», el vector está recogiendo el significado, no solo las palabras.</div>
+  </section>
+
+  <section class="paso" id="p7">
+    <h2><span class="num">7</span>Entrena la salida y mide cuánto confiar</h2>
+    <p class="meta">25 min</p>
+    
+<p><b>Qué haces.</b> Entrenas una capa pequeña encima de los vectores y la mides en validación.</p>
+<h3>7.1 Entrenar con los 208 mensajes</h3>
+<p>Una <b>regresión logística</b> multiplica el vector de 384 números por una matriz de pesos y da una probabilidad por clase: 384 × 3 + 3 = 1.155 números por aprender, contra 118 millones que no se tocan.</p>
+<div class="copiable" data-copy><span class="rot">Celda de código</span>y = df[&quot;etiqueta&quot;].values
+m_ent = (df[&quot;conjunto&quot;] == &quot;entrenamiento&quot;).values
+m_val = (df[&quot;conjunto&quot;] == &quot;validación&quot;).values
+
+cabeza = LogisticRegression(max_iter=2000, C=1.0)
+cabeza.fit(X[m_ent], y[m_ent])
+va[&quot;pred_B1&quot;] = cabeza.predict(X[m_val])
+
+print(&quot;Números que se entrenaron:&quot;, cabeza.coef_.size + cabeza.intercept_.size, &quot;| los del modelo grande, congelados:&quot;, f&quot;{total / 1e6:.0f} millones&quot;)
+registrar(&quot;B1 salida logística sobre representaciones congeladas&quot;, &quot;se entrena una salida con los 208 mensajes de entrenamiento (C=1)&quot;, va[&quot;etiqueta&quot;], va[&quot;pred_B1&quot;])
+print(classification_report(va[&quot;etiqueta&quot;], va[&quot;pred_B1&quot;], labels=CLASES, zero_division=0))
+pd.DataFrame(LOG)</div>
+
+<h3>7.2 ¿Cuántos datos hacen falta y cuánto es azar?</h3>
+<p>Entrenamos cinco veces con el 25 %, el 50 % y el 100 % del entrenamiento. Mira el rango (mínimo y máximo) de cada fila: eso es lo que no puedes distinguir de una mejora real.</p>
+<div class="copiable" data-copy><span class="rot">Celda de código</span>rng = np.random.RandomState(SEMILLA)
+idx_ent = np.where(m_ent)[0]
+filas = []
+for frac in [0.25, 0.5, 1.0]:
+    ks = []
+    for rep in range(5):
+        n = int(frac * len(idx_ent))
+        sel = idx_ent if frac == 1.0 else rng.choice(idx_ent, size=n, replace=False)
+        mod_ = LogisticRegression(max_iter=2000).fit(X[sel], y[sel])
+        ks.append(int((mod_.predict(X[m_val]) == y[m_val]).sum()))
+    filas.append({&quot;datos de entrenamiento&quot;: f&quot;{int(frac * 100)} % ({int(frac * len(idx_ent))} mensajes)&quot;,
+                  &quot;aciertos (mín - máx)&quot;: f&quot;{min(ks)} - {max(ks)} de {int(m_val.sum())}&quot;})
+pd.DataFrame(filas)</div>
+
+<h3>7.3 Un único cambio más: la regularización C</h3>
+<p>Un valor bajo de <code>C</code> hace que la salida se aferre menos a los datos de entrenamiento. Todo lo demás queda igual que en B1.</p>
+<div class="copiable" data-copy><span class="rot">Celda de código</span>for C_ in [0.1, 10.0]:
+    mod_ = LogisticRegression(max_iter=2000, C=C_).fit(X[m_ent], y[m_ent])
+    p = mod_.predict(X[m_val])
+    registrar(f&quot;B2 salida logística con C={C_}&quot;, f&quot;solo cambia C (de 1 a {C_})&quot;, va[&quot;etiqueta&quot;], p)
+pd.DataFrame(LOG)</div>
+
+<div class="caja ojo"><b class="t">Cómo se lee</b>Si con la mitad de los datos se obtiene casi lo mismo, conseguir más etiquetas no es lo urgente. Si los rangos de dos opciones se solapan, la diferencia no sostiene una decisión.</div>
+<div class="caja cuida"><b class="t">Una salida entrenada también puede engañarte</b>Con pocos datos aprende atajos, y si un mensaje de validación tiene gemelo en entrenamiento, el acierto sale inflado. Por eso la partición va por grupo.</div>
+  </section>
+
+  <section class="paso" id="p8">
+    <h2><span class="num">8</span>Camino C: se diseña, no se entrena</h2>
+    <p class="meta">10 min</p>
+    
+<p><b>Qué haces.</b> Calculas cuánto costaría afinar parte del modelo, sin entrenar nada.</p>
+<div class="copiable" data-copy><span class="rot">Celda de código</span>def parametros(*prefijos):
+    return sum(p.numel() for n, p in enc.named_parameters() if any(n.startswith(x) for x in prefijos))
+
+salida_p = 384 * 3 + 3
+ultimas2 = parametros(&quot;encoder.layer.10.&quot;, &quot;encoder.layer.11.&quot;)
+filas = []
+for nombre, entrenables_ in [(&quot;B · solo la salida&quot;, salida_p),
+                             (&quot;C1 · últimas 2 capas + salida&quot;, ultimas2 + salida_p),
+                             (&quot;C2 · todo el modelo + salida&quot;, total + salida_p)]:
+    # Estimación en float32: pesos (4 B) + por cada parámetro entrenable, gradiente (4 B) y dos estados de Adam (8 B)
+    mb = (total * 4 + entrenables_ * 12) / 1e6
+    filas.append({&quot;camino&quot;: nombre, &quot;parámetros que se actualizan&quot;: f&quot;{entrenables_:,}&quot;.replace(&quot;,&quot;, &quot;.&quot;),
+                  &quot;% del modelo&quot;: f&quot;{100 * entrenables_ / total:.2f} %&quot;, &quot;memoria aprox. (MB)&quot;: round(mb)})
+pd.DataFrame(filas)</div>
+
+<div class="caja ojo"><b class="t">Cómo se lee</b>La memoria es una estimación en float32 con el optimizador Adam, sin contar activaciones. Sirve para ver el orden de magnitud: afinar pasa de miles de números a millones.</div>
+<p><b>Qué haría falta para justificar C:</b></p>
+<ul class="check">
+<li>Un tipo de error concreto que esperas arreglar, con ejemplos (no «mejorar en general»).</li>
+<li>Suficientes ejemplos por clase y sin casi-duplicados entre conjuntos.</li>
+<li>Un punto de partida guardado para volver atrás, y una prueba que no hayas mirado.</li>
+</ul>
+<div class="caja cuida"><b class="t">Regla de honestidad</b>Si no entrenaste algo, no lo cuentes como hecho. En tu ficha, el camino C queda como <i>diseño</i>, no como resultado.</div>
+  </section>
+
+  <section class="paso" id="p9">
+    <h2><span class="num">9</span>Compara y mira qué errores cambian</h2>
+    <p class="meta">15 min</p>
+    
+<p><b>Qué haces.</b> Comparas el modelo tal cual (A0) con la salida entrenada (B1) mensaje por mensaje.</p>
+<div class="copiable" data-copy><span class="rot">Celda de código</span>tabla = pd.DataFrame([
+    resumen(va[&quot;etiqueta&quot;], va[&quot;pred_palabras&quot;], &quot;palabras clave&quot;),
+    resumen(va[&quot;etiqueta&quot;], va[&quot;pred_modelo&quot;], &quot;A0 · modelo tal cual&quot;),
+    resumen(va[&quot;etiqueta&quot;], va[&quot;pred_modelo_alt&quot;], &quot;A1 · otras palabras en las etiquetas&quot;),
+    resumen(va[&quot;etiqueta&quot;], va[&quot;pred_B1&quot;], &quot;B1 · salida entrenada (representaciones congeladas)&quot;),
+])
+print(tabla.to_string(index=False))
+
+err_A = set(va.loc[va[&quot;pred_modelo&quot;] != va[&quot;etiqueta&quot;], &quot;id&quot;])
+err_B = set(va.loc[va[&quot;pred_B1&quot;] != va[&quot;etiqueta&quot;], &quot;id&quot;])
+print()
+print(&quot;Errores de A0:&quot;, len(err_A), &quot;| de B1:&quot;, len(err_B))
+print(&quot;Los arregló B1:&quot;, len(err_A - err_B), &quot;| los dañó B1 (errores nuevos):&quot;, len(err_B - err_A), &quot;| persisten:&quot;, len(err_A &amp; err_B))</div>
+
+<p>Después miras los errores que persisten: los que ni el modelo ni la salida entrenada aciertan.</p>
+<div class="copiable" data-copy><span class="rot">Celda de código</span>persisten = va[va[&quot;id&quot;].isin(err_A &amp; err_B)]
+persisten[[&quot;id&quot;, &quot;mensaje&quot;, &quot;etiqueta&quot;, &quot;etiqueta_revisor2&quot;, &quot;ambiguo&quot;, &quot;pred_modelo&quot;, &quot;pred_B1&quot;]]</div>
+
+<div class="caja ojo"><b class="t">Cómo se lee</b>
+<ul>
+<li><b>Los arregló B:</b> la señal a favor de entrenar una salida.</li>
+<li><b>Los dañó B:</b> errores nuevos. Si son tantos como los que arregló, la diferencia de aciertos no sostiene una decisión.</li>
+<li><b>Persisten:</b> si el segundo revisor puso otra clase (<code>etiqueta_revisor2</code>) o el mensaje es ambiguo, el problema es de etiquetas y cambiar de modelo no ayuda.</li>
+</ul></div>
+<p>Piensa en tus dos errores de la clase 4: ¿siguen estando? ¿Qué camino los arreglaría?</p>
+  </section>
+
+  <section class="paso" id="p10">
+    <h2><span class="num">10</span>Cómo empezar con otro modelo de Hugging Face</h2>
+    <p class="meta">15 min</p>
+    
+<p><b>Qué haces.</b> Pruebas, con tus propios mensajes, otro modelo que conviertan frases en vectores. El resto del notebook no cambia.</p>
+<ol>
+<li>Entra a <code>huggingface.co/models</code>. Filtra por <b>Tarea</b> (<i>Sentence Similarity</i> o <i>Feature Extraction</i>) y por <b>Idioma</b> (Spanish).</li>
+<li>Abre la ficha y responde: ¿idioma?, ¿para qué se entrenó?, ¿cuántos tokens lee como máximo?, ¿qué tamaño tiene?, ¿qué licencia?</li>
+<li>Copia el nombre <code>autor/nombre</code>.</li>
+<li>En la celda de la sección 6.3, cambia solo el texto de <code>MODELO_EMB</code>. Vuelve a ejecutar desde ahí hasta la Parte 7.</li>
+</ol>
+<div class="copiable" data-copy><span class="rot">Qué cambiar</span>MODELO_EMB = "autor/nombre-del-modelo"   # el único cambio</div>
+<div class="caja ojo"><b class="t">Cómo se lee</b>Anota en <code>LOG</code> que el único cambio fue el modelo. El tamaño del vector puede ser distinto (por ejemplo 768 en vez de 384): la salida se entrena igual, pero el conteo de números que aprende cambia.</div>
+<div class="caja cuida"><b class="t">Si no responde bien</b>Algunos modelos piden un formato especial del texto o más memoria. Si un modelo no carga o tarda demasiado, vuelve al anterior: cambiar de modelo es una prueba más, no una obligación.</div>
+  </section>
+
+  <section class="paso" id="p11">
+    <h2><span class="num">11</span>Escribe tu ficha de hipótesis</h2>
+    <p class="meta">25 min</p>
+    
+<p><b>Qué haces.</b> Escribes qué vas a cambiar, qué esperas que pase y cómo vas a decidir, <b>antes de ejecutar</b>.</p>
+<ol>
+<li>Mira tus dos errores de la clase 4 y escoge uno.</li>
+<li>Decide un camino (A, B o C) y <b>un único cambio</b>.</li>
+<li>Escribe la hipótesis con «si, entonces, porque».</li>
+<li>Escribe el criterio de decisión: cuántos aciertos de diferencia y en cuántas repeticiones te harían preferir la opción.</li>
+</ol>
+<div class='tabla-scroll'><table><thead><tr><th>Mal escrita</th><th>Bien escrita</th></tr></thead><tbody><tr><td>«Con otro modelo va a mejorar.»</td><td>«Si entrenamos una salida sobre los vectores con los 208 mensajes, bajarán los errores por negación, porque los vectores separan mejor el tema que las palabras sueltas.»</td></tr></tbody></table></div>
+<p>Completa la celda. Si dejas un campo vacío, te avisa cuál falta.</p>
+<div class="copiable" data-copy><span class="rot">Celda de código</span>HIPOTESIS = {
+    &quot;camino&quot;: &quot;&quot;,                       # A, B o C
+    &quot;hipotesis&quot;: &quot;&quot;,                    # &quot;Si [cambio], entonces [qué error baja] porque [razón]&quot;
+    &quot;un_solo_cambio&quot;: &quot;&quot;,               # exactamente una cosa
+    &quot;lo_que_queda_igual&quot;: [&quot;partición por grupo&quot;, &quot;semilla 1540&quot;, &quot;66 mensajes de validación&quot;],
+    &quot;error_que_se_espera_arreglar&quot;: &quot;&quot;, # id y tipo de error (modelo, etiqueta o alcance)
+    &quot;medida&quot;: &quot;&quot;,                       # por ejemplo, aciertos en validación y cuáles de los dos errores cambian
+    &quot;criterio_de_decision&quot;: &quot;&quot;,         # escrito ANTES de ejecutar
+    &quot;riesgos&quot;: &quot;&quot;,                      # por ejemplo, sobreajuste, casi-duplicados, pocos datos
+    &quot;lo_que_no_afirmo&quot;: &quot;&quot;,             # lo que aún no puedes decir con estos datos
+    &quot;prueba&quot;: &quot;sin abrir hasta la comparación final&quot;,
+}
+
+faltan = [k for k, v in HIPOTESIS.items() if v in (&quot;&quot;, [])]
+print(&quot;Campos por completar:&quot;, faltan if faltan else &quot;ninguno&quot;)
+
+ficha = {
+    &quot;datos&quot;: {&quot;archivo&quot;: &quot;mensajes_servicio.csv&quot;, &quot;semilla&quot;: SEMILLA, &quot;partición&quot;: df[&quot;conjunto&quot;].value_counts().to_dict()},
+    &quot;hipotesis&quot;: HIPOTESIS,
+    &quot;experimentos&quot;: LOG,
+}
+with open(&quot;hipotesis_experimento.json&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as f:
+    json.dump(ficha, f, ensure_ascii=False, indent=2)
+pd.DataFrame(LOG).to_csv(&quot;registro_experimentos.csv&quot;, index=False)
+print(json.dumps(ficha[&quot;hipotesis&quot;], ensure_ascii=False, indent=2))</div>
+
+<div class="caja haz"><b class="t">Ejemplo (escenario ficticio)</b>
+<ul>
+<li><b>Camino:</b> B.</li>
+<li><b>Un solo cambio:</b> pasar de zero-shot a una salida logística, con el mismo encoder y los mismos datos.</li>
+<li><b>Medida y criterio:</b> aciertos de 66; se prefiere si gana por 5 o más y se mantiene con el 50 % de los datos.</li>
+<li><b>No afirmo:</b> que funcione con mensajes de otra tienda ni con la prueba, que no se ha abierto.</li>
+</ul></div>
+<div class="caja ojo"><b class="t">Así sabes que quedó bien</b>La celda dice «Campos por completar: ninguno» y crea <code>hipotesis_experimento.json</code> y <code>registro_experimentos.csv</code>.</div>
+  </section>
+
+  <section class="paso" id="fallas">
+    <h2>Si algo sale mal</h2>
+    
+<h3>La celda del modelo se queda cargando</h3>
+<p>La primera vez descarga cientos de MB. Espera unos minutos. Si pasan más de diez, reinicia la sesión (Entorno de ejecución → Reiniciar sesión) y ejecuta desde la Parte 0.</p>
+<h3>Colab dice que se quedó sin memoria</h3>
+<p>Reinicia la sesión y ejecuta desde la Parte 0. Cierra otras pestañas con modelos. Con GPU, la memoria del encoder no es el problema; con muchos mensajes sí puede serlo: baja <code>lote</code> de 32 a 8.</p>
+<h3>Un modelo no se descarga</h3>
+<p>Reintenta la celda. Si sigue, continúa con el camino A y las referencias: los pasos 4, 5 y 9 funcionan sin el encoder.</p>
+<h3>El chat no sigue el formato</h3>
+<p>Repite la instrucción: «Responde solo con líneas del tipo <code>1: envío</code>». La celda lee lo que reconoce y marca el resto como «sin clasificar».</p>
+<h3>Los números no coinciden con los de otra persona</h3>
+<p>Pequeñas diferencias son normales si la versión de <code>transformers</code> o <code>scikit-learn</code> es distinta. Lo importante es que anotes la versión y que cada comparación use el mismo código y los mismos mensajes.</p>
+<h3>La Parte 8 dice «Campos por completar»</h3>
+<p>No es un error: te avisa qué falta. Llena esos campos y vuelve a ejecutar la celda.</p>
+  </section>
+
+  <section class="paso" id="glosario">
+    <h2>Glosario y lista final</h2>
+    
+<div class="cuadro">
+<p><b>Transferencia:</b> usar lo que un modelo ya aprendió para una tarea nueva.</p>
+<p><b>Representación (vector, embedding):</b> lista de números que resume el significado de un texto.</p>
+<p><b>Congelar:</b> dejar sin actualizar los parámetros de un modelo.</p>
+<p><b>Regresión logística:</b> una capa que convierte un vector en una probabilidad por clase.</p>
+<p><b>Parámetro:</b> un número del modelo que se ajusta al entrenar.</p>
+<p><b>Afinar (fine-tuning):</b> entrenar también algunas capas del modelo grande.</p>
+<p><b>Regularización (C):</b> qué tanto se aferra la salida a los datos de entrenamiento.</p>
+<p><b>Similitud coseno:</b> qué tan parecidos son dos vectores (1 = misma dirección).</p>
+<p><b>Sobreajuste:</b> aprender atajos del entrenamiento que no sirven con mensajes nuevos.</p>
+<p><b>Hipótesis:</b> qué cambio haces, qué esperas que pase y por qué, escrito antes de ejecutar.</p>
+</div>
+<div class="caja haz"><b class="t">Lo que debes guardar</b>
+<ul class="check">
+<li>El notebook con tus celdas ejecutadas.</li>
+<li><code>hipotesis_experimento.json</code> y <code>registro_experimentos.csv</code>.</li>
+<li>Las fichas de los dos modelos que usaste, con tus verificaciones.</li>
+<li>Tu cuaderno con lo que esperabas antes de cada celda y lo que viste.</li>
+<li>El nombre y la versión del chat que usaste.</li>
+</ul></div>
+  </section>
+
+</main>
+<footer>Estud-IA · Alcaldía de Medellín · Pablo Ríos Peña · Los ejemplos usan datos ficticios.</footer>
+<script>
+  document.querySelectorAll('.copiable[data-copy]').forEach(function (el) {
+    var b = document.createElement('button'); b.type = 'button'; b.textContent = 'Copiar';
+    b.addEventListener('click', function () {
+      var rot = el.querySelector('.rot'); var texto = el.innerText.replace(/^Copiar\s*/, '');
+      if (rot) texto = texto.replace(rot.innerText, '').replace(/^\s+/, '');
+      texto = texto.replace(/\s*Copiar\s*$/, '');
+      var listo = function () { b.textContent = 'Copiado'; setTimeout(function () { b.textContent = 'Copiar'; }, 1500); };
+      try { navigator.clipboard.writeText(texto).then(listo, function () { b.textContent = 'Selecciona y copia'; }); }
+      catch (e) { b.textContent = 'Selecciona y copia'; }
+    });
+    el.appendChild(b);
+  });
+</script>
+</body>
+</html>

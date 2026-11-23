@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<base href="/estudia-ia-intermedio/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Estud-IA · Inteligencia artificial, nivel intermedio · Clase 5</title>
+<link rel="stylesheet" href="estudia.css">
+<style>
+  .agenda small { display: inline !important; margin-left: 22px; font-size: .78em; }
+  .ruta-tag { display: inline-block; font-size: 30px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 6px 22px; border-radius: 8px; color: #fff; }
+  .ruta-tag--gen { background: var(--naranja); color: #000; }
+  .ruta-tag--ml { background: var(--magenta); }
+  .tabla { width: 100%; border-collapse: collapse; font-size: 30px; }
+  .tabla th { text-align: left; background: #000; color: #fff; padding: 14px 22px; font-size: 24px; letter-spacing: .1em; text-transform: uppercase; }
+  .tabla td { padding: 13px 22px; border-bottom: 2px solid rgb(0 0 0 / .12); vertical-align: top; line-height: 1.25; }
+  .tabla tbody tr:nth-child(even) td { background: var(--suave); }
+  .tabla td:first-child { font-weight: 700; }
+  .tabla .ok { color: #3d7a00; font-weight: 700; }
+  .tabla .mal { color: var(--magenta); font-weight: 700; }
+  .matriz { display: grid; grid-template-columns: repeat(5, 82px); gap: 6px; }
+  .matriz span { height: 82px; display: grid; place-items: center; font: 700 30px var(--font-code); }
+  .matriz .n { background: #000; color: #fff; }
+  .matriz .b { background: #fff; color: #000; outline: 3px solid #000; outline-offset: -3px; }
+  .codigo { margin: 0; padding: 24px 32px; background: var(--tinta); color: #e6e7ea; font: 24px/1.36 var(--font-code); border-top: 12px solid var(--naranja); white-space: pre; }
+  .codigo b { color: var(--naranja); font-weight: 400; }
+  .rail--c { margin-top: 20px !important; }
+  .rail--c b { font-size: 38px; margin-top: 16px; }
+  .rail--c span { font-size: 27px; margin-top: 6px; }
+  .tabla--c td { padding: 9px 18px; }
+  .tabla--c th { padding: 11px 18px; }
+  .cierre-linea { font-size: 38px; font-weight: 700; color: var(--tinta); margin-top: 26px; line-height: 1.25; }
+  a.enlace-guia { display: inline-block; background: var(--naranja); color: #000; font-weight: 700; padding: 16px 34px; border-radius: 10px; text-decoration: none; font-size: 38px; }
+  a.enlace-guia:hover { background: #ff9a4d; }
+</style>
+</head>
+<body>
+<div class="escenario">
+
+  <!-- 1 -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 130px">Estud-IA · Capa 2 · Nivel intermedio</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Inteligencia artificial</h1>
+      <p class="docente" style="font-size: 46px">Clase 5 · Decidir qué cambiar y diseñar el experimento</p>
+      <p class="docente" style="margin-top: 6px">Pablo Ríos Peña</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+  <!-- 2 -->
+  <section class="slide slide--ruta">
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Hoy</span>
+    <h2 class="titulo" style="font-size: 76px">Objetivos de esta sesión</h2>
+    <div class="rail rail--c" style="--n: 3; margin-top: 60px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Decidir</b><span>Escoger entre usar el modelo tal cual, entrenar una salida pequeña o afinar parte del modelo.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Probar</b><span>Cambiar una sola cosa a la vez y medir el efecto contra la referencia de la clase 4.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Escribir</b><span>Dejar una ficha de hipótesis que otra persona pueda repetir.</span></div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="slide slide--azul slide--ruta">
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Hoy · 3 horas</span>
+    <h2 class="titulo" style="font-size: 72px">Lo que vamos a hacer</h2>
+    <div class="dividido" style="grid-template-columns: 1.3fr 1fr; gap: 80px; align-items: start; margin-top: 6px">
+      <ol class="lista lista--num agenda" style="font-size: 30px; gap: 8px; margin-top: 0">
+        <li data-paso="1"><span>Retomamos la clase 4<small style="color: #cfd6ee">10 min</small></span></li>
+        <li data-paso="2"><span>A · Tres caminos para usar un modelo<small style="color: #cfd6ee">35 min</small></span></li>
+        <li data-paso="3"><span>B · Representaciones y salida entrenada<small style="color: #cfd6ee">25 min</small></span></li>
+        <li data-paso="4"><span>Pausa<small style="color: #cfd6ee">10 min</small></span></li>
+        <li data-paso="5"><span>C · Práctica: probar A y B<small style="color: #cfd6ee">55 min</small></span></li>
+        <li data-paso="6"><span>D · Diseñar el experimento<small style="color: #cfd6ee">40 min</small></span></li>
+        <li data-paso="7"><span>Tu ficha de hipótesis<small style="color: #cfd6ee">entra en D</small></span></li>
+        <li data-paso="8"><span>Cierre<small style="color: #cfd6ee">5 min</small></span></li>
+      </ol>
+      <div class="bloque bloque--tinta" data-paso="9" style="margin-top: 0">
+        <h3 style="font-size: 46px">Al terminar tendremos</h3>
+        <p>Dos caminos medidos con los mismos 66 mensajes de validación.</p>
+        <p>Un camino más solo diseñado, sin fingir que se entrenó.</p>
+        <p>Una ficha de hipótesis con un único cambio.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="slide slide--ruta">
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Retomamos la clase 4</span>
+    <h2 class="titulo" style="font-size: 66px">Qué traemos y qué decidimos</h2>
+    <div class="dos" style="margin-top: 40px; gap: 40px; flex: none">
+      <div class="bloque" data-paso="1" style="padding: 30px 38px; border-top-color: var(--negro)"><h3 style="font-size: 42px">Lo que tenemos</h3><p style="font-size: 31px">Una medición del modelo contra dos referencias, una partición por grupo (208, 66 y 70) y dos errores clasificados como del modelo, de etiqueta o de alcance.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 30px 38px; border-top-color: var(--negro)"><h3 style="font-size: 42px">Lo que decidimos hoy</h3><p style="font-size: 31px">Qué cambio probar primero. Si el error es de etiquetas, cambiar de modelo no ayuda. Si es del modelo, hay varios caminos y cuestan distinto.</p></div>
+    </div>
+    <table class="tabla" data-paso="3" style="margin-top: 18px; font-size: 28px">
+      <thead><tr><th style="width: 420px">Archivo de la clase 4</th><th>Para qué lo usamos hoy</th></tr></thead>
+      <tbody>
+        <tr><td>predicciones_base.csv</td><td style="font-weight: 400">Punto de partida: lo que el modelo respondió sin tocarlo.</td></tr>
+        <tr><td>protocolo_inicial.json</td><td style="font-weight: 400">Tus dos errores y el tipo de cambio que habías supuesto.</td></tr>
+      </tbody>
+    </table>
+    <p class="nota" data-paso="4" style="font-size: 27px; margin-top: 14px">Si no los tienes, el notebook de hoy recalcula lo necesario.</p>
+  </section>
+
+  <!-- 5 -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Tres caminos"></div>
+    <div class="seccion-num" style="color: var(--negro)">A</div>
+    <div class="seccion-info">
+      <h2 class="titulo" style="font-size: 100px">Tres caminos para usar un modelo</h2>
+      <p class="sub" style="font-size: 40px">Qué se cambia, qué cuesta y cuándo se justifica cada uno.</p>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Tres caminos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Qué es transferir</span>
+    <h2 class="titulo" style="font-size: 66px">Un modelo que ya sabe algo del idioma</h2>
+    <div class="tres" style="margin-top: 36px; gap: 34px; flex: none">
+      <div class="bloque" data-paso="1" style="padding: 28px 32px"><h3 style="font-size: 40px">Preentrenar</h3><p style="font-size: 30px">Alguien entrena un modelo grande con millones de textos. Tú no lo haces: lo descargas.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 28px 32px"><h3 style="font-size: 40px">Transferir</h3><p style="font-size: 30px">Usas lo que ese modelo ya aprendió del idioma para tu propia tarea y tus propias clases.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 28px 32px"><h3 style="font-size: 40px">Evaluar</h3><p style="font-size: 30px">Mides en tus 66 mensajes de validación si la transferencia funcionó, y dónde falla.</p></div>
+    </div>
+    <p class="cierre-linea" data-paso="4" style="color: var(--magenta)">La pregunta de hoy no es si usar IA, sino cuánto del modelo tocar.</p>
+  </section>
+
+  <!-- 7 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Tres caminos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · La decisión</span>
+    <h2 class="titulo" style="font-size: 66px">Tres caminos, cada uno con su costo</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 26px">
+      <thead><tr><th style="width: 360px">Camino</th><th style="width: 470px">Qué cambia</th><th style="width: 400px">Qué necesita</th><th>Riesgo principal</th></tr></thead>
+      <tbody>
+        <tr><td>A · Usar el modelo tal cual</td><td style="font-weight: 400">Nada del modelo. Cambias etiquetas, plantilla o prompt.</td><td style="font-weight: 400">Ninguna etiqueta propia.</td><td style="font-weight: 400">No se adapta a tu jerga.</td></tr>
+        <tr><td>B · Entrenar una salida pequeña</td><td style="font-weight: 400">Una capa pequeña sobre el modelo congelado.</td><td style="font-weight: 400">Cientos de ejemplos etiquetados.</td><td style="font-weight: 400">Sobreajuste con pocos datos o duplicados.</td></tr>
+        <tr><td>C · Afinar parte del modelo</td><td style="font-weight: 400">Las últimas capas: millones de parámetros.</td><td style="font-weight: 400">Miles de ejemplos, GPU y tiempo.</td><td style="font-weight: 400">Costo y olvidar lo aprendido.</td></tr>
+      </tbody>
+    </table>
+    <p class="nota" data-paso="2" style="font-size: 29px; margin-top: 16px; font-weight: 700">Hoy ejecutamos A y B. C solo se diseña: no se entrena y no se cuenta como hecho.</p>
+  </section>
+
+  <!-- 8 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Tres caminos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Camino A</span>
+    <h2 class="titulo" style="font-size: 66px">Camino A: tocar solo cómo lo usas</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 27px">
+      <thead><tr><th style="width: 390px">Qué cambias</th><th>Ejemplo</th><th style="width: 460px">Qué NO cambia</th></tr></thead>
+      <tbody>
+        <tr><td>El nombre de las etiquetas</td><td style="font-weight: 400">«devolución» pasa a «devolver o cambiar el producto».</td><td style="font-weight: 400">Ningún parámetro del modelo.</td></tr>
+        <tr><td>La plantilla de la hipótesis</td><td style="font-weight: 400">«Este ejemplo es {}.» pasa a «El cliente habla de {}.».</td><td style="font-weight: 400">Ningún parámetro del modelo.</td></tr>
+        <tr><td>El prompt de un chat</td><td style="font-weight: 400">Agregar 9 ejemplos con su etiqueta antes de los mensajes.</td><td style="font-weight: 400">Los pesos del chat. Solo cambia lo que lee.</td></tr>
+      </tbody>
+    </table>
+    <p class="nota" data-paso="2" style="font-size: 28px; margin-top: 16px">Es el camino más barato. Siempre se prueba primero, aunque no sea el que termines usando.</p>
+  </section>
+
+  <!-- 9 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Tres caminos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Camino B</span>
+    <h2 class="titulo" style="font-size: 58px">Camino B: una salida pequeña sobre un modelo congelado</h2>
+    <div class="tres" style="margin-top: 36px; gap: 34px; flex: none">
+      <div class="bloque" data-paso="1" style="padding: 28px 32px"><h3 style="font-size: 40px">Congelar</h3><p style="font-size: 30px">El modelo grande queda igual. Ningún parámetro se actualiza.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 28px 32px"><h3 style="font-size: 40px">Representar</h3><p style="font-size: 30px">Cada mensaje se convierte en una lista de 384 números que resume su significado.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 28px 32px"><h3 style="font-size: 40px">Entrenar la salida</h3><p style="font-size: 30px">Una capa pequeña aprende, con tus ejemplos, qué vectores son de cada clase.</p></div>
+    </div>
+    <p class="cierre-linea" data-paso="4" style="color: var(--magenta)">Son 1.155 números que aprender, contra unos 118 millones que no se tocan.</p>
+  </section>
+
+  <!-- 10 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Tres caminos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Camino C</span>
+    <h2 class="titulo" style="font-size: 66px">Camino C: lo que costaría afinar</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 28px">
+      <thead><tr><th style="width: 420px">Qué se actualiza</th><th style="width: 300px">Parámetros</th><th style="width: 280px">Parte del modelo</th><th>Memoria aprox. al entrenar</th></tr></thead>
+      <tbody>
+        <tr><td>Solo la salida (camino B)</td><td style="font-weight: 400">1.155</td><td style="font-weight: 400">0,00 %</td><td style="font-weight: 400">unos 470 MB</td></tr>
+        <tr><td>Últimas 2 capas + salida</td><td style="font-weight: 400">unos 3,5 millones</td><td style="font-weight: 400">3 %</td><td style="font-weight: 400">unos 510 MB</td></tr>
+        <tr><td>Todo el modelo + salida</td><td style="font-weight: 400">unos 118 millones</td><td style="font-weight: 400">100 %</td><td style="font-weight: 400">unos 1.900 MB</td></tr>
+      </tbody>
+    </table>
+    <p class="nota" data-paso="2" style="font-size: 25px; margin-top: 16px">Estimación en float32 con el optimizador Adam, sin contar activaciones. Muestra el orden de magnitud, no una cifra exacta.</p>
+    <p class="cierre-linea" data-paso="3" style="color: var(--magenta)">Afinar pasa de miles de números a millones. Antes hay que saber qué error se espera arreglar.</p>
+  </section>
+
+  <!-- 11 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Tres caminos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Un cambio a la vez</span>
+    <h2 class="titulo" style="font-size: 62px">Si cambias dos cosas, no sabes cuál funcionó</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 28px">
+      <thead><tr><th style="width: 560px">Qué cambias</th><th>Qué sabes después</th></tr></thead>
+      <tbody>
+        <tr><td>Etiquetas y plantilla a la vez</td><td style="font-weight: 400">Que algo cambió. No sabes cuál de las dos lo movió.</td></tr>
+        <tr><td>Solo el nombre de las etiquetas</td><td style="font-weight: 400">Si el nombre importa, con la misma plantilla y los mismos mensajes.</td></tr>
+        <tr><td>Modelo y datos de entrenamiento a la vez</td><td style="font-weight: 400">Nada claro: si mejora o empeora, hay dos causas posibles.</td></tr>
+      </tbody>
+    </table>
+    <p class="cierre-linea" data-paso="2" style="color: var(--magenta)">Cada prueba se anota con su único cambio. Ese cuaderno es el experimento.</p>
+  </section>
+
+  <!-- 12 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Tres caminos"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">A · Decidir con cuidado</span>
+    <h2 class="titulo" style="font-size: 70px">Tres reglas para no engañarte</h2>
+    <div class="tres" style="margin-top: 36px; gap: 34px; flex: none">
+      <div class="bloque" data-paso="1" style="padding: 28px 32px"><h3 style="font-size: 38px">El criterio va primero</h3><p style="font-size: 29px">Antes de ejecutar, escribe cuántos aciertos de diferencia te harían preferir una opción.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 28px 32px"><h3 style="font-size: 38px">Se dice «k de N»</h3><p style="font-size: 29px">Con 66 mensajes, dos o tres aciertos de diferencia pueden ser azar. No se reportan más decimales.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 28px 32px"><h3 style="font-size: 38px">La prueba sigue cerrada</h3><p style="font-size: 29px">Cada decisión mirando la prueba la gasta. Hoy se decide solo con validación.</p></div>
+    </div>
+    <p class="cierre-linea" data-paso="4" style="color: var(--magenta)">Lo que no entrenaste, no lo cuentes como hecho.</p>
+  </section>
+
+  <!-- 13 -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Representaciones"></div>
+    <div class="seccion-num" style="color: var(--negro)">B</div>
+    <div class="seccion-info">
+      <h2 class="titulo" style="font-size: 100px">Representaciones y salida entrenada</h2>
+      <p class="sub" style="font-size: 40px">Qué es un vector de un mensaje y cómo se entrena una capa encima.</p>
+    </div>
+  </section>
+
+  <!-- 14 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Representaciones"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">B · Qué es una representación</span>
+    <h2 class="titulo" style="font-size: 66px">De un mensaje a una lista de números</h2>
+    <div class="rail rail--c" style="--n: 3; margin-top: 24px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Tokenizar</b><span>El mensaje se parte en trozos y cada trozo se vuelve un número.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Encoder</b><span>Un modelo con 12 capas da un vector por cada token.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Promediar</b><span>Se promedian los vectores y queda uno solo, de 384 números, por mensaje.</span></div>
+    </div>
+    <p class="cierre-linea" data-paso="4" style="color: var(--magenta)">Mensajes con el mismo significado quedan con vectores parecidos, aunque usen otras palabras.</p>
+  </section>
+
+  <!-- 15 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Representaciones"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">B · El modelo de hoy para esto</span>
+    <h2 class="titulo" style="font-size: 64px">Su ficha, leída antes de usarlo</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 26px">
+      <thead><tr><th style="width: 360px">Pregunta</th><th>Respuesta</th></tr></thead>
+      <tbody>
+        <tr><td>Nombre</td><td style="font-weight: 400">sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2</td></tr>
+        <tr><td>¿Qué es?</td><td style="font-weight: 400">Un encoder de la familia BERT con 12 capas y unos 118 millones de parámetros. Devuelve 384 números por frase.</td></tr>
+        <tr><td>¿Idioma?</td><td style="font-weight: 400">50 idiomas, entre ellos español.</td></tr>
+        <tr><td>¿Para qué se entrenó?</td><td style="font-weight: 400">Para que frases con el mismo significado queden cerca entre sí.</td></tr>
+        <tr><td>¿Qué NO tiene?</td><td style="font-weight: 400">Ninguna salida de clases. No sabe qué es facturación ni envío.</td></tr>
+        <tr><td>Licencia y tamaño</td><td style="font-weight: 400">Apache 2.0, unos 470 MB. Lee hasta 128 tokens.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 16 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Representaciones"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">B · Dos formas de usar un modelo de Hugging Face</span>
+    <h2 class="titulo" style="font-size: 62px">Mismo catálogo, dos maneras de usarlo</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 26px">
+      <thead><tr><th style="width: 360px"></th><th style="width: 540px">Zero-shot (clase 4)</th><th>Encoder y salida entrenada (hoy)</th></tr></thead>
+      <tbody>
+        <tr><td>Qué hace el modelo</td><td style="font-weight: 400">Calcula si la hipótesis se sigue del mensaje.</td><td style="font-weight: 400">Convierte el mensaje en 384 números.</td></tr>
+        <tr><td>Qué decide la clase</td><td style="font-weight: 400">El propio modelo, con tus etiquetas como frases.</td><td style="font-weight: 400">Una capa que entrenas con tus mensajes.</td></tr>
+        <tr><td>Qué aprende de tus datos</td><td style="font-weight: 400">Nada.</td><td style="font-weight: 400">Qué vectores corresponden a cada clase.</td></tr>
+        <tr><td>Números que se actualizan</td><td style="font-weight: 400">Ninguno.</td><td style="font-weight: 400">1.155.</td></tr>
+        <tr><td>Qué datos necesita</td><td style="font-weight: 400">Ninguna etiqueta propia.</td><td style="font-weight: 400">Tus 208 mensajes de entrenamiento etiquetados.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 17 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Representaciones"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">B · La salida que entrenas</span>
+    <h2 class="titulo" style="font-size: 62px">Una capa pequeña, entrenada con tus ejemplos</h2>
+    <div class="tres" style="margin-top: 36px; gap: 34px; flex: none">
+      <div class="bloque" data-paso="1" style="padding: 28px 32px"><h3 style="font-size: 38px">Qué hace</h3><p style="font-size: 29px">Multiplica el vector de 384 números por una matriz de pesos y da una probabilidad por clase.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 28px 32px"><h3 style="font-size: 38px">Cómo aprende</h3><p style="font-size: 29px">Ajusta esos pesos para acertar en los 208 mensajes de entrenamiento. Es una regresión logística.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 28px 32px"><h3 style="font-size: 38px">Qué mides</h3><p style="font-size: 29px">Cuántos de los 66 mensajes de validación acierta. Esos mensajes no los vio al aprender.</p></div>
+    </div>
+    <p class="cierre-linea" data-paso="4" style="color: var(--magenta)">Entrenar es mover números. Aquí se mueven 1.155, no 118 millones.</p>
+  </section>
+
+  <!-- 18 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Representaciones"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">B · Qué puede salir mal</span>
+    <h2 class="titulo" style="font-size: 62px">Una salida entrenada también puede engañarte</h2>
+    <div class="tres" style="margin-top: 36px; gap: 34px; flex: none">
+      <div class="bloque" data-paso="1" style="padding: 28px 32px"><h3 style="font-size: 38px">Pocos datos</h3><p style="font-size: 28px">Con pocos mensajes la salida aprende atajos. Por eso se prueba con el 25 %, el 50 % y el 100 %.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 28px 32px"><h3 style="font-size: 38px">Casi-duplicados</h3><p style="font-size: 28px">Si un mensaje de validación tiene gemelo en entrenamiento, el acierto sale inflado.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 28px 32px"><h3 style="font-size: 38px">Errores de etiqueta</h3><p style="font-size: 28px">Si los dos revisores no coinciden, la salida aprende también esa confusión.</p></div>
+    </div>
+    <p class="cierre-linea" data-paso="4" style="color: var(--magenta)">Pregunta: ¿cuántos mensajes etiquetados tienes hoy en tu proyecto?</p>
+  </section>
+
+  <!-- 19 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Representaciones"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">B · Otra forma de transferir: ejemplos en el prompt</span>
+    <h2 class="titulo" style="font-size: 62px">Darle ejemplos sin entrenar nada</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 26px">
+      <thead><tr><th style="width: 330px"></th><th style="width: 520px">Chat sin ejemplos</th><th>Chat con ejemplos en el prompt</th></tr></thead>
+      <tbody>
+        <tr><td>Qué lee el modelo</td><td style="font-weight: 400">Las instrucciones y los mensajes.</td><td style="font-weight: 400">Instrucciones, 9 ejemplos con su etiqueta y los mensajes.</td></tr>
+        <tr><td>Qué cambia en el modelo</td><td style="font-weight: 400">Nada.</td><td style="font-weight: 400">Nada. Solo cambia lo que lee.</td></tr>
+        <tr><td>Qué cuesta</td><td style="font-weight: 400">Pocos tokens.</td><td style="font-weight: 400">Más tokens, y los ejemplos ocupan parte del contexto.</td></tr>
+        <tr><td>Qué se vigila</td><td style="font-weight: 400">Que respete el formato.</td><td style="font-weight: 400">Que no copie los ejemplos y que repita lo mismo si lo ejecutas otra vez.</td></tr>
+      </tbody>
+    </table>
+    <p class="nota" data-paso="2" style="font-size: 27px; margin-top: 16px">Los 9 ejemplos salen solo del entrenamiento: así la validación sigue siendo limpia.</p>
+  </section>
+
+  <!-- 20 -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <div class="seccion-num" style="color: var(--negro)">C</div>
+    <div class="seccion-info">
+      <h2 class="titulo" style="font-size: 100px">Práctica: probar A y B</h2>
+      <p class="sub" style="font-size: 40px">Primero tu predicción, después el resultado.</p>
+    </div>
+  </section>
+
+  <!-- 21 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">C · Guía del notebook</span>
+    <h2 class="titulo" style="font-size: 56px">Partes 0 a 4: qué hace cada una y qué debes ver</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 25px">
+      <thead><tr><th style="width: 340px">Parte</th><th>Qué hace y qué deberías ver</th><th style="width: 460px">Qué haces tú</th></tr></thead>
+      <tbody>
+        <tr><td>0 y 1 · Entorno y datos</td><td style="font-weight: 400">Importa las bibliotecas, guarda el CSV y repite la partición de la clase 4: 208, 66 y 70.</td><td style="font-weight: 400">Comprueba que los tres números coinciden.</td></tr>
+        <tr><td>2 y 3 · Camino A</td><td style="font-weight: 400">Modelo tal cual en validación, y después solo el nombre de las etiquetas cambiado.</td><td style="font-weight: 400">Escribe antes si el cambio de nombre ayudará.</td></tr>
+        <tr><td>4 · Ejemplos en el prompt</td><td style="font-weight: 400">Arma el prompt con 9 ejemplos y el lote de 30 mensajes.</td><td style="font-weight: 400">Pega la respuesta de tu chat y mide.</td></tr>
+      </tbody>
+    </table>
+    <p class="nota" data-paso="2" style="font-size: 25px; margin-top: 14px">La primera vez, el notebook descarga los modelos (unos 440 y 470 MB). Ejecútalo pronto y sigue leyendo mientras carga.</p>
+  </section>
+
+  <!-- 22 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Práctica · 20 min</span>
+    <h2 class="titulo" style="font-size: 66px">Camino A: el modelo tal cual</h2>
+    <ol class="lista lista--num" style="font-size: 30px; gap: 11px; margin-top: 18px">
+      <li data-paso="1">Abre el notebook en Colab y ejecuta las Partes 0 y 1.</li>
+      <li data-paso="2">Comprueba 208, 66 y 70 y que la prueba queda sin abrir.</li>
+      <li data-paso="3">Parte 3: mide el modelo tal cual en validación. Antes de ejecutar, escribe cuántos aciertos esperas.</li>
+      <li data-paso="4">Cambia solo el nombre de las etiquetas y cuenta cuántos mensajes cambian de predicción.</li>
+      <li data-paso="5">Anota los dos resultados en tu cuaderno con su único cambio.</li>
+    </ol>
+    <p class="sub" data-paso="6" style="margin-top: 22px"><a class="enlace-guia" href="clase-5/guia-paso-a-paso-5/" target="_blank" rel="noopener">Paso a paso de la clase 5 →</a></p>
+    <div class="reloj sin-paso" data-segundos="1200" style="font-size: 80px; margin-top: auto; align-self: flex-end">20:00</div>
+  </section>
+
+  <!-- 23 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Práctica · 15 min</span>
+    <h2 class="titulo" style="font-size: 66px">Camino A con ejemplos en el prompt</h2>
+    <ol class="lista lista--num" style="font-size: 30px; gap: 11px; margin-top: 18px">
+      <li data-paso="1">Ejecuta la Parte 4: se arma el prompt con 9 ejemplos y el lote de 30.</li>
+      <li data-paso="2">Pégalo en Claude, ChatGPT o Gemini, solo con datos ficticios.</li>
+      <li data-paso="3">Pega la respuesta en la celda, una línea por mensaje.</li>
+      <li data-paso="4">Compara con las palabras clave y con el modelo en esos 30 mensajes.</li>
+      <li data-paso="5">Si hiciste este lote sin ejemplos en la clase 4, ¿los ejemplos ayudaron?</li>
+    </ol>
+    <div class="reloj sin-paso" data-segundos="900" style="font-size: 80px; margin-top: auto; align-self: flex-end">15:00</div>
+  </section>
+
+  <!-- 24 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">C · Guía del notebook</span>
+    <h2 class="titulo" style="font-size: 56px">Partes 5 a 7: qué hace cada una y qué debes ver</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 25px">
+      <thead><tr><th style="width: 290px">Parte</th><th>Qué hace y qué deberías ver</th><th style="width: 440px">Qué haces tú</th></tr></thead>
+      <tbody>
+        <tr><td>5 · Camino B</td><td style="font-weight: 400">Carga el encoder y lo congela. Saca 384 números por mensaje. Entrena la salida con los 208 y la mide en los 66. Repite con 25 %, 50 % y 100 %.</td><td style="font-weight: 400">Mira el rango (mínimo y máximo) de cada fila: es el ruido.</td></tr>
+        <tr><td>6 · Camino C</td><td style="font-weight: 400">No entrena nada. Calcula cuántos parámetros se actualizarían y cuánta memoria pedirían.</td><td style="font-weight: 400">Anota cuál sería el costo de afinar las últimas 2 capas.</td></tr>
+        <tr><td>7 · Comparar</td><td style="font-weight: 400">Una tabla y la cuenta de errores que B arregló, dañó o dejó igual.</td><td style="font-weight: 400">Mira si los errores que persisten son de etiqueta.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 25 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Práctica · 25 min</span>
+    <h2 class="titulo" style="font-size: 66px">Camino B: entrenar una salida pequeña</h2>
+    <ol class="lista lista--num" style="font-size: 30px; gap: 11px; margin-top: 18px">
+      <li data-paso="1">Ejecuta la Parte 5: el encoder queda congelado y sacas los vectores.</li>
+      <li data-paso="2">Compara dos frases con el mismo significado: ¿qué similitud sale?</li>
+      <li data-paso="3">Entrena la salida con los 208 mensajes y mide en validación.</li>
+      <li data-paso="4">Mira el rango con el 25 %, 50 % y 100 % del entrenamiento: ¿hacen falta más datos?</li>
+      <li data-paso="5">Cambia solo C y anota el efecto. Un cambio a la vez.</li>
+    </ol>
+    <div class="reloj sin-paso" data-segundos="1500" style="font-size: 80px; margin-top: auto; align-self: flex-end">25:00</div>
+  </section>
+
+  <!-- 26 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">C · Resultados</span>
+    <h2 class="titulo" style="font-size: 70px">Lo que mostró Colab</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 27px">
+      <thead><tr><th style="width: 420px">Paso</th><th>Qué se observa</th></tr></thead>
+      <tbody>
+        <tr><td>Partición</td><td style="font-weight: 400">208 · 66 · 70, igual que en la clase 4.</td></tr>
+        <tr><td>Palabras clave</td><td style="font-weight: 400">56 aciertos de 66 (0,85). Es la referencia.</td></tr>
+        <tr><td>A0 · modelo tal cual</td><td style="font-weight: 400">Tu resultado: anótalo, con la fecha y la versión de transformers.</td></tr>
+        <tr><td>A1 · otras etiquetas</td><td style="font-weight: 400">Tu resultado y cuántos mensajes cambiaron de predicción.</td></tr>
+        <tr><td>B1 · salida entrenada</td><td style="font-weight: 400">Tu resultado, y el rango con el 25 %, 50 % y 100 % de los datos.</td></tr>
+        <tr><td>Errores</td><td style="font-weight: 400">Cuántos arregló B, cuántos dañó y cuántos persisten.</td></tr>
+      </tbody>
+    </table>
+    <p class="nota" data-paso="2" style="font-size: 25px; margin-top: 14px">Los resultados dependen de cada ejecución y de la versión de las bibliotecas. Cada uno anota los suyos.</p>
+  </section>
+
+  <!-- 27 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">C · Qué errores cambiaron</span>
+    <h2 class="titulo" style="font-size: 70px">Mirar mensaje por mensaje</h2>
+    <div class="tres" style="margin-top: 36px; gap: 34px; flex: none">
+      <div class="bloque bloque--verde" data-paso="1" style="padding: 28px 32px"><h3 style="font-size: 38px">Los arregló B</h3><p style="font-size: 28px">Mensajes que el modelo tal cual erraba y la salida entrenada acierta. Es la señal a favor de B.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 28px 32px"><h3 style="font-size: 38px">Los dañó B</h3><p style="font-size: 28px">Errores nuevos. Una salida con pocos datos puede aprender atajos del entrenamiento.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 28px 32px"><h3 style="font-size: 38px">Persisten</h3><p style="font-size: 28px">Si son ambiguos o los revisores difieren, el problema es de etiquetas, no del modelo.</p></div>
+    </div>
+    <p class="cierre-linea" data-paso="4" style="color: var(--magenta)">Un número de aciertos no dice qué mensajes cambiaron. Hay que mirarlos.</p>
+  </section>
+
+  <!-- 28 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Práctica guiada"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">C · Camino C: se diseña, no se entrena</span>
+    <h2 class="titulo" style="font-size: 62px">Qué haría falta para justificar afinar</h2>
+    <div class="tres" style="margin-top: 36px; gap: 34px; flex: none">
+      <div class="bloque" data-paso="1" style="padding: 28px 32px"><h3 style="font-size: 38px">Qué error esperas arreglar</h3><p style="font-size: 29px">Un tipo de error concreto, con ejemplos. No «mejorar en general».</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 28px 32px"><h3 style="font-size: 38px">Cuántos ejemplos hay</h3><p style="font-size: 29px">Suficientes por clase, y sin casi-duplicados entre conjuntos.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 28px 32px"><h3 style="font-size: 38px">Cómo volver atrás</h3><p style="font-size: 29px">Un punto de partida guardado y una prueba que no se haya mirado.</p></div>
+    </div>
+    <p class="cierre-linea" data-paso="4" style="color: var(--magenta)">Si no cumples los tres, B alcanza por ahora. Y C queda como diseño, no como resultado.</p>
+  </section>
+
+  <!-- 29 -->
+  <section class="slide slide--magenta slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Experimento"></div>
+    <div class="seccion-num" style="color: #f6c6e0">D</div>
+    <div class="seccion-info">
+      <h2 class="titulo" style="font-size: 100px">Diseñar el experimento</h2>
+      <p class="sub" style="font-size: 40px">Escribir la hipótesis antes de ejecutar.</p>
+    </div>
+  </section>
+
+  <!-- 30 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Experimento"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">D · Qué es una hipótesis</span>
+    <h2 class="titulo" style="font-size: 62px">Una hipótesis dice qué cambia y qué esperas</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 27px">
+      <thead><tr><th style="width: 520px">Mal escrita</th><th>Bien escrita</th></tr></thead>
+      <tbody>
+        <tr><td>«Con otro modelo va a mejorar.»</td><td style="font-weight: 400">«Si entrenamos una salida sobre los vectores del encoder con los 208 mensajes, los errores por negación bajarán, porque los vectores separan mejor el tema que las palabras sueltas.»</td></tr>
+        <tr><td>No dice qué cambia, qué se mide ni por qué.</td><td style="font-weight: 400">Dice qué cambia (una cosa), qué error esperamos que baje y la razón. Se puede refutar.</td></tr>
+      </tbody>
+    </table>
+    <p class="cierre-linea" data-paso="2" style="color: var(--magenta)">Una hipótesis que no se puede refutar no sirve para decidir.</p>
+  </section>
+
+  <!-- 31 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Experimento"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">D · La ficha</span>
+    <h2 class="titulo" style="font-size: 70px">Tu ficha de hipótesis</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 27px">
+      <thead><tr><th style="width: 420px">Campo</th><th>Qué va</th></tr></thead>
+      <tbody>
+        <tr><td>Camino</td><td style="font-weight: 400">A, B o C.</td></tr>
+        <tr><td>Hipótesis</td><td style="font-weight: 400">Si [cambio], entonces [qué error baja], porque [razón].</td></tr>
+        <tr><td>Un solo cambio</td><td style="font-weight: 400">Exactamente una cosa distinta de la medición base.</td></tr>
+        <tr><td>Lo que queda igual</td><td style="font-weight: 400">Partición, semilla, mensajes de validación.</td></tr>
+        <tr><td>Medida y criterio</td><td style="font-weight: 400">Qué se mide y cuántos aciertos de diferencia deciden. Se escribe antes.</td></tr>
+        <tr><td>Riesgos y lo que no afirmo</td><td style="font-weight: 400">Sobreajuste, pocos datos, qué todavía no puedes decir.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 32 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Experimento"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">D · Ejemplo (escenario ficticio)</span>
+    <h2 class="titulo" style="font-size: 70px">Una ficha completa</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 25px">
+      <thead><tr><th style="width: 300px">Campo</th><th>Ejemplo</th></tr></thead>
+      <tbody>
+        <tr><td>Camino</td><td style="font-weight: 400">B · salida entrenada sobre representaciones congeladas.</td></tr>
+        <tr><td>Hipótesis</td><td style="font-weight: 400">Si entrenamos una salida con los 208 mensajes, bajarán los errores de mensajes con negación, porque los vectores recogen mejor el tema.</td></tr>
+        <tr><td>Un solo cambio</td><td style="font-weight: 400">Pasar de zero-shot a una salida logística. Mismo encoder, mismos datos.</td></tr>
+        <tr><td>Medida y criterio</td><td style="font-weight: 400">Aciertos de 66. Lo preferimos si gana por 5 o más y se mantiene con el 50 % de los datos.</td></tr>
+        <tr><td>No afirmo</td><td style="font-weight: 400">Que funcione con mensajes de otra tienda ni con la prueba, que no se ha abierto.</td></tr>
+      </tbody>
+    </table>
+    <p class="sub" data-paso="6" style="margin-top: 22px"><a class="enlace-guia" href="clase-5/guia-paso-a-paso-5/" target="_blank" rel="noopener">Paso a paso de la clase 5 →</a></p>
+  </section>
+
+  <!-- 33 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Experimento"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">D · Practicamos con tres hipótesis</span>
+    <h2 class="titulo" style="font-size: 66px">¿Qué le falta a cada hipótesis?</h2>
+    <table class="tabla" data-paso="1" style="margin-top: 18px; font-size: 27px">
+      <thead><tr><th style="width: 640px">Hipótesis</th><th>¿Qué falla?</th></tr></thead>
+      <tbody>
+        <tr><td>«Cambiar el modelo y las etiquetas mejorará el acierto.»</td><td style="font-weight: 400">Hay dos cambios: no se sabrá cuál funcionó.</td></tr>
+        <tr><td>«La salida entrenada será mejor.»</td><td style="font-weight: 400">No dice mejor en qué, ni cuánto, ni por qué.</td></tr>
+        <tr><td>«Con 9 ejemplos en el prompt, el chat acierta más que sin ellos en el mismo lote de 30.»</td><td style="font-weight: 400">Está bien planteada. Falta el criterio: ¿cuántos aciertos de diferencia?</td></tr>
+      </tbody>
+    </table>
+    <p class="nota" data-paso="2" style="font-size: 27px; margin-top: 16px; font-weight: 700">Con 30 mensajes, un acierto son 3 puntos porcentuales.</p>
+  </section>
+
+  <!-- 34 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · Experimento"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Práctica · 25 min</span>
+    <h2 class="titulo" style="font-size: 76px">Escribe tu ficha</h2>
+    <ol class="lista lista--num" style="font-size: 30px; gap: 11px; margin-top: 18px">
+      <li data-paso="1">Mira tus dos errores de la clase 4 y escoge uno.</li>
+      <li data-paso="2">Decide un camino (A, B o C) y un único cambio.</li>
+      <li data-paso="3">Escribe la hipótesis con «si, entonces, porque».</li>
+      <li data-paso="4">Escribe el criterio de decisión antes de ejecutar nada más.</li>
+      <li data-paso="5">Completa la Parte 8 del notebook: faltan campos hasta que los llenes.</li>
+    </ol>
+    <div class="reloj sin-paso" data-segundos="1500" style="font-size: 80px; margin-top: auto; align-self: flex-end">25:00</div>
+  </section>
+
+  <!-- 35 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Cierre"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Si tu proyecto es de visión</span>
+    <h2 class="titulo" style="font-size: 70px">El mismo experimento con imágenes</h2>
+    <div class="tres" style="margin-top: 36px; gap: 34px; flex: none">
+      <div class="bloque bloque--verde" data-paso="1" style="padding: 28px 32px"><h3 style="font-size: 36px">Camino A</h3><p style="font-size: 27px">Probar un modelo de clasificación de imágenes tal cual y mirar su ficha: ¿conoce tus clases?</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 28px 32px"><h3 style="font-size: 36px">Camino B</h3><p style="font-size: 27px">Congelar un extractor de características de imágenes y entrenar una salida con tus fotos.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 28px 32px"><h3 style="font-size: 36px">Partición por objeto</h3><p style="font-size: 27px">Todas las fotos de un mismo objeto van juntas al mismo conjunto.</p></div>
+    </div>
+    <p class="cierre-linea" data-paso="4" style="color: var(--magenta)">Pregunta: ¿cuál sería tu único cambio y qué esperarías que ocurra?</p>
+  </section>
+
+  <!-- 36 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Cierre"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Si te bloqueas</span>
+    <h2 class="titulo" style="font-size: 72px">Tres salidas, sin salirte de tu proyecto</h2>
+    <div class="tres" style="margin-top: 40px; gap: 34px; flex: none">
+      <div class="bloque" data-paso="1" style="padding: 32px 34px"><h3 style="font-size: 36px">Colab se queda sin memoria</h3><p style="font-size: 29px">Reinicia la sesión y ejecuta desde la Parte 0. Cierra otras pestañas con modelos.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 32px 34px"><h3 style="font-size: 36px">Un modelo no se descarga</h3><p style="font-size: 29px">Reintenta la celda. Si sigue, avisa: puedes continuar con el camino A y las referencias.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 32px 34px"><h3 style="font-size: 36px">El chat no sigue el formato</h3><p style="font-size: 29px">Repite la instrucción: «Responde solo con líneas del tipo 1: envío». La celda lee lo que reconoce.</p></div>
+    </div>
+  </section>
+
+  <!-- 37 -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Cierre"></div>
+    <span class="etiqueta">Ticket de salida</span>
+    <h2 class="mensaje" style="font-size: 82px; margin-top: 30px">Escribe en el chat tu hipótesis en una frase y qué resultado te haría abandonarla</h2>
+    <p class="sub">Un cambio, un error esperado y un criterio.</p>
+    <p class="nota" style="color: var(--negro); font-size: 34px; margin-top: 18px">Ejemplo: «Si entrenamos una salida con los 208 mensajes, bajan los errores por negación. La abandono si no gana por al menos 5 aciertos de 66.»</p>
+    <p class="nota" style="color: var(--negro); margin-top: auto">No incluyas datos personales ni de clientes.</p>
+  </section>
+
+  <!-- 38 -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Cierre"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Próximos pasos</span>
+    <h2 class="titulo" style="font-size: 80px">Tres pasos para continuar</h2>
+    <div class="camino" style="margin-top: 40px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><h3 style="font-size: 42px">Guarda tu ficha</h3><p style="font-size: 29px">hipotesis_experimento.json y registro_experimentos.csv.</p></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><h3 style="font-size: 42px">Prueba un cambio</h3><p style="font-size: 29px">Solo uno, el de tu ficha. Anótalo en el registro con su resultado.</p></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><h3 style="font-size: 42px">Anota lo que no afirmas</h3><p style="font-size: 29px">Qué te falta saber para decidir con más seguridad.</p></div>
+    </div>
+    <p class="sub" data-paso="4" style="font-size: 34px; margin-top: 30px; color: var(--tinta)"><b>Próxima clase:</b> miramos los datos con los que se entrena y qué cambia cuando los mejoras.</p>
+  </section>
+
+  <!-- 39 -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 250px">Nos vemos en la próxima sesión</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Gracias</h1>
+      <p class="docente">Pablo Ríos Peña · <span style="user-select: all">linkedin.com/in/pabloriospena</span></p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+
+</div>
+<div class="progreso"></div>
+<script src="motor.js"></script>
+</body>
+</html>
