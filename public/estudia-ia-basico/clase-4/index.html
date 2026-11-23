@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<base href="/estudia-ia-basico/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Estud-IA · Inteligencia artificial, nivel básico · Clase 4</title>
+<link rel="stylesheet" href="estudia.css">
+<link rel="stylesheet" href="estudia-nuevo.css">
+<style>
+  .agenda small { display: inline !important; margin-left: 22px; font-size: .78em; }
+  .tabla { width: 100%; border-collapse: collapse; font-size: 28px; }
+  .tabla th { text-align: left; background: #000; color: #fff; padding: 14px 22px; font-size: 24px; letter-spacing: .1em; text-transform: uppercase; }
+  .tabla td { padding: 13px 22px; border-bottom: 2px solid rgb(0 0 0 / .12); vertical-align: top; line-height: 1.25; font-weight: 400; }
+  .tabla tbody tr:nth-child(even) td { background: var(--suave); }
+  .tabla td:first-child { font-weight: 700; }
+  .tabla--datos { font-size: 24px; }
+  .tabla--datos th { padding: 9px 20px; font-size: 21px; }
+  .tabla--datos td { padding: 6px 20px; font-weight: 400 !important; }
+  .rail--5 b { font-size: 42px; }
+  .rail--5 span { font-size: 28px; }
+  .prompt-caja { background: var(--suave); border-left: 12px solid var(--naranja); padding: 30px 40px; font-family: var(--font-code); font-size: 30px; line-height: 1.4; color: var(--tinta); }
+  .prompt-caja b { color: var(--magenta); }
+  .slide--azul .prompt-caja { background: rgb(255 255 255 / .1); color: #fff; }
+  .slide--azul .prompt-caja b { color: var(--naranja); }
+  .tabla .ok { font-weight: 700; color: var(--magenta); }
+</style>
+</head>
+<body>
+<div class="escenario">
+
+  <!-- 1 · PORTADA -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 130px">Estud-IA · Capa 2 · Nivel básico</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Inteligencia artificial</h1>
+      <p class="docente" style="font-size: 46px">Clase 4 · Pedimos bien y configuramos el asistente</p>
+      <p class="docente" style="margin-top: 6px">Pablo Ríos Peña</p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+  <!-- 2 · PUENTE: CAMILA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Puente"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Donde quedamos</span>
+    <h2 class="titulo" style="font-size: 72px">Camila tenía 112 y luego 131</h2>
+    <div class="rail" style="--n: 3; margin-top: 56px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Lo que vimos</b><span>No se equivocó la IA: cambió la fuente. Por eso anotamos fuente, fecha, instrucción y comprobación.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Lo que falta</b><span>Pedir de modo que la respuesta se pueda comprobar, sin depender de cómo preguntes cada día.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Lo que hacemos hoy</b><span>Pedir bien (módulo 2) y dejar el asistente configurado (módulo 3). Todo en vivo, juntos.</span></div>
+    </div>
+    <p class="nota" style="margin-top: 30px">Caso ilustrativo, con datos ficticios.</p>
+  </section>
+
+  <!-- 3 · AGENDA -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Puente"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Hoy · 3 horas</span>
+    <h2 class="titulo" style="font-size: 72px">Lo que vamos a hacer</h2>
+    <div class="dividido" style="grid-template-columns: 1.25fr 1fr; gap: 90px; align-items: start; margin-top: 10px">
+      <ol class="lista lista--num agenda" style="font-size: 34px; gap: 12px; margin-top: 0">
+        <li data-paso="1"><span>Puente: una pregunta vaga<small style="color: #cfd6ee">15 min</small></span></li>
+        <li data-paso="2"><span>Prompts y loops<small style="color: #cfd6ee">80 min</small></span></li>
+        <li data-paso="3"><span>Pausa<small style="color: #cfd6ee">10 min</small></span></li>
+        <li data-paso="4"><span>System prompts y alcance<small style="color: #cfd6ee">65 min</small></span></li>
+        <li data-paso="5"><span>Cierre<small style="color: #cfd6ee">10 min</small></span></li>
+      </ol>
+      <div class="bloque bloque--tinta" data-paso="6" style="margin-top: 0">
+        <h3 style="font-size: 46px">Al terminar tendrás</h3>
+        <p>Un prompt de cinco partes que probaste.</p>
+        <p>Un loop con criterio de parada.</p>
+        <p>El system prompt de tu proyecto, probado con tres casos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · PUENTE: LA TABLA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Puente"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Material de hoy · datos ficticios</span>
+    <h2 class="titulo" style="font-size: 56px">Copia esta tabla y pégala en tu IA</h2>
+    <table class="tabla tabla--datos" data-paso="1" style="margin-top: 10px">
+      <thead><tr><th>fecha</th><th>barrio</th><th>tema</th><th>valor_reclamado</th><th>urgente</th></tr></thead>
+      <tbody>
+        <tr><td>2026-11-02</td><td>Laureles</td><td>Alumbrado</td><td>0</td><td>Sí</td></tr>
+        <tr><td>2026-11-02</td><td>Belén</td><td>Aseo</td><td>0</td><td>No</td></tr>
+        <tr><td>2026-11-03</td><td>Robledo</td><td>Servicios públicos</td><td>180000</td><td>Sí</td></tr>
+        <tr><td>2026-11-03</td><td></td><td>Seguridad</td><td>0</td><td>Sí</td></tr>
+        <tr><td>2026-11-04</td><td>Castilla</td><td>Movilidad</td><td>0</td><td>No</td></tr>
+        <tr><td>2026-11-04</td><td>Poblado</td><td>Alumbrado</td><td>0</td><td>No</td></tr>
+        <tr><td>2026-11-05</td><td>Belén</td><td></td><td>95000</td><td>Sí</td></tr>
+        <tr><td>2026-11-05</td><td>Laureles</td><td>Servicios públicos</td><td>240000</td><td>Sí</td></tr>
+        <tr><td>2026-11-06</td><td>Robledo</td><td>Aseo</td><td>0</td><td>No</td></tr>
+        <tr><td>2026-11-06</td><td>Castilla</td><td>Seguridad</td><td>0</td><td>Sí</td></tr>
+      </tbody>
+    </table>
+    <p class="nota" data-paso="2" style="margin-top: 10px; font-size: 26px">Te la pego también en el chat. Nadie sube información real de su trabajo.</p>
+  </section>
+
+  <!-- 5 · PUENTE: LA PREGUNTA VAGA -->
+  <section class="slide slide--magenta slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Puente"></div>
+    <span class="etiqueta">Hacemos juntos · 5 min</span>
+    <h2 class="titulo titulo--sm">Una sola pregunta</h2>
+    <p class="enorme" data-paso="1" style="font-size: 76px; margin-top: 40px; color: #fff">«¿Cuántas solicitudes urgentes hay?»</p>
+    <div class="preguntas" style="margin-top: 40px">
+      <div class="pregunta-g" data-paso="2" style="font-size: 46px"><b style="color: #fff">1</b>Pégala con la tabla y escribe en el chat el número que te dio.</div>
+      <div class="pregunta-g" data-paso="3" style="font-size: 46px"><b style="color: #fff">2</b>Mientras tanto, cuenta tú a mano en la tabla.</div>
+    </div>
+    <p class="sub" data-paso="4" style="margin-top: auto; font-size: 44px; font-weight: 700; color: #fff">Si tu número es distinto del de tu vecino, es material para la clase.</p>
+  </section>
+
+  <!-- 6 · PUENTE: LA RESPUESTA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 1" data-nombre="1 · Puente"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Comprobamos</span>
+    <h2 class="titulo" style="font-size: 72px">Son 6 urgentes en 10 filas</h2>
+    <div class="dos" style="margin-top: 36px; flex: none">
+      <div class="bloque" data-paso="1" style="border-top-color: var(--naranja)"><h3>Si coincidió</h3><p style="font-size: 34px">Bien, pero ¿sabrías decir cuántas filas leyó la IA? Una pregunta vaga no lo pide.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2"><h3>Si no coincidió</h3><p style="font-size: 34px">Tampoco se equivocó «al azar»: a la pregunta le faltó decir qué cuenta y qué hacer con los vacíos.</p></div>
+    </div>
+    <p class="sub" data-paso="3" style="font-size: 40px; margin-top: 34px; color: var(--tinta); font-weight: 700">Una pregunta vaga da una respuesta que no se puede verificar.</p>
+  </section>
+
+  <!-- 7 · M2-1 · CINCO PARTES -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Prompts y loops"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Módulo 2 · Un prompt completo</span>
+    <h2 class="titulo" style="font-size: 70px">Cinco partes para pedir bien</h2>
+    <div class="rail rail--5" style="--n: 5; margin-top: 60px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Tarea</b><span>Qué quieres que haga.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Datos</b><span>Con qué fuente trabaja.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Formato</b><span>Cómo te lo entrega.</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Criterio</b><span>Qué cuenta como «urgente».</span></div>
+      <div data-paso="5" style="--c: #ff7c1a"><i>5</i><b>Si falta</b><span>Qué hacer cuando no hay dato.</span></div>
+    </div>
+    <p class="sub" data-paso="6" style="font-size: 36px; margin-top: 44px; color: var(--tinta); font-weight: 700">Lo armamos juntos: cada parte, una voz del grupo.</p>
+  </section>
+
+  <!-- 8 · M2-1 · EJEMPLO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Prompts y loops"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Ejemplo · Lo escribimos en vivo</span>
+    <h2 class="titulo" style="font-size: 64px">Mismo dato, mejor pregunta</h2>
+    <div class="prompt-caja" data-paso="1" style="margin-top: 30px"><b>Tarea:</b> cuenta cuántas solicitudes tienen urgente = Sí.<br><b>Datos:</b> solo la tabla pegada abajo.<br><b>Formato:</b> el número, y la lista de fechas y barrios.<br><b>Criterio:</b> urgente es lo que dice la columna «urgente», sin interpretar.<br><b>Si falta:</b> si falta barrio o tema, escribe «sin dato», no lo inventes. Al final di cuántas filas leíste.</div>
+    <p class="sub" data-paso="2" style="font-size: 38px; margin-top: 30px; color: var(--tinta); font-weight: 700">Debe responder 6 urgentes y 10 filas leídas.</p>
+  </section>
+
+  <!-- 9 · M2-1 · HACEN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Prompts y loops"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Tu turno · 8 min</span>
+    <h2 class="titulo" style="font-size: 66px">Córrelo y luego quítale una parte</h2>
+    <div class="dividido" style="grid-template-columns: 1.6fr 1fr; gap: 70px; align-items: start; margin-top: 30px">
+      <ol class="lista lista--num" style="font-size: 34px; gap: 16px; margin-top: 0">
+        <li data-paso="1">Pega el prompt completo con la tabla y anota qué responde.</li>
+        <li data-paso="2">Bórrale una parte, por ejemplo «si falta información», y corre otra vez.</li>
+        <li data-paso="3">Escribe en el chat: ¿qué parte cambió más la respuesta?</li>
+      </ol>
+      <div class="reloj sin-paso" data-segundos="480" style="font-size: 130px">8:00</div>
+    </div>
+  </section>
+
+  <!-- 10 · M2-2 · DESCOMPONER -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Prompts y loops"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Descomponer una tarea</span>
+    <h2 class="titulo" style="font-size: 62px">«Prepárame un informe para mi jefe»</h2>
+    <p class="sub" style="font-size: 34px; margin-top: 4px">Demasiado grande para pedirlo de una vez. Lo partimos y pedimos un paso a la vez.</p>
+    <div class="rail" style="--n: 4; margin-top: 56px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Contar</b><span>Cuántas son urgentes.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Agrupar</b><span>Por tema.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Señalar</b><span>Lo que la tabla no permite saber.</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Redactar</b><span>Tres líneas para el jefe, al final.</span></div>
+    </div>
+    <p class="sub" data-paso="5" style="font-size: 36px; margin-top: 40px; color: var(--tinta); font-weight: 700">Cada paso se comprueba antes de pasar al siguiente.</p>
+  </section>
+
+  <!-- 11 · M2-2 · HACEN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 2" data-nombre="2 · Prompts y loops"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Tu turno · 10 min</span>
+    <h2 class="titulo" style="font-size: 66px">Parte la tarea de tu proyecto</h2>
+    <div class="dividido" style="grid-template-columns: 1.6fr 1fr; gap: 70px; align-items: start; margin-top: 30px">
+      <ol class="lista lista--num" style="font-size: 33px; gap: 16px; margin-top: 0">
+        <li data-paso="1">Escribe en una frase la tarea grande de tu proyecto.</li>
+        <li data-paso="2">Pártela en 3 o 4 pasos, en dos renglones.</li>
+        <li data-paso="3">Márcalos: ¿cuál puede hacer la IA sola y cuál necesita tu revisión?</li>
+        <li data-paso="4">Pega tus pasos en el chat.</li>
+      </ol>
+      <div class="reloj sin-paso" data-segundos="600" style="font-size: 130px">10:00</div>
+    </div>
+    <p class="sub" data-paso="5" style="font-size: 36px; margin-top: auto; color: var(--tinta); font-weight: 700">Contar y clasificar se revisan. Redactar va al final.</p>
+  </section>
+
+  <!-- 12 · M2-3 · LOOP -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Loops y registro"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Un loop con criterio de parada</span>
+    <h2 class="titulo" style="font-size: 72px">Revisar no es insistir</h2>
+    <div class="tres" style="margin-top: 40px; flex: none">
+      <div class="bloque bloque--verde" data-paso="1" style="padding: 32px 34px"><h3 style="font-size: 42px">Lista de control</h3><p style="font-size: 30px">¿Usa solo datos de la tabla?</p><p style="font-size: 30px">¿Dice cuántas filas leyó?</p><p style="font-size: 30px">¿No inventa motivos?</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 32px 34px"><h3 style="font-size: 42px">Máximo 3 vueltas</h3><p style="font-size: 30px">Vuelta 1: pido el borrador.</p><p style="font-size: 30px">Vuelta 2: pido corregir lo que falló.</p><p style="font-size: 30px">Vuelta 3: la última.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 32px 34px"><h3 style="font-size: 42px">Cuándo paro</h3><p style="font-size: 30px">Cuando cumple las tres condiciones.</p><p style="font-size: 30px">O al llegar a la vuelta 3, aunque no cumpla.</p></div>
+    </div>
+    <p class="sub" data-paso="4" style="font-size: 36px; margin-top: 36px; color: var(--tinta); font-weight: 700">Sin criterio de parada seguimos pidiendo sin saber cuándo está bien.</p>
+  </section>
+
+  <!-- 13 · M2-3 · TRAMPA -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Loops y registro"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Lo voy a mostrar en vivo</span>
+    <h2 class="titulo" style="font-size: 70px">Una pregunta que la tabla no puede responder</h2>
+    <ol class="lista lista--num" style="font-size: 36px; gap: 16px; margin-top: 28px">
+      <li data-paso="1">Pregunto: «¿Por qué reclaman los ciudadanos?».</li>
+      <li data-paso="2">La tabla no tiene una columna de motivo. Antes de ver la respuesta, predice: ¿inventa o dice que no puede?</li>
+      <li data-paso="3">Agrego a la lista de control: «Si la fuente no lo dice, responde “no está en la fuente”».</li>
+      <li data-paso="4">Repito la pregunta.</li>
+    </ol>
+    <p class="sub" data-paso="5" style="font-size: 42px; margin-top: auto; color: #fff; font-weight: 700">Una regla nueva nace de un fallo que viste, no de una suposición.</p>
+  </section>
+
+  <!-- 14 · M2-3 · HACEN -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Loops y registro"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Tu turno · 15 min</span>
+    <h2 class="titulo" style="font-size: 66px">Haz el loop con un paso de tu proyecto</h2>
+    <div class="dividido" style="grid-template-columns: 1.6fr 1fr; gap: 70px; align-items: start; margin-top: 30px">
+      <ol class="lista lista--num" style="font-size: 33px; gap: 14px; margin-top: 0">
+        <li data-paso="1">Elige uno de tus pasos y escribe su prompt de cinco partes.</li>
+        <li data-paso="2">Escribe tu lista de control, con tres condiciones.</li>
+        <li data-paso="3">Corre hasta cumplirla o hasta la vuelta 3.</li>
+        <li data-paso="4">Anota cuántas vueltas necesitaste y por qué paraste.</li>
+      </ol>
+      <div class="reloj sin-paso" data-segundos="900" style="font-size: 130px">15:00</div>
+    </div>
+    <p class="sub" data-paso="5" style="font-size: 34px; margin-top: auto; color: var(--tinta); font-weight: 700">Si no tienes datos de tu proyecto, usa la tabla de Camila.</p>
+  </section>
+
+  <!-- 15 · M2-4 · TRES REGLAS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Loops y registro"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Reglas de bolsillo</span>
+    <h2 class="titulo" style="font-size: 72px">Tres reglas para todo lo que hagas</h2>
+    <div class="tres" style="margin-top: 40px; flex: none">
+      <div class="bloque bloque--verde" data-paso="1" style="padding: 32px 34px"><h3 style="font-size: 42px">Comprueba</h3><p style="font-size: 31px">Todo número se verifica a mano en una muestra.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 32px 34px"><h3 style="font-size: 42px">Cuida</h3><p style="font-size: 31px">Sin información real de clientes, de tu empresa ni datos personales. Usa datos ficticios o recortados.</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 32px 34px"><h3 style="font-size: 42px">Anota lo que falló</h3><p style="font-size: 31px">Lo que no se registra no se puede repetir ni defender.</p></div>
+    </div>
+  </section>
+
+  <!-- 16 · M2-4 · REGISTRO -->
+  <section class="slide slide--azul slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Loops y registro"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Registro de la consulta · Con una línea nueva</span>
+    <h2 class="titulo" style="font-size: 76px">Los cuatro datos de la clase 3, más uno</h2>
+    <div class="rail rail--5" style="--n: 5; margin-top: 60px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Fuente</b><span>De dónde leíste.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Fecha y hora</b><span>Cuándo consultaste.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Instrucción</b><span>El prompt que usaste.</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Comprobación</b><span>El conteo a mano y si coincidió.</span></div>
+      <div data-paso="5" style="--c: #ffffff"><i>5</i><b>Vueltas</b><span>Cuántas hizo el loop y por qué paró.</span></div>
+    </div>
+    <p class="sub" data-paso="6" style="color: #cfd6ee; font-size: 38px; margin-top: 44px">Cópialo y llénalo ahora para tu práctica del loop. 5 min.</p>
+  </section>
+
+  <!-- 17 · PAUSA -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 3" data-nombre="3 · Loops y registro"></div>
+    <span class="etiqueta">Pausa</span>
+    <h2 class="mensaje" style="font-size: 120px; margin-top: 30px">Volvemos en 10 minutos</h2>
+    <p class="sub">Aléjate de la pantalla, estira las piernas y toma agua.</p>
+    <p class="mensaje" style="font-size: 88px; margin-top: 40px; color: #000">¿Tomamos asistencia?</p>
+    <div style="display: flex; align-items: center; gap: 40px; margin-top: auto">
+      <div class="reloj" data-segundos="600">10:00</div>
+    </div>
+  </section>
+
+  <!-- 18 · M3-1 · SYSTEM PROMPT -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · System prompts"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Módulo 3 · Configurar el asistente</span>
+    <h2 class="titulo" style="font-size: 72px">Un prompt se escribe en cada chat</h2>
+    <div class="dos" style="margin-top: 36px; flex: none">
+      <div class="bloque" data-paso="1" style="border-top-color: var(--naranja)"><h3>Prompt</h3><p style="font-size: 34px">Lo que pides <b>durante</b> la conversación. Cambia según cómo pregunte cada día.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2"><h3>System prompt</h3><p style="font-size: 34px">Lo que dejas escrito <b>antes</b> de que empiece. Fija cómo se comporta el asistente siempre.</p></div>
+    </div>
+    <p class="sub" data-paso="3" style="font-size: 38px; margin-top: 34px; color: var(--tinta); font-weight: 700">Propósito, límites y formato que no dependen de tu humor del día.</p>
+  </section>
+
+  <!-- 19 · M3-1 · CINCO BLOQUES -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · System prompts"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Plantilla de cinco bloques</span>
+    <h2 class="titulo" style="font-size: 70px">Qué lleva un system prompt</h2>
+    <div class="rail rail--5" style="--n: 5; margin-top: 60px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><b>Propósito</b><span>Qué hace este asistente.</span></div>
+      <div data-paso="2" style="--c: #e0509e"><i>2</i><b>Rol</b><span>Quién es y para quién trabaja.</span></div>
+      <div data-paso="3" style="--c: #7fc200"><i>3</i><b>Reglas</b><span>Qué hace y qué no hace.</span></div>
+      <div data-paso="4" style="--c: #11c9ee"><i>4</i><b>Formato</b><span>Cómo responde.</span></div>
+      <div data-paso="5" style="--c: #ff7c1a"><i>5</i><b>Cuándo para</b><span>Cuándo escala a una persona.</span></div>
+    </div>
+    <p class="sub" data-paso="6" style="font-size: 36px; margin-top: 44px; color: var(--tinta); font-weight: 700">Lo construimos en pantalla con el asistente de Camila.</p>
+  </section>
+
+  <!-- 20 · M3-1 · EJEMPLO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · System prompts"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Ejemplo · El asistente de Camila</span>
+    <h2 class="titulo" style="font-size: 64px">Cada bloque, una frase</h2>
+    <div class="prompt-caja" data-paso="1" style="margin-top: 30px"><b>Propósito y rol:</b> eres el apoyo de Camila para revisar solicitudes de ciudadanos.<br><b>Reglas:</b> solo usas la tabla que ella te comparta. Cuentas y clasificas; no explicas motivos que la tabla no tenga.<br><b>Formato:</b> siempre dices cuántas filas leíste.<br><b>Cuándo para:</b> si algo es ambiguo, lo marcas para que Camila lo revise.</div>
+    <p class="sub" data-paso="2" style="font-size: 36px; margin-top: 30px; color: var(--tinta); font-weight: 700">Pégalo y repite la pregunta del puente: ¿cuántas urgentes?</p>
+  </section>
+
+  <!-- 21 · M3-1 · DÓNDE PEGARLO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · System prompts"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">¿Dónde se pega?</span>
+    <h2 class="titulo" style="font-size: 70px">Depende de tu herramienta</h2>
+    <div class="tres" style="margin-top: 40px; flex: none">
+      <div class="bloque bloque--verde" data-paso="1" style="padding: 32px 34px"><h3 style="font-size: 42px">Si hay un lugar</h3><p style="font-size: 30px">Un proyecto, un Gem, un GPT personalizado o las instrucciones del chat. Pégalo ahí.</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 32px 34px"><h3 style="font-size: 42px">Si no lo ves</h3><p style="font-size: 30px">Pégalo como el primer mensaje de un chat nuevo y di: «Sigue estas instrucciones en toda la conversación».</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 32px 34px"><h3 style="font-size: 42px">Confírmalo</h3><p style="font-size: 30px">Los planes sin pago cambian seguido. Mira qué ofrece tu cuenta antes de depender de ello.</p></div>
+    </div>
+  </section>
+
+  <!-- 22 · M3-2 · TU TURNO -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · System prompts"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Tu turno · 25 min</span>
+    <h2 class="titulo" style="font-size: 62px">Escribe el system prompt de tu proyecto</h2>
+    <div class="dividido" style="grid-template-columns: 1.6fr 1fr; gap: 70px; align-items: start; margin-top: 30px">
+      <ol class="lista lista--num" style="font-size: 32px; gap: 14px; margin-top: 0">
+        <li data-paso="1">Redáctalo con los cinco bloques, en pocas líneas.</li>
+        <li data-paso="2">Pruébalo con tres casos: uno normal, uno fuera de su alcance y uno trampa.</li>
+        <li data-paso="3">Si un caso falla, agrega una regla y vuelve a probar.</li>
+        <li data-paso="4">Escribe en el chat una frase: qué caso falló y qué regla agregaste.</li>
+      </ol>
+      <div>
+        <div class="bloque bloque--tinta" data-paso="5" style="padding: 30px 34px"><h3 style="font-size: 40px">Mientras atiendo a alguien</h3><p style="font-size: 30px">Prueba un cuarto caso, el más raro que se te ocurra.</p></div>
+        <div class="reloj sin-paso" data-segundos="1500" style="font-size: 110px; margin-top: 24px">25:00</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 23 · M3-2 · TRES CASOS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 4" data-nombre="4 · System prompts"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Los tres casos de prueba</span>
+    <h2 class="titulo" style="font-size: 72px">El alcance se define probando lo que no debe hacer</h2>
+    <div class="tres" style="margin-top: 40px; flex: none">
+      <div class="bloque bloque--verde" data-paso="1" style="padding: 32px 34px"><h3 style="font-size: 42px">Normal</h3><p style="font-size: 30px">Lo que sí debe hacer. Ejemplo: «Cuenta las urgentes».</p></div>
+      <div class="bloque bloque--magenta" data-paso="2" style="padding: 32px 34px"><h3 style="font-size: 42px">Fuera de alcance</h3><p style="font-size: 30px">Algo que no debería hacer. Ejemplo: «Redacta la respuesta oficial al ciudadano».</p></div>
+      <div class="bloque bloque--tinta" data-paso="3" style="padding: 32px 34px"><h3 style="font-size: 42px">Trampa</h3><p style="font-size: 30px">Algo que la fuente no contiene. Debe responder «no está en la fuente».</p></div>
+    </div>
+    <p class="sub" data-paso="4" style="font-size: 36px; margin-top: 36px; color: var(--tinta); font-weight: 700">¿La regla que agregaste cierra el hueco o solo lo tapa?</p>
+  </section>
+
+  <!-- 24 · M3-3 · INSTRUCCIÓN O FUENTE -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Instrucción o fuente"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Respondemos en el chat · I o F</span>
+    <h2 class="titulo" style="font-size: 62px">¿Instrucción o fuente?</h2>
+    <table class="tabla" style="margin-top: 14px; font-size: 28px">
+      <thead><tr><th>Ítem</th><th style="width: 190px">Respuesta</th></tr></thead>
+      <tbody>
+        <tr data-paso="1"><td>Responde en máximo 80 palabras</td><td></td></tr>
+        <tr data-paso="1"><td>Las 300 solicitudes de noviembre</td><td></td></tr>
+        <tr data-paso="1"><td>Urgente = afecta la seguridad o un servicio básico</td><td></td></tr>
+        <tr data-paso="1"><td>La lista de precios de las cotizaciones</td><td></td></tr>
+        <tr data-paso="1"><td>Si no está en la fuente, di «no lo sé»</td><td></td></tr>
+        <tr data-paso="1"><td>Habla de usted y con tono formal</td><td></td></tr>
+        <tr data-paso="1"><td>Los correos de clientes del mes</td><td></td></tr>
+        <tr data-paso="1"><td>Cita siempre la fila o el archivo de donde sacas el dato</td><td></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 25 · M3-3 · RESPUESTAS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Instrucción o fuente"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Revisamos juntos</span>
+    <h2 class="titulo" style="font-size: 62px">Las reglas van en la instrucción; los datos, en la fuente</h2>
+    <table class="tabla" style="margin-top: 14px; font-size: 27px">
+      <thead><tr><th>Ítem</th><th style="width: 190px">Respuesta</th></tr></thead>
+      <tbody>
+        <tr data-paso="1"><td>Responde en máximo 80 palabras</td><td class="ok">I</td></tr>
+        <tr data-paso="2"><td>Las 300 solicitudes de noviembre</td><td class="ok">F</td></tr>
+        <tr data-paso="3"><td>Urgente = afecta la seguridad o un servicio básico</td><td class="ok">I (criterio)</td></tr>
+        <tr data-paso="4"><td>La lista de precios de las cotizaciones</td><td class="ok">F</td></tr>
+        <tr data-paso="5"><td>Si no está en la fuente, di «no lo sé»</td><td class="ok">I</td></tr>
+        <tr data-paso="6"><td>Habla de usted y con tono formal</td><td class="ok">I</td></tr>
+        <tr data-paso="7"><td>Los correos de clientes del mes</td><td class="ok">F</td></tr>
+        <tr data-paso="8"><td>Cita siempre la fila o el archivo de donde sacas el dato</td><td class="ok">I</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 26 · M3-4 · PRUEBA CRUZADA -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 5" data-nombre="5 · Instrucción o fuente"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Prueba cruzada · 10 min</span>
+    <h2 class="titulo" style="font-size: 66px">Prueba el asistente de otra persona</h2>
+    <div class="dividido" style="grid-template-columns: 1.6fr 1fr; gap: 70px; align-items: start; margin-top: 30px">
+      <ol class="lista lista--num" style="font-size: 33px; gap: 16px; margin-top: 0">
+        <li data-paso="1">Pega tu system prompt en el chat, con un caso de prueba.</li>
+        <li data-paso="2">Otra persona responde: ¿lo cumpliría o lo rompería?</li>
+        <li data-paso="3">Máximo dos intercambios por persona.</li>
+      </ol>
+      <div class="reloj sin-paso" data-segundos="600" style="font-size: 130px">10:00</div>
+    </div>
+    <p class="sub" data-paso="4" style="font-size: 36px; margin-top: auto; color: var(--tinta); font-weight: 700">Un asistente se revisa con casos de otra persona, no con los propios.</p>
+  </section>
+
+  <!-- 27 · TICKET DE SALIDA -->
+  <section class="slide slide--naranja slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <span class="etiqueta">Ticket de salida</span>
+    <h2 class="mensaje" style="font-size: 84px; margin-top: 30px">Escribe en el chat tu system prompt en una línea y el caso que lo puso a prueba</h2>
+    <p class="nota" style="color: var(--negro); margin-top: auto">No incluyas datos personales ni de clientes.</p>
+  </section>
+
+  <!-- 28 · EVIDENCIA Y PRÓXIMOS PASOS -->
+  <section class="slide slide--ruta">
+    <div class="ruta-cap" style="--c: 6" data-nombre="6 · Cierre"></div>
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="">
+    <span class="etiqueta">Evidencia y próximos pasos</span>
+    <h2 class="titulo" style="font-size: 80px">Tres cosas para guardar</h2>
+    <div class="camino" style="margin-top: 60px">
+      <div data-paso="1" style="--c: #ff7c1a"><i>1</i><h3 style="font-size: 44px">Tu registro de la consulta</h3><p style="font-size: 30px">Con las vueltas del loop.</p></div>
+      <div data-paso="2" style="--c: #cb318e"><i>2</i><h3 style="font-size: 44px">Tu prompt final</h3><p style="font-size: 30px">El de cinco partes que probaste en el módulo 2.</p></div>
+      <div data-paso="3" style="--c: #5c9100"><i>3</i><h3 style="font-size: 44px">Tu system prompt</h3><p style="font-size: 30px">Con el caso problemático y la regla que lo arregló.</p></div>
+    </div>
+    <p class="sub" data-paso="4" style="font-size: 34px; margin-top: 36px; color: var(--tinta)"><b>Asistencia:</b> el enlace va en el chat. <b>Próximo encuentro:</b> orquestación de agentes y subagentes. Sigue tu ruta en Platzi.</p>
+  </section>
+
+  <!-- 29 · CIERRE -->
+  <section class="slide slide--portada">
+    <img class="marca" src="estudia/img/logo-estudia-nuevo.png" alt="Estud-IA">
+    <span class="etiqueta" style="margin-top: 250px">Nos vemos en la próxima sesión</span>
+    <div class="portada-titulo" style="margin-top: 26px">
+      <h1 class="titulo" style="font-size: 150px; line-height: 1">Gracias</h1>
+      <p class="docente">Pablo Ríos Peña · <span style="user-select: all">linkedin.com/in/pabloriospena</span></p>
+    </div>
+    <div class="pie-blanco"><img src="estudia/img/logos-institucionales.png" alt="Opera: Corpogem. Apoya: Nodo y Universidad EAFIT. Organiza: Alcaldía de Medellín"></div>
+  </section>
+
+</div>
+<div class="progreso"></div>
+<script src="motor.js"></script>
+</body>
+</html>
