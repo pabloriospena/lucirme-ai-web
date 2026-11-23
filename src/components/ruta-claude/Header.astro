@@ -11,13 +11,13 @@ const destino = destinos[ruta] ?? "/ruta-claude#registro-hero";
 const mostrarCta = !(ruta === "/ruta-claude/kit" || /\/paso-[234]$/.test(ruta));
 ---
 <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
     <div class="flex items-center gap-3 min-w-0">
       <a href="/ruta-claude" class="flex items-center gap-2 group">
         <span class="font-bold text-slate-900 tracking-tight text-base">LuciRMe AI</span>
       </a>
       <span aria-hidden="true" class="hidden md:inline-block h-1 w-1 rounded-full bg-slate-300"></span>
-      <span class="hidden md:inline-block text-xs font-semibold px-2.5 py-1 rounded-full bg-teal-50 text-teal-800 border border-teal-200/60">
+      <span class="hidden md:inline-block text-sm font-semibold px-2.5 py-1 rounded-full bg-teal-50 text-teal-800 border border-teal-200/60">
         Ruta Claude desde cero
       </span>
     </div>
@@ -28,7 +28,7 @@ const mostrarCta = !(ruta === "/ruta-claude/kit" || /\/paso-[234]$/.test(ruta));
         target="_blank"
         rel="noopener noreferrer"
         onclick="try { window.posthog?.capture('header_whatsapp_click', { origen: 'ruta_claude_header' }); } catch (_) {}"
-        class="text-sm font-semibold text-slate-700 underline underline-offset-2 hover:text-slate-900"
+        class="text-sm font-semibold text-emerald-700 underline underline-offset-2 hover:text-emerald-800"
       >
         Hablar con Pablo
       </a>
@@ -38,7 +38,7 @@ const mostrarCta = !(ruta === "/ruta-claude/kit" || /\/paso-[234]$/.test(ruta));
         id="header-cta-registro"
         href={destino}
         data-ubicacion="header"
-        class="hidden sm:inline-flex items-center justify-center font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-2.5 px-5 transition text-sm shadow-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600"
+        class="hidden sm:inline-flex items-center justify-center font-semibold bg-teal-700 hover:bg-teal-800 text-white rounded-xl py-2.5 px-5 transition text-sm shadow-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600"
       >
         Empezar Paso 0 gratis
       </a>
