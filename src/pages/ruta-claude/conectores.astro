@@ -1,0 +1,171 @@
+---
+import RutaClaudeLayout from "../../layouts/RutaClaudeLayout.astro";
+import EmailCTA from "../../components/ruta-claude/EmailCTA.astro";
+import Compartir from "../../components/ruta-claude/Compartir.astro";
+
+const ideas = [
+  {
+    termino: "Conector",
+    texto:
+      "Un permiso que le das a Claude para leer, y a veces escribir, en una herramienta tuya, como Google Drive o Notion. Sin conector, Claude solo ve lo que pegás o subís en la conversación.",
+  },
+  {
+    termino: "MCP",
+    texto:
+      "Son las siglas de Model Context Protocol, un estándar abierto que creó Anthropic para conectar una IA con herramientas y datos externos. Después lo donó a la Linux Foundation. Muchos conectores funcionan sobre ese estándar, y por eso una misma herramienta se puede usar desde distintas IA.",
+  },
+  {
+    termino: "Artefacto",
+    texto:
+      "Un entregable que Claude crea en una ventana aparte, como un documento, una presentación, una hoja de cálculo, un diseño, un tablero o una mini aplicación. Lo podés editar, compartir y volver a abrir, en vez de copiar y pegar desde el chat.",
+  },
+];
+
+const herramientas = [
+  { nombre: "Notion", uso: "Guardo el contexto del negocio, las reglas, las tareas, el registro de clientes y el calendario de publicaciones. Claude lee esas páginas antes de trabajar y anota lo que se decide." },
+  { nombre: "Google Drive", uso: "Busco y subo archivos, como los videos que se publican, y los comparto con un enlace." },
+  { nombre: "Gmail y Google Calendar", uso: "Ordenar la bandeja de entrada y revisar la agenda antes de preparar una propuesta para un cliente." },
+  { nombre: "MailerLite", uso: "Armar y revisar los grupos, las automatizaciones y los correos, y contar cuántos leads llegaron en un periodo." },
+  { nombre: "Hotmart", uso: "Leer mis productos y mis ventas para actualizar mis números sin copiar nada a mano." },
+  { nombre: "PostHog", uso: "Leer las visitas y los eventos de esta web, con filtros para no contarme a mí ni a los robots." },
+  { nombre: "Metricool", uso: "Programar las publicaciones de Instagram, Facebook y TikTok." },
+  { nombre: "Windsor", uso: "Leer las métricas de mis redes sociales en un solo lugar." },
+  { nombre: "Composio", uso: "Publicar en LinkedIn e Instagram desde la conversación, siempre con una pieza que yo ya aprobé." },
+  { nombre: "Make", uso: "Dos escenarios que guardan en Notion los leads de alto encaje y las respuestas del formulario de la web." },
+  { nombre: "ElevenLabs", uso: "Generar la voz de los reels a partir de un guion que yo apruebo antes." },
+  { nombre: "Fathom", uso: "Traer transcripciones de reuniones y entrevistas para convertirlas en decisiones, con cada afirmación atada a una cita." },
+  { nombre: "Jira", uso: "Llevar esas decisiones a tickets, en mi trabajo de producto." },
+  { nombre: "Navegador", uso: "Leer páginas que piden iniciar sesión, cuando no existe un conector para esa herramienta." },
+];
+
+const reglas = [
+  "Conectá solo lo que la tarea necesita. Si hoy vas a ordenar ventas, no hace falta que Claude vea tu correo.",
+  "Empezá por lectura. Dejá que Claude lea y te muestre antes de darle permiso de escribir.",
+  "La regla de los datos del Paso 0 sigue valiendo. Que una herramienta esté conectada no significa que su contenido pueda salir de tu empresa.",
+  "Lo que Claude escribe en tus herramientas se revisa. Yo no dejo que publique ni envíe nada sin que yo lo apruebe.",
+  "Revisá los permisos de vez en cuando y quitá los que ya no usás.",
+];
+
+const artefactos = [
+  { titulo: "Una hoja de cálculo", texto: "Las ventas de tu emprendimiento, ordenadas y con fórmulas, para que cambies un número y se actualice el total." },
+  { titulo: "Un documento", texto: "La minuta de la reunión, lista para compartir y para que tu equipo comente." },
+  { titulo: "Una página", texto: "Un caso de tu portafolio, para ver cómo queda antes de publicarlo." },
+  { titulo: "Un tablero", texto: "Yo armé uno del embudo de esta web con datos de PostHog, MailerLite y Notion." },
+];
+---
+
+<RutaClaudeLayout
+  title="Conectores, MCP y artefactos de Claude, y para qué los uso"
+  description="Qué son los conectores, el MCP y los artefactos de Claude, cuáles uso en LuciRMe AI y para qué, y cómo decidir qué conectar."
+>
+  <div class="space-y-14 pb-16">
+    <nav class="text-xs font-mono text-slate-500 px-2">
+      <a href="/ruta-claude" class="hover:text-teal-700 underline-offset-2 hover:underline">Ruta Claude desde cero</a>
+      <span aria-hidden="true" class="mx-2 inline-block h-1 w-1 rounded-full bg-slate-300 align-middle"></span>
+      <span class="text-slate-700">Conectores y artefactos</span>
+    </nav>
+
+    <section class="space-y-5 bg-white rounded-3xl border border-slate-200/80 p-8 shadow-sm">
+      <span class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">Gratis</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+        Conectores, MCP y artefactos, y para qué los uso
+      </h1>
+      <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+        Claude hace mucho más cuando puede ver tus herramientas y entregarte algo que no sea solo texto en el chat. Acá te cuento qué es cada cosa y qué conecto yo en mi trabajo.
+      </p>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight px-2">Tres ideas, en corto</h2>
+      <div class="grid gap-4 sm:grid-cols-3">
+        {ideas.map((i) => (
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2">
+            <h3 class="font-bold text-slate-900">{i.termino}</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">{i.texto}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight px-2">Lo que conecto yo y para qué</h2>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed max-w-2xl">
+        Esta es la lista real de mi trabajo en LuciRMe AI. No necesitás todo esto. Con Claude y una sola herramienta ya podés hacer los ejemplos de esta ruta.
+      </p>
+      <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-x-auto">
+        <table class="w-full text-sm text-left min-w-[520px]">
+          <thead class="bg-slate-50 text-xs font-mono uppercase tracking-wider text-slate-500">
+            <tr>
+              <th class="px-4 py-3 w-1/4">Herramienta</th>
+              <th class="px-4 py-3">Para qué la uso</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-slate-700 align-top">
+            {herramientas.map((h) => (
+              <tr>
+                <td class="px-4 py-3 font-semibold text-slate-900">{h.nombre}</td>
+                <td class="px-4 py-3 leading-relaxed">{h.uso}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm text-slate-500 px-2 leading-relaxed max-w-2xl">
+        Lo que está disponible y lo que se puede hacer con cada conector depende de tu plan y de la herramienta. Revisá el tuyo antes de armar algo que dependa de ellos.
+      </p>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight px-2">Cómo decidir qué conectar</h2>
+      <ul class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-3 text-sm sm:text-base text-slate-700 leading-relaxed">
+        {reglas.map((r) => (
+          <li class="flex gap-3"><span aria-hidden="true" class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700"></span><span>{r}</span></li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight px-2">Qué puede ser un artefacto</h2>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed max-w-2xl">
+        Cuando el resultado es algo que vas a volver a abrir, editar o compartir, pedile a Claude que lo cree como artefacto en vez de pegarte el texto en el chat. Estos son cuatro usos, ligados a los ejemplos de la ruta.
+      </p>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {artefactos.map((a) => (
+          <div class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-2">
+            <h3 class="font-bold text-slate-900">{a.titulo}</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">{a.texto}</p>
+          </div>
+        ))}
+      </div>
+      <p class="text-sm text-slate-600 px-2 leading-relaxed max-w-2xl">
+        Un artefacto sigue las mismas reglas que cualquier respuesta de Claude. Comprobá los datos antes de compartirlo. Los <a href="/ruta-claude/ejemplos" class="text-teal-700 underline hover:text-teal-800">tres ejemplos gratis</a> te muestran cómo.
+      </p>
+    </section>
+
+    <section class="space-y-3 px-2">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight">Lo que no probé</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+        En la ruta trabajo con Claude, Google Drive y Notion. OneDrive y Microsoft 365 siguen la misma lógica, pero no los probé de punta a punta.
+      </p>
+    </section>
+
+    <section class="space-y-3 px-2">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight">Siguiente</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+        Antes de conectar nada, aprendé a pedirle a Claude con el contexto correcto. Es el Paso 1 y es gratis.
+      </p>
+      <a
+        href="/ruta-claude/paso-1"
+        onclick="if (window.posthog) { window.posthog.capture('ruta_claude_step_click', { paso: '1', origen: 'conectores' }); }"
+        class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3 px-5 transition text-sm shadow-md"
+      >
+        <span>Ir al Paso 1</span>
+        <span class="text-base leading-none">→</span>
+      </a>
+    </section>
+
+    <Compartir ubicacion="conectores" />
+
+    <EmailCTA ubicacion="conectores" />
+  </div>
+</RutaClaudeLayout>

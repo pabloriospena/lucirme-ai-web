@@ -98,7 +98,7 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, "https://lucirme.c
       (function () {
         var ruta = 'ruta_claude';
         var partes = location.pathname.replace(/\/+$/, '').split('/');
-        var pagina = partes.length > 2 ? partes[2] : 'hub';
+        var pagina = partes.length > 2 ? partes.slice(2).join('-') : 'hub';
         var params = new URLSearchParams(location.search);
         function enviar(nombre, props) {
           if (window.posthog) window.posthog.capture(nombre, props);

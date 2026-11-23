@@ -1,0 +1,8 @@
+---
+import EjemploPagina from "../../../components/ruta-claude/EjemploPagina.astro";
+import { EJEMPLOS_CLAUDE } from "../../../data/ruta-claude-ejemplos";
+
+const ejemplo = EJEMPLOS_CLAUDE.find((e) => e.slug === "emprendedor")!;
+---
+
+<EjemploPagina ejemplo={ejemplo} />

@@ -1,0 +1,56 @@
+---
+import RutaClaudeLayout from "../../../layouts/RutaClaudeLayout.astro";
+import EmailCTA from "../../../components/ruta-claude/EmailCTA.astro";
+import { EJEMPLOS_CLAUDE } from "../../../data/ruta-claude-ejemplos";
+---
+
+<RutaClaudeLayout
+  title="Ejemplos con Claude para emprendedores, empleados y tu portafolio"
+  description="Tres casos inventados con su prompt para copiar. Aprendé a pedirle a Claude con tu propio material y a comprobar lo que responde."
+>
+  <div class="space-y-12 pb-16">
+    <nav class="text-xs font-mono text-slate-500 px-2">
+      <a href="/ruta-claude" class="hover:text-teal-700 underline-offset-2 hover:underline">Ruta Claude desde cero</a>
+      <span aria-hidden="true" class="mx-2 inline-block h-1 w-1 rounded-full bg-slate-300 align-middle"></span>
+      <span class="text-slate-700">Ejemplos</span>
+    </nav>
+
+    <section class="space-y-5 bg-white rounded-3xl border border-slate-200/80 p-8 shadow-sm">
+      <span class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">Gratis</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+        Tres ejemplos para ver Claude trabajando sobre tu material
+      </h1>
+      <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+        Cada ejemplo parte de un problema real y trae el prompt para copiar, lo que deberías ver y cómo comprobarlo. Los casos y los números son inventados, para no exponer a nadie.
+      </p>
+    </section>
+
+    <section class="space-y-4">
+      <div class="grid gap-4 sm:grid-cols-3">
+        {EJEMPLOS_CLAUDE.map((e) => (
+          <a
+            href={`/ruta-claude/ejemplos/${e.slug}`}
+            onclick={`if (window.posthog) { window.posthog.capture('ruta_claude_ejemplo_click', { ejemplo: '${e.slug}', origen: 'ejemplos' }); }`}
+            class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-3 hover:border-teal-600 transition"
+          >
+            <span class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">{e.segmento}</span>
+            <h2 class="font-bold text-slate-900 leading-snug">{e.titulo}</h2>
+            <span class="text-xs font-semibold text-teal-700">Ver el ejemplo →</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="space-y-3 px-2">
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight">Lo que tienen en común</h2>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+        En los tres, Claude trabaja sobre un material que vos le das, responde solo con lo que ese material dice y te deja comprobar cada dato antes de usarlo. Esa idea se explica en el <a href="/ruta-claude/paso-1" class="text-teal-700 underline hover:text-teal-800">Paso 1</a>, que también es gratis.
+      </p>
+      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+        Si querés saber con qué herramientas se conecta Claude y cuáles uso yo, mirá <a href="/ruta-claude/conectores" class="text-teal-700 underline hover:text-teal-800">conectores, MCP y artefactos</a>.
+      </p>
+    </section>
+
+    <EmailCTA ubicacion="ejemplos" />
+  </div>
+</RutaClaudeLayout>
