@@ -1,0 +1,91 @@
+---
+interface Props {
+  /** Identificador único del bloque en la página. */
+  id: string;
+  /** Nombre corto del prompt para PostHog. */
+  prompt: string;
+  paso: string;
+  texto: string;
+  boton?: string;
+  /** Texto que lee el lector de pantalla para el bloque. */
+  etiqueta: string;
+  claro?: boolean;
+}
+
+const { id, prompt, paso, texto, boton = "Copiar prompt", etiqueta, claro = false } = Astro.props;
+---
+
+<div class="space-y-3" data-copiable data-prompt={prompt} data-paso={paso}>
+  <pre
+    id={`${id}-texto`}
+    tabindex="0"
+    aria-label={etiqueta}
+    class={`${claro ? "bg-slate-50 border border-slate-200 text-slate-800" : "bg-slate-900 text-slate-100"} text-sm rounded-2xl p-5 sm:p-6 overflow-x-auto whitespace-pre-wrap leading-relaxed focus-visible:ring-2 focus-visible:ring-teal-600 focus:outline-none`}
+  >{texto}</pre>
+  <div class="flex flex-wrap items-center gap-3">
+    <button
+      id={`${id}-boton`}
+      type="button"
+      data-copiar-boton
+      class="inline-flex items-center justify-center font-semibold bg-white border border-slate-300 hover:border-teal-600 text-slate-800 rounded-xl py-3 px-5 transition text-sm cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600"
+    >
+      {boton}
+    </button>
+    <p data-copiar-estado role="status" aria-live="polite" class="text-sm font-semibold"></p>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    if (window.__rutaClaudeCopiarListo) return;
+    window.__rutaClaudeCopiarListo = true;
+
+    function seleccionar(el) {
+      var r = document.createRange();
+      r.selectNodeContents(el);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+    }
+
+    // Devuelve true solo si el navegador confirmó que copió. Si no, deja el texto seleccionado.
+    async function copiar(texto, el) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+          await navigator.clipboard.writeText(texto);
+          return true;
+        } catch (e) {}
+      }
+      try {
+        seleccionar(el);
+        if (document.execCommand && document.execCommand('copy')) return true;
+      } catch (e) {}
+      seleccionar(el);
+      return false;
+    }
+
+    document.addEventListener('click', async function (e) {
+      var boton = e.target && e.target.closest ? e.target.closest('[data-copiar-boton]') : null;
+      if (!boton) return;
+      var bloque = boton.closest('[data-copiable]');
+      var pre = bloque.querySelector('pre');
+      var estado = bloque.querySelector('[data-copiar-estado]');
+      var ok = await copiar(pre.textContent || '', pre);
+      if (ok) {
+        estado.className = 'text-sm font-semibold text-emerald-700';
+        estado.textContent = 'Copiado.';
+        if (window.posthog) {
+          window.posthog.capture('ruta_claude_prompt_copiado', {
+            recurso: 'ruta-claude',
+            prompt: bloque.dataset.prompt,
+            paso: bloque.dataset.paso,
+          });
+        }
+        setTimeout(function () { if (estado.textContent === 'Copiado.') estado.textContent = ''; }, 4000);
+      } else {
+        estado.className = 'text-sm font-semibold text-red-700';
+        estado.textContent = 'No pude copiar solo. Dejé el texto seleccionado, copialo con Ctrl C o con Cmd C.';
+      }
+    });
+  })();
+</script>

@@ -1,0 +1,87 @@
+---
+interface Props {
+  paso: string;
+  prompt: string;
+  siguienteHref: string;
+  siguienteTexto: string;
+  /** Id del bloque de correo de la página, para quien todavía no dejó el suyo. */
+  registroId: string;
+}
+
+const { paso, prompt, siguienteHref, siguienteTexto, registroId } = Astro.props;
+const id = `ya-lo-probe-${paso}`;
+---
+
+<div class="space-y-4" data-ya-lo-probe data-paso={paso} data-prompt={prompt}>
+  <button
+    type="button"
+    id={id}
+    aria-expanded="false"
+    aria-controls={`${id}-siguiente`}
+    data-ya-lo-probe-boton
+    class="inline-flex items-center justify-center font-semibold bg-white border border-slate-300 hover:border-teal-600 text-slate-800 rounded-xl py-3 px-5 transition text-sm cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600"
+  >
+    Ya lo probé
+  </button>
+
+  <div id={`${id}-siguiente`} hidden class="bg-white rounded-2xl border border-teal-200 p-5 space-y-3" role="region" aria-live="polite">
+    <div data-con-correo hidden class="space-y-3">
+      <p class="text-sm sm:text-base text-slate-700 leading-relaxed">Muy bien. Ya podés seguir con el siguiente paso.</p>
+      <a
+        href={siguienteHref}
+        data-siguiente
+        class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3 px-5 transition text-sm shadow-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600"
+      >
+        <span>{siguienteTexto}</span>
+        <span class="text-base leading-none">→</span>
+      </a>
+    </div>
+    <div data-sin-correo hidden class="space-y-3">
+      <p class="text-sm sm:text-base text-slate-700 leading-relaxed">Muy bien. Dejá tu correo y no perdés el hilo de la ruta.</p>
+      <a
+        href={`#${registroId}`}
+        data-registro-link
+        class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3 px-5 transition text-sm shadow-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600"
+      >
+        <span>Dejar mi correo</span>
+        <span class="text-base leading-none">↓</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-ya-lo-probe]').forEach(function (bloque) {
+      if (bloque.dataset.listo) return;
+      bloque.dataset.listo = '1';
+      var boton = bloque.querySelector('[data-ya-lo-probe-boton]');
+      var panel = bloque.querySelector('[id$="-siguiente"]');
+      var conCorreo = bloque.querySelector('[data-con-correo]');
+      var sinCorreo = bloque.querySelector('[data-sin-correo]');
+      var paso = bloque.dataset.paso;
+      boton.addEventListener('click', function () {
+        var registrado = false;
+        try { registrado = window.localStorage.getItem('ruta_claude_registrado') === '1'; } catch (e) {}
+        conCorreo.hidden = !registrado;
+        sinCorreo.hidden = registrado;
+        panel.hidden = false;
+        boton.setAttribute('aria-expanded', 'true');
+        boton.disabled = true;
+        if (window.posthog) {
+          window.posthog.capture('ruta_claude_ya_lo_probe', { prompt: bloque.dataset.prompt, paso: paso, con_correo: registrado });
+        }
+        var enlace = registrado ? conCorreo.querySelector('a') : sinCorreo.querySelector('a');
+        if (enlace) enlace.focus();
+      });
+      var sig = bloque.querySelector('[data-siguiente]');
+      if (sig) sig.addEventListener('click', function () {
+        if (window.posthog) window.posthog.capture('ruta_claude_step_click', { paso: String(Number(paso) + 1), origen: 'ya-lo-probe-paso-' + paso });
+      });
+      var reg = bloque.querySelector('[data-registro-link]');
+      if (reg) reg.addEventListener('click', function () {
+        if (window.posthog) window.posthog.capture('ruta_claude_landing_click', { ubicacion: 'ya_lo_probe_paso_' + paso });
+      });
+    });
+  })();
+</script>

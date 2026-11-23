@@ -2,7 +2,7 @@
 import RutaClaudeLayout from "../../layouts/RutaClaudeLayout.astro";
 import EmailCTA from "../../components/ruta-claude/EmailCTA.astro";
 import Compartir from "../../components/ruta-claude/Compartir.astro";
-import { HOTMART_KIT_URL } from "../../data/ruta-claude";
+import { HOTMART_KIT_URL, KIT_ABIERTO, KIT_FECHA_ENTREGA, KIT_GARANTIA } from "../../data/ruta-claude";
 
 const incluye = [
   "Prompts listos para Claude. Para armar tu proyecto, para pedir con cita, para comprobar respuestas y para convertir tareas en rutina.",
@@ -48,29 +48,29 @@ const preguntas = [
     </nav>
 
     <section class="space-y-5 bg-white rounded-3xl border border-slate-200/80 p-8 sm:p-10 shadow-sm">
-      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border bg-amber-50 text-amber-800 border-amber-200">En preventa, se está terminando de probar</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border bg-amber-50 text-amber-800 border-amber-200">{KIT_ABIERTO ? "Preventa" : "Próximamente"}</span>
       <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.12]">
         Claude trabajando sobre tus propios documentos
       </h1>
       <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
         Un kit para profesionales y empleados que ya probaron Claude y quieren que responda con base en su material, con respuestas que puedan comprobar. Los Pasos 0 y 1 son gratis y el kit son los Pasos 2, 3 y 4.
       </p>
-      <p class="text-sm text-slate-500">Todavía no se puede comprar. Dejá tu correo y te aviso cuando abra la preventa.</p>
+      {!KIT_ABIERTO && <p class="text-sm text-slate-600">Todavía no se puede comprar. Dejá tu correo y te aviso cuando abra el Kit.</p>}
       {HOTMART_KIT_URL ? (
         <a
           href={HOTMART_KIT_URL}
           onclick="if (window.posthog) { window.posthog.capture('ruta_claude_kit_comprar_click', { ubicacion: 'hero' }); }"
           class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3.5 px-6 transition text-sm shadow-md"
         >
-          <span>Reservar mi cupo</span>
+          <span>Comprar el Kit</span>
           <span class="text-base leading-none">→</span>
         </a>
       ) : (
         <a
           href="#avisame"
-          class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3.5 px-6 transition text-sm shadow-md"
+          class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3.5 px-6 transition text-sm shadow-md focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-600"
         >
-          <span>Avisame cuando abra</span>
+          <span>Avisarme cuando abra el Kit</span>
           <span class="text-base leading-none">↓</span>
         </a>
       )}
@@ -132,21 +132,23 @@ const preguntas = [
       </p>
     </section>
 
-    <section class="space-y-4 px-2">
-      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Dónde se compra</h2>
-      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
-        {HOTMART_KIT_URL
-          ? "Se compra desde el botón Reservar mi cupo de esta misma página, y el contenido de pago llega a tu área de miembros."
-          : "Todavía no se puede comprar. Cuando abra la preventa, el botón de compra aparece en esta misma página y el contenido de pago llega a tu área de miembros. Si dejás tu correo abajo, te aviso el día que abra."}
-      </p>
-    </section>
-
-    <section class="space-y-4 px-2">
-      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Cómo funciona la preventa</h2>
-      <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
-        Hay cupos limitados para quienes entren primero. El kit se termina de armar y de probar con ellos, y cada comprador de preventa me cuenta qué falló y qué faltó. El precio, la fecha de entrega y la garantía se publican cuando abra la preventa. Dejá tu correo y te aviso antes que a nadie.
-      </p>
-    </section>
+    {KIT_ABIERTO ? (
+      <section class="space-y-4 px-2">
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Cómo funciona la preventa</h2>
+        <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+          Se compra desde el botón Comprar el Kit de esta misma página, y el contenido de pago llega a tu área de miembros.
+          {KIT_FECHA_ENTREGA && ` Fecha de entrega, ${KIT_FECHA_ENTREGA}.`}
+          {KIT_GARANTIA && ` Garantía, ${KIT_GARANTIA}.`}
+        </p>
+      </section>
+    ) : (
+      <section class="space-y-4 px-2">
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Cuándo abre</h2>
+        <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+          Todavía no se puede comprar y no hay fecha de apertura. Cuando la haya, el botón de compra aparece en esta misma página y el contenido de pago llega a tu área de miembros. Si dejás tu correo abajo, te aviso el día que abra.
+        </p>
+      </section>
+    )}
 
     <section class="space-y-4">
       <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight px-2">Preguntas frecuentes</h2>
@@ -163,9 +165,10 @@ const preguntas = [
     <div id="avisame">
       <EmailCTA
         ubicacion="kit"
-        titulo="Avisame cuando abra la preventa"
-        texto="Dejá tu correo y te aviso cuando abra, con el precio, la fecha de entrega y la garantía."
-        boton="Avisame"
+        titulo="Te aviso cuando abra el Kit"
+        texto="Dejá tu correo y te aviso cuando abra, con qué incluye cada paso, qué se entrega y cuándo."
+        boton="Avisarme cuando abra el Kit"
+        avisame
       />
     </div>
 

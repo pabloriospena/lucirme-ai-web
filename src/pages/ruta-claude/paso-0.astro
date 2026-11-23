@@ -2,6 +2,9 @@
 import RutaClaudeLayout from "../../layouts/RutaClaudeLayout.astro";
 import EmailCTA from "../../components/ruta-claude/EmailCTA.astro";
 import Compartir from "../../components/ruta-claude/Compartir.astro";
+import Leccion from "../../components/ruta-claude/Leccion.astro";
+import PromptCopiable from "../../components/ruta-claude/PromptCopiable.astro";
+import YaLoProbe from "../../components/ruta-claude/YaLoProbe.astro";
 
 const promptTarea = `Te voy a pasar un texto mío. Quiero que lo reescribas para que sea más claro y más corto, sin cambiar ningún dato.
 
@@ -22,27 +25,15 @@ Texto:
   title="Paso 0. Tu primera conversación con Claude"
   description="Dejá Claude listo, hacé una primera tarea con un texto tuyo y sabé qué datos no pegar. Sin programar y en unos minutos."
 >
-  <div class="space-y-12 pb-16">
-    <nav class="text-xs font-mono text-slate-500 px-2">
-      <a href="/ruta-claude" class="hover:text-teal-700 underline-offset-2 hover:underline">Ruta Claude desde cero</a>
-      <span aria-hidden="true" class="mx-2 inline-block h-1 w-1 rounded-full bg-slate-300 align-middle"></span>
-      <span class="text-slate-700">Paso 0</span>
-    </nav>
-
-    <section class="space-y-5 bg-white rounded-3xl border border-slate-200/80 p-8 shadow-sm">
-      <span class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">Paso 0, gratis</span>
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
-        Tu primera conversación con Claude
-      </h1>
-      <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
-        No necesitás saber programar ni saber de IA. Este paso deja tres cosas listas.
-      </p>
-      <ul class="space-y-2 text-sm sm:text-base text-slate-700 max-w-2xl">
+  <Leccion paso="00" eyebrow="Paso 0, gratis" titulo="Tu primera conversación con Claude">
+    <Fragment slot="intro">
+      <p>No necesitás saber programar ni saber de IA. Este paso deja tres cosas listas.</p>
+      <ul class="space-y-2 text-sm sm:text-base text-slate-700">
         <li class="flex gap-3"><span class="text-teal-700 font-bold">1.</span><span>Claude abierto y con una regla clara de qué datos pegar y cuáles no.</span></li>
         <li class="flex gap-3"><span class="text-teal-700 font-bold">2.</span><span>Una primera tarea real hecha con un texto tuyo.</span></li>
         <li class="flex gap-3"><span class="text-teal-700 font-bold">3.</span><span>Tres comprobaciones para saber si el resultado sirve.</span></li>
       </ul>
-    </section>
+    </Fragment>
 
     <section class="space-y-5">
       <h2 class="text-xl font-bold text-slate-900 tracking-tight px-2">1. Abrí Claude</h2>
@@ -70,14 +61,13 @@ Texto:
       <p class="text-sm text-slate-600 px-2 leading-relaxed">
         Elegí un texto tuyo que tengás que mandar esta semana, como un correo, una nota o un párrafo de un informe. Abrí una conversación nueva, completá lo que está entre corchetes y pegá esto.
       </p>
-      <pre id="prompt-tarea-texto" class="bg-slate-900 text-slate-100 text-xs sm:text-sm rounded-2xl p-6 overflow-x-auto whitespace-pre-wrap leading-relaxed">{promptTarea}</pre>
-      <button
-        id="btn-copiar-prompt-tarea"
-        type="button"
-        class="inline-flex items-center font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3 px-5 transition text-sm shadow-md cursor-pointer"
-      >
-        Copiar prompt
-      </button>
+      <PromptCopiable
+        id="prompt-tarea"
+        prompt="primera-tarea"
+        paso="0"
+        texto={promptTarea}
+        etiqueta="Prompt de la primera tarea"
+      />
     </section>
 
     <section class="space-y-5">
@@ -92,6 +82,13 @@ Texto:
           Si alguna comprobación falla, casi siempre faltó contexto en lo que le pediste, y de eso trata el Paso 1.
         </p>
       </div>
+      <YaLoProbe
+        paso="0"
+        prompt="primera-tarea"
+        siguienteHref="/ruta-claude/paso-1"
+        siguienteTexto="Seguir con el Paso 1"
+        registroId="registro-paso-0"
+      />
     </section>
 
     <section class="space-y-3 px-2">
@@ -103,21 +100,6 @@ Texto:
 
     <Compartir ubicacion="paso-0" />
 
-    <section class="space-y-3 px-2">
-      <h2 class="text-xl font-bold text-slate-900 tracking-tight">Siguiente</h2>
-      <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
-        El Paso 1 te enseña a pedirle a Claude con el contexto correcto, para que la primera respuesta ya sirva.
-      </p>
-      <a
-        href="/ruta-claude/paso-1"
-        onclick="if (window.posthog) { window.posthog.capture('ruta_claude_step_click', { paso: '1', origen: 'paso-0' }); }"
-        class="inline-flex items-center justify-center gap-2 font-semibold bg-white border border-slate-300 hover:border-teal-600 text-slate-800 rounded-xl py-3 px-5 transition text-sm"
-      >
-        <span>Ir al Paso 1</span>
-        <span class="text-base leading-none">→</span>
-      </a>
-    </section>
-
     <EmailCTA
       ubicacion="paso-0"
       titulo="Dejá tu correo y seguí con la ruta"
@@ -126,31 +108,5 @@ Texto:
       siguienteHref="/ruta-claude/paso-1"
       siguienteTexto="Seguir con el Paso 1"
     />
-  </div>
+  </Leccion>
 </RutaClaudeLayout>
-
-<script is:inline>
-  (function () {
-    var boton = document.getElementById('btn-copiar-prompt-tarea');
-    if (!boton) return;
-    boton.addEventListener('click', function () {
-      var el = document.getElementById('prompt-tarea-texto');
-      if (!el) return;
-      var texto = el.textContent || '';
-      var listo = function () {
-        boton.textContent = 'Copiado';
-        if (window.posthog) {
-          window.posthog.capture('prompt_copiado', { recurso: 'ruta-claude', prompt: 'primera-tarea', paso: '0' });
-        }
-        setTimeout(function () { boton.textContent = 'Copiar prompt'; }, 2000);
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(texto).then(listo).catch(function () {
-          window.prompt('Copiá el prompt:', texto);
-        });
-      } else {
-        window.prompt('Copiá el prompt:', texto);
-      }
-    });
-  })();
-</script>

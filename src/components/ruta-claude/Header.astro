@@ -7,6 +7,8 @@ const destinos: Record<string, string> = {
   "/ruta-claude/paso-1": "#registro-paso-1",
 };
 const destino = destinos[ruta] ?? "/ruta-claude#registro-hero";
+// En el kit y en sus vistas previas la acción principal es Avisarme cuando abra el Kit.
+const mostrarCta = !(ruta === "/ruta-claude/kit" || /\/paso-[234]$/.test(ruta));
 ---
 <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
@@ -31,6 +33,7 @@ const destino = destinos[ruta] ?? "/ruta-claude#registro-hero";
         Hablar con Pablo
       </a>
       <!-- En móvil el registro lo lleva la barra fija de abajo. Se oculta mientras el formulario está a la vista. -->
+      {mostrarCta && (
       <a
         id="header-cta-registro"
         href={destino}
@@ -39,6 +42,7 @@ const destino = destinos[ruta] ?? "/ruta-claude#registro-hero";
       >
         Empezar Paso 0 gratis
       </a>
+      )}
     </div>
   </div>
 </header>

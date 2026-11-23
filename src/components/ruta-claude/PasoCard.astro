@@ -1,5 +1,5 @@
 ---
-import type { PasoClaude } from "../../data/ruta-claude";
+import { etiquetaPaso, type PasoClaude } from "../../data/ruta-claude";
 
 interface Props {
   paso: PasoClaude;
@@ -7,15 +7,11 @@ interface Props {
 
 const { paso } = Astro.props;
 const esPago = paso.acceso === "pago";
-const estiloEstado: Record<string, string> = {
-  disponible: "bg-emerald-50 text-emerald-700 border-emerald-200",
-  "en-construccion": "bg-amber-50 text-amber-800 border-amber-200",
-  proximamente: "bg-slate-100 text-slate-600 border-slate-200/80",
-};
-const textoEstado: Record<string, string> = {
-  disponible: "Disponible",
-  "en-construccion": "En construcción",
-  proximamente: "Próximamente",
+const etiqueta = etiquetaPaso(paso);
+const estilo: Record<string, string> = {
+  Gratis: "bg-emerald-50 text-emerald-800 border-emerald-200",
+  Preventa: "bg-amber-50 text-amber-800 border-amber-200",
+  Próximamente: "bg-slate-100 text-slate-700 border-slate-300",
 };
 ---
 
@@ -25,11 +21,13 @@ const textoEstado: Record<string, string> = {
       Paso {Number(paso.numero)} de 4
     </span>
     <div class="flex items-center gap-2">
-      <span class={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border ${esPago ? "bg-slate-900 text-white border-slate-900" : "bg-emerald-50 text-emerald-700 border-emerald-200"}`}>
-        {esPago ? "En el kit" : "Gratis"}
-      </span>
-      <span class={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border ${estiloEstado[paso.estado]}`}>
-        {textoEstado[paso.estado]}
+      {esPago && (
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border bg-slate-900 text-white border-slate-900">
+          En el kit
+        </span>
+      )}
+      <span class={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border ${estilo[etiqueta]}`}>
+        {etiqueta}
       </span>
     </div>
   </div>

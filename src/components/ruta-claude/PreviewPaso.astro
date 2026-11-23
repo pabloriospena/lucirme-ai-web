@@ -1,7 +1,7 @@
 ---
 import EmailCTA from "./EmailCTA.astro";
 import Compartir from "./Compartir.astro";
-import { LANDING_KIT_URL } from "../../data/ruta-claude";
+import { LANDING_KIT_URL, KIT_ABIERTO } from "../../data/ruta-claude";
 
 interface Props {
   numero: string;
@@ -27,7 +27,8 @@ const { numero, titulo, resumen, recibes, limites, anterior, siguiente } = Astro
     <div class="flex flex-wrap items-center gap-2">
       <span class="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest">Paso {Number(numero)}</span>
       <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border bg-slate-900 text-white border-slate-900">En el kit</span>
-      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border bg-slate-100 text-slate-600 border-slate-200/80">Vista previa</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border bg-slate-100 text-slate-700 border-slate-300">{KIT_ABIERTO ? "Preventa" : "Próximamente"}</span>
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold border bg-white text-slate-700 border-slate-300">Vista previa</span>
     </div>
     <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">{titulo}</h1>
     <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">{resumen}</p>
@@ -42,7 +43,9 @@ const { numero, titulo, resumen, recibes, limites, anterior, siguiente } = Astro
       El kit son los Pasos 2, 3 y 4 de la ruta. Trae prompts listos para Claude, una plantilla de proyecto para tus documentos, una lista de comprobación y una guía para convertir tus tareas repetidas en rutina. Con él pasás de preguntarle cosas a Claude a trabajar con él sobre tus propios documentos, con respuestas que podés comprobar.
     </p>
     <p class="text-sm text-slate-700 leading-relaxed">
-      Todavía no se puede comprar. Abre en preventa con cupos limitados y la compra se hará en la página del kit. Mientras tanto podés ver todo lo que incluye y dejar tu correo para que te avise primero.
+      {KIT_ABIERTO
+        ? "La compra se hace desde la página del kit."
+        : "Todavía no se puede comprar. Mientras tanto podés ver todo lo que incluye y dejar tu correo para que te avise cuando abra el Kit."}
     </p>
     {LANDING_KIT_URL && (
       <a href={LANDING_KIT_URL} class="inline-flex text-sm font-semibold text-teal-800 underline hover:text-teal-900">Ver qué incluye el kit y qué ganas</a>
@@ -73,8 +76,8 @@ const { numero, titulo, resumen, recibes, limites, anterior, siguiente } = Astro
     <div class="px-2">
       <a
         href={LANDING_KIT_URL}
-        onclick={`if (window.posthog) { window.posthog.capture('ruta_claude_landing_click', { paso: '${Number(numero)}' }); }`}
-        class="inline-flex items-center justify-center gap-2 font-semibold bg-[#00685F] hover:bg-[#005049] text-white rounded-xl py-3.5 px-6 transition text-sm shadow-md"
+        onclick={`if (window.posthog) { window.posthog.capture('ruta_claude_landing_click', { ubicacion: 'preview_paso_${Number(numero)}' }); }`}
+        class="inline-flex items-center justify-center gap-2 font-semibold bg-white border border-slate-300 hover:border-teal-600 text-slate-800 rounded-xl py-3.5 px-6 transition text-sm"
       >
         <span>Ver el kit completo</span>
         <span class="text-base leading-none">→</span>
@@ -89,9 +92,10 @@ const { numero, titulo, resumen, recibes, limites, anterior, siguiente } = Astro
 
   <EmailCTA
     ubicacion={`paso-${Number(numero)}`}
-    titulo="Avísame cuando abra el kit"
-    texto="Dejá tu correo y te aviso cuando abra la preventa, con el precio y la fecha de entrega."
-    boton="Avísame"
+    titulo="Te aviso cuando abra el Kit"
+    texto="Dejá tu correo y te aviso cuando abra el Kit, con qué incluye cada paso, qué se entrega y cuándo."
+    boton="Avisarme cuando abra el Kit"
+    avisame
   />
 
   <Compartir ubicacion={`paso-${Number(numero)}`} />
