@@ -64,14 +64,14 @@
 
   <span class="etq">Estud-IA · Capa 2 · IA intermedio · Clase 5</span>
   <h1>Guía paso a paso: decide qué cambiar y diseña el experimento</h1>
-  <p class="lead">Una guía para hacerlo por tu cuenta, con el código completo. Al final habrás probado dos caminos para usar un modelo que ya existe, habrás diseñado un tercero sin fingir que lo entrenaste, y tendrás una ficha de hipótesis con un único cambio.</p>
-  <p><b>Cuánto tarda:</b> entre 2 y 3 horas la primera vez. <b>Qué necesitas:</b> una cuenta de Google para Colab, el notebook de la clase y acceso a Claude, ChatGPT o Gemini con plan gratuito.</p>
+  <p class="lead">Una guía para hacerlo por tu cuenta, con el código completo. Al final habrás probado dos caminos para usar un modelo que ya existe, habrás diseñado un tercero sin fingir que lo entrenaste, tendrás una ficha de hipótesis con un único cambio, y la habrás convertido en el prompt de tu propio modelo.</p>
+  <p><b>Cuánto tarda:</b> entre 2 y 3 horas la primera vez, más unos 40 minutos del paso 12. <b>Qué necesitas:</b> una cuenta de Google para Colab, el notebook de la clase y acceso a Claude, ChatGPT o Gemini con plan gratuito.</p>
 
   <nav class="indice">
     <b>Contenido</b>
     <ol>
       <li><a href="#entender">Entender: transferir un modelo sin tocarlo de más</a></li>
-      <li><a href="#p1">Paso 1 · Abre Colab y carga el notebook</a></li><li><a href="#p2">Paso 2 · Los mismos datos y la misma partición</a></li><li><a href="#p3">Paso 3 · Entiende los tres caminos antes de ejecutar</a></li><li><a href="#p4">Paso 4 · Camino A: el modelo tal cual</a></li><li><a href="#p5">Paso 5 · Camino A con ejemplos en el prompt</a></li><li><a href="#p6">Paso 6 · Camino B: de un mensaje a una lista de números</a></li><li><a href="#p7">Paso 7 · Entrena la salida y mide cuánto confiar</a></li><li><a href="#p8">Paso 8 · Camino C: se diseña, no se entrena</a></li><li><a href="#p9">Paso 9 · Compara y mira qué errores cambian</a></li><li><a href="#p10">Paso 10 · Cómo empezar con otro modelo de Hugging Face</a></li><li><a href="#p11">Paso 11 · Escribe tu ficha de hipótesis</a></li>
+      <li><a href="#p1">Paso 1 · Abre Colab y carga el notebook</a></li><li><a href="#p2">Paso 2 · Los mismos datos y la misma partición</a></li><li><a href="#p3">Paso 3 · Entiende los tres caminos antes de ejecutar</a></li><li><a href="#p4">Paso 4 · Camino A: el modelo tal cual</a></li><li><a href="#p5">Paso 5 · Camino A con ejemplos en el prompt</a></li><li><a href="#p6">Paso 6 · Camino B: de un mensaje a una lista de números</a></li><li><a href="#p7">Paso 7 · Entrena la salida y mide cuánto confiar</a></li><li><a href="#p8">Paso 8 · Camino C: se diseña, no se entrena</a></li><li><a href="#p9">Paso 9 · Compara y mira qué errores cambian</a></li><li><a href="#p10">Paso 10 · Cómo empezar con otro modelo de Hugging Face</a></li><li><a href="#p11">Paso 11 · Escribe tu ficha de hipótesis</a></li><li><a href="#p12">Paso 12 · De tu ficha a tu propio modelo con IA generativa</a></li>
       <li><a href="#fallas">Si algo sale mal</a></li>
       <li><a href="#glosario">Glosario y lista final</a></li>
     </ol>
@@ -528,6 +528,84 @@ print(json.dumps(ficha[&quot;hipotesis&quot;], ensure_ascii=False, indent=2))</d
 <li><b>No afirmo:</b> que funcione con mensajes de otra tienda ni con la prueba, que no se ha abierto.</li>
 </ul></div>
 <div class="caja ojo"><b class="t">Así sabes que quedó bien</b>La celda dice «Campos por completar: ninguno» y crea <code>hipotesis_experimento.json</code> y <code>registro_experimentos.csv</code>.</div>
+  </section>
+
+  <section class="paso" id="p12">
+    <h2><span class="num">12</span>De tu ficha a tu propio modelo con IA generativa</h2>
+    <p class="meta">40 min · vibe coding</p>
+
+<p><b>Qué haces.</b> Conviertes tu ficha en un prompt, dejas que la IA escriba el notebook de Colab, lo ejecutas y mides el resultado en «k de N». <b>Tú decides, la IA escribe.</b></p>
+<div class="caja cuida"><b class="t">Antes de empezar</b>Los números de los cuatro ejemplos salen de una sola ejecución con datos sintéticos. Los tuyos serán distintos: lo que importa es el método. No subas datos reales de una empresa: usa datos ficticios.</div>
+
+<h3>Tu ficha es tu prompt</h3>
+<div class='tabla-scroll'><table><thead><tr><th>Campo de la ficha</th><th>Cómo se lo dices a la IA</th></tr></thead><tbody><tr><td>Problema</td><td>«Quiero decidir [qué] a partir de [qué datos].»</td></tr><tr><td>Camino y un solo cambio</td><td>«Prueba solo [esto]. No cambies nada más.»</td></tr><tr><td>Lo que queda igual</td><td>«Usa siempre la misma separación de datos.»</td></tr><tr><td>Medida y criterio</td><td>«Dime cuántos acertó de cuántos, en datos que no vio.»</td></tr><tr><td>Riesgos</td><td>«Avísame si hay duplicados o clases muy desiguales.»</td></tr></tbody></table></div>
+<div class="copiable" data-copy><span class="rot">Plantilla de prompt</span>Tengo este problema: [qué quiero decidir].
+Mis datos tienen estas columnas: [lista de columnas y un ejemplo de fila].
+Hazme un notebook de Google Colab, paso a paso, que pruebe [el modelo o camino].
+Si no tengo datos, genera [número] filas ficticias con esa forma.
+Separa una parte de los datos que el modelo nunca vea y dime cuántos acertó de cuántos.
+Explica cada celda en palabras simples, sin matemáticas.
+No cambies nada más de lo que te pedí.</div>
+
+<h3>La receta, para cualquier proyecto</h3>
+<ol>
+<li><b>Ficha:</b> problema, camino, un solo cambio y medida.</li>
+<li><b>Datos:</b> los tuyos o ficticios que genera la IA.</li>
+<li><b>Prompt:</b> tu ficha con la plantilla.</li>
+<li><b>Ejecutar:</b> abre Colab y pulsa «Ejecutar todo».</li>
+<li><b>Medir:</b> «k de N» en datos nuevos y en casos escritos por ti.</li>
+</ol>
+
+<h3>Ejemplo 1 · Clasificar gastos por texto</h3>
+<p><b>Problema.</b> Tienes descripciones de gastos («Uber al aeropuerto») y quieres que el computador les ponga la categoría.</p>
+<p><b>El modelo, en palabras.</b> TF-IDF más regresión logística. Cuenta qué palabras aparecen en cada categoría y da más peso a las raras (Uber pesa más que «de»). Reconoce patrones de palabras, no entiende el significado.</p>
+<ol>
+<li>Ficha: camino B, un solo cambio (ninguno en la primera vuelta), medida «cuántos acierta de cuántos en gastos que no vio».</li><li>Datos: los tuyos sin información sensible, o 200 filas ficticias con las columnas <code>descripcion</code> y <code>categoria</code>.</li><li>Prompt: la plantilla con tu problema, más «muestra al final una tabla con cinco errores».</li><li>Ejecuta todo el notebook que devuelve la IA.</li><li>Prueba 8 frases que escribas tú y anota cuántas acierta.</li><li>Mira los errores: si una etiqueta es ambigua (por ejemplo «gimnasio»), corrígela y vuelve a medir. Un solo cambio.</li>
+</ol>
+<div class="caja ojo"><b class="t">Qué ves</b>En una ejecución mía con datos sintéticos: 50 de 50 en la prueba, pero 6 de 8 en frases nuevas. Un 50 de 50 es sospechoso: los datos ficticios son repetitivos. El número honesto es el de las frases nuevas.</div>
+<p><b>Qué significa frente a lo visto:</b> tokenizar (palabras a números), separar entrenamiento y prueba, «k de N» y un cambio a la vez.</p>
+<div class='tabla-scroll'><table><thead><tr><th>La IA hace</th><th>Tú haces</th></tr></thead><tbody><tr><td>Escribe el código y explica cada celda; genera datos ficticios si se lo pides.</td><td>Decides la categoría, revisas las etiquetas y pruebas con frases tuyas.</td></tr></tbody></table></div>
+
+<h3>Ejemplo 2 · Pronosticar consumo</h3>
+<p><b>Problema.</b> Tienes el consumo diario (energía, ventas, pedidos) y quieres estimar el de mañana.</p>
+<p><b>El modelo, en palabras.</b> Tres modelos. El promedio predice que mañana será como la última semana: es tu vara de medir. La regresión lineal traza la línea que sigue la tendencia. El bosque aleatorio son muchos árboles de preguntas que votan.</p>
+<ol>
+<li>Ficha: camino B. Hipótesis: el día de la semana y el consumo de ayer ayudan. Medida: error promedio en unidades reales (MAE), en las últimas semanas que el modelo no vio.</li><li>Datos: columnas <code>fecha</code> y <code>consumo</code>, o un año ficticio con tendencia y día de la semana.</li><li>Prompt: la plantilla más «separa por fecha: entrena con lo antiguo y prueba con las últimas 4 semanas; compara contra el promedio de la última semana».</li><li>Ejecuta todo y lee la tabla de errores.</li><li>Verifica en el código que la prueba son fechas posteriores a las de entrenamiento.</li><li>Agrega una variable (por ejemplo, festivo) y vuelve a medir. Un solo cambio.</li>
+</ol>
+<div class="caja ojo"><b class="t">Qué ves</b>En una ejecución mía (sintética, una corrida): promedio 17,3 · regresión lineal 6,5 · bosque 7,8, sobre consumos de unos 250. El modelo más complejo no ganó.</div>
+<p><b>Qué significa frente a lo visto:</b> el promedio es tu línea base; la partición aquí es por tiempo; un error de 6,5 solo se entiende frente a 17,3.</p>
+<div class='tabla-scroll'><table><thead><tr><th>La IA hace</th><th>Tú haces</th></tr></thead><tbody><tr><td>Arma las columnas de apoyo, entrena y compara los tres modelos.</td><td>Defines qué error es aceptable para tu negocio y verificas la partición.</td></tr></tbody></table></div>
+
+<h3>Ejemplo 3 · Anticipar fallas de equipos</h3>
+<p><b>Problema.</b> Tienes equipos con edad, incidentes y marca, y quieres señalar cuáles van a fallar.</p>
+<p><b>El modelo, en palabras.</b> Un árbol de decisión: una cadena de preguntas de sí o no que termina en «falla» o «no falla». Con <code>class_weight balanced</code>, pasar por alto una falla pesa más que una falsa alarma.</p>
+<ol>
+<li>Ficha: camino B. Medida: no solo aciertos, sino cuántas fallas reales detecta de cuántas hay.</li><li>Datos: <code>edad</code>, <code>incidentes</code>, <code>marca</code>, <code>fallo</code> (0 o 1), o 3000 filas ficticias donde fallan pocos equipos.</li><li>Prompt: la plantilla más «dime cuántas fallas reales detecta de cuántas hay y cuántas falsas alarmas da; compara contra un modelo que siempre diga que no falla».</li><li>Ejecuta todo y lee las dos medidas.</li><li>Decide con tu negocio qué cuesta más: una falla no detectada o una revisión innecesaria.</li><li>Cambia la profundidad del árbol y mide de nuevo las dos cosas. Un solo cambio.</li>
+</ol>
+<div class="caja ojo"><b class="t">Qué ves</b>En una ejecución mía (sintética, 750 equipos de prueba, 125 con falla): el modelo que siempre dice «no falla» acierta 625 de 750 y detecta 0 fallas. El árbol acierta 562 de 750 y detecta 90 de 125, con 153 falsas alarmas.</div>
+<p><b>Qué significa frente a lo visto:</b> es el caso de datos desiguales frente a la realidad, y de por qué un porcentaje alto no basta como estándar sin saber qué se está midiendo.</p>
+<div class='tabla-scroll'><table><thead><tr><th>La IA hace</th><th>Tú haces</th></tr></thead><tbody><tr><td>Entrena el árbol y cuenta aciertos y fallas; lo dibuja como diagrama.</td><td>Eliges qué error cuesta más y lees las preguntas del árbol.</td></tr></tbody></table></div>
+
+<h3>Ejemplo 4 · Búsqueda en contratos</h3>
+<p><b>Problema.</b> Tienes muchas cláusulas en texto y quieres encontrar rápido las que tratan de un tema.</p>
+<p><b>El modelo, en palabras.</b> Búsqueda por similitud TF-IDF. No se entrena nada: cada cláusula y tu pregunta se vuelven números según las palabras que usan, y el computador devuelve las más parecidas. Si la cláusula usa otras palabras, no la encuentra.</p>
+<ol>
+<li>Ficha: camino A, sin entrenar. Medida: de 3 preguntas, en cuántas sale la cláusula correcta de primera.</li><li>Datos: una columna <code>clausula</code>. No subas contratos confidenciales: pide 20 cláusulas ficticias.</li><li>Prompt: la plantilla más «haz una búsqueda por similitud de texto: yo escribo una pregunta y me muestras las 3 cláusulas más parecidas».</li><li>Ejecuta todo y escribe tus 3 preguntas.</li><li>Anota cuántas acertó y por qué falló la otra.</li><li>Repite una pregunta con sinónimos y compara el antes y el después. Un solo cambio.</li>
+</ol>
+<div class="caja ojo"><b class="t">Qué ves</b>En una ejecución mía (sintética): 1 de 3. Falla cuando la pregunta usa otras palabras («multa» frente a «penalidad»). Representar el significado (embeddings) es la mejora que se esperaría, pero no la probé: es una hipótesis que mides tú.</div>
+<p><b>Qué significa frente a lo visto:</b> conecta con tokenizar y con la diferencia entre parámetros y ventana de contexto: aquí no hay entrenamiento, solo comparación de texto.</p>
+<div class='tabla-scroll'><table><thead><tr><th>La IA hace</th><th>Tú haces</th></tr></thead><tbody><tr><td>Arma el buscador y muestra los resultados.</td><td>Escribes preguntas reales, juzgas si la cláusula sirve y decides qué mejora probar.</td></tr></tbody></table></div>
+
+<div class="caja haz"><b class="t">Tu entrega de esta parte</b>
+<ul>
+<li>Tu ficha y el prompt que salió de ella.</li>
+<li>Tu notebook ejecutado, con el resultado en «k de N».</li>
+<li>Al menos 5 casos escritos por ti y qué falló.</li>
+<li>El único cambio que probarías después.</li>
+</ul>
+Si tu proyecto es de clasificar texto, empieza por el ejemplo 1; predecir un número en el tiempo, el 2; eventos raros, el 3; encontrar información en documentos, el 4.</div>
+<div class="caja cuida"><b class="t">Si el notebook falla</b>Copia el mensaje de error completo y pídele a la IA que lo arregle sin cambiar nada más. Si no entiendes una celda, pídele que la explique como si no supieras programar. Si el resultado es perfecto, sospecha y prueba con casos tuyos.</div>
+<p class="meta">Quedan fuera de esta clase, por ahora: APIs, agentes, despliegue y RAG.</p>
   </section>
 
   <section class="paso" id="fallas">
