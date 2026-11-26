@@ -226,7 +226,7 @@ const defaultSchema = {
         <!-- Left / Center Promo Message -->
         <div class="flex items-center gap-2 text-xs truncate">
           <span
-            class="border border-amber-500/30 text-amber-400 bg-amber-500/10 text-[10px] font-mono px-2 py-0.5 rounded shrink-0"
+            class="border border-amber-500/30 text-amber-400 bg-amber-500/10 text-xs font-mono px-2 py-0.5 rounded shrink-0"
           >
             [CURSO DESTACADO]
           </span>
@@ -244,7 +244,7 @@ const defaultSchema = {
 
         <!-- Right Live Support Indicator (Hidden on small mobile) -->
         <div
-          class="hidden md:flex items-center gap-2 text-[11px] text-slate-400 font-mono shrink-0"
+          class="hidden md:flex items-center gap-2 text-xs text-slate-400 font-mono shrink-0"
         >
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
           ></span>
@@ -277,7 +277,7 @@ const defaultSchema = {
             </div>
           </a>
           <span
-            class="text-[10px] font-mono text-slate-500 tracking-wide uppercase pl-2.5 border-l border-slate-200 hidden sm:inline-block"
+            class="text-xs font-mono text-slate-500 tracking-wide uppercase pl-2.5 border-l border-slate-200 hidden sm:inline-block"
           >
             Guías & Mentoría
           </span>
@@ -345,7 +345,7 @@ const defaultSchema = {
             href={LINKS.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3.5 sm:px-4 py-2 rounded-lg flex items-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
+            class="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold px-3.5 sm:px-4 py-2 rounded-lg flex items-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
             onclick="if (window.posthog) { window.posthog.capture('header_whatsapp_click', { origen: 'header_main' }); }"
           >
             <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
@@ -398,6 +398,7 @@ const defaultSchema = {
     <aside
       id="sidebar-drawer"
       tabindex="-1"
+      inert
       class="fixed top-0 right-0 w-full sm:w-[380px] h-full bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between overflow-hidden"
     >
       <!-- Cabecera del Drawer -->
@@ -431,12 +432,12 @@ const defaultSchema = {
         <!-- Capa 1: Rutas de Aprendizaje Guiadas (5) -->
         <div class="space-y-2.5">
           <div
-            class="text-[11px] font-mono text-slate-400 tracking-wider uppercase font-semibold flex items-center justify-between"
+            class="text-xs font-mono text-slate-400 tracking-wider uppercase font-semibold flex items-center justify-between"
           >
             <span>RUTAS DE APRENDIZAJE (5)</span>
             <a
               href="/educacion"
-              class="text-teal-700 hover:underline text-[10px] normal-case"
+              class="text-teal-700 hover:underline text-xs normal-case"
               >Ver todas →</a
             >
           </div>
@@ -450,7 +451,7 @@ const defaultSchema = {
                 >01. Comunicación Directa con IA</span
               >
               <span
-                class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-amber-50 text-amber-700 border border-amber-200/80"
+                class="text-xs font-mono px-1.5 py-0.2 rounded bg-amber-50 text-amber-700 border border-amber-200/80"
                 >PRO</span
               >
             </a>
@@ -463,7 +464,7 @@ const defaultSchema = {
                 >02. Product Management & ShapeUp</span
               >
               <span
-                class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-teal-50 text-teal-700 border border-teal-200/80"
+                class="text-xs font-mono px-1.5 py-0.2 rounded bg-teal-50 text-teal-700 border border-teal-200/80"
                 >GUÍA</span
               >
             </a>
@@ -476,7 +477,7 @@ const defaultSchema = {
                 >03. Dominio de NotebookLM</span
               >
               <span
-                class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-rose-50 text-rose-700 border border-rose-200/80"
+                class="text-xs font-mono px-1.5 py-0.2 rounded bg-rose-50 text-rose-700 border border-rose-200/80"
                 >HOT</span
               >
             </a>
@@ -498,7 +499,7 @@ const defaultSchema = {
                 >05. Creación de Imágenes y Videos</span
               >
               <span
-                class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-700 border border-emerald-200/80"
+                class="text-xs font-mono px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-700 border border-emerald-200/80"
                 >POPULAR</span
               >
             </a>
@@ -510,7 +511,7 @@ const defaultSchema = {
         <!-- Capa 2: Servicios Y Mentoría Ejecutiva (3) -->
         <div class="space-y-2.5">
           <div
-            class="text-[11px] font-mono text-slate-400 tracking-wider uppercase font-semibold"
+            class="text-xs font-mono text-slate-400 tracking-wider uppercase font-semibold"
           >
             SERVICIOS Y MENTORÍA (3)
           </div>
@@ -524,7 +525,7 @@ const defaultSchema = {
                 >Mentoría 1:1</span
               >
               <span
-                class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 border border-slate-200"
+                class="text-xs font-mono px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 border border-slate-200"
               ></span>
             </a>
 
@@ -536,7 +537,7 @@ const defaultSchema = {
                 >Capacitación In-Company para Equipos</span
               >
               <span
-                class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 border border-slate-200"
+                class="text-xs font-mono px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 border border-slate-200"
                 >Equipos</span
               >
             </a>
@@ -557,7 +558,7 @@ const defaultSchema = {
         <!-- Capa 3: Herramientas Rápidas & Diagnóstico -->
         <div class="space-y-2.5">
           <div
-            class="text-[11px] font-mono text-slate-400 tracking-wider uppercase font-semibold"
+            class="text-xs font-mono text-slate-400 tracking-wider uppercase font-semibold"
           >
             HERRAMIENTAS RÁPIDAS
           </div>
@@ -572,7 +573,7 @@ const defaultSchema = {
                 >Diagnóstico gratis</span
               >
               <span
-                class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-amber-50 text-amber-700 border border-amber-200"
+                class="text-xs font-mono px-1.5 py-0.2 rounded bg-amber-50 text-amber-700 border border-amber-200"
                 >GRATIS</span
               >
             </a>
@@ -610,7 +611,7 @@ const defaultSchema = {
             <h4 class="text-xs font-bold text-slate-900 truncate">
               Pablo Ríos
             </h4>
-            <p class="text-[10px] text-slate-500 font-medium truncate">
+            <p class="text-xs text-slate-500 font-medium truncate">
               Consultor Principal · +13 años en producto
             </p>
           </div>
@@ -620,7 +621,7 @@ const defaultSchema = {
           href={LINKS.whatsapp}
           target="_blank"
           rel="noopener noreferrer"
-          class="w-full flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2.5 rounded-lg transition-colors shadow-2xs cursor-pointer"
+          class="w-full flex items-center justify-center gap-1.5 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold py-2.5 rounded-lg transition-colors shadow-2xs cursor-pointer"
         >
           <span>Hablemos 15m en WhatsApp</span>
           <span>→</span>
@@ -646,7 +647,7 @@ const defaultSchema = {
         const toggler = document.getElementById("sidebar-toggler");
 
         isSidebarOpen = true;
-        if (drawer) drawer.classList.remove("translate-x-full");
+        if (drawer) { drawer.removeAttribute("inert"); drawer.classList.remove("translate-x-full"); }
         if (backdrop) backdrop.classList.remove("hidden");
         if (toggler) toggler.setAttribute("aria-expanded", "true");
         document.body.classList.add("overflow-hidden");
@@ -658,7 +659,7 @@ const defaultSchema = {
         const toggler = document.getElementById("sidebar-toggler");
 
         isSidebarOpen = false;
-        if (drawer) drawer.classList.add("translate-x-full");
+        if (drawer) { drawer.setAttribute("inert", ""); drawer.classList.add("translate-x-full"); }
         if (backdrop) backdrop.classList.add("hidden");
         if (toggler) toggler.setAttribute("aria-expanded", "false");
         document.body.classList.remove("overflow-hidden");

@@ -41,7 +41,7 @@ import Layout from "../../layouts/Layout.astro";
       <!-- NOTION SIDEBAR / TOC (Desktop) -->
       <aside class="hidden lg:block lg:col-span-3 space-y-6 sticky top-20 self-start text-xs text-[#787774]">
         <div class="space-y-2">
-          <div class="text-[11px] font-semibold uppercase tracking-wider text-[#9B9A97]">En esta guía</div>
+          <div class="text-xs font-semibold uppercase tracking-wider text-[#9B9A97]">En esta guía</div>
           <nav class="space-y-1 font-medium">
             <a href="#metadata" class="block px-2.5 py-1.5 rounded hover:bg-[#F1F1EF] hover:text-[#37352F] transition">Información General</a>
             <a href="#resumen" class="block px-2.5 py-1.5 rounded hover:bg-[#F1F1EF] hover:text-[#37352F] transition">Visión del Proyecto</a>
@@ -56,7 +56,7 @@ import Layout from "../../layouts/Layout.astro";
         </div>
 
         <div class="pt-4 border-t border-[#E9E9E7] space-y-2">
-          <div class="text-[11px] font-semibold uppercase tracking-wider text-[#9B9A97]">Filtro de Entornos</div>
+          <div class="text-xs font-semibold uppercase tracking-wider text-[#9B9A97]">Filtro de Entornos</div>
           <div class="flex flex-col gap-1.5" id="sidebar-filters">
             <button data-filter="all" class="filter-btn active w-full text-left px-2.5 py-1.5 rounded text-xs font-semibold bg-[#E9E9E7] text-[#37352F]">
               Mostrar Todo
@@ -169,13 +169,13 @@ import Layout from "../../layouts/Layout.astro";
               <!-- GRATIS -->
               <div class="tier-card tier-gratis bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
                 <div class="flex items-center justify-between">
-                  <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#37352F] bg-[#F1F1EF] px-2.5 py-0.5 rounded border border-[#E9E9E7]">
+                  <span class="inline-flex items-center gap-1.5 text-xs font-bold text-[#37352F] bg-[#F1F1EF] px-2.5 py-0.5 rounded border border-[#E9E9E7]">
                     <svg class="w-3.5 h-3.5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     Microsoft Suite (Gratis)
                   </span>
-                  <span class="text-[10px] text-[#9B9A97] font-mono">Research Sub-fase</span>
+                  <span class="text-xs text-[#9B9A97] font-mono">Research Sub-fase</span>
                 </div>
                 <ul class="space-y-2.5 text-xs text-[#5A5A58]">
                   <li class="flex items-start gap-2">
@@ -207,7 +207,7 @@ import Layout from "../../layouts/Layout.astro";
                 <div class="pt-2 border-t border-[#F1F1EF]">
                   <button 
                     onclick="copyPrompt('Prompt Discovery: Sintetiza los hallazgos de las notas de OneNote adjuntas y estructura los 5 puntos clave para el PRD de Siigo en Word.')" 
-                    class="text-[11px] font-semibold text-[#37352F] hover:text-blue-600 transition flex items-center gap-1.5 cursor-pointer"
+                    class="text-xs font-semibold text-[#37352F] hover:text-blue-600 transition flex items-center gap-1.5 cursor-pointer"
                   >
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -220,13 +220,13 @@ import Layout from "../../layouts/Layout.astro";
               <!-- PRO -->
               <div class="tier-card tier-pro bg-[#FBFBFA] border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
                 <div class="flex items-center justify-between">
-                  <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#37352F] bg-[#EBEBE8] px-2.5 py-0.5 rounded border border-[#DCDCB6]">
+                  <span class="inline-flex items-center gap-1.5 text-xs font-bold text-[#37352F] bg-[#EBEBE8] px-2.5 py-0.5 rounded border border-[#DCDCB6]">
                     <svg class="w-3.5 h-3.5 text-teal-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                     Integraciones Pro
                   </span>
-                  <span class="text-[10px] text-[#9B9A97] font-mono">Workflow Conectado</span>
+                  <span class="text-xs text-[#9B9A97] font-mono">Workflow Conectado</span>
                 </div>
                 <ul class="space-y-2.5 text-xs text-[#5A5A58]">
                   <li class="flex items-start gap-2">
@@ -281,13 +281,13 @@ import Layout from "../../layouts/Layout.astro";
               <!-- GRATIS -->
               <div class="tier-card tier-gratis bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
                 <div class="flex items-center justify-between">
-                  <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#37352F] bg-[#F1F1EF] px-2.5 py-0.5 rounded border border-[#E9E9E7]">
+                  <span class="inline-flex items-center gap-1.5 text-xs font-bold text-[#37352F] bg-[#F1F1EF] px-2.5 py-0.5 rounded border border-[#E9E9E7]">
                     <svg class="w-3.5 h-3.5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     Microsoft Suite (Gratis)
                   </span>
-                  <span class="text-[10px] text-[#9B9A97] font-mono">Excel + Copilot</span>
+                  <span class="text-xs text-[#9B9A97] font-mono">Excel + Copilot</span>
                 </div>
                 <ul class="space-y-2.5 text-xs text-[#5A5A58]">
                   <li class="flex items-start gap-2">
@@ -307,7 +307,7 @@ import Layout from "../../layouts/Layout.astro";
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Analizar los datos con <strong>Copilot en Excel</strong> para generar informes ejecutivos de:
-                      <span class="block text-[11px] text-[#787774] mt-1 pl-2 border-l border-[#E9E9E7]">
+                      <span class="block text-xs text-[#787774] mt-1 pl-2 border-l border-[#E9E9E7]">
                         • Riesgos y temas pendientes.<br/>
                         • Estado del sprint y asignados.<br/>
                         • Épicas y rendimiento del equipo.
@@ -325,7 +325,7 @@ import Layout from "../../layouts/Layout.astro";
                 <div class="pt-2 border-t border-[#F1F1EF]">
                   <button 
                     onclick="copyPrompt('Prompt Excel Copilot: Analiza este archivo de Jira. Identifica las 3 tareas con mayor riesgo de retraso y genera una tabla resumen con porcentaje de avance por épica.')" 
-                    class="text-[11px] font-semibold text-[#37352F] hover:text-blue-600 transition flex items-center gap-1.5 cursor-pointer"
+                    class="text-xs font-semibold text-[#37352F] hover:text-blue-600 transition flex items-center gap-1.5 cursor-pointer"
                   >
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -338,13 +338,13 @@ import Layout from "../../layouts/Layout.astro";
               <!-- PRO -->
               <div class="tier-card tier-pro bg-[#FBFBFA] border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
                 <div class="flex items-center justify-between">
-                  <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#37352F] bg-[#EBEBE8] px-2.5 py-0.5 rounded border border-[#DCDCB6]">
+                  <span class="inline-flex items-center gap-1.5 text-xs font-bold text-[#37352F] bg-[#EBEBE8] px-2.5 py-0.5 rounded border border-[#DCDCB6]">
                     <svg class="w-3.5 h-3.5 text-teal-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                     Integraciones Pro
                   </span>
-                  <span class="text-[10px] text-[#9B9A97] font-mono">Automático & Live</span>
+                  <span class="text-xs text-[#9B9A97] font-mono">Automático & Live</span>
                 </div>
                 <ul class="space-y-2.5 text-xs text-[#5A5A58]">
                   <li class="flex items-start gap-2">
@@ -398,13 +398,13 @@ import Layout from "../../layouts/Layout.astro";
               <!-- GRATIS -->
               <div class="tier-card tier-gratis bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
                 <div class="flex items-center justify-between">
-                  <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#37352F] bg-[#F1F1EF] px-2.5 py-0.5 rounded border border-[#E9E9E7]">
+                  <span class="inline-flex items-center gap-1.5 text-xs font-bold text-[#37352F] bg-[#F1F1EF] px-2.5 py-0.5 rounded border border-[#E9E9E7]">
                     <svg class="w-3.5 h-3.5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     Microsoft Suite (Gratis)
                   </span>
-                  <span class="text-[10px] text-[#9B9A97] font-mono">Word + Outlook</span>
+                  <span class="text-xs text-[#9B9A97] font-mono">Word + Outlook</span>
                 </div>
                 <ul class="space-y-2.5 text-xs text-[#5A5A58]">
                   <li class="flex items-start gap-2">
@@ -424,7 +424,7 @@ import Layout from "../../layouts/Layout.astro";
                 <div class="pt-2 border-t border-[#F1F1EF]">
                   <button 
                     onclick="copyPrompt('Prompt Word Copilot: Redacta una Release Note profesional y clara para los clientes de Siigo basada en estas 3 funcionalidades finalizadas. Incluye beneficios y pasos de uso.')" 
-                    class="text-[11px] font-semibold text-[#37352F] hover:text-blue-600 transition flex items-center gap-1.5 cursor-pointer"
+                    class="text-xs font-semibold text-[#37352F] hover:text-blue-600 transition flex items-center gap-1.5 cursor-pointer"
                   >
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -437,13 +437,13 @@ import Layout from "../../layouts/Layout.astro";
               <!-- PRO -->
               <div class="tier-card tier-pro bg-[#FBFBFA] border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
                 <div class="flex items-center justify-between">
-                  <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#37352F] bg-[#EBEBE8] px-2.5 py-0.5 rounded border border-[#DCDCB6]">
+                  <span class="inline-flex items-center gap-1.5 text-xs font-bold text-[#37352F] bg-[#EBEBE8] px-2.5 py-0.5 rounded border border-[#DCDCB6]">
                     <svg class="w-3.5 h-3.5 text-teal-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                     Integraciones Pro
                   </span>
-                  <span class="text-[10px] text-[#9B9A97] font-mono">Multicanal</span>
+                  <span class="text-xs text-[#9B9A97] font-mono">Multicanal</span>
                 </div>
                 <ul class="space-y-2.5 text-xs text-[#5A5A58]">
                   <li class="flex items-start gap-2">
@@ -491,13 +491,13 @@ import Layout from "../../layouts/Layout.astro";
               <!-- GRATIS -->
               <div class="tier-card tier-gratis bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
                 <div class="flex items-center justify-between">
-                  <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#37352F] bg-[#F1F1EF] px-2.5 py-0.5 rounded border border-[#E9E9E7]">
+                  <span class="inline-flex items-center gap-1.5 text-xs font-bold text-[#37352F] bg-[#F1F1EF] px-2.5 py-0.5 rounded border border-[#E9E9E7]">
                     <svg class="w-3.5 h-3.5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     Microsoft Suite (Gratis)
                   </span>
-                  <span class="text-[10px] text-[#9B9A97] font-mono">Consolidado en Excel</span>
+                  <span class="text-xs text-[#9B9A97] font-mono">Consolidado en Excel</span>
                 </div>
                 <ul class="space-y-2.5 text-xs text-[#5A5A58]">
                   <li class="flex items-start gap-2">
@@ -511,7 +511,7 @@ import Layout from "../../layouts/Layout.astro";
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
                     <span>Analizar la data con Copilot en Excel para identificar:
-                      <span class="block text-[11px] text-[#787774] mt-1 pl-2 border-l border-[#E9E9E7]">
+                      <span class="block text-xs text-[#787774] mt-1 pl-2 border-l border-[#E9E9E7]">
                         • Casos abiertos vs. cerrados.<br/>
                         • Tendencias de fallas recurrentes.<br/>
                         • Tiempos de resolución y equipos asignados.
@@ -529,7 +529,7 @@ import Layout from "../../layouts/Layout.astro";
                 <div class="pt-2 border-t border-[#F1F1EF]">
                   <button 
                     onclick="copyPrompt('Prompt Soporte Copilot: Revisa esta lista de tickets de soporte. Clasifica las incidencias por categoría principal y destaca los 3 problemas con mayor tiempo de resolución.')" 
-                    class="text-[11px] font-semibold text-[#37352F] hover:text-blue-600 transition flex items-center gap-1.5 cursor-pointer"
+                    class="text-xs font-semibold text-[#37352F] hover:text-blue-600 transition flex items-center gap-1.5 cursor-pointer"
                   >
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -542,13 +542,13 @@ import Layout from "../../layouts/Layout.astro";
               <!-- PRO -->
               <div class="tier-card tier-pro bg-[#FBFBFA] border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
                 <div class="flex items-center justify-between">
-                  <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#37352F] bg-[#EBEBE8] px-2.5 py-0.5 rounded border border-[#DCDCB6]">
+                  <span class="inline-flex items-center gap-1.5 text-xs font-bold text-[#37352F] bg-[#EBEBE8] px-2.5 py-0.5 rounded border border-[#DCDCB6]">
                     <svg class="w-3.5 h-3.5 text-teal-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                     Integraciones Pro
                   </span>
-                  <span class="text-[10px] text-[#9B9A97] font-mono">Real-time Service Desk</span>
+                  <span class="text-xs text-[#9B9A97] font-mono">Real-time Service Desk</span>
                 </div>
                 <ul class="space-y-2.5 text-xs text-[#5A5A58]">
                   <li class="flex items-start gap-2">
@@ -596,13 +596,13 @@ import Layout from "../../layouts/Layout.astro";
               <!-- GRATIS -->
               <div class="tier-card tier-gratis bg-white border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
                 <div class="flex items-center justify-between">
-                  <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#37352F] bg-[#F1F1EF] px-2.5 py-0.5 rounded border border-[#E9E9E7]">
+                  <span class="inline-flex items-center gap-1.5 text-xs font-bold text-[#37352F] bg-[#F1F1EF] px-2.5 py-0.5 rounded border border-[#E9E9E7]">
                     <svg class="w-3.5 h-3.5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     Microsoft Suite (Gratis)
                   </span>
-                  <span class="text-[10px] text-[#9B9A97] font-mono">Feedback Cualitativo</span>
+                  <span class="text-xs text-[#9B9A97] font-mono">Feedback Cualitativo</span>
                 </div>
                 <ul class="space-y-2.5 text-xs text-[#5A5A58]">
                   <li class="flex items-start gap-2">
@@ -622,7 +622,7 @@ import Layout from "../../layouts/Layout.astro";
                 <div class="pt-2 border-t border-[#F1F1EF]">
                   <button 
                     onclick="copyPrompt('Prompt Adopción Copilot: Extrae las opiniones más repetidas en estos correos de feedback de clientes y resume los 3 puntos fuertes y 3 oportunidades de mejora del nuevo módulo de Siigo.')" 
-                    class="text-[11px] font-semibold text-[#37352F] hover:text-blue-600 transition flex items-center gap-1.5 cursor-pointer"
+                    class="text-xs font-semibold text-[#37352F] hover:text-blue-600 transition flex items-center gap-1.5 cursor-pointer"
                   >
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -635,13 +635,13 @@ import Layout from "../../layouts/Layout.astro";
               <!-- PRO -->
               <div class="tier-card tier-pro bg-[#FBFBFA] border border-[#E9E9E7] rounded-lg p-5 space-y-3 shadow-2xs">
                 <div class="flex items-center justify-between">
-                  <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#37352F] bg-[#EBEBE8] px-2.5 py-0.5 rounded border border-[#DCDCB6]">
+                  <span class="inline-flex items-center gap-1.5 text-xs font-bold text-[#37352F] bg-[#EBEBE8] px-2.5 py-0.5 rounded border border-[#DCDCB6]">
                     <svg class="w-3.5 h-3.5 text-teal-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                     Integraciones Pro
                   </span>
-                  <span class="text-[10px] text-[#9B9A97] font-mono">Product Analytics</span>
+                  <span class="text-xs text-[#9B9A97] font-mono">Product Analytics</span>
                 </div>
                 <ul class="space-y-2.5 text-xs text-[#5A5A58]">
                   <li class="flex items-start gap-2">
@@ -727,7 +727,7 @@ import Layout from "../../layouts/Layout.astro";
               </svg>
             </div>
             <div>
-              <span class="text-[11px] font-mono uppercase tracking-wider text-[#9B9A97]">Impacto Estratégico</span>
+              <span class="text-xs font-mono uppercase tracking-wider text-[#9B9A97]">Impacto Estratégico</span>
               <h2 class="text-xl font-bold text-[#37352F]">Valor Directo para Andrés Giraldo y el Equipo de Producto</h2>
             </div>
           </div>

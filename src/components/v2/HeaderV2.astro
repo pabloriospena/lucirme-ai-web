@@ -1,33 +1,31 @@
 ---
-// Cabecera de la web nueva (Web LuciRMe v2). Usa solo componentes y tokens del Design System vigente.
-// El menú, el botón y el desplegable se afinan cuando Pablo elija la dirección del look and feel.
+// Cabecera de la web nueva (Web LuciRMe v2), Dirección A. Tres enlaces y Empieza gratis, sin desplegables.
 const items = [
   { href: "/recursos", texto: "Contenido", clave: "contenido" },
   { href: "/empresas", texto: "Empresas", clave: "empresas" },
   { href: "/sobre-pablo", texto: "Sobre Pablo", clave: "sobre-pablo" },
 ];
-// Pendiente: /empezar todavía no existe. Mientras tanto el botón lleva al índice de contenido.
-const empezarHref = "/recursos";
+const empezarHref = "/empezar";
 const path = Astro.url.pathname;
 const activo = (href: string) => path === href || path.startsWith(href + "/");
+const boton =
+  "inline-flex min-h-11 items-center justify-center rounded-xl bg-v2-accion px-4 text-sm font-bold text-v2-accion-texto transition-colors duration-150 hover:bg-v2-accion-hover";
 ---
 
-<header
-  class="sticky top-0 z-40 bg-white/95 backdrop-blur-xl border-b border-slate-200/80 shadow-sm h-[65px] px-4 sm:px-6"
->
-  <div class="max-w-7xl mx-auto h-full flex items-center justify-between gap-6">
-    <a href="/" class="flex items-center shrink-0" aria-label="LuciRMe AI, inicio">
+<header class="sticky top-0 z-40 border-b-[0.8px] border-v2-borde bg-white/95 px-4 backdrop-blur-xl sm:px-6">
+  <div class="mx-auto flex min-h-[65px] max-w-7xl items-center justify-between gap-4">
+    <a href="/" class="flex min-h-11 shrink-0 items-center" aria-label="LuciRMe AI, inicio">
       <img src="/logo-lucirme-ai.svg" alt="LuciRMe AI" class="h-9 w-auto" />
     </a>
 
-    <nav class="hidden md:flex items-center gap-8" aria-label="Principal">
+    <nav class="hidden items-center gap-8 md:flex" aria-label="Principal">
       {
         items.map((i) => (
           <a
             href={i.href}
             class:list={[
-              "text-sm font-medium transition-colors duration-150",
-              activo(i.href) ? "text-slate-900" : "text-slate-600 hover:text-slate-900",
+              "inline-flex min-h-11 items-center text-sm font-medium transition-colors duration-150",
+              activo(i.href) ? "text-v2-texto" : "text-v2-cuerpo hover:text-v2-texto",
             ]}
             aria-current={activo(i.href) ? "page" : undefined}
             onclick={`if (window.posthog) { window.posthog.capture('nav_click', { destino: '${i.clave}', posicion: 'cabecera' }); }`}
@@ -38,37 +36,43 @@ const activo = (href: string) => path === href || path.startsWith(href + "/");
       }
       <a
         href={empezarHref}
-        class="inline-flex items-center rounded-xl bg-[#0F766E] hover:bg-[#115E59] text-white text-sm font-semibold px-4 py-2.5 transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F766E]"
+        class={boton}
         onclick="if (window.posthog) { window.posthog.capture('nav_click', { destino: 'empieza-gratis', posicion: 'cabecera' }); }"
       >
         Empieza gratis
       </a>
     </nav>
 
-    <details class="md:hidden relative">
-      <summary
-        class="list-none cursor-pointer flex items-center justify-center w-10 h-10 rounded-lg border border-slate-200 text-slate-700 [&::-webkit-details-marker]:hidden"
-        aria-label="Abrir menú"
+    <div class="flex items-center gap-2 md:hidden">
+      <a
+        href={empezarHref}
+        class={boton}
+        onclick="if (window.posthog) { window.posthog.capture('nav_click', { destino: 'empieza-gratis', posicion: 'cabecera-movil' }); }"
       >
-        <span class="material-symbols-outlined" aria-hidden="true">menu</span>
-      </summary>
-      <div
-        class="absolute right-0 top-12 w-64 rounded-2xl border border-slate-200 bg-white p-4 shadow-lg flex flex-col gap-1"
-      >
-        {
-          items.map((i) => (
-            <a href={i.href} class="px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">
-              {i.texto}
-            </a>
-          ))
-        }
-        <a
-          href={empezarHref}
-          class="mt-2 inline-flex justify-center rounded-xl bg-[#0F766E] text-white text-sm font-semibold px-4 py-2.5"
+        Empieza gratis
+      </a>
+      <details class="group">
+        <summary
+          class="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-xl border-[0.8px] border-v2-control text-v2-texto [&::-webkit-details-marker]:hidden"
+          aria-label="Abrir menú"
         >
-          Empieza gratis
-        </a>
-      </div>
-    </details>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16"></path>
+          </svg>
+        </summary>
+        <div class="absolute inset-x-4 top-[70px] rounded-xl border-[0.8px] border-v2-control bg-v2-fondo px-4 pb-4 pt-2 shadow-none">
+          {
+            items.map((i) => (
+              <a href={i.href} class="flex min-h-[52px] items-center border-b-[0.8px] border-v2-borde text-lg font-bold text-v2-texto">
+                {i.texto}
+              </a>
+            ))
+          }
+          <a href={empezarHref} class="mt-3 flex min-h-[52px] items-center justify-center rounded-xl bg-v2-accion text-base font-bold text-v2-accion-texto hover:bg-v2-accion-hover">
+            Empieza gratis
+          </a>
+        </div>
+      </details>
+    </div>
   </div>
 </header>

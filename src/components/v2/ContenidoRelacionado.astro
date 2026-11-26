@@ -1,0 +1,24 @@
+---
+// Contenido relacionado: lista de enlaces de 56 px, sin botón de color.
+interface Props { items: { titulo: string; tipo: string; url: string }[] }
+const { items } = Astro.props;
+---
+
+<section aria-labelledby="relacionado">
+  <h2 id="relacionado" class="text-xl font-bold text-v2-texto">Contenido relacionado</h2>
+  <ul>
+    {
+      items.map((i) => (
+        <li class="border-t-[0.8px] border-v2-borde">
+          <a href={i.url} class="flex min-h-14 items-center justify-between gap-3">
+            <span>
+              <span class="block text-base font-semibold text-v2-accion">{i.titulo}</span>
+              <span class="block text-xs text-v2-suave">{i.tipo}</span>
+            </span>
+            <span aria-hidden="true" class="text-v2-suave">›</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

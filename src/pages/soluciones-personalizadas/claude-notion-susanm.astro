@@ -266,7 +266,7 @@ const calendlyUrl = LINKS.calendly_empresa || LINKS.calendly_taller || LINKS.cal
           <!-- PROMPT BOX -->
           <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden my-3">
             <div class="flex justify-between items-center px-4 py-2.5 bg-slate-100 border-b border-slate-200">
-              <span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Prompt de prueba</span>
+              <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Prompt de prueba</span>
               <button onclick="copyText('prompt-prueba', this)" class="bg-teal hover:bg-tealHover text-white font-bold text-xs px-3 py-1 rounded-lg transition-all cursor-pointer">
                 Copiar Prompt
               </button>
@@ -329,7 +329,7 @@ const calendlyUrl = LINKS.calendly_empresa || LINKS.calendly_taller || LINKS.cal
         <!-- PROMPT BOX MAESTRO -->
         <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden my-4">
           <div class="flex justify-between items-center px-4 py-2.5 bg-slate-100 border-b border-slate-200">
-            <span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Prompt Maestro: Lectura, PRD y Escritura en Notion</span>
+            <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Prompt Maestro: Lectura, PRD y Escritura en Notion</span>
             <button onclick="copyText('prompt-maestro', this)" class="bg-orange hover:bg-orange/90 text-white font-bold text-xs px-3 py-1 rounded-lg transition-all cursor-pointer">
               Copiar Plantilla
             </button>
@@ -382,7 +382,7 @@ Por favor, confirma en el chat cuando hayas completado el proceso y muéstrame l
                 Abre un chat nuevo en Claude. En la esquina inferior (junto a la barra donde escribes), asegúrate de que el icono de herramientas esté configurado en <strong>Auto</strong> o <strong>Siempre disponible</strong>.
               </p>
             </div>
-            <div class="text-[11px] text-teal font-semibold bg-teal/5 p-2 rounded-lg border border-teal/10">
+            <div class="text-xs text-teal font-semibold bg-teal/5 p-2 rounded-lg border border-teal/10">
               ⚙️ Conector activo
             </div>
           </div>
@@ -401,7 +401,7 @@ Por favor, confirma en el chat cuando hayas completado el proceso y muéstrame l
                 "¿Puedes listar las bases de datos de Notion que tienes conectadas actualmente?"
               </div>
             </div>
-            <div class="text-[11px] text-gray-500 italic">
+            <div class="text-xs text-gray-500 italic">
               *Si pide permiso (Allow tool access), haz clic en "Permitir siempre".
             </div>
           </div>
@@ -417,7 +417,7 @@ Por favor, confirma en el chat cuando hayas completado el proceso y muéstrame l
                 Pega la plantilla con tus variables rellenadas. Claude leerá, redactará el PRD y lo guardará directamente en tu Notion.
               </p>
             </div>
-            <div class="text-[11px] text-emerald-700 font-bold bg-emerald-50 p-2 rounded-lg border border-emerald-200 text-center">
+            <div class="text-xs text-emerald-700 font-bold bg-emerald-50 p-2 rounded-lg border border-emerald-200 text-center">
               ✨ PRD generado en Notion
             </div>
           </div>
@@ -469,7 +469,7 @@ Por favor, confirma en el chat cuando hayas completado el proceso y muéstrame l
         <!-- PROMPT BOX TRIGGER -->
         <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden my-4">
           <div class="flex justify-between items-center px-4 py-2.5 bg-slate-100 border-b border-slate-200">
-            <span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Prompt de Entrenamiento de Trigger</span>
+            <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Prompt de Entrenamiento de Trigger</span>
             <button onclick="copyText('prompt-trigger', this)" class="bg-orange hover:bg-orange/90 text-white font-bold text-xs px-3 py-1 rounded-lg transition-all cursor-pointer">
               Copiar Prompt Trigger
             </button>
@@ -579,10 +579,10 @@ Si entiendes la instrucción y estás listo para operar, responde únicamente: "
     navigator.clipboard.writeText(text).then(() => {
       const originalText = btnElement.innerText;
       btnElement.innerText = "¡Copiado!";
-      btnElement.classList.add("bg-emerald-600");
+      btnElement.classList.add("bg-emerald-700");
       setTimeout(() => {
         btnElement.innerText = originalText;
-        btnElement.classList.remove("bg-emerald-600");
+        btnElement.classList.remove("bg-emerald-700");
       }, 2000);
     }).catch(err => {
       console.error("Error al copiar texto: ", err);

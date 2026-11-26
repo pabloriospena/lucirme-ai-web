@@ -543,10 +543,10 @@ Sé crítico. Prefiero una verdad incómoda que un halago inútil.</pre>
         const originalText = btnElement.innerHTML;
         btnElement.innerHTML = '<span>¡Copiado! ✓</span>';
         btnElement.classList.remove('bg-teal', 'hover:bg-tealHover');
-        btnElement.classList.add('bg-emerald-600');
+        btnElement.classList.add('bg-emerald-700');
         setTimeout(() => {
           btnElement.innerHTML = originalText;
-          btnElement.classList.remove('bg-emerald-600');
+          btnElement.classList.remove('bg-emerald-700');
           btnElement.classList.add('bg-teal', 'hover:bg-tealHover');
         }, 2500);
       }).catch(err => {

@@ -1,0 +1,23 @@
+---
+// Barra de progreso. Mide solo lo aplicado (decisión de Pablo, 26 nov 2026).
+interface Props { aplicados: number; total: number; etiqueta?: string }
+const { aplicados, total, etiqueta = "Progreso del camino" } = Astro.props;
+const pct = total > 0 ? Math.round((aplicados / total) * 100) : 0;
+---
+
+<div>
+  <div
+    role="progressbar"
+    aria-label={etiqueta}
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow={pct}
+    aria-valuetext={`${aplicados} de ${total} aplicados`}
+    class="h-2.5 overflow-hidden rounded-full bg-v2-barra-fondo"
+  >
+    <div class="h-full bg-v2-barra-relleno" style={`width:${pct}%`}></div>
+  </div>
+  <p class:list={["mt-1 text-xs", pct === 100 ? "font-bold text-v2-accion" : "text-v2-cuerpo"]}>
+    {pct === 100 ? `${total} de ${total}, camino completo` : `${aplicados} de ${total} aplicados`}
+  </p>
+</div>

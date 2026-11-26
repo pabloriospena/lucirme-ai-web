@@ -1,0 +1,51 @@
+---
+// Punto de pago con dos salidas: pagar o invitar a N personas con cuenta.
+// El precio llega leído de src/data/precios.ts. Si no hay precio, el botón dice Pagar la guía sin cifra.
+import ContadorInvitaciones from "./ContadorInvitaciones.astro";
+interface Props {
+  titulo: string;
+  precio?: string;
+  hrefPago: string;
+  invitaciones: number;
+  invitados: number;
+}
+const { titulo, precio, hrefPago, invitaciones, invitados } = Astro.props;
+---
+
+<div class="flex flex-col">
+  <div class="rounded-2xl border border-v2-pago-borde bg-v2-pago-fondo p-[18px]">
+    <p class="text-xs font-bold uppercase tracking-[0.05em] text-v2-pago-texto">Primera salida</p>
+    <h2 class="mb-1 mt-1.5 text-xl font-bold text-v2-texto">Pagar la guía</h2>
+    <p class="mb-3.5 text-sm leading-6 text-v2-cuerpo">
+      Pago único{precio ? ` de ${precio}` : ""}. El pago se hace en Hotmart y desbloquea {titulo} en tu cuenta.
+    </p>
+    <a
+      href={hrefPago}
+      class="flex min-h-[52px] items-center justify-center rounded-xl bg-v2-pago-boton px-4 text-base font-bold text-white hover:brightness-90"
+      onclick="if (window.posthog) { window.posthog.capture('hotmart_click', { posicion: 'punto-de-pago' }); }"
+    >
+      {precio ? `Pagar ${precio}` : "Pagar la guía"}
+    </a>
+  </div>
+
+  <p class="my-3 text-center text-sm font-bold text-v2-suave">o</p>
+
+  <div class="rounded-2xl border-[0.8px] border-v2-borde bg-v2-fondo p-[18px]">
+    <p class="text-xs font-bold uppercase tracking-[0.05em] text-v2-suave">Segunda salida</p>
+    <h2 class="mb-1 mt-1.5 text-xl font-bold text-v2-texto">Invitar a {invitaciones} personas</h2>
+    <p class="mb-3.5 text-sm leading-6 text-v2-cuerpo">
+      Se desbloquea cuando {invitaciones} personas creen su cuenta con tu enlace.
+    </p>
+    <ContadorInvitaciones actual={invitados} total={invitaciones} />
+    <button
+      type="button"
+      data-copiar-enlace
+      class="mt-3.5 flex min-h-[52px] w-full items-center justify-center rounded-xl border-[1.5px] border-v2-accion text-base font-bold text-v2-accion hover:bg-v2-marca-tinte"
+    >
+      Copiar mi enlace
+    </button>
+  </div>
+  <p class="mt-3.5 text-sm leading-6 text-v2-suave">
+    Una cuenta por correo verificado. No cuentan los correos desechables ni invitarte a ti mismo.
+  </p>
+</div>

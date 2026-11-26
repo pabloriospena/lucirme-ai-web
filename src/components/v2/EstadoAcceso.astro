@@ -1,0 +1,43 @@
+---
+// Estado de acceso de un recurso. Siempre icono más texto, nunca solo color.
+// El precio llega ya leído de src/data/precios.ts, no se escribe aquí.
+interface Props {
+  estado: "gratis" | "gratis-correo" | "de-pago" | "o-con-invitaciones" | "desbloqueada";
+  precio?: string;
+  invitaciones?: number;
+  grande?: boolean;
+}
+const { estado, precio, invitaciones, grande = false } = Astro.props;
+const pago = estado === "de-pago" || estado === "o-con-invitaciones";
+const texto = {
+  gratis: "Gratis",
+  "gratis-correo": "Gratis con correo",
+  "de-pago": precio ? `De pago ${precio}` : "De pago",
+  "o-con-invitaciones": `O con ${invitaciones ?? 3} invitaciones`,
+  desbloqueada: "Desbloqueada",
+}[estado];
+---
+
+<span
+  class:list={[
+    "inline-flex items-center gap-1.5 rounded-md border font-bold",
+    grande ? "text-sm px-2.5 py-1.5" : "text-xs px-2 py-1",
+    pago
+      ? "text-v2-pago-texto bg-v2-pago-fondo border-v2-pago-borde"
+      : "text-v2-accion bg-v2-marca-tinte border-v2-marca-borde",
+  ]}
+>
+  {
+    pago ? (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="5" y="11" width="14" height="9" rx="2" />
+        <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+      </svg>
+    ) : (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 12l5 5 9-10" />
+      </svg>
+    )
+  }
+  {texto}
+</span>

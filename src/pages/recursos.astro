@@ -2,7 +2,8 @@
 // Índice de contenido (Web LuciRMe v2). Se arma desde src/data/recursos.ts y src/data/biblioteca.js.
 // Las bandas vacías no se muestran. Sin precios ni fechas.
 import LayoutV2 from "../layouts/LayoutV2.astro";
-import { BANDAS, RECURSOS, recursosDeBanda, temasEnUso } from "../data/recursos.ts";
+import { BANDAS, RECURSOS, recursosDeBanda, valoresFiltro } from "../data/recursos.ts";
+import TarjetaRecurso from "../components/v2/TarjetaRecurso.astro";
 import { ARTICULOS, TEMAS, publicados } from "../data/biblioteca.js";
 
 // Igual que /biblioteca: en producción solo los artículos publicados.
@@ -31,7 +32,12 @@ const bandas = BANDAS.map((b) => {
   };
 }).filter((b) => b.tarjetas.length > 0);
 
-const temas = temasEnUso();
+const filtros = [
+  { campo: "tema", etiqueta: "Tema", valores: valoresFiltro("tema") },
+  { campo: "herramienta", etiqueta: "Herramienta", valores: valoresFiltro("herramienta") },
+  { campo: "dificultad", etiqueta: "Dificultad", valores: valoresFiltro("dificultad") },
+  { campo: "area", etiqueta: "Área", valores: valoresFiltro("area") },
+];
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
@@ -51,96 +57,63 @@ const jsonLd = {
   description="Rutas, guías, herramientas y prompts para aplicar la inteligencia artificial a tu trabajo real."
   jsonLd={jsonLd}
 >
-  <section class="bg-white px-4 sm:px-6 pt-12 pb-8">
-    <div class="max-w-4xl mx-auto">
-      <span
-        class="inline-flex items-center rounded-full border border-slate-300 bg-slate-200/60 px-3.5 py-1.5 font-mono text-xs font-medium uppercase tracking-[0.05em] text-slate-700"
-      >
-        Contenido
-      </span>
-      <h1 class="mt-5 text-4xl sm:text-5xl font-extrabold tracking-[-0.025em] text-slate-900 leading-[1.15]">
-        Contenido para aplicar IA a tu trabajo.
-      </h1>
-      <p class="mt-4 text-base sm:text-lg text-slate-600 leading-7 max-w-2xl">
-        Elige un tema y empieza por lo que necesitas hoy.
+  <section class="bg-v2-fondo px-4 pb-4 pt-8 sm:px-6 sm:pt-12">
+    <div class="mx-auto max-w-4xl">
+      <h1 class="text-[32px] font-extrabold leading-[1.15] tracking-[-0.9px] text-v2-texto sm:text-5xl">Contenido</h1>
+      <p class="mt-3 max-w-2xl text-base leading-6 text-v2-cuerpo sm:text-lg sm:leading-7">
+        Elige por tema, herramienta, dificultad o área.
       </p>
 
-      <div class="mt-8 flex flex-wrap gap-2" role="group" aria-label="Filtrar por tema" id="filtros">
-        <button
-          type="button"
-          data-filtro="todos"
-          aria-pressed="true"
-          class="chip rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-150"
-        >
-          Todos
-        </button>
+      <form id="filtros" class="mt-5 flex flex-wrap items-center gap-2" aria-label="Filtrar contenido" onsubmit="return false">
         {
-          temas.map((t) => (
-            <button
-              type="button"
-              data-filtro={t}
-              aria-pressed="false"
-              class="chip rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-150"
-            >
-              {t}
-            </button>
+          filtros.map((f) => (
+            <label class="relative inline-flex">
+              <span class="sr-only">{f.etiqueta}</span>
+              <select
+                data-filtro={f.campo}
+                class="filtro min-h-11 cursor-pointer appearance-none rounded-full border-[0.8px] border-v2-control bg-v2-chip py-0 pl-3.5 pr-9 text-sm font-semibold text-v2-cuerpo"
+              >
+                <option value="">{f.etiqueta}</option>
+                {f.valores.map((v) => <option value={v}>{v}</option>)}
+              </select>
+              <span aria-hidden="true" class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-sm text-v2-cuerpo">⌄</span>
+            </label>
           ))
         }
-      </div>
+        <button type="button" id="quitar-filtros" class="hidden min-h-11 items-center px-2 text-sm font-semibold text-v2-accion">
+          Quitar filtros
+        </button>
+      </form>
     </div>
   </section>
 
   {
-    bandas.map((b, i) => (
-      <section
-        class:list={["px-4 sm:px-6 py-16 border-t border-slate-200", i % 2 === 0 ? "bg-[#F8FAFC]" : "bg-white"]}
-        data-banda={b.id}
-        aria-labelledby={`banda-${b.id}`}
-      >
-        <div class="max-w-7xl mx-auto">
-          <h2 id={`banda-${b.id}`} class="text-3xl font-black tracking-[-0.025em] text-slate-900">
-            {b.nombre}
-          </h2>
-          <p class="mt-2 text-base text-slate-600 max-w-2xl">{b.descripcion}</p>
+    bandas.map((b) => (
+      <section class="border-t-[0.8px] border-v2-borde px-4 py-10 sm:px-6 sm:py-14" data-banda={b.id} aria-labelledby={`banda-${b.id}`}>
+        <div class="mx-auto max-w-7xl">
+          <div class="flex items-baseline justify-between gap-3">
+            <h2 id={`banda-${b.id}`} class="text-[22px] font-bold text-v2-texto sm:text-3xl">{b.nombre}</h2>
+            <span class="text-xs font-bold text-v2-suave" data-conteo-banda>
+              {b.tarjetas.length} {b.tarjetas.length === 1 ? "recurso" : "recursos"}
+            </span>
+          </div>
+          <p class="mt-1 max-w-2xl text-sm leading-6 text-v2-cuerpo">{b.descripcion}</p>
 
-          <ul class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <ul class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {b.tarjetas.map((r: any) => (
-              <li data-tema={r.tema}>
-                <a
-                  href={r.url}
-                  class="group flex h-full flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-colors duration-150 hover:border-slate-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F766E]"
-                  onclick={`if (window.posthog) { window.posthog.capture('recursos_card_click', { recurso: '${r.slug}', banda: '${b.id}' }); }`}
-                >
-                  <span class="flex items-center justify-between gap-3">
-                    <span class="rounded border border-teal-200 bg-[#F0FDFA] px-1.5 font-mono text-[10px] font-medium uppercase leading-4 text-[#0F766E]">
-                      {r.formato}
-                    </span>
-                    {r.tema && (
-                      <span class="font-mono text-xs font-medium uppercase tracking-[0.05em] text-slate-500">
-                        {r.tema}
-                      </span>
-                    )}
-                  </span>
-                  <span class="text-lg font-bold leading-7 text-slate-900">{r.titulo}</span>
-                  <span class="text-base leading-6 text-slate-600">{r.descripcion}</span>
-                  <span class="mt-auto flex items-center gap-1 pt-2 text-sm font-semibold text-[#0F766E]">
-                    Abrir
-                    <span class="material-symbols-outlined text-base" aria-hidden="true">
-                      arrow_forward
-                    </span>
-                  </span>
-                </a>
+              <li data-item data-tema={r.tema} data-herramienta={r.herramienta} data-dificultad={r.dificultad} data-area={r.area}>
+                <TarjetaRecurso recurso={r} banda={b.id} />
               </li>
             ))}
           </ul>
 
           {b.enlaces.length > 0 && (
-            <p class="mt-6 text-sm text-slate-600">
+            <p class="mt-5 text-sm text-v2-cuerpo">
               También puedes ver
               {b.enlaces.map((e: any, k: number) => (
                 <>
                   {k > 0 ? " y " : " "}
-                  <a href={e.url} class="font-medium text-[#0F766E] underline underline-offset-2">
+                  <a href={e.url} class="inline-flex min-h-11 items-center font-semibold text-v2-accion underline underline-offset-2">
                     {e.titulo}
                   </a>
                 </>
@@ -153,59 +126,60 @@ const jsonLd = {
     ))
   }
 
-  <p id="sin-resultados" class="hidden px-4 sm:px-6 py-16 text-center text-base text-slate-600">
-    No hay contenido para este tema todavía.
+  <p id="sin-resultados" class="hidden px-4 py-16 text-center text-base text-v2-cuerpo sm:px-6">
+    No hay contenido con esos filtros todavía.
   </p>
 
   <style>
-    .chip {
-      border-color: #cbd5e1;
-      background: #f1f5f9;
-      color: #334155;
-    }
-    .chip[aria-pressed="true"] {
-      border-color: #0f766e;
-      background: #0f766e;
-      color: #ffffff;
-    }
-    .chip:focus-visible {
-      outline: 2px solid #0f766e;
-      outline-offset: 2px;
+    .filtro[data-activo="true"] {
+      border-width: 1.5px;
+      border-color: var(--color-v2-accion);
+      background: var(--color-v2-marca-tinte);
+      color: var(--color-v2-accion);
+      font-weight: 700;
     }
   </style>
 
   <script is:inline>
     (function () {
-      var botones = document.querySelectorAll("#filtros [data-filtro]");
-      var items = document.querySelectorAll("li[data-tema]");
+      var selects = document.querySelectorAll("#filtros select[data-filtro]");
+      var items = document.querySelectorAll("li[data-item]");
       var secciones = document.querySelectorAll("section[data-banda]");
       var vacio = document.getElementById("sin-resultados");
+      var quitar = document.getElementById("quitar-filtros");
 
-      function filtrar(tema) {
-        var visibles = 0;
+      function filtrar(origen) {
+        var activos = {};
+        var hayActivos = false;
+        selects.forEach(function (s) {
+          var v = s.value;
+          s.setAttribute("data-activo", v ? "true" : "false");
+          if (v) { activos[s.getAttribute("data-filtro")] = v; hayActivos = true; }
+        });
         items.forEach(function (li) {
-          var ver = tema === "todos" || li.getAttribute("data-tema") === tema;
+          var ver = Object.keys(activos).every(function (k) { return li.getAttribute("data-" + k) === activos[k]; });
           li.classList.toggle("hidden", !ver);
         });
+        var visibles = 0;
         secciones.forEach(function (s) {
-          var hay = s.querySelectorAll("li[data-tema]:not(.hidden)").length > 0;
-          s.classList.toggle("hidden", !hay);
-          if (hay) visibles++;
+          var n = s.querySelectorAll("li[data-item]:not(.hidden)").length;
+          s.classList.toggle("hidden", n === 0);
+          var c = s.querySelector("[data-conteo-banda]");
+          if (c) c.textContent = n + (n === 1 ? " recurso" : " recursos");
+          if (n > 0) visibles++;
         });
         vacio.classList.toggle("hidden", visibles > 0);
+        quitar.classList.toggle("hidden", !hayActivos);
+        quitar.classList.toggle("inline-flex", hayActivos);
+        if (origen && window.posthog) {
+          window.posthog.capture("recursos_filtro", { filtro: origen.getAttribute("data-filtro"), valor: origen.value || "ninguno" });
+        }
       }
 
-      botones.forEach(function (b) {
-        b.addEventListener("click", function () {
-          var tema = b.getAttribute("data-filtro");
-          botones.forEach(function (o) {
-            o.setAttribute("aria-pressed", o === b ? "true" : "false");
-          });
-          filtrar(tema);
-          if (window.posthog) {
-            window.posthog.capture("recursos_filtro", { tema: tema });
-          }
-        });
+      selects.forEach(function (s) { s.addEventListener("change", function () { filtrar(s); }); });
+      quitar.addEventListener("click", function () {
+        selects.forEach(function (s) { s.value = ""; });
+        filtrar(null);
       });
     })();
   </script>
