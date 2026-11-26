@@ -1,432 +1,212 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Footer from "../components/Footer.astro";
-import RedesSociales from "../components/RedesSociales.astro";
+// Índice de contenido (Web LuciRMe v2). Se arma desde src/data/recursos.ts y src/data/biblioteca.js.
+// Las bandas vacías no se muestran. Sin precios ni fechas.
+import LayoutV2 from "../layouts/LayoutV2.astro";
+import { BANDAS, RECURSOS, recursosDeBanda, temasEnUso } from "../data/recursos.ts";
+import { ARTICULOS, TEMAS, publicados } from "../data/biblioteca.js";
 
-// 1. Cargamos todos los archivos .astro automáticamente
-const archivos = import.meta.glob("./recursos/*.astro", { eager: true });
+// Igual que /biblioteca: en producción solo los artículos publicados.
+const articulos = import.meta.env.DEV ? ARTICULOS : publicados();
 
-// 2. Mapeamos los archivos
-const recursos = Object.keys(archivos).map((key) => {
-  const file = archivos[key] as any;
-  const slug = key.split("/").pop()?.replace(".astro", "") || "";
+const bandas = BANDAS.map((b) => {
+  if (b.id === "biblioteca") {
+    return {
+      ...b,
+      tarjetas: articulos.map((a: any) => ({
+        slug: a.slug,
+        url: `/biblioteca/${a.slug}`,
+        titulo: a.titulo,
+        descripcion: a.descripcion,
+        formato: "Artículo",
+        tema: (TEMAS as Record<string, string>)[a.tema] || "",
+      })),
+      enlaces: [],
+    };
+  }
+  const todos = recursosDeBanda(b.id);
   return {
-    slug,
-    url: `/recursos/${slug}`,
-    titulo: file.frontmatter?.title || slug.replace("-", " ").toUpperCase(),
+    ...b,
+    tarjetas: todos.filter((r) => !r.secundaria),
+    enlaces: todos.filter((r) => r.secundaria),
   };
-});
+}).filter((b) => b.tarjetas.length > 0);
 
-// 3. Diccionario maestro de contenidos
-const metaData = {
-  "curso-presentaciones": {
-    etiqueta: "Curso Asíncrono · $35 USD",
-    titulo: 'De "No tengo idea" a Presentación Completa',
-    desc: "Convierte documentos, correos, audios, datos y notas desordenadas en una presentación clara, verificable y lista para presentar con IA. Método práctico de 5 pasos.",
-    precio: "$35 USD",
-    esPago: true,
-    categoria: "destacado",
-  },
-  "bot-presentaciones": {
-    etiqueta: "Agente Guiado · $8 USD",
-    titulo: "Bot Arquitecto de Presentaciones",
-    desc: "Ordena tu pensamiento disperso con un método de 5 pasos y lo convierte en un discurso claro, estructurado y con carga emocional. Sin perder tu voz.",
-    precio: "$8 USD",
-    esPago: true,
-    categoria: "destacado",
-  },
-  "presentaciones-con-ia": {
-    etiqueta: "Guía Abierta Gratuita",
-    titulo: "Presentaciones con IA en 30 Minutos",
-    desc: "De 'me toca trasnochar el domingo' a 'listo en media hora'. Método de 4 pasos y 4 prompts de copia rápida sin registro.",
-    precio: "Gratis",
-    esPago: false,
-    categoria: "ia",
-  },
-  "ideador-producto": {
-    etiqueta: "Guía Abierta",
-    desc: "Mapea, valida, pule y genera el prompt de Lovable para el prototipo visual de tu app en 4 fases de producto.",
-    precio: null,
-    esPago: false,
-    categoria: "pm",
-  },
-  "ebook-pm": {
-    etiqueta: "Ebook Oficial Vol. 1",
-    desc: "El manual de Product Management sin rodeos teóricos para aprender a aplicar IA con criterio real.",
-    precio: "$53.000 COP",
-    esPago: true,
-    categoria: "destacado",
-  },
-  "preventa-vol2": {
-    etiqueta: "Preventa Activa Vol. 2",
-    desc: "Asegura tu acceso exclusivo al volumen 2 de 'PM Sin Bullshit' a mitad de precio y llévate un checklist de regalo.",
-    precio: "Acceso Preventa",
-    esPago: false,
-    categoria: "destacado",
-  },
-  "checklistpm-vol1": {
-    etiqueta: "Guía Premium",
-    desc: "Aprende la fórmula R+C+T+E y accede a 4 prompts maestros para escribir User Stories, refinar roadmaps y priorizar sin bullshit.",
-    precio: null,
-    esPago: false,
-    categoria: "pm",
-  },
-  "guia-deepresearch": {
-    titulo: "Guía Completa de Deep Research",
-    etiqueta: "Guía Premium",
-    desc: "El superpoder de la investigación avanzada con IA: de 3 semanas de trabajo a 4 horas estratégicas con Gemini y ChatGPT.",
-    precio: null,
-    esPago: false,
-    categoria: "ia",
-  },
-  prompteador: {
-    etiqueta: "Herramienta Pro",
-    desc: "Optimiza tus prompts con la fórmula R+C+T+E para obtener respuestas de ingeniería de élite.",
-    precio: null,
-    esPago: false,
-    categoria: "ia",
-  },
-  "guia-20prompts-notebooklm": {
-    etiqueta: "Guía de Prompts",
-    desc: "20 prompts listos para copiar y pegar en NotebookLM. Organizados por análisis, estudio activo, investigación y acción.",
-    precio: null,
-    esPago: false,
-    categoria: "ia",
-  },
-  "guia-notebooklm": {
-    etiqueta: "Guía Premium",
-    desc: "Aprende a estructurar tus notas, PDFs y audios para generar reportes ejecutivos en minutos.",
-    precio: null,
-    esPago: false,
-    categoria: "ia",
-  },
-  "guia-estudio-notebooklm": {
-    etiqueta: "Guía Premium",
-    desc: "Descubre la fórmula validada para aprender rápido y aplicar nuevo conocimiento en proyectos reales desde la primera semana.",
-    precio: null,
-    esPago: false,
-    categoria: "ia",
-  },
-  "cv-con-ia": {
-    etiqueta: "Asistente IA",
-    desc: "Pega tu texto antiguo y deja que nuestra IA Llama 3.3 redacte tu CV optimizado para filtros ATS.",
-    precio: null,
-    esPago: false,
-    categoria: "ia",
-  },
-  "career-path-notebooklm": {
-    etiqueta: "Guía Premium",
-    desc: "Mapea tu ruta de carrera y habilidades de 8 semanas usando NotebookLM de forma estructurada.",
-    precio: null,
-    esPago: false,
-    categoria: "ia",
-  },
-  "job-prompt-ai": {
-    etiqueta: "Herramienta Pro",
-    desc: "Genera super-prompts de búsqueda avanzada para vacantes activas y pégalo en Perplexity.",
-    precio: null,
-    esPago: false,
-    categoria: "ia",
-  },
-  "crear-imagenes-ia": {
-    titulo: "Crea tu primera imagen con IA",
-    etiqueta: "Atajo Visual · Gratis",
-    desc: "Abre una herramienta, adjunta una foto y prueba comandos como /haircut, /outfit o /profile sin saber prompting.",
-    precio: "Gratis",
-    esPago: false,
-    categoria: "ia",
-  },
-  "atajos-visuales": {
-    titulo: "Atajos Visuales: 75 Comandos de Imagen y Video",
-    etiqueta: "Biblioteca Digital · $5 USD",
-    desc: "75 comandos probados (50 imágenes + 25 video) organizados por casos reales para copiar, adaptar y crear en segundos.",
-    precio: "$5 USD",
-    esPago: true,
-    categoria: "destacado",
-  },
-  "reunion-claridad": {
-    titulo: "Convierte Reuniones en Decisiones Claras",
-    etiqueta: "Guía Práctica",
-    desc: "Convierte conversaciones largas en decisiones, responsables y próximos pasos con NotebookLM y 3 prompts maestros.",
-    precio: null,
-    esPago: false,
-    categoria: "ia",
-  },
-  "atajos-ia": {
-    titulo: "Atajos de IA: 18 Prompts Prácticos",
-    etiqueta: "Colección Práctica",
-    desc: "18 prompts prácticos, listos para copiar, pegar y adaptar. Menos tiempo buscando qué escribir, más tiempo haciendo.",
-    precio: null,
-    esPago: true,
-    categoria: "ia",
-  },
-  "backlog-detox": {
-    etiqueta: "Herramienta Pro",
-    desc: "Pega tu backlog y clasifica al instante qué hacer ya, qué validar primero y qué archivar.",
-    precio: null,
-    esPago: false,
-    categoria: "pm",
-  },
-  "shapeup-builder": {
-    etiqueta: "Herramienta Pro",
-    desc: "Crea tu Pitch de producto bajo la metodología ShapeUp y mitiga riesgos antes de desarrollar.",
-    precio: null,
-    esPago: false,
-    categoria: "pm",
-  },
-  "roadmap-builder": {
-    etiqueta: "Herramienta Pro",
-    desc: "Genera tu Gantt interactivo estilo ClickUp a partir de tus épicas exportadas de Azure DevOps.",
-    precio: null,
-    esPago: false,
-    categoria: "pm",
-  },
-  "ai-solver": {
-    etiqueta: "Herramienta Pro",
-    desc: "Resolutor de problemas de producto basado en lógica de priorización asertiva.",
-    precio: null,
-    esPago: false,
-    categoria: "pm",
-  },
+const temas = temasEnUso();
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Contenido para aplicar IA a tu trabajo",
+  url: "https://lucirme.com/recursos",
+  inLanguage: "es",
+  hasPart: RECURSOS.filter((r) => !r.secundaria).map((r) => ({
+    "@type": "WebPage",
+    name: r.titulo,
+    url: `https://lucirme.com${r.url}`,
+  })),
 };
-
-// Separamos por categorías
-const botDestacado = recursos.find((r) => r.slug === "bot-presentaciones");
-const ebookDestacado = recursos.find((r) => r.slug === "ebook-pm");
-const preventaDestacada = recursos.find((r) => r.slug === "preventa-vol2");
-
-const recursosIA = recursos.filter((r) => {
-  const meta = metaData[r.slug as keyof typeof metaData];
-  return meta?.categoria === "ia" && r.slug !== "bot-presentaciones";
-});
-const recursosPM = recursos.filter((r) => {
-  const meta = metaData[r.slug as keyof typeof metaData];
-  return meta?.categoria === "pm" && r.slug !== "preventa-vol2"; // Evitamos duplicar la preventa
-});
 ---
 
-<Layout title="Librería de Recursos | LuciRMe AI">
-  <main class="max-w-6xl mx-auto py-16 px-6 space-y-12">
-    <header class="text-center mb-12">
-      <h1 class="text-4xl font-bold text-deep mb-4">Librería de Recursos</h1>
-      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-        Herramientas, plantillas y agentes guiados listos para potenciar tu trabajo.
+<LayoutV2
+  title="Contenido para aplicar IA a tu trabajo | LuciRMe AI"
+  description="Rutas, guías, herramientas y prompts para aplicar la inteligencia artificial a tu trabajo real."
+  jsonLd={jsonLd}
+>
+  <section class="bg-white px-4 sm:px-6 pt-12 pb-8">
+    <div class="max-w-4xl mx-auto">
+      <span
+        class="inline-flex items-center rounded-full border border-slate-300 bg-slate-200/60 px-3.5 py-1.5 font-mono text-xs font-medium uppercase tracking-[0.05em] text-slate-700"
+      >
+        Contenido
+      </span>
+      <h1 class="mt-5 text-4xl sm:text-5xl font-extrabold tracking-[-0.025em] text-slate-900 leading-[1.15]">
+        Contenido para aplicar IA a tu trabajo.
+      </h1>
+      <p class="mt-4 text-base sm:text-lg text-slate-600 leading-7 max-w-2xl">
+        Elige un tema y empieza por lo que necesitas hoy.
       </p>
-    </header>
 
-    <!-- 0. RECURSO PRINCIPAL DESTACADO: CURSO COMPLETO -->
-    <div class="bg-gradient-to-r from-[#0F172A] via-[#1E293B] to-[#0F172A] rounded-3xl p-8 md:p-10 text-white shadow-2xl border-2 border-amber-500/50 relative overflow-hidden group">
-      <div class="absolute -right-16 -top-16 w-64 h-64 bg-amber-500/20 rounded-full blur-3xl group-hover:bg-amber-500/30 transition-all pointer-events-none"></div>
-      <div class="relative z-10 grid md:grid-cols-3 gap-8 items-center">
-        <div class="md:col-span-2 space-y-4">
-          <div class="flex flex-wrap items-center gap-2">
-            <span class="bg-amber-500 text-slate-950 text-xs font-black uppercase tracking-widest px-3 py-1 rounded-md shadow-xs">
-              🎓 Producto Estrella · Curso Completo
-            </span>
-            <span class="bg-teal/20 text-teal text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-md border border-teal/30">
-              100% Asíncrono · Método de 5 Pasos
-            </span>
-          </div>
-          <h2 class="text-3xl md:text-4xl font-extrabold text-white leading-tight">
-            De "No tengo idea" a Presentación Completa
+      <div class="mt-8 flex flex-wrap gap-2" role="group" aria-label="Filtrar por tema" id="filtros">
+        <button
+          type="button"
+          data-filtro="todos"
+          aria-pressed="true"
+          class="chip rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-150"
+        >
+          Todos
+        </button>
+        {
+          temas.map((t) => (
+            <button
+              type="button"
+              data-filtro={t}
+              aria-pressed="false"
+              class="chip rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-150"
+            >
+              {t}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {
+    bandas.map((b, i) => (
+      <section
+        class:list={["px-4 sm:px-6 py-16 border-t border-slate-200", i % 2 === 0 ? "bg-[#F8FAFC]" : "bg-white"]}
+        data-banda={b.id}
+        aria-labelledby={`banda-${b.id}`}
+      >
+        <div class="max-w-7xl mx-auto">
+          <h2 id={`banda-${b.id}`} class="text-3xl font-black tracking-[-0.025em] text-slate-900">
+            {b.nombre}
           </h2>
-          <p class="text-gray-300 text-sm md:text-base leading-relaxed">
-            Convierte documentos, correos, audios, datos y notas desordenadas en una presentación clara, verificable y lista para presentar con IA. Un método práctico de 5 pasos para dejar de improvisar cada vez que tienes que preparar una presentación.
-          </p>
-          <div class="flex flex-wrap items-center gap-4 pt-2">
-            <span class="text-xl font-extrabold text-amber-300">US$35 · Pago único</span>
-            <span class="text-xs text-emerald-400 font-semibold flex items-center gap-1">
-              ✓ Incluye Materiales + Asistente IA + Bonus Lovable
-            </span>
-            <span class="text-xs text-gray-400">• Acceso inmediato</span>
-          </div>
-        </div>
-        <div class="flex flex-col justify-center items-stretch sm:items-end gap-3">
-          <a
-            href="/curso-presentaciones"
-            class="bg-amber-500 hover:bg-amber-400 text-slate-950 text-center px-6 py-4 rounded-xl font-black text-sm md:text-base transition shadow-[0_0_25px_rgba(245,158,11,0.4)] cursor-pointer"
-            onclick="if (window.posthog) { window.posthog.capture('recursos_card_click', { recurso: 'curso-presentaciones', tipo: 'hero_destacado' }); }"
-          >
-            Ver Curso Completo ($35) →
-          </a>
-          <a
-            href="/bot-presentaciones"
-            class="text-xs text-orange hover:underline text-center sm:text-right font-bold"
-            onclick="if (window.posthog) { window.posthog.capture('recursos_card_click', { recurso: 'bot-presentaciones', tipo: 'sub_hero' }); }"
-          >
-            ⚡ ¿Buscas solo el Bot Guiado? Ver por $8 USD →
-          </a>
-        </div>
-      </div>
-    </div>
+          <p class="mt-2 text-base text-slate-600 max-w-2xl">{b.descripcion}</p>
 
-    <!-- 1. SECCIÓN DESTACADA SECUNDARIA (EBOOK VOL 1 & VOL 2) -->
-    <div class="grid md:grid-cols-2 gap-8">
-      <!-- Ebook Vol 1 -->
-      {
-        ebookDestacado &&
-          (() => {
-            const meta = metaData["ebook-pm"];
-            return (
-              <div class="bg-gradient-to-br from-[#0F172A] to-[#1E293B] rounded-3xl p-8 text-white shadow-xl flex flex-col justify-between border border-white/10 min-h-[340px] relative overflow-hidden group">
-                <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal/10 rounded-full blur-2xl group-hover:bg-teal/20 transition-all" />
-                <div>
-                  <span class="inline-block bg-teal/10 text-teal text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-4 border border-teal/20">
-                    {meta.etiqueta}
+          <ul class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {b.tarjetas.map((r: any) => (
+              <li data-tema={r.tema}>
+                <a
+                  href={r.url}
+                  class="group flex h-full flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-colors duration-150 hover:border-slate-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F766E]"
+                  onclick={`if (window.posthog) { window.posthog.capture('recursos_card_click', { recurso: '${r.slug}', banda: '${b.id}' }); }`}
+                >
+                  <span class="flex items-center justify-between gap-3">
+                    <span class="rounded border border-teal-200 bg-[#F0FDFA] px-1.5 font-mono text-[10px] font-medium uppercase leading-4 text-[#0F766E]">
+                      {r.formato}
+                    </span>
+                    {r.tema && (
+                      <span class="font-mono text-xs font-medium uppercase tracking-[0.05em] text-slate-500">
+                        {r.tema}
+                      </span>
+                    )}
                   </span>
-                  <h2 class="text-2xl font-bold mb-3">
-                    {ebookDestacado.titulo}
-                  </h2>
-                  <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                    {meta.desc}
-                  </p>
-                </div>
-                <div class="flex items-center justify-between pt-6 border-t border-white/5">
-                  <span class="text-sm font-bold text-teal">{meta.precio}</span>
-                  <a
-                    href={ebookDestacado.url}
-                    class="bg-teal text-white px-5 py-2.5 rounded-lg font-bold text-xs hover:bg-tealHover transition"
-                    onclick="if (window.posthog) { window.posthog.capture('recursos_card_click', { recurso: 'ebook-pm', tipo: 'ebook' }); }"
-                  >
-                    Comprar →
+                  <span class="text-lg font-bold leading-7 text-slate-900">{r.titulo}</span>
+                  <span class="text-base leading-6 text-slate-600">{r.descripcion}</span>
+                  <span class="mt-auto flex items-center gap-1 pt-2 text-sm font-semibold text-[#0F766E]">
+                    Abrir
+                    <span class="material-symbols-outlined text-base" aria-hidden="true">
+                      arrow_forward
+                    </span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          {b.enlaces.length > 0 && (
+            <p class="mt-6 text-sm text-slate-600">
+              También puedes ver
+              {b.enlaces.map((e: any, k: number) => (
+                <>
+                  {k > 0 ? " y " : " "}
+                  <a href={e.url} class="font-medium text-[#0F766E] underline underline-offset-2">
+                    {e.titulo}
                   </a>
-                </div>
-              </div>
-            );
-          })()
-      }
+                </>
+              ))}
+              .
+            </p>
+          )}
+        </div>
+      </section>
+    ))
+  }
 
-      <!-- Preventa Vol 2 -->
-      {
-        preventaDestacada &&
-          (() => {
-            const meta = metaData["preventa-vol2"];
-            return (
-              <div class="bg-gradient-to-br from-[#0F172A] to-[#1E293B] rounded-3xl p-8 text-white shadow-xl flex flex-col justify-between border border-white/10 min-h-[340px] relative overflow-hidden group">
-                <div class="absolute -right-10 -top-10 w-32 h-32 bg-orange/10 rounded-full blur-2xl group-hover:bg-orange/20 transition-all" />
-                <div>
-                  <span class="inline-block bg-orange/10 text-orange text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-4 border border-orange/20">
-                    {meta.etiqueta}
-                  </span>
-                  <h2 class="text-2xl font-bold mb-3">
-                    {preventaDestacada.titulo}
-                  </h2>
-                  <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                    {meta.desc}
-                  </p>
-                </div>
-                <div class="flex items-center justify-between pt-6 border-t border-white/5">
-                  <span class="text-sm font-bold text-orange">
-                    {meta.precio}
-                  </span>
-                  <a
-                    href={preventaDestacada.url}
-                    class="bg-orange text-white px-5 py-2.5 rounded-lg font-bold text-xs hover:bg-orange/90 transition"
-                    onclick="if (window.posthog) { window.posthog.capture('recursos_card_click', { recurso: 'preventa-vol2', tipo: 'preventa' }); }"
-                  >
-                    Asegurar →
-                  </a>
-                </div>
-              </div>
-            );
-          })()
-      }
-    </div>
+  <p id="sin-resultados" class="hidden px-4 sm:px-6 py-16 text-center text-base text-slate-600">
+    No hay contenido para este tema todavía.
+  </p>
 
-    <!-- 2. SOLUCIONES CON IA -->
-    <div class="pt-8">
-      <h2 class="text-2xl font-bold text-deep mb-6 flex items-center gap-3">
-        ⚡ Soluciones con IA
-      </h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {
-          recursosIA.map((rec) => {
-            const meta = metaData[rec.slug as keyof typeof metaData] || {
-              etiqueta: "Herramienta",
-              desc: "",
-              precio: null,
-              esPago: false,
-            };
-            return (
-              <a
-                href={rec.url}
-                class="group bg-white p-6 rounded-2xl border border-gray-200 hover:border-teal transition-all shadow-sm flex flex-col h-full"
-                onclick={`if (window.posthog) { window.posthog.capture('recursos_card_click', { recurso: '${rec.slug}', categoria: 'ia' }); }`}
-              >
-                <span class="text-[10px] font-bold text-teal bg-teal/10 px-3 py-1 rounded-md uppercase tracking-widest w-fit mb-4">
-                  {meta.etiqueta}
-                </span>
-                <h3 class="text-lg font-bold text-deep mb-2 group-hover:text-teal transition-colors">
-                  {(meta as any).titulo || rec.titulo}
-                </h3>
-                <p class="text-xs text-gray-500 mb-6 leading-relaxed flex-grow">
-                  {meta.desc}
-                </p>
-                <div class="mt-auto pt-4 border-t border-gray-100 flex justify-between items-center text-xs">
-                  <span class="text-gray-400">Acceso abierto</span>
-                  <span class="text-teal font-bold group-hover:translate-x-1 transition-transform">
-                    Entrar →
-                  </span>
-                </div>
-              </a>
-            );
-          })
-        }
-      </div>
-    </div>
-
-    <!-- 3. IA PARA PRODUCT MANAGERS -->
-    <div class="pt-12 border-t border-gray-100">
-      <h2 class="text-2xl font-bold text-deep mb-6 flex items-center gap-3">
-        🛠️ IA para Product Managers
-      </h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {
-          recursosPM.map((rec) => {
-            const meta = metaData[rec.slug as keyof typeof metaData] || {
-              etiqueta: "Herramienta",
-              desc: "",
-              precio: null,
-              esPago: false,
-            };
-            return (
-              <a
-                href={rec.url}
-                class="group bg-white p-6 rounded-2xl border border-gray-200 hover:border-teal transition-all shadow-sm flex flex-col h-full"
-                onclick={`if (window.posthog) { window.posthog.capture('recursos_card_click', { recurso: '${rec.slug}', categoria: 'pm' }); }`}
-              >
-                <span class="text-[10px] font-bold text-teal bg-teal/10 px-3 py-1 rounded-md uppercase tracking-widest w-fit mb-4">
-                  {meta.etiqueta}
-                </span>
-                <h3 class="text-lg font-bold text-deep mb-2 group-hover:text-teal transition-colors">
-                  {(meta as any).titulo || rec.titulo}
-                </h3>
-                <p class="text-xs text-gray-500 mb-6 leading-relaxed flex-grow">
-                  {meta.desc}
-                </p>
-                <div class="mt-auto pt-4 border-t border-gray-100 flex justify-between items-center text-xs">
-                  <span class="text-gray-400">Acceso abierto</span>
-                  <span class="text-teal font-bold group-hover:translate-x-1 transition-transform">
-                    Entrar →
-                  </span>
-                </div>
-              </a>
-            );
-          })
-        }
-      </div>
-    </div>
-  </main>
+  <style>
+    .chip {
+      border-color: #cbd5e1;
+      background: #f1f5f9;
+      color: #334155;
+    }
+    .chip[aria-pressed="true"] {
+      border-color: #0f766e;
+      background: #0f766e;
+      color: #ffffff;
+    }
+    .chip:focus-visible {
+      outline: 2px solid #0f766e;
+      outline-offset: 2px;
+    }
+  </style>
 
   <script is:inline>
-    document.addEventListener("DOMContentLoaded", function () {
-      if (window.posthog) {
-        window.posthog.capture("recursos_page_view", {
-          pagina: "recursos"
-        });
-      }
-    });
-  </script>
+    (function () {
+      var botones = document.querySelectorAll("#filtros [data-filtro]");
+      var items = document.querySelectorAll("li[data-tema]");
+      var secciones = document.querySelectorAll("section[data-banda]");
+      var vacio = document.getElementById("sin-resultados");
 
-  <RedesSociales />
-</Layout>
+      function filtrar(tema) {
+        var visibles = 0;
+        items.forEach(function (li) {
+          var ver = tema === "todos" || li.getAttribute("data-tema") === tema;
+          li.classList.toggle("hidden", !ver);
+        });
+        secciones.forEach(function (s) {
+          var hay = s.querySelectorAll("li[data-tema]:not(.hidden)").length > 0;
+          s.classList.toggle("hidden", !hay);
+          if (hay) visibles++;
+        });
+        vacio.classList.toggle("hidden", visibles > 0);
+      }
+
+      botones.forEach(function (b) {
+        b.addEventListener("click", function () {
+          var tema = b.getAttribute("data-filtro");
+          botones.forEach(function (o) {
+            o.setAttribute("aria-pressed", o === b ? "true" : "false");
+          });
+          filtrar(tema);
+          if (window.posthog) {
+            window.posthog.capture("recursos_filtro", { tema: tema });
+          }
+        });
+      });
+    })();
+  </script>
+</LayoutV2>
