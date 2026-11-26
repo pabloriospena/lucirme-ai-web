@@ -1,0 +1,16 @@
+---
+// Plantilla de la web nueva (Web LuciRMe v2).
+// Envuelve la plantilla actual sin cambiarla: apaga su cabecera y su pie y pone los nuevos.
+// Las páginas actuales siguen con Layout.astro hasta que les toque pasar a esta.
+import Layout from "./Layout.astro";
+import HeaderV2 from "../components/v2/HeaderV2.astro";
+import FooterV2 from "../components/v2/FooterV2.astro";
+
+const props = Astro.props;
+---
+
+<Layout {...props} hideHeader hideFooter>
+  <HeaderV2 />
+  <slot />
+  <FooterV2 />
+</Layout>

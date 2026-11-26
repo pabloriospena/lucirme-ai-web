@@ -1,0 +1,40 @@
+---
+// Pie de la web nueva (Web LuciRMe v2). Solo enlaces a páginas que existen.
+const year = new Date().getFullYear();
+const enlaces = [
+  { href: "/recursos", texto: "Contenido" },
+  { href: "/empresas", texto: "Empresas" },
+  { href: "/sobre-pablo", texto: "Sobre Pablo" },
+];
+---
+
+<footer class="w-full bg-[#F8FAFC] border-t border-slate-200 py-12 px-4 sm:px-6">
+  <div class="max-w-7xl mx-auto flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+    <div class="flex flex-col gap-3 max-w-sm">
+      <a href="/" aria-label="LuciRMe AI, inicio">
+        <img src="/logo-lucirme-ai.svg" alt="LuciRMe AI" class="h-9 w-auto" />
+      </a>
+      <p class="text-sm text-slate-600 leading-6">
+        Aplica la IA a tu trabajo real y recupera tu autonomía.
+      </p>
+    </div>
+    <nav class="flex flex-col gap-3" aria-label="Pie de página">
+      {
+        enlaces.map((e) => (
+          <a href={e.href} class="text-sm font-medium text-slate-700 hover:text-slate-900">
+            {e.texto}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+  <div
+    class="max-w-7xl mx-auto mt-10 pt-6 border-t border-slate-200 flex flex-col gap-2 sm:flex-row sm:justify-between text-xs text-slate-500"
+  >
+    <span>LuciRMe AI, {year}</span>
+    <span class="flex gap-4">
+      <a href="/privacidad" class="hover:text-slate-900">Privacidad</a>
+      <a href="/terminos" class="hover:text-slate-900">Términos</a>
+    </span>
+  </div>
+</footer>

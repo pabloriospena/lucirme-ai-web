@@ -7,7 +7,6 @@ const REDIRECTS = {
   "/soluciones/tecnologia+tunegocio": "/empresas",
   "/profesionales/product-managers": "/profesionales#product-managers",
   "/servicios": "/",
-  "/recursos": "/educacion",
   "/rutas": "/educacion",
   "/content/sobremi": "/sobre-pablo",
   "/forms/pre-taller": "/",
