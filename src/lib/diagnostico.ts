@@ -15,7 +15,7 @@ const PROFESIONALES = [
   '/curso-presentaciones',
 ];
 
-export const DIAGNOSTICO_PROFESIONALES = '/servicios/producto#diagnostico-interactivo';
+export const DIAGNOSTICO_PROFESIONALES = '/empresas#diagnostico';
 export const DIAGNOSTICO_EMPRESAS = '/empresas#diagnostico';
 
 export function diagnosticoUrl(pathname: string): string {

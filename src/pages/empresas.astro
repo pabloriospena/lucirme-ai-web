@@ -1,5 +1,5 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import LayoutV2 from "../layouts/LayoutV2.astro";
 import SocialProof from "../components/SocialProof.astro";
 import SobreMi from "../components/SobreMi.astro";
 import { LINKS } from "../lib/constants.js";
@@ -21,66 +21,13 @@ const serviceJsonLd = {
 
 ---
 
-<Layout
+<LayoutV2
   title="LuciRMe AI · Empresas | Primero el problema. Después la tecnología."
   description="Encuentra un cuello de botella operativo en tu empresa, mide cuánto te está costando y decide si vale la pena intervenir. Soluciones con IA, automatización y adopción autónoma por Pablo Ríos."
-  hideHeader={true}
   jsonLd={serviceJsonLd}
-  hideFooter={true}
 >
-  <!-- 1. NAVEGACIÓN DEDICADA B2B (HEADER) -->
-  <header
-    class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200"
-  >
-    <div
-      class="h-16 max-w-7xl mx-auto px-6 flex items-center justify-between gap-4"
-    >
-      <div class="flex items-center gap-8">
-        <a class="flex items-center gap-2.5 group" href="/">
-          <img
-            src="/isotipo-lucirme.svg"
-            alt="LuciRMe AI"
-            class="h-8 w-auto object-contain group-hover:scale-105 transition-transform"
-          />
-          <span
-            class="font-bold text-lg text-slate-900 tracking-tight group-hover:text-teal-800 transition-colors"
-          >
-            LuciRMe<span class="text-teal-700 ml-0.5">AI</span> · Empresas
-          </span>
-        </a>
-      </div>
-      <nav
-        class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600"
-      >
-        <a class="hover:text-slate-900 transition-colors" href="#diagnostico"
-          >Diagnóstico</a
-        >
-        <a class="hover:text-slate-900 transition-colors" href="#casos">Casos</a
-        >
-        <a
-          class="hover:text-slate-900 transition-colors"
-          href="#como-trabajamos">Cómo trabajamos</a
-        >
-        <a class="hover:text-slate-900 transition-colors" href="#pablo">Pablo</a
-        >
-      </nav>
 
-      <div class="flex items-center gap-3">
-        <a
-          class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors shadow-2xs"
-          href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero revisar un cuello de botella operativo en mi empresa.")}`}
-          rel="noopener noreferrer"
-          target="_blank"
-          onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_whatsapp_click', { origen: 'header_b2b' }); }"
-        >
-          <span class="material-symbols-outlined text-[17px]">chat</span>
-          <span>Hablemos por WhatsApp</span>
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <main class="w-full bg-[#F8FAFC]">
+  <div class="w-full bg-[#F8FAFC]">
     <!-- 2. HERO -->
     <section
       class="w-full max-w-7xl mx-auto px-6 pt-12 pb-10 md:py-16 flex flex-col items-start gap-6 border-b border-slate-200/60"
@@ -1391,92 +1338,9 @@ const serviceJsonLd = {
         </p>
       </div>
     </section>
-  </main>
+  </div>
 
   <!-- 10. DEDICATED EMPRESAS FOOTER -->
-  <footer class="w-full bg-white border-t border-slate-200 py-12">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col gap-10">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div class="flex flex-col gap-2 md:col-span-1">
-          <span class="text-base font-bold text-slate-900 tracking-tight"
-            >LuciRMe AI · Empresas</span
-          >
-          <p class="text-xs font-mono text-slate-500">
-            Primero el problema. Después la tecnología.
-          </p>
-        </div>
-        <!-- Columna 1: Empresas -->
-        <div class="flex flex-col gap-2.5">
-          <span class="font-mono text-xs font-semibold text-slate-900 uppercase"
-            >Empresas</span
-          >
-          <div class="flex flex-col gap-2 text-xs text-slate-600">
-            <a
-              class="hover:text-slate-900 transition-colors"
-              href="#diagnostico">Diagnóstico</a
-            >
-            <a class="hover:text-slate-900 transition-colors" href="#casos"
-              >Casos</a
-            >
-            <a
-              class="hover:text-slate-900 transition-colors"
-              href="#como-trabajamos">Cómo trabajamos</a
-            >
-            <a class="hover:text-slate-900 transition-colors" href="#pablo"
-              >Pablo</a
-            >
-          </div>
-        </div>
-        <!-- Columna 2: Contacto -->
-        <div class="flex flex-col gap-2.5">
-          <span class="font-mono text-xs font-semibold text-slate-900 uppercase"
-            >Contacto</span
-          >
-          <div class="flex flex-col gap-2 text-xs text-slate-600">
-            <a
-              class="hover:text-slate-900 transition-colors"
-              href={whatsappBase}
-              rel="noopener noreferrer"
-              target="_blank">WhatsApp Directo</a
-            >
-            <a
-              class="hover:text-slate-900 transition-colors"
-              href="https://linkedin.com/in/pabloriospena"
-              rel="noopener noreferrer"
-              target="_blank">LinkedIn</a
-            >
-          </div>
-        </div>
-        <!-- Columna 3: Navegación -->
-        <div class="flex flex-col gap-2.5">
-          <span class="font-mono text-xs font-semibold text-slate-900 uppercase"
-            >Navegación</span
-          >
-          <div class="flex flex-col gap-2 text-xs text-slate-600">
-            <a class="hover:text-slate-900 transition-colors" href="/">Inicio</a
-            >
-            <a
-              class="hover:text-slate-900 transition-colors"
-              href="/profesionales">Profesionales</a
-            >
-            <a class="hover:text-slate-900 transition-colors" href="/educacion"
-              >Educación</a
-            >
-            <a
-              class="hover:text-slate-900 transition-colors"
-              href="/sobre-pablo">Sobre Pablo</a
-            >
-          </div>
-        </div>
-      </div>
-      <div
-        class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500"
-      >
-        <span>© 2026 LuciRMe AI · Todos los derechos reservados.</span>
-        <span>lucirme.com/empresas</span>
-      </div>
-    </div>
-  </footer>
 
   <!-- Script empaquetado por Vite con import estático de pdfGenerator -->
   <script>
@@ -2050,4 +1914,4 @@ const serviceJsonLd = {
       }
     });
   </script>
-</Layout>
+</LayoutV2>
