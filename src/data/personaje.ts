@@ -5,5 +5,5 @@
 // Mientras una pose no tenga ruta, el hero se ve completo sin imagen.
 export const POSES: { saludando?: string; presentando?: string } = {
   saludando: "/personaje/saludando.png",
-  presentando: undefined, // por ejemplo "/personaje/presentando.png"
+  presentando: "/personaje/presentando.png",
 };
