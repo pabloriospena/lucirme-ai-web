@@ -1,0 +1,26 @@
+---
+// Planes: Gratis, Por recurso y Suscripción. La suscripción solo aparece como Próximamente,
+// sin precio, fecha ni beneficios (Reglas sección 3, decisión de Pablo del 26 nov 2026).
+interface Props { precioRecurso?: string }
+const { precioRecurso } = Astro.props;
+---
+
+<div class="grid gap-3 md:grid-cols-3">
+  <div class="flex flex-col rounded-2xl border-[0.8px] border-v2-borde bg-v2-fondo p-5">
+    <h3 class="text-lg font-bold text-v2-texto">Gratis</h3>
+    <p class="mb-3 mt-1.5 text-sm leading-6 text-v2-cuerpo">Recursos gratis con tu cuenta y seguimiento de tu progreso.</p>
+    <a href="/recursos" class="mt-auto flex min-h-11 items-center justify-center rounded-xl border-[1.5px] border-v2-accion text-sm font-bold text-v2-accion hover:bg-v2-marca-tinte">Ver recursos gratis</a>
+  </div>
+  <div class="flex flex-col rounded-2xl border border-v2-pago-borde bg-v2-pago-fondo p-5">
+    <h3 class="text-lg font-bold text-v2-texto">Por recurso</h3>
+    <p class="mb-3 mt-1.5 text-sm leading-6 text-v2-cuerpo">
+      Pago único por cada recurso{precioRecurso ? `, desde ${precioRecurso}` : ""}, o invitando personas que creen su cuenta.
+    </p>
+    <a href="/recursos" class="mt-auto flex min-h-11 items-center justify-center rounded-xl bg-v2-pago-boton text-sm font-bold text-white hover:brightness-90">Ver recursos de pago</a>
+  </div>
+  <div class="flex flex-col rounded-2xl border-[0.8px] border-v2-borde bg-v2-fondo p-5">
+    <h3 class="text-lg font-bold text-v2-texto">Suscripción</h3>
+    <p class="mb-3 mt-1.5 text-sm leading-6 text-v2-cuerpo">Una forma de acceder a todo el contenido de pago.</p>
+    <span class="mt-auto flex min-h-11 items-center justify-center rounded-xl border-[0.8px] border-dashed border-v2-control text-sm font-bold text-v2-cuerpo">Próximamente</span>
+  </div>
+</div>

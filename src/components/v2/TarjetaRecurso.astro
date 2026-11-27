@@ -1,0 +1,60 @@
+---
+// Tarjeta de recurso: etiquetas arriba, título, descripción, formato y estado de acceso abajo.
+import EstadoAcceso from "./EstadoAcceso.astro";
+import { textoPrecio } from "../../data/precios.ts";
+
+interface Props {
+  recurso: {
+    slug: string;
+    url: string;
+    titulo: string;
+    descripcion: string;
+    formato: string;
+    tema?: string;
+    herramienta?: string;
+    dificultad?: string;
+    area?: string;
+    acceso?: "gratis" | "gratis-correo" | "de-pago" | "o-con-invitaciones";
+    precio?: string;
+    invitaciones?: number;
+  };
+  banda: string;
+}
+const { recurso: r, banda } = Astro.props;
+const etiquetas = [r.tema, r.herramienta, r.dificultad].filter(Boolean) as string[];
+---
+
+<article
+  class="relative flex h-full flex-col gap-3 rounded-2xl border-[0.8px] border-v2-borde bg-v2-fondo p-5 transition-colors duration-150 hover:border-v2-control"
+  data-tarjeta
+  data-tema={r.tema}
+  data-herramienta={r.herramienta}
+  data-dificultad={r.dificultad}
+  data-area={r.area}
+>
+  <ul class="flex flex-wrap gap-1.5" aria-label="Etiquetas">
+    {
+      etiquetas.map((t) => (
+        <li class="rounded-full border-[0.8px] border-v2-borde bg-v2-chip px-2.5 py-0.5 text-xs font-semibold text-v2-cuerpo">{t}</li>
+      ))
+    }
+  </ul>
+  <h3 class="text-xl font-bold leading-tight text-v2-texto">
+    <a
+      href={r.url}
+      class="after:absolute after:inset-0 after:content-['']"
+      onclick={`if (window.posthog) { window.posthog.capture('recursos_card_click', { recurso: '${r.slug}', banda: '${banda}' }); }`}
+    >
+      {r.titulo}
+    </a>
+  </h3>
+  <p class="text-sm leading-6 text-v2-cuerpo">{r.descripcion}</p>
+  <div class="mt-auto flex items-center justify-between gap-2 pt-2">
+    <span class="text-xs font-semibold text-v2-suave">{r.formato}</span>
+    <EstadoAcceso
+      estado={r.acceso ?? "gratis"}
+      precio={textoPrecio(r.precio)}
+      invitaciones={r.invitaciones}
+    />
+  </div>
+</article>

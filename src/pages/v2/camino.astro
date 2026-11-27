@@ -1,0 +1,77 @@
+---
+// Vista de ejemplo de un camino con progreso en los cuatro estados. No se indexa.
+// El progreso mide solo lo aplicado. Los estados son de muestra: la persistencia llega con las cuentas (Fase 2).
+import LayoutV2 from "../../layouts/LayoutV2.astro";
+import BarraProgreso from "../../components/v2/BarraProgreso.astro";
+import EstadoAcceso from "../../components/v2/EstadoAcceso.astro";
+import { textoPrecio } from "../../data/precios.ts";
+
+type Estado = "aplicada" | "leida" | "abierta" | "desbloqueada" | "pago";
+const pasos: { n: number; titulo: string; url: string; estado: Estado; nombre: string }[] = [
+  { n: 1, titulo: "De notas a reportes con NotebookLM", url: "/recursos/guia-notebooklm", estado: "aplicada", nombre: "Aplicada" },
+  { n: 2, titulo: "20 prompts para NotebookLM", url: "/recursos/guia-20prompts-notebooklm", estado: "leida", nombre: "Leída" },
+  { n: 3, titulo: "Guía de estudio con NotebookLM", url: "/recursos/guia-estudio-notebooklm", estado: "abierta", nombre: "Abierta" },
+  { n: 4, titulo: "Guía de Deep Research", url: "/recursos/guia-deepresearch", estado: "desbloqueada", nombre: "Desbloqueada" },
+  { n: 5, titulo: "Recurso de pago de ejemplo", url: "/v2/recurso?estado=antes", estado: "pago", nombre: "De pago" },
+];
+const aplicados = pasos.filter((p) => p.estado === "aplicada").length;
+const siguiente = pasos.find((p) => p.estado !== "aplicada" && p.estado !== "pago") ?? pasos[0];
+const precio = textoPrecio("ruta-product-paso-0");
+---
+
+<LayoutV2 title="Vista de ejemplo del camino | LuciRMe AI" noindex>
+  <div class="bg-v2-superficie px-4 py-2 text-center text-xs text-v2-cuerpo">Pantalla de ejemplo para revisar el diseño. Estados de muestra.</div>
+  <main class="px-4 pb-12 pt-5 sm:px-6">
+    <div class="mx-auto max-w-2xl">
+      <a href="/recursos#banda-paso-a-paso" class="inline-flex min-h-11 items-center text-sm font-semibold text-v2-accion">‹ Paso a paso</a>
+      <h1 class="mb-2 mt-1 text-[32px] font-extrabold leading-[1.15] tracking-[-0.9px] text-v2-texto">Estudia con tus documentos</h1>
+      <p class="mb-4 text-base leading-6 text-v2-cuerpo">Recursos uno detrás de otro, para trabajar sobre tus propios documentos.</p>
+      <div class="mb-2 flex justify-between text-sm font-bold text-v2-texto">
+        <span>Tu progreso</span><span class="text-v2-accion">{aplicados} de {pasos.length} aplicado</span>
+      </div>
+      <BarraProgreso aplicados={aplicados} total={pasos.length} etiqueta="Progreso del camino" />
+      <p class="mt-2 text-xs leading-5 text-v2-cuerpo">Cada paso puede estar desbloqueado, abierto, leído o aplicado. Solo aplicado cuenta como avance.</p>
+
+      <ol class="mt-4 flex flex-col">
+        {
+          pasos.map((p) => (
+            <li class="border-t-[0.8px] border-v2-borde">
+              <a href={p.url} class="flex items-start gap-3 py-4">
+                <span class:list={["mt-0.5 shrink-0", p.estado === "pago" ? "text-v2-pago-texto" : "text-v2-accion"]}>
+                  {p.estado === "aplicada" && (
+                    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor" /><path d="M7 12.5l3.5 3.5L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                  )}
+                  {p.estado === "leida" && (
+                    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="2" /><path d="M7.5 12.5l3 3L16.5 9.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                  )}
+                  {p.estado === "abierta" && (
+                    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="2" /><path d="M12 2.8a9.2 9.2 0 0 1 0 18.4z" fill="currentColor" /></svg>
+                  )}
+                  {p.estado === "desbloqueada" && (
+                    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="2" /></svg>
+                  )}
+                  {p.estado === "pago" && (
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg>
+                  )}
+                </span>
+                <span class="min-w-0">
+                  <span class="block text-xs font-bold uppercase tracking-[0.03em] text-v2-suave">Paso {p.n}</span>
+                  <span class="block text-lg font-bold leading-snug text-v2-texto">{p.titulo}</span>
+                  {p.estado === "pago" ? (
+                    <span class="mt-1.5 inline-block"><EstadoAcceso estado="de-pago" precio={precio} /></span>
+                  ) : (
+                    <span class="mt-1.5 block text-sm font-semibold text-v2-accion">{p.nombre}</span>
+                  )}
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+
+      <a href={siguiente.url} class="mt-2 flex min-h-[52px] items-center justify-center rounded-xl bg-v2-accion text-base font-bold text-v2-accion-texto hover:bg-v2-accion-hover">
+        Seguir con el paso {siguiente.n}
+      </a>
+    </div>
+  </main>
+</LayoutV2>
