@@ -108,94 +108,18 @@ const serviceJsonLd = {
                   ¿Qué proceso te gustaría mejorar en tu equipo?
                 </h3>
               </div>
-              <div
-                class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1"
-                id="group-proceso"
+              <div class="diag-group" role="group" id="group-proceso"
               >
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('proceso', 'Reportes y consolidación de información', this)"
-                  type="button"
-                >
-                  <span>Reportes e información</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('proceso', 'Atención y seguimiento de clientes', this)"
-                  type="button"
-                >
-                  <span>Atención a clientes</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('proceso', 'Documentación', this)"
-                  type="button"
-                >
-                  <span>Documentación</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('proceso', 'Reuniones y seguimiento', this)"
-                  type="button"
-                >
-                  <span>Reuniones y minutas</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('proceso', 'Procesos administrativos', this)"
-                  type="button"
-                >
-                  <span>Procesos administrativos</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('proceso', 'Ventas y marketing', this)"
-                  type="button"
-                >
-                  <span>Ventas y comercial</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option sm:col-span-2 flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('proceso', 'Otro', this); document.getElementById('otro-proceso-input').classList.toggle('hidden');"
-                  type="button"
-                >
-                  <span>Otro (especificar)</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
+                <button type="button" class="diag-option" data-multi="1" role="checkbox" aria-checked="false" onclick="window.selectStepOption('proceso', 'Reportes y consolidación de información', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Reportes e información</span></span></button>
+                <button type="button" class="diag-option" data-multi="1" role="checkbox" aria-checked="false" onclick="window.selectStepOption('proceso', 'Atención y seguimiento de clientes', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Atención a clientes</span></span></button>
+                <button type="button" class="diag-option" data-multi="1" role="checkbox" aria-checked="false" onclick="window.selectStepOption('proceso', 'Documentación', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Documentación</span></span></button>
+                <button type="button" class="diag-option" data-multi="1" role="checkbox" aria-checked="false" onclick="window.selectStepOption('proceso', 'Reuniones y seguimiento', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Reuniones y minutas</span></span></button>
+                <button type="button" class="diag-option" data-multi="1" role="checkbox" aria-checked="false" onclick="window.selectStepOption('proceso', 'Procesos administrativos', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Procesos administrativos</span></span></button>
+                <button type="button" class="diag-option" data-multi="1" role="checkbox" aria-checked="false" onclick="window.selectStepOption('proceso', 'Ventas y marketing', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Ventas y comercial</span></span></button>
+                <button type="button" class="diag-option" data-multi="1" role="checkbox" aria-checked="false" onclick="window.selectStepOption('proceso', 'Otro', this); document.getElementById('otro-proceso-input').classList.toggle('hidden');"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Otro (especificar)</span></span></button>
                 <input id="otro-proceso-input" class="hidden sm:col-span-2 w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" placeholder="Describe el proceso..." type="text" oninput="currentSelections['proceso-otro'] = this.value;" />
               </div>
-              <button 
-                  class="mt-4 w-full px-4 py-3 bg-teal-700 text-white font-semibold rounded-xl hover:bg-teal-800 transition-colors"
-                  onclick="nextStep()">
-                  Continuar
-              </button>
+              
             </div>
 
             <!-- Paso 2: Frecuencia -->
@@ -209,65 +133,13 @@ const serviceJsonLd = {
                   ¿Con qué frecuencia se repite este proceso?
                 </h3>
               </div>
-              <div
-                class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1"
-                id="group-frecuencia"
+              <div class="diag-group" role="radiogroup" id="group-frecuencia"
               >
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('frecuencia', 'Varias veces al día', this)"
-                  type="button"
-                >
-                  <span>Varias veces al día</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('frecuencia', 'Todos los días', this)"
-                  type="button"
-                >
-                  <span>Todos los días</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('frecuencia', 'Varias veces por semana', this)"
-                  type="button"
-                >
-                  <span>Varias veces por semana</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('frecuencia', 'Una vez por semana', this)"
-                  type="button"
-                >
-                  <span>Una vez por semana</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option sm:col-span-2 flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('frecuencia', 'Algunas veces al mes', this)"
-                  type="button"
-                >
-                  <span>Algunas veces al mes</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
+                <button type="button" class="diag-option" data-multi="0" role="radio" aria-checked="false" onclick="window.selectStepOption('frecuencia', 'Varias veces al día', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Varias veces al día</span></span></button>
+                <button type="button" class="diag-option" data-multi="0" role="radio" aria-checked="false" onclick="window.selectStepOption('frecuencia', 'Todos los días', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Todos los días</span></span></button>
+                <button type="button" class="diag-option" data-multi="0" role="radio" aria-checked="false" onclick="window.selectStepOption('frecuencia', 'Varias veces por semana', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Varias veces por semana</span></span></button>
+                <button type="button" class="diag-option" data-multi="0" role="radio" aria-checked="false" onclick="window.selectStepOption('frecuencia', 'Una vez por semana', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Una vez por semana</span></span></button>
+                <button type="button" class="diag-option" data-multi="0" role="radio" aria-checked="false" onclick="window.selectStepOption('frecuencia', 'Algunas veces al mes', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Algunas veces al mes</span></span></button>
               </div>
             </div>
 
@@ -282,65 +154,13 @@ const serviceJsonLd = {
                   ¿Cuánto tiempo consume cada sesión?
                 </h3>
               </div>
-              <div
-                class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1"
-                id="group-tiempo"
+              <div class="diag-group" role="radiogroup" id="group-tiempo"
               >
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('tiempo', 'Menos de 15 minutos', this)"
-                  type="button"
-                >
-                  <span>Menos de 15 minutos</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('tiempo', '15–30 minutos', this)"
-                  type="button"
-                >
-                  <span>15–30 minutos</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('tiempo', '30–60 minutos', this)"
-                  type="button"
-                >
-                  <span>30–60 minutos</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('tiempo', '1–2 horas', this)"
-                  type="button"
-                >
-                  <span>1–2 horas</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option sm:col-span-2 flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('tiempo', 'Más de 2 horas', this)"
-                  type="button"
-                >
-                  <span>Más de 2 horas</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
+                <button type="button" class="diag-option" data-multi="0" role="radio" aria-checked="false" onclick="window.selectStepOption('tiempo', 'Menos de 15 minutos', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Menos de 15 minutos</span></span></button>
+                <button type="button" class="diag-option" data-multi="0" role="radio" aria-checked="false" onclick="window.selectStepOption('tiempo', '15–30 minutos', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>15–30 minutos</span></span></button>
+                <button type="button" class="diag-option" data-multi="0" role="radio" aria-checked="false" onclick="window.selectStepOption('tiempo', '30–60 minutos', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>30–60 minutos</span></span></button>
+                <button type="button" class="diag-option" data-multi="0" role="radio" aria-checked="false" onclick="window.selectStepOption('tiempo', '1–2 horas', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>1–2 horas</span></span></button>
+                <button type="button" class="diag-option" data-multi="0" role="radio" aria-checked="false" onclick="window.selectStepOption('tiempo', 'Más de 2 horas', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Más de 2 horas</span></span></button>
               </div>
             </div>
 
@@ -355,41 +175,11 @@ const serviceJsonLd = {
                   ¿Cuántas personas participan en este proceso?
                 </h3>
               </div>
-              <div class="grid grid-cols-2 gap-2.5 pt-1" id="group-personas">
-                <button
-                  class="diag-option p-3 rounded-xl border border-slate-200 text-center font-medium text-slate-800 hover:border-slate-300 hover:bg-slate-50 transition-all flex flex-col items-center justify-center cursor-pointer"
-                  onclick="window.selectStepOption('personas', '1 persona', this)"
-                  type="button"
-                >
-                  <span class="text-xl font-bold font-mono">1</span>
-                  <span class="text-[11px] text-slate-500">Solo 1 persona</span>
-                </button>
-                <button
-                  class="diag-option p-3 rounded-xl border border-slate-200 text-center font-medium text-slate-800 hover:border-slate-300 hover:bg-slate-50 transition-all flex flex-col items-center justify-center cursor-pointer"
-                  onclick="window.selectStepOption('personas', '2 a 4 personas', this)"
-                  type="button"
-                >
-                  <span class="text-xl font-bold font-mono">2–3</span>
-                  <span class="text-[11px] text-slate-500">Equipo pequeño</span>
-                </button>
-                <button
-                  class="diag-option p-3 rounded-xl border border-slate-200 text-center font-medium text-slate-800 hover:border-slate-300 hover:bg-slate-50 transition-all flex flex-col items-center justify-center cursor-pointer"
-                  onclick="window.selectStepOption('personas', '4 a 5 personas', this)"
-                  type="button"
-                >
-                  <span class="text-xl font-bold font-mono">4–5</span>
-                  <span class="text-[11px] text-slate-500">Varios roles</span>
-                </button>
-                <button
-                  class="diag-option p-3 rounded-xl border border-slate-200 text-center font-medium text-slate-800 hover:border-slate-300 hover:bg-slate-50 transition-all flex flex-col items-center justify-center cursor-pointer"
-                  onclick="window.selectStepOption('personas', 'Más de 5 personas', this)"
-                  type="button"
-                >
-                  <span class="text-xl font-bold font-mono">&gt;5</span>
-                  <span class="text-[11px] text-slate-500"
-                    >Equipo extendido</span
-                  >
-                </button>
+              <div class="diag-group" role="radiogroup" id="group-personas">
+                <button type="button" class="diag-option" data-multi="0" role="radio" aria-checked="false" onclick="window.selectStepOption('personas', '1 persona', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>1 persona</span></span></button>
+                <button type="button" class="diag-option" data-multi="0" role="radio" aria-checked="false" onclick="window.selectStepOption('personas', '2 a 4 personas', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>2 a 4 personas</span></span></button>
+                <button type="button" class="diag-option" data-multi="0" role="radio" aria-checked="false" onclick="window.selectStepOption('personas', '4 a 5 personas', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>4 a 5 personas</span></span></button>
+                <button type="button" class="diag-option" data-multi="0" role="radio" aria-checked="false" onclick="window.selectStepOption('personas', 'Más de 5 personas', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Más de 5 personas</span></span></button>
               </div>
             </div>
 
@@ -404,108 +194,22 @@ const serviceJsonLd = {
                   ¿Cuál es el impacto principal cuando falla o se retrasa?
                 </h3>
               </div>
-              <div
-                class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1"
-                id="group-impacto"
+              <div class="diag-group" role="group" id="group-impacto"
               >
+                <button type="button" class="diag-option" data-multi="1" role="checkbox" aria-checked="false" onclick="window.selectStepOption('impacto', 'Perdemos tiempo de trabajo', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Perdemos tiempo de trabajo</span></span></button>
+                <button type="button" class="diag-option" data-multi="1" role="checkbox" aria-checked="false" onclick="window.selectStepOption('impacto', 'Tenemos que repetir tareas o corregir errores', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Repetir tareas / Errores</span></span></button>
+                <button type="button" class="diag-option" data-multi="1" role="checkbox" aria-checked="false" onclick="window.selectStepOption('impacto', 'Se retrasan otros procesos', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Retrasan otros procesos</span></span></button>
+                <button type="button" class="diag-option" data-multi="1" role="checkbox" aria-checked="false" onclick="window.selectStepOption('impacto', 'Afecta la atención o satisfacción de los clientes', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Afecta clientes</span></span></button>
+                <button type="button" class="diag-option" data-multi="1" role="checkbox" aria-checked="false" onclick="window.selectStepOption('impacto', 'Perdemos oportunidades de venta o clientes', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Perdemos ventas/clientes</span></span></button>
+                <button type="button" class="diag-option" data-multi="1" role="checkbox" aria-checked="false" onclick="window.selectStepOption('impacto', 'Genera costos adicionales', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Genera costos adicionales</span></span></button>
+                <button type="button" class="diag-option" data-multi="1" role="checkbox" aria-checked="false" onclick="window.selectStepOption('impacto', 'Depende demasiado de una persona', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Depende de una persona</span></span></button>
+                <button type="button" class="diag-option" data-multi="1" role="checkbox" aria-checked="false" onclick="window.selectStepOption('impacto', 'No tenemos suficiente información para saber qué está fallando', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Falta información</span>
+                  
                 <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('impacto', 'Perdemos tiempo de trabajo', this)"
-                  type="button"
-                >
-                  <span>Perdemos tiempo de trabajo</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('impacto', 'Tenemos que repetir tareas o corregir errores', this)"
-                  type="button"
-                >
-                  <span>Repetir tareas / Errores</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('impacto', 'Se retrasan otros procesos', this)"
-                  type="button"
-                >
-                  <span>Retrasan otros procesos</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('impacto', 'Afecta la atención o satisfacción de los clientes', this)"
-                  type="button"
-                >
-                  <span>Afecta clientes</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('impacto', 'Perdemos oportunidades de venta o clientes', this)"
-                  type="button"
-                >
-                  <span>Perdemos ventas/clientes</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('impacto', 'Genera costos adicionales', this)"
-                  type="button"
-                >
-                  <span>Genera costos adicionales</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('impacto', 'Depende demasiado de una persona', this)"
-                  type="button"
-                >
-                  <span>Depende de una persona</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('impacto', 'No tenemos suficiente información para saber qué está fallando', this)"
-                  type="button"
-                >
-                  <span>Falta información</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
                   onclick="window.selectStepOption('impacto', 'Otro', this); document.getElementById('otro-impacto-input').classList.toggle('hidden');"
                   type="button"
                 >
-                  <span>Otro</span>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
+                  <span>Otro</span></span></button>
               </div>
               <input
                 type="text"
@@ -514,11 +218,7 @@ const serviceJsonLd = {
                 placeholder="Especifica el impacto..."
                 oninput="recalculateAssessment()"
               />
-              <button 
-                  class="mt-4 w-full px-4 py-3 bg-teal-700 text-white font-semibold rounded-xl hover:bg-teal-800 transition-colors"
-                  onclick="nextStep()">
-                  Continuar
-              </button>
+              
             </div>
 
             <!-- Paso 6: Viabilidad -->
@@ -532,76 +232,34 @@ const serviceJsonLd = {
                   ¿Qué tan difícil crees que sería cambiarlo?
                 </h3>
               </div>
-              <div
-                class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1"
-                id="group-esfuerzo"
+              <div class="diag-group" role="radiogroup" id="group-esfuerzo"
               >
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('esfuerzo', 'Fácil', this)"
-                  type="button"
-                >
-                  <div>
-                    <div class="font-semibold text-slate-900">Fácil</div>
-                    <div class="text-[10px] text-slate-500">
+                <button type="button" class="diag-option" data-multi="0" role="radio" aria-checked="false" onclick="window.selectStepOption('esfuerzo', 'Fácil', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><div>
+                    <div>Fácil</div>
+                    <div>
                       Alinear hábitos o plantillas
                     </div>
-                  </div>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('esfuerzo', 'Moderado', this)"
-                  type="button"
-                >
-                  <div>
-                    <div class="font-semibold text-slate-900">Moderado</div>
-                    <div class="text-[10px] text-slate-500">
+                  </div></span></button>
+                <button type="button" class="diag-option" data-multi="0" role="radio" aria-checked="false" onclick="window.selectStepOption('esfuerzo', 'Moderado', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><div>
+                    <div>Moderado</div>
+                    <div>
                       Conectar herramientas
                     </div>
-                  </div>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('esfuerzo', 'Difícil', this)"
-                  type="button"
-                >
-                  <div>
-                    <div class="font-semibold text-slate-900">Difícil</div>
-                    <div class="text-[10px] text-slate-500">
+                  </div></span></button>
+                <button type="button" class="diag-option" data-multi="0" role="radio" aria-checked="false" onclick="window.selectStepOption('esfuerzo', 'Difícil', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><div>
+                    <div>Difícil</div>
+                    <div>
                       Sistemas legados
                     </div>
-                  </div>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
-                <button
-                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
-                  onclick="window.selectStepOption('esfuerzo', 'No tengo idea', this)"
-                  type="button"
-                >
-                  <div>
-                    <div class="font-semibold text-slate-900">
+                  </div></span></button>
+                <button type="button" class="diag-option" data-multi="0" role="radio" aria-checked="false" onclick="window.selectStepOption('esfuerzo', 'No tengo idea', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><div>
+                    <div>
                       No tengo idea
                     </div>
-                    <div class="text-[10px] text-slate-500">
+                    <div>
                       Explorarlo en diagnóstico
                     </div>
-                  </div>
-                  <span
-                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
-                    >circle</span
-                  >
-                </button>
+                  </div></span></button>
               </div>
             </div>
 
@@ -832,41 +490,17 @@ const serviceJsonLd = {
             </div>
           </div>
 
-          <!-- Botones de Navegación del Wizard -->
-          <div
-            class="pt-3 border-t border-slate-100 flex items-center justify-between"
-            id="wizard-navigation"
-          >
-            <button
-              class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-              disabled
-              id="btn-prev"
-              onclick="window.prevStep()"
-              type="button"
-            >
-              <span class="material-symbols-outlined text-[15px]"
-                >arrow_back</span
-              >
-              <span>Atrás</span>
-            </button>
-            <div class="hidden" id="step-dots">
-              <span class="w-4 h-2 rounded-full transition-all bg-teal-700"
-              ></span>
-              <span class="w-2 h-2 rounded-full transition-all bg-slate-200"
-              ></span>
-              <span class="w-2 h-2 rounded-full transition-all bg-slate-200"
-              ></span>
-              <span class="w-2 h-2 rounded-full transition-all bg-slate-200"
-              ></span>
-              <span class="w-2 h-2 rounded-full transition-all bg-slate-200"
-              ></span>
-              <span class="w-2 h-2 rounded-full transition-all bg-slate-200"
-              ></span>
-              <span class="w-2 h-2 rounded-full transition-all bg-slate-200"
-              ></span>
-            </div>
-            
+          <!-- Botones de Navegación del Wizard (Web v2: Siguiente es el único botón de color; sin Atrás en el paso 1) -->
+          <p id="diag-count" role="status" class="diag-count"></p>
+          <div id="diag-error" role="alert" class="diag-error hidden">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16h.01"></path></svg>
+            <span id="diag-error-texto"></span>
           </div>
+          <div class="diag-nav" id="wizard-navigation">
+            <button class="diag-back hidden" id="btn-prev" onclick="window.prevStep()" type="button">‹ Atrás</button>
+            <button class="diag-next" id="btn-next" onclick="window.nextStep()" type="button" aria-disabled="true">Siguiente</button>
+          </div>
+          <div class="hidden" id="step-dots"></div>
         </div>
 
         <!-- Columna Derecha: Tarjeta Viva "Tu cuello de botella" (oculta en Web v2; el diseño es de una columna) -->
@@ -1039,7 +673,34 @@ const serviceJsonLd = {
 
   </div>
 
-    <!-- 10. DEDICATED EMPRESAS FOOTER -->
+    <style is:global>
+  #diagnostico .diag-group { display: flex; flex-direction: column; gap: 10px; max-width: 520px; padding-top: 4px; }
+  #diagnostico .diag-option { min-height: 52px; box-sizing: border-box; display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 16px; text-align: left; border: 0.8px solid var(--color-v2-control); border-radius: 14px; background: #fff; color: var(--color-v2-texto); font-size: 16px; line-height: 24px; cursor: pointer; }
+  #diagnostico .diag-option[data-sel] { border: 1.6px solid var(--color-v2-accion); background: var(--color-v2-marca-tinte); }
+  #diagnostico .diag-option[data-error] { border-color: #c70036; }
+  #diagnostico .diag-option:focus-visible { outline: 0; box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--color-v2-foco); }
+  #diagnostico .diag-mark { flex: 0 0 24px; height: 24px; border-radius: 50%; border: 0.8px solid var(--color-v2-control); background: #fff; display: flex; align-items: center; justify-content: center; box-sizing: border-box; overflow: hidden; }
+  #diagnostico .diag-option[data-multi="1"] .diag-mark { border-radius: 8px; }
+  #diagnostico .diag-option[data-error] .diag-mark { border-color: #c70036; }
+  #diagnostico .diag-option[data-sel] .diag-mark { border-color: var(--color-v2-accion); }
+  #diagnostico .diag-option[data-sel][data-multi="0"] .diag-mark::after { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--color-v2-accion); }
+  #diagnostico .diag-option[data-sel][data-multi="1"] .diag-mark { background: var(--color-v2-accion); }
+  #diagnostico .diag-option[data-sel][data-multi="1"] .diag-mark::after { content: ""; width: 6px; height: 11px; margin-top: -2px; border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
+  #diagnostico .diag-body { display: flex; flex-direction: column; font-size: 16px; line-height: 24px; }
+  #diagnostico .diag-body div:nth-child(2) { font-size: 14px; line-height: 20px; color: var(--color-v2-cuerpo); }
+  #diagnostico .diag-count { min-height: 20px; margin: 8px 0 0; font-size: 14px; color: var(--color-v2-cuerpo); }
+  #diagnostico .diag-error { display: flex; gap: 10px; align-items: flex-start; max-width: 520px; margin-top: 10px; padding: 12px 16px; border: 0.8px solid #c70036; border-radius: 14px; background: #fff; color: #c70036; font-size: 14px; line-height: 20px; font-weight: 600; }
+  #diagnostico .diag-error.hidden { display: none; }
+  #diagnostico .diag-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; padding-top: 12px; border-top: 0.8px solid var(--color-v2-borde); }
+  #diagnostico .diag-back { min-height: 44px; padding: 0 12px; border: 0; background: transparent; color: var(--color-v2-accion); font-size: 16px; font-weight: 700; cursor: pointer; }
+  #diagnostico .diag-back.hidden { display: none; }
+  #diagnostico .diag-next { margin-left: auto; min-height: 52px; padding: 0 28px; border: 0; border-radius: 9999px; background: var(--color-v2-accion); color: var(--color-v2-accion-texto); font-size: 16px; font-weight: 700; cursor: pointer; }
+  #diagnostico .diag-next:hover { background: var(--color-v2-accion-hover); }
+  #diagnostico .diag-next[aria-disabled="true"] { background: #e2e8f0; color: var(--color-v2-cuerpo); cursor: not-allowed; }
+  #diagnostico .diag-next.hidden { display: none; }
+</style>
+
+  <!-- 10. DEDICATED EMPRESAS FOOTER -->
 
   <!-- Script empaquetado por Vite con import estático de pdfGenerator -->
   <script>
@@ -1094,7 +755,7 @@ const serviceJsonLd = {
       if (currentStep <= totalSteps) {
         setSegmentos(currentStep);
         counter.innerText = `Paso ${currentStep} de ${totalSteps}`;
-        if (prevBtn) prevBtn.disabled = currentStep === 1;
+        if (prevBtn) prevBtn.classList.toggle("hidden", currentStep === 1);
 
         if (currentStep === totalSteps) {
           if (nextBtn) nextBtn.classList.add("hidden");
@@ -1140,10 +801,16 @@ const serviceJsonLd = {
       }
 
       updateProgressBar();
+      hideError();
+      updateNav();
     }
 
     function nextStep() {
       if (currentStep < totalSteps) {
+        if (!hasAnswer(currentStep)) {
+          showError();
+          return;
+        }
         goToStep(currentStep + 1);
       }
     }
@@ -1154,73 +821,73 @@ const serviceJsonLd = {
       }
     }
 
+    const PASOS = ["proceso", "frecuencia", "tiempo", "personas", "impacto", "esfuerzo"];
+    const MULTIPLES = ["proceso", "impacto"];
+
+    function setSel(btn: Element, on: boolean) {
+      if (on) btn.setAttribute("data-sel", "1");
+      else btn.removeAttribute("data-sel");
+      btn.setAttribute("aria-checked", on ? "true" : "false");
+    }
+
+    function hasAnswer(step: number): boolean {
+      const cat = PASOS[step - 1];
+      if (!cat) return true;
+      const v = currentSelections[cat];
+      return Array.isArray(v) ? v.length > 0 : !!v;
+    }
+
+    function hideError() {
+      document.getElementById("diag-error")?.classList.add("hidden");
+      document.querySelectorAll(".diag-option[data-error]").forEach((el) => el.removeAttribute("data-error"));
+    }
+
+    function showError() {
+      const cat = PASOS[currentStep - 1];
+      const multi = MULTIPLES.includes(cat);
+      const box = document.getElementById("diag-error");
+      const txt = document.getElementById("diag-error-texto");
+      if (txt) txt.textContent = multi ? "Elige al menos una opción para continuar." : "Elige una opción para continuar.";
+      box?.classList.remove("hidden");
+      document.querySelectorAll(`#group-${cat} .diag-option`).forEach((el) => el.setAttribute("data-error", "1"));
+      (document.querySelector(`#group-${cat} .diag-option`) as HTMLElement | null)?.focus();
+    }
+
+    function updateNav() {
+      const next = document.getElementById("btn-next");
+      if (next) next.setAttribute("aria-disabled", hasAnswer(currentStep) ? "false" : "true");
+      const cat = PASOS[currentStep - 1];
+      const count = document.getElementById("diag-count");
+      if (count) {
+        const v = currentSelections[cat];
+        count.textContent = MULTIPLES.includes(cat) && Array.isArray(v) && v.length > 0
+          ? `${v.length} ${v.length === 1 ? "elegida" : "elegidas"}.`
+          : "";
+      }
+    }
+
     function selectStepOption(
       category: string,
       value: string,
       btnElement: HTMLElement,
     ) {
-      if (category === 'proceso' || category === 'impacto') {
+      if (MULTIPLES.includes(category)) {
         if (!Array.isArray(currentSelections[category])) {
           currentSelections[category] = [];
         }
         const index = currentSelections[category].indexOf(value);
-        if (index > -1) {
-          currentSelections[category].splice(index, 1);
-          btnElement.classList.remove("border-teal-700", "bg-teal-50/80", "text-teal-900", "font-bold");
-          btnElement.classList.add("border-slate-200", "text-slate-700");
-          const icon = btnElement.querySelector(".material-symbols-outlined");
-          if (icon) {
-            icon.textContent = "circle";
-            icon.classList.remove("text-teal-700");
-            icon.classList.add("text-slate-300", "opacity-0");
-          }
-        } else {
-          currentSelections[category].push(value);
-          btnElement.classList.remove("border-slate-200", "text-slate-700");
-          btnElement.classList.add("border-teal-700", "bg-teal-50/80", "text-teal-900", "font-bold");
-          const icon = btnElement.querySelector(".material-symbols-outlined");
-          if (icon) {
-            icon.textContent = "check_circle";
-            icon.classList.remove("text-slate-300", "opacity-0");
-            icon.classList.add("text-teal-700");
-          }
-        }
+        if (index > -1) currentSelections[category].splice(index, 1);
+        else currentSelections[category].push(value);
+        setSel(btnElement, index === -1);
       } else {
         currentSelections[category] = value;
-        const parent = btnElement.parentElement;
-        if (parent) {
-          const buttons = parent.querySelectorAll(".diag-option");
-          buttons.forEach((btn) => {
-            btn.classList.remove("border-teal-700", "bg-teal-50/80", "text-teal-900", "font-bold");
-            btn.classList.add("border-slate-200", "text-slate-700");
-            const icon = btn.querySelector(".material-symbols-outlined");
-            if (icon) {
-              icon.textContent = "circle";
-              icon.classList.remove("text-teal-700");
-              icon.classList.add("text-slate-300", "opacity-0");
-            }
-          });
-        }
-        btnElement.classList.remove("border-slate-200", "text-slate-700");
-        btnElement.classList.add("border-teal-700", "bg-teal-50/80", "text-teal-900", "font-bold");
-        const activeIcon = btnElement.querySelector(".material-symbols-outlined");
-        if (activeIcon) {
-          activeIcon.textContent = "check_circle";
-          activeIcon.classList.remove("text-slate-300", "opacity-0");
-          activeIcon.classList.add("text-teal-700");
-        }
+        btnElement.parentElement?.querySelectorAll(".diag-option").forEach((btn) => setSel(btn, btn === btnElement));
       }
+      hideError();
+      updateNav();
 
       recalculateAssessment();
 
-      // Only auto-advance if it's not the multi-select process or impacto question
-      if (category !== 'proceso' && category !== 'impacto') {
-        setTimeout(() => {
-          if (currentStep < totalSteps) {
-            nextStep();
-          }
-        }, 260);
-      }
     }
 
     function calculateEstimatedWeeklyHours() {
