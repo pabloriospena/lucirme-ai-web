@@ -84,7 +84,7 @@ const pageTitle = "Guía Práctica EMO & Matriz Legal | Interobras · LuciRMe AI
                             <!-- PROMPT BOX 1 -->
                             <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden mb-4">
                                 <div class="flex justify-between items-center px-4 py-2.5 bg-slate-100 border-b border-slate-200">
-                                    <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Prompt 1: Extracción Inicial EMO</span>
+                                    <span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Prompt 1: Extracción Inicial EMO</span>
                                     <button onclick="copyText('prompt-emo-1', this)" class="bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs px-3 py-1 rounded-lg transition-all cursor-pointer">
                                         Copiar Prompt
                                     </button>
@@ -119,7 +119,7 @@ Debes visualizar la tabla con los datos adjuntos</pre>
                             </p>
                             <div class="bg-slate-100 border border-slate-200 rounded-lg p-3 text-xs font-mono font-bold text-slate-800 flex justify-between items-center">
                                 <span>incluir estos examenes a la misma tabla</span>
-                                <button onclick="navigator.clipboard.writeText('incluir estos examenes a la misma tabla'); alert('Copiado');" class="text-xs bg-teal-600 text-white px-2.5 py-1 rounded hover:bg-teal-700 transition cursor-pointer">
+                                <button onclick="navigator.clipboard.writeText('incluir estos examenes a la misma tabla'); alert('Copiado');" class="text-[11px] bg-teal-600 text-white px-2.5 py-1 rounded hover:bg-teal-700 transition cursor-pointer">
                                     Copiar
                                 </button>
                             </div>
@@ -144,7 +144,7 @@ Debes visualizar la tabla con los datos adjuntos</pre>
                         <!-- PROMPT BOX BONUS -->
                         <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-2xs">
                             <div class="flex justify-between items-center px-4 py-2 bg-slate-100 border-b border-slate-200">
-                                <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Prompt Bonus: Generador Dashboard Power BI Style (index.html)</span>
+                                <span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Prompt Bonus: Generador Dashboard Power BI Style (index.html)</span>
                                 <button onclick="copyText('prompt-dashboard-html', this)" class="bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs px-3 py-1 rounded-lg transition-all cursor-pointer">
                                     Copiar Prompt Dashboard
                                 </button>
@@ -259,7 +259,7 @@ Todo en un solo archivo index.html listo para usar.</pre>
                         <!-- PROMPT BOX LEYES -->
                         <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden">
                             <div class="flex justify-between items-center px-4 py-2.5 bg-slate-100 border-b border-slate-200">
-                                <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Prompt 2: Análisis y Actualización Legal</span>
+                                <span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider">Prompt 2: Análisis y Actualización Legal</span>
                                 <button onclick="copyText('prompt-leyes', this)" class="bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs px-3 py-1 rounded-lg transition-all cursor-pointer">
                                     Copiar Prompt Leyes
                                 </button>
@@ -289,10 +289,10 @@ Mantén el idioma del documento en español, utiliza terminología jurídica pre
             navigator.clipboard.writeText(text).then(() => {
                 const originalText = btnElement.innerText;
                 btnElement.innerText = "¡Copiado!";
-                btnElement.classList.add("bg-emerald-700");
+                btnElement.classList.add("bg-emerald-600");
                 setTimeout(() => {
                     btnElement.innerText = originalText;
-                    btnElement.classList.remove("bg-emerald-700");
+                    btnElement.classList.remove("bg-emerald-600");
                 }, 2000);
             }).catch(err => {
                 console.error("Error al copiar text: ", err);

@@ -75,7 +75,7 @@ if (!userId) {
         complete: function(results) {
           const items = results.data.filter(r => r.Title).map((r, i) => ({
             id: i,
-            content: `<div class="font-bold text-xs">${r.Title}</div><div class="text-xs opacity-70">${r.State}</div>`,
+            content: `<div class="font-bold text-xs">${r.Title}</div><div class="text-[10px] opacity-70">${r.State}</div>`,
             start: r['Start Date'] || '2026-05-28',
             end: r['Due Date'] || '2026-06-28',
             group: r.ID // Esto agrupa por ID para tener filas separadas

@@ -87,7 +87,7 @@ const boton =
                             <tbody id="tabla-matriz" class="divide-y divide-slate-100 text-slate-700"></tbody>
                         </table>
                     </div>
-                    <p class="text-xs text-slate-400 mt-1">
+                    <p class="text-[11px] text-slate-400 mt-1">
                         Las horas son la suma de lo que declaró cada persona; la viabilidad, el promedio de procedimiento escrito y resultado estructurado. Lo que no se declaró no se inventa.
                     </p>
                 </div>
@@ -182,14 +182,14 @@ const boton =
             if (d.frecuencia) datos.push(d.frecuencia);
             if (d.procedimiento) datos.push(`procedimiento: ${d.procedimiento}`);
             if (d.estructurado) datos.push(`estructurado: ${d.estructurado}`);
-            fila.appendChild(el("p", "text-xs text-slate-400 mt-0.5", datos.join(" · ")));
+            fila.appendChild(el("p", "text-[11px] text-slate-400 mt-0.5", datos.join(" · ")));
             fila.appendChild(selector);
             return fila;
         }
 
         function selectorDe(dolorId: string, actual: string | null) {
             const sel = document.createElement("select");
-            sel.className = "mt-1 w-full rounded border border-slate-300 text-xs px-1 py-1 bg-white";
+            sel.className = "mt-1 w-full rounded border border-slate-300 text-[11px] px-1 py-1 bg-white";
             const op0 = new Option("Sin grupo", "");
             sel.appendChild(op0);
             grupos.forEach((g) => sel.appendChild(new Option(g.nombre || "(sin nombre)", g.id)));
@@ -227,7 +227,7 @@ const boton =
                     const d = porId.get(id);
                     if (d) caja.appendChild(filaDolor(d, selectorDe(id, g.id)));
                 }
-                const borrar = el("button", "text-xs text-red-600 hover:underline", "Eliminar grupo (sus dolores quedan sin grupo)");
+                const borrar = el("button", "text-[11px] text-red-600 hover:underline", "Eliminar grupo (sus dolores quedan sin grupo)");
                 borrar.addEventListener("click", () => {
                     grupos = grupos.filter((x) => x !== g);
                     marcarSucio(true);

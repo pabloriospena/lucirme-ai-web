@@ -289,7 +289,7 @@ const cafeEstrategiaUrl = LINKS.calendly_sesion_pago || LINKS.calendly;
         <!-- BLOQUE DE CÓDIGO DE SYSTEM PROMPT RECOMENDADO -->
         <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden my-3">
           <div class="flex justify-between items-center px-4 py-2.5 bg-slate-100 border-b border-slate-200">
-            <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">System Prompt Recomendado para Proyecto Claude</span>
+            <span class="text-[11px] font-bold text-slate-600 uppercase tracking-wider">System Prompt Recomendado para Proyecto Claude</span>
             <button onclick="copySystemPrompt(this)" class="bg-teal hover:bg-tealHover text-white font-bold text-xs px-3 py-1 rounded-lg transition-all cursor-pointer">
               Copiar System Prompt
             </button>
@@ -461,7 +461,7 @@ Instrucciones:
             <input type="checkbox" class="mt-1 w-4 h-4 rounded text-teal focus:ring-teal cursor-pointer" />
             <div class="space-y-0.5">
               <div class="flex items-center gap-2">
-                <span class="bg-red-100 text-red-800 text-xs font-black uppercase px-2 py-0.5 rounded">Prioridad Máxima</span>
+                <span class="bg-red-100 text-red-800 text-[10px] font-black uppercase px-2 py-0.5 rounded">Prioridad Máxima</span>
                 <strong class="text-deep text-sm font-bold group-hover:text-teal transition">Estudiar para tu entrevista de trabajo</strong>
               </div>
               <p class="text-xs text-gray-600 leading-relaxed">
@@ -508,7 +508,7 @@ Instrucciones:
             <input type="checkbox" class="mt-1 w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
             <div class="space-y-0.5">
               <div class="flex items-center gap-2">
-                <span class="bg-emerald-200 text-emerald-900 text-xs font-black uppercase px-2 py-0.5 rounded">Agendada</span>
+                <span class="bg-emerald-200 text-emerald-900 text-[10px] font-black uppercase px-2 py-0.5 rounded">Agendada</span>
                 <strong class="text-deep text-sm font-bold group-hover:text-emerald-700 transition">Siguiente Sesión de Mentoría</strong>
               </div>
               <p class="text-xs text-emerald-800 leading-relaxed">
@@ -568,10 +568,10 @@ Instrucciones:
     navigator.clipboard.writeText(text).then(() => {
       const originalText = btnElement.innerText;
       btnElement.innerText = "¡Copiado!";
-      btnElement.classList.add("bg-emerald-700");
+      btnElement.classList.add("bg-emerald-600");
       setTimeout(() => {
         btnElement.innerText = originalText;
-        btnElement.classList.remove("bg-emerald-700");
+        btnElement.classList.remove("bg-emerald-600");
       }, 2000);
     }).catch(err => {
       console.error("Error al copiar texto: ", err);

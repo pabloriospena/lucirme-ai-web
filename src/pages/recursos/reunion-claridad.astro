@@ -451,11 +451,11 @@ Ordena primero los elementos que pueden bloquear una entrega, una decisión o el
       const prevHTML = btn.innerHTML;
       btn.innerHTML = '<span>✓ Copiado</span>';
       btn.classList.remove('bg-teal', 'hover:bg-tealHover');
-      btn.classList.add('bg-emerald-700');
+      btn.classList.add('bg-emerald-600');
       
       setTimeout(() => { 
         btn.innerHTML = prevHTML; 
-        btn.classList.remove('bg-emerald-700');
+        btn.classList.remove('bg-emerald-600');
         btn.classList.add('bg-teal', 'hover:bg-tealHover');
       }, 2000);
     });
