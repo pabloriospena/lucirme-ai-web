@@ -1,15 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import MuroCorreo from '../../components/v2/MuroCorreo.astro';
 import { LINKS } from '../../lib/constants.js';
 import ActionHub from '../../components/ActionHub.astro';
 
 
-const auth = (Astro.locals as any).auth;
-const userId = typeof auth === 'function' ? auth().userId : auth?.userId;
-
-if (!userId) {
- return Astro.redirect(`/sign-in?redirect_url=${encodeURIComponent('/recursos/backlog-detox')}`);
-}
 
 ---
 
@@ -37,7 +32,8 @@ if (!userId) {
     </div>
     <button id="close-cafe-banner" class="absolute top-2 right-2 text-white/80 hover:text-white text-xl">×</button>
   </div>
-  <main class="py-10 px-6 max-w-7xl mx-auto">
+  <MuroCorreo recurso="Roadmap Builder" titulo="Abre el Roadmap Builder">
+<main class="py-10 px-6 max-w-7xl mx-auto">
     <div class="mb-8">
       <h1 class="text-3xl font-bold text-deep">🗺️ Roadmap Builder</h1>
       <p class="text-sm text-gray-500">Vista de ejecución técnica. Columnas fijas, control total.</p>
@@ -61,6 +57,7 @@ if (!userId) {
 
     <ActionHub />
   </main>
+</MuroCorreo>
 
   <link href="https://unpkg.com/vis-timeline@7.7.3/styles/vis-timeline-graph2d.min.css" rel="stylesheet" />
   <script is:inline src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
