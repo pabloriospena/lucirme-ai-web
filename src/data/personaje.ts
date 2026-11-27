@@ -4,6 +4,6 @@
 // Diseño entrega los PNG recortados (tarea en Notion). Cuando estén en public/personaje/, se escribe aquí su ruta.
 // Mientras una pose no tenga ruta, el hero se ve completo sin imagen.
 export const POSES: { saludando?: string; presentando?: string } = {
-  saludando: undefined, // por ejemplo "/personaje/saludando.png"
+  saludando: "/personaje/saludando.png",
   presentando: undefined, // por ejemplo "/personaje/presentando.png"
 };
