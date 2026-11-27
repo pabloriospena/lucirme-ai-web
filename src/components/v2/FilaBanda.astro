@@ -1,0 +1,49 @@
+---
+// Fila de banda para Inicio y /empezar. Alto mínimo de 60 px y sin botón de color.
+// Con href es un enlace. Sin href es una fila informativa. Con proximamente lleva borde punteado y un chip neutro.
+import { ICONOS } from "../../data/iconos-v2.ts";
+interface Props {
+  titulo: string;
+  texto: string;
+  icono: keyof typeof ICONOS;
+  href?: string;
+  externo?: boolean;
+  proximamente?: boolean;
+  evento?: string;
+}
+const { titulo, texto, icono, href, externo = false, proximamente = false, evento } = Astro.props;
+const caja = proximamente
+  ? "border-[#CAD5E2] bg-v2-chip text-v2-cuerpo"
+  : "border-v2-marca-borde bg-v2-marca-tinte text-v2-accion";
+const fila = proximamente
+  ? "border-dashed border-v2-control bg-v2-superficie"
+  : "border-v2-borde bg-v2-fondo";
+const Tag = href ? "a" : "div";
+---
+
+<Tag
+  href={href}
+  target={href && externo ? "_blank" : undefined}
+  rel={href && externo ? "noopener noreferrer" : undefined}
+  class:list={[
+    "box-border flex min-h-[60px] items-center gap-4 rounded-[20px] border-[0.8px] px-5 py-3.5 transition-colors duration-150",
+    fila,
+    href && "hover:border-v2-control",
+  ]}
+  onclick={href && evento ? evento : undefined}
+>
+  <span class:list={["flex h-11 w-11 flex-none items-center justify-center rounded-[14px] border-[0.8px]", caja]}>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={ICONOS[icono]} />
+  </span>
+  <span class="min-w-0 flex-1">
+    <span class="block text-[17px] font-bold text-v2-texto">{titulo}</span>
+    <span class="block text-sm leading-5 text-v2-cuerpo">{texto}</span>
+  </span>
+  {
+    proximamente ? (
+      <span class="inline-flex items-center rounded-full border-[0.8px] border-[#CAD5E2] bg-v2-fondo px-3 py-1 text-xs font-bold text-v2-cuerpo">Próximamente</span>
+    ) : href ? (
+      <span aria-hidden="true" class="text-xl text-v2-suave">›</span>
+    ) : null
+  }
+</Tag>

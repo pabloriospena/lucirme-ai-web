@@ -1,0 +1,155 @@
+---
+// Clases en vivo (Web LuciRMe v2). Referencia: lienzo de diseño, pantalla Clases y componente 7.
+// Un solo trabajo y un solo botón: Avisarme de la próxima clase. Sin precio ni fecha de clase.
+// Los temas son los provisionales del PRD, a confirmar en la Sesión 3.
+import LayoutV2 from "../layouts/LayoutV2.astro";
+import PersonajeFondo from "../components/v2/PersonajeFondo.astro";
+import SigueEnRedes from "../components/v2/SigueEnRedes.astro";
+
+const temas = [
+  "Presentar y comunicar",
+  "Estudiar e investigar",
+  "Imágenes y contenido visual",
+  "Carrera y empleo",
+  "Producto y decisiones",
+];
+const puntos = ["Clases con Pablo, en vivo.", "La grabación queda disponible.", "Eliges el tema que quieres aprender."];
+const campo =
+  "min-h-[52px] w-full rounded-[14px] border-[0.8px] border-v2-control bg-v2-fondo px-4 text-base text-v2-texto aria-[invalid=true]:border-[#c70036]";
+---
+
+<LayoutV2
+  title="Clases en vivo con Pablo | LuciRMe AI"
+  description="Clases cortas con Pablo para aplicar IA a tu trabajo. Quedan grabadas. Deja tu correo y te avisamos de la próxima."
+>
+  <div class="mx-auto flex w-full max-w-[1200px] flex-col gap-6 px-4 pb-4 pt-2 sm:px-6">
+    <section
+      class="relative min-h-[300px] overflow-hidden rounded-[32px] border-[0.8px] border-v2-marca-borde"
+      style="background: linear-gradient(135deg, #CCFBF1 0%, #F0FDFA 55%, #FFFFFF 100%)"
+    >
+      <PersonajeFondo pose="presentando" />
+      <div class="relative flex max-w-[620px] flex-col gap-3 px-6 py-8 sm:px-12 sm:pb-8 sm:pt-9">
+        <span class="self-start rounded-full border-[0.8px] border-v2-marca-borde bg-v2-fondo px-3.5 py-1.5 font-mono text-xs font-semibold uppercase tracking-[0.6px] text-v2-accion">Clases en vivo</span>
+        <h1 class="text-[34px] font-extrabold leading-[1.14] tracking-[-0.9px] text-v2-texto sm:text-[44px] sm:tracking-[-1.1px]">Aprende en vivo con Pablo.</h1>
+        <p class="max-w-[520px] text-base leading-6 text-v2-cuerpo sm:text-lg sm:leading-7">
+          Clases cortas para aplicar IA a tu trabajo. Quedan grabadas, para que las veas cuando puedas.
+        </p>
+      </div>
+    </section>
+
+    <section class="flex flex-wrap items-start gap-6">
+      <div class="flex min-w-0 grow shrink basis-[440px] flex-col gap-4">
+        <h2 class="text-2xl font-bold tracking-[-0.5px] text-v2-texto sm:text-[28px]">Avísame de la próxima clase</h2>
+        <p class="text-base leading-6 text-v2-cuerpo">
+          Todavía no hay una clase abierta. Deja tu correo y el tema que más te sirve, y te escribimos cuando haya una.
+        </p>
+        <ul class="flex flex-col gap-2.5">
+          {
+            puntos.map((p) => (
+              <li class="flex items-start gap-2.5 text-base leading-6 text-v2-texto">
+                <span class="mt-0.5 flex-none text-v2-accion" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10" /></svg>
+                </span>
+                {p}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="min-w-0 grow shrink basis-[420px]">
+        <form
+          id="form-clases"
+          novalidate
+          aria-label="Lista de espera"
+          class="flex flex-col gap-4 rounded-3xl border-[0.8px] border-v2-borde bg-v2-fondo p-6"
+        >
+          <div class="flex flex-col gap-1.5">
+            <label for="clases-correo" class="text-sm font-semibold text-v2-texto">Correo</label>
+            <input id="clases-correo" name="email" type="email" autocomplete="email" placeholder="tu@correo.com" aria-describedby="clases-error" class={campo} />
+            <p id="clases-error" class="hidden text-sm text-[#c70036]">Escribe un correo válido.</p>
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="clases-tema" class="text-sm font-semibold text-v2-texto">Tema que te interesa</label>
+            <select id="clases-tema" name="tema" class={campo}>
+              <option value="">Elige un tema</option>
+              {temas.map((t) => <option value={t}>{t}</option>)}
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="min-h-[52px] cursor-pointer rounded-full bg-v2-accion px-7 text-base font-bold text-v2-accion-texto hover:bg-v2-accion-hover disabled:cursor-wait disabled:opacity-70"
+          >
+            Avisarme de la próxima clase
+          </button>
+          <p id="clases-fallo" class="hidden text-sm text-[#c70036]"></p>
+          <p class="text-xs leading-4 text-v2-cuerpo">
+            Usamos tu correo solo para avisarte de las clases. Puedes salir cuando quieras. Revisa la
+            <a href="/privacidad" class="font-semibold text-v2-accion underline underline-offset-2">política de privacidad</a>.
+          </p>
+        </form>
+
+        <div id="clases-listo" role="status" class="hidden items-start gap-3 rounded-2xl border-[0.8px] border-v2-marca-borde bg-v2-marca-tinte p-4">
+          <span class="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-v2-accion text-v2-accion-texto" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10" /></svg>
+          </span>
+          <span>
+            <b class="block text-base text-v2-texto">¡Listo, quedaste en la lista!</b>
+            <span class="text-sm leading-5 text-v2-cuerpo">Te avisamos cuando abramos la próxima clase.</span>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <SigueEnRedes posicion="clases" />
+  </div>
+
+  <script is:inline>
+    (function () {
+      var form = document.getElementById("form-clases");
+      var correo = document.getElementById("clases-correo");
+      var tema = document.getElementById("clases-tema");
+      var errorCorreo = document.getElementById("clases-error");
+      var fallo = document.getElementById("clases-fallo");
+      var listo = document.getElementById("clases-listo");
+      var boton = form.querySelector("button[type=submit]");
+      function marcarError(on) {
+        correo.setAttribute("aria-invalid", on ? "true" : "false");
+        errorCorreo.classList.toggle("hidden", !on);
+      }
+      correo.addEventListener("input", function () { marcarError(false); });
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        fallo.classList.add("hidden");
+        var valor = correo.value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor)) { marcarError(true); correo.focus(); return; }
+        marcarError(false);
+        boton.disabled = true;
+        fetch("/api/lista-espera-clases", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: valor, tema: tema.value }),
+        })
+          .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
+          .then(function (d) {
+            if (d.ok) {
+              if (window.posthog) window.posthog.capture("avisarme_clase", { tema: tema.value || "sin_tema" });
+              form.classList.add("hidden");
+              listo.classList.remove("hidden");
+              listo.classList.add("flex");
+            } else if (d.campo === "email") {
+              marcarError(true); correo.focus();
+            } else {
+              fallo.textContent = d.error || "No pudimos registrar tu correo. Intenta de nuevo.";
+              fallo.classList.remove("hidden");
+            }
+          })
+          .catch(function () {
+            fallo.textContent = "No pudimos registrar tu correo. Intenta de nuevo.";
+            fallo.classList.remove("hidden");
+          })
+          .then(function () { boton.disabled = false; });
+      });
+    })();
+  </script>
+</LayoutV2>

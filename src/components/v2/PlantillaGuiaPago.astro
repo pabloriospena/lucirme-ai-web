@@ -1,0 +1,72 @@
+---
+// Plantilla de guía de pago (lienzo, pantalla Guía). Cada guía de pago pasa sus datos y no repite el diseño.
+// Una sola acción en la pantalla, Comprar la guía. Sin segundo botón de WhatsApp ni de ruta.
+// El precio se lee de src/data/precios.ts con la clave precioClave. Cómo se lee ese precio es una decisión abierta del PRD.
+import AvisoCompra from "./AvisoCompra.astro";
+import ContenidoRelacionado from "./ContenidoRelacionado.astro";
+import { textoPrecio } from "../../data/precios.ts";
+
+interface Props {
+  slug: string;
+  titulo: string;
+  descripcion: string;
+  tema?: string;
+  precioClave?: string;
+  hrefPago: string;
+  incluye: string[];
+  vistaPrevia: string;
+  relacionados: { titulo: string; tipo: string; url: string }[];
+}
+const { slug, titulo, descripcion, tema, precioClave, hrefPago, incluye, vistaPrevia, relacionados } = Astro.props;
+const precio = textoPrecio(precioClave);
+const tarjeta = "flex flex-col gap-4 rounded-3xl border-[0.8px] border-v2-borde bg-v2-fondo p-6";
+---
+
+<div class="mx-auto flex w-full max-w-[1200px] flex-col gap-6 px-4 pb-4 pt-2 sm:px-6">
+  <section class="flex flex-wrap items-start gap-6 pt-2">
+    <div class="flex min-w-0 grow shrink basis-[560px] flex-col gap-3">
+      <div class="flex flex-wrap gap-2">
+        <span class="inline-flex items-center rounded-full border-[0.8px] border-v2-marca-borde bg-v2-marca-tinte px-3 py-1 text-xs font-bold text-v2-accion">Guía</span>
+        {tema && <span class="inline-flex items-center rounded-full border-[0.8px] border-[#cad5e2] bg-v2-fondo px-3 py-1 text-xs font-bold text-v2-cuerpo">{tema}</span>}
+      </div>
+      <h1 class="text-[32px] font-extrabold leading-[1.14] tracking-[-0.8px] text-v2-texto sm:text-[40px] sm:tracking-[-1px]">{titulo}</h1>
+      <p class="text-base leading-6 text-v2-cuerpo sm:text-lg sm:leading-7">{descripcion}</p>
+    </div>
+    <div class="min-w-0 grow shrink basis-[340px] lg:max-w-[420px]">
+      <AvisoCompra precio={precio} hrefPago={hrefPago} recurso={slug} />
+    </div>
+  </section>
+
+  <section class="grid gap-6 md:grid-cols-2">
+    <div class={tarjeta}>
+      <h2 class="text-[22px] font-bold text-v2-texto">Qué incluye</h2>
+      <ul class="flex flex-col gap-2.5">
+        {
+          incluye.map((i) => (
+            <li class="flex items-start gap-2.5 text-base leading-6 text-v2-texto">
+              <span class="flex-none text-v2-accion" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10" /></svg>
+              </span>
+              {i}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class={tarjeta}>
+      <div class="flex items-center justify-between gap-2">
+        <h2 class="text-[22px] font-bold text-v2-texto">Vista previa gratis</h2>
+        <span class="inline-flex items-center rounded-full border-[0.8px] border-v2-marca-borde bg-v2-marca-tinte px-3 py-1 text-xs font-bold text-v2-accion">Gratis</span>
+      </div>
+      <p class="text-base leading-6 text-v2-cuerpo">{vistaPrevia}</p>
+      <div class="flex items-center gap-3 rounded-2xl border-[0.8px] border-dashed border-v2-control bg-v2-superficie p-4 text-v2-cuerpo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="flex-none"><rect x="5" y="11" width="14" height="9" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg>
+        <span class="text-sm">El resto se desbloquea al comprar la guía.</span>
+      </div>
+    </div>
+  </section>
+
+  <div class={tarjeta}>
+    <ContenidoRelacionado items={relacionados} />
+  </div>
+</div>

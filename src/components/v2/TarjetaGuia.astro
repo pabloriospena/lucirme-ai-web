@@ -1,0 +1,44 @@
+---
+// Tarjeta de recurso del índice (lienzo Recursos). Toda la tarjeta es un enlace. Arriba el formato y el acceso,
+// después título y descripción, y abajo Abrir en texto teal, sin botón de color.
+// El precio llega ya leído de src/data/precios.ts, no se escribe aquí.
+import { textoPrecio } from "../../data/precios.ts";
+
+interface Props {
+  recurso: {
+    slug: string;
+    url: string;
+    titulo: string;
+    descripcion: string;
+    formato: string;
+    acceso?: "gratis" | "gratis-correo" | "de-pago" | "o-con-invitaciones";
+    precio?: string;
+  };
+  banda: string;
+}
+const { recurso: r, banda } = Astro.props;
+const pago = r.acceso === "de-pago" || r.acceso === "o-con-invitaciones";
+const textoAcceso = pago ? (textoPrecio(r.precio) ?? "De pago") : "Gratis";
+---
+
+<a
+  href={r.url}
+  data-acceso={pago ? "pago" : "gratis"}
+  class="flex h-full flex-col gap-2 rounded-[20px] border-[0.8px] border-v2-borde bg-v2-fondo p-5 transition-colors duration-150 hover:border-v2-control"
+  onclick={`if (window.posthog) { window.posthog.capture('recursos_card_click', { recurso: '${r.slug}', banda: '${banda}' }); }`}
+>
+  <span class="flex items-center justify-between gap-2">
+    <span class="text-xs font-bold uppercase tracking-[0.5px] text-v2-suave">{r.formato}</span>
+    <span
+      class:list={[
+        "inline-flex items-center rounded-full border-[0.8px] px-3 py-1 text-xs font-bold",
+        pago
+          ? "border-v2-pago-borde bg-v2-pago-fondo text-v2-pago-texto"
+          : "border-v2-marca-borde bg-v2-marca-tinte text-v2-accion",
+      ]}>{textoAcceso}</span
+    >
+  </span>
+  <span class="text-lg font-bold leading-6 text-v2-texto">{r.titulo}</span>
+  <span class="text-sm leading-5 text-v2-cuerpo">{r.descripcion}</span>
+  <span class="mt-auto pt-1 text-sm font-bold text-v2-accion">Abrir ›</span>
+</a>

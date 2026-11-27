@@ -1,0 +1,19 @@
+---
+// Personaje de fondo del hero. Decorativo: alt vacío y aria-hidden, a la derecha, 380 px de alto, recortado por el
+// borde inferior del hero (el hero lleva overflow-hidden), sin sumar alto y oculto bajo 900 px.
+import { POSES } from "../../data/personaje.ts";
+interface Props { pose: "saludando" | "presentando" }
+const { pose } = Astro.props;
+const src = POSES[pose];
+---
+
+{
+  src && (
+    <img
+      src={src}
+      alt=""
+      aria-hidden="true"
+      class="pointer-events-none absolute right-14 top-7 hidden h-[380px] w-auto min-[900px]:block"
+    />
+  )
+}

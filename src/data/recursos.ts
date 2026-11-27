@@ -63,19 +63,19 @@ export const BANDAS: { id: BandaId; nombre: string; descripcion: string }[] = [
     descripcion: "Guías para leer y aplicar, y herramientas para usar ya.",
   },
   {
-    id: "prompts",
-    nombre: "Prompts",
-    descripcion: "Prompts listos para copiar y probar con tu propio caso.",
-  },
-  {
     id: "clases",
     nombre: "Clases en vivo",
-    descripcion: "Clases en vivo que quedan grabadas.",
+    descripcion: "Clases con Pablo que quedan grabadas.",
   },
   {
     id: "biblioteca",
     nombre: "Biblioteca",
     descripcion: "Artículos que responden una pregunta concreta sobre IA aplicada.",
+  },
+  {
+    id: "prompts",
+    nombre: "Prompts",
+    descripcion: "Prompts listos para copiar, filtrados por tema.",
   },
 ];
 

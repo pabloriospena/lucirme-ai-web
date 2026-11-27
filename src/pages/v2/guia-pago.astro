@@ -1,0 +1,24 @@
+---
+// Vista de ejemplo de la plantilla de guía de pago. No es una guía real ni se indexa.
+// Los textos entre corchetes los escriben Contenido y Productos y funnel. El precio de muestra sale de src/data/precios.ts.
+import LayoutV2 from "../../layouts/LayoutV2.astro";
+import PlantillaGuiaPago from "../../components/v2/PlantillaGuiaPago.astro";
+import { LINKS } from "../../lib/constants.js";
+---
+
+<LayoutV2 title="Vista de ejemplo de guía de pago | LuciRMe AI" noindex>
+  <PlantillaGuiaPago
+    slug="ejemplo-guia-de-pago"
+    titulo="[NOMBRE DE LA GUÍA]"
+    descripcion="[Descripción de dos líneas del resultado que consigues al aplicar la guía.]"
+    tema="Estudiar e investigar"
+    precioClave="ruta-product-paso-0"
+    hrefPago={LINKS.atajos_ia}
+    incluye={["[Parte uno de la guía.]", "[Parte dos de la guía.]", "[Parte tres de la guía.]", "[Plantillas o prompts incluidos.]"]}
+    vistaPrevia="[Un fragmento de la guía para que veas cómo se lee.]"
+    relacionados={[
+      { titulo: "De notas a reportes con NotebookLM", tipo: "Guía", url: "/recursos/guia-notebooklm" },
+      { titulo: "Prompteador", tipo: "Herramienta", url: "/recursos/prompteador" },
+    ]}
+  />
+</LayoutV2>
