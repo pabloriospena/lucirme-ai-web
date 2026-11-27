@@ -6,12 +6,15 @@
 export interface Precio {
   valor: number;
   moneda: "USD";
-  fuente: "Reglas sección 3" | "Hotmart";
+  fuente: "Reglas sección 3" | "Hotmart" | "Decisión de Pablo, 27 nov 2026";
 }
 
 export const PRECIOS: Record<string, Precio> = {
   // Paso 0, plantilla de conexión completa de la Ruta Product (Reglas sección 3).
   "ruta-product-paso-0": { valor: 17, moneda: "USD", fuente: "Reglas sección 3" },
+  // Atajos de IA y Atajos visuales, dichos por Pablo el 27 nov 2026. Falta confirmarlos contra Hotmart.
+  "atajos-ia": { valor: 5, moneda: "USD", fuente: "Decisión de Pablo, 27 nov 2026" },
+  "atajos-visuales": { valor: 5, moneda: "USD", fuente: "Decisión de Pablo, 27 nov 2026" },
 };
 
 export const textoPrecio = (clave?: string) => {

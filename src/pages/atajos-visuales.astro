@@ -1,5 +1,34 @@
 ---
-import Page from "./recursos/atajos-visuales.astro";
+// Atajos visuales, guía de pago con la plantilla de guía de pago (Web v2).
+// El pago va a Hotmart, enlace en src/lib/constants.js. El precio sale de src/data/precios.ts.
+// La página anterior quedó archivada en _atajos-visuales-anterior.astro. /recursos/atajos-visuales sigue mostrando esta misma página.
+import LayoutV2 from "../layouts/LayoutV2.astro";
+import PlantillaGuiaPago from "../components/v2/PlantillaGuiaPago.astro";
+import { LINKS } from "../lib/constants.js";
 ---
 
-<Page />
+<LayoutV2
+  title="Atajos visuales, 75 comandos para imágenes y video con IA | LuciRMe AI"
+  description="Una biblioteca de 75 comandos para crear imágenes y video con IA. Eliges lo que quieres crear, copias, adaptas y empiezas."
+>
+  <PlantillaGuiaPago
+    slug="atajos-visuales"
+    titulo="Atajos visuales, 75 comandos para imágenes y video con IA"
+    descripcion="El problema no es que no puedas crear algo. Es que no sabes qué pedirle a la herramienta. Aquí tienes el comando que ya funciona."
+    tema="Imágenes"
+    precioClave="atajos-visuales"
+    hrefPago={LINKS.atajos_visuales}
+    incluye={[
+      "50 comandos para crear y retocar imágenes.",
+      "25 comandos para animar y generar video.",
+      "Organizados por casos reales, como personas, productos, fondos y video.",
+      "Un PDF digital para copiar y usar desde cualquier dispositivo.",
+    ]}
+    vistaPrevia="Analiza este retrato y genera cuatro estilos de corte de cabello realistas. Mantén rostro, identidad, proporciones y tono de piel intactos. Cambia únicamente peinado y volumen."
+    relacionados={[
+      { titulo: "Crear imágenes con IA", tipo: "Guía", url: "/recursos/crear-imagenes-ia" },
+      { titulo: "Atajos de IA", tipo: "Guía", url: "/atajos-ia" },
+      { titulo: "Prompts para copiar", tipo: "Prompts", url: "/recursos/prompts" },
+    ]}
+  />
+</LayoutV2>

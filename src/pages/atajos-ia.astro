@@ -1,6 +1,6 @@
 ---
 // Atajos de IA, guía de pago con la plantilla de guía de pago (Web v2).
-// El pago va a Hotmart, enlace en src/lib/constants.js. Sin cifra de precio hasta que exista en src/data/precios.ts.
+// El pago va a Hotmart, enlace en src/lib/constants.js. El precio sale de src/data/precios.ts.
 // La página anterior quedó archivada en _atajos-ia-anterior.astro. /recursos/atajos-ia sigue mostrando esta misma página.
 import LayoutV2 from "../layouts/LayoutV2.astro";
 import PlantillaGuiaPago from "../components/v2/PlantillaGuiaPago.astro";
@@ -16,6 +16,7 @@ import { LINKS } from "../lib/constants.js";
     titulo="Atajos de IA, 18 prompts para trabajar y crear mejor"
     descripcion="Deja de empezar cada conversación con ChatGPT desde cero. Dieciocho prompts listos para copiar, pegar y adaptar a tu trabajo."
     tema="Prompts"
+    precioClave="atajos-ia"
     hrefPago={LINKS.atajos_ia}
     incluye={[
       "Prompts para pensar mejor, ordenar ideas y convertir un problema confuso en pasos concretos.",
