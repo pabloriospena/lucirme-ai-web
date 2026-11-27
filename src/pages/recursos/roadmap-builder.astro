@@ -1,82 +1,301 @@
 ---
 import LayoutV2 from '../../layouts/LayoutV2.astro';
-import MuroCorreo from '../../components/v2/MuroCorreo.astro';
-import { LINKS } from '../../lib/constants.js';
-import ActionHub from '../../components/ActionHub.astro';
-
-
-
 ---
 
 <LayoutV2 title="Roadmap Builder | LuciRMe AI">
-  <MuroCorreo recurso="Roadmap Builder" titulo="Abre el Roadmap Builder">
-<div class="py-10 px-6 max-w-7xl mx-auto">
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold text-deep">🗺️ Roadmap Builder</h1>
-      <p class="text-sm text-gray-500">Vista de ejecución técnica. Columnas fijas, control total.</p>
-    </div>
+  <div id="contenido-rb" class="mx-auto w-full max-w-[1100px] px-5 pb-16 pt-6 sm:px-8">
+    <header class="mb-6">
+      <h1 class="m-0 text-[28px] font-extrabold leading-tight tracking-[-0.7px] text-v2-texto sm:text-4xl sm:tracking-[-0.9px]">Roadmap Builder</h1>
+      <p class="mt-2 max-w-2xl text-base leading-6 text-v2-cuerpo">Sube un CSV con columnas fijas y recibe una línea de tiempo por mes. Se crea en tu navegador, sin IA y sin correo.</p>
+    </header>
 
-    <!-- CARGA -->
-    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm mb-6">
-      <input type="file" id="csv-file" accept=".csv" class="w-full text-sm file:bg-teal file:text-white file:px-4 file:py-2 file:rounded-lg file:border-0 cursor-pointer" />
-    </div>
+    <!-- ENTRADA -->
+    <section id="rb-entrada" aria-labelledby="rb-entrada-t" class="max-w-[620px] rounded-3xl border border-v2-borde bg-v2-fondo p-5 sm:p-6">
+      <h2 id="rb-entrada-t" class="m-0 text-lg font-bold text-v2-texto">1. Sube tu CSV</h2>
+      <p class="mb-3 mt-1 text-sm leading-5 text-v2-cuerpo">El archivo necesita estas columnas, en este orden.</p>
+      <ul class="m-0 mb-4 flex list-none flex-wrap gap-2 p-0" aria-label="Columnas necesarias">
+        <li class="rb-col">Title</li><li class="rb-col">State</li><li class="rb-col">Start Date</li><li class="rb-col">Due Date</li><li class="rb-col">ID</li>
+      </ul>
 
-    <!-- CONTROLES DE TIEMPO -->
-    <div class="flex gap-2 mb-6" id="zoom-controls">
-      <button onclick="zoom('week')" class="px-4 py-2 bg-gray-100 rounded-lg text-xs font-bold hover:bg-teal hover:text-white transition">Semana</button>
-      <button onclick="zoom('month')" class="px-4 py-2 bg-gray-100 rounded-lg text-xs font-bold hover:bg-teal hover:text-white transition">Mes</button>
-      <button onclick="zoom('year')" class="px-4 py-2 bg-gray-100 rounded-lg text-xs font-bold hover:bg-teal hover:text-white transition">Año</button>
-    </div>
+      <div id="rb-error" role="alert" class="rb-error hidden"></div>
+      <ul id="rb-error-lista" class="mb-4 mt-3 hidden list-disc pl-5 text-sm leading-[22px] text-v2-texto"></ul>
 
-    <!-- ROADMAP VISUAL -->
-    <div id="timeline-container" class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm"></div>
+      <label id="rb-zona" for="csv-file" class="rb-zona">
+        <input type="file" id="csv-file" accept=".csv,text/csv" class="sr-only">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--color-v2-accion)"><path d="M12 16V4M7 9l5-5 5 5"></path><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"></path></svg>
+        <b id="rb-zona-t" class="text-base text-v2-texto">Arrastra tu CSV aquí, o elígelo</b>
+        <span id="rb-zona-s" class="text-sm leading-5 text-v2-cuerpo">Solo archivos .csv.</span>
+      </label>
 
+      <div class="mt-4 flex flex-wrap items-center gap-3">
+        <button type="button" id="rb-crear" class="rb-main">Crear el roadmap</button>
+        <a id="rb-plantilla" href="#" download="plantilla-roadmap.csv" class="rb-link">Descargar la plantilla CSV</a>
+      </div>
+    </section>
 
-    <ActionHub />
+    <!-- RESULTADO -->
+    <section id="rb-resultado" aria-labelledby="rb-res-t" class="mt-6 hidden" tabindex="-1">
+      <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <h2 id="rb-res-t" class="m-0 text-lg font-bold text-v2-texto">2. Tu roadmap</h2>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" id="rb-img" class="rb-main rb-main-sm">Descargar como imagen</button>
+          <button type="button" id="rb-reset" class="rb-sec">Empezar de nuevo</button>
+        </div>
+      </div>
+      <div id="rb-grid-wrap" class="rb-grid-wrap"><div id="rb-grid" class="rb-grid"></div></div>
+      <div id="rb-lista" class="rb-lista"></div>
+      <p id="rb-recuento" role="status" class="mt-3 text-sm text-v2-cuerpo"></p>
+    </section>
   </div>
-</MuroCorreo>
-
-  <link href="https://unpkg.com/vis-timeline@7.7.3/styles/vis-timeline-graph2d.min.css" rel="stylesheet" />
-  <script is:inline src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
-  <script is:inline src="https://unpkg.com/vis-timeline@7.7.3/standalone/umd/vis-timeline-graph2d.min.js"></script>
 
   <script is:inline>
-    let timeline = null;
+    (function () {
+      var COLS = ['Title', 'State', 'Start Date', 'Due Date', 'ID'];
+      var MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+      var MAX_MESES = 24;
+      var $ = function (id) { return document.getElementById(id); };
+      var file = null, filas = 0, model = null;
 
-    document.getElementById('csv-file').addEventListener('change', function(e) {
-      Papa.parse(e.target.files[0], {
-        header: true,
-        complete: function(results) {
-          const items = results.data.filter(r => r.Title).map((r, i) => ({
-            id: i,
-            content: `<div class="font-bold text-xs">${r.Title}</div><div class="text-[10px] opacity-70">${r.State}</div>`,
-            start: r['Start Date'] || '2026-05-28',
-            end: r['Due Date'] || '2026-06-28',
-            group: r.ID // Esto agrupa por ID para tener filas separadas
-          }));
+      function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); }
 
-          const container = document.getElementById('timeline-container');
-          container.innerHTML = '';
-          
-          timeline = new window.vis.Timeline(container, new window.vis.DataSet(items), {
-            height: '500px',
-            orientation: 'top',
-            zoomable: false, // Desactivamos scroll-zoom
-            moveable: true
-          });
+      // Plantilla descargable
+      $('rb-plantilla').href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(
+        'Title,State,Start Date,Due Date,ID\nHito de ejemplo,En curso,2026-01-05,2026-02-20,Equipo A\nOtro hito,Pendiente,2026-02-10,2026-04-15,Equipo B\n');
+
+      // CSV mínimo con comillas
+      function parseCSV(text) {
+        text = text.replace(/^﻿/, '');
+        var first = text.split(/\r?\n/)[0] || '';
+        var d = (first.split(';').length > first.split(',').length) ? ';' : ',';
+        var rows = [], row = [], cur = '', q = false;
+        for (var i = 0; i < text.length; i++) {
+          var c = text[i];
+          if (q) {
+            if (c === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += c;
+          } else if (c === '"') q = true;
+          else if (c === d) { row.push(cur); cur = ''; }
+          else if (c === '\n' || c === '\r') { if (c === '\r' && text[i + 1] === '\n') i++; row.push(cur); rows.push(row); row = []; cur = ''; }
+          else cur += c;
         }
-      });
-    });
+        if (cur !== '' || row.length) { row.push(cur); rows.push(row); }
+        return rows;
+      }
+      function parseDate(s) {
+        s = String(s || '').trim();
+        var m = /^(\d{4})-(\d{1,2})-(\d{1,2})/.exec(s);
+        var y, mo, da;
+        if (m) { y = +m[1]; mo = +m[2]; da = +m[3]; }
+        else if ((m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(s))) { da = +m[1]; mo = +m[2]; y = +m[3]; }
+        else return null;
+        var dt = new Date(y, mo - 1, da);
+        if (dt.getFullYear() !== y || dt.getMonth() !== mo - 1 || dt.getDate() !== da) return null;
+        return dt;
+      }
+      function fmt(d) { return d.getDate() + ' ' + MESES[d.getMonth()] + ' ' + d.getFullYear(); }
 
-    window.zoom = function(scale) {
-      if (!timeline) return;
-      const now = new Date();
-      const ranges = {
-        week: { start: new Date(now.getTime() - 7*864e5), end: new Date(now.getTime() + 7*864e5) },
-        month: { start: new Date(now.getTime() - 30*864e5), end: new Date(now.getTime() + 30*864e5) },
-        year: { start: new Date(now.getTime() - 180*864e5), end: new Date(now.getTime() + 180*864e5) }
-      };
-      timeline.setWindow(ranges[scale].start, ranges[scale].end);
-    };
+      function showError(msg, lista) {
+        var e = $('rb-error'); e.textContent = msg; e.classList.remove('hidden');
+        var l = $('rb-error-lista');
+        l.innerHTML = (lista || []).slice(0, 8).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('');
+        l.classList.toggle('hidden', !(lista && lista.length));
+        $('rb-crear').textContent = 'Elegir otro archivo';
+      }
+      function hideError() {
+        $('rb-error').classList.add('hidden'); $('rb-error-lista').classList.add('hidden');
+        $('rb-crear').textContent = 'Crear el roadmap';
+      }
+      function setZona(loaded) {
+        var z = $('rb-zona');
+        z.classList.toggle('rb-zona-ok', !!loaded);
+        $('rb-zona-t').textContent = loaded ? file.name : 'Arrastra tu CSV aquí, o elígelo';
+        $('rb-zona-s').textContent = loaded ? filas + (filas === 1 ? ' fila leída.' : ' filas leídas.') : 'Solo archivos .csv.';
+      }
+
+      function setFile(f) {
+        hideError();
+        if (!f) return;
+        if (!/\.csv$/i.test(f.name)) { file = null; setZona(false); showError('El archivo debe ser un .csv. Elige otro archivo.'); return; }
+        file = f;
+        var r = new FileReader();
+        r.onload = function () {
+          var rows = parseCSV(String(r.result)).filter(function (x) { return x.join('').trim(); });
+          filas = Math.max(0, rows.length - 1);
+          setZona(true);
+        };
+        r.onerror = function () { file = null; setZona(false); showError('No pudimos leer tu archivo. Intenta con otro.'); };
+        r.readAsText(f);
+      }
+
+      function build() {
+        if ($('rb-crear').textContent === 'Elegir otro archivo') { $('csv-file').click(); return; }
+        hideError();
+        if (!file) { $('csv-file').click(); return; }
+        var btn = $('rb-crear');
+        btn.disabled = true; btn.setAttribute('aria-busy', 'true'); btn.textContent = 'Creando';
+        var r = new FileReader();
+        r.onload = function () {
+          setTimeout(function () {
+            btn.disabled = false; btn.removeAttribute('aria-busy'); btn.textContent = 'Crear el roadmap';
+            var rows = parseCSV(String(r.result)).filter(function (x) { return x.join('').trim(); });
+            if (!rows.length) { showError('El archivo está vacío.'); return; }
+            var head = rows[0].map(function (h) { return h.trim(); });
+            var idx = {}, faltan = [];
+            COLS.forEach(function (c) {
+              var i = head.findIndex(function (h) { return h.toLowerCase() === c.toLowerCase(); });
+              if (i < 0) faltan.push(c); else idx[c] = i;
+            });
+            if (faltan.length) {
+              showError('No pudimos leer tu archivo. Faltan estas columnas: ' + faltan.join(', ') + '.'); return;
+            }
+            var problemas = [], hitos = [];
+            rows.slice(1).forEach(function (row, n) {
+              var fila = n + 2;
+              var t = (row[idx['Title']] || '').trim(), id = (row[idx['ID']] || '').trim();
+              var s = parseDate(row[idx['Start Date']]), e = parseDate(row[idx['Due Date']]);
+              var p = false;
+              if (!t) { problemas.push('Fila ' + fila + ', Title está vacía.'); p = true; }
+              if (!id) { problemas.push('Fila ' + fila + ', ID está vacía.'); p = true; }
+              if (!s) { problemas.push('Fila ' + fila + ', Start Date no tiene un formato válido. Usa AAAA-MM-DD.'); p = true; }
+              if (!e) { problemas.push('Fila ' + fila + ', Due Date no tiene un formato válido. Usa AAAA-MM-DD.'); p = true; }
+              if (s && e && e < s) { problemas.push('Fila ' + fila + ', Due Date es anterior a Start Date.'); p = true; }
+              if (!p) hitos.push({ t: t, state: (row[idx['State']] || '').trim(), s: s, e: e, id: id });
+            });
+            if (problemas.length) { showError('No pudimos crear el roadmap. Revisa estas filas.', problemas); return; }
+            if (!hitos.length) { showError('El archivo no tiene filas con datos.'); return; }
+            var min = hitos.reduce(function (a, h) { return h.s < a ? h.s : a; }, hitos[0].s);
+            var max = hitos.reduce(function (a, h) { return h.e > a ? h.e : a; }, hitos[0].e);
+            var m0 = min.getFullYear() * 12 + min.getMonth(), m1 = max.getFullYear() * 12 + max.getMonth();
+            if (m1 - m0 + 1 > MAX_MESES) { showError('El roadmap cubre más de ' + MAX_MESES + ' meses. Divide el archivo en dos.'); return; }
+            model = { hitos: hitos, m0: m0, n: m1 - m0 + 1 };
+            renderResult();
+          }, 250);
+        };
+        r.readAsText(file);
+      }
+
+      function mesLabel(k) { return MESES[k % 12] + ' ' + Math.floor(k / 12); }
+      function isDone(st) { return /done|hecho|complet|cerrad|termin/i.test(st); }
+
+      function renderResult() {
+        var h = model.hitos, n = model.n, m0 = model.m0;
+        var lanes = [], map = {};
+        h.forEach(function (x) { if (!(x.id in map)) { map[x.id] = { id: x.id, items: [] }; lanes.push(map[x.id]); } map[x.id].items.push(x); });
+        var html = '<span></span>';
+        for (var i = 0; i < n; i++) html += '<span class="rb-mes">' + esc(mesLabel(m0 + i)) + '</span>';
+        lanes.forEach(function (ln) {
+          var filasEnd = [], placed = [];
+          ln.items.sort(function (a, b) { return a.s - b.s; }).forEach(function (x) {
+            var a = x.s.getFullYear() * 12 + x.s.getMonth() - m0, b = x.e.getFullYear() * 12 + x.e.getMonth() - m0;
+            var r = 0; while (filasEnd[r] !== undefined && filasEnd[r] >= a) r++;
+            filasEnd[r] = b; placed.push({ x: x, a: a, b: b, r: r });
+          });
+          var rowStart = 0;
+          html += '<span class="rb-lane" style="grid-row-end:span ' + filasEnd.length + '">' + esc(ln.id) + '</span>';
+          placed.forEach(function (p) {
+            html += '<span tabindex="0" class="rb-bar ' + (isDone(p.x.state) ? 'rb-bar-t' : 'rb-bar-s') + '" style="grid-column:' + (p.a + 2) + ' / ' + (p.b + 3) + ';grid-row:span 1;" title="' + esc(p.x.t + ', ' + fmt(p.x.s) + ' a ' + fmt(p.x.e)) + '" aria-label="' + esc(p.x.t + ', ' + ln.id + ', ' + fmt(p.x.s) + ' a ' + fmt(p.x.e)) + '">' + esc(p.x.t) + '</span>';
+          });
+        });
+        var g = $('rb-grid');
+        g.style.gridTemplateColumns = '140px repeat(' + n + ', minmax(80px, 1fr))';
+        g.innerHTML = html;
+        // lista móvil por mes
+        var porMes = {};
+        h.forEach(function (x) { var k = x.s.getFullYear() * 12 + x.s.getMonth(); (porMes[k] = porMes[k] || []).push(x); });
+        $('rb-lista').innerHTML = Object.keys(porMes).sort(function (a, b) { return a - b; }).map(function (k) {
+          return '<div class="rb-mcard"><b class="rb-mtitle">' + esc(mesLabel(+k)) + '</b>' + porMes[k].map(function (x) {
+            return '<div class="rb-mitem"><span class="rb-mbar ' + (isDone(x.state) ? 'rb-mbar-t' : '') + '"></span><span class="rb-mtxt"><b>' + esc(x.t) + '</b><span>' + esc(x.id) + ', ' + fmt(x.s) + ' a ' + fmt(x.e) + '</span></span></div>';
+          }).join('') + '</div>';
+        }).join('');
+        $('rb-recuento').textContent = h.length + (h.length === 1 ? ' hito en ' : ' hitos en ') + lanes.length + (lanes.length === 1 ? ' equipo.' : ' equipos.');
+        $('rb-entrada').classList.add('hidden');
+        var rs = $('rb-resultado'); rs.classList.remove('hidden'); rs.scrollIntoView({ behavior: 'smooth', block: 'start' }); rs.focus({ preventScroll: true });
+        if (window.posthog) window.posthog.capture('roadmap_builder_creado', { hitos: h.length });
+      }
+
+      function descargarImagen() {
+        var h = model.hitos, n = model.n, m0 = model.m0;
+        var lanes = [], map = {};
+        h.forEach(function (x) { if (!(x.id in map)) { map[x.id] = { id: x.id, items: [] }; lanes.push(map[x.id]); } map[x.id].items.push(x); });
+        var LW = 150, CW = 120, RH = 44, HH = 40, P = 20;
+        var rowsTotal = 0, placedAll = [];
+        lanes.forEach(function (ln) {
+          var ends = [];
+          ln.items.sort(function (a, b) { return a.s - b.s; }).forEach(function (x) {
+            var a = x.s.getFullYear() * 12 + x.s.getMonth() - m0, b = x.e.getFullYear() * 12 + x.e.getMonth() - m0;
+            var r = 0; while (ends[r] !== undefined && ends[r] >= a) r++;
+            ends[r] = b; placedAll.push({ x: x, a: a, b: b, y: rowsTotal + r });
+          });
+          ln.row = rowsTotal; ln.rows = ends.length; rowsTotal += ends.length;
+        });
+        var W = P * 2 + LW + n * CW, H = P * 2 + HH + rowsTotal * RH;
+        var c = document.createElement('canvas'); c.width = W * 2; c.height = H * 2;
+        var g = c.getContext('2d'); g.scale(2, 2);
+        g.fillStyle = '#fff'; g.fillRect(0, 0, W, H);
+        g.font = '700 13px sans-serif'; g.textBaseline = 'middle';
+        for (var i = 0; i < n; i++) {
+          g.fillStyle = '#45556c'; g.fillText(mesLabel(m0 + i), P + LW + i * CW + 8, P + HH / 2);
+          g.strokeStyle = '#e2e8f0'; g.beginPath(); g.moveTo(P + LW + i * CW, P); g.lineTo(P + LW + i * CW, H - P); g.stroke();
+        }
+        lanes.forEach(function (ln) { g.fillStyle = '#0f172b'; g.font = '700 14px sans-serif'; g.fillText(ln.id.slice(0, 18), P, P + HH + ln.row * RH + RH / 2); });
+        function rr(x, y, w, hh, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + hh, r); g.arcTo(x + w, y + hh, x, y + hh, r); g.arcTo(x, y + hh, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+        placedAll.forEach(function (p) {
+          var x = P + LW + p.a * CW + 4, y = P + HH + p.y * RH + 4, w = (p.b - p.a + 1) * CW - 8, hh = RH - 8, done = isDone(p.x.state);
+          rr(x, y, w, hh, 12); g.fillStyle = done ? '#f0fdfa' : '#00786f'; g.fill(); g.strokeStyle = done ? '#96f7e4' : '#00786f'; g.stroke();
+          g.save(); g.beginPath(); g.rect(x + 8, y, w - 16, hh); g.clip();
+          g.fillStyle = done ? '#0f172b' : '#fff'; g.font = '600 13px sans-serif'; g.fillText(p.x.t, x + 12, y + hh / 2); g.restore();
+        });
+        var a = document.createElement('a'); a.download = 'roadmap.png'; a.href = c.toDataURL('image/png'); document.body.appendChild(a); a.click(); a.remove();
+      }
+
+      $('csv-file').addEventListener('change', function (e) { setFile(e.target.files[0]); });
+      $('rb-crear').addEventListener('click', build);
+      $('rb-img').addEventListener('click', descargarImagen);
+      $('rb-reset').addEventListener('click', function () {
+        file = null; model = null; $('csv-file').value = ''; setZona(false); hideError();
+        $('rb-resultado').classList.add('hidden'); $('rb-entrada').classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      var z = $('rb-zona');
+      ['dragenter', 'dragover'].forEach(function (ev) { z.addEventListener(ev, function (e) { e.preventDefault(); z.classList.add('rb-zona-drag'); }); });
+      ['dragleave', 'drop'].forEach(function (ev) { z.addEventListener(ev, function (e) { e.preventDefault(); z.classList.remove('rb-zona-drag'); }); });
+      z.addEventListener('drop', function (e) { var f = e.dataTransfer && e.dataTransfer.files[0]; if (f) setFile(f); });
+    })();
   </script>
+
+  <style is:global>
+    #contenido-rb .rb-col { display: inline-flex; align-items: center; font-size: 12px; font-weight: 700; border-radius: 9999px; padding: 4px 12px; color: var(--color-v2-cuerpo); background: var(--color-v2-fondo); border: 0.8px solid #cad5e2; }
+    #contenido-rb .rb-zona { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; padding: 28px 20px; border: 1.6px dashed var(--color-v2-control); background: var(--color-v2-fondo); border-radius: 20px; cursor: pointer; }
+    #contenido-rb .rb-zona:focus-within { outline: 2px solid var(--color-v2-foco); outline-offset: 2px; }
+    #contenido-rb .rb-zona-drag { background: var(--color-v2-marca-tinte); }
+    #contenido-rb .rb-zona-ok { border: 0.8px solid var(--color-v2-marca-borde); background: var(--color-v2-marca-tinte); }
+    #contenido-rb .rb-error { display: flex; gap: 10px; align-items: flex-start; border: 0.8px solid #c70036; border-radius: 14px; padding: 12px 16px; background: #fff; color: #c70036; font-size: 14px; line-height: 20px; font-weight: 600; }
+    #contenido-rb .rb-error.hidden { display: none; }
+    #contenido-rb .rb-main { min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 28px; border: 0; border-radius: 9999px; background: var(--color-v2-accion); color: var(--color-v2-accion-texto); font-size: 16px; font-weight: 700; }
+    #contenido-rb .rb-main:hover:not(:disabled) { background: var(--color-v2-accion-hover); }
+    #contenido-rb .rb-main:disabled { opacity: 0.7; cursor: not-allowed; }
+    #contenido-rb .rb-main-sm { min-height: 44px; padding: 0 16px; font-size: 14px; }
+    #contenido-rb .rb-sec { min-height: 44px; display: inline-flex; align-items: center; padding: 0 16px; border-radius: 9999px; border: 0.8px solid var(--color-v2-control); background: var(--color-v2-fondo); color: var(--color-v2-texto); font-weight: 600; font-size: 14px; }
+    #contenido-rb .rb-link { min-height: 44px; display: inline-flex; align-items: center; padding: 0 8px; font-weight: 700; font-size: 14px; color: var(--color-v2-accion); }
+    #contenido-rb .rb-link:hover { color: var(--color-v2-accion-hover); text-decoration: underline; }
+    #contenido-rb .rb-grid-wrap { overflow-x: auto; border: 0.8px solid var(--color-v2-borde); border-radius: 16px; background: var(--color-v2-fondo); padding: 16px; }
+    #contenido-rb .rb-grid { display: grid; gap: 8px; align-items: center; min-width: 560px; }
+    #contenido-rb .rb-mes { font-size: 13px; font-weight: 700; color: var(--color-v2-cuerpo); border-left: 0.8px solid var(--color-v2-borde); padding-left: 8px; }
+    #contenido-rb .rb-lane { grid-column: 1; padding: 8px 8px 8px 0; font-weight: 700; font-size: 14px; align-self: center; word-break: break-word; }
+    #contenido-rb .rb-bar { min-height: 36px; box-sizing: border-box; display: flex; align-items: center; padding: 0 12px; border-radius: 12px; font-size: 13px; font-weight: 600; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; display: block; line-height: 34px; height: 36px; }
+    #contenido-rb .rb-bar-s { background: var(--color-v2-accion); color: #fff; border: 0.8px solid var(--color-v2-accion); }
+    #contenido-rb .rb-bar-t { background: var(--color-v2-marca-tinte); color: var(--color-v2-texto); border: 0.8px solid var(--color-v2-marca-borde); }
+    #contenido-rb .rb-bar:focus-visible, #contenido-rb .rb-bar:hover { overflow: visible; }
+    #contenido-rb .rb-lista { display: none; flex-direction: column; gap: 10px; }
+    #contenido-rb .rb-mcard { background: var(--color-v2-fondo); border: 0.8px solid var(--color-v2-borde); border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+    #contenido-rb .rb-mtitle { font-size: 13px; color: var(--color-v2-cuerpo); }
+    #contenido-rb .rb-mitem { display: flex; gap: 8px; align-items: center; }
+    #contenido-rb .rb-mbar { width: 6px; align-self: stretch; border-radius: 3px; background: var(--color-v2-accion); flex: none; }
+    #contenido-rb .rb-mbar-t { background: var(--color-v2-marca-borde); }
+    #contenido-rb .rb-mtxt { display: flex; flex-direction: column; font-size: 12px; color: var(--color-v2-cuerpo); }
+    #contenido-rb .rb-mtxt b { font-size: 14px; color: var(--color-v2-texto); }
+    @media (max-width: 720px) {
+      #contenido-rb .rb-grid-wrap { display: none; }
+      #contenido-rb .rb-lista { display: flex; }
+    }
+  </style>
 </LayoutV2>
