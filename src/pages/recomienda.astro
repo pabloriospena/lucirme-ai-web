@@ -1,5 +1,5 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import LayoutV2 from "../layouts/LayoutV2.astro";
 
 const whatsappNumber = "573053046180";
 
@@ -23,233 +23,70 @@ Si mencionas que vas recomendado por mí, te aplican un descuento de bienvenida 
 const linkOption1 = `https://api.whatsapp.com/send?text=${encodeURIComponent(rawText1)}`;
 const linkOption2 = `https://api.whatsapp.com/send?text=${encodeURIComponent(rawText2)}`;
 const linkOption3 = `https://api.whatsapp.com/send?text=${encodeURIComponent(rawText3)}`;
+const opciones = [
+  { etiqueta: "Opción 1", sub: "1 a 1", titulo: "Para un colega o amigo", desc: "Ideal para enviarlo a alguien que sabes que está ahogado en trabajo o reportes semanales.", texto: rawText1, enlace: linkOption1, boton: "Compartir por WhatsApp a un colega" },
+  { etiqueta: "Opción 2", sub: "Grupos y comunidad", titulo: "Para un grupo de WhatsApp o red de trabajo", desc: "Pensado para compartir valor en un grupo sin sonar a venta agresiva.", texto: rawText2, enlace: linkOption2, boton: "Compartir en un grupo de WhatsApp" },
+  { etiqueta: "Opción 3", sub: "B2B y ejecutivo", titulo: "Para un perfil senior, jefe o fundador (B2B)", desc: "Tono más formal, enfocado en ROI, estandarización de procesos y seguridad.", texto: rawText3, enlace: linkOption3, boton: "Compartir a un perfil senior o B2B" },
+];
 ---
 
-<Layout title="Recomienda LuciRMe AI | Pásale el atajo">
-  <div class="bg-slate-50 text-slate-800 font-sans selection:bg-teal/20 selection:text-slate-900 min-h-screen">
-    
-    <!-- HEADER HERO -->
-    <header class="bg-white relative pt-10 pb-12 md:pt-14 md:pb-16 px-6 border-b border-slate-200 overflow-hidden">
-      <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#94A3B8_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
-      <div class="absolute -right-20 -top-20 w-80 h-80 bg-teal/10 rounded-full blur-3xl pointer-events-none"></div>
-
-      <div class="max-w-3xl mx-auto text-center relative z-10 space-y-5">
-        
-        <div class="inline-flex items-center gap-1.5 bg-teal/10 text-teal-800 border border-teal/20 text-[11px] font-extrabold uppercase tracking-widest px-3.5 py-1 rounded-full">
-          <span>🤝</span>
-          <span>Programa de Recomendación</span>
-        </div>
-
-        <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 leading-tight tracking-tight uppercase">
-          ¿Conoces a alguien que siga <br class="hidden sm:block" />
-          <span class="text-teal">perdiendo horas en tareas manuales?</span>
-        </h1>
-
-        <p class="text-sm sm:text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
-          Si LucirMe te devolvió tiempo y claridad, pásale el atajo. Elige el mensaje que mejor se adapte a tu contacto, toca el botón y se te abrirá WhatsApp listo para enviar.
-        </p>
-
-        <!-- DESTACADO DE BENEFICIO -->
-        <div class="bg-gradient-to-r from-teal/10 via-amber-500/10 to-teal/10 border border-teal/30 p-4 sm:p-5 rounded-2xl max-w-xl mx-auto shadow-2xs text-left sm:text-center mt-4">
-          <p class="text-xs sm:text-sm text-slate-800 font-medium leading-relaxed">
-            <span class="text-base mr-1">🎁</span> <strong class="text-slate-900 font-extrabold">Ganamos todos:</strong> Tu contacto recibe un <span class="font-bold text-teal">descuento de bienvenida</span> en su primera sesión y a ti te acreditamos una <strong class="text-slate-900 font-bold">Sesión de Enfoque adicional</strong> sin costo.
-          </p>
-        </div>
-
+<LayoutV2 title="Recomienda LuciRMe AI | Pásale el atajo">
+  <div class="mx-auto flex w-full max-w-[1200px] flex-col gap-6 px-4 pb-16 pt-2 sm:px-6">
+    <header class="relative overflow-hidden rounded-[32px] border-[0.8px] border-v2-marca-borde bg-v2-marca-tinte">
+      <div class="relative flex max-w-[720px] flex-col gap-3 px-6 py-8 sm:px-12 sm:pb-8 sm:pt-9">
+        <span class="self-start rounded-full border-[0.8px] border-v2-marca-borde bg-v2-fondo px-3.5 py-1.5 font-mono text-xs font-semibold uppercase tracking-[0.6px] text-v2-accion">Programa de recomendación</span>
+        <h1 class="text-[34px] font-extrabold leading-[1.14] tracking-[-0.9px] text-v2-texto sm:text-[44px] sm:tracking-[-1.1px]">¿Conoces a alguien que siga perdiendo horas en tareas manuales?</h1>
+        <p class="max-w-[560px] text-base leading-6 text-v2-cuerpo sm:text-lg sm:leading-7">Si LuciRMe te devolvió tiempo y claridad, pásale el atajo. Elige el mensaje que mejor se adapte a tu contacto, toca el botón y se te abrirá WhatsApp listo para enviar.</p>
+        <p class="max-w-[560px] rounded-2xl border-[0.8px] border-v2-marca-borde bg-v2-fondo p-4 text-sm leading-5 text-v2-cuerpo"><b class="text-v2-texto">Ganamos todos:</b> tu contacto recibe un descuento de bienvenida en su primera sesión y a ti te acreditamos una Sesión de Enfoque adicional sin costo.</p>
       </div>
     </header>
 
-    <!-- OPCIONES DE COMPARTIR -->
-    <main class="max-w-3xl mx-auto px-6 py-12 space-y-10">
-
-      <!-- OPCIÓN 1 -->
-      <section class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-5 shadow-2xs transition-all hover:border-teal/40">
-        <div class="space-y-1.5">
-          <div class="flex items-center gap-2">
-            <span class="bg-teal/10 text-teal font-extrabold text-[11px] px-2.5 py-0.5 rounded-md uppercase tracking-wide border border-teal/20">
-              Opción 1
-            </span>
-            <span class="text-xs text-slate-500 font-semibold">1 a 1</span>
+    <main class="flex flex-col gap-6">
+      {opciones.map((o) => (
+        <section class="flex flex-col gap-5 rounded-3xl border-[0.8px] border-v2-borde bg-v2-fondo p-6 sm:p-8">
+          <div class="flex flex-col gap-1.5">
+            <div class="flex items-center gap-2">
+              <span class="rounded-full border-[0.8px] border-v2-marca-borde bg-v2-marca-tinte px-3 py-1 font-mono text-xs font-semibold uppercase tracking-[0.6px] text-v2-marca-texto">{o.etiqueta}</span>
+              <span class="text-xs font-semibold text-v2-suave">{o.sub}</span>
+            </div>
+            <h2 class="text-xl font-bold tracking-[-0.3px] text-v2-texto sm:text-2xl">{o.titulo}</h2>
+            <p class="text-sm leading-5 text-v2-cuerpo">{o.desc}</p>
           </div>
-          <h2 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
-            Para un colega o amigo
-          </h2>
-          <p class="text-xs sm:text-sm text-slate-600 italic">
-            Ideal para enviarlo a alguien que sabes que está ahogado en trabajo o reportes semanales.
-          </p>
-        </div>
-
-        <!-- PREVIEW -->
-        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 space-y-3">
-          <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
-            <span>Vista previa del mensaje:</span>
-            <span>WhatsApp</span>
+          <div class="flex flex-col gap-3 rounded-2xl border-[0.8px] border-v2-borde bg-v2-superficie p-4 sm:p-5">
+            <div class="flex items-center justify-between text-xs text-v2-suave"><span>Vista previa del mensaje</span><span>WhatsApp</span></div>
+            <p class="whitespace-pre-line rounded-xl border-[0.8px] border-v2-borde bg-v2-fondo p-3.5 text-sm leading-6 text-v2-cuerpo">{o.texto}</p>
           </div>
-          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans whitespace-pre-line bg-white p-3.5 rounded-lg border border-slate-200 text-slate-800">
-            {rawText1}
-          </p>
-        </div>
-
-        <!-- CTAS -->
-        <div class="flex flex-col sm:flex-row gap-3 pt-1">
-          <a
-            href={linkOption1}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-extrabold text-xs sm:text-sm px-5 py-3.5 rounded-xl transition shadow-xs transform hover:-translate-y-0.5 cursor-pointer"
-          >
-            <span>📲</span>
-            <span>Compartir por WhatsApp a un colega</span>
-          </a>
-          <button
-            type="button"
-            data-copy={rawText1}
-            class="copy-btn inline-flex items-center justify-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs px-4 py-3.5 rounded-xl transition cursor-pointer border border-slate-200 shrink-0"
-          >
-            <span>📋</span>
-            <span class="btn-text">Copiar texto</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- OPCIÓN 2 -->
-      <section class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-5 shadow-2xs transition-all hover:border-teal/40">
-        <div class="space-y-1.5">
-          <div class="flex items-center gap-2">
-            <span class="bg-amber-500/10 text-amber-900 font-extrabold text-[11px] px-2.5 py-0.5 rounded-md uppercase tracking-wide border border-amber-500/20">
-              Opción 2
-            </span>
-            <span class="text-xs text-slate-500 font-semibold">Grupos & Comunidad</span>
+          <div class="flex flex-col gap-3 sm:flex-row">
+            <a href={o.enlace} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[52px] flex-1 items-center justify-center rounded-full bg-v2-accion px-7 text-base font-bold text-v2-accion-texto hover:bg-v2-accion-hover">{o.boton}</a>
+            <button type="button" data-copy={o.texto} class="copy-btn inline-flex min-h-[52px] cursor-pointer items-center justify-center rounded-full border-[0.8px] border-v2-control bg-v2-secundario px-6 text-sm font-bold text-v2-texto hover:border-v2-accion">
+              <span class="btn-text">Copiar texto</span>
+            </button>
           </div>
-          <h2 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
-            Para un grupo de WhatsApp o red de trabajo
-          </h2>
-          <p class="text-xs sm:text-sm text-slate-600 italic">
-            Pensado para compartir valor en un grupo sin sonar a venta agresiva.
-          </p>
-        </div>
+        </section>
+      ))}
 
-        <!-- PREVIEW -->
-        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 space-y-3">
-          <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
-            <span>Vista previa del mensaje:</span>
-            <span>WhatsApp</span>
-          </div>
-          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans whitespace-pre-line bg-white p-3.5 rounded-lg border border-slate-200 text-slate-800">
-            {rawText2}
-          </p>
-        </div>
-
-        <!-- CTAS -->
-        <div class="flex flex-col sm:flex-row gap-3 pt-1">
-          <a
-            href={linkOption2}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-extrabold text-xs sm:text-sm px-5 py-3.5 rounded-xl transition shadow-xs transform hover:-translate-y-0.5 cursor-pointer"
-          >
-            <span>👥</span>
-            <span>Compartir en un grupo de WhatsApp</span>
-          </a>
-          <button
-            type="button"
-            data-copy={rawText2}
-            class="copy-btn inline-flex items-center justify-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs px-4 py-3.5 rounded-xl transition cursor-pointer border border-slate-200 shrink-0"
-          >
-            <span>📋</span>
-            <span class="btn-text">Copiar texto</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- OPCIÓN 3 -->
-      <section class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 space-y-5 shadow-2xs transition-all hover:border-teal/40">
-        <div class="space-y-1.5">
-          <div class="flex items-center gap-2">
-            <span class="bg-sky-500/10 text-sky-900 font-extrabold text-[11px] px-2.5 py-0.5 rounded-md uppercase tracking-wide border border-sky-500/20">
-              Opción 3
-            </span>
-            <span class="text-xs text-slate-500 font-semibold">B2B & Ejecutivo</span>
-          </div>
-          <h2 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
-            Para un perfil senior, jefe o fundador (B2B)
-          </h2>
-          <p class="text-xs sm:text-sm text-slate-600 italic">
-            Tono más formal, enfocado en ROI, estandarización de procesos y seguridad.
-          </p>
-        </div>
-
-        <!-- PREVIEW -->
-        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 space-y-3">
-          <div class="flex items-center justify-between text-xs text-slate-400 font-mono">
-            <span>Vista previa del mensaje:</span>
-            <span>WhatsApp</span>
-          </div>
-          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans whitespace-pre-line bg-white p-3.5 rounded-lg border border-slate-200 text-slate-800">
-            {rawText3}
-          </p>
-        </div>
-
-        <!-- CTAS -->
-        <div class="flex flex-col sm:flex-row gap-3 pt-1">
-          <a
-            href={linkOption3}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-extrabold text-xs sm:text-sm px-5 py-3.5 rounded-xl transition shadow-xs transform hover:-translate-y-0.5 cursor-pointer"
-          >
-            <span>👔</span>
-            <span>Compartir a un perfil Senior / B2B</span>
-          </a>
-          <button
-            type="button"
-            data-copy={rawText3}
-            class="copy-btn inline-flex items-center justify-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs px-4 py-3.5 rounded-xl transition cursor-pointer border border-slate-200 shrink-0"
-          >
-            <span>📋</span>
-            <span class="btn-text">Copiar texto</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- FOOTER NOTE -->
-      <div class="text-center pt-6 space-y-2">
-        <p class="text-xs text-slate-500">
-          ¿Tienes alguna duda sobre el programa de recomendación?
-        </p>
-        <a
-          href="https://lucirme.com/whatsapp"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-block text-xs font-bold text-teal hover:underline"
-        >
-          Habla directamente con Pablo por WhatsApp →
-        </a>
+      <div class="flex flex-col items-center gap-2 pt-2 text-center">
+        <p class="text-sm text-v2-cuerpo">¿Tienes alguna duda sobre el programa de recomendación?</p>
+        <a href="https://lucirme.com/whatsapp" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-v2-accion underline underline-offset-2">Habla directamente con Pablo por WhatsApp</a>
       </div>
-
     </main>
-
   </div>
-</Layout>
+</LayoutV2>
 
 <script>
-  document.querySelectorAll('.copy-btn').forEach(button => {
-    button.addEventListener('click', () => {
-      const textToCopy = button.getAttribute('data-copy');
-      if (textToCopy) {
-        navigator.clipboard.writeText(textToCopy).then(() => {
-          const textSpan = button.querySelector('.btn-text');
-          if (textSpan) {
-            const originalText = textSpan.textContent;
-            textSpan.textContent = '¡Copiado!';
-            button.classList.add('bg-emerald-100', 'text-emerald-800', 'border-emerald-300');
-            setTimeout(() => {
-              textSpan.textContent = originalText;
-              button.classList.remove('bg-emerald-100', 'text-emerald-800', 'border-emerald-300');
-            }, 2000);
-          }
-        });
-      }
+  document.querySelectorAll<HTMLButtonElement>(".copy-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      const textToCopy = button.getAttribute("data-copy");
+      if (!textToCopy) return;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const textSpan = button.querySelector(".btn-text");
+        if (!textSpan) return;
+        const originalText = textSpan.textContent;
+        textSpan.textContent = "¡Copiado!";
+        setTimeout(() => {
+          textSpan.textContent = originalText;
+        }, 2000);
+      });
     });
   });
 </script>
