@@ -1,0 +1,25 @@
+---
+// Prompt desplegable con botón de copiar, para las guías con muchos prompts (Web v2).
+// El script que copia vive en la página: busca los botones con data-copiar-texto.
+interface Props {
+  titulo: string;
+  texto: string;
+  n?: string;
+}
+const { titulo, texto, n } = Astro.props;
+---
+
+<details class="group rounded-2xl border-[0.8px] border-v2-borde bg-v2-fondo">
+  <summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 px-5 py-3 text-base font-bold text-v2-texto">
+    <span>{n && <span class="text-v2-accion">{n}. </span>}{titulo}</span>
+    <span aria-hidden="true" class="text-xl font-light text-v2-accion transition-transform group-open:rotate-45">+</span>
+  </summary>
+  <div class="flex flex-col gap-3 border-t-[0.8px] border-v2-borde p-5">
+    <pre class="whitespace-pre-wrap rounded-xl border-[0.8px] border-v2-borde bg-v2-superficie p-4 text-sm leading-5 text-v2-texto select-all" tabindex="0">{texto}</pre>
+    <div>
+      <button type="button" data-copiar-texto={texto} class="inline-flex h-11 cursor-pointer items-center rounded-full border-[0.8px] border-v2-control bg-v2-fondo px-4 text-sm font-bold text-v2-texto hover:border-v2-accion">
+        <span data-etiqueta>Copiar prompt</span><span class="sr-only">. {titulo}</span>
+      </button>
+    </div>
+  </div>
+</details>
