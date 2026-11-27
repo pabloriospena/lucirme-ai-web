@@ -216,7 +216,7 @@ export const RECURSOS: Recurso[] = [
     slug: "crear-imagenes-ia",
     url: "/recursos/crear-imagenes-ia",
     titulo: "Crea tu primera imagen con IA",
-    descripcion: "Abre una herramienta, adjunta una foto y prueba comandos sin saber de prompts.",
+    descripcion: "Abre una herramienta, adjunta una foto y prueba comandos sin saber de prompts. Termina en Atajos visuales.",
     banda: "guias-herramientas",
     formato: "Herramienta",
     tema: "Imágenes",
