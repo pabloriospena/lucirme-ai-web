@@ -1,0 +1,1917 @@
+---
+import LayoutV2 from "../layouts/LayoutV2.astro";
+import SocialProof from "../components/SocialProof.astro";
+import SobreMi from "../components/SobreMi.astro";
+import { LINKS } from "../lib/constants.js";
+
+const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
+const calendlyUrl = LINKS.calendly_empresa || "https://calendly.com/pablorios";
+
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "IA aplicada a procesos para empresas",
+  url: "https://lucirme.com/empresas",
+  description: "Encuentra un cuello de botella operativo en tu empresa, mide cuánto te está costando y decide si vale la pena intervenir, con IA, automatización y adopción autónoma.",
+  provider: { "@id": "https://lucirme.com/#organization" },
+  areaServed: "Latinoamérica",
+  availableLanguage: "es",
+  audience: { "@type": "Audience", audienceType: "Empresas y equipos" },
+};
+
+---
+
+<LayoutV2
+  title="LuciRMe AI · Empresas | Primero el problema. Después la tecnología."
+  description="Encuentra un cuello de botella operativo en tu empresa, mide cuánto te está costando y decide si vale la pena intervenir. Soluciones con IA, automatización y adopción autónoma por Pablo Ríos."
+  jsonLd={serviceJsonLd}
+>
+
+  <div class="w-full bg-[#F8FAFC]">
+    <!-- 2. HERO -->
+    <section
+      class="w-full max-w-7xl mx-auto px-6 pt-12 pb-10 md:py-16 flex flex-col items-start gap-6 border-b border-slate-200/60"
+    >
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
+        <div class="lg:col-span-7 flex flex-col items-start gap-5">
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 bg-white border border-slate-200 rounded-full font-mono text-xs text-slate-700 shadow-2xs"
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
+            Primero el problema. Después la tecnología.
+          </div>
+          <div class="max-w-2xl flex flex-col gap-3">
+            <h1
+              class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 leading-tight"
+            >
+              ¿Dónde se está perdiendo el tiempo en tu equipo?
+            </h1>
+            <p
+              class="text-base md:text-lg text-slate-600 font-normal leading-relaxed"
+            >
+              Hay procesos que parecen pequeños hasta que calculas cuántas veces
+              se repiten. Encuentra un cuello de botella, mide cuánto te está
+              costando y decide si vale la pena intervenir.
+            </p>
+          </div>
+          <div
+            class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 w-full sm:w-auto"
+          >
+            <a
+              class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors shadow-sm"
+              href="#diagnostico"
+              onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_started', { origen: 'hero_btn' }); }"
+            >
+              <span>Empezar diagnóstico · 3 min</span>
+              <span class="material-symbols-outlined text-[18px]"
+                >arrow_downward</span
+              >
+            </a>
+            <a
+              class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors shadow-2xs"
+              href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero conversar sobre un proceso operativo en mi empresa.")}`}
+              rel="noopener noreferrer"
+              target="_blank"
+              onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_whatsapp_click', { origen: 'hero_direct' }); }"
+            >
+              <span class="material-symbols-outlined text-slate-500 text-[18px]"
+                >chat</span
+              >
+              <span>Hablar directamente con Pablo</span>
+            </a>
+          </div>
+          <p class="text-xs font-mono text-slate-500">
+            No necesitas saber de IA. Nosotros nos ocupamos de esa parte.
+          </p>
+        </div>
+
+        <div class="lg:col-span-5 w-full flex justify-center lg:justify-end">
+          <div
+            class="w-full max-w-md bg-white rounded-2xl border border-slate-200 shadow-sm p-5 md:p-6 flex flex-col gap-4"
+          >
+            <div class="flex items-center justify-between pb-1">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                <span
+                  class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-900"
+                  >Diagnóstico LuciRMe AI</span
+                >
+              </div>
+            </div>
+
+            <div
+              class="p-3.5 bg-slate-50 border border-slate-200/60 rounded-xl flex flex-col gap-2"
+            >
+              <div class="flex items-center justify-between">
+                <span
+                  class="font-mono text-[10px] uppercase font-semibold text-slate-500 tracking-wider"
+                  >Fuga de tiempo típica</span
+                >
+                <span class="font-mono text-xs font-bold text-amber-700"
+                  >~10 hrs/semana por integrante</span
+                >
+              </div>
+              <p class="text-xs font-semibold text-slate-900 leading-snug">
+                Consolidación manual de datos. Más tiempo recolectando que
+                decidiendo
+              </p>
+              <div
+                class="w-full bg-slate-200 rounded-full h-1.5 mt-1 overflow-hidden"
+              >
+                <div class="bg-amber-600 h-1.5 rounded-full w-[65%]"></div>
+              </div>
+            </div>
+
+            <div
+              class="p-3.5 bg-slate-50 border border-slate-200/60 rounded-xl flex flex-col gap-1"
+            >
+              <span
+                class="font-mono text-[10px] uppercase font-semibold text-slate-500 tracking-wider"
+                >Priorización:</span
+              >
+              <h4 class="text-xs font-bold text-amber-700">
+                P1 Urgente · Alto ROI Inmediato
+              </h4>
+              <span class="text-[11px] font-medium text-teal-700 font-mono">
+                Integración de herramientas
+              </span>
+            </div>
+
+            <div
+              class="p-3 bg-white border border-slate-200/80 rounded-xl flex items-start gap-2.5 text-xs text-slate-600 leading-relaxed shadow-2xs"
+            >
+              <span
+                class="material-symbols-outlined text-teal-600 text-[18px] shrink-0 mt-0.5"
+                >verified</span
+              >
+              <p class="text-[11px] leading-relaxed text-slate-600">
+                Identificamos la causa raíz antes de gastar recursos. El 40% de
+                los cuellos de botella se resuelven simplificando el flujo sin
+                añadir costos fijos.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 & 4. DIAGNÓSTICO OPERATIVO (CONSOLA INTERACTIVA COMPACTA SIN SCROLL NI PRESELECCIÓN) -->
+    <section
+      class="w-full max-w-7xl mx-auto px-6 py-12 scroll-mt-20"
+      id="diagnostico"
+    >
+      <div class="max-w-3xl mb-8 flex flex-col gap-2">
+        <div
+          class="inline-flex items-center gap-2 font-mono text-xs text-teal-800 uppercase font-semibold"
+        >
+          Diagnóstico Operativo
+        </div>
+        <h2
+          class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900"
+        >
+          No necesitas saber de IA. Necesitas identificar qué está frenando al
+          equipo.
+        </h2>
+        <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+          Responde las siguientes preguntas para medir la fuga de tiempo de tu
+          equipo sin sesgos iniciales.
+        </p>
+      </div>
+
+      <!-- Consola Interactiva Compacta -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- Columna Izquierda: Wizard Paso a Paso Compacto -->
+        <div
+          class="lg:col-span-7 flex flex-col bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm relative min-h-[380px]"
+        >
+          <!-- Header del Wizard: Barra de Progreso y Paso actual -->
+          <div class="flex flex-col gap-2 pb-4 border-b border-slate-100">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-teal-600 animate-pulse"
+                ></span>
+                <span
+                  class="font-mono text-xs font-semibold text-teal-800 uppercase"
+                  id="step-counter">Paso 1 de 7</span
+                >
+              </div>
+              <span class="text-[11px] font-mono text-slate-400" id="step-hint"
+                >Selecciona una opción</span
+              >
+            </div>
+            <!-- Barra de progreso -->
+            <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div
+                class="bg-teal-700 h-1.5 rounded-full transition-all duration-300 ease-out"
+                id="progress-bar"
+                style="width: 14.2857%;"
+              >
+              </div>
+            </div>
+          </div>
+
+          <!-- Contenedor dinámico de pasos compacto -->
+          <div
+            class="py-4 flex-1 flex flex-col justify-between"
+            id="wizard-container"
+          >
+            <!-- Paso 1: Proceso -->
+            <div class="wizard-step flex flex-col gap-3" id="step-1">
+              <div class="flex flex-col gap-1">
+                <span
+                  class="font-mono text-xs font-semibold text-teal-800 uppercase"
+                  >Paso 1 · Proceso</span
+                >
+                <h3 class="text-base md:text-lg font-bold text-slate-900">
+                  ¿Qué proceso te gustaría mejorar en tu equipo?
+                </h3>
+              </div>
+              <div
+                class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1"
+                id="group-proceso"
+              >
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('proceso', 'Reportes y consolidación de información', this)"
+                  type="button"
+                >
+                  <span>Reportes e información</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('proceso', 'Atención y seguimiento de clientes', this)"
+                  type="button"
+                >
+                  <span>Atención a clientes</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('proceso', 'Documentación', this)"
+                  type="button"
+                >
+                  <span>Documentación</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('proceso', 'Reuniones y seguimiento', this)"
+                  type="button"
+                >
+                  <span>Reuniones y minutas</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('proceso', 'Procesos administrativos', this)"
+                  type="button"
+                >
+                  <span>Procesos administrativos</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('proceso', 'Ventas y marketing', this)"
+                  type="button"
+                >
+                  <span>Ventas y comercial</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option sm:col-span-2 flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('proceso', 'Otro', this); document.getElementById('otro-proceso-input').classList.toggle('hidden');"
+                  type="button"
+                >
+                  <span>Otro (especificar)</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <input id="otro-proceso-input" class="hidden sm:col-span-2 w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" placeholder="Describe el proceso..." type="text" oninput="currentSelections['proceso-otro'] = this.value;" />
+              </div>
+              <button 
+                  class="mt-4 w-full px-4 py-3 bg-teal-700 text-white font-semibold rounded-xl hover:bg-teal-800 transition-colors"
+                  onclick="nextStep()">
+                  Continuar
+              </button>
+            </div>
+
+            <!-- Paso 2: Frecuencia -->
+            <div class="wizard-step hidden flex flex-col gap-3" id="step-2">
+              <div class="flex flex-col gap-1">
+                <span
+                  class="font-mono text-xs font-semibold text-teal-800 uppercase"
+                  >Paso 2 · Frecuencia</span
+                >
+                <h3 class="text-base md:text-lg font-bold text-slate-900">
+                  ¿Con qué frecuencia se repite este proceso?
+                </h3>
+              </div>
+              <div
+                class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1"
+                id="group-frecuencia"
+              >
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('frecuencia', 'Varias veces al día', this)"
+                  type="button"
+                >
+                  <span>Varias veces al día</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('frecuencia', 'Todos los días', this)"
+                  type="button"
+                >
+                  <span>Todos los días</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('frecuencia', 'Varias veces por semana', this)"
+                  type="button"
+                >
+                  <span>Varias veces por semana</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('frecuencia', 'Una vez por semana', this)"
+                  type="button"
+                >
+                  <span>Una vez por semana</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option sm:col-span-2 flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('frecuencia', 'Algunas veces al mes', this)"
+                  type="button"
+                >
+                  <span>Algunas veces al mes</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+              </div>
+            </div>
+
+            <!-- Paso 3: Tiempo -->
+            <div class="wizard-step hidden flex flex-col gap-3" id="step-3">
+              <div class="flex flex-col gap-1">
+                <span
+                  class="font-mono text-xs font-semibold text-teal-800 uppercase"
+                  >Paso 3 · Tiempo por ejecución</span
+                >
+                <h3 class="text-base md:text-lg font-bold text-slate-900">
+                  ¿Cuánto tiempo consume cada sesión?
+                </h3>
+              </div>
+              <div
+                class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1"
+                id="group-tiempo"
+              >
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('tiempo', 'Menos de 15 minutos', this)"
+                  type="button"
+                >
+                  <span>Menos de 15 minutos</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('tiempo', '15–30 minutos', this)"
+                  type="button"
+                >
+                  <span>15–30 minutos</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('tiempo', '30–60 minutos', this)"
+                  type="button"
+                >
+                  <span>30–60 minutos</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('tiempo', '1–2 horas', this)"
+                  type="button"
+                >
+                  <span>1–2 horas</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option sm:col-span-2 flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('tiempo', 'Más de 2 horas', this)"
+                  type="button"
+                >
+                  <span>Más de 2 horas</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+              </div>
+            </div>
+
+            <!-- Paso 4: Equipo -->
+            <div class="wizard-step hidden flex flex-col gap-3" id="step-4">
+              <div class="flex flex-col gap-1">
+                <span
+                  class="font-mono text-xs font-semibold text-teal-800 uppercase"
+                  >Paso 4 · Equipo</span
+                >
+                <h3 class="text-base md:text-lg font-bold text-slate-900">
+                  ¿Cuántas personas participan en este proceso?
+                </h3>
+              </div>
+              <div class="grid grid-cols-2 gap-2.5 pt-1" id="group-personas">
+                <button
+                  class="diag-option p-3 rounded-xl border border-slate-200 text-center font-medium text-slate-800 hover:border-slate-300 hover:bg-slate-50 transition-all flex flex-col items-center justify-center cursor-pointer"
+                  onclick="window.selectStepOption('personas', '1 persona', this)"
+                  type="button"
+                >
+                  <span class="text-xl font-bold font-mono">1</span>
+                  <span class="text-[11px] text-slate-500">Solo 1 persona</span>
+                </button>
+                <button
+                  class="diag-option p-3 rounded-xl border border-slate-200 text-center font-medium text-slate-800 hover:border-slate-300 hover:bg-slate-50 transition-all flex flex-col items-center justify-center cursor-pointer"
+                  onclick="window.selectStepOption('personas', '2 a 4 personas', this)"
+                  type="button"
+                >
+                  <span class="text-xl font-bold font-mono">2–3</span>
+                  <span class="text-[11px] text-slate-500">Equipo pequeño</span>
+                </button>
+                <button
+                  class="diag-option p-3 rounded-xl border border-slate-200 text-center font-medium text-slate-800 hover:border-slate-300 hover:bg-slate-50 transition-all flex flex-col items-center justify-center cursor-pointer"
+                  onclick="window.selectStepOption('personas', '4 a 5 personas', this)"
+                  type="button"
+                >
+                  <span class="text-xl font-bold font-mono">4–5</span>
+                  <span class="text-[11px] text-slate-500">Varios roles</span>
+                </button>
+                <button
+                  class="diag-option p-3 rounded-xl border border-slate-200 text-center font-medium text-slate-800 hover:border-slate-300 hover:bg-slate-50 transition-all flex flex-col items-center justify-center cursor-pointer"
+                  onclick="window.selectStepOption('personas', 'Más de 5 personas', this)"
+                  type="button"
+                >
+                  <span class="text-xl font-bold font-mono">&gt;5</span>
+                  <span class="text-[11px] text-slate-500"
+                    >Equipo extendido</span
+                  >
+                </button>
+              </div>
+            </div>
+
+            <!-- Paso 5: Impacto -->
+            <div class="wizard-step hidden flex flex-col gap-3" id="step-5">
+              <div class="flex flex-col gap-1">
+                <span
+                  class="font-mono text-xs font-semibold text-teal-800 uppercase"
+                  >Paso 5 · Impacto</span
+                >
+                <h3 class="text-base md:text-lg font-bold text-slate-900">
+                  ¿Cuál es el impacto principal cuando falla o se retrasa?
+                </h3>
+              </div>
+              <div
+                class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1"
+                id="group-impacto"
+              >
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('impacto', 'Perdemos tiempo de trabajo', this)"
+                  type="button"
+                >
+                  <span>Perdemos tiempo de trabajo</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('impacto', 'Tenemos que repetir tareas o corregir errores', this)"
+                  type="button"
+                >
+                  <span>Repetir tareas / Errores</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('impacto', 'Se retrasan otros procesos', this)"
+                  type="button"
+                >
+                  <span>Retrasan otros procesos</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('impacto', 'Afecta la atención o satisfacción de los clientes', this)"
+                  type="button"
+                >
+                  <span>Afecta clientes</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('impacto', 'Perdemos oportunidades de venta o clientes', this)"
+                  type="button"
+                >
+                  <span>Perdemos ventas/clientes</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('impacto', 'Genera costos adicionales', this)"
+                  type="button"
+                >
+                  <span>Genera costos adicionales</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('impacto', 'Depende demasiado de una persona', this)"
+                  type="button"
+                >
+                  <span>Depende de una persona</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('impacto', 'No tenemos suficiente información para saber qué está fallando', this)"
+                  type="button"
+                >
+                  <span>Falta información</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('impacto', 'Otro', this); document.getElementById('otro-impacto-input').classList.toggle('hidden');"
+                  type="button"
+                >
+                  <span>Otro</span>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+              </div>
+              <input
+                type="text"
+                id="otro-impacto-input"
+                class="hidden w-full mt-2 px-3 py-2 border border-slate-300 rounded-xl text-sm"
+                placeholder="Especifica el impacto..."
+                oninput="recalculateAssessment()"
+              />
+              <button 
+                  class="mt-4 w-full px-4 py-3 bg-teal-700 text-white font-semibold rounded-xl hover:bg-teal-800 transition-colors"
+                  onclick="nextStep()">
+                  Continuar
+              </button>
+            </div>
+
+            <!-- Paso 6: Viabilidad -->
+            <div class="wizard-step hidden flex flex-col gap-3" id="step-6">
+              <div class="flex flex-col gap-1">
+                <span
+                  class="font-mono text-xs font-semibold text-teal-800 uppercase"
+                  >Paso 6 · Viabilidad</span
+                >
+                <h3 class="text-base md:text-lg font-bold text-slate-900">
+                  ¿Qué tan difícil crees que sería cambiarlo?
+                </h3>
+              </div>
+              <div
+                class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1"
+                id="group-esfuerzo"
+              >
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('esfuerzo', 'Fácil', this)"
+                  type="button"
+                >
+                  <div>
+                    <div class="font-semibold text-slate-900">Fácil</div>
+                    <div class="text-[10px] text-slate-500">
+                      Alinear hábitos o plantillas
+                    </div>
+                  </div>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('esfuerzo', 'Moderado', this)"
+                  type="button"
+                >
+                  <div>
+                    <div class="font-semibold text-slate-900">Moderado</div>
+                    <div class="text-[10px] text-slate-500">
+                      Conectar herramientas
+                    </div>
+                  </div>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('esfuerzo', 'Difícil', this)"
+                  type="button"
+                >
+                  <div>
+                    <div class="font-semibold text-slate-900">Difícil</div>
+                    <div class="text-[10px] text-slate-500">
+                      Sistemas legados
+                    </div>
+                  </div>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+                <button
+                  class="diag-option flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-slate-200 text-left text-xs font-medium text-slate-700 hover:border-slate-300 hover:bg-slate-50 transition-all cursor-pointer"
+                  onclick="window.selectStepOption('esfuerzo', 'No tengo idea', this)"
+                  type="button"
+                >
+                  <div>
+                    <div class="font-semibold text-slate-900">
+                      No tengo idea
+                    </div>
+                    <div class="text-[10px] text-slate-500">
+                      Explorarlo en diagnóstico
+                    </div>
+                  </div>
+                  <span
+                    class="material-symbols-outlined text-[16px] text-slate-300 opacity-0"
+                    >circle</span
+                  >
+                </button>
+              </div>
+            </div>
+
+            <!-- Paso 7: Datos de la Empresa y Contacto -->
+            <div class="wizard-step hidden flex flex-col gap-3" id="step-7">
+              <div class="flex flex-col gap-1">
+                <span
+                  class="font-mono text-xs font-semibold text-teal-800 uppercase"
+                  >Paso 7 · Datos de la empresa</span
+                >
+                <h3 class="text-base md:text-lg font-bold text-slate-900">
+                  Contexto para calibrar el diagnóstico
+                </h3>
+              </div>
+              <form
+                class="flex flex-col gap-2.5 pt-1 text-xs"
+                id="company-form"
+                onsubmit="event.preventDefault(); window.submitDiagnostic();"
+              >
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <div class="flex flex-col gap-1">
+                    <label
+                      class="font-semibold text-slate-700"
+                      for="nombre-input">Tu Nombre *</label
+                    >
+                    <input
+                      class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white"
+                      id="nombre-input"
+                      placeholder="Ana María Pérez"
+                      required
+                      type="text"
+                    />
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <label
+                      class="font-semibold text-slate-700"
+                      for="email-input">Correo Corporativo *</label
+                    >
+                    <input
+                      class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white"
+                      id="email-input"
+                      placeholder="ana@empresa.com"
+                      required
+                      type="email"
+                    />
+                  </div>
+                </div>
+
+                <div class="flex flex-col gap-1">
+                  <label
+                    class="font-semibold text-slate-700"
+                    for="empresa-input">Nombre de la Empresa *</label
+                  >
+                  <input
+                    class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white"
+                    id="empresa-input"
+                    placeholder="Nombre de tu empresa"
+                    required
+                    type="text"
+                  />
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  <div class="flex flex-col gap-1">
+                    <label class="font-semibold text-slate-700" for="costo-input">Costo estimado por hora (COP)</label>
+                    <input class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="costo-input" placeholder="Ej. 25000" type="number" />
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <label class="font-semibold text-slate-700" for="retrabajo-select">Frecuencia de retrabajo</label>
+                    <select class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="retrabajo-select">
+                      <option value="Nunca/Casi nunca">Nunca/Casi nunca</option>
+                      <option value="Ocasional">Ocasional</option>
+                      <option value="Frecuente">Frecuente</option>
+                      <option value="No lo sé">No lo sé</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="flex flex-col gap-1">
+                  <label class="font-semibold text-slate-700" for="consecuencia-input">Consecuencia principal de errores o demoras</label>
+                  <input class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="consecuencia-input" placeholder="Ej. Pérdida de clientes, estrés, costo extra" type="text" />
+                </div>
+                
+                <div class="flex flex-col gap-1">
+                  <label class="font-semibold text-slate-700" for="resultado-input">Resultado deseado</label>
+                  <input class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="resultado-input" placeholder="Ej. Reducir tiempo a la mitad, menos errores" type="text" />
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <div class="flex flex-col gap-1">
+                    <label
+                      class="font-semibold text-slate-700"
+                      for="tamano-select">Tamaño</label
+                    >
+                    <select
+                      class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white"
+                      id="tamano-select"
+                      required
+                    >
+                      <option value="1-10 personas">1–10 personas</option>
+                      <option selected value="11-50 personas"
+                        >11–50 personas</option
+                      >
+                      <option value="51-200 personas">51–200 personas</option>
+                      <option value="+200 personas">+200 personas</option>
+                    </select>
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <label
+                      class="font-semibold text-slate-700"
+                      for="industria-select">Sector</label
+                    >
+                    <select
+                      class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white"
+                      id="industria-select"
+                      required
+                    >
+                      <option selected value="Tecnología/SaaS"
+                        >Tecnología / SaaS</option
+                      >
+                      <option value="Servicios/Consultoría"
+                        >Servicios / Consultoría</option
+                      >
+                      <option value="Salud/Veterinaria"
+                        >Salud / Veterinaria</option
+                      >
+                      <option value="Comercio/Retail">Comercio / Retail</option>
+                      <option value="Manufactura/Logística"
+                        >Manufactura / Logística</option
+                      >
+                      <option value="Finanzas">Finanzas</option>
+                      <option value="Otro">Otro</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <div class="flex flex-col gap-1">
+                    <label class="font-semibold text-slate-700" for="pais-input"
+                      >País</label
+                    >
+                    <input
+                      class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white"
+                      id="pais-input"
+                      placeholder="Ej. Colombia"
+                      required
+                      type="text"
+                      value="Colombia"
+                    />
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <label
+                      class="font-semibold text-slate-700"
+                      for="ciudad-input">Ciudad</label
+                    >
+                    <input
+                      class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white"
+                      id="ciudad-input"
+                      placeholder="Ej. Bogotá"
+                      required
+                      type="text"
+                      value="Bogotá"
+                    />
+                  </div>
+                </div>
+
+                <div class="pt-1">
+                  <button
+                    id="submit-btn"
+                    class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
+                    type="submit"
+                  >
+                    <span>Ver diagnóstico de cuello de botella →</span>
+                  </button>
+                </div>
+                <input type="text" name="contacto_extra" data-trampa tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
+              </form>
+            </div>
+
+            <!-- Vista de Diagnóstico Completado -->
+            <div
+              class="wizard-step hidden flex flex-col gap-3"
+              id="step-completed"
+            >
+              <div
+                class="p-3 bg-teal-50 border border-teal-200 rounded-xl flex items-start gap-2.5"
+              >
+                <span
+                  class="material-symbols-outlined text-teal-700 text-xl shrink-0"
+                  >check_circle</span
+                >
+                <div class="flex flex-col gap-0.5">
+                  <h4 class="text-xs font-bold text-slate-900">
+                    Diagnóstico completado y registrado
+                  </h4>
+                  <p class="text-[11px] text-slate-600">
+                    Revisa la tarjeta en el lateral con el cálculo de fuga
+                    operativa y descarga tu PDF.
+                  </p>
+                </div>
+              </div>
+              <div
+                class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-col gap-1"
+              >
+                <span
+                  class="font-mono text-[10px] uppercase font-semibold text-slate-500"
+                  >Resumen procesado:</span
+                >
+                <div
+                  class="text-xs text-slate-700 leading-relaxed"
+                  id="completion-summary-text"
+                >
+                  Diagnóstico listo para analizar en conversación con Pablo.
+                </div>
+              </div>
+              <div class="flex items-center gap-2 pt-1">
+                <button
+                  class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer"
+                  onclick="window.goToStep(1)"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[15px]"
+                    >restart_alt</span
+                  >
+                  Reiniciar diagnóstico
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botones de Navegación del Wizard -->
+          <div
+            class="pt-3 border-t border-slate-100 flex items-center justify-between"
+            id="wizard-navigation"
+          >
+            <button
+              class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+              disabled
+              id="btn-prev"
+              onclick="window.prevStep()"
+              type="button"
+            >
+              <span class="material-symbols-outlined text-[15px]"
+                >arrow_back</span
+              >
+              <span>Anterior</span>
+            </button>
+            <div class="flex items-center gap-1.5" id="step-dots">
+              <span class="w-4 h-2 rounded-full transition-all bg-teal-700"
+              ></span>
+              <span class="w-2 h-2 rounded-full transition-all bg-slate-200"
+              ></span>
+              <span class="w-2 h-2 rounded-full transition-all bg-slate-200"
+              ></span>
+              <span class="w-2 h-2 rounded-full transition-all bg-slate-200"
+              ></span>
+              <span class="w-2 h-2 rounded-full transition-all bg-slate-200"
+              ></span>
+              <span class="w-2 h-2 rounded-full transition-all bg-slate-200"
+              ></span>
+              <span class="w-2 h-2 rounded-full transition-all bg-slate-200"
+              ></span>
+            </div>
+            
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Tarjeta Viva "Tu cuello de botella" -->
+        <div class="lg:col-span-5 lg:sticky lg:top-20">
+          <div
+            class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 md:p-6 flex flex-col gap-4"
+            id="assessment-card"
+          >
+            <div
+              class="flex items-center justify-between pb-2 border-b border-slate-100"
+            >
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                <span
+                  class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-900"
+                  >Tu cuello de botella</span
+                >
+              </div>
+              <span class="font-mono text-[10px] text-slate-500"
+                >Live Assessment</span
+              >
+            </div>
+
+            <!-- Proceso Activo -->
+            <div
+              class="flex flex-col gap-1 bg-slate-50 p-3 rounded-xl border border-slate-100"
+            >
+              <span class="font-mono text-[10px] uppercase text-slate-500"
+                >Proceso identificado:</span
+              >
+              <h3
+                class="text-sm font-bold text-slate-900 leading-snug"
+                id="card-proceso"
+              >
+                Selecciona tus respuestas...
+              </h3>
+              <span
+                class="text-[10px] text-slate-500 font-mono"
+                id="card-company-tag">Tus datos aparecerán aquí</span
+              >
+            </div>
+
+            <!-- Resumen en tiempo real -->
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div
+                class="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-0.5"
+              >
+                <span class="font-mono text-[10px] text-slate-500"
+                  >Frecuencia:</span
+                >
+                <span class="font-semibold text-slate-800" id="card-frecuencia"
+                  >-</span
+                >
+              </div>
+              <div
+                class="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-0.5"
+              >
+                <span class="font-mono text-[10px] text-slate-500"
+                  >Tiempo estimado:</span
+                >
+                <span class="font-semibold text-teal-700" id="card-tiempo"
+                  >Por calcular</span
+                >
+              </div>
+              <div
+                class="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-0.5"
+              >
+                <span class="font-mono text-[10px] text-slate-500"
+                  >Personas involucradas:</span
+                >
+                <span class="font-semibold text-slate-800" id="card-personas"
+                  >-</span
+                >
+              </div>
+              <div
+                class="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-0.5"
+              >
+                <span class="font-mono text-[10px] text-slate-500"
+                  >Esfuerzo de mejora:</span
+                >
+                <span class="font-semibold text-slate-800" id="card-esfuerzo"
+                  >-</span
+                >
+              </div>
+            </div>
+
+            <div
+              class="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-0.5 text-xs"
+            >
+              <span class="font-mono text-[10px] text-slate-500"
+                >Impacto principal:</span
+              >
+              <span class="font-semibold text-slate-800" id="card-impacto"
+                >-</span
+              >
+            </div>
+
+            <!-- Indicador Prioridad -->
+            <div
+              class="p-3 bg-teal-50/70 border border-teal-100 rounded-xl flex flex-col gap-1.5"
+            >
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold text-teal-800"
+                  >¿Vale la pena intervenir?</span
+                >
+                <span
+                  class="px-2 py-0.5 rounded font-mono text-[10px] font-bold bg-slate-100 text-slate-600 uppercase"
+                  id="card-priority-badge">Sin selección</span
+                >
+              </div>
+              <p
+                class="text-[11px] text-slate-600 leading-relaxed"
+                id="card-justification"
+              >
+                Responde las preguntas del diagnóstico a la izquierda para
+                estimar la fuga de tiempo semanal de tu equipo.
+              </p>
+            </div>
+
+            <!-- Mensaje clave de LuciRMe -->
+            <div
+              class="p-3 bg-slate-100 rounded-xl text-[11px] text-slate-600 leading-relaxed border border-slate-200/80"
+            >
+              <span class="font-semibold text-slate-800">Criterio LuciRMe:</span
+              > Primero entendemos el proceso real antes de proponer tecnología o
+              IA.
+            </div>
+
+            <!-- Botón CTA WhatsApp -->
+            <a
+              class="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors shadow-2xs text-center cursor-pointer"
+              href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero revisar un proceso operativo en mi empresa.")}`}
+              id="card-whatsapp-btn"
+              rel="noopener noreferrer"
+              target="_blank"
+              onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_whatsapp_click', { origen: 'diagnostico_card' }); }"
+            >
+              <span class="material-symbols-outlined text-[17px]">chat</span>
+              <span>Quiero revisar este proceso con Pablo</span>
+            </a>
+
+            <div class="grid grid-cols-2 gap-2 pt-0.5 w-full">
+              <button
+                type="button"
+                onclick="window.downloadPDF()"
+                class="inline-flex items-center justify-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 transition-colors shadow-2xs cursor-pointer"
+              >
+                <span
+                  class="material-symbols-outlined text-[15px] text-slate-500"
+                  >download</span
+                >
+                <span>Descargar PDF</span>
+              </button>
+              <button
+                type="button"
+                onclick="window.shareDiagnostic()"
+                class="inline-flex items-center justify-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 transition-colors shadow-2xs cursor-pointer"
+              >
+                <span
+                  class="material-symbols-outlined text-[15px] text-slate-500"
+                  >share</span
+                >
+                <span>Compartir</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CÓMO TRABAJAMOS -->
+    <section
+      class="w-full max-w-7xl mx-auto px-6 py-20 border-t border-slate-200"
+      id="como-trabajamos"
+    >
+      <div class="max-w-3xl mb-12 flex flex-col gap-2">
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase"
+          >¿Qué sigue después del diagnóstico?</span
+        >
+        <h2
+          class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900"
+        >
+          ¿Qué hacemos después del diagnóstico?
+        </h2>
+        <p class="text-base text-slate-600 leading-relaxed">
+          No todos los problemas necesitan el mismo tipo de intervención. Por
+          eso, el siguiente paso depende de lo que encontremos.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Paso 01 -->
+        <div
+          class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-4"
+        >
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold text-teal-800">01</span>
+            <span class="material-symbols-outlined text-teal-600 text-[20px]"
+              >chat</span
+            >
+          </div>
+          <h3 class="text-base font-bold text-slate-900 leading-snug">
+            Conversación de 30 minutos con Pablo
+          </h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Al final de la llamada tienes el proceso priorizado y una recomendación concreta, aunque no decidas contratar.
+          </p>
+        </div>
+
+        <!-- Paso 02 -->
+        <div
+          class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-4"
+        >
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold text-teal-800">02</span>
+            <span class="material-symbols-outlined text-slate-400 text-[20px]"
+              >groups</span
+            >
+          </div>
+          <h3 class="text-base font-bold text-slate-900 leading-snug">
+            Taller de inmersión con el equipo
+          </h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Nos metemos en el proceso real: cómo trabajan hoy, dónde se atascan,
+            qué herramientas utilizan y qué está generando el problema.
+          </p>
+          <span class="font-mono text-[11px] text-teal-800 font-semibold mt-1 block">Desde $1.000.000 COP por empresa.</span>
+        </div>
+
+        <!-- Paso 03 -->
+        <div
+          class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-4"
+        >
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold text-emerald-600">03</span>
+            <span class="material-symbols-outlined text-emerald-600 text-[20px]"
+              >school</span
+            >
+          </div>
+          <h3 class="text-base font-bold text-slate-900 leading-snug">
+            Ciclo de autonomía
+          </h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Diseñamos e implementamos la solución junto al equipo. No se trata
+            solo de entregar algo funcionando: acompaño, capacito y dejo al
+            equipo preparado para utilizarlo y seguir mejorándolo por su cuenta.
+          </p>
+        </div>
+
+        <!-- Paso 04 -->
+        <div
+          class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-4"
+        >
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs font-bold text-slate-400">04</span>
+            <span class="material-symbols-outlined text-slate-400 text-[20px]"
+              >precision_manufacturing</span
+            >
+          </div>
+          <div class="flex flex-col gap-1">
+            <h3 class="text-base font-bold text-slate-900 leading-snug">
+              Automatizaciones a la medida
+            </h3>
+            <span
+              class="font-mono text-[11px] text-slate-500 uppercase font-semibold"
+              >Opcional</span
+            >
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Si el proceso necesita desarrollo o automatización más avanzada,
+            podemos construirla a medida e integrarla al flujo de trabajo
+            existente.
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="mt-8 p-6 md:p-8 bg-slate-100 rounded-2xl border border-slate-200 text-center"
+      >
+        <p
+          class="text-base md:text-lg font-semibold text-slate-900 tracking-tight"
+        >
+          "El objetivo no es que dependas de nosotros. Es que tu equipo pueda
+          hacer más por sí mismo."
+        </p>
+      </div>
+
+      <div
+        class="mt-8 flex flex-col items-center justify-center gap-3 text-center"
+      >
+        <a
+          class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
+          href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, estuve revisando los pasos después del diagnóstico y quiero conversar sobre mi empresa.")}`}
+          rel="noopener noreferrer"
+          target="_blank"
+          onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_whatsapp_click', { origen: 'como_trabajamos' }); }"
+        >
+          <span class="material-symbols-outlined text-[18px]">chat</span>
+          <span>Hablar por WhatsApp con Pablo</span>
+        </a>
+        <p class="text-xs font-mono text-slate-500">
+          Respuesta directa por WhatsApp sin intermediarios ni compromiso.
+        </p>
+      </div>
+    </section>
+
+    <!-- CASOS DE EQUIPOS / PRUEBA SOCIAL -->
+    <SocialProof tipo="empresas" id="casos" />
+
+    <!-- 8. PABLO (SOBRE MÍ) -->
+    <SobreMi id="pablo" h1={false} />
+
+    <!-- 9. CTA FINAL -->
+    <section
+      class="w-full max-w-7xl mx-auto px-6 py-20 border-t border-slate-200"
+    >
+      <div
+        class="p-8 md:p-14 bg-white rounded-2xl border border-slate-200 text-center flex flex-col items-center gap-5 shadow-2xs max-w-4xl mx-auto"
+      >
+        <span class="font-mono text-xs font-semibold text-teal-800 uppercase"
+          >Paso Siguiente</span
+        >
+        <h2
+          class="text-2xl md:text-4xl font-bold tracking-tight text-slate-900"
+        >
+          ¿Ya sabes qué proceso quieres mejorar?
+        </h2>
+        <p
+          class="text-sm md:text-base text-slate-600 max-w-2xl leading-relaxed"
+        >
+          Cuéntame qué está pasando. Revisamos el problema, hablamos de posibles
+          caminos y te digo qué haría yo. Sin presentación comercial genérica.
+          Sin venderte una herramienta porque sí.
+        </p>
+        <div
+          class="flex flex-col sm:flex-row items-center gap-3 pt-3 w-full sm:w-auto justify-center"
+        >
+          <a
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
+            href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, tengo un proceso identificado para mejorar en mi empresa.")}`}
+            rel="noopener noreferrer"
+            target="_blank"
+            onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_whatsapp_click', { origen: 'cta_final' }); }"
+          >
+            <span class="material-symbols-outlined text-[18px]">chat</span>
+            <span>Hablemos por WhatsApp</span>
+          </a>
+        </div>
+        <p class="text-xs font-mono text-slate-500 pt-2">
+          Conversación estratégica directa. Sin compromiso de contratación.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <!-- 10. DEDICATED EMPRESAS FOOTER -->
+
+  <!-- Script empaquetado por Vite con import estático de pdfGenerator -->
+  <script>
+    import { generateBottleneckPDF } from "../lib/pdfGenerator";
+
+    let currentStep = 1;
+    const totalSteps = 7;
+
+    const currentSelections: Record<string, any> = {
+      proceso: [],
+      frecuencia: "",
+      tiempo: "",
+      personas: "",
+      impacto: [],
+      esfuerzo: "",
+      costoHora: "",
+      frecuenciaRetrabajo: "",
+      consecuenciaPrincipal: "",
+      resultadoDeseado: "",
+      name: "",
+      email: "",
+      empresa: "",
+      tamano: "11-50 personas",
+      industria: "Tecnología/SaaS",
+      pais: "Colombia",
+      ciudad: "Bogotá",
+    };
+
+    function updateProgressBar() {
+      const bar = document.getElementById("progress-bar");
+      const counter = document.getElementById("step-counter");
+      const prevBtn = document.getElementById(
+        "btn-prev",
+      ) as HTMLButtonElement | null;
+      const nextBtn = document.getElementById("btn-next");
+      const stepHint = document.getElementById("step-hint");
+      const dotsContainer = document.getElementById("step-dots");
+
+      if (!bar || !counter) return;
+
+      if (currentStep <= totalSteps) {
+        const percentage = (currentStep / totalSteps) * 100;
+        bar.style.width = percentage + "%";
+        counter.innerText = `Paso ${currentStep} de ${totalSteps}`;
+        if (prevBtn) prevBtn.disabled = currentStep === 1;
+
+        if (currentStep === totalSteps) {
+          if (nextBtn) nextBtn.classList.add("hidden");
+          if (stepHint) stepHint.innerText = "Último paso · Datos de contacto";
+        } else {
+          if (nextBtn) nextBtn.classList.remove("hidden");
+          if (stepHint) stepHint.innerText = "Selecciona una opción";
+        }
+
+        if (dotsContainer) {
+          dotsContainer.innerHTML = "";
+          for (let i = 1; i <= totalSteps; i++) {
+            const dot = document.createElement("span");
+            dot.className = `h-2 rounded-full transition-all ${i === currentStep ? "bg-teal-700 w-4" : i < currentStep ? "bg-teal-300 w-2" : "bg-slate-200 w-2"}`;
+            dotsContainer.appendChild(dot);
+          }
+        }
+      } else {
+        bar.style.width = "100%";
+        counter.innerText = "Diagnóstico Finalizado";
+        if (stepHint) stepHint.innerText = "Evaluación generada";
+        if (prevBtn) prevBtn.disabled = false;
+        if (nextBtn) nextBtn.classList.add("hidden");
+        if (dotsContainer) {
+          dotsContainer.innerHTML =
+            '<span class="text-xs font-mono text-emerald-600 font-semibold">100% Completado</span>';
+        }
+      }
+    }
+
+    function goToStep(step: number) {
+      document
+        .querySelectorAll(".wizard-step")
+        .forEach((el) => el.classList.add("hidden"));
+
+      currentStep = step;
+      if (step <= totalSteps) {
+        const targetStep = document.getElementById(`step-${step}`);
+        if (targetStep) targetStep.classList.remove("hidden");
+      } else {
+        const compStep = document.getElementById("step-completed");
+        if (compStep) compStep.classList.remove("hidden");
+      }
+
+      updateProgressBar();
+    }
+
+    function nextStep() {
+      if (currentStep < totalSteps) {
+        goToStep(currentStep + 1);
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 1) {
+        goToStep(currentStep - 1);
+      }
+    }
+
+    function selectStepOption(
+      category: string,
+      value: string,
+      btnElement: HTMLElement,
+    ) {
+      if (category === 'proceso' || category === 'impacto') {
+        if (!Array.isArray(currentSelections[category])) {
+          currentSelections[category] = [];
+        }
+        const index = currentSelections[category].indexOf(value);
+        if (index > -1) {
+          currentSelections[category].splice(index, 1);
+          btnElement.classList.remove("border-teal-700", "bg-teal-50/80", "text-teal-900", "font-bold");
+          btnElement.classList.add("border-slate-200", "text-slate-700");
+          const icon = btnElement.querySelector(".material-symbols-outlined");
+          if (icon) {
+            icon.textContent = "circle";
+            icon.classList.remove("text-teal-700");
+            icon.classList.add("text-slate-300", "opacity-0");
+          }
+        } else {
+          currentSelections[category].push(value);
+          btnElement.classList.remove("border-slate-200", "text-slate-700");
+          btnElement.classList.add("border-teal-700", "bg-teal-50/80", "text-teal-900", "font-bold");
+          const icon = btnElement.querySelector(".material-symbols-outlined");
+          if (icon) {
+            icon.textContent = "check_circle";
+            icon.classList.remove("text-slate-300", "opacity-0");
+            icon.classList.add("text-teal-700");
+          }
+        }
+      } else {
+        currentSelections[category] = value;
+        const parent = btnElement.parentElement;
+        if (parent) {
+          const buttons = parent.querySelectorAll(".diag-option");
+          buttons.forEach((btn) => {
+            btn.classList.remove("border-teal-700", "bg-teal-50/80", "text-teal-900", "font-bold");
+            btn.classList.add("border-slate-200", "text-slate-700");
+            const icon = btn.querySelector(".material-symbols-outlined");
+            if (icon) {
+              icon.textContent = "circle";
+              icon.classList.remove("text-teal-700");
+              icon.classList.add("text-slate-300", "opacity-0");
+            }
+          });
+        }
+        btnElement.classList.remove("border-slate-200", "text-slate-700");
+        btnElement.classList.add("border-teal-700", "bg-teal-50/80", "text-teal-900", "font-bold");
+        const activeIcon = btnElement.querySelector(".material-symbols-outlined");
+        if (activeIcon) {
+          activeIcon.textContent = "check_circle";
+          activeIcon.classList.remove("text-slate-300", "opacity-0");
+          activeIcon.classList.add("text-teal-700");
+        }
+      }
+
+      recalculateAssessment();
+
+      // Only auto-advance if it's not the multi-select process or impacto question
+      if (category !== 'proceso' && category !== 'impacto') {
+        setTimeout(() => {
+          if (currentStep < totalSteps) {
+            nextStep();
+          }
+        }, 260);
+      }
+    }
+
+    function calculateEstimatedWeeklyHours() {
+      if (!currentSelections.proceso && !currentSelections.frecuencia) {
+        return 0;
+      }
+
+      let freqMultiplier = 5;
+      if (currentSelections.frecuencia.includes("Varias veces al día"))
+        freqMultiplier = 15;
+      else if (currentSelections.frecuencia.includes("Todos los días"))
+        freqMultiplier = 5;
+      else if (currentSelections.frecuencia.includes("Varias veces por semana"))
+        freqMultiplier = 3;
+      else if (currentSelections.frecuencia.includes("Una vez por semana"))
+        freqMultiplier = 1;
+      else if (currentSelections.frecuencia.includes("Algunas veces al mes"))
+        freqMultiplier = 0.5;
+
+      let timeValue = 1.5;
+      if (currentSelections.tiempo.includes("Menos de 15 minutos"))
+        timeValue = 0.2;
+      else if (currentSelections.tiempo.includes("15–30 minutos"))
+        timeValue = 0.4;
+      else if (currentSelections.tiempo.includes("30–60 minutos"))
+        timeValue = 0.75;
+      else if (currentSelections.tiempo.includes("1–2 horas")) timeValue = 1.5;
+      else if (currentSelections.tiempo.includes("Más de 2 horas"))
+        timeValue = 2.5;
+
+      let personsCount = 2;
+      if (currentSelections.personas.includes("1 persona")) personsCount = 1;
+      else if (currentSelections.personas.includes("2 a 4 personas"))
+        personsCount = 2.5;
+      else if (currentSelections.personas.includes("4 a 5 personas"))
+        personsCount = 4.5;
+      else if (currentSelections.personas.includes("Más de 5 personas"))
+        personsCount = 6;
+
+      return Math.round(freqMultiplier * timeValue * personsCount * 10) / 10;
+    }
+
+    function recalculateAssessment() {
+      const hasSelections = !!currentSelections.proceso;
+
+      const elProc = document.getElementById("card-proceso");
+      if (elProc) {
+        elProc.innerText = hasSelections
+          ? (Array.isArray(currentSelections.proceso) ? currentSelections.proceso.join(', ') : currentSelections.proceso)
+          : "Selecciona tus respuestas...";
+      }
+
+      const elFreq = document.getElementById("card-frecuencia");
+      if (elFreq) {
+        elFreq.innerText = currentSelections.frecuencia || "-";
+      }
+
+      const weeklyHours = calculateEstimatedWeeklyHours();
+      const elTime = document.getElementById("card-tiempo");
+      if (elTime) {
+        elTime.innerText = hasSelections
+          ? `~${weeklyHours} h/semana`
+          : "Por calcular";
+      }
+
+      const elPers = document.getElementById("card-personas");
+      if (elPers) elPers.innerText = currentSelections.personas || "-";
+
+      const elImp = document.getElementById("card-impacto");
+      if (elImp) {
+          let impactoDisplay = Array.isArray(currentSelections.impacto) ? [...currentSelections.impacto] : [];
+          const elOtroInput = document.getElementById('otro-impacto-input') as HTMLInputElement;
+          if (elOtroInput && !elOtroInput.classList.contains('hidden') && elOtroInput.value) {
+              impactoDisplay = impactoDisplay.filter(i => i !== 'Otro');
+              impactoDisplay.push(elOtroInput.value);
+          }
+          elImp.innerText = impactoDisplay.length > 0 ? impactoDisplay.join(', ') : "-";
+      }
+
+      const elEsf = document.getElementById("card-esfuerzo");
+      if (elEsf) elEsf.innerText = currentSelections.esfuerzo || "-";
+
+      const elTag = document.getElementById("card-company-tag");
+      if (elTag) {
+        elTag.innerText = currentSelections.empresa
+          ? `${currentSelections.empresa} · ${currentSelections.industria} (${currentSelections.ciudad}, ${currentSelections.pais})`
+          : "Tus datos aparecerán aquí";
+      }
+
+      const badge = document.getElementById("card-priority-badge");
+      const justification = document.getElementById("card-justification");
+
+      if (!hasSelections) {
+        if (badge) {
+          badge.className =
+            "px-2 py-0.5 rounded font-mono text-[10px] font-bold bg-slate-100 text-slate-600 uppercase";
+          badge.innerText = "Sin selección";
+        }
+        if (justification) {
+          justification.innerHTML =
+            "Responde las preguntas del diagnóstico a la izquierda para estimar la fuga de tiempo semanal de tu equipo.";
+        }
+        return;
+      }
+
+      let prioridad: "Alta" | "Media" = "Media";
+      if (
+        weeklyHours >= 12 ||
+        currentSelections.impacto.includes("ingresos") ||
+        currentSelections.impacto.includes("varios") ||
+        currentSelections.impacto.includes("cliente")
+      ) {
+        prioridad = "Alta";
+      }
+
+      if (badge && justification) {
+        if (prioridad === "Alta") {
+          badge.className =
+            "px-2 py-0.5 rounded font-mono text-[10px] font-bold bg-amber-100 text-amber-900 uppercase";
+          badge.innerText = "Prioridad: Alta";
+          justification.innerHTML = `Este proceso genera una fuga de aproximadamente <strong class="text-slate-900">~${weeklyHours} horas/semana</strong> combinando alta recurrencia e impacto directo en la operación.`;
+        } else {
+          badge.className =
+            "px-2 py-0.5 rounded font-mono text-[10px] font-bold bg-teal-100 text-teal-800 uppercase";
+          badge.innerText = "Prioridad: Media";
+          justification.innerHTML = `Este proceso genera cerca de <strong class="text-slate-900">~${weeklyHours} horas/semana</strong>. Recomendamos simplificarlo o automatizar pasos clave.`;
+        }
+      }
+
+      const waBtn = document.getElementById(
+        "card-whatsapp-btn",
+      ) as HTMLAnchorElement | null;
+      if (waBtn) {
+        const encodedMsg = encodeURIComponent(
+          `Hola Pablo, completé el diagnóstico de LuciRMe AI para ${currentSelections.empresa || "mi empresa"} (${currentSelections.pais}):\n\n` +
+            `• Proceso a mejorar: ${currentSelections.proceso}\n` +
+            `• Frecuencia: ${currentSelections.frecuencia}\n` +
+            `• Tiempo por sesión: ${currentSelections.tiempo}\n` +
+            `• Fuga calculada: ~${weeklyHours} hrs/semana\n` +
+            `• Personas involucradas: ${currentSelections.personas}\n` +
+            `• Impacto principal: ${currentSelections.impacto}\n` +
+            `• Esfuerzo estimado: ${currentSelections.esfuerzo}\n\n` +
+            `Quiero revisar este proceso contigo.`,
+        );
+        waBtn.href = `https://wa.me/573053046180?text=${encodedMsg}`;
+      }
+
+      (window as any).latestDiagnosis = {
+        ...currentSelections,
+        weeklyHours,
+        prioridad,
+        prioridadBadge:
+          prioridad === "Alta"
+            ? "P1 Urgente · Alto ROI Inmediato"
+            : "P2 Recomendado · ROI Moderado",
+        justificacion: `Fuga aproximada de ~${weeklyHours} horas/semana.`,
+        recomendacion: "Revisión estratégica de 30 min con Pablo Ríos.",
+        empresaTag: `${currentSelections.empresa || "Mi Empresa"} · ${currentSelections.industria} (${currentSelections.ciudad}, ${currentSelections.pais})`,
+        empresa: currentSelections.empresa || "Mi Empresa",
+        name: currentSelections.name || "Contacto",
+        email: currentSelections.email || "contacto@empresa.com",
+        tamano: currentSelections.tamano || "11-50 personas",
+        industria: currentSelections.industria || "Tecnología/SaaS",
+        pais: currentSelections.pais || "Colombia",
+        ciudad: currentSelections.ciudad || "Bogotá",
+      };
+    }
+
+    async function submitDiagnostic() {
+      const nombreInput = document.getElementById(
+        "nombre-input",
+      ) as HTMLInputElement | null;
+      const emailInput = document.getElementById(
+        "email-input",
+      ) as HTMLInputElement | null;
+      const empInput = document.getElementById(
+        "empresa-input",
+      ) as HTMLInputElement | null;
+      const tamSelect = document.getElementById(
+        "tamano-select",
+      ) as HTMLSelectElement | null;
+      const indSelect = document.getElementById(
+        "industria-select",
+      ) as HTMLSelectElement | null;
+      const paisInput = document.getElementById(
+        "pais-input",
+      ) as HTMLInputElement | null;
+      const cdInput = document.getElementById(
+        "ciudad-input",
+      ) as HTMLInputElement | null;
+      const submitBtn = document.getElementById(
+        "submit-btn",
+      ) as HTMLButtonElement | null;
+
+      const nameVal = (nombreInput && nombreInput.value.trim()) || "";
+      const emailVal = (emailInput && emailInput.value.trim()) || "";
+      const empVal = (empInput && empInput.value.trim()) || "Mi Empresa";
+
+      if (!emailVal || !emailVal.includes("@")) {
+        alert("Por favor ingresa un correo electrónico corporativo válido.");
+        return;
+      }
+
+      if (!nameVal) {
+        alert("Por favor ingresa tu nombre.");
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Enviando y calculando...";
+      }
+
+      currentSelections.name = nameVal;
+      currentSelections.email = emailVal;
+      currentSelections.empresa = empVal;
+      currentSelections.tamano =
+        (tamSelect && tamSelect.value) || "11-50 personas";
+      currentSelections.industria =
+        (indSelect && indSelect.value) || "Tecnología/SaaS";
+      currentSelections.pais =
+        (paisInput && paisInput.value.trim()) || "Colombia";
+      currentSelections.ciudad = (cdInput && cdInput.value.trim()) || "Bogotá";
+      currentSelections.costoHora = (document.getElementById("costo-input") as HTMLInputElement)?.value || "";
+      currentSelections.frecuenciaRetrabajo = (document.getElementById("retrabajo-select") as HTMLSelectElement)?.value || "";
+      currentSelections.consecuenciaPrincipal = (document.getElementById("consecuencia-input") as HTMLInputElement)?.value || "";
+      currentSelections.resultadoDeseado = (document.getElementById("resultado-input") as HTMLInputElement)?.value || "";
+
+      if (currentSelections['proceso-otro']) {
+        if (!Array.isArray(currentSelections.proceso)) {
+          currentSelections.proceso = [currentSelections.proceso];
+        }
+        currentSelections.proceso.push(currentSelections['proceso-otro']);
+      }
+
+      recalculateAssessment();
+
+      try {
+        currentSelections.website = (document.querySelector('[data-trampa]') as HTMLInputElement | null)?.value || '';
+        const response = await fetch("/api/bottleneck-diagnosis", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(currentSelections),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok && result.error) {
+          alert(result.error);
+        } else if (result.success) {
+          sessionStorage.setItem('diagnosticResult', JSON.stringify(result));
+          window.location.href = '/diagnostico-resultado';
+        }
+      } catch (err) {
+        console.error("Error enviando diagnóstico:", err);
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = "Ver diagnóstico de cuello de botella →";
+        }
+      }
+
+      const hours = calculateEstimatedWeeklyHours();
+      const sumText = document.getElementById("completion-summary-text");
+      if (sumText) {
+        sumText.innerHTML = `
+          Para <strong>${currentSelections.empresa}</strong> (${currentSelections.industria}, ${currentSelections.tamano}), el proceso <strong>"${currentSelections.proceso || "Analizado"}"</strong> representa una carga de aproximadamente <strong>~${hours} horas por semana</strong> para ${currentSelections.personas || "el equipo"}.
+        `;
+      }
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture("bottleneck_diagnosis_completed", {
+          process: currentSelections.proceso,
+          company_size: currentSelections.tamano,
+          industry: currentSelections.industria,
+          estimated_hours_week: hours,
+          priority: (window as any).latestDiagnosis?.prioridad || "Alta",
+        });
+        (window as any).posthog.capture("bottleneck_diagnosis_lead_submitted", {
+          company_size: currentSelections.tamano,
+          industry: currentSelections.industria,
+          city: currentSelections.ciudad,
+          country: currentSelections.pais,
+        });
+      }
+
+      const card = document.getElementById("assessment-card");
+      if (card) {
+        card.classList.add("ring-2", "ring-emerald-500");
+        setTimeout(() => {
+          card.classList.remove("ring-2", "ring-emerald-500");
+        }, 1500);
+      }
+
+      goToStep(totalSteps + 1);
+    }
+
+    function downloadPDF() {
+      recalculateAssessment();
+
+      const diag = (window as any).latestDiagnosis || {
+        proceso:
+          currentSelections.proceso ||
+          "Reportes y consolidación de información",
+        frecuencia: currentSelections.frecuencia || "Todos los días",
+        tiempo: currentSelections.tiempo || "1–2 horas",
+        personas: currentSelections.personas || "2 a 4 personas",
+        impacto: currentSelections.impacto || "Afecta al cliente",
+        esfuerzo: currentSelections.esfuerzo || "Moderado",
+        weeklyHours: calculateEstimatedWeeklyHours() || 18.8,
+        prioridad: "Alta",
+        prioridadBadge: "P1 Urgente · Alto ROI Inmediato",
+        justificacion: "Fuga estimada de tiempo semanal.",
+        recomendacion:
+          "Agendar revisión estratégica de 30 minutos con Pablo Ríos.",
+        empresaTag: `${currentSelections.empresa || "Mi Empresa"} · ${currentSelections.industria} (${currentSelections.ciudad}, ${currentSelections.pais})`,
+        empresa: currentSelections.empresa || "Mi Empresa",
+        name: currentSelections.name || "Contacto",
+        email: currentSelections.email || "contacto@empresa.com",
+        tamano: currentSelections.tamano || "11-50 personas",
+        industria: currentSelections.industria || "Tecnología/SaaS",
+        pais: currentSelections.pais || "Colombia",
+        ciudad: currentSelections.ciudad || "Bogotá",
+      };
+
+      try {
+        generateBottleneckPDF(diag);
+
+        if ((window as any).posthog) {
+          (window as any).posthog.capture(
+            "bottleneck_diagnosis_pdf_downloaded",
+            {
+              process: diag.proceso,
+              company: diag.empresa,
+              estimated_hours_week: diag.weeklyHours,
+            },
+          );
+        }
+      } catch (pdfErr) {
+        console.error("Error generando PDF:", pdfErr);
+        alert(
+          "Ocurrió un error al generar el PDF. Por favor inténtalo de nuevo.",
+        );
+      }
+    }
+
+    async function shareDiagnostic() {
+      recalculateAssessment();
+      const hours = calculateEstimatedWeeklyHours() || 18.8;
+      const shareData = {
+        title: "Diagnóstico de Cuello de Botella - LuciRMe AI",
+        text: `Diagnóstico operativo para ${currentSelections.empresa || "mi empresa"}: fuga estimada de ~${hours} hrs/semana en ${currentSelections.proceso || "proceso operativo"}.`,
+        url: window.location.href,
+      };
+
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          if ((window as any).posthog) {
+            (window as any).posthog.capture("bottleneck_diagnosis_shared", {
+              method: "native_share",
+            });
+          }
+        } catch (err) {
+          console.log("Share cancelado o falló:", err);
+        }
+      } else if (navigator.clipboard) {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          alert("Enlace del diagnóstico copiado al portapapeles.");
+          if ((window as any).posthog) {
+            (window as any).posthog.capture("bottleneck_diagnosis_shared", {
+              method: "clipboard",
+            });
+          }
+        } catch (clipErr) {
+          console.error("Error al copiar:", clipErr);
+        }
+      }
+    }
+
+    // Attach to window so inline onclick handlers work smoothly
+    (window as any).goToStep = goToStep;
+    (window as any).nextStep = nextStep;
+    (window as any).prevStep = prevStep;
+    (window as any).selectStepOption = selectStepOption;
+    (window as any).submitDiagnostic = submitDiagnostic;
+    (window as any).downloadPDF = downloadPDF;
+    (window as any).shareDiagnostic = shareDiagnostic;
+    (window as any).recalculateAssessment = recalculateAssessment;
+    (window as any).currentSelections = currentSelections;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      updateProgressBar();
+
+      if ((window as any).posthog) {
+        (window as any).posthog.capture("bottleneck_diagnosis_started", {
+          pagina: "empresas_b2b_custom",
+        });
+      }
+    });
+  </script>
+</LayoutV2>

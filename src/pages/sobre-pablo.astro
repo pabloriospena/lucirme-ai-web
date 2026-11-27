@@ -1,8 +1,8 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import SobreMi from "../components/SobreMi.astro";
-import ActionHub from "../components/ActionHub.astro";
-import RedesSociales from "../components/RedesSociales.astro";
+// Sobre Pablo con el diseño de Web v2. Textos tomados de la página anterior (SobreMi), sin cifras nuevas.
+// Falta: trayectoria con años (no hay datos verificados) y confirmar la fuente de cada dato.
+import LayoutV2 from "../layouts/LayoutV2.astro";
+import SigueEnRedes from "../components/v2/SigueEnRedes.astro";
 
 const profileJsonLd = {
   "@context": "https://schema.org",
@@ -26,27 +26,74 @@ const profileJsonLd = {
     ],
   },
 };
+
+const datos = [
+  { n: "+50 personas", t: "Acompañadas 1 a 1 en procesos reales de trabajo y adopción de IA." },
+  { n: "+30 empresas", t: "Con las que he trabajado en operaciones, flujos con LLMs y automatizaciones." },
+  { n: "+13 años", t: "Liderando producto, tecnología y operaciones en startups y corporativos de Latam." },
+];
+const principios = [
+  "Priorizo y digo que no con criterio.",
+  "Parto de tu trabajo real, no de la teoría.",
+  "Quiero que mejores tu día a día sin depender de mí.",
+];
 ---
 
-<Layout
+<LayoutV2
   title="Sobre Pablo Ríos | LuciRMe AI"
   description="Pablo Ríos es Ingeniero de Sistemas con más de 13 años en producto, tecnología e inteligencia artificial. Fundador de LuciRMe AI."
   jsonLd={profileJsonLd}
 >
-  <main class="py-12 bg-white">
-    <SobreMi />
-  </main>
+  <div class="w-full bg-v2-fondo">
+    <div class="mx-auto flex w-full max-w-[1120px] flex-col gap-14 px-5 py-10 sm:px-8 sm:py-16">
+      <section class="grid items-start gap-8 md:grid-cols-[240px_1fr] md:gap-12">
+        <img src="/pablo-rios.jpeg" alt="Pablo Ríos" width="240" height="300" class="aspect-[4/5] w-full max-w-[240px] rounded-3xl border-[0.8px] border-v2-borde object-cover object-top" />
+        <div class="flex flex-col gap-5">
+          <p class="text-sm font-bold text-v2-accion">Sobre Pablo</p>
+          <h1 class="text-[32px] font-extrabold leading-tight text-v2-texto sm:text-[44px]">Soy Pablo y te ayudo a usar la IA en tu trabajo real.</h1>
+          <p class="max-w-[640px] text-base leading-7 text-v2-cuerpo">LuciRMe AI existe para que profesionales y equipos entiendan, implementen y adopten la IA, y recuperen su autonomía.</p>
+          <ul class="grid gap-3 sm:grid-cols-3">
+            {datos.map((d) => (
+              <li class="flex flex-col gap-1 rounded-2xl border-[0.8px] border-v2-borde bg-v2-superficie p-4">
+                <span class="text-2xl font-extrabold text-v2-accion">{d.n}</span>
+                <span class="text-sm leading-5 text-v2-cuerpo">{d.t}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-  <ActionHub />
-  <RedesSociales />
+      <section class="mx-auto flex w-full max-w-[720px] flex-col gap-4">
+        <h2 class="text-[26px] font-bold text-v2-texto">Por qué existe LuciRMe AI</h2>
+        <p class="text-base leading-7 text-v2-cuerpo">Soy Ingeniero de Sistemas y llevo más de 13 años trabajando entre producto, tecnología e inteligencia artificial.</p>
+        <p class="text-base leading-7 text-v2-cuerpo">En las startups conviví con recursos limitados, problemas ambiguos y usuarios que no pueden esperar meses por una solución. Ahí aprendí a priorizar y a decir que no con criterio.</p>
+      </section>
+
+      <section class="mx-auto flex w-full max-w-[720px] flex-col gap-4">
+        <h2 class="text-[26px] font-bold text-v2-texto">Cómo trabajo</h2>
+        <ol class="flex flex-col gap-3">
+          {principios.map((p, i) => (
+            <li class="flex gap-4 rounded-2xl border-[0.8px] border-v2-borde p-4">
+              <span class="text-lg font-extrabold text-v2-accion">{i + 1}</span>
+              <span class="text-base leading-6 text-v2-texto">{p}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="mx-auto flex w-full max-w-[720px] flex-col items-start gap-4 rounded-3xl border-[0.8px] border-v2-marca-borde bg-v2-superficie p-6 sm:p-8">
+        <h2 class="text-[26px] font-bold text-v2-texto">Empieza por aquí</h2>
+        <p class="text-base leading-7 text-v2-cuerpo">Mi objetivo no es que dependas de mí. Es que mejores tu día a día con tecnología e IA.</p>
+        <a href="/empezar" data-cta="sobre-pablo" class="inline-flex min-h-[52px] items-center rounded-full bg-v2-accion px-7 text-base font-bold text-v2-accion-texto hover:bg-v2-accion-hover">Empieza gratis</a>
+      </section>
+
+      <SigueEnRedes posicion="sobre-pablo" />
+    </div>
+  </div>
 
   <script is:inline>
     document.addEventListener("DOMContentLoaded", function () {
-      if (window.posthog) {
-        window.posthog.capture("sobre_pablo_page_view", {
-          pagina: "sobre-pablo"
-        });
-      }
+      if (window.posthog) window.posthog.capture("sobre_pablo_page_view", { pagina: "sobre-pablo" });
     });
   </script>
-</Layout>
+</LayoutV2>

@@ -1,0 +1,70 @@
+---
+// Muro de correo con MailerLite (Web LuciRMe v2). Reemplaza el inicio de sesión de Clerk en los recursos.
+// Envuelve el contenido: si la cookie de acceso es válida lo muestra de una vez; si no, pide el correo.
+// Usa /api/unlock-recurso (mismo grupo de recursos gratis). Pendiente de diseño: estados de la tarjeta.
+import { verificar, COOKIE_NAME } from "../../lib/acceso-ruta";
+
+interface Props {
+  recurso: string;
+  titulo: string;
+  texto?: string;
+  boton?: string;
+}
+const { recurso, titulo, texto = "Escribe tu correo y abres el recurso ahora. Es gratis y sin contraseña.", boton = "Abrir el recurso" } = Astro.props;
+let desbloqueado = false;
+try {
+  desbloqueado = verificar(Astro.cookies.get(COOKIE_NAME)?.value);
+} catch {
+  desbloqueado = false;
+}
+const id = recurso.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+---
+
+<section id={`muro-${id}`} class:list={["mx-auto my-10 w-full max-w-xl px-4", desbloqueado && "hidden"]}>
+  <div class="flex flex-col gap-4 rounded-[20px] border-[0.8px] border-v2-borde bg-v2-fondo p-6 sm:p-8">
+    <h2 class="text-2xl font-extrabold leading-tight text-v2-texto">{titulo}</h2>
+    <p class="text-base leading-6 text-v2-cuerpo">{texto}</p>
+    <form data-muro-form novalidate class="flex flex-col gap-3">
+      <label for={`correo-${id}`} class="text-sm font-semibold text-v2-texto">Tu correo</label>
+      <input id={`correo-${id}`} name="email" type="email" required autocomplete="email" placeholder="tu@correo.com" aria-describedby={`error-${id}`} class="min-h-11 rounded-xl border-[0.8px] border-v2-control bg-v2-fondo px-4 text-base text-v2-texto aria-[invalid=true]:border-[#c70036]" />
+      <p id={`error-${id}`} role="alert" class="hidden text-sm font-semibold text-[#c70036]"></p>
+      <button type="submit" class="inline-flex h-11 cursor-pointer items-center justify-center rounded-full bg-v2-accion px-6 text-sm font-bold text-v2-accion-texto disabled:opacity-60">{boton}</button>
+      <p class="text-xs leading-5 text-v2-suave">Al escribir tu correo aceptas la <a href="/privacidad" class="underline">política de privacidad</a>.</p>
+    </form>
+  </div>
+</section>
+
+<div id={`contenido-${id}`} class:list={[!desbloqueado && "hidden"]}>
+  <slot />
+</div>
+
+<script is:inline define:vars={{ id, recurso, boton }}>
+  (function () {
+    var muro = document.getElementById("muro-" + id);
+    var contenido = document.getElementById("contenido-" + id);
+    if (!muro) return;
+    var form = muro.querySelector("[data-muro-form]");
+    var input = document.getElementById("correo-" + id);
+    var error = document.getElementById("error-" + id);
+    var boton_ = form.querySelector("button");
+    function mostrarError(m) { error.textContent = m; error.classList.remove("hidden"); input.setAttribute("aria-invalid", "true"); input.focus(); }
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      error.classList.add("hidden"); input.removeAttribute("aria-invalid");
+      var correo = (input.value || "").trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) { mostrarError("Escribe un correo válido."); return; }
+      boton_.disabled = true; boton_.textContent = "Abriendo";
+      try {
+        var res = await fetch("/api/unlock-recurso", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: correo }) });
+        var data = await res.json().catch(function () { return {}; });
+        if (!res.ok) { boton_.disabled = false; boton_.textContent = boton; mostrarError(data.error || "No pudimos registrar tu correo. Intenta de nuevo."); return; }
+      } catch (err) {
+        boton_.disabled = false; boton_.textContent = boton; mostrarError("No pudimos registrar tu correo. Revisa tu conexión e intenta de nuevo."); return;
+      }
+      if (window.posthog) window.posthog.capture("resource_unlocked", { recurso: recurso, origen: "muro_v2" });
+      muro.classList.add("hidden");
+      contenido.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  })();
+</script>

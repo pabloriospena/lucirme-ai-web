@@ -1,7 +1,5 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import SocialProof from "../components/SocialProof.astro";
-import SobreMi from "../components/SobreMi.astro";
+import LayoutV2 from "../layouts/LayoutV2.astro";
 import { LINKS } from "../lib/constants.js";
 
 const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
@@ -21,221 +19,51 @@ const serviceJsonLd = {
 
 ---
 
-<Layout
+<LayoutV2
   title="LuciRMe AI · Empresas | Primero el problema. Después la tecnología."
   description="Encuentra un cuello de botella operativo en tu empresa, mide cuánto te está costando y decide si vale la pena intervenir. Soluciones con IA, automatización y adopción autónoma por Pablo Ríos."
-  hideHeader={true}
   jsonLd={serviceJsonLd}
-  hideFooter={true}
 >
-  <!-- 1. NAVEGACIÓN DEDICADA B2B (HEADER) -->
-  <header
-    class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200"
-  >
-    <div
-      class="h-16 max-w-7xl mx-auto px-6 flex items-center justify-between gap-4"
-    >
-      <div class="flex items-center gap-8">
-        <a class="flex items-center gap-2.5 group" href="/">
-          <img
-            src="/isotipo-lucirme.svg"
-            alt="LuciRMe AI"
-            class="h-8 w-auto object-contain group-hover:scale-105 transition-transform"
-          />
-          <span
-            class="font-bold text-lg text-slate-900 tracking-tight group-hover:text-teal-800 transition-colors"
-          >
-            LuciRMe<span class="text-teal-700 ml-0.5">AI</span> · Empresas
-          </span>
-        </a>
+
+<div class="w-full bg-v2-fondo">
+    <!-- Empresas: elección de tamaño (Web v2). Las secciones anteriores están en _empresas-anterior.astro -->
+    <section class="mx-auto flex w-full max-w-[1120px] flex-col gap-8 px-5 pb-6 pt-10 sm:px-8 sm:pt-16">
+      <div class="flex max-w-[720px] flex-col gap-3">
+        <p class="text-sm font-bold text-v2-accion">Empresas</p>
+        <h1 class="text-[32px] font-extrabold leading-tight text-v2-texto sm:text-[44px]">Encuentra qué frena a tu equipo y qué hacer con la IA.</h1>
+        <p class="text-base leading-7 text-v2-cuerpo">Elige el tamaño de tu empresa.</p>
       </div>
-      <nav
-        class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600"
-      >
-        <a class="hover:text-slate-900 transition-colors" href="#diagnostico"
-          >Diagnóstico</a
-        >
-        <a class="hover:text-slate-900 transition-colors" href="#casos">Casos</a
-        >
-        <a
-          class="hover:text-slate-900 transition-colors"
-          href="#como-trabajamos">Cómo trabajamos</a
-        >
-        <a class="hover:text-slate-900 transition-colors" href="#pablo">Pablo</a
-        >
-      </nav>
-
-      <div class="flex items-center gap-3">
-        <a
-          class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors shadow-2xs"
-          href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero revisar un cuello de botella operativo en mi empresa.")}`}
-          rel="noopener noreferrer"
-          target="_blank"
-          onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_whatsapp_click', { origen: 'header_b2b' }); }"
-        >
-          <span class="material-symbols-outlined text-[17px]">chat</span>
-          <span>Hablemos por WhatsApp</span>
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <main class="w-full bg-[#F8FAFC]">
-    <!-- 2. HERO -->
-    <section
-      class="w-full max-w-7xl mx-auto px-6 pt-12 pb-10 md:py-16 flex flex-col items-start gap-6 border-b border-slate-200/60"
-    >
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center w-full">
-        <div class="lg:col-span-7 flex flex-col items-start gap-5">
-          <div
-            class="inline-flex items-center gap-2 px-3 py-1 bg-white border border-slate-200 rounded-full font-mono text-xs text-slate-700 shadow-2xs"
-          >
-            <span class="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
-            Primero el problema. Después la tecnología.
-          </div>
-          <div class="max-w-2xl flex flex-col gap-3">
-            <h1
-              class="text-3xl md:text-5xl font-bold tracking-tight text-slate-900 leading-tight"
-            >
-              ¿Dónde se está perdiendo el tiempo en tu equipo?
-            </h1>
-            <p
-              class="text-base md:text-lg text-slate-600 font-normal leading-relaxed"
-            >
-              Hay procesos que parecen pequeños hasta que calculas cuántas veces
-              se repiten. Encuentra un cuello de botella, mide cuánto te está
-              costando y decide si vale la pena intervenir.
-            </p>
-          </div>
-          <div
-            class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 w-full sm:w-auto"
-          >
-            <a
-              class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-teal-700 text-white font-semibold text-sm hover:bg-teal-800 transition-colors shadow-sm"
-              href="#diagnostico"
-              onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_started', { origen: 'hero_btn' }); }"
-            >
-              <span>Empezar diagnóstico · 3 min</span>
-              <span class="material-symbols-outlined text-[18px]"
-                >arrow_downward</span
-              >
-            </a>
-            <a
-              class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors shadow-2xs"
-              href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero conversar sobre un proceso operativo en mi empresa.")}`}
-              rel="noopener noreferrer"
-              target="_blank"
-              onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_whatsapp_click', { origen: 'hero_direct' }); }"
-            >
-              <span class="material-symbols-outlined text-slate-500 text-[18px]"
-                >chat</span
-              >
-              <span>Hablar directamente con Pablo</span>
-            </a>
-          </div>
-          <p class="text-xs font-mono text-slate-500">
-            No necesitas saber de IA. Nosotros nos ocupamos de esa parte.
-          </p>
-        </div>
-
-        <div class="lg:col-span-5 w-full flex justify-center lg:justify-end">
-          <div
-            class="w-full max-w-md bg-white rounded-2xl border border-slate-200 shadow-sm p-5 md:p-6 flex flex-col gap-4"
-          >
-            <div class="flex items-center justify-between pb-1">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                <span
-                  class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-900"
-                  >Diagnóstico LuciRMe AI</span
-                >
-              </div>
+      <ul class="grid gap-4 md:grid-cols-2">
+        {[
+          { n: "Pymes", t: "Para equipos pequeños que quieren ordenar un proceso con IA." },
+          { n: "Enterprise", t: "Para empresas grandes que quieren adoptar IA en varios equipos." },
+        ].map((c) => (
+          <li class="flex flex-col gap-3 rounded-3xl border-[0.8px] border-v2-borde bg-v2-superficie p-6">
+            <div class="flex items-center justify-between gap-3">
+              <h2 class="text-[22px] font-bold text-v2-texto">{c.n}</h2>
+              <span class="rounded-full border-[0.8px] border-v2-borde bg-v2-fondo px-3 py-1 text-xs font-bold text-v2-cuerpo">Próximamente</span>
             </div>
-
-            <div
-              class="p-3.5 bg-slate-50 border border-slate-200/60 rounded-xl flex flex-col gap-2"
-            >
-              <div class="flex items-center justify-between">
-                <span
-                  class="font-mono text-[10px] uppercase font-semibold text-slate-500 tracking-wider"
-                  >Fuga de tiempo típica</span
-                >
-                <span class="font-mono text-xs font-bold text-amber-700"
-                  >~10 hrs/semana por integrante</span
-                >
-              </div>
-              <p class="text-xs font-semibold text-slate-900 leading-snug">
-                Consolidación manual de datos. Más tiempo recolectando que
-                decidiendo
-              </p>
-              <div
-                class="w-full bg-slate-200 rounded-full h-1.5 mt-1 overflow-hidden"
-              >
-                <div class="bg-amber-600 h-1.5 rounded-full w-[65%]"></div>
-              </div>
-            </div>
-
-            <div
-              class="p-3.5 bg-slate-50 border border-slate-200/60 rounded-xl flex flex-col gap-1"
-            >
-              <span
-                class="font-mono text-[10px] uppercase font-semibold text-slate-500 tracking-wider"
-                >Priorización:</span
-              >
-              <h4 class="text-xs font-bold text-amber-700">
-                P1 Urgente · Alto ROI Inmediato
-              </h4>
-              <span class="text-[11px] font-medium text-teal-700 font-mono">
-                Integración de herramientas
-              </span>
-            </div>
-
-            <div
-              class="p-3 bg-white border border-slate-200/80 rounded-xl flex items-start gap-2.5 text-xs text-slate-600 leading-relaxed shadow-2xs"
-            >
-              <span
-                class="material-symbols-outlined text-teal-600 text-[18px] shrink-0 mt-0.5"
-                >verified</span
-              >
-              <p class="text-[11px] leading-relaxed text-slate-600">
-                Identificamos la causa raíz antes de gastar recursos. El 40% de
-                los cuellos de botella se resuelven simplificando el flujo sin
-                añadir costos fijos.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+            <p class="text-base leading-6 text-v2-cuerpo">{c.t}</p>
+          </li>
+        ))}
+      </ul>
     </section>
 
     <!-- 3 & 4. DIAGNÓSTICO OPERATIVO (CONSOLA INTERACTIVA COMPACTA SIN SCROLL NI PRESELECCIÓN) -->
     <section
-      class="w-full max-w-7xl mx-auto px-6 py-12 scroll-mt-20"
+      class="mx-auto w-full max-w-[1120px] px-5 py-12 sm:px-8 scroll-mt-20"
       id="diagnostico"
     >
-      <div class="max-w-3xl mb-8 flex flex-col gap-2">
-        <div
-          class="inline-flex items-center gap-2 font-mono text-xs text-teal-800 uppercase font-semibold"
-        >
-          Diagnóstico Operativo
-        </div>
-        <h2
-          class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900"
-        >
-          No necesitas saber de IA. Necesitas identificar qué está frenando al
-          equipo.
-        </h2>
-        <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
-          Responde las siguientes preguntas para medir la fuga de tiempo de tu
-          equipo sin sesgos iniciales.
-        </p>
+      <div class="mb-8 flex max-w-[720px] flex-col gap-2">
+        <h2 class="text-[26px] font-bold text-v2-texto">Diagnóstico de 7 pasos</h2>
+        <p class="text-base leading-6 text-v2-cuerpo">Responde siete preguntas cortas y recibe tu diagnóstico.</p>
       </div>
 
       <!-- Consola Interactiva Compacta -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         <!-- Columna Izquierda: Wizard Paso a Paso Compacto -->
         <div
-          class="lg:col-span-7 flex flex-col bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm relative min-h-[380px]"
+          class="lg:col-span-12 mx-auto w-full max-w-[720px] flex flex-col bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm relative min-h-[380px]"
         >
           <!-- Header del Wizard: Barra de Progreso y Paso actual -->
           <div class="flex flex-col gap-2 pb-4 border-b border-slate-100">
@@ -252,14 +80,15 @@ const serviceJsonLd = {
                 >Selecciona una opción</span
               >
             </div>
-            <!-- Barra de progreso -->
-            <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
-              <div
-                class="bg-teal-700 h-1.5 rounded-full transition-all duration-300 ease-out"
-                id="progress-bar"
-                style="width: 14.2857%;"
-              >
-              </div>
+            <!-- Barra de progreso de 7 tramos -->
+            <div id="progress-bar" role="progressbar" aria-label="Progreso del diagnóstico" aria-valuemin="1" aria-valuemax="7" aria-valuenow="1" class="flex gap-1.5">
+<span data-seg class="h-2 flex-1 rounded-full bg-[#cad5e2]"></span>
+<span data-seg class="h-2 flex-1 rounded-full bg-[#cad5e2]"></span>
+<span data-seg class="h-2 flex-1 rounded-full bg-[#cad5e2]"></span>
+<span data-seg class="h-2 flex-1 rounded-full bg-[#cad5e2]"></span>
+<span data-seg class="h-2 flex-1 rounded-full bg-[#cad5e2]"></span>
+<span data-seg class="h-2 flex-1 rounded-full bg-[#cad5e2]"></span>
+<span data-seg class="h-2 flex-1 rounded-full bg-[#cad5e2]"></span>
             </div>
           </div>
 
@@ -1018,9 +847,9 @@ const serviceJsonLd = {
               <span class="material-symbols-outlined text-[15px]"
                 >arrow_back</span
               >
-              <span>Anterior</span>
+              <span>Atrás</span>
             </button>
-            <div class="flex items-center gap-1.5" id="step-dots">
+            <div class="hidden" id="step-dots">
               <span class="w-4 h-2 rounded-full transition-all bg-teal-700"
               ></span>
               <span class="w-2 h-2 rounded-full transition-all bg-slate-200"
@@ -1040,8 +869,8 @@ const serviceJsonLd = {
           </div>
         </div>
 
-        <!-- Columna Derecha: Tarjeta Viva "Tu cuello de botella" -->
-        <div class="lg:col-span-5 lg:sticky lg:top-20">
+        <!-- Columna Derecha: Tarjeta Viva "Tu cuello de botella" (oculta en Web v2; el diseño es de una columna) -->
+        <div class="hidden lg:col-span-5 lg:sticky lg:top-20">
           <div
             class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 md:p-6 flex flex-col gap-4"
             id="assessment-card"
@@ -1208,275 +1037,9 @@ const serviceJsonLd = {
       </div>
     </section>
 
-    <!-- 6. CÓMO TRABAJAMOS -->
-    <section
-      class="w-full max-w-7xl mx-auto px-6 py-20 border-t border-slate-200"
-      id="como-trabajamos"
-    >
-      <div class="max-w-3xl mb-12 flex flex-col gap-2">
-        <span class="font-mono text-xs font-semibold text-teal-800 uppercase"
-          >¿Qué sigue después del diagnóstico?</span
-        >
-        <h2
-          class="text-2xl md:text-3xl font-bold tracking-tight text-slate-900"
-        >
-          ¿Qué hacemos después del diagnóstico?
-        </h2>
-        <p class="text-base text-slate-600 leading-relaxed">
-          No todos los problemas necesitan el mismo tipo de intervención. Por
-          eso, el siguiente paso depende de lo que encontremos.
-        </p>
-      </div>
+  </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Paso 01 -->
-        <div
-          class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-4"
-        >
-          <div class="flex items-center justify-between">
-            <span class="font-mono text-xs font-bold text-teal-800">01</span>
-            <span class="material-symbols-outlined text-teal-600 text-[20px]"
-              >chat</span
-            >
-          </div>
-          <h3 class="text-base font-bold text-slate-900 leading-snug">
-            Conversación de 30 minutos con Pablo
-          </h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Al final de la llamada tienes el proceso priorizado y una recomendación concreta, aunque no decidas contratar.
-          </p>
-        </div>
-
-        <!-- Paso 02 -->
-        <div
-          class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-4"
-        >
-          <div class="flex items-center justify-between">
-            <span class="font-mono text-xs font-bold text-teal-800">02</span>
-            <span class="material-symbols-outlined text-slate-400 text-[20px]"
-              >groups</span
-            >
-          </div>
-          <h3 class="text-base font-bold text-slate-900 leading-snug">
-            Taller de inmersión con el equipo
-          </h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Nos metemos en el proceso real: cómo trabajan hoy, dónde se atascan,
-            qué herramientas utilizan y qué está generando el problema.
-          </p>
-          <span class="font-mono text-[11px] text-teal-800 font-semibold mt-1 block">Desde $1.000.000 COP por empresa.</span>
-        </div>
-
-        <!-- Paso 03 -->
-        <div
-          class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-4"
-        >
-          <div class="flex items-center justify-between">
-            <span class="font-mono text-xs font-bold text-emerald-600">03</span>
-            <span class="material-symbols-outlined text-emerald-600 text-[20px]"
-              >school</span
-            >
-          </div>
-          <h3 class="text-base font-bold text-slate-900 leading-snug">
-            Ciclo de autonomía
-          </h3>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Diseñamos e implementamos la solución junto al equipo. No se trata
-            solo de entregar algo funcionando: acompaño, capacito y dejo al
-            equipo preparado para utilizarlo y seguir mejorándolo por su cuenta.
-          </p>
-        </div>
-
-        <!-- Paso 04 -->
-        <div
-          class="p-6 bg-white rounded-2xl border border-slate-200 shadow-2xs flex flex-col gap-4"
-        >
-          <div class="flex items-center justify-between">
-            <span class="font-mono text-xs font-bold text-slate-400">04</span>
-            <span class="material-symbols-outlined text-slate-400 text-[20px]"
-              >precision_manufacturing</span
-            >
-          </div>
-          <div class="flex flex-col gap-1">
-            <h3 class="text-base font-bold text-slate-900 leading-snug">
-              Automatizaciones a la medida
-            </h3>
-            <span
-              class="font-mono text-[11px] text-slate-500 uppercase font-semibold"
-              >Opcional</span
-            >
-          </div>
-          <p class="text-xs text-slate-600 leading-relaxed">
-            Si el proceso necesita desarrollo o automatización más avanzada,
-            podemos construirla a medida e integrarla al flujo de trabajo
-            existente.
-          </p>
-        </div>
-      </div>
-
-      <div
-        class="mt-8 p-6 md:p-8 bg-slate-100 rounded-2xl border border-slate-200 text-center"
-      >
-        <p
-          class="text-base md:text-lg font-semibold text-slate-900 tracking-tight"
-        >
-          "El objetivo no es que dependas de nosotros. Es que tu equipo pueda
-          hacer más por sí mismo."
-        </p>
-      </div>
-
-      <div
-        class="mt-8 flex flex-col items-center justify-center gap-3 text-center"
-      >
-        <a
-          class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
-          href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, estuve revisando los pasos después del diagnóstico y quiero conversar sobre mi empresa.")}`}
-          rel="noopener noreferrer"
-          target="_blank"
-          onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_whatsapp_click', { origen: 'como_trabajamos' }); }"
-        >
-          <span class="material-symbols-outlined text-[18px]">chat</span>
-          <span>Hablar por WhatsApp con Pablo</span>
-        </a>
-        <p class="text-xs font-mono text-slate-500">
-          Respuesta directa por WhatsApp sin intermediarios ni compromiso.
-        </p>
-      </div>
-    </section>
-
-    <!-- CASOS DE EQUIPOS / PRUEBA SOCIAL -->
-    <SocialProof tipo="empresas" id="casos" />
-
-    <!-- 8. PABLO (SOBRE MÍ) -->
-    <SobreMi id="pablo" h1={false} />
-
-    <!-- 9. CTA FINAL -->
-    <section
-      class="w-full max-w-7xl mx-auto px-6 py-20 border-t border-slate-200"
-    >
-      <div
-        class="p-8 md:p-14 bg-white rounded-2xl border border-slate-200 text-center flex flex-col items-center gap-5 shadow-2xs max-w-4xl mx-auto"
-      >
-        <span class="font-mono text-xs font-semibold text-teal-800 uppercase"
-          >Paso Siguiente</span
-        >
-        <h2
-          class="text-2xl md:text-4xl font-bold tracking-tight text-slate-900"
-        >
-          ¿Ya sabes qué proceso quieres mejorar?
-        </h2>
-        <p
-          class="text-sm md:text-base text-slate-600 max-w-2xl leading-relaxed"
-        >
-          Cuéntame qué está pasando. Revisamos el problema, hablamos de posibles
-          caminos y te digo qué haría yo. Sin presentación comercial genérica.
-          Sin venderte una herramienta porque sí.
-        </p>
-        <div
-          class="flex flex-col sm:flex-row items-center gap-3 pt-3 w-full sm:w-auto justify-center"
-        >
-          <a
-            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
-            href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, tengo un proceso identificado para mejorar en mi empresa.")}`}
-            rel="noopener noreferrer"
-            target="_blank"
-            onclick="if (window.posthog) { window.posthog.capture('bottleneck_diagnosis_whatsapp_click', { origen: 'cta_final' }); }"
-          >
-            <span class="material-symbols-outlined text-[18px]">chat</span>
-            <span>Hablemos por WhatsApp</span>
-          </a>
-        </div>
-        <p class="text-xs font-mono text-slate-500 pt-2">
-          Conversación estratégica directa. Sin compromiso de contratación.
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <!-- 10. DEDICATED EMPRESAS FOOTER -->
-  <footer class="w-full bg-white border-t border-slate-200 py-12">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col gap-10">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div class="flex flex-col gap-2 md:col-span-1">
-          <span class="text-base font-bold text-slate-900 tracking-tight"
-            >LuciRMe AI · Empresas</span
-          >
-          <p class="text-xs font-mono text-slate-500">
-            Primero el problema. Después la tecnología.
-          </p>
-        </div>
-        <!-- Columna 1: Empresas -->
-        <div class="flex flex-col gap-2.5">
-          <span class="font-mono text-xs font-semibold text-slate-900 uppercase"
-            >Empresas</span
-          >
-          <div class="flex flex-col gap-2 text-xs text-slate-600">
-            <a
-              class="hover:text-slate-900 transition-colors"
-              href="#diagnostico">Diagnóstico</a
-            >
-            <a class="hover:text-slate-900 transition-colors" href="#casos"
-              >Casos</a
-            >
-            <a
-              class="hover:text-slate-900 transition-colors"
-              href="#como-trabajamos">Cómo trabajamos</a
-            >
-            <a class="hover:text-slate-900 transition-colors" href="#pablo"
-              >Pablo</a
-            >
-          </div>
-        </div>
-        <!-- Columna 2: Contacto -->
-        <div class="flex flex-col gap-2.5">
-          <span class="font-mono text-xs font-semibold text-slate-900 uppercase"
-            >Contacto</span
-          >
-          <div class="flex flex-col gap-2 text-xs text-slate-600">
-            <a
-              class="hover:text-slate-900 transition-colors"
-              href={whatsappBase}
-              rel="noopener noreferrer"
-              target="_blank">WhatsApp Directo</a
-            >
-            <a
-              class="hover:text-slate-900 transition-colors"
-              href="https://linkedin.com/in/pabloriospena"
-              rel="noopener noreferrer"
-              target="_blank">LinkedIn</a
-            >
-          </div>
-        </div>
-        <!-- Columna 3: Navegación -->
-        <div class="flex flex-col gap-2.5">
-          <span class="font-mono text-xs font-semibold text-slate-900 uppercase"
-            >Navegación</span
-          >
-          <div class="flex flex-col gap-2 text-xs text-slate-600">
-            <a class="hover:text-slate-900 transition-colors" href="/">Inicio</a
-            >
-            <a
-              class="hover:text-slate-900 transition-colors"
-              href="/profesionales">Profesionales</a
-            >
-            <a class="hover:text-slate-900 transition-colors" href="/educacion"
-              >Educación</a
-            >
-            <a
-              class="hover:text-slate-900 transition-colors"
-              href="/sobre-pablo">Sobre Pablo</a
-            >
-          </div>
-        </div>
-      </div>
-      <div
-        class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500"
-      >
-        <span>© 2026 LuciRMe AI · Todos los derechos reservados.</span>
-        <span>lucirme.com/empresas</span>
-      </div>
-    </div>
-  </footer>
+    <!-- 10. DEDICATED EMPRESAS FOOTER -->
 
   <!-- Script empaquetado por Vite con import estático de pdfGenerator -->
   <script>
@@ -1505,6 +1068,17 @@ const serviceJsonLd = {
       ciudad: "Bogotá",
     };
 
+    function setSegmentos(n: number) {
+      const barra = document.getElementById("progress-bar");
+      if (!barra) return;
+      barra.setAttribute("aria-valuenow", String(n));
+      barra.setAttribute("aria-valuetext", `Paso ${n} de ${totalSteps}`);
+      barra.querySelectorAll("[data-seg]").forEach((el, i) => {
+        el.classList.toggle("bg-v2-accion", i < n);
+        el.classList.toggle("bg-[#cad5e2]", i >= n);
+      });
+    }
+
     function updateProgressBar() {
       const bar = document.getElementById("progress-bar");
       const counter = document.getElementById("step-counter");
@@ -1518,8 +1092,7 @@ const serviceJsonLd = {
       if (!bar || !counter) return;
 
       if (currentStep <= totalSteps) {
-        const percentage = (currentStep / totalSteps) * 100;
-        bar.style.width = percentage + "%";
+        setSegmentos(currentStep);
         counter.innerText = `Paso ${currentStep} de ${totalSteps}`;
         if (prevBtn) prevBtn.disabled = currentStep === 1;
 
@@ -1540,7 +1113,7 @@ const serviceJsonLd = {
           }
         }
       } else {
-        bar.style.width = "100%";
+        setSegmentos(totalSteps);
         counter.innerText = "Diagnóstico Finalizado";
         if (stepHint) stepHint.innerText = "Evaluación generada";
         if (prevBtn) prevBtn.disabled = false;
@@ -2050,4 +1623,4 @@ const serviceJsonLd = {
       }
     });
   </script>
-</Layout>
+</LayoutV2>
