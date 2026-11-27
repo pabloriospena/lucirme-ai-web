@@ -8,11 +8,11 @@ import PersonajeFondo from "../components/v2/PersonajeFondo.astro";
 import { BANDAS } from "../data/recursos.ts";
 import { LINKS } from "../lib/constants.js";
 
-// Las cinco bandas, en el orden del menú. Clases en vivo todavía no abre y se muestra como Próximamente.
+// Las cinco bandas, en el orden del menú. Prompts se muestra como Próximamente hasta que exista su banda.
 const destino: Record<string, string | undefined> = {
   "paso-a-paso": "/recursos#banda-paso-a-paso",
   "guias-herramientas": "/recursos#banda-guias-herramientas",
-  clases: undefined,
+  clases: "/clases",
   biblioteca: "/biblioteca",
   prompts: undefined, // pasa a /recursos/prompts en la tarea de la banda Prompts
 };
@@ -68,7 +68,7 @@ const evento = (b: string) =>
             texto={b.descripcion}
             icono={b.id}
             href={destino[b.id]}
-            proximamente={!destino[b.id]}
+            proximamente={b.id === "clases" || !destino[b.id]}
             evento={evento(b.id)}
           />
         ))
