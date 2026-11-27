@@ -1,66 +1,96 @@
 ---
-// Inicio de la web nueva (Web LuciRMe v2). Un solo trabajo: llevar a Empieza gratis.
-// La portada anterior quedó guardada en src/pages/_inicio-anterior.astro (Astro no la publica).
+// Inicio de la web nueva (Web LuciRMe v2), look claro. Referencia: lienzo de diseño, pantalla Main.
+// Un solo trabajo: llevar a Empieza gratis. La portada anterior quedó en src/pages/_inicio-anterior.astro (Astro no la publica).
 import LayoutV2 from "../layouts/LayoutV2.astro";
 import SigueEnRedes from "../components/v2/SigueEnRedes.astro";
-import { BANDAS, conteoBanda } from "../data/recursos.ts";
-import { ARTICULOS, publicados } from "../data/biblioteca.js";
+import FilaBanda from "../components/v2/FilaBanda.astro";
+import PersonajeFondo from "../components/v2/PersonajeFondo.astro";
+import { BANDAS } from "../data/recursos.ts";
+import { LINKS } from "../lib/constants.js";
 
-const articulos = import.meta.env.DEV ? ARTICULOS : publicados();
-const filas = BANDAS.map((b) => ({
-  ...b,
-  n: b.id === "biblioteca" ? articulos.length : conteoBanda(b.id),
-})).filter((b) => b.n > 0);
+// Las cinco bandas, en el orden del menú. Clases en vivo todavía no abre y se muestra como Próximamente.
+const destino: Record<string, string | undefined> = {
+  "paso-a-paso": "/recursos#banda-paso-a-paso",
+  "guias-herramientas": "/recursos#banda-guias-herramientas",
+  clases: undefined,
+  biblioteca: "/biblioteca",
+  prompts: undefined, // pasa a /recursos/prompts en la tarea de la banda Prompts
+};
+const evento = (b: string) =>
+  `if (window.posthog) { window.posthog.capture('inicio_banda_click', { banda: '${b}' }); }`;
 ---
 
 <LayoutV2
   title="LuciRMe AI | Aprende a usar IA en tu trabajo"
   description="Guías, rutas y prompts para aplicar la inteligencia artificial a lo que haces cada día, con Pablo Ríos."
 >
-  <section class="bg-v2-fondo px-4 pb-6 pt-8 sm:px-6 sm:pt-16">
-    <div class="mx-auto max-w-4xl">
-      <p class="font-mono text-xs font-semibold uppercase tracking-[0.05em] text-v2-accion">IA aplicada a procesos reales</p>
-      <h1 class="mt-3 text-4xl font-extrabold leading-[1.12] tracking-[-0.9px] text-v2-texto sm:text-5xl">
-        Aprende a usar IA en tu trabajo, paso a paso.
-      </h1>
-      <p class="mt-4 max-w-2xl text-base leading-6 text-v2-cuerpo sm:text-lg sm:leading-7">
-        Guías, rutas y prompts para aplicar IA a lo que haces cada día.
-      </p>
-      <a
-        href="/empezar"
-        class="mt-6 flex min-h-[52px] items-center justify-center rounded-xl bg-v2-accion px-6 text-base font-bold text-v2-accion-texto hover:bg-v2-accion-hover sm:inline-flex"
-        onclick="if (window.posthog) { window.posthog.capture('cta_click', { boton: 'empieza-gratis', pagina: 'inicio' }); }"
-      >
-        Empieza gratis
-      </a>
-    </div>
-  </section>
+  <div class="mx-auto flex w-full max-w-[1200px] flex-col gap-6 px-4 pb-4 pt-2 sm:px-6">
+    <section
+      class="relative min-h-[300px] overflow-hidden rounded-[32px] border-[0.8px] border-v2-marca-borde"
+      style="background: linear-gradient(135deg, #CCFBF1 0%, #F0FDFA 55%, #FFFFFF 100%)"
+    >
+      <PersonajeFondo pose="saludando" />
+      <div class="relative flex max-w-[620px] flex-col gap-3 px-6 pb-8 pt-9 sm:px-12">
+        <span class="self-start rounded-full border-[0.8px] border-v2-marca-borde bg-white px-3.5 py-1.5 font-mono text-xs font-semibold uppercase tracking-[0.6px] text-v2-accion">
+          IA aplicada a procesos reales
+        </span>
+        <h1 class="text-[34px] font-extrabold leading-[1.14] tracking-[-1.1px] text-v2-texto sm:text-[44px]">
+          Aprende a usar IA en tu trabajo, paso a paso.
+        </h1>
+        <p class="max-w-[520px] text-lg leading-7 text-v2-cuerpo">Guías, rutas y prompts para aplicar IA a lo que haces cada día.</p>
+        <div class="mt-2 flex flex-wrap gap-3">
+          <a
+            href="/empezar"
+            class="inline-flex min-h-[52px] items-center justify-center rounded-full bg-v2-accion px-7 text-base font-bold text-v2-accion-texto transition-colors duration-150 hover:bg-v2-accion-hover"
+            onclick="if (window.posthog) { window.posthog.capture('cta_click', { boton: 'empieza-gratis', pagina: 'inicio' }); }"
+          >
+            Empieza gratis
+          </a>
+          <a
+            href={LINKS.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex min-h-[52px] items-center rounded-full border-[0.8px] border-v2-control bg-white px-6 text-base font-semibold text-v2-texto"
+            onclick="if (window.posthog) { window.posthog.capture('cta_click', { boton: 'hablar-con-pablo', pagina: 'inicio' }); }"
+          >
+            Hablar con Pablo
+          </a>
+        </div>
+      </div>
+    </section>
 
-  <section class="border-t-[0.8px] border-v2-borde bg-v2-superficie px-4 py-8 sm:px-6 sm:py-12" aria-labelledby="que-encuentras">
-    <div class="mx-auto max-w-4xl">
-      <h2 id="que-encuentras" class="text-xl font-bold text-v2-texto sm:text-2xl">Qué encuentras</h2>
-      <ul class="mt-1">
-        {
-          filas.map((b) => (
-            <li class="border-t-[0.8px] border-v2-borde">
-              <a href={`/recursos#banda-${b.id}`} class="flex min-h-16 items-center justify-between gap-3 py-3">
-                <span>
-                  <span class="block text-base font-bold text-v2-texto">{b.nombre}</span>
-                  <span class="block text-sm leading-5 text-v2-cuerpo">{b.descripcion}</span>
-                </span>
-                <span class="flex shrink-0 items-center gap-2">
-                  <span class="text-xs font-bold text-v2-suave">{b.n} {b.n === 1 ? "recurso" : "recursos"}</span>
-                  <span aria-hidden="true" class="text-xl text-v2-suave">›</span>
-                </span>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
+    <section aria-labelledby="que-encuentras" class="flex flex-col gap-2">
+      <h2 id="que-encuentras" class="mb-1 text-2xl font-bold text-v2-texto">Qué encuentras</h2>
+      {
+        BANDAS.map((b) => (
+          <FilaBanda
+            titulo={b.nombre}
+            texto={b.descripcion}
+            icono={b.id}
+            href={destino[b.id]}
+            proximamente={!destino[b.id]}
+            evento={evento(b.id)}
+          />
+        ))
+      }
+    </section>
 
-  <section class="border-t-[0.8px] border-v2-borde px-4 py-8 sm:px-6 sm:py-12">
-    <div class="mx-auto max-w-4xl"><SigueEnRedes posicion="inicio" /></div>
-  </section>
+    <section aria-labelledby="sobre-pablo" class="flex flex-wrap items-center gap-6 rounded-3xl border-[0.8px] border-v2-borde bg-v2-fondo px-5 py-5 sm:px-7">
+      <div class="flex flex-col gap-2">
+        <h2 id="sobre-pablo" class="text-2xl font-bold text-v2-texto">Detrás de LuciRMe estoy yo</h2>
+        <p class="max-w-[640px] text-base leading-6 text-v2-cuerpo">
+          Soy Pablo, ingeniero de sistemas, y llevo más de 13 años entre producto, tecnología e IA.
+        </p>
+        <a
+          href="/sobre-pablo"
+          class="inline-flex min-h-11 items-center text-sm font-bold text-v2-accion"
+          onclick="if (window.posthog) { window.posthog.capture('cta_click', { boton: 'conoce-mi-historia', pagina: 'inicio' }); }"
+        >
+          Conoce mi historia ›
+        </a>
+      </div>
+    </section>
+
+    <SigueEnRedes posicion="inicio" />
+  </div>
 </LayoutV2>
