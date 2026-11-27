@@ -2,42 +2,35 @@
 // Índice de contenido (Web LuciRMe v2). Se arma desde src/data/recursos.ts y src/data/biblioteca.js.
 // Las bandas vacías no se muestran. Sin precios ni fechas.
 import LayoutV2 from "../layouts/LayoutV2.astro";
-import { BANDAS, RECURSOS, recursosDeBanda, valoresFiltro } from "../data/recursos.ts";
-import TarjetaRecurso from "../components/v2/TarjetaRecurso.astro";
-import { ARTICULOS, TEMAS, publicados } from "../data/biblioteca.js";
+import { RECURSOS, recursosDeBanda } from "../data/recursos.ts";
+import TarjetaGuia from "../components/v2/TarjetaGuia.astro";
+import TarjetaRuta from "../components/v2/TarjetaRuta.astro";
+import SigueEnRedes from "../components/v2/SigueEnRedes.astro";
+import { RUTA_CLAUDE_DATA } from "../data/ruta-claude.ts";
+import { RUTA_EVIDENCIA_DATA } from "../data/ruta-evidencia.ts";
 
-// Igual que /biblioteca: en producción solo los artículos publicados.
-const articulos = import.meta.env.DEV ? ARTICULOS : publicados();
-
-const bandas = BANDAS.map((b) => {
-  if (b.id === "biblioteca") {
-    return {
-      ...b,
-      tarjetas: articulos.map((a: any) => ({
-        slug: a.slug,
-        url: `/biblioteca/${a.slug}`,
-        titulo: a.titulo,
-        descripcion: a.descripcion,
-        formato: "Artículo",
-        tema: (TEMAS as Record<string, string>)[a.tema] || "",
-      })),
-      enlaces: [],
-    };
-  }
-  const todos = recursosDeBanda(b.id);
-  return {
-    ...b,
-    tarjetas: todos.filter((r) => !r.secundaria),
-    enlaces: todos.filter((r) => r.secundaria),
-  };
-}).filter((b) => b.tarjetas.length > 0);
-
-const filtros = [
-  { campo: "tema", etiqueta: "Tema", valores: valoresFiltro("tema") },
-  { campo: "herramienta", etiqueta: "Herramienta", valores: valoresFiltro("herramienta") },
-  { campo: "dificultad", etiqueta: "Dificultad", valores: valoresFiltro("dificultad") },
-  { campo: "area", etiqueta: "Área", valores: valoresFiltro("area") },
+// Tres primeros pasos de cada ruta, leídos de sus datos. Sin el prefijo Paso N.
+const pasosDe = (datos: { titulo: string }[]) => datos.slice(0, 3).map((p) => p.titulo.replace(/^Paso \d+\.\s*/, ""));
+const PASOS: Record<string, string[]> = {
+  "ruta-claude": pasosDe(RUTA_CLAUDE_DATA),
+  "ruta-evidencia": pasosDe(RUTA_EVIDENCIA_DATA),
+};
+const rutas = recursosDeBanda("paso-a-paso").filter((r) => !r.secundaria && PASOS[r.slug]);
+const guias = recursosDeBanda("guias-herramientas").filter((r) => !r.secundaria);
+const chips = [
+  { nombre: "Paso a paso", href: "#banda-paso-a-paso" },
+  { nombre: "Guías y herramientas", href: "#banda-guias-herramientas" },
+  { nombre: "Clases en vivo", href: "/clases" },
+  { nombre: "Biblioteca", href: "/biblioteca" },
+  { nombre: "Prompts", href: "/recursos/prompts" },
 ];
+const accesoFiltros = [
+  { valor: "todos", nombre: "Todos" },
+  { valor: "gratis", nombre: "Gratis" },
+  { valor: "pago", nombre: "De pago" },
+];
+const chip = "inline-flex min-h-11 items-center rounded-full border-[0.8px] px-4 text-sm font-semibold";
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
@@ -57,129 +50,148 @@ const jsonLd = {
   description="Rutas, guías, herramientas y prompts para aplicar la inteligencia artificial a tu trabajo real."
   jsonLd={jsonLd}
 >
-  <section class="bg-v2-fondo px-4 pb-4 pt-8 sm:px-6 sm:pt-12">
-    <div class="mx-auto max-w-4xl">
-      <h1 class="text-[32px] font-extrabold leading-[1.15] tracking-[-0.9px] text-v2-texto sm:text-5xl">Contenido</h1>
-      <p class="mt-3 max-w-2xl text-base leading-6 text-v2-cuerpo sm:text-lg sm:leading-7">
-        Elige por tema, herramienta, dificultad o área.
+  <div class="mx-auto flex w-full max-w-[1200px] flex-col gap-6 px-4 pb-4 pt-2 sm:px-6">
+    <section class="flex flex-col gap-2 pt-2">
+      <span class="text-sm font-semibold text-v2-accion">Contenido</span>
+      <h1 class="text-[32px] font-extrabold leading-[1.14] tracking-[-0.8px] text-v2-texto sm:text-[40px] sm:tracking-[-1px]">Encuentra qué aprender</h1>
+      <p class="max-w-2xl text-base leading-6 text-v2-cuerpo sm:text-lg sm:leading-7">
+        Elige una banda o filtra por tema. Todo sirve para aplicar IA hoy.
       </p>
+    </section>
 
-      <form id="filtros" class="mt-5 flex flex-wrap items-center gap-2" aria-label="Filtrar contenido" onsubmit="return false">
-        {
-          filtros.map((f) => (
-            <label class="relative inline-flex">
-              <span class="sr-only">{f.etiqueta}</span>
-              <select
-                data-filtro={f.campo}
-                class="filtro min-h-11 cursor-pointer appearance-none rounded-full border-[0.8px] border-v2-control bg-v2-chip py-0 pl-3.5 pr-9 text-sm font-semibold text-v2-cuerpo"
+    <nav aria-label="Bandas" class="flex flex-wrap gap-2">
+      {
+        chips.map((c, i) => (
+          <a
+            href={c.href}
+            data-chip-banda
+            aria-current={i === 0 ? "location" : undefined}
+            class:list={[chip, "data-[activo=true]:border-v2-accion data-[activo=true]:bg-v2-accion data-[activo=true]:text-v2-accion-texto", "border-v2-control bg-v2-fondo text-v2-texto"]}
+            data-activo={i === 0 ? "true" : "false"}
+            onclick={`if (window.posthog) { window.posthog.capture('recursos_chip_banda', { banda: '${c.nombre}' }); }`}
+          >
+            {c.nombre}
+          </a>
+        ))
+      }
+    </nav>
+
+    {
+      rutas.length > 0 && (
+        <section id="banda-paso-a-paso" class="flex scroll-mt-4 flex-col gap-3" aria-labelledby="titulo-paso-a-paso">
+          <div>
+            <h2 id="titulo-paso-a-paso" class="text-2xl font-bold tracking-[-0.5px] text-v2-texto sm:text-[28px]">Paso a paso</h2>
+            <p class="mt-1 text-base text-v2-cuerpo">Empieza con el recurso gratis y sigue el camino.</p>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {rutas.map((r, i) => (
+              <TarjetaRuta numero={i + 1} slug={r.slug} url={r.url} titulo={r.titulo} pasos={PASOS[r.slug]} />
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <section id="banda-guias-herramientas" class="flex scroll-mt-4 flex-col gap-3" aria-labelledby="titulo-guias">
+      <div class="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h2 id="titulo-guias" class="text-2xl font-bold tracking-[-0.5px] text-v2-texto sm:text-[28px]">Guías y herramientas</h2>
+          <p class="mt-1 text-base text-v2-cuerpo">Para leer, aplicar o usar ya.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Filtrar por acceso">
+          {
+            accesoFiltros.map((f, i) => (
+              <button
+                type="button"
+                data-filtro-acceso={f.valor}
+                aria-pressed={i === 0 ? "true" : "false"}
+                class:list={[chip, "cursor-pointer border-v2-control bg-v2-fondo text-v2-texto aria-pressed:border-v2-accion aria-pressed:bg-v2-accion aria-pressed:text-v2-accion-texto"]}
               >
-                <option value="">{f.etiqueta}</option>
-                {f.valores.map((v) => <option value={v}>{v}</option>)}
-              </select>
-              <span aria-hidden="true" class="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-sm text-v2-cuerpo">⌄</span>
-            </label>
+                {f.nombre}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+      <p role="status" id="conteo-guias" class="text-xs font-bold text-v2-suave">
+        {guias.length} {guias.length === 1 ? "recurso" : "recursos"}
+      </p>
+      <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          guias.map((r) => (
+            <li data-item data-acceso={r.acceso === "de-pago" || r.acceso === "o-con-invitaciones" ? "pago" : "gratis"}>
+              <TarjetaGuia recurso={r} banda="guias-herramientas" />
+            </li>
           ))
         }
-        <button type="button" id="quitar-filtros" class="hidden min-h-11 items-center px-2 text-sm font-semibold text-v2-accion">
-          Quitar filtros
-        </button>
-      </form>
-    </div>
-  </section>
+      </ul>
+      <p id="sin-resultados" class="hidden py-6 text-base text-v2-cuerpo">Todavía no hay recursos de pago aquí.</p>
+    </section>
 
-  {
-    bandas.map((b) => (
-      <section class="border-t-[0.8px] border-v2-borde px-4 py-10 sm:px-6 sm:py-14" data-banda={b.id} aria-labelledby={`banda-${b.id}`}>
-        <div class="mx-auto max-w-7xl">
-          <div class="flex items-baseline justify-between gap-3">
-            <h2 id={`banda-${b.id}`} class="text-[22px] font-bold text-v2-texto sm:text-3xl">{b.nombre}</h2>
-            <span class="text-xs font-bold text-v2-suave" data-conteo-banda>
-              {b.tarjetas.length} {b.tarjetas.length === 1 ? "recurso" : "recursos"}
-            </span>
-          </div>
-          <p class="mt-1 max-w-2xl text-sm leading-6 text-v2-cuerpo">{b.descripcion}</p>
+    <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" aria-label="Más formas de aprender">
+      <a
+        href="/clases"
+        class="flex flex-col gap-2 rounded-[20px] border-[0.8px] border-dashed border-v2-control bg-v2-superficie p-5"
+        onclick="if (window.posthog) { window.posthog.capture('recursos_acceso_click', { destino: 'clases' }); }"
+      >
+        <span class="flex items-center justify-between gap-2">
+          <span class="text-xl font-bold text-v2-texto">Clases en vivo</span>
+          <span class="inline-flex items-center rounded-full border-[0.8px] border-[#cad5e2] bg-v2-fondo px-3 py-1 text-xs font-bold text-v2-cuerpo">Próximamente</span>
+        </span>
+        <span class="text-sm leading-5 text-v2-cuerpo">Clases con Pablo que quedan grabadas. Deja tu correo y te avisamos.</span>
+        <span class="inline-flex min-h-11 items-center text-sm font-bold text-v2-accion">Ir a la lista de espera ›</span>
+      </a>
+      <a
+        href="/recursos/prompts"
+        class="flex flex-col gap-2 rounded-[20px] border-[0.8px] border-v2-borde bg-v2-fondo p-5"
+        onclick="if (window.posthog) { window.posthog.capture('recursos_acceso_click', { destino: 'prompts' }); }"
+      >
+        <span class="text-xl font-bold text-v2-texto">Prompts</span>
+        <span class="text-sm leading-5 text-v2-cuerpo">Muchos prompts listos para copiar, filtrados por tema.</span>
+        <span class="inline-flex min-h-11 items-center text-sm font-bold text-v2-accion">Ver los prompts ›</span>
+      </a>
+      <a
+        href="/biblioteca"
+        class="flex flex-col gap-2 rounded-[20px] border-[0.8px] border-v2-borde bg-v2-fondo p-5"
+        onclick="if (window.posthog) { window.posthog.capture('recursos_acceso_click', { destino: 'biblioteca' }); }"
+      >
+        <span class="text-xl font-bold text-v2-texto">Biblioteca</span>
+        <span class="text-sm leading-5 text-v2-cuerpo">Todo el contenido en una lista, con filtro por tema, herramienta y dificultad.</span>
+        <span class="inline-flex min-h-11 items-center text-sm font-bold text-v2-accion">Ver la biblioteca ›</span>
+      </a>
+    </section>
 
-          <ul class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {b.tarjetas.map((r: any) => (
-              <li data-item data-tema={r.tema} data-herramienta={r.herramienta} data-dificultad={r.dificultad} data-area={r.area}>
-                <TarjetaRecurso recurso={r} banda={b.id} />
-              </li>
-            ))}
-          </ul>
-
-          {b.enlaces.length > 0 && (
-            <p class="mt-5 text-sm text-v2-cuerpo">
-              También puedes ver
-              {b.enlaces.map((e: any, k: number) => (
-                <>
-                  {k > 0 ? " y " : " "}
-                  <a href={e.url} class="inline-flex min-h-11 items-center font-semibold text-v2-accion underline underline-offset-2">
-                    {e.titulo}
-                  </a>
-                </>
-              ))}
-              .
-            </p>
-          )}
-        </div>
-      </section>
-    ))
-  }
-
-  <p id="sin-resultados" class="hidden px-4 py-16 text-center text-base text-v2-cuerpo sm:px-6">
-    No hay contenido con esos filtros todavía.
-  </p>
-
-  <style>
-    .filtro[data-activo="true"] {
-      border-width: 1.5px;
-      border-color: var(--color-v2-accion);
-      background: var(--color-v2-marca-tinte);
-      color: var(--color-v2-accion);
-      font-weight: 700;
-    }
-  </style>
+    <SigueEnRedes posicion="recursos" />
+  </div>
 
   <script is:inline>
     (function () {
-      var selects = document.querySelectorAll("#filtros select[data-filtro]");
+      var botones = document.querySelectorAll("button[data-filtro-acceso]");
       var items = document.querySelectorAll("li[data-item]");
-      var secciones = document.querySelectorAll("section[data-banda]");
+      var conteo = document.getElementById("conteo-guias");
       var vacio = document.getElementById("sin-resultados");
-      var quitar = document.getElementById("quitar-filtros");
-
-      function filtrar(origen) {
-        var activos = {};
-        var hayActivos = false;
-        selects.forEach(function (s) {
-          var v = s.value;
-          s.setAttribute("data-activo", v ? "true" : "false");
-          if (v) { activos[s.getAttribute("data-filtro")] = v; hayActivos = true; }
+      botones.forEach(function (b) {
+        b.addEventListener("click", function () {
+          var v = b.getAttribute("data-filtro-acceso");
+          botones.forEach(function (o) { o.setAttribute("aria-pressed", o === b ? "true" : "false"); });
+          var n = 0;
+          items.forEach(function (li) {
+            var ver = v === "todos" || li.getAttribute("data-acceso") === v;
+            li.classList.toggle("hidden", !ver);
+            if (ver) n++;
+          });
+          conteo.textContent = n + (n === 1 ? " recurso" : " recursos");
+          vacio.classList.toggle("hidden", n > 0);
+          if (window.posthog) window.posthog.capture("recursos_filtro", { filtro: "acceso", valor: v });
         });
-        items.forEach(function (li) {
-          var ver = Object.keys(activos).every(function (k) { return li.getAttribute("data-" + k) === activos[k]; });
-          li.classList.toggle("hidden", !ver);
+      });
+      var chips = document.querySelectorAll("a[data-chip-banda]");
+      chips.forEach(function (c) {
+        c.addEventListener("click", function () {
+          if (c.getAttribute("href").charAt(0) !== "#") return;
+          chips.forEach(function (o) { o.setAttribute("data-activo", o === c ? "true" : "false"); o.removeAttribute("aria-current"); });
+          c.setAttribute("aria-current", "location");
         });
-        var visibles = 0;
-        secciones.forEach(function (s) {
-          var n = s.querySelectorAll("li[data-item]:not(.hidden)").length;
-          s.classList.toggle("hidden", n === 0);
-          var c = s.querySelector("[data-conteo-banda]");
-          if (c) c.textContent = n + (n === 1 ? " recurso" : " recursos");
-          if (n > 0) visibles++;
-        });
-        vacio.classList.toggle("hidden", visibles > 0);
-        quitar.classList.toggle("hidden", !hayActivos);
-        quitar.classList.toggle("inline-flex", hayActivos);
-        if (origen && window.posthog) {
-          window.posthog.capture("recursos_filtro", { filtro: origen.getAttribute("data-filtro"), valor: origen.value || "ninguno" });
-        }
-      }
-
-      selects.forEach(function (s) { s.addEventListener("change", function () { filtrar(s); }); });
-      quitar.addEventListener("click", function () {
-        selects.forEach(function (s) { s.value = ""; });
-        filtrar(null);
       });
     })();
   </script>
