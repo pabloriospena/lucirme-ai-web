@@ -1,7 +1,7 @@
 // src/lib/constants.js
 export const LINKS = {
   calendly: "https://wa.me/573053046180",
-  ebook: "https://pay.hotmart.com/D96093022S?off=OFF50",
+  ebook: "https://pay.hotmart.com/D96093022S?off=OFF50&bid=1795819131011",
   curso_presentaciones: "https://pay.hotmart.com/R107150726I?checkoutMode=10",
   email: "mailto:pablo@lucirme.com",
   linkedin: "https://linkedin.com/in/pabloriospena",

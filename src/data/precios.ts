@@ -15,6 +15,8 @@ export const PRECIOS: Record<string, Precio> = {
   // Atajos de IA y Atajos visuales, dichos por Pablo el 27 nov 2026. Falta confirmarlos contra Hotmart.
   "atajos-ia": { valor: 5, moneda: "USD", fuente: "Decisión de Pablo, 27 nov 2026" },
   "atajos-visuales": { valor: 5, moneda: "USD", fuente: "Decisión de Pablo, 27 nov 2026" },
+  // Ebook PM Sin Bullshit: 17 USD con el 50% de descuento que ya trae el enlace de Hotmart (Pablo, 27 nov 2026). Falta confirmar si 17 es antes o después del descuento.
+  "ebook-pm": { valor: 17, moneda: "USD", fuente: "Decisión de Pablo, 27 nov 2026" },
 };
 
 export const textoPrecio = (clave?: string) => {

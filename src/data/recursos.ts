@@ -164,6 +164,8 @@ export const RECURSOS: Recurso[] = [
     banda: "guias-herramientas",
     formato: "Guía",
     tema: "Producto",
+    acceso: "de-pago",
+    precio: "ebook-pm",
   },
   {
     slug: "atajos-ia",
@@ -173,6 +175,8 @@ export const RECURSOS: Recurso[] = [
     banda: "guias-herramientas",
     formato: "Guía",
     tema: "Prompts",
+    acceso: "de-pago",
+    precio: "atajos-ia",
   },
   {
     slug: "atajos-visuales",
@@ -182,6 +186,8 @@ export const RECURSOS: Recurso[] = [
     banda: "guias-herramientas",
     formato: "Guía",
     tema: "Imágenes",
+    acceso: "de-pago",
+    precio: "atajos-visuales",
   },
   {
     slug: "presentaciones-con-ia",
