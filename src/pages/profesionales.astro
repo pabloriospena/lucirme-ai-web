@@ -1,5 +1,5 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import LayoutV2 from "../layouts/LayoutV2.astro";
 import SocialProof from "../components/SocialProof.astro";
 import { LINKS } from "../lib/constants.js";
 
@@ -20,42 +20,13 @@ const serviceJsonLd = {
 
 ---
 
-<Layout
+<LayoutV2
   title="Sesiones 1-1 de IA Aplicada | LuciRMe AI"
   description="Sesiones 1-1 para profesionales que quieren aplicar IA a problemas reales de su trabajo, ahorrar tiempo y construir flujos de trabajo más simples."
-  hideHeader={true}
   jsonLd={serviceJsonLd}
-  hideFooter={true}
 >
-  <!-- HEADER DEDICADO PROFESIONALES -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
-    <div class="h-16 max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
-      <a class="flex flex-col group" href="#">
-        <span class="text-base font-bold tracking-tight text-slate-900 group-hover:text-teal-700 transition-colors">LuciRMe AI · Sesiones 1-1</span>
-        <span class="text-[11px] font-mono text-slate-500">Trabajamos sobre problemas reales de tu trabajo.</span>
-      </a>
 
-      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600">
-        <a class="hover:text-slate-900 transition-colors" href="/empresas#diagnostico">Diagnóstico</a>
-        <a class="hover:text-slate-900 transition-colors" href="#como-trabajamos">Cómo trabajamos</a>
-        <a class="hover:text-slate-900 transition-colors" href="#lo-que-trabajamos">Lo que trabajamos</a>
-        <a class="hover:text-slate-900 transition-colors" href="#formatos">Formatos</a>
-        <a class="hover:text-slate-900 transition-colors" href="#pablo">Pablo</a>
-      </nav>
-
-      <div class="flex items-center gap-3">
-        <a
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-teal-700 text-white text-xs font-semibold hover:bg-teal-800 transition-colors shadow-2xs cursor-pointer"
-          href="/empresas#diagnostico"
-        >
-          <span class="material-symbols-outlined text-[17px]">psychology</span>
-          <span>Quiero revisar mi caso</span>
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <main class="w-full bg-[#F8FAFC]">
+  <div class="w-full bg-[#F8FAFC]">
 
     <!-- HERO SECTION -->
     <section class="w-full max-w-7xl mx-auto px-6 pt-12 pb-12 md:py-20 border-b border-slate-200/60">
@@ -363,28 +334,9 @@ const serviceJsonLd = {
       </div>
     </section>
 
-  </main>
+  </div>
 
   <!-- FOOTER DEDICADO PROFESIONALES -->
-  <footer class="w-full bg-white border-t border-slate-200 py-12">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col gap-8">
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div class="flex flex-col gap-1">
-          <span class="text-base font-bold text-slate-900">LuciRMe AI · Sesiones 1-1</span>
-          <p class="text-xs font-mono text-slate-500">Trabajamos sobre problemas reales de tu trabajo.</p>
-        </div>
-        <div class="flex items-center gap-4 text-xs text-slate-600 font-medium">
-          <a class="hover:text-slate-900 transition-colors" href={whatsapp1a1} target="_blank">WhatsApp Directo</a>
-          <a class="hover:text-slate-900 transition-colors" href="/educacion">Educación</a>
-          <a class="hover:text-slate-900 transition-colors" href="/empresas">Empresas</a>
-        </div>
-      </div>
-      <div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
-        <span>© 2026 LuciRMe AI · Todos los derechos reservados.</span>
-        <span>lucirme.com/profesionales</span>
-      </div>
-    </div>
-  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -395,4 +347,4 @@ const serviceJsonLd = {
       }
     });
   </script>
-</Layout>
+</LayoutV2>

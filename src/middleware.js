@@ -7,10 +7,12 @@ const REDIRECTS = {
   "/soluciones/tecnologia+tunegocio": "/empresas",
   "/profesionales/product-managers": "/profesionales#product-managers",
   "/servicios": "/",
-  "/rutas": "/educacion",
+  "/rutas": "/recursos",
+  "/educacion": "/recursos",
+  "/atajos-ia": "/recursos/atajos-ia",
   "/content/sobremi": "/sobre-pablo",
   "/forms/pre-taller": "/",
-  "/recursos/preventa-vol2": "/educacion",
+  "/recursos/preventa-vol2": "/recursos",
 };
 
 // Rutas con contenido de clientes, talleres o respuestas de formularios: no deben indexarse.
@@ -41,7 +43,10 @@ export const onRequest = (context, next) => {
   const pathname = url.pathname;
 
   if (REDIRECTS[pathname]) {
-    return context.redirect(REDIRECTS[pathname], 301);
+    // Conserva los UTM de los enlaces de redes al redirigir.
+    const destino = REDIRECTS[pathname];
+    const [ruta, ancla] = destino.split("#");
+    return context.redirect(ruta + url.search + (ancla ? "#" + ancla : ""), 301);
   }
 
   const publishableKey = import.meta.env.PUBLIC_CLERK_PUBLISHABLE_KEY || process.env.PUBLIC_CLERK_PUBLISHABLE_KEY;
