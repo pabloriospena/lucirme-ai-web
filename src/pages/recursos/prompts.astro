@@ -46,7 +46,7 @@ const jsonLd = {
       <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {
           PROMPTS.map((p) => (
-            <li data-prompt data-tema={p.tema} data-texto-busqueda={`${p.titulo} ${p.descripcion} ${p.tema}`.toLowerCase()}>
+            <li data-prompt tabindex="-1" class="outline-offset-4 focus:outline focus:outline-2 focus:outline-v2-foco" data-tema={p.tema} data-texto-busqueda={`${p.titulo} ${p.descripcion} ${p.tema}`.toLowerCase()}>
               <article class="flex h-full flex-col gap-2 rounded-[20px] border-[0.8px] border-v2-borde bg-v2-fondo p-5">
                 <div>
                   <span class="inline-flex rounded-full border-[0.8px] border-v2-marca-borde bg-v2-marca-tinte px-3 py-1 text-xs font-bold text-v2-accion">{p.tema}</span>
@@ -57,50 +57,88 @@ const jsonLd = {
                   <button
                     type="button"
                     data-copiar
+                    data-estado="reposo"
                     data-slug={p.slug}
                     data-tema-prompt={p.tema}
                     data-texto={p.texto}
-                    class="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border-[0.8px] border-v2-control bg-v2-fondo px-4 text-sm font-bold text-v2-accion"
+                    class="inline-flex h-11 cursor-pointer items-center gap-2 rounded-full border-[0.8px] border-v2-control bg-v2-fondo px-4 text-sm font-bold text-v2-accion data-[estado=copiado]:border-v2-marca-borde data-[estado=copiado]:bg-v2-marca-tinte data-[estado=copiado]:text-v2-accion data-[estado=error]:border-[#c70036] data-[estado=error]:text-[#c70036]"
                   >
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" /><path d="M5 15V6a2 2 0 0 1 2-2h9" /></svg>
-                    <span data-etiqueta>Copiar prompt</span><span class="sr-only">: {p.titulo}</span>
+                    <svg data-i="copiar" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" /><path d="M5 15V6a2 2 0 0 1 2-2h9" /></svg>
+                    <svg data-i="check" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+                    <svg data-i="error" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7.5v5.5M12 16.5h.01" /></svg>
+                    <span data-etiqueta aria-live="polite">Copiar prompt</span><span class="sr-only">: {p.titulo}</span>
                   </button>
+                  <div data-error class="mt-3 hidden flex-col gap-2">
+                    <p role="alert" class="text-sm font-semibold text-[#c70036]">No se pudo copiar. Selecciona el texto y cópialo a mano.</p>
+                    <div tabindex="0" class="select-all rounded-xl border-[0.8px] border-v2-borde bg-v2-superficie p-3 text-sm leading-5 text-v2-texto [user-select:all]">{p.texto}</div>
+                  </div>
                 </div>
               </article>
             </li>
           ))
         }
       </ul>
-      <p id="sin-prompts" class="hidden py-8 text-base text-v2-cuerpo">No hay prompts con esa búsqueda. Prueba con otro tema o con otras palabras.</p>
+      <div id="sin-prompts" role="status" class="hidden flex-col items-center gap-3 rounded-[20px] border-[0.8px] border-dashed border-v2-control bg-v2-fondo px-6 py-10 text-center">
+        <span class="text-v2-accion" aria-hidden="true">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="M20 20l-4-4" /></svg>
+        </span>
+        <p class="max-w-md text-base leading-6 text-v2-cuerpo">No encontramos prompts con esa búsqueda. Prueba con otro tema o con otras palabras.</p>
+        <button type="button" id="quitar-filtros" class="inline-flex h-11 cursor-pointer items-center rounded-full border-[0.8px] border-v2-control bg-v2-fondo px-5 text-sm font-bold text-v2-accion">Quitar filtros</button>
+      </div>
+      <div id="ver-mas-zona" class="mt-6 hidden flex-col items-center gap-3">
+        <p role="status" id="conteo-ver-mas" class="text-sm text-v2-cuerpo"></p>
+        <button type="button" id="ver-mas" class="inline-flex h-11 cursor-pointer items-center rounded-full border-[0.8px] border-v2-control bg-v2-fondo px-5 text-sm font-bold text-v2-accion">Ver más prompts</button>
+      </div>
+      <p id="fin-lista" class="mt-6 hidden text-center text-sm text-v2-cuerpo"></p>
     </section>
 
     <SigueEnRedes posicion="prompts" />
   </div>
 
-  <p role="status" id="aviso-copiado" class="sr-only"></p>
-
   <script is:inline>
     (function () {
-      var items = document.querySelectorAll("li[data-prompt]");
+      var POR_PAGINA = 9;
+      var items = Array.prototype.slice.call(document.querySelectorAll("li[data-prompt]"));
       var chips = document.querySelectorAll("button[data-tema-chip]");
       var buscar = document.getElementById("buscar-prompt");
       var conteo = document.getElementById("conteo-prompts");
       var vacio = document.getElementById("sin-prompts");
-      var aviso = document.getElementById("aviso-copiado");
+      var zona = document.getElementById("ver-mas-zona");
+      var conteoMas = document.getElementById("conteo-ver-mas");
+      var verMas = document.getElementById("ver-mas");
+      var fin = document.getElementById("fin-lista");
+      var lista = items[0].parentNode;
       var tema = "Todos";
+      var limite = POR_PAGINA;
       function norm(s) { return (s || "").toLowerCase(); }
-      function filtrar() {
+      function coincidencias() {
         var q = norm(buscar.value).trim();
-        var n = 0;
-        items.forEach(function (li) {
+        return items.filter(function (li) {
           var okTema = tema === "Todos" || li.getAttribute("data-tema") === tema;
           var okQ = !q || li.getAttribute("data-texto-busqueda").indexOf(q) !== -1;
-          li.classList.toggle("hidden", !(okTema && okQ));
-          if (okTema && okQ) n++;
+          return okTema && okQ;
         });
-        conteo.textContent = n + (n === 1 ? " prompt" : " prompts");
-        vacio.classList.toggle("hidden", n > 0);
       }
+      function pintar() {
+        var m = coincidencias();
+        var n = m.length;
+        var visibles = m.slice(0, limite);
+        items.forEach(function (li) { li.classList.toggle("hidden", visibles.indexOf(li) === -1); });
+        var hayMas = n > visibles.length;
+        var termino = limite > POR_PAGINA && n > POR_PAGINA && !hayMas;
+        conteo.textContent = n + (n === 1 ? " prompt" : " prompts");
+        conteo.classList.toggle("hidden", hayMas);
+        zona.classList.toggle("hidden", !hayMas);
+        zona.classList.toggle("flex", hayMas);
+        conteoMas.textContent = "Mostrando " + visibles.length + " de " + n + " prompts";
+        fin.classList.toggle("hidden", !termino);
+        fin.textContent = termino ? "Viste los " + n + " prompts de este tema." : "";
+        vacio.classList.toggle("hidden", n > 0);
+        vacio.classList.toggle("flex", n === 0);
+        lista.classList.toggle("hidden", n === 0);
+        return m;
+      }
+      function filtrar() { limite = POR_PAGINA; pintar(); }
       chips.forEach(function (c) {
         c.addEventListener("click", function () {
           tema = c.getAttribute("data-tema-chip");
@@ -110,6 +148,22 @@ const jsonLd = {
         });
       });
       buscar.addEventListener("input", filtrar);
+      document.getElementById("quitar-filtros").addEventListener("click", function () {
+        buscar.value = "";
+        tema = "Todos";
+        chips.forEach(function (o) { o.setAttribute("aria-pressed", o.getAttribute("data-tema-chip") === "Todos" ? "true" : "false"); });
+        filtrar();
+        buscar.focus();
+        if (window.posthog) window.posthog.capture("prompts_filtro", { tema: "Todos", origen: "quitar_filtros" });
+      });
+      verMas.addEventListener("click", function () {
+        var antes = Math.min(limite, coincidencias().length);
+        limite += POR_PAGINA;
+        var m = pintar();
+        if (m[antes]) m[antes].focus();
+        if (window.posthog) window.posthog.capture("prompts_ver_mas", { tema: tema, visibles: Math.min(limite, m.length) });
+      });
+      pintar();
 
       function copiar(texto) {
         if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(texto);
@@ -120,18 +174,29 @@ const jsonLd = {
           try { document.execCommand("copy") ? ok() : no(); } catch (e) { no(e); } finally { document.body.removeChild(t); }
         });
       }
+      function estado(b, e) {
+        b.setAttribute("data-estado", e);
+        ["copiar", "check", "error"].forEach(function (i) {
+          var ic = b.querySelector('[data-i="' + i + '"]');
+          var activo = (e === "reposo" && i === "copiar") || (e === "copiado" && i === "check") || (e === "error" && i === "error");
+          ic.classList.toggle("hidden", !activo);
+        });
+        b.querySelector("[data-etiqueta]").textContent = e === "copiado" ? "¡Copiado!" : e === "error" ? "No se pudo copiar" : "Copiar prompt";
+      }
       document.querySelectorAll("button[data-copiar]").forEach(function (b) {
+        var caja = b.parentNode.querySelector("[data-error]");
+        var temporizador;
         b.addEventListener("click", function () {
-          var etiqueta = b.querySelector("[data-etiqueta]");
+          clearTimeout(temporizador);
+          caja.classList.add("hidden"); caja.classList.remove("flex");
           copiar(b.getAttribute("data-texto")).then(function () {
             if (window.posthog) window.posthog.capture("prompt_copiado", { prompt: b.getAttribute("data-slug"), tema: b.getAttribute("data-tema-prompt") });
-            etiqueta.textContent = "Copiado";
-            aviso.textContent = "Prompt copiado.";
-            setTimeout(function () { etiqueta.textContent = "Copiar prompt"; aviso.textContent = ""; }, 2000);
+            estado(b, "copiado");
+            temporizador = setTimeout(function () { estado(b, "reposo"); }, 2000);
           }).catch(function () {
-            etiqueta.textContent = "No se pudo copiar";
-            aviso.textContent = "No se pudo copiar el prompt.";
-            setTimeout(function () { etiqueta.textContent = "Copiar prompt"; aviso.textContent = ""; }, 2500);
+            estado(b, "error");
+            caja.classList.remove("hidden"); caja.classList.add("flex");
+            if (window.posthog) window.posthog.capture("prompt_copiar_error", { prompt: b.getAttribute("data-slug") });
           });
         });
       });
