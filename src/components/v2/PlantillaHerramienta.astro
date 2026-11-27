@@ -1,0 +1,104 @@
+---
+// Plantilla de herramienta interactiva (lienzo, tablero Herramienta interactiva). Columna de 560 px.
+// Estados en el mismo lugar: entrada, carga, resultado y error. Una sola acción principal en cada uno.
+// La página pone los campos en el slot y registra su función en el elemento: host.generar(señal) devuelve el texto del resultado.
+interface Props {
+  nombre: string;
+  etiquetaResultado?: string;
+}
+const { nombre, etiquetaResultado = "Tu resultado" } = Astro.props;
+const boton = "inline-flex min-h-[52px] cursor-pointer items-center justify-center gap-2 rounded-full px-7 text-base font-bold";
+---
+
+<section data-herramienta data-nombre={nombre} class="mx-auto flex w-full max-w-[560px] flex-col gap-5" aria-label={nombre}>
+  <form data-h-form novalidate class="flex flex-col gap-4">
+    <h2 class="text-[22px] font-bold text-v2-texto">1. Cuéntanos</h2>
+    <slot />
+    <p data-h-error-campo role="alert" class="hidden text-sm font-semibold text-[#c70036]">Completa el primer campo para continuar.</p>
+    <button type="submit" data-h-generar class={`${boton} bg-v2-accion text-v2-accion-texto hover:bg-v2-accion-hover`}>Generar</button>
+  </form>
+
+  <div data-h-carga role="status" aria-busy="true" class="hidden flex-col gap-3">
+    <h2 class="text-[22px] font-bold text-v2-texto">2. Generando</h2>
+    <div class="flex flex-col gap-2.5 rounded-2xl border-[0.8px] border-v2-borde bg-v2-superficie p-5" aria-hidden="true">
+      <span class="block h-3 w-[92%] rounded-md bg-[#cad5e2]"></span>
+      <span class="block h-3 w-[78%] rounded-md bg-[#cad5e2]"></span>
+      <span class="block h-3 w-[86%] rounded-md bg-[#cad5e2]"></span>
+      <span class="block h-3 w-[60%] rounded-md bg-[#cad5e2]"></span>
+    </div>
+    <p class="text-sm text-v2-cuerpo">Estamos preparando tu resultado.</p>
+    <div class="flex flex-wrap gap-3">
+      <button type="button" disabled class={`${boton} bg-v2-accion text-v2-accion-texto opacity-70`}>
+        <svg class="h-5 w-5 motion-safe:animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9" /></svg>
+        Generando
+      </button>
+      <button type="button" data-h-cancelar class={`${boton} border-[0.8px] border-v2-control bg-v2-fondo text-v2-accion`}>Cancelar</button>
+    </div>
+  </div>
+
+  <div data-h-resultado class="hidden flex-col gap-3">
+    <h2 class="text-[22px] font-bold text-v2-texto">3. {etiquetaResultado}</h2>
+    <div data-h-salida tabindex="0" class="select-all whitespace-pre-wrap rounded-2xl border-[0.8px] border-v2-borde bg-v2-superficie p-5 text-sm leading-6 text-v2-texto"></div>
+    <div class="flex flex-wrap gap-3">
+      <button type="button" data-h-copiar class={`${boton} bg-v2-accion text-v2-accion-texto hover:bg-v2-accion-hover`}><span data-h-copiar-etiqueta>Copiar resultado</span></button>
+      <button type="button" data-h-reiniciar class={`${boton} border-[0.8px] border-v2-control bg-v2-fondo text-v2-accion`}>Empezar de nuevo</button>
+    </div>
+    <p data-h-copiar-aviso role="status" class="text-sm text-v2-cuerpo"></p>
+    <p class="text-sm text-v2-suave">Esta herramienta genera con IA. Revisa el resultado antes de usarlo.</p>
+  </div>
+
+  <div data-h-error class="hidden flex-col gap-3">
+    <p role="alert" class="flex flex-col gap-1">
+      <span class="text-base font-bold text-[#c70036]">Error al generar</span>
+      <span class="text-sm leading-5 text-v2-cuerpo">No pudimos generar el resultado. Tu texto sigue aquí, intenta de nuevo.</span>
+    </p>
+    <div><button type="button" data-h-reintentar class={`${boton} border-[0.8px] border-[#c70036] bg-v2-fondo text-[#c70036]`}>Intentar de nuevo</button></div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll("[data-herramienta]").forEach(function (host) {
+      var $ = function (s) { return host.querySelector(s); };
+      var form = $("[data-h-form]"), carga = $("[data-h-carga]"), res = $("[data-h-resultado]"), err = $("[data-h-error]");
+      var salida = $("[data-h-salida]"), aviso = $("[data-h-copiar-aviso]"), etCopiar = $("[data-h-copiar-etiqueta]"), errCampo = $("[data-h-error-campo]");
+      var control = null, nombre = host.getAttribute("data-nombre");
+      function vista(v) {
+        form.classList.toggle("hidden", v === "carga" || v === "resultado");
+        [["carga", carga], ["resultado", res], ["error", err]].forEach(function (p) {
+          var si = p[0] === v; p[1].classList.toggle("hidden", !si); p[1].classList.toggle("flex", si);
+        });
+      }
+      function enfocar(el) { el.setAttribute("tabindex", "-1"); el.focus(); }
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        errCampo.classList.add("hidden");
+        var primero = form.querySelector("input, textarea");
+        if (primero && primero.required && !primero.value.trim()) { errCampo.classList.remove("hidden"); primero.setAttribute("aria-invalid", "true"); primero.focus(); return; }
+        if (primero) primero.removeAttribute("aria-invalid");
+        if (typeof host.generar !== "function") return;
+        control = new AbortController();
+        vista("carga"); enfocar(carga);
+        Promise.resolve(host.generar(control.signal)).then(function (texto) {
+          if (control.signal.aborted) return;
+          salida.textContent = texto; aviso.textContent = ""; etCopiar.textContent = "Copiar resultado";
+          vista("resultado"); enfocar(res.querySelector("h2"));
+          if (window.posthog) window.posthog.capture("herramienta_generada", { herramienta: nombre });
+        }).catch(function () {
+          if (control.signal.aborted) return;
+          vista("error"); enfocar(err.querySelector("[role=alert]"));
+          if (window.posthog) window.posthog.capture("herramienta_error", { herramienta: nombre });
+        });
+      });
+      $("[data-h-cancelar]").addEventListener("click", function () { if (control) control.abort(); vista("entrada"); var f = form.querySelector("input, textarea"); if (f) f.focus(); });
+      $("[data-h-reintentar]").addEventListener("click", function () { vista("entrada"); var f = form.querySelector("input, textarea"); if (f) f.focus(); });
+      $("[data-h-reiniciar]").addEventListener("click", function () { vista("entrada"); var f = form.querySelector("input, textarea"); if (f) f.focus(); });
+      $("[data-h-copiar]").addEventListener("click", function () {
+        var texto = salida.textContent;
+        var ok = function () { etCopiar.textContent = "¡Copiado!"; aviso.textContent = "Resultado copiado."; setTimeout(function () { etCopiar.textContent = "Copiar resultado"; aviso.textContent = ""; }, 2000); };
+        var no = function () { aviso.textContent = "No se pudo copiar. Selecciona el texto y cópialo a mano."; var r = document.createRange(); r.selectNodeContents(salida); var s = getSelection(); s.removeAllRanges(); s.addRange(r); salida.focus(); };
+        if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(texto).then(ok, no); else no();
+      });
+    });
+  })();
+</script>

@@ -13,9 +13,13 @@ interface Props {
   tema?: string;
   aprendes: string[];
   pdf?: string;
+  // API que guarda el correo. Por defecto, el grupo de recursos gratis.
+  endpoint?: string;
+  // Clave de localStorage de un desbloqueo anterior, para no volver a pedir el correo.
+  claveLocal?: string;
   relacionados?: { titulo: string; tipo: string; url: string }[];
 }
-const { slug, titulo, descripcion, tema, aprendes, pdf, relacionados = [] } = Astro.props;
+const { slug, titulo, descripcion, tema, aprendes, pdf, endpoint = "/api/unlock-recurso", claveLocal, relacionados = [] } = Astro.props;
 let desbloqueada = false;
 try {
   desbloqueada = verificar(Astro.cookies.get(COOKIE_NAME)?.value);
@@ -26,7 +30,7 @@ const etiqueta = "inline-flex items-center rounded-full border-[0.8px] px-3 py-1
 const campo = "min-h-[52px] rounded-[14px] border-[0.8px] border-v2-control bg-v2-fondo px-4 text-base text-v2-texto aria-[invalid=true]:border-[#c70036] disabled:opacity-60";
 ---
 
-<div class="mx-auto flex w-full max-w-[1200px] flex-col gap-6 px-4 pb-8 pt-2 sm:px-6" data-guia-gratis={slug} data-desbloqueada={desbloqueada ? "1" : "0"}>
+<div class="mx-auto flex w-full max-w-[1200px] flex-col gap-6 px-4 pb-8 pt-2 sm:px-6" data-guia-gratis={slug} data-endpoint={endpoint} data-clave-local={claveLocal ?? ""} data-desbloqueada={desbloqueada ? "1" : "0"}>
   <section class="flex flex-wrap items-start gap-6 pt-2">
     <div class="flex min-w-0 grow shrink basis-[520px] flex-col gap-3">
       <div class="flex flex-wrap items-center gap-2">
@@ -120,6 +124,8 @@ const campo = "min-h-[52px] rounded-[14px] border-[0.8px] border-v2-control bg-v
     if (!raiz) return;
     var slug = raiz.getAttribute("data-guia-gratis");
     var clave = "guia-desbloqueada:" + slug;
+    var claveVieja = raiz.getAttribute("data-clave-local");
+    var endpoint = raiz.getAttribute("data-endpoint");
     var $ = function (s) { return raiz.querySelector(s); };
     var muro = $("[data-muro]"), form = $("[data-form]"), exito = $("[data-exito]");
     var cuerpo = $("[data-cuerpo]"), bloqueado = $("[data-bloque-bloqueado]"), desbloq = $("[data-bloque-desbloqueado]"), marca = $("[data-marca-desbloqueo]");
@@ -136,7 +142,7 @@ const campo = "min-h-[52px] rounded-[14px] border-[0.8px] border-v2-control bg-v
       marca.classList.remove("hidden"); marca.classList.add("inline-flex");
       if (enfocar) { var h = raiz.querySelector("h1"); h.setAttribute("tabindex", "-1"); h.focus(); }
     }
-    function recordado() { try { return localStorage.getItem(clave) === "1"; } catch (e) { return false; } }
+    function recordado() { try { return localStorage.getItem(clave) === "1" || (claveVieja && !!localStorage.getItem(claveVieja)); } catch (e) { return false; } }
     function recordar() { try { localStorage.setItem(clave, "1"); } catch (e) {}
     }
     if (raiz.getAttribute("data-desbloqueada") === "1" || recordado()) abrir(false);
@@ -161,7 +167,7 @@ const campo = "min-h-[52px] rounded-[14px] border-[0.8px] border-v2-control bg-v
       if (!okAcepto) { mostrar(eAcepto, true); acepto.setAttribute("aria-invalid", "true"); }
       if (!okCorreo || !okAcepto) { (okCorreo ? acepto : correo).focus(); return; }
       cargando(true);
-      fetch("/api/unlock-recurso", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: v }) })
+      fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: v }) })
         .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, d: d }; }); })
         .then(function (res) {
           cargando(false);
