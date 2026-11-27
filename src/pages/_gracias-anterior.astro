@@ -1,0 +1,121 @@
+---
+import ActionHub from "../components/ActionHub.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="¡Listo! Nos vemos en la sesión | LuciRMe AI">
+    <main class="bg-[#F8FAFC] min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-10">
+                <div
+                    class="inline-flex items-center justify-center w-16 h-16 bg-teal text-white rounded-full mb-4 shadow-lg shadow-teal/20"
+                >
+                    <svg
+                        class="w-8 h-8"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="3"
+                            d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h1 class="text-3xl font-black text-deep mb-2">
+                    ¡Recibido! 🎯
+                </h1>
+                <p class="text-gray-500 text-lg">
+                    Tus respuestas están guardadas. Ya tengo claridad sobre tu
+                    mayor "dolor de cabeza".
+                </p>
+            </div>
+
+            <!-- Qué sigue -->
+            <div
+                class="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 mb-8 shadow-sm"
+            >
+                <h2 class="text-lg font-bold text-deep mb-6">
+                    ¿Qué sigue ahora?
+                </h2>
+                <div class="space-y-6">
+                    {
+                        [
+                            {
+                                n: "1",
+                                t: "Revisa tu correo",
+                                d: "Te envié un email con los próximos pasos y el recordatorio de nuestra sesión.",
+                            },
+                            {
+                                n: "2",
+                                t: "Prepara tu 'dolor'",
+                                d: "Ten listo el archivo o proceso real (Excel, contratos, correos) para trabajar en vivo.",
+                            },
+                            {
+                                n: "3",
+                                t: "Abre tus cuentas de IA",
+                                d: "Claude, ChatGPT o Gemini listos para usar durante la sesión.",
+                            },
+                        ].map((item) => (
+                            <div class="flex items-start gap-4">
+                                <span class="flex-shrink-0 w-8 h-8 bg-teal/10 text-teal font-bold rounded-full flex items-center justify-center">
+                                    {item.n}
+                                </span>
+                                <div>
+                                    <p class="font-bold text-deep">{item.t}</p>
+                                    <p class="text-sm text-gray-500 mt-1">
+                                        {item.d}
+                                    </p>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <!-- Checklist técnico -->
+            <div class="bg-deep text-white p-6 md:p-8 rounded-2xl mb-8">
+                <h3 class="font-bold mb-4">
+                    ✅ Checklist para el día de la sesión
+                </h3>
+                <ul class="space-y-3 text-gray-300 text-sm">
+                    <li class="flex items-start gap-2">
+                        <span>✓</span>
+                        <span
+                            >Estar frente al computador con buena conexión.</span
+                        >
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span>✓</span>
+                        <span
+                            >Cuentas de IA abiertas (Claude, ChatGPT o Gemini).</span
+                        >
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span>✓</span>
+                        <span
+                            >El "dolor" a la mano listo para copiar/pegar.</span
+                        >
+                    </li>
+                </ul>
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center">
+                <p class="text-gray-400 text-sm mb-4">
+                    ¿Tienes alguna duda urgente antes de la sesión?
+                </p>
+                <a
+                    href="https://wa.me/573128199661"
+                    target="_blank"
+                    class="inline-block px-8 py-4 bg-teal hover:bg-tealHover text-white font-bold rounded-xl transition-all shadow-lg shadow-teal/20"
+                >
+                    Escríbeme por WhatsApp →
+                </a>
+            </div>
+        </div>
+    </main>
+    <ActionHub />
+</Layout>
