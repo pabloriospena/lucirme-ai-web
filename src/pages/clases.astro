@@ -15,7 +15,7 @@ const temas = [
 ];
 const puntos = ["Clases con Pablo, en vivo.", "La grabación queda disponible.", "Eliges el tema que quieres aprender."];
 const campo =
-  "min-h-[52px] w-full rounded-[14px] border-[0.8px] border-v2-control bg-v2-fondo px-4 text-base text-v2-texto aria-[invalid=true]:border-[#c70036]";
+  "min-h-[52px] w-full rounded-[14px] border-[0.8px] border-v2-control bg-v2-fondo px-4 text-base text-v2-texto aria-[invalid=true]:border-v2-error";
 ---
 
 <LayoutV2
@@ -25,7 +25,7 @@ const campo =
   <div class="mx-auto flex w-full max-w-[1200px] flex-col gap-6 px-4 pb-4 pt-2 sm:px-6">
     <section
       class="relative min-h-[300px] overflow-hidden rounded-[32px] border-[0.8px] border-v2-marca-borde"
-      style="background: linear-gradient(135deg, #CCFBF1 0%, #F0FDFA 55%, #FFFFFF 100%)"
+      style="background: linear-gradient(135deg, var(--v2-hero-desde) 0%, var(--v2-hero-medio) 55%, var(--v2-hero-hasta) 100%)"
     >
       <PersonajeFondo pose="presentando" />
       <div class="relative flex max-w-[620px] flex-col gap-3 px-6 py-8 sm:px-12 sm:pb-8 sm:pt-9">
@@ -67,7 +67,7 @@ const campo =
           <div class="flex flex-col gap-1.5">
             <label for="clases-correo" class="text-sm font-semibold text-v2-texto">Correo</label>
             <input id="clases-correo" name="email" type="email" autocomplete="email" placeholder="tu@correo.com" aria-describedby="clases-error" class={campo} />
-            <p id="clases-error" class="hidden text-sm text-[#c70036]">Escribe un correo válido.</p>
+            <p id="clases-error" class="hidden text-sm text-v2-error">Escribe un correo válido.</p>
           </div>
           <div class="flex flex-col gap-1.5">
             <label for="clases-tema" class="text-sm font-semibold text-v2-texto">Tema que te interesa</label>
@@ -82,7 +82,7 @@ const campo =
           >
             Avisarme de la próxima clase
           </button>
-          <p id="clases-fallo" class="hidden text-sm text-[#c70036]"></p>
+          <p id="clases-fallo" class="hidden text-sm text-v2-error"></p>
           <p class="text-xs leading-4 text-v2-cuerpo">
             Usamos tu correo solo para avisarte de las clases. Puedes salir cuando quieras. Revisa la
             <a href="/privacidad" class="font-semibold text-v2-accion underline underline-offset-2">política de privacidad</a>.

@@ -13,7 +13,7 @@ interface Props {
 }
 const { titulo, texto, icono, href, externo = false, proximamente = false, evento } = Astro.props;
 const caja = proximamente
-  ? "border-[#CAD5E2] bg-v2-chip text-v2-cuerpo"
+  ? "border-v2-neutro bg-v2-chip text-v2-cuerpo"
   : "border-v2-marca-borde bg-v2-marca-tinte text-v2-accion";
 const fila = proximamente
   ? "border-dashed border-v2-control bg-v2-superficie"
@@ -41,7 +41,7 @@ const Tag = href ? "a" : "div";
   </span>
   {
     proximamente ? (
-      <span class="inline-flex items-center rounded-full border-[0.8px] border-[#CAD5E2] bg-v2-fondo px-3 py-1 text-xs font-bold text-v2-cuerpo">Próximamente</span>
+      <span class="inline-flex items-center rounded-full border-[0.8px] border-v2-neutro bg-v2-fondo px-3 py-1 text-xs font-bold text-v2-cuerpo">Próximamente</span>
     ) : href ? (
       <span aria-hidden="true" class="text-xl text-v2-suave">›</span>
     ) : null

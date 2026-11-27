@@ -14,17 +14,17 @@ const boton = "inline-flex min-h-[52px] cursor-pointer items-center justify-cent
   <form data-h-form novalidate class="flex flex-col gap-4">
     <h2 class="text-[22px] font-bold text-v2-texto">1. Cuéntanos</h2>
     <slot />
-    <p data-h-error-campo role="alert" class="hidden text-sm font-semibold text-[#c70036]">Completa el primer campo para continuar.</p>
+    <p data-h-error-campo role="alert" class="hidden text-sm font-semibold text-v2-error">Completa el primer campo para continuar.</p>
     <button type="submit" data-h-generar class={`${boton} bg-v2-accion text-v2-accion-texto hover:bg-v2-accion-hover`}>Generar</button>
   </form>
 
   <div data-h-carga role="status" aria-busy="true" class="hidden flex-col gap-3">
     <h2 class="text-[22px] font-bold text-v2-texto">2. Generando</h2>
     <div class="flex flex-col gap-2.5 rounded-2xl border-[0.8px] border-v2-borde bg-v2-superficie p-5" aria-hidden="true">
-      <span class="block h-3 w-[92%] rounded-md bg-[#cad5e2]"></span>
-      <span class="block h-3 w-[78%] rounded-md bg-[#cad5e2]"></span>
-      <span class="block h-3 w-[86%] rounded-md bg-[#cad5e2]"></span>
-      <span class="block h-3 w-[60%] rounded-md bg-[#cad5e2]"></span>
+      <span class="block h-3 w-[92%] rounded-md bg-v2-neutro"></span>
+      <span class="block h-3 w-[78%] rounded-md bg-v2-neutro"></span>
+      <span class="block h-3 w-[86%] rounded-md bg-v2-neutro"></span>
+      <span class="block h-3 w-[60%] rounded-md bg-v2-neutro"></span>
     </div>
     <p class="text-sm text-v2-cuerpo">Estamos preparando tu resultado.</p>
     <div class="flex flex-wrap gap-3">
@@ -49,10 +49,10 @@ const boton = "inline-flex min-h-[52px] cursor-pointer items-center justify-cent
 
   <div data-h-error class="hidden flex-col gap-3">
     <p role="alert" class="flex flex-col gap-1">
-      <span class="text-base font-bold text-[#c70036]">Error al generar</span>
+      <span class="text-base font-bold text-v2-error">Error al generar</span>
       <span class="text-sm leading-5 text-v2-cuerpo">No pudimos generar el resultado. Tu texto sigue aquí, intenta de nuevo.</span>
     </p>
-    <div><button type="button" data-h-reintentar class={`${boton} border-[0.8px] border-[#c70036] bg-v2-fondo text-[#c70036]`}>Intentar de nuevo</button></div>
+    <div><button type="button" data-h-reintentar class={`${boton} border-[0.8px] border-v2-error bg-v2-fondo text-v2-error`}>Intentar de nuevo</button></div>
   </div>
 </section>
 

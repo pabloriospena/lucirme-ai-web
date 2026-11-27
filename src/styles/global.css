@@ -29,7 +29,7 @@
   --color-app-bg: #F8FAFC;
 
   /* Web v2, modo claro. Valores medidos en lucirme.com el 26 nov 2026 (Design System LuciRMe AI,
-     sección Web v2). Mandan sobre los hex de la sección Colors anterior. El modo oscuro no va en este corte. */
+     sección Web v2). Mandan sobre los hex de la sección Colors anterior. */
   --color-v2-fondo: #ffffff;
   --color-v2-superficie: #f8fafc;
   --color-v2-chip: #f1f5f9;
@@ -50,6 +50,18 @@
   --color-v2-foco: #00786f;
   --color-v2-barra-fondo: #e2e8f0;
   --color-v2-barra-relleno: #00786f;
+  /* Tokens que el modo oscuro necesita y el claro ya usaba suelto (hex en las páginas). */
+  --color-v2-error: #c70036;
+  --color-v2-neutro: #cad5e2;
+  --color-v2-marca-texto: #115e59;
+  --color-v2-pago-boton-texto: #ffffff;
+  --color-v2-exito: #047857;
+  --color-v2-exito-fondo: #ecfdf5;
+  --color-v2-exito-borde: #a4f4cf;
+  --color-v2-secundario: #ffffff;
+  --v2-hero-desde: #ccfbf1;
+  --v2-hero-medio: #f0fdfa;
+  --v2-hero-hasta: #ffffff;
 
   /* Custom Spacings */
   --spacing-space-xs: 0.25rem;
@@ -79,4 +91,65 @@ summary:focus-visible,
 [tabindex]:focus-visible {
   outline: 2px solid var(--color-v2-foco) !important;
   outline-offset: 2px !important;
+}
+
+/* Web v2, modo oscuro. Solo páginas V2 (html[data-v2]) y solo si la persona lo activó en la cabecera
+   (html[data-tema="oscuro"]). No hay prefers-color-scheme hasta que Pablo lo apruebe.
+   Valores del Design System, sección Web v2 modo oscuro. */
+html[data-v2][data-tema="oscuro"] {
+  color-scheme: dark;
+  --color-v2-fondo: #0f172b;
+  --color-v2-superficie: #1d293d;
+  --color-v2-chip: #1d293d;
+  --color-v2-texto: #f8fafc;
+  --color-v2-cuerpo: #cad5e2;
+  --color-v2-suave: #90a1b9;
+  --color-v2-borde: #314158;
+  --color-v2-control: #62748e;
+  --color-v2-accion: #46edd5;
+  --color-v2-accion-hover: #7bf4e2;
+  --color-v2-accion-texto: #0f172b;
+  --color-v2-marca-tinte: #0b4f4a;
+  --color-v2-marca-borde: #00786f;
+  --color-v2-pago-texto: #ffd230;
+  --color-v2-pago-fondo: #461901;
+  --color-v2-pago-borde: #973c00;
+  --color-v2-pago-boton: #ffb900;
+  --color-v2-pago-boton-texto: #0f172b;
+  --color-v2-foco: #46edd5;
+  --color-v2-barra-fondo: #314158;
+  --color-v2-barra-relleno: #46edd5;
+  --color-v2-error: #ffa1ad;
+  --color-v2-neutro: #314158;
+  --color-v2-marca-texto: #46edd5;
+  --color-v2-exito: #5ee9b5;
+  --color-v2-exito-fondo: #022c22;
+  --color-v2-exito-borde: #006045;
+  --color-v2-secundario: transparent;
+  --v2-hero-desde: #0b4f4a;
+  --v2-hero-medio: #0b4f4a;
+  --v2-hero-hasta: #0f172b;
+}
+html[data-v2][data-tema="oscuro"] body {
+  background-color: var(--color-v2-fondo);
+  color: var(--color-v2-texto);
+}
+/* Logo: sin versión oscura, va dentro de una píldora clara y no se recolorea. */
+.v2-logo-pildora {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+}
+html[data-v2][data-tema="oscuro"] .v2-logo-pildora {
+  background-color: #f8fafc;
+  padding: 6px 14px;
+}
+/* Transición entre modos: solo si la persona no pidió menos movimiento. */
+@media (prefers-reduced-motion: no-preference) {
+  html.tema-anima,
+  html.tema-anima *,
+  html.tema-anima *::before,
+  html.tema-anima *::after {
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease !important;
+  }
 }

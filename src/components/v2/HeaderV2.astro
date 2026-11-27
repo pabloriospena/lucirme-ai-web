@@ -26,9 +26,10 @@ const enlace =
 <header class="bg-v2-superficie px-4 sm:px-6" data-cabecera-v2>
   <div class="mx-auto flex min-h-[72px] max-w-[1200px] items-center justify-between gap-4">
     <a href="/" class="flex min-h-11 shrink-0 items-center" aria-label="LuciRMe AI, inicio">
-      <img src="/logo-lucirme-ai.svg" alt="LuciRMe AI" class="h-9 w-auto" />
+      <span class="v2-logo-pildora"><img src="/logo-lucirme-ai.svg" alt="LuciRMe AI" class="h-9 w-auto" /></span>
     </a>
 
+    <div class="flex items-center gap-2">
     <!-- Escritorio -->
     <nav
       class="relative hidden items-center gap-1 rounded-full border-[0.8px] border-v2-borde bg-v2-fondo py-1 pl-3 pr-1 md:flex"
@@ -89,7 +90,30 @@ const enlace =
         </ul>
       </div>
     </nav>
+    <button
+      type="button"
+      class="hidden md:flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full border-[0.8px] border-v2-control bg-v2-fondo text-v2-texto"
+      aria-label="Modo oscuro"
+      aria-pressed="false"
+      data-tema-boton
+    >
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+      </svg>
+    </button>
 
+    
+    <button
+      type="button"
+      class="flex md:hidden h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full border-[0.8px] border-v2-control bg-v2-fondo text-v2-texto"
+      aria-label="Modo oscuro"
+      aria-pressed="false"
+      data-tema-boton
+    >
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+      </svg>
+    </button>
     <!-- Móvil -->
     <button
       type="button"
@@ -106,6 +130,7 @@ const enlace =
         <path d="M6 6l12 12M18 6L6 18"></path>
       </svg>
     </button>
+    </div>
   </div>
 
   <nav id="menu-movil" hidden class="mx-auto max-w-[1200px] pb-4 md:hidden" aria-label="Principal, móvil" data-menu-movil>
@@ -153,6 +178,27 @@ const enlace =
   (function () {
     var cab = document.querySelector("[data-cabecera-v2]");
     if (!cab) return;
+    // Modo oscuro: solo con esta opción, guardado en el navegador. Sin prefers-color-scheme.
+    var raiz = document.documentElement;
+    var temaBotones = cab.querySelectorAll("[data-tema-boton]");
+    function pintarTema(oscuro) {
+      temaBotones.forEach(function (b) { b.setAttribute("aria-pressed", oscuro ? "true" : "false"); });
+    }
+    pintarTema(raiz.getAttribute("data-tema") === "oscuro");
+    temaBotones.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var oscuro = raiz.getAttribute("data-tema") !== "oscuro";
+        var sinAnimar = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (!sinAnimar) {
+          raiz.classList.add("tema-anima");
+          setTimeout(function () { raiz.classList.remove("tema-anima"); }, 250);
+        }
+        if (oscuro) raiz.setAttribute("data-tema", "oscuro"); else raiz.removeAttribute("data-tema");
+        try { localStorage.setItem("lucirme-tema", oscuro ? "oscuro" : "claro"); } catch (e) {}
+        pintarTema(oscuro);
+        if (window.posthog) window.posthog.capture("tema_cambiado", { tema: oscuro ? "oscuro" : "claro" });
+      });
+    });
     var boton = cab.querySelector("[data-menu-boton]");
     var panel = cab.querySelector("[data-menu-panel]");
     var botonMovil = cab.querySelector("[data-menu-movil-boton]");

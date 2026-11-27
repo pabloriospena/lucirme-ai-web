@@ -27,11 +27,11 @@ const evento = (b: string) =>
   <div class="mx-auto flex w-full max-w-[1200px] flex-col gap-6 px-4 pb-4 pt-2 sm:px-6">
     <section
       class="relative min-h-[300px] overflow-hidden rounded-[32px] border-[0.8px] border-v2-marca-borde"
-      style="background: linear-gradient(135deg, #CCFBF1 0%, #F0FDFA 55%, #FFFFFF 100%)"
+      style="background: linear-gradient(135deg, var(--v2-hero-desde) 0%, var(--v2-hero-medio) 55%, var(--v2-hero-hasta) 100%)"
     >
       <PersonajeFondo pose="saludando" />
       <div class="relative flex max-w-[620px] flex-col gap-3 px-6 pb-8 pt-9 sm:px-12">
-        <span class="self-start rounded-full border-[0.8px] border-v2-marca-borde bg-white px-3.5 py-1.5 font-mono text-xs font-semibold uppercase tracking-[0.6px] text-v2-accion">
+        <span class="self-start rounded-full border-[0.8px] border-v2-marca-borde bg-v2-fondo px-3.5 py-1.5 font-mono text-xs font-semibold uppercase tracking-[0.6px] text-v2-accion">
           IA aplicada a procesos reales
         </span>
         <h1 class="text-[34px] font-extrabold leading-[1.14] tracking-[-1.1px] text-v2-texto sm:text-[44px]">
@@ -50,7 +50,7 @@ const evento = (b: string) =>
             href={LINKS.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex min-h-[52px] items-center rounded-full border-[0.8px] border-v2-control bg-white px-6 text-base font-semibold text-v2-texto"
+            class="inline-flex min-h-[52px] items-center rounded-full border-[0.8px] border-v2-control bg-v2-secundario px-6 text-base font-semibold text-v2-texto"
             onclick="if (window.posthog) { window.posthog.capture('cta_click', { boton: 'hablar-con-pablo', pagina: 'inicio' }); }"
           >
             Hablar con Pablo

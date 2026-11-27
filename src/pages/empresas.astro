@@ -63,32 +63,32 @@ const serviceJsonLd = {
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         <!-- Columna Izquierda: Wizard Paso a Paso Compacto -->
         <div
-          class="lg:col-span-12 mx-auto w-full max-w-[720px] flex flex-col bg-white p-5 md:p-6 rounded-2xl border border-slate-200 shadow-sm relative min-h-[380px]"
+          class="lg:col-span-12 mx-auto w-full max-w-[720px] flex flex-col bg-v2-fondo p-5 md:p-6 rounded-2xl border border-v2-borde shadow-sm relative min-h-[380px]"
         >
           <!-- Header del Wizard: Barra de Progreso y Paso actual -->
-          <div class="flex flex-col gap-2 pb-4 border-b border-slate-100">
+          <div class="flex flex-col gap-2 pb-4 border-b border-v2-borde">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-teal-600 animate-pulse"
+                <span class="w-2 h-2 rounded-full bg-v2-accion animate-pulse"
                 ></span>
                 <span
-                  class="font-mono text-xs font-semibold text-teal-800 uppercase"
+                  class="font-mono text-xs font-semibold text-v2-marca-texto uppercase"
                   id="step-counter">Paso 1 de 7</span
                 >
               </div>
-              <span class="text-[11px] font-mono text-slate-400" id="step-hint"
+              <span class="text-[11px] font-mono text-v2-suave" id="step-hint"
                 >Selecciona una opción</span
               >
             </div>
             <!-- Barra de progreso de 7 tramos -->
             <div id="progress-bar" role="progressbar" aria-label="Progreso del diagnóstico" aria-valuemin="1" aria-valuemax="7" aria-valuenow="1" class="flex gap-1.5">
-<span data-seg class="h-2 flex-1 rounded-full bg-[#cad5e2]"></span>
-<span data-seg class="h-2 flex-1 rounded-full bg-[#cad5e2]"></span>
-<span data-seg class="h-2 flex-1 rounded-full bg-[#cad5e2]"></span>
-<span data-seg class="h-2 flex-1 rounded-full bg-[#cad5e2]"></span>
-<span data-seg class="h-2 flex-1 rounded-full bg-[#cad5e2]"></span>
-<span data-seg class="h-2 flex-1 rounded-full bg-[#cad5e2]"></span>
-<span data-seg class="h-2 flex-1 rounded-full bg-[#cad5e2]"></span>
+<span data-seg class="h-2 flex-1 rounded-full bg-v2-neutro"></span>
+<span data-seg class="h-2 flex-1 rounded-full bg-v2-neutro"></span>
+<span data-seg class="h-2 flex-1 rounded-full bg-v2-neutro"></span>
+<span data-seg class="h-2 flex-1 rounded-full bg-v2-neutro"></span>
+<span data-seg class="h-2 flex-1 rounded-full bg-v2-neutro"></span>
+<span data-seg class="h-2 flex-1 rounded-full bg-v2-neutro"></span>
+<span data-seg class="h-2 flex-1 rounded-full bg-v2-neutro"></span>
             </div>
           </div>
 
@@ -101,10 +101,10 @@ const serviceJsonLd = {
             <div class="wizard-step flex flex-col gap-3" id="step-1">
               <div class="flex flex-col gap-1">
                 <span
-                  class="font-mono text-xs font-semibold text-teal-800 uppercase"
+                  class="font-mono text-xs font-semibold text-v2-marca-texto uppercase"
                   >Paso 1 · Proceso</span
                 >
-                <h3 class="text-base md:text-lg font-bold text-slate-900">
+                <h3 class="text-base md:text-lg font-bold text-v2-texto">
                   ¿Qué proceso te gustaría mejorar en tu equipo?
                 </h3>
               </div>
@@ -117,7 +117,7 @@ const serviceJsonLd = {
                 <button type="button" class="diag-option" data-multi="1" role="checkbox" aria-checked="false" onclick="window.selectStepOption('proceso', 'Procesos administrativos', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Procesos administrativos</span></span></button>
                 <button type="button" class="diag-option" data-multi="1" role="checkbox" aria-checked="false" onclick="window.selectStepOption('proceso', 'Ventas y marketing', this)"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Ventas y comercial</span></span></button>
                 <button type="button" class="diag-option" data-multi="1" role="checkbox" aria-checked="false" onclick="window.selectStepOption('proceso', 'Otro', this); document.getElementById('otro-proceso-input').classList.toggle('hidden');"><span class="diag-mark" aria-hidden="true"></span><span class="diag-body"><span>Otro (especificar)</span></span></button>
-                <input id="otro-proceso-input" class="hidden sm:col-span-2 w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" placeholder="Describe el proceso..." type="text" oninput="currentSelections['proceso-otro'] = this.value;" />
+                <input id="otro-proceso-input" class="hidden sm:col-span-2 w-full text-xs px-3 py-2 rounded-lg border border-v2-control focus:border-v2-accion outline-none bg-v2-fondo" placeholder="Describe el proceso..." type="text" oninput="currentSelections['proceso-otro'] = this.value;" />
               </div>
               
             </div>
@@ -126,10 +126,10 @@ const serviceJsonLd = {
             <div class="wizard-step hidden flex flex-col gap-3" id="step-2">
               <div class="flex flex-col gap-1">
                 <span
-                  class="font-mono text-xs font-semibold text-teal-800 uppercase"
+                  class="font-mono text-xs font-semibold text-v2-marca-texto uppercase"
                   >Paso 2 · Frecuencia</span
                 >
-                <h3 class="text-base md:text-lg font-bold text-slate-900">
+                <h3 class="text-base md:text-lg font-bold text-v2-texto">
                   ¿Con qué frecuencia se repite este proceso?
                 </h3>
               </div>
@@ -147,10 +147,10 @@ const serviceJsonLd = {
             <div class="wizard-step hidden flex flex-col gap-3" id="step-3">
               <div class="flex flex-col gap-1">
                 <span
-                  class="font-mono text-xs font-semibold text-teal-800 uppercase"
+                  class="font-mono text-xs font-semibold text-v2-marca-texto uppercase"
                   >Paso 3 · Tiempo por ejecución</span
                 >
-                <h3 class="text-base md:text-lg font-bold text-slate-900">
+                <h3 class="text-base md:text-lg font-bold text-v2-texto">
                   ¿Cuánto tiempo consume cada sesión?
                 </h3>
               </div>
@@ -168,10 +168,10 @@ const serviceJsonLd = {
             <div class="wizard-step hidden flex flex-col gap-3" id="step-4">
               <div class="flex flex-col gap-1">
                 <span
-                  class="font-mono text-xs font-semibold text-teal-800 uppercase"
+                  class="font-mono text-xs font-semibold text-v2-marca-texto uppercase"
                   >Paso 4 · Equipo</span
                 >
-                <h3 class="text-base md:text-lg font-bold text-slate-900">
+                <h3 class="text-base md:text-lg font-bold text-v2-texto">
                   ¿Cuántas personas participan en este proceso?
                 </h3>
               </div>
@@ -187,10 +187,10 @@ const serviceJsonLd = {
             <div class="wizard-step hidden flex flex-col gap-3" id="step-5">
               <div class="flex flex-col gap-1">
                 <span
-                  class="font-mono text-xs font-semibold text-teal-800 uppercase"
+                  class="font-mono text-xs font-semibold text-v2-marca-texto uppercase"
                   >Paso 5 · Impacto</span
                 >
-                <h3 class="text-base md:text-lg font-bold text-slate-900">
+                <h3 class="text-base md:text-lg font-bold text-v2-texto">
                   ¿Cuál es el impacto principal cuando falla o se retrasa?
                 </h3>
               </div>
@@ -214,7 +214,7 @@ const serviceJsonLd = {
               <input
                 type="text"
                 id="otro-impacto-input"
-                class="hidden w-full mt-2 px-3 py-2 border border-slate-300 rounded-xl text-sm"
+                class="hidden w-full mt-2 px-3 py-2 border border-v2-control rounded-xl text-sm"
                 placeholder="Especifica el impacto..."
                 oninput="recalculateAssessment()"
               />
@@ -225,10 +225,10 @@ const serviceJsonLd = {
             <div class="wizard-step hidden flex flex-col gap-3" id="step-6">
               <div class="flex flex-col gap-1">
                 <span
-                  class="font-mono text-xs font-semibold text-teal-800 uppercase"
+                  class="font-mono text-xs font-semibold text-v2-marca-texto uppercase"
                   >Paso 6 · Viabilidad</span
                 >
-                <h3 class="text-base md:text-lg font-bold text-slate-900">
+                <h3 class="text-base md:text-lg font-bold text-v2-texto">
                   ¿Qué tan difícil crees que sería cambiarlo?
                 </h3>
               </div>
@@ -267,10 +267,10 @@ const serviceJsonLd = {
             <div class="wizard-step hidden flex flex-col gap-3" id="step-7">
               <div class="flex flex-col gap-1">
                 <span
-                  class="font-mono text-xs font-semibold text-teal-800 uppercase"
+                  class="font-mono text-xs font-semibold text-v2-marca-texto uppercase"
                   >Paso 7 · Datos de la empresa</span
                 >
-                <h3 class="text-base md:text-lg font-bold text-slate-900">
+                <h3 class="text-base md:text-lg font-bold text-v2-texto">
                   Contexto para calibrar el diagnóstico
                 </h3>
               </div>
@@ -282,11 +282,11 @@ const serviceJsonLd = {
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <div class="flex flex-col gap-1">
                     <label
-                      class="font-semibold text-slate-700"
+                      class="font-semibold text-v2-cuerpo"
                       for="nombre-input">Tu Nombre *</label
                     >
                     <input
-                      class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white"
+                      class="w-full text-xs px-3 py-2 rounded-lg border border-v2-control focus:border-v2-accion outline-none bg-v2-fondo"
                       id="nombre-input"
                       placeholder="Ana María Pérez"
                       required
@@ -295,11 +295,11 @@ const serviceJsonLd = {
                   </div>
                   <div class="flex flex-col gap-1">
                     <label
-                      class="font-semibold text-slate-700"
+                      class="font-semibold text-v2-cuerpo"
                       for="email-input">Correo Corporativo *</label
                     >
                     <input
-                      class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white"
+                      class="w-full text-xs px-3 py-2 rounded-lg border border-v2-control focus:border-v2-accion outline-none bg-v2-fondo"
                       id="email-input"
                       placeholder="ana@empresa.com"
                       required
@@ -310,11 +310,11 @@ const serviceJsonLd = {
 
                 <div class="flex flex-col gap-1">
                   <label
-                    class="font-semibold text-slate-700"
+                    class="font-semibold text-v2-cuerpo"
                     for="empresa-input">Nombre de la Empresa *</label
                   >
                   <input
-                    class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white"
+                    class="w-full text-xs px-3 py-2 rounded-lg border border-v2-control focus:border-v2-accion outline-none bg-v2-fondo"
                     id="empresa-input"
                     placeholder="Nombre de tu empresa"
                     required
@@ -324,12 +324,12 @@ const serviceJsonLd = {
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                   <div class="flex flex-col gap-1">
-                    <label class="font-semibold text-slate-700" for="costo-input">Costo estimado por hora (COP)</label>
-                    <input class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="costo-input" placeholder="Ej. 25000" type="number" />
+                    <label class="font-semibold text-v2-cuerpo" for="costo-input">Costo estimado por hora (COP)</label>
+                    <input class="w-full text-xs px-3 py-2 rounded-lg border border-v2-control focus:border-v2-accion outline-none bg-v2-fondo" id="costo-input" placeholder="Ej. 25000" type="number" />
                   </div>
                   <div class="flex flex-col gap-1">
-                    <label class="font-semibold text-slate-700" for="retrabajo-select">Frecuencia de retrabajo</label>
-                    <select class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="retrabajo-select">
+                    <label class="font-semibold text-v2-cuerpo" for="retrabajo-select">Frecuencia de retrabajo</label>
+                    <select class="w-full text-xs px-3 py-2 rounded-lg border border-v2-control focus:border-v2-accion outline-none bg-v2-fondo" id="retrabajo-select">
                       <option value="Nunca/Casi nunca">Nunca/Casi nunca</option>
                       <option value="Ocasional">Ocasional</option>
                       <option value="Frecuente">Frecuente</option>
@@ -339,23 +339,23 @@ const serviceJsonLd = {
                 </div>
 
                 <div class="flex flex-col gap-1">
-                  <label class="font-semibold text-slate-700" for="consecuencia-input">Consecuencia principal de errores o demoras</label>
-                  <input class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="consecuencia-input" placeholder="Ej. Pérdida de clientes, estrés, costo extra" type="text" />
+                  <label class="font-semibold text-v2-cuerpo" for="consecuencia-input">Consecuencia principal de errores o demoras</label>
+                  <input class="w-full text-xs px-3 py-2 rounded-lg border border-v2-control focus:border-v2-accion outline-none bg-v2-fondo" id="consecuencia-input" placeholder="Ej. Pérdida de clientes, estrés, costo extra" type="text" />
                 </div>
                 
                 <div class="flex flex-col gap-1">
-                  <label class="font-semibold text-slate-700" for="resultado-input">Resultado deseado</label>
-                  <input class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white" id="resultado-input" placeholder="Ej. Reducir tiempo a la mitad, menos errores" type="text" />
+                  <label class="font-semibold text-v2-cuerpo" for="resultado-input">Resultado deseado</label>
+                  <input class="w-full text-xs px-3 py-2 rounded-lg border border-v2-control focus:border-v2-accion outline-none bg-v2-fondo" id="resultado-input" placeholder="Ej. Reducir tiempo a la mitad, menos errores" type="text" />
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <div class="flex flex-col gap-1">
                     <label
-                      class="font-semibold text-slate-700"
+                      class="font-semibold text-v2-cuerpo"
                       for="tamano-select">Tamaño</label
                     >
                     <select
-                      class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white"
+                      class="w-full text-xs px-3 py-2 rounded-lg border border-v2-control focus:border-v2-accion outline-none bg-v2-fondo"
                       id="tamano-select"
                       required
                     >
@@ -369,11 +369,11 @@ const serviceJsonLd = {
                   </div>
                   <div class="flex flex-col gap-1">
                     <label
-                      class="font-semibold text-slate-700"
+                      class="font-semibold text-v2-cuerpo"
                       for="industria-select">Sector</label
                     >
                     <select
-                      class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white"
+                      class="w-full text-xs px-3 py-2 rounded-lg border border-v2-control focus:border-v2-accion outline-none bg-v2-fondo"
                       id="industria-select"
                       required
                     >
@@ -398,11 +398,11 @@ const serviceJsonLd = {
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <div class="flex flex-col gap-1">
-                    <label class="font-semibold text-slate-700" for="pais-input"
+                    <label class="font-semibold text-v2-cuerpo" for="pais-input"
                       >País</label
                     >
                     <input
-                      class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white"
+                      class="w-full text-xs px-3 py-2 rounded-lg border border-v2-control focus:border-v2-accion outline-none bg-v2-fondo"
                       id="pais-input"
                       placeholder="Ej. Colombia"
                       required
@@ -412,11 +412,11 @@ const serviceJsonLd = {
                   </div>
                   <div class="flex flex-col gap-1">
                     <label
-                      class="font-semibold text-slate-700"
+                      class="font-semibold text-v2-cuerpo"
                       for="ciudad-input">Ciudad</label
                     >
                     <input
-                      class="w-full text-xs px-3 py-2 rounded-lg border border-slate-300 focus:border-teal-700 outline-none bg-white"
+                      class="w-full text-xs px-3 py-2 rounded-lg border border-v2-control focus:border-v2-accion outline-none bg-v2-fondo"
                       id="ciudad-input"
                       placeholder="Ej. Bogotá"
                       required
@@ -429,7 +429,7 @@ const serviceJsonLd = {
                 <div class="pt-1">
                   <button
                     id="submit-btn"
-                    class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
+                    class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-v2-accion text-v2-accion-texto text-xs font-semibold hover:bg-v2-accion-hover transition-colors shadow-2xs cursor-pointer"
                     type="submit"
                   >
                     <span>Ver diagnóstico de cuello de botella →</span>
@@ -445,31 +445,31 @@ const serviceJsonLd = {
               id="step-completed"
             >
               <div
-                class="p-3 bg-teal-50 border border-teal-200 rounded-xl flex items-start gap-2.5"
+                class="p-3 bg-v2-marca-tinte border border-v2-marca-borde rounded-xl flex items-start gap-2.5"
               >
                 <span
-                  class="material-symbols-outlined text-teal-700 text-xl shrink-0"
+                  class="material-symbols-outlined text-v2-accion text-xl shrink-0"
                   >check_circle</span
                 >
                 <div class="flex flex-col gap-0.5">
-                  <h4 class="text-xs font-bold text-slate-900">
+                  <h4 class="text-xs font-bold text-v2-texto">
                     Diagnóstico completado y registrado
                   </h4>
-                  <p class="text-[11px] text-slate-600">
+                  <p class="text-[11px] text-v2-cuerpo">
                     Revisa la tarjeta en el lateral con el cálculo de fuga
                     operativa y descarga tu PDF.
                   </p>
                 </div>
               </div>
               <div
-                class="p-3 bg-slate-50 border border-slate-200 rounded-xl flex flex-col gap-1"
+                class="p-3 bg-v2-superficie border border-v2-borde rounded-xl flex flex-col gap-1"
               >
                 <span
-                  class="font-mono text-[10px] uppercase font-semibold text-slate-500"
+                  class="font-mono text-[10px] uppercase font-semibold text-v2-suave"
                   >Resumen procesado:</span
                 >
                 <div
-                  class="text-xs text-slate-700 leading-relaxed"
+                  class="text-xs text-v2-cuerpo leading-relaxed"
                   id="completion-summary-text"
                 >
                   Diagnóstico listo para analizar en conversación con Pablo.
@@ -477,7 +477,7 @@ const serviceJsonLd = {
               </div>
               <div class="flex items-center gap-2 pt-1">
                 <button
-                  class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer"
+                  class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-v2-cuerpo hover:text-v2-texto border border-v2-borde rounded-lg hover:bg-v2-superficie transition-colors cursor-pointer"
                   onclick="window.goToStep(1)"
                   type="button"
                 >
@@ -506,39 +506,39 @@ const serviceJsonLd = {
         <!-- Columna Derecha: Tarjeta Viva "Tu cuello de botella" (oculta en Web v2; el diseño es de una columna) -->
         <div class="hidden lg:col-span-5 lg:sticky lg:top-20">
           <div
-            class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 md:p-6 flex flex-col gap-4"
+            class="bg-v2-fondo rounded-2xl border border-v2-borde shadow-sm p-5 md:p-6 flex flex-col gap-4"
             id="assessment-card"
           >
             <div
-              class="flex items-center justify-between pb-2 border-b border-slate-100"
+              class="flex items-center justify-between pb-2 border-b border-v2-borde"
             >
               <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-v2-exito"></span>
                 <span
-                  class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-900"
+                  class="font-mono text-xs font-semibold uppercase tracking-wider text-v2-texto"
                   >Tu cuello de botella</span
                 >
               </div>
-              <span class="font-mono text-[10px] text-slate-500"
+              <span class="font-mono text-[10px] text-v2-suave"
                 >Live Assessment</span
               >
             </div>
 
             <!-- Proceso Activo -->
             <div
-              class="flex flex-col gap-1 bg-slate-50 p-3 rounded-xl border border-slate-100"
+              class="flex flex-col gap-1 bg-v2-superficie p-3 rounded-xl border border-v2-borde"
             >
-              <span class="font-mono text-[10px] uppercase text-slate-500"
+              <span class="font-mono text-[10px] uppercase text-v2-suave"
                 >Proceso identificado:</span
               >
               <h3
-                class="text-sm font-bold text-slate-900 leading-snug"
+                class="text-sm font-bold text-v2-texto leading-snug"
                 id="card-proceso"
               >
                 Selecciona tus respuestas...
               </h3>
               <span
-                class="text-[10px] text-slate-500 font-mono"
+                class="text-[10px] text-v2-suave font-mono"
                 id="card-company-tag">Tus datos aparecerán aquí</span
               >
             </div>
@@ -546,73 +546,73 @@ const serviceJsonLd = {
             <!-- Resumen en tiempo real -->
             <div class="grid grid-cols-2 gap-2 text-xs">
               <div
-                class="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-0.5"
+                class="p-2.5 bg-v2-superficie rounded-xl border border-v2-borde flex flex-col gap-0.5"
               >
-                <span class="font-mono text-[10px] text-slate-500"
+                <span class="font-mono text-[10px] text-v2-suave"
                   >Frecuencia:</span
                 >
-                <span class="font-semibold text-slate-800" id="card-frecuencia"
+                <span class="font-semibold text-v2-texto" id="card-frecuencia"
                   >-</span
                 >
               </div>
               <div
-                class="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-0.5"
+                class="p-2.5 bg-v2-superficie rounded-xl border border-v2-borde flex flex-col gap-0.5"
               >
-                <span class="font-mono text-[10px] text-slate-500"
+                <span class="font-mono text-[10px] text-v2-suave"
                   >Tiempo estimado:</span
                 >
-                <span class="font-semibold text-teal-700" id="card-tiempo"
+                <span class="font-semibold text-v2-accion" id="card-tiempo"
                   >Por calcular</span
                 >
               </div>
               <div
-                class="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-0.5"
+                class="p-2.5 bg-v2-superficie rounded-xl border border-v2-borde flex flex-col gap-0.5"
               >
-                <span class="font-mono text-[10px] text-slate-500"
+                <span class="font-mono text-[10px] text-v2-suave"
                   >Personas involucradas:</span
                 >
-                <span class="font-semibold text-slate-800" id="card-personas"
+                <span class="font-semibold text-v2-texto" id="card-personas"
                   >-</span
                 >
               </div>
               <div
-                class="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-0.5"
+                class="p-2.5 bg-v2-superficie rounded-xl border border-v2-borde flex flex-col gap-0.5"
               >
-                <span class="font-mono text-[10px] text-slate-500"
+                <span class="font-mono text-[10px] text-v2-suave"
                   >Esfuerzo de mejora:</span
                 >
-                <span class="font-semibold text-slate-800" id="card-esfuerzo"
+                <span class="font-semibold text-v2-texto" id="card-esfuerzo"
                   >-</span
                 >
               </div>
             </div>
 
             <div
-              class="p-2.5 bg-slate-50 rounded-xl border border-slate-100 flex flex-col gap-0.5 text-xs"
+              class="p-2.5 bg-v2-superficie rounded-xl border border-v2-borde flex flex-col gap-0.5 text-xs"
             >
-              <span class="font-mono text-[10px] text-slate-500"
+              <span class="font-mono text-[10px] text-v2-suave"
                 >Impacto principal:</span
               >
-              <span class="font-semibold text-slate-800" id="card-impacto"
+              <span class="font-semibold text-v2-texto" id="card-impacto"
                 >-</span
               >
             </div>
 
             <!-- Indicador Prioridad -->
             <div
-              class="p-3 bg-teal-50/70 border border-teal-100 rounded-xl flex flex-col gap-1.5"
+              class="p-3 bg-v2-marca-tinte border border-v2-marca-borde rounded-xl flex flex-col gap-1.5"
             >
               <div class="flex items-center justify-between">
-                <span class="text-xs font-semibold text-teal-800"
+                <span class="text-xs font-semibold text-v2-marca-texto"
                   >¿Vale la pena intervenir?</span
                 >
                 <span
-                  class="px-2 py-0.5 rounded font-mono text-[10px] font-bold bg-slate-100 text-slate-600 uppercase"
+                  class="px-2 py-0.5 rounded font-mono text-[10px] font-bold bg-v2-chip text-v2-cuerpo uppercase"
                   id="card-priority-badge">Sin selección</span
                 >
               </div>
               <p
-                class="text-[11px] text-slate-600 leading-relaxed"
+                class="text-[11px] text-v2-cuerpo leading-relaxed"
                 id="card-justification"
               >
                 Responde las preguntas del diagnóstico a la izquierda para
@@ -622,16 +622,16 @@ const serviceJsonLd = {
 
             <!-- Mensaje clave de LuciRMe -->
             <div
-              class="p-3 bg-slate-100 rounded-xl text-[11px] text-slate-600 leading-relaxed border border-slate-200/80"
+              class="p-3 bg-v2-chip rounded-xl text-[11px] text-v2-cuerpo leading-relaxed border border-v2-borde"
             >
-              <span class="font-semibold text-slate-800">Criterio LuciRMe:</span
+              <span class="font-semibold text-v2-texto">Criterio LuciRMe:</span
               > Primero entendemos el proceso real antes de proponer tecnología o
               IA.
             </div>
 
             <!-- Botón CTA WhatsApp -->
             <a
-              class="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors shadow-2xs text-center cursor-pointer"
+              class="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl bg-v2-accion text-v2-accion-texto text-xs font-semibold hover:bg-v2-accion-hover transition-colors shadow-2xs text-center cursor-pointer"
               href={`${whatsappBase}?text=${encodeURIComponent("Hola Pablo, quiero revisar un proceso operativo en mi empresa.")}`}
               id="card-whatsapp-btn"
               rel="noopener noreferrer"
@@ -646,10 +646,10 @@ const serviceJsonLd = {
               <button
                 type="button"
                 onclick="window.downloadPDF()"
-                class="inline-flex items-center justify-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 transition-colors shadow-2xs cursor-pointer"
+                class="inline-flex items-center justify-center gap-1 px-2.5 py-1.5 rounded-xl border border-v2-borde text-xs font-medium text-v2-cuerpo hover:bg-v2-superficie transition-colors shadow-2xs cursor-pointer"
               >
                 <span
-                  class="material-symbols-outlined text-[15px] text-slate-500"
+                  class="material-symbols-outlined text-[15px] text-v2-suave"
                   >download</span
                 >
                 <span>Descargar PDF</span>
@@ -657,10 +657,10 @@ const serviceJsonLd = {
               <button
                 type="button"
                 onclick="window.shareDiagnostic()"
-                class="inline-flex items-center justify-center gap-1 px-2.5 py-1.5 rounded-xl border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 transition-colors shadow-2xs cursor-pointer"
+                class="inline-flex items-center justify-center gap-1 px-2.5 py-1.5 rounded-xl border border-v2-borde text-xs font-medium text-v2-cuerpo hover:bg-v2-superficie transition-colors shadow-2xs cursor-pointer"
               >
                 <span
-                  class="material-symbols-outlined text-[15px] text-slate-500"
+                  class="material-symbols-outlined text-[15px] text-v2-suave"
                   >share</span
                 >
                 <span>Compartir</span>
@@ -675,28 +675,28 @@ const serviceJsonLd = {
 
     <style is:global>
   #diagnostico .diag-group { display: flex; flex-direction: column; gap: 10px; max-width: 520px; padding-top: 4px; }
-  #diagnostico .diag-option { min-height: 52px; box-sizing: border-box; display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 16px; text-align: left; border: 0.8px solid var(--color-v2-control); border-radius: 14px; background: #fff; color: var(--color-v2-texto); font-size: 16px; line-height: 24px; cursor: pointer; }
+  #diagnostico .diag-option { min-height: 52px; box-sizing: border-box; display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 16px; text-align: left; border: 0.8px solid var(--color-v2-control); border-radius: 14px; background: var(--color-v2-fondo); color: var(--color-v2-texto); font-size: 16px; line-height: 24px; cursor: pointer; }
   #diagnostico .diag-option[data-sel] { border: 1.6px solid var(--color-v2-accion); background: var(--color-v2-marca-tinte); }
-  #diagnostico .diag-option[data-error] { border-color: #c70036; }
-  #diagnostico .diag-option:focus-visible { outline: 0; box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--color-v2-foco); }
-  #diagnostico .diag-mark { flex: 0 0 24px; height: 24px; border-radius: 50%; border: 0.8px solid var(--color-v2-control); background: #fff; display: flex; align-items: center; justify-content: center; box-sizing: border-box; overflow: hidden; }
+  #diagnostico .diag-option[data-error] { border-color: var(--color-v2-error); }
+  #diagnostico .diag-option:focus-visible { outline: 0; box-shadow: 0 0 0 3px var(--color-v2-fondo), 0 0 0 5px var(--color-v2-foco); }
+  #diagnostico .diag-mark { flex: 0 0 24px; height: 24px; border-radius: 50%; border: 0.8px solid var(--color-v2-control); background: var(--color-v2-fondo); display: flex; align-items: center; justify-content: center; box-sizing: border-box; overflow: hidden; }
   #diagnostico .diag-option[data-multi="1"] .diag-mark { border-radius: 8px; }
-  #diagnostico .diag-option[data-error] .diag-mark { border-color: #c70036; }
+  #diagnostico .diag-option[data-error] .diag-mark { border-color: var(--color-v2-error); }
   #diagnostico .diag-option[data-sel] .diag-mark { border-color: var(--color-v2-accion); }
   #diagnostico .diag-option[data-sel][data-multi="0"] .diag-mark::after { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--color-v2-accion); }
   #diagnostico .diag-option[data-sel][data-multi="1"] .diag-mark { background: var(--color-v2-accion); }
-  #diagnostico .diag-option[data-sel][data-multi="1"] .diag-mark::after { content: ""; width: 6px; height: 11px; margin-top: -2px; border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
+  #diagnostico .diag-option[data-sel][data-multi="1"] .diag-mark::after { content: ""; width: 6px; height: 11px; margin-top: -2px; border: solid var(--color-v2-accion-texto); border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
   #diagnostico .diag-body { display: flex; flex-direction: column; font-size: 16px; line-height: 24px; }
   #diagnostico .diag-body div:nth-child(2) { font-size: 14px; line-height: 20px; color: var(--color-v2-cuerpo); }
   #diagnostico .diag-count { min-height: 20px; margin: 8px 0 0; font-size: 14px; color: var(--color-v2-cuerpo); }
-  #diagnostico .diag-error { display: flex; gap: 10px; align-items: flex-start; max-width: 520px; margin-top: 10px; padding: 12px 16px; border: 0.8px solid #c70036; border-radius: 14px; background: #fff; color: #c70036; font-size: 14px; line-height: 20px; font-weight: 600; }
+  #diagnostico .diag-error { display: flex; gap: 10px; align-items: flex-start; max-width: 520px; margin-top: 10px; padding: 12px 16px; border: 0.8px solid var(--color-v2-error); border-radius: 14px; background: var(--color-v2-fondo); color: var(--color-v2-error); font-size: 14px; line-height: 20px; font-weight: 600; }
   #diagnostico .diag-error.hidden { display: none; }
   #diagnostico .diag-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; padding-top: 12px; border-top: 0.8px solid var(--color-v2-borde); }
   #diagnostico .diag-back { min-height: 44px; padding: 0 12px; border: 0; background: transparent; color: var(--color-v2-accion); font-size: 16px; font-weight: 700; cursor: pointer; }
   #diagnostico .diag-back.hidden { display: none; }
   #diagnostico .diag-next { margin-left: auto; min-height: 52px; padding: 0 28px; border: 0; border-radius: 9999px; background: var(--color-v2-accion); color: var(--color-v2-accion-texto); font-size: 16px; font-weight: 700; cursor: pointer; }
   #diagnostico .diag-next:hover { background: var(--color-v2-accion-hover); }
-  #diagnostico .diag-next[aria-disabled="true"] { background: #e2e8f0; color: var(--color-v2-cuerpo); cursor: not-allowed; }
+  #diagnostico .diag-next[aria-disabled="true"] { background: var(--color-v2-borde); color: var(--color-v2-cuerpo); cursor: not-allowed; }
   #diagnostico .diag-next.hidden { display: none; }
 </style>
 
@@ -736,7 +736,7 @@ const serviceJsonLd = {
       barra.setAttribute("aria-valuetext", `Paso ${n} de ${totalSteps}`);
       barra.querySelectorAll("[data-seg]").forEach((el, i) => {
         el.classList.toggle("bg-v2-accion", i < n);
-        el.classList.toggle("bg-[#cad5e2]", i >= n);
+        el.classList.toggle("bg-v2-neutro", i >= n);
       });
     }
 
@@ -769,7 +769,7 @@ const serviceJsonLd = {
           dotsContainer.innerHTML = "";
           for (let i = 1; i <= totalSteps; i++) {
             const dot = document.createElement("span");
-            dot.className = `h-2 rounded-full transition-all ${i === currentStep ? "bg-teal-700 w-4" : i < currentStep ? "bg-teal-300 w-2" : "bg-slate-200 w-2"}`;
+            dot.className = `h-2 rounded-full transition-all ${i === currentStep ? "bg-v2-accion w-4" : i < currentStep ? "bg-v2-marca-borde w-2" : "bg-v2-borde w-2"}`;
             dotsContainer.appendChild(dot);
           }
         }
@@ -781,7 +781,7 @@ const serviceJsonLd = {
         if (nextBtn) nextBtn.classList.add("hidden");
         if (dotsContainer) {
           dotsContainer.innerHTML =
-            '<span class="text-xs font-mono text-emerald-600 font-semibold">100% Completado</span>';
+            '<span class="text-xs font-mono text-v2-exito font-semibold">100% Completado</span>';
         }
       }
     }
@@ -983,7 +983,7 @@ const serviceJsonLd = {
       if (!hasSelections) {
         if (badge) {
           badge.className =
-            "px-2 py-0.5 rounded font-mono text-[10px] font-bold bg-slate-100 text-slate-600 uppercase";
+            "px-2 py-0.5 rounded font-mono text-[10px] font-bold bg-v2-chip text-v2-cuerpo uppercase";
           badge.innerText = "Sin selección";
         }
         if (justification) {
@@ -1006,14 +1006,14 @@ const serviceJsonLd = {
       if (badge && justification) {
         if (prioridad === "Alta") {
           badge.className =
-            "px-2 py-0.5 rounded font-mono text-[10px] font-bold bg-amber-100 text-amber-900 uppercase";
+            "px-2 py-0.5 rounded font-mono text-[10px] font-bold bg-v2-pago-fondo text-v2-pago-texto uppercase";
           badge.innerText = "Prioridad: Alta";
-          justification.innerHTML = `Este proceso genera una fuga de aproximadamente <strong class="text-slate-900">~${weeklyHours} horas/semana</strong> combinando alta recurrencia e impacto directo en la operación.`;
+          justification.innerHTML = `Este proceso genera una fuga de aproximadamente <strong class="text-v2-texto">~${weeklyHours} horas/semana</strong> combinando alta recurrencia e impacto directo en la operación.`;
         } else {
           badge.className =
-            "px-2 py-0.5 rounded font-mono text-[10px] font-bold bg-teal-100 text-teal-800 uppercase";
+            "px-2 py-0.5 rounded font-mono text-[10px] font-bold bg-v2-marca-tinte text-v2-marca-texto uppercase";
           badge.innerText = "Prioridad: Media";
-          justification.innerHTML = `Este proceso genera cerca de <strong class="text-slate-900">~${weeklyHours} horas/semana</strong>. Recomendamos simplificarlo o automatizar pasos clave.`;
+          justification.innerHTML = `Este proceso genera cerca de <strong class="text-v2-texto">~${weeklyHours} horas/semana</strong>. Recomendamos simplificarlo o automatizar pasos clave.`;
         }
       }
 
@@ -1176,9 +1176,9 @@ const serviceJsonLd = {
 
       const card = document.getElementById("assessment-card");
       if (card) {
-        card.classList.add("ring-2", "ring-emerald-500");
+        card.classList.add("ring-2", "ring-v2-exito");
         setTimeout(() => {
-          card.classList.remove("ring-2", "ring-emerald-500");
+          card.classList.remove("ring-2", "ring-v2-exito");
         }, 1500);
       }
 
