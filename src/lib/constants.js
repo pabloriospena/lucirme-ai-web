@@ -15,6 +15,6 @@ export const LINKS = {
   calendly_taller: "https://wa.me/573053046180",
   bot: "https://pay.hotmart.com/F107452795B",
   atajos_ia: "https://pay.hotmart.com/X107628052G",
-  atajos_visuales: "https://pay.hotmart.com/A107711155Q",
+  atajos_visuales: "https://pay.hotmart.com/A107711155Q?bid=1795817575672",
   whatsapp: "https://wa.me/573053046180",
 };
