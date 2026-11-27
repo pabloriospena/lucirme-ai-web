@@ -1,0 +1,30 @@
+---
+// Aviso de pago de una guía (lienzo, componente 9). Una sola acción: Comprar la guía, que va a Hotmart.
+// El precio llega leído de src/data/precios.ts. Sin precio cargado no se muestra cifra y no se inventa ninguna.
+interface Props {
+  precio?: string;
+  hrefPago: string;
+  recurso: string;
+}
+const { precio, hrefPago, recurso } = Astro.props;
+---
+
+<aside aria-label="Compra" class="box-border flex w-full flex-col gap-3 rounded-3xl border-[0.8px] border-v2-marca-borde bg-v2-fondo p-6">
+  <div class="flex flex-wrap gap-2">
+    <span class="inline-flex items-center rounded-full border-[0.8px] border-v2-pago-borde bg-v2-pago-fondo px-3 py-1 text-xs font-bold text-v2-pago-texto">Guía de pago</span>
+  </div>
+  <div class="flex items-baseline gap-2">
+    {precio && <span class="text-4xl font-extrabold tracking-[-1px] text-v2-texto">{precio}</span>}
+    <span class="text-sm text-v2-cuerpo">pago único</span>
+  </div>
+  <a
+    href={hrefPago}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline-flex min-h-[52px] items-center justify-center rounded-full bg-v2-accion px-7 text-base font-bold text-v2-accion-texto hover:bg-v2-accion-hover"
+    onclick={`if (window.posthog) { window.posthog.capture('hotmart_click', { recurso: '${recurso}', posicion: 'aviso-compra' }); }`}
+  >
+    Comprar la guía
+  </a>
+  <p class="text-sm leading-5 text-v2-cuerpo">El pago se hace en Hotmart. Después de pagar, recibes el acceso en tu correo.</p>
+</aside>
