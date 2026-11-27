@@ -134,16 +134,11 @@ html[data-v2][data-tema="oscuro"] body {
   background-color: var(--color-v2-fondo);
   color: var(--color-v2-texto);
 }
-/* Logo: sin versión oscura, va dentro de una píldora clara y no se recolorea. */
-.v2-logo-pildora {
-  display: inline-flex;
-  align-items: center;
-  border-radius: 9999px;
-}
-html[data-v2][data-tema="oscuro"] .v2-logo-pildora {
-  background-color: #f8fafc;
-  padding: 6px 14px;
-}
+/* Logo: la variante oscura aprobada por Diseño (27 nov 2026) se muestra solo con el modo oscuro activo.
+   Va sobre #0F172B o #1D293D. Dentro del hero con degradado no se usa, ahí iría la píldora clara con el logo claro. */
+.v2-logo-oscuro { display: none; }
+html[data-v2][data-tema="oscuro"] .v2-logo-claro { display: none; }
+html[data-v2][data-tema="oscuro"] .v2-logo-oscuro { display: block; }
 /* Transición entre modos: solo si la persona no pidió menos movimiento. */
 @media (prefers-reduced-motion: no-preference) {
   html.tema-anima,
