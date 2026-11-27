@@ -1,0 +1,17 @@
+---
+// Contador de invitaciones: N segmentos de 10 px, llenos en teal.
+interface Props { actual: number; total: number }
+const { actual, total } = Astro.props;
+const completo = actual >= total;
+---
+
+<div>
+  <div class="flex gap-1.5" role="img" aria-label={`${actual} de ${total} personas con cuenta`}>
+    {Array.from({ length: total }).map((_, i) => (
+      <span class:list={["h-2.5 flex-1 rounded-full", i < actual ? "bg-v2-barra-relleno" : "bg-v2-barra-fondo"]}></span>
+    ))}
+  </div>
+  <p class:list={["mt-1 text-xs", completo ? "font-bold text-v2-accion" : "text-v2-cuerpo"]}>
+    {completo ? `${total} de ${total}, desbloqueado` : `${actual} de ${total} personas con cuenta`}
+  </p>
+</div>

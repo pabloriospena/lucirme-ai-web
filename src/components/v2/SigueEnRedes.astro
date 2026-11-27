@@ -1,0 +1,31 @@
+---
+// Sígueme en redes: lista de filas de 48 px, sin botón de color. Es una autodeclaración y no desbloquea nada.
+import { LINKS } from "../../lib/constants.js";
+interface Props { redes?: string[] }
+const { redes = ["Instagram", "TikTok", "Facebook", "LinkedIn"] } = Astro.props;
+const urls: Record<string, string> = {
+  Instagram: LINKS.instagram, TikTok: LINKS.tiktok, Facebook: LINKS.facebook, LinkedIn: LINKS.linkedin,
+};
+---
+
+<section aria-labelledby="sigueme-redes">
+  <h2 id="sigueme-redes" class="text-xl font-bold text-v2-texto">Sígueme en redes</h2>
+  <ul class="mt-1">
+    {
+      redes.map((r) => (
+        <li class="border-t-[0.8px] border-v2-borde">
+          <a
+            href={urls[r]}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex min-h-12 items-center justify-between text-base font-semibold text-v2-accion"
+            onclick={`if (window.posthog) { window.posthog.capture('red_social_click', { red: '${r.toLowerCase()}' }); }`}
+          >
+            <span>{r}</span>
+            <span aria-hidden="true" class="text-v2-suave">›</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

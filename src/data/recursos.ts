@@ -22,7 +22,34 @@ export interface Recurso {
   tema: string;
   // Enlace discreto, sin tarjeta. Se usa para la Ruta Product, que sigue congelada.
   secundaria?: boolean;
+  // Etiquetas de herramienta, dificultad y área. Marcadores de posición hasta la Sesión 3.
+  herramienta?: string;
+  dificultad?: Dificultad;
+  area?: string;
+  // Estado de acceso que ve la persona. Si falta, se asume gratis.
+  acceso?: Acceso;
+  // Clave en src/data/precios.ts, solo para recursos de pago.
+  precio?: string;
+  // Invitaciones que desbloquean un recurso de pago.
+  invitaciones?: number;
 }
+
+export type Dificultad = "Para empezar" | "Para avanzar";
+export type Acceso = "gratis" | "gratis-correo" | "de-pago" | "o-con-invitaciones";
+
+// Recursos que piden correo antes de abrirse. Salen de leer cada página (formulario con unlock-recurso o unlock-guia).
+const PIDEN_CORREO = new Set([
+  "guia-20prompts-notebooklm", "guia-estudio-notebooklm", "guia-deepresearch", "checklistpm-vol1", "prompteador",
+  "shapeup-builder", "crear-imagenes-ia", "backlog-detox", "reunion-claridad", "cv-con-ia", "job-prompt-ai",
+]);
+const HERRAMIENTA: Record<string, string> = {
+  NotebookLM: "NotebookLM", Claude: "Claude", Investigación: "Gemini y ChatGPT",
+};
+const AREA: Record<string, string> = {
+  Producto: "Product Management", Imágenes: "Multimedia", Presentaciones: "Multimedia",
+  Empleo: "Carrera", Reuniones: "Carrera", Prompts: "Todas", NotebookLM: "Todas", Claude: "Todas", Investigación: "Todas",
+};
+const AVANZADO = new Set(["guia-deepresearch", "shapeup-builder", "ai-solver", "ideador-producto", "ruta-evidencia"]);
 
 export const BANDAS: { id: BandaId; nombre: string; descripcion: string }[] = [
   {
@@ -273,3 +300,23 @@ export const temasEnUso = () => {
   }
   return [...temas].sort((a, b) => a.localeCompare(b, "es"));
 };
+
+// Completa etiquetas y acceso sin repetirlos en cada entrada. Son marcadores de posición hasta la Sesión 3.
+for (const r of RECURSOS) {
+  r.herramienta ??= HERRAMIENTA[r.tema];
+  r.area ??= AREA[r.tema] ?? "Todas";
+  r.dificultad ??= AVANZADO.has(r.slug) ? "Para avanzar" : "Para empezar";
+  r.acceso ??= PIDEN_CORREO.has(r.slug) ? "gratis-correo" : "gratis";
+}
+
+export const valoresFiltro = (campo: "tema" | "herramienta" | "dificultad" | "area") => {
+  const set = new Set<string>();
+  for (const r of RECURSOS) {
+    if (r.secundaria) continue;
+    const v = r[campo];
+    if (v) set.add(v);
+  }
+  return [...set].sort((a, b) => a.localeCompare(b, "es"));
+};
+
+export const conteoBanda = (banda: BandaId) => recursosDeBanda(banda).filter((r) => !r.secundaria).length;

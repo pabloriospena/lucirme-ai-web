@@ -1,0 +1,56 @@
+---
+// /empezar: página de elección, sin producto de entrada y sin botón de color.
+// El correo se pide en el recurso que la persona elija, no aquí.
+import LayoutV2 from "../layouts/LayoutV2.astro";
+import { LINKS } from "../lib/constants.js";
+
+const caminos = [
+  { titulo: "Usar algo hoy", texto: "Una herramienta o guía que resuelve una cosa.", href: "/recursos#banda-guias-herramientas", clave: "usar-hoy" },
+  { titulo: "Aprender paso a paso", texto: "Una ruta con pasos seguidos.", href: "/recursos#banda-paso-a-paso", clave: "paso-a-paso" },
+  { titulo: "Aprender en vivo", texto: "Clases con Pablo que quedan grabadas.", href: undefined, clave: "en-vivo" },
+  { titulo: "Hablar con Pablo", texto: "Una conversación de 30 minutos por WhatsApp.", href: LINKS.whatsapp, clave: "hablar" },
+];
+---
+
+<LayoutV2
+  title="Empezar | LuciRMe AI"
+  description="Elige por dónde empezar a aplicar IA en tu trabajo."
+>
+  <section class="px-4 pb-10 pt-8 sm:px-6 sm:pt-14">
+    <div class="mx-auto max-w-2xl">
+      <p class="font-mono text-xs font-semibold uppercase tracking-[0.05em] text-v2-accion">Empezar</p>
+      <h1 class="mt-3 text-[32px] font-extrabold leading-[1.15] tracking-[-0.9px] text-v2-texto sm:text-5xl">¿Por dónde quieres empezar?</h1>
+      <p class="mt-3 text-base leading-6 text-v2-cuerpo">Elige una opción. El correo te lo pedimos solo cuando abras un recurso.</p>
+
+      <ul class="mt-6 flex flex-col gap-3">
+        {
+          caminos.map((c) => (
+            <li>
+              {c.href ? (
+                <a
+                  href={c.href}
+                  class="flex min-h-[88px] items-center justify-between gap-3 rounded-2xl border-[0.8px] border-v2-borde bg-v2-fondo p-5 hover:border-v2-control"
+                  onclick={`if (window.posthog) { window.posthog.capture('empezar_click', { camino: '${c.clave}' }); }`}
+                >
+                  <span>
+                    <span class="block text-xl font-bold leading-tight text-v2-texto">{c.titulo}</span>
+                    <span class="mt-1 block text-sm leading-5 text-v2-cuerpo">{c.texto}</span>
+                  </span>
+                  <span aria-hidden="true" class="text-[22px] text-v2-suave">›</span>
+                </a>
+              ) : (
+                <div class="flex min-h-[88px] items-center justify-between gap-3 rounded-2xl border-[0.8px] border-dashed border-v2-control bg-v2-superficie p-5">
+                  <span>
+                    <span class="block text-xl font-bold leading-tight text-v2-texto">{c.titulo}</span>
+                    <span class="mt-1 block text-sm leading-5 text-v2-cuerpo">{c.texto}</span>
+                  </span>
+                  <span class="shrink-0 text-xs font-bold text-v2-cuerpo">Próximamente</span>
+                </div>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</LayoutV2>

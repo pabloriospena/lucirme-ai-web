@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@theme {
+@theme static {
   --color-deep: #0F172A;
   --color-teal: #0D9488;
   --color-orange: #EA580C;
@@ -28,6 +28,29 @@
   --color-premium-amber: #F59E0B;
   --color-app-bg: #F8FAFC;
 
+  /* Web v2, modo claro. Valores medidos en lucirme.com el 26 nov 2026 (Design System LuciRMe AI,
+     sección Web v2). Mandan sobre los hex de la sección Colors anterior. El modo oscuro no va en este corte. */
+  --color-v2-fondo: #ffffff;
+  --color-v2-superficie: #f8fafc;
+  --color-v2-chip: #f1f5f9;
+  --color-v2-texto: #0f172b;
+  --color-v2-cuerpo: #45556c;
+  --color-v2-suave: #62748e;
+  --color-v2-borde: #e2e8f0;
+  --color-v2-control: #62748e;
+  --color-v2-accion: #00786f;
+  --color-v2-accion-hover: #005f5a;
+  --color-v2-accion-texto: #ffffff;
+  --color-v2-marca-tinte: #f0fdfa;
+  --color-v2-marca-borde: #96f7e4;
+  --color-v2-pago-texto: #bb4d00;
+  --color-v2-pago-fondo: #fffbeb;
+  --color-v2-pago-borde: #fee685;
+  --color-v2-pago-boton: #bb4d00;
+  --color-v2-foco: #00786f;
+  --color-v2-barra-fondo: #e2e8f0;
+  --color-v2-barra-relleno: #00786f;
+
   /* Custom Spacings */
   --spacing-space-xs: 0.25rem;
   --spacing-space-sm: 0.5rem;
@@ -43,4 +66,17 @@
   body {
     @apply bg-[#F8FAFC] text-deep font-sans;
   }
+}
+
+/* Foco visible en todos los controles: anillo de 2 px con separación de 2 px (Web v2).
+   Va con !important porque hay campos con outline-none en páginas anteriores. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-v2-foco) !important;
+  outline-offset: 2px !important;
 }
