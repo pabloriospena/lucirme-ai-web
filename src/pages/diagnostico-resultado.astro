@@ -1,128 +1,114 @@
 ---
-import Layout from "../layouts/Layout.astro";
+// Resultado del diagnóstico con el diseño de Web v2 (tablero DiagnosticoResultado).
+// Los datos salen de sessionStorage ("diagnosticResult"), como antes. Un solo botón de color: WhatsApp.
+import LayoutV2 from "../layouts/LayoutV2.astro";
+import SigueEnRedes from "../components/v2/SigueEnRedes.astro";
+import { LINKS } from "../lib/constants.js";
+const whatsappBase = LINKS.whatsapp || "https://wa.me/573053046180";
 ---
 
-<Layout title="Resultados de tu Diagnóstico Operativo | LuciRMe AI">
-  <div class="max-w-4xl mx-auto px-6 py-12">
-    <div id="loading" class="text-center">
-      <h1 class="text-2xl font-bold">Cargando tu diagnóstico...</h1>
+<LayoutV2 title="Resultados de tu diagnóstico | LuciRMe AI" description="Resultado de tu diagnóstico operativo." noindex>
+  <div class="w-full bg-v2-fondo">
+    <div id="loading" class="mx-auto w-full max-w-[1200px] px-5 py-16 sm:px-8" role="status">
+      <h1 class="text-2xl font-bold text-v2-texto">Cargando tu diagnóstico</h1>
     </div>
-    
-    <div id="results" class="hidden space-y-8">
-      <h1 class="text-3xl font-bold">Tu Informe de Diagnóstico Operativo</h1>
-      
-      <div id="report-content" class="prose prose-slate max-w-none">
-        <!-- AI Report will be injected here -->
-      </div>
 
-      <div class="flex gap-4">
-        <button id="download-pdf" class="bg-teal-700 text-white px-4 py-2 rounded-lg cursor-pointer">Descargar PDF</button>
-        <button id="email-pdf" class="bg-slate-200 text-slate-800 px-4 py-2 rounded-lg cursor-pointer">Recibir por correo</button>
-      </div>
+    <div id="results" data-whatsapp={whatsappBase} class="mx-auto hidden w-full max-w-[1200px] flex-col gap-6 px-5 pb-12 pt-6 sm:px-8">
+      <section class="flex flex-col gap-3 pt-4">
+        <span class="self-start rounded-full border-[0.8px] border-v2-marca-borde bg-v2-fondo px-3.5 py-1.5 font-mono text-xs font-semibold uppercase tracking-wider text-v2-accion">Tu diagnóstico</span>
+        <h1 id="res-titulo" class="max-w-[760px] text-[32px] font-extrabold leading-[1.14] text-v2-texto sm:text-[44px]"></h1>
+        <p id="res-resumen" class="max-w-[640px] text-lg leading-7 text-v2-cuerpo"></p>
+      </section>
+
+      <section class="flex flex-wrap items-start gap-6">
+        <div class="flex flex-1 basis-[560px] flex-col gap-4 rounded-3xl border-[0.8px] border-v2-borde bg-v2-fondo p-6">
+          <h2 class="text-[22px] font-bold text-v2-texto">Lo que encontramos</h2>
+          <ul id="res-hallazgos" class="flex flex-col"></ul>
+        </div>
+        <aside aria-label="Siguiente paso" class="flex max-w-[400px] grow shrink basis-[320px] flex-col gap-3 rounded-3xl border-[0.8px] border-v2-marca-borde bg-v2-marca-tinte p-6">
+          <b class="text-xl text-v2-texto">Tu siguiente paso</b>
+          <span id="res-siguiente" class="text-sm leading-5 text-v2-cuerpo"></span>
+          <a id="res-whatsapp" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[52px] items-center justify-center rounded-full bg-v2-accion px-7 text-base font-bold text-v2-accion-texto hover:bg-v2-accion-hover">Hablar con Pablo por WhatsApp</a>
+          <button id="download-pdf" type="button" class="inline-flex min-h-11 cursor-pointer items-center justify-center text-sm font-bold text-v2-accion underline">Descargar el informe en PDF</button>
+          <a href="/empresas" class="inline-flex min-h-11 items-center text-sm font-bold text-v2-accion">Volver a Empresas ›</a>
+        </aside>
+      </section>
+
+      <SigueEnRedes posicion="diagnostico-resultado" />
     </div>
   </div>
 
   <script>
-    import { jsPDF } from "jspdf";
-    
-    const resultData = JSON.parse(sessionStorage.getItem('diagnosticResult') || '{}');
-    
+    const resultData = JSON.parse(sessionStorage.getItem("diagnosticResult") || "{}");
+
     if (!resultData.success) {
-      window.location.href = '/empresas';
+      window.location.href = "/empresas";
     } else {
-      document.getElementById('loading')!.classList.add('hidden');
-      document.getElementById('results')!.classList.remove('hidden');
-      
-      const content = document.getElementById('report-content')!;
-      const report = resultData.aiReport;
-      const diagnosis = resultData.diagnosis;
-      
-      content.innerHTML = `
-        <div class="space-y-10 text-slate-800">
-          <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-            <div class="flex justify-between items-start mb-6">
-              <div>
-                <h1 class="text-3xl font-bold text-slate-900 tracking-tight">Diagnóstico operativo</h1>
-                <p class="text-slate-500 font-mono mt-1">${diagnosis.empresa} • ${diagnosis.proceso} • ${new Date().toLocaleDateString()}</p>
-              </div>
-              <span class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${diagnosis.prioridad === 'Alta' ? 'bg-red-50 text-red-700 border border-red-200' : 'bg-amber-50 text-amber-800 border border-amber-200'}">
-                ${diagnosis.prioridadBadge}
-              </span>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-slate-100 pt-6">
-              <div>
-                <p class="text-xs text-slate-500 uppercase font-semibold">Carga Semanal</p>
-                <p class="text-xl font-bold text-slate-900">${diagnosis.weeklyHours} hrs</p>
-              </div>
-              <div>
-                <p class="text-xs text-slate-500 uppercase font-semibold">Costo Estimado</p>
-                <p class="text-xl font-bold text-slate-900">${diagnosis.costoSemanalEstimado ? '$' + diagnosis.costoSemanalEstimado.toLocaleString() : 'N/A'}</p>
-              </div>
-              <div>
-                <p class="text-xs text-slate-500 uppercase font-semibold">Frecuencia</p>
-                <p class="text-xl font-bold text-slate-900">${diagnosis.frecuencia}</p>
-              </div>
-              <div>
-                <p class="text-xs text-slate-500 uppercase font-semibold">Impacto</p>
-                <p class="text-xl font-bold text-slate-900">${diagnosis.impacto}</p>
-              </div>
-            </div>
-          </div>
+      document.getElementById("loading")!.classList.add("hidden");
+      const res = document.getElementById("results")!;
+      res.classList.remove("hidden");
+      res.classList.add("flex");
 
-          <section>
-            <h2 class="text-xl font-bold text-slate-900 mb-4">Resumen ejecutivo</h2>
-            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-               <p class="text-slate-700 leading-relaxed">${report.resumenEjecutivo || 'No disponible'}</p>
-            </div>
-          </section>
+      const diagnosis = resultData.diagnosis || {};
+      const raw = resultData.aiReport;
+      const report = raw && typeof raw === "object" ? raw : ({} as any);
+      const proceso = Array.isArray(diagnosis.proceso) ? diagnosis.proceso.join(", ") : diagnosis.proceso || "tu proceso";
 
-          <section>
-            <h2 class="text-xl font-bold text-slate-900 mb-4">Hallazgos principales</h2>
-            <div class="grid gap-4 md:grid-cols-2">
-              ${report.hallazgos ? report.hallazgos.map((item: any) => `
-                <div class="bg-white p-5 rounded-lg border border-slate-200">
-                  <div class="flex items-center justify-between mb-2">
-                    <h3 class="font-bold text-slate-900">${item.hallazgo}</h3>
-                    <span class="text-[10px] bg-slate-100 px-2 py-0.5 rounded-full text-slate-600">${item.tipoEvidencia}</span>
-                  </div>
-                  <p class="text-sm text-slate-600">${item.relevancia}</p>
-                </div>
-              `).join('') : '<p>Sin hallazgos suficientes.</p>'}
-            </div>
-          </section>
+      const titulo = document.getElementById("res-titulo")!;
+      titulo.textContent = diagnosis.prioridad
+        ? `Mejorar ${proceso} es una prioridad ${String(diagnosis.prioridad).toLowerCase()} para tu equipo.`
+        : `Este es el diagnóstico de ${proceso}.`;
+      document.getElementById("res-resumen")!.textContent = report.resumenEjecutivo || "Revisamos tus respuestas y esto es lo que vemos.";
 
-          <section>
-             <h2 class="text-xl font-bold text-slate-900 mb-4">Qué haría primero</h2>
-             <div class="space-y-4">
-               ${report.queHariaPrimero ? report.queHariaPrimero.map((item: any, index: number) => `
-                 <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-                   <h3 class="font-bold text-lg text-slate-900 mb-2">${index + 1}. ${item.accion}</h3>
-                   <p class="text-sm text-slate-600 mb-3"><strong class="text-slate-900">Motivo:</strong> ${item.motivo}</p>
-                   <p class="text-sm text-teal-700 font-medium"><strong class="text-slate-900">Siguiente paso:</strong> ${item.siguientePaso}</p>
-                 </div>
-               `).join('') : '<p>Recomendaciones en desarrollo.</p>'}
-             </div>
-          </section>
-
-          <section class="bg-slate-900 text-white p-8 rounded-xl text-center">
-            <h2 class="text-2xl font-bold mb-2">¿Necesitas ayuda priorizando?</h2>
-            <p class="text-slate-400 mb-6 max-w-lg mx-auto">Revisemos juntos este informe y definamos si la automatización es el camino correcto o si debemos ajustar el flujo primero.</p>
-            <a href="https://wa.me/573053046180?text=Hola Pablo, revisé mi diagnóstico operativo para ${diagnosis.proceso} y me gustaría conversar sobre los resultados." class="inline-block bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-lg font-semibold transition" target="_blank" rel="noopener noreferrer">
-              Hablar por WhatsApp
-            </a>
-          </section>
-        </div>
-      `;
-      
-      // PostHog: Report Viewed
-      if (window.posthog) {
-        window.posthog.capture('diagnostico_report_viewed', { 
-          empresa: resultData.diagnosis?.empresa,
-          proceso: resultData.diagnosis?.proceso 
-        });
+      const lista = document.getElementById("res-hallazgos")!;
+      const hallazgos: any[] = Array.isArray(report.hallazgos) ? report.hallazgos : [];
+      if (hallazgos.length === 0) {
+        const li = document.createElement("li");
+        li.className = "border-t-[0.8px] border-v2-borde py-3 text-sm text-v2-cuerpo";
+        li.textContent = "Aún no hay hallazgos suficientes. Hablemos y lo revisamos juntos.";
+        lista.appendChild(li);
       }
-      
+      hallazgos.forEach((h, i) => {
+        const li = document.createElement("li");
+        li.className = "flex items-start gap-3 border-t-[0.8px] border-v2-borde py-3";
+        const num = document.createElement("span");
+        num.className = "flex h-8 w-8 flex-none items-center justify-center rounded-full border-[0.8px] border-v2-marca-borde bg-v2-marca-tinte text-sm font-bold text-v2-accion";
+        num.textContent = String(i + 1);
+        const cuerpo = document.createElement("span");
+        cuerpo.className = "flex flex-1 flex-col gap-0.5";
+        const t = document.createElement("b");
+        t.className = "text-base text-v2-texto";
+        t.textContent = h.hallazgo || "";
+        const d = document.createElement("span");
+        d.className = "text-sm leading-5 text-v2-cuerpo";
+        d.textContent = h.relevancia || "";
+        cuerpo.append(t, d);
+        li.append(num, cuerpo);
+        if (h.tipoEvidencia) {
+          const nivel = document.createElement("span");
+          nivel.className = "inline-flex items-center rounded-full border-[0.8px] border-[#cad5e2] bg-v2-fondo px-3 py-1 text-xs font-bold text-v2-cuerpo";
+          nivel.textContent = h.tipoEvidencia;
+          li.append(nivel);
+        }
+        lista.appendChild(li);
+      });
+
+      const primera = Array.isArray(report.queHariaPrimero) ? report.queHariaPrimero[0] : null;
+      document.getElementById("res-siguiente")!.textContent = primera?.accion
+        ? `Lo primero que haría es esto: ${primera.accion}. Hablemos para definir cómo hacerlo.`
+        : "Revisemos juntos tu diagnóstico y decidimos qué conviene hacer primero.";
+      const wa = document.getElementById("res-whatsapp") as HTMLAnchorElement;
+      const texto = `Hola Pablo, revisé mi diagnóstico operativo para ${proceso} y me gustaría conversar sobre los resultados.`;
+      wa.href = `${res.dataset.whatsapp}?text=${encodeURIComponent(texto)}`;
+      wa.addEventListener("click", () => {
+        (window as any).posthog?.capture("bottleneck_diagnosis_whatsapp_click", { origen: "resultado" });
+      });
+
+      (window as any).posthog?.capture("diagnostico_report_viewed", {
+        empresa: diagnosis.empresa,
+        proceso: diagnosis.proceso,
+      });
+
       document.getElementById('download-pdf')!.addEventListener('click', async () => {
         const { jsPDF } = await import("jspdf");
         const { default: autoTable } = await import("jspdf-autotable");
@@ -141,7 +127,7 @@ import Layout from "../layouts/Layout.astro";
         doc.setFontSize(16);
         doc.text("Resumen ejecutivo", 10, 50);
         doc.setFontSize(11);
-        const resumenLines = doc.splitTextToSize(report.resumenEjecutivo, pageWidth - 20);
+        const resumenLines = doc.splitTextToSize(report.resumenEjecutivo || '', pageWidth - 20);
         doc.text(resumenLines, 10, 60);
 
         // Hallazgos
@@ -149,7 +135,7 @@ import Layout from "../layouts/Layout.astro";
         doc.setFontSize(16);
         doc.text("Hallazgos principales", 10, currentY);
         
-        const hallazgosData = report.hallazgos.map((item: any) => [
+        const hallazgosData = (report.hallazgos || []).map((item: any) => [
           item.hallazgo,
           item.tipoEvidencia,
           item.relevancia
@@ -168,7 +154,7 @@ import Layout from "../layouts/Layout.astro";
         doc.setFontSize(16);
         doc.text("Oportunidades", 10, currentY);
 
-        const opData = report.oportunidadesPriorizadas.slice(0, 3).map((op: any) => [
+        const opData = (report.oportunidadesPriorizadas || []).slice(0, 3).map((op: any) => [
           op.oportunidad,
           op.problema,
           op.beneficio
@@ -192,4 +178,4 @@ import Layout from "../layouts/Layout.astro";
 
     }
   </script>
-</Layout>
+</LayoutV2>
