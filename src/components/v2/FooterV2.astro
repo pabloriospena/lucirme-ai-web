@@ -1,28 +1,24 @@
 ---
-// Pie de la web nueva. Solo enlaces a páginas que existen.
+// Pie compacto de la web nueva. Una fila en escritorio y apilado en móvil, con enlaces de 44 px de alto táctil.
+// Solo enlaces a páginas que existen.
 const year = new Date().getFullYear();
 const enlaces = [
-  { href: "/recursos", texto: "Contenido" },
-  { href: "/empresas", texto: "Empresas" },
-  { href: "/sobre-pablo", texto: "Sobre Pablo" },
+  { href: "/privacidad", texto: "Privacidad" },
+  { href: "/terminos", texto: "Términos" },
 ];
 ---
 
-<footer class="w-full border-t-[0.8px] border-v2-borde bg-v2-superficie px-4 py-12 sm:px-6">
-  <div class="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-start md:justify-between">
-    <div class="flex max-w-sm flex-col gap-3">
-      <a href="/" class="inline-flex min-h-11 items-center" aria-label="LuciRMe AI, inicio"><img src="/logo-lucirme-ai.svg" alt="LuciRMe AI" class="h-9 w-auto" /></a>
-      <p class="text-sm leading-6 text-v2-cuerpo">Aplica la IA a tu trabajo real y recupera tu autonomía.</p>
-    </div>
-    <nav class="flex flex-col" aria-label="Pie de página">
-      {enlaces.map((e) => <a href={e.href} class="inline-flex min-h-11 items-center text-sm font-medium text-v2-cuerpo hover:text-v2-texto">{e.texto}</a>)}
+<footer class="mt-8 w-full border-t-[0.8px] border-v2-borde bg-v2-fondo px-4 py-4 sm:px-6">
+  <div class="mx-auto flex max-w-[1200px] flex-col gap-2 text-sm text-v2-cuerpo md:flex-row md:items-center md:justify-between md:gap-4">
+    <p>
+      <b class="font-bold text-[#115E59]">LuciRMe AI</b>, {year}. Aplica la IA a tu trabajo real y recupera tu autonomía.
+    </p>
+    <nav aria-label="Pie de página" class="flex flex-wrap gap-1">
+      {
+        enlaces.map((e) => (
+          <a href={e.href} class="inline-flex min-h-11 items-center px-2 hover:text-v2-texto">{e.texto}</a>
+        ))
+      }
     </nav>
-  </div>
-  <div class="mx-auto mt-10 flex max-w-7xl flex-col gap-2 border-t-[0.8px] border-v2-borde pt-6 text-xs text-v2-suave sm:flex-row sm:justify-between">
-    <span>LuciRMe AI, {year}</span>
-    <span class="flex gap-2">
-      <a href="/privacidad" class="inline-flex min-h-11 items-center px-2 hover:text-v2-texto">Privacidad</a>
-      <a href="/terminos" class="inline-flex min-h-11 items-center px-2 hover:text-v2-texto">Términos</a>
-    </span>
   </div>
 </footer>
