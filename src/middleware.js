@@ -24,11 +24,25 @@ const PRIVATE_PREFIXES = [
   "/estudia-ia-intermedio/",
   "/forms/",
   "/api/",
+  // Planes y páginas comerciales anteriores. Se conservan, pero sin indexar (decisión de Pablo, 27 nov 2026).
+  "/empresas/",
+  "/soluciones/",
+  "/servicios/",
+  "/content/",
+];
+
+const PRIVATE_EXACT = [
+  "/propuesta",
+  "/educacion",
+  "/pagina-comercial",
+  "/curso-presentaciones",
+  "/presentaciones-con-ia",
+  "/bot-presentaciones",
 ];
 
 const isPrivate = (pathname) =>
   PRIVATE_PREFIXES.some((prefix) => pathname.startsWith(prefix)) ||
-  pathname === "/propuesta";
+  PRIVATE_EXACT.includes(pathname);
 
 const withRobotsHeader = async (pathname, run) => {
   const response = await run();
