@@ -10,6 +10,16 @@ const props = Astro.props;
 ---
 
 <Layout {...props} hideHeader hideFooter>
+  <script slot="head" is:inline>
+    // Marca la página como V2 y aplica el modo guardado antes de pintar, para que no parpadee.
+    (function () {
+      var h = document.documentElement;
+      h.setAttribute("data-v2", "");
+      try {
+        if (localStorage.getItem("lucirme-tema") === "oscuro") h.setAttribute("data-tema", "oscuro");
+      } catch (e) {}
+    })();
+  </script>
   <HeaderV2 />
   <slot />
   <FooterV2 />

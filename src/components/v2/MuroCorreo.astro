@@ -26,8 +26,8 @@ const id = recurso.toLowerCase().replace(/[^a-z0-9]+/g, "-");
     <p class="text-base leading-6 text-v2-cuerpo">{texto}</p>
     <form data-muro-form novalidate class="flex flex-col gap-3">
       <label for={`correo-${id}`} class="text-sm font-semibold text-v2-texto">Tu correo</label>
-      <input id={`correo-${id}`} name="email" type="email" required autocomplete="email" placeholder="tu@correo.com" aria-describedby={`error-${id}`} class="min-h-11 rounded-xl border-[0.8px] border-v2-control bg-v2-fondo px-4 text-base text-v2-texto aria-[invalid=true]:border-[#c70036]" />
-      <p id={`error-${id}`} role="alert" class="hidden text-sm font-semibold text-[#c70036]"></p>
+      <input id={`correo-${id}`} name="email" type="email" required autocomplete="email" placeholder="tu@correo.com" aria-describedby={`error-${id}`} class="min-h-11 rounded-xl border-[0.8px] border-v2-control bg-v2-fondo px-4 text-base text-v2-texto aria-[invalid=true]:border-v2-error" />
+      <p id={`error-${id}`} role="alert" class="hidden text-sm font-semibold text-v2-error"></p>
       <button type="submit" class="inline-flex h-11 cursor-pointer items-center justify-center rounded-full bg-v2-accion px-6 text-sm font-bold text-v2-accion-texto disabled:opacity-60">{boton}</button>
       <p class="text-xs leading-5 text-v2-suave">Al escribir tu correo aceptas la <a href="/privacidad" class="underline">política de privacidad</a>.</p>
     </form>

@@ -27,7 +27,7 @@ try {
   desbloqueada = false;
 }
 const etiqueta = "inline-flex items-center rounded-full border-[0.8px] px-3 py-1 text-xs font-bold";
-const campo = "min-h-[52px] rounded-[14px] border-[0.8px] border-v2-control bg-v2-fondo px-4 text-base text-v2-texto aria-[invalid=true]:border-[#c70036] disabled:opacity-60";
+const campo = "min-h-[52px] rounded-[14px] border-[0.8px] border-v2-control bg-v2-fondo px-4 text-base text-v2-texto aria-[invalid=true]:border-v2-error disabled:opacity-60";
 ---
 
 <div class="mx-auto flex w-full max-w-[1200px] flex-col gap-6 px-4 pb-8 pt-2 sm:px-6" data-guia-gratis={slug} data-endpoint={endpoint} data-clave-local={claveLocal ?? ""} data-desbloqueada={desbloqueada ? "1" : "0"}>
@@ -36,7 +36,7 @@ const campo = "min-h-[52px] rounded-[14px] border-[0.8px] border-v2-control bg-v
       <div class="flex flex-wrap items-center gap-2">
         <span class={`${etiqueta} border-v2-marca-borde bg-v2-marca-tinte text-v2-accion`}>Guía</span>
         <span class={`${etiqueta} border-v2-marca-borde bg-v2-marca-tinte text-v2-accion`}>Gratis</span>
-        {tema && <span class={`${etiqueta} border-[#cad5e2] bg-v2-fondo text-v2-cuerpo`}>{tema}</span>}
+        {tema && <span class={`${etiqueta} border-v2-neutro bg-v2-fondo text-v2-cuerpo`}>{tema}</span>}
         <span data-marca-desbloqueo class="hidden items-center gap-1.5 rounded-full border-[0.8px] border-v2-marca-borde bg-v2-marca-tinte px-3 py-1 text-xs font-bold text-v2-accion">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2" /><path d="M8 11V8a4 4 0 0 1 7.5-2" /></svg>
           Guía desbloqueada
@@ -63,10 +63,10 @@ const campo = "min-h-[52px] rounded-[14px] border-[0.8px] border-v2-control bg-v
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg>
             Contenido de la guía
           </div>
-          <span class="block h-3 w-[92%] rounded-md bg-[#cad5e2]"></span>
-          <span class="block h-3 w-[78%] rounded-md bg-[#cad5e2]"></span>
-          <span class="block h-3 w-[86%] rounded-md bg-[#cad5e2]"></span>
-          <span class="block h-3 w-[60%] rounded-md bg-[#cad5e2]"></span>
+          <span class="block h-3 w-[92%] rounded-md bg-v2-neutro"></span>
+          <span class="block h-3 w-[78%] rounded-md bg-v2-neutro"></span>
+          <span class="block h-3 w-[86%] rounded-md bg-v2-neutro"></span>
+          <span class="block h-3 w-[60%] rounded-md bg-v2-neutro"></span>
         </div>
       </div>
 
@@ -82,18 +82,18 @@ const campo = "min-h-[52px] rounded-[14px] border-[0.8px] border-v2-control bg-v
           <h2 class="text-xl font-bold text-v2-texto">Recibe la guía gratis</h2>
           <p class="text-sm leading-5 text-v2-cuerpo">Déjanos tu correo y la abres al instante.</p>
         </div>
-        <p data-error-servidor role="alert" class="hidden text-sm font-semibold text-[#c70036]">No pudimos enviar tu correo. Intenta de nuevo en un momento.</p>
+        <p data-error-servidor role="alert" class="hidden text-sm font-semibold text-v2-error">No pudimos enviar tu correo. Intenta de nuevo en un momento.</p>
         <label class="flex flex-col gap-1.5 text-sm font-semibold text-v2-texto" for={`correo-${slug}`}>
           Correo
           <input data-correo id={`correo-${slug}`} name="email" type="email" required autocomplete="email" placeholder="tu@correo.com" aria-describedby={`error-correo-${slug}`} class={campo} />
-          <span data-error-correo id={`error-correo-${slug}`} class="hidden text-sm font-normal text-[#c70036]">Escribe un correo válido.</span>
+          <span data-error-correo id={`error-correo-${slug}`} class="hidden text-sm font-normal text-v2-error">Escribe un correo válido.</span>
         </label>
         <div class="flex flex-col gap-1.5">
           <label class="flex min-h-11 cursor-pointer items-start gap-3 text-sm leading-5 text-v2-cuerpo">
-            <input data-acepto type="checkbox" required aria-describedby={`error-acepto-${slug}`} class="mt-0.5 h-6 w-6 flex-none cursor-pointer rounded-lg accent-[#00786f] aria-[invalid=true]:outline aria-[invalid=true]:outline-2 aria-[invalid=true]:outline-[#c70036]" />
+            <input data-acepto type="checkbox" required aria-describedby={`error-acepto-${slug}`} class="mt-0.5 h-6 w-6 flex-none cursor-pointer rounded-lg accent-v2-accion aria-[invalid=true]:outline aria-[invalid=true]:outline-2 aria-[invalid=true]:outline-v2-error" />
             <span>Acepto la <a href="/privacidad" class="underline">política de privacidad</a> y que me escriban con la guía y con novedades.</span>
           </label>
-          <span data-error-acepto id={`error-acepto-${slug}`} class="hidden text-sm font-semibold text-[#c70036]">Para continuar, acepta la política de privacidad.</span>
+          <span data-error-acepto id={`error-acepto-${slug}`} class="hidden text-sm font-semibold text-v2-error">Para continuar, acepta la política de privacidad.</span>
         </div>
         <button data-enviar type="submit" class="inline-flex min-h-[52px] cursor-pointer items-center justify-center gap-2 rounded-full bg-v2-accion px-7 text-base font-bold text-v2-accion-texto hover:bg-v2-accion-hover disabled:cursor-not-allowed disabled:opacity-70">
           <svg data-spinner class="hidden h-5 w-5 motion-safe:animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9" /></svg>

@@ -21,7 +21,7 @@ const { titulo, precio, hrefPago, invitaciones, invitados } = Astro.props;
     </p>
     <a
       href={hrefPago}
-      class="flex min-h-[52px] items-center justify-center rounded-xl bg-v2-pago-boton px-4 text-base font-bold text-white hover:brightness-90"
+      class="flex min-h-[52px] items-center justify-center rounded-xl bg-v2-pago-boton px-4 text-base font-bold text-v2-pago-boton-texto hover:brightness-90"
       onclick="if (window.posthog) { window.posthog.capture('hotmart_click', { posicion: 'punto-de-pago' }); }"
     >
       {precio ? `Pagar ${precio}` : "Pagar la guía"}
