@@ -39,7 +39,7 @@ export type Acceso = "gratis" | "gratis-correo" | "de-pago" | "o-con-invitacione
 
 // Recursos que piden correo antes de abrirse. Salen de leer cada página (formulario con unlock-recurso o unlock-guia).
 const PIDEN_CORREO = new Set([
-  "guia-20prompts-notebooklm", "guia-estudio-notebooklm", "guia-deepresearch", "checklistpm-vol1", "prompteador",
+  "guia-notebooklm", "guia-deepresearch", "checklistpm-vol1", "prompteador",
   "shapeup-builder", "crear-imagenes-ia", "backlog-detox", "reunion-claridad", "cv-con-ia", "job-prompt-ai",
 ]);
 const HERRAMIENTA: Record<string, string> = {
@@ -114,26 +114,8 @@ export const RECURSOS: Recurso[] = [
   {
     slug: "guia-notebooklm",
     url: "/recursos/guia-notebooklm",
-    titulo: "De notas a reportes con NotebookLM",
-    descripcion: "Cómo ordenar tus notas, PDFs y audios para generar reportes en minutos.",
-    banda: "guias-herramientas",
-    formato: "Guía",
-    tema: "NotebookLM",
-  },
-  {
-    slug: "guia-20prompts-notebooklm",
-    url: "/recursos/guia-20prompts-notebooklm",
-    titulo: "20 prompts para NotebookLM",
-    descripcion: "Prompts listos para copiar y pegar, organizados por análisis, estudio, investigación y acción.",
-    banda: "guias-herramientas",
-    formato: "Guía",
-    tema: "NotebookLM",
-  },
-  {
-    slug: "guia-estudio-notebooklm",
-    url: "/recursos/guia-estudio-notebooklm",
-    titulo: "Guía de estudio con NotebookLM",
-    descripcion: "Un método para aprender rápido y aplicar lo aprendido en proyectos reales.",
+    titulo: "Guía de NotebookLM",
+    descripcion: "Todo en una guía. Prepara tus fuentes, copia prompts para resumir, evaluarte y estudiar, y arma tu plan de carrera.",
     banda: "guias-herramientas",
     formato: "Guía",
     tema: "NotebookLM",

@@ -12,7 +12,10 @@ export default defineConfig({
     '/whatsapp': 'https://wa.me/573053046180',
     '/propuestas/serna-echeverry': '/propuestas/serna-echeverri',
     '/sasa': '/presentaciones/sasa/aportar',
-    '/cm': '/presentaciones/cm/aportar'
+    '/cm': '/presentaciones/cm/aportar',
+    '/recursos/guia-estudio-notebooklm': '/recursos/guia-notebooklm',
+    '/recursos/guia-20prompts-notebooklm': '/recursos/guia-notebooklm',
+    '/recursos/career-path-notebooklm': '/recursos/guia-notebooklm'
   },
   adapter: isVercel ? vercel() : node({ mode: 'standalone' }),
   server: {

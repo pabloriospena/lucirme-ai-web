@@ -1,176 +1,214 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+// Guía única de NotebookLM, gratis con correo (Web v2). Une la guía de notas a reportes, la guía de estudio,
+// los 20 prompts y el plan de carrera. Los prompts son los de las guías anteriores, archivadas en _*-anterior.astro.
+import LayoutV2 from "../../layouts/LayoutV2.astro";
+import PlantillaGuiaGratis from "../../components/v2/PlantillaGuiaGratis.astro";
+import PromptDetalle from "../../components/v2/PromptDetalle.astro";
 import { LINKS } from "../../lib/constants.js";
-import ActionHub from "../../components/ActionHub.astro";
+import { RESUMIR, PLANES, EXAMENES, VEINTE } from "../../data/guia-notebooklm.ts";
+
+const trabajo = [
+  { titulo: "Para notas de reuniones", texto: "Extrae solo acuerdos, responsables y fechas límite. Omite conversaciones laterales. Formato: tabla." },
+  { titulo: "Para reportes manuales", texto: "Compara los datos de [Hoja1] con los comentarios de [Transcripción]. Identifica 3 discrepancias y sugiere una acción correctiva." },
+  { titulo: "Para presentaciones", texto: "Convierte este análisis en: Problema → Dato clave → Riesgo → Propuesta → Siguiente paso." },
+];
+const carrera = [
+  { titulo: "Roles que combinan tus intereses", texto: "¿Qué 3 roles emergentes combinan mis intereses en [tu área]?" },
+  { titulo: "Habilidades para cada rol", texto: "¿Qué habilidades necesito para cada uno?" },
+  { titulo: "Cómo empezar sin experiencia", texto: "¿Cómo puedo empezar sin experiencia previa?" },
+  { titulo: "Empresas que contratan", texto: "¿Qué empresas contratan perfiles en este campo?" },
+  { titulo: "Plan de 8 semanas", texto: "Crea un plan de 8 semanas para desarrollar estas 3 habilidades clave:\n- Incluye recursos gratuitos (cursos, artículos, herramientas)\n- Propón ejercicios prácticos semanales\n- Define métricas simples para medir progreso" },
+];
+const indice = [
+  ["problema", "El problema y la solución"],
+  ["primeros-pasos", "Primeros pasos"],
+  ["trabajo", "Prompts para el trabajo"],
+  ["veinte", "Veinte prompts por objetivo"],
+  ["resumir", "Resumir"],
+  ["evaluar", "Evaluarte"],
+  ["plan-estudio", "Plan de estudio"],
+  ["carrera", "Plan de carrera de 8 semanas"],
+  ["guardar", "Guardar notas, podcast y opciones nativas"],
+];
+const h2 = "mt-6 scroll-mt-24 text-[26px] font-bold tracking-[-0.5px] text-v2-texto";
+const nota = "flex flex-col gap-1 rounded-2xl border-[0.8px] border-v2-marca-borde bg-v2-marca-tinte p-5";
+const enlace = "font-bold text-v2-accion underline underline-offset-2";
 ---
 
-<Layout title="Guía Rápida: De Notas a Reportes con NotebookLM | LuciRMe Ai">
-  <!-- SUB-NAV (Breadcrumb) -->
-  <nav class="bg-white border-b border-gray-100 px-4 py-3">
-    <div class="max-w-6xl mx-auto flex justify-between items-center">
-      <a
-        href="/recursos"
-        class="text-sm font-bold text-gray-400 hover:text-teal transition"
-        >← Volver a Recursos</a
-      >
-      <span
-        class="text-xs font-bold text-teal uppercase tracking-widest flex items-center gap-2"
-      >
-        <span class="w-2 h-2 rounded-full bg-teal animate-pulse"></span> Evaluador
-        de IA
-      </span>
-    </div>
-  </nav>
-
-  <!-- BANNER CAFÉ GRATIS -->
-  <div
-    class="bg-gradient-to-r from-teal to-tealHover text-white px-4 py-3 text-center relative overflow-hidden"
+<LayoutV2
+  title="Guía de NotebookLM, de notas sueltas a reportes y estudio | LuciRMe AI"
+  description="Todo lo que necesitas para trabajar y estudiar con NotebookLM en una sola guía. Pasos, prompts listos para copiar, exámenes, planes de estudio y plan de carrera."
+>
+  <PlantillaGuiaGratis
+    slug="guia-notebooklm"
+    titulo="NotebookLM, de notas sueltas a reportes y estudio"
+    descripcion="Convierte horas de grabaciones, PDFs y apuntes en decisiones claras. Una sola guía con los pasos, los prompts y los planes para trabajar y aprender con tus propias fuentes."
+    tema="NotebookLM"
+    aprendes={[
+      "Cómo preparar un cuaderno de NotebookLM con las fuentes correctas.",
+      "Prompts listos para resumir, evaluarte y convertir notas en reportes y presentaciones.",
+      "Un plan de estudio de 7 o 14 días y un plan de carrera de 8 semanas.",
+      "Veinte prompts agrupados por lo que quieres lograr.",
+    ]}
+    claveLocal="guia_notebooklm_unlocked"
+    relacionados={[
+      { titulo: "Prompteador", tipo: "Herramienta", url: "/recursos/prompteador" },
+      { titulo: "Reunión con claridad", tipo: "Guía", url: "/recursos/reunion-claridad" },
+      { titulo: "Tu CV con IA", tipo: "Herramienta", url: "/recursos/cv-con-ia" },
+    ]}
   >
-    <div
-      class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-3"
-    >
-      <span class="text-2xl">☕</span>
-      <div class="text-sm sm:text-base">
-        <strong>¿Tienes dudas sobre los resultados?</strong> Agenda un café virtual
-        de 30 minutos y te ayudo a priorizar tus tareas.
+    <nav aria-label="En esta guía" class="flex flex-col gap-2 rounded-2xl border-[0.8px] border-v2-borde bg-v2-superficie p-5">
+      <h2 class="text-sm font-bold uppercase tracking-[0.6px] text-v2-suave">En esta guía</h2>
+      <ol class="grid gap-x-6 gap-y-1.5 text-base sm:grid-cols-2">
+        {indice.map(([id, t], i) => (
+          <li><a class="text-v2-accion hover:underline" href={`#${id}`}>{i + 1}. {t}</a></li>
+        ))}
+      </ol>
+    </nav>
+
+    <section id="problema" class="flex flex-col gap-4">
+      <h2 class={h2}>El problema y la solución</h2>
+      <p class="text-v2-cuerpo">Si te suena alguna de estas, esta guía es para ti.</p>
+      <ul class="flex flex-col gap-2 text-v2-cuerpo">
+        <li>Juntas transcripciones, correos y hojas de cálculo a mano.</li>
+        <li>Redactas reportes que llegan tarde o sin foco claro.</li>
+        <li>Archivas notas de reuniones que nunca vuelves a abrir.</li>
+      </ul>
+      <p class="font-bold text-v2-texto">El resultado es mucho esfuerzo, poca claridad y decisiones por intuición.</p>
+      <p class="text-v2-cuerpo">NotebookLM funciona en tres pasos.</p>
+      <ol class="grid gap-3 sm:grid-cols-3">
+        {["Reúne tus fuentes", "Súbelas al cuaderno", "Pregunta sobre ellas"].map((p, i) => (
+          <li class="rounded-2xl border-[0.8px] border-v2-borde bg-v2-fondo p-5 text-base font-bold text-v2-texto"><span class="text-v2-accion">{i + 1}.</span> {p}</li>
+        ))}
+      </ol>
+    </section>
+
+    <section id="primeros-pasos" class="flex flex-col gap-4">
+      <h2 class={h2}>Primeros pasos</h2>
+      <div class={nota}>
+        <b class="text-v2-texto">Regla de oro</b>
+        <p class="text-v2-cuerpo">Si no te devuelve tiempo, claridad o control, no te sirve. NotebookLM responde solo con lo que tú le das, así que si metes basura, te devuelve basura.</p>
       </div>
-      <a
-        href={LINKS.calendly}
-        target="_blank"
-        class="bg-white text-teal px-4 py-2 rounded-lg font-bold text-sm hover:bg-gray-100 transition whitespace-nowrap"
-      >
-        Agendar café gratis →
-      </a>
-    </div>
-    <button
-      id="close-cafe-banner"
-      class="absolute top-2 right-2 text-white/80 hover:text-white text-xl"
-      >×</button
-    >
-  </div>
+      <h3 class="text-xl font-bold text-v2-texto">Abre NotebookLM y crea un cuaderno</h3>
+      <p class="text-v2-cuerpo">Entra a <a class={enlace} href="https://notebooklm.google.com" target="_blank" rel="noopener noreferrer">notebooklm.google.com</a> con tu cuenta de Google. A diferencia de un chatbot genérico, no inventa. Pídele que procese, no que invente. Después haz clic en el signo más para crear un cuaderno y ponle un nombre claro y acotado, como Proyecto Cliente X o Macroeconomía Parcial 2.</p>
+      <p class="text-v2-cuerpo">Mantén el contexto limpio. Si metes 15 libros y 35 PDFs en un solo cuaderno, la IA se vuelve vaga. Usa un cuaderno por unidad o tema. El límite actual es de 50 fuentes.</p>
+      <h3 class="text-xl font-bold text-v2-texto">Añade fuentes, tú eres el curador</h3>
+      <p class="text-v2-cuerpo">NotebookLM no busca por ti. En el panel izquierdo, haz clic en Añadir fuente y elige entre estas.</p>
+      <ul class="flex flex-col gap-2 text-v2-cuerpo">
+        <li><b class="text-v2-texto">YouTube.</b> Tutoriales, conferencias y explicaciones de expertos. NotebookLM transcribe y analiza el audio.</li>
+        <li><b class="text-v2-texto">PDFs y manuales.</b> Documentación técnica, guías de estudio y whitepapers de tu industria.</li>
+        <li><b class="text-v2-texto">Google Docs o Notion.</b> Tus notas, resúmenes de reuniones y apuntes de clase.</li>
+        <li><b class="text-v2-texto">Artículos.</b> Blogs especializados, noticias de industria y casos de estudio.</li>
+      </ul>
+      <div class={nota}>
+        <b class="text-v2-texto">La regla del triángulo</b>
+        <p class="text-v2-cuerpo">Para cualquier tema importante, usa al menos tres tipos de fuentes. Teoría, como un paper, un libro o un manual. Práctica, como un tutorial o un caso de estudio. Y tu contexto, con tus notas y objetivos. Así evitas sesgos y obtienes una visión completa desde el principio.</p>
+      </div>
+      <h3 class="text-xl font-bold text-v2-texto">Busca fuentes sin salir de NotebookLM</h3>
+      <p class="text-v2-cuerpo">El cuaderno tiene un buscador integrado. Haz clic en el signo más y elige Buscar en la web. No escribas preguntas largas, usa esta fórmula.</p>
+      <pre class="whitespace-pre-wrap rounded-xl border-[0.8px] border-v2-borde bg-v2-superficie p-4 text-sm leading-5 text-v2-texto select-all" tabindex="0">[Tema específico] + [Tipo de fuente o año]</pre>
+      <ul class="flex flex-col gap-2 text-v2-cuerpo">
+        <li>Automatización de procesos administrativos con IA casos de uso.</li>
+        <li>Guía práctica de gestión de proyectos ágiles en PDF.</li>
+        <li>Regulaciones contables para pymes en Colombia.</li>
+      </ul>
+      <p class="text-v2-cuerpo">Revisa los resultados antes de añadirlos. Si el título suena a clickbait o a blog genérico, ignóralo y busca de nuevo.</p>
+    </section>
 
-  <!-- CABECERA DE RECURSO -->
-  <header class="py-12 border-b border-gray-100">
-    <div class="max-w-3xl mx-auto px-4">
-      <span
-        class="inline-block bg-teal/10 text-teal text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-md mb-4"
-        >Guía Gratuita</span
-      >
-      <h1 class="text-4xl font-bold text-deep leading-tight mb-4">
-        De Notas Sueltas a Reportes Listos
-      </h1>
-      <p class="text-lg text-gray-600 leading-relaxed">
-        Convierte horas de grabaciones y datos manuales en decisiones claras. <br
-        />
-        Sin herramientas complejas. Sin configuración.
-      </p>
-    </div>
-  </header>
+    <section id="trabajo" class="flex flex-col gap-4">
+      <h2 class={h2}>Prompts para el trabajo</h2>
+      <p class="text-v2-cuerpo">Tres prompts exactos para convertir tus fuentes en algo que puedas usar hoy.</p>
+      <div class="flex flex-col gap-3">
+        {trabajo.map((p) => <PromptDetalle titulo={p.titulo} texto={p.texto} />)}
+      </div>
+    </section>
 
-  <!-- CONTENIDO -->
-  <main class="py-16 px-4">
-    <div class="max-w-3xl mx-auto space-y-16">
-      <!-- 1. EL PROBLEMA -->
-      <section>
-        <h2 class="text-xl font-bold text-deep mb-6 flex items-center gap-2">
-          <span class="text-orange">✕</span> El problema que te frena
-        </h2>
-        <div class="bg-white p-8 rounded-xl border border-gray-100 shadow-sm">
-          <ul class="space-y-4 text-sm text-gray-600">
-            <li class="flex gap-3 items-start">
-              <span class="text-teal font-bold">✓</span> Juntas transcripciones, emails
-              y hojas de cálculo a mano.
-            </li>
-            <li class="flex gap-3 items-start">
-              <span class="text-teal font-bold">✓</span> Redactas reportes que llegan
-              tarde o sin foco claro.
-            </li>
-            <li class="flex gap-3 items-start">
-              <span class="text-teal font-bold">✓</span> Archivas notas de reuniones
-              que nunca vuelves a abrir.
-            </li>
-          </ul>
-          <p
-            class="mt-6 text-sm font-bold text-deep pt-4 border-t border-gray-100"
-          >
-            Resultado: Mucho esfuerzo, poca claridad. Decisiones basadas en
-            intuición, no en datos.
-          </p>
+    <section id="veinte" class="flex flex-col gap-4">
+      <h2 class={h2}>Veinte prompts por objetivo</h2>
+      <p class="text-v2-cuerpo">Copia el prompt, pégalo en tu cuaderno y ajústalo a tus fuentes.</p>
+      {VEINTE.map((g) => (
+        <div class="flex flex-col gap-3">
+          <h3 class="mt-2 text-xl font-bold text-v2-texto">{g.seccion}</h3>
+          {g.items.map((p) => <PromptDetalle n={p.n} titulo={p.titulo} texto={p.texto} />)}
         </div>
-      </section>
+      ))}
+    </section>
 
-      <!-- 2. LA SOLUCIÓN -->
-      <section>
-        <h2 class="text-xl font-bold text-deep mb-6">
-          ⚡ La solución: NotebookLM en 3 pasos
-        </h2>
-        <div class="grid md:grid-cols-3 gap-4">
-          {
-            ["Reúne", "Sube", "Pregunta"].map((paso, i) => (
-              <div class="bg-white p-6 rounded-xl border border-gray-100 text-center shadow-sm">
-                <div class="text-2xl mb-3">{["📁", "☁️", "💬"][i]}</div>
-                <h3 class="font-bold text-deep text-sm mb-1">
-                  {i + 1}. {paso}
-                </h3>
-              </div>
-            ))
-          }
-        </div>
-      </section>
+    <section id="resumir" class="flex flex-col gap-4">
+      <h2 class={h2}>Resumir</h2>
+      <p class="text-v2-cuerpo">Si escribes solo resúmeme el PDF, obtienes una respuesta genérica y olvidas el 80% en dos días. Estos prompts piden el resultado en Markdown, con títulos, bullets y negritas, para que lo copies directo a Notion, Obsidian o tu herramienta favorita.</p>
+      <div class="flex flex-col gap-3">
+        {RESUMIR.map((p) => <PromptDetalle titulo={p.titulo} texto={p.texto} />)}
+      </div>
+    </section>
 
-      <!-- 3. PROMPTS -->
-      <section>
-        <h2 class="text-xl font-bold text-deep mb-6">3 Prompts exactos</h2>
-        <div class="space-y-4">
-          {
-            [
-              {
-                cat: "Para notas de reuniones",
-                prompt:
-                  "Extrae solo acuerdos, responsables y fechas límite. Omite conversaciones laterales. Formato: tabla.",
-              },
-              {
-                cat: "Para reportes manuales",
-                prompt:
-                  "Compara los datos de [Hoja1] con los comentarios de [Transcripción]. Identifica 3 discrepancias y sugiere una acción correctiva.",
-              },
-              {
-                cat: "Para presentaciones",
-                prompt:
-                  "Convierte este análisis en: Problema → Dato clave → Riesgo → Propuesta → Siguiente paso.",
-              },
-            ].map((p) => (
-              <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-                <div class="bg-gray-50 px-6 py-2 text-xs font-bold text-gray-400 uppercase tracking-widest">
-                  {p.cat}
-                </div>
-                <div class="p-6 font-mono text-sm text-deep bg-white">
-                  {p.prompt}
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </section>
+    <section id="evaluar" class="flex flex-col gap-4">
+      <h2 class={h2}>Evaluarte</h2>
+      <p class="text-v2-cuerpo">Leer no es aprender, recuperar información de tu cabeza sí. Estos prompts generan exámenes basados en tus fuentes, con respuestas y explicaciones. Pide el examen, respóndelo tú primero y luego pídele a NotebookLM que te califique. No mires las respuestas antes.</p>
+      <div class="flex flex-col gap-3">
+        {EXAMENES.map((p) => <PromptDetalle titulo={p.titulo} texto={p.texto} />)}
+      </div>
+      <div class={nota}>
+        <b class="text-v2-texto">Por qué funciona</b>
+        <p class="text-v2-cuerpo">Cada vez que obligas a tu cerebro a recordar algo sin mirarlo, fortaleces esa conexión. Un examen de 20 minutos vale más que dos horas de relectura. NotebookLM te da el examen y tú pones el esfuerzo de recordar.</p>
+      </div>
+    </section>
 
-      <!-- 5. CIERRE + CTA (El motor de ventas) -->
-      <section class="bg-deep p-10 rounded-2xl text-center text-white">
-        <h3 class="text-2xl font-bold mb-4">Esto es solo el abrebocas.</h3>
-        <p class="text-sm text-gray-300 mb-8 max-w-lg mx-auto">
-          Este flujo te ahorra horas. Pero sigue siendo manual. <strong
-            >En tu Café Estratégico (15 min)</strong
-          > conectamos tus fuentes para que se actualicen solas.
-        </p>
-        <a
-          href={LINKS.calendly}
-          target="_blank"
-          class="inline-block bg-orange text-white px-8 py-4 rounded-lg font-bold hover:bg-orange/90 transition shadow-lg"
-        >
-          Reservar mi Café Estratégico →
-        </a>
-      </section>
+    <section id="plan-estudio" class="flex flex-col gap-4">
+      <h2 class={h2}>Plan de estudio</h2>
+      <p class="text-v2-cuerpo">No necesitas cuatro horas diarias, necesitas una hora bien usada todos los días durante una o dos semanas. Copia el prompt y NotebookLM arma el plan con tus fuentes, en sesiones de 60 minutos con objetivos y checkpoints.</p>
+      <div class="flex flex-col gap-3">
+        {PLANES.map((p) => <PromptDetalle titulo={p.titulo} texto={p.texto} />)}
+      </div>
+      <div class={nota}>
+        <b class="text-v2-texto">La verdad sobre volverse experto</b>
+        <p class="text-v2-cuerpo">Catorce días de una hora te dan una base sólida y operativa, no maestría. La maestría llega con la práctica real en tu trabajo. Este plan te quita el no sé por dónde empezar y te pone en movimiento.</p>
+      </div>
+    </section>
 
-      <ActionHub />
-    </div>
-  </main>
-</Layout>
+    <section id="carrera" class="flex flex-col gap-4">
+      <h2 class={h2}>Plan de carrera de 8 semanas</h2>
+      <p class="text-v2-cuerpo">Para explorar caminos profesionales con tus datos reales. Si no tienes tu hoja de vida al día, créala en 5 minutos con <a class={enlace} href="/recursos/cv-con-ia">Tu CV con IA</a> antes de empezar.</p>
+      <ol class="flex flex-col gap-2 text-v2-cuerpo">
+        <li><b class="text-v2-texto">1. Crea tu base de conocimiento.</b> Agrega una nota con tus intereses, tu hoja de vida, enlaces de roles que te llamen la atención y tu historial formativo. No necesitas orden perfecto, solo contexto real.</li>
+        <li><b class="text-v2-texto">2. Explora con preguntas.</b> Reemplaza [tu área] por tu contexto, como product management, automatización o IA aplicada.</li>
+        <li><b class="text-v2-texto">3. Pide el plan.</b> Exporta el resultado a Google Docs o Notion y compártelo con un mentor si quieres feedback.</li>
+      </ol>
+      <div class="flex flex-col gap-3">
+        {carrera.map((p) => <PromptDetalle titulo={p.titulo} texto={p.texto} />)}
+      </div>
+    </section>
+
+    <section id="guardar" class="flex flex-col gap-4">
+      <h2 class={h2}>Guardar notas, podcast y opciones nativas</h2>
+      <p class="text-v2-cuerpo"><b class="text-v2-texto">Guarda con criterio.</b> Cuando la IA te entregue una respuesta valiosa, usa la chincheta para guardarla como nota. No guardes todo, si almacenas decenas de notas no repasarás ninguna. NotebookLM no es tu base de conocimiento a largo plazo, así que exporta lo importante a Notion, Obsidian o Anki.</p>
+      <p class="text-v2-cuerpo"><b class="text-v2-texto">El audio no sustituye la lectura.</b> Audio Overview, las guías de estudio, las preguntas frecuentes y las líneas de tiempo son herramientas nativas. El podcast sirve como refuerzo pasivo mientras caminas o vas al trabajo, pero depender solo de él crea una falsa ilusión de competencia.</p>
+      <p class="text-v2-cuerpo"><b class="text-v2-texto">Flashcards con criterio.</b> Evita pedir definiciones de diccionario. Pide algo así, genera 20 flashcards enfocadas en relaciones causa y efecto y aplicaciones prácticas, no en definiciones literales.</p>
+    </section>
+
+    <section class="flex flex-col gap-3 rounded-3xl border-[0.8px] border-v2-marca-borde bg-v2-marca-tinte p-6 sm:p-8">
+      <h2 class="text-[26px] font-bold tracking-[-0.5px] text-v2-texto">Ahora pruébalo</h2>
+      <ol class="flex flex-col gap-1.5 text-v2-cuerpo">
+        <li>1. Abre NotebookLM, toma 30 segundos.</li>
+        <li>2. Crea un cuaderno con un solo tema pendiente.</li>
+        <li>3. Busca fuentes con la fórmula de la sección Primeros pasos.</li>
+        <li>4. Usa el primer prompt de la sección Resumir.</li>
+      </ol>
+      <p class="text-v2-cuerpo">Si quieres ver cómo aplicarlo a tu trabajo, agenda un Café de Estrategia. Es gratis, sin compromiso, y si no encaja cerramos igual.</p>
+      <a href={LINKS.calendly} target="_blank" rel="noopener noreferrer" class={enlace}>Agendar un Café de Estrategia</a>
+    </section>
+  </PlantillaGuiaGratis>
+</LayoutV2>
+
+<script is:inline>
+  document.querySelectorAll("button[data-copiar-texto]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var et = b.querySelector("[data-etiqueta]");
+      var texto = b.getAttribute("data-copiar-texto");
+      var listo = function () { et.textContent = "¡Copiado!"; setTimeout(function () { et.textContent = "Copiar prompt"; }, 2000); };
+      var falla = function () { et.textContent = "Selecciona el texto y cópialo"; setTimeout(function () { et.textContent = "Copiar prompt"; }, 3000); };
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(texto).then(listo, falla);
+      else falla();
+    });
+  });
+</script>
